@@ -121,4 +121,17 @@ class UsersController extends AppController
    
     }
     
+     public function delete($id)
+    {
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->User->delete($id))
+        {
+            $this->Session->setFlash(__('The User has been deleted',h($id)));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
+    
 }
