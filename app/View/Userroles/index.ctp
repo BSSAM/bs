@@ -38,8 +38,7 @@
                                         <td class="text-center"><?php echo $userrole_list['Userrole']['description'];?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                                             </div>
                                         </td>

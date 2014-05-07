@@ -61,7 +61,7 @@ class UserrolesController extends AppController
         }
         
         $userrole =  $this->Userrole->findById($id); 
-       if(empty($user))
+       if(empty($userrole))
        {
            $this->Session->setFlash(__('Invalid Userrole'));
              return $this->redirect(array('action'=>'edit'));
