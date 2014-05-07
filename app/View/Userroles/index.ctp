@@ -39,7 +39,7 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
                                         </td>
                                     </tr>
@@ -54,7 +54,9 @@
                             <script>$(function(){ UiProgress.init(); });</script>
                                 
                                 <?php if($this->Session->flash()!='') { ?>
-                            <script> var UiProgress = function() {
+                            <script>
+                       
+    var UiProgress = function() {
                                 
                                 // Get random number function from a given range
                                 var getRandomInt = function(min, max) {
@@ -65,8 +67,8 @@
                                     init: function() {
                                         
                                         var growlType = $(this).data('growl');
-                                        
-                                        $.bootstrapGrowl('User Role Added Successfully!', {
+                                        alert('<?php echo $this->Session->flash(); ?>');
+                                        $.bootstrapGrowl('fghgf<?php echo $this->Session->flash(); ?>sadad', {
                                             type: growlType,
                                             allow_dismiss: true
                                         });
@@ -75,7 +77,7 @@
                                     }
                                 };
                             }();
-                            
+                       
                             
                             </script> 
                             <?php } ?>
