@@ -52,9 +52,6 @@ class UserrolesController extends AppController
     {
         
        
-        $this->loadModel('Department');
-         $data = $this->Department->find('list', array('fields' => 'departmentname'));
-        $this->set('department',$data);
        
         if(empty($id))
         {
@@ -63,10 +60,10 @@ class UserrolesController extends AppController
           
         }
         
-        $user =  $this->User->findById($id); 
+        $userrole =  $this->Userrole->findById($id); 
        if(empty($user))
        {
-           $this->Session->setFlash(__('Invalid User'));
+           $this->Session->setFlash(__('Invalid Userrole'));
              return $this->redirect(array('action'=>'edit'));
           
        }
@@ -75,25 +72,20 @@ class UserrolesController extends AppController
          if($this->request->is(array('post','put')))
        {
              
-             $match2 = $this->request->data['department_id'];
-              $dept = implode(',',$match2);
-              $this->request->data['department_id'] = $dept;
-             
-            
-              $this->User->id = $id;
+              $this->Userrole->id = $id;
              
           
-              if($this->User->save($this->request->data))
+              if($this->Userrole->save($this->request->data))
            {
                
-               $this->Session->setFlash(__('User is Updated'));
+               $this->Session->setFlash(__('Userrole is Updated'));
                return $this->redirect(array('action'=>'index'));
            }
             
-            $this->Session->setFlash(__('User Cant be Updated'));
+            $this->Session->setFlash(__('Userrole Cant be Updated'));
         }
         else{
-            $this->request->data = $user;
+            $this->request->data = $userrole;
         }
    
         
