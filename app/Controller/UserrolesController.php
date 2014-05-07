@@ -48,40 +48,11 @@ class UserrolesController extends AppController
        
     }
     
-    public function edit($user_role_id = null)
+    public function edit($id = null)
     {
-       // $this->loadModel('User');
+       
         
-        $data = $this->Userrole->find('list');
-        $this->set('userrole',$data);
-       // pr($data);exit;
-        if(!$user_role_id)
-        {
-            throw new NotFoundException(__('Invalid User Role'));
-        }
-       $userrole =  $this->Userrole->findByUserRoleId($user_role_id);
-        $this->set('role',$userrole);
-    //pr($userrole);exit; 
-       if(!$userrole)
-       {
-           throw new NotFoundException(__('Invalid User Role'));
-       }
-       if($this->request->is(array('post')))
-       {
-           $this->Userrole->user_role_id = $user_role_id;
-           
-           
-           if($this->Userrole->save($this->request->data))
-           {
-               $this->Session->setFlash(__('User Role is Updated'));
-               return $this->redirect(array('action'=>'index'));
-           }
-           $this->Session->setFlash(__('User Role Cant be Updated'));
-       }
-       else 
-       {
-           $this->request->data = $userrole;
-       }
+       
        
     }
 }
