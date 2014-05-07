@@ -50,7 +50,52 @@ class UserrolesController extends AppController
     
     public function edit($id = null)
     {
+        
        
+        $this->loadModel('Department');
+         $data = $this->Department->find('list', array('fields' => 'departmentname'));
+        $this->set('department',$data);
+       
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Entry'));
+             return $this->redirect(array('action'=>'edit'));
+          
+        }
+        
+        $user =  $this->User->findById($id); 
+       if(empty($user))
+       {
+           $this->Session->setFlash(__('Invalid User'));
+             return $this->redirect(array('action'=>'edit'));
+          
+       }
+       
+        
+         if($this->request->is(array('post','put')))
+       {
+             
+             $match2 = $this->request->data['department_id'];
+              $dept = implode(',',$match2);
+              $this->request->data['department_id'] = $dept;
+             
+            
+              $this->User->id = $id;
+             
+          
+              if($this->User->save($this->request->data))
+           {
+               
+               $this->Session->setFlash(__('User is Updated'));
+               return $this->redirect(array('action'=>'index'));
+           }
+            
+            $this->Session->setFlash(__('User Cant be Updated'));
+        }
+        else{
+            $this->request->data = $user;
+        }
+   
         
        
        
