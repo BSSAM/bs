@@ -67,7 +67,7 @@
                                     init: function() {
                                         
                                         var growlType = $(this).data('growl');
-                                        alert('<?php echo $this->Session->flash(); ?>');
+                                        alert('');
                                         $.bootstrapGrowl('fghgf<?php echo $this->Session->flash(); ?>sadad', {
                                             type: growlType,
                                             allow_dismiss: true
