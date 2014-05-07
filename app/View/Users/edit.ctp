@@ -22,7 +22,7 @@
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                 <?php echo $this->Form->create('User',array('class'=>'form-horizontal form-bordered','id'=>'form-user-edit')); ?>
+                                 <?php echo $this->Form->create('User',array('class'=>'form-horizontal form-bordered','id'=>'form-user-add')); ?>
                                 
                                     <div class="form-group">
                                        
