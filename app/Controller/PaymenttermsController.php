@@ -51,4 +51,45 @@ class PaymenttermsController extends AppController
         }
        
     }
+    public function edit($id = NULL)
+    {
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Payment Term'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        $payment_details =  $this->Paymentterm->findById($id); 
+        if(empty($payment_details))
+        {
+           $this->Session->setFlash(__('Invalid Payment Term'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        if($this->request->is(array('post','put')))
+        {
+            $this->Paymentterm->id = $id;
+            if($this->Paymentterm->save($this->request->data))
+            {
+               $this->Session->setFlash(__('Payment Term is Updated'));
+               return $this->redirect(array('action'=>'index'));
+            }
+            $this->Session->setFlash(__('Payment Term Cant be Updated'));
+        }
+        else
+        {
+            $this->request->data = $payment_details;
+        }
+    }
+    public function delete($id)
+    {
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Paymentterm->delete($id))
+        {
+            $this->Session->setFlash(__('The Payment Term has been deleted'));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }

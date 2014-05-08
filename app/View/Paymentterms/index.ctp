@@ -42,9 +42,13 @@
                                      
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                                            </div>
+                                                <?PHP echo $this->html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Paymentterms',
+                                                    'action'=>'edit',$paymentterm_list['Paymentterm']['id']),array('title'=>'Edit',
+                                                        'class'=>'btn btn-xs btn-default','data-toggle'=>'tooltip','escape'=>false)); ?>
+                                                <?PHP echo $this->Form->postlink('<i class="fa fa-times"></i>',array('controller'=>'Paymentterms',
+                                                    'action'=>'delete',$paymentterm_list['Paymentterm']['id']),array('title'=>'Delete',
+                                                        'class'=>'btn btn-xs btn-danger','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to delete?')); ?>
+                                                 </div>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

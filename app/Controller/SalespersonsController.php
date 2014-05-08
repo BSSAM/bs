@@ -56,9 +56,9 @@ class SalespersonsController extends AppController
     }
     
     public function search($ClientSearchby = null)
-{
-//$ClientSearchby = 'surname';
-//echo json_encode($this->Client->getSurname($this->params['url']['term']));
+    {
+        //$ClientSearchby = 'surname';
+        //echo json_encode($this->Client->getSurname($this->params['url']['term']));
 Configure::write('debug', 0);
 $this->layout = 'ajax';
 $this->autoRender = false;
@@ -119,5 +119,46 @@ exit;
            
         }
        
+    }
+    public function edit($id = NULL)
+    {
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Sales Person'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        $sales_details =  $this->Salesperson->findById($id); 
+        if(empty($sales_details))
+        {
+           $this->Session->setFlash(__('Invalid Sales Person'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        if($this->request->is(array('post','put')))
+        {
+            $this->Salesperson->id = $id;
+            if($this->Salesperson->save($this->request->data))
+            {
+               $this->Session->setFlash(__('Sales Person is Updated'));
+               return $this->redirect(array('action'=>'index'));
+            }
+            $this->Session->setFlash(__('Sales Person Cant be Updated'));
+        }
+        else
+        {
+            $this->request->data =  $sales_details;
+        }
+    }
+    public function delete($id)
+    {
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Salesperson->delete($id))
+        {
+            $this->Session->setFlash(__('Sales Person Cant be Updated'));
+            return $this->redirect(array('action'=>'index'));
+        }
     }
 }

@@ -76,13 +76,15 @@ class IndustriesController extends AppController
     }
     public function delete($id)
     {
-        if($this->request->is('get'))
+        $this->autoRender=false;
+        
+        if($id=='')
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Userrole->delete($id))
+        if($this->Industry->delete($id))
         {
-            $this->Session->setFlash(__('The Userrole has been deleted',h($id)));
+            $this->Session->setFlash(__('The Industry has been deleted'));
             return $this->redirect(array('action'=>'index'));
         }
     }

@@ -47,4 +47,45 @@ class ReferedbysController extends AppController
         }
        
     }
+    public function edit($id = NULL)
+    {
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Refered Entry'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        $refer_details =  $this->Referedby->findById($id); 
+        if(empty($refer_details))
+        {
+           $this->Session->setFlash(__('Invalid Refered Entry'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        if($this->request->is(array('post','put')))
+        {
+            $this->Referedby->id = $id;
+            if($this->Referedby->save($this->request->data))
+            {
+               $this->Session->setFlash(__('Refered Entry is Updated'));
+               return $this->redirect(array('action'=>'index'));
+            }
+            $this->Session->setFlash(__('Refered Entry Cant be Updated'));
+        }
+        else
+        {
+            $this->request->data =  $refer_details;
+        }
+    }
+    public function delete($id)
+    {
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Referedby->delete($id))
+        {
+            $this->Session->setFlash(__('Priority has been deleted'));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }

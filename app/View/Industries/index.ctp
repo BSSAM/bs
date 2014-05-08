@@ -42,9 +42,9 @@
                                                 <?PHP echo $this->html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Industries',
                                                     'action'=>'edit',$industry_list['Industry']['id']),array('title'=>'Edit',
                                                         'class'=>'btn btn-xs btn-default','data-toggle'=>'tooltip','escape'=>false)); ?>
-                                                <?PHP echo $this->html->link('<i class="fa fa-times"></i>',array('controller'=>'Industries',
+                                                <?PHP echo $this->Form->postlink('<i class="fa fa-times"></i>',array('controller'=>'Industries',
                                                     'action'=>'delete',$industry_list['Industry']['id']),array('title'=>'Delete',
-                                                        'class'=>'btn btn-xs btn-danger','data-toggle'=>'tooltip','escape'=>false)); ?>
+                                                        'class'=>'btn btn-xs btn-danger','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to delete?')); ?>
                                                 
                                             </div>
                                         </td>

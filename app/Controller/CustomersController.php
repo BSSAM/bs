@@ -41,17 +41,17 @@ class CustomersController extends AppController
          //pr($data4);exit;
           $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
           
-$array3 = '';
-$i = 0 ; 
-$array3 = array();
-//pr($data4);pr($data5);exit;
-count($data4);
-for($i=1;$i<=count($data4);$i++)
-{
-    $array3[] = $data4[$i].' '.$data5[$i];
+        $array3 = '';
+        $i = 0 ; 
+        $array3 = array();
+        //pr($data4);pr($data5);exit;
+        count($data4);
+        for($i=1;$i<=count($data4);$i++)
+        {
+            $array3[] = $data4[$i].' '.$data5[$i];
 
-}
-       $this->set('paymentterm',$array3);
+        }
+        $this->set('paymentterm',$array3);
         
          $this->loadModel('Priority');
          $data6 = $this->Priority->find('list', array('fields' => 'priority'));
@@ -86,7 +86,7 @@ for($i=1;$i<=count($data4);$i++)
                 return $this->redirect(array('action'=>'add'));
             }
             $this->Customer->create();
-           
+           pr($this->request->data);exit;
             if($this->Customer->save($this->request->data))
             {
                 $this->Session->setFlash(__('Customer Added Successfully'));
@@ -96,6 +96,48 @@ for($i=1;$i<=count($data4);$i++)
            
         }
        
+    }
+    public function edit($id = NULL)
+    {
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Customer Entry'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        $customer_details =  $this->Customer->findById($id); 
+       
+        if(empty($customer_details))
+        {
+           $this->Session->setFlash(__('Invalid Customer'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        if($this->request->is(array('post','put')))
+        {
+            $this->Customer->id = $id;
+            if($this->Customer->save($this->request->data))
+            {
+               $this->Session->setFlash(__('Customer is Updated'));
+               return $this->redirect(array('action'=>'index'));
+            }
+            $this->Session->setFlash(__('Customer Cant be Updated'));
+        }
+        else
+        {
+            $this->request->data =  $customer_details;
+        }
+    }
+    public function delete($id)
+    {
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Customer->delete($id))
+        {
+            $this->Session->setFlash(__('Customer Cant be Updated'));
+            return $this->redirect(array('action'=>'index'));
+        }
     }
     
    

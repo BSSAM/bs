@@ -49,4 +49,45 @@ class PrioritiesController extends AppController
         }
        
     }
+    public function edit($id = NULL)
+    {
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Priority'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        $priority_details =  $this->Priority->findById($id); 
+        if(empty($priority_details))
+        {
+           $this->Session->setFlash(__('Invalid Priority'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        if($this->request->is(array('post','put')))
+        {
+            $this->Priority->id = $id;
+            if($this->Priority->save($this->request->data))
+            {
+               $this->Session->setFlash(__('Priority is Updated'));
+               return $this->redirect(array('action'=>'index'));
+            }
+            $this->Session->setFlash(__('Priority Cant be Updated'));
+        }
+        else
+        {
+            $this->request->data = $priority_details;
+        }
+    }
+    public function delete($id)
+    {
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Priority->delete($id))
+        {
+            $this->Session->setFlash(__('Priority has been deleted'));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }
