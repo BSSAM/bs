@@ -5,6 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//done by Iyappan
 class LoginsController extends AppController
 {
     public $helpers = array('Session');

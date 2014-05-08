@@ -39,8 +39,13 @@
                                      
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                <?PHP echo $this->html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Industries',
+                                                    'action'=>'edit',$industry_list['Industry']['id']),array('title'=>'Edit',
+                                                        'class'=>'btn btn-xs btn-default','data-toggle'=>'tooltip','escape'=>false)); ?>
+                                                <?PHP echo $this->html->link('<i class="fa fa-times"></i>',array('controller'=>'Industries',
+                                                    'action'=>'delete',$industry_list['Industry']['id']),array('title'=>'Delete',
+                                                        'class'=>'btn btn-xs btn-danger','data-toggle'=>'tooltip','escape'=>false)); ?>
+                                                
                                             </div>
                                         </td>
                                     </tr>

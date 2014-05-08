@@ -1,12 +1,12 @@
  <h1>
-                                <i class="gi gi-user"></i>Edit Services Type
+                                <i class="gi gi-user"></i>Edit Industry
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Services Type',array('controller'=>'Services','action'=>'index')); ?></li>
-                        <li>Edit Services Type</li>
+                        <li><?php echo $this->Html->link('Industries',array('controller'=>'Industries','action'=>'index')); ?></li>
+                        <li>Edit Industry</li>
                     </ul>
                     <!-- END Forms General Header -->
 
@@ -17,18 +17,18 @@
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
                                     
-                                    <h2></h2>
+                                      <h2></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                <?php echo $this->Form->create('Service',array('class'=>'form-horizontal form-bordered','id'=>'form-service-add')); ?>
+                                 <?php echo $this->Form->create('Industry',array('class'=>'form-horizontal form-bordered','id'=>'form-industry-add')); ?>
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_service">Services Type</label>
+                                        <label class="col-md-2 control-label" for="val_industryname">Industry Name</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('servicetype', array('id'=>'val_service','class'=>'form-control','placeholder'=>'Enter the Service Type','label'=>false,'name'=>'servicetype')); ?>
+                                            <?php echo $this->Form->input('industryname', array('id'=>'val_industryname','class'=>'form-control','placeholder'=>'Enter the Industry Name','label'=>false,'name'=>'industryname')); ?>
                                         </div>
                                    
                                         <label class="col-md-2 control-label" for="val_description">Description</label>
@@ -38,7 +38,6 @@
                                    
                                     </div>
                                     
-                                   
                                     
                                      <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
@@ -55,5 +54,35 @@
                         </div>
     <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
-        
+         <?php echo $this->Html->script('pages/uiProgress'); ?>
+                            <script>$(function(){ UiProgress.init(); });</script>
+                                
+                                <?php if($this->Session->flash()!='') { ?>
+                            <script> var UiProgress = function() {
+                                
+                                // Get random number function from a given range
+                                var getRandomInt = function(min, max) {
+                                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                                };
+                                
+                                return {
+                                    init: function() {
+                                        
+                                        
+                                        
+                                        $.bootstrapGrowl('Industry Already Exists!', {
+                                            type: 'danger',
+                                            allow_dismiss: true
+                                        });
+                                        
+                                        $(this).prop('disabled', true);
+                                        $('#val_industryname').focus();
+                                    }
+                                };
+                            }();
+                            
+                            
+                            </script> 
+                            <?php } ?>
+                        
                         

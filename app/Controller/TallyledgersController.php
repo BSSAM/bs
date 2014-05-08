@@ -48,4 +48,56 @@ class TallyledgersController extends AppController
         }
        
     }
+    
+    public function edit($id = null)
+    {
+        
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Entry'));
+             return $this->redirect(array('action'=>'edit'));
+          
+        }
+        
+        $tallyledger =  $this->Tallyledger->findById($id); 
+       if(empty($tallyledger))
+       {
+            $this->Session->setFlash(__('Invalid Tally ledger A/C'));
+            return $this->redirect(array('action'=>'edit'));
+          
+       }
+        //$this->set('country',$data);
+        if($this->request->is(array('post','put')))
+       {
+             
+              $this->Tallyledger->id = $id;
+             
+          
+              if($this->Tallyledger->save($this->request->data))
+           {
+               
+               $this->Session->setFlash(__('Tally Ledger A/C is Updated'));
+               return $this->redirect(array('action'=>'index'));
+           }
+            
+            $this->Session->setFlash(__('Tally Ledger A/C Cant be Updated'));
+        }
+        else{
+            $this->request->data = $tallyledger;
+        }
+       
+    }
+    
+    public function delete($id)
+    {
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Tallyledger->delete($id))
+        {
+            $this->Session->setFlash(__('Tally Ledger A/C has been deleted',h($id)));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }

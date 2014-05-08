@@ -40,4 +40,57 @@ class ServicesController extends AppController
         }
        
     }
+    
+       
+    public function edit($id = null)
+    {
+        
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Entry'));
+             return $this->redirect(array('action'=>'edit'));
+          
+        }
+        
+        $service =  $this->Service->findById($id); 
+       if(empty($service))
+       {
+            $this->Session->setFlash(__('Invalid Service Type'));
+            return $this->redirect(array('action'=>'edit'));
+          
+       }
+        //$this->set('country',$data);
+        if($this->request->is(array('post','put')))
+       {
+             
+              $this->Service->id = $id;
+             
+          
+              if($this->Service->save($this->request->data))
+           {
+               
+               $this->Session->setFlash(__('Service Type is Updated'));
+               return $this->redirect(array('action'=>'index'));
+           }
+            
+            $this->Session->setFlash(__('Service Type Cant be Updated'));
+        }
+        else{
+            $this->request->data = $service;
+        }
+       
+    }
+    
+    public function delete($id)
+    {
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Service->delete($id))
+        {
+            $this->Session->setFlash(__('The Service Type has been deleted',h($id)));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }

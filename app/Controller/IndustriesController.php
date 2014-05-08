@@ -47,4 +47,43 @@ class IndustriesController extends AppController
         }
        
     }
+    public function edit($id = NULL)
+    {
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Entry'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        $industry_details =  $this->Industry->findById($id); 
+        if(empty($industry_details))
+        {
+           $this->Session->setFlash(__('Invalid Industry'));
+             return $this->redirect(array('action'=>'edit'));
+        }
+        if($this->request->is(array('post','put')))
+        {
+            $this->Industry->id = $id;
+            if($this->Industry->save($this->request->data))
+            {
+               $this->Session->setFlash(__('Industry is Updated'));
+               return $this->redirect(array('action'=>'index'));
+            }
+            $this->Session->setFlash(__('Industry Cant be Updated'));
+        }
+        else{
+            $this->request->data = $industry_details;
+        }
+    }
+    public function delete($id)
+    {
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Userrole->delete($id))
+        {
+            $this->Session->setFlash(__('The Userrole has been deleted',h($id)));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }

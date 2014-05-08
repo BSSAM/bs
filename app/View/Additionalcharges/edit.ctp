@@ -1,12 +1,12 @@
  <h1>
-                                <i class="gi gi-user"></i>Edit Services Type
+                                <i class="gi gi-user"></i>Edit Additional Charges
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Services Type',array('controller'=>'Services','action'=>'index')); ?></li>
-                        <li>Edit Services Type</li>
+                        <li><?php echo $this->Html->link('Additional Charges',array('controller'=>'Additionalcharges','action'=>'index')); ?></li>
+                        <li>Edit Additional Charges</li>
                     </ul>
                     <!-- END Forms General Header -->
 
@@ -22,13 +22,13 @@
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                <?php echo $this->Form->create('Service',array('class'=>'form-horizontal form-bordered','id'=>'form-service-add')); ?>
+                                <?php echo $this->Form->create('Additionalcharge',array('class'=>'form-horizontal form-bordered','id'=>'form-additionalcharge-add')); ?>
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_service">Services Type</label>
+                                        <label class="col-md-2 control-label" for="val_additionalcharge">Additional Charges</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('servicetype', array('id'=>'val_service','class'=>'form-control','placeholder'=>'Enter the Service Type','label'=>false,'name'=>'servicetype')); ?>
+                                            <?php echo $this->Form->input('additionalcharge', array('id'=>'val_additionalcharge','class'=>'form-control','placeholder'=>'Enter the Additional Charges','label'=>false,'name'=>'additionalcharge')); ?>
                                         </div>
                                    
                                         <label class="col-md-2 control-label" for="val_description">Description</label>
@@ -55,5 +55,4 @@
                         </div>
     <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
-        
                         
