@@ -17,8 +17,8 @@ var WidgetsStats = function() {
                 tooltipOffsetX: -25,
                 tooltipOffsetY: 20,
                 barColor: '#555555',
-                tooltipPrefix: '+ ',
-                tooltipSuffix: ' Sales',
+                tooltipPrefix: '',
+                tooltipSuffix: 'Sales',
                 tooltipFormat: '{{prefix}}{{value}}{{suffix}}'
             };
             $('#mini-chart-bar1').sparkline('html', miniChartBarOptions);
@@ -29,13 +29,13 @@ var WidgetsStats = function() {
             $('#mini-chart-bar2').sparkline('html', miniChartBarOptions);
 
             miniChartBarOptions['barColor'] = '#e74c3c';
-            miniChartBarOptions['tooltipPrefix'] = '+ ';
-            miniChartBarOptions['tooltipSuffix'] = ' Photos';
+            miniChartBarOptions['tooltipPrefix'] = '';
+            miniChartBarOptions['tooltipSuffix'] = ' Quotes';
             $('#mini-chart-bar3').sparkline('html', miniChartBarOptions);
 
             miniChartBarOptions['barColor'] = '#9b59b6';
             miniChartBarOptions['tooltipPrefix'] = '';
-            miniChartBarOptions['tooltipSuffix'] = ' Tickets';
+            miniChartBarOptions['tooltipSuffix'] = ' Jobs';
             $('#mini-chart-bar4').sparkline('html', miniChartBarOptions);
 
             var miniChartLineOptions = {

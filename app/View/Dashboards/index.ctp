@@ -91,7 +91,7 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-extra themed-background-dark-default text-center">
-                                    <h3 class="widget-content-light">Weekly <strong>Register</strong></h3>
+                                    <h3 class="widget-content-light">Weekly <strong>Quote</strong></h3>
                                 </div>
                                 <div class="widget-extra-full text-center">
                                     <!-- Jquery Sparkline (initialized in js/pages/widgetsStats.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
@@ -104,11 +104,12 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-extra themed-background-dark-default text-center">
-                                    <h3 class="widget-content-light">Weekly <strong>Quotation</strong></h3>
+                                    <h3 class="widget-content-light">Weekly <strong>Confirm Job</strong></h3>
                                 </div>
                                 <div class="widget-extra-full text-center">
                                     <!-- Jquery Sparkline (initialized in js/pages/widgetsStats.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
                                     <span id="mini-chart-bar4">9,24,5,4,7,15,7</span>
+                                    
                                 </div>
                             </div>
                             <!-- END Widget -->
@@ -121,8 +122,9 @@
                                     <h3 class="widget-content-light">Weekly <strong>Sales</strong></h3>
                                 </div>
                                 <div class="widget-extra-full text-center">
+                                    
                                     <!-- Jquery Sparkline (initialized in js/pages/widgetsStats.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
-                                    <span id="mini-chart-bar1">6,10,5,6,7,10,3</span>
+                                    <span id="mini-chart-bar1">6:10,10:10,5:5,6:8,7:1,10:7,3:4</span>
                                 </div>
                             </div>
                             <!-- END Widget -->

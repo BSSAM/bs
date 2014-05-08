@@ -21,11 +21,24 @@ var CompCharts = function() {
                 tooltipSuffix: ' Projects',
                 tooltipFormat: '{{prefix}}{{value}}{{suffix}}'
             };
-            $('#mini-chart-bar1').sparkline('html', miniChartBarOptions);
+			
+			 var miniChartBarOptions_stacked = {
+                type: 'bar',
+                barWidth: 6,
+                barSpacing: 5,
+                height: '50px',
+                tooltipOffsetX: -25,
+                tooltipOffsetY: 20,
+                barColor: '#9b59b6',
+                tooltipPrefix: '',
+                tooltipSuffix: ' Sales',
+                tooltipFormat: '{{prefix}}{{value}}{{suffix}}'
+            };
+            $('#mini-chart-bar1').sparkline('html', miniChartBarOptions_stacked);
 
-            miniChartBarOptions['barColor'] = '#2ecc71';
-            miniChartBarOptions['tooltipPrefix'] = '$ ';
-            miniChartBarOptions['tooltipSuffix'] = '';
+            miniChartBarOptions_stacked['barColor'] = '#2ecc71';
+            miniChartBarOptions_stacked['tooltipPrefix'] = '$ ';
+            miniChartBarOptions_stacked['tooltipSuffix'] = '';
             $('#mini-chart-bar2').sparkline('html', miniChartBarOptions);
 
             miniChartBarOptions['barColor'] = '#1bbae1';
