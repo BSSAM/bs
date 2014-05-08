@@ -53,4 +53,61 @@ class BranchesController extends AppController
         }
        
     }
+    
+    public function edit($id = null)
+    {
+        $this->loadModel('Currency');
+         $data = $this->Currency->find('list', array('fields' => 'currencycode'));
+        // pr($data);exit;
+         
+        $this->set('currency',$data);
+         
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Entry'));
+             return $this->redirect(array('action'=>'edit'));
+          
+        }
+        
+        $branch =  $this->Branch->findById($id); 
+       if(empty($branch))
+       {
+            $this->Session->setFlash(__('Invalid Branch'));
+            return $this->redirect(array('action'=>'edit'));
+          
+       }
+        //$this->set('country',$data);
+        if($this->request->is(array('post','put')))
+       {
+             
+              $this->Branch->id = $id;
+             
+          
+              if($this->Branch->save($this->request->data))
+           {
+               
+               $this->Session->setFlash(__('Branch is Updated'));
+               return $this->redirect(array('action'=>'index'));
+           }
+            
+            $this->Session->setFlash(__('Branch Cant be Updated'));
+        }
+        else{
+            $this->request->data = $branch;
+        }
+       
+    }
+    
+    public function delete($id)
+    {
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Branch->delete($id))
+        {
+            $this->Session->setFlash(__('The Branch has been deleted',h($id)));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }

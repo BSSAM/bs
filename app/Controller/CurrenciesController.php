@@ -53,4 +53,59 @@ class CurrenciesController extends AppController
         }
        
     }
+    
+    public function edit($id = null)
+    {
+        $this->loadModel('Country');
+        $data = $this->Country->find('list', array('fields' => 'country'));
+        $this->set('country',$data);
+         
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Entry'));
+             return $this->redirect(array('action'=>'edit'));
+          
+        }
+        
+        $currency =  $this->Currency->findById($id); 
+       if(empty($currency))
+       {
+            $this->Session->setFlash(__('Invalid Currency'));
+            return $this->redirect(array('action'=>'edit'));
+          
+       }
+        //$this->set('country',$data);
+        if($this->request->is(array('post','put')))
+       {
+             
+              $this->Currency->id = $id;
+             
+          
+              if($this->Currency->save($this->request->data))
+           {
+               
+               $this->Session->setFlash(__('Currency is Updated'));
+               return $this->redirect(array('action'=>'index'));
+           }
+            
+            $this->Session->setFlash(__('Currency Cant be Updated'));
+        }
+        else{
+            $this->request->data = $currency;
+        }
+       
+    }
+    
+    public function delete($id)
+    {
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Currency->delete($id))
+        {
+            $this->Session->setFlash(__('The Currency has been deleted',h($id)));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }

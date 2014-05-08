@@ -67,8 +67,8 @@
                                     init: function() {
                                         
                                         var growlType = $(this).data('growl');
-                                        alert('');
-                                        $.bootstrapGrowl('fghgf<?php echo $this->Session->flash(); ?>sadad', {
+                                        
+                                        $.bootstrapGrowl('User Role Added Successfully', {
                                             type: growlType,
                                             allow_dismiss: true
                                         });

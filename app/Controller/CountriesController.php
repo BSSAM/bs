@@ -40,4 +40,56 @@ class CountriesController extends AppController
         }
        
     }
+    
+    public function edit($id = null)
+    {
+        
+        if(empty($id))
+        {
+             $this->Session->setFlash(__('Invalid Entry'));
+             return $this->redirect(array('action'=>'edit'));
+          
+        }
+        
+        $country =  $this->Country->findById($id); 
+       if(empty($country))
+       {
+            $this->Session->setFlash(__('Invalid Country'));
+            return $this->redirect(array('action'=>'edit'));
+          
+       }
+        //$this->set('country',$data);
+        if($this->request->is(array('post','put')))
+       {
+             
+              $this->Country->id = $id;
+             
+          
+              if($this->Country->save($this->request->data))
+           {
+               
+               $this->Session->setFlash(__('Country is Updated'));
+               return $this->redirect(array('action'=>'index'));
+           }
+            
+            $this->Session->setFlash(__('Country Cant be Updated'));
+        }
+        else{
+            $this->request->data = $country;
+        }
+       
+    }
+    
+    public function delete($id)
+    {
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($this->Country->delete($id))
+        {
+            $this->Session->setFlash(__('The Country has been deleted',h($id)));
+            return $this->redirect(array('action'=>'index'));
+        }
+    }
 }

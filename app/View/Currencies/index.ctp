@@ -41,8 +41,8 @@
                                         <td class="text-center"><?php echo $currency_list['Currency']['exchangerate']; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$currency_list['Currency']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$currency_list['Currency']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
                                         </td>
                                     </tr>
