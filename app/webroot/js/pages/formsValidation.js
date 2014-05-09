@@ -727,9 +727,9 @@ var FormsValidation = function() {
                         required: true
                         
                     },
-                    salesperson_id: {
-                        required: true                        
-                    },
+//                    salesperson_id: {
+//                        required: true                        
+//                    },
                     phone: {
                         required: true
                         
@@ -756,10 +756,10 @@ var FormsValidation = function() {
                         required: 'Postal Code is Required'
                         
                     },
-                    salesperson_id: {
-                        required: 'Salesperson is Required'
-                        
-                    },
+//                    salesperson_id: {
+//                        required: 'Salesperson is Required'
+//                        
+//                    },
                     
                     phone: {
                         required: 'Phone No is Required'
@@ -780,7 +780,6 @@ var FormsValidation = function() {
                 
                invalidHandler: function(e, validator){
                  if(validator.errorList.length)
-                   //  alert();
                   $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
                  }
                 
