@@ -77,7 +77,7 @@ if(customer!='')
                                         
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
-                                            <ul class="nav nav-pills nav-justified " data-toggle="tabs">
+                                            <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Quotation Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
                                                 <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> File Upload</a></li>

@@ -13,9 +13,9 @@ class CustomersController extends AppController
     
     public function index()
     {
+        $this->Session->delete('customer_id');
         $data = $this->Customer->find('all',array('order' => array('Customer.id' => 'DESC')));
         $this->set('customer', $data);
-        
         //pr($data);
     }
     
@@ -116,7 +116,7 @@ class CustomersController extends AppController
             {
                 $this->Session->setFlash(__('Customer Added Successfully'));
                 return $this->redirect(array('action'=>'index'));
-                $this->Session->delete('Customer.customer_id');
+                $this->Session->delete('customer_id');
             }
             $this->Session->setFlash(__('Customer Could Not be Added'));
            

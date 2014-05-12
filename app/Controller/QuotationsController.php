@@ -16,7 +16,7 @@
             $this->set('quotationno', $str);
             if($this->request->is('post'))
             {
-                pr($this->request->data);exit;
+                pr($this->request->data);
             }
         }
         public function search()
