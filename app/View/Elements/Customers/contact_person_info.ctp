@@ -2,7 +2,7 @@
     
     <label class="col-md-2 control-label" for="val_customername">S.No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('customername', array('id'=>'sno','class'=>'form-control','placeholder'=>'','label'=>false,'readonly'=>true)); ?>
+        <?php echo $this->Form->input('serial_id', array('id'=>'sno','class'=>'form-control','placeholder'=>'','label'=>false,'readonly'=>true)); ?>
     </div>
     
     <label class="col-md-2 control-label" for="val_postalcode">Email</label>
@@ -85,5 +85,27 @@
         </tr>
     </thead>
     <tbody class="contact_info_row">
+        <?php foreach($contactpersoninfo as $contactpersoninfo_list): ?>
+         <tr>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?></td>
+                                        <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['customer_id']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['name']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['email']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['department']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['phone']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['position']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['mobile']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['purpose']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['remarks']; ?></td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
