@@ -16485,7 +16485,7 @@ function (a) {
             t.extend(t.validator.defaults, e)
         },
         messages: {
-            required: "This field is required.",
+            required: "",
             remote: "Please fix this field.",
             email: "Please enter a valid email address.",
             url: "Please enter a valid URL.",

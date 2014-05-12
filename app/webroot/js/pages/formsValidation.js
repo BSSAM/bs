@@ -14,6 +14,7 @@ var FormsValidation = function() {
 
             /* Initialize Form Validation */
             $('#form-login').validate({
+                
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
@@ -700,7 +701,11 @@ var FormsValidation = function() {
                 }
             });
             $('#form-customer-add').validate({
-                 ignore: ".ignore",
+               ignore: ".ignore",
+                invalidHandler: function(e, validator){
+                    if(validator.errorList.length)
+                    $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+                },
                
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
@@ -778,10 +783,7 @@ var FormsValidation = function() {
                     
                 },
                 
-               invalidHandler: function(e, validator){
-                 if(validator.errorList.length)
-                  $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
-                 }
+              
                 
             });
             

@@ -3,25 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/bs/app/Controller/UserrolesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Model/Userrole.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Users/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Users/add.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Userroles/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/AdditionalchargesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Users/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Customers/add.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Userroles/add.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/UsersController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Customers/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/tablesDatatables.js</file>
-            <file>file:/D:/wamp/www/bs/app/View/Userroles/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/formsValidation.js</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/css/main.css</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/header.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Users/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/compCharts.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Users/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Model/User.php</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/css/bootstrap.min.css</file>
-            <file>file:/D:/wamp/www/bs/app/View/Layouts/default.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/CustomersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Department.php</file>
         </group>
     </open-files>
 </project-private>

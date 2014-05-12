@@ -1,5 +1,7 @@
 <script>
-    var path_url='<?PHP echo Router::url('/',true); ?>'
+    var path_url='<?PHP echo Router::url('/',true); ?>';
+    var customer_id = '<?php echo $customer_id;?>';
+    //alert(customer_id);
 </script>
 <h1>
     <i class="gi gi-user"></i>Add Customer
@@ -8,7 +10,7 @@
 </div>
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-    <li><?php echo $this->Html->link('Priority',array('controller'=>'Customers','action'=>'index')); ?></li>
+    <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
     <li>Add Customer</li>
 </ul>
 <!-- END Forms General Header -->
@@ -31,7 +33,7 @@
                     <!-- BASIC WIZARD -->
                     <div id="basicWizard" class="basic-wizard">
                         
-                        <ul class="nav nav-pills nav-justified " data-toggle="tabs">
+                        <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                             <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Customer Info</a></li>
                             <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Contact Person Info</a></li>
                             <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Project Info</a></li>

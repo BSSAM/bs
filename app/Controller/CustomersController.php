@@ -15,11 +15,24 @@ class CustomersController extends AppController
     {
         $data = $this->Customer->find('all',array('order' => array('Customer.id' => 'DESC')));
         $this->set('customer', $data);
+        
         //pr($data);
     }
     
     public function add()
     {
+        
+        if($this->Session->read('customer_id')=='')
+        {
+        $d=date ("d");
+        $m=date ("m");
+        $y=date ("Y");
+        $t=time();
+        $dmt=$d+$m+$y+$t;
+        $this->Session->write('customer_id',$dmt);
+        $this->set('customer_id',$this->Session->read('customer_id'));
+        }
+        
         $this->loadModel('Salesperson');
         $data = $this->Salesperson->find('list', array('fields' => 'salesperson'));
         $this->set('salesperson',$data);
@@ -41,6 +54,11 @@ class CustomersController extends AppController
          //pr($data4);exit;
         $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
           
+        $this->loadModel('Deliveryaddress');
+        $lastid = $this->Deliveryaddress->getLastInsertID();
+        //echo $lastid;exit;
+        $this->set('lastid',$lastid);
+        
         $array3 = '';
         $i = 0 ; 
         $array3 = array();
@@ -87,11 +105,18 @@ class CustomersController extends AppController
                 return $this->redirect(array('action'=>'add'));
             }
             $this->Customer->create();
+           // pr($this->request->data);exit;
+            unset($this->request->data['Customer']);
+            $this->request->data['id'] = $this->Session->read('customer_id');
+            
+                        //pr($this->request->data);exit;
+
             
             if($this->Customer->save($this->request->data))
             {
                 $this->Session->setFlash(__('Customer Added Successfully'));
                 return $this->redirect(array('action'=>'index'));
+                $this->Session->delete('Customer.customer_id');
             }
             $this->Session->setFlash(__('Customer Could Not be Added'));
            
@@ -149,7 +174,7 @@ class CustomersController extends AppController
         $status=0;
         $this->loadModel('Projectinfo');
         $this->request->data['Projectinfo']['project_id']=$serial_id;
-        $this->request->data['Projectinfo']['customer_id']=2;
+        $this->request->data['Projectinfo']['customer_id']=$this->Session->read('customer_id');;
         $this->request->data['Projectinfo']['project_name']=$project_name;
         $this->request->data['Projectinfo']['project_status']=$status;
         if($this->Projectinfo->save($this->request->data))
@@ -170,13 +195,15 @@ class CustomersController extends AppController
     }
     public function delivery_add()
     {
+        
         $this->autoRender=false;
         $delivery_id= $this->request->data['delivery_id'];
         $delivery_address=$this->request->data['delivery_address'];
         $status=0;
         $this->loadModel('Deliveryaddress');
+        
         $this->request->data['Deliveryaddress']['delivery_id']=$delivery_id;
-        $this->request->data['Deliveryaddress']['customer_id']=2;
+        $this->request->data['Deliveryaddress']['customer_id']=$this->Session->read('customer_id');;
         $this->request->data['Deliveryaddress']['delivery_address']=$delivery_address;
         $this->request->data['Deliveryaddress']['project_status']=$status;
         if($this->Deliveryaddress->save($this->request->data))
@@ -203,7 +230,7 @@ class CustomersController extends AppController
         $status=0;
         $this->loadModel('Billingaddress');
         $this->request->data['Billingaddress']['billing_id']=$billing_id;
-        $this->request->data['Billingaddress']['customer_id']=2;
+        $this->request->data['Billingaddress']['customer_id']=$this->Session->read('customer_id');;
         $this->request->data['Billingaddress']['billing_address']=$billing_address;
         $this->request->data['Billingaddress']['status']=$status;
         if($this->Billingaddress->save($this->request->data))
@@ -234,7 +261,7 @@ class CustomersController extends AppController
         $this->request->data['Contactpersoninfo']['position']=$this->request->data['contact_position'];
         $this->request->data['Contactpersoninfo']['mobile']=$this->request->data['contact_mobile'];
         $this->request->data['Contactpersoninfo']['purpose']=$this->request->data['contact_purpose'];
-        $this->request->data['Contactpersoninfo']['customer_id']=2;
+        $this->request->data['Contactpersoninfo']['customer_id']=$this->Session->read('customer_id');
         $this->request->data['Contactpersoninfo']['status']=0;
         if($this->Contactpersoninfo->save($this->request->data))
         {
