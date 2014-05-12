@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_customername">S.No</label>
+    <label class="col-md-2 control-label" for="val_customername">S.No <?php echo $lastid; ?></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('delivery_id', array('id'=>'delivery_id','class'=>'form-control','label'=>false,'readonly'=>true,'type'=>'text')); ?>
     </div>

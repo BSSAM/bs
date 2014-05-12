@@ -52,6 +52,7 @@ $(document).ready(function(){
             $('.name_error').show();
             return false;
         }
+        
         var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
         var contact_name=$('#contact_name').val();
         var contact_email=$('#contact_email').val();
@@ -61,7 +62,8 @@ $(document).ready(function(){
         var contact_mobile=$('#contact_mobile').val();
         var contact_purpose=$('#contact_purpose').val();
         var contact_remark=$('#contact_remark').val();
-        $('.contact_info_row').append('<tr class="contact_remove_'+serial+'">\n\
+        $('.contact_info_row').append('<tr class="contact_remove_'+serial+'">\n\\n\
+                                    <td class="text-center">'+customer_id+'</td>\n\
                                     <td class="text-center">'+serial+'</td>\n\
                                     <td class="text-center">'+contact_name+'</td>\n\\n\
                                     <td class="text-center">'+contact_email+'</td>\n\

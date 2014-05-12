@@ -27,9 +27,9 @@
     
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_salespeoples">Phone</label>
+    <label class="col-md-2 control-label" for="contact_phone">Phone</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('phone', array('id'=>'contact_phone','class'=>'form-control','placeholder'=>'Enter the Phone Number','label'=>false)); ?>
+        <?php echo $this->Form->input('phoneno', array('id'=>'contact_phone','class'=>'form-control','placeholder'=>'Enter the Phone Number','label'=>false)); ?>
     </div>
     
     <label class="col-md-2 control-label" for="val_billaddress">Position</label>
@@ -72,6 +72,7 @@
     <thead>
         <tr>
             <th class="text-center">S.No</th>
+            <th class="text-center">Customer</th>
             <th class="text-center">Name</th>
             <th class="text-center">Email</th>
             <th class="text-center">Department</th>
