@@ -15,6 +15,7 @@ class CustomersController extends AppController
     {
         $data = $this->Customer->find('all',array('order' => array('Customer.id' => 'DESC')));
         $this->set('customer', $data);
+        
         //pr($data);
     }
     

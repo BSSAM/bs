@@ -13,10 +13,43 @@ class UsersController extends AppController
     
     public function index()
     {
+        $this->User->recursive = 1; 
         $data = $this->User->find('all',array('order' => array('User.id' => 'DESC')));
+        //pr($data);exit;
         $this->set('user', $data);
        
-        //pr($data);
+//        //pr($data);
+//               // pr($data);exit;
+//        $data1 = $this->User->find('all');
+//         $this->loadModel('Department');
+//        // pr($data1);exit;
+//       for($i=0;$i<(count($data1));$i++)
+//       {
+//        $a = $data1[$i]['User']['department_id'];
+//        $b = explode(',', $a);
+//        $c[]=$b;
+//       }// pr($c);
+//       foreach($c as $d=>$e)
+//       {
+//           foreach($e as $f)
+//           {
+//               pr($f);
+//            $da2[]= $this->Department->findById($f,array('fields' => 'departmentname'));}
+//        
+//       }
+//       pr($da2);exit;
+//       for($i=0;$i<(count($c));$i++)
+//       {
+//           for($j=0;$j<$i;$j++)
+//         
+//           {
+//               $d[]= $c[$i][$j];
+//           }
+//         }
+//       pr($d);
+//       exit;
+//       exit;  
+//          
     
     }
     

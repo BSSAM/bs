@@ -181,11 +181,11 @@
                                 </ul>
                             </li>
                              <li>
-                                <a href="" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
-                                 <ul>
-                                    <li>
-                                          <a href="#"><?php echo 'Quotation'; ?></a>
-                                    </li>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
+                                 <ul <?php echo $a=($control == 'Quotations')?'style=display:block':'';?>>
+                                    <li <?php echo $a=($control == 'Quotations')?'class=active':''; ?>>
+                                         <?php echo $this->Html->link('Quotation',array('controller'=>'Quotations','action'=>'index')); ?>
+
                                     <li>
                                           <a href="#"><?php echo 'Purchase Order'; ?></a>
                                     </li>

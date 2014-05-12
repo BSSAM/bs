@@ -12,7 +12,8 @@ class User extends AppModel
 //           'foreignKey'  => 'role',
 //          'associationForeignKey'  => 'user_role_id'
 //           )); 
-    public $belongsTo = array( 'Userrole','Department' );
+    public $belongsTo = array( 'Userrole','Department');
+    
     
 }
 
