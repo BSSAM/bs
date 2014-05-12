@@ -85,6 +85,7 @@
         </tr>
     </thead>
     <tbody class="contact_info_row">
+        <?PHP if(!empty($contactpersoninfo )): ?>
         <?php foreach($contactpersoninfo as $contactpersoninfo_list): ?>
          <tr>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?></td>
@@ -107,5 +108,6 @@
                                         </td>
                                     </tr>
         <?php endforeach; ?>
+       <?PHP endif; ?>
     </tbody>
 </table>

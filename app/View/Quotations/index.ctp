@@ -29,24 +29,24 @@
                                         <th class="text-center">Customer</th>
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
-                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Reference No</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                      <?php foreach($quotation as $quotation_list): ?>
                                     <tr>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
-                                         <td class="text-center"></td>
-                                        <td class="text-center"></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>
+                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$user_list['User']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$user_list['User']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 
                                             </div>
                                         </td>

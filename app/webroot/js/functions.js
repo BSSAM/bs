@@ -181,7 +181,14 @@ $(document).ready(function(){
 	cache: false,
 	success: function(data)
 	{
-            $('#val_address').val(data);
+            data1 = $.parseJSON(data);
+            $('#val_address').val(data1.Customer.regaddress);
+            $('#QuotationCustomerId').val(data1.Customer.id);
+            $('#val_phone').val(data1.Customer.phone);
+            $('#val_fax').val(data1.Customer.fax);
+            $('#val_attn').append('<option>'+data1.Contactpersoninfo.name+'</option>');
+            $('#val_email').val(data1.Contactpersoninfo.email);
+            $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
 	}
 	});
    });
