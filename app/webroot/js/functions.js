@@ -167,16 +167,21 @@ $(document).ready(function(){
 		});
         $('.billing_remove_'+delete_id).fadeOut();
    });
+   $(document).on('click','.show',function(){
+       var customer_name=$(this).text();
+       $('#val_customer').val(customer_name);
+       $('#result').fadeOut();
+       var customer_id=$(this).attr('id');
+       $.ajax({
+	type: "POST",
+	url: "../Quotations/get_customer_value",
+	data: 'cust_id='+customer_id,
+	cache: false,
+	success: function(data)
+	{
+            $('#val_address').val(data);
+	}
+	});
+   });
 }); 
-    function validateEmail($email) 
-    {
-        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-        if(!emailReg.test( $email))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
-    };
+    

@@ -42,19 +42,19 @@
                         <br><br>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
-                                                 <?PHP echo $this->element('customer_info'); ?>
+                                <?PHP echo $this->element('Customers/customer_info'); ?>
                             </div>
                             <div class="tab-pane" id="tab2">
-                                <?PHP echo $this->element('contact_person_info'); ?>
+                                <?PHP echo $this->element('Customers/contact_person_info'); ?>
                             </div>
                             <div class="tab-pane" id="tab3">
-                                <?PHP echo $this->element('project_info'); ?>
+                                <?PHP echo $this->element('Customers/project_info'); ?>
                             </div>
                             <div class="tab-pane" id="tab4">
-                                <?PHP echo $this->element('delivery_address'); ?>
+                                <?PHP echo $this->element('Customers/delivery_address'); ?>
                             </div>
                             <div class="tab-pane" id="tab5">
-                                <?PHP echo $this->element('billing_address'); ?>
+                                <?PHP echo $this->element('Customers/billing_address'); ?>
                             </div>
                         </div><!-- tab-content -->
                         <!-- #basicWizard -->

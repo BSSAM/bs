@@ -1,3 +1,6 @@
+<script>
+    var path_url='<?PHP echo Router::url('/',true); ?>';
+</script>
 <style>
     .show
 	{
@@ -13,6 +16,10 @@
 		color:#FFF;
 		cursor:pointer;
 	}
+        #result{
+            position: absolute;
+            z-index: 999;
+        }
     </style>
 <script type="text/javascript">
 $(function(){
@@ -30,28 +37,13 @@ if(customer!='')
 	cache: false,
 	success: function(html)
 	{
-	$("#result").html(html).show();
+            
+            $("#result").html(html).show();
 	}
 	});
 }return false;    
 });});
 
-jQuery("#result").live("click",function(e){ 
-    
-	var $clicked = $(e.target);
-	var $name = $clicked.find('.name').html();
-	var decoded = $("<div/>").html($name).text();
-	$('#val_customer').val(decoded);
-});
-$(document).live("click", function(e) { 
-	var $clicked = $(e.target);
-	if (! $clicked.hasClass("search")){
-	jQuery("#result").fadeOut(); 
-	}
-});
-$('#val_customer').click(function(){
-	jQuery("#result").fadeIn();
-});
 
 </script>
 <h1>
@@ -78,47 +70,52 @@ $('#val_customer').click(function(){
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                 <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'form-quotation-add')); ?>
-                                
-                                    <div class="form-group">
-                                       
-                                        <label class="col-md-2 control-label" for="val_quotationno">Quotation No</label>
-                                        <div class="col-md-4">
-                                            <?php echo $this->Form->input('quotationno', array('id'=>'val_quotationno','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'quotationno','value'=> $quotationno)); ?>
-                                        </div>
-                                   
-                                        <label class="col-md-2 control-label" for="val_branchname">Branch</label>
-                                        <div class="col-md-4">
-                                           <?php echo $this->Form->input('branchname', array('id'=>'val_branchname','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'branchname')); ?>
-                                        </div>
-                                   
-                                    </div>
-                                
-                                    <div class="form-group">
-                                       
-                                        <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
-                                        <div class="col-md-4">
-                                            <?php echo $this->Form->input('customer', array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,'name'=>'customer')); ?>
-                                        <div id="result">
-</div>
-                                        </div>
-                                   
-                                        <label class="col-md-2 control-label" for="val_address">Customer Address</label>
-                                        <div class="col-md-4">
-                                           <?php echo $this->Form->password('address', array('id'=>'val_address','class'=>'form-control','placeholder'=>'Enter the Customer Address','label'=>false,'name'=>'address')); ?>
-                                        </div>
-                                   
-                                    </div>
-                                    <div class="form-group form-actions">
-                                        <div class="col-md-9 col-md-offset-3">
+                                 
+                                <div class="panel panel-default">
+                                    <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'form-quotation-add')); ?>
+                                    <div class="panel-body panel-body-nopadding">
+                                        
+                                        <!-- BASIC WIZARD -->
+                                        <div id="basicWizard" class="basic-wizard">
+                                            <ul class="nav nav-pills nav-justified " data-toggle="tabs">
+                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Quotation Info</a></li>
+                                                <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
+                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> File Upload</a></li>
+                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Description </a></li>
+                                            </ul>
+                                            <div class="nav-pills-border-color"></div>
+                                            <br><br>
                                             
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab1">
+                                                    <?PHP echo $this->element('Quotations/quotation_info'); ?>
+                                                </div>
+                                                <div class="tab-pane" id="tab2">
+                                                    <?PHP echo $this->element('Quotations/customer_special_needs'); ?>
+                                                </div>
+                                                <div class="tab-pane" id="tab3">
+                                                    <?PHP echo $this->element('Quotations/file_upload'); ?>
+                                                </div>
+                                                <div class="tab-pane" id="tab4">
+                                                    <?PHP echo $this->element('Quotations/description'); ?>
+                                                </div>
+                                            </div><!-- tab-content -->
+                                            <!-- #basicWizard -->
+                                        </div><!-- panel-body -->
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-10">
+                                                
                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                             <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-
+                                                
+                                            </div>
                                         </div>
+                                        
                                     </div>
-                                
-                                <?php echo $this->Form->end(); ?>
+                                    <!-- panel -->
+                                    <?php echo $this->Form->end(); ?>
+                                </div>
+                                    
                                 <!-- END Basic Form Elements Content -->
                             </div>
                             <!-- END Basic Form Elements Block -->
