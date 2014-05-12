@@ -30,7 +30,7 @@ class CustomersController extends AppController
         $m=date ("m");
         $y=date ("Y");
         $t=time();
-        $dmt=$d+$m+$y+$t;
+        $dmt='CUS'.($d+$m+$y+$t);
         $this->Session->write('customer_id',$dmt);
         }
         $this->set('customer_id',$this->Session->read('customer_id'));
@@ -132,7 +132,7 @@ class CustomersController extends AppController
                 
                 if($project>0)
                 {
-                    $this->Projectinfo->updateAll(array('Projectinfo.status'=>1),array('Projectinfo.customer_id'=>$this->Session->read('customer_id')));
+                    $this->Projectinfo->updateAll(array('Projectinfo.project_status'=>1),array('Projectinfo.customer_id'=>$this->Session->read('customer_id')));
                 }
                 $this->Session->setFlash(__('Customer Added Successfully'));
                 return $this->redirect(array('action'=>'index'));
@@ -196,7 +196,7 @@ class CustomersController extends AppController
         $this->set('contactpersoninfo', $data);
         
           $this->loadModel('Projectinfo');
-        $data = $this->Projectinfo->find('all',array('conditions'=>array('Projectinfo.status'=>1,'Projectinfo.customer_id'=>$id),'order' => array('Projectinfo.id' => 'DESC')));
+        $data = $this->Projectinfo->find('all',array('conditions'=>array('Projectinfo.project_status'=>1,'Projectinfo.customer_id'=>$id),'order' => array('Projectinfo.id' => 'DESC')));
         //pr($data);exit;
         $this->set('projectinfo', $data);
         
