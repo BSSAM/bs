@@ -23,7 +23,8 @@ class QuotationsController extends AppController
        //echo  md5(substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, rand(1,10))); 
       
        
-        echo $str = 'BSQ-13-'.str_pad($str + 1, 5, 0, STR_PAD_LEFT);$str++;exit;
+        $str = 'BSQ-13-'.str_pad($str + 1, 5, 0, STR_PAD_LEFT);
+        $str++;
         $this->set('quotationno', $str);
     }
     
