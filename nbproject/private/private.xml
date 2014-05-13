@@ -3,14 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/bs/app/Controller/UsersController.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/header.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Users/edit.ctp</file>
             <file>file:/D:/wamp/www/bs/app/webroot/js/pages/compCharts.js</file>
-            <file>file:/D:/wamp/www/bs/app/View/Users/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Model/User.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customers/edit.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customers/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customers/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Contactpersoninfo.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/delivery_address.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/functions.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Quotations/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Paymentterms/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Model/User.php</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Customer.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Users/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Users/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/CustomersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/PaymenttermsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/billing_address.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/UsersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/contact_person_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/formsValidation.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/project_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Paymentterm.php</file>
             <file>file:/D:/wamp/www/bs/app/Model/Department.php</file>
         </group>
     </open-files>

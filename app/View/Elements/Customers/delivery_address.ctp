@@ -24,6 +24,7 @@
         </tr>
     </thead>
     <tbody class="delivery_info_row">
+          <?PHP if(!empty($deliveryaddress )): ?>
          <?php foreach($deliveryaddress as $deliveryaddress_list): ?>
          <tr>
                                         <td class="text-center"><?php echo $deliveryaddress_list['deliveryaddress']['id']; ?></td>
@@ -39,5 +40,6 @@
                                         </td>
                                     </tr>
         <?php endforeach; ?>
+                                    <?PHP endif; ?>
     </tbody>
 </table>

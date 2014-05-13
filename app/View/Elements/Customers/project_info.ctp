@@ -24,6 +24,7 @@
         </tr>
     </thead>
     <tbody class="project_info_row">
+         <?PHP if(!empty($projectinfo )): ?>
         <?php foreach($projectinfo as $projectinfo_list): ?>
          <tr>
                                         <td class="text-center"><?php echo $projectinfo_list['projectinfo']['id']; ?></td>
@@ -39,5 +40,6 @@
                                         </td>
                                     </tr>
         <?php endforeach; ?>
+                                    <?PHP endif; ?>
     </tbody>
 </table>

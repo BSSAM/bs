@@ -24,6 +24,7 @@
         </tr>
     </thead>
     <tbody class="billing_info_row">
+         <?PHP if(!empty($billingaddress )): ?>
          <?php foreach($billingaddress as $billingaddress_list): ?>
          <tr>
                                         <td class="text-center"><?php echo $billingaddress_list['billingaddress']['id']; ?></td>
@@ -39,5 +40,6 @@
                                         </td>
                                     </tr>
         <?php endforeach; ?>
+                                     <?PHP endif; ?>
     </tbody>
 </table>

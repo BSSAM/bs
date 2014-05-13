@@ -34,6 +34,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?PHP if(!empty($quotation )): ?>
                                      <?php foreach($quotation as $quotation_list): ?>
                                     <tr>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
@@ -52,7 +53,7 @@
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
-                                    
+                                    <?PHP endif; ?>
                                    
                                 </tbody>
                             </table>
