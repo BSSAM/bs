@@ -1,11 +1,16 @@
- <h1>
+<script>
+    var path_url='<?PHP echo Router::url('/',true); ?>';
+    var customer_id = '<?php echo $customer_id;?>';
+    //alert(customer_id);
+</script>
+<h1>
                                 <i class="gi gi-user"></i>Edit Customer
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Priority',array('controller'=>'Customers','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
                         <li>Edit Customer</li>
                     </ul>
                     <!-- END Forms General Header -->
@@ -39,19 +44,19 @@
                                             <br><br>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
-                                <?PHP echo $this->element('Customers/customer_info'); ?>
+                                <?PHP echo $this->element('Customers/edit/customer_info'); ?>
                             </div>
                             <div class="tab-pane" id="tab2">
-                                <?PHP echo $this->element('Customers/contact_person_info'); ?>
+                                <?PHP echo $this->element('Customers/edit/contact_person_info'); ?>
                             </div>
                             <div class="tab-pane" id="tab3">
-                                <?PHP echo $this->element('Customers/project_info'); ?>
+                                <?PHP echo $this->element('Customers/edit/project_info'); ?>
                             </div>
                             <div class="tab-pane" id="tab4">
-                                <?PHP echo $this->element('Customers/delivery_address'); ?>
+                                <?PHP echo $this->element('Customers/edit/delivery_address'); ?>
                             </div>
                             <div class="tab-pane" id="tab5">
-                                <?PHP echo $this->element('Customers/billing_address'); ?>
+                                <?PHP echo $this->element('Customers/edit/billing_address'); ?>
                             </div>
                         </div><!-- tab-content -->
                                                 

@@ -18,7 +18,7 @@ $(document).ready(function(){
         }
         var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
         var pro_name=$('#project_name').val();
-        $('.project_info_row').append('<tr class="remove_'+serial+'"><td class="text-center">'+serial+'</td><td class="text-center">'+pro_name+'</td>\n\
+        $('.project_info_row').append('<tr class="remove_'+pro_name+'"><td class="text-center">'+serial+'</td><td class="text-center">'+pro_name+'</td>\n\
         <td class="text-center"><div class="btn-group"><a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger but_delete">\n\
         <i class="fa fa-times"></i></a></div></td></tr>');
         $('#serial').val(null);
@@ -62,7 +62,7 @@ $(document).ready(function(){
         var contact_mobile=$('#contact_mobile').val();
         var contact_purpose=$('#contact_purpose').val();
         var contact_remark=$('#contact_remark').val();
-        $('.contact_info_row').append('<tr class="contact_remove_'+serial+'">\n\\n\
+        $('.contact_info_row').append('<tr class="contact_remove_'+pro_name+'">\n\\n\
                                     <td class="text-center">'+customer_id+'</td>\n\
                                     <td class="text-center">'+serial+'</td>\n\
                                     <td class="text-center">'+contact_name+'</td>\n\\n\
@@ -192,5 +192,128 @@ $(document).ready(function(){
 	}
 	});
    });
+   
+  ///////////////EDIT Customer ////////////////////////////////////
+//    $('.bt_pro_edit').click(function()
+//    {
+//        var pro_id = this.id;
+//          return $.ajax({
+//		type: 'POST',
+//                url: path_url+'/customers/project_edit',
+//		data:"id="+ pro_id		
+//               
+//		});
+//                
+//    });
+    
+    
+    
+    // Project Edit Process.................................
+  
+    $('.bt_pro_edit').click(function() {
+         
+        var pro_id = this.id;
+        // alert(pro_id);
+        param = 'id=' + pro_id;
+        check_project(param).done(function(value) {
+            //waits until ajax is completed
+            var myarr = value.split(",");
+            //alert(myarr[3]); 
+            $('#serial').val(myarr[0]);
+            $('#project_name').val(myarr[3]);
+            $(".project_edit_submit").html('Update');
+            $(".project_edit_submit").attr('id',myarr[0])
+        });
+        //$('#project_name').val=myarr[3];
+        return false;
+    });
+    
+    
+    function check_project(param) {
+        return $.ajax({
+            type: 'POST',
+            data: param,
+            url: path_url + '/Customers/project_edit_update/'
+        });
+    }
+    
+    $('.project_edit_submit').click(function()
+    {
+       
+       
+        if($('#project_name').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        
+       
+       var a =$(".project_edit_submit").text();
+       
+        if(a!="update")
+        {
+            
+            var pro_name=$('#project_name').val();
+        $('.project_info_row').append('<tr class="remove_'+pro_name+'"><td class="text-center"></td><td class="text-center">'+pro_name+'</td>\n\
+        <td class="text-center"><div class="btn-group"><button type="button" id="'+pro_id+'" title="Edit" class="btn btn-xs btn-default bt_pro_edit"><i class="fa fa-pencil"></i></button><a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger but_delete">\n\
+        <i class="fa fa-times"></i></a></div></td></tr>');
+        $('#serial').val(null);
+        $('#project_name').val(null);
+        $('.project_name_error').hide();
+        $.ajax({
+		type: 'POST',
+		data:"project_name="+pro_name,
+		url: path_url+'/customers/project_add/'
+		});
+        }
+        
+         
+        var pro_id = this.id;
+        var pro_name=$('#project_name').val();
+        //alert(pro_name);
+        param = 'id=' + pro_id +'&pro_name='+pro_name;
+        update_project(param).done(function(value) {
+            //alert(value);
+        });
+        $('#serial').val(null);
+        $('#project_name').val(null);
+        $('.project_name_error').hide();
+        $('.project_edit_submit').html('<i class="fa fa-plus fa-fw"></i> add');
+        $('.tb_pro').each(function() {
+        $(this).find("tr#"+pro_id+" td:nth-child(2)").html(pro_name);
+    
+     });
+//            html('<td class="text-center">'+pro_id+'</td>\n\
+//<td class="text-center">'+pro_name+'</td>\n\
+//<td class="text-center">\n\
+//<div class="btn-group">\n\
+//<button type="button" id="'+pro_id+'" title="Edit" class="btn btn-xs btn-default bt_pro_edit">\n\
+//<i class="fa fa-pencil"></i></button>\n\
+//<a href="#" data-toggle="tooltip" title="" class="btn btn-xs btn-danger" onclick="if (confirm(Are you Sure?))" data-original-title="Delete">\n\
+//<i class="fa fa-times"></i>\n\
+//</a>\n\
+//</div></td>');  
+   // alert(customerId);
+
+        //var a = $('tr#'+pro_id).attr('id',pro_id).html('');
+        
+        //alert(('tr#'+pro_id).replaceWith('new'));
+      
+//        $('tr#'+pro_id).html("<tr class='remove_'+pro_id+'' id=''+pro_id+''><td class='text-center'>'+pro_id+'</td><td class='text-center'>'+pro_name+'</td>\n\
+//        <td class='text-center'><div class='btn-group'><a data-delete='+pro_id+'' data-toggle='tooltip' title='Delete' class='btn btn-xs btn-danger but_delete'>\n\
+//        <i class='fa fa-times'></i></a></div></td></tr>");
+        return false;
+    });
+     
+    function update_project(param) {
+        return $.ajax({
+            type: 'POST',
+            data: param,
+            url: path_url + 'Customers/project_edit_rule/'
+        });
+    }
+    
 }); 
     

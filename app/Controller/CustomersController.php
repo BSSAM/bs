@@ -145,6 +145,13 @@ class CustomersController extends AppController
     }
     public function edit($id = NULL)
     {
+        if($this->Session->read('customer_id')=='')
+        {
+            $this->Session->write('customer_id',$id);
+        }
+          $this->set('customer_id',$this->Session->read('customer_id'));
+        
+        
          $this->loadModel('Salesperson');
         $data = $this->Salesperson->find('list', array('fields' => 'salesperson'));
         $this->set('salesperson',$data);
@@ -233,12 +240,38 @@ class CustomersController extends AppController
               $this->request->data['salesperson_id'] = $dept;
               
               $match3 = $this->request->data['referedbies_id'];
+              if($match3!='')
+              {
               $dept1 = implode(',',$match3);
               $this->request->data['referedbies_id'] = $dept1;
+              }
             if($this->Customer->save($this->request->data))
             {
+                
+                $project= $this->Projectinfo->find('count',array('conditions'=>array('Projectinfo.customer_id'=>$this->Session->read('customer_id'))));
+               $contactperson= $this->Contactpersoninfo->find('count',array('conditions'=>array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id'))));
+               $billingaddress= $this->Billingaddress->find('count',array('conditions'=>array('Billingaddress.customer_id'=>$this->Session->read('customer_id'))));
+               $delivery=$this->Deliveryaddress->find('count',array('conditions'=>array('Deliveryaddress.customer_id'=>$this->Session->read('customer_id'))));
+                if($contactperson>0)
+                {
+                $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.status'=>1),array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id')));
+                }
+                if($billingaddress>0)
+                {
+                $this->Billingaddress->updateAll(array('Billingaddress.status'=>1),array('Billingaddress.customer_id'=>$this->Session->read('customer_id')));
+                }
+                if($delivery>0)
+                {
+                $this->Deliveryaddress->updateAll(array('Deliveryaddress.status'=>1),array('Deliveryaddress.customer_id'=>$this->Session->read('customer_id')));
+                }
+                
+                if($project>0)
+                {
+                    $this->Projectinfo->updateAll(array('Projectinfo.project_status'=>1),array('Projectinfo.customer_id'=>$this->Session->read('customer_id')));
+                }
                $this->Session->setFlash(__('Customer is Updated'));
                return $this->redirect(array('action'=>'index'));
+               $this->Session->delete('customer_id');
             }
             $this->Session->setFlash(__('Customer Cant be Updated'));
         }
@@ -276,6 +309,25 @@ class CustomersController extends AppController
         {
             echo "success";
         }
+    }
+    public function project_edit_update()
+    {
+        $this->autoRender=false;
+        $pro_id= $this->request->data['id'];
+        $this->loadModel('Projectinfo');
+        $projectinfo =  $this->Projectinfo->findById($pro_id);
+        echo $str = implode(',',$projectinfo['Projectinfo']);
+    }
+    public function project_edit_rule()
+    {
+        $this->autoRender=false;
+        $pro_id= $this->request->data['id'];
+        $pro_name= $this->request->data['pro_name'];
+        $this->loadModel('Projectinfo');
+        
+        $data = $this->Projectinfo->updateAll(array('Projectinfo.project_name'=>'"'.$pro_name.'"'),array('Projectinfo.id'=>$pro_id));
+        pr($data);
+        //echo 'success';
     }
     public function project_delete()
     {
