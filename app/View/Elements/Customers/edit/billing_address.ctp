@@ -24,22 +24,19 @@
         </tr>
     </thead>
     <tbody class="billing_info_row">
-         <?PHP if(!empty($billingaddress )): ?>
-         <?php foreach($billingaddress as $billingaddress_list): ?>
-         <tr>
-                                        <td class="text-center"><?php echo $billingaddress_list['billingaddress']['id']; ?></td>
-                                        <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><?php echo $billingaddress_list['billingaddress']['billing_address']; ?></td>
-                                       
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$billingaddress_list['billingaddress']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$billingaddress_list['billingaddress']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                                
-                                            </div>
-                                        </td>
-                                    </tr>
+        <?PHP if(!empty($billingaddress )): ?>
+        <?php foreach($billingaddress as $billingaddress_list): ?>
+        <tr>
+            <td class="text-center"><?php echo $billingaddress_list['billingaddress']['id']; ?></td>
+            <td class="text-center"><?php echo $billingaddress_list['billingaddress']['billing_address']; ?></td>
+            <td class="text-center">
+                <div class="btn-group">
+                    <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$billingaddress_list['billingaddress']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                    <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$billingaddress_list['billingaddress']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                </div>
+            </td>
+        </tr>
         <?php endforeach; ?>
-                                     <?PHP endif; ?>
+        <?PHP endif; ?>
     </tbody>
 </table>

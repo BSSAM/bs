@@ -9,9 +9,10 @@ $(document).ready(function(){
     
     
     
-    /* Project Info .................................
-    ......................................................................................................................
-    .................................................*/
+    /* Contact Person Info .................................
+    *......................................................................................................................
+    *......................................................................................................................
+    *.......................................................*/
     
     
     $('.project_name_error').hide();
@@ -52,7 +53,7 @@ $(document).ready(function(){
    
   
     $(document).on('click','.bt_pro_edit',function() {
-        alert();
+        
         var pro_id = this.id;
         // alert(pro_id);
         param = 'id=' + pro_id;
@@ -169,10 +170,11 @@ $(document).ready(function(){
    
    
    
+    /* Contact Person Info ...........................................
+     * ..........................................................................................................................
+     * ..........................................................................................................................
+    *.................................................................*/
    
-    /*Contact Person Info .................................
-    ........................................................................................................................
-    ......................................................*/
     
     
     $('.name_error').hide();
@@ -236,6 +238,92 @@ $(document).ready(function(){
         });
         $('.contact_remove_'+delete_id).fadeOut();
     });
+    
+    
+     $('.contact_edit_submit').click(function()
+    {
+        if($('#contact_name').val()=='')
+        {
+            $('.name_error').addClass('animation-slideDown');
+            $('.name_error').css('color','red');
+            $('.name_error').show();
+            return false;
+        }
+    
+        if(this.id=='')
+        {
+            var pro_name=$('#project_name').val();
+            var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+            
+            $.ajax({
+		type: 'POST',
+                data:"project_name="+pro_name+"&serial_id="+serial,
+		url: path_url+'/customers/project_edit_add/',
+                success:function(value){
+                    cookievalue= value + ";";
+                    document.cookie="pro_id=" + cookievalue;
+                }
+            });
+           
+            
+            function readCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0;i < ca.length;i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                }
+                return null;
+            }
+            
+            function eraseCookie(name) {
+                createCookie(name,"",-1);
+            }
+            var pro_id = readCookie('pro_id');
+            $('#serial').val(null);
+            $('#project_name').val(null);
+            $('.project_name_error').hide();
+            
+           
+            $('.tb_pro').each(function() {
+                $(this).find("tr#"+pro_id+" td:nth-child(1)").html(pro_name);
+            });
+            // alert(pro_id+"sf");
+            $('.project_info_row').append('<tr class="remove_'+serial+'" id="'+pro_id+'"><td class="text-center">'+pro_name+'</td><td class="text-center"><div class="btn-group"><button type="button" id="'+pro_id+'" title="Edit" class="btn btn-xs btn-default bt_pro_edit"><i class="fa fa-pencil"></i></button><a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger but_delete"><i class="fa fa-times"></i></a></div></td></tr>'); 
+            eraseCookie('pro_id');
+        }
+        else
+        {
+            var pro_id = this.id;
+            //alert(pro_id);
+            var pro_name=$('#project_name').val();
+            //alert(pro_name);
+           
+            param = 'id=' + pro_id +'&pro_name='+pro_name;
+            update_project(param).done(function(value) {
+              
+            });
+             
+            $('tr#'+pro_id+' td:nth-child(1)').html(pro_name);
+            $('#serial').val(null);
+            $('#project_name').val(null);
+            $('.project_name_error').hide();
+            $('.project_edit_submit').html('<i class="fa fa-plus fa-fw"></i> add');
+          
+        }
+        return false;
+    });
+    
+    
+    
+    /* Delivery Address Info ...........................................
+     * ..........................................................................................................................
+     * ..........................................................................................................................
+     *..................................................................*/
+    
+    
+    
     $('.delivery_address_error').hide();
     $('.delivery_submit').click(function()
     {
