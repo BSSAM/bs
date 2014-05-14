@@ -1,8 +1,8 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_customername">S.No</label>
+<!--    <label class="col-md-2 control-label" for="val_customername">S.No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('serial_no', array('id'=>'serial','class'=>'form-control ','label'=>false,'readonly'=>true)); ?>
-    </div>
+        <?php //echo $this->Form->input('serial_no', array('id'=>'serial','class'=>'form-control ','label'=>false,'readonly'=>true)); ?>
+    </div>-->
     <label class="col-md-2 control-label" for="val_postalcode">Project Name *</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('project_name', array('id'=>'project_name','class'=>'form-control','placeholder'=>'Enter Project name','label'=>false)); ?>
@@ -18,7 +18,7 @@
 <table  class="table table-vcenter table-condensed table-bordered tb_pro">
     <thead>
         <tr>
-            <th class="text-center">S.No</th>
+<!--            <th class="text-center">S.No</th>-->
             <th class="text-center">Project Name</th>
             <th class="text-center">Actions</th>
         </tr>
@@ -27,7 +27,7 @@
          <?PHP if(!empty($projectinfo )): ?>
         <?php foreach($projectinfo as $projectinfo_list): ?>
         <tr id="<?php echo $projectinfo_list['Projectinfo']['id']; ?>" class="remove_<?php echo $projectinfo_list['Projectinfo']['project_id']; ?>">
-                                        <td class="text-center"><?php echo $projectinfo_list['Projectinfo']['id']; ?></td>
+<!--                                        <td class="text-center"><?php //echo $projectinfo_list['Projectinfo']['id']; ?></td>-->
                                         <td class="text-center"><?php echo $projectinfo_list['Projectinfo']['project_name']; ?></td>
                                        
                                         <td class="text-center">

@@ -310,6 +310,22 @@ class CustomersController extends AppController
             echo "success";
         }
     }
+     public function project_edit_add()
+    {
+        $this->autoRender=false;
+        $serial_id= $this->request->data['serial_id'];
+        $project_name=$this->request->data['project_name'];
+        
+        $status=1;
+        $this->loadModel('Projectinfo');
+        $this->request->data['Projectinfo']['project_id']=$serial_id;
+        $this->request->data['Projectinfo']['customer_id']=$this->Session->read('customer_id');;
+        $this->request->data['Projectinfo']['project_name']=$project_name;
+        $this->request->data['Projectinfo']['project_status']=$status;
+        $this->Projectinfo->save($this->request->data);
+        $pro_id = $this->Projectinfo->getLastInsertID();
+        return $pro_id+1;
+    }
     public function project_edit_update()
     {
         $this->autoRender=false;
