@@ -15,7 +15,7 @@
                     </ul>
                     <!-- END Forms General Header -->
 
-<div class="row"><?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-add')); ?>
+<div class="row"><?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-edit')); ?>
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
@@ -33,7 +33,7 @@
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
                                             
-                                            <ul class="nav nav-pills nav-justified " data-toggle="tabs">
+                                            <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Customer Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Contact Person Info</a></li>
                                                 <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Project Info</a></li>
