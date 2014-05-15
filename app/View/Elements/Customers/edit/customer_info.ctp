@@ -28,11 +28,11 @@
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_regaddress">Registered Address</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
-    </div>
+<!--    <div class="col-md-4">
+        <?php //echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
+    </div>-->
     
-    <div class="col-md-6">
+    <div class="col-md-10">
         <!-- Block Tabs -->
         <div class="block full">
             <!-- Block Tabs Title -->
