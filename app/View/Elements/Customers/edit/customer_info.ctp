@@ -31,6 +31,66 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
     </div>
+    
+    <div class="col-md-6">
+        <!-- Block Tabs -->
+        <div class="block full">
+            <!-- Block Tabs Title -->
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <div class="btn-group">
+                        <a class="btn btn-alt btn-sm btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)"><i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                            <li>
+                                <a href="#modal-regular" data-toggle="modal">Add</a>
+                                <a href="javascript:void(0)">Action 2</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:void(0)">Another Action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs" data-toggle="tabs">
+                    <li><a href="#example-tabs2-activity">Address1</a></li>
+                    <li><a href="#example-tabs2-profile">Address2</a></li>
+                    <li><a href="#example-tabs2-options">Address3</li>
+                </ul>
+            </div>
+            <!-- END Block Tabs Title -->
+                
+            <!-- Tabs Content -->
+            <div class="tab-content">
+                <div class="tab-pane" id="example-tabs2-activity">new address,adas,asdasda</div>
+                <div class="tab-pane" id="example-tabs2-profile">ast4yteg,adasdaf4rw</div>
+                <div class="tab-pane" id="example-tabs2-options">help,help</div>
+            </div>
+            <!-- END Tabs Content -->
+        </div>
+        <!-- END Block Tabs -->
+    </div>
+    
+    
+    
+    
+    
+    
+    <div id="modal-regular" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Modal Title</h3>
+                </div>
+                <div class="modal-body">
+                    Modal Content..
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
         
     <label class="col-md-2 control-label" for="val_billaddress">Billing Address</label>
     <div class="col-md-4">

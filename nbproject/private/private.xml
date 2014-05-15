@@ -6,7 +6,6 @@
             <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/customer_info.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/customer_info.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Customers/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/AdditionalchargesController.php</file>
             <file>file:/D:/wamp/www/bs/app/Controller/CustomersController.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Customers/add.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/billing_address.ctp</file>
@@ -20,7 +19,6 @@
             <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/project_info.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/delivery_address.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Model/Customer.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Layouts/default.ctp</file>
         </group>
     </open-files>
 </project-private>
