@@ -72,7 +72,7 @@ if(customer!='')
                                 <!-- Basic Form Elements Content -->
                                  
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'form-quotation-add')); ?>
+                                    <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'fileupload','enctype'=>'multipart/form-data')); ?>
                                     <?php echo $this->Form->input('Quotation.customer_id', array('type'=>'hidden','value'=>'')); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         

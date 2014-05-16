@@ -37,69 +37,39 @@
 		echo $this->Html->css('plugins');
 		echo $this->Html->css('main');
 		echo $this->Html->css('themes');
+                echo $this->Html->css('file_upload_css/jquery.fileupload');
+		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
 		echo $this->Html->script('jquery.min');
                 echo $this->Html->script('functions');
-                 ?>
+                
+                ?>
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
-		<?php echo $this->Html->script('vendor/modernizr-2.7.1-respond-1.4.2.min');
+	<?php echo $this->Html->script('vendor/modernizr-2.7.1-respond-1.4.2.min');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
 </head>
 <body>
-	<?php /*?><div id="container">
-		<div id="header">
-			<h1><?php //echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content"><?php */?>
-
-	<?php /*?><?php echo $this->Session->flash(); ?><?php */
-                        
-                  
-	$sess_username = $this->Session->read('sess_username');
-        
-        if(isset($sess_username))
-        {
-            echo $this->element('header');
-        }?>
-            
-                       
-
-			<?php echo $this->fetch('content');?>
-		<?php /*?></div>
-		<div id="footer">
-			<?php // echo $this->Html->link(
-				//	$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-				//	'http://www.cakephp.org/',
-				//	array('target' => '_blank', 'escape' => false)
-				//);
-			?>
-		</div>
-	</div><?php */?>
-	<?php /*?><?php echo $this->element('sql_dump'); ?><?php */?>
-    
+    <?php 
+    $sess_username = $this->Session->read('sess_username');
+    if(isset($sess_username))
+    {
+        echo $this->element('header');
+    }?>
+    <?php echo $this->fetch('content');?>
     <?php echo $this->Html->script('vendor/bootstrap.min'); ?>
-    
     <?php echo $this->Html->script('plugins'); ?>
     <?php echo $this->Html->script('app'); ?>
-     
     <?php echo $this->Html->script('pages/tablesDatatables'); ?>
     <script>$(function(){ TablesDatatables.init(); });</script>
-    
     <script>$(function(){ WidgetsStats.init(); });</script>
-    
     <?php echo $this->Html->script('pages/login'); ?>
     <script>$(function(){ Login.init(); });</script>
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <?php echo $this->Html->script('helpers/gmaps.min'); ?>
     <?php echo $this->Html->script('pages/index'); ?>
     <script>$(function(){ Index.init(); });</script>
-    
-   
-    
-   
-    
 </body>
 </html>
   
