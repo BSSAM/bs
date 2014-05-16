@@ -39,21 +39,18 @@
             <div class="block-title">
                 <div class="block-options pull-right">
                     <div class="btn-group">
-                        <a class="btn btn-alt btn-sm btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)"><i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                        <a href="#modal-registered" data-toggle="modal" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
+<!--                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li>
-                                <a href="#modal-regular" data-toggle="modal">Add</a>
-                                <a href="javascript:void(0)">Action 2</a>
+                                <a href="#modal-registered" data-toggle="modal">Add</a>
                             </li>
-                            <li class="divider"></li>
-                            <li><a href="javascript:void(0)">Another Action</a></li>
-                        </ul>
+                        </ul>-->
                     </div>
                 </div>
                 <ul class="nav nav-tabs" data-toggle="tabs">
-                    <li><a href="#example-tabs2-activity">Address1</a></li>
-                    <li><a href="#example-tabs2-profile">Address2</a></li>
-                    <li><a href="#example-tabs2-options">Address3</li>
+                    <li id="1"><a href="#example-tabs2-Address1"><button class="close" type="button" id="1" onclick="rem(this);">×</button>Address1</a></li>
+                    <li id="2"><a href="#example-tabs2-Address2"><button class="close" type="button" id="2" onclick="rem(this);">×</button>Address2</a></li>
+                    <li id="3"><a href="#example-tabs2-Address3"><button class="close" type="button" id="3" onclick="rem(this);">×</button>Address3</a></li>
                 </ul>
             </div>
             <!-- END Block Tabs Title -->
@@ -69,29 +66,7 @@
         <!-- END Block Tabs -->
     </div>
     
-    
-    
-    
-    
-    
-    <div id="modal-regular" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 class="modal-title">Modal Title</h3>
-                </div>
-                <div class="modal-body">
-                    Modal Content..
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-sm btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-        
+      
     <label class="col-md-2 control-label" for="val_billaddress">Billing Address</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>

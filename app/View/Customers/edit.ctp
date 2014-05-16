@@ -2,6 +2,12 @@
     var path_url='<?PHP echo Router::url('/',true); ?>';
     var customer_id = '<?php echo $customer_id;?>';
     //alert(customer_id);
+    function rem(link)
+    {
+        link.parentNode.parentNode.removeChild(link.parentNode);
+        
+
+    }
 </script>
 <h1>
                                 <i class="gi gi-user"></i>Edit Customer
@@ -82,8 +88,25 @@
                                 <?php echo $this->Form->end(); ?>
                                 <!-- END Basic Form Elements Content -->
 </div>
-    
-  
+    <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-address-edit')); ?>
+  <div id="modal-registered" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Registered Address</h3>
+                </div>
+                <div class="modal-body">
+                   <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <?php echo $this->Form->end(); ?>
     <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
          <?php echo $this->Html->script('pages/uiProgress'); ?>

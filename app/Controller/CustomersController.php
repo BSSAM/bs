@@ -21,6 +21,26 @@ class CustomersController extends AppController
         //pr($data);
     }
     
+    public function addregaddress()
+    {
+        
+    $this->autoRender=false;
+    $regaddress= $this->request->data['regaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        
+        $status=0;
+        $this->loadModel('Address');
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address']=$regaddress;
+        $this->request->data['Address']['type']='registered';
+        $this->request->data['Address']['status']=$status;
+        if($this->Address->save($this->request->data))
+        {
+            echo "success";
+        }
+    
+    }
+    
     public function add()
     {
         

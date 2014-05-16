@@ -3717,3 +3717,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
     margin-right:3px;
     margin-left: 3px;
 }
+
+.nav-tabs > li .close {
+    margin: -2px 0 0 10px;
+    font-size: 18px;
+}

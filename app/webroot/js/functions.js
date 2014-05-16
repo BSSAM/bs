@@ -199,7 +199,7 @@ $(document).ready(function(){
         var contact_mobile=$('#contact_mobile').val();
         var contact_purpose=$('#contact_purpose').val();
         var contact_remark=$('#contact_remark').val();
-        $('.contact_info_row').append('<tr class="contact_remove_'+pro_name+'">\n\\n\
+        $('.contact_info_row').append('<tr class="contact_remove_'+contact_name+'">\n\\n\
                                     <td class="text-center">'+customer_id+'</td>\n\
                                     <td class="text-center">'+serial+'</td>\n\
                                     <td class="text-center">'+contact_name+'</td>\n\\n\
@@ -414,6 +414,44 @@ $(document).ready(function(){
                 $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
             }
 	});
+    });
+    $('.project_name_error').hide();
+    $('#save_regadd').click(function()
+    {
+        if($('#val_regaddress').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+        var regaddress=$('#val_regaddress').val();
+        
+         var n = $("ul#tabs_reg li").size()+1;
+          $('#tabs_reg').append('<li id="'+n+'"><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+n+'" onclick="rem_reg(this);">×</button>Address'+n+'</a></li>');
+          $('#tab-content').append('<div class="tab-pane" id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
+          $('#val_regaddress').val(null);
+         
+          $.ajax({
+            type: 'POST',
+            data:"regaddress="+regaddress+"&customer_id="+customer_id,
+            url: path_url+'/customers/addregaddress/'
+        });
+        $('#modal-registered').modal('hide');
+       
+        //alert(pro_name);
+//        $('.nav nav-tabs').append('<tr class="remove_'+serial+'"><td class="text-center">'+serial+'</td><td class="text-center">'+pro_name+'</td>\n\
+//        <td class="text-center"><div class="btn-group"><a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger but_delete">\n\
+//        <i class="fa fa-times"></i></a></div></td></tr>');
+//        $('#serial').val(null);
+//        $('#project_name').val(null);
+//        $('.project_name_error').hide();
+//        $.ajax({
+//            type: 'POST',
+//            data:"serial_id="+ serial+"&project_name="+pro_name,
+//            url: path_url+'/customers/project_add/'
+//        });
     });
    
 
