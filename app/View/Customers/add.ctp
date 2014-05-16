@@ -1,6 +1,20 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
     var customer_id = '<?php echo $customer_id;?>';
+    $(document).on('click','.close',function(){
+        var id=$(this).attr('id');
+        alert(id);
+        $.ajax({
+            type: 'POST',
+            data:"delete_id="+id,
+            url: path_url+'/customers/deleteregaddress/',
+            success:function(data){
+                if(data == 'deleted'){
+                    $('#'+id).fadeOut();
+                }
+            }
+        });
+    });
     function rem_reg(link)
     {
         //alert($(".tabs li").size());
@@ -8,13 +22,21 @@
 //        {
 //            alert('error');
 //        }
+        var delete_id = link.id;
+//alert(link.parentNode.parentNode);
         link.parentNode.parentNode.removeChild(link.parentNode);
        // $('#example-tabs2-Address'+link.id).remove();
-        $('#example-tabs2-Address'+link.id).parentNode.remove();
+        //$('#example-tabs2-Address'+link.id).parentNode.remove();
+        
          $.ajax({
             type: 'POST',
-            data:"regaddress="+regaddress+"&customer_id="+customer_id,
-            url: path_url+'/customers/deleteregaddress/'
+            data:"delete_id="+delete_id,
+            url: path_url+'/customers/deleteregaddress/',
+            success:function(data){
+                if(data == 'deleted'){
+                    $('#'+delete_id).fadeOut();
+                }
+            }
         });
         
     }

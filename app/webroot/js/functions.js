@@ -429,14 +429,18 @@ $(document).ready(function(){
         var regaddress=$('#val_regaddress').val();
         
          var n = $("ul#tabs_reg li").size()+1;
-          $('#tabs_reg').append('<li id="'+n+'"><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+n+'" onclick="rem_reg(this);">×</button>Address'+n+'</a></li>');
           $('#tab-content').append('<div class="tab-pane" id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
           $('#val_regaddress').val(null);
          
           $.ajax({
             type: 'POST',
             data:"regaddress="+regaddress+"&customer_id="+customer_id,
-            url: path_url+'/customers/addregaddress/'
+            url: path_url+'/customers/addregaddress/',
+            success:function(data){
+                $('#tabs_reg').append('<li id="'+data+'"><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+data+'" onclick="rem_reg(this);">×</button>Address'+n+'</a></li>');
+          
+            }
+                    
         });
         $('#modal-registered').modal('hide');
        
@@ -454,6 +458,35 @@ $(document).ready(function(){
 //        });
     });
    
+    $('.country_value').change(function() {
+        var country_id = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: path + "Quotations/get_country_value",
+            data: 'country_id=' + country_id,
+            cache: false,
+            success: function(data)
+            {
+
+                $('#val_currency_value').val(data);
+            }
+
+        });
+    });
+    $('.gsttype').change(function() {
+        var gst_id = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: path + "Quotations/get_gst_value",
+            data: 'gst_id=' + gst_id,
+            cache: false,
+            success: function(data)
+            {
+                $('#val_gst').val(data);
+            }
+
+        });
+    });
 
     
     

@@ -30,15 +30,30 @@ class CustomersController extends AppController
         
         $status=0;
         $this->loadModel('Address');
+        $random =mt_rand();
         $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
         $this->request->data['Address']['address']=$regaddress;
         $this->request->data['Address']['type']='registered';
         $this->request->data['Address']['status']=$status;
         if($this->Address->save($this->request->data))
         {
-            echo "success";
+            echo $random;
         }
     
+    }
+    
+     public function deleteregaddress()
+    {
+        $this->autoRender=false;
+        $delete_id= $this->request->data['delete_id'];
+        
+        $this->loadModel('Address');
+        
+        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
+        {
+            echo "deleted";
+        }
     }
     
     public function add()
@@ -62,6 +77,13 @@ class CustomersController extends AppController
         $this->loadModel('Referedby');
         $data1 = $this->Referedby->find('list', array('fields' => 'referedby'));
         $this->set('referedby',$data1);
+        
+        $this->loadModel('Address');
+        $data10 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'registered')));
+        $data10_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'registered')));
+        //pr($data10);pr($data10_count);exit;
+        $this->set('data10',$data10);
+        $this->set('data10_count',$data10_count);
         
         $this->loadModel('Industry');
         $data2 = $this->Industry->find('list', array('fields' => 'industryname'));

@@ -44,19 +44,26 @@
                     </div>
                 </div>
                 <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_reg">
+                    <?php for($i=0;$i<$data10_count;$i++){ ?>
+                    
+                        <li id="<?php echo $data10[$i]['Address']['address_id']; ?>"><a href="#example-tabs2-Address<?php echo $i; ?>"><button class="close" type="button" id="<?php echo $data10[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
+                     <?php //echo "<li id='.$i.'><a href='#example-tabs2-Address'.$i.''><button class='close' type='button' id='.$i.' onclick='rem_reg(this);'>×</button>Address'.$i+1.'</a></li>"; ?>
                     <!--                    <li id="1"><a href="#example-tabs2-Address1"><button class="close" type="button" id="1" onclick="rem_reg(this);">×</button>Address1</a></li>
                                         <li id="2"><a href="#example-tabs2-Address2"><button class="close" type="button" id="2" onclick="rem_reg(this);">×</button>Address2</a></li>
                                         <li id="3"><a href="#example-tabs2-Address3"><button class="close" type="button" id="3" onclick="rem_reg(this);">×</button>Address3</a></li>-->
-
+                    <?php } ?>
                 </ul>
             </div>
             <!-- END Block Tabs Title -->
 
             <!-- Tabs Content -->
             <div class="tab-content" id="tab-content">
+                 <?php for($i=0;$i<$data10_count;$i++){ ?>
+                <div class="tab-pane" id="example-tabs2-Address<?php echo $i; ?>"><?php echo $data10[$i]['Address']['address']; ?></div>
                 <!--                <div class="tab-pane" id="example-tabs2-Address1">new address,adas,asdasda</div>
                                 <div class="tab-pane" id="example-tabs2-Address2">ast4yteg,adasdaf4rw</div>
                                 <div class="tab-pane" id="example-tabs2-Address3">help,help</div>-->
+                <?php } ?>
             </div>
             <!-- END Tabs Content -->
         </div>
