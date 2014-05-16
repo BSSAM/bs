@@ -2,7 +2,7 @@
     class QuotationsController extends AppController
     {
         public $helpers = array('Html','Form','Session');
-        public $uses =array('Priority','Paymentterm','Quotation');
+        public $uses =array('Priority','Paymentterm','Quotation','Currency','Country','Additionalcharge','Service');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -24,10 +24,18 @@
             $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $this->set('payment',$payment);
+            $country=$this->Country->find('list',array('fields'=>array('id','country')));
+            $this->set('country',$country);
+            
+            $additional_charge=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
+            $this->set('additional',$additional_charge);
+            
+            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $this->set('service',$services);
+            
             $this->request->data['Quotation']['quotationno']=$dmt;
             if($this->request->is('post'))
             {
-              
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $this->Session->setFlash(__('Quotation has been Added Succefully '));
@@ -61,6 +69,30 @@
             if(!empty($customer_data))
             {
                 echo json_encode($customer_data) ;
+            }
+        }
+        public function get_country_value()
+        {
+            $this->autoRender = false;
+            $country_id =  $this->request->data['country_id'];
+            $currency_data = $this->Currency->find('first',array('conditions'=>array('Currency.country_id'=>$country_id),'recursive'=>'2'));
+            if(!empty($currency_data))
+            {
+                echo $currency_data['Currency']['exchangerate'];
+            }
+        }
+        public function get_gst_value()
+        {
+            $this->autoRender = false;
+            $gst_id =  $this->request->data['gst_id'];
+            switch($gst_id)
+            {
+                case 'Standard':
+                    echo "7.00";
+                    break;
+                case 'Zero':
+                    echo "0.00";
+                    break;
             }
         }
 }
