@@ -53,7 +53,7 @@ var App = function() {
         chatUi();
 
         // Initialize tabs
-        $('[data-toggle="tabs"] a, .enable-tabs a').click(function(e){ e.preventDefault(); $(this).tab('show'); });
+        $(document).on('click','[data-toggle="tabs"] a, .enable-tabs a',function(e){ e.preventDefault(); $(this).tab('show'); });
 
         // Initialize Tooltips
         $('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: 'body', animation: false});

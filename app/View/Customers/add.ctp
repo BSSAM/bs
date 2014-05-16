@@ -11,11 +11,11 @@
         link.parentNode.parentNode.removeChild(link.parentNode);
        // $('#example-tabs2-Address'+link.id).remove();
         $('#example-tabs2-Address'+link.id).parentNode.remove();
-//         $.ajax({
-//            type: 'POST',
-//            data:"regaddress="+regaddress+"&customer_id="+customer_id,
-//            url: path_url+'/customers/addregaddress/'
-//        });
+         $.ajax({
+            type: 'POST',
+            data:"regaddress="+regaddress+"&customer_id="+customer_id,
+            url: path_url+'/customers/deleteregaddress/'
+        });
         
     }
        
