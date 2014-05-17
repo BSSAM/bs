@@ -5,8 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Customerspecialneed extends AppModel
-{
- public  $name =  'Customerspecialneed';
-}
 
+class Brand extends AppModel
+{
+    
+}

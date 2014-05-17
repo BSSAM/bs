@@ -5,8 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Customerspecialneed extends AppModel
+class CustomerInstrument extends AppModel
 {
- public  $name =  'Customerspecialneed';
+    var $hasone=array('Customer');
 }
-

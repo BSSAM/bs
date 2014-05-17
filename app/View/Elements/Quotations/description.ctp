@@ -14,7 +14,7 @@
     
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_customer">Description</label>
+    <label class="col-md-2 control-label" for="val_customer">Instrument</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
                 array('id'=>'val_description','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,

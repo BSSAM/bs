@@ -12,6 +12,7 @@
         public function add()
         {
            //echo  md5(substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, rand(1,10))); 
+            
             $str=NULL;
             $d=date("d");
             $m=date("m");
@@ -65,7 +66,6 @@
             $this->autoRender = false;
             $customer_id =  $this->request->data['cust_id'];
             $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$customer_id),'recursive'=>'2'));
-           
             if(!empty($customer_data))
             {
                 echo json_encode($customer_data) ;

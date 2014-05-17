@@ -10,7 +10,6 @@
         <?php echo $this->Form->input('branchname', array('id'=>'val_branchname','class'=>'form-control','disabled'=>'disabled',
             'label'=>false,'type'=>'text')); ?>
     </div>
-        
 </div>
     
 <div class="form-group">
