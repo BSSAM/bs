@@ -429,7 +429,7 @@ $(document).ready(function(){
         var regaddress=$('#val_regaddress').val();
         
          var n = $("ul#tabs_reg li").size()+1;
-          $('#tab-content').append('<div class="tab-pane" id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
+          $('#tab-content').append('<div class="tab-pane active" id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
           $('#val_regaddress').val(null);
          
           $.ajax({
@@ -437,25 +437,73 @@ $(document).ready(function(){
             data:"regaddress="+regaddress+"&customer_id="+customer_id,
             url: path_url+'/customers/addregaddress/',
             success:function(data){
-                $('#tabs_reg').append('<li id="'+data+'"><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+data+'" onclick="rem_reg(this);">×</button>Address'+n+'</a></li>');
-          
+                $('#tabs_reg').append('<li id="'+data+'" class="active"><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+data+'" >×</button>Address'+n+'</a></li>');
+                
             }
                     
         });
         $('#modal-registered').modal('hide');
-       
-        //alert(pro_name);
-//        $('.nav nav-tabs').append('<tr class="remove_'+serial+'"><td class="text-center">'+serial+'</td><td class="text-center">'+pro_name+'</td>\n\
-//        <td class="text-center"><div class="btn-group"><a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger but_delete">\n\
-//        <i class="fa fa-times"></i></a></div></td></tr>');
-//        $('#serial').val(null);
-//        $('#project_name').val(null);
-//        $('.project_name_error').hide();
-//        $.ajax({
-//            type: 'POST',
-//            data:"serial_id="+ serial+"&project_name="+pro_name,
-//            url: path_url+'/customers/project_add/'
-//        });
+    
+    });
+    
+    $('#save_billadd').click(function()
+    {
+        if($('#val_billaddress').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+        var billaddress=$('#val_billaddress').val();
+        
+         var n = $("ul#tabs_bill li").size()+1;
+          $('#tab-content_bill').append('<div class="tab-pane active" id="example-tabs2-billing'+n+'">'+billaddress+'</div>');
+          $('#val_billaddress').val(null);
+         
+          $.ajax({
+            type: 'POST',
+            data:"billaddress="+billaddress+"&customer_id="+customer_id,
+            url: path_url+'/customers/addbilladdress/',
+            success:function(data){
+                $('#tabs_bill').append('<li id="'+data+'" class="active"><a href="#example-tabs2-billing'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
+                
+            }
+                    
+        });
+        $('#modal-billing').modal('hide');
+    
+    });
+    
+    $('#save_deliveryadd').click(function()
+    {
+        if($('#val_deliveryaddress').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+        var deliveryaddress=$('#val_deliveryaddress').val();
+        
+         var n = $("ul#tabs_delivery li").size()+1;
+          $('#tab-content_delivery').append('<div class="tab-pane active" id="example-tabs2-delivery'+n+'">'+deliveryaddress+'</div>');
+          $('#val_deliveryaddress').val(null);
+         
+          $.ajax({
+            type: 'POST',
+            data:"deliveryaddress="+deliveryaddress+"&customer_id="+customer_id,
+            url: path_url+'/customers/adddeliveryaddress/',
+            success:function(data){
+                $('#tabs_delivery').append('<li id="'+data+'" class="active"><a href="#example-tabs2-delivery'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
+                
+            }
+                    
+        });
+        $('#modal-delivery').modal('hide');
+    
     });
    
     $('.country_value').change(function() {

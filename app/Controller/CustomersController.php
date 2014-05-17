@@ -56,6 +56,76 @@ class CustomersController extends AppController
         }
     }
     
+    public function addbilladdress()
+    {
+        
+    $this->autoRender=false;
+    $billaddress= $this->request->data['billaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        
+        $status=0;
+        $this->loadModel('Address');
+        $random =mt_rand();
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
+        $this->request->data['Address']['address']=$billaddress;
+        $this->request->data['Address']['type']='billing';
+        $this->request->data['Address']['status']=$status;
+        if($this->Address->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+    
+     public function deletebilladdress()
+    {
+        $this->autoRender=false;
+        $delete_id= $this->request->data['delete_id'];
+        
+        $this->loadModel('Address');
+        
+        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
+        {
+            echo "deleted";
+        }
+    }
+    
+    public function adddeliveryaddress()
+    {
+        
+    $this->autoRender=false;
+    $deliveryaddress= $this->request->data['deliveryaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        
+        $status=0;
+        $this->loadModel('Address');
+        $random =mt_rand();
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
+        $this->request->data['Address']['address']=$deliveryaddress;
+        $this->request->data['Address']['type']='delivery';
+        $this->request->data['Address']['status']=$status;
+        if($this->Address->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+    
+     public function deletedeliveryaddress()
+    {
+        $this->autoRender=false;
+        $delete_id= $this->request->data['delete_id'];
+        
+        $this->loadModel('Address');
+        
+        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
+        {
+            echo "deleted";
+        }
+    }
+    
     public function add()
     {
         
@@ -84,6 +154,19 @@ class CustomersController extends AppController
         //pr($data10);pr($data10_count);exit;
         $this->set('data10',$data10);
         $this->set('data10_count',$data10_count);
+        
+       
+        $data11 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'billing')));
+        $data11_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'billing')));
+        //pr($data10);pr($data10_count);exit;
+        $this->set('data11',$data11);
+        $this->set('data11_count',$data11_count);
+        
+        $data12 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'delivery')));
+        $data12_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'delivery')));
+        //pr($data10);pr($data10_count);exit;
+        $this->set('data12',$data12);
+        $this->set('data12_count',$data12_count);
         
         $this->loadModel('Industry');
         $data2 = $this->Industry->find('list', array('fields' => 'industryname'));
@@ -159,6 +242,7 @@ class CustomersController extends AppController
                $contactperson= $this->Contactpersoninfo->find('count',array('conditions'=>array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id'))));
                $billingaddress= $this->Billingaddress->find('count',array('conditions'=>array('Billingaddress.customer_id'=>$this->Session->read('customer_id'))));
                $delivery=$this->Deliveryaddress->find('count',array('conditions'=>array('Deliveryaddress.customer_id'=>$this->Session->read('customer_id'))));
+               $address= $this->Address->find('count',array('conditions'=>array('Address.customer_id'=>$this->Session->read('customer_id'))));
                 if($contactperson>0)
                 {
                 $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.status'=>1),array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id')));
@@ -170,6 +254,10 @@ class CustomersController extends AppController
                 if($delivery>0)
                 {
                 $this->Deliveryaddress->updateAll(array('Deliveryaddress.status'=>1),array('Deliveryaddress.customer_id'=>$this->Session->read('customer_id')));
+                }
+                if($delivery>0)
+                {
+                $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$this->Session->read('customer_id')));
                 }
                 
                 if($project>0)
@@ -457,6 +545,7 @@ class CustomersController extends AppController
     public function contact_person_add()
     {
         $this->autoRender=false;
+        //echo $this->Session->read('customer_id');
         $this->loadModel('Contactpersoninfo');
         $this->request->data['Contactpersoninfo']['email']=$this->request->data['contact_email'];
         $this->request->data['Contactpersoninfo']['remarks']=$this->request->data['contact_remark'];

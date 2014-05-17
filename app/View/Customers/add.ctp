@@ -1,48 +1,58 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
     var customer_id = '<?php echo $customer_id;?>';
+    //$('#tabs_reg li:nth-child(1)').attr('class','active');
+    
     $(document).on('click','.close',function(){
         var id=$(this).attr('id');
-        alert(id);
+        var hre = $(this).parent('a').attr('href');
         $.ajax({
             type: 'POST',
             data:"delete_id="+id,
             url: path_url+'/customers/deleteregaddress/',
             success:function(data){
                 if(data == 'deleted'){
-                    $('#'+id).fadeOut();
+                    $('#'+id).remove();
+                    $(hre).remove();
                 }
             }
         });
-    });
-    function rem_reg(link)
-    {
-        //alert($(".tabs li").size());
-//        if($(".tabs li").size()==1)
-//        {
-//            alert('error');
-//        }
-        var delete_id = link.id;
-//alert(link.parentNode.parentNode);
-        link.parentNode.parentNode.removeChild(link.parentNode);
-       // $('#example-tabs2-Address'+link.id).remove();
-        //$('#example-tabs2-Address'+link.id).parentNode.remove();
         
-         $.ajax({
+    });
+     $(document).on('click','.close_bill',function(){
+        var id=$(this).attr('id');
+        var hre = $(this).parent('a').attr('href');
+        $.ajax({
             type: 'POST',
-            data:"delete_id="+delete_id,
-            url: path_url+'/customers/deleteregaddress/',
+            data:"delete_id="+id,
+            url: path_url+'/customers/deletebilladdress/',
             success:function(data){
                 if(data == 'deleted'){
-                    $('#'+delete_id).fadeOut();
+                    $('#'+id).remove();
+                    $(hre).remove();
                 }
             }
         });
         
-    }
-       
+    });
+    
+    $(document).on('click','.close_delivery',function(){
+        var id=$(this).attr('id');
+        var hre = $(this).parent('a').attr('href');
+        $.ajax({
+            type: 'POST',
+            data:"delete_id="+id,
+            url: path_url+'/customers/deletedeliveryaddress/',
+            success:function(data){
+                if(data == 'deleted'){
+                    $('#'+id).remove();
+                    $(hre).remove();
+                }
+            }
+        });
+        
+    });
 
-    //$('').onform-customer-address-edit
 </script>
 <h1>
     <i class="gi gi-user"></i>Add Customer
@@ -135,8 +145,55 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
                     <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_regadd','escape' => false)); ?>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  <?php echo $this->Form->end(); ?>
+<?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-billing-add')); ?>
+  <div id="modal-billing" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Billing Address</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
+                    <span class="help-block_login project_name_error">Enter the Billing Address</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_billadd','escape' => false)); ?>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  <?php echo $this->Form->end(); ?>
+
+<?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-delivery-add')); ?>
+  <div id="modal-delivery" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Delivery Address</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('deliveryaddress', array('id'=>'val_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress')); ?>
+                    <span class="help-block_login project_name_error">Enter the Delivery Address</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_deliveryadd','escape' => false)); ?>
                     
                 </div>
             </div>

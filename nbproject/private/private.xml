@@ -5,20 +5,14 @@
         <group>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/customer_info.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/customer_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customers/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Customers/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/functions.js</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/formsValidation.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/project_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/css/main.css</file>
             <file>file:/D:/wamp/www/bs/app/Controller/CustomersController.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Customers/add.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/billing_address.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Customers/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/delivery_address.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/functions.js</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/contact_person_info.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/formsValidation.js</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/billing_address.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/project_info.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/project_info.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/delivery_address.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Model/Customer.php</file>
         </group>
     </open-files>
 </project-private>
