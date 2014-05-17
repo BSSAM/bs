@@ -3722,3 +3722,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
     margin: -2px 0 0 10px;
     font-size: 18px;
 }
+
+.nav-tabs > li .close_bill {
+    margin: -2px 0 0 10px;
+    font-size: 18px;
+}
