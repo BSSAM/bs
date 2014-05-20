@@ -7,4 +7,5 @@
  */
 class Quotation extends AppModel
 {
+    var $hasOne=array('Customerspecialneed');
 }

@@ -2,7 +2,7 @@
     
     <label class="col-md-2 control-label" for="val_quotationno">Quotation No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Quotation.quotationno', array('id'=>'val_quotationno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $quotationno)); ?>
+        <?php echo $this->Form->input('Quotation.quotationno', array('id'=>'val_quotationno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $this->request->data['Quotation']['quotationno'])); ?>
     </div>
     <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
@@ -36,8 +36,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('due_amount', array('id'=>'val_dueamount','class'=>'form-control',
                                                 'placeholder'=>'Enter the Due Amount','label'=>false,'autoComplete'=>'off')); ?>
-        <div id="result">
-        </div>
+      
     </div>
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
@@ -50,8 +49,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control',
                                                 'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off')); ?>
-        <div id="result">
-        </div>
+      
     </div>
     <label class="col-md-2 control-label" for="val_fax">Fax</label>
     <div class="col-md-4">
@@ -65,8 +63,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('email', array('id'=>'val_email','class'=>'form-control',
                                                 'placeholder'=>'Enter the Email Id','label'=>false,'autoComplete'=>'off')); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_payment_term">Payment Terms</label>
     <div class="col-md-4">
@@ -81,8 +78,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'mm/dd/yy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_ref_no">Your Reference No</label>
     <div class="col-md-4">
@@ -95,15 +91,13 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
                                                 'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text')); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>array('1'=>'We are pleased to quote the item(s) below for calibration service with certificate(s) :'))); ?>
-        <div id="result">
-        </div>
+       
     </div>
 </div>
 

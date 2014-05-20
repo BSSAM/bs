@@ -566,7 +566,6 @@ class CustomersController extends AppController
     {
         $this->autoRender=false;
         $delete_id= $this->request->data['delete_id'];
-        
         $this->loadModel('Contactpersoninfo');
         if($this->Projectinfo->deleteAll(array('Contactpersoninfo.serial_id'=>$delete_id)))
         {

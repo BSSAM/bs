@@ -32,11 +32,12 @@ if(customer!='')
 {
 	$.ajax({
 	type: "POST",
-	url: "<?PHP echo Router::url('/',true); ?>Salesorders/search",
+	url: "<?PHP echo Router::url('/',true); ?>/Quotations/search",
 	data: dataString,
 	cache: false,
 	success: function(html)
 	{
+            
             $("#result").html(html).show();
 	}
 	});
@@ -46,14 +47,14 @@ if(customer!='')
 
 </script>
 <h1>
-                                <i class="gi gi-user"></i>Add Sales Order
+                                <i class="gi gi-user"></i>Edit Quotation
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Salesorders',array('controller'=>'Salesorders','action'=>'index')); ?></li>
-                        <li>Add Salesorders</li>
+                        <li><?php echo $this->Html->link('Quotation',array('controller'=>'Quotations','action'=>'index')); ?></li>
+                        <li>Edit Quotation</li>
                     </ul>
                     <!-- END Forms General Header -->
 
@@ -71,29 +72,33 @@ if(customer!='')
                                 <!-- Basic Form Elements Content -->
                                  
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
-                                    <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden','value'=>'')); ?>
+                                    <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'fileupload','enctype'=>'multipart/form-data')); ?>
+                                    <?php echo $this->Form->input('Quotation.customer_id', array('type'=>'hidden','value'=>'')); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
-                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Sales Order Info</a></li>
+                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Quotation Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
-                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 3:</span> Description </a></li>
+                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> File Upload</a></li>
+                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Description </a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
                                             
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
-                                                    <?PHP echo $this->element('Salesorders/salesorder_info'); ?>
+                                                    <?PHP echo $this->element('Quotations/edit/quotation_info'); ?>
                                                 </div>
-                                                 <div class="tab-pane" id="tab2">
-                                                    <?PHP echo $this->element('Salesorders/customer_special_needs'); ?>
+                                                <div class="tab-pane" id="tab2">
+                                                    <?PHP echo $this->element('Quotations/edit/customer_special_needs'); ?>
+                                                </div>
+                                                <div class="tab-pane" id="tab3">
+                                                    <?PHP echo $this->element('Quotations/edit/file_upload'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Salesorders/description'); ?>
+                                                    <?PHP echo $this->element('Quotations/edit/description'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->

@@ -46,14 +46,14 @@ if(customer!='')
 
 </script>
 <h1>
-                                <i class="gi gi-user"></i>Add Sales Order
+                                <i class="gi gi-user"></i>Edit Sales Order
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Salesorders',array('controller'=>'Salesorders','action'=>'index')); ?></li>
-                        <li>Add Salesorders</li>
+                        <li>Edit Salesorders</li>
                     </ul>
                     <!-- END Forms General Header -->
 
@@ -87,13 +87,13 @@ if(customer!='')
                                             
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
-                                                    <?PHP echo $this->element('Salesorders/salesorder_info'); ?>
+                                                    <?PHP echo $this->element('Salesorders/edit/salesorder_info'); ?>
                                                 </div>
                                                  <div class="tab-pane" id="tab2">
-                                                    <?PHP echo $this->element('Salesorders/customer_special_needs'); ?>
+                                                    <?PHP echo $this->element('Salesorders/edit/customer_special_needs'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Salesorders/description'); ?>
+                                                    <?PHP echo $this->element('Salesorders/edit/description'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->

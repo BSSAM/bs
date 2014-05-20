@@ -2,7 +2,7 @@
     class SalesordersController extends AppController
     {
         public $helpers = array('Html','Form','Session');
-        public $uses =array('Priority','Paymentterm','Salesorder');
+        public $uses =array('Priority','Paymentterm','Salesorder','Service');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -24,16 +24,41 @@
             $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $this->set('payment',$payment);
+            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $this->set('service',$services);
             $this->request->data['Salesorder']['salesorderno']=$dmt;
             if($this->request->is('post'))
             {
-              
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
                     $this->Session->setFlash(__('Salesorder has been Added Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
                
+            }
+        }
+        public function edit($id=NULL)
+        {
+            $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
+            $this->set('priority',$priority);
+            $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
+            $this->set('payment',$payment);
+            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $this->set('service',$services);
+            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id)));
+           
+            if($this->request->is(array('post','put')))
+            {
+                $this->Salesorder->id=$id;
+                if($this->Salesorder->save($this->request->data['Salesorder']))
+                {
+                    $this->Session->setFlash(__('Salesorder has been Added Succefully '));
+                    $this->redirect(array('action'=>'index'));
+                }
+            }
+            else
+            {
+                $this->request->data=$salesorder_details;
             }
         }
         public function search()

@@ -5,7 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class CustomerInstrument extends AppModel
+class Device extends AppModel
 {
-    var $belongsTo=array('Customer','Instrument');
+    var $belongsTo=array('Customer','Instrument','Brand');
+    
 }

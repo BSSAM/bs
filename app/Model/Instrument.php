@@ -8,5 +8,5 @@
 
 class Instrument extends AppModel
 {
-    var $hasMany=array('Brand','Range','Department','Procedure');
+    var $belongsTo=array('Brand','Range','Department','Procedure');
 }

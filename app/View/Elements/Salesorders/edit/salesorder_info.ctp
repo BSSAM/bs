@@ -2,7 +2,7 @@
     
     <label class="col-md-2 control-label" for="val_quotationno">Sales Order No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $salesorderno)); ?>
+        <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $this->request->data['Salesorder']['salesorderno'])); ?>
     </div>
         
 <!--    <label class="col-md-2 control-label" for="val_branchname">Branch</label>

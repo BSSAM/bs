@@ -7,7 +7,6 @@
             <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Add files...</span>
-                <?PHP //echo $this->Form->input('Document.files',array('multiple'=>'multiple','type'=>"file")); ?>
                 <input type="file" name="files[]" multiple>
             </span>
             <input type="checkbox" class="toggle">
