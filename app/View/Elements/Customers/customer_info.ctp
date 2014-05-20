@@ -54,7 +54,7 @@
                  <?php for($i=0;$i<$data10_count;$i++){ ?>
                 <div class="tab-pane <?php if($i==0){?> active<?php } ?>" id="example-tabs2-Address<?php echo $i; ?>" ><?php echo $data10[$i]['Address']['address']; ?></div>
                 
-                <?php } if($data10_count == 0){?> <div class="text-center">No Records Found </div> <?php } ?>
+                <?php } ?>
             </div>
             <!-- END Tabs Content -->
         </div>
@@ -90,14 +90,14 @@
                  <?php for($i=0;$i<$data11_count;$i++){ ?>
                 <div class="tab-pane <?php if($i==0){?> active<?php } ?>" id="example-tabs2-billing<?php echo $i; ?>" ><?php echo $data11[$i]['Address']['address']; ?></div>
                 
-                <?php } if($data11_count == 0){?> <div class="text-center">No Records Found </div> <?php } ?>
+                <?php } ?>
             </div>
             <!-- END Tabs Content -->
         </div>
         <!-- END Block Tabs -->
     </div>
 
-</div>
+
 
 <label class="col-md-2 control-label" for="val_deliveryaddress">Delivery Address</label>
     <div class="col-md-10">
@@ -126,13 +126,46 @@
                  <?php for($i=0;$i<$data12_count;$i++){ ?>
                 <div class="tab-pane <?php if($i==0){?> active<?php } ?>" id="example-tabs2-delivery<?php echo $i; ?>" ><?php echo $data12[$i]['Address']['address']; ?></div>
                 
-                <?php } if($data12_count == 0){?> <div class="text-center">No Records Found </div> <?php } ?>
+                <?php }?>
             </div>
             <!-- END Tabs Content -->
         </div>
         <!-- END Block Tabs -->
     </div>
+<label class="col-md-2 control-label" for="val_projectname">Project Info</label>
+    <div class="col-md-10">
+        <!-- Block Tabs -->
+        <div class="block full">
+            <!-- Block Tabs Title -->
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <div class="btn-group">
+                        <a href="#modal-project" data-toggle="modal" id="" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
+                        
+                    </div>
+                </div>
+                <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_project">
+                    <?php for($i=0;$i<$data13_count;$i++){ ?>
+                    
+                        <li id="<?php echo $data13[$i]['Projectinfo']['project_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>><a href="#example-tabs2-project<?php echo $i; ?>"><button class="close close_project" type="button" id="<?php echo $data13[$i]['Projectinfo']['project_id']; ?>" >×</button>Project<?php echo $i+1; ?></a></li>
+                    
+                    <?php } ?>
+                </ul>
+            </div>
+            <!-- END Block Tabs Title -->
 
+            <!-- Tabs Content -->
+            <div class="tab-content_project" id="tab-content_project">
+                 <?php for($i=0;$i<$data13_count;$i++){ ?>
+                <div class="tab-pane <?php if($i==0){?> active<?php } ?>" id="example-tabs2-project<?php echo $i; ?>" ><?php echo $data13[$i]['Projectinfo']['project_name']; ?></div>
+                
+                <?php } ?>
+            </div>
+            <!-- END Tabs Content -->
+        </div>
+        <!-- END Block Tabs -->
+    </div>
+</div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="var_phone">Phone</label>
     <div class="col-md-4">

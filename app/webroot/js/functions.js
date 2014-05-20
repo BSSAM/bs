@@ -175,7 +175,39 @@ $(document).ready(function(){
      * ..........................................................................................................................
     *.................................................................*/
    
+     $(document).on('click','.bt_con_edit',function() {
+        
+        var con_id = this.id;
+        // alert(pro_id);
+        param = 'id=' + con_id;
+        check_contact(param).done(function(value) {
+            //waits until ajax is completed
+            var myarr = value.split(",");
+            alert(myarr); 
+            $('#sno').val(myarr[0]);
+            $('#contact_email').val(myarr[3]);
+            $('#contact_name').val(myarr[5]);
+            $('#contact_department').val(myarr[6]);
+            $('#contact_phone').val(myarr[7]);
+            $('#contact_position').val(myarr[8]);
+            $('#contact_mobile').val(myarr[9]);
+            $('#contact_purpose').val(myarr[10]);
+            $('#contact_remark').val(myarr[4]);
+            $(".contactperson__editsubmit").html('Update');
+            $(".contactperson__editsubmit").attr('class', 'btn btn-sm btn-primary contactperson__updatesubmit');
+            $(".contactperson__updatesubmit").attr('id',myarr[0]);
+        });
+        //$('#project_name').val=myarr[3];
+        return false;
+    });
     
+     function check_contact(param) {
+        return $.ajax({
+            type: 'POST',
+            data: param,
+            url: path_url + '/Customers/contact_edit_update/'
+        });
+    }
     
     $('.name_error').hide();
     $('.email_error').hide();
@@ -228,6 +260,64 @@ $(document).ready(function(){
             url: path_url+'/customers/contact_person_add/'
         });
     });
+    $('.name_error').hide();
+    $('.email_error').hide();
+    $(document).on('click','.contactperson__editsubmit',function()
+    {
+        if($('#contact_name').val()=='')
+        {
+            $('.name_error').addClass('animation-slideDown');
+            $('.name_error').css('color','red');
+            $('.name_error').show();
+            return false;
+        }
+        
+        
+        var contact_name=$('#contact_name').val();
+        var contact_email=$('#contact_email').val();
+        var contact_department=$('#contact_department').val();
+        var contact_phone=$('#contact_phone').val();
+        var contact_position=$('#contact_position').val();
+        var contact_mobile=$('#contact_mobile').val();
+        var contact_purpose=$('#contact_purpose').val();
+        var contact_remark=$('#contact_remark').val();
+       
+       
+       alert("contact_name = "+ contact_name+" & contact_email = "+contact_email+" & contact_department = "+contact_department+" & contact_phone = "+contact_phone+" & contact_position = "+contact_position+" & contact_remark = "+contact_remark+" & contact_purpose = "+contact_purpose+" & contact_mobile = "+contact_mobile);
+        $.ajax({
+            type: 'POST',
+            data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile,
+            url: path_url+'/customers/contact_person_edit/',
+            success:function(data){
+              
+                $('.contact_info_row').append('<tr id = "'+data+'">\n\\n\
+                                    <td class="text-center">'+data+'</td>\n\
+                                    <td class="text-center">'+customer_id+'</td>\n\
+                                    <td class="text-center">'+contact_name+'</td>\n\\n\
+                                    <td class="text-center">'+contact_email+'</td>\n\
+                                    <td class="text-center">'+contact_department+'</td>\n\\n\
+                                    <td class="text-center">'+contact_phone+'</td>\n\\n\\n\
+                                    <td class="text-center">'+contact_position+'</td>\n\
+                                    <td class="text-center">'+contact_mobile+'</td>\n\
+                                    <td class="text-center">'+contact_purpose+'</td>\n\
+                                    <td class="text-center">'+contact_remark+'</td>\n\
+                                    <td class="text-center"><div class="btn-group"><button type="button" id="'+data+'" title="Edit" class="btn btn-xs btn-default bt_con_edit"><i class="fa fa-pencil"></i></button>\n\
+                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">\n\
+                                    <i class="fa fa-times"></i></a></div></td></tr>');
+          
+                
+            }
+        });
+        $('#contact_name').val(null);
+        $('#contact_email').val(null);
+        $('#contact_department').val(null);
+        $('#contact_phone').val(null);
+        $('#contact_position').val(null);
+        $('#contact_mobile').val(null);
+        $('#contact_purpose').val(null);
+        $('#contact_remark').val(null);
+        $('.name_error').hide();
+    });
     $(document).on('click','.contact_delete',function()
     {
         var delete_id = $(this).attr('data-delete');
@@ -239,8 +329,7 @@ $(document).ready(function(){
         $('.contact_remove_'+delete_id).fadeOut();
     });
     
-    
-     $('.contact_edit_submit').click(function()
+    $(document).on('click','.contactperson__updatesubmit',function()
     {
         if($('#contact_name').val()=='')
         {
@@ -249,71 +338,115 @@ $(document).ready(function(){
             $('.name_error').show();
             return false;
         }
-    
-        if(this.id=='')
+   
+//        if(this.id=='')
+//        {
+//            alert(this.id);
+//            return false;
+//            var contact_name=$('#contact_name').val();
+//            var contact_name=$('#contact_name').val();
+//        var contact_email=$('#contact_email').val();
+//        var contact_department=$('#contact_department').val();
+//        var contact_phone=$('#contact_phone').val();
+//        var contact_position=$('#contact_position').val();
+//        var contact_mobile=$('#contact_mobile').val();
+//        var contact_purpose=$('#contact_purpose').val();
+//        var contact_remark=$('#contact_remark').val();
+//            //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+//            
+//            $.ajax({
+//		type: 'POST',
+//                data:"contact_name="+contact_name,
+//		url: path_url+'/customers/contact_edit_add/',
+//                success:function(value){
+//                    cookievalue= value + ";";
+//                    document.cookie="pro_id=" + cookievalue;
+//                }
+//            });
+//           
+//            
+//            function readCookie(name) {
+//                var nameEQ = name + "=";
+//                var ca = document.cookie.split(';');
+//                for(var i=0;i < ca.length;i++) {
+//                    var c = ca[i];
+//                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+//                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+//                }
+//                return null;
+//            }
+//            
+//            function eraseCookie(name) {
+//                createCookie(name,"",-1);
+//            }
+//            var pro_id = readCookie('pro_id');
+//            $('#serial').val(null);
+//            $('#project_name').val(null);
+//            $('.project_name_error').hide();
+//            
+//           
+//            $('.tb_pro').each(function() {
+//                $(this).find("tr#"+pro_id+" td:nth-child(1)").html(pro_name);
+//            });
+//            // alert(pro_id+"sf");
+//            $('.project_info_row').append('<tr class="remove_'+serial+'" id="'+pro_id+'"><td class="text-center">'+pro_name+'</td><td class="text-center"><div class="btn-group"><button type="button" id="'+pro_id+'" title="Edit" class="btn btn-xs btn-default bt_pro_edit"><i class="fa fa-pencil"></i></button><a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger but_delete"><i class="fa fa-times"></i></a></div></td></tr>'); 
+//            eraseCookie('pro_id');
+//        }
+        if(this.id!='')
         {
-            var pro_name=$('#project_name').val();
-            var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
             
-            $.ajax({
-		type: 'POST',
-                data:"project_name="+pro_name+"&serial_id="+serial,
-		url: path_url+'/customers/project_edit_add/',
-                success:function(value){
-                    cookievalue= value + ";";
-                    document.cookie="pro_id=" + cookievalue;
-                }
+            var con_id = this.id;
+            
+              var contact_name=$('#contact_name').val();
+        var contact_email=$('#contact_email').val();
+        var contact_department=$('#contact_department').val();
+        var contact_phone=$('#contact_phone').val();
+        var contact_position=$('#contact_position').val();
+        var contact_mobile=$('#contact_mobile').val();
+        var contact_purpose=$('#contact_purpose').val();
+        var contact_remark=$('#contact_remark').val();
+            
+            param = 'id=' + con_id +'&contact_name='+contact_name+'&contact_email='+contact_email+'&contact_department='+contact_department+'&contact_phone='+contact_phone+'&contact_position='+contact_position+'&contact_mobile='+contact_mobile+'&contact_purpose='+contact_purpose+'&contact_remark='+contact_remark;
+            
+            
+            update_contact(param).done(function(value) {
+           
             });
            
-            
-            function readCookie(name) {
-                var nameEQ = name + "=";
-                var ca = document.cookie.split(';');
-                for(var i=0;i < ca.length;i++) {
-                    var c = ca[i];
-                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-                }
-                return null;
-            }
-            
-            function eraseCookie(name) {
-                createCookie(name,"",-1);
-            }
-            var pro_id = readCookie('pro_id');
+            $('tr#'+con_id+' td:nth-child(2)').html(customer_id);
+            $('tr#'+con_id+' td:nth-child(3)').html(contact_name);
+             $('tr#'+con_id+' td:nth-child(4)').html(contact_email);
+              $('tr#'+con_id+' td:nth-child(5)').html(contact_department);
+               $('tr#'+con_id+' td:nth-child(6)').html(contact_phone);
+                $('tr#'+con_id+' td:nth-child(7)').html(contact_position);
+                 $('tr#'+con_id+' td:nth-child(8)').html(contact_mobile);
+                  $('tr#'+con_id+' td:nth-child(9)').html(contact_purpose);
+                   $('tr#'+con_id+' td:nth-child(10)').html(contact_remark);
             $('#serial').val(null);
-            $('#project_name').val(null);
+           $('#contact_name').val(null);
+           $('#contact_email').val(null);
+           $('#contact_department').val(null);
+           $('#contact_phone').val(null);
+           $('#contact_position').val(null);
+           $('#contact_mobile').val(null);
+           $('#contact_purpose').val(null);
+           $('#contact_remark').val(null);
             $('.project_name_error').hide();
             
+             $(".contactperson__updatesubmit").attr('class', 'btn btn-sm btn-primary contactperson__editsubmit');
+           $(".contactperson__editsubmit").html('<i class="fa fa-plus fa-fw"></i> add');
            
-            $('.tb_pro').each(function() {
-                $(this).find("tr#"+pro_id+" td:nth-child(1)").html(pro_name);
-            });
-            // alert(pro_id+"sf");
-            $('.project_info_row').append('<tr class="remove_'+serial+'" id="'+pro_id+'"><td class="text-center">'+pro_name+'</td><td class="text-center"><div class="btn-group"><button type="button" id="'+pro_id+'" title="Edit" class="btn btn-xs btn-default bt_pro_edit"><i class="fa fa-pencil"></i></button><a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger but_delete"><i class="fa fa-times"></i></a></div></td></tr>'); 
-            eraseCookie('pro_id');
         }
-        else
-        {
-            var pro_id = this.id;
-            //alert(pro_id);
-            var pro_name=$('#project_name').val();
-            //alert(pro_name);
-           
-            param = 'id=' + pro_id +'&pro_name='+pro_name;
-            update_project(param).done(function(value) {
-              
-            });
-             
-            $('tr#'+pro_id+' td:nth-child(1)').html(pro_name);
-            $('#serial').val(null);
-            $('#project_name').val(null);
-            $('.project_name_error').hide();
-            $('.project_edit_submit').html('<i class="fa fa-plus fa-fw"></i> add');
-          
-        }
-        return false;
+       
     });
+    
+     function update_contact(param) {
+        return $.ajax({
+            type: 'POST',
+            data: param,
+            url: path_url + 'Customers/contact_edit_rule/'
+        });
+    }
     
     
     
@@ -505,6 +638,156 @@ $(document).ready(function(){
         $('#modal-delivery').modal('hide');
     
     });
+    
+     $('#save_projectadd').click(function()
+    {
+        if($('#val_projectname').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+        var projectname = $('#val_projectname').val();
+        
+         var n = $("ul#tabs_project li").size()+1;
+          $('#tab-content_project').append('<div class="tab-pane active" id="example-tabs2-project'+n+'">'+projectname+'</div>');
+          $('#val_projectname').val(null);
+         
+          $.ajax({
+            type: 'POST',
+            data:"projectname="+projectname+"&customer_id="+customer_id,
+            url: path_url+'/customers/addprojectinfo/',
+            success:function(data){
+                $('#tabs_project').append('<li id="'+data+'" class="active"><a href="#example-tabs2-project'+n+'"><button class="close" type="button" id="'+data+'">×</button>Project'+n+'</a></li>');
+                
+            }
+                    
+        });
+        $('#modal-project').modal('hide');
+    
+    });
+    
+    $('#save_regedit').click(function()
+    {
+        if($('#val_regaddress').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+        var regaddress=$('#val_regaddress').val();
+        
+         var n = $("ul#tabs_reg li").size()+1;
+          $('#tab-content').append('<div class="tab-pane active" id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
+          $('#val_regaddress').val(null);
+         
+          $.ajax({
+            type: 'POST',
+            data:"regaddress="+regaddress+"&customer_id="+customer_id,
+            url: path_url+'/customers/editregaddress/',
+            success:function(data){
+                $('#tabs_reg').append('<li id="'+data+'" class="active"><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+data+'" >×</button>Address'+n+'</a></li>');
+                
+            }
+                    
+        });
+        $('#modal-registered').modal('hide');
+    
+    });
+    
+    $('#save_billedit').click(function()
+    {
+        if($('#val_billaddress').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+        var billaddress=$('#val_billaddress').val();
+        
+         var n = $("ul#tabs_bill li").size()+1;
+          $('#tab-content_bill').append('<div class="tab-pane active" id="example-tabs2-billing'+n+'">'+billaddress+'</div>');
+          $('#val_billaddress').val(null);
+         
+          $.ajax({
+            type: 'POST',
+            data:"billaddress="+billaddress+"&customer_id="+customer_id,
+            url: path_url+'/customers/editbilladdress/',
+            success:function(data){
+                $('#tabs_bill').append('<li id="'+data+'" class="active"><a href="#example-tabs2-billing'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
+                
+            }
+                    
+        });
+        $('#modal-billing').modal('hide');
+    
+    });
+    
+    $('#save_deliveryedit').click(function()
+    {
+        if($('#val_deliveryaddress').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+        var deliveryaddress=$('#val_deliveryaddress').val();
+        
+         var n = $("ul#tabs_delivery li").size()+1;
+          $('#tab-content_delivery').append('<div class="tab-pane active" id="example-tabs2-delivery'+n+'">'+deliveryaddress+'</div>');
+          $('#val_deliveryaddress').val(null);
+         
+          $.ajax({
+            type: 'POST',
+            data:"deliveryaddress="+deliveryaddress+"&customer_id="+customer_id,
+            url: path_url+'/customers/editdeliveryaddress/',
+            success:function(data){
+                $('#tabs_delivery').append('<li id="'+data+'" class="active"><a href="#example-tabs2-delivery'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
+                
+            }
+                    
+        });
+        $('#modal-delivery').modal('hide');
+    
+    });
+    
+     $('#save_projectedit').click(function()
+    {
+        if($('#val_projectname').val()=='')
+        {
+            $('.project_name_error').addClass('animation-slideDown');
+            $('.project_name_error').css('color','red');
+            $('.project_name_error').show();
+            return false;
+        }
+        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
+        var projectname = $('#val_projectname').val();
+        
+         var n = $("ul#tabs_project li").size()+1;
+          $('#tab-content_project').append('<div class="tab-pane active" id="example-tabs2-project'+n+'">'+projectname+'</div>');
+          $('#val_projectname').val(null);
+         
+          $.ajax({
+            type: 'POST',
+            data:"projectname="+projectname+"&customer_id="+customer_id,
+            url: path_url+'/customers/editprojectinfo/',
+            success:function(data){
+                $('#tabs_project').append('<li id="'+data+'" class="active"><a href="#example-tabs2-project'+n+'"><button class="close" type="button" id="'+data+'">×</button>Project'+n+'</a></li>');
+                
+            }
+                    
+        });
+        $('#modal-project').modal('hide');
+    
+    });
    
     $('.country_value').change(function() {
         var country_id = $(this).val();
@@ -536,6 +819,215 @@ $(document).ready(function(){
         });
     });
 
+$(document).on('click','.instrument_id',function(){
+        var instrument_id=$(this).attr('id');
+        var ins_text=$(this).text();
+        $('#val_description').val(ins_text);
+        $('.ins_error').hide();
+        $('#search_instrument').fadeOut();
+        $.ajax({
+            type: "POST",
+            url: path+"Quotations/get_brand_value",
+            data: 'instrument_id='+instrument_id,
+            cache: false,
+            success: function(data)
+            {
+                parsedata = $.parseJSON(data);
+                $.each(parsedata, function(k, v)
+                {
+                    if('Brand' in v)
+                    {
+                     $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
+                    }
+                    if('Department' in v)
+                    {
+                        $('#val_department').val(v.Department.departmentname);
+                    }
+                    if('Range' in v)
+                    {
+                        $('#val_range').val(v.Range.from_range+'~'+v.Range.to_range+'/unit');
+                    }
+                });
+                
+                $('#val_model_no').val(parsedata.CustomerInstrument.model_no);
+                $('#QuotationInstrumentId').val(instrument_id);
+                $('#val_unit_price').val(parsedata.CustomerInstrument.unit_price);
+                        
+            }
+});
+    });
+    $('.ins_error').hide();
+   $(document).on('click','.description_add',function(){
+       
+      if($('#val_description').val()=='')
+        {
+            $('.ins_error').addClass('animation-slideDown');
+            $('.ins_error').css('color','red');
+            $('.ins_error').show();
+            return false;
+        }
+        var customer_id =   $('#QuotationCustomerId').val();
+        var instrument_id   =   $('#QuotationInstrumentId').val();
+        var instrument_quantity =   $('#val_quantity').val();
+        var instrument_name=$('#val_description').val();
+        var instrument_modelno=$('#val_model_no').val();
+        var instrument_brand=$('#val_brand').val();
+        var instrument_range=$('#val_range').val();
+        var instrument_calllocation=$('#val_call_location').val();
+        var instrument_calltype=$('#val_call_type').val();
+        var instrument_validity=$('#val_validity').val();
+        var instrument_unitprice=$('#val_unit_price').val();
+        var instrument_discount=$('#val_discount').val();
+        var instrument_department=$('#val_department').val();
+        var instrument_account=$('#val_account_service').val();
+        var instrument_title=$('#val_title').val();
+        
+        
+        $.ajax({
+            type: 'POST',
+            data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title,
+            url: path+'Quotations/add_instrument/',
+            success: function(data)
+            {
+               $('.Instrument_info').append('<tr class="instrument_remove_'+data+'">\n\\n\
+                                    <td class="text-center">'+data+'</td>\n\
+                                    <td class="text-center">'+instrument_name+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_modelno+'</td>\n\
+                                    <td class="text-center">'+instrument_brand+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_range+'</td>\n\\n\\n\
+                                    <td class="text-center">'+instrument_calllocation+'</td>\n\
+                                    <td class="text-center">'+instrument_calltype+'</td>\n\
+                                    <td class="text-center">'+instrument_validity+'</td>\n\
+                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_account+'</td>\n\
+                                    <td class="text-center"><div class="btn-group">\n\
+                                    <a data-edit="'+data+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
+                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
+                                    <i class="fa fa-times"></i></a></div></td></tr>');
+                
+                $('#val_quantity').val(null);
+                $('#val_description').val(null);
+                $('#val_model_no').val(null);
+                $('#val_brand').empty().append('<option value="">Select Brand</option>');
+                $('#val_range').val(null);
+                $('#val_unit_price').val(null);
+                $('#val_discount').val(null);
+                $('#val_description').val(null);
+                 
+                
+                }
+        });
+        
+   });
+   $(document).on('click','.instrument_delete',function(){
+      var device_id=$(this).attr('data-delete');
+      alert(device_id);
+       $.ajax({
+            type: 'POST',
+            data:"device_id="+ device_id,
+            url: path_url+'/Quotations/delete_instrument/',
+            success:function(data){
+                $('.instrument_remove_'+device_id).fadeOut();
+            }
+        });
+        
+   });
+    $(document).on('click','.instrument_edit',function(){
+      var edit_device_id=$(this).attr('data-edit');
+      $('.update_device').html('<button class="btn btn-sm btn-primary device_update" type="button"><i class="fa fa-plus fa-fw"></i> Update</button>');
+       $.ajax({
+            type: 'POST',
+            data:"edit_device_id="+ edit_device_id,
+            url: path_url+'/Quotations/edit_instrument/',
+            success:function(data){
+               edit_node=$.parseJSON(data);
+               $('#device_id').val(edit_node.Device.id);
+               $('#val_quantity').val(edit_node.Device.quantity);
+                $('#val_description').val(edit_node.Instrument.name);
+                $('#QuotationCustomerId').val(edit_node.Device.customer_id);
+                $('#val_model_no').val(edit_node.Device.model_no);
+                $('#val_brand').empty().append('<option value="">Select Brand</option><option selected="selected" value="'+edit_node.Brand.id+'">'+edit_node.Brand.brandname+'</option>');
+                $('#val_range').val(edit_node.Device.range);
+                
+                $('#val_call_location').val(edit_node.Device.call_location);
+                $('#val_call_type').val(edit_node.Device.call_type);
+                $('#val_validity').val(edit_node.Device.validity);
+                
+                $('#val_unit_price').val(edit_node.Device.unit_price);
+                $('#val_discount').val(edit_node.Device.discount);
+                $('#val_department').val(edit_node.Device.department);
+                
+                $('#val_account_service').val(edit_node.Device.account_service);
+                $('#val_title').val(edit_node.Device.title);
+              
+            }
+        });
+        
+   });
+   $(document).on('click','.device_update',function(){
+       
+      if($('#val_description').val()=='')
+        {
+            $('.ins_error').addClass('animation-slideDown');
+            $('.ins_error').css('color','red');
+            $('.ins_error').show();
+            return false;
+        }
+        $('.update_device').html('<button class="btn btn-sm btn-primary description_add" type="button"><i class="fa fa-plus fa-fw"></i> add</button>');
+        var device_id =   $('#device_id').val();
+        var customer_id =   $('#QuotationCustomerId').val();
+        var customer_id =   $('#QuotationCustomerId').val();
+        var instrument_id   =   $('#QuotationInstrumentId').val();
+        var instrument_quantity =   $('#val_quantity').val();
+        var instrument_name=$('#val_description').val();
+        var instrument_modelno=$('#val_model_no').val();
+        var instrument_brand=$('#val_brand').val();
+        var instrument_range=$('#val_range').val();
+        var instrument_calllocation=$('#val_call_location').val();
+        var instrument_calltype=$('#val_call_type').val();
+        var instrument_validity=$('#val_validity').val();
+        var instrument_unitprice=$('#val_unit_price').val();
+        var instrument_discount=$('#val_discount').val();
+        var instrument_department=$('#val_department').val();
+        var instrument_account=$('#val_account_service').val();
+        var instrument_title=$('#val_title').val();
+        
+        
+        $.ajax({
+            type: 'POST',
+            data:"device_id="+device_id+"&instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title,
+            url: path+'Quotations/update_instrument/',
+            success: function(data)
+            {
+               $('.instrument_remove_'+device_id).remove();
+               $('.Instrument_info').append('<tr class="instrument_remove_'+device_id+'">\n\\n\
+                                    <td class="text-center">'+device_id+'</td>\n\
+                                    <td class="text-center">'+instrument_name+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_modelno+'</td>\n\
+                                    <td class="text-center">'+instrument_brand+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_range+'</td>\n\\n\\n\
+                                    <td class="text-center">'+instrument_calllocation+'</td>\n\
+                                    <td class="text-center">'+instrument_calltype+'</td>\n\
+                                    <td class="text-center">'+instrument_validity+'</td>\n\
+                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_account+'</td>\n\
+                                    <td class="text-center"><div class="btn-group">\n\
+                                    <a data-edit="'+device_id+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
+                                    <a data-delete="'+device_id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
+                                    <i class="fa fa-times"></i></a></div></td></tr>');
+                
+                $('#val_quantity').val(null);
+                $('#val_description').val(null);
+                $('#val_model_no').val(null);
+                $('#val_brand').empty().append('<option value="">Select Brand</option>');
+                $('#val_range').val(null);
+                $('#val_unit_price').val(null);
+                $('#val_discount').val('');
+                $('#val_description').val(null);
+                }
+        });
+        
+   });
     
     
 }); 

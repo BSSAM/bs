@@ -63,8 +63,9 @@
     </div>
 </div>
 <div class="form-group form-actions">
-    <div class="col-md-9 col-md-offset-10">
-        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary contactperson__submit','escape' => false)); ?>
+    <div class="col-md-9 col-md-offset-10"><div id="check"></div>
+        <?php //echo $this->Form->input('',array('id'=>'id')); ?>
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary contactperson__editsubmit','escape' => false)); ?>
     </div>
 </div>
     
@@ -87,16 +88,16 @@
     <tbody class="contact_info_row">
         <?PHP if(!empty($contactpersoninfo )): ?>
         <?php foreach($contactpersoninfo as $contactpersoninfo_list): ?>
-         <tr>
+         <tr id="<?php echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?>">
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?></td>
-                                        <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
+<!--                                        <td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['customer_id']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['name']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['email']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['department']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['phone']; ?></td>
-                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['position']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['mobile']; ?></td>
+                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['position']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['purpose']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['remarks']; ?></td>
                                         <td class="text-center">

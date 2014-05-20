@@ -1,13 +1,74 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
     var customer_id = '<?php echo $customer_id;?>';
-    //alert(customer_id);
-    function rem(link)
-    {
-        link.parentNode.parentNode.removeChild(link.parentNode);
+    //$('#tabs_reg li:nth-child(1)').attr('class','active');
+    
+    $(document).on('click','.close',function(){
+        var id=$(this).attr('id');
+        var hre = $(this).parent('a').attr('href');
+        $.ajax({
+            type: 'POST',
+            data:"delete_id="+id,
+            url: path_url+'/customers/deleteregaddress/',
+            success:function(data){
+                if(data == 'deleted'){
+                    $('#'+id).remove();
+                    $(hre).remove();
+                }
+            }
+        });
         
-
-    }
+    });
+     $(document).on('click','.close_bill',function(){
+        var id=$(this).attr('id');
+        var hre = $(this).parent('a').attr('href');
+        $.ajax({
+            type: 'POST',
+            data:"delete_id="+id,
+            url: path_url+'/customers/deletebilladdress/',
+            success:function(data){
+                if(data == 'deleted'){
+                    $('#'+id).remove();
+                    $(hre).remove();
+                }
+            }
+        });
+        
+    });
+    
+    $(document).on('click','.close_delivery',function(){
+        var id=$(this).attr('id');
+        var hre = $(this).parent('a').attr('href');
+        $.ajax({
+            type: 'POST',
+            data:"delete_id="+id,
+            url: path_url+'/customers/deletedeliveryaddress/',
+            success:function(data){
+                if(data == 'deleted'){
+                    $('#'+id).remove();
+                    $(hre).remove();
+                }
+            }
+        });
+        
+    });
+    
+     $(document).on('click','.close_project',function(){
+        var id=$(this).attr('id');
+        var hre = $(this).parent('a').attr('href');
+        $.ajax({
+            type: 'POST',
+            data:"delete_id="+id,
+            url: path_url+'/customers/deleteprojectinfo/',
+            success:function(data){
+                if(data == 'deleted'){
+                    $('#'+id).remove();
+                    $(hre).remove();
+                }
+            }
+        });
+        
+    });
 </script>
 <h1>
                                 <i class="gi gi-user"></i>Edit Customer
@@ -42,9 +103,9 @@
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Customer Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Contact Person Info</a></li>
-                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Project Info</a></li>
+<!--                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Project Info</a></li>
                                                  <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Delivery Addresses</a></li>
-                                                  <li class=""><a href="#tab5" data-toggle="tab"><span>Step 5:</span> Billing Addresses</a></li>
+                                                  <li class=""><a href="#tab5" data-toggle="tab"><span>Step 5:</span> Billing Addresses</a></li>-->
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
@@ -55,15 +116,15 @@
                             <div class="tab-pane" id="tab2">
                                 <?PHP echo $this->element('Customers/edit/contact_person_info'); ?>
                             </div>
-                            <div class="tab-pane" id="tab3">
-                                <?PHP echo $this->element('Customers/edit/project_info'); ?>
+<!--                            <div class="tab-pane" id="tab3">
+                                <?PHP //echo $this->element('Customers/edit/project_info'); ?>
                             </div>
                             <div class="tab-pane" id="tab4">
-                                <?PHP echo $this->element('Customers/edit/delivery_address'); ?>
+                                <?PHP //echo $this->element('Customers/edit/delivery_address'); ?>
                             </div>
                             <div class="tab-pane" id="tab5">
-                                <?PHP echo $this->element('Customers/edit/billing_address'); ?>
-                            </div>
+                                <?PHP //echo $this->element('Customers/edit/billing_address'); ?>
+                            </div>-->
                         </div><!-- tab-content -->
                                                 
                                         <!-- #basicWizard -->
@@ -88,7 +149,7 @@
                                 <?php echo $this->Form->end(); ?>
                                 <!-- END Basic Form Elements Content -->
 </div>
-    <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-address-edit')); ?>
+   <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-address-add')); ?>
   <div id="modal-registered" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -97,11 +158,86 @@
                     <h3 class="modal-title">Registered Address</h3>
                 </div>
                 <div class="modal-body">
-                   <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
+                    <div class="form-group">
+                        <?php echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
+                    <span class="help-block_login project_name_error">Enter the Registered Address</span>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_regedit','escape' => false)); ?>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  <?php echo $this->Form->end(); ?>
+<?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-billing-add')); ?>
+  <div id="modal-billing" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Billing Address</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
+                    <span class="help-block_login project_name_error">Enter the Billing Address</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_billedit','escape' => false)); ?>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  <?php echo $this->Form->end(); ?>
+
+<?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-delivery-add')); ?>
+  <div id="modal-delivery" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Delivery Address</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('deliveryaddress', array('id'=>'val_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress')); ?>
+                    <span class="help-block_login project_name_error">Enter the Delivery Address</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_deliveryedit','escape' => false)); ?>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  <?php echo $this->Form->end(); ?>
+
+<?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-project-add')); ?>
+  <div id="modal-project" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Project Name</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('projectname', array('id'=>'val_projectname','class'=>'form-control','placeholder'=>'Enter the Project Name','label'=>false,'name'=>'projectname')); ?>
+                    <span class="help-block_login project_name_error">Enter the Project Name</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_projectedit','escape' => false)); ?>
+                    
                 </div>
             </div>
         </div>
@@ -125,7 +261,7 @@
                                         
                                         
                                         
-                                        $.bootstrapGrowl('Customer Already Exists!', {
+                                        $.bootstrapGrowl('Customer Added Successfully!', {
                                             type: 'danger',
                                             allow_dismiss: true
                                         });

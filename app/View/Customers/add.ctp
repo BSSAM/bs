@@ -52,6 +52,23 @@
         });
         
     });
+    
+     $(document).on('click','.close_project',function(){
+        var id=$(this).attr('id');
+        var hre = $(this).parent('a').attr('href');
+        $.ajax({
+            type: 'POST',
+            data:"delete_id="+id,
+            url: path_url+'/customers/deleteprojectinfo/',
+            success:function(data){
+                if(data == 'deleted'){
+                    $('#'+id).remove();
+                    $(hre).remove();
+                }
+            }
+        });
+        
+    });
 
 </script>
 <h1>
@@ -200,6 +217,31 @@
         </div>
     </div>
   <?php echo $this->Form->end(); ?>
+
+<?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-project-add')); ?>
+  <div id="modal-project" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Project Name</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('projectname', array('id'=>'val_projectname','class'=>'form-control','placeholder'=>'Enter the Project Name','label'=>false,'name'=>'projectname')); ?>
+                    <span class="help-block_login project_name_error">Enter the Project Name</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_projectadd','escape' => false)); ?>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  <?php echo $this->Form->end(); ?>
+
 
     <?php echo $this->Html->script('pages/formsValidation'); ?>
 <script>$(function(){ FormsValidation.init(); });</script>
