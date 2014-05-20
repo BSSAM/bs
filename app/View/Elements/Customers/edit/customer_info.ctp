@@ -28,10 +28,6 @@
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_regaddress">Registered Address</label>
-<!--    <div class="col-md-4">
-        <?php //echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
-    </div>-->
-    
     <div class="col-md-10">
         <!-- Block Tabs -->
         <div class="block full">
@@ -39,39 +35,136 @@
             <div class="block-title">
                 <div class="block-options pull-right">
                     <div class="btn-group">
-                        <a href="#modal-registered" data-toggle="modal" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
-<!--                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                            <li>
-                                <a href="#modal-registered" data-toggle="modal">Add</a>
-                            </li>
-                        </ul>-->
+                        <a href="#modal-registered" data-toggle="modal" id="" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
+                        
                     </div>
                 </div>
-                <ul class="nav nav-tabs" data-toggle="tabs">
-                    <li id="1"><a href="#example-tabs2-Address1"><button class="close" type="button" id="1" onclick="rem(this);">×</button>Address1</a></li>
-                    <li id="2"><a href="#example-tabs2-Address2"><button class="close" type="button" id="2" onclick="rem(this);">×</button>Address2</a></li>
-                    <li id="3"><a href="#example-tabs2-Address3"><button class="close" type="button" id="3" onclick="rem(this);">×</button>Address3</a></li>
+                <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_reg">
+                    <?php for($i=0;$i<$data10_count;$i++){ ?>
+                    
+                        <li id="<?php echo $data10[$i]['Address']['address_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>><a href="#example-tabs2-Address<?php echo $i; ?>"><button class="close" type="button" id="<?php echo $data10[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
+                    
+                    <?php } ?>
                 </ul>
             </div>
             <!-- END Block Tabs Title -->
-                
+
             <!-- Tabs Content -->
-            <div class="tab-content">
-                <div class="tab-pane" id="example-tabs2-activity">new address,adas,asdasda</div>
-                <div class="tab-pane" id="example-tabs2-profile">ast4yteg,adasdaf4rw</div>
-                <div class="tab-pane" id="example-tabs2-options">help,help</div>
+            <div class="tab-content" id="tab-content">
+                 <?php for($i=0;$i<$data10_count;$i++){ ?>
+                <div class="tab-pane" id="example-tabs2-Address<?php echo $i; ?>" ><?php echo $data10[$i]['Address']['address']; ?></div>
+                
+                <?php } ?>
             </div>
             <!-- END Tabs Content -->
         </div>
         <!-- END Block Tabs -->
     </div>
     
-      
-    <label class="col-md-2 control-label" for="val_billaddress">Billing Address</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
+
+
+   <label class="col-md-2 control-label" for="val_billaddress">Billing Address</label>
+    <div class="col-md-10">
+        <!-- Block Tabs -->
+        <div class="block full">
+            <!-- Block Tabs Title -->
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <div class="btn-group">
+                        <a href="#modal-billing" data-toggle="modal" id="" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
+                        
+                    </div>
+                </div>
+                <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_bill">
+                    <?php for($i=0;$i<$data11_count;$i++){ ?>
+                    
+                        <li id="<?php echo $data11[$i]['Address']['address_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>><a href="#example-tabs2-billing<?php echo $i; ?>"><button class="close close_bill" type="button" id="<?php echo $data11[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
+                    
+                    <?php } ?>
+                </ul>
+            </div>
+            <!-- END Block Tabs Title -->
+
+            <!-- Tabs Content -->
+            <div class="tab-content_bill" id="tab-content_bill">
+                 <?php for($i=0;$i<$data11_count;$i++){ ?>
+                <div class="tab-pane" id="example-tabs2-billing<?php echo $i; ?>" ><?php echo $data11[$i]['Address']['address']; ?></div>
+                
+                <?php } ?>
+            </div>
+            <!-- END Tabs Content -->
+        </div>
+        <!-- END Block Tabs -->
     </div>
-        
+
+
+
+<label class="col-md-2 control-label" for="val_deliveryaddress">Delivery Address</label>
+    <div class="col-md-10">
+        <!-- Block Tabs -->
+        <div class="block full">
+            <!-- Block Tabs Title -->
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <div class="btn-group">
+                        <a href="#modal-delivery" data-toggle="modal" id="" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
+                        
+                    </div>
+                </div>
+                <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_delivery">
+                    <?php for($i=0;$i<$data12_count;$i++){ ?>
+                    
+                        <li id="<?php echo $data12[$i]['Address']['address_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>><a href="#example-tabs2-delivery<?php echo $i; ?>"><button class="close close_delivery" type="button" id="<?php echo $data12[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
+                    
+                    <?php } ?>
+                </ul>
+            </div>
+            <!-- END Block Tabs Title -->
+
+            <!-- Tabs Content -->
+            <div class="tab-content_delivery" id="tab-content_delivery">
+                 <?php for($i=0;$i<$data12_count;$i++){ ?>
+                <div class="tab-pane" id="example-tabs2-delivery<?php echo $i; ?>" ><?php echo $data12[$i]['Address']['address']; ?></div>
+                
+                <?php }?>
+            </div>
+            <!-- END Tabs Content -->
+        </div>
+        <!-- END Block Tabs -->
+    </div>
+<label class="col-md-2 control-label" for="val_projectname">Project Info</label>
+    <div class="col-md-10">
+        <!-- Block Tabs -->
+        <div class="block full">
+            <!-- Block Tabs Title -->
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <div class="btn-group">
+                        <a href="#modal-project" data-toggle="modal" id="" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
+                        
+                    </div>
+                </div>
+                <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_project">
+                    <?php for($i=0;$i<$data13_count;$i++){ ?>
+                    
+                        <li id="<?php echo $data13[$i]['Projectinfo']['project_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>><a href="#example-tabs2-project<?php echo $i; ?>"><button class="close close_project" type="button" id="<?php echo $data13[$i]['Projectinfo']['project_id']; ?>" >×</button>Project<?php echo $i+1; ?></a></li>
+                    
+                    <?php } ?>
+                </ul>
+            </div>
+            <!-- END Block Tabs Title -->
+
+            <!-- Tabs Content -->
+            <div class="tab-content_project" id="tab-content_project">
+                 <?php for($i=0;$i<$data13_count;$i++){ ?>
+                <div class="tab-pane" id="example-tabs2-project<?php echo $i; ?>" ><?php echo $data13[$i]['Projectinfo']['project_name']; ?></div>
+                
+                <?php } ?>
+            </div>
+            <!-- END Tabs Content -->
+        </div>
+        <!-- END Block Tabs -->
+    </div>
 </div>
     
 <div class="form-group">
@@ -106,10 +199,7 @@
         <?php echo $this->Form->input('customertype', array('id'=>'var_type','class'=>'form-control','empty'=>'Enter the Customer Type','options'=>array('Customer'=>'Customer','Sub-Contractor'=>'Sub-Contractor','Supplier'=>'Supplier','Customer/Sub-Contractor'=>'Customer/Sub-Contractor'),'label'=>false,'name'=>'customertype')); ?>
     </div>
         
-    <label class="col-md-2 control-label" for="var_deliveryaddress">Delivery Address </label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('deliveryaddress', array('id'=>'var_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress')); ?>
-    </div>
+   
         
 </div>
     
