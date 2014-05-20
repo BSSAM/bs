@@ -39,6 +39,7 @@
            
             if($this->request->is('post'))
             {
+                $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =$this->Quotation->getLastInsertID();

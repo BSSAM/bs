@@ -867,7 +867,7 @@ var FormsValidation = function() {
                     
                 },
             });
-            $('#form-quotation-add').validate({
+            $('#fileupload').validate({
                ignore: ".ignore",
                 invalidHandler: function(e, validator){
                     if(validator.errorList.length)
@@ -901,6 +901,45 @@ var FormsValidation = function() {
                         required: 'Customer Name is Required',
                         minlength: 'Customer Name Should Aleast be 1 Characters'
                         
+                    }}
+                    
+                    
+                },
+                
+              
+                
+            });
+            $('#form-salesorder-add').validate({
+               ignore: ".ignore",
+                invalidHandler: function(e, validator){
+                    if(validator.errorList.length)
+                    $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+                },
+               
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                   // e.parents('.basic-wizard > tab').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    sales_customername: {
+                        required: true,
+                        minlength: 1
+                },
+                messages: {
+                    sales_customername: {
+                        required: 'Customer Name is Required',
+                        minlength: 'Customer Name Should Aleast be 1 Characters'
                     }}
                     
                     

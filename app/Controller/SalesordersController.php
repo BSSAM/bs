@@ -29,6 +29,7 @@
             $this->request->data['Salesorder']['salesorderno']=$dmt;
             if($this->request->is('post'))
             {
+                $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
                     $this->Session->setFlash(__('Salesorder has been Added Succefully '));

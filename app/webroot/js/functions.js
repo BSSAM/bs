@@ -1028,7 +1028,7 @@ $(document).on('click','.instrument_id',function(){
         });
         
    });
-    
+  
     
 }); 
     

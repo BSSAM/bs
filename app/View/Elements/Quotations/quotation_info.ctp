@@ -18,7 +18,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', 
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
-                    'autoComplete'=>'off','type'=>'text')); ?>
+                    'autoComplete'=>'off','type'=>'text','name'=>'customername')); ?>
         <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'customer_id')); ?>
         <div id="result">
         </div>
