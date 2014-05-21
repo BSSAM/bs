@@ -23110,3 +23110,28 @@ function (a, b) {
         stackup_spacing: 10
     }
 }).call(this);
+
+// PANELS
+        $(".panel-body").css('display','none');
+        $(".panel-minimize").replaceWith('<a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>');
+	// panel close
+	$('.panel-close').click(function(e){
+		e.preventDefault();
+		$(this).parent().parent().parent().parent().fadeOut();
+	});
+
+	$('.panel-minimize').click(function(e){
+		e.preventDefault();
+		var $target = $(this).parent().parent().parent().next('.panel-body');
+//		if($target.is(':visible')) { $('i',$(this)).removeClass('fa-chevron-up').addClass('fa-chevron-down'); }
+//		else { $('i',$(this)).removeClass('fa-chevron-down').addClass('fa-chevron-up'); }
+		$target.slideToggle();
+	});
+	$('.fa-hover').click(function(e){
+		e.preventDefault();
+		var valued= $(this).find('i').attr('class');
+		$('.modal-title').html(valued);
+		$('.icon-show').html('<i class="' + valued + ' fa-5x "></i>&nbsp;&nbsp;<i class="' + valued + ' fa-4x "></i>&nbsp;&nbsp;<i class="' + valued + ' fa-3x "></i>&nbsp;&nbsp;<i class="' + valued + ' fa-2x "></i>&nbsp;&nbsp;<i class="' + valued + ' "></i>&nbsp;&nbsp;');
+		$('.modal-footer span.icon-code').html('"' + valued + '"');
+		$('#myModal').modal('show');
+	});

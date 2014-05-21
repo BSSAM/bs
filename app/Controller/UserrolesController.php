@@ -105,4 +105,25 @@ class UserrolesController extends AppController
             return $this->redirect(array('action'=>'index'));
         }
     }
+    
+    public function roles($id = null)
+    {
+        
+       
+//       
+//        if(empty($id))
+//        {
+//             $this->Session->setFlash(__('Invalid Entry'));
+//             return $this->redirect(array('action'=>'edit'));
+//          
+//        }
+//        pr($id);
+        
+        //$userrole =  $this->Userrole->findById($id); 
+       
+   
+        
+       
+       
+    }
 }
