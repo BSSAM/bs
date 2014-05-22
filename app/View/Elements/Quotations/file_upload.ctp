@@ -3,7 +3,7 @@
     </script>
     <?PHP //echo $this->APP->get_full_url();exit; ?>
     <div class="row fileupload-buttonbar">
-        <div class="col-lg-7">
+        <div class="col-lg-7" id="file_upload" style="">
             <!-- The fileinput-button span is used to style the file input field as button -->
             <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
