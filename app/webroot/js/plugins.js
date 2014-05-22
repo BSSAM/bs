@@ -6301,7 +6301,8 @@ jQuery.fn.dataTableExt.oApi.fnPagingInfo = function (e) {
         r = n.addDays,
         o = n.applyAll;
     n.sourceNormalizers.push(function (e) {
-        ("gcal" == e.dataType || void 0 === e.dataType && (e.url || "").match(/^(http|https):\/\/www.google.com\/calendar\/feeds\//)) && (e.dataType = "gcal", void 0 === e.editable && (e.editable = !1))
+        //("gcal" == e.dataType || void 0 === e.dataType && (e.url || "").match(/^(http|https):\/\/www.google.com\/calendar\/feeds\//)) && (e.dataType =
+		("gcal" == e.dataType || void 0 === e.dataType && (e.url || "").match()) && (e.dataType = "gcal", void 0 === e.editable && (e.editable = !1))
     }), n.sourceFetchers.push(function (e, n, a) {
         return "gcal" == e.dataType ? t(e, n, a) : void 0
     }), n.gcalFeed = function (t, n) {
@@ -19395,7 +19396,7 @@ function (t) {
             markup: '<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe class="mfp-iframe" src="//about:blank" frameborder="0" allowfullscreen></iframe></div>',
             srcAction: "iframe_src",
             patterns: {
-                youtube: {
+               /* youtube: {
                     index: "youtube.com",
                     id: "v=",
                     src: "//www.youtube.com/embed/%id%?autoplay=1"
@@ -19408,7 +19409,7 @@ function (t) {
                 gmaps: {
                     index: "//maps.google.",
                     src: "%id%&output=embed"
-                }
+                }*/
             }
         },
         proto: {
