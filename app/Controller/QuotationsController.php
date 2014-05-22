@@ -13,7 +13,8 @@
         }
         public function add()
         {
-          
+//          $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>1399899781),'recursive'=>'2'));
+//          pr($customer_data);exit;
             $str=NULL;
             $d=date("d");
             $m=date("m");
@@ -39,10 +40,17 @@
            
             if($this->request->is('post'))
             {
+             
+                $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
-                    $quotation_id   =$this->Quotation->getLastInsertID();
+                    $quotation_id   =   $this->Quotation->getLastInsertID();
+                    $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
+                    if(!empty($device_node))
+                    {
+                        $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
+                    }
                     $this->request->data['Customerspecialneed']['quotation_id']=$quotation_id;
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);                    
                     $this->Session->setFlash(__('Quotation has been Added Succefully '));
@@ -53,8 +61,8 @@
         }
         public function edit($id=NULL)
         {
-            $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id)));
-//            pr($quotation_details);exit;
+            $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
+            //pr($quotation_details);exit;
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
@@ -67,11 +75,21 @@
             
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set('service',$services);
+            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            
+            $this->set('quotations_list',$quotation_details);
+           
             if($this->request->is(array('post','put')))
             {
                 $this->Quotation->id=$id;
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
+                    $customer_id=$quotation_details['Quotation']['customer_id'];
+                    $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
+                    if(!empty($device_node))
+                    {
+                        $this->Device->updateAll(array('Device.quotation_id'=>$id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
+                    }
                     $this->Customerspecialneed->id=$this->request->data['Customerspecialneed']['id'];
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);                    
                     $this->Session->setFlash(__('Quotation has been Added Succefully '));
@@ -101,8 +119,8 @@
         }
         public function get_customer_value()
         {
-            $this->loadModel('Customer');
             $this->autoRender = false;
+            $this->loadModel('Customer');
             $customer_id =  $this->request->data['cust_id'];
             $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$customer_id),'recursive'=>'2'));
             if(!empty($customer_data))
@@ -162,7 +180,7 @@
             {
                 echo json_encode($brand_details);
             }
-            //pr($brand_list);
+            //pr($brand_list);,lp,
      
         }
         public function add_instrument()
@@ -188,7 +206,6 @@
             {
                 $device_id=$this->Device->getLastInsertID();
                 echo $device_id;
-                
             }
      
         }

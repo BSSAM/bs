@@ -5,9 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Device extends AppModel
-{   
-    public $belongsTo = array(
+
+class Description extends AppModel
+{
+    public $useTable   =   'sal_description';
+     public $belongsTo = array(
         'Customer' => array(
             'className' => 'Customer',
             'foreignKey' => 'customer_id ',
@@ -28,8 +30,13 @@ class Device extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+         'Department' => array(
+            'className' => 'Department',
+            'foreignKey' => 'department_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
     );
-    public $useTable    =   'quo_devices';
-   
 }

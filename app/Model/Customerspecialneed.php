@@ -7,6 +7,7 @@
  */
 class Customerspecialneed extends AppModel
 {
- public  $name =  'Customerspecialneed';
+    public  $name =  'Customerspecialneed';
+    public $useTable   =   'quo_customerspecialneeds';
 }
 

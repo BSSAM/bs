@@ -8,6 +8,6 @@
 
 class Projectinfo extends AppModel
 {
-    
+    public $useTable   =   'cus_projectinfos';
 
 }

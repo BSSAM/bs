@@ -1,28 +1,77 @@
+<script>
+    var path='<?PHP echo Router::url('/',true); ?>';
+</script>
+<style>
+    .sales_instrument_id
+	{
+		padding:10px; 
+		border-bottom:1px #999 dashed;
+		font-size:15px; 
+		height:50px;
+                float: top;
+	}
+	.sales_instrument_id:hover
+	{
+		background:#4c66a4;
+		color:#FFF;
+		cursor:pointer;
+	}
+        #search_instrument{
+            position: absolute;
+            z-index: 999;
+        }
+    </style>
+<script type="text/javascript">
+    $(function(){
+    $("#val_instrument").keyup(function() 
+    { 
+        var instrument = $(this).val();
+        var customer_id = $('#SalesorderCustomerId').val();
+        var dataString = 'customer_id='+ customer_id+'&instrument='+instrument;
+        if(customer_id!='')
+        {
+            $.ajax({
+            type: "POST",
+            url: path_url+"salesorders/instrument_search",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                $("#search_instrument").html(html).show();
+            }
+            });
+        }return false;    
+    });
+    });
+
+
+</script>
 <div class="form-group">
-    
-    <label class="col-md-2 control-label" for="val_sno">S.No</label>
+    <label class="col-md-2 control-label" for="sales_sno">S.No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('sno', array('id'=>'val_sno','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'sno')); ?>
+        <?php echo $this->Form->input('sno', array('id'=>'sales_sno','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'sales_sno')); ?>
     </div>
         
-    <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
+    <label class="col-md-2 control-label" for="sales_quantity">Quantity</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','class'=>'form-control','label'=>false,'name'=>'sales_quantity')); ?>
     </div>
         
 </div>
-    
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_customer">Description</label>
+    <label class="col-md-2 control-label" for="val_description">Instrument</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
-                array('id'=>'val_description','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,
-                    'name'=>'description','autoComplete'=>'off')); ?>
-        <div id="result">
+                array('id'=>'val_instrument','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,
+                    'name'=>'instrument','autoComplete'=>'off')); ?>
+        <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
+        <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
+         <span class="help-block_login ins_error">Enter the Instrument Name</span>
+        <div id="search_instrument">
         </div>
     </div>
-    <label class="col-md-2 control-label" for="val_address">Model No</label>
+    <label class="col-md-2 control-label" for="val_model_no">Model No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
@@ -34,71 +83,98 @@
     <label class="col-md-2 control-label" for="val_brand">Brand</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
-                                                'label'=>false,'name'=>'brand','rows'=>6,'cols'=>'')); ?>
-        <div id="result">
-        </div>
+                                                'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand')); ?>
+       
     </div>
-    <label class="col-md-2 control-label" for="val_range">Range</label>
+    <label class="col-md-2 control-label" for="sales_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','label'=>false,'name'=>'range')); ?>
+        <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control','label'=>false,'name'=>'sales_range')); ?>
     </div>
 </div>
 <div class="form-group">
-    
-    <label class="col-md-2 control-label" for="val_call_location">Call Location</label>
+    <label class="col-md-2 control-label" for="sales_calllocation">Call Location</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control',
-                                                'label'=>false,'name'=>'call_location','type'=>'select')); ?>
+        <?php echo $this->Form->input('call_location', array('id'=>'sales_calllocation','class'=>'form-control',
+                                                'label'=>false,'name'=>'sales_calllocation','type'=>'select','options'=>array('Inlab'=>'In-Lab',
+                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site'))); ?>
+     
+    </div>
+    <label class="col-md-2 control-label" for="sales_calltype">Call Type</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('call_type', array('id'=>'sales_calltype','class'=>'form-control','label'=>false,'name'=>'sales_calltype',
+                                      'placeholder'=>'Enter the Fax Number','type'=>'select','options'=>array('singlas'=>'Singlas',
+                                          'no-singlas'=>'Non-Singlas'))); ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-2 control-label" for="sales_validity">Validity (in months) </label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('validity', array('id'=>'sales_validity','class'=>'form-control',
+                                                'label'=>false,'name'=>'sales_validity','disabled'=>'disabled','value'=>'12')); ?>
         <div id="result">
         </div>
     </div>
-    <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
+    <label class="col-md-2 control-label" for="sales_unitprice">Unit Price</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','placeholder'=>'Enter the Fax Number')); ?>
+        <?php echo $this->Form->input('sales_unitprice', array('id'=>'sales_unitprice','class'=>'form-control','label'=>false,
+            'name'=>'sales_unitprice','placeholder'=>'Enter the Unit Price','disabled'=>'disabled')); ?>
     </div>
 </div>
 
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_validity">Validity (in months) </label>
+    <label class="col-md-2 control-label" for="sales_discount">Discount </label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('validity', array('id'=>'val_validity','class'=>'form-control',
-                                                'label'=>false,'name'=>'validity','disabled'=>'disabled')); ?>
-        <div id="result">
-        </div>
-    </div>
-    <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('unit_price', array('id'=>'val_unit_price','class'=>'form-control','label'=>false,
-            'name'=>'unit_price','placeholder'=>'Enter the Unit Price',)); ?>
-    </div>
-</div>
-
-<div class="form-group">
-    
-    <label class="col-md-2 control-label" for="val_discount">Discount</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
-                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount')); ?>
+        <?php echo $this->Form->input('sales_discount', array('id'=>'sales_discount','class'=>'form-control',
+                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'sales_discount','type'=>'text')); ?>
         <div id="result">
         </div>
     </div>
     <label class="col-md-2 control-label" for="val_department">Department</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('department', array('id'=>'val_department','class'=>'form-control','label'=>false,'name'=>'department','placeholder'=>'Enter the Departmnent Name',)); ?>
+        <?php echo $this->Form->input('department', array('id'=>'val_department','class'=>'form-control','label'=>false,
+                                      'name'=>'department','placeholder'=>'Enter the Departmnent Name',)); ?>
+        <?PHP echo $this->Form->input('department_id',array('type'=>'hidden','id'=>'sales_department_id')); ?>
     </div>
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_account_service">Account Service</label>
+    <label class="col-md-2 control-label" for="sales_accountservice">Account Service</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control',
-                                                'label'=>false,'name'=>'account_service','options'=>array('1'=>'yes'))); ?>
-        <div id="result">
-        </div>
+        <?php echo $this->Form->input('sales_accountservice', array('id'=>'sales_accountservice','class'=>'form-control',
+                                      'label'=>false,'name'=>'sales_accountservice','options'=>array('calibration service'=>'Calibration Service'),
+                                      'empty'=>'Select Account Service')); ?>
+     
     </div>
-    <label class="col-md-2 control-label" for="val_title">Titles</label>
+    <label class="col-md-2 control-label" for="sales_titles">Titles</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('title', array('id'=>'val_title','class'=>'form-control','label'=>false,'name'=>'title','type'=>'select')); ?>
+        <?php echo $this->Form->input('sales_titles', array('id'=>'sales_titles','class'=>'form-control','label'=>false,'name'=>'sales_titles','type'=>'select',
+            'options'=>array('1'=>'title'))); ?>
     </div>
 </div>
+<div class="form-group form-actions">
+    <div class="col-md-9 col-md-offset-10 sales_update_device">
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary sales_description_add','escape' => false)); ?>
+    </div>
+</div>
+<table  class="table table-vcenter table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">S.No</th>
+            <th class="text-center">Instrument</th>
+            <th class="text-center">Model No</th>
+            <th class="text-center">Brand</th>
+            <th class="text-center">Range</th>
+            <th class="text-center">Call Location</th>
+            <th class="text-center">Call Type</th>
+             <th class="text-center">Validity</th>
+            <th class="text-center">Unit Price</th>
+            <th class="text-center">Account Service</th>
+            <th class="text-center">Total</th>
+        </tr>
+    </thead>
+    <tbody class="sales_Instrument_info"> 
+   
+    </tbody>
+</table>

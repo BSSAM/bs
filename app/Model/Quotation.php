@@ -8,4 +8,18 @@
 class Quotation extends AppModel
 {
     var $hasOne=array('Customerspecialneed');
+    
+    public $hasMany = array(
+        'Device' => array(
+            'className' => 'Device',
+            'foreignKey' => 'quotation_id',
+            'conditions' => array('status'=>'1'),
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ));
 }

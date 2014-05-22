@@ -13,7 +13,6 @@
 </div>
     
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', 
@@ -40,7 +39,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select')); ?>
+        <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','options'=>array($quotations_list['Quotation']['attn']=>$quotations_list['Quotation']['attn']),'selected'=>'selected')); ?>
     </div>
 </div>
 <div class="form-group">

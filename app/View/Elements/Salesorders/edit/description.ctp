@@ -1,13 +1,12 @@
 <div class="form-group">
-    
-    <label class="col-md-2 control-label" for="val_sno">S.No</label>
+    <label class="col-md-2 control-label" for="sales_sno">S.No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('sno', array('id'=>'val_sno','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'sno')); ?>
+        <?php echo $this->Form->input('sno', array('id'=>'sales_sno','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'sales_sno')); ?>
     </div>
         
-    <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
+    <label class="col-md-2 control-label" for="sales_quantity">Quantity</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','class'=>'form-control','label'=>false,'name'=>'sales_quantity')); ?>
     </div>
         
 </div>

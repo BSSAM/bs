@@ -1,6 +1,7 @@
     <script>
         var file_path='<?PHP echo Router::url('/',true); ?>';
     </script>
+    <?PHP //echo $this->APP->get_full_url();exit; ?>
     <div class="row fileupload-buttonbar">
         <div class="col-lg-7">
             <!-- The fileinput-button span is used to style the file input field as button -->

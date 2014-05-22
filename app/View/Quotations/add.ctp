@@ -32,7 +32,7 @@ if(customer!='')
 {
 	$.ajax({
 	type: "POST",
-	url: "../Quotations/search",
+	url: "<?PHP echo Router::url('/',true); ?>/Quotations/search",
 	data: dataString,
 	cache: false,
 	success: function(html)

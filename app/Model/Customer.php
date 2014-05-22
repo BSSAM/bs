@@ -11,6 +11,6 @@
 class Customer extends AppModel
 {
   public $belongsTo = array( 'Salesperson','Referedby','Industry','Location','Paymentterm','Priority' );
- 
+  public $hasOne    =array('Contactpersoninfo');
 
 }

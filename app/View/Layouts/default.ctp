@@ -41,6 +41,7 @@
 		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
 		echo $this->Html->script('jquery.min');
                 echo $this->Html->script('functions');
+                echo $this->Html->script('sal_desc_func');
                 
                 ?>
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>

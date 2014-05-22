@@ -8,7 +8,6 @@
 $(document).ready(function(){
     
     
-    
     /* Contact Person Info .................................
     *......................................................................................................................
     *......................................................................................................................
@@ -532,7 +531,7 @@ $(document).ready(function(){
         var customer_id=$(this).attr('id');
         $.ajax({
             type: "POST",
-            url: "../Quotations/get_customer_value",
+            url: path_url+"/Quotations/get_customer_value",
             data: 'cust_id='+customer_id,
             cache: false,
             success: function(data)
@@ -540,8 +539,11 @@ $(document).ready(function(){
                 data1 = $.parseJSON(data);
                 $('#val_address').val(data1.Customer.regaddress);
                 $('#QuotationCustomerId').val(data1.Customer.id);
-                $('#val_phone').val(data1.Customer.phone);
+                $('#val_phone').val(data1.Customer.phone);                
+                $('#val_salesperson').val(data1.Salesperson.salesperson);
+                $('#salespeople_id').val(data1.Salesperson.id);
                 $('#val_fax').val(data1.Customer.fax);
+                $('#SalesorderCustomerId').val(data1.Customer.id);
                 $('#val_attn').append('<option>'+data1.Contactpersoninfo.name+'</option>');
                 $('#val_email').val(data1.Contactpersoninfo.email);
                 $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
@@ -854,12 +856,12 @@ $(document).on('click','.instrument_id',function(){
                 $('#val_unit_price').val(parsedata.CustomerInstrument.unit_price);
                         
             }
-});
+    });
     });
     $('.ins_error').hide();
    $(document).on('click','.description_add',function(){
        
-      if($('#val_description').val()=='')
+        if($('#val_description').val()=='')
         {
             $('.ins_error').addClass('animation-slideDown');
             $('.ins_error').css('color','red');
@@ -991,8 +993,6 @@ $(document).on('click','.instrument_id',function(){
         var instrument_department=$('#val_department').val();
         var instrument_account=$('#val_account_service').val();
         var instrument_title=$('#val_title').val();
-        
-        
         $.ajax({
             type: 'POST',
             data:"device_id="+device_id+"&instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title,

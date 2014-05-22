@@ -59,7 +59,7 @@
     
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_customer">Instrument</label>
+    <label class="col-md-2 control-label" for="val_description">Instrument</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
                 array('id'=>'val_description','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,
@@ -127,7 +127,7 @@
 
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_discount">Discount</label>
+    <label class="col-md-2 control-label" for="val_discount">Discount </label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>

@@ -7,6 +7,6 @@
  */
 class Contactpersoninfo extends AppModel
 {
-    
+   public $useTable   =   'cus_contactpersoninfos';
 
 }

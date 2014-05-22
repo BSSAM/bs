@@ -43,8 +43,8 @@ class UploadHandler
     function __construct($options = null, $initialize = true, $error_messages = null) {
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/iyappan/',
-            'upload_url' => $this->get_full_url().'/iyappan/',
+            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/files/',
+            'upload_url' => $this->get_full_url().'/files/',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
@@ -147,6 +147,7 @@ class UploadHandler
                 )
             )
         );
+		
         if ($options) {
             $this->options = $options + $this->options;
         }

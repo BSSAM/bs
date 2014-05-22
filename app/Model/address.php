@@ -6,8 +6,7 @@
  * and open the template in the editor.
  */
 
-class Billingaddress extends AppModel
+class Address extends AppModel
 {
-    
-
+    public $useTable   =   'cus_addresses';
 }
