@@ -13,9 +13,7 @@
         }
         public function add()
         {
-           //echo  md5(substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, rand(1,10))); 
-           
-            $str=NULL;
+           $str=NULL;
             $d=date("d");
             $m=date("m");
             $y=date("Y");
@@ -32,22 +30,32 @@
             $this->request->data['Salesorder']['salesorderno']=$dmt;
             if($this->request->is('post'))
             {
-                
-                $customer_id    =   $this->request->data['Salesorder']['customer_id'];
-                $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
-                if($this->Salesorder->save($this->request->data['Salesorder']))
-                {
-                    $sales_orderid  =   $this->Salesorder->getLastInsertID();
-                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
-                    if(!empty($device_node))
+               if($this->request->data['Salesorder']['quotation_id']!='')
+               {
+                 $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1')));
+                 // $this->request->data   =   $quotation_details;
+                 pr($quotation_details);exit;
+                 $quotation_details =  $quotation_details['Quotation']  ;
+                 
+                 $sales['Salesorder']   =    $quotation_details;
+                 $this->request->data =   $sales;
+               }
+               else 
+               {
+                    $customer_id    =   $this->request->data['Salesorder']['customer_id'];
+                    $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
+                    if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
-                        $this->Description->updateAll(array('Description.salesorder_id'=>$sales_orderid,'Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
+                        $sales_orderid  =   $this->Salesorder->getLastInsertID();
+                        $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
+                        if(!empty($device_node))
+                        {
+                            $this->Description->updateAll(array('Description.salesorder_id'=>$sales_orderid,'Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
+                        }
+                        $this->Session->setFlash(__('Salesorder has been Added Succefully '));
+                        $this->redirect(array('action'=>'index'));
                     }
-                    
-                    $this->Session->setFlash(__('Salesorder has been Added Succefully '));
-                    $this->redirect(array('action'=>'index'));
-                }
-               
+               }
             }
         }
         public function edit($id=NULL)
@@ -58,7 +66,9 @@
             $this->set('payment',$payment);
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set('service',$services);
-            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id)));
+            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id),'recursive'=>'2'));
+            
+            $this->set('salesorder',$salesorder_details);
            
             if($this->request->is(array('post','put')))
             {
@@ -72,6 +82,22 @@
             else
             {
                 $this->request->data=$salesorder_details;
+            }
+        }
+        public function delete($id=NULL)
+        {
+            
+            if($id!='')
+            {
+                if($this->Salesorder->delete($id))
+                {
+                    $this->Session->setFlash(__('The SalesOrder has been deleted',h($id)));
+                    return $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
+                }
+            }
+            else
+            {
+                throw new MethodNotAllowedException();
             }
         }
         public function search()
@@ -154,7 +180,8 @@
             if($this->Description->save($this->request->data))
             {
                 $device_id=$this->Description->getLastInsertID();
-                echo $device_id;
+                $get_lastdevice_details    =   $this->Description->find('first',array('conditions'=>array('Description.id'=>$device_id)));
+                echo json_encode($get_lastdevice_details);
                 
             }
      
@@ -184,6 +211,7 @@
         {
             $this->autoRender = false;
             $this->loadModel('Description');
+            $device_id                                              =   $this->request->data['device_id'];
             $this->Description->id                                  =   $this->request->data['device_id'];
             $this->request->data['Description']['customer_id']      =   $this->request->data['customer_id'];
             $this->request->data['Description']['instrument_id']    =   $this->request->data['instrument_id'];
@@ -202,9 +230,51 @@
             $this->request->data['Description']['status']       =   0;
             if($this->Description->save($this->request->data))
             {
-               echo "Updated";
-                
+                $get_updatedevice_details    =   $this->Description->find('first',array('conditions'=>array('Description.id'=>$device_id)));
+                echo json_encode($get_updatedevice_details);
             }
      
         }
+        public function quotation_search()
+        {
+            $this->loadModel('Quotation');
+            $name =  $this->request->data['id'];
+            $this->autoRender = false;
+            $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno LIKE'=>'%'.$name.'%','Quotation.is_approved'=>'1')));
+            $c = count($data);
+            if($c!=0)
+            {
+                for($i = 0; $i<$c;$i++)
+                { 
+                    echo "<div class='quotation_single' align='left' id='".$data[$i]['Quotation']['id']."'>";
+                    echo $data[$i]['Quotation']['quotationno'];
+                    echo "<br>";
+                    echo "</div>";
+                }
+            }
+            else
+            {
+                echo "<div class='no_result' align='left'>";
+                echo "No Results Found";
+                echo "<br>";
+                echo "</div>";
+            }
+        }
+        public function check_quotation_count()
+        {
+            $this->autoRender = false;
+            $this->loadModel('Quotation');
+            $name =  $this->request->data['single_quote_id'];
+            $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$name,'Quotation.is_approved'=>'1')));
+            $c = count($data);
+            if($c!=0)
+            {
+                echo "success";
+            }
+            else 
+            {
+                echo "failure";
+            }
+        }
+      
 }

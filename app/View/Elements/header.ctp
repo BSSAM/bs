@@ -133,16 +133,17 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-ruller sidebar-nav-icon"></i>Instruments</a>
-                                 <ul>
-                                    <li>
-                                        <a href="#"><?php echo 'Instrument'; ?></a>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Instruments'||$control == 'procedures'||$control == 'Brands'||$control == 'Ranges'||$control=='Units')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-ruller sidebar-nav-icon"></i>Instruments</a>
+                                 <ul <?php echo $a=($control == 'Instruments'||$control == 'procedures'||$control == 'Brands'||$control == 'Ranges'|| $control == 'Units')?'style=display:block':'';?> >
+                                    <li <?php echo $a=($control == 'Instruments')?'class=active':''; ?>>
+                                        <?PHP echo $this->Html->link('Instrument',array('controller'=>'Instruments','action'=>'index')); ?>
+                                          
                                     </li>
-                                    <li>
-                                        <a href="#"><?php echo 'Procedure No'; ?></a>
+                                    <li <?php echo $a=($control == 'procedures')?'class=active':''; ?>>
+                                        <?PHP echo $this->Html->link('Procedure No',array('controller'=>'procedures','action'=>'index')); ?>
                                     </li>
-                                    <li>
-                                          <a href="#"><?php echo 'Brand'; ?></a>
+                                    <li <?php echo $a=($control == 'Brands')?'class=active':''; ?>>
+                                        <?PHP echo $this->Html->link('Brand',array('controller'=>'Brands','action'=>'index')); ?>
                                     </li>
                                     <li>
                                          <a href="#"><?php echo 'Instrument'; ?></a>
@@ -150,14 +151,16 @@
                                     <li>
                                          <a href="#"><?php echo 'Instrument for Group'; ?></a>
                                     </li>
-                                    <li>
-                                         <a href="#"><?php echo 'Range'; ?></a>
+                                    <li <?php echo $a=($control == 'Ranges')?'class=active':''; ?>>
+                                        <?PHP echo $this->Html->link('Range',array('controller'=>'Ranges','action'=>'index')); ?>
+                                          
                                     </li>
                                     <li>
                                          <a href="#"><?php echo 'Title'; ?></a>
                                     </li>
-                                    <li>
-                                         <a href="#"><?php echo 'Unit'; ?></a>
+                                    <li <?php echo $a=($control == 'Units')?'class=active':''; ?>>
+                                        <?PHP echo $this->Html->link('Unit',array('controller'=>'Units','action'=>'index')); ?>
+                                          
                                     </li>
                                 </ul>
                             </li>

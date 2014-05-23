@@ -805,7 +805,7 @@ class CustomersController extends AppController
         $this->loadModel('Contactpersoninfo');
         
         $data = $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.name'=>'"'.$contact_name.'"','Contactpersoninfo.email'=>'"'.$contact_email.'"','Contactpersoninfo.department'=>'"'.$contact_department.'"','Contactpersoninfo.phone'=>'"'.$contact_phone.'"','Contactpersoninfo.position'=>'"'.$contact_position.'"','Contactpersoninfo.mobile'=>'"'.$contact_mobile.'"','Contactpersoninfo.purpose'=>'"'.$contact_purpose.'"','Contactpersoninfo.remarks'=>'"'.$contact_remark.'"'),array('Contactpersoninfo.id'=>$con_id));
-        pr($data);
+        
         //echo 'success';
     }
 //    public function project_delete()

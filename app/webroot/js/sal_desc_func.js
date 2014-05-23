@@ -23,7 +23,7 @@ $(document).ready(function(){
                 {
                     if('Brand' in v)
                     {
-                     $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
+                        $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
                     }
                     if('Department' in v)
                     {
@@ -72,20 +72,20 @@ $(document).ready(function(){
             url: path+'Salesorders/sales_add_instrument/',
             success: function(data)
             {
-               $('.sales_Instrument_info').append('<tr class="sales_instrument_remove_'+data+'">\n\\n\
-                                    <td class="text-center">'+data+'</td>\n\
-                                    <td class="text-center">'+instrument_name+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_modelno+'</td>\n\
-                                    <td class="text-center">'+instrument_brand+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_range+'</td>\n\\n\\n\
-                                    <td class="text-center">'+instrument_calllocation+'</td>\n\
-                                    <td class="text-center">'+instrument_calltype+'</td>\n\
-                                    <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_account+'</td>\n\
+                data_edit_node  =   $.parseJSON(data);
+                
+               $('.sales_Instrument_info').append('<tr class="sales_instrument_remove_'+data_edit_node.Description.id+'">\n\\n\
+                                    <td class="text-center">'+data_edit_node.Description.id+'</td>\n\
+                                    <td class="text-center">'+data_edit_node.Instrument.name+'</td>\n\\n\
+                                    <td class="text-center">'+data_edit_node.Description.sales_quantity+'</td>\n\
+                                    <td class="text-center">'+data_edit_node.Brand.brandname+'</td>\n\\n\
+                                    <td class="text-center">'+data_edit_node.Description.sales_calllocation+'</td>\n\
+                                     <td class="text-center">'+data_edit_node.Description.sales_validity+'</td>\n\
+                                    <td class="text-center">'+data_edit_node.Description.sales_unitprice+'</td>\n\\n\
+                                    <td class="text-center">'+data_edit_node.Department.departmentname+'</td>\n\
                                     <td class="text-center"><div class="btn-group">\n\
-                                    <a data-edit="'+data+'"class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
-                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">\n\
+                                    <a data-edit="'+data_edit_node.Description.id+'"class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
+                                    <a data-delete="'+data_edit_node.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
                 
                 $('#sales_quantity').val(null);
@@ -124,11 +124,12 @@ $(document).ready(function(){
             url: path_url+'/Salesorders/sales_edit_instrument/',
             success:function(data){
                edit_node=$.parseJSON(data);
+              
                $('#device_id').val(edit_node.Description.id);
                $('#sales_quantity').val(edit_node.Description.sales_quantity);
                 $('#val_instrument').val(edit_node.Instrument.name);
                 $('#SalesorderCustomerId').val(edit_node.Description.customer_id);
-                $('#SalesorderInstrumentId').val(edit_node.Description.id);
+                $('#SalesorderInstrumentId').val(edit_node.Instrument.id);
                 $('#val_model_no').val(edit_node.Description.model_no);
                 $('#val_brand').empty().append('<option value="">Select Brand</option><option selected="selected" value="'+edit_node.Brand.id+'">'+edit_node.Brand.brandname+'</option>');
                 $('#sales_range').val(edit_node.Description.sales_range);
@@ -181,18 +182,17 @@ $(document).ready(function(){
             url: path+'Salesorders/update_instrument/',
             success: function(data)
             {
+                data_edit_node  =   $.parseJSON(data);
                $('.sales_instrument_remove_'+device_id).remove();
                $('.sales_Instrument_info').append('<tr class="sales_instrument_remove_'+device_id+'">\n\\n\
                                     <td class="text-center">'+device_id+'</td>\n\
-                                    <td class="text-center">'+instrument_name+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_modelno+'</td>\n\
-                                    <td class="text-center">'+instrument_brand+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_range+'</td>\n\\n\\n\
-                                    <td class="text-center">'+instrument_calllocation+'</td>\n\
-                                    <td class="text-center">'+instrument_calltype+'</td>\n\
-                                    <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_account+'</td>\n\
+                                    <td class="text-center">'+data_edit_node.Instrument.name+'</td>\n\\n\
+                                    <td class="text-center">'+data_edit_node.Description.sales_quantity+'</td>\n\
+                                    <td class="text-center">'+data_edit_node.Brand.brandname+'</td>\n\\n\
+                                    <td class="text-center">'+data_edit_node.Description.sales_calllocation+'</td>\n\
+                                     <td class="text-center">'+data_edit_node.Description.sales_validity+'</td>\n\
+                                    <td class="text-center">'+data_edit_node.Description.sales_unitprice+'</td>\n\\n\
+                                    <td class="text-center">'+data_edit_node.Department.departmentname+'</td>\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+device_id+'"class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+device_id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">\n\

@@ -23112,7 +23112,7 @@ function (a, b) {
 }).call(this);
 
 // PANELS
-        $(".panel-body").css('display','none');
+//        $(".panel-body").css('display','none');
         $(".panel-minimize").replaceWith('<a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>');
 	// panel close
 	$('.panel-close').click(function(e){

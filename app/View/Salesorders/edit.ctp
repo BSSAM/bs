@@ -72,7 +72,7 @@ if(customer!='')
                                  
                                 <div class="panel panel-default">
                                     <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
-                                    <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden','value'=>'')); ?>
+                                    <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden','value'=>$salesorder['Salesorder']['customer_id'])); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         
                                         <!-- BASIC WIZARD -->
@@ -80,7 +80,7 @@ if(customer!='')
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Sales Order Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
-                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 3:</span> Description </a></li>
+                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 3:</span> Instrument </a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>

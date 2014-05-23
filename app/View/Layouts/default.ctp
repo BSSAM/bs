@@ -37,6 +37,7 @@
 		echo $this->Html->css('plugins');
 		echo $this->Html->css('main');
 		echo $this->Html->css('themes');
+                echo $this->Html->css('custom');
                 echo $this->Html->css('file_upload_css/jquery.fileupload');
 		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
 		echo $this->Html->script('jquery.min');

@@ -163,15 +163,13 @@
         <tr>
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
-            <th class="text-center">Model No</th>
+            <th class="text-center">Quantity</th>
             <th class="text-center">Brand</th>
-            <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
-            <th class="text-center">Call Type</th>
-             <th class="text-center">Validity</th>
+            <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
-            <th class="text-center">Account Service</th>
-            <th class="text-center">Total</th>
+            <th class="text-center">Department</th>
+            <th class="text-center">Action</th>
         </tr>
     </thead>
     <tbody class="sales_Instrument_info"> 

@@ -7,4 +7,27 @@
  */
 class Salesorder extends AppModel
 {
+    public $hasMany = array(
+        'Description' => array(
+            'className' => 'Description',
+            'foreignKey' => 'salesorder_id',
+            'conditions' => array('status'=>'1'),
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ));
+    public $belongsTo = array(
+        'Customer' => array(
+            'className' => 'Customer',
+            'foreignKey' => 'customer_id ',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+       
+    );
 }

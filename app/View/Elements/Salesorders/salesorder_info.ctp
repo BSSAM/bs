@@ -93,7 +93,7 @@
     
      <label class="col-md-2 control-label" for="val_in_date">In Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.out_date', array('id'=>'val_in_date','class'=>'form-control input-datepicker-close','data-date-format'=>'mm/dd/yy',
+        <?php echo $this->Form->input('Salesorder.in_date', array('id'=>'val_in_date','class'=>'form-control input-datepicker-close','data-date-format'=>'mm/dd/yy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
        
     </div>
@@ -110,7 +110,7 @@
     
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control','type'=>'select',
+        <?php echo $this->Form->input('Salesorder.instrument_type', array('id'=>'val_customer','class'=>'form-control','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>array('1'=>'We are pleased to quote the item(s) below for calibration service with certificate(s) :'))); ?>
                                                     
                                                     

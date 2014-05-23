@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 23, 2014, 3:20:55 PM
+    Author     : admin
+*/
+
+.success_alert {
+   background-color: #99CC00;
+    border: 1px solid #B2D463;
+}
+.failure_alert {
+   background-color: #EF8A80;
+    border: 1px solid #B2D463;
+}
+.alert_box {
+   background-position: 0 0;
+    background-repeat: repeat;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 15px;
+    margin-bottom: 15px;
+    padding: 8px;
+    text-indent: 8px;
+}

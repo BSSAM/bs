@@ -3,16 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Helper/AppHelper.php</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/Quotations/edit/customer_special_needs.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/webroot/js/file_upload_js/main.js</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Controller/QuotationsController.php</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Quotations/edit.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/Quotations/edit/file_upload.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/Quotations/edit/quotation_info.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/Quotations/file_upload.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/webroot/js/file_upload_js/jquery.fileupload.js</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/Quotations/edit/description.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/webroot/js/pages/formsValidation.js</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Model/Brand.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/webroot/js/pages/instrumentsvalidation.js</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Controller/DepartmentsController.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Brands/add.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Controller/UnitsController.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Controller/BranchesController.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Controller/BrandsController.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Model/Unit.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Brands/index.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Brands/edit.ctp</file>
         </group>
     </open-files>
 </project-private>

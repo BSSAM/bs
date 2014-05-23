@@ -2,7 +2,7 @@
     
     <label class="col-md-2 control-label" for="val_quotationno">Sales Order No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=>$salesorder['Salesorder']['salesorderno'])); ?>
+        <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $this->request->data['Salesorder']['salesorderno'])); ?>
     </div>
         
 <!--    <label class="col-md-2 control-label" for="val_branchname">Branch</label>
@@ -18,11 +18,12 @@
 </div>
     
 <div class="form-group">
+    
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.customername', 
+        <?php echo $this->Form->input('customername', 
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
-                    'autoComplete'=>'off','type'=>'text','name'=>'sales_customername','value'=>$salesorder['Customer']['customername'])); ?>
+                    'autoComplete'=>'off','type'=>'text','name'=>'sales_customername')); ?>
         <div id="result">
         </div>
     </div>
@@ -31,6 +32,7 @@
         <?php echo $this->Form->textarea('Salesorder.address', array('id'=>'val_address','class'=>'form-control',
                                                'placeholder'=>'Enter the Customer Address','label'=>false,'rows'=>6,'cols'=>30)); ?>
     </div>
+        
 </div>
 <div class="form-group">
     
@@ -42,7 +44,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','options'=>array($salesorder['Salesorder']['attn']=>$salesorder['Salesorder']['attn']),'selected'=>'selected')); ?>
+        <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select')); ?>
     </div>
 </div>
 <div class="form-group">
