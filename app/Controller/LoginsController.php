@@ -41,6 +41,7 @@ class LoginsController extends AppController
                 {
                     $this->Session->write('sess_username', $data[$i]['User']['username']);
                     $this->Session->write('sess_userid', $data[$i]['User']['id']);
+                    $this->Session->write('sess_userrole', $data[$i]['User']['userrole_id']);
                     return $this->redirect(array('controller' => 'Dashboards','action'=>'index'));
                 }
             }

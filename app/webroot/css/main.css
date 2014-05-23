@@ -3775,3 +3775,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
     padding-left: 480px;
 }
 
+.block-extend{
+    overflow-y: auto;
+}
+
+.panel-over{
+    max-height: 300px;
+    overflow-y: auto;
+}

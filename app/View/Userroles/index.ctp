@@ -40,7 +40,7 @@
                         <div class="">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                                <?php echo $this->Html->link('Role',array('action'=>'roles',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Roles','class'=>'btn btn-alt btn-xs btn-primary','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('Role',array('action'=>'roles',$userrole_list['Userrole']['user_role_id']),array('data-toggle'=>'tooltip','title'=>'Roles','class'=>'btn btn-alt btn-xs btn-primary','escape'=>false)); ?>
                         </div>
                     </td>
                 </tr>

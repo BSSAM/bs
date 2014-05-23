@@ -75,9 +75,10 @@
                                     <li <?php echo $a=($control == 'Userroles')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('User Roles',array('controller'=>'Userroles','action'=>'index')); ?>
                                     </li>
+                                    <?php if($user_role['other_branch']['view'] == 1){ ?>
                                     <li <?php echo $a=($control == 'Branches')?'class=active':''; ?>>
                                         <?php echo $this->Html->link('Branch',array('controller'=>'Branches','action'=>'index')); ?>
-                                    </li>
+                                    </li><?php } ?>
                                     <li <?php echo $a=($control == 'Departments')?'class=active':''; ?>>
                                         <?php echo $this->Html->link('Department',array('controller'=>'Departments','action'=>'index')); ?>
                                     </li>

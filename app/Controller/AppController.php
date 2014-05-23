@@ -50,8 +50,25 @@ public function beforeFilter()
             }
         }
         $this->set('control',$this->params['controller']);
-      
-   
+        
+        /************************************** User Role ***************************************************
+        */
+         $id = $this->Session->read('sess_userrole');
+         //pr($id);
+         $this->loadModel('Userrole');
+         //$userrole = 0;
+         $userrole =  $this->Userrole->findByUserRoleId($id); 
+         if(!empty($userrole))
+         {
+         //pr($userrole['Userrole']['js_enc']);
+         
+         $ca = $userrole['Userrole']['js_enc'];
+         $user_role = unserialize($ca);
+         $this->set('user_role', $user_role);
+         }
+        
+         /****************************************************************************************************
+        */
 }
      
 }

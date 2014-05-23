@@ -108,22 +108,25 @@ class UserrolesController extends AppController
     
     public function roles($id = null)
     {
-        
-       
-//       
-//        if(empty($id))
-//        {
-//             $this->Session->setFlash(__('Invalid Entry'));
-//             return $this->redirect(array('action'=>'edit'));
-//          
-//        }
-//        pr($id);
-        
-        //$userrole =  $this->Userrole->findById($id); 
-       
-   
-        
-       
-       
+        $id = $this->Session->read('sess_userrole');
+
+        if($this->request->is(array('post','put')))
+        {
+            $a = serialize($this->request->data);
+            $this->Userrole->id = $id;
+            $this->request->data['Userrole']['js_enc'] =$a;
+            if($this->Userrole->save($this->request->data))
+            {
+                $this->Session->setFlash(__('Userrole is Updated'));
+            }
+            $this->Session->setFlash(__('Userrole Cant be Updated'));
+        }
+        else
+        {
+            $userrole =  $this->Userrole->findByUserRoleId($id); 
+            $b = unserialize($userrole['Userrole']['js_enc']);
+//          pr($b);  exit;
+            $this->request->data = $b;
+        }
     }
 }
