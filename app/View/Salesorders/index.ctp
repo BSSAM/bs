@@ -75,25 +75,25 @@
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Sales Order</h2>
-                            <?PHP echo $this->Form->create('Salesorder',array('action'=>'add','class'=>'form-horizontal form-bordered')); ?>
-                                    <div class="form-group">
-                                        <div class="col-md-4">
+                            <h2>List Of Sales Order <?PHP echo $this->Form->create('Salesorder',array('action'=>'add','class'=>'form-horizontal form-bordered')); ?>
+                                    
+                                        <div class="col-md-4 search_move">
                                             <div class="input-group">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary quotation_search" type="button">Proceed</button>
                                                 </span>
-                                                <?PHP echo $this->Form->input('quotation_id',array('placeholder'=>'Quaotation Id','class'=>'form-control',
+                                                <?PHP echo $this->Form->input('quotation_id',array('placeholder'=>'Quotation Id','class'=>'form-control',
                                                     'div'=>false,'label'=>false,'type'=>'text','autoComplete'=>'off')) ?>
                                             </div>
                                              <div id="quoat_list">
                                                     
                                                 </div>
-                                        </div>
-                                    </div>
-                              <?PHP $this->Form->end(); ?>
-                            <h2 style="float:right;">
+                                        </div><h2>
                                 <?php echo $this->Html->link('Add Salesorders',array('controller'=>'Salesorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Sales Order')); ?></h2>
+                              <?PHP $this->Form->end(); ?>
+                                     </h2>
+                            
+                           
                         </div>
                         
 

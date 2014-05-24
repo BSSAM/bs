@@ -41,7 +41,15 @@ if(customer!='')
 	}
 	});
 }return false;    
-});});
+});
+$("#val_reg_date").datepicker("setDate", new Date());
+$("#val_in_date").datepicker("setDate", new Date());
+var dateMin = $('#val_in_date').datepicker('getDate');   
+var date = new Date(); 
+var da = date.getDate() + 4;
+$("#val_out_date").datepicker("setDate",new Date());
+
+});
 
 
 </script>

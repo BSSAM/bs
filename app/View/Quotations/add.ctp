@@ -42,7 +42,9 @@ if(customer!='')
 	}
 	});
 }return false;    
-});});
+});
+$("#val_reg_date").datepicker("setDate", new Date());
+});
 
 
 </script>

@@ -35,7 +35,7 @@
     <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('due_amount', array('id'=>'val_dueamount','class'=>'form-control',
-                                                'placeholder'=>'Enter the Due Amount','label'=>false,'autoComplete'=>'off')); ?>
+                                                'placeholder'=>'Due Amount','label'=>false,'autoComplete'=>'off','disabled'=>'disabled')); ?>
         <div id="result">
         </div>
     </div>
@@ -98,12 +98,15 @@
         <div id="result">
         </div>
     </div>
-    <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
-    <div class="col-md-4">
+   
+</div>
+<div class="form-group">
+    
+ <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
+    <div class="col-md-12">
         <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>array('1'=>'We are pleased to quote the item(s) below for calibration service with certificate(s) :'))); ?>
         <div id="result">
         </div>
     </div>
 </div>
-
