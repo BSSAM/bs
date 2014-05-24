@@ -53,8 +53,7 @@ public function beforeFilter()
         
         /************************************** User Role ***************************************************
         */
-         $id = $this->Session->read('sess_userrole');
-         //pr($id);
+         $id = $this->Session->read('sess_userrole');//pr($id);
          $this->loadModel('Userrole');
          //$userrole = 0;
          $userrole =  $this->Userrole->findByUserRoleId($id); 
