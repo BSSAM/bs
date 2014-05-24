@@ -38,6 +38,15 @@ class Description extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+          'Salesorder' => array(
+            'className' => 'Salesorder',
+            'foreignKey' => 'salesorderno',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+             
+            
         )
     );
 }

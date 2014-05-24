@@ -23,7 +23,9 @@
     $("#val_description").keyup(function() 
     { 
         var instrument = $(this).val();
+        //alert(instrument);
         var customer_id = $('#QuotationCustomerId').val();
+        //alert(customer_id);
         var dataString = 'customer_id='+ customer_id+'&instrument='+instrument;
         if(customer_id!='')
         {
@@ -34,7 +36,7 @@
             cache: false,
             success: function(html)
             {
-                
+                //alert(html);
                 $("#search_instrument").html(html).show();
             }
             });

@@ -10,7 +10,7 @@ class Salesorder extends AppModel
     public $hasMany = array(
         'Description' => array(
             'className' => 'Description',
-            'foreignKey' => 'salesorder_id',
+            'foreignKey' => false,
             'conditions' => array('status'=>'1'),
             'fields' => '',
             'order' => '',
@@ -18,7 +18,9 @@ class Salesorder extends AppModel
             'offset' => '',
             'exclusive' => '',
             'finderQuery' => '',
-            'counterQuery' => ''
+            'dependent'=>true,
+            'counterQuery' => '',
+            'associatedkey' => 'salesorder_id',
         ));
     public $belongsTo = array(
         'Customer' => array(
