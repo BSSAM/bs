@@ -40,20 +40,19 @@
             </thead>
             <tbody>
                                     
-                                    <?php for($i=0;$i<$count_data;$i++) 
+                                      <?php foreach($labs as $labs_list): ?> 
                                     {?>
                                   
                 
                 <tr>
-                    <td class="text-center"><?PHP echo $labs_ins[$i]['instrument_id']; ?></td>
+                    <td class="text-center"><?PHP echo $labs_list['instrument_id']; ?></td>
                     <td class="text-center"><?PHP echo $this->Form->checkbox('processing',array('label'=>'false','id'=>'processing')); ?></td>
                     <td class="text-center"><?PHP echo $this->Form->checkbox('checking',array('label'=>'false','id'=>'checking')); ?></td>
-                    <td class="text-center"><?PHP echo $labs_ins[$i]['department_id']; ?></td>
-                    <td class="text-center"><?PHP echo $labs_ins[$i]['delay']; ?></td>
+                    <td class="text-center"><?PHP echo $labs_list['department_id']; ?></td>
+                    <td class="text-center"><?PHP echo $labs_list['delay']; ?></td>
                 </tr>
                                    
-                
-                                    <?PHP } ?>
+                 <?php endforeach; ?>
                 
             </tbody>
         </table> 

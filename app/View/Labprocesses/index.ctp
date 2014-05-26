@@ -28,16 +28,16 @@
             <div class="block text-center"><h4>SO Count</h4><p><code><?php echo $salesordercount; ?></code></p></div>
         </div>
         <div class="col-sm-2">
-            <div class="block text-center"><h4>Total Qty</h4><p><code><?php echo $count_data; ?></code></p></div>
+            <div class="block text-center"><h4>Total Qty</h4><p><code><?php echo $data_description_count; ?></code></p></div>
         </div>
         <div class="col-sm-2">
-            <div class="block text-center"><h4>Pending Qty</h4><p><code><?php echo $count_data; ?></code></p></div>
+            <div class="block text-center"><h4>Pending Qty</h4><p><code><?php echo $data_pending_count; ?></code></p></div>
         </div>
         <div class="col-sm-2">
-            <div class="block text-center"><h4>Pending Qty</h4><p><code>0</code></p></div>
+            <div class="block text-center"><h4>Processing Qty</h4><p><code><?php echo $data_processing_count; ?></code></p></div>
         </div>
         <div class="col-sm-2">
-            <div class="block text-center"><h4>Pending Qty</h4><p><code>0</code></p></div>
+            <div class="block text-center"><h4>Checking Qty</h4><p><code><?php echo $data_checking_count; ?></code></p></div>
         </div>
         
         
@@ -49,21 +49,21 @@
                         <h2><strong>SO</strong> List Status</h2>
                     </div>
                    
-                                   <div class="radio">
-                                                <label class="radio-inline" for="example-radio1">
-                                                    <?php echo $this->Form->radio('solist',array('label'=>false)); ?>Outstanding SO List
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label class="radio-inline" for="example-radio2">
+                                
+                                                
+                                                    <?php echo $this->Form->radio('solist',array('standard' => 'Standard'),array('legend' => false)); ?>Outstanding SO List
+                                                
+                                            
+<!--                                            <div class="radio">
+                                                <label class="radio-inline" for="example-radio2">-->
                                                     <?php echo $this->Form->radio('solist',array('label'=>false)); ?>Running SO List
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label class="radio-inline" for="example-radio3">
+<!--                                                </label>
+                                            </div>-->
+<!--                                            <div class="radio">
+                                                <label class="radio-inline" for="example-radio3">-->
                                                      <?php echo $this->Form->radio('solist',array('label'=>false)); ?>Overdue SO List
-                                                </label>
-                                            </div>             
+<!--                                                </label>
+                                            </div>             -->
 <!--                                                   <?php //echo $this->Form->radio('solist',array('label'=>false)); ?>Outstanding SO List-->
                                            
                                                
@@ -114,8 +114,8 @@
             </thead>
             <tbody>
                                     <?PHP if(!empty($labprocess )): ?>
-                                    <?php for($i=0;$i<$count_data;$i++) 
-                                    {?>
+                                    
+                                   
                                      <?php foreach($labprocess as $labprocess_list): ?>
                 
                 <tr>
@@ -123,10 +123,10 @@
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['branchname'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['customername'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['priority'] ?></td>
-                    <td class="text-center"><?PHP echo $labprocess_list['Description'][$i]['sales_quantity'] ?></td>
-                    <td class="text-center"><?PHP echo $labprocess_list['Description'][$i]['sales_quantity'] ?></td>
-                    <td class="text-center"><?PHP echo $labprocess_list['Description'][$i]['processing'] ?></td>
-                    <td class="text-center"><?PHP echo $labprocess_list['Description'][$i]['checking'] ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->query_total($labprocess_list['Salesorder']['salesorderno']) ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->query_pending($labprocess_list['Salesorder']['salesorderno']) ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno']) ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno']) ?></td>
                     
                     <td class="text-center">
                         <div class="btn-group">
@@ -136,7 +136,7 @@
                         </div>
                     </td>
                 </tr>
-                                    <?php endforeach;} ?>
+                                    <?php endforeach; ?>
                 
                                     <?PHP endif; ?>
                 

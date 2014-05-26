@@ -7,11 +7,13 @@
  */
 class Salesorder extends AppModel
 {
+    public $actsAs = array('Containable');
+
     public $hasMany = array(
         'Description' => array(
             'className' => 'Description',
-            'foreignKey' => false,
-            'conditions' => array('status'=>'1'),
+            'foreignKey' => 'salesorder_id',
+            'conditions' => array(),
             'fields' => '',
             'order' => '',
             'limit' => '',
@@ -20,8 +22,8 @@ class Salesorder extends AppModel
             'finderQuery' => '',
             'dependent'=>true,
             'counterQuery' => '',
-            'associatedkey' => 'salesorder_id',
-        ));
+             
+      ));
     public $belongsTo = array(
         'Customer' => array(
             'className' => 'Customer',
