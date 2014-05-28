@@ -41,7 +41,7 @@ class Description extends AppModel
         ),
           'Salesorder' => array(
             'className' => 'Salesorder',
-            'foreignKey' => '',
+            'foreignKey' => 'salesorder_id',
             'conditions' => '',
             'fields' => '',
             'order' => '',
