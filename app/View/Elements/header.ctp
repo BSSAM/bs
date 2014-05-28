@@ -185,8 +185,8 @@
                                 </ul>
                             </li>
                              <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
-                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders')?'style=display:block':'';?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
+                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses')?'style=display:block':'';?>>
                                     <li <?php echo $a=($control == 'Quotations')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('Quotation',array('controller'=>'Quotations','action'=>'index')); ?>
                                     </li>  
@@ -196,9 +196,10 @@
                                     <li <?php echo $a=($control == 'Salesorders')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('Sales Order',array('controller'=>'Salesorders','action'=>'index')); ?>
                                     </li>  
-                                    <li>
-                                          <a href="#"><?php echo 'Lab Process'; ?></a>
-                                    </li>
+                                    <li <?php echo $a=($control == 'Labprocesses')?'class=active':''; ?>>
+                                         <?php echo $this->Html->link('Lab Process',array('controller'=>'Labprocesses','action'=>'index')); ?>
+                                    </li>  
+                                    
                                     <li>
                                           <a href="#"><?php echo 'Sub Contract DO'; ?></a>
                                     </li>

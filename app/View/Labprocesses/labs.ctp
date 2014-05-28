@@ -1,12 +1,8 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
-
 <script type="text/javascript">
-   
-    
 </script>                
-
 <h1>
     <i class="gi gi-user"></i>Lab Process of 
 </h1>
