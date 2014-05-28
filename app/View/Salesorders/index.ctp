@@ -71,7 +71,7 @@
                         <li><?php echo $this->Html->link('Salesorders',array('controller'=>'Salesorders','action'=>'index')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
-
+                    <?PHP echo $this->element('message'); ?>
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
@@ -114,6 +114,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     <?PHP if(!empty($salesorder )): ?>
                                      <?php foreach($salesorder as $salesorder_list): ?>
                                     <tr>
@@ -137,33 +138,16 @@
                                    
                                 </tbody>
                             </table>
-                         <?php echo $this->Html->script('pages/uiProgress'); ?>
+                            <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>
-                                
-                                <?php if($this->Session->flash()!='') { ?>
-                            <script> var UiProgress = function() {
-                                
-                                // Get random number function from a given range
-                                var getRandomInt = function(min, max) {
-                                    return Math.floor(Math.random() * (max - min + 1)) + min;
-                                };
-                                
-                                return {
-                                    init: function() {
-                                        
-                                        
-                                        
-                                        $.bootstrapGrowl('Sales Order Updated Successfully!', {
-                                            type: 'danger',
-                                            allow_dismiss: true
-                                        });
-                                        
-                                        $(this).prop('disabled', true);
-                                       
-                                    }
-                                };
-                            }();
-                            
-                            
-                            </script> 
+
+                            <?php if ($this->Session->flash() != '') { ?>
+                                <script> var UiProgress = function() {
+                                    
+                                    // Get random number function from a given range
+                                    var getRandomInt = function(min, max) {
+                                        return Math.floor(Math.random() * (max - min + 1)) + min;
+                                    };
+                                }();
+                                </script> 
                             <?php } ?>

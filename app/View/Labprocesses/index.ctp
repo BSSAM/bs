@@ -42,20 +42,26 @@
                     <div class="block-title">
                         <h2><strong>SO</strong> List Status</h2>
                     </div>
-                    <?php echo $this->Form->radio('solist', array('standard' => 'Standard'), array('legend' => false)); ?>Outstanding SO List
-                   
-                    <?php echo $this->Form->radio('solist', array('label' => false)); ?>Running SO List
-                    
-                    <?php echo $this->Form->radio('solist', array('label' => false)); ?>Overdue SO List
+                   <?PHP 
+                   $options = array('out' => 'Outstanding SO List', 'run' => 'Running SO List','overdue'=>'Overdue SO List');
+                   $attributes = array('legend' => false,'value'=>'out','class'=>'so_list_button','name'=>'solist');
+                   echo $this->Form->radio('solist', $options, $attributes);
+                   ?>
                 </div>
                 <div class="block">
                     <div class="block-title">
                         <h2><strong>Call</strong> Location</h2>
                     </div>
-                    All <?php echo $this->Form->radio('calllocation',array('Label'=>false)); ?>  In-Lab<?php echo $this->Form->radio('calllocation',array('Label'=>false)); ?> Sub-Contract<?php echo $this->Form->radio('calllocation',array('Label'=>false)); ?>On Site<?php echo $this->Form->radio('calllocation',array('Label'=>false)); ?></div>
+                    <?PHP 
+                   $options = array('all' => 'All', 'inlab' => 'In Lab','subcontract'=>'Sub Contract','onsite'=>'On Site');
+                   $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button','name'=>'calllocation');
+                   echo $this->Form->radio('calllocation', $options, $attributes);
+                   ?>
+                    </div>
             </div>
         </div></div>
     <div class="table-responsive">
+        <div class="so_paste">
         <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
@@ -93,6 +99,7 @@
                 <?PHP endif; ?>
             </tbody>
         </table>
+        </div>
         <?php echo $this->Html->script('pages/uiProgress'); ?>
         <script>$(function(){ UiProgress.init(); });</script>
         <?php if ($this->Session->flash() != '') { ?>

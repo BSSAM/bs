@@ -33,7 +33,6 @@
             
             if($this->request->is('post'))
             {
-               
                if(isset($this->request->data['Salesorder']['quotation_id']) && $this->request->data['Salesorder']['quotation_id']!='')
                {
                  $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
@@ -58,12 +57,12 @@
                         {
                             $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
                         }
-                        $this->Session->setFlash(__('Salesorder has been Added Succefully '));
+                        $this->Session->setFlash(__('Salesorder has been Added Successfully '));
                         $this->redirect(array('action'=>'index'));
                     }
-                   
                }
             }
+           
         }
         public function edit($id=NULL)
         {
@@ -98,7 +97,6 @@
         }
         public function delete($id=NULL)
         {
-            
             if($id!='')
             {
                 if($this->Salesorder->delete($id))
