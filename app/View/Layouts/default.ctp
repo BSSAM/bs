@@ -18,7 +18,7 @@
 
 //$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html ng-app>
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
@@ -41,10 +41,8 @@
                 echo $this->Html->css('file_upload_css/jquery.fileupload');
 		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
 		echo $this->Html->script('jquery.min');
-                echo $this->Html->script('functions');
-                echo $this->Html->script('sal_desc_func');
-                echo $this->Html->script('delivery_order');
-                
+                echo $this->Html->script(array('sal_desc_func','functions','labprocess_js','delivery_order'));
+                echo $this->Html->script('angular/angular.min');
                 ?>
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
 	<?php echo $this->Html->script('vendor/modernizr-2.7.1-respond-1.4.2.min');

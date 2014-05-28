@@ -1,5 +1,11 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
+    
+    function Controller($scope, $http)
+    {
+        $scope.show_delay = true;
+        $scope.delay = "None";
+    }
 </script>
 <script type="text/javascript">
 </script>                
@@ -21,31 +27,29 @@
     </div>
     
     <?php echo $this->Form->create('Labs',array('class'=>'form-horizontal form-bordered','id'=>'form-labs-add')); ?>
-    <div class="table-responsive">
+    <div class="table-responsive" ng-controller="Controller">
         <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
-                    
-                    <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                     <th class="text-center">Instrument</th>
-                    <th class="text-center">Processing</th>
-                    <th class="text-center">Checking</th>
                     <th class="text-center">Department</th>
+                    <th class="text-center" style="width: 70px;">P</th>
+                    <th class="text-center" style="width: 70px;">C</th>
                     <th class="text-center">Reason of Delay(if applicable)</th>
                 </tr>
             </thead>
             <tbody>
                                     
                                       <?php foreach($labs as $labs_list): ?> 
-                                    {?>
-                                  
+                                    
+                                  <?php // pr($labs_list); exit;?>
                 
                 <tr>
-                    <td class="text-center"><?PHP echo $labs_list['instrument_id']; ?></td>
-                    <td class="text-center"><?PHP echo $this->Form->checkbox('processing',array('label'=>'false','id'=>'processing')); ?></td>
-                    <td class="text-center"><?PHP echo $this->Form->checkbox('checking',array('label'=>'false','id'=>'checking')); ?></td>
-                    <td class="text-center"><?PHP echo $labs_list['department_id']; ?></td>
-                    <td class="text-center"><?PHP echo $labs_list['delay']; ?></td>
+                    <td class="text-center"><?PHP echo $labs_list['Instrument']['name']; ?></td>
+                    <td class="text-center"><?PHP echo $labs_list['Department']['departmentname']; ?></td>
+                     <td class="text-center"><?PHP echo $this->Form->checkbox('processing',array('label'=>'false','id'=>'processing','class'=>$labs_list['Description']['salesorder_id'])); ?></td>
+                    <td class="text-center"><?PHP echo $this->Form->checkbox('checking',array('label'=>'false','id'=>'checking','class'=>$labs_list['Description']['salesorder_id'])); ?></td>
+                    <td class="text-center"><?PHP //echo $labs_list['Description']['delay']; ?><span ng-if="show_delay"></span></td>
                 </tr>
                                    
                  <?php endforeach; ?>

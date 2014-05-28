@@ -30,16 +30,15 @@ class LabprocessesController extends AppController
     }  
     public function labs($id=null)
     {
-       // pr($id);exit;
-        //$labs_details=$this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$id,'Description.is_approved'=>1)));
-        //pr($labs_details);exit;
-        $datacount = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1),'contain'=>array('Description','conditions'=>array('Description.salesorder_id'=>$id))));
-        pr($datacount);exit;
-        $this->set('labs', $labs_details);
-        $this->set('labs_ins', $labs_details[0]['Description']);
-          $this->set('count_data', count($labs_details[0]['Description']));
-        //pr($labs_details[0]['Description']);exit;
-        //$data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1),'group' => array('Salesorder.salesorderno')));
+       // $this->Description->recursive = 1;
+        $this->Description->unbindModel(array('belongsTo' => array('Brand','Customer','Salesorder')), true);
+        $data_description = $this->Description->find('all',array('conditions'=>array('Description.is_approved'=>1,'Description.salesorder_id'=>$id)));
+       
+      
+      //pr($data_description);exit;
+        $this->set('labs', $data_description);
+      
+       
     }
     
    
