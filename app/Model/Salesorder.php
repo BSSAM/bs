@@ -7,8 +7,8 @@
  */
 class Salesorder extends AppModel
 {
-    public $actsAs = array('Containable');
-
+   
+   
     public $hasMany = array(
         'Description' => array(
             'className' => 'Description',

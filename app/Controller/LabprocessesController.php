@@ -13,6 +13,9 @@ class LabprocessesController extends AppController
                             'Instrument','Brand','Customer','Device','Salesorder','Description');
    public function index()
     {
+         $labprocess = $this->Salesorder->find('all');
+            
+           pr( $labprocess[0]['Salesorder']['due_date']); exit;
         $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1),'group' => array('Salesorder.salesorderno')));
         $data_checking_count = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.checking" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1),'group' => array('Salesorder.salesorderno')));
         $salesordercount = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.is_approved'=>1)));
@@ -37,9 +40,30 @@ class LabprocessesController extends AppController
       
       //pr($data_description);exit;
         $this->set('labs', $data_description);
-      
        
     }
-    
+
+    public function so_list_variations()
+    {
+        $this->autoRender   =   false;  
+        
+        $solist_id  =    $this->request->data['solist'];
+        $calllocation_id    =   $this->request->data['calllocation'];
+        if($solist_id=='run'    &&  $calllocation_id=='all')
+        {
+            $current_date   =   strtotime(date('d-M-y')) ;
+            
+            $labprocess = $this->Salesorder->find('all');
+            
+           pr( $labprocess); 
+        }
+        else if($solist_id=='run')
+        {
+            
+        }
+        else 
+        {echo "no1401235200";}
+      
+    }
    
 } 
