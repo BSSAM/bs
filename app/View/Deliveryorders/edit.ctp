@@ -20,7 +20,7 @@
             position: absolute;
             z-index: 999;
         }
-    </style>
+ </style>
 <script type="text/javascript">
 $(function(){
 $("#val_customer").keyup(function() 
@@ -44,17 +44,16 @@ if(customer!='')
 });});
 </script>
 <h1>
-                                <i class="gi gi-user"></i>Edit Sales Order
+                                <i class="gi gi-user"></i>Edit Delivery Order
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Salesorders',array('controller'=>'Salesorders','action'=>'index')); ?></li>
-                        <li>Edit Salesorders</li>
+                        <li><?php echo $this->Html->link('Delivery orders',array('controller'=>'deliveryorders','action'=>'index')); ?></li>
+                        <li>Edit Delivery Order</li>
                     </ul>
                     <!-- END Forms General Header -->
-
 <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
@@ -69,29 +68,26 @@ if(customer!='')
                                 <!-- Basic Form Elements Content -->
                                  
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
-                                    <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden','value'=>$salesorder['Salesorder']['customer_id'])); ?>
+                                    <?php echo $this->Form->create('Deliveryorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
+                                    <?php echo $this->Form->input('Deliveryorder.customer_id', array('type'=>'hidden','value'=>$deliveryorder['Deliveryorder']['customer_id'])); ?>
+                                    <?php echo $this->Form->input('Deliveryorder.salesorder_id', array('type'=>'hidden','value'=>$deliveryorder['Deliveryorder']['salesorder_id'])); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
-                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Sales Order Info</a></li>
-                                                <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
-                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 3:</span> Instrument </a></li>
+                                               <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Delivery Order Info</a></li>
+                                                <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs and Tag ID</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
                                             
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
-                                                    <?PHP echo $this->element('Salesorders/edit/salesorder_info'); ?>
+                                                    <?PHP echo $this->element('Deliveryorders/edit/deliveryorder_info'); ?>
                                                 </div>
-                                                 <div class="tab-pane" id="tab2">
-                                                    <?PHP echo $this->element('Salesorders/edit/customer_special_needs'); ?>
-                                                </div>
-                                                <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Salesorders/edit/description'); ?>
+                                                <div class="tab-pane" id="tab2">
+                                                    <?PHP echo $this->element('Deliveryorders/edit/customer_special_needs_tagid'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->

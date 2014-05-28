@@ -3,17 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-   
 $(document).ready(function(){
-    
-    
     /* Contact Person Info .................................
     *......................................................................................................................
     *......................................................................................................................
     *.......................................................*/
-    
-    
     $('.project_name_error').hide();
     $('.project_submit').click(function()
     {
@@ -915,8 +909,6 @@ $(document).on('click','.instrument_id',function(){
                 $('#val_unit_price').val(null);
                 $('#val_discount').val(null);
                 $('#val_description').val(null);
-                 
-                
                 }
         });
         

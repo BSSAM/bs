@@ -29,10 +29,9 @@ class CustomersController extends AppController
     public function addregaddress()
     {
         
-    $this->autoRender=false;
-    $regaddress= $this->request->data['regaddress'];
+        $this->autoRender=false;
+        $regaddress= $this->request->data['regaddress'];
         $customer_id=$this->request->data['customer_id'];
-        
         $status=0;
         $this->loadModel('Address');
         $random =mt_rand();

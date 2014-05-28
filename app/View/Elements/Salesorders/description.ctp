@@ -1,6 +1,16 @@
 <script>
     var path='<?PHP echo Router::url('/',true); ?>';
 </script>
+<script language=Javascript>
+      function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+   </script>
 <style>
     .sales_instrument_id
 	{
@@ -54,7 +64,7 @@
         
     <label class="col-md-2 control-label" for="sales_quantity">Quantity</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','class'=>'form-control','label'=>false,'name'=>'sales_quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','class'=>'form-control','label'=>false,'name'=>'sales_quantity','onkeypress'=>'return isNumberKey(event)','placeholder'=>'Enter the Quantity ( only Numbers )')); ?>
     </div>
         
 </div>
@@ -84,7 +94,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
                                                 'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand')); ?>
-       
+        <span class="help-block_login brand_error">Select the Brand Name</span>
     </div>
     <label class="col-md-2 control-label" for="sales_range">Range</label>
     <div class="col-md-4">
@@ -163,16 +173,49 @@
         <tr>
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
-            <th class="text-center">Quantity</th>
             <th class="text-center">Brand</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
             <th class="text-center">Department</th>
+            <th class="text-center">Total</th>
             <th class="text-center">Action</th>
         </tr>
     </thead>
     <tbody class="sales_Instrument_info"> 
-   
+    <?PHP 
+       
+            if(!empty($sale['Description'])):
+              
+                foreach($sale['Description'] as $device):
+                    for($i=1;$i<=$device['quantity'];$i++):
+                ?>
+              
+                <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
+                    <td class="text-center"><?PHP echo $i; ?></td>
+                    <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
+                    <td class="text-center"><?PHP echo $i; ?></td>
+                    <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
+                    <td class="text-center"><?PHP echo $device['call_location']; ?></td>
+                    <td class="text-center"><?PHP echo $device['validity']; ?></td>
+                    <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
+                   
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a data-delete="<?PHP echo $device['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+        <?PHP   
+            endfor;
+            endforeach;
+                   endif; 
+        ?>
     </tbody>
 </table>

@@ -163,12 +163,12 @@
         <tr>
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
-            <th class="text-center">Quantity</th>
             <th class="text-center">Brand</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
             <th class="text-center">Department</th>
+            <th class="text-center">Total</th>
             <th class="text-center">Action</th>
         </tr>
     </thead>
@@ -182,13 +182,12 @@
                 <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
                     <td class="text-center"><?PHP echo $device['id']; ?></td>
                     <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
-                    <td class="text-center"><?PHP echo $device['sales_quantity']; ?></td>
                     <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
                     <td class="text-center"><?PHP echo $device['sales_calllocation']; ?></td>
                     <td class="text-center"><?PHP echo $device['sales_validity']; ?></td>
                     <td class="text-center"><?PHP echo $device['sales_unitprice']; ?></td>
                     <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
-                   
+                    <td class="text-center"><?PHP echo $device['sales_total']; ?></td>
                     <td class="text-center">
                         <div class="btn-group">
                             <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit">

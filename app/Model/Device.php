@@ -28,6 +28,13 @@ class Device extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'Department' => array(
+            'className' => 'Department',
+            'foreignKey' => 'department_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
     );
     public $useTable    =   'quo_devices';

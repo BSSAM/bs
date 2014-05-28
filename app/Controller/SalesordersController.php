@@ -13,6 +13,7 @@
         }
         public function add()
         {
+           
            $str=NULL;
             $d=date("d");
             $m=date("m");
@@ -27,34 +28,40 @@
             $this->set('payment',$payment);
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set('service',$services);
+            $this->request->data['Salesorder']['id']=$dmt;
             $this->request->data['Salesorder']['salesorderno']=$dmt;
+            
             if($this->request->is('post'))
             {
-               if($this->request->data['Salesorder']['quotation_id']!='')
+               
+               if(isset($this->request->data['Salesorder']['quotation_id']) && $this->request->data['Salesorder']['quotation_id']!='')
                {
-                 $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1')));
+                 $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                  // $this->request->data   =   $quotation_details;
-                 pr($quotation_details);exit;
-                 $quotation_details =  $quotation_details['Quotation']  ;
-                 
-                 $sales['Salesorder']   =    $quotation_details;
+                 $sales_details =  $quotation_details['Quotation']  ;
+                 $sales['Salesorder']   =    $sales_details;
+                 $sales['Description']   =    $quotation_details['Device'];
+                 $this->set('sale',$sales);
+//                pr($sales);exit;
                  $this->request->data =   $sales;
                }
                else 
                {
                     $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                     $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
+                   
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
                         $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
                         if(!empty($device_node))
                         {
-                            $this->Description->updateAll(array('Description.salesorder_id'=>$sales_orderid,'Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
+                            $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
                         }
                         $this->Session->setFlash(__('Salesorder has been Added Succefully '));
                         $this->redirect(array('action'=>'index'));
                     }
+                   
                }
             }
         }
@@ -69,13 +76,18 @@
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id),'recursive'=>'2'));
             
             $this->set('salesorder',$salesorder_details);
-           
             if($this->request->is(array('post','put')))
             {
+                $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                 $this->Salesorder->id=$id;
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
-                    $this->Session->setFlash(__('Salesorder has been Added Succefully '));
+                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
+                    if(!empty($device_node))
+                    {
+                        $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$id.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
+                    }
+                    $this->Session->setFlash(__('Salesorder has been Updated Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
             }
@@ -161,22 +173,23 @@
         {
             $this->autoRender = false;
             $this->loadModel('Description');
-            
-            $this->request->data['Description']['customer_id']   =   $this->request->data['customer_id'];
-            $this->request->data['Description']['instrument_id'] =   $this->request->data['instrument_id'];
-            $this->request->data['Description']['brand_id']      =   $this->request->data['instrument_brand'];
-            $this->request->data['Description']['sales_quantity']      =   $this->request->data['instrument_quantity'];
-            $this->request->data['Description']['model_no']      =   $this->request->data['instrument_modelno'];
-            $this->request->data['Description']['sales_range']         =   $this->request->data['instrument_range'];
-            $this->request->data['Description']['sales_calllocation'] =   $this->request->data['instrument_calllocation'];
-            $this->request->data['Description']['sales_calltype']     =   $this->request->data['instrument_calltype'];
-            $this->request->data['Description']['sales_validity']      =   $this->request->data['instrument_validity'];
-            $this->request->data['Description']['sales_discount']      =   $this->request->data['instrument_discount'];
-            $this->request->data['Description']['department_id']    =   $this->request->data['instrument_department'];
-            $this->request->data['Description']['sales_unitprice']    =   $this->request->data['instrument_unitprice'];
-            $this->request->data['Description']['sales_accountservice']=  $this->request->data['instrument_account'];
+            $this->request->data['Description']['customer_id']          =   $this->request->data['customer_id'];
+            $this->request->data['Description']['instrument_id']        =   $this->request->data['instrument_id'];
+            $this->request->data['Description']['brand_id']             =   $this->request->data['instrument_brand'];
+            $this->request->data['Description']['sales_quantity']       =   $this->request->data['instrument_quantity'];
+            $this->request->data['Description']['model_no']             =   $this->request->data['instrument_modelno'];
+            $this->request->data['Description']['sales_range']          =   $this->request->data['instrument_range'];
+            $this->request->data['Description']['sales_calllocation']   =   $this->request->data['instrument_calllocation'];
+            $this->request->data['Description']['sales_calltype']       =   $this->request->data['instrument_calltype'];
+            $this->request->data['Description']['sales_validity']       =   $this->request->data['instrument_validity'];
+            $this->request->data['Description']['sales_discount']       =   $this->request->data['instrument_discount'];
+            $this->request->data['Description']['department_id']        =   $this->request->data['instrument_department'];
+            $this->request->data['Description']['sales_unitprice']      =   $this->request->data['instrument_unitprice'];
+            $this->request->data['Description']['sales_accountservice'] =  $this->request->data['instrument_account'];
             $this->request->data['Description']['sales_titles']         =   $this->request->data['instrument_title'];
-            $this->request->data['Description']['status']        =   0;
+            $this->request->data['Description']['sales_total']          =   $this->request->data['instrument_total'];
+            $this->request->data['Description']['status']               =   0;
+            $this->request->data['Description']['is_approved']          =   0;
             if($this->Description->save($this->request->data))
             {
                 $device_id=$this->Description->getLastInsertID();
@@ -227,7 +240,9 @@
             $this->request->data['Description']['sales_unitprice']  =   $this->request->data['instrument_unitprice'];
             $this->request->data['Description']['sales_accountservice']=  $this->request->data['instrument_account'];
             $this->request->data['Description']['sales_titles']     =   $this->request->data['instrument_title'];
+             $this->request->data['Description']['sales_total']     =   $this->request->data['instrument_total'];
             $this->request->data['Description']['status']       =   0;
+            $this->request->data['Description']['is_approved']       =   0;
             if($this->Description->save($this->request->data))
             {
                 $get_updatedevice_details    =   $this->Description->find('first',array('conditions'=>array('Description.id'=>$device_id)));

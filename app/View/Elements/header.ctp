@@ -185,8 +185,8 @@
                                 </ul>
                             </li>
                              <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
-                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders')?'style=display:block':'';?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
+                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders')?'style=display:block':'';?>>
                                     <li <?php echo $a=($control == 'Quotations')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('Quotation',array('controller'=>'Quotations','action'=>'index')); ?>
                                     </li>  
@@ -214,9 +214,10 @@
                                      <li>
                                           <a href="#"><?php echo 'C and D Info'; ?></a>
                                     </li>
-                                     <li>
-                                          <a href="#"><?php echo 'Delivery Order'; ?></a>
-                                    </li>
+                                    <li <?php echo $a=($control == 'Deliveryorders')?'class=active':''; ?>>
+                                         <?php echo $this->Html->link('Delivery Order',array('controller'=>'Deliveryorders','action'=>'index')); ?>
+                                    </li>  
+                                    
                                      <li>
                                           <a href="#"><?php echo 'Tracking System'; ?></a>
                                     </li>

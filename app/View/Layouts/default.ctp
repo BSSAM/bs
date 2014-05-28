@@ -43,6 +43,7 @@
 		echo $this->Html->script('jquery.min');
                 echo $this->Html->script('functions');
                 echo $this->Html->script('sal_desc_func');
+                echo $this->Html->script('delivery_order');
                 
                 ?>
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
