@@ -3,14 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Deliveryorders/add.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/Deliveryorders/edit/deliveryorder_info.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/Deliveryorders/edit/customer_special_needs_tagid.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Deliveryorders/edit.ctp</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Controller/DeliveryordersController.php</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Model/Description.php</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Model/Deliveryorder.php</file>
-            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Deliveryorders/index.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/webroot/js/labprocess_js.js</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Controller/LabprocessesController.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Layouts/default.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Labprocesses/labs.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Model/Labprocess.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/webroot/js/sal_desc_func.js</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/header.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Controller/SalesordersController.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Salesorders/add.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Labprocesses/index.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Elements/Salesorders/salesorder_info.ctp</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/Model/Salesorder.php</file>
+            <file>file:/F:/xampp/htdocs/iyappan/bs/app/View/Labprocesses/so_list_variations.ctp</file>
         </group>
     </open-files>
 </project-private>

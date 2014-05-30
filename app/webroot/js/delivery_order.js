@@ -42,6 +42,28 @@ $(document).ready(function(){
                     $('#del_fax').val(sales_node.Customer.fax);
                     $('#val_ref_no').val(sales_node.Salesorder.ref_no);
                     $('#val_our_ref_no').val(sales_node.Salesorder.our_ref_no);
+                    $.each(sales_node.Description,function(key,value){  
+                        if(sales_node.Description.length===0)
+                        {
+                            $('.delivery_instrument_node').html('No Records Found');
+                        }
+                        else
+                        {
+                            $('.delivery_instrument_node').append('\n\
+                                    <tr class="tr_color sales_instrument_remove_'+value.id+'">\n\\n\
+                                    <td class="text-center">'+value.id+'</td>\n\
+                                    <td class="text-center">'+value.Instrument.name+'</td>\n\\n\
+                                    <td class="text-center">'+value.Brand.brandname+'</td>\n\\n\
+                                    <td class="text-center">'+value.sales_calllocation+'</td>\n\
+                                     <td class="text-center">'+value.sales_validity+'</td>\n\
+                                    <td class="text-center">'+value.sales_unitprice+'</td>\n\\n\
+                                    <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\
+                                    <td class="text-center">'+value.sales_total+'</td>\n\
+                                    </tr>');
+                        }
+                        
+                    });
+                   
                 }
                 if(data=='failure')
                 {
@@ -58,3 +80,13 @@ $(document).ready(function(){
     });
 })
 
+//$(document).ready(function() {
+//	//catch the right-click context menu
+//	$(document).bind("contextmenu",function(e) {				 
+//		//warning prompt - optional
+//		alert("No right-clicking!");
+//
+//		//delete the default context menu
+//		return false;
+//	});
+//});

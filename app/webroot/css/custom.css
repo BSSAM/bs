@@ -8,19 +8,21 @@ and open the template in the editor.
     Author     : admin
 */
 
+/* BS V1.0 */
 .success_alert {
-   background-color: #99CC00;
+   background-color: #F9FAFC;
     border: 1px solid #B2D463;
+    color: #008000;
 }
 .failure_alert {
-   background-color: #EF8A80;
-    border: 1px solid #B2D463;
+   background-color: #F9FAFC;
+    border: 1px solid #FF0000;
+    color: #FF0000;
 }
 .alert_box {
    background-position: 0 0;
     background-repeat: repeat;
     border-radius: 5px;
-    color: #FFFFFF;
     font-size: 15px;
     margin-bottom: 15px;
     padding: 8px;

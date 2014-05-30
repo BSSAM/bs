@@ -1,4 +1,10 @@
 <?php
+/*
+ * Document     :   DeliveryordersController.php
+ * Controller   :   Delivery Order
+ * Model        :   Deliveryorder 
+ * Created By   :   M.Iyappan Samsys
+ */
     class DeliveryordersController extends AppController
     {
         public $helpers = array('Html','Form','Session');
@@ -13,6 +19,7 @@
         }
         public function add()
         {
+            
             $str=NULL;$d=date("d");$m=date("m");$y=date("Y");$t=time();
             $dmt='BDO'.($d+$m+$y+$t);
             $this->set('deliveryorderno', $dmt);
@@ -73,8 +80,15 @@
                 throw new MethodNotAllowedException();
             }
         }
+        /*
+         * Function Name:salesorder_id_search
+         * Description   :   for salesorder Search
+         * Created on    :   29/05/2014 1.51PM 
+         * BS V1.0 
+         */
         public function salesorder_id_search()
         {
+            
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
@@ -103,7 +117,7 @@
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sales_id'];
             $this->autoRender = false;
-            $sales_data = $this->Salesorder->find('first',array('conditions'=>array('salesorderno'=>$sales_id,'is_approved'=>'1')));
+            $sales_data = $this->Salesorder->find('first',array('conditions'=>array('salesorderno'=>$sales_id,'is_approved'=>'1'),'recursive'=>'2'));
             if(!empty($sales_data))
             {
                 echo json_encode($sales_data);

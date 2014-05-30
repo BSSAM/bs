@@ -11,3 +11,22 @@
         </div>
     </div>
 </div>
+
+<table  class="table table-vcenter table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">S.No</th>
+            <th class="text-center">Instrument</th>
+            <th class="text-center">Brand</th>
+            <th class="text-center">Call Location</th>
+            <th class="text-center">Validity</th>
+            <th class="text-center">Unit Price</th>
+            <th class="text-center">Department</th>
+            <th class="text-center">Total</th>
+           
+        </tr>
+    </thead>
+    <tbody class="delivery_instrument_node"> 
+        
+    </tbody>
+</table>

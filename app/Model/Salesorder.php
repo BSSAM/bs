@@ -7,7 +7,10 @@
  */
 class Salesorder extends AppModel
 {
-   
+    public $actsAs  =   array('Containable');
+    public $virtualFields = array(
+    'solist_diff' => 'DATEDIFF(CURDATE(),STR_TO_DATE(Salesorder.due_date,"%d-%M-%y"))'
+);
    
     public $hasMany = array(
         'Description' => array(

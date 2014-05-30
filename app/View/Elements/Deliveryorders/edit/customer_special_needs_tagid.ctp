@@ -11,7 +11,6 @@
         </div>
     </div>
 </div>  
-
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>

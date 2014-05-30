@@ -18,9 +18,7 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 App::uses('Controller', 'Controller');
-
 /**
  * Application Controller
  *
@@ -30,44 +28,57 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
-	public $components = array(
-    'Session'
-);
-public function beforeFilter()
-{
-   
-        $sess_username = $this->Session->read('sess_username');
-        if(isset($sess_username))
+    class AppController extends Controller 
+    {
+        public $components = array('Session');
+        public function beforeFilter()
         {
-            $this->set('username',$sess_username);
-        }
-        else
-        { 
-            if(($this->params['controller']!='Logins'))  
+
+            $sess_username = $this->Session->read('sess_username');
+            if(isset($sess_username))
             {
-            return $this->redirect(array('controller' => 'Logins','action'=>'index'));
+                $this->set('username',$sess_username);
             }
+            else
+            { 
+                if(($this->params['controller']!='Logins'))  
+                {
+                return $this->redirect(array('controller' => 'Logins','action'=>'index'));
+                }
+            }
+            $this->set('control',$this->params['controller']);
+
+            /************************************** User Role ***************************************************
+            */
+             $id = $this->Session->read('sess_userrole');//pr($id);
+             $this->loadModel('Userrole');
+             //$userrole = 0;
+             $userrole =  $this->Userrole->findByUserRoleId($id); 
+             if(!empty($userrole))
+             {
+             //pr($userrole['Userrole']['js_enc']);
+
+             $ca = $userrole['Userrole']['js_enc'];
+             $user_role = unserialize($ca);
+             $this->set('user_role', $user_role);
+             }
+
+             /****************************************************************************************************
+            */
         }
-        $this->set('control',$this->params['controller']);
-        
-        /************************************** User Role ***************************************************
-        */
-         $id = $this->Session->read('sess_userrole');//pr($id);
-         $this->loadModel('Userrole');
-         //$userrole = 0;
-         $userrole =  $this->Userrole->findByUserRoleId($id); 
-         if(!empty($userrole))
-         {
-         //pr($userrole['Userrole']['js_enc']);
-         
-         $ca = $userrole['Userrole']['js_enc'];
-         $user_role = unserialize($ca);
-         $this->set('user_role', $user_role);
-         }
-        
-         /****************************************************************************************************
-        */
-}
-     
+        public function userrole_permission()
+        {
+            $id = $this->Session->read('sess_userrole');//pr($id);
+            $this->loadModel('Userrole');
+            //$userrole = 0;
+            $userrole =  $this->Userrole->findByUserRoleId($id); 
+            if(!empty($userrole))
+            {
+                //pr($userrole['Userrole']['js_enc']);
+                $ca = $userrole['Userrole']['js_enc'];
+                $user_role = unserialize($ca);
+                $this->set('user_role', $user_role);
+            }
+            return $user_role;
+        }
 }

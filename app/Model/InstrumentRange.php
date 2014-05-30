@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Labprocess extends AppModel
+class InstrumentRange extends AppModel
 {
-    public $actsAs  =  array('Containable') ;
+    var $name   =   'InstrumentRange';
 }

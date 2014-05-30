@@ -53,7 +53,7 @@
                         <h2><strong>Call</strong> Location</h2>
                     </div>
                     <?PHP 
-                   $options = array('all' => 'All', 'inlab' => 'In Lab','subcontract'=>'Sub Contract','onsite'=>'On Site');
+                   $options = array('all' => 'All', 'Inlab' => 'In Lab','subcontract'=>'Sub Contract','onsite'=>'On Site');
                    $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button','name'=>'calllocation');
                    echo $this->Form->radio('calllocation', $options, $attributes);
                    ?>
