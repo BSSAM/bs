@@ -1,11 +1,11 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
-    
-    function Controller($scope, $http)
-    {
-        $scope.show_delay = true;
-        $scope.delay = "None";
-    }
+//    
+//    function Controller($scope, $http)
+//    {
+//        $scope.show_delay = true;
+//        $scope.delay = "None";
+//    }
 </script>
 <script type="text/javascript">
 </script>                
@@ -26,7 +26,7 @@
         <h2>List Of Instruments</h2>
     </div>
     
-    <?php echo $this->Form->create('Labs',array('class'=>'form-horizontal form-bordered','id'=>'form-labs-add')); ?>
+    <?php echo $this->Form->create('Description',array('class'=>'form-horizontal form-bordered','id'=>'form-labs-add')); ?>
     <div class="table-responsive" ng-controller="Controller">
         <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
@@ -47,9 +47,11 @@
                 <tr>
                     <td class="text-center"><?PHP echo $labs_list['Instrument']['name']; ?></td>
                     <td class="text-center"><?PHP echo $labs_list['Department']['departmentname']; ?></td>
-                     <td class="text-center"><?PHP echo $this->Form->checkbox('processing',array('label'=>'false','id'=>'processing','class'=>$labs_list['Description']['salesorder_id'])); ?></td>
-                    <td class="text-center"><?PHP echo $this->Form->checkbox('checking',array('label'=>'false','id'=>'checking','class'=>$labs_list['Description']['salesorder_id'])); ?></td>
-                    <td class="text-center"><?PHP //echo $labs_list['Description']['delay']; ?><span ng-if="show_delay"></span></td>
+                    <td class="text-center">
+                        <input type="checkbox" name="data[Description][processing][<?PHP echo $labs_list['Description']['id']; ?>]" value=<?PHP echo $labs_list['Description']['processing']; ?>  <?PHP echo $test=($labs_list['Description']['processing']==1)?'checked="checked"':''; ?>>
+                        </td>
+                    <td class="text-center"><?PHP echo $this->Form->input('Description.checking',array('label'=>false,'id'=>'checking','type'=>'checkbox','class'=>$labs_list['Description']['salesorder_id'])); ?></td>
+                    <td class="text-center"><?PHP echo $labs_list['Description']['delay']; ?><!--<span ng-if="show_delay"></span>--></td>
                 </tr>
                                    
                  <?php endforeach; ?>

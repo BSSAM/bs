@@ -36,6 +36,20 @@
 		echo $this->Html->css('bootstrap.min');
 		echo $this->Html->css('plugins');
 		echo $this->Html->css('main');
+                ?>
+                <script>
+                    /* add a class of 'loading' to the HTML, then remove it once the page has finished loading */
+                    (function(c){
+                        c('scripted loading')
+                        window.onload = function(){setTimeout(function(){
+                                c(c().replace('scripted loading',''))
+                            },30)}
+                    }(function(c){
+                        var h = document.lastChild
+                        return c ? h.className = c : h.className
+                    }))
+                </script>
+                <?php
 		echo $this->Html->css('themes');
                 echo $this->Html->css('custom');
                 echo $this->Html->css('file_upload_css/jquery.fileupload');
@@ -49,7 +63,9 @@
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-	?>
+        ?>
+                
+
 </head>
 <body>
     <?php 

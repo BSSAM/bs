@@ -677,7 +677,9 @@ a.sidebar-title:focus {
 .sidebar-nav {
     list-style: none;
     margin: 0;
-    padding: 10px 0 0;
+    /* BS V1.0 */
+    /*padding: 10px 0 0;*/
+    padding: 0px 0 0;
 }
 
 .sidebar-nav .sidebar-header:first-child {
@@ -3786,4 +3788,43 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 .search_move{
     margin-left: 600px;
+}
+
+html.loading body {
+    opacity: 0;
+    -moz-transition: opacity 0.3s ease-out;
+    -o-transition: opacity 0.3s ease-out;
+    -webkit-transition: opacity 0.3s ease-out;
+    -ms-transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
+}
+
+html.loading:after {
+    content:url(../img/loader.gif) ;
+    display: block;
+    line-height: 1em;
+    margin-top: -.5em;
+    width: 9.30em;
+    height: 9.30em;
+    position: absolute;
+    text-align: center;
+    top: 35%;
+    width: 100%;
+}
+
+html.scripted:before{
+    content: "BEST STANDARDS";
+    display: block;
+    line-height: 1em;
+    margin-top: -.5em;
+    width: 9.30em;
+    height: 9.30em;
+    position: absolute;
+    text-align: center;
+    top: 25%;
+    width: 100%;
+    color:#dbe1e8;
+    font-family: sans-serif;
+    font-size: xx-large;
+    
 }

@@ -13,6 +13,21 @@ class UserrolesController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Userroles
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_role']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * *****************************************************
+         */
         $this->loadModel('User');
         $data = $this->Userrole->find('all',array('order' => array('Userrole.id' => 'DESC')));
         $this->set('userrole', $data);
@@ -21,6 +36,24 @@ class UserrolesController extends AppController
     
     public function add()
     {
+        
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Userroles
+         *  Permission : Add 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_role']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * *****************************************************
+         */
+        
+        
         if($this->request->is('post'))
         {
              $this->request->data['status']=1;
@@ -36,9 +69,19 @@ class UserrolesController extends AppController
                 return $this->redirect(array('action'=>'add'));
             }
             $this->Userrole->create();
-           
+            $results = $this->Userrole->find('first', array('fields' => array('MAX(Userrole.user_role_id) as max_userroleid')));
+            $max_userroleid = $results[0]['max_userroleid'];
+            if(empty($max_userroleid))
+            {
+                $this->request->data['user_role_id']=1;
+            }
+            else
+            {
+                $this->request->data['user_role_id']=$max_userroleid+1;
+            }    
             if($this->Userrole->save($this->request->data))
             {
+                
                 $this->Session->setFlash(__('User Role is Added'));
                 return $this->redirect(array('action'=>'index'));
             }
@@ -50,7 +93,21 @@ class UserrolesController extends AppController
     
     public function edit($id = null)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Userroles
+         *  Permission : Edit 
+         *******************************************************/
         
+        $user_role = $this->userrole_permission();
+        if($user_role['other_role']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * *****************************************************
+         */
        
        
         if(empty($id))
@@ -60,7 +117,14 @@ class UserrolesController extends AppController
           
         }
         
-        $userrole =  $this->Userrole->findById($id); 
+        $userrole =  $this->Userrole->findById($id);
+        $user_role_id = $userrole['Userrole']['user_role_id'];
+         if($user_role_id == 1 || $user_role_id == 2)
+        {
+             
+             return $this->redirect(array('action'=>'index'));
+          
+        }
        if(empty($userrole))
        {
            $this->Session->setFlash(__('Invalid Userrole'));
@@ -95,6 +159,31 @@ class UserrolesController extends AppController
     
      public function delete($id)
     {
+         
+         /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Userroles
+         *  Permission : delete 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_role']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * *****************************************************
+         */
+        
+        $userrole =  $this->Userrole->findById($id);
+        $user_role_id = $userrole['Userrole']['user_role_id'];
+         if($user_role_id == 1 || $user_role_id == 2)
+        {
+             
+             return $this->redirect(array('action'=>'index'));
+          
+        }
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
@@ -106,16 +195,41 @@ class UserrolesController extends AppController
         }
     }
     
-    public function roles($id = null)
+    public function roles($ids = null)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Userroles
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_role']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * *****************************************************
+         */
+        
+        $userrole =  $this->Userrole->findById($ids);
+        $user_role_name = $userrole['Userrole']['user_role'];
+        $this->set('user_name',$user_role_name);
+        $user_role_id = $userrole['Userrole']['user_role_id'];
+         if($user_role_id == 1 || $user_role_id == 2)
+        {
+             
+             return $this->redirect(array('action'=>'index'));
+          
+        }
         $id = $this->Session->read('sess_userrole');
-
+        
         if($this->request->is(array('post','put')))
         {
             $a = serialize($this->request->data);
-            $this->Userrole->id = $id;
-            $this->request->data['Userrole']['js_enc'] =$a;
-            if($this->Userrole->save($this->request->data))
+                    
+            if($this->Userrole->updateAll(array('Userrole.js_enc'=>"'".$a."'"),array('Userrole.user_role_id'=>$ids)))
             {
                 $this->Session->setFlash(__('Userrole is Updated'));
             }
@@ -123,9 +237,8 @@ class UserrolesController extends AppController
         }
         else
         {
-            $userrole =  $this->Userrole->findByUserRoleId($id); 
+            $userrole =  $this->Userrole->findByUserRoleId($ids); 
             $b = unserialize($userrole['Userrole']['js_enc']);
-//          pr($b);  exit;
             $this->request->data = $b;
         }
     }
