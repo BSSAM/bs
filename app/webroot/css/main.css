@@ -302,6 +302,9 @@ header.navbar-inverse.navbar-fixed-bottom {
     min-width: 50px;
     padding: 5px 7px;
     line-height: 40px;
+    /* BS V1.0    */
+    min-height: 50px;
+    /* BS V1.0    */
     text-align: center;
     color: #394263;
     position: relative;
@@ -1753,42 +1756,32 @@ a:focus {
 }
 
 .text-second,
-.text-second:hover,
-a,
-a:hover,
-a:focus {
+.text-second:hover
+{
     color: #af64cc;
 }
 
 .text-third,
-.text-third:hover,
-a,
-a:hover,
-a:focus {
+.text-third:hover
+{
     color: #e67e22;
 }
 
 .text-four,
-.text-four:hover,
-a,
-a:hover,
-a:focus {
+.text-four:hover
+ {
     color: #d9416c;
 }
 
 .text-five,
-.text-five:hover,
-a,
-a:hover,
-a:focus {
+.text-five:hover
+{
     color: #27ae60;
 }
 
 .text-six,
-.text-six:hover,
-a,
-a:hover,
-a:focus {
+.text-six:hover
+{
     color: #333333;
 }
 
@@ -3752,17 +3745,19 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 .nav-pills-border-color{
     min-height: 10px;
-    border-bottom: 1px dotted #cccccc;
+    //border-bottom: 1px dotted #cccccc;
 }
 
 .nav-justified>li>a{
     background-color: #f7be64;
     margin-right: 3px;
     margin-left: 3px;
+    color: #000000;
 }
 
 .nav-justified>li>a:hover{
     background-color: #f39c12;
+    
     margin-right:3px;
     margin-left: 3px;
 }

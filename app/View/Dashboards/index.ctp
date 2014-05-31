@@ -13,6 +13,140 @@
                         <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
                         <img src="img/placeholders/headers/dashboard_header.jpg" alt="header image" class="animation-pulseSlow">
                     </div>
+                    <div class="block">
+                        <!-- Forum Tabs Title -->
+                        <div class="block-title">
+                            <ul class="nav nav-tabs" data-toggle="tabs">
+                                <li class="active"><a href="#messages">Messages <span class="badge animation-floating">19</span></a></li>
+                                <li><a href="#approval">Approval <span class="badge animation-floating">6</span></a></li>
+                                
+                            </ul>
+                        </div>
+                        <!-- END Forum Tabs -->
+
+                        <!-- Tab Content -->
+                        <div class="tab-content">
+                            <!-- Forum -->
+                            <div class="tab-pane active" id="messages">
+                                <div class="table-responsive">
+                                <!-- Intro Category -->
+                                <table class="table table-borderless table-striped table-vcenter">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center" style="width: 100px;"><i class="gi gi-globe fa-2x"></i></td>
+                                            <td>
+                                                <h4>
+                                                    <a href="javascript:void(0)"><strong>Welcome</strong></a><br>
+                                                    <small>Feel free to come inside and introduce yourself!</small>
+                                                </h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">205</a></td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">1265</a></td>
+                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Sandra Gilbert</a><br><small>February 30, 2014</small></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center"><i class="gi gi-bullhorn fa-2x"></i></td>
+                                            <td>
+                                                <h4>
+                                                    <a href="javascript:void(0)"><strong>Announcements</strong></a><br>
+                                                    <small>For the latest news, here is the place</small>
+                                                </h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">251</a></td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">6352</a></td>
+                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Carolyn Cruz</a><br><small>June 15, 2014</small></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center"><i class="gi gi-pen fa-2x"></i></td>
+                                            <td>
+                                                <h4>
+                                                    <a href="javascript:void(0)"><strong>Terms &amp; Conditions</strong></a><br>
+                                                    <small>Please read the rules of our forum</small>
+                                                </h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">20</a></td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">20</a></td>
+                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Shirley Ray</a><br><small>February 10, 2014</small></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="text-center">
+                                    <ul class="pagination pagination-sm">
+                                        <li class="disabled"><a href="javascript:void(0)">Prev</a></li>
+                                        <li class="active"><a href="javascript:void(0)">1</a></li>
+                                        <li><a href="javascript:void(0)">2</a></li>
+                                        <li><a href="javascript:void(0)">3</a></li>
+                                        <li><a href="javascript:void(0)">...</a></li>
+                                        <li><a href="javascript:void(0)">999</a></li>
+                                        <li><a href="javascript:void(0)">Next</a></li>
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- END Forum -->
+
+                            <!-- Topics -->
+                            <div class="tab-pane" id="approval">
+                                <table class="table table-borderless table-striped table-vcenter">
+<!--                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Getting Started</th>
+                                            <th class="text-center hidden-xs hidden-sm" style="width: 100px;">Replies</th>
+                                            <th class="text-center hidden-xs hidden-sm" style="width: 100px;">Views</th>
+                                            <th class="hidden-xs hidden-sm" style="width: 200px;">Last Post</th>
+                                        </tr>
+                                    </thead>-->
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong>Welcome to our Getting Started category</strong></a> <br><small><a href="page_ready_user_profile.html">Hannah Bates</a> on <em>January 1, 2014</em></small></h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">456</a></td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">6598</a></td>
+                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Maria Young</a><br><small>June 25, 2014</small></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong>A big upgrade is coming to our app</strong></a> <br><small><a href="page_ready_user_profile.html">Anna Matthews</a> on <em>February 2, 2014</em></small></h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">277</a></td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">1254</a></td>
+                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Jacob Matthews</a><br><small>June 28, 2014</small></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong>Tips &amp; tricks for staying motivated</strong></a> <br><small><a href="page_ready_user_profile.html">Jeremy Davis</a> on <em>February 5, 2014</em></small></h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">248</a></td>
+                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">7548</a></td>
+                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Catherine Carr</a><br><small>June 30, 2014</small></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                                <div class="text-center">
+                                    <ul class="pagination pagination-sm">
+                                        <li class="disabled"><a href="javascript:void(0)">Prev</a></li>
+                                        <li class="active"><a href="javascript:void(0)">1</a></li>
+                                        <li><a href="javascript:void(0)">2</a></li>
+                                        <li><a href="javascript:void(0)">3</a></li>
+                                        <li><a href="javascript:void(0)">...</a></li>
+                                        <li><a href="javascript:void(0)">999</a></li>
+                                        <li><a href="javascript:void(0)">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- END Topics -->
+
+                            <!-- Discussion -->
+                            
+                            <!-- END Discussion -->
+                        </div>
+                        <!-- END Tab Content -->
+                    </div>
                     <!-- END Dashboard Header -->
 
                     <!-- Mini Top Stats Row -->
@@ -20,13 +154,14 @@
                     <!-- END Mini Top Stats Row -->
 
                     <!-- Widgets Row -->
+                    <?php if($user_me == 1 || $user_me ==2){ ?>
                     <div class="row">
                         <div class="col-sm-2 col-lg-2">
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-simple">
-                                    <a> <span class="label label-primary custom_float_top animation-floating">4</span><h3 class="text-center animation-stretchRight">In Quotation</h3> </a>
-                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>3002</strong></h3>
+                                    <a> <span class="label label-primary custom_float_top animation-floating"><?php echo $total_quotation_view; ?> New</span><h3 class="text-center animation-stretchRight">In Quotation</h3> </a>
+                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_quotation_count; ?></strong></h3>
                                 </div>
                             </div>
                             <!-- END Widget -->
@@ -46,8 +181,8 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-simple">
-                                    <a> <span class="label label-third custom_float_top animation-floating">200</span><h3 class="text-center themed-color-autumn animation-stretchRight">Sales Order</h3> </a>
-                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>30</strong></h3>
+                                    <a> <span class="label label-third custom_float_top animation-floating"><?php echo $total_salesorder_view; ?> New</span><h3 class="text-center themed-color-autumn animation-stretchRight">Sales Order</h3> </a>
+                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_salesorder_count; ?></strong></h3>
                                 </div>
                             </div>
                             <!-- END Widget -->
@@ -56,8 +191,8 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-simple">
-                                    <a> <span class="label label-four custom_float_top animation-floating">44</span><h3 class="text-center themed-color-fancy animation-stretchRight">Lab Process</h3> </a>
-                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>69</strong></h3>
+                                    <a> <span class="label label-four custom_float_top animation-floating"><?php echo $total_labprocess_count; ?> New</span><h3 class="text-center themed-color-fancy animation-stretchRight">Lab Process</h3> </a>
+                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_labprocess_view; ?></strong></h3>
                                 </div>
                             </div>
                             <!-- END Widget -->
@@ -76,8 +211,8 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-simple">
-                                    <a> <span class="label label-six custom_float_top animation-floating">24</span><h3 class="text-center themed-color-dark-night animation-stretchRight">Total Delivery</h3> </a>
-                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>42</strong></h3>
+                                    <a> <span class="label label-six custom_float_top animation-floating"><?php echo $total_delivery_view; ?> New</span><h3 class="text-center themed-color-dark-night animation-stretchRight">Total Delivery</h3> </a>
+                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_delivery_count; ?></strong></h3>
                                 </div>
                             </div>
                             <!-- END Widget -->
@@ -85,6 +220,8 @@
                             
                         </div>
                     </div>
+                    <?php } ?>
+                    <?php if($user_me == 1 || $user_me ==2){ ?>
                     <div class="row">
                         
                         <div class="col-sm-6 col-lg-3">
@@ -144,6 +281,7 @@
                         </div>
                        
                     </div>
+                    <?php } ?>
                     <!-- END Widgets Row -->
                     <!--<div class="block block-alt-noborder full">
                         <div class="row">
