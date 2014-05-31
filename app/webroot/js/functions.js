@@ -823,28 +823,29 @@ $(document).on('click','.instrument_id',function(){
         $('#search_instrument').fadeOut();
         $.ajax({
             type: "POST",
+            
             url: path+"Quotations/get_brand_value",
             data: 'instrument_id='+instrument_id,
             cache: false,
+            
             success: function(data)
             {
+                
                 parsedata = $.parseJSON(data);
-                $.each(parsedata, function(k, v)
+                var dept    =   parsedata.Instrument;
+                $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
                 {
-                    if('Brand' in v)
-                    {
                      $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
-                    }
-                    if('Department' in v)
-                    {
-                        $('#val_department').val(v.Department.departmentname);
-                    }
-                    if('Range' in v)
-                    {
-                        $('#val_range').val(v.Range.from_range+'~'+v.Range.to_range+'/unit');
-                    }
+                  
                 });
                 
+                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
+                {
+                     $('#val_range').empty().append('<option value=0>Select Brand</option><option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+                  
+                });
+                    
+                $('#val_department').val(dept.Department.departmentname);
                 $('#val_model_no').val(parsedata.CustomerInstrument.model_no);
                 $('#QuotationInstrumentId').val(instrument_id);
                 $('#val_unit_price').val(parsedata.CustomerInstrument.unit_price);
@@ -878,7 +879,7 @@ $(document).on('click','.instrument_id',function(){
         var instrument_account=$('#val_account_service').val();
         var instrument_title=$('#val_title').val();
         
-        
+        for ( var i = 1; i <= instrument_quantity; i++ ){
         $.ajax({
             type: 'POST',
             data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title,
@@ -911,7 +912,7 @@ $(document).on('click','.instrument_id',function(){
                 $('#val_description').val(null);
                 }
         });
-        
+    }
    });
    $(document).on('click','.instrument_delete',function(){
       var device_id=$(this).attr('data-delete');

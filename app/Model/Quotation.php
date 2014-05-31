@@ -7,6 +7,7 @@
  */
 class Quotation extends AppModel
 {
+    public $actsAs = array('Containable');
     var $hasOne=array('Customerspecialneed');
     
     public $hasMany = array(

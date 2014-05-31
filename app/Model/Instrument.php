@@ -8,5 +8,29 @@
 
 class Instrument extends AppModel
 {
-    var $belongsTo=array('Brand','Range','Department','Procedure');
+    
+    var $belongsTo=array('Department');
+    public $hasMany = array(
+        'InstrumentBrand' =>
+            array(
+                'className' => 'InstrumentBrand',
+                'foreignKey' => 'instrument_id',
+               
+            ),
+        'InstrumentProcedure' =>
+            array(
+                'className' => 'InstrumentProcedure',
+                
+                'foreignKey' => 'instrument_id',
+               
+            ),
+        'InstrumentRange' =>
+            array(
+                'className' => 'InstrumentRange',
+              
+                'foreignKey' => 'instrument_id',
+               
+            ),
+        
+    );
 }

@@ -57,6 +57,12 @@
                         {
                             $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
                         }
+                        /******************
+                        * Data Log
+                        */
+                        $this->Logactivity->save(array('Logactivity.logname'=>'Salesorder','Logactivity.logactivity'=>'Add SalesOrder','Logactivity.logid'=>'"'.$sales_orderid.'"'));
+                        /******************/
+
                         $this->Session->setFlash(__('Salesorder has been Added Successfully '));
                         $this->redirect(array('action'=>'index'));
                     }

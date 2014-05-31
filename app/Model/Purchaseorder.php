@@ -5,8 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class CustomerInstrument extends AppModel
+class Purchaseorder extends AppModel
 {
-    public $actsAs = array('Containable');
-    var $belongsTo=array('Customer','Instrument');
+    var $name = 'Purchaseorder';
 }

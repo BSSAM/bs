@@ -7,5 +7,15 @@
  */
 class InstrumentRange extends AppModel
 {
+    
     var $name   =   'InstrumentRange';
+    public $belongsTo = array(
+        'Instrument' => array(
+            'counterCache' => true,
+        ),
+        'Range' => array(
+            'counterCache' => true,
+            
+        )
+    );
 }

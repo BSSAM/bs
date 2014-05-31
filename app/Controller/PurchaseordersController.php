@@ -1,10 +1,16 @@
 <?php
-    class QuotationsController extends AppController
-    {
-        public $helpers = array('Html','Form','Session');
-        public $uses =array('Priority','Paymentterm','Quotation','Currency',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Unit');
+/*
+ * Document     :   PurchaseOrder Controller.php
+ * Controller   :   PurchaseOrder
+ * Model        :   Purchaseorder 
+ * Created By   :   M.Iyappan Samsys
+ */
+class PurchaseordersController extends AppController
+{
+    public $helpers = array('Html', 'Form', 'Session');
+    public $uses = array('Priority', 'Paymentterm', 'Quotation', 'Currency',
+        'Country', 'Additionalcharge', 'Service', 'CustomerInstrument', 'Customerspecialneed',
+        'Instrument', 'Brand', 'Customer', 'Device');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -13,7 +19,6 @@
         }
         public function add()
         {
-           
 //          $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>1399899781),'recursive'=>'2'));
 //          pr($customer_data);exit;
             $str=NULL;
@@ -41,9 +46,7 @@
            
             if($this->request->is('post'))
             {
-                $date = date('m/d/Y h:i:s a', time());
-                $this->request->data['Quotation']['created_by'] = $date;
-
+             
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 if($this->Quotation->save($this->request->data['Quotation']))
@@ -55,13 +58,7 @@
                         $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
                     }
                     $this->request->data['Customerspecialneed']['quotation_id']=$quotation_id;
-                    $this->Customerspecialneed->save($this->request->data['Customerspecialneed']); 
-                    /******************
-                    * Data Log
-                    */
-                    $this->Logactivity->save(array('Logactivity.logname' => 'Quotation', 'Logactivity.logactivity' => 'Add Quotation', 'Logactivity.logid' => '"' . $quotation_id . '"'));
-                    /******************/
-
+                    $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);                    
                     $this->Session->setFlash(__('Quotation has been Added Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -111,20 +108,31 @@
                 $this->request->data=$quotation_details;
             }
         }
-        public function search()
+        public function customer_search()
         {
             $this->loadModel('Customer');
             $name =  $this->request->data['name'];
             $this->autoRender = false;
             $data = $this->Customer->find('all',array('conditions'=>array('customername LIKE'=>'%'.$name.'%')));
             $c = count($data);
-            for($i = 0; $i<$c;$i++)
-            { 
-                echo "<div class='show' align='left' id='".$data[$i]['Customer']['id']."'>";
-                echo $data[$i]['Customer']['customername'];
+            if($c!=0)
+            {
+                for($i = 0; $i<$c;$i++)
+                { 
+                    echo "<div class='customer_show' align='left' id='".$data[$i]['Customer']['id']."'>";
+                    echo $data[$i]['Customer']['customername'];
+                    echo "<br>";
+                    echo "</div>";
+                }
+            }
+            else
+            {
+                echo "<div class='no_show' align='left'>";
+                echo 'No Results Found';
                 echo "<br>";
                 echo "</div>";
-            }
+        }
+            
         }
         public function get_customer_value()
         {
@@ -184,12 +192,13 @@
         {
             $this->autoRender = false;
             $instrument_id =  $this->request->data['instrument_id'];
-            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id),'recursive'=>'3'));
+            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id),'recursive'=>'2'));
             if(!empty($brand_details))
             {
                 echo json_encode($brand_details);
             }
-           
+            //pr($brand_list);,lp,
+     
         }
         public function add_instrument()
         {

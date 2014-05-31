@@ -32,6 +32,8 @@
                     </td>
                 </tr>
                 <?php endforeach; ?>
-                <?PHP endif; ?>
+                <?PHP else:
+                    echo "No Records Found";
+                endif; ?>
             </tbody>
         </table>

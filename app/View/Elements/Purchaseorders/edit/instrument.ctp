@@ -90,9 +90,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control',
-                                                'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Brand')); ?>
-       
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','label'=>false,'name'=>'range')); ?>
     </div>
 </div>
 <div class="form-group">

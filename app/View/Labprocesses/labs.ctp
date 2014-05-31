@@ -48,7 +48,7 @@
                     <td class="text-center"><?PHP echo $labs_list['Instrument']['name']; ?></td>
                     <td class="text-center"><?PHP echo $labs_list['Department']['departmentname']; ?></td>
                     <td class="text-center">
-                        <input type="checkbox" name="data[Description][processing][<?PHP echo $labs_list['Description']['id']; ?>]" value=<?PHP echo $labs_list['Description']['processing']; ?>  <?PHP echo $test=($labs_list['Description']['processing']==1)?'checked="checked"':''; ?>>
+                        <input type="checkbox" name="data[Description][processing][<?PHP echo $labs_list['Description']['id']; ?>]"  <?PHP echo $test=($labs_list['Description']['processing']==1)?'checked="checked"':''; ?>>
                         </td>
                     <td class="text-center"><?PHP echo $this->Form->input('Description.checking',array('label'=>false,'id'=>'checking','type'=>'checkbox','class'=>$labs_list['Description']['salesorder_id'])); ?></td>
                     <td class="text-center"><?PHP echo $labs_list['Description']['delay']; ?><!--<span ng-if="show_delay"></span>--></td>

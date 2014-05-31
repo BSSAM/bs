@@ -8,4 +8,12 @@
 class InstrumentBrand extends AppModel
 {
     var $name   =   'InstrumentBrand';
+    public $belongsTo = array(
+        'Instrument' => array(
+            'counterCache' => true,
+        ),
+        'Brand' => array(
+            'counterCache' => true,
+        )
+    );
 }

@@ -206,15 +206,15 @@
                             </li>-->
                             
                              <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
-                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses')?'style=display:block':'';?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
+                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders')?'style=display:block':'';?>>
                                     <?php if($user_role['job_quotation']['view'] == 1){ ?>
                                     <li <?php echo $a=($control == 'Quotations')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('Quotation',array('controller'=>'Quotations','action'=>'index')); ?>
                                     </li><?php } ?>
                                     <?php if($user_role['job_purchaseorder']['view'] == 1){ ?>
-                                    <li>
-                                          <a href="#"><?php echo 'Purchase Order'; ?></a>
+                                    <li <?php echo $a=($control == 'Purchaseorders')?'class=active':''; ?>>
+                                         <?php echo $this->Html->link('Purchase Order',array('controller'=>'Purchaseorders','action'=>'index')); ?>
                                     </li><?php } ?>
                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li <?php echo $a=($control == 'Salesorders')?'class=active':''; ?>>

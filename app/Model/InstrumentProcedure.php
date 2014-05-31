@@ -9,4 +9,9 @@
 class InstrumentProcedure extends AppModel
 {
     var $name   =   'InstrumentProcedure';
+    public $belongsTo = array(
+        'Instrument' => array(
+            'counterCache' => true,
+        )
+    );
 }
