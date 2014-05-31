@@ -1,4 +1,4 @@
-/* 
+ /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -21,23 +21,20 @@ $(document).ready(function(){
             success: function(data)
             {
                 parsedata = $.parseJSON(data);
-                $.each(parsedata, function(k, v)
+                 var dept    =   parsedata.Instrument;
+                $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
                 {
-                    if('Brand' in v)
-                    {
-                        $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
-                    }
-                    if('Department' in v)
-                    {
-                        $('#val_department').val(v.Department.departmentname);
-                        $('#sales_department_id').val(v.Department.id);
-                    }
-                    if('Range' in v)
-                    {
-                        $('#sales_range').val(v.Range.from_range+'~'+v.Range.to_range+'/unit');
-                    }
+                     $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
+                  
                 });
                 
+                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
+                {
+                     $('#sales_range').empty().append('<option value=0>Select Brand</option><option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+                  
+                });
+                $('#sales_department_id').val(dept.Department.id);
+                $('#val_department').val(dept.Department.departmentname);
                 $('#val_model_no').val(parsedata.CustomerInstrument.model_no);
                 $('#SalesorderInstrumentId').val(instrument_id);
                 $('#sales_unitprice').val(parsedata.CustomerInstrument.unit_price);
@@ -245,4 +242,3 @@ $(document).ready(function(){
         });
    });
 })
-
