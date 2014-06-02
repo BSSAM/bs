@@ -25,31 +25,31 @@
                                 <thead>
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
-                                        <th class="text-center">Delivery Order No</th>
-                                        <th class="text-center">Delivery Order Date</th>
-                                        <th class="text-center">Sales order No</th>
+                                        <th class="text-center">Purchase Order No</th>
+                                        <th class="text-center">Customer Id</th>
                                         <th class="text-center">Customer Name</th>
                                          <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
+                                         <th class="text-center">Due Amount</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?PHP if(!empty($deliveryorders )): ?>
-                                     <?php foreach($deliveryorders as $deliveryorder): ?>
+                                    <?PHP if(!empty($purchaseorders)): ?>
+                                     <?php foreach($purchaseorders as $purchaseorder): ?>
                                     <tr>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_no'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['salesorder_id'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Customer']['customername'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['phone'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['email'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['our_reference_no'] ?></td>
+                                        <td class="text-center"><?PHP echo $purchaseorder['Purchaseorder']['purchaseorder_no'] ?></td>
+                                        <td class="text-center"><?PHP echo $purchaseorder['Purchaseorder']['customer_id'] ?></td>
+                                        <td class="text-center"><?PHP echo $purchaseorder['Customer']['customername'] ?></td>
+                                        <td class="text-center"><?PHP echo $purchaseorder['Purchaseorder']['phone'] ?></td>
+                                        <td class="text-center"><?PHP echo $purchaseorder['Purchaseorder']['email'] ?></td>
+                                        <td class="text-center"><?PHP echo $purchaseorder['Purchaseorder']['your_ref_no'] ?></td>
+                                        <td class="text-center"><?PHP echo $purchaseorder['Purchaseorder']['due_amount'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$deliveryorder['Deliveryorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$deliveryorder['Deliveryorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure want to delete order  '.$deliveryorder['Deliveryorder']['delivery_order_no'].'?')); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$purchaseorder['Purchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$purchaseorder['Purchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure want to delete order  '.$purchaseorder['Purchaseorder']['purchaseorder_no'].'?')); ?>
                                                 
                                             </div>
                                         </td>

@@ -73,7 +73,7 @@ $("#val_reg_date").datepicker("setDate", new Date());
 <div class="form-group">
     <label class="col-md-2 control-label" for="pur_customer">Customer Name</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('customer_name', array('id'=>'pur_customer','class'=>'form-control','label'=>false,'name'=>'customer_name')); ?>
+        <?php echo $this->Form->input('customer_name', array('id'=>'pur_customer','class'=>'form-control','label'=>false,'name'=>'customer_name','autoComplete'=>'off')); ?>
     </div>
     <div id="result"></div>
         <label class="col-md-2 control-label" for="pur_customer_address">Customer Address</label>
@@ -118,7 +118,7 @@ $("#val_reg_date").datepicker("setDate", new Date());
 <div class="form-group">
     <label class="col-md-2 control-label" for="pur_order_no">Purchase Order No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Purchaseorder.purchase_order_no', array('id'=>'pur_order_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
+        <?php echo $this->Form->input('Purchaseorder.purchaseorder_no', array('id'=>'pur_order_no','class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$purchaseorderno)); ?>
     </div>
     <label class="col-md-2 control-label" for="pur_order_date">Purchase Order Date</label>
     <div class="col-md-4">

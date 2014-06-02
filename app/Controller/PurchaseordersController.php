@@ -10,56 +10,40 @@ class PurchaseordersController extends AppController
     public $helpers = array('Html', 'Form', 'Session');
     public $uses = array('Priority', 'Paymentterm', 'Quotation', 'Currency',
         'Country', 'Additionalcharge', 'Service', 'CustomerInstrument', 'Customerspecialneed',
-        'Instrument', 'Brand', 'Customer', 'Device');
+        'Instrument', 'Brand', 'Customer', 'Device','Purchaseorder','PurchaseCustomerspecialneed');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
-            $data = $this->Quotation->find('all',array('order' => array('Quotation.id' => 'DESC')));
-            $this->set('quotation', $data);
+            $purchase_order_data = $this->Purchaseorder->find('all',array('order' => array('Purchaseorder.id' => 'DESC')));
+            $this->set('purchaseorders', $purchase_order_data);
         }
         public function add()
         {
-//          $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>1399899781),'recursive'=>'2'));
-//          pr($customer_data);exit;
+                
             $str=NULL;
             $d=date("d");
             $m=date("m");
             $y=date("Y");
             $t=time();
-            $dmt='BSQ'.($d+$m+$y+$t);
-            //$str = 'BSQ-13-'.str_pad($str + 1, 5, 0, STR_PAD_LEFT);
-            $this->set('quotationno', $dmt);
-            $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
-            $this->set('priority',$priority);
-            $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
-            $this->set('payment',$payment);
+            $purchaseorderno='BSP'.($d+$m+$y+$t);
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
-            $this->set('country',$country);
-            
-            $additional_charge=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
-            $this->set('additional',$additional_charge);
-            
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set('service',$services);
-            
-            $this->request->data['Quotation']['quotationno']=$dmt;
+            $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $this->set(compact('purchaseorderno','country','additional','service'));
            
+            
             if($this->request->is('post'))
             {
-             
-                $customer_id=$this->request->data['Quotation']['customer_id'];
-                $this->request->data['Quotation']['customername']=$this->request->data['customername'];
-                if($this->Quotation->save($this->request->data['Quotation']))
+                
+                if($this->Purchaseorder->save($this->request->data['Purchaseorder']))
                 {
-                    $quotation_id   =   $this->Quotation->getLastInsertID();
-                    $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
-                    if(!empty($device_node))
+                    $purchase_id   =   $this->Purchaseorder->getLastInsertID();
+                    if($purchase_id!='')
                     {
-                        $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
+                        $this->request->data['PurchaseCustomerspecialneed']['purchaseorder_id']=$purchase_id;
+                        $this->PurchaseCustomerspecialneed->save($this->request->data['PurchaseCustomerspecialneed']);
                     }
-                    $this->request->data['Customerspecialneed']['quotation_id']=$quotation_id;
-                    $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);                    
-                    $this->Session->setFlash(__('Quotation has been Added Succefully '));
+                    $this->Session->setFlash(__('Purchase Order has been Added Succefully'));
                     $this->redirect(array('action'=>'index'));
                 }
                
@@ -67,45 +51,46 @@ class PurchaseordersController extends AppController
         }
         public function edit($id=NULL)
         {
-            $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
-            //pr($quotation_details);exit;
-            $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
-            $this->set('priority',$priority);
-            $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
-            $this->set('payment',$payment);
-            $country=$this->Country->find('list',array('fields'=>array('id','country')));
-            $this->set('country',$country);
-            
-            $additional_charge=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
-            $this->set('additional',$additional_charge);
-            
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set('service',$services);
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            
-            $this->set('quotations_list',$quotation_details);
+            $purchase_edit_data = $this->Purchaseorder->find('first',array('conditions'=>array('Purchaseorder.id'=>$id),'recursive'=>3));
            
+            $country=$this->Country->find('list',array('fields'=>array('id','country')));
+            $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $purchaseorderno    =  $purchase_edit_data['Purchaseorder']['purchaseorder_no'];
+            $this->set(compact('purchaseorderno','country','additional','service'));
+            
+            
             if($this->request->is(array('post','put')))
             {
-                $this->Quotation->id=$id;
-                if($this->Quotation->save($this->request->data['Quotation']))
+                 pr($this->request->data);exit;
+                $this->Purchaseorder->id=$id;
+                if($this->Purchaseorder->save($this->request->data['Quotation']))
                 {
-                    $customer_id=$quotation_details['Quotation']['customer_id'];
-                    $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
-                    if(!empty($device_node))
-                    {
-                        $this->Device->updateAll(array('Device.quotation_id'=>$id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
-                    }
-                    $this->Customerspecialneed->id=$this->request->data['Customerspecialneed']['id'];
-                    $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);                    
-                    $this->Session->setFlash(__('Quotation has been Added Succefully '));
+                    $this->PurchaseCustomerspecialneed->id=$purchase_id;
+                    $this->PurchaseCustomerspecialneed->save($this->request->data['PurchaseCustomerspecialneed']);
+                    $this->Session->setFlash(__('Purchase order has been Updated Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
                 
             }
             else
             {
-                $this->request->data=$quotation_details;
+                $this->request->data=$purchase_edit_data;
+            }
+        }
+        public function delete($id=NULL)
+        {
+            if($id!='')
+            {
+                if($this->Purchaseorder->delete($id,true))
+                {
+                    $this->Session->setFlash(__('The Purchaseorder has been deleted',h($id)));
+                    return $this->redirect(array('controller'=>'Purchaseorders','action'=>'index'));
+                }
+            }
+            else
+            {
+                throw new MethodNotAllowedException();
             }
         }
         public function customer_search()
@@ -131,8 +116,7 @@ class PurchaseordersController extends AppController
                 echo 'No Results Found';
                 echo "<br>";
                 echo "</div>";
-        }
-            
+            }
         }
         public function get_customer_value()
         {
@@ -155,20 +139,7 @@ class PurchaseordersController extends AppController
                 echo $currency_data['Currency']['exchangerate'];
             }
         }
-        public function get_gst_value()
-        {
-            $this->autoRender = false;
-            $gst_id =  $this->request->data['gst_id'];
-            switch($gst_id)
-            {
-                case 'Standard':
-                    echo "7.00";
-                    break;
-                case 'Zero':
-                    echo "0.00";
-                    break;
-            }
-        }
+       
         public function instrument_search()
         {
             $this->autoRender = false;

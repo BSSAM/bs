@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Unit');
+                            'Instrument','Brand','Customer','Device','Unit','Logactivity');
         public function index()
         {
             //$this->Quotation->recursive = 1; 

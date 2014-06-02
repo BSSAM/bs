@@ -74,7 +74,7 @@ $("#delivery_input_search").keyup(function()
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Purchase Orders',array('controller'=>'Purchaseorder','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Purchase Orders',array('controller'=>'Purchaseorders','action'=>'index')); ?></li>
                         <li>Add Purchase Order</li>
                     </ul>
                     <!-- END Forms General Header -->

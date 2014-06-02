@@ -104,10 +104,7 @@
                         <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                             <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Customer Info</a></li>
                             <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Contact Person Info</a></li>
-<!--                            <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Project Info</a></li>
-                            <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Delivery Addresses</a></li>
-                            <li class=""><a href="#tab5" data-toggle="tab"><span>Step 5:</span> Billing Addresses</a></li>-->
-                        </ul>
+                       </ul>
                         <div class="nav-pills-border-color"></div>
                         <br><br>
                         <div class="tab-content">
@@ -117,17 +114,6 @@
                             <div class="tab-pane" id="tab2">
                                 <?PHP echo $this->element('Customers/contact_person_info'); ?>
                             </div>
-<!--                            <div class="tab-pane" id="tab3">
-                                <?PHP //echo $this->element('Customers/project_info'); ?>
-                            </div>
-                            <div class="tab-pane" id="tab4">
-                                <?PHP //echo $this->element('Customers/delivery_address'); ?>
-                            </div>
-                            <div class="tab-pane" id="tab5">
-                                <?PHP //echo $this->element('Customers/billing_address'); ?>
-                            </div>-->
-                        </div><!-- tab-content -->
-                        <!-- #basicWizard -->
                     </div><!-- panel-body -->
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
@@ -264,20 +250,20 @@ $(document).ready(function(){
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
                                 
-    return {
-        init: function() {
-                                        
-                                        
-                                        
-            $.bootstrapGrowl('Customer Already Exists!', {
-                type: 'danger',
-                allow_dismiss: true
-            });
-                                        
-            $(this).prop('disabled', true);
-            $('#val_customername').focus();
-        }
-    };
+//    return {
+//        init: function() {
+//                                        
+//                                        
+//                                        
+//            $.bootstrapGrowl('Customer Already Exists!', {
+//                type: 'danger',
+//                allow_dismiss: true
+//            });
+//                                        
+//            $(this).prop('disabled', true);
+//            $('#val_customername').focus();
+//        }
+//    };
 }();
                             
                             

@@ -34,10 +34,10 @@ var path='<?PHP echo Router::url('/',true); ?>';
     </div>
     <label class="col-md-2 control-label" for="pur_service_charge">Service Charge</label>
     <div class="col-md-4">
-<?php
-echo $this->Form->input('PurchaseCustomerspecialneed.additional_service_value', array('id' => 'pur_service_charge', 'class' => 'form-control',
-    'placeholder' => 'Enter Additional Service Charge Values', 'label' => false));
-?>    
+        <?php
+        echo $this->Form->input('PurchaseCustomerspecialneed.additional_service_value', array('id' => 'pur_service_charge', 'class' => 'form-control',
+            'placeholder' => 'Enter Additional Service Charge Values', 'label' => false));
+        ?>    
     </div>
 </div>
 <div class="form-group">

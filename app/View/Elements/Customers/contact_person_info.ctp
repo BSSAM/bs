@@ -2,7 +2,7 @@
     
     <label class="col-md-2 control-label" for="val_customername">S.No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('serial_id', array('id'=>'sno','class'=>'form-control','placeholder'=>'','label'=>false,'readonly'=>true)); ?>
+        <?php echo $this->Form->input('serial_id', array('id'=>'sno','class'=>'form-control','placeholder'=>'','label'=>false,'readonly'=>true,'type'=>'text')); ?>
     </div>
     
     <label class="col-md-2 control-label" for="val_postalcode">Email</label>
@@ -59,7 +59,7 @@
     
     <label class="col-md-2 control-label" for="val_billaddress">Remark</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('remark', array('id'=>'contact_remark','class'=>'form-control','placeholder'=>'Enter Remark','label'=>false)); ?>
+        <?php echo $this->Form->input('remark', array('id'=>'contact_remark','class'=>'form-control','placeholder'=>'Enter Remark','label'=>false,'type'=>'textarea')); ?>
     </div>
 </div>
 <div class="form-group form-actions">

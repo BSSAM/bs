@@ -14,6 +14,7 @@
         public function add()
         {
            
+           
            $str=NULL;
             $d=date("d");
             $m=date("m");
@@ -62,7 +63,6 @@
                         */
                         $this->Logactivity->save(array('Logactivity.logname'=>'Salesorder','Logactivity.logactivity'=>'Add SalesOrder','Logactivity.logid'=>'"'.$sales_orderid.'"'));
                         /******************/
-
                         $this->Session->setFlash(__('Salesorder has been Added Successfully '));
                         $this->redirect(array('action'=>'index'));
                     }
@@ -105,7 +105,7 @@
         {
             if($id!='')
             {
-                if($this->Salesorder->delete($id))
+                if($this->Salesorder->delete($id,true))
                 {
                     $this->Session->setFlash(__('The SalesOrder has been deleted',h($id)));
                     return $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
@@ -165,7 +165,7 @@
         {
             $this->autoRender = false;
             $instrument_id =  $this->request->data['instrument_id'];
-            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id),'recursive'=>'2'));
+            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id),'recursive'=>'3'));
             if(!empty($brand_details))
             {
                 echo json_encode($brand_details);

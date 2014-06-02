@@ -252,15 +252,15 @@ class CustomersController extends AppController
         
         if($this->Session->read('customer_id')=='')
         {
-        $d=date ("d");
-        $m=date ("m");
-        $y=date ("Y");
-        $t=time();
-        $dmt='CUS'.($d+$m+$y+$t);
-        $this->Session->write('customer_id',$dmt);
+            $d=date ("d");
+            $m=date ("m");
+            $y=date ("Y");
+            $t=time();
+            $dmt='CUS'.($d+$m+$y+$t);
+            $this->Session->write('customer_id',$dmt);
         }
-        $this->set('customer_id',$this->Session->read('customer_id'));
         
+        $this->set('customer_id',$this->Session->read('customer_id'));
         $this->loadModel('Salesperson');
         $data = $this->Salesperson->find('list', array('fields' => 'salesperson'));
         $this->set('salesperson',$data);
@@ -318,73 +318,53 @@ class CustomersController extends AppController
         for($i=1;$i<=count($data4);$i++)
         {
             $array3[] = $data4[$i].' '.$data5[$i];
-
         }
         $this->set('paymentterm',$array3);
         
-         $this->loadModel('Priority');
-         $data6 = $this->Priority->find('list', array('fields' => 'priority'));
-        $this->set('priority',$data6);
-		
-		 $this->loadModel('Userrole');
-         $data = $this->Userrole->find('list', array('fields' => 'user_role'));
-        $this->set('userrole',$data);
-        
+        $this->loadModel('Priority');
+        $data6 = $this->Priority->find('list', array('fields' => 'priority'));
+        $this->set('priority', $data6);
+
+        $this->loadModel('Userrole');
+        $data = $this->Userrole->find('list', array('fields' => 'user_role'));
+        $this->set('userrole', $data);
+
         if($this->request->is('post'))
         {
            
-             $this->request->data['status']=1;
-            //pr($dat);exit;
-             //$dat = $this->request->params[''];
-             $match2 = $this->request->data['salesperson_id'];
-              $dept = implode(',',$match2);
-              $this->request->data['salesperson_id'] = $dept;
-              
-              $match3 = $this->request->data['referedbies_id'];
-              $dept1 = implode(',',$match3);
-              $this->request->data['referedbies_id'] = $dept1;
-             
-             $match1 = $this->request->data['customername'];
-             $data1 = $this->Customer->findByCustomername($match1);
-            
-            
+            $this->request->data['status'] = 1;
+            $match2 = $this->request->data['salesperson_id'];
+            $dept = implode(',', $match2);
+            $this->request->data['salesperson_id'] = $dept;
+
+            $match3 = $this->request->data['referedbies_id'];
+            $dept1 = implode(',', $match3);
+            $this->request->data['referedbies_id'] = $dept1;
+
+            $match1 = $this->request->data['customername'];
+            $data1 = $this->Customer->findByCustomername($match1);
             if(!empty($data1))
             {
-            
                 $this->Session->setFlash(__('Customer Name Already Exist'));
-               
                 return $this->redirect(array('action'=>'add'));
             }
             $this->Customer->create();
-           // pr($this->request->data);exit;
+          
             unset($this->request->data['Customer']);
             $this->request->data['id'] = $this->Session->read('customer_id');
             
-                        //pr($this->request->data);exit;
-
-            
             if($this->Customer->save($this->request->data))
             {
-               $project= $this->Projectinfo->find('count',array('conditions'=>array('Projectinfo.customer_id'=>$this->Session->read('customer_id'))));
-               $contactperson= $this->Contactpersoninfo->find('count',array('conditions'=>array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id'))));
-//               $billingaddress= $this->Billingaddress->find('count',array('conditions'=>array('Billingaddress.customer_id'=>$this->Session->read('customer_id'))));
-//               $delivery=$this->Deliveryaddress->find('count',array('conditions'=>array('Deliveryaddress.customer_id'=>$this->Session->read('customer_id'))));
-               $address= $this->Address->find('count',array('conditions'=>array('Address.customer_id'=>$this->Session->read('customer_id'))));
-                if($contactperson>0)
-                {
-                $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.status'=>1),array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id')));
+                $project = $this->Projectinfo->find('count', array('conditions' => array('Projectinfo.customer_id' => $this->Session->read('customer_id'))));
+                $contactperson = $this->Contactpersoninfo->find('count', array('conditions' => array('Contactpersoninfo.customer_id' => $this->Session->read('customer_id'))));
+                $address = $this->Address->find('count', array('conditions' => array('Address.customer_id' => $this->Session->read('customer_id'))));
+                if ($contactperson > 0) {
+                    $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.status' => 1), array('Contactpersoninfo.customer_id' => $this->Session->read('customer_id')));
                 }
-//                if($billingaddress>0)
-//                {
-//                $this->Billingaddress->updateAll(array('Billingaddress.status'=>1),array('Billingaddress.customer_id'=>$this->Session->read('customer_id')));
-//                }
-//                if($delivery>0)
-//                {
-//                $this->Deliveryaddress->updateAll(array('Deliveryaddress.status'=>1),array('Deliveryaddress.customer_id'=>$this->Session->read('customer_id')));
-//                }
+
                 if($address>0)
                 {
-                $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$this->Session->read('customer_id')));
+                    $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$this->Session->read('customer_id')));
                 }
                 
                 if($project>0)
@@ -469,41 +449,22 @@ class CustomersController extends AppController
             $array3[] = $data4[$i].' '.$data5[$i];
 
         }
-        $this->set('paymentterm',$array3);
-        
-         $this->loadModel('Priority');
-         $data6 = $this->Priority->find('list', array('fields' => 'priority'));
-        $this->set('priority',$data6);
-		
-		 $this->loadModel('Userrole');
-         $data = $this->Userrole->find('list', array('fields' => 'user_role'));
-        $this->set('userrole',$data);
-        
+        $this->set('paymentterm', $array3);
+
+        $this->loadModel('Priority');
+        $data6 = $this->Priority->find('list', array('fields' => 'priority'));
+        $this->set('priority', $data6);
+
+        $this->loadModel('Userrole');
+        $data = $this->Userrole->find('list', array('fields' => 'user_role'));
+        $this->set('userrole', $data);
+
         // Model For the Tab Edit Contact Info
-        
+
         $this->loadModel('Contactpersoninfo');
-        $data = $this->Contactpersoninfo->find('all',array('conditions'=>array('Contactpersoninfo.status'=>1,'Contactpersoninfo.customer_id'=>$id),'order' => array('Contactpersoninfo.id' => 'DESC')));
+        $data = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.status' => 1, 'Contactpersoninfo.customer_id' => $id), 'order' => array('Contactpersoninfo.id' => 'DESC')));
         //pr($data);exit;
         $this->set('contactpersoninfo', $data);
-        
-//          $this->loadModel('Projectinfo');
-//        $data = $this->Projectinfo->find('all',array('conditions'=>array('Projectinfo.project_status'=>1,'Projectinfo.customer_id'=>$id),'order' => array('Projectinfo.id' => 'DESC')));
-//        //pr($data);exit;
-//        $this->set('projectinfo', $data);
-//        
-//        //Billingaddress
-//        //
-//        $this->loadModel('Billingaddress');
-//        $data = $this->Billingaddress->find('all',array('conditions'=>array('Billingaddress.status'=>1,'Billingaddress.customer_id'=>$id),'order' => array('Billingaddress.id' => 'DESC')));
-//        //pr($data);exit;
-//        $this->set('billingaddress', $data);
-//        
-//         $this->loadModel('Deliveryaddress');
-//        $data = $this->Deliveryaddress->find('all',array('conditions'=>array('Deliveryaddress.status'=>1,'Deliveryaddress.customer_id'=>$id),'order' => array('Deliveryaddress.id' => 'DESC')));
-//        //pr($data);exit;
-//        $this->set('Deliveryaddress', $data);
-        //------------------------------------
-        
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Customer Entry'));
@@ -516,6 +477,7 @@ class CustomersController extends AppController
            $this->Session->setFlash(__('Invalid Customer'));
              return $this->redirect(array('action'=>'edit'));
         }
+        
         if($this->request->is(array('post','put')))
         {
             $this->Customer->id = $id;
@@ -529,7 +491,8 @@ class CustomersController extends AppController
               $dept1 = implode(',',$match3);
               $this->request->data['referedbies_id'] = $dept1;
               }
-              pr($this->request->data);
+//              pr($this->request->data);
+             
             if($this->Customer->save($this->request->data))
             {
                 

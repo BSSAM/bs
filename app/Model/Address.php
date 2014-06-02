@@ -5,8 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class PurcahseCustomerspecialneeds extends AppModel
-{
-    public $useTable   =   'pur_customerspecialneeds';
 
+class Address extends AppModel
+{
+    public $useTable   =   'cus_addresses';
 }

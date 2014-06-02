@@ -8,4 +8,29 @@
 class Purchaseorder extends AppModel
 {
     var $name = 'Purchaseorder';
+    public $hasMany = array(
+        'Description' => array(
+            'className' => 'PurchaseCustomerspecialneed',
+            'foreignKey' => 'purchaseorder_id',
+            'conditions' => array(),
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'dependent'=>true,
+            'counterQuery' => '',
+             
+      ));
+    public $belongsTo = array(
+        'Customer' => array(
+            'className' => 'Customer',
+            'foreignKey' => 'customer_id ',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+       
+    );
 }
