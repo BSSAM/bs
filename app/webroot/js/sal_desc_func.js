@@ -241,4 +241,45 @@ $(document).ready(function(){
                 }
         });
    });
-})
+   $(document).on('click','.approve_salesorder',function(){
+       var val_salesorderno=$('#val_salesorderno').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_salesorderno,
+            url: path+'Salesorders/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+    $(document).on('click','.approve_quotation',function(){
+       var val_quotationno=$('#val_quotationno').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_quotationno,
+            url: path+'Quotations/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+
+});

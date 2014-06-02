@@ -11,7 +11,7 @@ class DashboardsController extends AppController
     public $helpers = array('Html','Form','Session');
     public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Deliveryorder');
+                            'Instrument','Brand','Customer','Device','Salesorder','Deliveryorder','Logactivity');
     public function index()
     {
         /*  
@@ -40,6 +40,15 @@ class DashboardsController extends AppController
         $this->set('total_delivery_count', $data_delivery);
         $data_delivery_view = $this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.view'=>'0','Deliveryorder.status'=>'1')));
         $this->set('total_delivery_view', $data_delivery_view);
+        $logactivity_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1)));
+        $this->set('log_activity_count', $logactivity_count);
+        $logactivity = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1)));
+        //pr($logactivity);exit;
+        $this->set('log_activity', $logactivity);
+        
+        $logactivity_message = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>0)));
+        //pr($logactivity);exit;
+        $this->set('log_activity_message', $logactivity_message);
       
     }
 }
