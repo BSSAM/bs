@@ -16,12 +16,28 @@
     
     <label class="col-md-2 control-label" for="val_salespeoples">Sales Persons</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('salesperson_id', array('id'=>'val_salespeoples','class'=>'select-chosen required','options'=>$salesperson,'data-placeholder'=>'Enter the Sales Persons','label'=>false,'name'=>'salesperson_id','multiple'=>true,'style'=>'width: 250px; display: none;')); ?>
+    <select id="val_salespeoples" name="data[salesperson_id][]" class="select-chosen required" data-placeholder="Enter the Sales Persons" style="width: 250px;" multiple >
+                                                    <?PHP foreach ($salesperson as $k => $v): ?>
+                                                    <?php 
+                                                         $get_sales = $this->Customer->checksalesperson_value($this->request->data['Customer']['id'], $k);
+                                                           $selected_procedure = ($get_sales == 1) ? 'selected="selected"' : ''; ?>
+                                                        <option <?PHP echo $selected_procedure; ?> value=<?PHP echo $k ?>><?PHP echo $v; ?></option>
+                                                    <?PHP endforeach; ?>
+                                        </select>
+    
     </div>
         
     <label class="col-md-2 control-label" for="val_referredbies">Referred By(s)</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('referedbies_id', array('id'=>'val_referredbies','class'=>'select-chosen','options'=>$referedby,'data-placeholder'=>'Enter the Referred By','label'=>false,'name'=>'referedbies_id','multiple'=>true,'style'=>'width: 250px; display: none;')); ?>
+        <select id="val_salespeoples" name="data[referedbies_id][]" class="select-chosen required" data-placeholder="Select the Refered Persons" style="width: 250px;" multiple >
+                                                    <?PHP foreach ($referedby as $k => $v): ?>
+                                                    <?php 
+                                                         $get_ref = $this->Customer->checkrefer_value($this->request->data['Customer']['id'], $k);
+                                                           $selected_ref = ($get_ref == 1) ? 'selected="selected"' : ''; ?>
+                                                        <option <?PHP echo $selected_ref; ?> value=<?PHP echo $k ?>><?PHP echo $v; ?></option>
+                                                    <?PHP endforeach; ?>
+                                        </select>
+        <?php //echo $this->Form->input('referedbies_id', array('id'=>'val_referredbies','class'=>'select-chosen','options'=>$referedby,'data-placeholder'=>'Enter the Referred By','label'=>false,'name'=>'referedbies_id','multiple'=>true,'style'=>'width: 250px; display: none;')); ?>
                                                  
     </div>
         

@@ -12,6 +12,13 @@ class CusSalesperson extends AppModel
     public $belongsTo = array(
         'Customer' => array(
             'counterCache' => true,
+        ),
+        'Salesperson' => array(
+            'className' => 'Salesperson',
+            'foreignKey' => 'salespeople_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
         
     );

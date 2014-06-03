@@ -11,13 +11,14 @@ class CustomersController extends AppController
     
     public $helpers = array('Html','Form','Session');
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
-                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby');
+                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby','Industry','Location','Paymentterm');
     
-        
+  
     public function index()
     {
         $this->Session->delete('customer_id');
-        $data = $this->Customer->find('all',array('order' => array('Customer.id' => 'DESC')));
+        $data = $this->Customer->find('all',array('order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
+       
         $this->set('customer', $data);
         $this->Address->deleteAll(array('Address.status'=>0));
         $this->Projectinfo->deleteAll(array('Projectinfo.project_status'=>0));
@@ -298,11 +299,10 @@ class CustomersController extends AppController
 
         if($this->request->is('post'))
         {
-           
             $this->request->data['status'] = 1;
             $refer_array = $this->request->data['referedbies_id'];
             $sales_array = $this->request->data['salesperson_id'];
-            $cust_id  =   $this->request->data['customer_id'];
+            $cust_id  =   $this->request->data['id'];
             if(!empty($sales_array))
             {
                 foreach($sales_array as $key=>$value)
@@ -317,20 +317,22 @@ class CustomersController extends AppController
                 foreach($refer_array as $key=>$value)
                 {
                     $this->CusReferby->create();
-                    $ref_data = array('customer_id' =>$cust_id, 'referby_id' => $value);
+                    $ref_data = array('customer_id' =>$cust_id, 'referedby_id' => $value);
                     $this->CusReferby->save($ref_data);
                 }
             }
+            unset($this->request->data['Customer']);
+            unset($this->request->data['salesperson_id']);
+            unset($this->request->data['referedbies_id']);
+             
             $match1 = $this->request->data['customername'];
             $data1 = $this->Customer->findByCustomername($match1);
+           
             if(!empty($data1))
             {
                 $this->Session->setFlash(__('Customer Name Already Exist'));
                 return $this->redirect(array('action'=>'add'));
             }
-            $this->Customer->create();
-            unset($this->request->data['Customer']);
-//            $this->request->data['id'] = $this->Session->read('customer_id');
             
             if($this->Customer->save($this->request->data))
             {
@@ -362,21 +364,18 @@ class CustomersController extends AppController
         {
             $this->Session->write('customer_id',$id);
         }
-          $this->set('customer_id',$this->Session->read('customer_id'));
+        $this->set('customer_id',$this->Session->read('customer_id'));
         
-        
-         $this->loadModel('Salesperson');
+       
         $data = $this->Salesperson->find('list', array('fields' => 'salesperson'));
-        $this->set('salesperson',$data);
-        
-        $this->loadModel('Referedby');
+        $this->set('salesperson', $data);
+           
         $data1 = $this->Referedby->find('list', array('fields' => 'referedby'));
         $this->set('referedby',$data1);
         
-        $this->loadModel('Address');
         $data10 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
         $data10_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
-        //pr($data10);pr($data10_count);exit;
+        
         $this->set('data10',$data10);
         $this->set('data10_count',$data10_count);
         
@@ -400,15 +399,13 @@ class CustomersController extends AppController
         $this->set('data13_count',$data13_count);
         
         
-        $this->loadModel('Industry');
+        
         $data2 = $this->Industry->find('list', array('fields' => 'industryname'));
         $this->set('industry',$data2);
         
-        $this->loadModel('Location');
         $data3 = $this->Location->find('list', array('fields' => 'locationname'));
         $this->set('location',$data3);
         
-        $this->loadModel('Paymentterm');
         $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
          //pr($data4);exit;
         $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
@@ -456,49 +453,55 @@ class CustomersController extends AppController
         
         if($this->request->is(array('post','put')))
         {
+           
             $this->Customer->id = $id;
-             $match2 = $this->request->data['salesperson_id'];
-              $dept = implode(',',$match2);
-              $this->request->data['salesperson_id'] = $dept;
-              
-              $match3 = $this->request->data['referedbies_id'];
-              if($match3!='')
-              {
-              $dept1 = implode(',',$match3);
-              $this->request->data['referedbies_id'] = $dept1;
-              }
-//              pr($this->request->data);
-             
+            $refer_array = $this->request->data['referedbies_id'];
+            $sales_array = $this->request->data['salesperson_id'];
+            $cust_id  =   $id;
+            if(!empty($sales_array))
+            {
+                $this->CusSalesperson->deleteAll(array('CusSalesperson.customer_id' => $id));
+                foreach ($sales_array as $key => $value) {
+                    
+                    $this->CusSalesperson->create();
+                    $sal_data = array('customer_id' => $id, 'salespeople_id' => $value);
+                    $this->CusSalesperson->save($sal_data);
+                }
+               
+            }
+            if(!empty($refer_array))
+            {
+                $this->CusReferby->deleteAll(array('CusReferby.customer_id' => $id));
+                foreach ($refer_array as $key => $value) {
+                    
+                    $this->CusReferby->create();
+                    $ref_data = array('customer_id' => $id, 'referedby_id' => $value);
+                    $this->CusReferby->save($ref_data);
+                }
+                
+            }
+            unset($this->request->data['Customer']);
+            unset($this->request->data['salesperson_id']);
+            unset($this->request->data['referedbies_id']);
             if($this->Customer->save($this->request->data))
             {
                 
                $project= $this->Projectinfo->find('count',array('conditions'=>array('Projectinfo.customer_id'=>$this->Session->read('customer_id'))));
                $contactperson= $this->Contactpersoninfo->find('count',array('conditions'=>array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id'))));
-//               $billingaddress= $this->Billingaddress->find('count',array('conditions'=>array('Billingaddress.customer_id'=>$this->Session->read('customer_id'))));
-//               $delivery=$this->Deliveryaddress->find('count',array('conditions'=>array('Deliveryaddress.customer_id'=>$this->Session->read('customer_id'))));
                $address= $this->Address->find('count',array('conditions'=>array('Address.customer_id'=>$this->Session->read('customer_id'))));
                 if($contactperson>0)
                 {
                     $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.status'=>1),array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id')));
                 }
-//                if($billingaddress>0)
-//                {
-//                $this->Billingaddress->updateAll(array('Billingaddress.status'=>1),array('Billingaddress.customer_id'=>$this->Session->read('customer_id')));
-//                }
-//                if($delivery>0)
-//                {
-//                $this->Deliveryaddress->updateAll(array('Deliveryaddress.status'=>1),array('Deliveryaddress.customer_id'=>$this->Session->read('customer_id')));
-//                }
                 if($address>0)
                 {
-                $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$this->Session->read('customer_id')));
+                     $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$this->Session->read('customer_id')));
                 }
-                
                 if($project>0)
                 {
                     $this->Projectinfo->updateAll(array('Projectinfo.project_status'=>1),array('Projectinfo.customer_id'=>$this->Session->read('customer_id')));
                 }
-               $this->Session->setFlash(__('Customer is Updated'));
+               $this->Session->setFlash(__('Customer has been Updated'));
                return $this->redirect(array('action'=>'index'));
                $this->Session->delete('customer_id');
             }

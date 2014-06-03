@@ -9,10 +9,17 @@ class CusReferby extends AppModel
 {
  var $name   =   'CusReferby';
  
+ 
     public $belongsTo = array(
         'Customer' => array(
             'counterCache' => true,
+        ),
+         'Referedby' => array(
+            'className' => 'Referedby',
+            'foreignKey' => 'referedby_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
-        
     );
 }

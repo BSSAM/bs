@@ -47,7 +47,7 @@
                                     <div class="col-md-4">
                                         <?php //echo $this->Form->input('InstrumentProcedure.procedure_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$procedure_array,'data-placeholder'=>'Select Procedure Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                          <select id="example-chosen-multiple" name="data[InstrumentProcedure][procedure_id][]" class="select-chosen" data-placeholder="Choose a Country.." style="width: 250px;" multiple >
-                                                    <?PHP foreach ($procedure_array as $k => $v): ?>
+                                                    <?PHP foreach ($salesperson as $k => $v): ?>
                                                     <?php 
                                                          $get_procedure = $this->Instrument->checkprocedure_value($instrum_id, $k);
                                                            $selected_procedure = ($get_procedure == 1) ? 'selected="selected"' : ''; ?>

@@ -85,7 +85,7 @@
                         
 <div class="row">
     <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-add')); ?>
-    <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[customer_id]')); ?>
+    <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[id]')); ?>
     <div class="col-md-12">
         <!-- Basic Form Elements Block -->
         <div class="block">
