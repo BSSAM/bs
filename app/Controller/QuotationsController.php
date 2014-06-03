@@ -111,6 +111,10 @@
                 $this->request->data=$quotation_details;
             }
         }
+        public function file_upload()
+        {
+            
+        }
         public function search()
         {
             $this->loadModel('Customer');

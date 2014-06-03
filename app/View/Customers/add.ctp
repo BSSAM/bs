@@ -83,7 +83,9 @@
 </ul>
 <!-- END Forms General Header -->
                         
-<div class="row"><?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-add')); ?>
+<div class="row">
+    <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-add')); ?>
+    <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[customer_id]')); ?>
     <div class="col-md-12">
         <!-- Basic Form Elements Block -->
         <div class="block">
@@ -93,7 +95,7 @@
                 <h2></h2>
             </div>
             <!-- END Form Elements Title -->
-                                    
+                             
             <!-- Basic Form Elements Content -->
             <div class="panel panel-default">
                 <div class="panel-body panel-body-nopadding">
@@ -230,45 +232,16 @@
 
 
     <?php echo $this->Html->script('pages/formsValidation'); ?>
-<script>$(function(){ FormsValidation.init(); });</script>
-         <?php echo $this->Html->script('pages/uiProgress'); ?>
-<script>$(function(){ UiProgress.init(); });</script>
-<!--<script>
-$(document).ready(function(){
-    //$(document).on('click','.onform-customer-address-add',function() {
-        $('#onform-customer-address-add').submit(function() {
-        alert("submitted");
-       
-    });
-    });
-    </script>-->
-                                <?php if($this->Session->flash()!='') { ?>
-<script> var UiProgress = function() {
-                                
-    // Get random number function from a given range
-    var getRandomInt = function(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-                                
-//    return {
-//        init: function() {
-//                                        
-//                                        
-//                                        
-//            $.bootstrapGrowl('Customer Already Exists!', {
-//                type: 'danger',
-//                allow_dismiss: true
-//            });
-//                                        
-//            $(this).prop('disabled', true);
-//            $('#val_customername').focus();
-//        }
-//    };
-}();
-                            
-                            
-                            
-</script> 
-                            <?php } ?>
-                            
-                            
+    <script>$(function(){ FormsValidation.init(); });</script>
+    <?php echo $this->Html->script('pages/uiProgress'); ?>
+    <script>$(function(){ UiProgress.init(); });</script>
+    <?php if ($this->Session->flash() != '') { ?>
+        <script> var UiProgress = function() {
+            // Get random number function from a given range
+            var getRandomInt = function(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            };
+        }();
+        </script> 
+    <?php } ?>
+

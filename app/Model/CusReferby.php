@@ -5,8 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-class Address extends AppModel
+class CusReferby extends AppModel
 {
-    public $useTable   =   'cus_addresses';
+ var $name   =   'CusReferby';
+ 
+    public $belongsTo = array(
+        'Customer' => array(
+            'counterCache' => true,
+        )
+        
+    );
 }

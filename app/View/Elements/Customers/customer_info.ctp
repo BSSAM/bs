@@ -183,12 +183,12 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_industry">Customer Industry</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('industry_id', array('id' => 'val_industry', 'class' => 'form-control', 'empty' => 'Enter the Industry', 'options' => $industry, 'label' => false, 'name' => 'industry_id')); ?>
+        <?php echo $this->Form->input('industry_id', array('id' => 'val_industry', 'class' => 'form-control select-chosen', 'empty' => 'Enter the Industry', 'options' => $industry, 'label' => false, 'name' => 'industry_id')); ?>
     </div>
 
     <label class="col-md-2 control-label" for="val_location">Customer Location</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('location_id', array('id' => 'val_location', 'class' => 'form-control', 'empty' => 'Enter the Location', 'options' => $location, 'label' => false, 'name' => 'location_id')); ?>
+        <?php echo $this->Form->input('location_id', array('id' => 'val_location', 'class' => 'form-control select-chosen', 'empty' => 'Enter the Location', 'options' => $location, 'label' => false, 'name' => 'location_id')); ?>
     </div>
 
 </div>
@@ -196,7 +196,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="var_type">Customer Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('customertype', array('id' => 'var_type', 'class' => 'form-control', 'empty' => 'Enter the Customer Type', 'options' => array('Customer' => 'Customer', 'Sub-Contractor' => 'Sub-Contractor', 'Supplier' => 'Supplier', 'Customer/Sub-Contractor' => 'Customer/Sub-Contractor'), 'label' => false, 'name' => 'customertype')); ?>
+        <?php echo $this->Form->input('customertype', array('id' => 'var_type', 'class' => 'form-control select-chosen', 'empty' => 'Enter the Customer Type', 'options' => array('Customer' => 'Customer', 'Sub-Contractor' => 'Sub-Contractor', 'Supplier' => 'Supplier', 'Customer/Sub-Contractor' => 'Customer/Sub-Contractor'), 'label' => false, 'name' => 'customertype')); ?>
     </div>
 
    
@@ -211,31 +211,31 @@
 
     <label class="col-md-2 control-label" for="val_paymentterms">Payment Terms</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('paymentterms_id', array('id' => 'val_paymentterms', 'class' => 'form-control', 'options' => $paymentterm, 'empty' => 'Enter the Payment Terms', 'label' => false, 'name' => 'paymentterms_id')); ?>
+        <?php echo $this->Form->input('paymentterms_id', array('id' => 'val_paymentterms', 'class' => 'form-control select-chosen', 'options' => $paymentterm, 'empty' => 'Enter the Payment Terms', 'label' => false, 'name' => 'paymentterms_id')); ?>
     </div>
 
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="var_priorities">Priority</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('priorities_id', array('id' => 'var_priorities', 'class' => 'form-control', 'options' => $priority, 'empty' => 'Enter the Priorities', 'label' => false, 'name' => 'priorities_id')); ?>
+        <?php echo $this->Form->input('priorities_id', array('id' => 'var_priorities', 'class' => 'form-control select-chosen', 'options' => $priority, 'empty' => 'Enter the Priorities', 'label' => false, 'name' => 'priorities_id')); ?>
     </div>
 
     <label class="col-md-2 control-label" for="val_calibrationtype">Calibration Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('calibrationtype', array('id' => 'val_calibrationtype', 'class' => 'form-control', 'options' => array('Singlas' => 'Singlas', 'Non-Singlas' => 'Non-Singlas'), 'empty' => 'Enter the Calibration Type', 'label' => false, 'name' => 'calibrationtype')); ?>
+        <?php echo $this->Form->input('calibrationtype', array('id' => 'val_calibrationtype', 'class' => 'form-control select-chosen', 'options' => array('Singlas' => 'Singlas', 'Non-Singlas' => 'Non-Singlas'), 'empty' => 'Enter the Calibration Type', 'label' => false, 'name' => 'calibrationtype')); ?>
     </div>
 
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('invoicetype', array('id' => 'val_invoicetype', 'class' => 'form-control', 'options' => array('Purchase order full invoice' => 'Purchase order full invoice', 'Sales order full invioce' => 'Sales order full invioce', 'Sales order partial invoice' => 'Sales order partial invoice'), 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoicetype')); ?>
+        <?php echo $this->Form->input('invoicetype', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' => array('Purchase order full invoice' => 'Purchase order full invoice', 'Sales order full invioce' => 'Sales order full invioce', 'Sales order partial invoice' => 'Sales order partial invoice'), 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoicetype')); ?>
     </div>
 
     <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('deliveryordertype', array('id' => 'val_deliveryordertype', 'class' => 'form-control', 'options' => array('Full delivery order' => 'Full delivery order', 'Partial delivery order' => 'Partial delivery order'), 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype')); ?>
+        <?php echo $this->Form->input('deliveryordertype', array('id' => 'val_deliveryordertype', 'class' => 'form-control select-chosen', 'options' => array('Full delivery order' => 'Full delivery order', 'Partial delivery order' => 'Partial delivery order'), 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype')); ?>
     </div>
 
 </div>

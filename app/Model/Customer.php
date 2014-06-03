@@ -11,6 +11,22 @@
 class Customer extends AppModel
 {
   public $belongsTo = array( 'Salesperson','Referedby','Industry','Location','Paymentterm','Priority' );
-  public $hasOne    =array('Contactpersoninfo');
+  public $hasMany = array(
+        'CusSalesperson' =>
+            array(
+                'className' => 'CusSalesperson',
+                'foreignKey' => 'customer_id',
+            ),
+        'CusReferby' =>
+            array(
+                'className' => 'CusReferby',
+                'foreignKey' => 'customer_id',
+            ),
+       'Contactpersoninfo' =>
+            array(
+                'className' => 'Contactpersoninfo',
+                'foreignKey' => 'customer_id',
+            ),
+    );
 
 }
