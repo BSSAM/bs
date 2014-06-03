@@ -48,11 +48,14 @@
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
+                    
                     $quotation_id   =   $this->Quotation->getLastInsertID();
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
+                    
                     if(!empty($device_node))
-                    {
+                    {  
                         $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
+                      
                     }
                     $this->request->data['Customerspecialneed']['quotation_id']=$quotation_id;
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']); 
@@ -71,6 +74,10 @@
         public function edit($id=NULL)
         {
             $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
+            if(empty($quotation_details)){
+                $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id),'recursive'=>2));
+                
+            }
             //pr($quotation_details);exit;
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $this->set('priority',$priority);
@@ -100,7 +107,16 @@
                         $this->Device->updateAll(array('Device.quotation_id'=>$id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
                     }
                     $this->Customerspecialneed->id=$this->request->data['Customerspecialneed']['id'];
-                    $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);                    
+                    $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);  
+                    
+                     $this->request->data['Logactivity']['logname']   =   'Quotation';
+                        $this->request->data['Logactivity']['logactivity']   =   'Add Quotation';
+                         $this->request->data['Logactivity']['logid']   =   $quotation_details['Quotation']['quotationno'];
+                         $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                         $this->request->data['Logactivity']['logapprove'] = 1;
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                        
+                        
                     $this->Session->setFlash(__('Quotation has been Added Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -268,5 +284,14 @@
                 
             }
      
+        }
+        public function approve()
+        {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.quotationno'=>$id));
+            //pr($id1);exit;
+           $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
         }
 }

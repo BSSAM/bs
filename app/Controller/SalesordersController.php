@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -61,7 +61,13 @@
                         /******************
                         * Data Log
                         */
-                        $this->Logactivity->save(array('Logactivity.logname'=>'Salesorder','Logactivity.logactivity'=>'Add SalesOrder','Logactivity.logid'=>'"'.$sales_orderid.'"'));
+                        $this->request->data['Logactivity']['logname']   =   'Salesorder';
+                        $this->request->data['Logactivity']['logactivity']   =   'Add SalesOrder';
+                         $this->request->data['Logactivity']['logid']   =   $sales_orderid;
+                         $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                         $this->request->data['Logactivity']['logapprove'] = 1;
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                        //pr($a);exit;
                         /******************/
                         $this->Session->setFlash(__('Salesorder has been Added Successfully '));
                         $this->redirect(array('action'=>'index'));
@@ -81,6 +87,7 @@
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id),'recursive'=>'2'));
             
             $this->set('salesorder',$salesorder_details);
+            //pr($salesorder_details);exit;
             if($this->request->is(array('post','put')))
             {
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
@@ -294,6 +301,16 @@
             {
                 echo "failure";
             }
+        }
+        
+        public function approve()
+        {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->Salesorder->updateAll(array('Salesorder.is_approved'=>1),array('Salesorder.salesorderno'=>$id));
+            //pr($id1);exit;
+           $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add SalesOrder'));
         }
       
 }

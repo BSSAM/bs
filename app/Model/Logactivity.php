@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Address extends AppModel
+class Logactivity extends AppModel
 {
-    public $useTable   =   'cus_addresses';
+    public $belongsTo    =array('User');
 }

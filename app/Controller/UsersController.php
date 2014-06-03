@@ -1,23 +1,21 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-class UsersController extends AppController
-{
-    
-    public $helpers = array('Html','Form','Session');
-    
-    public function index()
-    {
-        $this->User->recursive = 1; 
-        $data = $this->User->find('all',array('order' => array('User.id' => 'DESC')));
+class UsersController extends AppController {
+
+    public $helpers = array('Html', 'Form', 'Session');
+
+    public function index() {
+        $this->User->recursive = 1;
+        $data = $this->User->find('all', array('order' => array('User.id' => 'DESC')));
         //pr($data);exit;
         $this->set('user', $data);
-       
+
 //        //pr($data);
 //               // pr($data);exit;
 //        $data1 = $this->User->find('all');
@@ -50,121 +48,102 @@ class UsersController extends AppController
 //       exit;
 //       exit;  
 //          
-    
     }
-    
-    public function add()
-    {
-        
-     
+
+    public function add() {
+
+
         $this->loadModel('Userrole');
-         $data = $this->Userrole->find('list', array('fields' => 'user_role'));
-        $this->set('userrole',$data);
-        
+        $data = $this->Userrole->find('list', array('fields' => 'user_role'));
+        $this->set('userrole', $data);
+
         $this->loadModel('Department');
-         $data = $this->Department->find('list', array('fields' => 'departmentname'));
-        $this->set('department',$data);
-        
-        
-         if($this->request->is('post'))
-        {
-             $this->request->data['status']=1;
+        $data = $this->Department->find('list', array('fields' => 'departmentname'));
+        $this->set('department', $data);
+
+
+        if ($this->request->is('post')) {
+            $this->request->data['status'] = 1;
             //pr($dat);exit;
-             //$dat = $this->request->params[''];
-            
-              $match2 = $this->request->data['department_id'];
-              $dept = implode(',',$match2);
-              $this->request->data['department_id'] = $dept;
-              
-             
-             $match1 = $this->request->data['username'];
-             $data1 = $this->User->findByUsername($match1);
-             
-            if(!empty($data1))
-            {
+            //$dat = $this->request->params[''];
+
+            $match2 = $this->request->data['department_id'];
+            $dept = implode(',', $match2);
+            $this->request->data['department_id'] = $dept;
+
+
+            $match1 = $this->request->data['username'];
+            $data1 = $this->User->findByUsername($match1);
+
+            if (!empty($data1)) {
                 $this->Session->setFlash(__('Username Entered is Already Exist'));
-               
-                return $this->redirect(array('action'=>'add'));
+
+                return $this->redirect(array('action' => 'add'));
             }
             $this->User->create();
-           
-            if($this->User->save($this->request->data))
-            {
+
+            if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('User is Added'));
-                return $this->redirect(array('action'=>'index'));
+                return $this->redirect(array('action' => 'index'));
             }
             $this->Session->setFlash(__('User Could Not be Added'));
-           
         }
-       
     }
-    
-    public function edit($id = null)
-    {
-          
-        
-        
+
+    public function edit($id = null) {
+
+
+
         $this->loadModel('Userrole');
-         $data = $this->Userrole->find('list', array('fields' => 'user_role'));
-        $this->set('userrole',$data);
-        
+        $data = $this->Userrole->find('list', array('fields' => 'user_role'));
+        $this->set('userrole', $data);
+
         $this->loadModel('Department');
-         $data = $this->Department->find('list', array('fields' => 'departmentname'));
-        $this->set('department',$data);
-       
-        if(empty($id))
-        {
-             $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
-          
+        $data = $this->Department->find('list', array('fields' => 'departmentname'));
+        $this->set('department', $data);
+
+        if (empty($id)) {
+            $this->Session->setFlash(__('Invalid Entry'));
+            return $this->redirect(array('action' => 'edit'));
         }
-        
-        $user =  $this->User->findById($id); 
-       if(empty($user))
-       {
-           $this->Session->setFlash(__('Invalid User'));
-             return $this->redirect(array('action'=>'edit'));
-          
-       }
-       
-        
-         if($this->request->is(array('post','put')))
-       {
-             
-             $match2 = $this->request->data['department_id'];
-              $dept = implode(',',$match2);
-              $this->request->data['department_id'] = $dept;
-             
-            
-              $this->User->id = $id;
-             
-          
-              if($this->User->save($this->request->data))
-           {
-               
-               $this->Session->setFlash(__('User is Updated'));
-               return $this->redirect(array('action'=>'index'));
-           }
-            
+
+        $user = $this->User->findById($id);
+        if (empty($user)) {
+            $this->Session->setFlash(__('Invalid User'));
+            return $this->redirect(array('action' => 'edit'));
+        }
+
+
+        if ($this->request->is(array('post', 'put'))) {
+
+            $match2 = $this->request->data['department_id'];
+            $dept = implode(',', $match2);
+            $this->request->data['department_id'] = $dept;
+
+
+            $this->User->id = $id;
+
+
+            if ($this->User->save($this->request->data)) {
+
+                $this->Session->setFlash(__('User is Updated'));
+                return $this->redirect(array('action' => 'index'));
+            }
+
             $this->Session->setFlash(__('User Cant be Updated'));
-        }
-        else{
+        } else {
             $this->request->data = $user;
         }
-   
     }
-    
-     public function delete($id)
-    {
-        if($this->request->is('get'))
-        {
+
+    public function delete($id) {
+        if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
-        if($this->User->delete($id))
-        {
-            $this->Session->setFlash(__('The User has been deleted',h($id)));
-            return $this->redirect(array('action'=>'index'));
+        if ($this->User->delete($id)) {
+            $this->Session->setFlash(__('The User has been deleted', h($id)));
+            return $this->redirect(array('action' => 'index'));
         }
     }
-    
+
 }

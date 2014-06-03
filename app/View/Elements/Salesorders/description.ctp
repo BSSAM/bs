@@ -98,8 +98,8 @@
     </div>
     <label class="col-md-2 control-label" for="sales_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control',
-                                                'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand')); ?>
+         <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control',
+                                                'label'=>false,'name'=>'range_id','type'=>'select','empty'=>'Select Range')); ?>
         
     </div>
 </div>

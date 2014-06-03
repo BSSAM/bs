@@ -18,7 +18,7 @@
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
                                 <li class="active"><a href="#messages">Messages <span class="badge animation-floating">19</span></a></li>
-                                <li><a href="#approval">Approval <span class="badge animation-floating">6</span></a></li>
+                                <li><a href="#approval">Approval <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
                                 
                             </ul>
                         </div>
@@ -32,6 +32,8 @@
                                 <!-- Intro Category -->
                                 <table class="table table-borderless table-striped table-vcenter">
                                     <tbody>
+                                        <?PHP if (!empty($log_activity_message)): ?>
+                                        <?php foreach ($log_activity_message as $log_activity_message_list) :?>
                                         <tr>
                                             <td class="text-center" style="width: 100px;"><i class="gi gi-globe fa-2x"></i></td>
                                             <td>
@@ -44,30 +46,8 @@
                                             <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">1265</a></td>
                                             <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Sandra Gilbert</a><br><small>February 30, 2014</small></td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center"><i class="gi gi-bullhorn fa-2x"></i></td>
-                                            <td>
-                                                <h4>
-                                                    <a href="javascript:void(0)"><strong>Announcements</strong></a><br>
-                                                    <small>For the latest news, here is the place</small>
-                                                </h4>
-                                            </td>
-                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">251</a></td>
-                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">6352</a></td>
-                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Carolyn Cruz</a><br><small>June 15, 2014</small></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center"><i class="gi gi-pen fa-2x"></i></td>
-                                            <td>
-                                                <h4>
-                                                    <a href="javascript:void(0)"><strong>Terms &amp; Conditions</strong></a><br>
-                                                    <small>Please read the rules of our forum</small>
-                                                </h4>
-                                            </td>
-                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">20</a></td>
-                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">20</a></td>
-                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Shirley Ray</a><br><small>February 10, 2014</small></td>
-                                        </tr>
+                                        <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                                 <div class="text-center">
@@ -87,6 +67,7 @@
 
                             <!-- Topics -->
                             <div class="tab-pane" id="approval">
+                                <div class="table-responsive">
                                 <table class="table table-borderless table-striped table-vcenter">
 <!--                                    <thead>
                                         <tr>
@@ -97,16 +78,28 @@
                                         </tr>
                                     </thead>-->
                                     <tbody>
+                                         <?PHP if (!empty($log_activity)): ?>
+                                        <?php foreach ($log_activity as $log_activity_list) :?>
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong>Welcome to our Getting Started category</strong></a> <br><small><a href="page_ready_user_profile.html">Hannah Bates</a> on <em>January 1, 2014</em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">456</a></td>
-                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">6598</a></td>
-                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Maria Young</a><br><small>June 25, 2014</small></td>
+<!--                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">456</a></td>-->
+                                            <td class="text-center hidden-xs hidden-sm">
+                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Salesorder'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Quotation'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                            
+                                            </td>
+                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_list['User']['username'] ?><br><small><?PHP echo $log_activity_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
-                                        <tr>
+                                       <?php endforeach; ?>
+                                        <?php endif; ?>
+<!--                                        <tr>
                                             <td class="text-center"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong>A big upgrade is coming to our app</strong></a> <br><small><a href="page_ready_user_profile.html">Anna Matthews</a> on <em>February 2, 2014</em></small></h4>
@@ -123,11 +116,12 @@
                                             <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">248</a></td>
                                             <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">7548</a></td>
                                             <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Catherine Carr</a><br><small>June 30, 2014</small></td>
-                                        </tr>
+                                        </tr>-->
                                         
                                     </tbody>
                                 </table>
-                                <div class="text-center">
+                                </div>
+<!--                                <div class="text-center">
                                     <ul class="pagination pagination-sm">
                                         <li class="disabled"><a href="javascript:void(0)">Prev</a></li>
                                         <li class="active"><a href="javascript:void(0)">1</a></li>
@@ -137,7 +131,7 @@
                                         <li><a href="javascript:void(0)">999</a></li>
                                         <li><a href="javascript:void(0)">Next</a></li>
                                     </ul>
-                                </div>
+                                </div>-->
                             </div>
                             <!-- END Topics -->
 
@@ -171,8 +165,8 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-simple">
-                                    <a> <span class="label label-second custom_float_top animation-floating">232</span><h3 class="text-center themed-color-amethyst animation-stretchRight">Purchase Order</h3> </a>
-                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>72</strong></h3>
+                                    <a> <span class="label label-second custom_float_top animation-floating">0 New</span><h3 class="text-center themed-color-amethyst animation-stretchRight">Purchase Order</h3> </a>
+                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>0</strong></h3>
                                 </div>
                             </div>
                             <!-- END Widget -->
@@ -201,8 +195,8 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-simple">
-                                    <a> <span class="label label-five custom_float_top animation-floating">5</span><h3 class="text-center themed-color-spring animation-stretchRight">In Invoice </h3> </a>
-                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>76</strong></h3>
+                                    <a> <span class="label label-five custom_float_top animation-floating">0 New</span><h3 class="text-center themed-color-spring animation-stretchRight">In Invoice </h3> </a>
+                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>0</strong></h3>
                                 </div>
                             </div>
                             <!-- END Widget -->
