@@ -2331,6 +2331,7 @@ a.list-group-item.active > .badge {
 
 .nav > li i {
     font-size: 14px;
+    padding-top: 13px;
 }
 
 .nav-pills > .active > a > .badge {

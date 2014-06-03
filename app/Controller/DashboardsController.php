@@ -49,6 +49,8 @@ class DashboardsController extends AppController
         $logactivity_message = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>0)));
         //pr($logactivity);exit;
         $this->set('log_activity_message', $logactivity_message);
+        $logactivity_message_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>0)));
+        $this->set('log_activity_message_count', $logactivity_message_count);
       
     }
 }

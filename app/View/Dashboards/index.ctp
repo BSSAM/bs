@@ -17,7 +17,7 @@
                         <!-- Forum Tabs Title -->
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
-                                <li class="active"><a href="#messages">Messages <span class="badge animation-floating">19</span></a></li>
+                                <li class="active"><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
                                 <li><a href="#approval">Approval <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
                                 
                             </ul>
@@ -35,22 +35,26 @@
                                         <?PHP if (!empty($log_activity_message)): ?>
                                         <?php foreach ($log_activity_message as $log_activity_message_list) :?>
                                         <tr>
-                                            <td class="text-center" style="width: 100px;"><i class="gi gi-globe fa-2x"></i></td>
+                                            <td class="text-center" style="width: 100px;">
+                                                <?php if($log_activity_message_list['Logactivity']['logname'] == 'Salesorder'){ ?>
+                                                <i class="gi gi-globe fa-2x"></i>
+                                                <?php } ?>
+                                            </td>
                                             <td>
                                                 <h4>
-                                                    <a href="javascript:void(0)"><strong>Welcome</strong></a><br>
-                                                    <small>Feel free to come inside and introduce yourself!</small>
+                                                    <a href="javascript:void(0)"><strong><?PHP echo $log_activity_message_list['Logactivity']['logname']; ?></strong></a><br>
+                                                    <small><?php echo $log_activity_message_list['Logactivity']['logid']; ?></small>
                                                 </h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">205</a></td>
-                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">1265</a></td>
-                                            <td class="hidden-xs hidden-sm">by <a href="page_ready_user_profile.html">Sandra Gilbert</a><br><small>February 30, 2014</small></td>
+<!--                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">205</a></td>-->
+                                            <td class="text-center hidden-xs hidden-sm"><?PHP echo $log_activity_message_list['Logactivity']['logactivity']; ?></td>
+                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php endif; ?>
                                     </tbody>
                                 </table>
-                                <div class="text-center">
+<!--                            <div class="text-center">
                                     <ul class="pagination pagination-sm">
                                         <li class="disabled"><a href="javascript:void(0)">Prev</a></li>
                                         <li class="active"><a href="javascript:void(0)">1</a></li>
@@ -60,7 +64,7 @@
                                         <li><a href="javascript:void(0)">999</a></li>
                                         <li><a href="javascript:void(0)">Next</a></li>
                                     </ul>
-                                </div>
+                                </div>-->
                                 </div>
                             </div>
                             <!-- END Forum -->
@@ -99,6 +103,7 @@
                                         </tr>
                                        <?php endforeach; ?>
                                         <?php endif; ?>
+                                        
 <!--                                        <tr>
                                             <td class="text-center"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
                                             <td>
