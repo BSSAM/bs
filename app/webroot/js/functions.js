@@ -531,16 +531,26 @@ $(document).ready(function(){
             success: function(data)
             {
                 data1 = $.parseJSON(data);
-                $('#val_address').val(data1.Customer.regaddress);
+                address_node    =   data1.Address;
+                contact_person_info =   data1.Contactpersoninfo;
+                salesperson_node =   data1.CusSalesperson;
+                $.each(address_node,function(k,v){
+                    if(v.type=='registered'){
+                    $('#val_address').val(v.address);}
+                });
+                $.each(contact_person_info,function(k,v){
+                    $('#val_attn').append('<option value="'+v.id+'">'+v.name+'</option>');
+                });
+                  var sal_name    =  [];
+                  $.each(salesperson_node,function(k,v){
+                      sal_name.push(v.Salesperson.salesperson);   
+                });
+                $('#val_salesperson').val(sal_name.join(' , '));
                 $('#QuotationCustomerId').val(data1.Customer.id);
-                $('#val_phone').val(data1.Customer.phone);    
-                $('#SalesorderCustomerId').val(data1.Customer.id);
-                $('#val_salesperson').val(data1.Salesperson.salesperson);
-                $('#salespeople_id').val(data1.Salesperson.id);
                 $('#val_fax').val(data1.Customer.fax);
-                
-                $('#val_attn').append('<option>'+data1.Contactpersoninfo.name+'</option>');
+                $('#val_phone').val(data1.Customer.phone); 
                 $('#val_email').val(data1.Contactpersoninfo.email);
+                $('#SalesorderCustomerId').val(data1.Customer.id);
                 $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
             }
 	});
@@ -842,11 +852,12 @@ $(document).on('click','.instrument_id',function(){
                 
                 $.each(parsedata.Instrument.InstrumentRange, function(k, v)
                 {
-                     $('#val_range').empty().append('<option value=0>Select Brand</option><option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+                     $('#val_range').empty().append('<option value=0>Select Range</option><option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
                   
                 });
                     
                 $('#val_department').val(dept.Department.departmentname);
+                $('#val_department_id').val(dept.Department.id);
                 $('#val_model_no').val(parsedata.CustomerInstrument.model_no);
                 $('#QuotationInstrumentId').val(instrument_id);
                 $('#val_unit_price').val(parsedata.CustomerInstrument.unit_price);
@@ -876,7 +887,7 @@ $(document).on('click','.instrument_id',function(){
         var instrument_validity=$('#val_validity').val();
         var instrument_unitprice=$('#val_unit_price').val();
         var instrument_discount=$('#val_discount').val();
-        var instrument_department=$('#val_department').val();
+        var instrument_department=$('#val_department_id').val();
         var instrument_account=$('#val_account_service').val();
         var instrument_title=$('#val_title').val();
         
@@ -891,8 +902,6 @@ $(document).on('click','.instrument_id',function(){
                                     <td class="text-center">'+data+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
                                     <td class="text-center">'+instrument_modelno+'</td>\n\
-                                    <td class="text-center">'+instrument_brand+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_range+'</td>\n\\n\\n\
                                     <td class="text-center">'+instrument_calllocation+'</td>\n\
                                     <td class="text-center">'+instrument_calltype+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\
@@ -951,7 +960,7 @@ $(document).on('click','.instrument_id',function(){
                 
                 $('#val_unit_price').val(edit_node.Device.unit_price);
                 $('#val_discount').val(edit_node.Device.discount);
-                $('#val_department').val(edit_node.Device.department);
+                $('#val_department').val(edit_node.Department.departmentname);
                 
                 $('#val_account_service').val(edit_node.Device.account_service);
                 $('#val_title').val(edit_node.Device.title);
@@ -971,7 +980,6 @@ $(document).on('click','.instrument_id',function(){
         }
         $('.update_device').html('<button class="btn btn-sm btn-primary description_add" type="button"><i class="fa fa-plus fa-fw"></i> add</button>');
         var device_id =   $('#device_id').val();
-        var customer_id =   $('#QuotationCustomerId').val();
         var customer_id =   $('#QuotationCustomerId').val();
         var instrument_id   =   $('#QuotationInstrumentId').val();
         var instrument_quantity =   $('#val_quantity').val();
@@ -998,8 +1006,6 @@ $(document).on('click','.instrument_id',function(){
                                     <td class="text-center">'+device_id+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
                                     <td class="text-center">'+instrument_modelno+'</td>\n\
-                                    <td class="text-center">'+instrument_brand+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_range+'</td>\n\\n\\n\
                                     <td class="text-center">'+instrument_calllocation+'</td>\n\
                                     <td class="text-center">'+instrument_calltype+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\

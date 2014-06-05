@@ -26,8 +26,7 @@ var path='<?PHP echo Router::url('/',true); ?>';
         echo $this->Form->input('Customerspecialneed.gsttype', array('id' => 'val_gsttype', 'class' => 'form-control gsttype', 'type' => 'select',
             'label' => false, 'options' => array('Standard' => 'Standard Rated', 'Zero' => 'Zero Rated')));
         ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_gst">GST</label>
     <div class="col-md-4">
@@ -44,8 +43,7 @@ echo $this->Form->input('Customerspecialneed.gst', array('id' => 'val_gst', 'cla
 echo $this->Form->input('Customerspecialneed.currency_id', array('id' => 'val_currency', 'class' => 'form-control country_value', 'type' => 'select',
     'label' => false ,'options' => $country));
 ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_currency_value">Currency Value</label>
     <div class="col-md-4">
@@ -63,8 +61,7 @@ echo $this->Form->input('Customerspecialneed.currency_value', array('id' => 'val
 echo $this->Form->input('Customerspecialneed.additionalcharge_id', array('id' => 'val_additional_service_charge', 'class' => 'form-control', 'type' => 'select',
     'label' => false, 'options' => $additional));
 ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_service_charge">Service Charge</label>
     <div class="col-md-4">
@@ -89,8 +86,7 @@ echo $this->Form->input('Customerspecialneed.additional_service_value', array('i
 echo $this->Form->input('Customerspecialneed.service_id', array('id' => 'val_service_id', 'class' => 'form-control', 'type' => 'select',
     'label' => false, 'options' =>$service));
 ?>
-        <div id="result">
-        </div>
+        
     </div>  
 
 </div>

@@ -6,7 +6,7 @@ var path='<?PHP echo Router::url('/',true); ?>';
     <div class="col-md-4">
         <?php
         echo $this->Form->input('Customerspecialneed.salesperson', array('id' => 'val_salesperson', 'class' => 'form-control',
-            'placeholder' => 'Sales Person Name', 'label' => false));
+            'placeholder' => 'Sales Person Name', 'label' => false,'readonly'));
         echo $this->Form->input('Customerspecialneed.salespeople_id',array('type'=>'hidden','id'=>'salespeople_id'));
        
         ?>
@@ -23,17 +23,16 @@ var path='<?PHP echo Router::url('/',true); ?>';
     <label class="col-md-2 control-label" for="val_gsttype">GST type</label>
     <div class="col-md-4">
         <?php
-        echo $this->Form->input('Customerspecialneed.gsttype', array('id' => 'val_gsttype', 'class' => 'form-control gsttype', 'type' => 'select',
-            'label' => false, 'options' => array('Standard' => 'Standard Rated', 'Zero' => 'Zero Rated')));
+        echo $this->Form->input('Customerspecialneed.gsttype', array('id' => 'val_gsttype', 'class' => 'form-control gsttype select-chosen', 'type' => 'select',
+            'label' => false, 'options' => array('Standard' => 'Standard Rated', 'Zero' => 'Zero Rated'),'empty'=>'Select GST Type'));
         ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_gst">GST</label>
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.gst', array('id' => 'val_gst', 'class' => 'form-control',
-    'placeholder' => 'GST Values', 'label' => false));
+    'placeholder' => 'GST Values', 'label' => false,'readonly'));
 ?>    
     </div>
 </div>
@@ -41,17 +40,16 @@ echo $this->Form->input('Customerspecialneed.gst', array('id' => 'val_gst', 'cla
     <label class="col-md-2 control-label" for="val_currency">Currency</label>
     <div class="col-md-4">
 <?php
-echo $this->Form->input('Customerspecialneed.currency_id', array('id' => 'val_currency', 'class' => 'form-control country_value', 'type' => 'select',
-    'label' => false ,'options' => $country));
+echo $this->Form->input('Customerspecialneed.currency_id', array('id' => 'val_currency', 'class' => 'form-control country_value select-chosen', 'type' => 'select',
+    'label' => false ,'options' => $country,'empty'=>'Select Currency Type'));
 ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_currency_value">Currency Value</label>
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.currency_value', array('id' => 'val_currency_value', 'class' => 'form-control',
-    'placeholder' => 'Currency Values', 'label' => false));
+    'placeholder' => 'Currency Values', 'label' => false,'type'=>'text','readonly'));
 ?>    
     </div>
 </div>
@@ -60,17 +58,16 @@ echo $this->Form->input('Customerspecialneed.currency_value', array('id' => 'val
     <label class="col-md-2 control-label" for="val_additional_service_charge">Additional Service Charge</label>
     <div class="col-md-4">
 <?php
-echo $this->Form->input('Customerspecialneed.additionalcharge_id', array('id' => 'val_additional_service_charge', 'class' => 'form-control', 'type' => 'select',
-    'label' => false, 'options' => $additional));
+echo $this->Form->input('Customerspecialneed.additionalcharge_id', array('id' => 'val_additional_service_charge', 'class' => 'form-control select-chosen', 'type' => 'select',
+    'label' => false, 'options' => $additional,'empty'=>'Select Service Charge'));
 ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_service_charge">Service Charge</label>
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.additional_service_value', array('id' => 'val_service_charge', 'class' => 'form-control',
-    'placeholder' => 'Enter Additional Service Charge Values', 'label' => false));
+    'placeholder' => 'Enter Additional Service Charge Values', 'label' => false,'type'=>'text'));
 ?>    
     </div>
 </div>
@@ -86,11 +83,10 @@ echo $this->Form->input('Customerspecialneed.additional_service_value', array('i
     <label class="col-md-2 control-label" for="val_service_id">Service Type</label>
     <div class="col-md-4">
 <?php
-echo $this->Form->input('Customerspecialneed.service_id', array('id' => 'val_service_id', 'class' => 'form-control', 'type' => 'select',
-    'label' => false, 'options' =>$service));
+echo $this->Form->input('Customerspecialneed.service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
+    'label' => false, 'options' =>$service,'empty'=>'Select Service Type'));
 ?>
-        <div id="result">
-        </div>
+        
     </div>  
 
 </div>

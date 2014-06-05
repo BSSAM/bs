@@ -5,7 +5,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Unit','Logactivity');
+                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Contactpersoninfo');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -24,14 +24,19 @@
             $y=date("Y");
             $t=time();
             $dmt='BSQ'.($d+$m+$y+$t);
+            $track_id='BSTRA'.(rand(0,89966587));
+            
             //$str = 'BSQ-13-'.str_pad($str + 1, 5, 0, STR_PAD_LEFT);
             $this->set('quotationno', $dmt);
+            $this->set('our_ref_no', $track_id);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $this->set('payment',$payment);
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
             $this->set('country',$country);
+            $instrument_type=$this->InstrumentType->find('list',array('conditions'=>array('type_for'=>'Quotation'),'fields'=>array('id','type_name')));
+            $this->set('instrument_types',$instrument_type);
             
             $additional_charge=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
             $this->set('additional',$additional_charge);
@@ -49,6 +54,7 @@
 
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
+                
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     
@@ -79,21 +85,24 @@
                
             }
         }
-        public function file_up()
-        {
-            $upload_handler = new UploadHandler();
-            $file_path  =   $upload_handler->get_upload_path();
-            pr($file_path);exit;
-            
-        }
+       
         public function edit($id=NULL)
         {
             $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
+            pr($quotation_details);
+            exit;
             if(empty($quotation_details)){
                 $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id),'recursive'=>2));
                 
             }
             //pr($quotation_details);exit;
+            $instrument_type=$this->InstrumentType->find('list',array('conditions'=>array('type_for'=>'Quotation'),'fields'=>array('id','type_name')));
+            $this->set('instrument_types',$instrument_type);
+            $track_id='BSTRA'.(rand(0,89966587));
+            
+          
+            
+            $this->set('our_ref_no', $track_id);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
@@ -167,6 +176,7 @@
             $this->loadModel('Customer');
             $customer_id =  $this->request->data['cust_id'];
             $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$customer_id),'recursive'=>'2'));
+           
             if(!empty($customer_data))
             {
                 echo json_encode($customer_data) ;
@@ -201,18 +211,18 @@
             $this->autoRender = false;
             $instrument =  $this->request->data['instrument'];
             $customer_id =  $this->request->data['customer_id'];
-            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id)));
-            foreach($instrument_details as $instrument)
-            {
-                echo "<div class='instrument_id' align='left' id='".$instrument['Instrument']['id']."'>";
-                $instrument_list= $this->Instrument->find('all',array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument['Instrument']['name'].'%'),'fields'=>array('Instrument.name')));
-                foreach($instrument_list as $li)
-                {
-                    echo $li['Instrument']['name'];
+            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
+            $c = count($instrument_details);
+                for($i = 0; $i<$c;$i++)
+                { 
+                    echo "<div class='instrument_id' align='left' id='".$instrument_details[$i]['Instrument']['id']."'>";
+                    echo $name=($instrument_details[$i]['Instrument']['name']!='')?$instrument_details[$i]['Instrument']['name']:'No Results Found';
+                    echo "<br>";
+                    echo "</div>";
                 }
-                echo "<br>";
-                echo "</div>";
-            }
+            
+            
+            
             
         }
         public function get_brand_value()
@@ -240,7 +250,7 @@
             $this->request->data['Device']['call_type']     =   $this->request->data['instrument_calltype'];
             $this->request->data['Device']['validity']      =   $this->request->data['instrument_validity'];
             $this->request->data['Device']['discount']      =   $this->request->data['instrument_discount'];
-            $this->request->data['Device']['department']    =   $this->request->data['instrument_department'];
+            $this->request->data['Device']['department_id']    =   $this->request->data['instrument_department'];
             $this->request->data['Device']['unit_price']    =   $this->request->data['instrument_unitprice'];
             $this->request->data['Device']['account_service']=  $this->request->data['instrument_account'];
             $this->request->data['Device']['title']         =   $this->request->data['instrument_title'];
@@ -248,6 +258,7 @@
             if($this->Device->save($this->request->data))
             {
                 $device_id=$this->Device->getLastInsertID();
+               
                 echo $device_id;
             }
      
@@ -308,5 +319,19 @@
             //pr($id1);exit;
            $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
+        }
+        public function get_contact_email()
+        {
+            $this->autoRender   =   false;
+            $id =  $this->request->data['cid'];
+            $email  =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.status'=>'1','Contactpersoninfo.id'=>1),'fields'=>array('email')));
+            if(!empty($email))
+            {
+                echo $email['Contactpersoninfo']['email'];
+            }
+            else {
+                echo "";
+            }
+           
         }
 }

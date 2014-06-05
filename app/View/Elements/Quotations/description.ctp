@@ -72,7 +72,7 @@
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control',
-                                                'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Brand')); ?>
+                                                'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
        
     </div>
 </div>
@@ -82,14 +82,14 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
-                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site'))); ?>
+                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Call Location')); ?>
         
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type',
-                                      'placeholder'=>'Enter the Fax Number','type'=>'select','options'=>array('singlas'=>'Singlas',
-                                          'no-singlas'=>'Non-Singlas'))); ?>
+                                      'type'=>'select','options'=>array('singlas'=>'Singlas',
+                                          'no-singlas'=>'Non-Singlas'),'empty'=>'Select Call Type')); ?>
     </div>
 </div>
 
@@ -119,7 +119,8 @@
     <label class="col-md-2 control-label" for="val_department">Department</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('department', array('id'=>'val_department','class'=>'form-control','label'=>false,
-                                      'name'=>'department','placeholder'=>'Enter the Departmnent Name',)); ?>
+                                      'name'=>'department','placeholder'=>'Enter the Departmnent Name','readonly')); ?>
+        <?PHP echo $this->Form->input('dept_id',array('id'=>'val_department_id','type'=>'hidden')) ?>
     </div>
 </div>
 <div class="form-group">
@@ -149,8 +150,6 @@
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Model No</th>
-            <th class="text-center">Brand</th>
-            <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Call Type</th>
              <th class="text-center">Validity</th>

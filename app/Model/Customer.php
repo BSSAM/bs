@@ -28,6 +28,11 @@ class Customer extends AppModel
                 'className' => 'Contactpersoninfo',
                 'foreignKey' => 'customer_id',
             ),
+            'Address' =>
+        array(
+            'className' => 'Address',
+            'foreignKey' => 'customer_id',
+        ),
     );
 
 }

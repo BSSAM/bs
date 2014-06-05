@@ -6,7 +6,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('priority', array('id'=>'val_priority','class'=>'form-control',
+        <?php echo $this->Form->input('priority', array('id'=>'val_priority','class'=>'form-control select-chosen',
             'label'=>false,'options'=>$priority)); ?>
     </div>
     
@@ -40,7 +40,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select')); ?>
+        <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name')); ?>
     </div>
 </div>
 <div class="form-group">
@@ -62,7 +62,7 @@
     <label class="col-md-2 control-label" for="val_email">Email</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('email', array('id'=>'val_email','class'=>'form-control',
-                                                'placeholder'=>'Enter the Email Id','label'=>false,'autoComplete'=>'off')); ?>
+                                                'placeholder'=>'Enter the Email Id','label'=>false,'autoComplete'=>'off','readonly'=>'readonly')); ?>
         
     </div>
     <label class="col-md-2 control-label" for="val_payment_term">Payment Terms</label>
@@ -76,7 +76,7 @@
     
     <label class="col-md-2 control-label" for="val_reg_date">Reg Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'mm/dd/yy',
+        <?php echo $this->Form->input('reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
      
     </div>
@@ -93,14 +93,18 @@
                                                 'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text')); ?>
         
     </div>
+    <label class="col-md-2 control-label" for="val_our_no">Our Reference No</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('track_id', array('id'=>'val_our_no','class'=>'form-control','label'=>false,'value'=>$our_ref_no,'readonly','type'=>'text')); ?>
+    </div>
    
 </div>
 <div class="form-group">
     
  <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
     <div class="col-md-12">
-        <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control','type'=>'select',
-                                                'label'=>false,'empty'=>'-- Select instrument For --','options'=>array('1'=>'We are pleased to quote the item(s) below for calibration service with certificate(s) :'))); ?>
+        <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
+                                                'label'=>false,'empty'=>'-- Select instrument For --','options'=>$instrument_types)); ?>
        
     </div>
 </div>
