@@ -426,9 +426,9 @@
                         <!-- END User Dropdown -->
                     </ul>
                     
-                    <?php echo $this->Form->create('Invents',array('action'=>'index','class'=>'navbar-form-custom','role'=>'search')); ?>
+                    <?php echo $this->Form->create('Track',array('action'=>'index','type'=>'get','class'=>'navbar-form-custom','role'=>'search')); ?>
                     <div class="form-group">
-                    <?php echo $this->Form->input('',array('type'=>'text','label'=>false,'id'=>'top-search','name'=>'top-search','class'=>'form-control','placeholder'=>'Search..')); ?>
+                    <?php echo $this->Form->input('track_id',array('type'=>'text','label'=>false,'id'=>'top-search','class'=>'form-control','placeholder'=>'Search..')); ?>
                     </div>
                     <?php echo $this->Form->end(); ?>
                     <!-- END Left Header Navigation -->

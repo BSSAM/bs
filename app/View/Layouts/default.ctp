@@ -36,6 +36,7 @@
 		echo $this->Html->css('bootstrap.min');
 		echo $this->Html->css('plugins');
 		echo $this->Html->css('main');
+             
                 ?>
                 <script>
                     /* add a class of 'loading' to the HTML, then remove it once the page has finished loading */
@@ -61,7 +62,7 @@
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
                 <?php 
                 echo $this->Html->script('vendor/modernizr-2.7.1-respond-1.4.2.min');
-		echo $this->fetch('meta');
+                echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
                 ?>
