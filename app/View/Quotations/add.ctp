@@ -1,28 +1,12 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
-<style>
-    .show
-	{
-		padding:10px; 
-		border-bottom:1px #999 dashed;
-		font-size:15px; 
-		height:50px;
-                float: top;
-	}
-	.show:hover
-	{
-		background:#4c66a4;
-		color:#FFF;
-		cursor:pointer;
-	}
-        #result{
-            position: absolute;
-            z-index: 999;
-        }
-    </style>
+
 <script type="text/javascript">
+
 $(function(){
+    $("#result").hide();
+   
 $("#val_customer").keyup(function() 
 { 
 //alert();    
@@ -39,10 +23,13 @@ if(customer!='')
 	{
             
             $("#result").html(html).show();
+            
 	}
 	});
-}return false;    
+}
+
 });
+
 $("#val_reg_date").datepicker("setDate", new Date());
 });
 

@@ -51,6 +51,12 @@
                                             <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                         <?php endforeach; ?>
+                                        <?php else: ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-circle_info"></i> Oops... No Messages Available
+                                            </td>
+                                        </tr>
                                         <?php endif; ?>
                                     </tbody>
                                 </table>
@@ -102,6 +108,12 @@
                                             <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_list['User']['username'] ?><br><small><?PHP echo $log_activity_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                        <?php endforeach; ?>
+                                        <?php else: ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Approvals Available
+                                            </td>
+                                        </tr>
                                         <?php endif; ?>
                                         
 <!--                                        <tr>

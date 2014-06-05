@@ -1,63 +1,29 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
-<style>
-    .delivery_show
-    {
-        padding:10px; 
-        border-bottom:1px #999 dashed;
-        font-size:15px; 
-        height:50px;
-        float: top;
-    }
-    .delivery_no_result
-    {
-        padding:10px; 
-        border-bottom:1px #999 dashed;
-        font-size:15px; 
-        height:50px;
-        float: top;
-    }
-    .delivery_no_result:hover
-    {
-        background:#4c66a4;
-        color:#FFF;
-        cursor:pointer;
-    }
-    .delivery_show:hover
-    {
-        background:#4c66a4;
-        color:#FFF;
-        cursor:pointer;
-    }
-    #sales_list{
-        position: absolute;
-        z-index: 999;
-        background: none repeat scroll 0 0 #F4F4F4;
-        width: 268px;
-    }
-</style>
+
  
 <script type="text/javascript">
-$(function(){
-$("#delivery_input_search").keyup(function() 
-{ 
-    $(this).css('border','1px solid green')
-    var sales_id = $(this).val();
-    var dataString = 'sale_id='+ sales_id;
-    if(sales_id!='')
-    {
-	$.ajax({
-	type: "POST",
-	url: "<?PHP echo Router::url('/',true); ?>Deliveryorders/salesorder_id_search",
-	data: dataString,
-	cache: false,
-	success: function(html)
-	{
-            $("#sales_list").html(html).show();
-	}
-	});
-        }return false;    
+    $(function(){
+        $("#sales_list").hide();
+        $("#delivery_input_search").keyup(function() 
+        { 
+            $(this).css('border','1px solid green')
+            var sales_id = $(this).val();
+            var dataString = 'sale_id='+ sales_id;
+            if(sales_id!='')
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "<?PHP echo Router::url('/',true); ?>Deliveryorders/salesorder_id_search",
+                    data: dataString,
+                    cache: false,
+                    success: function(html)
+                    {
+                        $("#sales_list").html(html).show();
+                    }
+                });
+            }return false;    
         });
         $("#val_reg_date").datepicker("setDate", new Date());
         $("#val_in_date").datepicker("setDate", new Date());
@@ -65,7 +31,7 @@ $("#delivery_input_search").keyup(function()
         var addDays = new Date();
         addDays.setDate(addDays.getDate() + 4);
         $("#val_out_date").datepicker("setDate",addDays);
-        });
+    });
 </script>
                     <h1>
                         <i class="gi gi-user"></i>Add Delivery Order

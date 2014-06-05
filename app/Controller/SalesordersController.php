@@ -9,6 +9,7 @@
         {
             //$this->Quotation->recursive = 1; 
             $data = $this->Salesorder->find('all',array('order' => array('Salesorder.id' => 'DESC')));
+            //pr($data);exit;
             $this->set('salesorder', $data);
         }
         public function add()
@@ -311,6 +312,13 @@
             //pr($id1);exit;
            $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add SalesOrder'));
+            
+//            $this->request->data['Logactivity']['logname']   =   'Labprocess';
+//            $this->request->data['Logactivity']['logactivity']   =   'Labprocess Check';
+//            $this->request->data['Logactivity']['logid']   =   $id;
+//            $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+//            $this->request->data['Logactivity']['logapprove'] = 1;
+//            $a = $this->Logactivity->save($this->request->data['Logactivity']);
         }
       
 }

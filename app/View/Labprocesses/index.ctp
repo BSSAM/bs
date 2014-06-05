@@ -20,41 +20,49 @@
         <h2>List Of Lab Processes</h2>
     </div>
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3 col-lg-13">
             <div class="block text-center"><h4>SO Count</h4><p><code><?php echo $salesordercount; ?></code></p></div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3 col-lg-13">
             <div class="block text-center"><h4>Total Qty</h4><p><code><?php echo $data_description_count; ?></code></p></div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3 col-lg-13">
             <div class="block text-center"><h4>Pending Qty</h4><p><code><?php echo $data_pending_count; ?></code></p></div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3 col-lg-13">
             <div class="block text-center"><h4>Processing Qty</h4><p><code><?php echo $data_processing_count; ?></code></p></div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3 col-lg-13">
             <div class="block text-center"><h4>Checking Qty</h4><p><code><?php echo $data_checking_count; ?></code></p></div>
         </div>
         <div class="">
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 
                 <div class="block">
                     <div class="block-title">
                         <h2><strong>SO</strong> List Status</h2>
                     </div>
+                
                    <?PHP 
-                   $options = array('out' => 'Outstanding SO List', 'run' => 'Running SO List','overdue'=>'Overdue SO List');
-                   $attributes = array('legend' => false,'value'=>'out','class'=>'so_list_button','name'=>'solist');
+                   $options = array('out' => 'Outstanding SO List', 'run' => 'Running SO List','overdue'=>'Overdue SO List');?>
+                
+                   <?php      
+                   $attributes = array('legend' => false,'value'=>'out','class'=>'so_list_button radio-align','name'=>'solist'); ?>
+
+                   <?php      
                    echo $this->Form->radio('solist', $options, $attributes);
                    ?>
+
                 </div>
+            </div>
+             <div class="col-sm-6">
                 <div class="block">
                     <div class="block-title">
                         <h2><strong>Call</strong> Location</h2>
                     </div>
                     <?PHP 
                    $options = array('all' => 'All', 'Inlab' => 'In Lab','subcontract'=>'Sub Contract','onsite'=>'On Site');
-                   $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button','name'=>'calllocation');
+                   $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button radio-align-call','name'=>'calllocation');
                    echo $this->Form->radio('calllocation', $options, $attributes);
                    ?>
                     </div>

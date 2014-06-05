@@ -161,6 +161,7 @@
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
     </div>
 </div>
+<div class="col-sm-3 col-lg-12">
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
@@ -215,3 +216,4 @@
         
     </tbody>
 </table>
+</div>

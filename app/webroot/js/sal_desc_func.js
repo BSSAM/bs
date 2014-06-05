@@ -281,5 +281,7 @@ $(document).ready(function(){
     }
        
    });
-
+    $('#SalesorderQuotationId').blur(function(){
+         $('#quoat_list').fadeOut();
+    });
 });

@@ -1,25 +1,7 @@
-<style>
-    .instrument_id
-	{
-		padding:10px; 
-		border-bottom:1px #999 dashed;
-		font-size:15px; 
-		height:50px;
-                float: top;
-	}
-	.instrument_id:hover
-	{
-		background:#4c66a4;
-		color:#FFF;
-		cursor:pointer;
-	}
-        #search_instrument{
-            position: absolute;
-            z-index: 999;
-        }
-    </style>
+
 <script type="text/javascript">
     $(function(){
+         $("#search_instrument").hide();
     $("#val_description").keyup(function() 
     { 
         var instrument = $(this).val();
@@ -85,8 +67,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
@@ -102,8 +83,7 @@
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'))); ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
     <div class="col-md-4">
@@ -119,8 +99,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('validity', array('id'=>'val_validity','class'=>'form-control',
                                                 'label'=>false,'name'=>'validity','disabled'=>'disabled','value'=>'12')); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
     <div class="col-md-4">
@@ -135,8 +114,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>
-        <div id="result">
-        </div>
+      
     </div>
     <label class="col-md-2 control-label" for="val_department">Department</label>
     <div class="col-md-4">
@@ -151,8 +129,7 @@
         <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_title">Titles</label>
     <div class="col-md-4">
@@ -165,6 +142,7 @@
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
     </div>
 </div>
+<div class="col-sm-3 col-lg-12">
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
@@ -185,3 +163,4 @@
    
     </tbody>
 </table>
+</div>
