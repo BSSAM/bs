@@ -1,4 +1,5 @@
 <?php
+    App::import('Vendor', 'UploadHandler');
     class QuotationsController extends AppController
     {
         public $helpers = array('Html','Form','Session');
@@ -13,6 +14,7 @@
         }
         public function add()
         {
+          
            
 //          $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>1399899781),'recursive'=>'2'));
 //          pr($customer_data);exit;
@@ -41,6 +43,7 @@
            
             if($this->request->is('post'))
             {
+                  
                 $date = date('m/d/Y h:i:s a', time());
                 $this->request->data['Quotation']['created_by'] = $date;
 
@@ -51,7 +54,7 @@
                     
                     $quotation_id   =   $this->Quotation->getLastInsertID();
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
-                    
+                    $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
                     if(!empty($device_node))
                     {  
                         $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
@@ -62,14 +65,26 @@
                     /******************
                     * Data Log
                     */
-                    $this->Logactivity->save(array('Logactivity.logname' => 'Quotation', 'Logactivity.logactivity' => 'Add Quotation', 'Logactivity.logid' => '"' . $quotation_id . '"'));
-                    /******************/
+                    $this->request->data['Logactivity']['logname'] = 'Quotation';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Quotation';
+                    $this->request->data['Logactivity']['logid'] = $quotation_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);/******************/
 
                     $this->Session->setFlash(__('Quotation has been Added Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
                
             }
+        }
+        public function file_up()
+        {
+            $upload_handler = new UploadHandler();
+            $file_path  =   $upload_handler->get_upload_path();
+            pr($file_path);exit;
+            
         }
         public function edit($id=NULL)
         {

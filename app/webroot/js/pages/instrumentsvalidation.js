@@ -230,6 +230,65 @@ var FormsValidation = function() {
                 }
             });
             
+            
+            //Customer Instrument Validation 
+            $('#form-customerinstrument-adds').validate({
+               ignore: ".ignore",
+                invalidHandler: function(e, validator){
+                    if(validator.errorList.length)
+                    $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+                },
+               
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                   // e.parents('.basic-wizard > tab').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    instrument_name: {
+                        required: true,
+                        minlength: 1
+                },
+                    model_no: {
+                        required: true,
+                        minlength: 1
+                },
+                    range: {
+                        required: true,
+                        minlength: 1
+                },
+                messages: {
+                    instrument_name: {
+                        required: 'Instrument Name is Required',
+                        minlength: 'Instrument Name Should Aleast be 1 Characters'
+                    },
+                     model_no: {
+                        required: 'Model No is Required',
+                        minlength: 'Model No Should Aleast be 1 Characters'
+                    },
+                     range: {
+                        required: 'Range is Required',
+                        minlength: 'Range Should Aleast be 1 Characters'
+                    }
+                }
+                    
+                    
+                },
+                
+              
+                
+            });
+            
         }
     }
            

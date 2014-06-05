@@ -121,7 +121,6 @@ class UserrolesController extends AppController
         $user_role_id = $userrole['Userrole']['user_role_id'];
          if($user_role_id == 1 || $user_role_id == 2)
         {
-             
              return $this->redirect(array('action'=>'index'));
           
         }
@@ -214,17 +213,22 @@ class UserrolesController extends AppController
          */
         
         $userrole =  $this->Userrole->findById($ids);
-        $user_role_name = $userrole['Userrole']['user_role'];
-        $this->set('user_name',$user_role_name);
-        $user_role_id = $userrole['Userrole']['user_role_id'];
-         if($user_role_id == 1 || $user_role_id == 2)
+        if(!empty($userrole))
         {
-             
-             return $this->redirect(array('action'=>'index'));
-          
+            $user_role_name = $userrole['Userrole']['user_role'];
+            $this->set('user_name',$user_role_name);
+            $user_role_id = $userrole['Userrole']['user_role_id'];
+            if($user_role_id == 1 || $user_role_id == 2)
+            {
+                return $this->redirect(array('action'=>'index'));
+            }
+            
+        }
+        else 
+        {
+            $this->set('user_name','Unknown Role');
         }
         $id = $this->Session->read('sess_userrole');
-        
         if($this->request->is(array('post','put')))
         {
             $a = serialize($this->request->data);

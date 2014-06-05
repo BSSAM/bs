@@ -9,7 +9,7 @@
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Add files...</span>
                 <?PHP //echo $this->Form->input('Document.files',array('multiple'=>'multiple','type'=>"file")); ?>
-                <input type="file" name="t[]" multiple class="" id="fileImportData">
+                <input type="file" name="file[]" multiple class="" id="fileImportData">
             </span>
             <input type="checkbox" class="toggle">
             <!-- The global file processing state -->

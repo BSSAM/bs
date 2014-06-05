@@ -17,8 +17,7 @@ var path='<?PHP echo Router::url('/',true); ?>';
         echo $this->Form->input('PurchaseCustomerspecialneed.currency_id', array('id' => 'pur_currency', 'class' => 'form-control country_value select-chosen', 'type' => 'select',
             'label' => false, 'options' => $country));
         ?>
-        <div id="result">
-        </div>
+        
     </div>
    
 </div>
@@ -29,8 +28,7 @@ var path='<?PHP echo Router::url('/',true); ?>';
         echo $this->Form->input('PurchaseCustomerspecialneed.additionalcharge_id', array('id' => 'pur_additional_service_charge', 'class' => 'form-control select-chosen', 'type' => 'select',
             'label' => false, 'options' => $additional));
         ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="pur_service_charge">Service Charge</label>
     <div class="col-md-4">
@@ -54,8 +52,7 @@ var path='<?PHP echo Router::url('/',true); ?>';
 echo $this->Form->input('PurchaseCustomerspecialneed.service_id', array('id' => 'pur_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
     'label' => false, 'options' =>$service));
 ?>
-        <div id="result">
-        </div>
+       
     </div>  
 
 </div>

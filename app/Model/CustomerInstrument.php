@@ -8,5 +8,6 @@
 class CustomerInstrument extends AppModel
 {
     public $actsAs = array('Containable');
-    var $belongsTo=array('Customer','Instrument');
+    var $belongsTo=array('Customer','Instrument','Range');
+    
 }

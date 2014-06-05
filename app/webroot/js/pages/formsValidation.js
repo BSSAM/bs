@@ -945,9 +945,9 @@ var FormsValidation = function() {
                     
                 },
                 
-              
-                
             });
+            
+            
             
 //             $('#form-customer-address-add').validate({
 //                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page

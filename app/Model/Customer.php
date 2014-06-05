@@ -10,6 +10,7 @@
 
 class Customer extends AppModel
 {
+  public $actsAs  =   array('Containable');
   public $belongsTo = array('Industry','Location','Paymentterm','Priority' );
   public $hasMany = array(
         'CusSalesperson' =>

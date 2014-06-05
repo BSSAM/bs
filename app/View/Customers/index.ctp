@@ -52,8 +52,13 @@
                                     'action' => 'delete', $customer_list['Customer']['id']), array('title' => 'Delete',
                                     'class' => 'btn btn-xs btn-danger', 'data-toggle' => 'tooltip', 'escape' => false, 'confirm' => 'Are you sure want to delete?'));
                                 ?>
-
+                                    
                              </div>
+                            <?PHP
+                                    echo $this->html->link('Instrument', array('controller' => 'Customers',
+                                        'action' => 'instrument_map', $customer_list['Customer']['id']), array('title' => 'Map Instrument',
+                                        'class' => 'btn btn-alt btn-xs btn-primary', 'data-toggle' => 'tooltip', 'escape' => false));
+                                    ?>
                     </td>
                 </tr>
                                     <?php endforeach; ?>

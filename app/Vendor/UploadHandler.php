@@ -147,7 +147,6 @@ class UploadHandler
                 )
             )
         );
-		
         if ($options) {
             $this->options = $options + $this->options;
         }
@@ -204,7 +203,7 @@ class UploadHandler
         return '';
     }
 
-    protected function get_upload_path($file_name = null, $version = null) {
+    public function get_upload_path($file_name = null, $version = null) {
         $file_name = $file_name ? $file_name : '';
         if (empty($version)) {
             $version_path = '';

@@ -7,7 +7,7 @@
  */
 class InstrumentRange extends AppModel
 {
-    
+    public  $actsAs =   array('Containable');
     var $name   =   'InstrumentRange';
     public $belongsTo = array(
         'Instrument' => array(

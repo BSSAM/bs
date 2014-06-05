@@ -11,7 +11,8 @@ class CustomersController extends AppController
     
     public $helpers = array('Html','Form','Session');
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
-                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby','Industry','Location','Paymentterm');
+                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
+                        'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument');
     
   
     public function index()
@@ -512,6 +513,7 @@ class CustomersController extends AppController
             $this->request->data =  $customer_details;
         }
     }
+    
     public function delete($id)
     {
         $this->autoRender=false;
@@ -749,15 +751,61 @@ class CustomersController extends AppController
         
         //echo 'success';
     }
-//    public function project_delete()
-//    {
-//        $this->autoRender=false;
-//        $delete_id= $this->request->data['delete_id'];
-//        
-//        $this->loadModel('Projectinfo');
-//        if($this->Projectinfo->deleteAll(array('Projectinfo.project_id'=>$delete_id)))
-//        {
-//            echo "deleted";
-//        }
-//    }
+    public function instrument_map($id=NULL)
+    {
+       
+      if($id!=NULL)
+      {
+         $customer_entry  =    $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id),'recursive'=>'3'));
+        
+         $instruments   =   $this->Instrument->find('list',array('conditions'=>array('Instrument.status'=>'1'),'order'=>'Instrument.id desc','fields'=>array('id','name')));
+         $customer_instruments   =   $this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$id),'order'=>'CustomerInstrument.id desc'));
+         
+            $this->set(compact('customer_entry','instruments','customer_instruments'));
+        
+      }
+    }
+    public function get_range()
+    {
+        $this->layout   =   'ajax';
+        $instrument_id  =   $this->request->data['instrument_id'];
+        $instrument_range    =    $this->InstrumentRange->find('all',array('conditions'=>array('InstrumentRange.instrument_id'=>$instrument_id),'order'=>'InstrumentRange.id desc','contain'=>array('Range'=>array('fields'=>array('id','range_name')))));
+        $this->set('ranges',$instrument_range);
+        
+    }
+    public function add_customer_instrument()
+    {
+        $this->autoRender=false;
+       
+        $this->loadModel('CustomerInstrument');
+        
+        $data = $this->CustomerInstrument->save($this->request->data);
+        if($data)
+        {
+          $last_id  =    $this->CustomerInstrument->getLastInsertId();
+          if($last_id!='')
+          {
+              $last_data = $this->CustomerInstrument->find('first', array('conditions' => array('CustomerInstrument.id' => $last_id)));
+               if(!empty($last_data))
+               {
+                  echo json_encode($last_data);
+               }
+            }
+        }
+    }
+    public function delete_cusinstrument()
+    {
+        $this->autoRender=  false;
+        $delete_id  =   $this->request->data['device_id'];
+        if($delete_id!='')
+        {
+            $delete_data    =   $this->CustomerInstrument->deleteAll(array('CustomerInstrument.id'=>$delete_id));
+            
+            if($delete_data)
+            {
+                echo 'deleted';
+            }
+        }
+    }
+
 }

@@ -533,11 +533,12 @@ $(document).ready(function(){
                 data1 = $.parseJSON(data);
                 $('#val_address').val(data1.Customer.regaddress);
                 $('#QuotationCustomerId').val(data1.Customer.id);
-                $('#val_phone').val(data1.Customer.phone);                
+                $('#val_phone').val(data1.Customer.phone);    
+                $('#SalesorderCustomerId').val(data1.Customer.id);
                 $('#val_salesperson').val(data1.Salesperson.salesperson);
                 $('#salespeople_id').val(data1.Salesperson.id);
                 $('#val_fax').val(data1.Customer.fax);
-                $('#SalesorderCustomerId').val(data1.Customer.id);
+                
                 $('#val_attn').append('<option>'+data1.Contactpersoninfo.name+'</option>');
                 $('#val_email').val(data1.Contactpersoninfo.email);
                 $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);

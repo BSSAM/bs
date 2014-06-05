@@ -16,7 +16,7 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: file_path+'files'
+        url: file_path+'Quotations/file_up'
     });
 
     // Enable iframe cross-domain access via redirect option:
@@ -60,7 +60,7 @@ $(function () {
             // Uncomment the following to send cross-domain cookies:
             //xhrFields: {withCredentials: true},
             url: $('#fileupload').fileupload('option', 'url'),
-            dataType: 'json',
+            dataType: 'html',
             context: $('#fileupload')[0]
         }).always(function () {
             $(this).removeClass('fileupload-processing');
