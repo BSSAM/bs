@@ -1,14 +1,14 @@
 <script>
-var path='<?PHP echo Router::url('/',true); ?>';
+    var path='<?PHP echo Router::url('/',true); ?>';
 </script>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_salesperson">Sales person</label>
     <div class="col-md-4">
         <?php
         echo $this->Form->input('Customerspecialneed.salesperson_name', array('id' => 'val_salesperson', 'class' => 'form-control',
-            'placeholder' => 'Sales Person Name', 'label' => false));
+            'placeholder' => 'Sales Person Name', 'label' => false,'value'=>$salespeople,'readonly'));
         echo $this->Form->input('Customerspecialneed.salespeople_id',array('type'=>'hidden','id'=>'salespeople_id'));
-         echo $this->Form->input('Customerspecialneed.id',array('type'=>'hidden','id'=>$this->request->data['Customerspecialneed']['id']));
+        echo $this->Form->input('Customerspecialneed.id',array('type'=>'hidden','id'=>$this->request->data['Customerspecialneed']['id']));
         ?>
     </div>
     <label class="col-md-2 control-label" for="val_projectname">Project name</label>
@@ -32,7 +32,7 @@ var path='<?PHP echo Router::url('/',true); ?>';
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.gst', array('id' => 'val_gst', 'class' => 'form-control',
-    'placeholder' => 'GST Values', 'label' => false));
+    'placeholder' => 'GST Values', 'label' => false,'type'=>'text'));
 ?>    
     </div>
 </div>
@@ -49,7 +49,7 @@ echo $this->Form->input('Customerspecialneed.currency_id', array('id' => 'val_cu
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.currency_value', array('id' => 'val_currency_value', 'class' => 'form-control',
-    'placeholder' => 'Currency Values', 'label' => false));
+    'placeholder' => 'Currency Values', 'label' => false,'type'=>'text'));
 ?>    
     </div>
 </div>

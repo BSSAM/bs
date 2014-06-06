@@ -8,7 +8,7 @@
                         <li><?php echo $this->Html->link('Quotations',array('controller'=>'Quotations','action'=>'index')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
-
+                    <?PHP echo $this->element('message'); ?>
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
@@ -66,21 +66,6 @@
                                 // Get random number function from a given range
                                 var getRandomInt = function(min, max) {
                                     return Math.floor(Math.random() * (max - min + 1)) + min;
-                                };
-                                
-                                return {
-                                    init: function() {
-                                        
-                                        
-                                        
-                                        $.bootstrapGrowl('Quotation Updated Successfully!', {
-                                            type: 'danger',
-                                            allow_dismiss: true
-                                        });
-                                        
-                                        $(this).prop('disabled', true);
-                                       
-                                    }
                                 };
                             }();
                             

@@ -5,7 +5,8 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Contactpersoninfo');
+                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
+                            'Contactpersoninfo','CusSalesperson');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -88,43 +89,38 @@
        
         public function edit($id=NULL)
         {
-            $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
-            pr($quotation_details);
-            exit;
+            $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
+            
+            //for Contact person info
+            $customer_id    =   $quotations_list['Customer']['id'];
+            $salesperson_list    =   $this->CusSalesperson->find('all',array('conditions'=>array('CusSalesperson.customer_id'=>$customer_id)));
+            $salespeople         =   '';
+            foreach($salesperson_list as $salesper)
+            {
+                $salespeople.=$salesper['Salesperson']['salesperson'].' , ';
+            }
+            $person_list    =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$customer_id),'fields'=>array('id','name')));
             if(empty($quotation_details)){
                 $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id),'recursive'=>2));
-                
             }
             //pr($quotation_details);exit;
-            $instrument_type=$this->InstrumentType->find('list',array('conditions'=>array('type_for'=>'Quotation'),'fields'=>array('id','type_name')));
-            $this->set('instrument_types',$instrument_type);
-            $track_id='BSTRA'.(rand(0,89966587));
-            
-          
-            
-            $this->set('our_ref_no', $track_id);
+            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('type_for'=>'Quotation'),'fields'=>array('id','type_name')));
+            $our_ref_no='BSTRA'.(rand(0,89966587));
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
-            $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
-            $this->set('payment',$payment);
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
-            $this->set('country',$country);
             
-            $additional_charge=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
-            $this->set('additional',$additional_charge);
-            
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set('service',$services);
+            $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             
-            $this->set('quotations_list',$quotation_details);
-           
+            $this->set(compact('instrument_types','person_list','our_ref_no','country','priority','payment','quotations_list','additional','service','quotations_list','salespeople'));
             if($this->request->is(array('post','put')))
             {
                 $this->Quotation->id=$id;
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
-                    $customer_id=$quotation_details['Quotation']['customer_id'];
+                    $customer_id=$quotations_list['Quotation']['customer_id'];
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
                     if(!empty($device_node))
                     {
@@ -135,7 +131,7 @@
                     
                      $this->request->data['Logactivity']['logname']   =   'Quotation';
                         $this->request->data['Logactivity']['logactivity']   =   'Add Quotation';
-                         $this->request->data['Logactivity']['logid']   =   $quotation_details['Quotation']['quotationno'];
+                         $this->request->data['Logactivity']['logid']   =   $quotations_list['Quotation']['quotationno'];
                          $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                          $this->request->data['Logactivity']['logapprove'] = 1;
                         $a = $this->Logactivity->save($this->request->data['Logactivity']);
@@ -148,12 +144,23 @@
             }
             else
             {
-                $this->request->data=$quotation_details;
+                $this->request->data=$quotations_list;
             }
         }
-        public function file_upload()
+        public function delete($id=NULL)
         {
-            
+            if($id!='')
+            {
+                if($this->Quotation->delete($id,true))
+                {
+                    $this->Session->setFlash(__('The Quotation has been deleted',h($id)));
+                    return $this->redirect(array('controller'=>'Quotations','action'=>'index'));
+                }
+            }
+            else
+            {
+                throw new MethodNotAllowedException();
+            }
         }
         public function search()
         {
@@ -230,6 +237,7 @@
             $this->autoRender = false;
             $instrument_id =  $this->request->data['instrument_id'];
             $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id),'recursive'=>'3'));
+            
             if(!empty($brand_details))
             {
                 echo json_encode($brand_details);

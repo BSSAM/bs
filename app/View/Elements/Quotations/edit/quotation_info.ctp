@@ -1,5 +1,4 @@
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_quotationno">Quotation No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Quotation.quotationno', array('id'=>'val_quotationno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $this->request->data['Quotation']['quotationno'])); ?>
@@ -9,11 +8,9 @@
         <?php echo $this->Form->input('priority', array('id'=>'val_priority','class'=>'form-control select-chosen',
             'label'=>false,'options'=>$priority)); ?>
     </div>
-    
 </div>
     
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', 
@@ -35,12 +32,12 @@
     <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('due_amount', array('id'=>'val_dueamount','class'=>'form-control',
-                                                'placeholder'=>'Due Amount','label'=>false,'autoComplete'=>'off','disabled'=>'disabled')); ?>
+                                                'placeholder'=>'Due Amount','label'=>false,'autoComplete'=>'off','disabled'=>'disabled','type'=>'text')); ?>
         
     </div>
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name','options'=>array($quotations_list['Quotation']['attn']=>$quotations_list['Quotation']['attn']))); ?>
+        <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name','options'=>$person_list)); ?>
     </div>
 </div>
 <div class="form-group">
@@ -68,7 +65,8 @@
     <label class="col-md-2 control-label" for="val_payment_term">Payment Terms</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('payment_term', array('id'=>'val_payment_term','class'=>'form-control','label'=>false,
-           'placeholder'=>'Enter the Payment Terms','disabled'=>'disabled','type'=>'text')); ?>
+           'placeholder'=>'Enter the Payment Terms','disabled'=>'disabled','type'=>'text','value'=>$quotations_list['Customer']['Paymentterm']['pay'])); ?>
+       
     </div>
 </div>
 
@@ -103,7 +101,7 @@
     
  <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
     <div class="col-md-12">
-        <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
+        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>$instrument_types)); ?>
        
     </div>

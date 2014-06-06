@@ -69,6 +69,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('payment_term', array('id'=>'val_payment_term','class'=>'form-control','label'=>false,
            'placeholder'=>'Enter the Payment Terms','disabled'=>'disabled','type'=>'text')); ?>
+         <?PHP echo $this->Form->input('paymentterm_id',array('type'=>'hidden','id'=>'pay_id')); ?>
     </div>
 </div>
 
@@ -103,7 +104,7 @@
     
  <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
     <div class="col-md-12">
-        <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
+        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>$instrument_types)); ?>
        
     </div>

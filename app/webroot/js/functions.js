@@ -552,6 +552,7 @@ $(document).ready(function(){
                 $('#val_email').val(data1.Contactpersoninfo.email);
                 $('#SalesorderCustomerId').val(data1.Customer.id);
                 $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
+                $('#pay_id').val(data1.Paymentterm.id);
             }
 	});
     });
@@ -846,13 +847,14 @@ $(document).on('click','.instrument_id',function(){
                 var dept    =   parsedata.Instrument;
                 $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
                 {
-                     $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
+                     $('#val_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
                   
                 });
                 
                 $.each(parsedata.Instrument.InstrumentRange, function(k, v)
                 {
-                     $('#val_range').empty().append('<option value=0>Select Range</option><option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+                   
+                     $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
                   
                 });
                     
@@ -926,7 +928,8 @@ $(document).on('click','.instrument_id',function(){
    });
    $(document).on('click','.instrument_delete',function(){
       var device_id=$(this).attr('data-delete');
-      alert(device_id);
+      var result    =   confirm('Are you sure want to delete?');
+      if(result==true){
        $.ajax({
             type: 'POST',
             data:"device_id="+ device_id,
@@ -935,7 +938,7 @@ $(document).on('click','.instrument_id',function(){
                 $('.instrument_remove_'+device_id).fadeOut();
             }
         });
-        
+    }
    });
     $(document).on('click','.instrument_edit',function(){
       var edit_device_id=$(this).attr('data-edit');

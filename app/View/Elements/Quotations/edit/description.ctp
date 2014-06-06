@@ -43,7 +43,7 @@
 
 
 </script>
-<div class="form-group">
+<!--<div class="form-group">
     
     <label class="col-md-2 control-label" for="val_sno">S.No</label>
     <div class="col-md-4">
@@ -83,12 +83,11 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','label'=>false,'name'=>'range')); ?>
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','label'=>false,'name'=>'range','type'=>'select')); ?>
     </div>
 </div>
 <div class="form-group">
@@ -98,8 +97,7 @@
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'))); ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
     <div class="col-md-4">
@@ -115,8 +113,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('validity', array('id'=>'val_validity','class'=>'form-control',
                                                 'label'=>false,'name'=>'validity','disabled'=>'disabled','value'=>'12')); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
     <div class="col-md-4">
@@ -131,13 +128,12 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_department">Department</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('department', array('id'=>'val_department','class'=>'form-control','label'=>false,
-                                      'name'=>'department','placeholder'=>'Enter the Departmnent Name',)); ?>
+                                      'name'=>'department','placeholder'=>'Enter the Departmnent Name','readonly')); ?>
     </div>
 </div>
 <div class="form-group">
@@ -147,18 +143,32 @@
         <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_title">Titles</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('title', array('id'=>'val_title','class'=>'form-control','label'=>false,'name'=>'title','type'=>'select',
             'options'=>array('1'=>'title'))); ?>
     </div>
-</div>
-<div class="form-group form-actions">
+</div>-->
+<!--<div class="form-group form-actions">
     <div class="col-md-9 col-md-offset-10 update_device">
-        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
+        <?php  //echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
+    </div>
+</div>-->
+<div class="form-group">
+    
+    
+    <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('unit_price', array('id'=>'val_unit_price','class'=>'form-control','label'=>false,
+            'name'=>'unit_price','placeholder'=>'Enter the Unit Price')); ?>
+    </div>
+    <label class="col-md-2 control-label" for="val_discount">Discount</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
+                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>
+        
     </div>
 </div>
 <div class="col-sm-3 col-lg-12">
@@ -168,8 +178,6 @@
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Model No</th>
-            <th class="text-center">Brand</th>
-            <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Call Type</th>
              <th class="text-center">Validity</th>
@@ -187,12 +195,10 @@
                
                 foreach($quotations_list['Device'] as $device):?>
               
-                <tr>
-                    <td class="text-center">1</td>
+        <tr class="instrument_remove_<?PHP echo $device['Instrument']['id']; ?>">
+                    <td class="text-center"><?PHP echo $device['Instrument']['id']; ?></td>
                     <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
                     <td class="text-center"><?PHP echo $device['model_no']; ?></td>
-                     <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
-                    <td class="text-center"><?PHP echo $device['range']; ?></td>
                     <td class="text-center"><?PHP echo $device['call_location']; ?></td>
                     <td class="text-center"><?PHP echo $device['call_type']; ?></td>
                     <td class="text-center"><?PHP echo $device['validity']; ?></td>
@@ -201,9 +207,9 @@
                    
                     <td class="text-center">
                         <div class="btn-group">
-                            <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit">
+<!--                            <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-pencil"></i>
-                            </a>
+                            </a>-->
                             <a data-delete="<?PHP echo $device['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">
                                 <i class="fa fa-times"></i>
                             </a>
