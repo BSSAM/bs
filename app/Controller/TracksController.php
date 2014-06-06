@@ -13,9 +13,7 @@
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity');
         public function index()
         {
-//            if($this->request->is('get'))
-//            {
-            //$this->request->params['track_id'];
+
             $track_id = $this->request->query['track_id'];
             if(!empty($track_id)){
                 $this->set('track',$track_id);
@@ -26,10 +24,10 @@
                 $this->set('Quo_det',$quotation);
                 //$this->set('Cus_det',$customer);
             }
-//            }
-//            else{
-//                exit;
-//            }
+            else{
+                return $this->redirect(array('controller' => 'Dashboards','action'=>'index'));
+            }
+//           
         }
     }
     

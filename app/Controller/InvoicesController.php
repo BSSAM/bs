@@ -18,5 +18,12 @@ class InvoicesController extends AppController
       
       
     }
+    public function invoice()
+    {
+       
+        
+      
+      
+    }
     
 }
