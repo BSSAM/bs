@@ -172,6 +172,7 @@
     </div>
 </div>
 <div class="col-sm-3 col-lg-12">
+<div class="table-responsive">
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
@@ -222,4 +223,5 @@
         
     </tbody>
 </table>
+</div>
 </div>

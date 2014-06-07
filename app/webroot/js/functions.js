@@ -888,7 +888,11 @@ $(document).on('click','.instrument_id',function(){
         var instrument_calltype=$('#val_call_type').val();
         var instrument_validity=$('#val_validity').val();
         var instrument_unitprice=$('#val_unit_price').val();
-        var instrument_discount=$('#val_discount').val();
+        var instrument_discount=$('#val_discount1').val();
+       
+        var instrument_cal=instrument_unitprice*instrument_discount/100;
+       
+        var instrument_total= instrument_unitprice - instrument_cal ;
         var instrument_department=$('#val_department_id').val();
         var instrument_account=$('#val_account_service').val();
         var instrument_title=$('#val_title').val();
@@ -909,6 +913,7 @@ $(document).on('click','.instrument_id',function(){
                                     <td class="text-center">'+instrument_validity+'</td>\n\
                                     <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
                                     <td class="text-center">'+instrument_account+'</td>\n\
+                                    <td class="text-center">'+instrument_total+'</td>\n\\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+data+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
@@ -920,7 +925,7 @@ $(document).on('click','.instrument_id',function(){
                 $('#val_brand').empty().append('<option value="">Select Brand</option>');
                 $('#val_range').val(null);
                 $('#val_unit_price').val(null);
-                $('#val_discount').val(null);
+                $('#val_discount1').val(null);
                 $('#val_description').val(null);
                 }
         });
@@ -962,7 +967,7 @@ $(document).on('click','.instrument_id',function(){
                 $('#val_validity').val(edit_node.Device.validity);
                 
                 $('#val_unit_price').val(edit_node.Device.unit_price);
-                $('#val_discount').val(edit_node.Device.discount);
+                $('#val_discount1').val(edit_node.Device.discount);
                 $('#val_department').val(edit_node.Department.departmentname);
                 
                 $('#val_account_service').val(edit_node.Device.account_service);
@@ -994,7 +999,11 @@ $(document).on('click','.instrument_id',function(){
         var instrument_calltype=$('#val_call_type').val();
         var instrument_validity=$('#val_validity').val();
         var instrument_unitprice=$('#val_unit_price').val();
-        var instrument_discount=$('#val_discount').val();
+        var instrument_discount=$('#val_discount1').val();
+       
+        var instrument_cal=instrument_unitprice*instrument_discount/100;
+       
+        var instrument_total= instrument_unitprice - instrument_cal ;
         var instrument_department=$('#val_department').val();
         var instrument_account=$('#val_account_service').val();
         var instrument_title=$('#val_title').val();
@@ -1013,7 +1022,8 @@ $(document).on('click','.instrument_id',function(){
                                     <td class="text-center">'+instrument_calltype+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\
                                     <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_account+'</td>\n\
+                                    <td class="text-center">'+instrument_account+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_total+'</td>\n\\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+device_id+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+device_id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\

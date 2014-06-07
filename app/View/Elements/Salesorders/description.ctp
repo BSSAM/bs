@@ -189,20 +189,22 @@
     <?PHP 
        
             if(!empty($sale['Description'])):
-              
+              $i = 0;
                 foreach($sale['Description'] as $device):
-                    for($i=1;$i<=$device['quantity'];$i++):
+               $i++;
+                    //for($i=1;$i<=count($device['Instrument']);$i++):
                 ?>
               
                 <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
-                    <td class="text-center"><?PHP echo $i; ?></td>
+                    <td class="text-center"><?PHP // echo $i; ?></td>
                     <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
-                    <td class="text-center"><?PHP echo $i; ?></td>
+<!--                    <td class="text-center"><?PHP //echo $device['Instrument']['brand_id']; ?></td>-->
                     <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
                     <td class="text-center"><?PHP echo $device['call_location']; ?></td>
                     <td class="text-center"><?PHP echo $device['validity']; ?></td>
                     <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
                     <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
+                     <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
                    
                     <td class="text-center">
                         <div class="btn-group">
@@ -216,10 +218,11 @@
                     </td>
                 </tr>
         <?PHP   
-            endfor;
+           // endfor;
             endforeach;
                    endif; 
         ?>
     </tbody>
 </table>
 </div>
+
