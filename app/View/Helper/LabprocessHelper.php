@@ -32,7 +32,7 @@ App::uses('Helper', 'View');
 class LabprocessHelper extends AppHelper 
 {
     public $uses    =   array('Salesorder','Description');
-    
+   
     public function labperocess_checking($id = null)
     {
         APP::import('Model','Description');

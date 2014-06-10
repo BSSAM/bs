@@ -110,9 +110,9 @@
 
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_discount">Discount </label>
+    <label class="col-md-2 control-label" for="val_discount1">Discount </label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
+        <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>
       
     </div>
@@ -144,6 +144,7 @@
     </div>
 </div>
 <div class="col-sm-3 col-lg-12">
+<div class="table-responsive">
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
@@ -156,10 +157,12 @@
             <th class="text-center">Unit Price</th>
             <th class="text-center">Account Service</th>
             <th class="text-center">Total</th>
+            <th class="text-center">Action</th>
         </tr>
     </thead>
     <tbody class="Instrument_info"> 
    
     </tbody>
 </table>
+</div>
 </div>

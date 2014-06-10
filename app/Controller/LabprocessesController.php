@@ -5,12 +5,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 class LabprocessesController extends AppController
 {
     public $helpers =   array('Html','Form','Session');
     public $uses    =   array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Salesorder','Description');
+     public $components = array('RequestHandler');
+     
    public function index()
     {
         $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1),'group' => array('Salesorder.salesorderno')));
@@ -34,7 +37,6 @@ class LabprocessesController extends AppController
         $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
         $this->Description->updateAll(array('Description.processing' => 1),array('Description.salesorder_id' => $id));
         $this->set('labs', $data_description);
-        
         if ($this->request->is(array('post', 'put'))) 
         {
             $checking_array = $this->request->data['Description']['checking'];
@@ -111,6 +113,18 @@ class LabprocessesController extends AppController
                         ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('Description' => array('conditions' => array('Description.processing' => 0, 'Description.sales_calllocation' => $calllocation_id)))));
                     $this->set('labprocess', $labprocess);
             endif;
+        }
+    }
+    public function update_delay()
+    {
+        $this->autoRender   =   false;
+         if ($this->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->data['Description']['delay']);
+
+            $this->Description->id = $this->data['Description']['id'];
+            $this->Description->saveField('delay', $title);
+            echo $title;
         }
     }
 } 

@@ -8,6 +8,16 @@
 //    }
 </script>
 <script type="text/javascript">
+    $(function() {
+    $('.edit_delay').editable(path_url+'/Labprocesses/update_delay', {
+         id        : 'data[Description][id]',
+         name      : 'data[Description][delay]',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Click to edit the title'
+    });
+});
 </script>                
 <h1>
     <i class="gi gi-user"></i>Lab Process of 
@@ -55,7 +65,7 @@
                     <td class="text-center">
                             <?PHP echo $this->Form->input('Description.checking', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $labs_list['Description']['salesorder_id'], 'name' => $checking,$checked)); ?></td>
                 <!--<td class="text-center"><?PHP //echo $this->Form->input('Description.checking',array('label'=>false,'id'=>'checking','type'=>'checkbox','class'=>$labs_list['Description']['salesorder_id']));   ?></td>-->
-                <td class="text-center"><?PHP echo $labs_list['Description']['delay']; ?><!--<span ng-if="show_delay"></span>--></td>
+                <td class="text-center edit_delay" id="<?PHP echo $labs_list['Description']['id']; ?>"><?PHP echo $labs_list['Description']['delay']; ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

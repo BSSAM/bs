@@ -39,11 +39,14 @@
                {
                  $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                  // $this->request->data   =   $quotation_details;
+//                 $device_count = count($quotation_details['Device']);
+//                 $this->set('device_count',$device_count);
+                 
                  $sales_details =  $quotation_details['Quotation']  ;
                  $sales['Salesorder']   =    $sales_details;
                  $sales['Description']   =    $quotation_details['Device'];
                  $this->set('sale',$sales);
-//                pr($sales);exit;
+              //pr($sales);exit;
                  $this->request->data =   $sales;
                }
                else 

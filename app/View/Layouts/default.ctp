@@ -56,6 +56,7 @@
                 echo $this->Html->css('file_upload_css/jquery.fileupload');
 		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
 		echo $this->Html->script('jquery.min');
+                echo $this->Html->script('jedit/jquery.jeditable');
                 echo $this->Html->script(array('sal_desc_func','functions','labprocess_js','delivery_order','pur_function_js','quo_function_js','cus_function'));
                 echo $this->Html->script('angular/angular.min');
                 ?>

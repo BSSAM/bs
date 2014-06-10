@@ -211,7 +211,7 @@
 
     <label class="col-md-2 control-label" for="val_paymentterms">Payment Terms</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('paymentterms_id', array('id' => 'val_paymentterms', 'class' => 'form-control select-chosen', 'options' => $paymentterm, 'empty' => 'Enter the Payment Terms', 'label' => false, 'name' => 'paymentterms_id')); ?>
+        <?php echo $this->Form->input('paymentterm_id', array('id' => 'val_paymentterms', 'class' => 'form-control select-chosen', 'options' => $paymentterm, 'empty' => 'Enter the Payment Terms', 'label' => false, 'name' => 'paymentterm_id')); ?>
     </div>
 
 </div>
