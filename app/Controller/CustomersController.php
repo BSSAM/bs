@@ -12,7 +12,7 @@ class CustomersController extends AppController
     public $helpers = array('Html','Form','Session');
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
-                        'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument');
+                        'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument','Deliveryordertype');
     
   
     public function index()
@@ -269,6 +269,9 @@ class CustomersController extends AppController
         $data2 = $this->Industry->find('list', array('fields' => 'industryname'));
         $this->set('industry',$data2);
         
+        $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
+        $this->set(compact('deliverorder_type'));
+        
         $this->loadModel('Location');
         $data3 = $this->Location->find('list', array('fields' => 'locationname'));
         $this->set('location',$data3);
@@ -377,7 +380,7 @@ class CustomersController extends AppController
         
         $data10 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
         $data10_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
-        
+      
         $this->set('data10',$data10);
         $this->set('data10_count',$data10_count);
         
@@ -408,6 +411,8 @@ class CustomersController extends AppController
         $data3 = $this->Location->find('list', array('fields' => 'locationname'));
         $this->set('location',$data3);
         
+        $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
+        $this->set(compact('deliverorder_type'));
         $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
          //pr($data4);exit;
         $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));

@@ -3985,3 +3985,8 @@ min-width: 612px;*/
     padding-top: 30px;
     padding-left: 48px;
 }
+
+.modal-dialog.pop_up_instrument {
+    margin: 30px auto;
+    width: 850px;
+}

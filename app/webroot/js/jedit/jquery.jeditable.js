@@ -424,7 +424,7 @@
                             });
                         /* otherwise use button with given string as text */
                         } else {
-                            var submit = $('<button type="submit" />');
+                            var submit = $('<button type="submit" class="btn btn-alt btn-xs btn-primary"/>');
                             submit.html(settings.submit);                            
                         }
                         $(this).append(submit);
@@ -435,7 +435,7 @@
                             var cancel = $(settings.cancel);
                         /* otherwise use button with given string as text */
                         } else {
-                            var cancel = $('<button type="cancel" />');
+                            var cancel = $('<button type="cancel" class="btn btn-alt btn-xs btn-primary" />');
                             cancel.html(settings.cancel);
                         }
                         $(this).append(cancel);
@@ -455,7 +455,7 @@
             },
             text: {
                 element : function(settings, original) {
-                    var input = $('<input />');
+                    var input = $('<input class="form-control" />');
                     if (settings.width  != 'none') { input.width(settings.width);  }
                     if (settings.height != 'none') { input.height(settings.height); }
                     /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */

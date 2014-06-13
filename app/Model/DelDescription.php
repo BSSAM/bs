@@ -5,22 +5,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Deliveryorder extends AppModel
+class DelDescription extends AppModel
 {
-    //public $actsAs  =   'Containable';
-    var $name   =   'Deliveryorder';
-    public $hasMany = array(
-        'DelDescription' => array(
-            'className' => 'DelDescription',
-            'foreignKey' => 'deliveryorder_id',
+    var $name   =   'DelDescription';
+    public $belongsTo = array(
+        'Description' => array(
+            'className' => 'Description',
+            'foreignKey' => 'description_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        ));
-    public $belongsTo = array(
-        'Customer' => array(
-            'className' => 'Customer',
-            'foreignKey' => 'customer_id',
+        ),
+        'Deliveryorder' => array(
+            'className' => 'Deliveryorder',
+            'foreignKey' => 'deliveryorder_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -32,6 +30,6 @@ class Deliveryorder extends AppModel
             'fields' => '',
             'order' => ''
         )
+       
         );
 }
-

@@ -1,6 +1,4 @@
-<div class="block full">
-    <div class="table-responsive invoice_info">
-                <table id="example-datatable"  class="table table-vcenter table-condensed table-bordered">
+<table id="example-datatable"  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">Invoice no</th>
@@ -17,25 +15,24 @@
                             
                         </tr>
                     </thead>
-                    <tbody> 
-                        <?PHP if(!empty($prepareinvoice_approved_list)): ?>
-                        <?PHP foreach($prepareinvoice_approved_list as $invoice): ?>
+                    <tbody>                         
+                        <?PHP if(!empty($updated_invoice)): ?>
+                        <?PHP foreach($updated_invoice as $invoice): ?>
                         <tr>
-                            <td class="text-center"><?PHP echo $invoice['Invoice']['id'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Invoice']['approved_date'] ?></td>
+                            <td class="text-center"><?PHP echo $invoice['Invoice']['id'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Invoice']['id'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Deliveryorder']['Customer']['customername'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Deliveryorder']['customer_address']  ?></td>
-<!--                        <td class="text-center"><?PHP //echo $invoice['Deliveryorder']['phone'] ?></td>
+<!--                            <td class="text-center"><?PHP //echo $invoice['Deliveryorder']['phone'] ?></td>
                             <td class="text-center"><?PHP //echo $invoice['Deliveryorder']['email'] ?></td>-->
                             <td class="text-center"><?PHP echo $invoice['Deliveryorder']['Salesorder']['salesorderno'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Deliveryorder']['delivery_order_no'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Deliveryorder']['our_reference_no'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Deliveryorder']['your_reference_no'] ?></td>
+                            
                         </tr>
                         <?PHP endforeach; ?>
                         <?PHP endif; ?>
-                    </tbody>
+</tbody>
                 </table>
-            </div>
-</div>
