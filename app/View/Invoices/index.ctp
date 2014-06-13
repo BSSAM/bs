@@ -9,7 +9,7 @@
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Invoice',array('controller'=>'Onsites','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Invoice',array('controller'=>'Invoices','action'=>'index')); ?></li>
                         
                     </ul>
                     <!-- END Forms General Header -->
@@ -30,7 +30,7 @@
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
-                                                <li class="active"><a href="#tab1" data-toggle="tab">Invoice</a></li>
+                                                <li class="active invoice_active"><a href="#tab1" data-toggle="tab">Invoice</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab">Ready to Prepare Invoice</a></li>
                                                 <li class=""><a href="#tab3" data-toggle="tab">Ready to Prepare SO Full Invoice</a></li>
                                                 <li class=""><a href="#tab4" data-toggle="tab">Ready to Prepare SO Partial Invoice</a></li>
@@ -53,7 +53,7 @@
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->
                                         </div><!-- panel-body -->
-                                        <?PHP echo $this->Html->link(__('PDF'), array('action' => 'invoice', 'ext' => 'pdf')); ?>
+                                        <?PHP //echo $this->Html->link(__('PDF'), array('action' => 'invoice', 'ext' => 'pdf')); ?>
                                     </div>
                                     <!-- panel -->
                                     <?php echo $this->Form->end(); ?>

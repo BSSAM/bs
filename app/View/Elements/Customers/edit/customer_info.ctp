@@ -101,9 +101,9 @@
 
             <!-- Tabs Content -->
             <div class="tab-content" id="tab-content">
+            
                  <?php for($i=0;$i<$data10_count;$i++){ ?>
                 <div class="tab-pane" id="example-tabs2-Address<?php echo $i; ?>" ><?php echo $data10[$i]['Address']['address']; ?></div>
-                
                 <?php } ?>
             </div>
             <!-- END Tabs Content -->
@@ -252,7 +252,7 @@
         
     <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('deliveryordertype', array('id'=>'val_deliveryordertype','class'=>'form-control select-chosen','options'=>array('Full delivery order'=>'Full delivery order','Partial delivery order'=>'Partial delivery order'),'empty'=>'Enter the Delivery Order Type','label'=>false,'name'=>'deliveryordertype')); ?>
+        <?php echo $this->Form->input('deliveryordertype', array('id'=>'val_deliveryordertype','class'=>'form-control select-chosen','options'=>$deliverorder_type,'empty'=>'Enter the Delivery Order Type','label'=>false,'name'=>'deliveryordertype')); ?>
     </div>
         
 </div>

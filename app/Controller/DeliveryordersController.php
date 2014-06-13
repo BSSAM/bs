@@ -9,7 +9,7 @@
     {
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder');
         public function index()
         {
@@ -39,16 +39,9 @@
         }
         public function edit($id=NULL)
         {
-            
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set('service',$services);
-            $deliveryorder_details=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id)));
-            if(!empty($deliveryorder_details))
-            {
-                $salesorder_id  = $deliveryorder_details['Salesorder']['id'];
-                $device_details =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$salesorder_id)));
-                $this->set('devicedetails',$device_details);
-            }
+            $deliveryorder_details=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>3));
             $this->set('deliveryorder',$deliveryorder_details);
             if($this->request->is(array('post','put')))
             {
@@ -80,6 +73,23 @@
                 throw new MethodNotAllowedException();
             }
         }
+        public function approve()
+        {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1),array('Deliveryorder.id'=>$id));
+            if($updated)
+            {
+                //pr($id1);exit;
+                $user_id = $this->Session->read('sess_userid');
+                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Approved Delivery order'));
+                $this->request->data['Invoice']['deliveryorder_id']=$id;
+                $this->request->data['Invoice']['customer_purchaseorder_no']='';
+                $this->request->data['Invoice']['is_approved']=0;
+                $this->Invoice->save($this->request->data);
+               
+            }
+         }
         /*
          * Function Name:salesorder_id_search
          * Description   :   for salesorder Search

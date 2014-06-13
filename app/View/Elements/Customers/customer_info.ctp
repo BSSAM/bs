@@ -235,7 +235,7 @@
 
     <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('deliveryordertype', array('id' => 'val_deliveryordertype', 'class' => 'form-control select-chosen', 'options' => array('Full delivery order' => 'Full delivery order', 'Partial delivery order' => 'Partial delivery order'), 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype')); ?>
+        <?php echo $this->Form->input('deliveryordertype', array('id' => 'val_deliveryordertype', 'class' => 'form-control select-chosen', 'options' => $deliverorder_type, 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype')); ?>
     </div>
 
 </div>

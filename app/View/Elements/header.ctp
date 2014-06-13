@@ -228,10 +228,12 @@
                                     <li <?php echo $a=($control == 'Subcontractdos')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('Sub Contract DO',array('controller'=>'Subcontractdos','action'=>'index')); ?>
                                     </li><?php } ?>
-                                    <?php //if($user_role['job_salesorder']['view'] == 1){ ?>
-                                    <!--<li>
-                                          <a href="#"><?php //echo 'Job Monitoring'; ?></a>
-                                    </li><?php //} ?>-->
+                                    
+                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <li <?php echo $a=($control == 'Jobmonitorings')?'class=active':''; ?>>
+                                         <?php echo $this->Html->link('Job Monitoring',array('controller'=>'Jobmonitorings','action'=>'index')); ?>
+                                    </li><?php } ?>
+                                    
                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>
                                           <a href="#"><?php echo 'Proforma Invoice'; ?></a>

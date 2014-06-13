@@ -28,18 +28,18 @@
     <tbody class="sales_Instrument_info"> 
     <?PHP 
        
-            if(!empty($devicedetails)):
+            if(!empty($deliveryorder['DelDescription'])):
                $i=0;
-                foreach($devicedetails as $device):
+                foreach($deliveryorder['DelDescription'] as $device):
                 ?>
                 <tr class="sales_instrument_remove_<?PHP echo $device['Description']['id']; ?>">
                     <td class="text-center"><?PHP echo $i=$i+1; ?></td>
-                    <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
-                    <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Description']['Instrument']['name']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Description']['Brand']['brandname']; ?></td>
                     <td class="text-center"><?PHP echo $device['Description']['sales_calllocation']; ?></td>
                     <td class="text-center"><?PHP echo $device['Description']['sales_validity']; ?></td>
                     <td class="text-center"><?PHP echo $device['Description']['sales_unitprice']; ?></td>
-                    <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Description']['Department']['departmentname']; ?></td>
                     <td class="text-center"><?PHP echo $device['Description']['sales_total']; ?></td>
                 </tr>
         <?PHP   
