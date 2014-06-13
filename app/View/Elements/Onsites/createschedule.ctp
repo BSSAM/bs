@@ -1,6 +1,4 @@
-  
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', 
@@ -15,7 +13,6 @@
         <?php echo $this->Form->textarea('address', array('id'=>'val_address','class'=>'form-control',
                                                'placeholder'=>'Enter the Customer Address','label'=>false,'rows'=>6,'cols'=>30)); ?>
     </div>
-        
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_fax">Fax</label>

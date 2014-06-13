@@ -1,5 +1,6 @@
 
-                            <h1>
+    
+<h1>
                                 <i class="gi gi-usd"></i>Invoice
                             </h1>
                         </div>

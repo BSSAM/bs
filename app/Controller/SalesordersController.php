@@ -114,6 +114,7 @@
         }
         public function delete($id=NULL)
         {
+            pr($id);exit;
             if($id!='')
             {
                 if($this->Salesorder->delete($id,true))

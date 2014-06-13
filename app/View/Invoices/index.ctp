@@ -53,7 +53,7 @@
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->
                                         </div><!-- panel-body -->
-                                        
+                                        <?PHP echo $this->Html->link(__('PDF'), array('action' => 'invoice', 'ext' => 'pdf')); ?>
                                     </div>
                                     <!-- panel -->
                                     <?php echo $this->Form->end(); ?>

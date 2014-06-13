@@ -8,7 +8,7 @@
                     </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
-                          <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Onsite Schedule',array('controller'=>'Onsites','action'=>'index')); ?></li>
                         <li>Add Onsite Schedule</li>
                     </ul>
@@ -26,12 +26,12 @@
                                                 <div>
                                                     <input type="text" class="form-control" autoComplete='off' placeholder="Enter Quotation No" id="onsite_input_search"/>
                                                 </div>
-                                                 <span class="input-group-btn">
+                                                <span class="input-group-btn">
                                                     <button class="btn btn-primary onsite_search" type="button">Proceed</button>
                                                 </span>
                                             </div>
-                                             <div id="sales_list">
-                                                </div>
+                                            <div id="sales_list">
+                                            </div>
                                         </div>
                                     </h2>
                                 </div>

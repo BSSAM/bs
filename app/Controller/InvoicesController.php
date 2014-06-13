@@ -10,20 +10,14 @@ class InvoicesController extends AppController
 {
     
     public $helpers = array('Html','Form','Session');
-    
+    public $components = array('RequestHandler');
     public function index()
     {
-       
         
-      
-      
     }
     public function invoice()
     {
-       
-        
-      
-      
+       ini_set('memory_limit', '512M');
     }
     
     public function create_pdf()

@@ -62,11 +62,11 @@ class SalesorderHelper extends AppHelper
     {
         APP::import('Model','Salesorder');
         $this->Salesorder   =   new Salesorder();
-        $data_count_checking = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.checking" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
-        $data_count_processing = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.processing" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
+        //$data_count_checking = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.checking" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
+        $data_count_processing = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array('AND'=>array("Description.processing" => 1,"Description.checking" => 1)))) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
         $data_count_total = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
        // pr(count($data_count[0]['Description']));exit;
-        $pending = count($data_count_total[0]['Description'])-(count($data_count_checking[0]['Description'])+count($data_count_processing[0]['Description']));
+        $pending = count($data_count_total[0]['Description'])-count($data_count_processing[0]['Description']);
         return $pending;
     }
     
