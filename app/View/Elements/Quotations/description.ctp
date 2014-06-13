@@ -153,7 +153,7 @@
             <th class="text-center">Model No</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Call Type</th>
-             <th class="text-center">Validity</th>
+            <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
             <th class="text-center">Account Service</th>
             <th class="text-center">Total</th>

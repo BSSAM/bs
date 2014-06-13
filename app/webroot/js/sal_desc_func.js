@@ -25,13 +25,11 @@ $(document).ready(function(){
                 $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
                 {
                      $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
-                  
                 });
                 
                 $.each(parsedata.Instrument.InstrumentRange, function(k, v)
                 {
                      $('#sales_range').empty().append('<option value=0>Select Brand</option><option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
-                  
                 });
                 $('#sales_department_id').val(dept.Department.id);
                 $('#val_department').val(dept.Department.departmentname);
@@ -40,7 +38,7 @@ $(document).ready(function(){
                 $('#sales_unitprice').val(parsedata.CustomerInstrument.unit_price);
                         
             }
-    });
+        });
     });
     $('.brand_error').hide();
     $('#val_brand').change(function(){

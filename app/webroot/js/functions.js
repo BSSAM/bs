@@ -931,6 +931,7 @@ $(document).on('click','.instrument_id',function(){
         });
     }
    });
+   
    $(document).on('click','.instrument_delete',function(){
       var device_id=$(this).attr('data-delete');
       var result    =   confirm('Are you sure want to delete?');
@@ -1073,6 +1074,8 @@ $(document).on('click','.instrument_id',function(){
     
     $('#SalesorderQuotationId').blur(function(){
          $('#quoat_list').fadeOut();
-    })
+    });
+    
+   
 }); 
     
