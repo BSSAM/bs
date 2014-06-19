@@ -25,6 +25,7 @@ class Salesorder extends AppModel
             'finderQuery' => '',
             'dependent'=>true,
             'counterQuery' => '',
+            
              
       ));
     public $belongsTo = array(

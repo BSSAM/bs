@@ -46,6 +46,14 @@ class Description extends AppModel
             'fields' => '',
             'order' => '',
            
+        ),
+         'Range' => array(
+            'className' => 'Range',
+            'foreignKey' => 'sales_range',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+           
         )
     );
 }

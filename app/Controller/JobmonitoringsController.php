@@ -20,7 +20,7 @@ class JobmonitoringsController extends AppController
     }
     public function edit($id=NULL)
     {
-          pr($id);exit;
+         
             if($this->request->is(array('post','put')))
             {
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];

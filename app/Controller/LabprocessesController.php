@@ -16,6 +16,8 @@ class LabprocessesController extends AppController
      
     public function index()
     {
+              
+        
         $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno')));
         $data_checking_count = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.checking" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1),'group' => array('Salesorder.salesorderno')));
         $salesordercount = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.is_approved'=>1)));
@@ -256,7 +258,7 @@ class LabprocessesController extends AppController
                         ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('Description' => array('conditions' => array('Description.processing' => 0, 'Description.sales_calllocation' => $calllocation_id)))));
                     $this->set('labprocess', $labprocess);
             endif;
-             break;
+            break;
             case 'overdue': 
                  if($calllocation_id=='all'):
                      $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_approved' => 1, 'Salesorder.solist_diff <' => 0,
