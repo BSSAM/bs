@@ -9,8 +9,12 @@ $(document).ready(function(){
         $('#subcontract_input_search').val(sales_id);
         $('#subcontract_list').fadeOut();
     });
+    
     $('#subcontract_input_search').blur(function(){
          $('#subcontract_list').fadeOut();
+    });
+    $('#val_customername').blur(function(){
+         $('#subcontract_result').fadeOut();
     })
     $(document).on('click','.subcontract_search',function()
     {
@@ -38,6 +42,8 @@ $(document).ready(function(){
                         }
                         else
                         {
+                            $('#SubcontractdoSalesorderId').val(sales_id);
+                            $('.description_list').append('<input type="hidden" value="'+value.Description.id+'" name="description_list[]"/>');
                             $('.subcontract_instrument_info').append('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.Description.id+'">\n\\n\
                                     <td class="text-center">'+value.Description.id+'</td>\n\
@@ -81,7 +87,46 @@ $(document).ready(function(){
                 $('.sales_instrument_remove_'+device_id).fadeOut();
             }
         });
-   });  
+   }); 
+  
+   $(document).on('click','.subcontract_customer_show',function(){
+        var customer_name=$(this).text();
+        $('#val_customername').val(customer_name);
+        $('#subcontract_result').fadeOut();
+        var customer_id=$(this).attr('id');
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Subcontractdos/get_customer_value",
+            data: 'cust_id='+customer_id,
+            cache: false,
+            success: function(data)
+            {
+                data1 = $.parseJSON(data);
+                address_node    =   data1.Address;
+                contact_person_info =   data1.Contactpersoninfo;
+                salesperson_node =   data1.CusSalesperson;
+                $.each(address_node,function(k,v){
+                    if(v.type=='registered'){
+                    $('#val_regaddress').val(v.address);}
+                });
+                $.each(contact_person_info,function(k,v){
+                    $('#val_attn').append('<option value="'+v.id+'">'+v.name+'</option>');
+                });
+                  var sal_name    =  [];
+                  $.each(salesperson_node,function(k,v){
+                      sal_name.push(v.Salesperson.salesperson);   
+                });
+                $('#val_salesperson').val(sal_name.join(' , '));
+                $('#SubcontractdoCustomerId').val(data1.Customer.id);
+                $('#val_fax').val(data1.Customer.fax);
+                $('#val_phone').val(data1.Customer.phone); 
+                $('#val_email').val(data1.Contactpersoninfo.email);
+                $('#SalesorderCustomerId').val(data1.Customer.id);
+                $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
+                $('#pay_id').val(data1.Paymentterm.id);
+            }
+	});
+    });
 })
 
 //$(document).ready(function() {

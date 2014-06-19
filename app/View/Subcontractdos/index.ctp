@@ -36,20 +36,32 @@
                 </tr>
             </thead>
             <tbody>
+                <?PHP if(!empty($subcontract_list)): ?>
+                <?PHP foreach($subcontract_list as $subcontract): ?>
                 <tr>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_dono']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_date']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_duedate']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_dono']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_name']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_address']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_attn']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_phone']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_email']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['salesorder_id']; ?></td>
+                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_ref_no']; ?></td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit', $subcontract['Subcontractdo']['id']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
+                            <?php echo $this->Form->postLink('<i class="fa fa-times"></i>', array('action' => 'delete', $subcontract['Subcontractdo']['id']), array('data-toggle' => 'tooltip', 'title' => 'Delete', 'class' => 'btn btn-xs btn-danger', 'escape' => false, 'confirm' => 'Are you Sure?')); ?>
+                                        
+                        </div>
+                    </td>
                 </tr>
+                <?PHP endforeach; ?>
+                <?PHP else: ?>
+                <?PHP echo "No Records Found"; ?>
+                <?PHP endif; ?>
             </tbody>
         </table>
     </div>

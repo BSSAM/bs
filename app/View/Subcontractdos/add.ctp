@@ -93,51 +93,56 @@ $(function(){
 
 
             <?php echo $this->Form->create('Subcontractdo', array('class' => 'form-horizontal form-bordered', 'id' => 'fileupload', 'enctype' => 'multipart/form-data')); ?>
+            <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
+            <?PHP echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
+            <div class="description_list">
+                
+            </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_customername">Sub Contract Name</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('customername', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false, 'name' => 'customername')); ?>
+                    <?php echo $this->Form->input('subcontract_name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off')); ?>
                 <div id="subcontract_result">
                 </div>
                 </div>
                 <label class="col-md-2 control-label" for="val_regaddress">Sub Contract Address</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('regaddress', array('id' => 'val_regaddress', 'class' => 'form-control', 'placeholder' => 'Enter Sub Contract Address', 'label' => false)); ?>
+                    <?php echo $this->Form->input('subcontract_address', array('id' => 'val_regaddress', 'class' => 'form-control', 'placeholder' => 'Enter Sub Contract Address', 'label' => false,'readonly' => true)); ?>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_attn">ATTN</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => 'Select Contact person Name')); ?>
+                    <?php echo $this->Form->input('subcontract_attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => 'Select Contact person Name')); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_phone">Phone</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('phone', array('id' => 'val_phone', 'class' => 'form-control',
-                        'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off'));
+                    <?php echo $this->Form->input('subcontract_phone', array('id' => 'val_phone', 'class' => 'form-control',
+                        'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true));
                     ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_fax">Fax</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('fax', array('id' => 'val_fax', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter the Fax Number')); ?>
+                    <?php echo $this->Form->input('subcontract_fax', array('id' => 'val_fax', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter the Fax Number', 'readonly' => true)); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_email">Email</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('email', array('id' => 'val_email', 'class' => 'form-control',
-                        'placeholder' => 'Enter the Email Id', 'label' => false, 'autoComplete' => 'off', 'readonly' => 'readonly'));
+                    <?php echo $this->Form->input('subcontract_email', array('id' => 'val_email', 'class' => 'form-control',
+                        'placeholder' => 'Enter the Email Id', 'label' => false, 'autoComplete' => 'off', 'readonly' => true));
                     ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_subcontractdono">Sub Contract DO No </label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontractdono', array('id'=>'val_subcontractdono','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Sub Contract DO No')); ?>
+                    <?php echo $this->Form->input('subcontract_dono', array('id'=>'val_subcontractdono','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Sub Contract DO No','value'=>$subcontract_do_id,'readonly'=>true)); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_date">Date</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
+                    <?php echo $this->Form->input('subcontract_date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Registration Date','label'=>false)); ?>
                 </div>
             </div>
@@ -145,20 +150,20 @@ $(function(){
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_duedate">Due Date </label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('duedate', array('id' => 'val_duedate', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy',
+                    <?php echo $this->Form->input('subcontract_duedate', array('id' => 'val_duedate', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy',
                         'placeholder' => 'Enter the Due Date', 'label' => false));
                     ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_ref_no">Your Ref No</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('ref_no', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter the Reference Number')); ?>
+                    <?php echo $this->Form->input('subcontract_ref_no', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter the Reference Number','readonly'=>true)); ?>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_trackid">Track ID</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('track_id', array('id'=>'val_trackid','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Track Id')); ?>
+                    <?php echo $this->Form->input('subcontract_track_id', array('id'=>'val_trackid','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Track Id')); ?>
                 </div>
             </div>
 
@@ -170,17 +175,16 @@ $(function(){
                 <label class="col-md-2 control-label" for="val_salesperson">Sales person</label>
                 <div class="col-md-4">
                 <?php
-                    echo $this->Form->input('Customerspecialneed.salesperson', array('id' => 'val_salesperson', 'class' => 'form-control',
+                    echo $this->Form->input('subcontract_salesperson', array('id' => 'val_salesperson', 'class' => 'form-control',
                             'placeholder' => 'Sales Person Name', 'label' => false,'readonly'));
-                    echo $this->Form->input('Customerspecialneed.salespeople_id',array('type'=>'hidden','id'=>'salespeople_id'));
                 ?>
                 </div>  
                 
                 <label class="col-md-2 control-label" for="val_service_id">Service Type</label>
                 <div class="col-md-4">
                 <?php
-                    echo $this->Form->input('Customerspecialneed.service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
-                     'label' => false, 'options' =>'','empty'=>'Select Service Type'));
+                    echo $this->Form->input('service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
+                     'label' => false, 'options' =>$services,'empty'=>'Select Service Type'));
                 ?>
                 </div> 
             </div>
@@ -188,7 +192,7 @@ $(function(){
             <label class="col-md-2 control-label" for="val_remarks">Remarks</label>
             <div class="col-md-4">
             <?php
-                echo $this->Form->input('Customerspecialneed.remarks', array('id' => 'val_remarks', 'class' => 'form-control',
+                echo $this->Form->input('subcontract_remarks', array('id' => 'val_remarks', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea'));
             ?>    
             </div>
@@ -231,15 +235,12 @@ $(function(){
 
             <!-- panel -->
 <?php echo $this->Form->end(); ?>
-
             <!-- END Basic Form Elements Content -->
         </div>
         <!-- END Basic Form Elements Block -->
     </div>
 <?php echo $this->Html->script('pages/formsValidation'); ?>
-    <script>$(function() {
-            FormsValidation.init();
-        });</script>
+    <script>$(function() { FormsValidation.init(); });</script>
 
 
 

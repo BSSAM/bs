@@ -8,7 +8,6 @@ $(document).ready(function(){
             success:function(data){
                 $('#val_email').val(data);
             }
-                    
         });
        
    }); 
