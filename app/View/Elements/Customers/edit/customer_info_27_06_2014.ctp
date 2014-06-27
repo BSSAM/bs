@@ -42,8 +42,8 @@
     </div>
         
 </div>
-<div class="form-group">
- <!--   <label class="col-md-2 control-label" for="val_projectname">Customer Tag</label>
+<!--<div class="form-group">
+    <label class="col-md-2 control-label" for="val_projectname">Customer Tag</label>
     <div class="col-md-10">
          Block Tabs 
         <div class="block full">
@@ -92,7 +92,7 @@
                 <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_reg">
                     <?php for($i=0;$i<$data10_count;$i++){ ?>
                     
-                        <li id="<?php echo $data10[$i]['Address']['address_id']; ?>" <?php if($i==0){?><?php } ?>>
+                        <li id="<?php echo $data10[$i]['Address']['address_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>>
                             <a href="#example-tabs2-Address<?php echo $i; ?>">
                                 <button class="close" type="button" id="<?php echo $data10[$i]['Address']['address_id']; ?>" >×</button>
                                 Address<?php echo $i+1; ?>
@@ -133,7 +133,7 @@
                 <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_bill">
                     <?php for($i=0;$i<$data11_count;$i++){ ?>
                     
-                        <li id="<?php echo $data11[$i]['Address']['address_id']; ?>" <?php if($i==0){?><?php } ?>><a href="#example-tabs2-billing<?php echo $i; ?>"><button class="close close_bill" type="button" id="<?php echo $data11[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
+                        <li id="<?php echo $data11[$i]['Address']['address_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>><a href="#example-tabs2-billing<?php echo $i; ?>"><button class="close close_bill" type="button" id="<?php echo $data11[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
                     
                     <?php } ?>
                 </ul>
@@ -169,7 +169,7 @@
                 <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_delivery">
                     <?php for($i=0;$i<$data12_count;$i++){ ?>
                     
-                        <li id="<?php echo $data12[$i]['Address']['address_id']; ?>" <?php if($i==0){?> <?php } ?>><a href="#example-tabs2-delivery<?php echo $i; ?>"><button class="close close_delivery" type="button" id="<?php echo $data12[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
+                        <li id="<?php echo $data12[$i]['Address']['address_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>><a href="#example-tabs2-delivery<?php echo $i; ?>"><button class="close close_delivery" type="button" id="<?php echo $data12[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
                     
                     <?php } ?>
                 </ul>
@@ -252,7 +252,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('invoicetype', array('id'=>'val_invoicetype','class'=>'form-control select-chosen','options' =>$invoice_types,'empty'=>'Enter the Invoice Type','label'=>false,'name'=>'invoicetype')); ?>
+        <?php echo $this->Form->input('invoicetype', array('id'=>'val_invoicetype','class'=>'form-control select-chosen','options'=>array('Purchase order full invoice'=>'Purchase order full invoice','Sales order full invioce'=>'Sales order full invioce','Sales order partial invoice'=>'Sales order partial invoice'),'empty'=>'Enter the Invoice Type','label'=>false,'name'=>'invoicetype')); ?>
     </div>
         
     <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>

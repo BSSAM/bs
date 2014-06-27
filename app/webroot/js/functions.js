@@ -655,7 +655,7 @@ $(document).ready(function(){
         var projectname = $('#val_projectname').val();
         
          var n = $("ul#tabs_project li").size()+1;
-          $('#tab-content_project').append('<div class="tab-pane active" id="example-tabs2-project'+n+'">'+projectname+'</div>');
+          $('#tab-content_project').append('<div class="tab-pane " id="example-tabs2-project'+n+'">'+projectname+'</div>');
           $('#val_projectname').val(null);
          
           $.ajax({
@@ -663,7 +663,7 @@ $(document).ready(function(){
             data:"projectname="+projectname+"&customer_id="+customer_id,
             url: path_url+'/customers/addprojectinfo/',
             success:function(data){
-                $('#tabs_project').append('<li id="'+data+'" class="active"><a href="#example-tabs2-project'+n+'"><button class="close" type="button" id="'+data+'">×</button>Project'+n+'</a></li>');
+                $('#tabs_project').append('<li id="'+data+'"><a href="#example-tabs2-project'+n+'"><button class="close" type="button" id="'+data+'">×</button>Project'+n+'</a></li>');
                 
             }
                     
@@ -685,7 +685,7 @@ $(document).ready(function(){
         var regaddress=$('#val_regaddress').val();
         
          var n = $("ul#tabs_reg li").size()+1;
-          $('#tab-content').append('<div class="tab-pane active" id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
+          $('#tab-content').append('<div class="tab-pane " id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
           $('#val_regaddress').val(null);
          
           $.ajax({
@@ -693,7 +693,7 @@ $(document).ready(function(){
             data:"regaddress="+regaddress+"&customer_id="+customer_id,
             url: path_url+'/customers/editregaddress/',
             success:function(data){
-                $('#tabs_reg').append('<li id="'+data+'" class="active"><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+data+'" >×</button>Address'+n+'</a></li>');
+                $('#tabs_reg').append('<li id="'+data+'" ><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+data+'" >×</button>Address'+n+'</a></li>');
                 
             }
                     
@@ -715,7 +715,7 @@ $(document).ready(function(){
         var billaddress=$('#val_billaddress').val();
         
          var n = $("ul#tabs_bill li").size()+1;
-          $('#tab-content_bill').append('<div class="tab-pane active" id="example-tabs2-billing'+n+'">'+billaddress+'</div>');
+          $('#tab-content_bill').append('<div class="tab-pane " id="example-tabs2-billing'+n+'">'+billaddress+'</div>');
           $('#val_billaddress').val(null);
          
           $.ajax({
@@ -723,7 +723,7 @@ $(document).ready(function(){
             data:"billaddress="+billaddress+"&customer_id="+customer_id,
             url: path_url+'/customers/editbilladdress/',
             success:function(data){
-                $('#tabs_bill').append('<li id="'+data+'" class="active"><a href="#example-tabs2-billing'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
+                $('#tabs_bill').append('<li id="'+data+'" ><a href="#example-tabs2-billing'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
                 
             }
                     
@@ -745,7 +745,7 @@ $(document).ready(function(){
         var deliveryaddress=$('#val_deliveryaddress').val();
         
          var n = $("ul#tabs_delivery li").size()+1;
-          $('#tab-content_delivery').append('<div class="tab-pane active" id="example-tabs2-delivery'+n+'">'+deliveryaddress+'</div>');
+          $('#tab-content_delivery').append('<div class="tab-pane " id="example-tabs2-delivery'+n+'">'+deliveryaddress+'</div>');
           $('#val_deliveryaddress').val(null);
          
           $.ajax({
@@ -753,7 +753,7 @@ $(document).ready(function(){
             data:"deliveryaddress="+deliveryaddress+"&customer_id="+customer_id,
             url: path_url+'/customers/editdeliveryaddress/',
             success:function(data){
-                $('#tabs_delivery').append('<li id="'+data+'" class="active"><a href="#example-tabs2-delivery'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
+                $('#tabs_delivery').append('<li id="'+data+'"><a href="#example-tabs2-delivery'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
                 
             }
                     
