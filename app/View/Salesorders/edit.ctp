@@ -51,7 +51,7 @@ if(customer!='')
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Salesorders',array('controller'=>'Salesorders','action'=>'index')); ?></li>
-                        <li>Edit Salesorders</li>
+                        <li>Edit Sales Order</li>
                     </ul>
                     <!-- END Forms General Header -->
 
@@ -61,7 +61,6 @@ if(customer!='')
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
-                                    
                                     <h2></h2>
                                 </div>
                                 <!-- END Form Elements Title -->

@@ -16,7 +16,7 @@
         <h2 style="float:right;"><?php echo $this->Html->link('Add Sub-Contract DO',array('controller'=>'Subcontractdos','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Sub-Contract DO')); ?></h2>
     </div>
                             
-                            
+                     
     <div class="table-responsive">
         <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
@@ -65,6 +65,6 @@
             </tbody>
         </table>
     </div>
-        
+       
         
         

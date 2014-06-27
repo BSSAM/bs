@@ -19,7 +19,6 @@ $(document).ready(function(){
                 }
             });
     })
-  
     $(document).on('click','.customerinstrument_add',function(){
        
         if($('#val_description').val()=='')
@@ -64,16 +63,13 @@ $(document).ready(function(){
                 $('#unit_price').val(null);
                 $('#range_array').empty().append('<option value="">Select Range</option>');
                 $('#status').val(null);
-                
                 }
         });
     });
     $(document).on('click','.cus_instrument_delete',function(){
         var result = confirm("Are your sure want to delete?");
         if (result==true) {
-    
         var device_id=$(this).attr('data-delete');
-        
         $.ajax({
             type: 'POST',
             data:"device_id="+ device_id,
@@ -84,7 +80,93 @@ $(document).ready(function(){
         });
     }
    });
-  
+  //for customer Instrument Edit process
+    $(document).on('click','.cus_instrument_edit',function(){
+      var edit_device_id=$(this).attr('data-edit');
+      $('.update_device').html('<button class="btn btn-sm btn-primary cus_ins_update" type="button"><i class="fa fa-plus fa-fw"></i> Update</button>');
+       $.ajax({
+            type: 'POST',
+            data:"edit_device_id="+ edit_device_id,
+            url: path_url+'/Customers/edit_instrument/',
+            success:function(data){
+              
+                edit_node=$.parseJSON(data);
+                $('#model_no').val(edit_node.CustomerInstrument.model_no);
+                $('#unit_price').val(edit_node.CustomerInstrument.unit_price);
+                $('#range_array').empty().append('<option value="">Select Brand</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
+                $('#instrument_name_chosen span').text(edit_node.Instrument.name);
+                var check=(edit_node.CustomerInstrument.status==1)?true:false;
+                $('#status').prop('checked',check);
+               
+            }
+        });
+        
+   });
+   //for Instrument Update Process
+    $(document).on('click','.cus_ins_update',function(){
+    
+      if($('#val_description').val()=='')
+        {
+            $('.ins_error').addClass('animation-slideDown');
+            $('.ins_error').css('color','red');
+            $('.ins_error').show();
+            return false;
+        }
+        $('.cus_ins_update').html('<button class="btn btn-sm btn-primary customerinstrument_add" type="button"><i class="fa fa-plus fa-fw"></i> add</button>');
+        var device_id =   $('#device_id').val();
+        var customer_id =   $('#QuotationCustomerId').val();
+        var instrument_id   =   $('#QuotationInstrumentId').val();
+        var instrument_quantity =   $('#val_quantity').val();
+        var instrument_name=$('#val_description').val();
+        var instrument_modelno=$('#val_model_no').val();
+        var instrument_brand=$('#val_brand').val();
+        var instrument_range=$('#val_range').val();
+        var instrument_calllocation=$('#val_call_location').val();
+        var instrument_calltype=$('#val_call_type').val();
+        var instrument_validity=$('#val_validity').val();
+        var instrument_unitprice=$('#val_unit_price').val();
+        var instrument_discount=$('#val_discount1').val();
+       
+        var instrument_cal=instrument_unitprice*instrument_discount/100;
+       
+        var instrument_total= instrument_unitprice - instrument_cal ;
+        var instrument_department=$('#val_department').val();
+        var instrument_account=$('#val_account_service').val();
+        var instrument_title=$('#val_title').val();
+        $.ajax({
+            type: 'POST',
+            data:"device_id="+device_id+"&instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title,
+            url: path+'Quotations/update_instrument/',
+            success: function(data)
+            {
+               $('.instrument_remove_'+device_id).remove();
+               $('.Instrument_info').append('<tr class="instrument_remove_'+device_id+'">\n\\n\
+                                    <td class="text-center">'+device_id+'</td>\n\
+                                    <td class="text-center">'+instrument_name+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_modelno+'</td>\n\
+                                    <td class="text-center">'+instrument_calllocation+'</td>\n\
+                                    <td class="text-center">'+instrument_calltype+'</td>\n\
+                                    <td class="text-center">'+instrument_validity+'</td>\n\
+                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_account+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_total+'</td>\n\\n\
+                                    <td class="text-center"><div class="btn-group">\n\
+                                    <a data-edit="'+device_id+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
+                                    <a data-delete="'+device_id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
+                                    <i class="fa fa-times"></i></a></div></td></tr>');
+                
+                $('#val_quantity').val(null);
+                $('#val_description').val(null);
+                $('#val_model_no').val(null);
+                $('#val_brand').empty().append('<option value="">Select Brand</option>');
+                $('#val_range').val(null);
+                $('#val_unit_price').val(null);
+                $('#val_discount').val('');
+                $('#val_description').val(null);
+                }
+        });
+        
+   });
 });
 
 

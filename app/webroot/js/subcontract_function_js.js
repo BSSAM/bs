@@ -9,7 +9,6 @@ $(document).ready(function(){
         $('#subcontract_input_search').val(sales_id);
         $('#subcontract_list').fadeOut();
     });
-    
     $('#subcontract_input_search').blur(function(){
          $('#subcontract_list').fadeOut();
     });
@@ -33,18 +32,19 @@ $(document).ready(function(){
             {
                 if(data!='failure')
                 {
+                    
                     sales_node = $.parseJSON(data);
                     
                     $.each(sales_node,function(key,value){  
                         if(sales_node.length===0)
                         {
-                            $('.subcontract_instrument_info').html('No Records Found');
+                            $('.subcontract_instrument_info').html(' <tr class="text-center">No Records Found</tr>');
                         }
                         else
                         {
                             $('#SubcontractdoSalesorderId').val(sales_id);
                             $('.description_list').append('<input type="hidden" value="'+value.Description.id+'" name="description_list[]"/>');
-                            $('.subcontract_instrument_info').append('\n\
+                            $('.subcontract_instrument_info').html('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.Description.id+'">\n\\n\
                                     <td class="text-center">'+value.Description.id+'</td>\n\
                                     <td class="text-center">'+value.Instrument.name+'</td>\n\\n\\n\
@@ -59,7 +59,7 @@ $(document).ready(function(){
                                     <a data-delete="'+value.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger subcontract_instrument_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
                         }
-                        
+                        $('body, html').animate({scrollTop : ($('.subcontract_linear').offset().top)-500}, 'slow', 'linear');
                     });
                    
                 }
@@ -78,15 +78,8 @@ $(document).ready(function(){
     });
     $(document).on('click','.subcontract_instrument_delete',function(){
       var device_id=$(this).attr('data-delete');
+        $('.sales_instrument_remove_'+device_id).fadeOut();
        
-        $.ajax({
-            type: 'POST',
-            data:"device_id="+ device_id,
-            url: path_url+'/Subcontractdos/delete_instrument/',
-            success:function(data){
-                $('.sales_instrument_remove_'+device_id).fadeOut();
-            }
-        });
    }); 
   
    $(document).on('click','.subcontract_customer_show',function(){
@@ -127,6 +120,7 @@ $(document).ready(function(){
             }
 	});
     });
+    
 })
 
 //$(document).ready(function() {

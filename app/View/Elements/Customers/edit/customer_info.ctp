@@ -247,7 +247,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('invoicetype', array('id'=>'val_invoicetype','class'=>'form-control select-chosen','options'=>array('Purchase order full invoice'=>'Purchase order full invoice','Sales order full invioce'=>'Sales order full invioce','Sales order partial invoice'=>'Sales order partial invoice'),'empty'=>'Enter the Invoice Type','label'=>false,'name'=>'invoicetype')); ?>
+        <?php echo $this->Form->input('invoicetype', array('id'=>'val_invoicetype','class'=>'form-control select-chosen','options' =>$invoice_types,'empty'=>'Enter the Invoice Type','label'=>false,'name'=>'invoicetype')); ?>
     </div>
         
     <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>

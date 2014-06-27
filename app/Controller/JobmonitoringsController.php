@@ -8,19 +8,17 @@
 
 class JobmonitoringsController extends AppController
 {
-   
     public $helpers = array('Html','Form','Session');
     public $components = array('RequestHandler');
-    public $uses    =   array('Deliveryorder','Invoice');
+    public $uses    =   array('Deliveryorder','Invoice','Salesorder','Description');
     public function index()
     {
-        $deliveryorder_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1),'recursive'=>2));
-//       pr($deliveryorder_approved_list);exit;
-        $this->set(compact('deliveryorder_approved_list'));
+        $salesorder_approved_list    =   $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1),'recursive'=>2));
+        $this->set(compact('salesorder_approved_list'));
     }
     public function edit($id=NULL)
     {
-         
+            $description_list    =   $this->Description->find('all',array('conditions'=>array('Description.is_approved'=>1),'recursive'=>2));
             if($this->request->is(array('post','put')))
             {
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
@@ -38,7 +36,7 @@ class JobmonitoringsController extends AppController
             }
             else
             {
-                $this->request->data=$salesorder_details;
+                $this->set('descriptions',$description_list);
             }
         }
 }

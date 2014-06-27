@@ -90,7 +90,7 @@
                             <th class="text-center">Model No</th>
                             <th class="text-center">Range</th>
                             <th class="text-center">Unit Price</th>
-                             <th class="text-center">Status</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -99,32 +99,31 @@
                              <?PHP foreach($customer_instruments as $cusins):?>  
                         <tr class="cus_instrument_remove_<?PHP echo $cusins['CustomerInstrument']['id']; ?>">
                             <td class="text-center"><?PHP echo $cusins['CustomerInstrument']['id']; ?></td>
-                           <td  class="text-center"><?PHP echo $cusins['Instrument']['name']; ?></td>
-                           <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['model_no']; ?></td>
-                           <td class="text-center"><?PHP echo $cusins['Range']['range_name']; ?></td>
-                           <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['unit_price']; ?></td>
-                           <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['status']; ?></td>
-                           
-                           <td class="text-center">
-                               <div class="btn-group">
-                                   <a data-edit="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit">
-                                       <i class="fa fa-pencil"></i>
-                                   </a>
-                                   <a data-delete="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">
-                                       <i class="fa fa-times"></i>
-                                   </a>
-                               </div>
-                           </td>
+                            <td  class="text-center"><?PHP echo $cusins['Instrument']['name']; ?></td>
+                            <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['model_no']; ?></td>
+                            <td class="text-center"> <?PHP echo $cusins['Range']['range_name']; ?></td>
+                            <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['unit_price']; ?></td>
+                            <td  class="text-center"><?PHP echo $status = ($cusins['CustomerInstrument']['status'] == 1) ? 'Active' : 'In active'; ?></td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a data-edit="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a data-delete="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                              <?PHP endforeach; ?>  
                            <?PHP endif; ?>     
                     </tbody>
                 </table>
                                 <div class="form-group form-actions">
-                                <div class="col-md-9 col-md-offset-10 update_device">
-                                    <?php echo $this->Html->link('Back to Customers', array('controller' => 'Customers','action'=>'index'),array('class' => 'btn btn-sm btn-primary','escape' => false)); ?>
+                                    <div class="col-md-9 col-md-offset-10">
+                                        <?php echo $this->Html->link('Back to Customers', array('controller' => 'Customers', 'action' => 'index'), array('class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+                                    </div>
                                 </div>
-                             </div>
     <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
                         

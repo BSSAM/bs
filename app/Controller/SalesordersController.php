@@ -15,8 +15,7 @@
         public function add()
         {
            
-           
-           $str=NULL;
+            $str=NULL;
             $d=date("d");
             $m=date("m");
             $y=date("Y");
@@ -45,7 +44,9 @@
                  $sales_details =  $quotation_details['Quotation']  ;
                  $sales['Salesorder']   =    $sales_details;
                  $sales['Description']   =    $quotation_details['Device'];
+                
                  $this->set('sale',$sales);
+                 
               //pr($sales);exit;
                  $this->request->data =   $sales;
                }
@@ -53,7 +54,7 @@
                {
                     $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                     $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
-                   
+                    
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
@@ -67,9 +68,9 @@
                         */
                         $this->request->data['Logactivity']['logname']   =   'Salesorder';
                         $this->request->data['Logactivity']['logactivity']   =   'Add SalesOrder';
-                         $this->request->data['Logactivity']['logid']   =   $sales_orderid;
-                         $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
-                         $this->request->data['Logactivity']['logapprove'] = 1;
+                        $this->request->data['Logactivity']['logid']   =   $sales_orderid;
+                        $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
                         $a = $this->Logactivity->save($this->request->data['Logactivity']);
                         //pr($a);exit;
                         /******************/

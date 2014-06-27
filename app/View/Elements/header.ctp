@@ -212,18 +212,28 @@
                                     <li <?php echo $a=($control == 'Quotations')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('Quotation',array('controller'=>'Quotations','action'=>'index')); ?>
                                     </li><?php } ?>
+                                    
+                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <li <?php echo $a=($control == 'Salesorders')?'class=active':''; ?>>
+                                         <?php echo $this->Html->link('Sales Order',array('controller'=>'Salesorders','action'=>'index')); ?>
+                                    </li><?php } ?> 
+                                    
+                                     <?php if($user_role['job_labprocess']['view'] == 1){ ?>
+                                    <li <?php echo $a=($control == 'Labprocesses')?'class=active':''; ?>>
+                                         <?php echo $this->Html->link('Lab Process',array('controller'=>'Labprocesses','action'=>'index')); ?>
+                                    </li> <?php } ?>
+                                    
+                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <li <?php echo $a=($control == 'Deliveryorders')?'class=active':''; ?>>
+                                         <?php echo $this->Html->link('Delivery Order',array('controller'=>'Deliveryorders','action'=>'index')); ?>
+                                    </li>  <?php } ?>
+                                    
                                     <?php if($user_role['job_purchaseorder']['view'] == 1){ ?>
                                     <li <?php echo $a=($control == 'Purchaseorders')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('Purchase Order',array('controller'=>'Purchaseorders','action'=>'index')); ?>
                                     </li><?php } ?>
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
-                                    <li <?php echo $a=($control == 'Salesorders')?'class=active':''; ?>>
-                                         <?php echo $this->Html->link('Sales Order',array('controller'=>'Salesorders','action'=>'index')); ?>
-                                    </li><?php } ?>  
-                                    <?php if($user_role['job_labprocess']['view'] == 1){ ?>
-                                    <li <?php echo $a=($control == 'Labprocesses')?'class=active':''; ?>>
-                                         <?php echo $this->Html->link('Lab Process',array('controller'=>'Labprocesses','action'=>'index')); ?>
-                                    </li> <?php } ?> 
+                                    
+                                    
                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li <?php echo $a=($control == 'Subcontractdos')?'class=active':''; ?>>
                                          <?php echo $this->Html->link('Sub Contract DO',array('controller'=>'Subcontractdos','action'=>'index')); ?>
@@ -246,10 +256,7 @@
                                      <li>
                                           <a href="#"><?php echo 'C and D Info'; ?></a>
                                     </li><?php } ?>
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
-                                    <li <?php echo $a=($control == 'Deliveryorders')?'class=active':''; ?>>
-                                         <?php echo $this->Html->link('Delivery Order',array('controller'=>'Deliveryorders','action'=>'index')); ?>
-                                    </li>  <?php } ?>
+                                   
                                     <?php //if($user_role['job_salesorder']['view'] == 1){ ?>
                                    <!-- <li>
                                         <a href="#"><?php //echo 'Tracking System'; ?></a>

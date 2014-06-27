@@ -3,17 +3,15 @@
 </script>
 
 <script type="text/javascript">
-
 $(function(){
     $("#result").hide();
-   
-$("#val_customer").keyup(function() 
-{ 
-//alert();    
-var customer = $(this).val();
-var dataString = 'name='+ customer;
-if(customer!='')
-{
+    $("#val_customer").keyup(function() 
+    { 
+    //alert();    
+    var customer = $(this).val();
+    var dataString = 'name='+ customer;
+    if(customer!='')
+    {
 	$.ajax({
 	type: "POST",
 	url: "<?PHP echo Router::url('/',true); ?>/Quotations/search",
@@ -21,25 +19,20 @@ if(customer!='')
 	cache: false,
 	success: function(html)
 	{
-            
             $("#result").html(html).show();
-            
 	}
 	});
 }
-
 });
-
 $("#val_reg_date").datepicker("setDate", new Date());
 });
-
-
 </script>
 <h1>
                                 <i class="gi gi-user"></i>Add Quotation
                             </h1>
                         </div>
                     </div>
+                   
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Quotation',array('controller'=>'Quotations','action'=>'index')); ?></li>
@@ -47,19 +40,16 @@ $("#val_reg_date").datepicker("setDate", new Date());
                     </ul>
                     <!-- END Forms General Header -->
 
-<div class="row">
+                <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
-                                    
                                     <h2></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
-
                                 <!-- Basic Form Elements Content -->
-                                 
                                 <div class="panel panel-default">
                                     <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'fileupload','enctype'=>'multipart/form-data')); ?>
                                     <?php echo $this->Form->input('Quotation.customer_id', array('type'=>'hidden','value'=>'')); ?>

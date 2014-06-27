@@ -48,7 +48,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?PHP // pr($labs);exit; ?>
+                
                 <?php foreach ($labs as $labs_list): ?> 
                 <?PHP $description_id   =   $labs_list['Description']['id']; 
                        $processing=   'data[Description][processing]['.$description_id.']';

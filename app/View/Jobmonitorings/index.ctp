@@ -26,7 +26,7 @@
                     <th class="text-center">Sales Orders No</th>
                     <th class="text-center">Due Date</th>
                     <th class="text-center">Reg.Date</th>
-                     <th class="text-center">Branch Name</th>
+                    <th class="text-center">Branch Name</th>
                     <th class="text-center">Customer Name</th>
                     <th class="text-center">Status</th>
                     <th class="text-center">Total Qty</th>
@@ -38,24 +38,23 @@
                 </tr>
             </thead>
             <tbody>
-                <?PHP if (!empty($deliveryorder_approved_list)): ?>
-                <?php foreach ($deliveryorder_approved_list as $deliveryorder): ?>
+                <?PHP if (!empty($salesorder_approved_list)): ?>
+                <?php foreach ($salesorder_approved_list as $salesorder): ?>
                 <tr>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['salesorderno'] ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['priority'] ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['branchname'] ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['branchname'] ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['customername']; ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['salesorderno'] ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['priority'] ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['branchname'] ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['branchname'] ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['customername']; ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['branchname']; ?></td>
-                    <td class="text-center"><?PHP echo $deliveryorder['Salesorder']['customername'];?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['salesorderno'] ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['due_date'] ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['reg_date'] ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['branchname'] ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Customer']['customername']; ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['salesorderno'] ?></td>
+                    <td class="text-center"><?PHP echo count($salesorder['Description']); ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['priority'] ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['branchname'] ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['customername']; ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['branchname']; ?></td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit',$deliveryorder['Deliveryorder']['id']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
+                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit',$salesorder['Salesorder']['id']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
                         </div>
                     </td>
                 </tr>

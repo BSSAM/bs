@@ -112,8 +112,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('validity', array('id'=>'sales_validity','class'=>'form-control',
                                                 'label'=>false,'name'=>'sales_validity','disabled'=>'disabled','value'=>'12')); ?>
-        <div id="result">
-        </div>
+        
     </div>
     <label class="col-md-2 control-label" for="sales_unitprice">Unit Price</label>
     <div class="col-md-4">
@@ -128,8 +127,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('sales_discount', array('id'=>'sales_discount','class'=>'form-control',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'sales_discount','type'=>'text')); ?>
-        <div id="result">
-        </div>
+       
     </div>
     <label class="col-md-2 control-label" for="val_department">Department</label>
     <div class="col-md-4">
@@ -145,7 +143,6 @@
         <?php echo $this->Form->input('sales_accountservice', array('id'=>'sales_accountservice','class'=>'form-control',
                                       'label'=>false,'name'=>'sales_accountservice','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
-     
     </div>
     <label class="col-md-2 control-label" for="sales_titles">Titles</label>
     <div class="col-md-4">
@@ -201,9 +198,7 @@
                         </div>
                     </td>
                 </tr>
-        <?PHP   endforeach;
-                   endif; 
-        ?>
+        <?PHP   endforeach;  endif;  ?>
     </tbody>
 </table>
 </div>

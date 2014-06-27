@@ -12,7 +12,8 @@ class CustomersController extends AppController
     public $helpers = array('Html','Form','Session');
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
-                        'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument','Deliveryordertype');
+                        'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
+                        'Deliveryordertype','InvoiceType');
     
   
     public function index()
@@ -270,7 +271,9 @@ class CustomersController extends AppController
         $this->set('industry',$data2);
         
         $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
-        $this->set(compact('deliverorder_type'));
+        $invoice_types = $this->InvoiceType->find('list', array('fields' => array('id','type_invoice')));
+        
+        $this->set(compact('deliverorder_type','invoice_types'));
         
         $this->loadModel('Location');
         $data3 = $this->Location->find('list', array('fields' => 'locationname'));
@@ -340,7 +343,7 @@ class CustomersController extends AppController
             
             if($this->Customer->save($this->request->data))
             {
-                pr($this->request->data);exit;
+               
                 $project = $this->Projectinfo->find('count', array('conditions' => array('Projectinfo.customer_id' => $this->Session->read('customer_id'))));
                 $contactperson = $this->Contactpersoninfo->find('count', array('conditions' => array('Contactpersoninfo.customer_id' => $this->Session->read('customer_id'))));
                 $address = $this->Address->find('count', array('conditions' => array('Address.customer_id' => $this->Session->read('customer_id'))));
@@ -760,16 +763,23 @@ class CustomersController extends AppController
     public function instrument_map($id=NULL)
     {
        
-      if($id!=NULL)
-      {
-         $customer_entry  =    $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id),'recursive'=>'3'));
-        
-         $instruments   =   $this->Instrument->find('list',array('conditions'=>array('Instrument.status'=>'1'),'order'=>'Instrument.id desc','fields'=>array('id','name')));
-         $customer_instruments   =   $this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$id),'order'=>'CustomerInstrument.id desc'));
-         
-            $this->set(compact('customer_entry','instruments','customer_instruments'));
-        
-      }
+        if($id!=NULL)
+        {
+           $customer_entry  =    $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id),'recursive'=>'3'));
+           $instruments   =   $this->Instrument->find('list',array('conditions'=>array('Instrument.status'=>'1'),'order'=>'Instrument.id desc','fields'=>array('id','name')));
+           $customer_instruments   =   $this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$id),'order'=>'CustomerInstrument.id desc'));
+           $this->set(compact('customer_entry','instruments','customer_instruments'));
+        }
+    }
+    public function edit_instrument()
+    {
+        $this->autoRender=false;
+        $device_id= $this->request->data['edit_device_id'];
+        $edit_device_details    =   $this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.id'=>$device_id)));
+        if(!empty($edit_device_details ))
+        {
+                echo json_encode($edit_device_details);
+        }
     }
     public function get_range()
     {

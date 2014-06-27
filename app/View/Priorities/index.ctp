@@ -26,7 +26,7 @@
                                         <th class="text-center">Priority</th>
                                         <th class="text-center">Description</th>
                                         <th class="text-center">No of Days</th>
-                                        <th class="text-center">Multiples Of</th>
+                                        <th class="text-center">Multiply By</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>

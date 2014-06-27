@@ -101,7 +101,6 @@ class SubcontractdosController extends AppController
     }
     public function get_sales_details() 
     {
-       
         $sales_id = $this->request->data['sales_id'];
         $this->autoRender = false;
         $sales_data = $this->Description->find('all', array('conditions' => array('Description.salesorder_id' => $sales_id, 'Description.is_approved' => '1','Description.sales_calllocation'=>'subcontract')));

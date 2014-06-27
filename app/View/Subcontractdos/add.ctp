@@ -197,13 +197,11 @@ $(function(){
             ?>    
             </div>
             </div>
-            
-            <p>
-            </p>
+           
             <div class="col-lg-12">
                 <h4 class="sub-header"><small><b>Instruments List </b</small></h4>
             </div>
-            <div class="col-sm-3 col-lg-12">
+            <div class="col-sm-3 col-lg-12 subcontract_linear">
                 <table  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
@@ -221,7 +219,11 @@ $(function(){
                         </tr>
                     </thead>
                     <tbody class="subcontract_instrument_info"> 
-                        
+                        <tr class="text-center">    
+                            <td class="" colspan="10">
+                        No Records Found</td>
+                       
+                        </tr>
                     </tbody>
                 </table>
             </div>

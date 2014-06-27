@@ -36,9 +36,11 @@ class LabprocessesController extends AppController
     public function labs($id=null)
     {
         $salesorder_list    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_approved'=>1)));
+        
         if($salesorder_list['Customer']['deliveryordertype_id']==1)
         {
             $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+            
             $this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
             $this->set('labs', $data_description);
             if ($this->request->is(array('post', 'put'))) 
@@ -126,6 +128,7 @@ class LabprocessesController extends AppController
         elseif($salesorder_list['Customer']['deliveryordertype_id']==2)
         {
             $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.is_approved_lab' => 0)));
+          
             $this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
             $this->set('labs', $data_description);
             if ($this->request->is(array('post', 'put'))) 
@@ -165,7 +168,6 @@ class LabprocessesController extends AppController
                     $approved_device = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_approved_lab' => 1,)));
                     $approved = Hash::extract($approved_device,'{n}.Description.id' );
                     $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'delivery')));
-                    
                     $str=NULL;$d=date("d");$m=date("m");$y=date("Y");$t=time();
                     $dmt='BDO'.($d+$m+$y+$t);
                     $track_id='BSTRA'.(rand(0,89966587));

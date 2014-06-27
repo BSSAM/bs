@@ -40,47 +40,47 @@ if(customer!='')
             $("#result").html(html).show();
 	}
 	});
-}return false;    
-});
-$("#val_reg_date").datepicker("setDate", new Date());
-$("#val_in_date").datepicker("setDate", new Date());
-var dateMin = $('#val_in_date').datepicker('getDate');   
-var addDays = new Date();
-addDays.setDate(addDays.getDate() + 4);
-$("#val_out_date").datepicker("setDate",addDays);
+        }return false;    
+        });
+        $("#val_reg_date").datepicker("setDate", new Date());
+        $("#val_in_date").datepicker("setDate", new Date());
+        var dateMin = $('#val_in_date').datepicker('getDate');   
+        var addDays = new Date();
+        addDays.setDate(addDays.getDate() + 4);
+        $("#val_out_date").datepicker("setDate",addDays);
 
-});
+        });
 
 
 </script>
 <h1>
+                           
                                 <i class="gi gi-user"></i>Add Sales Order
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
-                          <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Salesorders',array('controller'=>'Salesorders','action'=>'index')); ?></li>
-                        <li>Add Salesorders</li>
+                        <li>Add Sales Orders</li>
                     </ul>
                     <!-- END Forms General Header -->
-
-<div class="row">
+                    <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
-                                    
                                     <h2></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
-
                                 <!-- Basic Form Elements Content -->
-                                 
                                 <div class="panel panel-default">
                                     <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','action'=>'add')); ?>
                                     <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden','value'=>'')); ?>
+                                    <?PHP if(!empty($sale['Salesorder']['track_id'])): ?>
+                                    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','value'=>$sale['Salesorder']['track_id'])); ?>
+                                    <?PHP endif; ?>
                                     <div class="panel-body panel-body-nopadding">
                                         
                                         <!-- BASIC WIZARD -->
@@ -92,7 +92,6 @@ $("#val_out_date").datepicker("setDate",addDays);
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
-                                            
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
                                                     <?PHP echo $this->element('Salesorders/salesorder_info'); ?>
@@ -108,13 +107,10 @@ $("#val_out_date").datepicker("setDate",addDays);
                                         </div><!-- panel-body -->
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-10">
-                                                
                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary sales_submit')); ?>
                                             <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-                                                
                                             </div>
                                         </div>
-                                        
                                     </div>
                                     <!-- panel -->
                                     <?php echo $this->Form->end(); ?>

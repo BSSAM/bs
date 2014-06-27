@@ -264,8 +264,7 @@ $(document).ready(function(){
             $('.name_error').show();
             return false;
         }
-        
-        
+       
         var contact_name=$('#contact_name').val();
         var contact_email=$('#contact_email').val();
         var contact_department=$('#contact_department').val();
@@ -274,9 +273,7 @@ $(document).ready(function(){
         var contact_mobile=$('#contact_mobile').val();
         var contact_purpose=$('#contact_purpose').val();
         var contact_remark=$('#contact_remark').val();
-       
-       
-       alert("contact_name = "+ contact_name+" & contact_email = "+contact_email+" & contact_department = "+contact_department+" & contact_phone = "+contact_phone+" & contact_position = "+contact_position+" & contact_remark = "+contact_remark+" & contact_purpose = "+contact_purpose+" & contact_mobile = "+contact_mobile);
+//       alert("contact_name = "+ contact_name+" & contact_email = "+contact_email+" & contact_department = "+contact_department+" & contact_phone = "+contact_phone+" & contact_position = "+contact_position+" & contact_remark = "+contact_remark+" & contact_purpose = "+contact_purpose+" & contact_mobile = "+contact_mobile);
         $.ajax({
             type: 'POST',
             data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile,
@@ -297,8 +294,6 @@ $(document).ready(function(){
                                     <td class="text-center"><div class="btn-group"><button type="button" id="'+data+'" title="Edit" class="btn btn-xs btn-default bt_con_edit"><i class="fa fa-pencil"></i></button>\n\
                                     <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
-          
-                
             }
         });
         $('#contact_name').val(null);
