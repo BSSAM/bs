@@ -45,6 +45,7 @@
                  $sales_details =  $quotation_details['Quotation']  ;
                  $sales['Salesorder']   =    $sales_details;
                  $sales['Description']   =    $quotation_details['Device'];
+                 $sales['Salesorder']   =    $sales_details;
                  $this->set('sale',$sales);
               //pr($sales);exit;
                  $this->request->data =   $sales;

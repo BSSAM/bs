@@ -18,8 +18,9 @@
             if(!empty($track_id)){
                 $this->set('track',$track_id);
                 $quotation = $this->Quotation->find('all',array('conditions'=>array('track_id'=>$track_id)));
+                $salesorder = $this->Salesorder->find('all',array('conditions'=>array('track_id'=>$track_id)));
                 //$customer = $this->Customer->find('all',array('customer_id'=>$quotation[0]['Quotation']['customer_id']));
-                pr($quotation);
+               // pr($quotation);
                 //pr($customer);
                 $this->set('Quo_det',$quotation);
                 //$this->set('Cus_det',$customer);

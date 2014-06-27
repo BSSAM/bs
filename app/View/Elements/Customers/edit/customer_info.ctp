@@ -92,7 +92,12 @@
                 <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_reg">
                     <?php for($i=0;$i<$data10_count;$i++){ ?>
                     
-                        <li id="<?php echo $data10[$i]['Address']['address_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>><a href="#example-tabs2-Address<?php echo $i; ?>"><button class="close" type="button" id="<?php echo $data10[$i]['Address']['address_id']; ?>" >×</button>Address<?php echo $i+1; ?></a></li>
+                        <li id="<?php echo $data10[$i]['Address']['address_id']; ?>" <?php if($i==0){?> class="active"<?php } ?>>
+                            <a href="#example-tabs2-Address<?php echo $i; ?>">
+                                <button class="close" type="button" id="<?php echo $data10[$i]['Address']['address_id']; ?>" >×</button>
+                                Address<?php echo $i+1; ?>
+                            </a>
+                        </li>
                     
                     <?php } ?>
                 </ul>

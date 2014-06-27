@@ -340,7 +340,7 @@ class CustomersController extends AppController
             
             if($this->Customer->save($this->request->data))
             {
-                pr($this->request->data);exit;
+                //pr($this->request->data);exit;
                 $project = $this->Projectinfo->find('count', array('conditions' => array('Projectinfo.customer_id' => $this->Session->read('customer_id'))));
                 $contactperson = $this->Contactpersoninfo->find('count', array('conditions' => array('Contactpersoninfo.customer_id' => $this->Session->read('customer_id'))));
                 $address = $this->Address->find('count', array('conditions' => array('Address.customer_id' => $this->Session->read('customer_id'))));

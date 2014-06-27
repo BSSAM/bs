@@ -13,11 +13,6 @@ and open the template in the editor.
 .failure_alert {background-color: #F9FAFC;  border: 1px solid #FF0000;  color: #FF0000;}
 .alert_box {   background-position: 0 0;    background-repeat: repeat;    border-radius: 5px;    font-size: 15px;margin-bottom: 15px;padding: 8px;ext-indent: 8px;}
 
-//For Quotation Search List 
-.show{padding: 13px 0px; max-width: 303px; min-width: 303px; padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 15px;max-height: 37px;float: top; background:#FFF; color:#000000; line-height: 20px; border-bottom: 1px #dbe1e8 dotted !important;}
-.show:hover{ background:#6ad2eb; color:#FFF; cursor:pointer;}
-#result{ position: absolute;z-index: 999;background-color: #ffffff; text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
-
 .instrument_id{padding: 13px 0px; max-width: 303px;min-width: 303px;padding-left: 9px;padding-top: 9px;border-bottom: #000000 1px;font-size: 15px; max-height: 37px; float: top;background:#FFFF;color:#000000;line-height: 20px;border-bottom: 1px #dbe1e8 dotted !important;}
 .instrument_id:hover{background:#6ad2eb;color:#FFF;cursor:pointer;}
 #search_instrument{ position: absolute; z-index: 999; background-color: #ffffff;text-align: left; max-height: 150px; overflow-y: scroll; overflow-x: hidden;    border: 1px #dbe1e8 solid !important;}
