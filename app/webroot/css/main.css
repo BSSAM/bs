@@ -2235,8 +2235,12 @@ textarea.form-control {
 }
 
 .table thead > tr > th {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
+}
+.table tbody > tr > td {
+    font-size: 14px;
+    font-weight: 200;
 }
 
 .table thead > tr > th > small {
