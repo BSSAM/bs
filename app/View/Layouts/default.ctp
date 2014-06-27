@@ -24,7 +24,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo "BS Standard"; ?>
+		<?php echo "Best Standard Enterprise"; ?>
 	</title>
 	<?php
 		echo $this->Html->meta('description', 'A great page');

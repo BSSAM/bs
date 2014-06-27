@@ -6,7 +6,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson');
+                            'Contactpersoninfo','CusSalesperson','Clientpo');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -324,9 +324,20 @@
             $this->autoRender=false;
             $id =  $this->request->data['id'];
             $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.quotationno'=>$id));
-            //pr($id1);exit;
-           $user_id = $this->Session->read('sess_userid');
+            $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
+            $details=$this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$id)));
+            $track_id = $details[0]['Quotation']['track_id'];
+            $customer_id = $details[0]['Quotation']['customer_id'];
+            $quo_id = $details[0]['Quotation']['id'];
+            $d=date("d");
+            $m=date("m");
+            $y=date("Y");
+            $t=time();
+            $dmt='CPO'.($d+$m+$y+$t);
+            $clientpo_id = $dmt;
+            $device_node    =   $this->Device->find('count',array('conditions'=>array('Device.quotation_id'=>$quo_id)));
+            $this->Clientpo->save(array('quotations_id'=> $id,'clientpos_id'=>$clientpo_id,'track_id'=>$track_id,'customer_id'=>$customer_id,'quo_quantity'=>$device_node));
         }
         public function get_contact_email()
         {

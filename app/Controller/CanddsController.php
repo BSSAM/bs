@@ -50,6 +50,34 @@ public function get_customer_value() {
             echo json_encode($customer_data);
         }
     }
+    
+    public function add_candds()
+        {
+            $this->autoRender = false;
+            $this->loadModel('Candds');
+            $this->request->data['Candds']['customer_id']   =   $this->request->data['customer_id'];
+            $this->request->data['Candds']['instrument_id'] =   $this->request->data['instrument_id'];
+            $this->request->data['Candds']['brand_id']      =   $this->request->data['instrument_brand'];
+            $this->request->data['Candds']['quantity']      =   $this->request->data['instrument_quantity'];
+            $this->request->data['Candds']['model_no']      =   $this->request->data['instrument_modelno'];
+            $this->request->data['Candds']['range']         =   $this->request->data['instrument_range'];
+            $this->request->data['Candds']['call_location'] =   $this->request->data['instrument_calllocation'];
+            $this->request->data['Candds']['call_type']     =   $this->request->data['instrument_calltype'];
+            $this->request->data['Candds']['validity']      =   $this->request->data['instrument_validity'];
+            $this->request->data['Candds']['discount']      =   $this->request->data['instrument_discount'];
+            $this->request->data['Candds']['department_id']    =   $this->request->data['instrument_department'];
+            $this->request->data['Candds']['unit_price']    =   $this->request->data['instrument_unitprice'];
+            $this->request->data['Candds']['account_service']=  $this->request->data['instrument_account'];
+            $this->request->data['Candds']['title']         =   $this->request->data['instrument_title'];
+            $this->request->data['Candds']['status']        =   0;
+            if($this->Device->save($this->request->data))
+            {
+                $purpose_id=$this->Candds->getLastInsertID();
+               
+                echo $purpose_id;
+            }
+     
+        }
 
 }
 ?>

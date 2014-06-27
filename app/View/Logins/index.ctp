@@ -10,7 +10,7 @@
         <div id="login-container">
             <!-- Login Title -->
             <div class="login-title text-center">
-                <h1> <span style="color: #000000;"> <strong>BEST STANDARDS</strong></span><?php //echo $this->Html->image('logoBs.png', array('alt' => 'Login Background','class'=>'animation-pulseSlow')); ?><br><h5 class="custom_header">Your Global Alliance</h5></h1>
+                <h1> <span style="color: #000000;"> <strong>Best Standard Enterprise</strong></span><?php //echo $this->Html->image('logoBs.png', array('alt' => 'Login Background','class'=>'animation-pulseSlow')); ?><br><h5 class="custom_header">Your Global Alliance</h5></h1>
             </div>
             <!-- END Login Title -->
 

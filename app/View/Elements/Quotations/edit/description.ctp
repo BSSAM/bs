@@ -74,7 +74,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
-    </div>
+</div>
         
 </div>
 <div class="form-group">

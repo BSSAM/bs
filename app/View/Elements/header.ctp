@@ -442,7 +442,7 @@
                     </div>
                     <?php echo $this->Form->end(); ?>
                     <!-- END Left Header Navigation -->
-<?php echo $this->Html->link('<strong>Best</strong> Standards',array('controller'=>'Dashboards','action'=>'index',),array( 'escape'=>false,'class'=>'sidebar-brand'));?>
+<?php echo $this->Html->link('<strong>Best Standard Enterprise</strong>',array('controller'=>'Dashboards','action'=>'index',),array( 'escape'=>false,'class'=>'sidebar-brand'));?>
                     <!-- Search Form -->
               
                     <!--<form action="Invents" method="post" class="navbar-form-custom" role="search">
