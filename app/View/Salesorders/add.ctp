@@ -80,9 +80,9 @@ if(customer!='')
                                     <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden','value'=>'')); ?>
                                     <?PHP if(!empty($sale['Salesorder']['track_id'])): ?>
                                     <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','value'=>$sale['Salesorder']['track_id'])); ?>
+                                    <?php echo $this->Form->input('Salesorder.quotation_id', array('type'=>'hidden','value'=>$sale['Salesorder']['quotationno'])); ?>
                                     <?PHP endif; ?>
                                     <div class="panel-body panel-body-nopadding">
-                                        
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">

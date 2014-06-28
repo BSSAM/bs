@@ -368,46 +368,25 @@ class CustomersController extends AppController
     }
     public function edit($id = NULL)
     {
-        if($this->Session->read('customer_id')=='')
-        {
-            $this->Session->write('customer_id',$id);
-        }
+        if($this->Session->read('customer_id')==''){ $this->Session->write('customer_id',$id);  }
         $this->set('customer_id',$this->Session->read('customer_id'));
         
-       
-        $data = $this->Salesperson->find('list', array('fields' => 'salesperson'));
-        $this->set('salesperson', $data);
-           
-        $data1 = $this->Referedby->find('list', array('fields' => 'referedby'));
-        $this->set('referedby',$data1);
+        $salesperson = $this->Salesperson->find('list', array('fields' => 'salesperson'));
+        $referedby = $this->Referedby->find('list', array('fields' => 'referedby'));
         
         $data10 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
         $data10_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
       
-        $this->set('data10',$data10);
-        $this->set('data10_count',$data10_count);
-        
-       
         $data11 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'billing')));
         $data11_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'billing')));
-        //pr($data10);pr($data10_count);exit;
-        $this->set('data11',$data11);
-        $this->set('data11_count',$data11_count);
-        
+     
         $data12 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'delivery')));
         $data12_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'delivery')));
-        //pr($data10);pr($data10_count);exit;
-        $this->set('data12',$data12);
-        $this->set('data12_count',$data12_count);
         
         $data13 = $this->Projectinfo->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>1)));
         $data13_count = $this->Projectinfo->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>1)));
-        //pr($data10);pr($data10_count);exit;
-        $this->set('data13',$data13);
-        $this->set('data13_count',$data13_count);
         
-        
-        
+        $invoice_types = $this->InvoiceType->find('list', array('fields' => array('id','type_invoice')));
         $data2 = $this->Industry->find('list', array('fields' => 'industryname'));
         $this->set('industry',$data2);
         
@@ -420,7 +399,8 @@ class CustomersController extends AppController
          //pr($data4);exit;
         $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
           
-        
+        $this->set(compact('salesperson','referedby','data10','data10_count',
+        'data11','data11_count','data12','data12_count','data13','data13_count','invoice_types'));
         
         $array3 = '';
         $i = 0 ; 
