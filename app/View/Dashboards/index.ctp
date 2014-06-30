@@ -262,7 +262,19 @@
                             </div>
                             <!-- END Widget -->
                         </div>
-                        
+                         <div class="col-sm-6 col-lg-3">
+                            <!-- Widget -->
+                            <div class="widget">
+                                <div class="widget-extra themed-background-dark-default text-center">
+                                    <h3 class="widget-content-light">Weekly <strong>Delivery</strong></h3>
+                                </div>
+                                <div class="widget-extra-full text-center">
+                                    <!-- Jquery Sparkline (initialized in js/pages/widgetsStats.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
+                                    <span id="mini-chart-bar2">9,24,5,4,7,15,7</span>
+                                </div>
+                            </div>
+                            <!-- END Widget -->
+                        </div>
                          <div class="col-sm-6 col-lg-3">
                             <!-- Widget -->
                             <div class="widget">
@@ -277,19 +289,7 @@
                             </div>
                             <!-- END Widget -->
                         </div>
-                        <div class="col-sm-6 col-lg-3">
-                            <!-- Widget -->
-                            <div class="widget">
-                                <div class="widget-extra themed-background-dark-default text-center">
-                                    <h3 class="widget-content-light">Weekly <strong>Delivery</strong></h3>
-                                </div>
-                                <div class="widget-extra-full text-center">
-                                    <!-- Jquery Sparkline (initialized in js/pages/widgetsStats.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
-                                    <span id="mini-chart-bar2">9,24,5,4,7,15,7</span>
-                                </div>
-                            </div>
-                            <!-- END Widget -->
-                        </div>
+                       
                        
                     </div>
                     <?php } ?>
