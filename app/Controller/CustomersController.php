@@ -385,6 +385,7 @@ class CustomersController extends AppController
         $data5 = $this->Paymentterm->find('list', array('fields' => array('id','pay')));;
         $this->set('paymentterm',$data5);
 		
+		
         $priority = $this->Priority->find('list', array('fields' => 'priority'));
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
         $contactpersoninfo = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.status' => 1, 'Contactpersoninfo.customer_id' => $id), 'order' => array('Contactpersoninfo.id' => 'DESC')));
