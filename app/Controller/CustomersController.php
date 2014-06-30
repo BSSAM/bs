@@ -367,17 +367,27 @@ class CustomersController extends AppController
         
         $data10 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
         $data10_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
-      
+        $this->set('data10',$data10);
+        $this->set('data10_count',$data10_count);
+        
         $data11 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'billing')));
         $data11_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'billing')));
-     
+        $this->set('data11',$data11);
+        $this->set('data11_count',$data11_count);
+        
         $data12 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'delivery')));
         $data12_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'delivery')));
+        $this->set('data12',$data12);
+        $this->set('data12_count',$data12_count);
         
         $data13 = $this->Projectinfo->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>1)));
         $data13_count = $this->Projectinfo->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>1)));
+        $this->set('data13',$data13);
+        $this->set('data13_count',$data13_count);
         
         $invoice_types = $this->InvoiceType->find('list', array('fields' => array('id','type_invoice')));
+        $this->set('invoice_types',$invoice_types);
+        
         $data2 = $this->Industry->find('list', array('fields' => 'industryname'));
         $this->set('industry',$data2);
         
