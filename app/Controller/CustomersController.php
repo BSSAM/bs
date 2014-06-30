@@ -386,7 +386,6 @@ class CustomersController extends AppController
         
         $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
         $this->set(compact('deliverorder_type'));
-<<<<<<< HEAD
 //        $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
 //         //pr($data4);exit;
 //        $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
@@ -407,26 +406,6 @@ class CustomersController extends AppController
         $data5 = $this->Paymentterm->find('list', array('fields' => array('id','pay')));;
      
         $this->set('paymentterm',$data5);
-=======
-        $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
-         //pr($data4);exit;
-        $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
-          
-        $this->set(compact('salesperson','referedby','data10','data10_count',
-        'data11','data11_count','data12','data12_count','data13','data13_count','invoice_types'));
-        
-        $array3 = '';
-        $i = 0 ; 
-        $array3 = array();
-        //pr($data4);pr($data5);exit;
-        count($data4);
-        for($i=1;$i<=count($data4);$i++)
-        {
-            $array3[] = $data4[$i].' '.$data5[$i];
-
-        }
-        $this->set('paymentterm', $array3);
->>>>>>> origin/master
 
         $this->loadModel('Priority');
         $data6 = $this->Priority->find('list', array('fields' => 'priority'));
