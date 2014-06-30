@@ -14,7 +14,6 @@
         }
         public function add()
         {
-           
             $str=NULL;
             $d=date("d");
             $m=date("m");
@@ -34,7 +33,8 @@
             
             if($this->request->is('post'))
             {
-               if(isset($this->request->data['Salesorder']['quotation_id']) && $this->request->data['Salesorder']['quotation_id']!='')
+               
+               if(isset($this->request->data['Salesorder']['salesorder_created']) && $this->request->data['Salesorder']['salesorder_created']==1)
                {
                  $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                  // $this->request->data   =   $quotation_details;
@@ -48,13 +48,14 @@
                  $this->set('sale',$sales);
                  
               //pr($sales);exit;
+                 
                  $this->request->data =   $sales;
                }
                else 
                {
                     $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                     $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
-                    
+                  
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
@@ -90,7 +91,6 @@
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set('service',$services);
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id),'recursive'=>'2'));
-            
             $this->set('salesorder',$salesorder_details);
             //pr($salesorder_details);exit;
             if($this->request->is(array('post','put')))
@@ -202,7 +202,7 @@
             $this->request->data['Description']['sales_discount']       =   $this->request->data['instrument_discount'];
             $this->request->data['Description']['department_id']        =   $this->request->data['instrument_department'];
             $this->request->data['Description']['sales_unitprice']      =   $this->request->data['instrument_unitprice'];
-            $this->request->data['Description']['sales_accountservice'] =  $this->request->data['instrument_account'];
+            $this->request->data['Description']['sales_accountservice'] =   $this->request->data['instrument_account'];
             $this->request->data['Description']['sales_titles']         =   $this->request->data['instrument_title'];
             $this->request->data['Description']['sales_total']          =   $this->request->data['instrument_total'];
             $this->request->data['Description']['status']               =   0;
@@ -212,11 +212,9 @@
                 $device_id=$this->Description->getLastInsertID();
                 $get_lastdevice_details    =   $this->Description->find('first',array('conditions'=>array('Description.id'=>$device_id)));
                 echo json_encode($get_lastdevice_details);
-                
             }
-     
         }
-         public function delete_instrument()
+        public function delete_instrument()
         {
             $this->autoRender=false;
             $device_id= $this->request->data['device_id'];
@@ -257,7 +255,7 @@
             $this->request->data['Description']['sales_unitprice']  =   $this->request->data['instrument_unitprice'];
             $this->request->data['Description']['sales_accountservice']=  $this->request->data['instrument_account'];
             $this->request->data['Description']['sales_titles']     =   $this->request->data['instrument_title'];
-             $this->request->data['Description']['sales_total']     =   $this->request->data['instrument_total'];
+            $this->request->data['Description']['sales_total']     =   $this->request->data['instrument_total'];
             $this->request->data['Description']['status']       =   0;
             $this->request->data['Description']['is_approved']       =   0;
             if($this->Description->save($this->request->data))

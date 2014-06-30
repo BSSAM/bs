@@ -1,40 +1,6 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
-<style>
-    .quotation_single
-    {
-        padding:10px; 
-        border-bottom:1px #999 dashed;
-        font-size:15px; 
-        height:50px;
-        float: top;
-    }
-    .no_result
-    {
-        padding:10px; 
-        border-bottom:1px #999 dashed;
-        font-size:15px; 
-        height:50px;
-        float: top;
-    }
-    .no_result:hover
-    {
-        background:#4c66a4;
-        color:#FFF;
-        cursor:pointer;
-    }
-    .quotation_single:hover
-    {
-        background:#4c66a4;
-        color:#FFF;
-        cursor:pointer;
-    }
-    #quoat_list{
-        position: absolute;
-        z-index: 999;
-    }
-</style>
 <script type="text/javascript">
     $(function(){
         $("#SalesorderQuotationId").keyup(function() 
@@ -57,8 +23,6 @@
                 });
             }return false;    
         });});
-    
-    
 </script>                
 
 <h1>
@@ -75,33 +39,30 @@
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Sales Order <?PHP echo $this->Form->create('Salesorder',array('action'=>'add','class'=>'form-horizontal form-bordered')); ?>
+                            <h2>List Of Sales Order </h2> 
+                                <?PHP echo $this->Form->create('Salesorder',array('action'=>'add','class'=>'form-horizontal form-bordered')); ?>
                                     
-                                        <div class="col-md-4 search_move">
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-primary quotation_search" type="button">Proceed</button>
-                                                </span>
-                                                <?PHP echo $this->Form->input('quotation_id',array('placeholder'=>'Quotation Id','class'=>'form-control',
-                                                    'div'=>false,'label'=>false,'type'=>'text','autoComplete'=>'off')) ?>
-                                            </div>
-                                             <div id="quoat_list">
-                                                    
-                                                </div>
-                                        </div><h2>
-                                <?php echo $this->Html->link('Add Salesorders',array('controller'=>'Salesorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Sales Order')); ?></h2>
-                              <?PHP $this->Form->end(); ?>
-                                     </h2>
-                            
-                           
+                                <div class="col-md-3 search_move">
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary quotation_search" type="button">Proceed</button>
+                                        </span>
+                                        <?PHP echo $this->Form->input('quotation_id', array('placeholder' => 'Quotation Id', 'class' => 'form-control',
+                                            'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
+                                        ?>
+                                        <?PHP echo $this->Form->input('salesorder_created',array('type'=>'hidden','value'=>1)); ?>
+                                    </div>
+                                    <div id="quoat_list">
+                                    </div>
+                                </div>
+                                <h2>
+                                    <?php echo $this->Html->link('Add Salesorders', array('controller' => 'Salesorders', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Sales Order')); ?></h2>
+                            <?PHP $this->Form->end(); ?>
                         </div>
-                        
-
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
-                                        
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">Sales Orders No</th>
                                         <th class="text-center">Reg Date</th>
@@ -114,7 +75,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
                                     <?PHP if(!empty($salesorder )): ?>
                                      <?php foreach($salesorder as $salesorder_list): ?>
                                     <tr>
@@ -135,15 +95,12 @@
                                     </tr>
                                     <?php endforeach; ?>
                                     <?PHP endif; ?>
-                                   
                                 </tbody>
                             </table>
                             <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>
-
                             <?php if ($this->Session->flash() != '') { ?>
                                 <script> var UiProgress = function() {
-                                    
                                     // Get random number function from a given range
                                     var getRandomInt = function(min, max) {
                                         return Math.floor(Math.random() * (max - min + 1)) + min;
