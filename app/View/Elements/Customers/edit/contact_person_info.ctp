@@ -1,16 +1,13 @@
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_customername">S.No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('serial_id', array('id'=>'sno','class'=>'form-control','placeholder'=>'','label'=>false,'readonly'=>true,'type'=>'text')); ?>
     </div>
-    
     <label class="col-md-2 control-label" for="val_postalcode">Email</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('email', array('id'=>'contact_email','class'=>'form-control','placeholder'=>'Enter the Email Id','label'=>false)); ?>
         <span class="help-block_login email_error">Enter the Mail id</span>
     </div>
-    
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_salespeoples">Name</label>
