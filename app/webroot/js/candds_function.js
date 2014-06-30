@@ -8,7 +8,7 @@ $(document).ready(function(){
      
     
     $(document).on('click','.candds_add',function(){
-       alert('candds_add');
+     //  alert('candds_add');
       
 //        if($('#val_customer').val()=='')
 //        {
@@ -18,9 +18,9 @@ $(document).ready(function(){
 //            return false;
 //        }
         
-        alert("a");var customer_id= $(".show").val();
-        alert(customer_id);
-        var customer = customer_id;
+       // alert("a");var customer_id= $(".show").val();
+       // alert(customer_id);
+        var customer = $(".show").val();
         var purpose =   $('#val_purpose').val();
         var address   =   $('#val_address').val();
         var assigned  =  $('#val_assigned').val();
@@ -72,62 +72,62 @@ $(document).ready(function(){
     
     //////////////////////////////////////////////////////////////
     
-    
-    $(document).on('click','.show',function(){
-        var customer_name=$(this).text();
-        $('#val_customer').val(customer_name);
-        $('#result').fadeOut();
-        var customer_id=$(this).attr('id');
-        $.ajax({
-            type: "POST",
-            url: path_url+"/Candds/get_customer_value",
-            data: 'cust_id='+customer_id,
-            cache: false,
-            success: function(data)
-            {
-                data1 = $.parseJSON(data);
-                address_node = data1.Address;
-                //alert(data);
-                //alert(address_node.);
-                contact_person_info =   data1.Contactpersoninfo;
-                salesperson_node =   data1.CusSalesperson;
-                $.each(address_node,function(k,v){
-                    //alert(v.type);
-                    //$('#val_addr').html('');
-                    //$('#val_addr').find('option').remove();
-                    $('#val_addr').append('<option value="'+v.type+'">'+v.type+'</option>');
-                    var count = 0;
-                    if(v.type=='registered'){
-                        ++count;
-                        alert(v.address);
-                        var add = v.address;
-   
-                    $('#hid_address').append('<input type="text" name="registered" value="'+v.address+'"/>');
-                    }
-                    //alert(count);
-                });
-             // var i=0;
-                $.each(contact_person_info,function(k,v){
-                  //  i++;
-                    $('#val_attn').find('option').remove();
-                    $('#val_attn').append('<option value="'+v.id+'">'+v.name+i+'</option>');
-                });
-                
-                  var sal_name    =  [];
-                  $.each(salesperson_node,function(k,v){
-                      sal_name.push(v.Salesperson.salesperson);   
-                });
-               // alert(sal_name.join(' , '));
-//                $('#val_assigned').append('<option value="'+sal_name.join(' , ')+'">'+sal_name.join(' , ')+'</option>');
-//                $('#QuotationCustomerId').val(data1.Customer.id);
-//                $('#val_fax').val(data1.Customer.fax);
-//                $('#val_phone').val(data1.Customer.phone); 
-//                $('#val_email').val(data1.Contactpersoninfo.email);
-//                $('#SalesorderCustomerId').val(data1.Customer.id);
-//                $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
-//                $('#pay_id').val(data1.Paymentterm.id);
-            }
-	});
-    });
+//    
+//    $(document).on('click','.show',function(){
+//        var customer_name=$(this).text();
+//        $('#val_customer').val(customer_name);
+//        $('#result').fadeOut();
+//        var customer_id=$(this).attr('id');
+//        $.ajax({
+//            type: "POST",
+//            url: path_url+"/Candds/get_customer_value",
+//            data: 'cust_id='+customer_id,
+//            cache: false,
+//            success: function(data)
+//            {
+//                data1 = $.parseJSON(data);
+//                address_node = data1.Address;
+//                //alert(data);
+//                //alert(address_node.);
+//                contact_person_info =   data1.Contactpersoninfo;
+//                salesperson_node =   data1.CusSalesperson;
+//                $.each(address_node,function(k,v){
+//                    //alert(v.type);
+//                    //$('#val_addr').html('');
+//                    //$('#val_addr').find('option').remove();
+//                    $('#val_addr').append('<option value="'+v.type+'">'+v.type+'</option>');
+//                    var count = 0;
+//                    if(v.type=='registered'){
+//                        ++count;
+//                        //alert(v.address);
+//                        var add = v.address;
+//   
+//                    $('#hid_address').append('<input type="text" name="registered" value="'+v.address+'"/>');
+//                    }
+//                    //alert(count);
+//                });
+//             // var i=0;
+//                $.each(contact_person_info,function(k,v){
+//                  //  i++;
+//                    $('#val_attn').find('option').remove();
+//                    $('#val_attn').append('<option value="'+v.id+'">'+v.name+i+'</option>');
+//                });
+//                
+//                  var sal_name    =  [];
+//                  $.each(salesperson_node,function(k,v){
+//                      sal_name.push(v.Salesperson.salesperson);   
+//                });
+//               // alert(sal_name.join(' , '));
+////                $('#val_assigned').append('<option value="'+sal_name.join(' , ')+'">'+sal_name.join(' , ')+'</option>');
+////                $('#QuotationCustomerId').val(data1.Customer.id);
+////                $('#val_fax').val(data1.Customer.fax);
+////                $('#val_phone').val(data1.Customer.phone); 
+////                $('#val_email').val(data1.Contactpersoninfo.email);
+////                $('#SalesorderCustomerId').val(data1.Customer.id);
+////                $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
+////                $('#pay_id').val(data1.Paymentterm.id);
+//            }
+//	});
+//    });
     
 });

@@ -176,7 +176,7 @@ $(document).ready(function(){
         check_contact(param).done(function(value) {
             //waits until ajax is completed
             var myarr = value.split(",");
-            alert(myarr); 
+           // alert(myarr); 
             $('#sno').val(myarr[0]);
             $('#contact_email').val(myarr[3]);
             $('#contact_name').val(myarr[5]);
@@ -525,6 +525,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
+                alert(data);
                 data1 = $.parseJSON(data);
                 address_node    =   data1.Address;
                 contact_person_info =   data1.Contactpersoninfo;

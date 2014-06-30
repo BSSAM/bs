@@ -280,21 +280,10 @@ class CustomersController extends AppController
         $this->set('location',$data3);
         
         $this->loadModel('Paymentterm');
-        $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
-         //pr($data4);exit;
-        $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
-          
         
-        
-        $array3 = '';
-        $i = 0 ; 
-        $array3 = array();
-        count($data4);
-        for($i=1;$i<=count($data4);$i++)
-        {
-            $array3[] = $data4[$i].' '.$data5[$i];
-        }
-        $this->set('paymentterm',$array3);
+        $data5 = $this->Paymentterm->find('list', array('fields' => array('id','pay')));;
+     
+        $this->set('paymentterm',$data5);
         
         $this->loadModel('Priority');
         $data6 = $this->Priority->find('list', array('fields' => 'priority'));
@@ -306,6 +295,8 @@ class CustomersController extends AppController
 
         if($this->request->is('post'))
         {
+           
+           // $this->request->data['paymentterm_id'] = $this->request->data['val_paymentterms_chosen'];
             $this->request->data['status'] = 1;
             $refer_array = $this->request->data['referedbies_id'];
             $sales_array = $this->request->data['salesperson_id'];
@@ -416,23 +407,26 @@ class CustomersController extends AppController
         
         $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
         $this->set(compact('deliverorder_type'));
-        $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
-         //pr($data4);exit;
-        $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
-          
-        
-        
-        $array3 = '';
-        $i = 0 ; 
-        $array3 = array();
-        //pr($data4);pr($data5);exit;
-        count($data4);
-        for($i=1;$i<=count($data4);$i++)
-        {
-            $array3[] = $data4[$i].' '.$data5[$i];
-
-        }
-        $this->set('paymentterm', $array3);
+//        $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
+//         //pr($data4);exit;
+//        $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
+//          
+//        
+//        
+//        $array3 = '';
+//        $i = 0 ; 
+//        $array3 = array();
+//        //pr($data4);pr($data5);exit;
+//        count($data4);
+//        for($i=1;$i<=count($data4);$i++)
+//        {
+//            $array3[] = $data4[$i].' '.$data5[$i];
+//
+//        }
+//        $this->set('paymentterm', $array3);
+        $data5 = $this->Paymentterm->find('list', array('fields' => array('id','pay')));;
+     
+        $this->set('paymentterm',$data5);
 
         $this->loadModel('Priority');
         $data6 = $this->Priority->find('list', array('fields' => 'priority'));
