@@ -38,7 +38,8 @@
                                         <td class="text-center"><?php echo $instrument['Instrument']['name'];?></td>
                                         <td class="text-center"><?php echo $instrument['Instrument']['description'];?></td>
                                         <td class="text-center"><?php echo $instrument['Department']['departmentname'];?></td>
-                                        <td class="text-center"><?php echo $instrument['Instrument']['status'];?></td>
+                                        <?php $status   =   ($instrument['Instrument']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
+                                        <td class="text-center"><?PHP echo $status; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$instrument['Instrument']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

@@ -122,11 +122,11 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Industries'||$control == 'Locations'||$control == 'Paymentterms'||$control == 'Priorities'|| $control == 'Customers'||$control == 'Referedbys'||$control == 'Salespersons')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-group sidebar-nav-icon"></i>Customers</a>
-                                 <ul <?php echo $a=($control == 'Industries'||$control == 'Locations'||$control == 'Paymentterms'||$control == 'Priorities'|| $control == 'Customers'||$control == 'Referedbys'||$control == 'Salespersons')?'style=display:block':'';?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Industries'||$control == 'Locations'||$control == 'Paymentterms'||$control == 'Priorities'|| $control == 'Customers'||$control == 'Referedbys'||$control == 'Salespersons'||$control == 'Customertaglists')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-group sidebar-nav-icon"></i>Customers</a>
+                                 <ul <?php echo $a=($control == 'Industries'||$control == 'Locations'||$control == 'Paymentterms'||$control == 'Priorities'|| $control == 'Customers'||$control == 'Referedbys'||$control == 'Salespersons'||$control == 'Customertaglists')?'style=display:block':'';?>>
                                     <?php if($user_role['cus_customer']['view'] == 1){ ?>
                                     <li>
-                                        <?php  $a=($control == 'Customers')?'active':''; ?>
+                                        <?php  $a=($control == 'Customers' ||$control == 'Customertaglists')?'active':''; ?>
                                         <?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
                                     <?php if($user_role['cus_industry']['view'] == 1){ ?>

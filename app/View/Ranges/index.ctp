@@ -40,7 +40,8 @@
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><?php echo '('.$range['Range']['range_name'].')/'.$range['Unit']['unit_name'];?></td>
                                         <td class="text-center"><?php echo $range['Range']['range_description'];?></td>
-                                         <td class="text-center"><?php echo $range['Range']['status'];?></td>
+                                        <?php $status   =   ($range['Range']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
+                                        <td class="text-center"><?PHP echo $status; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$range['Range']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

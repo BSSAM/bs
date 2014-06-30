@@ -29,17 +29,14 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach($units as $unit): ?>
-                                       
                                     <tr>
                                         <td class="text-center"><?php echo $unit['Unit']['id'];?></td>
-                                        
                                          <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$unit['Unit']['created']);?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><?php echo $unit['Unit']['unit_name'];?></td>
                                         <td class="text-center"><?php echo $unit['Unit']['unit_description'];?></td>
-                                         <td class="text-center">
-                                             
-                                             <?php echo $unit['Unit']['status'];?></td>
+                                        <?php $status   =   ($unit['Unit']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
+                                        <td class="text-center"><?PHP echo $status; ?></td> 
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$unit['Unit']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

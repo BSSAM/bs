@@ -186,17 +186,15 @@
     <tbody class="sales_Instrument_info"> 
     <?PHP 
        
-            if(!empty($sale['Description'])):
-              $i = 0;
-                foreach($sale['Description'] as $device):
-               $i++;
+            if(!empty($sale['Description'])): $i = 0;
+                foreach($sale['Description'] as $device): $i++;
                     //for($i=1;$i<=count($device['Instrument']);$i++):
                 ?>
-              
+                <input type="hidden" name="data[Description][]" value="<?PHP echo $device['id']  ?>"/>
                 <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
                     <td class="text-center"><?PHP // echo $i; ?></td>
                     <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
-<!--                    <td class="text-center"><?PHP //echo $device['Instrument']['brand_id']; ?></td>-->
+<!--                <td class="text-center"><?PHP //echo $device['Instrument']['brand_id']; ?></td>-->
                     <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
                     <td class="text-center"><?PHP echo $device['call_location']; ?></td>
                     <td class="text-center"><?PHP echo $device['validity']; ?></td>

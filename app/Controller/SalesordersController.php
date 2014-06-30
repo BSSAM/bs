@@ -37,25 +37,25 @@
                if(isset($this->request->data['Salesorder']['salesorder_created']) && $this->request->data['Salesorder']['salesorder_created']==1)
                {
                  $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
-                 // $this->request->data   =   $quotation_details;
-//                 $device_count = count($quotation_details['Device']);
-//                 $this->set('device_count',$device_count);
-                 
+               
                  $sales_details =  $quotation_details['Quotation']  ;
                  $sales['Salesorder']   =    $sales_details;
-                 $sales['Description']   =    $quotation_details['Device'];
+                 $sales['Description']  =    $quotation_details['Device'];
                  $sales['Salesorder']   =    $sales_details;
                  $this->set('sale',$sales);
-                 
-              //pr($sales);exit;
-                 
+                 foreach($sales['Description'] as $sale):
+                     $this->Description->create();
+                     $description_data  =   $this->saleDescription($sale['id']);
+                     $this->Description->save($description_data);
+                 endforeach;   
+//pr($sales);exit;
                  $this->request->data =   $sales;
                }
                else 
                {
                     $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                     $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
-                  
+                   
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
@@ -312,8 +312,9 @@
             $this->autoRender=false;
             $id =  $this->request->data['id'];
             $this->Salesorder->updateAll(array('Salesorder.is_approved'=>1),array('Salesorder.salesorderno'=>$id));
+            $this->Description->updateAll(array('Description.is_approved'=>1),array('Description.salesorder_id'=>$id));
             //pr($id1);exit;
-           $user_id = $this->Session->read('sess_userid');
+            $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add SalesOrder'));
             
 //            $this->request->data['Logactivity']['logname']   =   'Labprocess';

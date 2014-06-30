@@ -39,7 +39,8 @@
                                         <td class="text-center"><?php echo $procedure['Procedure']['procedure_no'];?></td>
                                         <td class="text-center"><?php echo $procedure['Department']['departmentname'];?></td>
                                         <td class="text-center"><?php echo $procedure['Procedure']['description'];?></td>
-                                        <td class="text-center"><?php echo $procedure['Procedure']['status'];?></td>
+                                        <?php $status   =   ($procedure['Procedure']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
+                                        <td class="text-center"><?PHP echo $status; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$procedure['Procedure']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

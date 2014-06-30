@@ -31,6 +31,7 @@ App::uses('Controller', 'Controller');
     class AppController extends Controller 
     {
         public $components = array('Session');
+        public $uses    =   array('Description');
         public function beforeFilter()
         {
 
@@ -81,4 +82,27 @@ App::uses('Controller', 'Controller');
             }
             return $user_role;
         }
+        public function saleDescription($id=NULL)
+        {
+            $devices    =   $this->Device->find('first',array('conditions'=>array('Device.id'=>$id,'Device.status'=>1)));
+            $this->request->data['Description']['customer_id']          =   $devices['Device']['customer_id'];
+            $this->request->data['Description']['instrument_id']        =   $devices['Device']['instrument_id'];
+            $this->request->data['Description']['brand_id']             =   $devices['Device']['brand_id'];
+            $this->request->data['Description']['sales_quantity']       =   $devices['Device']['quantity'];
+            $this->request->data['Description']['model_no']             =   $devices['Device']['model_no'];
+            $this->request->data['Description']['sales_range']          =   $devices['Device']['range'];
+            $this->request->data['Description']['sales_calllocation']   =   $devices['Device']['call_location'];
+            $this->request->data['Description']['sales_calltype']       =   $devices['Device']['call_type'];
+            $this->request->data['Description']['sales_validity']       =   $devices['Device']['validity'];
+            $this->request->data['Description']['sales_discount']       =   $devices['Device']['discount'];
+            $this->request->data['Description']['department_id']        =   $devices['Device']['department_id'];
+            $this->request->data['Description']['sales_unitprice']      =   $devices['Device']['unit_price'];
+            $this->request->data['Description']['sales_accountservice'] =   $devices['Device']['account_service'];
+            $this->request->data['Description']['sales_titles']         =   $devices['Device']['title'];
+            $this->request->data['Description']['sales_total']          =   $devices['Device']['validity'];
+            $this->request->data['Description']['status']               =   0;
+            $this->request->data['Description']['is_approved']          =   0;
+            return $this->request->data;
+        }
+        
 }
