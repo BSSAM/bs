@@ -24,11 +24,11 @@
                                 <!-- END Form Elements Title -->
                                 
                                 <!-- Basic Form Elements Content -->
-                                <?php echo $this->Form->create('CustomerInstrument', array('class' => 'form-horizontal form-bordered', 'id' => 'form-customerinstrument-add')); ?>
+                                <?PHP echo $this->Form->create('CustomerInstrument', array('class' => 'form-horizontal form-bordered', 'id' => 'form-customerinstrument-add')); ?>
                                 <?PHP echo $this->Form->input('customer_id', array('type' => 'hidden', 'value' => $customer_entry['Customer']['id'])); ?>
                                 <?PHP echo $this->Form->input('instrument_id', array('type' => 'hidden', 'id' => 'ins_id')); ?>
                                 <?PHP echo $this->Form->input('instrument_name', array('type' => 'hidden', 'id' => 'ins_name')); ?>
-
+                                <?PHP echo $this->Form->input('device_id', array('type' => 'hidden', 'id' => 'device_id')); ?>        
                                 <div class="form-group">
                                         <label class="col-md-2 control-label" for="customer_name">Customer Name</label>
                                         <div class="col-md-4">

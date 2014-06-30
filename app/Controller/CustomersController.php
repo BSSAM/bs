@@ -13,7 +13,7 @@ class CustomersController extends AppController
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
-                        'Deliveryordertype','InvoiceType');
+                        'Deliveryordertype','InvoiceType','Priority','Userrole');
     
   
     public function index()
@@ -279,22 +279,11 @@ class CustomersController extends AppController
         $data3 = $this->Location->find('list', array('fields' => 'locationname'));
         $this->set('location',$data3);
         
-        $this->loadModel('Paymentterm');
-        $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
-         //pr($data4);exit;
-        $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
-          
+       	$this->loadModel('Paymentterm');
+        $data5 = $this->Paymentterm->find('list', array('fields' => array('id','pay')));;
+        $this->set('paymentterm',$data5);
         
         
-        $array3 = '';
-        $i = 0 ; 
-        $array3 = array();
-        count($data4);
-        for($i=1;$i<=count($data4);$i++)
-        {
-            $array3[] = $data4[$i].' '.$data5[$i];
-        }
-        $this->set('paymentterm',$array3);
         
         $this->loadModel('Priority');
         $data6 = $this->Priority->find('list', array('fields' => 'priority'));
@@ -387,59 +376,32 @@ class CustomersController extends AppController
         $data13_count = $this->Projectinfo->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>1)));
         
         $invoice_types = $this->InvoiceType->find('list', array('fields' => array('id','type_invoice')));
-        $data2 = $this->Industry->find('list', array('fields' => 'industryname'));
-        $this->set('industry',$data2);
+        $industry = $this->Industry->find('list', array('fields' => 'industryname'));
         
-        $data3 = $this->Location->find('list', array('fields' => 'locationname'));
-        $this->set('location',$data3);
-        
+        $location = $this->Location->find('list', array('fields' => 'locationname'));
         $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
-        $this->set(compact('deliverorder_type'));
-        $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
-         //pr($data4);exit;
-        $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
-          
-        $this->set(compact('salesperson','referedby','data10','data10_count',
-        'data11','data11_count','data12','data12_count','data13','data13_count','invoice_types'));
-        
-        $array3 = '';
-        $i = 0 ; 
-        $array3 = array();
-        //pr($data4);pr($data5);exit;
-        count($data4);
-        for($i=1;$i<=count($data4);$i++)
-        {
-            $array3[] = $data4[$i].' '.$data5[$i];
-
-        }
-        $this->set('paymentterm', $array3);
-
-        $this->loadModel('Priority');
-        $data6 = $this->Priority->find('list', array('fields' => 'priority'));
-        $this->set('priority', $data6);
-
-        $this->loadModel('Userrole');
-        $data = $this->Userrole->find('list', array('fields' => 'user_role'));
-        $this->set('userrole', $data);
-
-        // Model For the Tab Edit Contact Info
-
-        $this->loadModel('Contactpersoninfo');
-        $data = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.status' => 1, 'Contactpersoninfo.customer_id' => $id), 'order' => array('Contactpersoninfo.id' => 'DESC')));
-        //pr($data);exit;
-        $this->set('contactpersoninfo', $data);
+       
+        $this->loadModel('Paymentterm');
+        $data5 = $this->Paymentterm->find('list', array('fields' => array('id','pay')));;
+        $this->set('paymentterm',$data5);
+		
+        $priority = $this->Priority->find('list', array('fields' => 'priority'));
+        $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
+        $contactpersoninfo = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.status' => 1, 'Contactpersoninfo.customer_id' => $id), 'order' => array('Contactpersoninfo.id' => 'DESC')));
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Customer Entry'));
              return $this->redirect(array('action'=>'edit'));
         }
         $customer_details =  $this->Customer->findById($id); 
-       
         if(empty($customer_details))
         {
            $this->Session->setFlash(__('Invalid Customer'));
-             return $this->redirect(array('action'=>'edit'));
+           return $this->redirect(array('action'=>'edit'));
         }
+        $this->set(compact('salesperson','referedby','data10','data10_count',
+        'data11','data11_count','data12','data12_count','data13','data13_count','invoice_types',
+        'industry','location','deliverorder_type','priority','userrole','contactpersoninfo'));
         
         if($this->request->is(array('post','put')))
         {
@@ -761,6 +723,25 @@ class CustomersController extends AppController
                 echo json_encode($edit_device_details);
         }
     }
+    public function update_instrument()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Device');
+        $this->CustomerInstrument->id = $this->request->data['device_id'];
+        $this->request->data['CustomerInstrument']['instrument_id'] = $this->request->data['instrument_id'];
+        $this->request->data['CustomerInstrument']['instrument_name'] = $this->request->data['instrument_name'];
+        $this->request->data['CustomerInstrument']['model_no'] = $this->request->data['model_no'];
+        $this->request->data['CustomerInstrument']['range_id'] = $this->request->data['range_id'];
+        $this->request->data['CustomerInstrument']['unit_price'] = $this->request->data['unit_price'];
+        $this->request->data['CustomerInstrument']['status'] = $this->request->data['status'];
+        if ($this->CustomerInstrument->save($this->request->data)) 
+        {
+            $device_details =   $this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.id'=>$this->request->data['device_id'])));
+            echo json_encode($device_details);
+           
+        }
+    }
+
     public function get_range()
     {
         $this->layout   =   'ajax';

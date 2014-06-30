@@ -57,7 +57,7 @@
                                                 <div>
                                                     <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="delivery_input_search"/>
                                                 </div>
-                                                 <span class="input-group-btn">
+                                                <span class="input-group-btn">
                                                     <button class="btn btn-primary delivery_search" type="button">Proceed</button>
                                                 </span>
                                             </div>
