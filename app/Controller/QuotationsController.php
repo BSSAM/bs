@@ -56,6 +56,7 @@
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 
+                
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     

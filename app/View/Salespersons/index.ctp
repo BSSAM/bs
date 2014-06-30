@@ -22,7 +22,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">ID</th>
-                                        <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
+                                        
                                         <th class="text-center">Sales Person</th>
                                         <th class="text-center">Sales Person Code</th>
                                         <th class="text-center">Description</th>
@@ -31,15 +31,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?PHP if (!empty($salesperson)): ?>
                                      <?php foreach($salesperson as $salesperson_list): ?>
                                     <tr>
                                         <td class="text-center"><?php echo $salesperson_list['Salesperson']['id']; ?></td>
-                                        <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><a href="javascript:void(0)"><?php echo $salesperson_list['Salesperson']['salesperson']; ?></a></td>
+                                        <td class="text-center"><?php echo $salesperson_list['Salesperson']['salesperson']; ?></td>
                                         <td class="text-center"><?php echo $salesperson_list['Salesperson']['salespersoncode']; ?></td>
-                                        <td class="text-center"><?php echo $salesperson_list['Salesperson']['description']; ?></td>
+                                        <td class="text-center" ><?php echo $salesperson_list['Salesperson']['description']; ?></td>
                                      
-                                        <td class="text-center">
+                                        <td class="text-center" style="width: 250px;">
                                             <div class="btn-group">
                                                  <?PHP echo $this->html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Salespersons',
                                                     'action'=>'edit',$salesperson_list['Salesperson']['id']),array('title'=>'Edit',
@@ -49,12 +49,21 @@
                                                         'class'=>'btn btn-xs btn-danger','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to delete?')); ?>
                                                </div>
                                         </td>
+                                       
                                     </tr>
                                     <?php endforeach; ?>
+                                     <?php else: ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Salesperson Available
+                                            </td>
+                                        </tr>
+                                        <?php endif; ?>
                                     
                                    
                                 </tbody>
                             </table>
+                        </div>
                          <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>
                                 

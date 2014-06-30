@@ -218,7 +218,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="var_priorities">Priority</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('priorities_id', array('id' => 'var_priorities', 'class' => 'form-control select-chosen', 'options' => $priority, 'empty' => 'Enter the Priorities', 'label' => false, 'name' => 'priorities_id')); ?>
+        <?php echo $this->Form->input('priority_id', array('id' => 'var_priorities', 'class' => 'form-control select-chosen', 'options' => $priority, 'empty' => 'Enter the Priorities', 'label' => false, 'name' => 'priority_id')); ?>
     </div>
 
     <label class="col-md-2 control-label" for="val_calibrationtype">Calibration Type</label>
