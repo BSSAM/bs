@@ -76,8 +76,9 @@
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
-                          <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
+                            <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
+                            <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
+                            <li><?php echo $this->Html->link('Customer Tags',array('controller'=>'Customertaglists','action'=>'index',$customer_id)); ?></li>
                         <li>Edit Customer</li>
                     </ul>
                     <!-- END Forms General Header -->
@@ -111,31 +112,19 @@
                                             <br><br>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
-                                <?PHP echo $this->element('Customers/edit/customer_info'); ?>
+                                <?PHP echo $this->element('Customertaglists/edit/customer_info'); ?>
                             </div>
+                        </div>
                             <div class="tab-pane" id="tab2">
-                                <?PHP echo $this->element('Customers/edit/contact_person_info'); ?>
+                                <?PHP echo $this->element('Customertaglists/edit/contact_person_info'); ?>
                             </div>
-<!--                            <div class="tab-pane" id="tab3">
-                                <?PHP //echo $this->element('Customers/edit/project_info'); ?>
-                            </div>
-                            <div class="tab-pane" id="tab4">
-                                <?PHP //echo $this->element('Customers/edit/delivery_address'); ?>
-                            </div>
-                            <div class="tab-pane" id="tab5">
-                                <?PHP //echo $this->element('Customers/edit/billing_address'); ?>
-                            </div>-->
                         </div><!-- tab-content -->
-                                                
-                                        <!-- #basicWizard -->
-                                            
+                                    <!-- #basicWizard -->
                                     </div><!-- panel-body -->
                                     <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-10">
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-<!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
-                                            <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
+                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                            <?php echo $this->HTMl->link('<i class="fa fa-angle-right"></i> Cancel', array('controller'=>'Customertaglists','action'=>'index'),array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
                                         </div>
                                     </div>
                                 </div>

@@ -71,7 +71,6 @@
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
-            <th class="text-center">S.No</th>
             <th class="text-center">Customer</th>
             <th class="text-center">Name</th>
             <th class="text-center">Email</th>
@@ -88,7 +87,6 @@
         <?PHP if(!empty($contactpersoninfo )): ?>
         <?php foreach($contactpersoninfo as $contactpersoninfo_list): ?>
          <tr>
-                                        <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['customer_id']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['name']; ?></td>

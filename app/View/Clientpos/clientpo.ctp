@@ -1,32 +1,20 @@
-<script>
-    $(document).ready(function(){
-        $(document).on('click','#Add',function(){
-            $('.change').append("<label class='col-md-2 control-label' for='val_ponumber'>PO Number</label><div class='col-md-4'><input name='ponumber' id='val_ponumber' class='form-control' placeholder='Enter the Purchase Order No' type='text'></div>");
-                                
-        });
-    });
-</script>
-
 <h1>
-                                <i class="gi gi-user"></i>Client Purchase Order Form
-                            </h1>
+    <i class="gi gi-user"></i>Client Purchase Order Form
+</h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Client Purchase Order Form',array('controller'=>'Clientpos','action'=>'index')); ?></li>
-                      
                     </ul>
                     <!-- END Forms General Header -->
-
-<div class="row">
+            <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
-                                <div class="block-title">
-                                    
-                                    <h2></h2>
+                                <div class="block-title clearfix">
+                                    <h2 class="pull-right">Track Id : <?PHP echo $this->request->data['Clientpo']['track_id']; ?> </h2>
                                 </div>
                                 <!-- END Form Elements Title -->
 
@@ -35,35 +23,27 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for=""></label>
                                     <div class="col-md-4">
-                                        
                                     </div>
-                                    
-                                    <label class="col-md-2 control-label" for="val_track">Track Id</label>
                                     <div class="col-md-4">
-                                        <ul class="nav nav-pills nav-stacked">
-                                        <li class="active">
-                                            <?php echo $this->Form->input('track_id', array('id'=>'val_track','class'=>'form-control','label'=>false,'name'=>'track_id','disabled'=>'disabled','type'=>'text')); ?>
-                                        </li>
-                                        </ul>
+                                            <?php echo $this->Form->input('track_id', array('id'=>'val_track','class'=>'form-control','label'=>false,'name'=>'track_id','disabled'=>'disabled','type'=>'hidden')); ?>
                                     </div>
                                 </div>
+                               
                                 <div class="form-group">
-                                    <div class="change">
                                         <label class="col-md-2 control-label" for="val_ponumber">PO Number</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('clientpos_id', array('id'=>'val_ponumber','class'=>'form-control','placeholder'=>'Enter the Purchase Order No','label'=>false,'name'=>'clientpos_id','type'=>'text')); ?>
-                                                
-                                              <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Add',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'Add','escape' => false)); ?>
+                                            <?php echo $this->Form->input('clientpos_id', array('id' => 'val_ponumber', 'class' => 'form-control', 'placeholder' => 'Enter the Purchase Order No', 'label' => false, 'name' => 'clientpos_id[]', 'type' => 'text')); ?>
                                         </div>
-                                    </div>
-                                        
                                     <label class="col-md-2 control-label" for="val_pocount">PO Instrument Count</label>
-                                    <div class="col-md-4">
-                                           <?php echo $this->Form->input('po_quantity', array('id'=>'val_pocount','class'=>'form-control','placeholder'=>'Enter the Purchase Order Count','label'=>false,'name'=>'po_quantity')); ?>
+                                    <div class="col-md-3">
+                                        <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'placeholder' => 'Enter the Purchase Order Count', 'label' => false, 'name' => 'po_quantity[]')); ?>
                                     </div>
-                                        
+                                    <div class="col-md-1"><div class="btn-group btn-group-sm"><div class="btn btn-alt btn-info" id='add_po'><i class="fa fa-plus"></i></div></div> </div>
                                 </div>
-                                    
+                                <div class="form-group">
+                                    <div class="po_up">
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     
                                     <label class="col-md-2 control-label" for="val_quotation">Quotation No</label>
@@ -125,10 +105,12 @@
                                     </div>
                                 </div>
                                 <?php echo $this->Form->end(); ?>
+                                
                                 <!-- END Basic Form Elements Content -->
                             </div>
                             <!-- END Basic Form Elements Block -->
                         </div>
+    
     <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
          <?php echo $this->Html->script('pages/uiProgress'); ?>

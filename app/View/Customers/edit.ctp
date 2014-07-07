@@ -81,14 +81,12 @@
                         <li>Edit Customer</li>
                     </ul>
                     <!-- END Forms General Header -->
-
 <div class="row"><?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-edit')); ?>
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
-                                    
                                       <h2></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
@@ -96,50 +94,37 @@
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
                                     <div class="panel-body panel-body-nopadding">
-                                        
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
-                                            
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Customer Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Contact Person Info</a></li>
-
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab1">
-                                <?PHP echo $this->element('Customers/edit/customer_info'); ?>
-                            </div>
-                            <div class="tab-pane" id="tab2">
-                                <?PHP echo $this->element('Customers/edit/contact_person_info'); ?>
-                            </div>
-<!--                            <div class="tab-pane" id="tab3">
-                                <?PHP //echo $this->element('Customers/edit/project_info'); ?>
-                            </div>
-                            <div class="tab-pane" id="tab4">
-                                <?PHP //echo $this->element('Customers/edit/delivery_address'); ?>
-                            </div>
-                            <div class="tab-pane" id="tab5">
-                                <?PHP //echo $this->element('Customers/edit/billing_address'); ?>
-                            </div>-->
-                        </div><!-- tab-content -->
-                                                
-                                        <!-- #basicWizard -->
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab1">
+                                                    <?PHP echo $this->element('Customers/edit/customer_info'); ?>
+                                                </div>
+                                             </div>
+                                                <div class="tab-pane" id="tab2">
+                                                    <?PHP echo $this->element('Customers/edit/contact_person_info'); ?>
+                                                </div>
                                             
-                                    </div><!-- panel-body -->
-                                    <div class="form-group form-actions">
-                                        <div class="col-md-9 col-md-offset-10">
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-<!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
-                                            <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
+                                          <!-- tab-content -->
+                                            <!-- #basicWizard -->
+                                        </div><!-- panel-body -->
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-10">
+                                                <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+                                                <?php echo $this->Form->button('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Customers','action'=>'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+    <!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                     <!-- panel -->
                             </div>
-                                
                             <!-- END Basic Form Elements Block -->
                         </div>
                             </div>
@@ -235,44 +220,23 @@
                 <div class="modal-footer">
 <!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
                     <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_projectedit','escape' => false)); ?>
-                    
                 </div>
             </div>
         </div>
     </div>
   <?php echo $this->Form->end(); ?>
-    <?php echo $this->Html->script('pages/formsValidation'); ?>
-        <script>$(function(){ FormsValidation.init(); });</script>
-         <?php echo $this->Html->script('pages/uiProgress'); ?>
-                            <script>$(function(){ UiProgress.init(); });</script>
-                                
-                                <?php if($this->Session->flash()!='') { ?>
-                            <script> var UiProgress = function() {
-                                
-                                // Get random number function from a given range
-                                var getRandomInt = function(min, max) {
-                                    return Math.floor(Math.random() * (max - min + 1)) + min;
-                                };
-                                
-                                return {
-                                    init: function() {
-                                        
-                                        
-                                        
-                                        $.bootstrapGrowl('Customer Added Successfully!', {
-                                            type: 'danger',
-                                            allow_dismiss: true
-                                        });
-                                        
-                                        $(this).prop('disabled', true);
-                                        $('#val_customername').focus();
-                                    }
-                                };
-                            }();
-                            
-                           
-
-                            </script> 
-                            <?php } ?>
+                    <?php echo $this->Html->script('pages/formsValidation'); ?>
+                    <script>$(function(){ FormsValidation.init(); });</script>
+                    <?php echo $this->Html->script('pages/uiProgress'); ?>
+                    <script>$(function(){ UiProgress.init(); });</script>
+                    <?php if ($this->Session->flash() != '') { ?>
+                        <script> var UiProgress = function() {
+                            // Get random number function from a given range
+                            var getRandomInt = function(min, max) {
+                                return Math.floor(Math.random() * (max - min + 1)) + min;
+                            };
+                        }();
+                        </script> 
+                    <?php } ?>
                         
                         

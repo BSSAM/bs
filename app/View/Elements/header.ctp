@@ -159,17 +159,17 @@
                                         <?php  $a=($control == 'Salespersons')?'active':''; ?>
                                         <?php echo $this->Html->link('Sales Person',array('controller'=>'Salespersons','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                    <?php if($user_role['cus_title']['view'] == 1){ ?>
+                                    <?php //if($user_role['cus_title']['view'] == 1){ ?>
                                     <li>
-                                        <?php echo $a=($control == 'title')?'active':''; ?>
-                                        <a href="#"><?php echo 'Title'; ?></a>
-                                    </li><?php } ?>
+                                        <?php  //$a=($control == 'Titles')?'active':''; ?>
+                                        <?php //echo $this->Html->link('Title',array('controller'=>'Titles','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                  </li><?php //} ?>
                                    
                                 </ul>
                             </li>
                             <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Instruments'||$control == 'procedures'||$control == 'Brands'||$control == 'Ranges'||$control=='Units'||$control=='procedures')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-ruller sidebar-nav-icon"></i>Instruments</a>
-                                 <ul <?php echo $a=($control == 'Instruments'||$control == 'procedures'||$control == 'Brands'||$control == 'Ranges'|| $control == 'Units'||$control=='procedures')?'style=display:block':'';?> >
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Instruments'||$control == 'Procedures'||$control == 'Brands'||$control == 'Ranges'||$control=='Units'||$control=='Titles')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-ruller sidebar-nav-icon"></i>Instruments</a>
+                                 <ul <?php echo $a=($control == 'Instruments'||$control == 'Procedures'||$control == 'Brands'||$control == 'Ranges'|| $control == 'Units'||$control=='Titles')?'style=display:block':'';?> >
                                     <?php if($user_role['ins_instrument']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Instruments')?'active':''; ?>
@@ -177,8 +177,8 @@
                                     </li><?php } ?>
                                     <?php if($user_role['ins_procedureno']['view'] == 1){ ?>
                                     <li>
-                                        <?php  $a=($control == 'procedures')?'active':''; ?>
-                                        <?PHP echo $this->Html->link('Procedure No',array('controller'=>'procedures','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                        <?php  $a=($control == 'Procedures')?'active':''; ?>
+                                        <?PHP echo $this->Html->link('Procedure No',array('controller'=>'Procedures','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
                                     <?php if($user_role['ins_brand']['view'] == 1){ ?>
                                     <li>
@@ -197,16 +197,15 @@
                                         <?php  $a=($control == 'Ranges')?'active':''; ?>
                                         <?PHP echo $this->Html->link('Range',array('controller'=>'Ranges','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                    <?php if($user_role['ins_title']['view'] == 1){ ?>
+                                    <?php if($user_role['cus_title']['view'] == 1){ ?>
                                     <li>
-                                         <a href="#"><?php echo 'Title'; ?></a>
-                                    </li>
-                                    <?php } ?>
+                                        <?php  $a=($control == 'Titles')?'active':''; ?>
+                                        <?php echo $this->Html->link('Title',array('controller'=>'Titles','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                  </li><?php } ?>
                                     <?php if($user_role['ins_unit']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Units')?'active':''; ?>
                                         <?PHP echo $this->Html->link('Unit',array('controller'=>'Units','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                          
                                     </li><?php } ?>
                                 </ul>
                             </li>
@@ -229,9 +228,15 @@
                             </li>-->
                             
                              <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
-                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings')?'style=display:block':'';?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
+                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos')?'style=display:block':'';?>>
                                     <?php if($user_role['job_quotation']['view'] == 1){ ?>
+                                    <li>
+                                        <?php  $a=($control == 'Clientpos')?'active':''; ?>
+                                         <?php echo $this->Html->link('Client Po List',array('controller'=>'Clientpos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li><?php } ?>
+                                    
+                                     <?php if($user_role['job_quotation']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Quotations')?'active':''; ?>
                                          <?php echo $this->Html->link('Quotation',array('controller'=>'Quotations','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
@@ -288,14 +293,7 @@
                                           <a href="#"><?php echo 'C and D Info'; ?></a>
                                     </li><?php } ?>
                                    
-                                    <?php //if($user_role['job_salesorder']['view'] == 1){ ?>
-                                   <!-- <li>
-                                        <a href="#"><?php //echo 'Tracking System'; ?></a>
-                                    </li><?php// } ?>-->
-                                    <?php // if($user_role['job_salesorder']['view'] == 1){ ?>
-                                     <!--<li>
-                                          <a href="#"><?php //echo 'Job Transaction'; ?></a>
-                                    </li><?php //} ?>-->
+                                    
                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>
                                           <a href="#"><?php echo 'Purchase Requisition'; ?></a>

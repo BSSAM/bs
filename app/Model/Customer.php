@@ -12,6 +12,8 @@ class Customer extends AppModel
 {
   public $actsAs  =   array('Containable');
   public $belongsTo = array('Industry','Location','Paymentterm','Priority' );
+  public $virtualFields = array( 'Customertagname' => 'CONCAT(Customer.customername, " ( ", Customer.tag_name," ) ")');
+
   public $hasMany = array(
         'CusSalesperson' =>
             array(
@@ -29,7 +31,7 @@ class Customer extends AppModel
                 'foreignKey' => 'customer_id',
             ),
             'Address' =>
-        array(
+            array(
             'className' => 'Address',
             'foreignKey' => 'customer_id',
         ),

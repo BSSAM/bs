@@ -16,7 +16,6 @@
         public function add()
         {
           
-           
 //          $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>1399899781),'recursive'=>'2'));
 //          pr($customer_data);exit;
             $str=NULL;
@@ -79,7 +78,9 @@
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
 
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);/******************/
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                    /******************/
 
                     $this->Session->setFlash(__('Quotation has been Added Succefully '));
                     $this->redirect(array('action'=>'index'));
@@ -168,15 +169,26 @@
             $this->loadModel('Customer');
             $name =  $this->request->data['name'];
             $this->autoRender = false;
-            $data = $this->Customer->find('all',array('conditions'=>array('customername LIKE'=>'%'.$name.'%')));
+            $data = $this->Customer->find('all',array('conditions'=>array('Customertagname LIKE'=>'%'.$name.'%','is_deleted'=>0,'Customer.status'=>1)));
             $c = count($data);
-            for($i = 0; $i<$c;$i++)
-            { 
-                echo "<div class='show' align='left' id='".$data[$i]['Customer']['id']."'>";
-                echo $data[$i]['Customer']['customername'];
-                echo "<br>";
-                echo "</div>";
+            if($c>0)
+            {
+                for($i = 0; $i<$c;$i++)
+                { 
+                    echo "<div class='show' align='left' id='".$data[$i]['Customer']['id']."'>";
+                    echo $data[$i]['Customer']['Customertagname'];
+                    echo "<br>";
+                    echo "</div>";
+                }
             }
+            else
+            {
+                    echo "<div class='no_result' align='left'>";
+                    echo "No Results Found";
+                    echo "<br>";
+                    echo "</div>";
+            }
+            
         }
         public function get_customer_value()
         {
@@ -327,10 +339,10 @@
             $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.quotationno'=>$id));
             $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
-            $details=$this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$id)));
-            $track_id = $details[0]['Quotation']['track_id'];
-            $customer_id = $details[0]['Quotation']['customer_id'];
-            $quo_id = $details[0]['Quotation']['id'];
+            $details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id)));
+            $track_id = $details['Quotation']['track_id'];
+            $customer_id = $details['Quotation']['customer_id'];
+            $quo_id = $details['Quotation']['id'];
             $d=date("d");
             $m=date("m");
             $y=date("Y");

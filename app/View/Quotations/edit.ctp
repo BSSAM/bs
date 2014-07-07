@@ -1,31 +1,10 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
-<style>
-    .show
-	{
-		padding:10px; 
-		border-bottom:1px #999 dashed;
-		font-size:15px; 
-		height:50px;
-                float: top;
-	}
-	.show:hover
-	{
-		background:#4c66a4;
-		color:#FFF;
-		cursor:pointer;
-	}
-        #result{
-            position: absolute;
-            z-index: 999;
-        }
-    </style>
 <script type="text/javascript">
 $(function(){
 $("#val_customer").keyup(function() 
 { 
-//alert();    
 var customer = $(this).val();
 var dataString = 'name='+ customer;
 if(customer!='')
@@ -37,7 +16,6 @@ if(customer!='')
 	cache: false,
 	success: function(html)
 	{
-            
             $("#result").html(html).show();
 	}
 	});
@@ -47,8 +25,8 @@ if(customer!='')
 
 </script>
 <h1>
-                                <i class="gi gi-user"></i>Edit Quotation
-                            </h1>
+    <i class="gi gi-user"></i>Edit Quotation
+</h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
@@ -81,8 +59,7 @@ if(customer!='')
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Quotation Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
-                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> File Upload</a></li>
-                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Description </a></li>
+                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span>Description</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
@@ -94,10 +71,10 @@ if(customer!='')
                                                 <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Quotations/edit/customer_special_needs'); ?>
                                                 </div>
+<!--                                                <div class="tab-pane" id="tab3">
+                                                    <?PHP //echo $this->element('Quotations/edit/file_upload'); ?>
+                                                </div>-->
                                                 <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Quotations/edit/file_upload'); ?>
-                                                </div>
-                                                <div class="tab-pane" id="tab4">
                                                     <?PHP echo $this->element('Quotations/edit/description'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
@@ -108,8 +85,8 @@ if(customer!='')
                                                  <?php if($user_role['app_quotation']['add'] == 1 && $quotations_list['Quotation']['is_approved']==0): ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_quotation','escape' => false)); ?>
                                                 <?php else : ?>
-                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                                <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Quotations','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
                                                 <?php endif; ?>
                                             
                                             

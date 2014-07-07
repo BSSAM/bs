@@ -732,6 +732,10 @@ var FormsValidation = function() {
                         required: true
                         
                     },
+                    tag_name: {
+                        required: true
+                        
+                    },
 //                    salesperson_id: {
 //                        required: true                        
 //                    },
@@ -765,7 +769,11 @@ var FormsValidation = function() {
 //                        required: 'Salesperson is Required'
 //                        
 //                    },
-                    
+                    tag_name: {
+                        required: 'Tag Name is Required'
+                        
+                        
+                    },
                     phone: {
                         required: 'Phone No is Required'
                         
@@ -905,10 +913,44 @@ var FormsValidation = function() {
                     
                     
                 },
-                
-              
-                
             });
+            /**************************For Title Module Validation**************************/
+            
+            $('#form-title-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    tilte_name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    
+                   
+                },
+                messages: {
+                    tilte_name: {
+                        required: 'Please enter a Country Name',
+                        minlength: 'Your Country Name must at least 3 characters'
+                    },
+                    
+                }
+            });
+            
+            
+            
+            /**************************For Sales order Module************************/
             $('#form-salesorder-add').validate({
                ignore: ".ignore",
                 invalidHandler: function(e, validator){
@@ -946,7 +988,7 @@ var FormsValidation = function() {
                 },
                 
             });
-            
+             /*******************************************************************************/
             
             
 //             $('#form-customer-address-add').validate({

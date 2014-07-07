@@ -1,29 +1,8 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
-
 <script type="text/javascript">
-$(function(){
-    $("#result").hide();
-    $("#val_customer").keyup(function() 
-    { 
-    //alert();    
-    var customer = $(this).val();
-    var dataString = 'name='+ customer;
-    if(customer!='')
-    {
-	$.ajax({
-	type: "POST",
-	url: "<?PHP echo Router::url('/',true); ?>/Quotations/search",
-	data: dataString,
-	cache: false,
-	success: function(html)
-	{
-            $("#result").html(html).show();
-	}
-	});
-}
-});
+ $(function(){
 $("#val_reg_date").datepicker("setDate", new Date());
 });
 </script>
@@ -60,8 +39,8 @@ $("#val_reg_date").datepicker("setDate", new Date());
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Quotation Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
-                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> File Upload</a></li>
-                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Description </a></li>
+<!--                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> File Upload</a></li>-->
+                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Description </a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
@@ -73,10 +52,10 @@ $("#val_reg_date").datepicker("setDate", new Date());
                                                 <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Quotations/customer_special_needs'); ?>
                                                 </div>
+<!--                                                <div class="tab-pane" id="tab3">
+                                                    <?PHP //echo $this->element('Quotations/file_upload'); ?>
+                                                </div>-->
                                                 <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Quotations/file_upload'); ?>
-                                                </div>
-                                                <div class="tab-pane" id="tab4">
                                                     <?PHP echo $this->element('Quotations/description'); ?>
                                                 </div>
                                             </div><!-- tab-content -->

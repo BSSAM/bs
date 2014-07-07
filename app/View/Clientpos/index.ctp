@@ -23,22 +23,21 @@
                                     <tr>
                                         <th class="text-center">ID</th>
                                         <th class="text-center">Quotation No</th>
-                                        <th class="text-center">Quotation Quantity</th>
+                                        <th class="text-center">Instrument(Qty)</th>
                                         <th class="text-center">Client Purchase order No</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($clientpo as $clientpo_list): ?>
-                                       
                                     <tr>
                                         <td class="text-center"><?php echo $clientpo_list['Clientpo']['id'];?></td>
                                         <td class="text-center"><?php echo $clientpo_list['Clientpo']['quotations_id'];?></td>
-                                        <td class="text-center"><?php echo $clientpo_list['Clientpo']['quo_quantity'];?></td>
+                                        <td class="text-center"><span class="label label-success"><?php echo $clientpo_list['Clientpo']['quo_quantity'];?></span></td>
                                         <td class="text-center"><?php echo $clientpo_list['Clientpo']['clientpos_id'];?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'clientpo',$clientpo_list['Clientpo']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'Clientpo',$clientpo_list['Clientpo']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$clientpo_list['Clientpo']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
                                         </td>

@@ -1,4 +1,3 @@
-
 <h1>
     <i class="gi gi-user"></i>Customers
 </h1>
@@ -32,37 +31,47 @@
                 </tr>
             </thead>
             <tbody>
+                
                 <?php foreach ($customer as $customer_list): ?>
                     <tr>
                         <td class="text-center"><?php echo $customer_list['Customer']['id']; ?></td>
-                        <td class="text-center"><a href="javascript:void(0)"><?php echo $customer_list['Customer']['customername']; ?></a></td>
+                        <td class="text-center"><a href="javascript:void(0)"><?php echo $customer_list['Customer']['Customertagname']; ?></a></td>
                         <td class="text-center"><?php echo $customer_list['Customer']['phone']; ?></td>
                         <td class="text-center"><?php echo $customer_list['Customer']['customertype']; ?></td>
                         <td class="text-center"><?php echo $customer_list['Industry']['industryname']; ?></td>
                         <td class="text-center"><?php echo $customer_list['Location']['locationname']; ?></td>
                         <td class="text-center">
+                            
+                                <?PHP
+                                echo $this->html->link('Instrument', array('controller' => 'Customers',
+                                    'action' => 'instrument_map', $customer_list['Customer']['id']), array('title' => 'Map Instrument',
+                                    'class' => 'btn  btn-xs btn-primary', 'data-toggle' => 'tooltip', 'escape' => false));
+                                ?>
+                                <?PHP $tag_count    = $this->Customer->checktag_list($customer_list['Customer']['customergroup_id']); ?>
+                                <?PHP if($tag_count==1):
+                                        $tag_name   = 'Add Tag';
+                                        $controller='Customertaglists';$action='add' ;
+                                        else:
+                                        $tag_name   = 'Customer Tag list';$controller='Customertaglists';
+                                        $action='index';
+                                        endif; ?>
+                                <?PHP
+                                echo $this->html->link($tag_name, array('controller' => $controller,
+                                    'action' => $action, $customer_list['Customer']['id']), array('title' => 'Tags',
+                                    'class' => 'btn  btn-xs btn-warning', 'data-toggle' => 'tooltip', 'escape' => false));
+                                ?>
                             <div class="btn-group">
                                 <?PHP
                                 echo $this->html->link('<i class="fa fa-pencil"></i>', array('controller' => 'Customers',
                                     'action' => 'edit', $customer_list['Customer']['id']), array('title' => 'Edit',
-                                    'class' => 'btn btn-xs btn-default', 'data-toggle' => 'tooltip', 'escape' => false));
+                                    'class' => 'btn btn-sm btn-default', 'data-toggle' => 'tooltip', 'escape' => false));
                                 ?>
                                 <?PHP
                                 echo $this->Form->postlink('<i class="fa fa-times"></i>', array('controller' => 'Customers',
                                     'action' => 'delete', $customer_list['Customer']['id']), array('title' => 'Delete',
-                                    'class' => 'btn btn-xs btn-danger', 'data-toggle' => 'tooltip', 'escape' => false, 'confirm' => 'Are you sure want to delete?'));
+                                    'class' => 'btn btn-sm btn-danger', 'data-toggle' => 'tooltip', 'escape' => false, 'confirm' => 'Are you sure want to delete?'));
                                 ?>
                              </div>
-                                <?PHP
-                                echo $this->html->link('Instrument', array('controller' => 'Customers',
-                                    'action' => 'instrument_map', $customer_list['Customer']['id']), array('title' => 'Map Instrument',
-                                    'class' => 'btn btn-alt btn-xs btn-primary', 'data-toggle' => 'tooltip', 'escape' => false));
-                                ?>
-                                <?PHP
-                                echo $this->html->link('Tag list', array('controller' => 'Customertaglists',
-                                    'action' => 'index', $customer_list['Customer']['id']), array('title' => 'Tags',
-                                    'class' => 'btn btn-alt btn-xs btn-warning', 'data-toggle' => 'tooltip', 'escape' => false));
-                                ?>
                     </td>
                 </tr>
                                     <?php endforeach; ?>

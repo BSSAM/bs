@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 class CustomersController extends AppController
 {
     
@@ -19,223 +18,32 @@ class CustomersController extends AppController
     public function index()
     {
         $this->Session->delete('customer_id');
-        $data = $this->Customer->find('all',array('order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
+        $data = $this->Customer->find('all',array('conditions'=>array('Customer.is_default'=>1,'Customer.is_deleted'=>0,'Customer.status'=>1),'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
        
         $this->set('customer', $data);
         $this->Address->deleteAll(array('Address.status'=>0));
         $this->Projectinfo->deleteAll(array('Projectinfo.project_status'=>0));
         
     }
-    
-    public function addregaddress()
-    {
-        
-        $this->autoRender=false;
-        $regaddress= $this->request->data['regaddress'];
-        $customer_id=$this->request->data['customer_id'];
-        $status=0;
-        $random =mt_rand();
-        $this->request->data['Address']['customer_id']=$customer_id;
-        $this->request->data['Address']['address_id']=$random;
-        $this->request->data['Address']['address']=$regaddress;
-        $this->request->data['Address']['type']='registered';
-        $this->request->data['Address']['status']=$status;
-        if($this->Address->save($this->request->data))
-        {
-            echo $random;
-        }
-    
-    }
-     public function editregaddress()
-    {
-        
-        $this->autoRender=false;
-        $regaddress= $this->request->data['regaddress'];
-        $customer_id=$this->request->data['customer_id'];
-        $status=1;
-        $random =mt_rand();
-        $this->request->data['Address']['customer_id']=$customer_id;
-        $this->request->data['Address']['address_id']=$random;
-        $this->request->data['Address']['address']=$regaddress;
-        $this->request->data['Address']['type']='registered';
-        $this->request->data['Address']['status']=$status;
-        if($this->Address->save($this->request->data))
-        {
-            echo $random;
-        }
-    
-    }
-    
-     public function deleteregaddress()
-    {
-        $this->autoRender=false;
-        $delete_id= $this->request->data['delete_id'];
-        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
-        {
-            echo "deleted";
-        }
-    }
-    
-    public function addbilladdress()
-    {
-        
-        $this->autoRender=false;
-        $billaddress= $this->request->data['billaddress'];
-        $customer_id=$this->request->data['customer_id'];
-        $status=0;
-        $random =mt_rand();
-        $this->request->data['Address']['customer_id']=$customer_id;
-        $this->request->data['Address']['address_id']=$random;
-        $this->request->data['Address']['address']=$billaddress;
-        $this->request->data['Address']['type']='billing';
-        $this->request->data['Address']['status']=$status;
-        if($this->Address->save($this->request->data))
-        {
-            echo $random;
-        }
-    
-    }
-     public function editbilladdress()
-    {
-        
-        $this->autoRender=false;
-        $billaddress= $this->request->data['billaddress'];
-        $customer_id=$this->request->data['customer_id'];
-        $status=1;
-        $random =mt_rand();
-        $this->request->data['Address']['customer_id']=$customer_id;
-        $this->request->data['Address']['address_id']=$random;
-        $this->request->data['Address']['address']=$billaddress;
-        $this->request->data['Address']['type']='billing';
-        $this->request->data['Address']['status']=$status;
-        if($this->Address->save($this->request->data))
-        {
-            echo $random;
-        }
-    
-    }
-    
-     public function deletebilladdress()
-    {
-        $this->autoRender=false;
-        $delete_id= $this->request->data['delete_id'];
-        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
-        {
-            echo "deleted";
-        }
-    }
-    
-    public function adddeliveryaddress()
-    {
-        
-        $this->autoRender=false;
-        $deliveryaddress= $this->request->data['deliveryaddress'];
-        $customer_id=$this->request->data['customer_id'];
-        $status=0;
-        $random =mt_rand();
-        $this->request->data['Address']['customer_id']=$customer_id;
-        $this->request->data['Address']['address_id']=$random;
-        $this->request->data['Address']['address']=$deliveryaddress;
-        $this->request->data['Address']['type']='delivery';
-        $this->request->data['Address']['status']=$status;
-        if($this->Address->save($this->request->data))
-        {
-            echo $random;
-        }
-    
-    }
-    public function editdeliveryaddress()
-    {
-        $this->autoRender=false;
-        $deliveryaddress= $this->request->data['deliveryaddress'];
-        $customer_id=$this->request->data['customer_id'];
-        $status=1;
-        $random =mt_rand();
-        $this->request->data['Address']['customer_id']=$customer_id;
-        $this->request->data['Address']['address_id']=$random;
-        $this->request->data['Address']['address']=$deliveryaddress;
-        $this->request->data['Address']['type']='delivery';
-        $this->request->data['Address']['status']=$status;
-        if($this->Address->save($this->request->data))
-        {
-            echo $random;
-        }
-    
-    }
-    
-     public function deletedeliveryaddress()
-    {
-        $this->autoRender=false;
-        $delete_id= $this->request->data['delete_id'];
-        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
-        {
-            echo "deleted";
-        }
-    }
-    
-    public function addprojectinfo()
-    {
-        
-        $this->autoRender=false;
-        $projectname= $this->request->data['projectname'];
-        $customer_id=$this->request->data['customer_id'];
-        $status=0;
-        $random =mt_rand();
-        $this->request->data['Projectinfo']['customer_id']=$customer_id;
-        $this->request->data['Projectinfo']['project_id']=$random;
-        $this->request->data['Projectinfo']['project_name']=$projectname;
-        $this->request->data['Projectinfo']['project_status']=$status;
-        if($this->Projectinfo->save($this->request->data))
-        {
-            echo $random;
-        }
-    
-    }
-    public function editprojectinfo()
-    {
-        
-        $this->autoRender=false;
-        $projectname= $this->request->data['projectname'];
-        $customer_id=$this->request->data['customer_id'];
-        
-        $status=1;
-        $random =mt_rand();
-        $this->request->data['Projectinfo']['customer_id']=$customer_id;
-        $this->request->data['Projectinfo']['project_id']=$random;
-        $this->request->data['Projectinfo']['project_name']=$projectname;
-        $this->request->data['Projectinfo']['project_status']=$status;
-        if($this->Projectinfo->save($this->request->data))
-        {
-            echo $random;
-        }
-    
-    }
-    
-     public function deleteprojectinfo()
-    {
-        $this->autoRender=false;
-        $delete_id= $this->request->data['delete_id'];
-        if($this->Projectinfo->deleteAll(array('Projectinfo.project_id'=>$delete_id)))
-        {
-            echo "deleted";
-        }
-    }
-    
     public function add()
     {
-        
         if($this->Session->read('customer_id')=='')
         {
-            $d=date ("d");
-            $m=date ("m");
-            $y=date ("Y");
-            $t=time();
+            $d=date ("d"); $m=date ("m"); $y=date ("Y"); $t=time();
             $dmt='CUS'.($d+$m+$y+$t);
+            $tag='TAG'.($d+$m+$y+$t);
+            $group='CGRU'.($d+$m+$t);
+            $this->Session->write('tag_id',$tag);
             $this->Session->write('customer_id',$dmt);
+            $this->Session->write('group_id',$group);
         }
+       
         $this->set('customer_id',$this->Session->read('customer_id'));
+        $this->set('tag_id',$this->Session->read('tag_id'));
+        $this->set('group_id',$this->Session->read('group_id'));
        
         $data = $this->Salesperson->find('list', array('fields' => 'salesperson'));
+      
         $this->set('salesperson',$data);
         
         $data1 = $this->Referedby->find('list', array('fields' => 'referedby'));
@@ -247,7 +55,6 @@ class CustomersController extends AppController
         $this->set('data10',$data10);
         $this->set('data10_count',$data10_count);
         
-       
         $data11 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'billing')));
         $data11_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'billing')));
         //pr($data10);pr($data10_count);exit;
@@ -260,11 +67,6 @@ class CustomersController extends AppController
         $this->set('data12',$data12);
         $this->set('data12_count',$data12_count);
         
-        $data13 = $this->Projectinfo->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>0)));
-        $data13_count = $this->Projectinfo->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>0)));
-        //pr($data10);pr($data10_count);exit;
-        $this->set('data13',$data13);
-        $this->set('data13_count',$data13_count);
         
         $this->loadModel('Industry');
         $data2 = $this->Industry->find('list', array('fields' => 'industryname'));
@@ -295,18 +97,19 @@ class CustomersController extends AppController
 
         if($this->request->is('post'))
         {
-           
-           // $this->request->data['paymentterm_id'] = $this->request->data['val_paymentterms_chosen'];
             $this->request->data['status'] = 1;
             $refer_array = $this->request->data['referedbies_id'];
             $sales_array = $this->request->data['salesperson_id'];
             $cust_id  =   $this->request->data['id'];
+            $group_id  =   $this->request->data['customergroup_id'];
+            $tag_id  =   $this->request->data['tag_id'];
+            $this->request->data['is_default']  =   1;
             if(!empty($sales_array))
             {
                 foreach($sales_array as $key=>$value)
                 {
                     $this->CusSalesperson->create();
-                    $per_data = array('customer_id' =>$cust_id, 'salespeople_id' => $value);
+                    $per_data = array('customer_id' =>$cust_id, 'salespeople_id' => $value,'tag_id'=>$tag_id,'customergroup_id'=>$group_id);
                     $this->CusSalesperson->save($per_data);
                 }
             }
@@ -315,43 +118,30 @@ class CustomersController extends AppController
                 foreach($refer_array as $key=>$value)
                 {
                     $this->CusReferby->create();
-                    $ref_data = array('customer_id' =>$cust_id, 'referedby_id' => $value);
+                    $ref_data = array('customer_id' =>$cust_id, 'referedby_id' => $value,'tag_id'=>$tag_id,'customergroup_id'=>$group_id);
                     $this->CusReferby->save($ref_data);
                 }
             }
             unset($this->request->data['Customer']);
             unset($this->request->data['salesperson_id']);
             unset($this->request->data['referedbies_id']);
-             
-            $match1 = $this->request->data['customername'];
-            $data1 = $this->Customer->findByCustomername($match1);
-           
-            if(!empty($data1))
-            {
-                $this->Session->setFlash(__('Customer Name Already Exist'));
-                return $this->redirect(array('action'=>'add'));
-            }
             
             if($this->Customer->save($this->request->data))
             {
-                //pr($this->request->data);exit;
-                $project = $this->Projectinfo->find('count', array('conditions' => array('Projectinfo.customer_id' => $this->Session->read('customer_id'))));
-                $contactperson = $this->Contactpersoninfo->find('count', array('conditions' => array('Contactpersoninfo.customer_id' => $this->Session->read('customer_id'))));
-                $address = $this->Address->find('count', array('conditions' => array('Address.customer_id' => $this->Session->read('customer_id'))));
+                $contactperson = $this->Contactpersoninfo->find('count', array('conditions' => array('Contactpersoninfo.customer_id' => $cust_id)));
+                $address = $this->Address->find('count', array('conditions' => array('Address.customer_id' =>$cust_id)));
                 if ($contactperson > 0) {
-                    $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.status' => 1), array('Contactpersoninfo.customer_id' => $this->Session->read('customer_id')));
+                    $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.status' => 1), array('Contactpersoninfo.customer_id' => $cust_id));
                 }
                 if($address>0)
                 {
-                    $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$this->Session->read('customer_id')));
+                    $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$cust_id));
                 }
-                if($project>0)
-                {
-                    $this->Projectinfo->updateAll(array('Projectinfo.project_status'=>1),array('Projectinfo.customer_id'=>$this->Session->read('customer_id')));
-                }
+                
                 $this->Session->setFlash(__('Customer has been Added Successfully'));
                 return $this->redirect(array('action'=>'index'));
                 $this->Session->delete('customer_id');
+                $this->Session->delete('tag_id');
             }
             $this->Session->setFlash(__('Customer Could Not be Added'));
         }
@@ -363,12 +153,15 @@ class CustomersController extends AppController
         $this->set('customer_id',$this->Session->read('customer_id'));
         
         $salesperson = $this->Salesperson->find('list', array('fields' => 'salesperson'));
+        
         $referedby = $this->Referedby->find('list', array('fields' => 'referedby'));
+        $this->set(compact('salesperson','referedby'));
         
         $data10 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
         $data10_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'registered')));
         $this->set('data10',$data10);
         $this->set('data10_count',$data10_count);
+        
         
         $data11 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'billing')));
         $data11_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>1,'type'=>'billing')));
@@ -380,10 +173,7 @@ class CustomersController extends AppController
         $this->set('data12',$data12);
         $this->set('data12_count',$data12_count);
         
-        $data13 = $this->Projectinfo->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>1)));
-        $data13_count = $this->Projectinfo->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'project_status'=>1)));
-        $this->set('data13',$data13);
-        $this->set('data13_count',$data13_count);
+        
         
         $invoice_types = $this->InvoiceType->find('list', array('fields' => array('id','type_invoice')));
         $this->set('invoice_types',$invoice_types);
@@ -396,23 +186,7 @@ class CustomersController extends AppController
         
         $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
         $this->set(compact('deliverorder_type'));
-//        $data4 = $this->Paymentterm->find('list', array('fields' => 'paymentterm'));
-//         //pr($data4);exit;
-//        $data5 = $this->Paymentterm->find('list', array('fields' => 'paymenttype'));
-//          
-//        
-//        
-//        $array3 = '';
-//        $i = 0 ; 
-//        $array3 = array();
-//        //pr($data4);pr($data5);exit;
-//        count($data4);
-//        for($i=1;$i<=count($data4);$i++)
-//        {
-//            $array3[] = $data4[$i].' '.$data5[$i];
-//
-//        }
-//        $this->set('paymentterm', $array3);
+
         $data5 = $this->Paymentterm->find('list', array('fields' => array('id','pay')));;
         $this->set('paymentterm',$data5);
 
@@ -475,11 +249,11 @@ class CustomersController extends AppController
             unset($this->request->data['Customer']);
             unset($this->request->data['salesperson_id']);
             unset($this->request->data['referedbies_id']);
+            
             if($this->Customer->save($this->request->data))
             {
-                
-               $project= $this->Projectinfo->find('count',array('conditions'=>array('Projectinfo.customer_id'=>$this->Session->read('customer_id'))));
-               $contactperson= $this->Contactpersoninfo->find('count',array('conditions'=>array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id'))));
+               $project = $this->Projectinfo->find('count',array('conditions'=>array('Projectinfo.customer_id'=>$this->Session->read('customer_id'))));
+               $contactperson   = $this->Contactpersoninfo->find('count',array('conditions'=>array('Contactpersoninfo.customer_id'=>$this->Session->read('customer_id'))));
                $address= $this->Address->find('count',array('conditions'=>array('Address.customer_id'=>$this->Session->read('customer_id'))));
                 if($contactperson>0)
                 {
@@ -505,14 +279,10 @@ class CustomersController extends AppController
         }
     }
     
-    public function delete($id)
+    public function delete($id=NULL)
     {
         $this->autoRender=false;
-        if($id=='')
-        {
-            throw new MethodNotAllowedException();
-        }
-        if($this->Customer->delete($id,true))
+        if($this->Customer->updateAll(array('Customer.is_deleted'=>1,'Customer.status'=>0),array('Customer.id'=>$id)))
         {
             $this->Session->setFlash(__('Customer has been deleted'));
             return $this->redirect(array('action'=>'index'));
@@ -523,7 +293,6 @@ class CustomersController extends AppController
         $this->autoRender=false;
         $serial_id= $this->request->data['serial_id'];
         $project_name=$this->request->data['project_name'];
-        
         $status=0;
         $this->loadModel('Projectinfo');
         $this->request->data['Projectinfo']['project_id']=$serial_id;
@@ -567,7 +336,6 @@ class CustomersController extends AppController
         $this->loadModel('Projectinfo');
         
         $data = $this->Projectinfo->updateAll(array('Projectinfo.project_name'=>'"'.$pro_name.'"'),array('Projectinfo.id'=>$pro_id));
-        pr($data);
         //echo 'success';
     }
     public function project_delete()
@@ -650,7 +418,10 @@ class CustomersController extends AppController
         $this->request->data['Contactpersoninfo']['position']=$this->request->data['contact_position'];
         $this->request->data['Contactpersoninfo']['mobile']=$this->request->data['contact_mobile'];
         $this->request->data['Contactpersoninfo']['purpose']=$this->request->data['contact_purpose'];
-        $this->request->data['Contactpersoninfo']['customer_id']=$this->Session->read('customer_id');
+        $this->request->data['Contactpersoninfo']['customer_id']=$this->request->data['customer_id'];
+        $this->request->data['Contactpersoninfo']['tag_id']=$this->request->data['tag_id'];
+        $this->request->data['Contactpersoninfo']['serial_id']=$this->request->data['serial_id'];
+        $this->request->data['Contactpersoninfo']['customergroup_id']=$this->request->data['group_id'];
         $this->request->data['Contactpersoninfo']['status']=0;
         if($this->Contactpersoninfo->save($this->request->data))
         {
@@ -683,7 +454,7 @@ class CustomersController extends AppController
         $this->autoRender=false;
         $delete_id= $this->request->data['delete_id'];
         $this->loadModel('Contactpersoninfo');
-        if($this->Projectinfo->deleteAll(array('Contactpersoninfo.serial_id'=>$delete_id)))
+        if($this->Contactpersoninfo->deleteAll(array('Contactpersoninfo.serial_id'=>$delete_id)))
         {
             echo "deleted";
         }
@@ -806,4 +577,208 @@ class CustomersController extends AppController
         }
     }
 
+    public function addregaddress()
+    {
+        
+        $this->autoRender=false;
+        $regaddress= $this->request->data['regaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        $tag_id=$this->request->data['tag_id'];
+        $status=0;
+        $random =mt_rand();
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
+        $this->request->data['Address']['address']=$regaddress;
+        $this->request->data['Address']['type']='registered';
+        $this->request->data['Address']['status']=$status;
+        $this->request->data['Address']['tag_id']=$tag_id;
+        $this->request->data['Address']['customergroup_id']=$this->request->data['group_id'];
+        if($this->Address->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+     public function editregaddress()
+    {
+        
+        $this->autoRender=false;
+        $regaddress= $this->request->data['regaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        $tag_id=$this->request->data['tag_id'];
+        $status=1;
+        $random =mt_rand();
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
+        $this->request->data['Address']['address']=$regaddress;
+        $this->request->data['Address']['type']='registered';
+        $this->request->data['Address']['status']=$status;
+        $this->request->data['Address']['tag_id']=$tag_id;
+        if($this->Address->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+    
+     public function deleteregaddress()
+    {
+        $this->autoRender=false;
+        $delete_id= $this->request->data['delete_id'];
+        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
+        {
+            echo "deleted";
+        }
+    }
+    
+    public function addbilladdress()
+    {
+        
+        $this->autoRender=false;
+        $billaddress= $this->request->data['billaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        $tag_id=$this->request->data['tag_id'];
+        $status=0;
+        $random =mt_rand();
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
+        $this->request->data['Address']['address']=$billaddress;
+        $this->request->data['Address']['type']='billing';
+        $this->request->data['Address']['status']=$status;
+        $this->request->data['Address']['tag_id']=$tag_id;
+        $this->request->data['Address']['customergroup_id']=$this->request->data['group_id'];
+        if($this->Address->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+     public function editbilladdress()
+    {
+        
+        $this->autoRender=false;
+        $billaddress= $this->request->data['billaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        $tag_id=$this->request->data['tag_id'];
+        $status=1;
+        $random =mt_rand();
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
+        $this->request->data['Address']['address']=$billaddress;
+        $this->request->data['Address']['type']='billing';
+        $this->request->data['Address']['status']=$status;
+        $this->request->data['Address']['tag_id']=$tag_id;
+        if($this->Address->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+    
+     public function deletebilladdress()
+    {
+        $this->autoRender=false;
+        $delete_id= $this->request->data['delete_id'];
+        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
+        {
+            echo "deleted";
+        }
+    }
+    
+    public function adddeliveryaddress()
+    {
+        
+        $this->autoRender=false;
+        $deliveryaddress= $this->request->data['deliveryaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        $random =mt_rand();
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
+        $this->request->data['Address']['address']=$deliveryaddress;
+        $this->request->data['Address']['type']='delivery';
+        $this->request->data['Address']['status']=0;
+        $this->request->data['Address']['tag_id']=$this->request->data['tag_id'];
+        $this->request->data['Address']['customergroup_id']=$this->request->data['group_id'];
+        if($this->Address->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+    public function editdeliveryaddress()
+    {
+        $this->autoRender=false;
+        $deliveryaddress= $this->request->data['deliveryaddress'];
+        $customer_id=$this->request->data['customer_id'];
+        $tag_id=$this->request->data['tag_id'];
+        $status=1;
+        $random =mt_rand();
+        $this->request->data['Address']['customer_id']=$customer_id;
+        $this->request->data['Address']['address_id']=$random;
+        $this->request->data['Address']['address']=$deliveryaddress;
+        $this->request->data['Address']['type']='delivery';
+        $this->request->data['Address']['status']=$status;
+         $this->request->data['Address']['tag_id']=$tag_id;
+        if($this->Address->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+    
+     public function deletedeliveryaddress()
+    {
+        $this->autoRender=false;
+        $delete_id= $this->request->data['delete_id'];
+        if($this->Address->deleteAll(array('Address.address_id'=>$delete_id)))
+        {
+            echo "deleted";
+        }
+    }
+    
+    public function addprojectinfo()
+    {
+        $this->autoRender=false;
+        $projectname= $this->request->data['projectname'];
+        $customer_id=$this->request->data['customer_id'];
+        $status=0;
+        $random =mt_rand();
+        $this->request->data['Projectinfo']['customer_id']=$customer_id;
+        $this->request->data['Projectinfo']['project_id']=$random;
+        $this->request->data['Projectinfo']['project_name']=$projectname;
+        $this->request->data['Projectinfo']['project_status']=$status;
+        if($this->Projectinfo->save($this->request->data))
+        {
+            echo $random;
+        }
+    }
+    public function editprojectinfo()
+    {
+        
+        $this->autoRender=false;
+        $projectname= $this->request->data['projectname'];
+        $customer_id=$this->request->data['customer_id'];
+        
+        $status=1;
+        $random =mt_rand();
+        $this->request->data['Projectinfo']['customer_id']=$customer_id;
+        $this->request->data['Projectinfo']['project_id']=$random;
+        $this->request->data['Projectinfo']['project_name']=$projectname;
+        $this->request->data['Projectinfo']['project_status']=$status;
+        if($this->Projectinfo->save($this->request->data))
+        {
+            echo $random;
+        }
+    
+    }
+    
+    public function deleteprojectinfo()
+    {
+        $this->autoRender=false;
+        $delete_id= $this->request->data['delete_id'];
+        if($this->Projectinfo->deleteAll(array('Projectinfo.project_id'=>$delete_id)))
+        {
+            echo "deleted";
+        }
+    }
 }

@@ -44,7 +44,6 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('mobile', array('id'=>'contact_mobile','class'=>'form-control','placeholder'=>'Enter the Phone No','label'=>false)); ?>
     </div>
-    
     <label class="col-md-2 control-label" for="val_fax">Purpose</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('purpose', array('id'=>'contact_purpose','class'=>'form-control','placeholder'=>'Enter the Purpose','label'=>false)); ?>
@@ -64,16 +63,15 @@
 </div>
 <div class="form-group form-actions">
     <div class="col-md-9 col-md-offset-10">
-        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary contactperson__submit','escape' => false)); ?>
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary tag_contactperson__submit','escape' => false)); ?>
     </div>
 </div>
     
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
-            <th class="text-center">S.No</th>
-            <th class="text-center">Customer</th>
-            <th class="text-center">Name</th>
+            <th class="text-center">Customer Id</th>
+            <th class="text-center">Person Name</th>
             <th class="text-center">Email</th>
             <th class="text-center">Department</th>
             <th class="text-center">Phone</th>
@@ -84,10 +82,10 @@
             <th class="text-center">Action</th>
         </tr>
     </thead>
-    <tbody class="contact_info_row">
+    <tbody class="tag_contact_info_row">
         <?PHP if(!empty($contactpersoninfo )): ?>
         <?php foreach($contactpersoninfo as $contactpersoninfo_list): ?>
-         <tr>
+        <tr class="tag_contact_remove_"<?php echo $contactpersoninfo_list['Contactpersoninfo']['tag_id']; ?>>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['customer_id']; ?></td>
@@ -101,9 +99,9 @@
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['remarks']; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 
+                                                <?php echo $this->Form->button('<i class="fa fa-pencil"></i>',array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Form->button('<i class="fa fa-times"></i>',array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger tag_contact_delete','escape'=>false)); ?>
                                             </div>
                                         </td>
                                     </tr>

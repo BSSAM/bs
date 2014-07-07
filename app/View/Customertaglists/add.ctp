@@ -1,8 +1,6 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
-    var customer_id = '<?php echo $customer_id;?>';
-    //$('#tabs_reg li:nth-child(1)').attr('class','active');
-    
+   
     $(document).on('click','.close',function(){
         var id=$(this).attr('id');
         var hre = $(this).parent('a').attr('href');
@@ -78,31 +76,30 @@
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
     <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
-     <li><?php echo $this->Html->link('Customer Tags',array('controller'=>'Customertaglists','action'=>'index')); ?></li>
+     <li><?php echo $this->Html->link('Customer Tags',array('controller'=>'Customertaglists','action'=>'index',$customer_id)); ?></li>
+     
     <li>Add Customer Tag</li>
 </ul>
 <!-- END Forms General Header -->
                         
 <div class="row">
     <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-add')); ?>
-    <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[id]')); ?>
+    <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[id]','id'=>'customer_id')); ?>
+    <?PHP echo $this->Form->input('tag_id',array('type'=>'hidden','value'=>$tag_id,'name'=>'data[tag_id]')); ?>
+    <?PHP echo $this->Form->input('group_id',array('type'=>'hidden','value'=>$group_id,'name'=>'data[customergroup_id]')); ?>
     <div class="col-md-12">
         <!-- Basic Form Elements Block -->
         <div class="block">
             <!-- Basic Form Elements Title -->
             <div class="block-title">
-                
                 <h2></h2>
             </div>
             <!-- END Form Elements Title -->
-                             
             <!-- Basic Form Elements Content -->
             <div class="panel panel-default">
                 <div class="panel-body panel-body-nopadding">
-                    
                     <!-- BASIC WIZARD -->
                     <div id="basicWizard" class="basic-wizard">
-                        
                         <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                             <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Customer Info</a></li>
                             <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Contact Person Info</a></li>

@@ -214,7 +214,6 @@ $(document).ready(function(){
             $('.name_error').show();
             return false;
         }
-        
         var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
         var contact_name=$('#contact_name').val();
         var contact_email=$('#contact_email').val();
@@ -224,9 +223,19 @@ $(document).ready(function(){
         var contact_mobile=$('#contact_mobile').val();
         var contact_purpose=$('#contact_purpose').val();
         var contact_remark=$('#contact_remark').val();
-        $('.contact_info_row').append('<tr class="contact_remove_'+contact_name+'">\n\\n\
+        var customer_id=$('#customer_id').val();
+        var tag_id=$('#CustomerTagId').val();
+        var group_id=$('#CustomerGroupId').val();
+        
+       
+        $.ajax({
+            type: 'POST',
+            data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile+"&customer_id="+customer_id+"&tag_id="+tag_id+"&serial_id="+serial+"&group_id="+group_id,
+            url: path_url+'/customers/contact_person_add/',
+            success:function(data){
+              
+                 $('.contact_info_row').append('<tr class="contact_remove_'+serial+'">\n\\n\
                                     <td class="text-center">'+customer_id+'</td>\n\
-                                    <td class="text-center">'+serial+'</td>\n\
                                     <td class="text-center">'+contact_name+'</td>\n\\n\
                                     <td class="text-center">'+contact_email+'</td>\n\
                                     <td class="text-center">'+contact_department+'</td>\n\\n\
@@ -238,6 +247,9 @@ $(document).ready(function(){
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
+            }
+        });
+        
         $('#contact_name').val(null);
         $('#contact_email').val(null);
         $('#contact_department').val(null);
@@ -247,15 +259,10 @@ $(document).ready(function(){
         $('#contact_purpose').val(null);
         $('#contact_remark').val(null);
         $('.name_error').hide();
-        $.ajax({
-            type: 'POST',
-            data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile,
-            url: path_url+'/customers/contact_person_add/'
-        });
     });
     $('.name_error').hide();
     $('.email_error').hide();
-    $(document).on('click','.contactperson__editsubmit',function()
+    $(document).on('click','.contactperson_editsubmit',function()
     {
         if($('#contact_name').val()=='')
         {
@@ -309,12 +316,16 @@ $(document).ready(function(){
     $(document).on('click','.contact_delete',function()
     {
         var delete_id = $(this).attr('data-delete');
-        $.ajax({
-            type: 'POST',
-            data:"delete_id="+ delete_id,
-            url: path_url+'/customers/project_delete/'
-        });
-        $('.contact_remove_'+delete_id).fadeOut();
+        var confirm =   window.confirm('Are you Sure want to Delete?');
+        if(confirm==true)
+        {
+            $.ajax({
+                type: 'POST',
+                data:"delete_id="+ delete_id,
+                url: path_url+'/customers/contact_delete/'
+            });
+            $('.contact_remove_'+delete_id).fadeOut();
+        }
     });
     
     $(document).on('click','.contactperson__updatesubmit',function()
@@ -525,7 +536,6 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                alert(data);
                 data1 = $.parseJSON(data);
                 address_node    =   data1.Address;
                 contact_person_info =   data1.Contactpersoninfo;
@@ -553,246 +563,7 @@ $(document).ready(function(){
 	});
     });
     $('.project_name_error').hide();
-    $('#save_regadd').click(function()
-    {
-        if($('#val_regaddress').val()=='')
-        {
-            $('.project_name_error').addClass('animation-slideDown');
-            $('.project_name_error').css('color','red');
-            $('.project_name_error').show();
-            return false;
-        }
-        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var regaddress=$('#val_regaddress').val();
-        
-         var n = $("ul#tabs_reg li").size()+1;
-          $('#tab-content').append('<div class="tab-pane active" id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
-          $('#val_regaddress').val(null);
-         
-          $.ajax({
-            type: 'POST',
-            data:"regaddress="+regaddress+"&customer_id="+customer_id,
-            url: path_url+'/customers/addregaddress/',
-            success:function(data){
-                $('#tabs_reg').append('<li id="'+data+'" class="active"><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+data+'" >×</button>Address'+n+'</a></li>');
-                
-            }
-                    
-        });
-        $('#modal-registered').modal('hide');
-    
-    });
-    
-    $('#save_billadd').click(function()
-    {
-        if($('#val_billaddress').val()=='')
-        {
-            $('.project_name_error').addClass('animation-slideDown');
-            $('.project_name_error').css('color','red');
-            $('.project_name_error').show();
-            return false;
-        }
-        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var billaddress=$('#val_billaddress').val();
-        
-         var n = $("ul#tabs_bill li").size()+1;
-          $('#tab-content_bill').append('<div class="tab-pane active" id="example-tabs2-billing'+n+'">'+billaddress+'</div>');
-          $('#val_billaddress').val(null);
-         
-          $.ajax({
-            type: 'POST',
-            data:"billaddress="+billaddress+"&customer_id="+customer_id,
-            url: path_url+'/customers/addbilladdress/',
-            success:function(data){
-                $('#tabs_bill').append('<li id="'+data+'" class="active"><a href="#example-tabs2-billing'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
-                
-            }
-                    
-        });
-        $('#modal-billing').modal('hide');
-    
-    });
-    
-    $('#save_deliveryadd').click(function()
-    {
-        if($('#val_deliveryaddress').val()=='')
-        {
-            $('.project_name_error').addClass('animation-slideDown');
-            $('.project_name_error').css('color','red');
-            $('.project_name_error').show();
-            return false;
-        }
-        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var deliveryaddress=$('#val_deliveryaddress').val();
-        
-         var n = $("ul#tabs_delivery li").size()+1;
-          $('#tab-content_delivery').append('<div class="tab-pane active" id="example-tabs2-delivery'+n+'">'+deliveryaddress+'</div>');
-          $('#val_deliveryaddress').val(null);
-         
-          $.ajax({
-            type: 'POST',
-            data:"deliveryaddress="+deliveryaddress+"&customer_id="+customer_id,
-            url: path_url+'/customers/adddeliveryaddress/',
-            success:function(data){
-                $('#tabs_delivery').append('<li id="'+data+'" class="active"><a href="#example-tabs2-delivery'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
-                
-            }
-                    
-        });
-        $('#modal-delivery').modal('hide');
-    
-    });
-    
-     $('#save_projectadd').click(function()
-    {
-        if($('#val_projectname').val()=='')
-        {
-            $('.project_name_error').addClass('animation-slideDown');
-            $('.project_name_error').css('color','red');
-            $('.project_name_error').show();
-            return false;
-        }
-        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var projectname = $('#val_projectname').val();
-        
-         var n = $("ul#tabs_project li").size()+1;
-          $('#tab-content_project').append('<div class="tab-pane " id="example-tabs2-project'+n+'">'+projectname+'</div>');
-          $('#val_projectname').val(null);
-         
-          $.ajax({
-            type: 'POST',
-            data:"projectname="+projectname+"&customer_id="+customer_id,
-            url: path_url+'/customers/addprojectinfo/',
-            success:function(data){
-                $('#tabs_project').append('<li id="'+data+'"><a href="#example-tabs2-project'+n+'"><button class="close" type="button" id="'+data+'">×</button>Project'+n+'</a></li>');
-                
-            }
-                    
-        });
-        $('#modal-project').modal('hide');
-    
-    });
-    
-    $('#save_regedit').click(function()
-    {
-        if($('#val_regaddress').val()=='')
-        {
-            $('.project_name_error').addClass('animation-slideDown');
-            $('.project_name_error').css('color','red');
-            $('.project_name_error').show();
-            return false;
-        }
-        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var regaddress=$('#val_regaddress').val();
-        
-         var n = $("ul#tabs_reg li").size()+1;
-          $('#tab-content').append('<div class="tab-pane " id="example-tabs2-Address'+n+'">'+regaddress+'</div>');
-          $('#val_regaddress').val(null);
-         
-          $.ajax({
-            type: 'POST',
-            data:"regaddress="+regaddress+"&customer_id="+customer_id,
-            url: path_url+'/customers/editregaddress/',
-            success:function(data){
-                $('#tabs_reg').append('<li id="'+data+'" ><a href="#example-tabs2-Address'+n+'"><button class="close" type="button" id="'+data+'" >×</button>Address'+n+'</a></li>');
-                
-            }
-                    
-        });
-        $('#modal-registered').modal('hide');
-    
-    });
-    
-    $('#save_billedit').click(function()
-    {
-        if($('#val_billaddress').val()=='')
-        {
-            $('.project_name_error').addClass('animation-slideDown');
-            $('.project_name_error').css('color','red');
-            $('.project_name_error').show();
-            return false;
-        }
-        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var billaddress=$('#val_billaddress').val();
-        
-         var n = $("ul#tabs_bill li").size()+1;
-          $('#tab-content_bill').append('<div class="tab-pane " id="example-tabs2-billing'+n+'">'+billaddress+'</div>');
-          $('#val_billaddress').val(null);
-         
-          $.ajax({
-            type: 'POST',
-            data:"billaddress="+billaddress+"&customer_id="+customer_id,
-            url: path_url+'/customers/editbilladdress/',
-            success:function(data){
-                $('#tabs_bill').append('<li id="'+data+'" ><a href="#example-tabs2-billing'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
-                
-            }
-                    
-        });
-        $('#modal-billing').modal('hide');
-    
-    });
-    
-    $('#save_deliveryedit').click(function()
-    {
-        if($('#val_deliveryaddress').val()=='')
-        {
-            $('.project_name_error').addClass('animation-slideDown');
-            $('.project_name_error').css('color','red');
-            $('.project_name_error').show();
-            return false;
-        }
-        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var deliveryaddress=$('#val_deliveryaddress').val();
-        
-         var n = $("ul#tabs_delivery li").size()+1;
-          $('#tab-content_delivery').append('<div class="tab-pane " id="example-tabs2-delivery'+n+'">'+deliveryaddress+'</div>');
-          $('#val_deliveryaddress').val(null);
-         
-          $.ajax({
-            type: 'POST',
-            data:"deliveryaddress="+deliveryaddress+"&customer_id="+customer_id,
-            url: path_url+'/customers/editdeliveryaddress/',
-            success:function(data){
-                $('#tabs_delivery').append('<li id="'+data+'"><a href="#example-tabs2-delivery'+n+'"><button class="close" type="button" id="'+data+'">×</button>Address'+n+'</a></li>');
-                
-            }
-                    
-        });
-        $('#modal-delivery').modal('hide');
-    
-    });
-    
-     $('#save_projectedit').click(function()
-    {
-        if($('#val_projectname').val()=='')
-        {
-            $('.project_name_error').addClass('animation-slideDown');
-            $('.project_name_error').css('color','red');
-            $('.project_name_error').show();
-            return false;
-        }
-        //var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var projectname = $('#val_projectname').val();
-        
-         var n = $("ul#tabs_project li").size()+1;
-          $('#tab-content_project').append('<div class="tab-pane active" id="example-tabs2-project'+n+'">'+projectname+'</div>');
-          $('#val_projectname').val(null);
-         
-          $.ajax({
-            type: 'POST',
-            data:"projectname="+projectname+"&customer_id="+customer_id,
-            url: path_url+'/customers/editprojectinfo/',
-            success:function(data){
-                $('#tabs_project').append('<li id="'+data+'" class="active"><a href="#example-tabs2-project'+n+'"><button class="close" type="button" id="'+data+'">×</button>Project'+n+'</a></li>');
-                
-            }
-                    
-        });
-        $('#modal-project').modal('hide');
-    
-    });
-   
+
     $('.country_value').change(function() {
         var country_id = $(this).val();
         $.ajax({

@@ -99,10 +99,11 @@
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['remarks']; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php //echo $this->Html->link('<i class="fa fa-pencil"></i>',array($contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->button('<i class="fa fa-pencil"></i>',array('type'=>'button','id'=>$contactpersoninfo_list['Contactpersoninfo']['id'],'title'=>'Edit','class'=>'btn btn-xs btn-default bt_con_edit','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array($contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                                
+                                                 <a data-delete=<?PHP echo $contactpersoninfo_list['Contactpersoninfo']['tag_id']; ?> data-toggle="tooltip" title="Delete" class="btn btn-xs btn-default tag_contact_delete">
+                                                <i class="fa fa-pencil"></i></a>
+                                                <a data-delete=<?PHP echo $contactpersoninfo_list['Contactpersoninfo']['tag_id']; ?> data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger tag_contact_delete">
+                                                <i class="fa fa-times"></i></a>
+                                                 
                                             </div>
                                         </td>
                                     </tr>

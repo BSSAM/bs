@@ -1,6 +1,6 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
-    var customer_id = '<?php echo $customer_id;?>';
+    //var customer_id = '<?php //echo $customer_id;?>';
     //$('#tabs_reg li:nth-child(1)').attr('class','active');
     
     $(document).on('click','.close',function(){
@@ -85,17 +85,17 @@
                         
 <div class="row">
     <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-add')); ?>
-    <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[id]')); ?>
+    <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[id]','id'=>'customer_id')); ?>
+    <?PHP echo $this->Form->input('tag_id',array('type'=>'hidden','value'=>$tag_id,'name'=>'data[tag_id]')); ?>
+    <?PHP echo $this->Form->input('group_id',array('type'=>'hidden','value'=>$group_id,'name'=>'data[customergroup_id]')); ?>
     <div class="col-md-12">
         <!-- Basic Form Elements Block -->
         <div class="block">
             <!-- Basic Form Elements Title -->
             <div class="block-title">
-                
                 <h2></h2>
             </div>
             <!-- END Form Elements Title -->
-                             
             <!-- Basic Form Elements Content -->
             <div class="panel panel-default">
                 <div class="panel-body panel-body-nopadding">
@@ -116,12 +116,12 @@
                             <div class="tab-pane" id="tab2">
                                 <?PHP echo $this->element('Customers/contact_person_info'); ?>
                             </div>
-                    </div><!-- panel-body -->
+                        </div><!-- panel-body -->
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                 <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-<!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                            <!-- <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
+                        <?php echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress','type'=>'textarea')); ?>
                     <span class="help-block_login project_name_error">Enter the Registered Address</span>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
+                        <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress','type'=>'textarea')); ?>
                     <span class="help-block_login project_name_error">Enter the Billing Address</span>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('deliveryaddress', array('id'=>'val_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress')); ?>
+                        <?php echo $this->Form->input('deliveryaddress', array('id'=>'val_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress','type'=>'textarea')); ?>
                     <span class="help-block_login project_name_error">Enter the Delivery Address</span>
                     </div>
                 </div>

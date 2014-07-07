@@ -44,14 +44,9 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    
                                     <?php endforeach; ?>
-                                    
-                                  
-                                   
                                 </tbody>
                             </table>
-                            
                             <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>
                                 

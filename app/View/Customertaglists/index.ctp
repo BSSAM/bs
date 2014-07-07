@@ -14,49 +14,59 @@
 <!-- Datatables Content -->
 <div class="block full">
     <div class="block-title">
-        <h2>List Of Customers</h2>
-        <h2 style="float:right;"><?php echo $this->Html->link('Add Customer Tag',array('controller'=>'Customertaglists','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Add Customer tag')); ?></h2>
+        <h2>List Of Customers Tags</h2>
+        <h2 style="float:right;"><?php echo $this->Html->link('Add Customer Tag',array('controller'=>'Customertaglists','action'=>'add',$customer_id),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Add Customer tag')); ?></h2>
     </div>
-                            
-                            
+                
     <div class="table-responsive">
         <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center">Customer ID</th>
-                    <th class="text-center">Tag ID</th>
                     <th class="text-center">Customer Name</th>
-                    <th class="text-center">Tag Name</th>
                     <th class="text-center">Customer Type</th>
                     <th class="text-center">Industry</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
+                <?PHP if(!empty($taglists)): ?>
                 <?php foreach ($taglists as $taglist): ?>
                     <tr>
                         <td class="text-center"><?php echo $taglist['Customer']['id']; ?></td>
-                        <td class="text-center"><?php echo $taglist['Customer']['id']; ?></td>
-                        <td class="text-center"><a href="javascript:void(0)"><?php echo $taglist['Customer']['customername']; ?></a></td>
-                         <td class="text-center"><a href="javascript:void(0)"><?php echo $taglist['Customer']['customername']; ?></a></td>
+                        <td class="text-center">
+                            <a href="javascript:void(0)">
+                                <?php echo $taglist['Customer']['Customertagname']; ?>
+                                <?PHP $default =    ($taglist['Customer']['is_default']==1)?'<span class="label label-success">Default<span>':''; ?>
+                               <?PHP  echo $default; ?>
+                            </a></td>
                         <td class="text-center"><?php echo $taglist['Customer']['customertype']; ?></td>
                         <td class="text-center"><?php echo $taglist['Industry']['industryname']; ?></td>
                         <td class="text-center">
+                            <?PHP
+                                echo $this->html->link('Instrument', array('controller' => 'Customers',
+                                    'action' => 'instrument_map', $taglist['Customer']['id']), array('title' => 'Map Instrument',
+                                    'class' => 'btn  btn-xs btn-primary', 'data-toggle' => 'tooltip', 'escape' => false));
+                                ?>
                             <div class="btn-group">
+                                 
                                 <?PHP
-                                echo $this->html->link('<i class="fa fa-pencil"></i>', array('controller' => 'Customers',
+                                echo $this->html->link('<i class="fa fa-pencil"></i>', array('controller' => 'Customertaglists',
                                     'action' => 'edit', $taglist['Customer']['id']), array('title' => 'Edit Tag',
                                     'class' => 'btn btn-xs btn-default', 'data-toggle' => 'tooltip', 'escape' => false));
                                 ?>
+                                <?PHP if($taglist['Customer']['is_default']==0): ?>
                                 <?PHP
-                                echo $this->Form->postlink('<i class="fa fa-times"></i>', array('controller' => 'Customers',
+                                echo $this->Form->postlink('<i class="fa fa-times"></i>', array('controller' => 'Customertaglists',
                                     'action' => 'delete', $taglist['Customer']['id']), array('title' => 'Delete Tag',
                                     'class' => 'btn btn-xs btn-danger', 'data-toggle' => 'tooltip', 'escape' => false, 'confirm' => 'Are you sure want to delete?'));
                                 ?>
+                                <?PHP endif; ?>
                              </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>
+                <?PHP endif; ?>
                                         
             </tbody>
         </table>

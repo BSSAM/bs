@@ -14,12 +14,12 @@ class ClientposController extends AppController
     public function index()
     {
         $clientpos    =   $this->Clientpo->find('all');
-         $this->set('clientpo', $clientpos);
+        $this->set('clientpo', $clientpos);
     }
-     public function clientpo($id = null)
+    public function Clientpo($id = null)
     {
           $clientpo_list=$this->Clientpo->find('first',array('conditions'=>array('Clientpo.id'=>$id)));
-        $this->request->data=$clientpo_list;
-       //  $this->set('clientpo', $clientpos);
+          $this->request->data=$clientpo_list;
+          //$this->set('clientpo', $clientpos);
     }
 }

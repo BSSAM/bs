@@ -1,18 +1,17 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
     </script>
-<h1>
-                                <i class="gi gi-user"></i>Instrument Pricing
-                            </h1>
+    <h1>
+        <i class="gi gi-user"></i>Instrument Pricing
+    </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
-                          <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
                         <li>Instrument Pricing</li>
                     </ul>
                     <!-- END Forms General Header -->
-
             <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
@@ -30,32 +29,30 @@
                                 <?PHP echo $this->Form->input('instrument_name', array('type' => 'hidden', 'id' => 'ins_name')); ?>
                                 <?PHP echo $this->Form->input('device_id', array('type' => 'hidden', 'id' => 'device_id')); ?>        
                                 <div class="form-group">
-                                        <label class="col-md-2 control-label" for="customer_name">Customer Name</label>
-                                        <div class="col-md-4">
-                                            <?php echo $this->Form->input('Customer.customername', array('id'=>'customer_name','class'=>'form-control','placeholder'=>'Customer Name','label'=>false,'disabled'=>'disabled','value'=>$customer_entry['Customer']['customername'])); ?>
-                                        </div>
-                                        <label class="col-md-2 control-label" for="machine_description">Instrument Name</label>
-                                        <div class="col-md-4">
-                                           <?php echo $this->Form->input('instrument_name', array('id'=>'instrument_name','class'=>'form-control select-chosen','label'=>false,'name'=>'instrument_name','type'=>'select','options'=>$instruments,'empty'=>'Select Instument Name')); ?>
-                                            
-                                        </div>
+                                    <label class="col-md-2 control-label" for="customer_name">Customer Name</label>
+                                    <div class="col-md-4">
+                                        <?php echo $this->Form->input('Customer.customername', array('id' => 'customer_name', 'class' => 'form-control', 'placeholder' => 'Customer Name', 'label' => false, 'disabled' => 'disabled', 'value' => $customer_entry['Customer']['Customertagname'])); ?>
                                     </div>
+                                    <label class="col-md-2 control-label" for="machine_description">Instrument Name</label>
+                                    <div class="col-md-4">
+                                        <?php echo $this->Form->input('instrument_name', array('id' => 'instrument_name', 'class' => 'form-control select-chosen', 'label' => false, 'name' => 'instrument_name', 'type' => 'select', 'options' => $instruments, 'empty' => 'Select Instument Name')); ?>
+
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="model_no">Model No</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('model_no', array('id'=>'model_no','class'=>'form-control','label'=>false,'data-placeholder'=>'Enter Model No','name'=>'model_no')); ?>
-                                        
+                                        <?php echo $this->Form->input('model_no', array('id' => 'model_no', 'class' => 'form-control', 'label' => false, 'data-placeholder' => 'Enter Model No', 'name' => 'model_no')); ?>
+                                            
                                     </div>
                                     <label class="col-md-2 control-label" for="range">Range</label>
                                     <div class="col-md-4">
                                         <select id="range_array" name="range" class="form-control" data-placeholder="Select Range Name" style="width: 250px;" >
-                                           
+                                            
                                         </select>
                                         <?php //echo $this->Form->input('range', array('id'=>'range','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
-                                        
+                                            
                                     </div>
-                                     
-                                    
                                    
                                 </div>
                                 <div class="form-group">

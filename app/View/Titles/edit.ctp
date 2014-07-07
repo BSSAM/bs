@@ -1,56 +1,51 @@
  <h1>
-                                <i class="gi gi-user"></i>Edit Brand
+                                <i class="gi gi-user"></i>Edit Title
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Brands',array('controller'=>'Brands','action'=>'index')); ?></li>
-                        <li>Edit Brand</li>
+                        <li><?php echo $this->Html->link('Titles',array('controller'=>'Titles','action'=>'index')); ?></li>
+                        <li>Edit Title</li>
                     </ul>
                     <!-- END Forms General Header -->
 
-<div class="row">
+            <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
-                                    
                                     <h2></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                <?php echo $this->Form->create('Brand',array('class'=>'form-horizontal form-bordered','id'=>'form-brand-add')); ?>
+                                <?php echo $this->Form->create('Title',array('class'=>'form-horizontal form-bordered','id'=>'form-title-add')); ?>
                                 
                                     <div class="form-group">
-                                       
-                                        <label class="col-md-2 control-label" for="brandname">Brand Name</label>
+                                        <label class="col-md-2 control-label" for="title_name">Title Name</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('brandname', array('id'=>'brandname','class'=>'form-control','placeholder'=>'Enter the Department Name','label'=>false,'name'=>'brandname')); ?>
+                                            <?php echo $this->Form->input('title_name', array('id'=>'title_name','class'=>'form-control','placeholder'=>'Enter the Instrument Name','label'=>false,'name'=>'title_name')); ?>
                                         </div>
-                                   
-                                        <label class="col-md-2 control-label" for="branddescription">Brand Description</label>
+                                        <label class="col-md-2 control-label" for="title_description">Title Description</label>
                                         <div class="col-md-4">
-                                           <?php echo $this->Form->input('branddescription', array('id'=>'branddescription','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,'name'=>'branddescription')); ?>
-                                        </div>
-                                   
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label" for="status">Active</label>
-                                        <div class="col-md-4 form-control-static">
-                                            <?php echo $this->Form->checkbox('status', array('id'=>'status','label'=>false,'name'=>'status')); ?>
+                                           <?php echo $this->Form->input('title_description', array('id'=>'title_description','class'=>'form-control','label'=>false,'name'=>'title_description','type'=>'textarea')); ?>
                                         </div>
                                     </div>
-                                    
+                                
+                                 <div class="form-group">
+                                    <label class="col-md-2 control-label" for="status">Active</label>
+                                    <div class="col-md-4 form-control-static">
+                                            <?php echo $this->Form->checkbox('status', array('id'=>'status','class'=>'','label'=>false,'name'=>'status')); ?>
+                                    </div>
+                                </div>
                                      <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Units','action'=>'index'), array('class'=>'btn btn-sm btn-danger','escape' => false)); ?>
+                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Instruments','action'=>'index'), array('class'=>'btn btn-sm btn-danger','escape' => false)); ?>
 
-<!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                                <!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
                                         </div>
                                     </div>
@@ -59,6 +54,6 @@
                             </div>
                             <!-- END Basic Form Elements Block -->
                         </div>
-   <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
+    <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
                         

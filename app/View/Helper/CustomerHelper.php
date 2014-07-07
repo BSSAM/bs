@@ -54,5 +54,11 @@ class CustomerHelper extends AppHelper
             return FALSE;
         endif;
     }
-   
+    public function checktag_list($group_id=NULL)
+    {
+        APP::import('Model','Customer');
+        $this->Customer  =   new Customer();
+        $group_data  =    $this->Customer->find('all',array('conditions'=>array('Customer.customergroup_id'=>$group_id,'Customer.status'=>1)));
+        return count($group_data);
+    }
 }
