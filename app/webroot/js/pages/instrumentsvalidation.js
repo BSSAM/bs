@@ -70,7 +70,7 @@ var FormsValidation = function() {
                 rules: {
                     unit_name: {
                         required: true,
-                        minlength: 3
+                        minlength: 1
                     },
                     unit_description: {
                         required: true,
@@ -82,7 +82,7 @@ var FormsValidation = function() {
                 messages: {
                     unit_name: {
                         required: 'Please enter the Unit Name',
-                        minlength: 'Unit Name must consist of at least 3 characters'
+                        minlength: 'Unit Name must consist of at least 1 characters'
                     },
                     unit_description: {
                         required: 'Please enter the Unit Description',
@@ -119,9 +119,8 @@ var FormsValidation = function() {
                         minlength: 1
                     },
                     unit_id: {
-                        required: true,
-                        minlength: 1
-                    },
+                        required: true
+                    }
                    
                     
                     
@@ -201,14 +200,6 @@ var FormsValidation = function() {
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
-                    name: {
-                        required: true,
-                        minlength: 3
-                    },
-                    name: {
-                        required: true,
-                        minlength: 3
-                    },
                     name: {
                         required: true,
                         minlength: 3

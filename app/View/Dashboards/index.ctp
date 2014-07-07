@@ -17,8 +17,8 @@
                         <!-- Forum Tabs Title -->
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
-                                <li class="active"><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
-                                <li><a href="#approval">Approval <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
+                                <li class="active"><a href="#messages">Messages <span class="badge animation-floating"><?php //echo $log_activity_message_count; ?></span></a></li>
+                                <li><a href="#approval">Approval <!--<span class="badge animation-floating"><?php //echo $log_activity_count; ?></span>--></a></li>
                                 
                             </ul>
                         </div>
@@ -77,7 +77,237 @@
 
                             <!-- Topics -->
                             <div class="tab-pane" id="approval">
+                                <ul class="nav nav-tabs" data-toggle="tabs">
+                                    <li class="active"><a href="#instrument">Instrument <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
+                                    <li><a href="#unit">Unit <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#range">Range <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#quotation">Quotation <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#labprocess">Lab Process <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>
+                                </ul>
+                            <div class="tab-content">
+                                <p></p>
+                            <div class="tab-pane" id="instrument">
                                 <div class="table-responsive">
+                                                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                     <tbody>
+                                         <?PHP if (!empty($log_activity)): ?>
+                                        <?php foreach ($log_activity as $log_activity_list) :?>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm">
+                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Salesorder'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Quotation'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                            
+                                            </td>
+                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_list['User']['username'] ?><br><small><?PHP echo $log_activity_list['Logactivity']['logtime'] ?></small></td>
+                                        </tr>
+                                       <?php endforeach; ?>
+                                        <?php else: ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Instrument Approval Available
+                                            </td>
+                                        </tr>
+                                        <?php endif; ?>
+                                        
+
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="unit">
+                                <div class="table-responsive">
+                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                     <tbody>
+                                         <tr>
+                                            <th>Flag</th>
+                                            <th>Name(Details)</th>
+                                            <th>Approval</th>
+                                            <th>Created</th>
+                                            
+                                        </tr>
+                                         <?PHP if (!empty($log_activity)): ?>
+                                        <?php foreach ($log_activity as $log_activity_list) :?>
+                                        
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm">
+                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Salesorder'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Quotation'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                            
+                                            </td>
+                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_list['User']['username'] ?><br><small><?PHP echo $log_activity_list['Logactivity']['logtime'] ?></small></td>
+                                        </tr>
+                                       <?php endforeach; ?>
+                                        <?php else: ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No unit Approval Available
+                                            </td>
+                                        </tr>
+                                        <?php endif; ?>
+                                        
+
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="range">
+                                <div class="table-responsive">
+                                                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Range Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="quotation">
+                                <div class="table-responsive">
+                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                     <tbody>
+                                        <tr>
+                                            <th>Flag</th>
+                                            <th>Name(Details)</th>
+                                            <th>Approval</th>
+                                            <th>Created</th>
+                                        </tr>
+                                         <?PHP if (!empty($log_activity_quotation)): ?>
+                                        <?php foreach ($log_activity_quotation as $log_activity_quotation_list) :?>
+                                        
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_quotation_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_quotation_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm">
+                                           
+                                           <?PHP if($log_activity_quotation_list['Logactivity']['logname'] == 'Quotation'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_quotation_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                            
+                                            </td>
+                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_quotation_list['User']['username'] ?><br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logtime'] ?></small></td>
+                                        </tr>
+                                       <?php endforeach; ?>
+                                        <?php else: ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Quotation Approval Available
+                                            </td>
+                                        </tr>
+                                        <?php endif; ?>
+                                        
+
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="sales">
+                                <div class="table-responsive">
+                                <table id="example-datatable" class="table table-borderless table-striped table-vcenter">
+                                     <tbody>
+                                        <tr>
+                                            <th>Flag</th>
+                                            <th>Name(Details)</th>
+                                            <th>Approval</th>
+                                            <th>Created</th>
+                                        </tr>
+                                         <?PHP if (!empty($log_activity_salesorder)): ?>
+                                        <?php foreach ($log_activity_salesorder as $log_activity_salesorder_list) :?>
+                                         <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'): ?>
+                                        
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center hidden-xs hidden-sm">
+                                           <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                           
+                                            
+                                            </td>
+                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                        </tr>
+                                        <?php endif; ?>
+                                       <?php endforeach; ?>
+                                        <?php else: ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Sales Order Approval Available
+                                            </td>
+                                        </tr>
+                                        <?php endif; ?>
+                                        
+
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                                
+                            <div class="tab-pane" id="labprocess">
+                                <div class="table-responsive">
+                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Lab Process Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="delivery">
+                                <div class="table-responsive">
+                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Delivery Order Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="invoice">
+                                <div class="table-responsive">
+                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Invoice Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            </div>
+                            <?php /*?><div class="table-responsive">
                                 <table class="table table-borderless table-striped table-vcenter">
 <!--                                    <thead>
                                         <tr>
@@ -137,7 +367,7 @@
                                         
                                     </tbody>
                                 </table>
-                                </div>
+                            </div><?php */?>
 <!--                                <div class="text-center">
                                     <ul class="pagination pagination-sm">
                                         <li class="disabled"><a href="javascript:void(0)">Prev</a></li>
@@ -411,6 +641,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- END User Settings -->
         <?php echo $this->Html->script('pages/widgetsStats'); ?>
         <?php echo $this->Html->script('pages/compCalendar'); ?>

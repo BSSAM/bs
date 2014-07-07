@@ -528,7 +528,7 @@
         name       : 'value',
         id         : 'id',
         type       : 'textarea',
-        width      : '200px',
+        width      : '300px',
         height     : '25px',
         event      : 'click.editable',
         onblur     : 'cancel',

@@ -14,7 +14,7 @@ class Range extends AppModel
 //    'range_name' => 'CONCAT("( ",Range.from_range, " ~ ", Range.to_range," )"," / ",Unit.unit_name)',
 //    );
     public $virtualFields = array(
-    'range_name' => 'CONCAT("( ",Range.from_range, " ~ ", Range.to_range," )"," / ")',
+    'range_name' => 'CONCAT("( ",Range.from_range, " ~ ", Range.to_range," )","")',
     );
     
     public $belongsTo = array(

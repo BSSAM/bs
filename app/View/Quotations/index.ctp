@@ -48,8 +48,11 @@
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                                
+                                                 
                                             </div>
+                                                <?PHP //echo $this->html->link('View', array('url'=>'http://www.google.com'), array('title' => 'View','data-target'=>'#myModal','class' => 'btn btn-alt btn-xs btn-primary', 'data-toggle' => 'modal'));  ?>
+<!--                                            <a href="Customers" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">Launch First</a>-->
+                                            
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -57,6 +60,15 @@
                                    
                                 </tbody>
                             </table>
+                             
+<!--                            <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    </div>
+                                </div>
+                            </div>-->
+
+ 
                          <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>
                                 
@@ -68,7 +80,8 @@
                                     return Math.floor(Math.random() * (max - min + 1)) + min;
                                 };
                             }();
-                            
-                            
+                            $('#modal').load('Customers').dialog('open');
+                       
                             </script> 
+                            
                             <?php } ?>
