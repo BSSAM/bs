@@ -24,6 +24,20 @@ class UnitsController extends AppController
         {
             if($this->Unit->save($this->request->data))
             {
+                $last_insert_id =   $this->Unit->getLastInsertID();
+                /******************
+                    * Data Log
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'Unit';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Unit';
+                    $this->request->data['Logactivity']['logid'] = $last_insert_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+                    
                 $this->Session->setFlash(__('Unit is Added'));
                 $this->redirect(array('controller'=>'Units','action'=>'index'));
             }

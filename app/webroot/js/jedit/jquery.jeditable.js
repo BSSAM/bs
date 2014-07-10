@@ -527,8 +527,8 @@
     $.fn.editable.defaults = {
         name       : 'value',
         id         : 'id',
-        type       : 'textarea',
-        width      : '300px',
+        type       : 'text',
+        width      : '200px',
         height     : '25px',
         event      : 'click.editable',
         onblur     : 'cancel',

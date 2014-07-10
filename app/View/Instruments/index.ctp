@@ -31,7 +31,7 @@
                                 <tbody>
                                     <?php foreach($instruments as $instrument): ?>
                                        
-                                    <tr>
+                                    <tr <?php if($instrument['Instrument']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $instrument['Instrument']['id'];?></td>
                                         
                                         <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$instrument['Instrument']['created']);?></td>

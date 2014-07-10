@@ -3860,3 +3860,38 @@ html.scripted:before{
 .show{padding: 13px 0px; max-width: 230px; min-width: 305px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 15px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important;}
 #result{position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
 
+// TR Color Change for Approval
+/*.table>thead>tr.success {
+   background-color: #F3FCEF !important; 
+}*/
+.table tbody tr.success {
+  background-color: #F3FCEF !important;
+}
+
+.table tbody tr.error {
+  background-color: #FFF9F9 !important;
+}
+
+.table tbody tr.warning {
+  background-color: #fcf8e3 !important;
+}
+
+.table tbody tr.info {
+  background-color: #d9edf7 !important;
+}
+
+.table-hover tbody tr:hover.success {
+  background-color: #d0e9c6 !important;
+}
+
+.table-hover tbody tr:hover.error {
+  background-color: #ebcccc !important;
+}
+
+.table-hover tbody tr:hover.warning {
+  background-color: #faf2cc !important;
+}
+
+.table-hover tbody tr:hover.info {
+  background-color: #c4e3f3 !important;
+}
