@@ -107,10 +107,7 @@ App::uses('Controller', 'Controller');
             $this->request->data['Description']['is_approved']          =   0;
             return $this->request->data;
         }
-<<<<<<< HEAD
-=======
-        
->>>>>>> e65c278cbc827f43a891380a503783f2f586e690
+
         public function random($module)
         {
             switch ($module)
@@ -236,17 +233,10 @@ App::uses('Controller', 'Controller');
                 break;
             }
             
-<<<<<<< HEAD
+
             return $str1;
            
         }
 
-=======
-           
-            return $str1;
-           
-        }
-        
-        
->>>>>>> e65c278cbc827f43a891380a503783f2f586e690
+
 }
