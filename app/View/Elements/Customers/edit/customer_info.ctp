@@ -104,7 +104,6 @@
 
             <!-- Tabs Content -->
             <div class="tab-content" id="tab-content">
-            
                  <?php for($i=0;$i<$data10_count;$i++){ ?>
                 <div class="tab-pane" id="example-tabs2-Address<?php echo $i; ?>" ><?php echo $data10[$i]['Address']['address']; ?></div>
                 <?php } ?>
@@ -114,8 +113,6 @@
         <!-- END Block Tabs -->
     </div>
     
-
-
    <label class="col-md-2 control-label" for="val_billaddress">Billing Address</label>
     <div class="col-md-10">
         <!-- Block Tabs -->
@@ -160,7 +157,6 @@
                 <div class="block-options pull-right">
                     <div class="btn-group">
                         <a href="#modal-delivery" data-toggle="modal" id="" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
-                        
                     </div>
                 </div>
                 <ul class="nav nav-tabs" data-toggle="tabs" id="tabs_delivery">
@@ -239,7 +235,7 @@
     </div>
      <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('invoicetype', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoicetype')); ?>
+        <?php echo $this->Form->input('invoice_type_id', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoice_type_id')); ?>
     </div>
 
 
@@ -252,7 +248,7 @@
     </div>
      <label class="col-md-2 control-label" for="val_poack">PO Acknowledgement</label>
     <div class="col-md-4">
-        <?php echo $this->Form->checkbox('poack', array('id' => 'val_poack', 'class' => 'checkbox', 'label' => false, 'name' => 'val_poack')); ?>
+        <?php echo $this->Form->checkbox('poack', array('id' => 'val_poack', 'class' => 'checkbox', 'label' => false, 'name' => 'poack')); ?>
     </div>
 
 </div>

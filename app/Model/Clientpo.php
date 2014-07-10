@@ -7,8 +7,23 @@
  */
 class Clientpo extends AppModel
 {
-   // public $useTable = false;
-    
+   var $name   =   'Clientpo';
+   public $belongsTo = array(
+        'Customer' => array(
+            'className' => 'Customer',
+            'foreignKey' => 'customer_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+       'Quotation' => array(
+            'className' => 'Quotation',
+            'foreignKey' => 'quotation_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+       
+    );
 }
-
 ?>

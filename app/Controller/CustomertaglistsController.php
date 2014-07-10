@@ -281,8 +281,8 @@ class CustomertaglistsController extends AppController
                 {
                     $this->Projectinfo->updateAll(array('Projectinfo.project_status'=>1),array('Projectinfo.customer_id'=>$this->Session->read('customer_id')));
                 }
-               $this->Session->setFlash(__('Customer has been Updated'));
-               return $this->redirect(array('action'=>'index'));
+               $this->Session->setFlash(__('Customer Taglist has been Updated'));
+               return $this->redirect(array('controller'=>'Customertaglists','action'=>'index',$id));
                $this->Session->delete('customer_id');
             }
             $this->Session->setFlash(__('Customer Cant be Updated'));

@@ -52,7 +52,7 @@
                                         $tag_name   = 'Add Tag';
                                         $controller='Customertaglists';$action='add' ;
                                         else:
-                                        $tag_name   = 'Customer Tag list';$controller='Customertaglists';
+                                        $tag_name   = 'Tag list';$controller='Customertaglists';
                                         $action='index';
                                         endif; ?>
                                 <?PHP
@@ -64,12 +64,12 @@
                                 <?PHP
                                 echo $this->html->link('<i class="fa fa-pencil"></i>', array('controller' => 'Customers',
                                     'action' => 'edit', $customer_list['Customer']['id']), array('title' => 'Edit',
-                                    'class' => 'btn btn-sm btn-default', 'data-toggle' => 'tooltip', 'escape' => false));
+                                    'class' => 'btn btn-xs btn-default', 'data-toggle' => 'tooltip', 'escape' => false));
                                 ?>
                                 <?PHP
                                 echo $this->Form->postlink('<i class="fa fa-times"></i>', array('controller' => 'Customers',
                                     'action' => 'delete', $customer_list['Customer']['id']), array('title' => 'Delete',
-                                    'class' => 'btn btn-sm btn-danger', 'data-toggle' => 'tooltip', 'escape' => false, 'confirm' => 'Are you sure want to delete?'));
+                                    'class' => 'btn btn-xs btn-danger', 'data-toggle' => 'tooltip', 'escape' => false, 'confirm' => 'Are you sure want to delete?'));
                                 ?>
                              </div>
                     </td>

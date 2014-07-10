@@ -132,14 +132,14 @@
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);  
                     
                      $this->request->data['Logactivity']['logname']   =   'Quotation';
-                        $this->request->data['Logactivity']['logactivity']   =   'Add Quotation';
-                         $this->request->data['Logactivity']['logid']   =   $quotations_list['Quotation']['quotationno'];
-                         $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
-                         $this->request->data['Logactivity']['logapprove'] = 1;
-                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                     $this->request->data['Logactivity']['logactivity']   =   'Add Quotation';
+                     $this->request->data['Logactivity']['logid']   =   $quotations_list['Quotation']['quotationno'];
+                     $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                     $this->request->data['Logactivity']['logapprove'] = 1;
+                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
                         
                         
-                    $this->Session->setFlash(__('Quotation has been Added Succefully '));
+                    $this->Session->setFlash(__('Quotation has been Updated Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
                 
@@ -340,6 +340,7 @@
             $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
             $details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id)));
+            
             $track_id = $details['Quotation']['track_id'];
             $customer_id = $details['Quotation']['customer_id'];
             $quo_id = $details['Quotation']['id'];
@@ -350,7 +351,7 @@
             $dmt='CPO'.($d+$m+$y+$t);
             $clientpo_id = $dmt;
             $device_node    =   $this->Device->find('count',array('conditions'=>array('Device.quotation_id'=>$quo_id)));
-            $this->Clientpo->save(array('quotations_id'=> $id,'clientpos_id'=>$clientpo_id,'track_id'=>$track_id,'customer_id'=>$customer_id,'quo_quantity'=>$device_node));
+            $this->Clientpo->save(array('quotation_no'=>$id,'quotation_id'=> $quo_id,'clientpos_no'=>$clientpo_id,'track_id'=>$track_id,'customer_id'=>$customer_id,'quo_quantity'=>$device_node));
         }
         public function get_contact_email()
         {

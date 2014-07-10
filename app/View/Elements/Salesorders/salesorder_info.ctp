@@ -4,7 +4,6 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $salesorderno)); ?>
     </div>
-        
 <!--    <label class="col-md-2 control-label" for="val_branchname">Branch</label>
     <div class="col-md-4">
         <?php //echo $this->Form->input('branchname', array('id'=>'val_branchname','class'=>'form-control','disabled'=>'disabled',
@@ -12,8 +11,7 @@
     </div>-->
         <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.priority', array('id'=>'val_priority','class'=>'form-control',
-            'label'=>false,'options'=>$priority)); ?>
+        <?php echo $this->Form->input('Salesorder.priority', array('id'=>'val_priority','class'=>'form-control','label'=>false,'options'=>$priority)); ?>
     </div>
 </div>
     

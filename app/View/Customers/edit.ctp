@@ -71,8 +71,8 @@
     });
 </script>
 <h1>
-                                <i class="gi gi-user"></i>Edit Customer
-                            </h1>
+    <i class="gi gi-user"></i>Edit Customer
+</h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
@@ -81,7 +81,8 @@
                         <li>Edit Customer</li>
                     </ul>
                     <!-- END Forms General Header -->
-<div class="row"><?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-edit')); ?>
+                <div class="row">
+                <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-edit')); ?>
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
@@ -106,19 +107,18 @@
                                                 <div class="tab-pane active" id="tab1">
                                                     <?PHP echo $this->element('Customers/edit/customer_info'); ?>
                                                 </div>
-                                             </div>
+                                            </div>
                                                 <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Customers/edit/contact_person_info'); ?>
                                                 </div>
-                                            
                                           <!-- tab-content -->
                                             <!-- #basicWizard -->
                                         </div><!-- panel-body -->
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-10">
                                                 <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
-                                                <?php echo $this->Form->button('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Customers','action'=>'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
-    <!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                                <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Customers','action'=>'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                                                <!-- <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                                                 <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
                                             </div>
                                         </div>
@@ -128,7 +128,6 @@
                             <!-- END Basic Form Elements Block -->
                         </div>
                             </div>
-                             
                                 <?php echo $this->Form->end(); ?>
                                 <!-- END Basic Form Elements Content -->
 </div>
@@ -147,9 +146,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-<!--                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
+<!--                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>-->
                     <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save changes',array('type'=>'button','class'=>'btn btn-sm btn-primary','id'=>'save_regedit','escape' => false)); ?>
-                    
                 </div>
             </div>
         </div>

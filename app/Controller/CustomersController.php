@@ -139,7 +139,7 @@ class CustomersController extends AppController
                 }
                 
                 $this->Session->setFlash(__('Customer has been Added Successfully'));
-                return $this->redirect(array('action'=>'index'));
+                return $this->redirect(array('action'=>'index',));
                 $this->Session->delete('customer_id');
                 $this->Session->delete('tag_id');
             }
@@ -268,7 +268,7 @@ class CustomersController extends AppController
                     $this->Projectinfo->updateAll(array('Projectinfo.project_status'=>1),array('Projectinfo.customer_id'=>$this->Session->read('customer_id')));
                 }
                $this->Session->setFlash(__('Customer has been Updated'));
-               return $this->redirect(array('action'=>'index'));
+               $this->redirect(array('action'=>'index'));
                $this->Session->delete('customer_id');
             }
             $this->Session->setFlash(__('Customer Cant be Updated'));
@@ -758,7 +758,6 @@ class CustomersController extends AppController
         $this->autoRender=false;
         $projectname= $this->request->data['projectname'];
         $customer_id=$this->request->data['customer_id'];
-        
         $status=1;
         $random =mt_rand();
         $this->request->data['Projectinfo']['customer_id']=$customer_id;

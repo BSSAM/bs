@@ -421,7 +421,7 @@ $(document).ready(function(){
                  $('tr#'+con_id+' td:nth-child(8)').html(contact_mobile);
                   $('tr#'+con_id+' td:nth-child(9)').html(contact_purpose);
                    $('tr#'+con_id+' td:nth-child(10)').html(contact_remark);
-            $('#serial').val(null);
+           $('#serial').val(null);
            $('#contact_name').val(null);
            $('#contact_email').val(null);
            $('#contact_department').val(null);
@@ -430,7 +430,7 @@ $(document).ready(function(){
            $('#contact_mobile').val(null);
            $('#contact_purpose').val(null);
            $('#contact_remark').val(null);
-            $('.project_name_error').hide();
+           $('.project_name_error').hide();
             
              $(".contactperson__updatesubmit").attr('class', 'btn btn-sm btn-primary contactperson__editsubmit');
            $(".contactperson__editsubmit").html('<i class="fa fa-plus fa-fw"></i> add');

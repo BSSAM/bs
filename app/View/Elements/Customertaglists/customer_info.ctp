@@ -185,7 +185,7 @@
 <div class="form-group">
    <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('invoicetype', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoicetype')); ?>
+        <?php echo $this->Form->input('invoice_type_id', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoice_type_id')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_calibrationtype">Calibration Type</label>
     <div class="col-md-4">
