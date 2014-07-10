@@ -88,9 +88,6 @@ if(customer!='')
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Quotations','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
                                                 <?php endif; ?>
-                                            
-                                            
-                                                
                                             </div>
                                         </div>
                                         

@@ -9,7 +9,7 @@ class InstrumentsController extends AppController
 {
     public $helpers = array('Html', 'Form', 'Session');
     public $uses = array('Procedure','Department','Country','Range','Service', 'CustomerInstrument', 'Customerspecialneed',
-        'Instrument', 'Brand', 'Customer', 'Device', 'Salesorder', 'Description', 'Deliveryorder','InstrumentBrand','InstrumentRange','InstrumentProcedure');
+        'Instrument', 'Brand', 'Customer', 'Device', 'Salesorder', 'Description', 'Deliveryorder','InstrumentBrand','InstrumentRange','InstrumentProcedure','Logactivity');
     public function index()
     {
         /*******************************************************
@@ -25,7 +25,9 @@ class InstrumentsController extends AppController
         /*
          * *****************************************************
          */
+        //$instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_approved'=>1),'order'=>'Instrument.id Desc','recursive'=>'2'));
         $instrument_data = $this->Instrument->find('all',array('order'=>'Instrument.id Desc','recursive'=>'2'));
+        //pr($instrument_data);exit;
         $this->set('instruments', $instrument_data);
         
     }
@@ -87,6 +89,21 @@ class InstrumentsController extends AppController
                         $this->InstrumentRange->save($ran_data);
                     }
                 }
+                
+                /******************
+                    * Data Log
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'Instrument';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Instrument';
+                    $this->request->data['Logactivity']['logid'] = $last_insert_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+
+                
                 $this->Session->setFlash(__('Instrument is Added Successfully'));
                 $this->redirect(array('controller'=>'Instruments','action'=>'index'));
             }
@@ -110,6 +127,8 @@ class InstrumentsController extends AppController
          * *****************************************************
          */
         $instrument_data = $this->Instrument->find('first',array('conditions'=>array('Instrument.id'=>$id),'recursive'=>'2'));
+        $instrument_dat = $this->Instrument->find('first',array('conditions'=>array('Instrument.id'=>$id),'recursive'=>'2'));
+        $this->set('instrument_dat',$instrument_dat);
       
         $brand_array =   $this->Brand->find('list',array('conditions'=>array('Brand.status'=>'1'),'fields'=>array('id','brandname')));
         $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
@@ -199,5 +218,16 @@ class InstrumentsController extends AppController
             $this->Session->setFlash(__('The Procedure has been deleted',h($id)));
             return $this->redirect(array('controller'=>'Procedures','action'=>'index'));
         }
+    }
+    
+    public function approve()
+    {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->Instrument->updateAll(array('Instrument.is_approved'=>1),array('Instrument.id'=>$id));
+            $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Instrument'));
+            $details=$this->Instrument->find('first',array('conditions'=>array('Instrument.id'=>$id)));
+            
     }
 }

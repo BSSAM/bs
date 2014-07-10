@@ -41,7 +41,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);
@@ -53,7 +53,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);
@@ -65,7 +65,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);
@@ -77,7 +77,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);
@@ -89,7 +89,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);
@@ -101,7 +101,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);
@@ -113,7 +113,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);
@@ -125,7 +125,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);
@@ -137,7 +137,7 @@ class InstrumentforgroupsController extends AppController
         $this->autoRender   =   false;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->data['Instrumentforgroup']['delay']);
+            $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
             $this->Instrumentforgroup->saveField('delay', $title);

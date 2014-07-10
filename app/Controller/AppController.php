@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
     class AppController extends Controller 
     {
         public $components = array('Session');
-        public $uses    =   array('Description');
+        public $uses    =   array('Description','Random');
         public function beforeFilter()
         {
 
@@ -63,9 +63,12 @@ App::uses('Controller', 'Controller');
              $user_role = unserialize($ca);
              $this->set('user_role', $user_role);
              }
-
+                
+             
+             
              /****************************************************************************************************
             */
+             //$this->random();
         }
         public function userrole_permission()
         {
@@ -104,5 +107,136 @@ App::uses('Controller', 'Controller');
             $this->request->data['Description']['is_approved']          =   0;
             return $this->request->data;
         }
+        
+        public function random($module)
+        {
+            switch ($module)
+            {
+                // Customer Random ID
+                case 'customer':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['customer'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
+                
+                // Instrument Random ID
+                case 'instrument':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['customer'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
+                
+                // Quotation Random ID
+                case 'quotation':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['customer'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
+                
+                // SalesOrder Random ID
+                case 'salesorder':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['customer'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
+                
+                // DeliveryOrder Random ID
+                case 'deliveryorder':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['customer'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
+                
+                 // Invoice Random ID
+                case 'invoice':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['customer'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
+            }
+            
+           
+            return $str1;
+           
+        }
+        
         
 }

@@ -104,12 +104,12 @@
             </thead>
             <tbody>
                 
-                <?php //foreach ($labs as $labs_list): ?> 
-                <?PHP //$description_id   =   $labs_list['Description']['id']; 
-                      // $processing=   'data[Description][processing]['.$description_id.']';
-                       //$checking=   'data[Description][checking]['.$description_id.']';
-                      //$checked  =   $this->Labprocess->labperocess_checking($labs_list['Description']['id']);
-                      //$processed =   $this->Labprocess->labperocess_processing($labs_list['Description']['id']);
+                <?php  // foreach ($labs as $labs_list): 
+                       // $description_id   =   $labs_list['Description']['id']; 
+                       // $processing=   'data[Description][processing]['.$description_id.']';
+                       // $checking=   'data[Description][checking]['.$description_id.']';
+                       // $checked  =   $this->Labprocess->labperocess_checking($labs_list['Description']['id']);
+                       // $processed =   $this->Labprocess->labperocess_processing($labs_list['Description']['id']);
                 ?>
                     <?php // pr($labs_list); exit;?>
 

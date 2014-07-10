@@ -252,7 +252,7 @@
     </div>
      <label class="col-md-2 control-label" for="val_poack">PO Acknowledgement</label>
     <div class="col-md-4">
-        <?php echo $this->Form->checkbox('poack', array('id' => 'val_poack', 'class' => 'checkbox', 'label' => false, 'name' => 'val_poack')); ?>
+        <?php echo $this->Form->checkbox('poack', array('id' => 'val_poack', 'class' => 'checkbox', 'label' => false, 'name' => 'poack')); ?>
     </div>
 
 </div>

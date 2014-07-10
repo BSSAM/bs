@@ -78,40 +78,43 @@
                             <!-- Topics -->
                             <div class="tab-pane" id="approval">
                                 <ul class="nav nav-tabs" data-toggle="tabs">
-                                    <li class="active"><a href="#instrument">Instrument <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
+                                    <li><a href="#instrument">Instrument <span class="badge animation-floating"><?php echo $log_activity_instrument_count; ?></span></a></li>
+                                     <li><a href="#procedureno">Proc.No <span class="badge animation-floating"><?php echo $log_activity_instrument_count; ?></span></a></li>
+                                     
                                     <li><a href="#unit">Unit <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
                                     <li><a href="#range">Range <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
                                     <li><a href="#quotation">Quotation <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
                                     <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
-                                    <li><a href="#labprocess">Lab Process <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>
-                                    <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>
-                                    <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#labprocess">Lab <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
+                            
+                            <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------INSTRUMENT----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            
                             <div class="tab-pane" id="instrument">
                                 <div class="table-responsive">
-                                                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
-                                     <tbody>
-                                         <?PHP if (!empty($log_activity)): ?>
-                                        <?php foreach ($log_activity as $log_activity_list) :?>
-                                        <tr>
-                                            <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
-                                            <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_list['Logactivity']['logid'] ?></em></small></h4>
-                                            </td>
-                                            <td class="text-center hidden-xs hidden-sm">
-                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Salesorder'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
-                                           <?php }?>
-                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Quotation'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
-                                           <?php }?>
-                                            
-                                            </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_list['User']['username'] ?><br><small><?PHP echo $log_activity_list['Logactivity']['logtime'] ?></small></td>
-                                        </tr>
-                                       <?php endforeach; ?>
+                                    <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                        <tbody>
+                                            <?PHP if (!empty($log_activity_instrument)): ?>
+                                            <?php foreach ($log_activity_instrument as $log_activity_instrument_list) :?>
+                                            <tr>
+                                                <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
+                                                <td>
+                                                    <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_instrument_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_instrument_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_instrument_list['Logactivity']['logid'] ?></em></small></h4>
+                                                </td>
+                                                <td class="text-center hidden-xs hidden-sm">
+                                                    <?PHP if($log_activity_instrument_list['Logactivity']['logname'] == 'Instrument'){ ?>
+                                                    <?PHP echo $this->html->link('Approve',array('controller'=>'Instruments','action'=>'edit',$log_activity_instrument_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                                    <?php }?>
+                                                </td>
+                                                <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_instrument_list['User']['username'] ?><br><small><?PHP echo $log_activity_instrument_list['Logactivity']['modified'] ?></small></td>
+                                            </tr>
+                                            <?php endforeach; ?>
                                         <?php else: ?>
                                         <tr>
                                             <td class="text-center">
@@ -119,12 +122,15 @@
                                             </td>
                                         </tr>
                                         <?php endif; ?>
-                                        
-
-                                    </tbody>
+                                        <tr><td><br></td></tr>
+                                        </tbody>
                                 </table>
                                 </div>
                             </div>
+                            
+                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------UNIT----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="unit">
                                 <div class="table-responsive">
                                 <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
@@ -136,30 +142,27 @@
                                             <th>Created</th>
                                             
                                         </tr>
-                                         <?PHP if (!empty($log_activity)): ?>
-                                        <?php foreach ($log_activity as $log_activity_list) :?>
+                                         <?PHP if (!empty($log_activity_unit)): ?>
+                                        <?php foreach ($log_activity_unit as $log_activity_unit_list) :?>
                                         
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><i class="gi gi-pin_flag fa-2x text-danger"></i></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_unit_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_unit_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_unit_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center hidden-xs hidden-sm">
-                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Salesorder'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?PHP if($log_activity_unit_list['Logactivity']['logname'] == 'Unit'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Units','action'=>'edit',$log_activity_unit_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
-                                           <?PHP if($log_activity_list['Logactivity']['logname'] == 'Quotation'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
-                                           <?php }?>
-                                            
+                                           
                                             </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_list['User']['username'] ?><br><small><?PHP echo $log_activity_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_unit_list['User']['username'] ?><br><small><?PHP echo $log_activity_unit_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                        <?php endforeach; ?>
                                         <?php else: ?>
                                         <tr>
                                             <td class="text-center">
-                                                <i class="gi gi-keys"></i> Oops... No unit Approval Available
+                                                <i class="gi gi-keys"></i> Oops... No Unit Approval Available
                                             </td>
                                         </tr>
                                         <?php endif; ?>
@@ -169,6 +172,10 @@
                                 </table>
                                 </div>
                             </div>
+                            
+                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------RANGE----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="range">
                                 <div class="table-responsive">
                                                                 <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
@@ -182,6 +189,10 @@
                                 </table>
                                 </div>
                             </div>
+                            
+                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------QUOTATION----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="quotation">
                                 <div class="table-responsive">
                                 <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
@@ -223,6 +234,9 @@
                                 </table>
                                 </div>
                             </div>
+                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------SALES ORDER----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="sales">
                                 <div class="table-responsive">
                                 <table id="example-datatable" class="table table-borderless table-striped table-vcenter">
@@ -266,7 +280,9 @@
                                 </table>
                                 </div>
                             </div>
-                                
+                            <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------LAB PROCESS----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="labprocess">
                                 <div class="table-responsive">
                                 <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
@@ -280,6 +296,10 @@
                                 </table>
                                 </div>
                             </div>
+                            
+                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------DELIVERY ORDER----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="delivery">
                                 <div class="table-responsive">
                                 <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
@@ -293,6 +313,9 @@
                                 </table>
                                 </div>
                             </div>
+                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------INVOICE----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="invoice">
                                 <div class="table-responsive">
                                 <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">

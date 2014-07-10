@@ -17,6 +17,8 @@ class DashboardsController extends AppController
         /*  
          * User Role Session
          */
+       // $this->random();
+        
         $sess_userrole = $this->Session->read('sess_userrole');
         $this->set('user_me', $sess_userrole);
         
@@ -55,6 +57,10 @@ class DashboardsController extends AppController
         //pr($logactivity);exit;
         $this->set('log_activity_instrument', $logactivity_instrument);
         
+        $logactivity_instrument_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Instrument")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_instrument_count', $logactivity_instrument_count);
+        
         /*****************************************************/
         
         /****************** Log Activity - Unit ********************/
@@ -62,6 +68,10 @@ class DashboardsController extends AppController
         $logactivity_unit = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Unit")));
         //pr($logactivity);exit;
         $this->set('log_activity_unit', $logactivity_unit);
+        
+        $logactivity_unit_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Unit")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_unit_count', $logactivity_unit_count);
         
         /*****************************************************/
         
@@ -110,6 +120,8 @@ class DashboardsController extends AppController
         $this->set('log_activity_message', $logactivity_message);
         $logactivity_message_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>0)));
         $this->set('log_activity_message_count', $logactivity_message_count);
+        
+       // echo $a;
       
     }
 }
