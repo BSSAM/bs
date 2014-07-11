@@ -9924,7 +9924,7 @@ jQuery.fn.dataTableExt.oApi.fnPagingInfo = function (e) {
                     withCredentials: !1,
                     parallelUploads: 2,
                     uploadMultiple: !1,
-                    maxFilesize: 256,
+                    maxFilesize: 600,
                     paramName: "file",
                     createImageThumbnails: !0,
                     maxThumbnailFilesize: 10,
@@ -9934,10 +9934,10 @@ jQuery.fn.dataTableExt.oApi.fnPagingInfo = function (e) {
                     params: {},
                     clickable: !0,
                     ignoreHiddenFiles: !0,
-                    acceptedFiles: null,
+                    acceptedFiles: "application/pdf,.doc,.docx,.xls",
                     acceptedMimeTypes: null,
                     autoProcessQueue: !0,
-                    addRemoveLinks: !1,
+                    addRemoveLinks: 1,
                     previewsContainer: null,
                     dictDefaultMessage: "Drop files here to upload",
                     dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
@@ -9954,6 +9954,14 @@ jQuery.fn.dataTableExt.oApi.fnPagingInfo = function (e) {
                         return b()
                     },
                     init: function () {
+                        thisDropzone = this;
+                        $.get(path_url+'fileuploads/file_upload', function(data) {
+                           var data_node    =   $.parseJSON(data);
+                            $.each(data_node, function(key,value){
+                                var mockFile = { name: value.name, size: value.size };
+                                thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+                            });
+                        });
                         return i
                     },
                     forceFallback: !1,
@@ -10006,8 +10014,17 @@ jQuery.fn.dataTableExt.oApi.fnPagingInfo = function (e) {
                     },
                     removedfile: function (a) {
                         var b;
+                        var name    =   a.name;
+                        var confirm =window.confirm('Do you want to Remove file '+name+' ?');
+                        if(confirm==true){
+                        $.ajax({
+                            type: 'POST',
+                            url: path_url+'Fileuploads/delete_document',
+                            data: "document_id="+name,
+                        });
+                    
                         return null != (b = a.previewElement) && b.parentNode.removeChild(a.previewElement), this._updateMaxFilesReachedClass()
-                    },
+                    }},
                     thumbnail: function (a, b) {
                         var c, d, e, f, g;
                         for (a.previewElement.classList.remove("dz-file-preview"), a.previewElement.classList.add("dz-image-preview"), f = a.previewElement.querySelectorAll("[data-dz-thumbnail]"), g = [], d = 0, e = f.length; e > d; d++) c = f[d], c.alt = a.name, g.push(c.src = b);
@@ -10449,6 +10466,7 @@ jQuery.fn.dataTableExt.oApi.fnPagingInfo = function (e) {
     }), a.alias("component-emitter/index.js", "dropzone/deps/emitter/index.js"), a.alias("component-emitter/index.js", "emitter/index.js"), "object" == typeof exports ? module.exports = a("dropzone") : "function" == typeof define && define.amd ? define(function () {
         return a("dropzone")
     }) : this.Dropzone = a("dropzone")
+
 }();
 
 /* =========================================================

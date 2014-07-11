@@ -232,11 +232,6 @@ App::uses('Controller', 'Controller');
                     $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
             }
-            
-
             return $str1;
-           
         }
-
-
 }

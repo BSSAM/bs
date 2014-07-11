@@ -2,7 +2,8 @@
     var path_url='<?PHP echo Router::url('/',true); ?>'
     </script>
 <h1>
-    <i class="gi gi-user"></i>Client Purchase Order Form
+    <i class="gi gi-user"></i>
+    Client Purchase Order Form
 </h1>
                         </div>
                     </div>
