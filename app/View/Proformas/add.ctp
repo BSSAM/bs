@@ -6,7 +6,7 @@
 <script type="text/javascript">
     $(function(){
         $("#sales_list").hide();
-        $("#delivery_input_search").keyup(function() 
+        $("#proforma_input_search").keyup(function() 
         { 
             $(this).css('border','1px solid green')
             var sales_id = $(this).val();
@@ -15,7 +15,7 @@
             {
                 $.ajax({
                     type: "POST",
-                    url: "<?PHP echo Router::url('/',true); ?>Deliveryorders/salesorder_id_search",
+                    url: "<?PHP echo Router::url('/',true); ?>Proformas/salesorder_id_search",
                     data: dataString,
                     cache: false,
                     success: function(html)
@@ -40,8 +40,8 @@
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Delivery orders',array('controller'=>'Deliveryorders','action'=>'index')); ?></li>
-                        <li>Add Delivery Order</li>
+                        <li><?php echo $this->Html->link('Proforma Invoice',array('controller'=>'Proformas','action'=>'index')); ?></li>
+                        <li>Add Proforma Invoice</li>
                     </ul>
                     <!-- END Forms General Header -->
 
@@ -55,10 +55,10 @@
                                         <div class="col-md-4 search_move">
                                             <div class="input-group">
                                                 <div>
-                                                    <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="delivery_input_search"/>
+                                                    <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="proforma_input_search"/>
                                                 </div>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-primary delivery_search" type="button">Proceed</button>
+                                                    <button class="btn btn-primary proforma_search" type="button">Proceed</button>
                                                 </span>
                                             </div>
                                              <div id="sales_list">
@@ -69,9 +69,9 @@
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Deliveryorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
-                                    <?php echo $this->Form->input('Deliveryorder.customer_id', array('type'=>'hidden','value'=>'')); ?>
-                                    <?php echo $this->Form->input('Deliveryorder.salesorder_id', array('type'=>'hidden','value'=>'')); ?>
+                                    <?php echo $this->Form->create('Proforma',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
+                                    <?php echo $this->Form->input('Proforma.customer_id', array('type'=>'hidden','value'=>'')); ?>
+                                    <?php echo $this->Form->input('Proforma.salesorder_id', array('type'=>'hidden','value'=>'')); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
@@ -83,10 +83,10 @@
                                             <br><br>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
-                                                    <?PHP echo $this->element('Deliveryorders/deliveryorder_info'); ?>
+                                                    <?PHP echo $this->element('Proformas/deliveryorder_info'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab2">
-                                                    <?PHP echo $this->element('Deliveryorders/customer_special_needs_tagid'); ?>
+                                                    <?PHP echo $this->element('Proformas/customer_special_needs_tagid'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->

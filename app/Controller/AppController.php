@@ -250,21 +250,24 @@ App::uses('Controller', 'Controller');
                     $this->Random->updateAll(array('Random.Clientpo'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 case 'proforma':
-                    $random = $this->Random->find('first');
+                  $random = $this->Random->find('first');
                     $str = $random['Random']['proforma'];
                     $i = 1;
                     $parts = explode('-', $str);
-                    if ($parts[2] == 99999999) {
-                        $parts[2] = 10000000;
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
                         $parts[1] += $parts[1];
                         $parts[1] = sprintf("%02d", $parts[1]);
-                    } else {
+                    }
+                    else
+                    {
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.proforma' => '"' . $str1 . '"'), array('Random.id' => 1));
-                    break;
-        }
+                    $this->Random->updateAll(array('Random.proforma'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
+            }
             return $str1;
         }
 }
