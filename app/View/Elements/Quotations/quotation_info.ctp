@@ -1,5 +1,4 @@
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_quotationno">Quotation No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Quotation.quotationno', array('id'=>'val_quotationno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $quotationno)); ?>
@@ -9,11 +8,9 @@
         <?php echo $this->Form->input('priority', array('id'=>'val_priority','class'=>'form-control select-chosen',
             'label'=>false,'options'=>$priority)); ?>
     </div>
-    
 </div>
     
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', 
@@ -28,7 +25,6 @@
         <?php echo $this->Form->textarea('address', array('id'=>'val_address','class'=>'form-control',
                                                'placeholder'=>'Enter the Customer Address','label'=>false,'rows'=>6,'cols'=>30)); ?>
     </div>
-        
 </div>
 <div class="form-group">
     
@@ -36,7 +32,6 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('due_amount', array('id'=>'val_dueamount','class'=>'form-control',
                                                 'placeholder'=>'Due Amount','label'=>false,'autoComplete'=>'off','disabled'=>'disabled')); ?>
-        
     </div>
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
@@ -44,12 +39,10 @@
     </div>
 </div>
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_phone">Phone</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control',
                                                 'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off')); ?>
-       
     </div>
     <label class="col-md-2 control-label" for="val_fax">Fax</label>
     <div class="col-md-4">
@@ -58,12 +51,10 @@
 </div>
 
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_email">Email</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('email', array('id'=>'val_email','class'=>'form-control',
                                                 'placeholder'=>'Enter the Email Id','label'=>false,'autoComplete'=>'off','readonly'=>'readonly')); ?>
-        
     </div>
     <label class="col-md-2 control-label" for="val_payment_term">Payment Terms</label>
     <div class="col-md-4">
@@ -74,38 +65,27 @@
 </div>
 
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_reg_date">Reg Date</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Registration date','label'=>false)); ?>
-     
     </div>
-    <label class="col-md-2 control-label" for="val_ref_no">Your Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
     </div>
 </div>
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
                                                 'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text')); ?>
-        
     </div>
-    <label class="col-md-2 control-label" for="val_our_no">Our Reference No</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('track_id', array('id'=>'val_our_no','class'=>'form-control','label'=>false,'value'=>$our_ref_no,'readonly','type'=>'text')); ?>
-    </div>
-   
 </div>
 <div class="form-group">
-    
  <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
     <div class="col-md-12">
         <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>$instrument_types)); ?>
-       
     </div>
 </div>

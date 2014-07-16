@@ -155,7 +155,7 @@ App::uses('Controller', 'Controller');
                 // Quotation Random ID
                 case 'quotation':
                   $random = $this->Random->find('first');
-                    $str = $random['Random']['customer'];
+                    $str = $random['Random']['quotation'];
                     $i = 1;
                     $parts = explode('-', $str);
                     if($parts[2]==99999999)
@@ -169,13 +169,13 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.quotation'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 
                 // SalesOrder Random ID
                 case 'salesorder':
                   $random = $this->Random->find('first');
-                    $str = $random['Random']['customer'];
+                    $str = $random['Random']['salesorder'];
                     $i = 1;
                     $parts = explode('-', $str);
                     if($parts[2]==99999999)
@@ -189,13 +189,13 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.salesorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 
                 // DeliveryOrder Random ID
                 case 'deliveryorder':
                   $random = $this->Random->find('first');
-                    $str = $random['Random']['customer'];
+                    $str = $random['Random']['deliveryorder'];
                     $i = 1;
                     $parts = explode('-', $str);
                     if($parts[2]==99999999)
@@ -209,7 +209,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.deliveryorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 
                  // Invoice Random ID
@@ -249,7 +249,22 @@ App::uses('Controller', 'Controller');
                     $str1 = implode('-', $parts);
                     $this->Random->updateAll(array('Random.Clientpo'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
-            }
+                case 'proforma':
+                    $random = $this->Random->find('first');
+                    $str = $random['Random']['proforma'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if ($parts[2] == 99999999) {
+                        $parts[2] = 10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    } else {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.proforma' => '"' . $str1 . '"'), array('Random.id' => 1));
+                    break;
+        }
             return $str1;
         }
 }

@@ -10,23 +10,14 @@
         public function index()
         {
             //$this->Quotation->recursive = 1; 
-            $data = $this->Quotation->find('all',array('order' => array('Quotation.id' => 'DESC')));
+            $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.id' => 'DESC')));
+           
             $this->set('quotation', $data);
         }
         public function add()
         {
-          
-//          $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>1399899781),'recursive'=>'2'));
-//          pr($customer_data);exit;
-            $str=NULL;
-            $d=date("d");
-            $m=date("m");
-            $y=date("Y");
-            $t=time();
-            $dmt='BSQ'.($d+$m+$y+$t);
+            $dmt=$this->random('quotation');
             $track_id='BSTRA'.(rand(0,89966587));
-            
-            //$str = 'BSQ-13-'.str_pad($str + 1, 5, 0, STR_PAD_LEFT);
             $this->set('quotationno', $dmt);
             $this->set('our_ref_no', $track_id);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
@@ -91,12 +82,12 @@
        
         public function edit($id=NULL)
         {
-            $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
-            
+            $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
             //for Contact person info
             $customer_id    =   $quotations_list['Customer']['id'];
             $salesperson_list    =   $this->CusSalesperson->find('all',array('conditions'=>array('CusSalesperson.customer_id'=>$customer_id)));
             $salespeople         =   '';
+            pr($quotations_list['Clientpo']);exit;
             foreach($salesperson_list as $salesper)
             {
                 $salespeople.=$salesper['Salesperson']['salesperson'].' , ';
@@ -137,8 +128,6 @@
                      $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                      $this->request->data['Logactivity']['logapprove'] = 1;
                      $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                        
-                        
                     $this->Session->setFlash(__('Quotation has been Updated Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -153,7 +142,7 @@
         {
             if($id!='')
             {
-                if($this->Quotation->delete($id,true))
+                if($this->Quotation->updateAll(array('Quotation.is_deleted'=>1),array('Quotation.id'=>$id)))
                 {
                     $this->Session->setFlash(__('The Quotation has been deleted',h($id)));
                     return $this->redirect(array('controller'=>'Quotations','action'=>'index'));
@@ -175,7 +164,7 @@
             {
                 for($i = 0; $i<$c;$i++)
                 { 
-                    echo "<div class='show' align='left' id='".$data[$i]['Customer']['id']."'>";
+                    echo "<div class='customer_show' align='left' id='".$data[$i]['Customer']['id']."'>";
                     echo $data[$i]['Customer']['Customertagname'];
                     echo "<br>";
                     echo "</div>";

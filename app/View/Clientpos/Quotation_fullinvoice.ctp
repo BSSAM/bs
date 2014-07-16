@@ -37,7 +37,6 @@
                                             <th class="text-center">Sales order Details</th>
                                             <th class="text-center">Delivery order Details</th>
                                             <th class="text-center">Invoice Details</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>

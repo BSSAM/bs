@@ -78,7 +78,7 @@
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
      
     </div>
-    <label class="col-md-2 control-label" for="val_ref_no">Your Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
     </div>
@@ -91,17 +91,14 @@
                                                 'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text')); ?>
         
     </div>
-    <label class="col-md-2 control-label" for="val_our_no">Our Reference No</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('track_id', array('id'=>'val_our_no','class'=>'form-control','label'=>false,'value'=>$our_ref_no,'readonly','type'=>'text')); ?>
-    </div>
+    
    
 </div>
 <div class="form-group">
     
- <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
+ <label class="col-md-2 control-label" for="val_instrument">Select Instrument For</label>
     <div class="col-md-12">
-        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
+        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_instrument','class'=>'form-control select-chosen','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>$instrument_types)); ?>
        
     </div>

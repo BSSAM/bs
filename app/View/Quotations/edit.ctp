@@ -41,14 +41,11 @@ if(customer!='')
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
-                                <div class="block-title">
-                                    
-                                    <h2></h2>
+                                <div class="block-title clearfix">
+                                    <h2 class="pull-right">Track Id:  <?PHP echo $our_ref_no; ?></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
-
                                 <!-- Basic Form Elements Content -->
-                                 
                                 <div class="panel panel-default">
                                     <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'fileupload','enctype'=>'multipart/form-data')); ?>
                                     <?php echo $this->Form->input('Quotation.customer_id', array('type'=>'hidden','value'=>$quotations_list['Quotation']['customer_id'])); ?>

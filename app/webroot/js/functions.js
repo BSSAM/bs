@@ -454,8 +454,6 @@ $(document).ready(function(){
      * ..........................................................................................................................
      *..................................................................*/
     
-    
-    
     $('.delivery_address_error').hide();
     $('.delivery_submit').click(function()
     {
@@ -524,7 +522,7 @@ $(document).ready(function(){
         });
         $('.billing_remove_'+delete_id).fadeOut();
     });
-    $(document).on('click','.show',function(){
+    $(document).on('click','.customer_show',function(){
         var customer_name=$(this).text();
         $('#val_customer').val(customer_name);
         $('#result').fadeOut();
@@ -841,6 +839,10 @@ $(document).on('click','.instrument_id',function(){
     
     $('#SalesorderQuotationId').blur(function(){
          $('#quoat_list').fadeOut();
+    });
+     $('#val_customer').blur(function(){
+         $(this).val('');
+         $('#result').fadeOut();
     });
     
     // Proforma Invoice

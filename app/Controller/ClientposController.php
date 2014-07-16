@@ -169,7 +169,6 @@ class ClientposController extends AppController
     {
           $pos=$this->Clientpo->find('all',array('conditions'=>array('Clientpo.quotation_id'=>$id)));
           $po_first=$this->Clientpo->find('first',array('conditions'=>array('Clientpo.quotation_id'=>$id)));
-          pr($po_first);exit;
           $this->set(compact('pos','po_first'));
           if($this->request->is(array('post','put')))
           {

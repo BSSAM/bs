@@ -21,7 +21,6 @@
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
-                                        
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">Quotation No</th>
                                         <th class="text-center">Reg Date</th>
@@ -39,10 +38,10 @@
                                     <tr>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
-<!--                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['branchname'] ?></td>-->
+<!--                                    <td class="text-center"><?PHP echo $quotation_list['Quotation']['branchname'] ?></td>-->
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>
-                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
