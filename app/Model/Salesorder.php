@@ -25,13 +25,24 @@ class Salesorder extends AppModel
             'finderQuery' => '',
             'dependent'=>true,
             'counterQuery' => '',
-            
-             
-      ));
+      ),
+        'Clientpo' => array(
+            'className' => 'Clientpo',
+            'foreignKey' => 'salesorder_id',
+            'conditions' => array(),
+      ),
+        );
     public $belongsTo = array(
         'Customer' => array(
             'className' => 'Customer',
             'foreignKey' => 'customer_id ',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+         'Quotation' => array(
+            'className' => 'Quotation',
+            'foreignKey' => 'quotation_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''

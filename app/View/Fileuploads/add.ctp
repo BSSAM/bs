@@ -11,16 +11,13 @@
     <li>Upload your files</li>
 </ul>
 <!-- END Forms General Header -->
-                        
 <div class="row">
-    
-    
     <div class="col-md-12">
         <!-- Basic Form Elements Block -->
         <div class="block">
             <!-- Basic Form Elements Title -->
             <div class="block-title">
-                <h2></h2>
+                <h2>Upload your files for <?PHP echo $customer_quotation['Quotation']['quotationno']; ?></h2>
             </div>
             <!-- END Form Elements Title -->
             <!-- Basic Form Elements Content -->

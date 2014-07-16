@@ -21,8 +21,21 @@ class Quotation extends AppModel
             'offset' => '',
             'exclusive' => '',
             'finderQuery' => '',
-            'counterQuery' => ''
-        ));
+            'counterQuery' => '',
+        ),
+        'Clientpo' => array(
+            'className' => 'Clientpo',
+            'foreignKey' => 'quotation_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => '',
+        ),
+        );
     public $hasOne = array(
         'Customerspecialneed' => array(
             'className' => 'Customerspecialneed',

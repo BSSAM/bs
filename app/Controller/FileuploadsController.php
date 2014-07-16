@@ -96,6 +96,7 @@ class FileuploadsController extends AppController
          *  Description   :   add Procedures Details page
          *******************************************************/
      $this->Session->write('sess_quotation_id',$id);
+     
      $customer_quotation=$this->Quotation->find('first',array('conditions'=> array('Quotation.quotationno'=>$id)));
      $this->set(compact('customer_quotation'));  
     }

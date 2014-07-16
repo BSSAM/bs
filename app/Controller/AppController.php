@@ -231,6 +231,24 @@ App::uses('Controller', 'Controller');
                     $str1 = implode('-', $parts);
                     $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
+                case 'clientpo':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['clientpo'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.Clientpo'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
             }
             return $str1;
         }

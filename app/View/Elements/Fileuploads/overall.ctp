@@ -9,7 +9,7 @@
 <div class="block full">
     <!-- Dropzone Title -->
     <div class="block-title">
-        <h2><strong>Upload your files for <?PHP echo $customer_quotation['Quotation']['quotationno']; ?></strong></h2>
+        <h2><strong>Drag Files and Upload</strong></h2>
     </div>
     <?php echo $this->Form->create('Document', array('url'=>'file_upload','class' => 'dropzone', 'id' => 'form-customer-add','enctype'=>'multipart/form-data')); ?>
     <?php echo $this->Form->input('quotationno', array('type'=>'hidden','name'=>'quotation_no','value'=>$customer_quotation['Quotation']['quotationno'])); ?>
@@ -19,6 +19,7 @@
         <div class="fallback">
             <input name="file" type="file" multiple />
         </div>
-    </div>
     <?php echo $this->Form->end(); ?>
+    </div>
+    
     

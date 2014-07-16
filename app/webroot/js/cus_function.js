@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-    $(document).on('click','.chosen-results li',function(){
-        $(this).addClass('instrument_select');
-        var instrument_id =   $('ul.chosen-results').find('.instrument_select').attr('data-option-array-index');
-        var instrument_name=   $('ul.chosen-results').find('.instrument_select').text();
-        $('#ins_id').val(instrument_id);
-        $('#ins_name').val(instrument_name);
+    $(document).on('change','#instrument_name',function(){
+//        $(this).addClass('instrument_select');
+//        var instrument_id =   $('ul.chosen-results').find('.instrument_select').attr('data-option-array-index');
+//        var instrument_name=   $('ul.chosen-results').find('.instrument_select').text();
+//        $('#ins_id').val(instrument_id);
+//        $('#ins_name').val(instrument_name);
+        var instrument_id   =   $(this).val();
         $.ajax({
 		type: 'POST',
                 data:"instrument_id="+instrument_id,
@@ -30,8 +31,8 @@ $(document).ready(function(){
         }
         var range   =   $('#range_array').val();
         var customer_id =   $('#CustomerInstrumentCustomerId').val();
-        var instrument_id   =   $('#ins_id').val();
-        var instrument_name =    $('#ins_name').val();
+        var instrument_id   =   $('#instrument_name option:selected').val();
+        var instrument_name =    $('#instrument_name option:selected').text();
         var model_no =   $('#model_no').val();
         var unit_price=$('#unit_price').val();
         var status  =   $('#status').val();
@@ -43,7 +44,6 @@ $(document).ready(function(){
             success: function(data)
             {
                 var node_data   =   $.parseJSON(data);
-               
                 if (node_data.CustomerInstrument.status == "1"){  var status    =   "Active";                 
                 }else{    var status    =   "Inactive";               
                 }
@@ -115,15 +115,13 @@ $(document).ready(function(){
         $('.update_device').html('<button class="btn btn-sm btn-primary customerinstrument_add" type="button"><i class="fa fa-plus fa-fw"></i> add</button>');
         var range   =   $('#range_array').val();
         var customer_id =   $('#CustomerInstrumentCustomerId').val();
-        var instrument_id   =   $('#ins_id').val();
-        var instrument_name =    $('#ins_name').val();
+        var instrument_id   =   $('#instrument_name option:selected').val();
+        var instrument_name =    $('#instrument_name option:selected').text();
         var model_no =   $('#model_no').val();
         var device_id   =   $('#device_id').val();
         var unit_price=$('#unit_price').val();
         var status  =   $('#status').val();
-       
         var check=(status==1)?'Active':'In Active';
-       
         $.ajax({
             type: 'POST',
             data:"instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&unit_price="+unit_price+"&status="+status+"&range_id="+range+"&device_id="+device_id,

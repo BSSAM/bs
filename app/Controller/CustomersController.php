@@ -780,4 +780,24 @@ class CustomersController extends AppController
             echo "deleted";
         }
     }
+    public function update_instrument()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Device');
+        $this->CustomerInstrument->id = $this->request->data['device_id'];
+        $this->request->data['CustomerInstrument']['instrument_id'] = $this->request->data['instrument_id'];
+        $this->request->data['CustomerInstrument']['instrument_name'] = $this->request->data['instrument_name'];
+        $this->request->data['CustomerInstrument']['model_no'] = $this->request->data['model_no'];
+        $this->request->data['CustomerInstrument']['range_id'] = $this->request->data['range_id'];
+        $this->request->data['CustomerInstrument']['unit_price'] = $this->request->data['unit_price'];
+        $this->request->data['CustomerInstrument']['status'] = $this->request->data['status'];
+        if ($this->CustomerInstrument->save($this->request->data)) 
+        {
+            $device_details =   $this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.id'=>$this->request->data['device_id'])));
+            echo json_encode($device_details);
+           
+        }
+    }
+
+
 }

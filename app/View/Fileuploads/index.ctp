@@ -37,13 +37,13 @@
                                             </span>
                                         </td>
                                            <td class="text-center">
-                                               <span class="label label-warning">
+                                               
                                                     <?php echo $customer['Deliveryordertype']['delivery_order_type'];?>
-                                               </span>
+                                               
                                            </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="gi gi-eye_open"></i> Quotations',array('action'=>'Customer_quotation_list',$customer['Customer']['id']),array('data-toggle'=>'tooltip','title'=>'Upload files to '.$customer['Customer']['Customertagname'],'class' => 'btn  btn-xs btn-primary','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('Quotation List',array('action'=>'Customer_quotation_list',$customer['Customer']['id']),array('data-toggle'=>'tooltip','title'=>'Upload files to '.$customer['Customer']['Customertagname'],'class' => 'btn  btn-xs btn-success','escape'=>false)); ?>
                                                 <?php //echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$clientpo_list['Clientpo']['quotation_id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
                                         </td>

@@ -43,3 +43,19 @@ and open the template in the editor.
 .no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}
 .quotation_single:hover{  background:#4c66a4;  color:#FFF;  cursor:pointer;}
 #quoat_list{position: absolute;  z-index: 999; }
+
+
+/* For ClientPO Module Po search*/
+.po_single_show   { background-color: #ffffff;    border-bottom: 1px dotted #dbe1e8 !important;    color: #000000;    font-size: 15px;    line-height: 18px;    max-height: 37px;    max-width: 230px;    min-width: 223px;    padding: 9px 0 13px 9px; }
+.po_no_result  { background-color: #ffffff;    border-bottom: 1px dotted #dbe1e8 !important;    color: #000000;    font-size: 15px;    line-height: 18px;    max-height: 37px;    max-width: 230px;    min-width: 223px;    padding: 9px 0 13px 9px; }
+.po_no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}
+.po_single_show:hover{  background:#4c66a4;  color:#FFF;  cursor:pointer;}
+#po_result{position: absolute;  z-index: 999; }
+
+
+/* For ClientPO Module SO search*/
+.so_single_show   { background-color: #ffffff;    border-bottom: 1px dotted #dbe1e8 !important;    color: #000000;    font-size: 15px;    line-height: 18px;    max-height: 37px;    max-width: 230px;    min-width: 223px;    padding: 9px 0 13px 9px; }
+.so_no_result  { background-color: #ffffff;    border-bottom: 1px dotted #dbe1e8 !important;    color: #000000;    font-size: 15px;    line-height: 18px;    max-height: 37px;    max-width: 230px;    min-width: 223px;    padding: 9px 0 13px 9px; }
+.so_no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}
+.so_single_show:hover{  background:#4c66a4;  color:#FFF;  cursor:pointer;}
+#so_result{position: absolute;  z-index: 999; }

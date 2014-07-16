@@ -6,7 +6,7 @@
                     <ul class="breadcrumb breadcrumb-top">
                         
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Client Purchase Order',array('controller'=>'Clientpos','action'=>'index')); ?></li>
+                        <li>Customers</li>
                     </ul>
                     <!-- END Datatables Header -->
                     <!-- Datatables Content -->
@@ -43,16 +43,14 @@
                                             <?PHP //endforeach; ?>
                                            </td>-->
                                            <td class="text-center">
-                                               <span class="label label-warning">
                                                     <?php echo $clientpo_list['Deliveryordertype']['delivery_order_type'];?>
-                                               </span>
                                            </td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?PHP 
                                                    $invoice_type   =   $this->ClientPO->getinvoice_type($clientpo_list['Customer']['id']);
                                                 ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>$invoice_type,$clientpo_list['Customer']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-plus"></i>Add',array('action'=>$invoice_type,$clientpo_list['Customer']['id']),array('data-toggle'=>'tooltip','title'=>'Add','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php //echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$clientpo_list['Clientpo']['quotation_id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
                                         </td>
