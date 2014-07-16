@@ -4,7 +4,7 @@
     $(function() {
     $('.cust_purchase_order_no').editable(path_url+'/Invoices/update_puchaseid', {
          id        : 'data[Invoice][id]',
-         name      : 'data[Invoice][customer_puchaseorder_no]',
+         name      : 'data[Invoice][purchaseorder_id]',
          type      : 'text',
          cancel    : 'Cancel',
          submit    : 'Save',
@@ -14,7 +14,7 @@
 </script>     
 <div class="table-responsive">
 <div class="col-sm-3 col-lg-12">
-                    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                    <table id="prepare-datatable" class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">Your Reference No</th>
@@ -22,21 +22,21 @@
                             <th class="text-center">Customer Address</th>
                             <th class="text-center">Customer Purchase order No</th>
                             <th class="text-center">Prepare Invoice</th>
-                            <th class="text-center">View</th>
+<!--                            <th class="text-center">View</th>-->
 
                         </tr>
                     </thead>
                     <tbody class="Instrument_info"> 
                         <?PHP //pr($unapproved_order_list);exit; ?>
-                        <?PHP if(!empty($unapproved_order_list)):?>
-                        <?PHP foreach($unapproved_order_list as $list): ?>
+                        <?PHP if(!empty($prepareinvoice_approved_list)):?>
+                        <?PHP foreach($prepareinvoice_approved_list as $list): ?>
                         <tr class="invoice_<?PHP echo $list['Invoice']['id']; ?>">
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['your_reference_no']; ?></td>
-                            <td class="text-center"><?PHP echo $list['Deliveryorder']['Customer']['customername']; ?></td>
+                            <td class="text-center"><?PHP echo $list['Customer']['customername']; ?></td>
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['customer_address'];; ?></td>
-                            <td class="text-center cust_purchase_order_no" id="<?PHP echo $list['Invoice']['id'] ?>"><?PHP echo $list['Invoice']['customer_puchaseorder_no'] ;?></td>
+                            <td class="text-center cust_purchase_order_no" id="<?PHP echo $list['Invoice']['id'] ?>"><?PHP echo $list['Invoice']['purchaseorder_id'] ;?></td>
                             <td class="text-center"><a href="javascript:void(0);" class="prepare" id="<?PHP echo $list['Invoice']['id']; ?>"><?PHP echo  'Prepare Invoice'; ?></a></td>
-                            <td class="text-center"> <a href="#modal-regular<?PHP echo $list['Deliveryorder']['id'] ?>" class="btn btn-primary" data-toggle="modal">View</a></td>
+<!--                            <td class="text-center"> <a href="#modal-regular<?PHP //echo $list['Deliveryorder']['id'] ?>" class="btn btn-primary" data-toggle="modal">View</a></td>-->
                             
                         </tr>
                     <div id="modal-regular<?PHP echo $list['Deliveryorder']['id'] ?>" class="modal" tabindex="-1" role="dialog" aria-hidden="true">

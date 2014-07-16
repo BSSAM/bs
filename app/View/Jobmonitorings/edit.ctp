@@ -14,13 +14,14 @@
 });
 </script>                
 <h1>
-    <i class="gi gi-user"></i>Edit Job Monitoring 
+    <i class="gi gi-user"></i>Job Monitoring of <?php echo $job_sales_no; ?>
 </h1>
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
     <li><?php echo $this->Html->link('Job Monitoring',array('controller'=>'Jobmonitorings','action'=>'index')); ?></li>
+    <li><?php echo $job_sales_no; ?></li>
 </ul>
 <!-- END Datatables Header -->
 
@@ -63,11 +64,50 @@
                     <td class="text-center">
                             <?PHP echo $this->Form->input('Description.checking', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled','value'=>$description['Description']['checking'],$checking)); ?></td>
                     <td class="text-center">
-                            <?PHP echo $this->Form->input('Description.document', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled')); ?></td>
+                        <?php 
+                        //pr($deliver_order);exit;
+                            if ($deliver_order != NULL):
+                                foreach ($deliver_order as $deliver_list):
+
+                                    if ($deliver_list['Deliveryorder']['is_approved'] == 1):
+                                        //echo $deliver_list['Deliveryorder']['is_approved'];
+                                        $delivery_delivery = true;
+                                        $dis = 'enabled';
+                                    elseif ($deliver_list['Deliveryorder']['is_approved'] != '' && $deliver_list['Deliveryorder']['is_approved'] != 1):
+                                        //echo $deliver_list['Deliveryorder']['is_approved'];
+                                        $delivery_delivery = false;
+                                        $dis = 'disabled';
+                                    endif;
+
+                                endforeach;
+                            else:
+                                $delivery_delivery = false;
+                                $dis = 'disabled';
+                            endif;
+                            ?>
+                            <?PHP echo $this->Form->input('document', array('name'=>'document','label' => false, 'id' => 'document', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled', 'checked'=> $delivery_delivery)); ?></td>
                     <td class="text-center">
-                            <?PHP echo $this->Form->input('Description.ready_to_deliver', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],)); ?></td>
+                            
+                            <?PHP echo $this->Form->input('Description.ready_deliver[]', array('label' => false, 'id' => 'ready', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>$dis)); ?></td>
                     <td class="text-center">
-                            <?PHP echo $this->Form->input('Description.delivered', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled')); ?></td>
+                         <?php 
+                        //pr($deliver_order);exit;
+                            if ($deliver_order != NULL):
+                                foreach ($deliver_order as $deliver_list):
+
+                                    if ($deliver_list['Deliveryorder']['job_finished'] == 1):
+                                        $job_finished = true;
+                                    elseif ($deliver_list['Deliveryorder']['job_finished'] != '' && $deliver_list['Deliveryorder']['job_finished'] != 1):
+                                        $job_finished = false;
+                                    endif;
+
+                                endforeach;
+                            else:
+                                $job_finished = false;
+                            endif;
+                            ?>
+                        
+                            <?PHP echo $this->Form->input('Description.delivered', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled','checked'=>$job_finished)); ?></td>
                     
                    
                     <td class="text-center"><?PHP echo $description['Department']['departmentname']; ?></td>

@@ -6,7 +6,7 @@
 $(document).ready(function(){
    $('.prepare').click(function(){
       var id    =   $(this).attr('id');
-      var results   =   confirm('Are you Sure want to Approve ?');
+      //var results   =   confirm('Are you Sure want to Approve ?');
       if(results==true)
       {
            $.ajax({
@@ -23,11 +23,12 @@ $(document).ready(function(){
       }
    });
    $('.invoice_active').click(function(){
-   $('.invoice_info').load(path_url+'/Invoices/invoice_approved_list/');
-   setTimeout( function() {
-              $('.invoice_info').load(path_url+'/Invoices/invoice_approved_list/');
-              refresh();
-            }, 1000);
+        location.reload();
+   //$('.invoice_info').load(path_url+'/Invoices/');
+//   setTimeout( function() {
+//              $('.invoice_info').load(path_url+'/Invoices/invoice_approved_list/');
+//              refresh();
+//            }, 1000);
    });
     
 })

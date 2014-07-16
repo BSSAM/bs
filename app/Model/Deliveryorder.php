@@ -31,6 +31,13 @@ class Deliveryorder extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'Invoice' => array(
+            'className' => 'Invoice',
+            'foreignKey' => 'delivery_order_no',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
         );
 }

@@ -91,8 +91,8 @@
                 <tr>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['salesorderno'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['branchname'] ?></td>
-                    <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['customername'] ?></td>
-                    <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['priority'] ?></td>
+                    <td class="text-center"><?PHP echo $labprocess_list['Customer']['Customertagname'] ?></td>
+                    <td class="text-center"><?PHP echo $cus[0]['Priority']['priority'] ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->query_total($labprocess_list['Salesorder']['salesorderno']) ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->query_pending($labprocess_list['Salesorder']['salesorderno']) ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno']) ?></td>

@@ -7,7 +7,7 @@
  */
 class Invoice extends AppModel
 {
-    public $useTable = 'prepare_invoices';
+   // public $useTable = 'prepare_invoices';
     public $belongsTo   =  array(
                 'Deliveryorder'=>array(
                 'className'=>'Deliveryorder',

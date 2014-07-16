@@ -22,7 +22,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.customername', 
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
-                    'autoComplete'=>'off','type'=>'text','name'=>'sales_customername','value'=>$salesorder['Customer']['customername'])); ?>
+                    'autoComplete'=>'off','type'=>'text','name'=>'sales_customername','value'=>$salesorder['Customer']['customername'],'readonly'=>'readonly')); ?>
         <div id="result">
         </div>
     </div>

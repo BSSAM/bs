@@ -18,6 +18,12 @@ class LabprocessesController extends AppController
     {
               
         $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno')));
+        //$labprocess[0]['Customer']['id']
+        $cus = $this->Customer->find('all',array('conditions'=>array('Customer.id'=>$labprocess[0]['Customer']['id'])));
+        $this->set('cus', $cus);
+        // pr($cus);exit;
+        //pr($labprocess); exit;
+        $this->set('labprocess', $labprocess);
         $data_checking_count = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.checking" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1),'group' => array('Salesorder.salesorderno')));
         $salesordercount = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.is_approved'=>1)));
         $this->Description->unbindModel(array('belongsTo' => array('Brand','Customer','Instrument','Department','Salesorder')), true);
@@ -34,6 +40,8 @@ class LabprocessesController extends AppController
     public function labs($id=null)
     {
         $salesorder_list    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_approved'=>1)));
+        
+        $this->set('lab_sales_id',$id);
         
         if($salesorder_list['Customer']['deliveryordertype_id']==1)
         {

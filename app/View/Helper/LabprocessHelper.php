@@ -33,7 +33,7 @@ class LabprocessHelper extends AppHelper
 {
     public $uses    =   array('Salesorder','Description');
    
-    public function labperocess_checking($id = null)
+    public function labprocess_checking($id = null)
     {
         APP::import('Model','Description');
         $this->Description   =   new Description();
@@ -50,7 +50,7 @@ class LabprocessHelper extends AppHelper
         }
         return $data;
     }
-    public function labperocess_processing($id = null)
+    public function labprocess_processing($id = null)
     {
         APP::import('Model','Description');
         $this->Description   =   new Description();

@@ -285,9 +285,11 @@
                                          <?php echo $this->Html->link('Job Monitoring',array('controller'=>'Jobmonitorings','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
                                     
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <?php if($user_role['job_proforma']['view'] == 1){ ?>
                                     <li>
-                                          <a href="#"><?php echo 'Proforma Invoice'; ?></a>
+                                        <?php  $a=($control == 'Proformas')?'active':''; ?>
+                                         <?php echo $this->Html->link('Proforma Invoice',array('controller'=>'Proformas','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+<!--                                          <a href="#"><?php //echo 'Proforma Invoice'; ?></a>-->
                                     </li><?php } ?>
                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>

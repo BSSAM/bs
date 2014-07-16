@@ -16,11 +16,20 @@ class InvoicesController extends AppController
     {
        
         $unapproved_order_list    =   $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'0'),'recursive'=>4));
-        //$approved_order_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>'1','Deliveryorder.status'=>'1')));
-        $prepareinvoice_approved_list   =    $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>4));
-      
-        $this->set(compact('unapproved_order_list','prepareinvoice_approved_list'));
+       // pr($unapproved_order_list);exit;
+        $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>'1','Deliveryorder.status'=>'1')));
+       // pr($prepareinvoice_approved_list);exit;
+        $approved_order_list   =    $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
+        //pr($approved_order_list);exit;
+        $this->set(compact('unapproved_order_list','prepareinvoice_approved_list','approved_order_list'));
     }
+    
+    public function prepare()
+    {
+        //$prepareinvoice_approved_list   =    $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
+        //$this->set(compact('prepareinvoice_approved_list'));
+    }
+     
     
     public function invoice()
     {
@@ -51,8 +60,12 @@ class InvoicesController extends AppController
     public function invoice_approved_list()
     {
         
-        $updated_invoice =   $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>1),'recursive'=>4));
+        //$updated_invoice =   $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>0),'recursive'=>4));
+        $updated_invoice =$this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'0'),'recursive'=>4));
+        if($updated_invoice!='')
+        {
         $this->set('updated_invoice',$updated_invoice);
+        }
     }
     public function create_pdf()
     {

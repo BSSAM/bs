@@ -46,11 +46,47 @@
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['reg_date'] ?></td>
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['branchname'] ?></td>
                     <td class="text-center"><?PHP echo $salesorder['Customer']['customername']; ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['salesorderno'] ?></td>
-                    <td class="text-center"><?PHP echo count($salesorder['Description']); ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['priority'] ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['branchname'] ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['customername']; ?></td>
+                    <td class="text-center">
+                    <?PHP 
+                    $count_desc =  count($salesorder['Description']); 
+                    $count_p = '' ; 
+                    foreach ($salesorder['Description'] as $desc):  
+                        if($desc['processing'] == '1'): 
+                            $count_p++; 
+                        endif; 
+                    endforeach;
+                    $count_c = '' ; 
+                    foreach ($salesorder['Description'] as $desc):  
+                        if($desc['checking'] == '1'): 
+                            $count_c++; 
+                        endif; 
+                    endforeach;
+                    $count_r = '' ; 
+                    foreach ($salesorder['Description'] as $desc):  
+                        if($desc['ready_deliver'] == '1'): 
+                            $count_r++; 
+                        endif; 
+                    endforeach;
+                    if($count_p ==  $count_desc):
+                        $status = " Processing ";
+                    endif;
+                    if($count_c ==  $count_desc):
+                        //echo "Ch";
+                        $status = " Checking ";
+                    endif;
+                    if($count_r ==  $count_desc):
+                        $status = " Ready To Deliver ";
+                    endif;
+                    
+                    echo $status;
+                    
+                    ?>
+                    </td>
+                    <td class="text-center"><?php $count_desc =  count($salesorder['Description']);  echo $count_desc;?>
+                    </td>
+                    <td class="text-center"><?PHP $count_p = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['processing'] == '1'): $count_p++; endif; endforeach; if($count_p == ''): echo '0'; else: echo $count_p; endif;?></td>
+                    <td class="text-center"><?PHP $count_c = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['checking'] == '1'): $count_c++; endif; endforeach; if($count_c == ''): echo '0'; else: echo $count_c; endif;?></td>
+                    <td class="text-center"><?PHP $count_r = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['ready_deliver'] == '1'): $count_r++; endif; endforeach; if($count_r == ''): echo '0'; else: echo $count_r; endif;?></td>
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['branchname']; ?></td>
                     <td class="text-center">
                         <div class="btn-group">

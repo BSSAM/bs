@@ -843,6 +843,40 @@ $(document).on('click','.instrument_id',function(){
          $('#quoat_list').fadeOut();
     });
     
+    // Proforma Invoice
+    
+    $('.salesorder_search').click(function(){
+        var salesorder_single_id =   $('#ProformaSalesorderId').val();
+       $.ajax({
+          type:'POST',
+          url:path_url+'Proformas/check_salesorder_count',
+          data:'single_salesorder_id='+salesorder_single_id,
+          success:function(data){
+              if(data=='success')
+              {
+                $('#ProformaAddForm').submit();
+              }
+              if(data=='failure')
+              {
+                   $('#ProformaSalesorderId').css('border','1px solid red');
+                   return false;
+              }
+          }
+       });
+       
+    });
+    
+    $('#ProformaSalesorderId').blur(function(){
+         $('#sales_list').fadeOut();
+    });
+	
+	 $(document).on('click','.salesorder_single',function(){
+        var salesorder_id=$(this).text();
+        $('#ProformaSalesorderId').val(salesorder_id);
+        $('#salesorder_single').fadeOut();
+    });
+    
+    
    
 }); 
     

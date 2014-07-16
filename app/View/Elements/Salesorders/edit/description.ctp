@@ -49,12 +49,12 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="sales_sno">S.No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('sno', array('id'=>'sales_sno','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'sales_sno')); ?>
+        <?php echo $this->Form->input('sno', array('id'=>'sales_sno','class'=>'form-control','readonly'=>'readonly','label'=>false,'name'=>'sales_sno')); ?>
     </div>
         
     <label class="col-md-2 control-label" for="sales_quantity">Quantity</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','class'=>'form-control','label'=>false,'name'=>'sales_quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','class'=>'form-control','label'=>false,'name'=>'sales_quantity','readonly'=>'readonly')); ?>
     </div>
         
 </div>
@@ -64,7 +64,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
                 array('id'=>'val_instrument','class'=>'form-control','placeholder'=>'Enter the Instrument','label'=>false,
-                    'name'=>'instrument','autoComplete'=>'off')); ?>
+                    'name'=>'instrument','autoComplete'=>'off','readonly'=>'readonly')); ?>
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
          <span class="help-block_login ins_error">Enter the Instrument Name</span>
@@ -74,7 +74,7 @@
     <label class="col-md-2 control-label" for="val_model_no">Model No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
-                                               'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
+                                               'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','readonly'=>'readonly')); ?>
     </div>
         
 </div>
@@ -83,12 +83,12 @@
     <label class="col-md-2 control-label" for="val_brand">Brand</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
-                                                'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand')); ?>
+                                                'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand','readonly'=>'readonly')); ?>
        
     </div>
     <label class="col-md-2 control-label" for="sales_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control','label'=>false,'name'=>'sales_range')); ?>
+        <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control','label'=>false,'name'=>'sales_range','readonly'=>'readonly')); ?>
     </div>
 </div>
 <div class="form-group">

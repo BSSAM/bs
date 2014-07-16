@@ -20,13 +20,14 @@
 });
 </script>                
 <h1>
-    <i class="gi gi-user"></i>Lab Process of 
+    <i class="gi gi-user"></i>Lab Process of <?php echo $lab_sales_id; ?> 
 </h1>
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
     <li><?php echo $this->Html->link('Labprocess',array('controller'=>'Labprocesses','action'=>'index')); ?></li>
+    <li><?php echo $lab_sales_id;?></li>
 </ul>
 <!-- END Datatables Header -->
 
@@ -53,8 +54,8 @@
                 <?PHP $description_id   =   $labs_list['Description']['id']; 
                        $processing=   'data[Description][processing]['.$description_id.']';
                        $checking=   'data[Description][checking]['.$description_id.']';
-                      $checked  =   $this->Labprocess->labperocess_checking($labs_list['Description']['id']);
-                      $processed =   $this->Labprocess->labperocess_processing($labs_list['Description']['id']);
+                      $checked  =   $this->Labprocess->labprocess_checking($labs_list['Description']['id']);
+                      $processed =   $this->Labprocess->labprocess_processing($labs_list['Description']['id']);
                 ?>
                     <?php // pr($labs_list); exit;?>
                 <tr>
