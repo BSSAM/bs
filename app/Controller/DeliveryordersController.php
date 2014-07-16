@@ -20,8 +20,7 @@
         public function add()
         {
             
-            $str=NULL;$d=date("d");$m=date("m");$y=date("Y");$t=time();
-            $dmt='BDO'.($d+$m+$y+$t);
+            $str=NULL;$dmt = $this->random('deliveryorder');
             $this->set('deliveryorderno', $dmt);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $this->set('payment',$payment);
