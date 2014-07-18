@@ -11,12 +11,12 @@ class Salesorder extends AppModel
     public $virtualFields = array(
     'solist_diff' => 'DATEDIFF(CURDATE(),STR_TO_DATE(Salesorder.due_date,"%d-%M-%y"))'
 );
-   
+    
     public $hasMany = array(
         'Description' => array(
             'className' => 'Description',
             'foreignKey' => 'salesorder_id',
-            'conditions' => array(),
+            'conditions' => array('is_deleted'=>0,'pending'=>0),
             'fields' => '',
             'order' => '',
             'limit' => '',

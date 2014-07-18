@@ -1,27 +1,24 @@
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_quotationno">Sales Order No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $salesorderno)); ?>
+        <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','readonly'=>'readonly','label'=>false,'value'=> $salesorderno)); ?>
     </div>
-<!--    <label class="col-md-2 control-label" for="val_branchname">Branch</label>
+    <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
-        <?php //echo $this->Form->input('branchname', array('id'=>'val_branchname','class'=>'form-control','disabled'=>'disabled',
-            //'label'=>false,'type'=>'text')); ?>
-    </div>-->
-        <label class="col-md-2 control-label" for="val_priority">Priority</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.priority', array('id'=>'val_priority','class'=>'form-control','label'=>false,'options'=>$priority)); ?>
+        <?php echo $this->Form->input('Salesorder.due_amount', array('id' => 'val_dueamount', 'class' => 'form-control',
+            'placeholder' => 'Due Amount', 'label' => false, 'disabled' => 'disabled'));
+        ?>
     </div>
+      
 </div>
     
 <div class="form-group">
     
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.customername', 
-                array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
-                    'autoComplete'=>'off','type'=>'text','name'=>'sales_customername')); ?>
+        <?PHP $customer_name    =   (!empty($sale['Customer']['Customertagname'])?$sale['Customer']['Customertagname']:$sale['Salesorder']['customername']); ?>
+        <?php echo $this->Form->input('Salesorder.customername', array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
+                    'autoComplete'=>'off','type'=>'text','name'=>'sales_customername','value'=>$customer_name)); ?>
         <div id="result">
         </div>
     </div>
@@ -34,11 +31,9 @@
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
+    <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.due_amount', array('id'=>'val_dueamount','class'=>'form-control',
-                                                'placeholder'=>'Due Amount','label'=>false,'disabled'=>'disabled')); ?>
-       
+        <?php echo $this->Form->input('Salesorder.priority', array('id' => 'val_priority', 'class' => 'select-chosen form-control', 'label' => false, 'options' => $priority)); ?>
     </div>
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
@@ -77,7 +72,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">Your Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
     </div>
@@ -107,10 +102,9 @@
     
     
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.instrument_type', array('id'=>'val_customer','class'=>'form-control','type'=>'select',
+    <div class="col-md-12">
+        <?php echo $this->Form->input('Salesorder.instrument_type', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>array('1'=>'We are pleased to quote the item(s) below for calibration service with certificate(s) :'))); ?>
-                                                    
                                                     
     </div>
         

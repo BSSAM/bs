@@ -20,9 +20,8 @@ if(customer!='')
 	}
 	});
 }return false;    
-});});
-
-
+});
+});
 </script>
 <h1>
     <i class="gi gi-user"></i>Edit Quotation

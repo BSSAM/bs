@@ -13,7 +13,7 @@ class Quotation extends AppModel
         'Device' => array(
             'className' => 'Device',
             'foreignKey' => 'quotation_id',
-            'conditions' => array('status'=>'1'),
+            'conditions' => array('is_deleted'=>0),
             'dependent'=> true,
             'fields' => '',
             'order' => '',

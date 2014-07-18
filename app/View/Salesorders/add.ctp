@@ -22,6 +22,7 @@
         }
     </style>
 <script type="text/javascript">
+    
 $(function(){
 $("#val_customer").keyup(function() 
 { 
@@ -70,17 +71,22 @@ if(customer!='')
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
-                                <div class="block-title">
-                                    <h2></h2>
+                                <div class="block-title clearfix">
+                                    <h2 class="pull-right">
+                                        Track Id    :<div class="track_sales"></div>
+                                    </h2>
                                 </div>
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','action'=>'add')); ?>
-                                    <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden','value'=>$sale['Salesorder']['customer_id'])); ?>
+                                   
+                                    <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'Salesorder','action'=>'add')); ?>
+                                    <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden')); ?>
                                     <?PHP if(!empty($sale['Salesorder']['track_id'])): ?>
-                                    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','value'=>$sale['Salesorder']['track_id'])); ?>
-                                    <?php echo $this->Form->input('Salesorder.quotation_id', array('type'=>'hidden','value'=>$sale['Salesorder']['quotationno'])); ?>
+                                    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden')); ?>
+                                    <?php echo $this->Form->input('Salesorder.quotationno', array('type'=>'hidden')); ?>
+                                    <?php echo $this->Form->input('Salesorder.quotation_id', array('type'=>'hidden')); ?>
+                                    <?php echo $this->Form->input('device_status', array('type'=>'hidden','value'=>$status_id)); ?>
                                     <?PHP endif; ?>
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->

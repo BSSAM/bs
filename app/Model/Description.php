@@ -9,7 +9,7 @@
 class Description extends AppModel
 {
     public $useTable   =   'sal_description';
-    
+   
      public $belongsTo = array(
         'Customer' => array(
             'className' => 'Customer',

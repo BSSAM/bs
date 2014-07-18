@@ -7,6 +7,7 @@
  */
 class Device extends AppModel
 {   
+    public $useTable    =   'quo_devices';
     public $belongsTo = array(
         'Customer' => array(
             'className' => 'Customer',
@@ -18,6 +19,20 @@ class Device extends AppModel
         'Instrument' => array(
             'className' => 'Instrument',
             'foreignKey' => 'instrument_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'Quotation' => array(
+            'className' => 'Quotation',
+            'foreignKey' => 'quotation_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'Range' => array(
+            'className' => 'Range',
+            'foreignKey' => 'range',
             'conditions' => '',
             'fields' => '',
             'order' => ''
@@ -37,6 +52,6 @@ class Device extends AppModel
             'order' => ''
         )
     );
-    public $useTable    =   'quo_devices';
+   
    
 }

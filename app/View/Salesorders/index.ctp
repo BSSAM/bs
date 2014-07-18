@@ -5,8 +5,9 @@
     $(function(){
         $("#SalesorderQuotationId").keyup(function() 
         { 
+            var device_status   =    $('input:radio[name=quotation_device_status]:checked').val();
             var quotation_id = $(this).val();
-            var dataString = 'id='+ quotation_id;
+            var dataString = 'id='+ quotation_id+'&device_status='+device_status;
             if(quotation_id!='')
             {
                 $.ajax({
@@ -39,12 +40,19 @@
                             <h2>List Of Sales Order </h2> 
                             <?PHP echo $this->Form->create('Salesorder', array('action' => 'add', 'class' => 'form-horizontal form-bordered')); ?>
                             <div class="col-md-4 search_move">
+                                <div class="col-md-9">
+                                    <?PHP
+                                    $options = array('processing' => 'Processing', 'pending' => 'Pending');
+                                    $attributes = array('legend' => false, 'class' => 'device_status', 'value' => 'processing', 'name' => 'quotation_device_status');
+                                    echo $this->Form->radio('quotation_device_status', $options, $attributes);
+                                    ?>
+                                </div>
                                 <div class="input-group">
                                         <?PHP echo $this->Form->input('quotation_id', array('placeholder' => 'Quotation Id', 'class' => 'form-control',
                                             'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
                                         ?>
                                     <?PHP echo $this->Form->input('salesorder_created', array('type' => 'hidden', 'value' => 1)); ?>
-                                <span class="input-group-btn">
+                                    <span class="input-group-btn">
                                         <button class="btn btn-primary quotation_search" type="button">Proceed</button>
                                     </span>     
                                 </div>
@@ -77,14 +85,14 @@
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['branchname'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['customername'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Customer']['Customertagname'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
                                          <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 
                                             </div>
                                         </td>

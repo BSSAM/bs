@@ -10,10 +10,11 @@
         <?php //echo $this->Form->input('branchname', array('id'=>'val_branchname','class'=>'form-control','disabled'=>'disabled',
             //'label'=>false,'type'=>'text')); ?>
     </div>-->
-        <label class="col-md-2 control-label" for="val_priority">Priority</label>
+    <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.priority', array('id'=>'val_priority','class'=>'form-control',
-            'label'=>false,'options'=>$priority)); ?>
+        <?php echo $this->Form->input('Salesorder.priority', array('id' => 'val_priority', 'class' => 'form-control',
+            'label' => false, 'options' => $priority));
+        ?>
     </div>
 </div>
     
@@ -99,14 +100,13 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.out_date', array('id'=>'val_out_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
-       
     </div>
     
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control','type'=>'select',
+    <div class="col-md-12">
+        <?php echo $this->Form->input('instrument_type', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>array('1'=>'We are pleased to quote the item(s) below for calibration service with certificate(s) :'))); ?>
     </div>
 </div>

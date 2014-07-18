@@ -40,6 +40,7 @@ $(document).ready(function(){
             }
         });
     });
+     /**************************For Sales order Brand Change*************************************/
     $('.brand_error').hide();
     $('#val_brand').change(function(){
        if($(this).val()=='0')
@@ -54,6 +55,9 @@ $(document).ready(function(){
             $('.brand_error').hide();
        }
     });
+    
+    /**************************For Sales order Description add*************************************/
+    
     $(document).on('click','.sales_description_add',function(){
         if($('#val_instrument').val()=='0')
         {
@@ -127,8 +131,13 @@ $(document).ready(function(){
         });
     }
    });
+   
+   
+   /***************************For Instrument Delete script on Salesorder***********************/
    $(document).on('click','.sales_instrument_delete',function(){
       var device_id=$(this).attr('data-delete');
+      var confirm   =   window.confirm('Do you want to delete?');
+      if(confirm==true){
        $.ajax({
             type: 'POST',
             data:"device_id="+ device_id,
@@ -137,8 +146,9 @@ $(document).ready(function(){
                 $('.sales_instrument_remove_'+device_id).fadeOut();
             }
         });
-        
+    }
    });
+   /***********************************************************/
     $(document).on('click','.sales_instrument_edit',function(){
       var edit_device_id=$(this).attr('data-edit');
       $('.tr_color').css('background-color','none');
@@ -239,6 +249,7 @@ $(document).ready(function(){
                 }
         });
    });
+   /************************For Sales order Approval Script*********************************/
    $(document).on('click','.approve_salesorder',function(){
        var val_salesorderno=$('#val_salesorderno').val();
        if(window.confirm("Are you sure?")){
@@ -259,8 +270,10 @@ $(document).ready(function(){
     }
        
    });
+   /************************For Sales order Approval End*********************************/
     
     $('#SalesorderQuotationId').blur(function(){
+        $(this).val('');
          $('#quoat_list').fadeOut();
     });
 });

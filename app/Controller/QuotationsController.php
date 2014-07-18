@@ -17,36 +17,27 @@
         public function add()
         {
             $dmt=$this->random('quotation');
-            $track_id='BSTRA'.(rand(0,89966587));
+            $track_id=$this->random('track');
             $this->set('quotationno', $dmt);
             $this->set('our_ref_no', $track_id);
+            
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
-            $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
-            $this->set('payment',$payment);
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
-            $this->set('country',$country);
-            $instrument_type=$this->InstrumentType->find('list',array('conditions'=>array('type_for'=>'Quotation'),'fields'=>array('id','type_name')));
-            $this->set('instrument_types',$instrument_type);
+            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('type_for'=>'Quotation'),'fields'=>array('id','type_name')));
+            $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             
-            $additional_charge=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
-            $this->set('additional',$additional_charge);
-            
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set('service',$services);
-            
-            $this->request->data['Quotation']['quotationno']=$dmt;
+            $this->set(compact('service','additional','instrument_types','country','priority','payment'));
            
             if($this->request->is('post'))
             {
-                  
                 $date = date('m/d/Y h:i:s a', time());
                 $this->request->data['Quotation']['created_by'] = $date;
 
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
-                
-                
+               
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     
@@ -84,10 +75,22 @@
         {
             $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
             //for Contact person info
+           
             $customer_id    =   $quotations_list['Customer']['id'];
             $salesperson_list    =   $this->CusSalesperson->find('all',array('conditions'=>array('CusSalesperson.customer_id'=>$customer_id)));
             $salespeople         =   '';
-            pr($quotations_list['Clientpo']);exit;
+            if(!empty($quotations_list['Clientpo']))
+            {
+                $po_list        =   '';
+                foreach($quotations_list['Clientpo'] as $po)
+                {
+                    $po_list .=$po['clientpos_no'].',';
+                }
+               $this->set('po_list',$po_list);
+            }
+            else {
+                $this->set('po_list','');
+            }
             foreach($salesperson_list as $salesper)
             {
                 $salespeople.=$salesper['Salesperson']['salesperson'].' , ';
@@ -98,7 +101,7 @@
             }
             //pr($quotation_details);exit;
             $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('type_for'=>'Quotation'),'fields'=>array('id','type_name')));
-            $our_ref_no='BSTRA'.(rand(0,89966587));
+            $our_ref_no=$quotations_list['Quotation']['track_id'];
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
@@ -128,7 +131,7 @@
                      $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                      $this->request->data['Logactivity']['logapprove'] = 1;
                      $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    $this->Session->setFlash(__('Quotation has been Updated Succefully '));
+                    $this->Session->setFlash(__('Quotation has been Updated Successfully '));
                     $this->redirect(array('action'=>'index'));
                 }
                 
@@ -260,9 +263,10 @@
             $this->request->data['Device']['call_type']     =   $this->request->data['instrument_calltype'];
             $this->request->data['Device']['validity']      =   $this->request->data['instrument_validity'];
             $this->request->data['Device']['discount']      =   $this->request->data['instrument_discount'];
-            $this->request->data['Device']['department_id']    =   $this->request->data['instrument_department'];
+            $this->request->data['Device']['department_id'] =   $this->request->data['instrument_department'];
             $this->request->data['Device']['unit_price']    =   $this->request->data['instrument_unitprice'];
             $this->request->data['Device']['account_service']=  $this->request->data['instrument_account'];
+            $this->request->data['Device']['total']         =   $this->request->data['instrument_total'];
             $this->request->data['Device']['title']         =   $this->request->data['instrument_title'];
             $this->request->data['Device']['status']        =   0;
             if($this->Device->save($this->request->data))
@@ -277,8 +281,7 @@
         {
             $this->autoRender=false;
             $device_id= $this->request->data['device_id'];
-            $this->loadModel('Device');
-            if($this->Device->deleteAll(array('Device.id'=>$device_id)))
+            if($this->Device->updateAll(array('Device.is_deleted'=>1),array('Device.id'=>$device_id)))
             {
                 echo "deleted";
             }
@@ -297,7 +300,6 @@
         public function update_instrument()
         {
             $this->autoRender = false;
-            $this->loadModel('Device');
             $this->Device->id                               =   $this->request->data['device_id'];
             $this->request->data['Device']['customer_id']   =   $this->request->data['customer_id'];
             $this->request->data['Device']['instrument_id'] =   $this->request->data['instrument_id'];
@@ -312,8 +314,9 @@
             $this->request->data['Device']['department']    =   $this->request->data['instrument_department'];
             $this->request->data['Device']['unit_price']    =   $this->request->data['instrument_unitprice'];
             $this->request->data['Device']['account_service']=  $this->request->data['instrument_account'];
+             $this->request->data['Device']['total']         =   $this->request->data['instrument_total'];
             $this->request->data['Device']['title']         =   $this->request->data['instrument_title'];
-            $this->request->data['Device']['status']        =   0;
+            $this->request->data['Device']['status']        =   1;
             if($this->Device->save($this->request->data))
             {
                echo "Updated";

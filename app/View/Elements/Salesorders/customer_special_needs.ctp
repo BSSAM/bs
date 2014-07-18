@@ -6,7 +6,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_service_type">Service Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.service_id', array('id'=>'val_service_type','class'=>'form-control','type'=>'select','options'=>$service,'label'=>false)); ?>
+        <?php echo $this->Form->input('Salesorder.service_id', array('id'=>'val_service_type','class'=>'select-chosen form-control','type'=>'select','options'=>$service,'label'=>false)); ?>
        
     </div>
 </div>

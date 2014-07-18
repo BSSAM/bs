@@ -8,62 +8,93 @@
         public function index()
         {
             //$this->Quotation->recursive = 1; 
-            $data = $this->Salesorder->find('all',array('order' => array('Salesorder.id' => 'DESC')));
-            //pr($data);exit;
+            $data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+           
             $this->set('salesorder', $data);
         }
         public function add()
         {
-            $str=NULL;
-            $d=date("d");
-            $m=date("m");
-            $y=date("Y");
-            $t=time();
-            $dmt='BSO'.($d+$m+$y+$t);
-            //$str = 'BSQ-13-'.str_pad($str + 1, 5, 0, STR_PAD_LEFT);
+            $dmt    =   $this->random('salesorder');
             $this->set('salesorderno', $dmt);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
-            $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
-            $this->set('payment',$payment);
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set('service',$services);
-            $this->request->data['Salesorder']['id']=$dmt;
-            $this->request->data['Salesorder']['salesorderno']=$dmt;
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $this->set(compact('service','payment','priority'));
             
             if($this->request->is('post'))
             {
                
                if(isset($this->request->data['Salesorder']['salesorder_created']) && $this->request->data['Salesorder']['salesorder_created']==1)
                {
-                 $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
-                 $sales_details =  $quotation_details['Quotation']  ;
-                 $sales['Salesorder']   =    $sales_details;
-                 $sales['Description']  =    $quotation_details['Device'];
-                 $sales['Salesorder']   =    $sales_details;
-                 $this->set('sale',$sales);
-                 foreach($sales['Description'] as $sale):
-                     $this->Description->create();
-                     $description_data  =   $this->saleDescription($sale['id']);
-                     $this->Description->save($description_data);
-                 endforeach;   
-                //pr($sales);exit;
-                 $this->request->data =   $sales;
+                  
+                   $device_current_status   =  $this->request->data['quotation_device_status']; 
+                   if($device_current_status=='pending')
+                   {
+                         $salesorder_details    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$this->request->data['Salesorder']['quotation_id']),'contain'=>array('Description'=>array('Instrument','Brand','Range','Department','conditions'=>array('Description.pending'=>'1')),'Customer'),'recursive'=>3));
+                        
+                         if($salesorder_details['Customer']['invoice_type_id']!=3)
+                         {
+                            $this->set('sale',$salesorder_details);
+                            $this->set('status_id','pending_status');
+                            $this->request->data =   $salesorder_details;
+                         }
+                   }
+                   else
+                   {
+                        $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
+                        $sales_details =  $quotation_details['Quotation']  ;
+                        $sales['Salesorder']   =    $sales_details;
+                        $sales['Description']  =    $quotation_details['Device'];
+                        $sales['Salesorder']['quotation_id']   =    $sales_details['id'];
+                        $device_node_nonstatus    =   $this->Description->find('all',array('conditions'=>array('Description.quotation_id'=>$sales['Salesorder']['quotation_id'],'Description.status'=>0)));
+                        if(!empty($device_node_nonstatus))
+                        {
+                             $this->Description->deleteAll(array('Description.quotation_id'=>$sales['Salesorder']['quotation_id'],'Description.status'=>0));
+                        }
+                       
+                        $this->set('sale',$sales);
+                        $this->set('status_id','');
+                        foreach($sales['Description'] as $sale):
+                            $this->Description->create();
+                            $description_data  =   $this->saleDescription($sale['id']);
+                            $this->Description->save($description_data);
+                        endforeach;   
+                       //pr($sales);exit;
+                        $this->request->data =   $sales;
+                   }
                }
                else 
                {
                     $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                     $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
+                    $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
+                    $quotation_id   =   $this->request->data['Salesorder']['quotation_id'];
                    
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
+                        
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
-                        $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
-                        if(!empty($device_node))
+                        if(!empty($this->request->data['Salesorder']['device_status']))
                         {
-                            $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
+                            $device_node_pending    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.pending'=>1)));
+                            if(!empty($device_node_pending))
+                            {
+                                $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1,'Description.pending'=>0),array('Description.customer_id'=>$customer_id,'Description.pending'=>1));
+                            }
+                            $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
+                       
                         }
-                        /******************
+                        else
+                        {
+                            $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
+                            if(!empty($device_node))
+                            {
+                                $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id));
+                            }
+                            $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
+                       
+                        }
+                         /******************
                         * Data Log
                         */
                         $this->request->data['Logactivity']['logname']   =   'Salesorder';
@@ -75,7 +106,7 @@
                         //pr($a);exit;
                         /******************/
                         $this->Session->setFlash(__('Salesorder has been Added Successfully '));
-                        $this->redirect(array('action'=>'index'));
+                        $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
                     }
                }
             }
@@ -114,10 +145,10 @@
         }
         public function delete($id=NULL)
         {
-            pr($id);exit;
+            
             if($id!='')
             {
-                if($this->Salesorder->delete($id,true))
+                if($this->Salesorder->updateAll(array('Salesorder.is_deleted'=>1),array('Salesorder.id'=>$id)))
                 {
                     $this->Session->setFlash(__('The SalesOrder has been deleted',h($id)));
                     return $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
@@ -218,7 +249,7 @@
             $this->autoRender=false;
             $device_id= $this->request->data['device_id'];
             $this->loadModel('Description');
-            if($this->Description->deleteAll(array('Description.id'=>$device_id)))
+            if($this->Description->updateAll(array('Description.pending'=>1),array('Description.id'=>$device_id)))
             {
                 echo "deleted";
             }
@@ -266,28 +297,59 @@
         }
         public function quotation_search()
         {
+            
+            $this->autoRender = false;
             $this->loadModel('Quotation');
             $name =  $this->request->data['id'];
-            $this->autoRender = false;
-            $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno LIKE'=>'%'.$name.'%','Quotation.is_approved'=>'1')));
-            $c = count($data);
-            if($c!=0)
+            $device_status =  $this->request->data['device_status'];
+            if($device_status=='pending')
             {
-                for($i = 0; $i<$c;$i++)
-                { 
-                    echo "<div class='quotation_single' align='left' id='".$data[$i]['Quotation']['id']."'>";
-                    echo $data[$i]['Quotation']['quotationno'];
-                    echo "<br>";
-                    echo "</div>";
-                }
+                $data = $this->Description->find('all',array('conditions'=>array('Description.pending'=>1,'Description.is_deleted'=>0)));
+                $c = count($data);
+                if($c!=0)
+                {
+                     for($i = 0; $i<$c;$i++)
+                     { 
+                         echo "<div class='quotation_single' align='left' id='".$data[$i]['Description']['quotation_id']."'>";
+                         echo $data[$i]['Description']['quotationno'];
+                         echo "<br>";
+                         echo "</div>";
+                     }
+                 }
+                 else
+                 {
+                     echo "<div class='no_result' align='left'>";
+                     echo "No Results Found";
+                     echo "<br>";
+                     echo "</div>";
+                 }  
+            
+                
             }
             else
             {
-                echo "<div class='no_result' align='left'>";
-                echo "No Results Found";
-                echo "<br>";
-                echo "</div>";
+                 
+                 $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno LIKE'=>'%'.$name.'%','Quotation.is_approved'=>'1','Quotation.salesorder_created'=>0)));
+                 $c = count($data);
+                 if($c!=0)
+                 {
+                     for($i = 0; $i<$c;$i++)
+                     { 
+                         echo "<div class='quotation_single' align='left' id='".$data[$i]['Quotation']['id']."'>";
+                         echo $data[$i]['Quotation']['quotationno'];
+                         echo "<br>";
+                         echo "</div>";
+                     }
+                 }
+                 else
+                 {
+                     echo "<div class='no_result' align='left'>";
+                     echo "No Results Found";
+                     echo "<br>";
+                     echo "</div>";
+                 } 
             }
+            
         }
         public function check_quotation_count()
         {

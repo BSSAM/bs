@@ -102,7 +102,9 @@ App::uses('Controller', 'Controller');
             $this->request->data['Description']['sales_unitprice']      =   $devices['Device']['unit_price'];
             $this->request->data['Description']['sales_accountservice'] =   $devices['Device']['account_service'];
             $this->request->data['Description']['sales_titles']         =   $devices['Device']['title'];
-            $this->request->data['Description']['sales_total']          =   $devices['Device']['validity'];
+            $this->request->data['Description']['sales_total']          =   $devices['Device']['total'];
+            $this->request->data['Description']['quotation_id']         =   $devices['Device']['quotation_id'];
+            $this->request->data['Description']['quotationno']          =   $devices['Quotation']['quotationno'];
             $this->request->data['Description']['status']               =   0;
             $this->request->data['Description']['is_approved']          =   0;
             return $this->request->data;
@@ -266,6 +268,24 @@ App::uses('Controller', 'Controller');
                     }
                     $str1 = implode('-', $parts);
                     $this->Random->updateAll(array('Random.proforma'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    break;
+                case 'track':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['track'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.track'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
             }
             return $str1;
