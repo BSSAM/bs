@@ -76,7 +76,7 @@
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
-                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Delivery Order Info</a></li>
+                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Proforma Invoice Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs and Tag ID</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>

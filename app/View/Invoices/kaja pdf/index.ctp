@@ -14,7 +14,7 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
 .f_right { float:right; }
 .header_id { padding:10px 0; width:100%; float:left; }
 .logo { margin-top:10px; }
-.address_details { width:46%; line-height:20px; text-align:right; }
+.address_details { width:40%; line-height:20px; text-align:right; }
 .address_details p { float:left; width:100%; }
 .address_details a { color: #1bbae1; float:left; width:100%; }
 .cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }

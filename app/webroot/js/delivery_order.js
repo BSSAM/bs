@@ -105,30 +105,38 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                alert(data);
+                $('#tab-content').append(data);
                 if(data!='failure')
                 {
                     sales_node = $.parseJSON(data);
-                    $('#DeliveryorderSalesorderId').val(sales_node.Salesorder.id);
-                    $('#DeliveryorderCustomerId').val(sales_node.Customer.id);
-                    $('#deli_customer').val(sales_node.Customer.customername);
-                    $('#del_address_id').append('<option value="'+sales_node.Customer.deliveryaddress+'">'+sales_node.Customer.deliveryaddress+'</option>');
-                    $('#del_dueamount').val(sales_node.Salesorder.due_amount);                
-                    $('#del_customer_address').val(sales_node.Customer.regaddress);
-                    $('#del_email').val(sales_node.Salesorder.email);
-                    $('#del_attn').append('<option value="'+sales_node.Salesorder.attn+'">'+sales_node.Salesorder.attn+'</option>');
-                    $('#del_phone').val(sales_node.Customer.phone);
-                    $('#del_fax').val(sales_node.Customer.fax);
+                    
+                    $('#val_id').val(sales_node.BPI.id);
+                    $('#val_salesorderno').val(sales_node.Salesorder.salesorderno);
+                    $('#val_priority').val(sales_node.Salesorder.priority);
+                    $('#val_customer_id').val(sales_node.Salesorder.customer_id);
+                    $('#val_customer').val(sales_node.Customer.customername);
+                    $('#val_address').val(sales_node.Salesorder.address);
+                    $('#val_dueamount').val(sales_node.Salesorder.due_amount);
+                    $('#val_attn').append('<option value="'+sales_node.Salesorder.attn+'">'+sales_node.Salesorder.attn+'</option>');
+                    $('#val_phone').val(sales_node.Salesorder.phone);
+                    $('#val_fax').val(sales_node.Salesorder.fax);
+                    $('#val_email').val(sales_node.Salesorder.email);
+                    $('#val_reg_date').val(sales_node.Salesorder.reg_date);
                     $('#val_ref_no').val(sales_node.Salesorder.ref_no);
                     $('#val_our_ref_no').val(sales_node.Salesorder.our_ref_no);
+                    $('#val_in_date').val(sales_node.Salesorder.in_date);
+                    $('#val_out_date').val(sales_node.Salesorder.out_date);
+                    $('#val_instrument_type').append('<option value="'+sales_node.Salesorder.instrument_type+'">'+sales_node.Salesorder.instrument_type+'</option>');
+                    $('#val_remarks').val(sales_node.Salesorder.remarks);
+                    $('#val_service_type').val(sales_node.Salesorder.service_id);
                     $.each(sales_node.Description,function(key,value){  
                         if(sales_node.Description.length===0)
                         {
-                            $('.delivery_instrument_node').html('No Records Found');
+                            $('.proforma_instrument_node').html('No Records Found');
                         }
                         else
                         {
-                            $('.delivery_instrument_node').append('\n\
+                            $('.proforma_instrument_node').append('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.id+'">\n\\n\
                                     <td class="text-center">'+value.id+'</td>\n\
                                     <td class="text-center">'+value.Instrument.name+'</td>\n\\n\

@@ -1,14 +1,13 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="del_remarks">Remarks</label>
+    <label class="col-md-2 control-label" for="val_remarks">Remarks</label>
     <div class="col-md-4">
-        <?php echo $this->Form->textarea('Deliveryorder.remarks', array('id'=>'del_remarks','class'=>'form-control',
-                                               'label'=>false,'rows'=>6,'cols'=>30)); ?>
+        <?php echo $this->Form->textarea('Proforma.remarks', array('id'=>'val_remarks','class'=>'form-control',
+                                               'label'=>false,'rows'=>6,'cols'=>30,'readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="del_service_type">Service Type</label>
+    <label class="col-md-2 control-label" for="val_service_type">Service Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.service_id', array('id'=>'del_service_type','class'=>'form-control','type'=>'select','options'=>$service,'label'=>false)); ?>
-        <div id="result">
-        </div>
+        <?php echo $this->Form->input('Proforma.service_id', array('id'=>'val_service_type','class'=>'form-control','type'=>'select','label'=>false,'readonly'=>'readonly')); ?>
+       
     </div>
 </div>
 
@@ -26,7 +25,7 @@
            
         </tr>
     </thead>
-    <tbody class="delivery_instrument_node"> 
+    <tbody class="proforma_instrument_node"> 
         
     </tbody>
 </table>

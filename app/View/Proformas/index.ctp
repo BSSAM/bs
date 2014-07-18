@@ -25,6 +25,8 @@
                                 <thead>
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
+                                        
+                                        <th class="text-center">ID</th>
                                         <th class="text-center">Sales Orders No</th>
                                         <th class="text-center">Reg Date</th>
                                         <th class="text-center">Branch</th>
@@ -36,22 +38,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?PHP if(!empty($salesorder )): ?>
-                                     <?php foreach($salesorder as $salesorder_list): ?>
+                                    <?PHP if(!empty($proforma )): ?>
+                                     <?php foreach($proforma as $salesorder_list): ?>
                                     <tr>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['branchname'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['customername'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
-                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['ref_no'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['id'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['salesorderno'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['reg_date'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['customername'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['phone'] ?></td>
+                                         <td class="text-center"><?PHP echo $salesorder_list['Proforma']['email'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php //echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                
                                                 
                                             </div>
+                                            <?php echo $this->Form->postLink('PDF',array('action'=>'pdf',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
+                                            <?php echo $this->Form->postLink('XLS',array('action'=>'xls',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
+                                            <?php echo $this->Form->postLink('WORD',array('action'=>'word',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

@@ -9,6 +9,23 @@ class Proforma extends AppModel
 {
     //public $actsAs  =   'Containable';
     //var $name   =   'Deliveryorder';
-    
+   
+    public $belongsTo = array(
+        'Customer' => array(
+            'className' => 'Customer',
+            'foreignKey' => 'customer_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'Salesorder' => array(
+            'className' => 'Salesorder',
+            'foreignKey' => 'salesorderno',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        
+        );
 
 }
