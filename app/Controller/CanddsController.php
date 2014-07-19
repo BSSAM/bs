@@ -13,7 +13,8 @@ class CanddsController extends AppController
                             'Instrument','Brand','Customer','Device','Salesorder','Description');
 public function index()
 {
-    
+     $data = $this->Candd->find('all');
+     $this->set('candd', $data);
 }
 public function add()
 {
