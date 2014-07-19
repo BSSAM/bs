@@ -100,6 +100,21 @@ class FileuploadsController extends AppController
      $customer_quotation=$this->Quotation->find('first',array('conditions'=> array('Quotation.quotationno'=>$id)));
      $this->set(compact('customer_quotation'));  
     }
+    public function individual($id=NULL)
+    {
+      
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Procedures
+         *  Permission : add 
+         *  Description   :   add Procedures Details page
+         *******************************************************/
+     $this->Session->write('sess_quotation_id',$id);
+     
+     $customer_quotation=$this->Quotation->find('first',array('conditions'=> array('Quotation.quotationno'=>$id)));
+     $this->set(compact('customer_quotation'));  
+    }
     public function Customer_quotation_list($id=NULL)
     {
         $customer_detatils  =   $this->Customer->find('first',array('conditions'=> array('Customer.id'=>$id)));

@@ -165,8 +165,7 @@ class LabprocessesController extends AppController
                     $approved_device = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_approved_lab' => 1,)));
                     $approved = Hash::extract($approved_device,'{n}.Description.id');
                     $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'delivery')));
-                    $str=NULL;$d=date("d");$m=date("m");$y=date("Y");$t=time();
-                    $dmt='BDO'.($d+$m+$y+$t);
+                    $dmt=$this->random('deliveryorder');
                     $track_id='BSTRA'.(rand(0,89966587));
                     $po_id='BSPO'.(rand(0,89966587));
                     $delivery['Deliverorder']   =  $salesorder_list['Salesorder'];

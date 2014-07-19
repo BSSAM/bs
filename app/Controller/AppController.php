@@ -34,7 +34,7 @@ App::uses('Controller', 'Controller');
         public $uses    =   array('Description','Random');
         public function beforeFilter()
         {
-
+                
             $sess_username = $this->Session->read('sess_username');
             if(isset($sess_username))
             {
@@ -48,9 +48,7 @@ App::uses('Controller', 'Controller');
                 }
             }
             $this->set('control',$this->params['controller']);
-
-            /************************************** User Role ***************************************************
-            */
+            /************************************** User Role ****************************************************/
              $id = $this->Session->read('sess_userrole');//pr($id);
              $this->loadModel('Userrole');
              //$userrole = 0;
@@ -63,11 +61,7 @@ App::uses('Controller', 'Controller');
              $user_role = unserialize($ca);
              $this->set('user_role', $user_role);
              }
-                
-             
-             
-             /****************************************************************************************************
-            */
+             /*****************************************************************************************************/
              //$this->random();
         }
         public function userrole_permission()

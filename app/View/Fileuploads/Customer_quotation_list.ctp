@@ -46,9 +46,11 @@
                                            </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="gi gi-upload"></i> Upload files',array('action'=>'add',$quotation['Quotation']['quotationno']),array('data-toggle'=>'tooltip','title'=>'Upload files to '.$quotation['Quotation']['customername'],'class' => 'btn  btn-xs btn-primary','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('<i class="gi gi-sort"></i> Overall',array('action'=>'add',$quotation['Quotation']['quotationno']),array('data-toggle'=>'tooltip','title'=>'Upload files to '.$quotation['Quotation']['customername'],'class' => 'btn  btn-xs btn-primary','escape'=>false)); ?>
                                                 <?php //echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$clientpo_list['Clientpo']['quotation_id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
+                                            <?php echo $this->Html->link('<i class="gi gi-file_import"></i> Individual',array('action'=>'individual',$quotation['Quotation']['quotationno']),array('data-toggle'=>'tooltip','title'=>'Upload files to '.$quotation['Quotation']['customername'],'class' => 'btn  btn-xs btn-primary','escape'=>false)); ?>
+                                                
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

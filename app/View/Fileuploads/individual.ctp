@@ -26,15 +26,20 @@
                     <!-- BASIC WIZARD -->
                     <div id="basicWizard" class="basic-wizard">
                         <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
-                            <li class="active"><a href="#tab1" data-toggle="tab"> Overall File Upload</a></li>
+                            <li class="active"><a href="#tab1" data-toggle="tab"> Individual File Upload</a></li>
                        </ul>
                         <div class="nav-pills-border-color"></div>
                         <br><br>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="val_job_type">Select Job Type</label>
+                            <div class="col-md-4">
+                                <?php echo $this->Form->input('jobtype', array('id' => 'val_job_type', 'class' => 'select-chosen required', 'options' =>array('Quotation'=>'Quotation ','Purchase order'=>'Purchase order ','Salesorder'=>'Sales Order','Delivery order'=>'Delivery Order','Invoice'=>'Invoice'), 'label' => false,'empty'=>'Please Select the Job Type', 'name' => 'jobtype_id', 'style' => 'width: 250px; display: none;')); ?>
+                            </div>
+                        </div>
+                        <br><br>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
-                                <?PHP echo $this->element('Fileuploads/overall'); ?>
-                            </div>
-                            
+                                <?PHP echo $this->element('Fileuploads/individual'); ?>
                     </div><!-- panel-body -->
                    
                 </div>

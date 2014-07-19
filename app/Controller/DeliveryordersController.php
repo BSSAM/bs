@@ -19,7 +19,6 @@
         }
         public function add()
         {
-            
             $dmt = $this->random('deliveryorder');
             $this->set('deliveryorderno', $dmt);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
@@ -31,9 +30,7 @@
             {
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
-                    /******************
-                        * Data Log
-                        */
+                    /******************* Data Log*/
                         $this->request->data['Logactivity']['logname']   =   'Delivery Order';
                         $this->request->data['Logactivity']['logactivity']   =   'Add DeliveryOrder';
                         $this->request->data['Logactivity']['logid']   =   $dmt;
