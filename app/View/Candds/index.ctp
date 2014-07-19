@@ -29,9 +29,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-                                    vhvgjhvj
-                                    
                                     <?php foreach($candd as $candd_list): ?>
                                        
                                     <tr <?php if($candd_list['Instrument']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
