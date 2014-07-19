@@ -67,5 +67,12 @@ class LabprocessHelper extends AppHelper
         }
         return $data;
     }
-   
+    public function find_priority_type($id = null)
+    {
+        APP::import('Model','Priority');
+        $this->Priority   =   new Priority();
+        $pri_type = $this->Priority->findById($id);
+       // pr(count($data_count[0]['Description']));exit;
+        return $pri_type['Priority']['priority'];
+    }
 }

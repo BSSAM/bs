@@ -32,7 +32,15 @@ App::uses('Helper', 'View');
 class SalesorderHelper extends AppHelper 
 {
     public $uses    =   array('Salesorder','Description');
-    
+    public function query_total($id = null)
+    {
+        APP::import('Model','Salesorder');
+        $this->Salesorder   =   new Salesorder();
+        
+        $data_count = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
+      
+        return count($data_count[0]['Description']);
+    }
     public function query_checking($id = null)
     {
         APP::import('Model','Salesorder');
@@ -41,6 +49,7 @@ class SalesorderHelper extends AppHelper
        // pr(count($data_count[0]['Description']));exit;
         return count($data_count[0]['Description']);
     }
+    
     public function query_processing($id = null)
     {
         APP::import('Model','Salesorder');
@@ -49,14 +58,7 @@ class SalesorderHelper extends AppHelper
        // pr(count($data_count[0]['Description']));exit;
         return count($data_count[0]['Description']);
     }
-    public function query_total($id = null)
-    {
-        APP::import('Model','Salesorder');
-        $this->Salesorder   =   new Salesorder();
-        $data_count = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
-       // pr(count($data_count[0]['Description']));exit;
-        return count($data_count[0]['Description']);
-    }
+    
     
     public function query_pending($id = null)
     {

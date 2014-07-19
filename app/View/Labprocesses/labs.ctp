@@ -1,12 +1,4 @@
-<script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
-//    
-//    function Controller($scope, $http)
-//    {
-//        $scope.show_delay = true;
-//        $scope.delay = "None";
-//    }
-</script>
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script type="text/javascript">
     $(function() {
     $('.edit_delay').editable(path_url+'/Labprocesses/update_delay', {
@@ -79,7 +71,6 @@
     </div>
     <?php echo $this->Form->end(); ?>
 </div>
-                   
 <!-- panel -->
 <?php echo $this->Form->end(); ?>
 <?php echo $this->Html->script('pages/uiProgress'); ?>

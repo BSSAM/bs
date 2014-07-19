@@ -51,7 +51,6 @@
                                             </div>
                                                 <?PHP //echo $this->html->link('View', array('url'=>'http://www.google.com'), array('title' => 'View','data-target'=>'#myModal','class' => 'btn btn-alt btn-xs btn-primary', 'data-toggle' => 'modal'));  ?>
 <!--                                            <a href="Customers" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">Launch First</a>-->
-                                            
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -59,7 +58,6 @@
                                    
                                 </tbody>
                             </table>
-                             
 <!--                            <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -67,20 +65,15 @@
                                 </div>
                             </div>-->
 
- 
-                         <?php echo $this->Html->script('pages/uiProgress'); ?>
-                            <script>$(function(){ UiProgress.init(); });</script>
-                                
-                                <?php if($this->Session->flash()!='') { ?>
-                            <script> var UiProgress = function() {
-                                
-                                // Get random number function from a given range
-                                var getRandomInt = function(min, max) {
-                                    return Math.floor(Math.random() * (max - min + 1)) + min;
-                                };
-                            }();
-                            $('#modal').load('Customers').dialog('open');
-                       
-                            </script> 
-                            
-                            <?php } ?>
+                    <?php echo $this->Html->script('pages/uiProgress'); ?>
+                    <script>$(function(){ UiProgress.init(); });</script>
+                    <?php if ($this->Session->flash() != '') { ?>
+                        <script> var UiProgress = function() {
+                            // Get random number function from a given range
+                            var getRandomInt = function(min, max) {
+                                return Math.floor(Math.random() * (max - min + 1)) + min;
+                            };
+                        }();
+                        $('#modal').load('Customers').dialog('open');
+                        </script> 
+                    <?php } ?>

@@ -30,14 +30,13 @@
                    $device_current_status   =  $this->request->data['quotation_device_status']; 
                    if($device_current_status=='pending')
                    {
-                         $salesorder_details    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$this->request->data['Salesorder']['quotation_id']),'contain'=>array('Description'=>array('Instrument','Brand','Range','Department','conditions'=>array('Description.pending'=>'1')),'Customer'),'recursive'=>3));
-                        
-                         if($salesorder_details['Customer']['invoice_type_id']!=3)
-                         {
+                        $salesorder_details    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$this->request->data['Salesorder']['quotation_id']),'contain'=>array('Description'=>array('Instrument','Brand','Range','Department','conditions'=>array('Description.pending'=>'1')),'Customer'),'recursive'=>3));
+                        if($salesorder_details['Customer']['invoice_type_id']!=3)
+                        {
                             $this->set('sale',$salesorder_details);
                             $this->set('status_id','pending_status');
                             $this->request->data =   $salesorder_details;
-                         }
+                        }
                    }
                    else
                    {
@@ -69,7 +68,7 @@
                     $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
                     $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
                     $quotation_id   =   $this->request->data['Salesorder']['quotation_id'];
-                   
+                    
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         
@@ -82,7 +81,6 @@
                                 $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1,'Description.pending'=>0),array('Description.customer_id'=>$customer_id,'Description.pending'=>1));
                             }
                             $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
-                       
                         }
                         else
                         {
@@ -115,25 +113,25 @@
         public function edit($id=NULL)
         {
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
-            $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
-            $this->set('payment',$payment);
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set('service',$services);
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id),'recursive'=>'2'));
             $this->set('salesorder',$salesorder_details);
             //pr($salesorder_details);exit;
+            
+            $this->set(compact('priority','payment','service'));
             if($this->request->is(array('post','put')))
             {
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                 $this->Salesorder->id=$id;
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
-                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
-                    if(!empty($device_node))
-                    {
-                        $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$id.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
-                    }
+//                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
+//                    if(!empty($device_node))
+//                    {
+//                        $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$id.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
+//                    }
                     $this->Session->setFlash(__('Salesorder has been Updated Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -304,7 +302,7 @@
             $device_status =  $this->request->data['device_status'];
             if($device_status=='pending')
             {
-                $data = $this->Description->find('all',array('conditions'=>array('Description.pending'=>1,'Description.is_deleted'=>0)));
+                $data = $this->Description->find('all',array('conditions'=>array('Description.pending'=>1,'Description.is_deleted'=>0),'group' => array('Salesorder.salesorderno')));
                 $c = count($data);
                 if($c!=0)
                 {

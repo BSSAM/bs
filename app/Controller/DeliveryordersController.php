@@ -14,13 +14,13 @@
         public function index()
         {
             //$this->Quotation->recursive = 1; 
-            $delivery_data = $this->Deliveryorder->find('all',array('order' => array('Deliveryorder.id' => 'DESC')));
+            $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
             $this->set('deliveryorders', $delivery_data);
         }
         public function add()
         {
             
-            $str=NULL;$dmt = $this->random('deliveryorder');
+            $dmt = $this->random('deliveryorder');
             $this->set('deliveryorderno', $dmt);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $this->set('payment',$payment);
@@ -31,6 +31,17 @@
             {
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
+                    /******************
+                        * Data Log
+                        */
+                        $this->request->data['Logactivity']['logname']   =   'Delivery Order';
+                        $this->request->data['Logactivity']['logactivity']   =   'Add DeliveryOrder';
+                        $this->request->data['Logactivity']['logid']   =   $dmt;
+                        $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                        //pr($a);exit;
+
                     $this->Session->setFlash(__('Delivery Order has been Added Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -58,10 +69,9 @@
         }
         public function delete($id=NULL)
         {
-            
             if($id!='')
             {
-                if($this->Deliveryorder->delete($id))
+                if($this->Deliveryorder->updateAll(array('Deliveryorder.is_deleted'=>0),array('Deliveryorder.id'=>$id)));
                 {
                     $this->Session->setFlash(__('The Delivery order has been deleted',h($id)));
                     return $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
@@ -101,7 +111,7 @@
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
-            $data = $this->Salesorder->find('all',array('conditions'=>array('salesorderno LIKE'=>'%'.$sales_id.'%','is_approved'=>'1')));
+            $data = $this->Salesorder->find('all',array('conditions'=>array('salesorderno LIKE'=>'%'.$sales_id.'%','Salesorder.is_approved'=>1)));
             $c = count($data);
             if(!empty($c))
             {
@@ -126,7 +136,7 @@
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sales_id'];
             $this->autoRender = false;
-            $sales_data = $this->Salesorder->find('first',array('conditions'=>array('salesorderno'=>$sales_id,'is_approved'=>'1'),'recursive'=>'2'));
+            $sales_data = $this->Salesorder->find('first',array('conditions'=>array('salesorderno'=>$sales_id,'Salesorder.is_approved'=>'1'),'recursive'=>'2'));
             if(!empty($sales_data))
             {
                 echo json_encode($sales_data);

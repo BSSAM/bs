@@ -16,7 +16,7 @@ class Salesorder extends AppModel
         'Description' => array(
             'className' => 'Description',
             'foreignKey' => 'salesorder_id',
-            'conditions' => array('is_deleted'=>0,'pending'=>0),
+            'conditions' => array('is_deleted'=>0),
             'fields' => '',
             'order' => '',
             'limit' => '',

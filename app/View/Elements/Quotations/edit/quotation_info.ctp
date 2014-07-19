@@ -67,27 +67,23 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>  
     <div class="col-md-4">
-        <?PHP if($po_list!=''){$pos =$po_list ;$readonly    ="readonly";}else{$pos ='' ;$readonly    ="";}?>
+        <?PHP if(!empty($this->request->data['Clientpo'])){$pos =$po_list ;$readonly    ="readonly";}else{$pos =$this->request->data['Quotation']['ref_no'];$readonly    ="";}?>
         <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','value'=>$pos,$readonly)); ?>
     </div>
      <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
                                                 'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text')); ?>
-        
     </div>
 </div>
 <div class="form-group">
-    
-   
      <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('priority', array('id'=>'val_priority','class'=>'form-control select-chosen',
             'label'=>false,'options'=>$priority)); ?>
     </div>
-   
 </div>
 <div class="form-group">
     

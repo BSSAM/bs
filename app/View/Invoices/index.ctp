@@ -1,7 +1,6 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
-
                     <h1>
                         <i class="gi gi-user"></i>Invoice
                     </h1>
@@ -13,13 +12,11 @@
                         
                     </ul>
                     <!-- END Forms General Header -->
-
             <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
-                                
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
@@ -31,9 +28,10 @@
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active invoice_active"><a href="#tab1" data-toggle="tab">Invoice</a></li>
-                                                <li class=""><a href="#tab2" data-toggle="tab">Ready to Prepare Invoice</a></li>
-                                                <li class=""><a href="#tab3" data-toggle="tab">Ready to Prepare SO Full Invoice</a></li>
-                                                <li class=""><a href="#tab4" data-toggle="tab">Ready to Prepare SO Partial Invoice</a></li>
+                                                <li class=""><a href="#tab3" data-toggle="tab"> Prepare PO Full Invoice</a></li>
+                                                <li class=""><a href="#tab5" data-toggle="tab"> Prepare QO Full Invoice</a></li>
+                                                <li class=""><a href="#tab4" data-toggle="tab"> Prepare SO Full Invoice</a></li>
+                                                <li class=""><a href="#tab5" data-toggle="tab"> Prepare DO Full Invoice</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
@@ -48,6 +46,9 @@
                                                     <?PHP echo $this->element('Invoices/preparefull'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab4">
+                                                    <?PHP echo $this->element('Invoices/preparepartial'); ?>
+                                                </div>
+                                                <div class="tab-pane" id="tab5">
                                                     <?PHP echo $this->element('Invoices/preparepartial'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
