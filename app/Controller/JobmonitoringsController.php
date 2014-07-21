@@ -23,7 +23,7 @@ class JobmonitoringsController extends AppController
     {
             $this->set('job_sales_no',$id);
             $description_list    =   $this->Description->find('all',array('conditions'=>array('Description.is_approved'=>1),'recursive'=>2));
-            
+            pr($description_list);exit;
             $deliver = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$id)));
             
             if($deliver!=''):
@@ -35,7 +35,7 @@ class JobmonitoringsController extends AppController
             
             if($this->request->is(array('post','put')))
             {
-                pr($this->request->data);exit;
+               
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                 $this->Salesorder->id=$id;
                 

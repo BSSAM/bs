@@ -15,19 +15,15 @@ class Instrument extends AppModel
             array(
                 'className' => 'InstrumentBrand',
                 'foreignKey' => 'instrument_id',
-               
             ),
         'InstrumentProcedure' =>
             array(
                 'className' => 'InstrumentProcedure',
-                
                 'foreignKey' => 'instrument_id',
-               
             ),
         'InstrumentRange' =>
             array(
                 'className' => 'InstrumentRange',
-              
                 'foreignKey' => 'instrument_id',
                
             ),

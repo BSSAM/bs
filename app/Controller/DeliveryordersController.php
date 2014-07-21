@@ -15,6 +15,7 @@
         {
             //$this->Quotation->recursive = 1; 
             $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
+           
             $this->set('deliveryorders', $delivery_data);
         }
         public function add()
@@ -46,10 +47,10 @@
         }
         public function edit($id=NULL)
         {
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set('service',$services);
-            $deliveryorder_details=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>3));
-            $this->set('deliveryorder',$deliveryorder_details);
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
+           
+            $this->set(compact('service','deliveryorder'));
             if($this->request->is(array('post','put')))
             {
                 $this->Deliveryorder->id=$id;
@@ -61,7 +62,7 @@
             }
             else
             {
-                $this->request->data=$deliveryorder_details;
+                $this->request->data=$deliveryorder;
             }
         }
         public function delete($id=NULL)

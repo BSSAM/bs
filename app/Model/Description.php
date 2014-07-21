@@ -45,7 +45,7 @@ class Description extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => '',
-           
+            'counterCache' => true,
         ),
          'Range' => array(
             'className' => 'Range',

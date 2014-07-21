@@ -3,17 +3,18 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('customer_name', array('id'=>'deli_customer','class'=>'form-control','readonly'=>'readonly','label'=>false,'name'=>'deli_customer_name')); ?>
     </div>
-        <label class="col-md-2 control-label" for="del_address_id">Delivery Addresses List</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.delivery_address', array('id'=>'del_address_id','class'=>'form-control',
-            'label'=>false,'empty'=>'Select Delivery Address List','type'=>'select')); ?>
-    </div>
-</div>
-<div class="form-group">
     <label class="col-md-2 control-label" for="del_dueamount">Due Amount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.due_amount', 
                 array('id'=>'del_dueamount','class'=>'form-control','label'=>false,'type'=>'text','readonly'=>'readonly')); ?>
+    </div>
+</div>
+<div class="form-group">
+   
+    <label class="col-md-2 control-label" for="del_address_id">Delivery Addresses List</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('Deliveryorder.delivery_address', array('id'=>'del_address_id','class'=>'form-control',
+            'label'=>false,'empty'=>'Select Delivery Address List','type'=>'select')); ?>
     </div>
     <label class="col-md-2 control-label" for="del_customer_address">Customer Address</label>
     <div class="col-md-4">
@@ -22,15 +23,16 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="del_email">Email</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.email', array('id'=>'del_email','class'=>'form-control',
-                                                'label'=>false,'readonly'=>'readonly')); ?>
-    </div>
     <label class="col-md-2 control-label" for="del_attn">ATTN</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.attn', array('id'=>'del_attn','class'=>'form-control','label'=>false,'type'=>'select')); ?>
     </div>
+    <label class="col-md-2 control-label" for="del_email">Email</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('Deliveryorder.email', array('id'=>'del_email','class'=>'form-control',
+                                       'label'=>false,'readonly'=>'readonly')); ?>
+    </div>
+    
 </div>
 <div class="form-group">
     
@@ -56,15 +58,14 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">Your Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.your_reference_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
+        <?php echo $this->Form->input('Deliveryorder.po_reference_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
+<!--    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.our_reference_no', array('id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
-    </div>
-    
+        <?php //echo $this->Form->input('Deliveryorder.our_reference_no', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
+    </div>-->
 </div>
 
 

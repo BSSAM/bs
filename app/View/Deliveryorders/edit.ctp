@@ -59,9 +59,11 @@ if(customer!='')
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
-                                <div class="block-title">
+                                <div class="block-title clearfix">
                                     
-                                    <h2></h2>
+                                    <h2 class="pull-right ">
+                                       Track Id : <?PHP echo $this->request->data['Deliveryorder']['our_reference_no']; ?>
+                                    </h2>
                                 </div>
                                 <!-- END Form Elements Title -->
 
@@ -81,7 +83,6 @@ if(customer!='')
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
-                                            
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
                                                     <?PHP echo $this->element('Deliveryorders/edit/deliveryorder_info'); ?>
@@ -94,13 +95,10 @@ if(customer!='')
                                         </div><!-- panel-body -->
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-10">
-                                                
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-                                                
+                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                            <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel',array('controller'=>'Deliveryorders','action'=>'index') ,array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                     <!-- panel -->
                                     <?php echo $this->Form->end(); ?>

@@ -28,7 +28,8 @@ class Device extends AppModel
             'foreignKey' => 'quotation_id',
             'conditions' => '',
             'fields' => '',
-            'order' => ''
+            'order' => '',
+            'counterCache' => true,
         ),
         'Range' => array(
             'className' => 'Range',

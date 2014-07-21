@@ -7,5 +7,5 @@
  */
 class Labprocess extends AppModel
 {
-    public $actsAs  =  array('Containable') ;
+    public $actsAs  =  array('Containable');
 }

@@ -9,19 +9,13 @@ class DelDescription extends AppModel
 {
     var $name   =   'DelDescription';
     public $belongsTo = array(
-        'Description' => array(
-            'className' => 'Description',
-            'foreignKey' => 'description_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
         'Deliveryorder' => array(
             'className' => 'Deliveryorder',
             'foreignKey' => 'deliveryorder_id',
             'conditions' => '',
             'fields' => '',
-            'order' => ''
+            'order' => '',
+            'counterCache' => true,
         ),
         'Salesorder' => array(
             'className' => 'Salesorder',
@@ -29,6 +23,35 @@ class DelDescription extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+         'Instrument' => array(
+            'className' => 'Instrument',
+            'foreignKey' => 'instrument_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'Brand' => array(
+            'className' => 'Brand',
+            'foreignKey' => 'brand_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+         'Department' => array(
+            'className' => 'Department',
+            'foreignKey' => 'department_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+         'Range' => array(
+            'className' => 'Range',
+            'foreignKey' => 'delivery_range',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+           
         )
        
         );

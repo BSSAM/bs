@@ -45,7 +45,7 @@
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['due_date'] ?></td>
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['reg_date'] ?></td>
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['branchname'] ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['Customer']['customername']; ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Customer']['Customertagname']; ?></td>
                     <td class="text-center">
                     <?PHP 
                     $count_desc =  count($salesorder['Description']); 
@@ -82,8 +82,7 @@
                     
                     ?>
                     </td>
-                    <td class="text-center"><?php $count_desc =  count($salesorder['Description']);  echo $count_desc;?>
-                    </td>
+                    <td class="text-center"><?php $count_desc =  count($salesorder['Description']);  echo $count_desc;?></td>
                     <td class="text-center"><?PHP $count_p = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['processing'] == '1'): $count_p++; endif; endforeach; if($count_p == ''): echo '0'; else: echo $count_p; endif;?></td>
                     <td class="text-center"><?PHP $count_c = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['checking'] == '1'): $count_c++; endif; endforeach; if($count_c == ''): echo '0'; else: echo $count_c; endif;?></td>
                     <td class="text-center"><?PHP $count_r = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['ready_deliver'] == '1'): $count_r++; endif; endforeach; if($count_r == ''): echo '0'; else: echo $count_r; endif;?></td>

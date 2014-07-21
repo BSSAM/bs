@@ -15,7 +15,6 @@
             </thead>
             <tbody>
                 <?PHP if (!empty($labprocess)): ?>
-                
                 <?php foreach ($labprocess as $labprocess_list): ?>
                 <tr>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['salesorderno'] ?></td>

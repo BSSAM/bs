@@ -37,18 +37,14 @@
         </div>
         <div class="">
             <div class="col-sm-6">
-                
                 <div class="block">
                     <div class="block-title">
                         <h2><strong>SO</strong> List Status</h2>
                     </div>
-                
                    <?PHP 
                    $options = array('out' => 'Outstanding SO List', 'run' => 'Running SO List','overdue'=>'Overdue SO List');?>
-                
                    <?php      
                    $attributes = array('legend' => false,'value'=>'out','class'=>'so_list_button radio-align','name'=>'solist'); ?>
-
                    <?php      
                    echo $this->Form->radio('solist', $options, $attributes);
                    ?>
@@ -61,9 +57,9 @@
                         <h2><strong>Call</strong> Location</h2>
                     </div>
                     <?PHP 
-                   $options = array('all' => 'All', 'Inlab' => 'In Lab','subcontract'=>'Sub Contract','onsite'=>'On Site');
-                   $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button radio-align-call','name'=>'calllocation');
-                   echo $this->Form->radio('calllocation', $options, $attributes);
+                        $options = array('all' => 'All', 'Inlab' => 'In Lab','subcontract'=>'Sub Contract','onsite'=>'On Site');
+                        $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button radio-align-call','name'=>'calllocation');
+                        echo $this->Form->radio('calllocation', $options, $attributes);
                    ?>
                     </div>
             </div>
