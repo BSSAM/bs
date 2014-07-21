@@ -166,6 +166,29 @@ $(document).ready(function(){
 	});
     });
     
+    /************************For Delivery order Approval Script*********************************/
+   $(document).on('click','.approve_deliveryorder',function(){
+       var val_salesorderno=$('#val_salesorderno').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_salesorderno,
+            url: path+'Salesorders/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+   /************************For Delivery order Approval End*********************************/
+    
     
 })
 
@@ -179,3 +202,4 @@ $(document).ready(function(){
 //		return false;
 //	});
 //});
+

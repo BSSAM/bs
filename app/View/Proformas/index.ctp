@@ -34,7 +34,7 @@
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
-                                        <th class="text-center">Action</th>
+                                        <th class="text-center">Download</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -1,6 +1,5 @@
-
-<h1>
-    <i class="gi gi-user"></i>Tag lists
+<h1 class="text-center">
+    <i class="gi gi-user"></i><div class="label label-six text-center" style="line-height: 61px;"><?php echo $cust; ?></div>
 </h1>
 </div>
 </div>

@@ -298,7 +298,7 @@
                                     </li><?php } ?>
                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                      <li>
-                                          <a href="#"><?php echo 'C and D Info'; ?></a>
+                                          <?php echo $this->Html->link('C & D Info',array('controller'=>'Candds','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
                                    
                                     

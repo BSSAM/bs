@@ -28,7 +28,9 @@ class CustomertaglistsController extends AppController
          * *****************************************************
          */
         $this->set('customer_id',$id);
-        $maintag_data = $this->Customer->find('first',array('conditions'=>array('Customer.status'=>1,'Customer.id'=>$id,'is_deleted'=>0),'fields'=>array('customergroup_id')));
+        $maintag_data = $this->Customer->find('first',array('conditions'=>array('Customer.status'=>1,'Customer.id'=>$id,'is_deleted'=>0),'fields'=>array('Customername','customergroup_id')));
+        $this -> set('cust',$maintag_data['Customer']['Customername']);
+        
         if(!empty($maintag_data))
         {
             $taglist_data = $this->Customer->find('all',array('conditions'=>array('Customer.status'=>1,'customergroup_id'=>$maintag_data['Customer']['customergroup_id'],'is_deleted'=>0),'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
