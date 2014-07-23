@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 class JobmonitoringsController extends AppController
 {
     public $helpers = array('Html','Form','Session');
@@ -23,8 +22,8 @@ class JobmonitoringsController extends AppController
     {
             $this->set('job_sales_no',$id);
             $description_list    =   $this->Description->find('all',array('conditions'=>array('Description.is_approved'=>1),'recursive'=>2));
-            pr($description_list);exit;
-            $deliver = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$id)));
+//            pr($description_list);exit;
+            $deliver = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$id,'Deliveryorder.is_approved'=>1)));
             
             if($deliver!=''):
                 $this->set('deliver_order',$deliver);
@@ -32,10 +31,9 @@ class JobmonitoringsController extends AppController
                 $this->set('deliver_order',0);
             endif;
     
-            
             if($this->request->is(array('post','put')))
             {
-               
+               pr($this->request->data);exit;
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                 $this->Salesorder->id=$id;
                 

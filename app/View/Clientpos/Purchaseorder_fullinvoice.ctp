@@ -1,6 +1,6 @@
 <script>
-    var path_url='<?PHP echo Router::url('/',true); ?>'
-    </script>
+    var path_url = '<?PHP echo Router::url('/', true); ?>'
+</script>
 <h1>
     <i class="gi gi-user"></i>
     Purchase Order Form  -  Purchase Order  Full Invoice
@@ -8,8 +8,8 @@
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
-                          <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Client Po List',array('controller'=>'Clientpos','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Home', array('controller' => 'Dashboards', 'action' => 'index')); ?></li>
+                        <li><?php echo $this->Html->link('Client Po List', array('controller' => 'Clientpos', 'action' => 'index')); ?></li>
                         <li>Purchase Order Full Invoice</li>
                     </ul>
                     <!-- END Forms General Header -->
@@ -20,8 +20,6 @@
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
                                     <h2 class="pull-left"><small><code>Note</code> Type manually for Purchase order edit For Example :CPO123</small>  </h2>
-                                    
-                                                    
                                     <h2 class="pull-right">Track Id : <?PHP //echo $po_first['Clientpo']['track_id']; ?> </h2>
                                 </div>
                                 <!-- END Form Elements Title -->
@@ -41,26 +39,17 @@
                                             <th class="text-center">Sales order Details</th>
                                             <th class="text-center">Delivery order Details</th>
                                             <th class="text-center">Invoice Details</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td class="text-center">
-                                            <div class="form-group">
-                                                <div class="col-sm-13">
-                                                        <div class="row col-sm-12">
-                                                            <?php echo $this->Form->input('clientpo_no', array('id' => 'purchase_order','class'=>'form-control','placeholder' => 'Purchase Order No', 'label' => false, 'name' => 'clientpo_no','autoComplete'=>'off')); ?>
-                                                             <div id="po_result">
-                                                             </div>
-                                                        </div>
-                                                </div>
-                                                
+                                            <div class="form-group col-md-7">
+                                                    <?php echo $this->Form->input('clientpo_no', array('id' => 'purchase_order', 'class' => 'form-control', 'placeholder' => 'Purchase Order No', 'label' => false, 'name' => 'clientpo_no', 'autoComplete' => 'off')); ?>
+                                                    <div id="po_result"></div>
                                             </div>
-                                                <div class="form-group">
-                                                <div class="col-sm-8">
-                                                    <?php echo $this->Form->input('po_quantity', array('id'=>'val_pocount','class'=>'form-control','placeholder' => 'Count','label'=>false,'name'=>'po_quantity')); ?>
-                                                </div>
+                                            <div class="form-group col-md-5">
+                                                <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'placeholder' => 'Count', 'label' => false, 'name' => 'po_quantity')); ?>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary generate_po" id="purchase_order" type="button">Generate Po</button>
                                                 </span>
@@ -81,7 +70,6 @@
                                             <div class="po_based_clientpo">
                                             </div>
                                         </td>
-                                        
                                         <td class="text-center">
                                             <div class="form-group">
                                                 <div class="col-sm-11">
@@ -95,17 +83,14 @@
                                         
                                         <td class="text-center">
                                             <div class="form-group">
-                                                
                                                     <div class="col-sm-11">
                                                         <?php echo $this->Form->input('deliveryorder_id', array('id' => 'val_deliveryorderno', 'class' => 'form-control', 'placeholder' => 'Delivery Order No', 'label' => false, 'name' => 'deliveryorder_id', 'readonly' => 'readonly', 'type' => 'text', 'value' => '')); ?>
                                                     </div>
-                                                   
                                                     <div class="col-sm-6">
                                                         <?php echo $this->Form->input('deliver_quantity', array('id' => 'val_deliveryordercount', 'class' => 'form-control', 'label' => false, 'name' => 'deliver_quantity', 'readonly' => 'readonly', 'value' => '','placeholder' => 'DO Count')); ?>
                                                     </div>
                                             </div>
                                         </td>
-                                        
                                         <td class="text-center">
                                             <div class="form-group">
                                                     <div class="col-sm-12">
@@ -113,7 +98,6 @@
                                                     </div>
                                             </div>
                                         </td>
-                                        
                                     </tr>
                                 </tbody>
                             </table>

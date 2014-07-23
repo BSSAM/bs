@@ -16,7 +16,6 @@
     
 <!-- Datatables Content -->
 <div class="block full">
-  
     <div class="table-responsive">
         <div class="so_paste">
         <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -79,7 +78,6 @@
                     endif;
                     
                     echo $status;
-                    
                     ?>
                     </td>
                     <td class="text-center"><?php $count_desc =  count($salesorder['Description']);  echo $count_desc;?></td>

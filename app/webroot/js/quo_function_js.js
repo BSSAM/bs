@@ -103,6 +103,7 @@ $(document).ready(function(){
     /********************************************Quotation Instrument search Id Select Script************************************************/
     $(document).on('click','.instrument_id',function(){
         var instrument_id=$(this).attr('id');
+        var customer_id =   $('#QuotationCustomerId').val();
         var ins_text=$(this).text();
         $('#val_description').val(ins_text);
         $('.ins_error').hide();
@@ -110,7 +111,7 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: path+"Quotations/get_brand_value",
-            data: 'instrument_id='+instrument_id,
+            data: 'instrument_id='+instrument_id+'&customer_id='+customer_id,
             cache: false,
             
             success: function(data)

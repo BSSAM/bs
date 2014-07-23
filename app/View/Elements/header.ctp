@@ -228,8 +228,8 @@
                             </li>-->
                             
                              <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
-                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads')?'style=display:block':'';?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
+                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas')?'style=display:block':'';?>>
                                     <?php if($user_role['job_quotation']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Clientpos')?'active':''; ?>
@@ -298,6 +298,7 @@
                                     </li><?php } ?>
                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                      <li>
+                                          <?php  $a=($control == 'Candds')?'active':''; ?>
                                           <?php echo $this->Html->link('C & D Info',array('controller'=>'Candds','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
                                    

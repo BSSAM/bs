@@ -13,7 +13,7 @@
 </div>  
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
-        <h4 class="sub-header text-left"><strong>Instrument List</strong></h4>
+       <h4 class="sub-header"><small><b>Instruments List </b></small></h4>
         <tr>
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>

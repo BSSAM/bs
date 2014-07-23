@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 /* BS V1.0 */
-.success_alert {background-color: #F9FAFC; border: 1px solid #B2D463;  color: #008000;}
+.success_alert {background-color: #464c65; border: 1px solid #464c65;  color: #fff;}
 .failure_alert {background-color: #F9FAFC;  border: 1px solid #FF0000;  color: #FF0000;}
 .alert_box {   background-position: 0 0;    background-repeat: repeat;    border-radius: 5px;    font-size: 15px;margin-bottom: 15px;padding: 8px;ext-indent: 8px;}
 
@@ -38,10 +38,10 @@ and open the template in the editor.
 .subcontract_customer_show:hover{background:#6ad2eb;color:#FFF;cursor:pointer;}
 
 /* For Sales order quotation id track*/
-#quoat_list{position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
-.quotation_single{padding: 13px 0px; max-width: 230px; min-width: 257px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important;}
+#quoat_list{position: absolute;z-index: 999;margin-left: 246px;margin-top: 35px;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
+.quotation_single{padding: 13px 0px; max-width: 230px; min-width: 225px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important;}
 .quotation_single:hover{ background:#6ad2eb; color:#FFF; cursor:pointer;}
-.no_result  {padding: 13px 0px; max-width: 230px; min-width: 257px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important; }
+.no_result  {padding: 13px 0px; max-width: 230px; min-width: 224px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important; }
 .no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}
 
 /* For ClientPO Module Po search*/

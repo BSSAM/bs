@@ -70,7 +70,6 @@
             </tbody>
         </table>
         
-        
         <?php echo $this->Html->script('pages/uiProgress'); ?>
         <script>$(function(){ UiProgress.init(); });</script>
         <?php if ($this->Session->flash() != '') { ?>

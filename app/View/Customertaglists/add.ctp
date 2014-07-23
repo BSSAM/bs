@@ -1,6 +1,5 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
-   
     $(document).on('click','.close',function(){
         var id=$(this).attr('id');
         var hre = $(this).parent('a').attr('href');
@@ -50,7 +49,6 @@
         });
         
     });
-    
      $(document).on('click','.close_project',function(){
         var id=$(this).attr('id');
         var hre = $(this).parent('a').attr('href');
@@ -65,7 +63,6 @@
                 }
             }
         });
-        
     });
 </script>
 <h1>
@@ -142,7 +139,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
+                        <?php echo $this->Form->input('regaddress', array('type'=>'textarea','id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
                     <span class="help-block_login project_name_error">Enter the Registered Address</span>
                     </div>
                 </div>
@@ -165,7 +162,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
+                        <?php echo $this->Form->input('billaddress', array('type'=>'textarea','id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
                     <span class="help-block_login project_name_error">Enter the Billing Address</span>
                     </div>
                 </div>
@@ -189,7 +186,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('deliveryaddress', array('id'=>'val_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress')); ?>
+                        <?php echo $this->Form->input('deliveryaddress', array('type'=>'textarea','id'=>'val_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress')); ?>
                     <span class="help-block_login project_name_error">Enter the Delivery Address</span>
                     </div>
                 </div>

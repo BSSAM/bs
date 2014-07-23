@@ -24,14 +24,14 @@
                             <td class="text-center"><?PHP echo $invoice['Invoice']['id'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Invoice']['approved_date'] ?></td>
                             <td class="text-center"></td>
-                            <td class="text-center"><?PHP echo $invoice['Deliveryorder']['Customer']['customername'] ?></td>
-                            <td class="text-center"><?PHP echo $invoice['Deliveryorder']['customer_address']  ?></td>
+                            <td class="text-center"><?PHP //echo $invoice['Deliveryorder']['Customer']['customername'] ?></td>
+                            <td class="text-center"><?PHP //echo $invoice['Deliveryorder']['customer_address']  ?></td>
 <!--                        <td class="text-center"><?PHP //echo $invoice['Deliveryorder']['phone'] ?></td>
                             <td class="text-center"><?PHP //echo $invoice['Deliveryorder']['email'] ?></td>-->
-                            <td class="text-center"><?PHP echo $invoice['Deliveryorder']['Salesorder']['salesorderno'] ?></td>
+                            <td class="text-center"><?PHP //echo $invoice['Deliveryorder']['Salesorder']['salesorderno'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Deliveryorder']['delivery_order_no'] ?></td>
                             <td class="text-center"><?PHP echo $invoice['Invoice']['track_id'] ?></td>
-                            <td class="text-center"><?PHP echo $invoice['Deliveryorder']['your_reference_no'] ?></td>
+                            <td class="text-center"><?PHP echo $invoice['Deliveryorder']['po_reference_no'] ?></td>
                         </tr>
                         <?PHP endforeach; ?>
                         <?PHP endif; ?>

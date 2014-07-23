@@ -44,7 +44,7 @@ App::uses('Controller', 'Controller');
             { 
                 if(($this->params['controller']!='Logins'))  
                 {
-                return $this->redirect(array('controller' => 'Logins','action'=>'index'));
+                    return $this->redirect(array('controller' => 'Logins','action'=>'index'));
                 }
             }
             $this->set('control',$this->params['controller']);
@@ -127,7 +127,44 @@ App::uses('Controller', 'Controller');
                     $str1 = implode('-', $parts);
                     $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
-                
+                //Customer Tag Id
+                case 'tag':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['tag'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.tag'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
+                //Customer Group Id
+                case 'group':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['group'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.group'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
                 // Instrument Random ID
                 case 'instrument':
                   $random = $this->Random->find('first');

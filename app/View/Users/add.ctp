@@ -61,7 +61,7 @@
                                    
                                         <label class="col-md-2 control-label" for="val_userrole">User Role</label>
                                         <div class="col-md-4">
-                                           <?php echo $this->Form->input('userrole_id', array('id'=>'val_userrole','class'=>'form-control','options' => $userrole,'empty'=>'Enter the User Role','label'=>false,'name'=>'userrole_id')); ?>
+                                           <?php echo $this->Form->input('userrole_id', array('id'=>'val_userrole','class'=>'select-chosen form-control','options' => $userrole,'empty'=>'Enter the User Role','label'=>false,'name'=>'userrole_id')); ?>
                                         </div>
                                    
                                     </div>

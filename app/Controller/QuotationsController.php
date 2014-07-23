@@ -1,5 +1,4 @@
 <?php
-    App::import('Vendor', 'UploadHandler');
     class QuotationsController extends AppController
     {
         public $helpers = array('Html','Form','Session');
@@ -62,7 +61,7 @@
                     
                     /******************/
 
-                    $this->Session->setFlash(__('Quotation has been Added Succefully '));
+                    $this->Session->setFlash(__('Quotation has been added Successfully'));
                     $this->redirect(array('action'=>'index'));
                 }
                
@@ -73,7 +72,6 @@
         {
             $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
             //for Contact person info
-           
             $customer_id    =   $quotations_list['Customer']['id'];
             $salesperson_list    =   $this->CusSalesperson->find('all',array('conditions'=>array('CusSalesperson.customer_id'=>$customer_id)));
             $salespeople         =   '';
@@ -223,6 +221,8 @@
             $customer_id =  $this->request->data['customer_id'];
             $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
             $c = count($instrument_details);
+            if($c>0)
+            {
                 for($i = 0; $i<$c;$i++)
                 { 
                     echo "<div class='instrument_id' align='left' id='".$instrument_details[$i]['Instrument']['id']."'>";
@@ -230,16 +230,21 @@
                     echo "<br>";
                     echo "</div>";
                 }
-            
-            
-            
-            
+            }
+            else
+            {
+                echo "<div  align='left'>";
+                echo 'No Results Found';
+                echo "<br>";
+                echo "</div>"; 
+            }
         }
         public function get_brand_value()
         {
             $this->autoRender = false;
             $instrument_id =  $this->request->data['instrument_id'];
-            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id),'recursive'=>'3'));
+            $customer_id =  $this->request->data['customer_id'];
+            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id),'recursive'=>'3'));
             
             if(!empty($brand_details))
             {

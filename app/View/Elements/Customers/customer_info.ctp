@@ -123,9 +123,8 @@
 
             <!-- Tabs Content -->
             <div class="tab-content_delivery" id="tab-content_delivery">
-                 <?php for($i=0;$i<$data12_count;$i++){ ?>
+                <?php for($i=0;$i<$data12_count;$i++){ ?>
                 <div class="tab-pane <?php if($i==0){?> active<?php } ?>" id="example-tabs2-delivery<?php echo $i; ?>" ><?php echo $data12[$i]['Address']['address']; ?></div>
-                
                 <?php }?>
             </div>
             <!-- END Tabs Content -->
@@ -190,7 +189,6 @@
         <?php echo $this->Form->input('invoice_type_id', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoice_type_id')); ?>
     </div>
 
-
 </div>
 <div class="form-group">
    
@@ -200,7 +198,6 @@
     </div>
      <label class="col-md-2 control-label" for="val_poack">PO Acknowledgement</label>
     <div class="col-md-4">
-
         <?php echo $this->Form->checkbox('poack', array('id' => 'val_poack', 'class' => 'checkbox', 'label' => false, 'name' => 'poack')); ?>
     </div>
 

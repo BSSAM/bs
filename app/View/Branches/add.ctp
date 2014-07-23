@@ -80,7 +80,7 @@
                                        
                                         <label class="col-md-2 control-label" for="val_currency_id">Currency</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('currency_id', array('id'=>'val_currency_id','options' => $currency,'class'=>'form-control','empty'=>'Enter the Currency','label'=>false,'name'=>'currency_id')); ?>
+                                            <?php echo $this->Form->input('currency_id', array('id'=>'val_currency_id','options' => $currency,'class'=>'select-chosen form-control','empty'=>'Enter the Currency','label'=>false,'name'=>'currency_id')); ?>
                                         </div>
                                    
                                         <label class="col-md-2 control-label" for="val_gst">GST</label>

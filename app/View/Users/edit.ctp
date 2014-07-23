@@ -61,7 +61,7 @@
                                    
                                         <label class="col-md-2 control-label" for="val_userrole">User Role</label>
                                         <div class="col-md-4">
-                                           <?php echo $this->Form->input('userrole_id', array('id'=>'val_userrole','class'=>'form-control','options' => $userrole,'empty'=>'Enter the User Role','label'=>false,'name'=>'userrole_id')); ?>
+                                           <?php echo $this->Form->input('userrole_id', array('id'=>'val_userrole','class'=>'select-chosen form-control','options' => $userrole,'empty'=>'Enter the User Role','label'=>false,'name'=>'userrole_id')); ?>
                                         </div>
                                    
                                     </div>
@@ -79,8 +79,8 @@
                                 <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
                                             
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Users','action'=>'index'), array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
 <!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
                                         </div>

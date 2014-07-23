@@ -45,7 +45,7 @@ class BranchesController extends AppController
            
             if($this->Branch->save($this->request->data))
             {
-                $this->Session->setFlash(__('Branch is Added'));
+                $this->Session->setFlash(__('Branch has been  Added successfully'));
                 return $this->redirect(array('action'=>'index'));
             }
             $this->Session->setFlash(__('Branch Could Not be Added'));

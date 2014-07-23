@@ -71,17 +71,7 @@
     
 </div>
 
-<div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
-    </div>
-    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.our_ref_no', array('id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
-    </div>
-    
-</div>
+
 <div class="form-group">
     
      <label class="col-md-2 control-label" for="val_in_date">In Date</label>
@@ -97,6 +87,14 @@
        
     </div>
     
+</div>
+<div class="form-group">
+    <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+    </div>
+    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+   
 </div>
 <div class="form-group">
     

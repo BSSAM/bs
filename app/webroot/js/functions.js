@@ -186,9 +186,9 @@ $(document).ready(function(){
             $('#contact_mobile').val(myarr[9]);
             $('#contact_purpose').val(myarr[10]);
             $('#contact_remark').val(myarr[4]);
-            $(".contactperson__editsubmit").html('Update');
-            $(".contactperson__editsubmit").attr('class', 'btn btn-sm btn-primary contactperson__updatesubmit');
-            $(".contactperson__updatesubmit").attr('id',myarr[0]);
+            $(".contactperson_editsubmit").html('Update');
+            $(".contactperson_editsubmit").attr('class', 'btn btn-sm btn-primary contactperson_updatesubmit');
+            $(".contactperson_updatesubmit").attr('id',myarr[0]);
         });
         //$('#project_name').val=myarr[3];
         return false;
@@ -202,133 +202,9 @@ $(document).ready(function(){
         });
     }
     
-    $('.name_error').hide();
-    $('.email_error').hide();
     
-    $('.contactperson__submit').click(function()
-    {
-        if($('#contact_name').val()=='')
-        {
-            $('.name_error').addClass('animation-slideDown');
-            $('.name_error').css('color','red');
-            $('.name_error').show();
-            return false;
-        }
-        var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
-        var contact_name=$('#contact_name').val();
-        var contact_email=$('#contact_email').val();
-        var contact_department=$('#contact_department').val();
-        var contact_phone=$('#contact_phone').val();
-        var contact_position=$('#contact_position').val();
-        var contact_mobile=$('#contact_mobile').val();
-        var contact_purpose=$('#contact_purpose').val();
-        var contact_remark=$('#contact_remark').val();
-        var customer_id=$('#customer_id').val();
-        var tag_id=$('#CustomerTagId').val();
-        var group_id=$('#CustomerGroupId').val();
-        
-       
-        $.ajax({
-            type: 'POST',
-            data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile+"&customer_id="+customer_id+"&tag_id="+tag_id+"&serial_id="+serial+"&group_id="+group_id,
-            url: path_url+'/customers/contact_person_add/',
-            success:function(data){
-              
-                 $('.contact_info_row').append('<tr class="contact_remove_'+serial+'">\n\\n\
-                                    <td class="text-center">'+customer_id+'</td>\n\
-                                    <td class="text-center">'+contact_name+'</td>\n\\n\
-                                    <td class="text-center">'+contact_email+'</td>\n\
-                                    <td class="text-center">'+contact_department+'</td>\n\\n\
-                                    <td class="text-center">'+contact_phone+'</td>\n\\n\\n\
-                                    <td class="text-center">'+contact_position+'</td>\n\
-                                    <td class="text-center">'+contact_mobile+'</td>\n\
-                                    <td class="text-center">'+contact_purpose+'</td>\n\
-                                    <td class="text-center">'+contact_remark+'</td>\n\
-                                    <td class="text-center"><div class="btn-group">\n\
-                                    <a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
-            }
-        });
-        
-        $('#contact_name').val(null);
-        $('#contact_email').val(null);
-        $('#contact_department').val(null);
-        $('#contact_phone').val(null);
-        $('#contact_position').val(null);
-        $('#contact_mobile').val(null);
-        $('#contact_purpose').val(null);
-        $('#contact_remark').val(null);
-        $('.name_error').hide();
-    });
-    $('.name_error').hide();
-    $('.email_error').hide();
-    $(document).on('click','.contactperson_editsubmit',function()
-    {
-        if($('#contact_name').val()=='')
-        {
-            $('.name_error').addClass('animation-slideDown');
-            $('.name_error').css('color','red');
-            $('.name_error').show();
-            return false;
-        }
-       
-        var contact_name=$('#contact_name').val();
-        var contact_email=$('#contact_email').val();
-        var contact_department=$('#contact_department').val();
-        var contact_phone=$('#contact_phone').val();
-        var contact_position=$('#contact_position').val();
-        var contact_mobile=$('#contact_mobile').val();
-        var contact_purpose=$('#contact_purpose').val();
-        var contact_remark=$('#contact_remark').val();
-//       alert("contact_name = "+ contact_name+" & contact_email = "+contact_email+" & contact_department = "+contact_department+" & contact_phone = "+contact_phone+" & contact_position = "+contact_position+" & contact_remark = "+contact_remark+" & contact_purpose = "+contact_purpose+" & contact_mobile = "+contact_mobile);
-        $.ajax({
-            type: 'POST',
-            data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile,
-            url: path_url+'/customers/contact_person_edit/',
-            success:function(data){
-              
-                $('.contact_info_row').append('<tr id = "'+data+'">\n\\n\
-                                    <td class="text-center">'+data+'</td>\n\
-                                    <td class="text-center">'+customer_id+'</td>\n\
-                                    <td class="text-center">'+contact_name+'</td>\n\\n\
-                                    <td class="text-center">'+contact_email+'</td>\n\
-                                    <td class="text-center">'+contact_department+'</td>\n\\n\
-                                    <td class="text-center">'+contact_phone+'</td>\n\\n\\n\
-                                    <td class="text-center">'+contact_position+'</td>\n\
-                                    <td class="text-center">'+contact_mobile+'</td>\n\
-                                    <td class="text-center">'+contact_purpose+'</td>\n\
-                                    <td class="text-center">'+contact_remark+'</td>\n\
-                                    <td class="text-center"><div class="btn-group"><button type="button" id="'+data+'" title="Edit" class="btn btn-xs btn-default bt_con_edit"><i class="fa fa-pencil"></i></button>\n\
-                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
-            }
-        });
-        $('#contact_name').val(null);
-        $('#contact_email').val(null);
-        $('#contact_department').val(null);
-        $('#contact_phone').val(null);
-        $('#contact_position').val(null);
-        $('#contact_mobile').val(null);
-        $('#contact_purpose').val(null);
-        $('#contact_remark').val(null);
-        $('.name_error').hide();
-    });
-    $(document).on('click','.contact_delete',function()
-    {
-        var delete_id = $(this).attr('data-delete');
-        var confirm =   window.confirm('Are you Sure want to Delete?');
-        if(confirm==true)
-        {
-            $.ajax({
-                type: 'POST',
-                data:"delete_id="+ delete_id,
-                url: path_url+'/customers/contact_delete/'
-            });
-            $('.contact_remove_'+delete_id).fadeOut();
-        }
-    });
     
-    $(document).on('click','.contactperson__updatesubmit',function()
+    $(document).on('click','.contactperson_updatesubmit',function()
     {
         if($('#contact_name').val()=='')
         {
@@ -432,8 +308,8 @@ $(document).ready(function(){
            $('#contact_remark').val(null);
            $('.project_name_error').hide();
             
-             $(".contactperson__updatesubmit").attr('class', 'btn btn-sm btn-primary contactperson__editsubmit');
-           $(".contactperson__editsubmit").html('<i class="fa fa-plus fa-fw"></i> add');
+             $(".contactperson_updatesubmit").attr('class', 'btn btn-sm btn-primary contactperson_editsubmit');
+           $(".contactperson_editsubmit").html('<i class="fa fa-plus fa-fw"></i> add');
            
         }
        
@@ -446,6 +322,7 @@ $(document).ready(function(){
             url: path_url + 'Customers/contact_edit_rule/'
         });
     }
+    
     
     
     

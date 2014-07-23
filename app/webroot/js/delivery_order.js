@@ -168,12 +168,12 @@ $(document).ready(function(){
     
     /************************For Delivery order Approval Script*********************************/
    $(document).on('click','.approve_deliveryorder',function(){
-       var val_salesorderno=$('#val_salesorderno').val();
+       var val_salesorderno=$('#del_order_no').val();
        if(window.confirm("Are you sure?")){
        $.ajax({
             type: 'POST',
             data:"id="+val_salesorderno,
-            url: path+'Salesorders/approve/',
+            url: path_url+'Deliveryorders/approve/',
             success: function(data)
             {
                 window.location.reload();

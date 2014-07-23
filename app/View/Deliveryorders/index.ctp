@@ -43,7 +43,7 @@
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_no'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_date'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['salesorder_id'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Customer']['customername'] ?></td>
+                                        <td class="text-center"><?PHP echo $deliveryorder['Customer']['Customertagname'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['email'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['our_reference_no'] ?></td>

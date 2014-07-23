@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-    $('.tag_contactperson__submit').click(function()
+    /******************************Customertag Contact person add*************************************/ 
+    $('.tag_contactperson_submit').click(function()
     {
         if($('#contact_name').val()=='')
         {
@@ -30,7 +31,7 @@ $(document).ready(function(){
             data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile+"&tag_id="+tag_id+"&customer_id="+customer_id+"&group_id="+group_id,
             url: path_url+'/Customertaglists/tag_contact_person_add/',
             success:function(data){
-                $('.tag_contact_info_row').append('<tr class="tag_contact_remove_'+tag_id+'">\n\\n\
+                $('.tag_contact_info_row').append('<tr class="tag_contact_remove_'+data+'">\n\\n\
                                     <td class="text-center">'+customer_id+'</td>\n\
                                     <td class="text-center">'+contact_name+'</td>\n\\n\
                                     <td class="text-center">'+contact_email+'</td>\n\
@@ -41,7 +42,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+contact_purpose+'</td>\n\
                                     <td class="text-center">'+contact_remark+'</td>\n\
                                     <td class="text-center"><div class="btn-group">\n\
-                                    <a data-delete="'+tag_id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger tag_contact_delete">\n\
+                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger tag_contact_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
             }
             });
@@ -55,6 +56,7 @@ $(document).ready(function(){
             $('#contact_remark').val(null);
             $('.name_error').hide();
     });
+    /***************************Customer Contact person Delete*************************/
      $(document).on('click','.tag_contact_delete',function()
     {
         var delete_id = $(this).attr('data-delete');

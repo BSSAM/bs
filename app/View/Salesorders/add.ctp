@@ -73,7 +73,7 @@ if(customer!='')
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
                                     <h2 class="pull-right">
-                                        Track Id    :<div class="track_sales"></div>
+                                        Track Id    : <?PHP echo $this->request->data['Salesorder']['track_id']; ?>
                                     </h2>
                                 </div>
                                 <!-- END Form Elements Title -->

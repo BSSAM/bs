@@ -96,16 +96,12 @@ if(customer!='')
                                         </div><!-- panel-body -->
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-10">
-                                                
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-                                            <?php if($user_role['app_deliveryorder']['add'] == 1 && $deliveryorder['Deliveryorder']['is_approved']==0): ?>
+                                            <?php if($user_role['app_deliveryorder1']['add'] == 1 && $deliveryorder['Deliveryorder']['is_approved']==0): ?>
                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_deliveryorder','escape' => false)); ?>
                                             <?php else : ?>
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Deliveryorders','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
                                             <?php endif; ?>
-                                                     
                                             </div>
                                         </div>
                                     </div>

@@ -15,7 +15,6 @@
         {
             //$this->Quotation->recursive = 1; 
             $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
-           
             $this->set('deliveryorders', $delivery_data);
         }
         public function add()
@@ -38,8 +37,7 @@
                         $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
                         $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                        //pr($a);exit;
-
+                    //pr($a);exit;
                     $this->Session->setFlash(__('Delivery Order has been Added Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -49,14 +47,13 @@
         {
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
-           
             $this->set(compact('service','deliveryorder'));
             if($this->request->is(array('post','put')))
             {
                 $this->Deliveryorder->id=$id;
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
-                    $this->Session->setFlash(__($deliveryorder_details['Deliveryorder']['delivery_order_no'].' has been Updated Succefully'));
+                    $this->Session->setFlash(__($deliveryorder['Deliveryorder']['delivery_order_no'].' has been Updated Succefully'));
                     $this->redirect(array('action'=>'index'));
                 }
             }
@@ -84,7 +81,7 @@
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
-            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1),array('Deliveryorder.id'=>$id));
+            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1),array('Deliveryorder.delivery_order_no'=>$id));
             if($updated)
             {
                 //pr($id1);exit;
@@ -105,7 +102,6 @@
          */
         public function salesorder_id_search()
         {
-            
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
@@ -145,5 +141,6 @@
             }
             
         }
+        
        
 }

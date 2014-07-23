@@ -258,11 +258,11 @@
   
     <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('deliveryordertype_id', array('id'=>'val_deliveryordertype','class'=>'form-control select-chosen','options'=>$deliverorder_type,'empty'=>'Enter the Delivery Order Type','label'=>false,'name'=>'deliveryordertype')); ?>
+        <?php echo $this->Form->input('deliveryordertype_id', array('id'=>'val_deliveryordertype','class'=>'form-control select-chosen','options'=>$deliverorder_type,'empty'=>'Enter the Delivery Order Type','label'=>false,'name'=>'deliveryordertype_id')); ?>
     </div>
      <label class="col-md-2 control-label" for="val_poack">PO Acknowledgement</label>
     <div class="col-md-4">
-        <?php echo $this->Form->checkbox('poack', array('id'=>'val_poack','class'=>'checkbox','label'=>false,'name'=>'val_poack')); ?>
+        <?php echo $this->Form->checkbox('poack', array('id'=>'val_poack','class'=>'checkbox','label'=>false,'name'=>'poack')); ?>
     </div>
         
    

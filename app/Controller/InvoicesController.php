@@ -16,9 +16,10 @@ class InvoicesController extends AppController
     {
        
         $unapproved_order_list    =   $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'0'),'recursive'=>4));
-       // pr($unapproved_order_list);exit;
-        $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>'1','Deliveryorder.status'=>'1')));
-       // pr($prepareinvoice_approved_list);exit;
+        //pr($unapproved_order_list);exit;
+        
+        $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1)));
+//              pr($prepareinvoice_approved_list);exit;
         $approved_order_list   =    $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
         //pr($approved_order_list);exit;
         $this->set(compact('unapproved_order_list','prepareinvoice_approved_list','approved_order_list'));
@@ -41,7 +42,7 @@ class InvoicesController extends AppController
         if ($this->data) 
         {
             App::uses('Sanitize', 'Utility');
-            $purchase_id = Sanitize::clean($this->data['Invoice']['customer_puchaseorder_no']);
+            $purchase_id = Sanitize::clean($this->data['Invoice']['purchaseorder_id']);
             $this->Invoice->id = $this->data['Invoice']['id'];
             $this->Invoice->saveField('customer_puchaseorder_no', $purchase_id);
             echo $purchase_id;

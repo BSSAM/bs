@@ -74,6 +74,7 @@
     <i class="gi gi-user"></i>Edit Customer
 </h1>
                         </div>
+                        
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
@@ -83,7 +84,11 @@
                     <!-- END Forms General Header -->
                 <div class="row">
                 <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-edit')); ?>
-                        <div class="col-md-12">
+                    <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[id]','id'=>'customer_id')); ?>
+                    <?PHP echo $this->Form->input('tag_id',array('type'=>'hidden','value'=>$this->request->data['Customer']['tag_id'],'name'=>'data[tag_id]')); ?>
+                    <?PHP echo $this->Form->input('group_id',array('type'=>'hidden','value'=>$this->request->data['Customer']['customergroup_id'],'name'=>'data[customergroup_id]')); ?>
+        
+                    <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->

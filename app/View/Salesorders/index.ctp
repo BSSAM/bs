@@ -24,9 +24,9 @@
         });});
 </script>                
 <h1>
-                                <i class="gi gi-user"></i>Sales Order
-                            </h1>
-                        </div>
+    <i class="gi gi-user"></i>Sales Order
+</h1>
+                    </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
@@ -36,18 +36,21 @@
                     <?PHP echo $this->element('message'); ?>
                     <!-- Datatables Content -->
                     <div class="block full">
+                        
+                        
                         <div class="block-title">
-                            <h2>List Of Sales Order </h2> 
                             <?PHP echo $this->Form->create('Salesorder', array('action' => 'add', 'class' => 'form-horizontal form-bordered')); ?>
-                            <div class="col-md-4 search_move">
-                                <div class="col-md-9">
+                       
+                             <h2>List Of Sales Order </h2> 
+                             <div class="col-md-8 pull-right">
+                                <div class="col-md-4">
                                     <?PHP
                                     $options = array('processing' => 'Processing', 'pending' => 'Pending');
                                     $attributes = array('legend' => false, 'class' => 'device_status', 'value' => 'processing', 'name' => 'quotation_device_status');
                                     echo $this->Form->radio('quotation_device_status', $options, $attributes);
                                     ?>
                                 </div>
-                                <div class="input-group">
+                                <div class="input-group col-md-4 pull-left">
                                         <?PHP echo $this->Form->input('quotation_id', array('placeholder' => 'Quotation Id', 'class' => 'form-control',
                                             'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
                                         ?>
@@ -56,12 +59,14 @@
                                         <button class="btn btn-primary quotation_search" type="button">Proceed</button>
                                     </span>     
                                 </div>
+                                
                                 <div id="quoat_list">
                                 </div>
+                                <div class="col-md-4">
+                                    <h2><?php echo $this->Html->link('Add Salesorders', array('controller' => 'Salesorders', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Sales Order')); ?></h2>
+                                </div>
                             </div>
-                            <h2>
-                            <?php echo $this->Html->link('Add Salesorders', array('controller' => 'Salesorders', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Sales Order')); ?></h2>
-                        <?PHP $this->Form->end(); ?>
+                               <?PHP $this->Form->end(); ?>
                         </div>
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -93,7 +98,6 @@
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                                
                                             </div>
                                         </td>
                                     </tr>
