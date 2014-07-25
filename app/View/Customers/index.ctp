@@ -1,6 +1,4 @@
-<h1>
-    <i class="gi gi-user"></i>Customers
-</h1>
+<h1><i class="gi gi-user"></i>Customers</h1>
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">

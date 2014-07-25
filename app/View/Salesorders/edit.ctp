@@ -100,8 +100,8 @@ if(customer!='')
                                                 <?php if($user_role['app_salesorder']['add'] == 1 && $salesorder['Salesorder']['is_approved']==0): ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_salesorder','escape' => false)); ?>
                                                 <?php else : ?>
-                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                                <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel',array('controller'=>'Salesorders','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
                                                 <?php endif; ?>
                                                 
                                                 
@@ -118,9 +118,9 @@ if(customer!='')
                             <!-- END Basic Form Elements Block -->
                         </div>
     <?php echo $this->Html->script('pages/formsValidation'); ?>
-        <script>$(function(){ FormsValidation.init(); });</script>
-         <?php echo $this->Html->script('pages/uiProgress'); ?>
-                            <script>$(function(){ UiProgress.init(); });</script>
+    <script>$(function(){ FormsValidation.init(); });</script>
+    <?php echo $this->Html->script('pages/uiProgress'); ?>
+    <script>$(function(){ UiProgress.init(); });</script>
                                 
                                
                         

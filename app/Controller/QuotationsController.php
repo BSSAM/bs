@@ -5,7 +5,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson','Clientpo');
+                            'Contactpersoninfo','CusSalesperson','Clientpo','branch');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -26,6 +26,7 @@
             $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             
+            $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             $this->set(compact('service','additional','instrument_types','country','priority','payment'));
            
             if($this->request->is('post'))
@@ -35,10 +36,10 @@
 
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
+                $this->request->data['Quotation']['branch_id']=$branch['branch']['id'];
                
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
-                    
                     $quotation_id   =   $this->Quotation->getLastInsertID();
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
                     $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));

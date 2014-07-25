@@ -68,9 +68,7 @@
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
        
     </div>
-    
 </div>
-
 
 <div class="form-group">
     
@@ -86,24 +84,21 @@
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
        
     </div>
-    
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
     </div>
-    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,)); ?>
    
 </div>
 <div class="form-group">
-    
     
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
     <div class="col-md-12">
         <?php echo $this->Form->input('Salesorder.instrument_type', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>array('1'=>'We are pleased to quote the item(s) below for calibration service with certificate(s) :'))); ?>
-                                                    
     </div>
         
 </div>

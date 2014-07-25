@@ -26,6 +26,7 @@ class Deliveryorder extends AppModel
             'fields' => '',
             'order' => ''
         ),
+       
         'Salesorder' => array(
             'className' => 'Salesorder',
             'foreignKey' => 'salesorder_id',
@@ -39,7 +40,14 @@ class Deliveryorder extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        )
+        ),
+         'branch' => array(
+            'className' => 'branch',
+            'foreignKey' => 'branch_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
         );
 }
 

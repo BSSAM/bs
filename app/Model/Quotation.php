@@ -8,7 +8,7 @@
 class Quotation extends AppModel
 {
     public $actsAs = array('Containable');
-    var $belongsTo  =   array('Customer');
+    var $belongsTo  =   array('Customer','branch');
     public $hasMany = array(
         'Device' => array(
             'className' => 'Device',

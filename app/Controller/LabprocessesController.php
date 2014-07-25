@@ -11,12 +11,11 @@ class LabprocessesController extends AppController
     public $helpers =   array('Html','Form','Session');
     public $uses    =   array('Priority','Paymentterm','Quotation','Currency','Deliveryorder','Address','DelDescription','Logactivity',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Labprocess');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Labprocess','branch');
     public $components = array('RequestHandler');
      
     public function index()
     {
-              
         $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno')));
         $this->set('labprocess', $labprocess);
         $data_checking_count = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.checking" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1),'group' => array('Salesorder.salesorderno')));
@@ -37,10 +36,10 @@ class LabprocessesController extends AppController
         $salesorder_list    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_approved'=>1,'Salesorder.is_deliveryorder_created'=>0)));
         
         $this->set('lab_sales_id',$id);
-        
+        $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
+            
         if($salesorder_list['Customer']['deliveryordertype_id']==1)
         {
-           
             $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
             $this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
             $this->set('labs', $data_description);
@@ -86,6 +85,7 @@ class LabprocessesController extends AppController
                     $delivery['Deliverorder']['delivery_order_date']  = date('d-M-y');
                     $delivery['Deliverorder']['our_reference_no']  = $track_id;
                     $delivery['Deliverorder']['your_reference_no']  = $po_id;
+                    $delivery['Deliverorder']['branch_id']  = $branch['branch']['id'];
                     unset($delivery['Deliverorder']['id']);
                     if($this->Deliveryorder->save($delivery['Deliverorder']))
                     {
@@ -186,6 +186,7 @@ class LabprocessesController extends AppController
                     $delivery['Deliverorder']['delivery_order_date']  = date('d-M-y');
                     $delivery['Deliverorder']['our_reference_no']  = $track_id;
                     $delivery['Deliverorder']['your_reference_no']  = $po_id;
+                    $delivery['Deliverorder']['branch_id']  = $branch['branch']['id'];
                     unset($delivery['Deliverorder']['id']);
                     
                     if($this->Deliveryorder->save($delivery['Deliverorder']))
@@ -249,22 +250,20 @@ class LabprocessesController extends AppController
         switch($solist_id)
         {
             case 'run':
-                
                 if($calllocation_id=='all'){
-                    $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >=' => 0,
+                    $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
                         ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1)))));
                     $this->set('labprocess', $labprocess);
                    } else{
-                      
-                        $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1, 'Description.sales_calllocation' => 'subcontract')))));
+                        $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1, 'Description.sales_calllocation' =>$calllocation_id)))));
                         $this->set('labprocess', $labprocess);
-                       
                    }
                     break;
             case 'out':
-                
+                  
             if($calllocation_id=='all'):
+                
                     $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
                         ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0)))));
                     $this->set('labprocess', $labprocess);
@@ -275,12 +274,15 @@ class LabprocessesController extends AppController
             endif;
             break;
             case 'overdue': 
+                
                  if($calllocation_id=='all'):
-                     $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <' => 0,
+                    
+                     $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
                         ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1)))));
                     $this->set('labprocess', $labprocess);
                 else:
-                        $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
+                     
+                        $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,'Salesorder.solist_diff >' => 0,
                         ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0, 'Description.sales_calllocation' => $calllocation_id)))));
                     $this->set('labprocess', $labprocess);
             endif;

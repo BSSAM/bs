@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','branch');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -20,17 +20,16 @@
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set(compact('service','payment','priority'));
+            $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             
             if($this->request->is('post'))
             {
                
                if(isset($this->request->data['Salesorder']['salesorder_created']) && $this->request->data['Salesorder']['salesorder_created']==1)
                {
-                  
                    $device_current_status   =  $this->request->data['quotation_device_status']; 
                    if($device_current_status=='pending')
                    {
-                       
                         $salesorder_details    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$this->request->data['Salesorder']['quotation_id']),'contain'=>array('Description'=>array('Instrument','Brand','Range','Department','conditions'=>array('Description.pending'=>'1')),'Customer'),'recursive'=>3));
                         if($salesorder_details['Customer']['invoice_type_id']!=3)
                         {
@@ -69,10 +68,10 @@
                     $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
                     $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
                     $quotation_id   =   $this->request->data['Salesorder']['quotation_id'];
+                    $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
                     
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
-                        
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
                         if(!empty($this->request->data['Salesorder']['device_status']))
                         {
@@ -91,9 +90,8 @@
                                 $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.status'=>0));
                             }
                             $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
-                       
                         }
-                         /******************
+                        /******************
                         * Data Log
                         */
                         $this->request->data['Logactivity']['logname']   =   'Salesorder';
@@ -104,7 +102,7 @@
                         $a = $this->Logactivity->save($this->request->data['Logactivity']);
                         //pr($a);exit;
                         /******************/
-                        $this->Session->setFlash(__('Salesorder has been Added Successfully '));
+                        $this->Session->setFlash(__('Salesorder has been Added Successfully'));
                         $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
                     }
                }

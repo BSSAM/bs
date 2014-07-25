@@ -1,15 +1,8 @@
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_quotationno">Sales Order No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=>$salesorder['Salesorder']['salesorderno'])); ?>
     </div>
-        
-<!--    <label class="col-md-2 control-label" for="val_branchname">Branch</label>
-    <div class="col-md-4">
-        <?php //echo $this->Form->input('branchname', array('id'=>'val_branchname','class'=>'form-control','disabled'=>'disabled',
-            //'label'=>false,'type'=>'text')); ?>
-    </div>-->
     <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.priority', array('id' => 'val_priority', 'class' => 'form-control',
@@ -24,8 +17,7 @@
         <?php echo $this->Form->input('Salesorder.customername', 
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
                     'autoComplete'=>'off','type'=>'text','name'=>'sales_customername','value'=>$salesorder['Customer']['customername'],'readonly'=>'readonly')); ?>
-        <div id="result">
-        </div>
+        <div id="result"></div>
     </div>
     <label class="col-md-2 control-label" for="val_address">Customer Address</label>
     <div class="col-md-4">
@@ -38,7 +30,7 @@
     <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.due_amount', array('id'=>'val_dueamount','class'=>'form-control',
-                                                'placeholder'=>'Enter the Due Amount','label'=>false)); ?>
+                                                'placeholder'=>'Enter the Due Amount','label'=>false,'readonly'=>'readonly')); ?>
        
     </div>
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
@@ -76,18 +68,6 @@
     </div>
     
 </div>
-
-<div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
-    </div>
-    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.our_ref_no', array('id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
-    </div>
-    
-</div>
 <div class="form-group">
     
      <label class="col-md-2 control-label" for="val_in_date">In Date</label>
@@ -98,11 +78,19 @@
     </div>
     <label class="col-md-2 control-label" for="val_out_date">Out Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.out_date', array('id'=>'val_out_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
+        <?php echo $this->Form->input('Salesorder.due_date', array('id'=>'val_out_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
     </div>
     
 </div>
+<div class="form-group">
+    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+    </div>
+        <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,)); ?>
+</div>
+
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
     <div class="col-md-12">
