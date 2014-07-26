@@ -176,7 +176,6 @@ $(document).ready(function(){
     });
     /*****************************************************************************/
     $(document).on('click','.candd_delivery_add',function(){
-        alert();
         $.ajax({
             type: "POST",
             url: path_url+"/Candds/get_delivery_info",
@@ -201,7 +200,29 @@ $(document).ready(function(){
             }
 	});
     });
-    
-    
-    
+   /********************For Description Move to deliver Script*********************/
+   $('.move_to_deliver').click(function(){
+      var assign_value  =   $('#val_assigned_move option:selected').text();
+      var description_move_checked = [];
+        $('.description_move_delivery_check:checked').each(function(i){
+          description_move_checked[i] = $(this).val();
+        });
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Candds/move_deliveryorder",
+            data:'assign_to='+assign_value+'&description_move='+description_move_checked,
+            cache: false,
+            success: function(data)
+            {
+               var checked_node =   $.parseJSON(data);
+               $.each(checked_node,function(k,v){
+                  $('.move_'+v).fadeOut('slow',function(){
+                      $(this).remove();
+                  }) 
+               });
+             
+                
+            }
+	});
+   });
 });

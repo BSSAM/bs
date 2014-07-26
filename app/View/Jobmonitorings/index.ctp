@@ -3,9 +3,7 @@
 </script>
 <script type="text/javascript">
 </script>                
-<h1>
-    <i class="gi gi-user"></i>Job Monitoring
-</h1>
+<h1><i class="gi gi-user"></i>Job Monitoring</h1>
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
@@ -13,7 +11,7 @@
     <li><?php echo $this->Html->link('Job Monitoring',array('controller'=>'Jobmonitorings','action'=>'index')); ?></li>
 </ul>
 <!-- END Datatables Header -->
-    
+    <?php echo $this->element('message');?>
 <!-- Datatables Content -->
 <div class="block full">
     <div class="table-responsive">

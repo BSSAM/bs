@@ -43,8 +43,6 @@ class Description extends AppModel
             'className' => 'Salesorder',
             'foreignKey' => 'salesorder_id',
             'conditions' => '',
-            'fields' => '',
-            'order' => '',
             'counterCache' => true,
         ),
          'Range' => array(

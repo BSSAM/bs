@@ -35,27 +35,25 @@
         <table  class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
-                    <th class="text-center">SL.No</th>
+                    <th class="text-center">S.No</th>
                     <th class="text-center">Description</th>
                     <th class="text-center" style="width: 70px;">P</th>
                     <th class="text-center" style="width: 70px;">C</th>
                     <th class="text-center" style="width: 70px;">Doc</th>
                     <th class="text-center" style="width: 70px;">R</th>
                     <th class="text-center" style="width: 70px;">D</th>
-                     <th class="text-center" style="width: 70px;">Department</th>
+                    <th class="text-center" style="width: 70px;">Department</th>
                     <th class="text-center">Reason of Delay(if applicable)</th>
                 </tr>
             </thead>
             <tbody>
                 
                 <?php foreach ($descriptions as $description): ?> 
-                <?PHP //$description_id   =   $labs_list['Description']['id']; 
-                        $processing=  ($description['Description']['processing']==1)?'checked="checked"':'' ;
-                        $checking=   ($description['Description']['checking']==1)?'checked="checked"':'' ;
-//                      $checked  =   $this->Labprocess->labperocess_checking($labs_list['Description']['id']);
-//                      $processed =   $this->Labprocess->labperocess_processing($labs_list['Description']['id']);
-//                ?>
-                    <?php // pr($labs_list); exit;?>
+                <?PHP  
+                    $processing=  ($description['Description']['processing']==1)?'checked="checked"':'' ;
+                    $checking=   ($description['Description']['checking']==1)?'checked="checked"':'' ;
+                    if($description['Description']['ready_deliver']==1){$check_ready    =   'checked="checked"';$dis_ready='disabled="disabled"';}else{$check_ready    = '';$dis_ready='';}
+               ?>
                 <tr>
                     <td class="text-center"><?PHP echo $description['Description']['id']; ?></td>
                     <td class="text-center"><?PHP echo $description['Instrument']['name']; ?></td>
@@ -68,33 +66,28 @@
                         //pr($deliver_order);exit;
                             if ($deliver_order != NULL):
                                 foreach ($deliver_order as $deliver_list):
-
                                     if ($deliver_list['Deliveryorder']['is_approved'] == 1):
-                                        //echo $deliver_list['Deliveryorder']['is_approved'];
                                         $delivery_delivery = true;
                                         $dis = 'enabled';
                                     elseif ($deliver_list['Deliveryorder']['is_approved'] != '' && $deliver_list['Deliveryorder']['is_approved'] != 1):
                                         //echo $deliver_list['Deliveryorder']['is_approved'];
                                         $delivery_delivery = false;
-                                        $dis = 'disabled';
+                                        $dis = 'readonly';
                                     endif;
 
                                 endforeach;
                             else:
                                 $delivery_delivery = false;
-                                $dis = 'disabled';
+                                $dis = 'readonly';
                             endif;
                             ?>
                             <?PHP echo $this->Form->input('document', array('name'=>'document','label' => false, 'id' => 'document', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled', 'checked'=> $delivery_delivery)); ?></td>
-                    <td class="text-center">
-                            
-                            <?PHP echo $this->Form->input('Description.ready_deliver[]', array('label' => false, 'id' => 'ready', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>$dis)); ?></td>
-                    <td class="text-center">
+                        <td class="text-center">
+                            <?PHP echo $this->Form->input('Description.ready_deliver[]', array('label' => false, 'id' => 'ready', 'type' => 'checkbox','value'=>$description['Description']['id'], 'class' => $description['Description']['salesorder_id'],$dis_ready,'name'=>'data[Description][ready_deliver][]',$check_ready)); ?></td>
+                        <td class="text-center">
                          <?php 
-                        //pr($deliver_order);exit;
                             if ($deliver_order != NULL):
                                 foreach ($deliver_order as $deliver_list):
-
                                     if ($deliver_list['Deliveryorder']['job_finished'] == 1):
                                         $job_finished = true;
                                     elseif ($deliver_list['Deliveryorder']['job_finished'] != '' && $deliver_list['Deliveryorder']['job_finished'] != 1):
@@ -106,10 +99,7 @@
                                 $job_finished = false;
                             endif;
                             ?>
-                        
                             <?PHP echo $this->Form->input('Description.delivered', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled','checked'=>$job_finished)); ?></td>
-                    
-                   
                     <td class="text-center"><?PHP echo $description['Department']['departmentname']; ?></td>
                     <td class="text-center edit_delay" id="<?PHP echo $description['Description']['id']; ?>"><?PHP echo $description['Description']['delay']; ?></td>
                 </tr>

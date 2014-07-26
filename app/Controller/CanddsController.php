@@ -8,19 +8,21 @@
 class CanddsController extends AppController
 {
     public $helpers =   array('Html','Form','Session');
-    public $uses    =   array('Priority','Paymentterm','Quotation','Currency',
+    public $uses    =   array('Priority','Paymentterm','Quotation','Currency','Deliveryorder',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','Branch');
     public function index()
     {
         $data = $this->Candd->find('all',array('recursive'=>'4'));
-        //pr($data);exit;
+//          pr($data);exit;
         $this->set('candd', $data);
     }
     public function add()
     {   
         $assignto =   $this->Assign->find('list',array('conditions'=>array('Assign.status'=>1),'fields'=>array('id','assignedto')));
-        $this->set(compact('assignto'));
+        $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ready_to_deliver'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>2)));
+        pr($ready_to_deliver_items);exit;
+        $this->set(compact('assignto','ready_to_deliver_items'));
         if($this->request->is('post'))
         {
             
@@ -117,7 +119,19 @@ class CanddsController extends AppController
             pr($candd_data);
         }
     }
-    
-
+    public function move_deliveryorder()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Description');
+        $description_string =$this->request->data['description_move'];
+        $assign_to =$this->request->data['assign_to'];
+        $export = explode(',', $description_string);
+        foreach ($export as $ex=>$val)
+        {
+            $this->Description->updateAll(array('is_delivered'=>1,'assign_to'=>'"'.$assign_to.'"'),array('Description.id'=>$val));
+           
+        }
+       echo  json_encode($export);
+    }
 }
 ?>

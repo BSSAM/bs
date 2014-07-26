@@ -48,7 +48,9 @@ class CustomersController extends AppController
         $priority= $this->Priority->find('list', array('fields' => 'priority'));
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
         
-        
+        $this->set(compact('priority','location','salesperson','referedby','data10','data10_count','data11',
+                            'data11_count','data12','data12_count','industry','deliverorder_type',
+                            'invoice_types','paymentterm','userrole','industry','contactpersoninfo'));
         
         if($this->request->is('post'))
         {

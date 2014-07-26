@@ -21,8 +21,7 @@ class JobmonitoringsController extends AppController
     public function edit($id=NULL)
     {
             $this->set('job_sales_no',$id);
-            $description_list    =   $this->Description->find('all',array('conditions'=>array('Description.is_approved'=>1),'recursive'=>2));
-//            pr($description_list);exit;
+            $description_list    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$id,'Description.is_deleted'=>0,'Description.is_approved'=>1),'recursive'=>2));
             $deliver = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$id,'Deliveryorder.is_approved'=>1)));
             
             if($deliver!=''):
@@ -33,30 +32,29 @@ class JobmonitoringsController extends AppController
     
             if($this->request->is(array('post','put')))
             {
-               pr($this->request->data);exit;
-                $customer_id    =   $this->request->data['Salesorder']['customer_id'];
-                $this->Salesorder->id=$id;
-                
-                if($this->Salesorder->save($this->request->data['Salesorder']))
+                $description_ready_deliver_array = $this->request->data['Description']['ready_deliver'];
+//                pr($description_ready_deliver_array);exit;
+                if (!empty($description_ready_deliver_array)) 
                 {
-                    $description_array = $this->request->data['Description']['processing'];
-                    if (!empty($description_array)) 
+                    foreach ($description_ready_deliver_array as $key => $value) 
                     {
-                        foreach ($description_array as $key => $value) 
+                        if($value!=0)
                         {
-                            $this->Description->id = $key;
-                            $this->Description->saveField('processing', $value);
+                   
+                            $this->Description->id = $value;
+                            $this->Description->saveField('ready_deliver', 1);
                         }
                     }
-                    //pr($this->request->data['Salesorder']);exit;
-                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
-                    if(!empty($device_node))
-                    {
-                        $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$id.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
-                    }
-                    $this->Session->setFlash(__('Salesorder has been Updated Succefully '));
-                    $this->redirect(array('action'=>'index'));
+                    
                 }
+                $total_count    =   $this->Description->find('count',array('conditions'=>array('Description.salesorder_id'=>$id)));
+                $deliver_count      =   $this->Description->find('count',array('conditions'=>array('Description.salesorder_id'=>$id,'Description.ready_deliver'=>1)));
+                if($total_count==$deliver_count)
+                {
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.ready_to_deliver'=>1),array('Deliveryorder.salesorder_id'=>$id));
+                }
+                $this->Session->setFlash(__('Job has been updated Successfully'));
+                $this->redirect(array('controller'=>'Jobmonitorings','action'=>'index'));
             }
             else
             {
