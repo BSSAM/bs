@@ -8,6 +8,14 @@
 
 class Candd extends AppModel
 {
-    
+     public $belongsTo = array(
+        'Customer' => array(
+            'className' => 'Customer',
+            'foreignKey' => 'customer_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
+        );
 }
 ?>

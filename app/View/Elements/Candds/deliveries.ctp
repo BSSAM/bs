@@ -3,7 +3,7 @@
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
-            <th class="text-center">S.No</th>
+            <th class="text-center"></th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Model No</th>
             <th class="text-center">Call Location</th>

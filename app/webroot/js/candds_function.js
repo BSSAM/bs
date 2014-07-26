@@ -175,4 +175,33 @@ $(document).ready(function(){
        }
     });
     /*****************************************************************************/
+    $(document).on('click','.candd_delivery_add',function(){
+        alert();
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Candds/get_delivery_info",
+            cache: false,
+            success: function(data)
+            {
+                data1 = $.parseJSON(data);
+                //deliveries_info
+                alert(data1);
+//                address_node = data1.Address;
+//                //alert(data);
+//                //alert(address_node.);
+//                contact_person_info =   data1.Contactpersoninfo;
+//                salesperson_node =   data1.CusSalesperson;
+//                $('#candd_customer_id').val(data1.Customer.id);
+//                
+//                $.each(contact_person_info,function(k,v){
+//                    $('#val_attn_candd').append('<option value="'+v.id+'">'+v.name+'</option>');
+//                });
+                
+                
+            }
+	});
+    });
+    
+    
+    
 });

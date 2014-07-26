@@ -232,7 +232,7 @@ class UserrolesController extends AppController
         if($this->request->is(array('post','put')))
         {
             $a = serialize($this->request->data);
-                    
+                   //pr($a);echo "a";exit;
             if($this->Userrole->updateAll(array('Userrole.js_enc'=>"'".$a."'"),array('Userrole.user_role_id'=>$ids)))
             {
                 $this->Session->setFlash(__('Userrole is Updated'));
@@ -243,6 +243,61 @@ class UserrolesController extends AppController
         {
             $userrole =  $this->Userrole->findByUserRoleId($ids); 
             $b = unserialize($userrole['Userrole']['js_enc']);
+            pr($b);echo "b";exit;
+            $this->request->data = $b;
+        }
+    }
+    
+    public function template($ids = null)
+    {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Userroles
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_role']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * *****************************************************
+         */
+        
+        $userrole =  $this->Userrole->findById($ids);
+        if(!empty($userrole))
+        {
+            $user_role_name = $userrole['Userrole']['user_role'];
+            $this->set('user_name',$user_role_name);
+            $user_role_id = $userrole['Userrole']['user_role_id'];
+            if($user_role_id == 1 || $user_role_id == 2)
+            {
+                return $this->redirect(array('action'=>'index'));
+            }
+            
+        }
+        else 
+        {
+            $this->set('user_name','Unknown Role');
+        }
+        $id = $this->Session->read('sess_userrole');
+        if($this->request->is(array('post','put')))
+        {
+            $a = serialize($this->request->data);
+                   //pr($a);echo "a";exit;
+            if($this->Userrole->updateAll(array('Userrole.js_enc'=>"'".$a."'"),array('Userrole.user_role_id'=>$ids)))
+            {
+                $this->Session->setFlash(__('Userrole is Updated'));
+            }
+            $this->Session->setFlash(__('Userrole Cant be Updated'));
+        }
+        else
+        {
+            $userrole =  $this->Userrole->findByUserRoleId($ids); 
+            $b = unserialize($userrole['Userrole']['js_enc']);
+            //pr($b);echo "b";exit;
             $this->request->data = $b;
         }
     }

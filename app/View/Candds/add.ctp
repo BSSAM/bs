@@ -1,8 +1,12 @@
 <script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script type="text/javascript">
 $(function(){
+    $( ".input-datepicker-close" ).datepicker("setDate", new Date());
+    $( ".input-datepicker-close" ).val($.datepicker.formatDate("dd-mm-yy", new Date()));
+    //$(".input-datepicker-close").val("19-July-14");
   
     $("#val_reg_date").datepicker("setDate", new Date());
+    
 });
 </script>
 <h1><i class="gi gi-user"></i>Add Collection & Delivery Info</h1></div></div>
@@ -94,7 +98,7 @@ $(function(){
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Ready To Delivery Items</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Collections Info</a></li>
-                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Deliveries Info</a></li>
+                                                <li class="candd_delivery_add"><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Deliveries Info</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>

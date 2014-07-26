@@ -10,10 +10,11 @@ class CanddsController extends AppController
     public $helpers =   array('Html','Form','Session');
     public $uses    =   array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','Branch');
     public function index()
     {
-        $data = $this->Candd->find('all');
+        $data = $this->Candd->find('all',array('recursive'=>'4'));
+        //pr($data);exit;
         $this->set('candd', $data);
     }
     public function add()
@@ -60,6 +61,18 @@ class CanddsController extends AppController
             echo json_encode($customer_data);
         }
     }
+    
+    public function get_delivery_info() 
+    {
+        $this->autoRender = false;
+        $this->loadModel('Candd');
+        
+        $candd_data = $this->Candd->find('all', array('conditions' => array('Candd.purpose' => 'delivery','Candd.is_deleted'=>0), 'recursive' => '2'));
+        if (!empty($candd_data)) {
+            echo json_encode($candd_data);
+        }
+    }
+    
     public function get_contact_person_value() 
     {
         $this->autoRender = false;
@@ -104,6 +117,7 @@ class CanddsController extends AppController
             pr($candd_data);
         }
     }
+    
 
 }
 ?>

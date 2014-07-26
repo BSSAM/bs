@@ -87,7 +87,7 @@
     <?php echo $this->Html->script('pages/login'); ?>
     <script>$(function(){ Login.init(); });</script>
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <?php echo $this->Html->script('helpers/gmaps.min'); ?>
+    <?php //echo $this->Html->script('helpers/gmaps.min'); ?>
     <?php echo $this->Html->script('pages/index'); ?>
     <script>$(function(){ Index.init(); });</script>
 </body>

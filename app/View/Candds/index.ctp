@@ -1,5 +1,5 @@
                             <h1>
-                                <i class="fa fa-table"></i>C & D Information 
+                                <i class="fa fa-table"></i>Collection & Delivery Information 
                             </h1>
                         </div>
                     </div>
@@ -12,7 +12,7 @@
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of C & D Information</h2>
+                            <h2>List Of Collection & Delivery Information</h2>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add C & D Info',array('controller'=>'Candds','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add C & D Info')); ?></h2>
                         </div>
                         <div class="table-responsive">
@@ -31,19 +31,18 @@
                                 <tbody>
                                     <?php foreach($candd as $candd_list): ?>
                                        
-                                    <tr <?php if($candd_list['Instrument']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                                        <td class="text-center"><?php echo $candd_list['Instrument']['id'];?></td>
+                                    <tr <?php if($candd_list['Candd']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                        <td class="text-center"><?php echo $candd_list['Customer']['branch']['branchname'];?></td>
                                         
-                                        <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$candd_list['Instrument']['created']);?></td>
-                                        <td class="text-center"><?php echo $candd_list['Instrument']['name'];?></td>
-                                        <td class="text-center"><?php echo $candd_list['Instrument']['description'];?></td>
-                                        <td class="text-center"><?php echo $candd_list['Department']['departmentname'];?></td>
-                                        <?php $status   =   ($candd_list['Instrument']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
-                                        <td class="text-center"><?PHP echo $status; ?></td>
+                                        <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$candd_list['Candd']['created']);?></td>
+                                        <td class="text-center"><?php echo '1';?></td>
+                                        <td class="text-center"><?php echo '1';?></td>
+                                        <td class="text-center"><?php echo '1';?></td>
+                                        <td class="text-center"><?PHP echo '1'; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$instrument['Instrument']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$instrument['Instrument']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$candd_list['Candd']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$candd_list['Candd']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
                                         </td>
                                     </tr>
