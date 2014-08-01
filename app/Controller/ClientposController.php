@@ -7,7 +7,7 @@
 class ClientposController extends AppController
 {
     public $helpers = array('Html','Form','Session');
-    public $uses =array('Priority','Paymentterm','Quotation','Currency','Salesorder',
+    public $uses =array('Priority','Paymentterm','Quotation','Currency','Salesorder','Deliveryorder',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
                             'Contactpersoninfo','CusSalesperson','Clientpo');
@@ -167,11 +167,11 @@ class ClientposController extends AppController
     }
     public function Deliveryorder_fullinvoice($id = null)
     {
-        $customer_quotation_list=$this->Quotation->find('list',array('conditions'=>
-                        array('Quotation.customer_id'=>$id,'Quotation.is_approved'=>1),'fields'=>array('id','quotationno')));
+        $customer_salesorder_list=$this->Salesorder->find('list',array('conditions'=>
+                        array('Salesorder.customer_id'=>$id,'Salesorder.is_approved'=>1),'fields'=>array('id','salesorderno')));
         $po_list=$this->Clientpo->find('all',array('conditions'=>array('Clientpo.customer_id'=>$id)));
         $po_single=$this->Clientpo->find('first',array('conditions'=>array('Clientpo.customer_id'=>$id)));
-        $this->set(compact('po_list','customer_quotation_list','pos','po_first','po_single'));
+        $this->set(compact('po_list','customer_salesorder_list','pos','po_first','po_single'));
         $this->set('customer_id',$id);
         
         if($this->request->is(array('post','put')))
@@ -226,6 +226,18 @@ class ClientposController extends AppController
        }
        
     }
+    public function get_delivery_id_details()
+    {
+        $this->layout   =   "ajax";
+        $delivery_id= $this->request->data['del_id'];
+        $customer_id= $this->request->data['customer_id'];
+        if($delivery_id!=''){
+            $delivery_order_details    =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$delivery_id,'Deliveryorder.customer_id'=>$customer_id)));
+            $sales_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$delivery_order_details['Deliveryorder']['salesorder_id'])));
+            echo json_encode($sales_details);
+       }
+       
+    }
     public function po_search()
     {
         $this->autoRender   =   false;
@@ -272,6 +284,32 @@ class ClientposController extends AppController
         else
         {
             echo "<div class='so_no_result' align='left'>";
+            echo "No Results Found";
+            echo "<br>";
+            echo "</div>";
+        }
+            
+    }
+    public function do_search()
+    {
+        $this->autoRender   =   false;
+        $name =  $this->request->data['do_id'];
+        $customer_id    =   $this->request->data['customer_id'];
+        $data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.delivery_order_no LIKE'=>'%'.$name.'%','Deliveryorder.customer_id'=>$customer_id)));
+        $c = count($data);
+        if($c>0)
+        {
+            for($i = 0; $i<$c;$i++)
+            { 
+                echo "<div class='do_single_show' align='left' id='".$data[$i]['Deliveryorder']['id']."' data-count='".$data[$i]['Deliveryorder']['del_description_count']."'>";
+                echo $data[$i]['Deliveryorder']['delivery_order_no'];
+                echo "<br>";
+                echo "</div>";
+            }
+        }
+        else
+        {
+            echo "<div class='po_no_result' align='left'>";
             echo "No Results Found";
             echo "<br>";
             echo "</div>";

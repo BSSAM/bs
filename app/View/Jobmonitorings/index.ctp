@@ -41,7 +41,7 @@
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['salesorderno'] ?></td>
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['due_date'] ?></td>
                     <td class="text-center"><?PHP echo $salesorder['Salesorder']['reg_date'] ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['branchname'] ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['branch']['branchname'] ?></td>
                     <td class="text-center"><?PHP echo $salesorder['Customer']['Customertagname']; ?></td>
                     <td class="text-center">
                     <?PHP 

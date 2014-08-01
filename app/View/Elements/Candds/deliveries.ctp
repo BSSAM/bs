@@ -3,31 +3,21 @@
 <table  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
-            <th class="text-center"></th>
-            <th class="text-center">Instrument</th>
-            <th class="text-center">Model No</th>
-            <th class="text-center">Call Location</th>
-            <th class="text-center">Call Type</th>
-             <th class="text-center">Validity</th>
-            <th class="text-center">Unit Price</th>
-            <th class="text-center">Account Service</th>
-            <th class="text-center">Total</th>
-            <th class="text-center">Action</th>
+            <th class="text-center">S.No</th>
+            <th class="text-center">Customer Name</th>
+            <th class="text-center">Customer Address</th>
+            <th class="text-center">ATTN</th>
+            <th class="text-center">Phone</th>
+             <th class="text-center">Salesorder No</th>
+            <th class="text-center">Delivery order No</th>
+            <th class="text-center">Assign To</th>
+            <th class="text-center">Branch</th>
+            <th class="text-center">Remarks</th>
+             <th class="text-center">Action</th>
         </tr>
     </thead>
     <tbody class="deliveries_info"> 
-        <tr>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-        </tr>
+        
     </tbody>
 </table>
 </div>

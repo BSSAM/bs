@@ -8,9 +8,8 @@
         public function index()
         {
             //$this->Quotation->recursive = 1; 
-            $data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
-           
-            $this->set('salesorder', $data);
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+            $this->set('salesorder', $salesorder_list);
         }
         public function add()
         {

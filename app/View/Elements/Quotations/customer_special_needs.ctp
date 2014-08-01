@@ -1,6 +1,4 @@
-<script>
-var path='<?PHP echo Router::url('/',true); ?>';
-</script>
+<script>var path='<?PHP echo Router::url('/',true); ?>';</script>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_salesperson">Sales person</label>
     <div class="col-md-4">
@@ -82,11 +80,9 @@ echo $this->Form->input('Customerspecialneed.additional_service_value', array('i
     </div>
     <label class="col-md-2 control-label" for="val_service_id">Service Type</label>
     <div class="col-md-4">
-<?php
-echo $this->Form->input('Customerspecialneed.service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
-    'label' => false, 'options' =>$service,'empty'=>'Select Service Type'));
-?>
-        
+    <?php
+    echo $this->Form->input('Customerspecialneed.service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
+        'label' => false, 'options' =>$service,'empty'=>'Select Service Type'));
+    ?>
     </div>  
-
 </div>

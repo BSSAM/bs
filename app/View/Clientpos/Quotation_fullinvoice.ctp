@@ -1,17 +1,11 @@
-<script>
-    var path_url='<?PHP echo Router::url('/',true); ?>'
-    </script>
-<h1>
-    <i class="gi gi-user"></i>
-    Purchase Order Form  -  Quotation Full Invoice
-</h1>
+<script> var path_url='<?PHP echo Router::url('/',true); ?>';</script>
+<h1> <i class="gi gi-user"></i> Purchase Order Form  -  Quotation Full Invoice</h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
-                          <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Client Po List',array('controller'=>'Clientpos','action'=>'index')); ?></li>
-                    <li>Quotation Full Invoice</li>
-                        
+                        <li><?php echo $this->Html->link('Home', array('controller' => 'Dashboards', 'action' => 'index')); ?></li>
+                        <li><?php echo $this->Html->link('Client Po List', array('controller' => 'Clientpos', 'action' => 'index')); ?></li>
+                        <li>Quotation Full Invoice</li>
                     </ul>
                     <!-- END Forms General Header -->
             <div class="row">

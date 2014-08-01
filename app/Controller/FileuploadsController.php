@@ -51,7 +51,8 @@ class FileuploadsController extends AppController
                     $document_array['Document']['document_name']= $document_name;
                     $document_array['Document']['customer_id']= $customer_id;
                     $document_array['Document']['quotation_id']= $quotation_id;
-                    $document_array['Document']['document_size']= $size.'kb';
+                    $document_array['Document']['document_size']= $size;
+                    $document_array['Document']['document_type']= $quotation_files['type'];
                     $this->Document->create();
                     $this->Document->save($document_array);
                 }
@@ -172,5 +173,64 @@ class FileuploadsController extends AppController
         {
             echo "deleted";
         }
+    }
+    public function add_individual($id=NULL)
+    {}
+    public function upload_individual($id=NULL)
+    {
+        $this->autoRender=  false;
+        if($this->request->is('post'))
+          {
+            
+            $quotation_no  =   $_POST['quotation_no'] ;  
+            $quotation_files   =   $_FILES['file'];
+            $document_array    = array();
+            if(!empty($quotation_files))
+            {
+                if(!is_dir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no)):
+                        mkdir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no);
+                endif;
+                $document_name  =   time().'_'.$quotation_files['name'];
+                $type = $quotation_files['type'];
+                $size = $quotation_files['size'];
+                $tmpPath = $quotation_files['tmp_name'];
+                $originalPath = APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no.DS.$document_name;
+                if(move_uploaded_file($tmpPath,$originalPath))
+                {
+                    $document_array['Document']['document_name']= $document_name;
+                    $document_array['Document']['document_size']= $size;
+                    $document_array['Document']['upload_type']= 'individual';
+                    $document_array['Document']['quotationno']= $quotation_no;
+                    $document_array['Document']['document_type']= $quotation_files['type'];
+                    $document_array['Document']['status']= 0;
+                    $this->Document->create();
+                    $this->Document->save($document_array);
+                }
+            }
+            
+          }
+          else 
+            {        
+             
+                $result  = array();
+                if(is_dir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$id))
+                {        
+                        $files = scandir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$id);   
+                        if ( false!==$files ) 
+                        {
+                            foreach ( $files as $file ) 
+                            {
+                                if ( '.'!=$file && '..'!=$file) 
+                                {       //2
+                                    $obj['name'] = $file;
+                                    $obj['size'] = filesize(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$id.DS.$file);
+                                    $result[] = $obj;
+                                }
+                            }
+                        }
+                    echo json_encode($result);
+                }
+            }
+    
     }
 }

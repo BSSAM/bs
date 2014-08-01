@@ -35,6 +35,18 @@ class Quotation extends AppModel
             'finderQuery' => '',
             'counterQuery' => '',
         ),
+        'Document' => array(
+            'className' => 'Document',
+            'foreignKey' => 'quotation_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => '',
+        )
         );
     public $hasOne = array(
         'Customerspecialneed' => array(

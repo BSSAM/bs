@@ -9955,9 +9955,10 @@ jQuery.fn.dataTableExt.oApi.fnPagingInfo = function (e) {
                     },
                     init: function () {
                         thisDropzone = this;
-                        $.get(path_url+'fileuploads/file_upload', function(data) {
+                        $.get(upload_url,function(data) {
                            var data_node    =   $.parseJSON(data);
                             $.each(data_node, function(key,value){
+                               
                                 var mockFile = { name: value.name, size: value.size };
                                 thisDropzone.options.addedfile.call(thisDropzone, mockFile);
                             });
@@ -10019,10 +10020,9 @@ jQuery.fn.dataTableExt.oApi.fnPagingInfo = function (e) {
                         if(confirm==true){
                         $.ajax({
                             type: 'POST',
-                            url: path_url+'Fileuploads/delete_document',
+                            url: delete_url,
                             data: "document_id="+name,
                         });
-                    
                         return null != (b = a.previewElement) && b.parentNode.removeChild(a.previewElement), this._updateMaxFilesReachedClass()
                     }},
                     thumbnail: function (a, b) {

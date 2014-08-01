@@ -31,7 +31,8 @@ App::uses('Controller', 'Controller');
     class AppController extends Controller 
     {
         public $components = array('Session');
-        public $uses    =   array('Description','Random');
+        public $uses    =   array('Description','Random','branch');
+        
         public function beforeFilter()
         {
                 
@@ -63,6 +64,8 @@ App::uses('Controller', 'Controller');
              }
              /*****************************************************************************************************/
              //$this->random();
+             $this->default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
+            // $this->set('branch',$default_branch);
         }
         public function userrole_permission()
         {
@@ -346,4 +349,27 @@ App::uses('Controller', 'Controller');
             $this->request->data['DelDescription']['delivery_total']           =   $devices['Description']['sales_total'];
             return $this->request->data;
         }
+        public function ready_to_deliver($delivery_order_id=NULL,$assign_to=NULL,$cd_date=NULL)
+        {
+            $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
+            $order_data     =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$delivery_order_id,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0)));
+            $this->request->data['ReadytodeliverItem']['cd_date']          =   $cd_date;
+            $this->request->data['ReadytodeliverItem']['branch_id']        =   $default_branch['branch']['id'];
+            $this->request->data['ReadytodeliverItem']['customer_id']      =   $order_data['Deliveryorder']['customer_id'];
+            $this->request->data['ReadytodeliverItem']['quotation_id']     =   $order_data['Salesorder']['quotation_id'];
+            $this->request->data['ReadytodeliverItem']['quotationno']      =   $order_data['Salesorder']['quotationno'];
+            $this->request->data['ReadytodeliverItem']['salesorder_id']    =   $order_data['Salesorder']['id'];
+            $this->request->data['ReadytodeliverItem']['salesorderno']     =   $order_data['Salesorder']['salesorderno'];
+            $this->request->data['ReadytodeliverItem']['deliveryorder_id'] =   $order_data['Deliveryorder']['id'];
+            $this->request->data['ReadytodeliverItem']['deliveryorderno']  =   $order_data['Deliveryorder']['delivery_order_no'];
+            $this->request->data['ReadytodeliverItem']['assign_to']        =   $assign_to;
+            $this->request->data['ReadytodeliverItem']['status']           =   0;
+            return $this->request->data;
+        }
+        public function  description_update_shipping($deliveryorder_id  =NULL)
+        {
+            $salesorder_id  =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$deliveryorder_id),'fields'=>array('salesorder_id')));
+            $this->Description->updateAll(array('Description.shipping'=>1),array('Description.salesorder_id'=>$salesorder_id['Deliveryorder']['salesorder_id']));
+        }
+        
 }

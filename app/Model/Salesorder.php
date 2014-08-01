@@ -47,6 +47,13 @@ class Salesorder extends AppModel
             'fields' => '',
             'order' => ''
         ),
+         'branch' => array(
+            'className' => 'branch',
+            'foreignKey' => 'branch_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
        
     );
 }

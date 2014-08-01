@@ -1,4 +1,11 @@
-<table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+<script>
+     $('#solistvariation-datatable').dataTable({
+             // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
+                "iDisplayLength": 5,
+                "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
+            });
+    </script>
+<table id="solistvariation-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
@@ -18,7 +25,7 @@
                 <?php foreach ($labprocess as $labprocess_list): ?>
                 <tr>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['salesorderno'] ?></td>
-                    <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['branchname'] ?></td>
+                    <td class="text-center"><?PHP echo $labprocess_list['branch']['branchname'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['Customer']['Customertagname'] ?></td>
                     <td class="text-center"><?PHP echo $this->Labprocess->find_priority_type($labprocess_list['Customer']['priority_id']) ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->query_total($labprocess_list['Salesorder']['salesorderno']) ?></td>
@@ -32,8 +39,6 @@
                     </td>
                 </tr>
                 <?php endforeach; ?>
-                <?PHP else:
-                    echo "No Records Found";
-                endif; ?>
+                <?PHP  endif; ?>
             </tbody>
         </table>

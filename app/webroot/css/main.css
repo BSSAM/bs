@@ -2235,11 +2235,11 @@ textarea.form-control {
 }
 
 .table thead > tr > th {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
 }
 .table tbody > tr > td {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 300;
 }
 

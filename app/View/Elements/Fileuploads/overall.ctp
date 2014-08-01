@@ -1,5 +1,5 @@
 <script>
-    var path_url    =   '<?PHP echo Router::url('/',true); ?>';
+    var path_url    =   '<?PHP echo Router::url('/fileuploads/file_upload',true); ?>';
     $(document).ready(function(){
        $('#file_upload_quotation_id').change(function(){
            $('#file_upload_quotation_no').val($('#file_upload_quotation_id option:selected').text());

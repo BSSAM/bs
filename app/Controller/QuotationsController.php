@@ -2,15 +2,15 @@
     class QuotationsController extends AppController
     {
         public $helpers = array('Html','Form','Session');
-        public $uses =array('Priority','Paymentterm','Quotation','Currency',
+        public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
-            $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.id' => 'DESC')));
-            $this->set('quotation', $data);
+            $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.id' => 'DESC')));
+            $this->set('quotation', $quotation_lists);
         }
         public function add()
         {
@@ -31,6 +31,7 @@
            
             if($this->request->is('post'))
             {
+               
                 $date = date('m/d/Y h:i:s a', time());
                 $this->request->data['Quotation']['created_by'] = $date;
 
@@ -46,6 +47,11 @@
                     if(!empty($device_node))
                     {  
                         $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1,'Device.quotationno'=>'"'.$this->request->data['Quotation']['quotationno'].'"'),array('Device.customer_id'=>$customer_id));
+                    }
+                    $this->Document->deleteAll(array('Document.quotationno'=>$this->request->data['Quotation']['quotationno'],'Document.status'=>0));
+                    if(!empty($device_node))
+                    {  
+                        $this->Document->updateAll(array('Document.quotation_id'=>$quotation_id,'Document.customer_id'=>'"'.$customer_id.'"'),array('Document.quotationno'=>$this->request->data['Quotation']['quotationno'],'Document.status'=>1));
                     }
                     $this->request->data['Customerspecialneed']['quotation_id']=$quotation_id;
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']); 
@@ -83,7 +89,7 @@
                 {
                     $po_list .=$po['clientpos_no'].',';
                 }
-               $this->set('po_list',$po_list);
+                $this->set('po_list',$po_list);
             }
             else {
                 $this->set('po_list','');
@@ -361,5 +367,74 @@
                 echo "";
             }
            
+        }
+        public function attachment($quotation_id= NULL,$doc_name=NULL)
+        {
+            $file_name    = explode('_',$doc_name);unset($file_name[0]); 
+            $document_file_name   =   implode($file_name,'-') ;
+            $this->response->file(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_id.DS.$doc_name,
+			array('download'=> true, 'name'=>$document_file_name));
+            return $this->response;  
+	}
+        public function get_document_files()
+        {
+           
+            $this->autoRender   =   false;
+            $id =  $this->request->data['id'];
+            $documents  =   $this->Document->find('all',array('conditions'=>array('Document.quotationno'=>$id,'Document.status'=>0)));
+            if(!empty($documents))
+            {
+                echo json_encode($documents);
+            }
+           
+        }
+        public function file_upload($id=NULL)
+        {
+            $this->autoRender=false;
+            if($this->request->is('post'))
+            {
+                $quotation_no  =   $_POST['quotation_no'] ;  
+                $quotation_files   =   $_FILES['file'];
+                $document_array    = array();
+                if(!empty($quotation_files))
+                {
+                    if(!is_dir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no)):
+                            mkdir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no);
+                    endif;
+                    $document_name  =   time().'_'.$quotation_files['name'];
+                    $type = $quotation_files['type'];
+                    $size = $quotation_files['size'];
+                    $tmpPath = $quotation_files['tmp_name'];
+                    $originalPath = APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no.DS.$document_name;
+                    if(move_uploaded_file($tmpPath,$originalPath))
+                    {
+                        $document_array['Document']['document_name']= $document_name;
+                        $document_array['Document']['quotationno']= $quotation_no;
+                        $document_array['Document']['document_size']= $size;
+                        $document_array['Document']['upload_type']= 'Individual';
+                        $document_array['Document']['document_type']= $quotation_files['type'];
+                        $this->Document->create();
+                        $this->Document->save($document_array);
+                    }
+                }
+              }
+        }
+        public function delete_document($id=NULL)
+        {
+            $this->autoRender   =   false;
+            $document_id    =   $this->request->data['document_id'];
+            $files = scandir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$id); 
+//            if(in_array($document_id,$files))
+//            {
+//                echo "yes";exit;
+//                foreach($files as $file=>$v)
+//                {
+//                    unlink(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$id.DS.$v);
+//                }
+//            }
+            if($document_id!='')
+            {
+                 $this->Document->updateAll(array('Document.status'=>0),array('Document.quotationno'=>$id,'Document.document_name LIKE'=>'%'.$document_id.'%'));
+            }
         }
 }

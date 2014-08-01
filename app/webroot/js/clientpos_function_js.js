@@ -197,5 +197,67 @@ $(document).ready(function(){
         $(this).val('');
          $('#so_result').fadeOut();
     });
-    /**********************So Search For Client Po Module End*****************************************************************************/
+    /**********************Delivery order full invoice order no Search*****************************************************************************/
+    $(".do_result").hide();
+    $("#val_deliveryorderno_fullinvoice").keyup(function() 
+    { 
+        var do_id = $(this).val();
+        var customer_id =   $('#customer_for_quotation_id').val();
+        var dataString = 'do_id='+ do_id+'&customer_id='+customer_id;
+        if(do_id!='')
+        {
+            $.ajax({
+            type: "POST",
+            url: path_url+"/Clientpos/do_search",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                $(".do_result").html(html).show();
+            }
+            });
+        }
+    });
+ /**********************Do Search For Client Po  Module *****************************************************************************/
+    var count=1;
+    $(document).on('click','.do_single_show',function(){
+        var do_id_name=$(this).text();
+        var data_count=$(this).attr('data-count');
+        $('#val_deliveryordercount').val(data_count);
+        $('#val_deliveryorderno_fullinvoice').val(do_id_name);
+        $('.do_result').hide('slow');
+        var do_id=$(this).attr('id');
+        var customer_id =   $('#customer_for_quotation_id').val();
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Clientpos/get_delivery_id_details",
+            data: 'del_id='+do_id+'&customer_id='+customer_id,
+            cache: false,
+            success: function(data)
+            {
+                alert(data);
+                $('.sales_list_id').append('<div class="group_do_'+(count++)+'"><div class="form-group"><div class="col-sm-11"><input type="hidden" name="salesorder_id[]" value="'+salesorder_val+'"/><input type="hidden" name="salesorder_no[]" value="'+salesorder_selected+'"/><div class="col-sm-6  form-control-static">'+salesorder_selected+'</div>\n\
+                                      <div class="col-sm-4"><input readonly="readonly" class="form-control" type="text" name="so_quantity[]"/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"> <div class="btn btn-alt btn-info do_id_selected"   data-delete ="'+(count-1)+'"  > <i class="fa fa-minus"></i></div> </div> ');
+                $(".do_result").html(html).show();
+            }
+            });
+    });
+    $('#purchase_order').blur(function(){
+         $('#po_result').fadeOut();
+    });
+    /*****************************For Do Full Invoice So id Change******************************************/
+    var count=1;
+    $(document).on('change','#val_salesorder',function(){
+        var salesorder_selected  =   $('#val_salesorder option:selected').text();
+        var salesorder_val  =   $('#val_salesorder option:selected').val();
+       
+       $('.sales_list_id').append('<div class="group_do_'+(count++)+'"><div class="form-group"><div class="col-sm-11"><input type="hidden" name="salesorder_id[]" value="'+salesorder_val+'"/><input type="hidden" name="salesorder_no[]" value="'+salesorder_selected+'"/><div class="col-sm-6  form-control-static">'+salesorder_selected+'</div>\n\
+                                      <div class="col-sm-4"><input readonly="readonly" class="form-control" type="text" name="so_quantity[]"/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"> <div class="btn btn-alt btn-info do_id_selected"   data-delete ="'+(count-1)+'"  > <i class="fa fa-minus"></i></div> </div> ');
+       $('#val_salesorder').prop("selectedIndex",-1);
+    });
+    $(document).on('click','.do_id_selected',function(){
+     var data_length= $(this).attr('data-delete');
+     $('.group_do_'+data_length).remove();
+   });
+
 });

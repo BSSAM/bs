@@ -1,10 +1,9 @@
 <script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
-
-<h1><i class="gi gi-user"></i>Add Collection & Delivery Info</h1></div></div>
+<h1><i class="gi gi-user"></i>Edit Collection & Delivery Info</h1></div></div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('C & D Info',array('controller'=>'Candds','action'=>'index')); ?></li>
-                        <li>Add Collection & Delivery Info </li>
+                        <li>Edit Collection & Delivery Info </li>
                     </ul>
                     <!-- END Forms General Header -->
 <div class="row">
@@ -16,7 +15,7 @@
                                         <div class="form-group">
                                         <label class="col-md-5 control-label" for="cd_date">C and D Date</label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control input-datepicker-close cd_date" data-date-format="dd-MM-yy" name="cd_date" />
+                                            <input type="text" class="form-control input-datepicker-close cd_date" data-date-format="dd-MM-yy" name="cd_date" value="<?PHP echo $collection_delivery_data['CollectionDelivery']['collection_delivery_date']; ?>" />
                                         </div>
                                     </div>
                                        
@@ -91,19 +90,19 @@
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Ready To Delivery Items</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Collections Info</a></li>
-                                                <li class="candd_delivery_add"><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Deliveries Info</a></li>
+                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Deliveries Info</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
-                                                    <?PHP echo $this->element('Candds/readytodeliver'); ?>
+                                                    <?PHP echo $this->element('Candds/edit/readytodeliver'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab2">
-                                                    <?PHP echo $this->element('Candds/collections'); ?>
+                                                    <?PHP echo $this->element('Candds/edit/collections'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Candds/deliveries'); ?>
+                                                    <?PHP echo $this->element('Candds/edit/deliveries'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->
@@ -111,7 +110,13 @@
                                        
                                     </div>
                                     <!-- panel -->
-                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'submit','class'=>'btn btn-sm btn-primary pull-right cd_save','escape' => false)); ?>
-                                
+                                    <div class="form-group form-actions">
+                                        
+                                        <?php  echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Candds','action'=>'index'),array('class'=>'btn btn-sm btn-warning pull-right','escape' => false)); ?>
+                                        
+                                        
+                                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'submit','class'=>'btn btn-sm btn-primary pull-right cd_save','escape' => false)); ?>
+                                        
+                                    </div>
                                 </div>  
                                 <?php echo $this->Form->end(); ?>

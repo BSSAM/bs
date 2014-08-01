@@ -56,6 +56,7 @@ if(customer!='')
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Quotation Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
                                                 <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span>Description</a></li>
+                                                 <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span>Uploaded Files</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
@@ -67,11 +68,11 @@ if(customer!='')
                                                 <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Quotations/edit/customer_special_needs'); ?>
                                                 </div>
-<!--                                                <div class="tab-pane" id="tab3">
-                                                    <?PHP //echo $this->element('Quotations/edit/file_upload'); ?>
-                                                </div>-->
                                                 <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Quotations/edit/description'); ?>
+                                                   <?PHP echo $this->element('Quotations/edit/description'); ?>
+                                                </div>
+                                                <div class="tab-pane" id="tab4">
+                                                     <?PHP echo $this->element('Quotations/edit/file_upload'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->

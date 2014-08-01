@@ -89,7 +89,7 @@
                                     <tr>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['branch']['branchname'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Customer']['Customertagname'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
                                          <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>

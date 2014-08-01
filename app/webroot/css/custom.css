@@ -66,3 +66,9 @@ and open the template in the editor.
 .candd_no_result  {padding: 13px 0px; max-width: 230px; min-width: 224px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important; }
 .candd_no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}
 
+/* For ClientPO Module Do search*/
+.do_single_show   { background-color: #ffffff;    border-bottom: 1px dotted #dbe1e8 !important;    color: #000000;    font-size: 15px;    line-height: 18px;    max-height: 37px;    max-width: 230px;    min-width: 223px;    padding: 9px 0 13px 9px; }
+.do_no_result  { background-color: #ffffff;    border-bottom: 1px dotted #dbe1e8 !important;    color: #000000;    font-size: 15px;    line-height: 18px;    max-height: 37px;    max-width: 230px;    min-width: 223px;    padding: 9px 0 13px 9px; }
+.do_no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}
+.do_single_show:hover{  background:#4c66a4;  color:#FFF;  cursor:pointer;}
+.do_result{position: absolute;  z-index: 999; }

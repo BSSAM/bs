@@ -104,13 +104,14 @@ class CustomersController extends AppController
     }
     public function edit($id = NULL)
     {
-       
+      
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Customer Entry'));
              return $this->redirect(array('action'=>'index'));
         }
-        $customer_details =  $this->Customer->find('first',array(array('conditions'=>array('Customer.id'=>$id,'Customer.status'=>1,'Customer.is_deleted'=>0)))); 
+        
+        $customer_details =  $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id,'Customer.status'=>1,'Customer.is_deleted'=>0))); 
         
         if($this->Session->read('customer_id')==''){ $this->Session->write('customer_id',$id);  }
         $this->set('customer_id',$id);

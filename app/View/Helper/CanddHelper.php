@@ -63,4 +63,35 @@ class CanddHelper extends AppHelper
             return $delivery_orders['Deliveryorder']['delivery_order_date'];
         }
     }
+    public function get_task($cd_date=NULL)
+    {
+        APP::import('Model','ReadytodeliverItem');
+        $this->ReadytodeliverItem  =   new ReadytodeliverItem();
+        APP::import('Model','Candd');
+        $this->Candd  =   new Candd();
+        $collectioncount_basedon_date    =    $this->Candd->find('count',array('conditions'=>array('Candd.cd_date'=>$cd_date,'Candd.status'=>1)));
+        $count_basedon_date    =    $this->ReadytodeliverItem->find('count',array('conditions'=>array('ReadytodeliverItem.cd_date'=>$cd_date,'ReadytodeliverItem.status'=>1)));
+        return $collectioncount_basedon_date+$count_basedon_date;
+        
+    }
+    public function get_collection_count($cd_date=NULL)
+    {
+        APP::import('Model','Candd');
+        $this->Candd  =   new Candd();
+        $collectioncount_basedon_date    =    $this->Candd->find('count',array('conditions'=>array('Candd.cd_date'=>$cd_date)));
+        if(!empty($collectioncount_basedon_date))
+        {
+            return $collectioncount_basedon_date;
+        }
+    }
+    public function get_delivery_count($cd_date=NULL)
+    {
+        APP::import('Model','ReadytodeliverItem');
+        $this->ReadytodeliverItem  =   new ReadytodeliverItem();
+        $delivercount_basedon_date    =    $this->ReadytodeliverItem->find('count',array('conditions'=>array('ReadytodeliverItem.cd_date'=>$cd_date)));
+        if(!empty($delivercount_basedon_date))
+        {
+            return $delivercount_basedon_date;
+        }
+    }
 }

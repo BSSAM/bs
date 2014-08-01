@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
     $(function(){
          $("#search_instrument").hide();
@@ -46,8 +45,6 @@
 </div>
     
 <div class="form-group">
-    
-   
     <label class="col-md-2 control-label" for="val_address">Model No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
@@ -57,7 +54,6 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('validity', array('id'=>'val_validity','class'=>'form-control',
                                                 'label'=>false,'name'=>'validity','disabled'=>'disabled','value'=>'12')); ?>
-       
     </div>
 </div>
 <div class="form-group">
@@ -98,7 +94,6 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>
-      
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
     <div class="col-md-4">

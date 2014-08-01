@@ -283,5 +283,36 @@ $(document).ready(function(){
     }
        
    });
-   /***************************************************************************************************/
+   /**********************************File Upload refresh**********************************************/
+   $(document).on('click','.refresh_file_upload',function(){
+      
+       var qid=$(this).attr('data-qid');
+       
+       $.ajax({
+            type: 'POST',
+            data:"id="+qid,
+            url: path+'Quotations/get_document_files/',
+            success: function(data)
+            {
+               var document_data_node   =   $.parseJSON(data);
+               $('.file_upload_created').empty();
+               $.each(document_data_node,function(k,v){
+                   alert(v.Document.document_name.split('_'));
+                   $('.file_upload_created').append('<tr class="">\n\
+                                                    <td class="text-center">'+v.Document.id+'</td>\n\
+                                                    <td class="text-center">'+v.Document.id+'</td>\n\
+                                                    <td class="text-center">'+v.Document.document_name+'</td>\n\
+                                                    <td class="text-center">'+v.Document.document_size+'</td>\n\
+                                                    <td class="text-center">Delete</td>\n\
+                                                </tr>');
+            
+               });
+              
+                
+            }
+            
+        });
+        /**********************************************individual File upload*****************************/
+       
+   });
 });

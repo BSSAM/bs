@@ -24,7 +24,7 @@
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">Quotation No</th>
                                         <th class="text-center">Reg Date</th>
-<!--                                        <th class="text-center">Branch</th>-->
+                                        <th class="text-center">Branch</th>
                                         <th class="text-center">Customer</th>
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
@@ -38,7 +38,7 @@
                                     <tr>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
-<!--                                    <td class="text-center"><?PHP echo $quotation_list['Quotation']['branchname'] ?></td>-->
+                                        <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>

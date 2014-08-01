@@ -41,6 +41,7 @@
                     <th class="text-center" style="width: 70px;">C</th>
                     <th class="text-center" style="width: 70px;">Doc</th>
                     <th class="text-center" style="width: 70px;">R</th>
+                     <th class="text-center" style="width: 70px;">S</th>
                     <th class="text-center" style="width: 70px;">D</th>
                     <th class="text-center" style="width: 70px;">Department</th>
                     <th class="text-center">Reason of Delay(if applicable)</th>
@@ -52,6 +53,7 @@
                 <?PHP  
                     $processing=  ($description['Description']['processing']==1)?'checked="checked"':'' ;
                     $checking=   ($description['Description']['checking']==1)?'checked="checked"':'' ;
+                    $shipping=   ($description['Description']['shipping']==1)?'checked="checked"':'' ;
                     if($description['Description']['ready_deliver']==1){$check_ready    =   'checked="checked"';$dis_ready='disabled="disabled"';}else{$check_ready    = '';$dis_ready='';}
                ?>
                 <tr>
@@ -82,9 +84,13 @@
                             endif;
                             ?>
                             <?PHP echo $this->Form->input('document', array('name'=>'document','label' => false, 'id' => 'document', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled', 'checked'=> $delivery_delivery)); ?></td>
-                        <td class="text-center">
+                       
+                    <td class="text-center">
                             <?PHP echo $this->Form->input('Description.ready_deliver[]', array('label' => false, 'id' => 'ready', 'type' => 'checkbox','value'=>$description['Description']['id'], 'class' => $description['Description']['salesorder_id'],$dis_ready,'name'=>'data[Description][ready_deliver][]',$check_ready)); ?></td>
                         <td class="text-center">
+                            <?PHP echo $this->Form->input('Description.shipping', array('label' => false, 'id' => 'shipping', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled','value'=>$description['Description']['shipping'],$shipping)); ?></td>
+                   
+                    <td class="text-center">
                          <?php 
                             if ($deliver_order != NULL):
                                 foreach ($deliver_order as $deliver_list):
@@ -108,13 +114,13 @@
         </table> 
     </div>
     <div class="form-group form-actions">
+        <div class="pull-left"><code>Note:</code> P - Processing , C - Checking ,Doc - Delivery Approved ,R - Ready to Deliver ,S - In Shipping , D - Delivered </div>
         <div class="col-md-9 col-md-offset-10">
             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary sales_submit', 'escape' => false)); ?>
         </div>
     </div>
     <?php echo $this->Form->end(); ?>
 </div>
-                   
 <!-- panel -->
 <?php echo $this->Form->end(); ?>
 <?php echo $this->Html->script('pages/uiProgress'); ?>
