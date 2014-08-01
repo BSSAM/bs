@@ -11,7 +11,7 @@ class DashboardsController extends AppController
     public $helpers = array('Html','Form','Session');
     public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Deliveryorder','Logactivity');
+                            'Instrument','Brand','Customer','Device','Salesorder','Deliveryorder','Logactivity','Datalog');
     public function index()
     {
         /*  
@@ -92,6 +92,10 @@ class DashboardsController extends AppController
         //pr($logactivity);exit;
         $this->set('log_activity_range', $logactivity_range);
         
+        $logactivity_range_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Range")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_range_count', $logactivity_range_count);
+        
         /*****************************************************/
         
         /****************** Log Activity - Quotation ********************/
@@ -126,13 +130,17 @@ class DashboardsController extends AppController
         
         /*****************************************************/
         
-        $logactivity_message = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>0)));
-        //pr($logactivity);exit;
-        $this->set('log_activity_message', $logactivity_message);
-        $logactivity_message_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>0)));
-        $this->set('log_activity_message_count', $logactivity_message_count);
         
-       // echo $a;
+        /****************** DataLog ********************/
+        
+        //$logactivity_message = $this->Datalog->find('all',array('conditions'=>array('Datalog.logapprove'=>0)));
+        $logactivity_message = $this->Datalog->find('all');
+        //pr($logactivity_message);exit;
+        $this->set('log_activity_message', $logactivity_message);
+        $logactivity_message_count = $this->Datalog->find('count');
+        $this->set('log_activity_message_count', $logactivity_message_count);
+        /*****************************************************/
+       
       
     }
 }

@@ -17,9 +17,9 @@
                         <!-- Forum Tabs Title -->
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
-                                <li class="active"><a href="#job_approval">Job Approval <!--<span class="badge animation-floating"><?php //echo $log_activity_count; ?></span>--></a></li>
-                                <li><a href="#ins_approval">Instrument Approval <!--<span class="badge animation-floating"><?php //echo $log_activity_count; ?></span>--></a></li>
-                                <li><a href="#messages">Messages <span class="badge animation-floating"><?php //echo $log_activity_message_count; ?></span></a></li>
+                                <li class="active"><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo $log_activity_job_count; ?></span></a></li>
+                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo $log_activity_instrument_count; ?></span></a></li>
+                                <li><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
                             </ul>
                         </div>
                         <!-- END Forum Tabs -->
@@ -30,25 +30,25 @@
                             <div class="tab-pane" id="messages">
                                 <div class="table-responsive">
                                 <!-- Intro Category -->
-                                <table class="table table-borderless table-striped table-vcenter">
+                                <table id="dashboard_message_all" class="table table-borderless table-striped table-vcenter">
                                     <tbody>
                                         <?PHP if (!empty($log_activity_message)): ?>
                                         <?php foreach ($log_activity_message as $log_activity_message_list) :?>
                                         <tr>
                                             <td class="text-center" style="width: 100px;">
-                                                <?php if($log_activity_message_list['Logactivity']['logname'] == 'Salesorder'){ ?>
+                                                <?php //if($log_activity_message_list['Datalog']['logname'] == 'Salesorder'){ ?>
                                                 <i class="gi gi-globe fa-2x"></i>
-                                                <?php } ?>
+                                                <?php //} ?>
                                             </td>
                                             <td>
                                                 <h4>
-                                                    <a href="javascript:void(0)"><strong><?PHP echo $log_activity_message_list['Logactivity']['logname']; ?></strong></a><br>
-                                                    <small><?php echo $log_activity_message_list['Logactivity']['logid']; ?></small>
+                                                    <a href="javascript:void(0)"><strong><?PHP echo $log_activity_message_list['Datalog']['logname']; ?></strong></a><br>
+                                                    <small><?php echo $log_activity_message_list['Datalog']['logid']; ?></small>
                                                 </h4>
                                             </td>
 <!--                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">205</a></td>-->
-                                            <td class="text-center hidden-xs hidden-sm"><?PHP echo $log_activity_message_list['Logactivity']['logactivity']; ?></td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="text-center hidden-xs hidden-sm"><?PHP echo $log_activity_message_list['Datalog']['logactivity']; ?></td>
+                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Datalog']['modified'] ?></small></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else: ?>

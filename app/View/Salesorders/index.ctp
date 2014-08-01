@@ -3,6 +3,7 @@
 </script>
 <script type="text/javascript">
     $(function(){
+        $("#quoat_list").hide();
         $("#SalesorderQuotationId").keyup(function() 
         { 
             var device_status   =    $('input:radio[name=quotation_device_status]:checked').val();
@@ -39,34 +40,34 @@
                         
                         
                         <div class="block-title">
-                            <?PHP echo $this->Form->create('Salesorder', array('action' => 'add', 'class' => 'form-horizontal form-bordered')); ?>
-                       
-                             <h2>List Of Sales Order </h2> 
-                             <div class="col-md-8 pull-right">
-                                <div class="col-md-4">
-                                    <?PHP
-                                    $options = array('processing' => 'Processing', 'pending' => 'Pending');
-                                    $attributes = array('legend' => false, 'class' => 'device_status', 'value' => 'processing', 'name' => 'quotation_device_status');
-                                    echo $this->Form->radio('quotation_device_status', $options, $attributes);
-                                    ?>
-                                </div>
-                                <div class="input-group col-md-4 pull-left">
-                                        <?PHP echo $this->Form->input('quotation_id', array('placeholder' => 'Quotation Id', 'class' => 'form-control',
-                                            'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
-                                        ?>
-                                    <?PHP echo $this->Form->input('salesorder_created', array('type' => 'hidden', 'value' => 1)); ?>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary quotation_search" type="button">Proceed</button>
-                                    </span>     
-                                </div>
-                                
-                                <div id="quoat_list">
-                                </div>
-                                <div class="col-md-4">
+                            <h2>List Of Sales Order </h2> 
+                            
+                            
+                            <div style="float:right;">
                                     <h2><?php echo $this->Html->link('Add Salesorders', array('controller' => 'Salesorders', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Sales Order')); ?></h2>
-                                </div>
                             </div>
-                               <?PHP $this->Form->end(); ?>
+                        </div>
+                        <div class="form-actions">
+                            <?PHP echo $this->Form->create('Salesorder', array('action' => 'Salesorder_by_quotation', 'class' => 'form-horizontal form-bordered')); ?>
+                            <?PHP   
+                                $options = array('processing' => 'Processing', 'pending' => 'Pending');
+                                $attributes = array('legend' => false, 'class' => 'device_status', 'value' => 'processing', 'name' => 'quotation_device_status');
+                                echo $this->Form->radio('quotation_device_status', $options, $attributes);
+                            ?>
+                            <div class="input-group col-md-4" style="margin-left: 65%;
+margin-bottom: 3%;">
+                                <?PHP echo $this->Form->input('quotation_id', array('placeholder' => 'Quotation Id', 'class' => 'form-control',
+                                    'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
+                                ?>
+                                <?PHP echo $this->Form->input('salesorder_created', array('type' => 'hidden', 'value' => 1)); ?>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary quotation_search" type="button">Proceed</button>
+                                </span>     
+                            </div>
+                            <div id="quoat_list">
+                            </div>
+							<?PHP $this->Form->end(); ?>
+                            
                         </div>
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
