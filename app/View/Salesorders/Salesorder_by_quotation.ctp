@@ -46,7 +46,6 @@ if(customer!='')
         var addDays = new Date();
         addDays.setDate(addDays.getDate() + 4);
         $("#val_out_date").datepicker("setDate",addDays);
-
         });
 </script>
 <h1>
@@ -68,7 +67,7 @@ if(customer!='')
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
                                     <h2 class="pull-right">
-                                        Track Id    : 
+                                        Track Id    : <?PHP echo $this->request->data['Salesorder']['track_id']; ?>
                                     </h2>
                                 </div>
                                 <!-- END Form Elements Title -->
@@ -79,6 +78,8 @@ if(customer!='')
                                     <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden')); ?>
                                     <?PHP if(!empty($sale['Salesorder']['track_id'])): ?>
                                     <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden')); ?>
+                                    <?php echo $this->Form->input('Salesorder.quotationno', array('type'=>'hidden')); ?>
+                                    <?php echo $this->Form->input('Salesorder.quotation_id', array('type'=>'hidden')); ?>
                                     <?php echo $this->Form->input('device_status', array('type'=>'hidden','value'=>$status_id)); ?>
                                     <?PHP endif; ?>
                                     <div class="panel-body panel-body-nopadding">
@@ -88,39 +89,36 @@ if(customer!='')
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Sales Order Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
                                                 <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Description </a></li>
-                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Upload Your Files </a></li>
+                                                <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Upload your Files </a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
-                                                    <?PHP echo $this->element('Salesorders/salesorder_info'); ?>
+                                                    <?PHP echo $this->element('Salesorders/Salesorder_by_quotation/salesorder_info'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab2">
-                                                    <?PHP echo $this->element('Salesorders/customer_special_needs'); ?>
+                                                    <?PHP echo $this->element('Salesorders/Salesorder_by_quotation/customer_special_needs'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Salesorders/description'); ?>
+                                                    <?PHP echo $this->element('Salesorders/Salesorder_by_quotation/description'); ?>
                                                     <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-10">
                                                             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary sales_submit')); ?>
-                                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                                                            <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel',array('controller'=>'Salesorders','action'=>'index'),array('class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                  <?php echo $this->Form->end(); ?>
+                                                 <?php echo $this->Form->end(); ?>
                                                 <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Salesorders/file_upload'); ?>
+                                                    <?PHP echo $this->element('Salesorders/Salesorder_by_quotation/file_upload'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->
                                         </div><!-- panel-body -->
-                                        
                                     </div>
                                     <!-- panel -->
-                                  
                                 </div>
-                                    
                                 <!-- END Basic Form Elements Content -->
                             </div>
                             <!-- END Basic Form Elements Block -->

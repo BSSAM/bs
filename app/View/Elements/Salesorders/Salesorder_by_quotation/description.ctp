@@ -180,7 +180,44 @@
         </tr>
     </thead>
     <tbody class="sales_Instrument_info"> 
-    
+    <?PHP 
+       
+            if(!empty($sale['Description'])): $i = 0;
+                foreach($sale['Description'] as $device): $i++;
+                    //for($i=1;$i<=count($device['Instrument']);$i++):
+                ?>
+                <input type="hidden" name="data[Description][]" value="<?PHP echo $device['id']  ?>"/>
+                <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
+                    <td class="text-center"><?PHP echo $device['id']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
+<!--                <td class="text-center"><?PHP //echo $device['Instrument']['brand_id']; ?></td>-->
+                    <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
+                    <?PHP $call_location    =   (empty($device['call_location']))?$device['sales_calllocation']:$device['call_location']; ?>
+                    <td class="text-center"><?PHP echo $call_location; ?></td>
+                    <?PHP $validity    =   (empty($device['validity']))?$device['sales_validity']:$device['validity']; ?>
+                    <td class="text-center"><?PHP echo $validity; ?></td>
+                    <?PHP $unit_price    =   (empty($device['unit_price']))?$device['sales_unitprice']:$device['unit_price']; ?>
+                    <td class="text-center"><?PHP echo $unit_price; ?></td>
+                    <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
+                    <?PHP $total    =   (empty($device['total']))?$device['sales_total']:$device['total']; ?>
+                    <td class="text-center"><?PHP echo $total; ?></td>
+                   
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a data-delete="<?PHP echo $device['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+        <?PHP   
+           // endfor;
+            endforeach;
+                   endif; 
+        ?>
     </tbody>
 </table>
 </div>

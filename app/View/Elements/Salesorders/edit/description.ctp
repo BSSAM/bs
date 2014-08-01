@@ -1,6 +1,4 @@
-<script>
-    var path='<?PHP echo Router::url('/',true); ?>';
-</script>
+<script> var path='<?PHP echo Router::url('/',true); ?>';</script>
 <style>
     .sales_instrument_id
 	{
@@ -43,8 +41,6 @@
         }return false;    
     });
     });
-
-
 </script>
 <div class="form-group">
    <label class="col-md-2 control-label" for="val_description">Instrument</label>

@@ -2,7 +2,7 @@
     class SalesordersController extends AppController
     {
         public $helpers = array('Html','Form','Session');
-        public $uses =array('Priority','Paymentterm','Quotation','Currency',
+        public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','branch');
         public function index()
@@ -23,9 +23,76 @@
             
             if($this->request->is('post'))
             {
+                $customer_id    =   $this->request->data['Salesorder']['customer_id'];
+                $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
+                $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
+                $quotation_id   =   $this->request->data['Salesorder']['quotation_id'];
+                $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
+               
+                if($this->Salesorder->save($this->request->data['Salesorder']))
+                {
+                    $sales_orderid  =   $this->Salesorder->getLastInsertID();
+                    /***********************for pending process in Salesorder*************************************/
+                    if(!empty($this->request->data['Salesorder']['device_status']))
+                    {
+                        $device_node_pending    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.pending'=>1)));
+                        if(!empty($device_node_pending))
+                        {
+                            $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1,'Description.pending'=>0),array('Description.customer_id'=>$customer_id,'Description.pending'=>1));
+                        }
+                        $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
+                        $sales_document =   $this->SalesDocument->deleteAll(array('SalesDocument.Salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>0));
+                        if(!empty($sales_document))
+                        {  
+                            $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>'"'.$sales_orderid.'"','SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
+                        }
+                    }
+                    else
+                    {
+                        $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
+                        if(!empty($device_node))
+                        {
+                            $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.status'=>0));
+                        }
+                        $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
+                        $sales_document =   $this->SalesDocument->deleteAll(array('SalesDocument.Salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>0));
+                        if(!empty($sales_document))
+                        {  
+                            $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>'"'.$sales_orderid.'"','SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
+                        }
+                    }
+                    /******************
+                     * Data Log
+                    */
+                    $this->request->data['Logactivity']['logname']   =   'Salesorder';
+                    $this->request->data['Logactivity']['logactivity']   =   'Add SalesOrder';
+                    $this->request->data['Logactivity']['logid']   =   $sales_orderid;
+                    $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    //pr($a);exit;
+                    /******************/
+                    $this->Session->setFlash(__('Salesorder has been Added Successfully'));
+                    $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
+                }
+            }
+        }
+        public function Salesorder_by_quotation($id=NULL)
+        {
+            $dmt    =   $this->random('salesorder');
+            $this->set('salesorderno', $dmt);
+            $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
+            $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $this->set(compact('service','payment','priority'));
+            $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
+            
+            if($this->request->is('post'))
+            {
                
                if(isset($this->request->data['Salesorder']['salesorder_created']) && $this->request->data['Salesorder']['salesorder_created']==1)
                {
+                   //For pending process in Salesorder by quotation
                    $device_current_status   =  $this->request->data['quotation_device_status']; 
                    if($device_current_status=='pending')
                    {
@@ -40,6 +107,9 @@
                    else
                    {
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
+                        // pr($quotation_details);exit;
+                        $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+                        $this->set(compact('contact_list'));
                         $sales_details =  $quotation_details['Quotation']  ;
                         $sales['Salesorder']   =    $sales_details;
                         $sales['Description']  =    $quotation_details['Device'];
@@ -106,6 +176,10 @@
                     }
                }
             }
+            else
+            {
+                $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
+            }
            
         }
         public function edit($id=NULL)
@@ -115,6 +189,7 @@
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id),'recursive'=>'2'));
+            
             $this->set('salesorder',$salesorder_details);
             //pr($salesorder_details);exit;
             
@@ -381,5 +456,78 @@
 //            $this->request->data['Logactivity']['logapprove'] = 1;
 //            $a = $this->Logactivity->save($this->request->data['Logactivity']);
         }
+        public function file_upload($id=NULL)
+        {
+            $this->autoRender=false;
+            if($this->request->is('post'))
+            {
+                $salesorder_no  =   $_POST['salesorder_no'] ;  
+                $salesorder_files   =   $_FILES['file'];
+                $document_array    = array();
+                if(!empty($salesorder_files))
+                {
+                    if(!is_dir(APP.'webroot'.DS.'files'.DS.'Salesorders'.DS.$salesorder_no)):
+                            mkdir(APP.'webroot'.DS.'files'.DS.'Salesorders'.DS.$salesorder_no);
+                    endif;
+                    $document_name  =   time().'_'.$salesorder_files['name'];
+                    $type = $salesorder_files['type'];
+                    $size = $salesorder_files['size'];
+                    $tmpPath = $salesorder_files['tmp_name'];
+                    $originalPath = APP.'webroot'.DS.'files'.DS.'Salesorders'.DS.$salesorder_no.DS.$document_name;
+                    if(move_uploaded_file($tmpPath,$originalPath))
+                    {
+                        $document_array['SalesDocument']['document_name']= $document_name;
+                        $document_array['SalesDocument']['salesorderno']= $salesorder_no;
+                        $document_array['SalesDocument']['document_size']= $size;
+                        $document_array['SalesDocument']['upload_type']= 'Individual';
+                        $document_array['SalesDocument']['document_type']= $salesorder_files['type'];
+                        $this->SalesDocument->create();
+                        $this->SalesDocument->save($document_array);
+                    }
+                }
+              }
+        }
+        public function delete_document($id=NULL)
+        {
+            $this->autoRender   =   false;
+            $document_id    =   $this->request->data['document_id'];
+            $files = scandir(APP.'webroot'.DS.'files'.DS.'Salesorders'.DS.$id); 
+//            if(in_array($document_id,$files))
+//            {
+//                echo "yes";exit;
+//                foreach($files as $file=>$v)
+//                {
+//                    unlink(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$id.DS.$v);
+//                }
+//            }
+            if($document_id!='')
+            {
+                 $this->SalesDocument->updateAll(array('SalesDocument.status'=>0),array('SalesDocument.salesorderno'=>$id,'SalesDocument.document_name LIKE'=>'%'.$document_id.'%'));
+            }
+        }
+        public function attachment($salesorder_id= NULL,$doc_name=NULL)
+        {
+            $file_name    = explode('_',$doc_name);unset($file_name[0]); 
+            $document_file_name   =   implode($file_name,'-') ;
+            $this->response->file(APP.'webroot'.DS.'files'.DS.'Salesorders'.DS.$salesorder_id.DS.$doc_name,
+			array('download'=> true, 'name'=>$document_file_name));
+            return $this->response;  
+	}
+        public function remove_salesdocument()
+        {
+            $this->autoRender   =   false;
+            $document_id    =   $this->request->data['doc_id'];
+            $document_name    =   $this->request->data['doc_org_name'];
+            $salesorder_id    =   $this->request->data['salesorder_id'];
+            if( $this->SalesDocument->deleteAll(array('SalesDocument.id'=>$document_id)))
+            {
+                 if(unlink(APP.'webroot'.DS.'files'.DS.'Salesorders'.DS.$salesorder_id.DS.$document_name))
+                 {
+                     echo 'Success';
+                 }
+            }
+            
+	}
+        
       
 }

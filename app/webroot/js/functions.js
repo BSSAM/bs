@@ -469,41 +469,10 @@ $(document).ready(function(){
         });
     });
 
-
-   
-   
-   
-   
-  
       setTimeout(function(){
           $('.alert_box').slideUp('slow');
       },5000);
   
-    $('.quotation_search').click(function(){
-        var quotation_single_id =   $('#SalesorderQuotationId').val();
-       $.ajax({
-          type:'POST',
-          url:path_url+'Salesorders/check_quotation_count',
-          data:'single_quote_id='+quotation_single_id,
-          success:function(data){
-              if(data=='success')
-              {
-                $('#SalesorderAddForm').submit();
-              }
-              if(data=='failure')
-              {
-                   $('#SalesorderQuotationId').css('border','1px solid red');
-                   return false;
-              }
-          }
-       });
-       
-    });
-     $(document).on('click','.quotation_single',function(){
-        var quote_id=$(this).text();
-        $('#SalesorderQuotationId').val(quote_id);
-        $('#quoat_list').fadeOut();
-    });
     
      $('#val_customer').blur(function(){
          $(this).val('');
@@ -621,7 +590,6 @@ $(document).ready(function(){
             {
                 window.location.reload();
             }
-            
         });
     }
     else

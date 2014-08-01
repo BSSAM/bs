@@ -38,7 +38,7 @@
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 $this->request->data['Quotation']['branch_id']=$branch['branch']['id'];
-               
+              
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
@@ -46,7 +46,7 @@
                     $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
                     if(!empty($device_node))
                     {  
-                        $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1,'Device.quotationno'=>'"'.$this->request->data['Quotation']['quotationno'].'"'),array('Device.customer_id'=>$customer_id));
+                        $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1,'Device.quotationno'=>'"'.$this->request->data['Quotation']['quotationno'].'"'),array('Device.customer_id'=>$customer_id,'Device.quotationno'=>$this->request->data['Quotation']['quotationno'],'Device.status'=>0));
                     }
                     $this->Document->deleteAll(array('Document.quotationno'=>$this->request->data['Quotation']['quotationno'],'Document.status'=>0));
                     if(!empty($device_node))
@@ -263,6 +263,7 @@
         {
             $this->autoRender = false;
             $this->loadModel('Device');
+            $this->request->data['Device']['quotationno']   =   $this->request->data['quotationno'];
             $this->request->data['Device']['customer_id']   =   $this->request->data['customer_id'];
             $this->request->data['Device']['instrument_id'] =   $this->request->data['instrument_id'];
             $this->request->data['Device']['brand_id']      =   $this->request->data['instrument_brand'];
@@ -282,7 +283,6 @@
             if($this->Device->save($this->request->data))
             {
                 $device_id=$this->Device->getLastInsertID();
-               
                 echo $device_id;
             }
      

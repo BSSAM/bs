@@ -48,6 +48,7 @@ $(document).ready(function(){
             return false;
         }
         var customer_id =   $('#QuotationCustomerId').val();
+        var quotation_id =   $('#QuotationQuotationId').val();
         var instrument_id   =   $('#QuotationInstrumentId').val();
         var instrument_quantity =   $('#val_quantity').val();
         var instrument_name=$('#val_description').val();
@@ -69,7 +70,7 @@ $(document).ready(function(){
         for ( var i = 1; i <= instrument_quantity; i++ ){
         $.ajax({
             type: 'POST',
-            data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total,
+            data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total+"&quotationno="+quotation_id,
             url: path+'Quotations/add_instrument/',
             success: function(data)
             {

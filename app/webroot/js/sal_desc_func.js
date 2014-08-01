@@ -21,7 +21,7 @@ $(document).ready(function(){
             success: function(data)
             {
                 parsedata = $.parseJSON(data);
-                 var dept    =   parsedata.Instrument;
+                var dept    =   parsedata.Instrument;
                 $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
                 {
                      $('#val_brand').empty().append('<option value=0>Select Brand</option><option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
@@ -270,10 +270,61 @@ $(document).ready(function(){
     }
        
    });
+    /************************quotation id paste on input box*********************************/
+   $(document).on('click','.quotation_single',function(){
+        var quote_id=$(this).text();
+        $('#SalesorderQuotationId').val(quote_id);
+        $('#quoat_list').fadeOut();
+    });
    /************************For Sales order Approval End*********************************/
     
     $('#SalesorderQuotationId').blur(function(){
         $(this).val('');
          $('#quoat_list').fadeOut();
     });
+    /****************Salesorder index page Quotation count Search*********************/
+     $('.quotation_search').click(function(){
+        var quotation_single_id =   $('#SalesorderQuotationId').val();
+       $.ajax({
+          type:'POST',
+          url:path_url+'Salesorders/check_quotation_count',
+          data:'single_quote_id='+quotation_single_id,
+          success:function(data){
+              if(data=='success')
+              {
+                $('#SalesorderSalesorderByQuotationForm').submit();
+              }
+              if(data=='failure')
+              {
+                   $('#SalesorderQuotationId').css('border','1px solid red');
+                   return false;
+              }
+          }
+       });
+       
+    });
+    /********************************Salesorder uploaded documents delete from edit file*******************************/
+    $(document).on('click','.sales_document_delete',function(){
+       var salesorder_id   =   $(this).attr('data-salesorder_id');
+       var document_id     =   $(this).attr('data-id');
+       var doc_name   =   $(this).attr('data-name');
+       var doc_org_name   =   $(this).attr('data-org_name');
+       var con  =   window.confirm('Do you want to delete '+doc_name+ '?');
+       if(con==true)
+       {
+            $.ajax({
+              type:'POST',
+              url:path_url+'Salesorders/remove_salesdocument',
+              data:'doc_id='+document_id+'&salesorder_id='+salesorder_id+'&doc_org_name='+doc_org_name,
+              success:function(data){
+                if(data=='Success')
+                {
+                    $('.document_'+document_id).fadeOut();
+                }
+              }
+            });
+       }
+       
+    });
+    
 });

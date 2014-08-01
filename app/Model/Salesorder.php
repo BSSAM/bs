@@ -11,12 +11,24 @@ class Salesorder extends AppModel
     public $virtualFields = array(
     'solist_diff' => 'DATEDIFF(CURDATE(),STR_TO_DATE(Salesorder.due_date,"%d-%M-%y"))'
 );
-    
     public $hasMany = array(
         'Description' => array(
             'className' => 'Description',
             'foreignKey' => 'salesorder_id',
             'conditions' => array('is_deleted'=>0),
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'dependent'=>true,
+            'counterQuery' => '',
+      ),
+        'SalesDocument' => array(
+            'className' => 'SalesDocument',
+            'foreignKey' => 'salesorder_id',
+            'conditions' => array('status'=>1),
             'fields' => '',
             'order' => '',
             'limit' => '',

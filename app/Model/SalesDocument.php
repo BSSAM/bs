@@ -5,8 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Document extends AppModel
+class SalesDocument extends AppModel
 {
-    var $name   =   'Document';
-    public $useTable    =   'quo_documents';
+    var $name   =   'SalesDocument';
+    public $useTable    =   'sal_documents';
 }
