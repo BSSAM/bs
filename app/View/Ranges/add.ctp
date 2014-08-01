@@ -1,4 +1,6 @@
- <h1>
+ <h1><script>
+    var path='<?PHP echo Router::url('/',true); ?>';
+</script>
                                 <i class="gi gi-user"></i>Add Range
                             </h1>
                         </div>

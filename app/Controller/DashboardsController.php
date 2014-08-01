@@ -62,6 +62,17 @@ class DashboardsController extends AppController
         $this->set('log_activity_instrument_count', $logactivity_instrument_count);
         
         /*****************************************************/
+        /****************** Log Activity - Procedure No ********************/
+        
+        $logactivity_procedure = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Procedure No")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_procedure', $logactivity_procedure);
+        
+        $logactivity_procedure_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Procedure No")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_procedure_count', $logactivity_procedure_count);
+        
+        /*****************************************************/
         
         /****************** Log Activity - Unit ********************/
         

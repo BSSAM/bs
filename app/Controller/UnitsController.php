@@ -9,7 +9,7 @@ class UnitsController extends AppController
 {
     
     public $helpers = array('Html','Form','Session');
-    public $uses    =   array('Unit');   
+    public $uses    =   array('Unit','Logactivity','Datalog');   
     
     public function index()
     {
@@ -20,13 +20,18 @@ class UnitsController extends AppController
     
     public function add()
     {
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_unit']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
         if($this->request->is('post'))
         {
             if($this->Unit->save($this->request->data))
             {
                 $last_insert_id =   $this->Unit->getLastInsertID();
                 /******************
-                    * Data Log
+                    * Log Activity For Approval
                     */
                     $this->request->data['Logactivity']['logname'] = 'Unit';
                     $this->request->data['Logactivity']['logactivity'] = 'Add Unit';
@@ -38,6 +43,19 @@ class UnitsController extends AppController
                     
                 /******************/
                     
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Unit';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $last_insert_id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/ 
+                
+                    
                 $this->Session->setFlash(__('Unit is Added'));
                 $this->redirect(array('controller'=>'Units','action'=>'index'));
             }
@@ -46,6 +64,14 @@ class UnitsController extends AppController
     }
     public function edit($id = null)
     {
+        $user_role = $this->userrole_permission();
+        
+        $unit_dat = $this->Unit->find('first',array('conditions'=>array('Unit.id'=>$id),'recursive'=>'2'));
+        $this->set('unit_dat',$unit_dat);
+        
+        if($user_role['ins_unit']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -62,6 +88,17 @@ class UnitsController extends AppController
             $this->Unit->id = $id;
             if($this->Unit->save($this->request->data))
             {
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Unit';
+                    $this->request->data['Datalog']['logactivity'] = 'Edit';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/
                $this->Session->setFlash(__('Unit is Updated'));
                return $this->redirect(array('controller'=>'Units','action'=>'index'));
             }
@@ -75,14 +112,41 @@ class UnitsController extends AppController
     
     public function delete($id)
     {
+        $user_role = $this->userrole_permission();
+        
+        if($user_role['ins_unit']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Unit->delete($id))
+        if($this->Unit->updateAll(array('Unit.is_deleted'=>1,'Unit.status'=>0),array('Unit.id'=>$id)))
         {
+            /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Unit';
+                    $this->request->data['Datalog']['logactivity'] = 'Delete';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+            /******************/ 
             $this->Session->setFlash(__('The Unit has been deleted',h($id)));
             return $this->redirect(array('controller'=>'Units','action'=>'index'));
         }
+    }
+    
+    public function approve()
+    {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->Unit->updateAll(array('Unit.is_approved'=>1),array('Unit.id'=>$id));
+            $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Unit'));
+            $details=$this->Unit->find('first',array('conditions'=>array('Unit.id'=>$id)));
+            
     }
 }

@@ -1,4 +1,6 @@
-                            <h1>
+                 <h1><script>
+    var path='<?PHP echo Router::url('/',true); ?>';
+</script>
                                 <i class="fa fa-table"></i>Procedures
                             </h1>
                         </div>
@@ -32,7 +34,7 @@
                                 <tbody>
                                     <?php foreach($procedures as $procedure): ?>
                                        
-                                    <tr>
+                                    <tr <?php if($procedure['Procedure']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $procedure['Procedure']['id'];?></td>
                                         
                                         <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$procedure['Procedure']['created']);?></td>

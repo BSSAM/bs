@@ -543,6 +543,93 @@ $(document).ready(function(){
         $('#salesorder_single').fadeOut();
     });
     
+    // Instrument Approval
+    $(document).on('click','.approve_instrument',function(){
+       var val_instrumentid = $('#instru_id').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_instrumentid,
+            url: path+'Instruments/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+   
+    // Procedure Approval
+    $(document).on('click','.approve_procedure',function(){
+       var val_procedureid = $('#pro_id').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_procedureid,
+            url: path+'Procedures/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+   
+    // Unit Approval
+    $(document).on('click','.approve_unit',function(){
+       var val_unitid = $('#unit_id').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_unitid,
+            url: path+'Units/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+   
+   // Range Approval
+    $(document).on('click','.approve_range',function(){
+       var val_rangeid = $('#range_id').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_rangeid,
+            url: path+'Ranges/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
     
    
 }); 

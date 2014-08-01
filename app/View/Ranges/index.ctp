@@ -1,4 +1,6 @@
-                            <h1>
+                    <h1><script>
+    var path='<?PHP echo Router::url('/',true); ?>';
+</script>
                                 <i class="fa fa-table"></i>Ranges
                             </h1>
                         </div>
@@ -33,7 +35,7 @@
                                 <tbody>
                                     <?php foreach($ranges as $range): ?>
                                        
-                                    <tr>
+                                    <tr<?php if($range['Range']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $range['Range']['id'];?></td>
                                         
                                          <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$range['Range']['created']);?></td>

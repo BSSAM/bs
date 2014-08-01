@@ -1,4 +1,6 @@
-                            <h1>
+                    <h1><script>
+    var path='<?PHP echo Router::url('/',true); ?>';
+</script>
                                 <i class="fa fa-table"></i>Units
                             </h1>
                         </div>
@@ -29,7 +31,7 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach($units as $unit): ?>
-                                    <tr>
+                                    <tr <?php if($unit['Unit']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $unit['Unit']['id'];?></td>
                                          <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$unit['Unit']['created']);?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->

@@ -46,9 +46,13 @@
                                     <tbody>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5>Branch</h5></td>
-                                            <?php $a = ($this->request->data['other_branch']['edit']==1)?'checked ="checked"':''; ?>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.add',array('id'=>'add','checked'=>'unchecked')); ?><label for="add">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.edit',array('id'=>'edit','type'=>'checkbox','label'=>false,'checked'=>'unchecked'));?><label for="edit">Edit</label> </div></td>
+                                            <?php if($this->request->data['other_branch']['add']==1):?>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.add',array('id'=>'add','value'=>'on','checked'=>'checked')); ?><label for="add">Add</label> </div></td>
+                                            <?php elseif($this->request->data['other_branch']['add']==0): ?>
+                                            <td></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.add',array('id'=>'add','value'=>'off','unchecked'=>'unchecked')); ?><label for="add">Add</label> </div></td>
+                                            <?php endif; ?>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.edit',array('id'=>'edit'));?><label for="edit">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.view',array('id'=>'view')); ?><label for="view">View</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.delete',array('id'=>'delete')); ?><label for="delete">Delete</label> </div></td>
                                         </tr>

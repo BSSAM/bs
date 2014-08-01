@@ -9,7 +9,7 @@ class RangesController extends AppController
 {
     
     public $helpers = array('Html','Form','Session');
-    public $uses    =   array('Range','Unit');   
+    public $uses    =   array('Range','Unit','Logactivity','Datalog');   
     
     public function index()
     {
@@ -20,6 +20,12 @@ class RangesController extends AppController
     
     public function add()
     {
+        $user_role = $this->userrole_permission();
+        
+        if($user_role['ins_range']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
         $unit_array =   $this->Unit->find('list',array('conditions'=>array('Unit.status'=>'1'),'fields'=>array('id','unit_name')));
         $this->set('units',$unit_array);
       
@@ -27,6 +33,31 @@ class RangesController extends AppController
         {
             if($this->Range->save($this->request->data))
             {
+                $last_insert_id =   $this->Range->getLastInsertID();
+                /******************
+                    * Log Activity For Approval
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'Range';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Range';
+                    $this->request->data['Logactivity']['logid'] = $last_insert_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+                    
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Range';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $last_insert_id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/ 
                 $this->Session->setFlash(__('Range is Added'));
                 $this->redirect(array('controller'=>'Ranges','action'=>'index'));
             }
@@ -35,8 +66,18 @@ class RangesController extends AppController
     }
     public function edit($id = null)
     {
+        $user_role = $this->userrole_permission();
+        
+        if($user_role['ins_range']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
         $unit_array =   $this->Unit->find('list',array('conditions'=>array('Unit.status'=>'1'),'fields'=>array('id','unit_name')));
         $this->set('units',$unit_array);
+        
+        $range_dat = $this->Range->find('first',array('conditions'=>array('Range.id'=>$id),'recursive'=>'2'));
+        $this->set('range_dat',$range_dat);
+        
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -53,6 +94,17 @@ class RangesController extends AppController
             $this->Range->id = $id;
             if($this->Range->save($this->request->data))
             {
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Range';
+                    $this->request->data['Datalog']['logactivity'] = 'Edit';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/
                $this->Session->setFlash(__('Range is Updated'));
                return $this->redirect(array('controller'=>'Ranges','action'=>'index'));
             }
@@ -66,14 +118,42 @@ class RangesController extends AppController
     
     public function delete($id)
     {
+        $user_role = $this->userrole_permission();
+        
+        if($user_role['ins_range']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Range->delete($id))
+        if($this->Range->updateAll(array('Range.is_deleted'=>1,'Range.status'=>0),array('Range.id'=>$id)))
         {
+            /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Range';
+                    $this->request->data['Datalog']['logactivity'] = 'Delete';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+            /******************/
             $this->Session->setFlash(__('The Range has been deleted',h($id)));
             return $this->redirect(array('controller'=>'Ranges','action'=>'index'));
         }
+    }
+    
+    public function approve()
+    {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->Range->updateAll(array('Range.is_approved'=>1),array('Range.id'=>$id));
+            $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Range'));
+            $details=$this->Range->find('first',array('conditions'=>array('Range.id'=>$id)));
+            
     }
 }
