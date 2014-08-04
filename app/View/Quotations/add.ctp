@@ -44,6 +44,7 @@ $("#val_reg_date").datepicker("setDate", new Date());
                                     <?php echo $this->Form->input('Quotation.customer_id', array('type'=>'hidden','value'=>'')); ?>
                                     <?php echo $this->Form->input('Quotation.track_id', array('type'=>'hidden','value'=>$our_ref_no)); ?>
                                     <?php echo $this->Form->input('Quotation.quotation_id', array('type'=>'hidden','value'=>$quotationno)); ?>
+                                    <?php echo $this->Form->input('Quotation.quo_device_count', array('type'=>'hidden','id'=>'quotation_device_count')); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">

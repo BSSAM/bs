@@ -1,4 +1,3 @@
-
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_remarks">Remarks</label>
     <div class="col-md-4">

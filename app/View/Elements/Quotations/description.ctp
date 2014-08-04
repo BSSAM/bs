@@ -21,7 +21,8 @@
                 $("#search_instrument").html(html).show();
             }
             });
-        }return false;    
+        }
+        return false;    
     });});
 
 </script>

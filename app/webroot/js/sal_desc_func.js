@@ -78,6 +78,7 @@ $(document).ready(function(){
             $('#sales_quantity').css('border','1px solid red');
             return false;
         }
+        var salesorder_no   =   $('#val_salesorderno').val();
         var instrument_quantity =  $('#sales_quantity').val();
         var customer_id         =   $('#SalesorderCustomerId').val();
         var instrument_id       =   $('#SalesorderInstrumentId').val();
@@ -96,10 +97,11 @@ $(document).ready(function(){
         var instrument_title=$('#sales_titles').val();
         var instrument_cal=instrument_unitprice*instrument_discount/100;
         var instrument_total=instrument_unitprice - instrument_cal ;
+        
         for ( var i = 1; i <= instrument_quantity; i++ ){
         $.ajax({
             type: 'POST',
-            data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total,
+            data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total+"&salesorder_id="+salesorder_no,
             url: path+'Salesorders/sales_add_instrument/',
             success: function(data)
             {

@@ -71,12 +71,11 @@
     </div>
 </div>
 <div class="form-group">
-   
     <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.priority', array('id' => 'val_priority', 'class' => 'select-chosen form-control', 'label' => false, 'options' => $priority)); ?>
     </div>
-    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,)); ?>
+    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'value'=>$our_ref_no)); ?>
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>

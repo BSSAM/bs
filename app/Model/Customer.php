@@ -12,7 +12,7 @@ class Customer extends AppModel
 {
   public $actsAs  =   array('Containable');
   public $belongsTo = array('Industry','Location','Paymentterm','Priority','Deliveryordertype',
-                      'InvoiceType','branch');
+                      'InvoiceType','branch','AcknowledgementType');
   public $virtualFields = array( 'Customertagname' => 'CONCAT(Customer.customername, " ( ", Customer.tag_name," ) ")');
 
   public $hasMany = array(

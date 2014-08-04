@@ -14,6 +14,8 @@
         public function add()
         {
             $dmt    =   $this->random('salesorder');
+            $track_id=$this->random('track');
+            $this->set('our_ref_no', $track_id);
             $this->set('salesorderno', $dmt);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
@@ -24,43 +26,24 @@
             if($this->request->is('post'))
             {
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
-                $this->request->data['Quotation']['customername']=$this->request->data['sales_customername'];
+                $this->request->data['Salesorder']['customername']=$this->request->data['sales_customername'];
                 $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
-                $quotation_id   =   $this->request->data['Salesorder']['quotation_id'];
+                $quotation_array  = explode('-', $this->request->data['Salesorder']['salesorderno']);
+                $quotation_array[0]="BSQ";$quotation_id  =  implode($quotation_array,'-');
                 $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
-               
+                $this->request->data['Salesorder']['quotationno']=$quotation_id;
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
                     $sales_orderid  =   $this->Salesorder->getLastInsertID();
+                    $create_quotation   =   $this->create_automatic_quotation($sales_orderid);
                     /***********************for pending process in Salesorder*************************************/
-                    if(!empty($this->request->data['Salesorder']['device_status']))
+                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0)));
+                    if(!empty($device_node))
                     {
-                        $device_node_pending    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.pending'=>1)));
-                        if(!empty($device_node_pending))
-                        {
-                            $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1,'Description.pending'=>0),array('Description.customer_id'=>$customer_id,'Description.pending'=>1));
-                        }
-                        $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
-                        $sales_document =   $this->SalesDocument->deleteAll(array('SalesDocument.Salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>0));
-                        if(!empty($sales_document))
-                        {  
-                            $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>'"'.$sales_orderid.'"','SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
-                        }
+                        $this->Description->updateAll(array('Description.quotationno'=>'"'.$quotation_id.'"','Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0));
                     }
-                    else
-                    {
-                        $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
-                        if(!empty($device_node))
-                        {
-                            $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.status'=>0));
-                        }
-                        $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
-                        $sales_document =   $this->SalesDocument->deleteAll(array('SalesDocument.Salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>0));
-                        if(!empty($sales_document))
-                        {  
-                            $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>'"'.$sales_orderid.'"','SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
-                        }
-                    }
+                    $sales_document =   $this->SalesDocument->deleteAll(array('SalesDocument.Salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>0));
+                    $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>'"'.$sales_orderid.'"','SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
                     /******************
                      * Data Log
                     */
@@ -292,6 +275,7 @@
             $this->autoRender = false;
             $this->loadModel('Description');
             $this->request->data['Description']['customer_id']          =   $this->request->data['customer_id'];
+            $this->request->data['Description']['salesorder_id']        =   $this->request->data['salesorder_id'];
             $this->request->data['Description']['instrument_id']        =   $this->request->data['instrument_id'];
             $this->request->data['Description']['brand_id']             =   $this->request->data['instrument_brand'];
             $this->request->data['Description']['sales_quantity']       =   $this->request->data['instrument_quantity'];

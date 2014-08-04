@@ -1,22 +1,4 @@
-                            <h1>
-                                <i class="gi gi-user"></i>Quotations
-                            </h1>
-                        </div>
-                    </div>
-                    <ul class="breadcrumb breadcrumb-top">
-                        <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Quotations',array('controller'=>'Quotations','action'=>'index')); ?></li>
-                    </ul>
-                    <!-- END Datatables Header -->
-                    <?PHP echo $this->element('message'); ?>
-                    <!-- Datatables Content -->
-                    <div class="block full">
-                        <div class="block-title">
-                            <h2>List Of Quotations</h2>
-                            <h2 style="float:right;"><?php echo $this->Html->link('Add Quotation',array('controller'=>'Quotations','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Quotation')); ?></h2>
-                        </div>
-                        
-
+                   
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
@@ -60,25 +42,8 @@
                                     </tr>
                                     <?php endforeach; ?>
                                     <?PHP endif; ?>
-                                   
                                 </tbody>
                             </table>
-<!--                            <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    </div>
-                                </div>
-                            </div>-->
 
-                    <?php echo $this->Html->script('pages/uiProgress'); ?>
-                    <script>$(function(){ UiProgress.init(); });</script>
-                    <?php if ($this->Session->flash() != '') { ?>
-                        <script> var UiProgress = function() {
-                            // Get random number function from a given range
-                            var getRandomInt = function(min, max) {
-                                return Math.floor(Math.random() * (max - min + 1)) + min;
-                            };
-                        }();
-                        $('#modal').load('Customers').dialog('open');
-                        </script> 
-                    <?php } ?>
+
+                    

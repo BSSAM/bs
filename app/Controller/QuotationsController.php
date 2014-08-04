@@ -31,14 +31,11 @@
            
             if($this->request->is('post'))
             {
-               
                 $date = date('m/d/Y h:i:s a', time());
                 $this->request->data['Quotation']['created_by'] = $date;
-
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 $this->request->data['Quotation']['branch_id']=$branch['branch']['id'];
-              
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
@@ -79,6 +76,7 @@
         {
             $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
             //for Contact person info
+            
             $customer_id    =   $quotations_list['Customer']['id'];
             $salesperson_list    =   $this->CusSalesperson->find('all',array('conditions'=>array('CusSalesperson.customer_id'=>$customer_id)));
             $salespeople         =   '';
@@ -116,7 +114,13 @@
             $this->set(compact('instrument_types','person_list','our_ref_no','country','priority','payment','quotations_list','additional','service','quotations_list','salespeople'));
             if($this->request->is(array('post','put')))
             {
+                //to update quotation po generate type
+                if($quotations_list['Quotation']['ref_no']!=$this->request->data['Quotation']['ref_no'])
+                {
+                    $this->request->data['Quotation']['po_generate_type']='Manual';
+                }
                 $this->Quotation->id=$id;
+                
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $customer_id=$quotations_list['Quotation']['customer_id'];
@@ -128,12 +132,12 @@
                     $this->Customerspecialneed->id=$this->request->data['Customerspecialneed']['id'];
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);  
                     
-                     $this->request->data['Logactivity']['logname']   =   'Quotation';
-                     $this->request->data['Logactivity']['logactivity']   =   'Add Quotation';
-                     $this->request->data['Logactivity']['logid']   =   $quotations_list['Quotation']['quotationno'];
-                     $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
-                     $this->request->data['Logactivity']['logapprove'] = 1;
-                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    $this->request->data['Logactivity']['logname']   =   'Quotation';
+                    $this->request->data['Logactivity']['logactivity']   =   'Add Quotation';
+                    $this->request->data['Logactivity']['logid']   =   $quotations_list['Quotation']['quotationno'];
+                    $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
                     $this->Session->setFlash(__('Quotation has been Updated Successfully '));
                     $this->redirect(array('action'=>'index'));
                 }

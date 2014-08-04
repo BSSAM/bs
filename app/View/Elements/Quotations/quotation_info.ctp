@@ -3,14 +3,12 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('Quotation.quotationno', array('id'=>'val_quotationno','class'=>'form-control','readonly'=>'readonly','label'=>false,'value'=> $quotationno)); ?>
     </div>
-    
     <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('due_amount', array('id'=>'val_dueamount','class'=>'form-control',
                                                 'placeholder'=>'Due Amount','label'=>false,'autoComplete'=>'off','disabled'=>'disabled')); ?>
     </div>
 </div>
-    
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
@@ -18,8 +16,7 @@
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
                     'autoComplete'=>'off','type'=>'text','name'=>'customername')); ?>
         <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'customer_id')); ?>
-        <div id="result">
-        </div>
+        <div id="result"></div>
     </div>
     <label class="col-md-2 control-label" for="val_address">Customer Address</label>
     <div class="col-md-4">
@@ -28,7 +25,6 @@
     </div>
 </div>
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name')); ?>
@@ -50,7 +46,6 @@
         <?php echo $this->Form->input('fax', array('id'=>'val_fax','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Fax Number')); ?>
     </div>
 </div>
-
 <div class="form-group">
      <label class="col-md-2 control-label" for="val_payment_term">Payment Terms</label>
     <div class="col-md-4">
@@ -63,14 +58,17 @@
         <?php echo $this->Form->input('reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Registration date','label'=>false)); ?>
     </div>
-   
 </div>
-
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+        <div class="row col-md-9">
+            <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+            <?php echo $this->Form->input('Quotation.po_generate_type', array('type'=>'hidden','id'=>'po_gen_type','class'=>'form-control','label'=>false)); ?>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-sm btn-primary quo_generate_po" id="purchase_order" type="button">Generate Po</button>
+        </div>   
     </div>
     <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">

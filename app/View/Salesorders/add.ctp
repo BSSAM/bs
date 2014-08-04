@@ -2,17 +2,17 @@
 <style>
     .show
 	{
-		padding:10px; 
-		border-bottom:1px #999 dashed;
-		font-size:15px; 
-		height:50px;
-                float: top;
+            padding:10px; 
+            border-bottom:1px #999 dashed;
+            font-size:15px; 
+            height:50px;
+            float: top;
 	}
 	.show:hover
 	{
-		background:#4c66a4;
-		color:#FFF;
-		cursor:pointer;
+            background:#4c66a4;
+            color:#FFF;
+            cursor:pointer;
 	}
         #result{
             position: absolute;
@@ -21,33 +21,33 @@
 </style>
 <script type="text/javascript">
 $(function(){
-$("#val_customer").keyup(function() 
+$("#manual_val_customer").keyup(function() 
 { 
-//alert();    
-var customer = $(this).val();
-var dataString = 'name='+ customer;
-if(customer!='')
-{
-	$.ajax({
-	type: "POST",
-	url: "<?PHP echo Router::url('/',true); ?>Salesorders/search",
-	data: dataString,
-	cache: false,
-	success: function(html)
-	{
-            $("#result").html(html).show();
-	}
-	});
-        }return false;    
-        });
-        $("#val_reg_date").datepicker("setDate", new Date());
-        $("#val_in_date").datepicker("setDate", new Date());
-        var dateMin = $('#val_in_date').datepicker('getDate');   
-        var addDays = new Date();
-        addDays.setDate(addDays.getDate() + 4);
-        $("#val_out_date").datepicker("setDate",addDays);
+    //alert();    
+    var customer = $(this).val();
+    var dataString = 'name='+ customer;
+    if(customer!='')
+    {
+            $.ajax({
+            type: "POST",
+            url: "<?PHP echo Router::url('/',true); ?>Salesorders/search",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                $("#result").html(html).show();
+            }
+            });
+            }return false;    
+            });
+            $("#val_reg_date").datepicker("setDate", new Date());
+            $("#val_in_date").datepicker("setDate", new Date());
+            var dateMin = $('#val_in_date').datepicker('getDate');   
+            var addDays = new Date();
+            addDays.setDate(addDays.getDate() + 4);
+            $("#val_out_date").datepicker("setDate",addDays);
 
-        });
+            });
 </script>
 <h1>
                            
@@ -68,19 +68,15 @@ if(customer!='')
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
                                     <h2 class="pull-right">
-                                        Track Id    : 
+                                        Track Id    : <?PHP echo $our_ref_no; ?>
                                     </h2>
                                 </div>
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
-                                   
                                     <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'Salesorder','action'=>'add')); ?>
                                     <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden')); ?>
-                                    <?PHP if(!empty($sale['Salesorder']['track_id'])): ?>
-                                    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden')); ?>
-                                    <?php echo $this->Form->input('device_status', array('type'=>'hidden','value'=>$status_id)); ?>
-                                    <?PHP endif; ?>
+                                    <?php echo $this->Form->input('Salesorder.salesorder_id', array('type'=>'hidden','value'=>$salesorderno)); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">

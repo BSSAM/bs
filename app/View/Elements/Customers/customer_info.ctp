@@ -1,5 +1,4 @@
 <div class="form-group">
-
     <label class="col-md-2 control-label" for="val_customername">Customer Name</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Customer Name', 'label' => false, 'name' => 'customername')); ?>
@@ -11,8 +10,6 @@
 
 </div>
 <div class="form-group">
-
-   
     <label class="col-md-2 control-label" for="val_salespeoples">Sales Persons</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('salesperson_id', array('id' => 'val_salespeoples', 'class' => 'select-chosen required', 'options' => $salesperson, 'data-placeholder' => 'Enter the Sales Persons', 'label' => false, 'name' => 'salesperson_id', 'multiple' => true, 'style' => 'width: 250px; display: none;')); ?>
@@ -191,22 +188,18 @@
 
 </div>
 <div class="form-group">
-   
     <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('deliveryordertype_id', array('id' => 'val_deliveryordertype', 'class' => 'form-control select-chosen', 'options' => $deliverorder_type, 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype_id')); ?>
     </div>
-     <label class="col-md-2 control-label" for="val_poack">PO Acknowledgement</label>
+    <label class="col-md-2 control-label" for="val_poack">Acknowledgement Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->checkbox('poack', array('id' => 'val_poack', 'class' => 'checkbox', 'label' => false, 'name' => 'poack')); ?>
+        <?php echo $this->Form->input('acknowledgement_type_id', array('id' => 'val_poack', 'class' => 'form-control select-chosen checkbox', 'label' => false, 'name' => 'acknowledgement_type_id','type'=>'select','options'=>$acknowledgement_type,'empty'=>'Select the Acknowledgement Type')); ?>
     </div>
-
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="var_requirements">Requirements</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('requirements', array('id' => 'var_requirements', 'class' => 'form-control', 'placeholder' => 'Enter the Requirement', 'label' => false, 'name' => 'requirements')); ?>
     </div>
-   
-   
 </div>

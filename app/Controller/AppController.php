@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
     class AppController extends Controller 
     {
         public $components = array('Session');
-        public $uses    =   array('Description','Random','branch');
+        public $uses    =   array('Description','Random','branch','Device','Customerspecialneed');
         
         public function beforeFilter()
         {
@@ -371,5 +371,53 @@ App::uses('Controller', 'Controller');
             $salesorder_id  =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$deliveryorder_id),'fields'=>array('salesorder_id')));
             $this->Description->updateAll(array('Description.shipping'=>1),array('Description.salesorder_id'=>$salesorder_id['Deliveryorder']['salesorder_id']));
         }
-        
+        public function create_automatic_quotation($sales_id=NULL)
+        {
+           $create_quotation_from_salesorder_detatils = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$sales_id,'Salesorder.is_deleted'=>0),'recursive'=>3));
+           unset($create_quotation_from_salesorder_detatils['Salesorder']['id']);
+           
+           $form_quotation_array['Quotation']       =   $create_quotation_from_salesorder_detatils['Salesorder'];
+           $form_quotation_array['Quotation']['instrument_type_id']=$create_quotation_from_salesorder_detatils['Salesorder']['instrument_type'];
+           $form_quotation_array['Quotation']['quotation_id']=$sales_id;
+           $form_quotation_array['Quotation']['salesorder_created']=1;
+           unset($create_quotation_from_salesorder_detatils['Salesorder']['instrument_type']);
+           if($this->Quotation->save($form_quotation_array['Quotation']))
+           {
+             
+                $last_quotation_id  =   $this->Quotation->getLastInsertID();
+                //For Salesorder Quotation id Update
+                $this->Salesorder->updateAll(array('Salesorder.quotation_id'=>$last_quotation_id),array('Salesorder.id'=>$sales_id));
+                //For Salesorder Description Quotation id Update
+                $this->Description->updateAll(array('Description.quotation_id'=>$last_quotation_id),array('Description.salesorder_id'=>$sales_id));
+                $form_quotation_array['Customerspecialneed']['quotation_id']=$last_quotation_id;
+                $form_quotation_array['Customerspecialneed']['remarks']=$create_quotation_from_salesorder_detatils['Salesorder']['remarks'];
+                $form_quotation_array['Customerspecialneed']['service_id']=$create_quotation_from_salesorder_detatils['Salesorder']['service_id'];
+                $this->Customerspecialneed->save($form_quotation_array['Customerspecialneed']);
+                $descriptions =    $create_quotation_from_salesorder_detatils['Description'];
+                if(!empty($descriptions)):
+                  foreach($descriptions as $description):
+                    $this->Device->create();
+                    $this->request->data['Device']['quotationno']   =   $create_quotation_from_salesorder_detatils['Salesorder']['quotationno'];
+                    $this->request->data['Device']['customer_id']   =   $create_quotation_from_salesorder_detatils['Salesorder']['customer_id'];
+                    $this->request->data['Device']['quotation_id']  =   $last_quotation_id;
+                    $this->request->data['Device']['instrument_id'] =   $description['instrument_id'];
+                    $this->request->data['Device']['brand_id']      =   $description['brand_id'];
+                    $this->request->data['Device']['quantity']      =   $description['sales_quantity'];
+                    $this->request->data['Device']['model_no']      =   $description['model_no'];
+                    $this->request->data['Device']['range']         =   $description['sales_range'];
+                    $this->request->data['Device']['call_location'] =   $description['sales_calllocation'];
+                    $this->request->data['Device']['call_type']     =   $description['sales_calltype'];
+                    $this->request->data['Device']['validity']      =   $description['sales_validity'];
+                    $this->request->data['Device']['discount']      =   $description['sales_discount'];
+                    $this->request->data['Device']['department_id'] =   $description['department_id'];
+                    $this->request->data['Device']['unit_price']    =   $description['sales_unitprice'];
+                    $this->request->data['Device']['account_service']=  $description['sales_accountservice'];
+                    $this->request->data['Device']['total']         =   $description['sales_total'];
+                    $this->request->data['Device']['title']         =   $description['sales_titles'];
+                    $this->request->data['Device']['status']        =  1;
+                    $this->Device->save($this->request->data['Device']);
+                  endforeach;
+              endif;
+           }
+        }
 }

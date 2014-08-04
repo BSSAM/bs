@@ -8,7 +8,7 @@
 class CustomersController extends AppController
 {
     public $helpers = array('Html','Form','Session');
-    public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
+    public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo','AcknowledgementType',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
                         'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo');
@@ -16,8 +16,8 @@ class CustomersController extends AppController
   
     public function index()
     {
-        $data = $this->Customer->find('all',array('conditions'=>array('Customer.is_default'=>1,'Customer.is_deleted'=>0,'Customer.status'=>1),'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
-        $this->set('customer', $data);
+        $Customer_lists = $this->Customer->find('all',array('conditions'=>array('Customer.is_default'=>1,'Customer.is_deleted'=>0,'Customer.status'=>1),'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
+        $this->set('customer', $Customer_lists);
         $this->Address->deleteAll(array('Address.status'=>0));
         $this->Projectinfo->deleteAll(array('Projectinfo.project_status'=>0));
     }
@@ -47,10 +47,11 @@ class CustomersController extends AppController
         $paymentterm = $this->Paymentterm->find('list', array('fields' => array('id','pay')));
         $priority= $this->Priority->find('list', array('fields' => 'priority'));
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
-        
+        $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
+       
         $this->set(compact('priority','location','salesperson','referedby','data10','data10_count','data11',
                             'data11_count','data12','data12_count','industry','deliverorder_type',
-                            'invoice_types','paymentterm','userrole','industry','contactpersoninfo'));
+                            'invoice_types','paymentterm','userrole','industry','contactpersoninfo','acknowledgement_type'));
         
         if($this->request->is('post'))
         {
@@ -137,12 +138,12 @@ class CustomersController extends AppController
         
         $priority = $this->Priority->find('list', array('fields' => 'priority'));
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
-        
+        $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
         // Model For the Tab Edit Contact Info
         $contactpersoninfo = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.status' => 1, 'Contactpersoninfo.customer_id' => $id), 'order' => array('Contactpersoninfo.id' => 'DESC')));
         $this->set(compact('priority','location','salesperson','referedby','data10','data10_count','data11',
                             'data11_count','data12','data12_count','industry','deliverorder_type',
-                            'invoice_types','paymentterm','userrole','industry','contactpersoninfo'));
+                            'invoice_types','paymentterm','userrole','industry','contactpersoninfo','acknowledgement_type'));
      
         if($this->request->is(array('post','put')))
         {

@@ -89,6 +89,7 @@ $(document).ready(function(){
                                     <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
                 
+                
                 $('#val_quantity').val(null);
                 $('#val_description').val(null);
                 $('#val_model_no').val(null);
@@ -313,7 +314,31 @@ $(document).ready(function(){
             }
             
         });
-        /**********************************************individual File upload*****************************/
-       
    });
+     /**********************************************Generate Po for Quotation*****************************/
+   $(document).on('click','.quo_generate_po',function()
+   {
+       
+       var po_id    =   $(this).attr('id');
+       var confirm   =window.confirm('I dont have Po number.Need to generate temporary po');  
+       if(confirm==true)
+       {
+            $.ajax({
+            type:'POST',
+            url:path_url+'/Clientpos/get_random_ponumber/',
+            success:function(data){
+                  $('#val_ref_no').val(data);
+                  $('#val_ref_no').attr('readonly','readonly');
+                  $('#po_gen_type').val('Automatic');
+                    
+                }
+            });
+        }
+   });
+    /***********************************************Calculate Device Count Rate Total******************************/
+    $(document).on('keyup','#val_ref_no',function(){
+      if($(this).val()=='-'){
+         $('#po_gen_type').val('Normal');
+      }
+    });
 });

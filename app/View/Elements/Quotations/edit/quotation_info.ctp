@@ -31,7 +31,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name','options'=>$person_list)); ?>
+        <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name','options'=>$person_list,'readonly'=>'readonly')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_email">Email</label>
     <div class="col-md-4">
@@ -67,11 +67,11 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>  
-    <div class="col-md-4">
-        <?PHP if(!empty($this->request->data['Clientpo'])){$pos =$po_list ;$readonly    ="readonly";}else{$pos =$this->request->data['Quotation']['ref_no'];$readonly    ="";}?>
-        <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','value'=>$pos,$readonly)); ?>
-    </div>
+    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label> 
+     <div class="col-md-4">
+            <?PHP //if(!empty($this->request->data['Clientpo'])){$pos =$po_list ;$readonly    ="readonly";}else{$pos =$this->request->data['Quotation']['ref_no'];$readonly    ="";}?>
+            <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number')); ?>
+     </div>
      <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
