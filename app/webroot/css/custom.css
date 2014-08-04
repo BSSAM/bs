@@ -72,3 +72,4 @@ and open the template in the editor.
 .do_no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}
 .do_single_show:hover{  background:#4c66a4;  color:#FFF;  cursor:pointer;}
 .do_result{position: absolute;  z-index: 999; }
+.float_none{float:none !important;}

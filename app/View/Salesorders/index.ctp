@@ -54,8 +54,7 @@
                                 $attributes = array('legend' => false, 'class' => 'device_status', 'value' => 'processing', 'name' => 'quotation_device_status');
                                 echo $this->Form->radio('quotation_device_status', $options, $attributes);
                             ?>
-                            <div class="input-group col-md-4" style="margin-left: 65%;
-margin-bottom: 3%;">
+                            <div class="input-group col-md-4" style="margin-left:65%;margin-bottom:3%;">
                                 <?PHP echo $this->Form->input('quotation_id', array('placeholder' => 'Quotation Id', 'class' => 'form-control',
                                     'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
                                 ?>

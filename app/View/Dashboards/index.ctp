@@ -17,9 +17,9 @@
                         <!-- Forum Tabs Title -->
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
-                                <li class="active"><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo $log_activity_job_count; ?></span></a></li>
-                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo $log_activity_instrument_count; ?></span></a></li>
-                                <li><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
+                                <li class="active"><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
+                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php //echo $log_activity_instrument_count; ?></span></a></li>
+                                <li><a href="#messages">Messages <span class="badge animation-floating"><?php //echo $log_activity_message_count; ?></span></a></li>
                             </ul>
                         </div>
                         <!-- END Forum Tabs -->

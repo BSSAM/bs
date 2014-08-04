@@ -34,11 +34,11 @@
                                     <thead>
                                         <tr>
                                             <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
-                                            <th class="text-center">Purchase order Details</th>
-                                            <th class="text-center">Quotation Details</th>
-                                            <th class="text-center">Sales order Details</th>
-                                            <th class="text-center">Delivery order Details</th>
-                                            <th class="text-center">Invoice Details</th>
+                                            <th class="text-center col-md-3">Purchase order Details</th>
+                                            <th class="text-center col-md-3">Quotation Details</th>
+                                            <th class="text-center col-md-3">Sales order Details</th>
+                                            <th class="text-center col-md-3">Delivery order Details</th>
+                                            <th class="text-center col-md-3">Invoice Details</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -111,6 +111,146 @@
                                 <!-- END Basic Form Elements Content -->
                             </div>
                             <!-- END Basic Form Elements Block -->
+                            <div class="row">
+                        <div class="col-md-6 fc-header-title float_none">
+                            <!-- Block with Options -->
+                            <div class="block col-md-12">
+                                <!-- Block with Options Title -->
+                                <div class="block-title">
+                                    
+                                    <h2><strong>Purchase order Details	</strong></h2>
+                                </div>
+                                <!-- END Block with Options Title -->
+
+                                <!-- Block with Options Content -->
+                                <div class="form-group col-md-8">
+                                                <?php echo $this->Form->input('clientpo_no', array('id' => 'purchase_order', 'class' => 'form-control', 'placeholder' => 'Purchase Order No', 'label' => false, 'name' => 'clientpo_no', 'autoComplete' => 'off')); ?>
+                                                    <div id="po_result"></div>
+                                            </div>
+                                            <div class="form-group col-md-3 row">
+                                                <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'placeholder' => 'Count', 'label' => false, 'name' => 'po_quantity')); ?>
+                                                
+                                            </div>
+                                  <div class="form-group col-md-8">
+                                                <?php echo $this->Form->input('clientpo_no', array('id' => 'purchase_order', 'class' => 'form-control', 'placeholder' => 'Purchase Order No', 'label' => false, 'name' => 'clientpo_no', 'autoComplete' => 'off')); ?>
+                                                    <div id="po_result"></div>
+                                            </div>
+                                            <div class="form-group col-md-3 row">
+                                                <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'placeholder' => 'Count', 'label' => false, 'name' => 'po_quantity')); ?>
+                                                
+                                            </div>
+                                
+                                  <div class="form-group col-md-8">
+                                                    <?php echo $this->Form->input('clientpo_no', array('id' => 'purchase_order', 'class' => 'form-control', 'placeholder' => 'Purchase Order No', 'label' => false, 'name' => 'clientpo_no', 'autoComplete' => 'off')); ?>
+                                                    <div id="po_result"></div>
+                                            </div>
+                                            <div class="form-group col-md-3 row">
+                                                <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'placeholder' => 'Count', 'label' => false, 'name' => 'po_quantity')); ?>
+                                                
+                                            </div>
+                                  <div class="form-group col-md-8">
+                                                    <?php echo $this->Form->input('clientpo_no', array('id' => 'purchase_order', 'class' => 'form-control', 'placeholder' => 'Purchase Order No', 'label' => false, 'name' => 'clientpo_no', 'autoComplete' => 'off')); ?>
+                                                    <div id="po_result"></div>
+                                            </div>
+                                            <div class="form-group col-md-3 row">
+                                                <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'placeholder' => 'Count', 'label' => false, 'name' => 'po_quantity')); ?>
+                                                
+                                            </div>
+                                <!-- END Block with Options Content -->
+                            </div>
+                            <!-- END Block with Options -->
+                        </div>
+                        <div class="col-md-5 fc-header-title float_none">
+                            <!-- Block with Options Left -->
+                            <div class="block col-md-12">
+                                <!-- Block with Options Left Title -->
+                                <div class="block-title clearfix">
+                                    
+                                    <h2 class="pull-left"><strong>Quotation Details</strong>	</h2>
+                                </div>
+                                <!-- END Block with Options Left Title -->
+
+                                <!-- Block with Options Left Content -->
+                                  <?PHP if(!empty($customer_quotation_list)): ?>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                     <?php echo $this->Form->input('quotation_id[]', array('id' => 'val_quotation_po', 'class' => 'select-chosen required','empty'=>'Please select the Quotation No', 'options' => $customer_quotation_list, 
+                                                         'label' => false, 'name' => 'quot_id[]', 'style' => 'width: 250px; display: none;')); ?>
+                                                </div>
+                                            </div>
+                                            <?PHP else: ?>
+                                            <?PHP echo "No more quotations to select"; ?>
+                                            <?PHP endif; ?>
+                                            <div class="po_based_clientpo">
+                                            </div>
+                                <!-- END Block with Options Left Content -->
+                            </div>
+                            <!-- END Block with Options Left -->
+                        </div>
+                                <div class="col-md-6 fc-header-title float_none">
+                            <!-- Block with Options -->
+                            <div class="block col-md-12">
+                                <!-- Block with Options Title -->
+                                <div class="block-title">
+                                    
+                                    <h2><strong>Sales order Details	</strong> </h2>
+                                </div>
+                                <!-- END Block with Options Title -->
+
+                                <!-- Block with Options Content -->
+                              <div class="form-group col-md-8">
+                                                
+                                                        <?php echo $this->Form->input('salesorder_id', array('id'=>'val_salesorderno','class'=>'form-control','placeholder'=>'Sales Order No','label'=>false,'name'=>'salesorder_id','readonly'=>'readonly','type'=>'text','value'=>'')); ?>
+                                                </div>
+                                                <div class="form-group col-md-3 row">
+                                                       <?php echo $this->Form->input('sales_quantity', array('id'=>'val_salesordercount','class'=>'form-control','label'=>false,'name'=>'sales_quantity','readonly'=>'readonly','value'=>'','placeholder'=>'So Count')); ?>
+                                                </div>
+                                            
+                                <!-- END Block with Options Content -->
+                            </div>
+                            <!-- END Block with Options -->
+                        </div>
+                        <div class="col-md-5 fc-header-title float_none">
+                            <!-- Block with Options Left -->
+                            <div class="block col-md-12">
+                                <!-- Block with Options Left Title -->
+                                <div class="block-title clearfix">
+                                    
+                                    <h2 class="pull-left"><strong>Delivery order Details	</strong> </h2>
+                                </div>
+                                <!-- END Block with Options Left Title -->
+
+                                <!-- Block with Options Left Content -->
+                               
+                                                    <div class="form-group col-md-8">
+                                                        <?php echo $this->Form->input('deliveryorder_id', array('id' => 'val_deliveryorderno', 'class' => 'form-control', 'placeholder' => 'Delivery Order No', 'label' => false, 'name' => 'deliveryorder_id', 'readonly' => 'readonly', 'type' => 'text', 'value' => '')); ?>
+                                                    </div>
+                                                   <div class="form-group col-md-4 row">
+                                                        <?php echo $this->Form->input('deliver_quantity', array('id' => 'val_deliveryordercount', 'class' => 'form-control', 'label' => false, 'name' => 'deliver_quantity', 'readonly' => 'readonly', 'value' => '','placeholder' => 'DO Count')); ?>
+                                                    </div>
+                                            
+                                <!-- END Block with Options Left Content -->
+                            </div>
+                            <!-- END Block with Options Left -->
+                        </div>
+                                   <div class="col-md-6 fc-header-title float_none">
+                            <!-- Block with Options -->
+                            <div class="block col-md-12">
+                                <!-- Block with Options Title -->
+                                <div class="block-title">
+                                    
+                                    <h2><strong>Invoice	</strong> </h2>
+                                </div>
+                                <!-- END Block with Options Title -->
+
+                                <!-- Block with Options Content -->
+                             
+                                <!-- END Block with Options Content -->
+                            </div>
+                            <!-- END Block with Options -->
+                        </div>
+                    </div>
+                            
                         </div>
                             <?php echo $this->Html->script('pages/formsValidation'); ?>
                             <script>$(function(){ FormsValidation.init(); });</script>
