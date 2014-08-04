@@ -31,9 +31,9 @@
                                     <?php foreach($instrumentforgroups as $instrument): ?>
                                        
                                     <tr>
-                                        <td class="text-center"><?php echo $instrument['Instrumentforgroup']['group_id'];?></td>
-                                        <td class="text-center"><?php echo $instrument['Instrumentforgroup']['group_name'];?></td>
-                                        <td class="text-center"><?php echo $instrument['Instrumentforgroup']['group_description'];?></td>
+                                        <!--<td class="text-center"><?php //echo $instrument['Instrumentforgroup']['group_id'];?></td>
+                                        <td class="text-center"><?php //echo $instrument['Instrumentforgroup']['group_name'];?></td>
+                                        <td class="text-center"><?php //echo $instrument['Instrumentforgroup']['group_description'];?></td>-->
                                         <?php $status   =   ($instrument['Instrumentforgroup']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
                                         <td class="text-center"><?PHP echo $status; ?></td>
                                         <td class="text-center">

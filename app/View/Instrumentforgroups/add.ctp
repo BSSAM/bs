@@ -14,21 +14,22 @@
 <script type="text/javascript">
     $(function() {
     $('.add_quotation').editable(path_url+'/Instrumentforgroups/add_group_quotation', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
+         id        : 'data[Instrumentforgroup][group_id]',
+         type_name : 'data[Instrumentforgroup][type_name]',
+         type_for : 'data[Instrumentforgroup][type_for]',
          group     : 'quotation',
          type      : 'text',
          tooltip   : 'Click to edit the title'
     });
     $('.add_salesorder').editable(path_url+'/Instrumentforgroups/add_group_salesorder', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
+         id        : 'data[Instrumentforgroup][group_id]',
+         name      : 'data[Instrumentforgroup][group_name]',
          type      : 'text',
          tooltip   : 'Click to edit the title'
     });
     $('.add_deliveryorder').editable(path_url+'/Instrumentforgroups/add_group_deliveryorder', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
+         id        : 'data[Instrumentforgroup][group_id]',
+         name      : 'data[Instrumentforgroup][group_name]',
          type      : 'text',
          tooltip   : 'Click to edit the title'
     });
@@ -93,8 +94,20 @@
     <div class="block-title">
         <h2>List Of Instrument for Group</h2>
     </div>
-    <?php echo $this->Form->create('Description',array('class'=>'form-horizontal form-bordered','id'=>'form-group-add')); ?>
+    <?php echo $this->Form->create('instrumentforgroup',array('class'=>'form-horizontal form-bordered','id'=>'form-group-add')); ?>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="group_name">Group Name</label>
+        <div class="col-md-4">
+            <?php echo $this->Form->input('group_name', array('id'=>'group_name','class'=>'form-control','placeholder'=>'Enter the Group Name','label'=>false,'name'=>'group_name')); ?>
+        </div>
+        <label class="col-md-2 control-label" for="group_description">Group Description</label>
+        <div class="col-md-4">
+            <?php echo $this->Form->input('group_description', array('id'=>'group_description','class'=>'form-control','placeholder'=>'Enter the Group Description','label'=>false,'name'=>'group_description')); ?>
+        </div>
+                                   
+    </div>
     <div class="table-responsive" ng-controller="Controller">
+        
         <table class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
@@ -103,7 +116,8 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <?php //foreach ($instrumentforgroup_list as $instrumentforgroup_lists): 
+                    ?>
                 <?php  // foreach ($labs as $labs_list): 
                        // $description_id   =   $labs_list['Description']['id']; 
                        // $processing=   'data[Description][processing]['.$description_id.']';
@@ -115,43 +129,51 @@
 
                 <tr>
                     <td class="text-center">Quotation</td>
-                    <td class="text-center add_quotation" id=""></td>
+                    <td class="text-center add_quotation">
+                        <?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Quotation'){ 
+                        //echo $labs_list['Instrumentforgroup']['type_name'];
+                        //} ?>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-center">Sales Order</td>
-                    <td class="text-center add_salesorder" id=""></td>
+                    <td class="text-center add_salesorder" id="">
+                        <?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Sales Order'){ 
+                       // echo $labs_list['Instrumentforgroup']['type_name'];
+                        //} ?>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-center">Delivery Order</td>
-                    <td class="text-center add_deliveryorder" id=""></td>
+                    <td class="text-center add_deliveryorder" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Delivery Order'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
                 </tr>
                 <tr>
                     <td class="text-center">Invoice</td>
-                    <td class="text-center add_invoice" id=""></td>
+                    <td class="text-center add_invoice" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Invoice'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
                 </tr>
                 <tr>
                     <td class="text-center">Purchase Order</td>
-                    <td class="text-center add_purchaseorder" id=""></td>
+                    <td class="text-center add_purchaseorder" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Purchase Order'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
                 </tr>
                 <tr>
                     <td class="text-center">Sub-Contract Delivery Order</td>
-                    <td class="text-center add_subcontract" id=""></td>
+                    <td class="text-center add_subcontract" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Sub-Contract Delivery Order'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
                 </tr>
                 <tr>
                     <td class="text-center">Proforma Invoice</td>
-                    <td class="text-center add_proforma" id=""></td>
+                    <td class="text-center add_proforma" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Proforma Invoice'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
                 </tr>
                 <tr>
                     <td class="text-center">Purchase Requisition</td>
-                    <td class="text-center add_porequisition" id=""></td>
+                    <td class="text-center add_porequisition" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Purchase Requisition'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
                 </tr>
                 <tr>
                     <td class="text-center">Recall Service</td>
-                    <td class="text-center add_recall" id=""></td>
+                    <td class="text-center add_recall" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Recall Service'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
                 </tr>
                 <tr>
                     <td class="text-center">On-Site Schedule</td>
-                    <td class="text-center add_onsite" id=""></td>
+                    <td class="text-center add_onsite" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='On-Site Schedule'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
                 </tr>
                 <?php //endforeach; ?>
             </tbody>

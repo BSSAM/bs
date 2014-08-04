@@ -11,28 +11,34 @@ class InstrumentforgroupsController extends AppController
     {
         APP::import('Model','Instrumentforgroup');
         //,array('conditions'=>array('Instrumentforgroup.status'=>'1'),
-        $instrument_data = $this->Instrumentforgroup->find('all',array('group' => array('Instrumentforgroup.group_id')));
+        $instrument_data = $this->Instrumentforgroup->find('all');//,array('group' => array('Instrumentforgroup.group_id'))
         $this->set('instrumentforgroups', $instrument_data);
         //pr($instrument_data);exit;
     } 
     public function add()
     {
         APP::import('Model','Instrumentforgroup');
+        $instrumentforgroup_list = $this->Instrumentforgroup->find('all');
+        //$this->Instrumentforgroup->updateAll(array('Instrumentforgroup.processing' => 1), array('Instrumentforgroup.salesorder_id' => $id));
+        $this->set('instrumentforgroup_list', $instrumentforgroup_list);
         //,array('conditions'=>array('Instrumentforgroup.status'=>'1'),
-        $instrument_data = $this->Instrumentforgroup->find('all',array('group' => array('Instrumentforgroup.group_id')));
-        $this->set('instrumentforgroups', $instrument_data);
+        //$instrument_data = $this->Instrumentforgroup->find('all');//,array('group' => array('Instrumentforgroup.group_id'))
+        //$this->set('instrumentforgroups', $instrument_data);
         //pr($instrument_data);exit;
+        
+        
     } 
     
     public function add_group_quotation()
     {
         $this->autoRender   =   false;
+        //pr($this->data);exit;
          if ($this->data) {
             App::uses('Sanitize', 'Utility');
             $title = Sanitize::clean($this->data['Instrumentforgroup']['type_name']);
 
             $this->Instrumentforgroup->id = $this->data['Instrumentforgroup']['id'];
-            $this->Instrumentforgroup->saveField('delay', $title);
+            $this->Instrumentforgroup->saveField('type_name', $title);
             echo $title;
         }
     }
