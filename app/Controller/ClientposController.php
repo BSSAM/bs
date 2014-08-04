@@ -243,14 +243,14 @@ class ClientposController extends AppController
         $this->autoRender   =   false;
         $name =  $this->request->data['po_id'];
         $customer_id    =   $this->request->data['customer_id'];
-        $data = $this->Clientpo->find('all',array('conditions'=>array('clientpos_no LIKE'=>'%'.$name.'%','Clientpo.customer_id'=>$customer_id),'group'=>'clientpos_no'));
+        $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no LIKE'=>'%'.$name.'%','Quotation.customer_id'=>$customer_id)));
         $c = count($data);
         if($c>0)
         {
             for($i = 0; $i<$c;$i++)
             { 
-                echo "<div class='po_single_show' align='left' id='".$data[$i]['Clientpo']['clientpos_no']."'>";
-                echo $data[$i]['Clientpo']['clientpos_no'];
+                echo "<div class='po_single_show' align='left' id='".$data[$i]['Quotation']['ref_no']."'>";
+                echo $data[$i]['Quotation']['ref_no'];
                 echo "<br>";
                 echo "</div>";
             }
