@@ -204,15 +204,16 @@ class UserrolesController extends AppController
          *******************************************************/
         
         $user_role = $this->userrole_permission();
-        if($user_role['other_role']['view'] == 0){ 
-            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        }
+        //if($user_role['other_role']['view'] == 0){ 
+            //return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        //}
         
         /*
          * *****************************************************
          */
         
         $userrole =  $this->Userrole->findById($ids);
+        //pr($userrole);exit;
         if(!empty($userrole))
         {
             $user_role_name = $userrole['Userrole']['user_role'];
@@ -242,9 +243,11 @@ class UserrolesController extends AppController
         else
         {
             $userrole =  $this->Userrole->findByUserRoleId($ids); 
+            
             $b = unserialize($userrole['Userrole']['js_enc']);
-            pr($b);echo "b";exit;
+            
             $this->request->data = $b;
+            
         }
     }
     

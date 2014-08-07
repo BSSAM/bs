@@ -140,20 +140,21 @@
                                                 </tr>
                                             </tbody>
                                         </table>-->
+                                          
                                         <div class="timeline block-content-full">
-                                    <h3 class="timeline-header">Job Track <small><strong>Reg Date : <?php echo $Quo_det[0]['Quotation']['reg_date']; ?></strong></small></h3>
+                                    <h3 class="timeline-header">Job Track <small><strong>Reg Date : <?php foreach($Quo_det as $Quo_details): ?><?php echo $Quo_details['Quotation']['reg_date']; ?><?php endforeach;?></strong></small></h3>
                                     <!-- You can remove the class .timeline-hover if you don't want each event to be highlighted on mouse hover -->
                                     <ul class="timeline-list timeline-hover">
-                                        <?php foreach($Quo_det as $Quo_details): ?>
+                                      <?php foreach($Quo_det as $Quo_details): ?>
                                         <li class="alert alert-success">
                                             <div class="timeline-icon"></div>
                                             <div class="timeline-time"><strong><?php echo $Quo_details['Quotation']['created']; ?></strong></div>
                                             <div class="timeline-content">
                                                 <p class="push-bit"><strong>Quotation</strong></p>
                                                 <p class="push-bit"><a href="#"><?php echo $Quo_details['Quotation']['quotationno']; ?></a></p>
-                                                <p class="push-bit">Created By : <code class="label label-default"><?php ?></code> </p>
-                                                <?php if($Quo_details['Quotation']['is_approved']==1):?>
-                                                <p class="push-bit">Approved By : <code class="label label-success"><?php ?></code> </p>
+                                                <p class="push-bit">Created By : <code class="label label-default"><?php $Quo_details['Quotation']['created_by'];?></code> </p>
+                                                <?php if($Quo_details['Quotation']['is_approved']==2):?>
+                                                <p class="push-bit">Approved By : <code class="label label-success"><?php echo $this->Log->getlog_approve($Quo_details['Quotation']['quotationno']); ?></code> </p>
                                                 <?php endif; ?>
 <!--                                                <div class="row push">
                                                     <div class="col-sm-6 col-md-4">
@@ -170,14 +171,17 @@
                                             </div>
                                         </li><br>
                                         <?php endforeach;?>
+                                         <?php foreach($Sal_det as $Sal_details): ?>
                                         <li class="alert alert-success">
                                             <div class="timeline-icon"></div>
-                                            <div class="timeline-time"><strong>4-April-14</strong></div>
+                                            <div class="timeline-time"><strong><?php echo $Sal_details['Salesorder']['created']; ?></strong></div>
                                             <div class="timeline-content">
                                                 <p class="push-bit"><strong>Sales Order</strong></p>
-                                                <p class="push-bit"><a href="#">BSO1234567890</a></p>
-                                                <p class="push-bit">Created By : <code class="label label-default">ADMIN</code> </p>
-                                                <p class="push-bit">Approved By : <code class="label label-success">ADMIN</code> </p>
+                                                <p class="push-bit"><a href="#"><?php echo $Sal_details['Salesorder']['salesorderno']; ?></a></p>
+                                                <p class="push-bit">Created By : <code class="label label-default"><?php echo $Sal_details['Salesorder']['created_by']; ?></code> </p>
+                                                <?php if($Sal_details['Salesorder']['is_approved']==2):?>
+                                                <p class="push-bit">Approved By : <code class="label label-success"><?php echo $this->Log->getlog_approve_sales($Sal_details['Salesorder']['salesorderno']); ?></code> </p>
+                                                <?php endif; ?>
 <!--                                                <div class="row push">
                                                     <div class="col-sm-6 col-md-4">
                                                         <a href="img/placeholders/photos/photo6.jpg" data-toggle="lightbox-image">
@@ -191,7 +195,10 @@
                                                     </div>
                                                 </div>-->
                                             </div>
-                                        </li><br>
+                                        </li>
+                                        <?php endforeach;?>
+                                        <br>
+                                        <?php foreach($Sal_det as $Sal_details): ?>
                                          <li class="">
                                             <div class="timeline-icon"></div>
                                             <div class="timeline-time"><strong>5-April-14</strong></div>
@@ -212,28 +219,9 @@
                                                     </div>
                                                 </div>-->
                                             </div>
-                                        </li><br>
-                                         <li class="">
-                                            <div class="timeline-icon"></div>
-                                            <div class="timeline-time"><strong>5-April-14</strong></div>
-                                            <div class="timeline-content">
-                                                <p class="push-bit"><strong>Invoice Generation</strong></p>
-                                                <p class="push-bit">BSO1234567890</p>
-                                                <p class="push-bit">Generated By : <code class="label label-default">Iyappan</code> </p>
-<!--                                                <div class="row push">
-                                                    <div class="col-sm-6 col-md-4">
-                                                        <a href="img/placeholders/photos/photo6.jpg" data-toggle="lightbox-image">
-                                                            <img src="img/placeholders/photos/photo6.jpg" alt="image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-4">
-                                                        <a href="img/placeholders/photos/photo7.jpg" data-toggle="lightbox-image">
-                                                            <img src="img/placeholders/photos/photo7.jpg" alt="image">
-                                                        </a>
-                                                    </div>
-                                                </div>-->
-                                            </div>
-                                        </li><br>
+                                        </li>
+                                         <?php endforeach;?>
+                                        <br>
                                          <li class="">
                                             <div class="timeline-icon"></div>
                                             <div class="timeline-time"><strong>6-April-14</strong></div>
@@ -253,6 +241,55 @@
                                                         </a>
                                                     </div>
                                                 </div>-->
+                                            </div>
+                                        </li>
+                                        <br>
+                                        <li class="">
+                                            <div class="timeline-icon"></div>
+                                            <div class="timeline-time"><strong>5-April-14</strong></div>
+                                            <div class="timeline-content">
+                                                <p class="push-bit"><strong>C & D Info</strong></p>
+                                                <p class="push-bit">BDO1234567890</p>
+                                                <p class="push-bit">Generated By : <code class="label label-default">Iyappan</code> </p>
+<!--                                                <div class="row push">
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <a href="img/placeholders/photos/photo6.jpg" data-toggle="lightbox-image">
+                                                            <img src="img/placeholders/photos/photo6.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <a href="img/placeholders/photos/photo7.jpg" data-toggle="lightbox-image">
+                                                            <img src="img/placeholders/photos/photo7.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+                                                </div>-->
+                                            </div>
+                                        </li><br>
+                                        <li class="">
+                                            <div class="timeline-icon"></div>
+                                            <div class="timeline-time"><strong>5-April-14</strong></div>
+                                            <div class="timeline-content">
+                                                <p class="push-bit"><strong>Invoice Generation</strong></p>
+                                                <p class="push-bit">BSO1234567890</p>
+                                                <p class="push-bit">Generated By : <code class="label label-default">Iyappan</code> </p>
+<!--                                                <div class="row push">
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <a href="img/placeholders/photos/photo6.jpg" data-toggle="lightbox-image">
+                                                            <img src="img/placeholders/photos/photo6.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <a href="img/placeholders/photos/photo7.jpg" data-toggle="lightbox-image">
+                                                            <img src="img/placeholders/photos/photo7.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+                                                </div>-->
+                                            </div>
+                                        </li>
+                                        <li class="">
+                                            <div class="timeline-icon"></div>
+                                            <div class="timeline-content">
+                                                <p class="push-bit"><strong>Delivered</strong></p>
                                             </div>
                                         </li>
                                          

@@ -10,20 +10,26 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','Deliveryorder');
         public function index()
         {
-
             $track_id = $this->request->query['track_id'];
+            
+
+            
             if(!empty($track_id)){
                 $this->set('track',$track_id);
-                $quotation = $this->Quotation->find('all',array('conditions'=>array('track_id'=>$track_id)));
-                $salesorder = $this->Salesorder->find('all',array('conditions'=>array('track_id'=>$track_id)));
-                //$customer = $this->Customer->find('all',array('customer_id'=>$quotation[0]['Quotation']['customer_id']));
-               // pr($quotation);
-                //pr($customer);
+                $quotation = $this->Quotation->find('all',array('conditions'=>array('Quotation.track_id'=>$track_id),'recursive'=>'1'));
+                $salesorder = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.track_id'=>$track_id)));
+                $deliveryorder = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.track_id'=>$track_id)));
+                //pr($quotation);
+               // pr($salesorder);
+                //pr($deliveryorder);
+                //exit;
                 $this->set('Quo_det',$quotation);
-                //$this->set('Cus_det',$customer);
+                $this->set('Sal_det',$salesorder);
+                $this->set('Del_det',$deliveryorder);
+                
             }
             else{
                 return $this->redirect(array('controller' => 'Dashboards','action'=>'index'));

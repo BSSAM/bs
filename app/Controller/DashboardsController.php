@@ -114,19 +114,27 @@ class DashboardsController extends AppController
         
         /*****************************************************/
         
-        /****************** Log Activity - Lab Process ********************/
+        /****************** Log Activity - Delivery Order ********************/
         
-        $logactivity_labprocess = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Labprocess")));
+        $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder")));
         //pr($logactivity);exit;
-        $this->set('log_activity_labprocess', $logactivity_labprocess);
+        $this->set('log_activity_labprocess', $logactivity_deliveryorder);
         
         /*****************************************************/
         
-         /****************** Log Activity - Lab Process ********************/
+         /****************** Log Activity - C & D Info ********************/
         
-        $logactivity_labprocess = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Labprocess")));
+        $logactivity_cdinfo = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"C&Dinfo")));
         //pr($logactivity);exit;
-        $this->set('log_activity_labprocess', $logactivity_labprocess);
+        $this->set('log_activity_cdinfo', $logactivity_cdinfo);
+        
+        /*****************************************************/
+        
+         /****************** Log Activity - Invoice ********************/
+        
+        $logactivity_invoice = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Invoice")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_invoice', $logactivity_invoice);
         
         /*****************************************************/
         

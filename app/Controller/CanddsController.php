@@ -10,7 +10,7 @@ class CanddsController extends AppController
     public $helpers =   array('Html','Form','Session');
     public $uses    =   array('Priority','Paymentterm','Quotation','Currency','Deliveryorder','ReadytodeliverItem','CollectionDelivery',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','Branch');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','Branch','Logactivity','Datalog');
     public function index()
     {
         $cd_statistics =    $this->CollectionDelivery->find('all',array('conditions'=>array('CollectionDelivery.status'=>1,'CollectionDelivery.is_deleted'=>0),'group'=>'CollectionDelivery.collection_delivery_date','recursive'=>2));
@@ -145,9 +145,33 @@ class CanddsController extends AppController
         {
             $candd_last_id=$this->Candd->getLastInsertID();
             $candd_data =   $this->Candd->find('first',array('conditions'=>array('Candd.id'=>$candd_last_id)));
+            /******************
+                    * Log Activity For Approval
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Collection';
+                    $this->request->data['Logactivity']['logid'] = $candd_last_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+                    
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'C&Dinfo';
+                    $this->request->data['Datalog']['logactivity'] = 'Add Collection';
+                    $this->request->data['Datalog']['logid'] = $candd_last_id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/ 
             if(!empty($candd_data))
             {
-                echo json_encode($candd_data);exit;
+                echo json_encode($candd_data);
             }
            
         }
@@ -167,6 +191,30 @@ class CanddsController extends AppController
             {
                 $this->description_update_shipping($val);
                 $this->Deliveryorder->updateAll(array('Deliveryorder.move_to_deliver'=>1,'assign_to'=>'"'.$assign_to.'"'),array('Deliveryorder.id'=>$val));
+                /******************
+                    * Log Activity For Approval
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
+                    $this->request->data['Logactivity']['logid'] = $val;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+                    
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'C&Dinfo';
+                    $this->request->data['Datalog']['logactivity'] = 'Add Delivery';
+                    $this->request->data['Datalog']['logid'] = $val;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/ 
             }
         }
        echo  json_encode($export);

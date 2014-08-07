@@ -10,7 +10,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Datalog');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -31,12 +31,25 @@
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
                     /******************* Data Log*/
-                        $this->request->data['Logactivity']['logname']   =   'Delivery Order';
+                        $this->request->data['Logactivity']['logname']   =   'Deliveryorder';
                         $this->request->data['Logactivity']['logactivity']   =   'Add DeliveryOrder';
                         $this->request->data['Logactivity']['logid']   =   $dmt;
                         $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
                         $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                        
+                            
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $dmt;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/    
                     //pr($a);exit;
                     $this->Session->setFlash(__('Delivery Order has been Added Succefully '));
                     $this->redirect(array('action'=>'index'));
@@ -53,6 +66,17 @@
                 $this->Deliveryorder->id=$id;
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
+                    /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                    $this->request->data['Datalog']['logactivity'] = 'Edit';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                    /******************/   
                     $this->Session->setFlash(__($deliveryorder['Deliveryorder']['delivery_order_no'].' has been Updated Succefully'));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -68,6 +92,17 @@
             {
                 if($this->Deliveryorder->updateAll(array('Deliveryorder.is_deleted'=>0),array('Deliveryorder.id'=>$id)));
                 {
+                     /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                    $this->request->data['Datalog']['logactivity'] = 'Delete';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                    /******************/   
                     $this->Session->setFlash(__('The Delivery order has been deleted',h($id)));
                     return $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
                 }
