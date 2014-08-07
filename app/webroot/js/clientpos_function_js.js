@@ -7,7 +7,7 @@
 $(document).ready(function(){
     var count=1;
     $(document).on('click','#add_po',function(){
-         var quo_inst_count  =$('#val_quotationcount').val(); 
+       var quo_inst_count  =$('#val_quotationcount').val(); 
        if($('#val_pocount').val()!=quo_inst_count)
        {
             $('.po_up').append('<div class="group_po_'+(count++)+'"><div class="form-group"><div class="col-sm-10"><div class="input-group">\n\
@@ -22,8 +22,7 @@ $(document).ready(function(){
      $('.group_po_'+data_length).remove();
    });
    
-   $(document).on('click','.generate_po',function()
-   {
+   $(document).on('click','.generate_po',function() {
        var po_id    =   $(this).attr('id');
        $.ajax({
            type:'POST',
@@ -57,20 +56,52 @@ $(document).ready(function(){
             $('#val_quotationcount').val('');
         }
     });
+    /******************************Quotation append with the Quantity in purchase order full invoice***********************************/
     $(document).on('change','#val_quotation_po',function(){
         var quotation_selected  =   $('#val_quotation_po option:selected').text();
         var quotation_val  =   $('#val_quotation_po option:selected').val();
-       
-       $('.po_based_clientpo').append('<div class="group_qo_'+(count++)+'"><div class="form-group"><div class="col-sm-11"><input type="hidden" name="quotation_id[]" value="'+quotation_val+'"/><input type="hidden" name="quotation_no[]" value="'+quotation_selected+'"/><div class="col-sm-6  form-control-static">'+quotation_selected+'</div>\n\
-                                      <div class="col-sm-4"><input class="form-control" type="text" name="quo_quantity[]"/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"> <div class="btn btn-alt btn-info qo_id_selected"   data-delete ="'+(count-1)+'"  > <i class="fa fa-minus"></i></div> </div> ');
-       
-       $('#val_quotation_po').prop("selectedIndex",-1);
+        var qlength =   $('.'+quotation_selected).length;
+        if(quotation_val!='' && qlength==0){
+        $('.po_based_clientpo').append('<div class="group_qo_'+(count++)+' '+quotation_selected+'"><div class="form-group"><div class="col-sm-11"><input type="hidden" name="quotation_id[]" value="'+quotation_val+'"/><input type="hidden" name="quotation_no[]" value="'+quotation_selected+'"/><div class="col-sm-6  form-control-static">'+quotation_selected+'</div>\n\
+                                      <div class="col-sm-4"><input class="form-control" readonly="readonly" value="'+quotation_val+'" type="text" name="quo_quantity[]"/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"> <div class="btn btn-alt btn-info qo_id_selected"   data-delete ="'+(count-1)+'"  > <i class="fa fa-minus"></i></div> </div> ');
+        }
+        if(qlength==0){
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Clientpos/get_quotation_relateddetails",
+            data: 'qo_id='+quotation_selected,
+            cache: false,
+            success: function(data)
+            {
+                var parse_node  =   $.parseJSON(data);
+                if($.isEmptyObject(parse_node.Salesorder)){
+                    $('.salesorder_by_quotation').append('<p class="themed-color-fire  pull-left">Sales order not yet created for '+quotation_selected+'</p>'); }
+                else{$('.salesorder_by_quotation').empty();
+                     $('.salesorder_by_quotation').html('<p class="themed-color-spring">Salesorders for '+quotation_selected+'</p>');
+                $.each(parse_node.Salesorder,function(k,v){
+                  $('.salesorder_by_quotation').append('<div class="form-group col-md-8"><div class="input text"><input type="text" value="'+k+'" readonly="readonly" placeholder="Sales Order No" class="form-control" id="val_salesorderno" name="salesorder_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="So Count" value="'+v+'" readonly="readonly" class="form-control" id="val_salesordercount" name="sales_quantity[]"></div></div>');
+                });}
+            
+             if($.isEmptyObject(parse_node.Deliveryorder)){
+                    $('.deliveryorder_by_quotation').append('<p class="themed-color-fire">Delivery order not yet created for '+quotation_selected+'</p>'); }
+                else{$('.deliveryorder_by_quotation').empty();  $('.deliveryorder_by_quotation').html('<p class="themed-color-spring">Delivery orders for '+quotation_selected+'</p>');
+              $.each(parse_node.Deliveryorder,function(k,v){
+                  $('.deliveryorder_by_quotation').append('<div class="form-group col-md-8"><div class="input text"><input type="text" value="'+k+'" readonly="readonly" placeholder="Delivery Order No" class="form-control" id="val_deliveryorderno" name="deliveryorder_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="Do Count" value="'+v+'" readonly="readonly" class="form-control" id="val_deliveryordercount" name="delivery_quantity[]"></div></div>');
+                  
+                });}
+                
+                
+              
+            }
+            });
+        }
+        $('#val_quotation_po').prop("selectedIndex",-1);
     });
+    /****************************Delete quotation in purchase order and others*****************************/
      $(document).on('click','.qo_id_selected',function(){
      var data_length= $(this).attr('data-delete');
      $('.group_qo_'+data_length).remove();
-   });
-   
+    });
    /**********************Po Search For Client Po Module*****************************************************************************/
     $("#po_result").hide();
     $("#purchase_order").keyup(function() 
@@ -119,8 +150,6 @@ $(document).ready(function(){
     $('#purchase_order').blur(function(){
          $('#po_result').fadeOut();
     });
-    
-    
     /**********************SO Search For Client Po Module*****************************************************************************/
     $("#so_result").hide();
     $("#sales_order").keyup(function() 
@@ -142,7 +171,7 @@ $(document).ready(function(){
             });
         }
     });
-    
+    /******************************************************************************************************************/
     $(document).on('click','.so_single_show',function(){
         var po_id_name=$(this).text();
         $('#sales_order').val(po_id_name);

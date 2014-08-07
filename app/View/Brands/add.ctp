@@ -23,14 +23,11 @@
 
                                 <!-- Basic Form Elements Content -->
                                 <?php echo $this->Form->create('Brand',array('class'=>'form-horizontal form-bordered','id'=>'form-brand-add')); ?>
-                                
                                     <div class="form-group">
-                                       
                                         <label class="col-md-2 control-label" for="brandname">Brand Name</label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('brandname', array('id'=>'brandname','class'=>'form-control','placeholder'=>'Enter the Department Name','label'=>false,'name'=>'brandname')); ?>
                                         </div>
-                                   
                                         <label class="col-md-2 control-label" for="branddescription">Brand Description</label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('branddescription', array('id'=>'branddescription','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,'name'=>'branddescription')); ?>

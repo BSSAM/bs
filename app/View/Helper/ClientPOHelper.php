@@ -68,5 +68,14 @@ class ClientPOHelper extends AppHelper
         }
         
     }
+    public function get_customer_name($customer_id=NULL)
+    {
+        APP::import('Model','Clientpo');
+        $this->Customer  =   new Customer();
+        $customer    =    $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$customer_id),'fields'=>array('Customertagname')));
+        if(!empty($customer)):
+               return  $customer['Customer']['Customertagname'];
+            endif;
+    }
     
 }

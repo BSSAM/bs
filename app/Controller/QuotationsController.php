@@ -22,7 +22,8 @@
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
-            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('type_for'=>'Quotation'),'fields'=>array('id','type_name')));
+            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','quotation')));
+           
             $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             
@@ -124,11 +125,11 @@
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $customer_id=$quotations_list['Quotation']['customer_id'];
-                    $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
-                    if(!empty($device_node))
-                    {
-                        $this->Device->updateAll(array('Device.quotation_id'=>$id,'Device.status'=>1),array('Device.customer_id'=>$customer_id));
-                    }
+//                    $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
+//                    if(!empty($device_node))
+//                    {
+//                        $this->Device->updateAll(array('Device.quotation_id'=>$id,'Device.status'=>1,'Device.quotationno'=>'"'.$this->request->data['Quotation']['quotationno'].'"'),array('Device.customer_id'=>$customer_id,'Device.quotationno'=>$this->request->data['Quotation']['quotationno'],'Device.status'=>0));
+//                    }
                     $this->Customerspecialneed->id=$this->request->data['Customerspecialneed']['id'];
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);  
                     
@@ -138,7 +139,7 @@
                     $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    $this->Session->setFlash(__('Quotation has been Updated Successfully '));
+                    $this->Session->setFlash(__('Quotation has been Updated Successfully'));
                     $this->redirect(array('action'=>'index'));
                 }
                 

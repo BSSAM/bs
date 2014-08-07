@@ -11,13 +11,14 @@
                         <li>Purchase Order Full Invoice</li>
                     </ul>
                     <!-- END Forms General Header -->
-            <div class="row">
+                <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
                                     <h2 class="pull-right">Track Id : <?PHP //echo $po_first['Clientpo']['track_id']; ?> </h2>
+                                    <h2 class="pull-left"><?PHP echo $this->ClientPO->get_customer_name($this->request->pass[0]); ?></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
@@ -26,7 +27,7 @@
                                  <?PHP echo $this->Form->input('track_id', array('type' => 'hidden', 'id' => 'track_id','name'=>'track_id')); ?>
                                  <?PHP echo $this->Form->input('customer_for_quotation_id', array('type' => 'hidden', 'id' => 'customer_for_quotation_id','name'=>'customer_for_quotation_id','value'=>$customer_id)); ?>
                             <!-- END Basic Form Elements Block -->
-                            <div class="row">
+                            <div class="">
                         <div class="col-md-6 fc-header-title float_none">
                             <!-- Block with Options -->
                             <div class="block col-md-12">
@@ -35,7 +36,6 @@
                                     <h2><strong>Purchase order Details	</strong></h2>
                                 </div>
                                 <!-- END Block with Options Title -->
-
                                 <!-- Block with Options Content -->
                                 <div class="form-group col-md-8">
                                     <?php echo $this->Form->input('clientpo_no', array('id' => 'purchase_order', 'class' => 'form-control', 'placeholder' => 'Purchase Order No', 'label' => false, 'name' => 'clientpo_no', 'autoComplete' => 'off')); ?>
@@ -61,7 +61,7 @@
                                 <?PHP if (!empty($customer_quotation_list)): ?>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <?php echo $this->Form->input('quotation_id[]', array('id' => 'val_quotation_po', 'class' => 'select-chosen required', 'empty' => 'Please select the Quotation No', 'options' => $customer_quotation_list,
+                                            <?php echo $this->Form->input('quotation_id[]', array('id' => 'val_quotation_po', 'class' => 'select-chosen required', 'empty' => 'Please select the Quotation No', 'options' => $quotation_array_id,
                                                 'label' => false, 'name' => 'quot_id[]', 'style' => 'width: 250px; display: none;'));
                                             ?>
                                         </div>
@@ -80,18 +80,13 @@
                             <div class="block col-md-12">
                                 <!-- Block with Options Title -->
                                 <div class="block-title">
-                                    <h2><strong>Sales order Details	</strong> </h2>
+                                    <h2><strong>Sales order Details</strong> </h2>
                                 </div>
                                 <!-- END Block with Options Title -->
-
                                 <!-- Block with Options Content -->
-                                
-                                    <div class="form-group col-md-8">
-                                        <?php echo $this->Form->input('salesorder_id', array('id' => 'val_salesorderno', 'class' => 'form-control', 'placeholder' => 'Sales Order No', 'label' => false, 'name' => 'salesorder_id', 'readonly' => 'readonly', 'type' => 'text', 'value' => '')); ?>
-                                    </div>
-                                    <div class="form-group col-md-3 row">
-                                        <?php echo $this->Form->input('sales_quantity', array('id' => 'val_salesordercount', 'class' => 'form-control', 'label' => false, 'name' => 'sales_quantity', 'readonly' => 'readonly', 'value' => '', 'placeholder' => 'So Count')); ?>
-                                    </div>
+                                <div class="salesorder_by_quotation">
+                                     <p>Select Quotation to get Salesorder Details.. </p>
+                                </div>
                                 <!-- END Block with Options Content -->
                             </div>
                             <!-- END Block with Options -->
@@ -103,12 +98,9 @@
                                 <div class="block-title clearfix">
                                     <h2 class="pull-left"><strong>Delivery order Details	</strong> </h2>
                                 </div>
-                                <div class="form-group col-md-8">
-                                        <?php echo $this->Form->input('deliveryorder_id', array('id' => 'val_deliveryorderno', 'class' => 'form-control', 'placeholder' => 'Delivery Order No', 'label' => false, 'name' => 'deliveryorder_id', 'readonly' => 'readonly', 'type' => 'text', 'value' => '')); ?>
-                                     </div>
-                                    <div class="form-group col-md-3 row">
-                                        <?php echo $this->Form->input('deliver_quantity', array('id' => 'val_deliveryordercount', 'class' => 'form-control', 'label' => false, 'name' => 'deliver_quantity', 'readonly' => 'readonly', 'value' => '', 'placeholder' => 'DO Count')); ?>
-                                   </div>
+                                <div class="deliveryorder_by_quotation">
+                                    <p>Select Quotation to get Delivery order Details.</p>
+                                </div>
                                 <!-- END Block with Options Left Content -->
                             </div>
                             <!-- END Block with Options Left -->
@@ -123,11 +115,8 @@
                                         <!-- END Block with Options Title -->
 
                                         <!-- Block with Options Content -->
-                                        <div class="form-group col-md-8">
-                                            <?php echo $this->Form->input('invoiceno', array('id' => 'val_invoiceno', 'class' => 'form-control', 'placeholder' => 'Invoice No', 'label' => false, 'name' => 'invoiceno', 'readonly' => 'readonly', 'value' => '')); ?>
-                                        </div>
-                                        <div class="form-group col-md-3 row">
-                                            <?php echo $this->Form->input('deliver_quantity', array('id' => 'val_deliveryordercount', 'class' => 'form-control', 'label' => false, 'name' => 'deliver_quantity', 'readonly' => 'readonly', 'value' => '', 'placeholder' => 'DO Count')); ?>
+                                        <div class="invoice_by_quotation">
+                                             <p>Select Quotation to get Invoice Details </p>
                                         </div>
                                         <!-- END Block with Options Content -->
                                     </div>
@@ -141,17 +130,7 @@
                                 </div>
                                  <?php echo $this->Form->end(); ?>
                     </div>
-                            
                         </div>
                             <?php echo $this->Html->script('pages/formsValidation'); ?>
                             <script>$(function(){ FormsValidation.init(); });</script>
-                            <?php echo $this->Html->script('pages/uiProgress'); ?>
-                            <script>$(function(){ UiProgress.init(); });</script>
-                            <?php if ($this->Session->flash() != '') { ?>
-                                <script> var UiProgress = function() {
-                                    // Get random number function from a given range
-                                    var getRandomInt = function(min, max) {
-                                        return Math.floor(Math.random() * (max - min + 1)) + min;
-                                    };  }();
-                                </script> 
-                            <?php } ?>
+                            

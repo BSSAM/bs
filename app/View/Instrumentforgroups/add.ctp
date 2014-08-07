@@ -1,82 +1,4 @@
-<?php 
-//pr($this->Session->read('Config.time'));exit;
-?>
-
-<script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
-//    
-//    function Controller($scope, $http)
-//    {
-//        $scope.show_delay = true;
-//        $scope.delay = "None";
-//    }
-</script>
-<script type="text/javascript">
-    $(function() {
-    $('.add_quotation').editable(path_url+'/Instrumentforgroups/add_group_quotation', {
-         id        : 'data[Instrumentforgroup][group_id]',
-         type_name : 'data[Instrumentforgroup][type_name]',
-         type_for : 'data[Instrumentforgroup][type_for]',
-         group     : 'quotation',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_salesorder').editable(path_url+'/Instrumentforgroups/add_group_salesorder', {
-         id        : 'data[Instrumentforgroup][group_id]',
-         name      : 'data[Instrumentforgroup][group_name]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_deliveryorder').editable(path_url+'/Instrumentforgroups/add_group_deliveryorder', {
-         id        : 'data[Instrumentforgroup][group_id]',
-         name      : 'data[Instrumentforgroup][group_name]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_invoice').editable(path_url+'/Instrumentforgroups/add_group_invoice', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_purchaseorder').editable(path_url+'/Instrumentforgroups/add_group_purchaseorder', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_subcontract').editable(path_url+'/Instrumentforgroups/add_group_subcontract', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_proforma').editable(path_url+'/Instrumentforgroups/add_group_proforma', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_porequisition').editable(path_url+'/Instrumentforgroups/add_group_porequisition', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_recall').editable(path_url+'/Instrumentforgroups/add_group_recall', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-    $('.add_onsite').editable(path_url+'/Instrumentforgroups/add_group_onsite', {
-         id        : 'data[Instrumentforgroup][id]',
-         name      : 'data[Instrumentforgroup][delay]',
-         type      : 'text',
-         tooltip   : 'Click to edit the title'
-    });
-});
-</script>                
+<script> var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <h1>
     <i class="gi gi-user"></i>Add Instrument for Group
 </h1>
@@ -94,91 +16,84 @@
     <div class="block-title">
         <h2>List Of Instrument for Group</h2>
     </div>
-    <?php echo $this->Form->create('instrumentforgroup',array('class'=>'form-horizontal form-bordered','id'=>'form-group-add')); ?>
+    <?php echo $this->Form->create('InstrumentType',array('class'=>'form-horizontal form-bordered','id'=>'form-group-add')); ?>
+        <div class="block ">
     <div class="form-group">
-        <label class="col-md-2 control-label" for="group_name">Group Name</label>
-        <div class="col-md-4">
-            <?php echo $this->Form->input('group_name', array('id'=>'group_name','class'=>'form-control','placeholder'=>'Enter the Group Name','label'=>false,'name'=>'group_name')); ?>
+            <label class="col-md-2 control-label" for="group_name">Group Name</label>
+            <div class="col-md-4">
+                <?php echo $this->Form->input('group_name', array('id'=>'group_name','class'=>'form-control','placeholder'=>'Enter the Group Name','label'=>false,'name'=>'group_name')); ?>
+            </div>
+            <label class="col-md-2 control-label" for="group_description">Group Description</label>
+            <div class="col-md-4">
+                <?php echo $this->Form->textarea('group_description', array('id'=>'group_description','class'=>'form-control','placeholder'=>'Enter the Group Description','label'=>false,'name'=>'group_description')); ?>
+            </div>
         </div>
-        <label class="col-md-2 control-label" for="group_description">Group Description</label>
-        <div class="col-md-4">
-            <?php echo $this->Form->input('group_description', array('id'=>'group_description','class'=>'form-control','placeholder'=>'Enter the Group Description','label'=>false,'name'=>'group_description')); ?>
         </div>
-                                   
-    </div>
+    <div class="block ">
     <div class="table-responsive" ng-controller="Controller">
         
-        <table class="table table-vcenter table-condensed table-bordered">
-            <thead>
-                <tr>
-                    <th class="text-center">Instrument for Type</th>
-                    <th class="text-center">Instrument for Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php //foreach ($instrumentforgroup_list as $instrumentforgroup_lists): 
-                    ?>
-                <?php  // foreach ($labs as $labs_list): 
-                       // $description_id   =   $labs_list['Description']['id']; 
-                       // $processing=   'data[Description][processing]['.$description_id.']';
-                       // $checking=   'data[Description][checking]['.$description_id.']';
-                       // $checked  =   $this->Labprocess->labperocess_checking($labs_list['Description']['id']);
-                       // $processed =   $this->Labprocess->labperocess_processing($labs_list['Description']['id']);
-                ?>
-                    <?php // pr($labs_list); exit;?>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="quotation">Quotation</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('quotation', array('id' => 'quotation', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Quotation', 'label' => false, 'name' => 'quotation')); ?>
+                </div>
+                <label class="col-md-2 control-label" for="salesorder">Salesorder</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('salesorder', array('id' => 'salesorder', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Sales order', 'label' => false, 'name' => 'salesorder')); ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="deliveryorder">Delivery order</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('deliveryorder', array('id' => 'deliveryorder', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Delivery order', 'label' => false, 'name' => 'deliveryorder')); ?>
+                </div>
+                <label class="col-md-2 control-label" for="invoice">Invoice</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('invoice', array('id' => 'invoice', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Invoice', 'label' => false, 'name' => 'invoice')); ?>
+                </div>
+            </div>
+            
+            
+             <div class="form-group">
+                <label class="col-md-2 control-label" for="purchaseorder">Purchase order</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('purchaseorder', array('id' => 'purchaseorder', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Purchase order', 'label' => false, 'name' => 'purchaseorder')); ?>
+                </div>
+                <label class="col-md-2 control-label" for="performainvoice">Performa Invoice</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('performainvoice', array('id' => 'performainvoice', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Performa Invoice', 'label' => false, 'name' => 'performainvoice')); ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="subcontract_deliveryorder">Subcontract Delivery order</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('subcontract_deliveryorder', array('id' => 'subcontract_deliveryorder', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Subcontract Delivery order', 'label' => false, 'name' => 'subcontract_deliveryorder')); ?>
+                </div>
+                <label class="col-md-2 control-label" for="purchase_requisition">Purchase Requisition</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('purchase_requisition', array('id' => 'purchase_requisition', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Purchase Requisition', 'label' => false, 'name' => 'purchase_requisition')); ?>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-md-2 control-label" for="recall_service">Recall Service</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('recall_service', array('id' => 'recall_service', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Recall Service', 'label' => false, 'name' => 'recall_service')); ?>
+                </div>
+                <label class="col-md-2 control-label" for="onsite_schedule">Onsite Schedule</label>
+                <div class="col-md-4">
+                    <?php echo $this->Form->textarea('onsite_schedule', array('id' => 'onsite_schedule', 'class' => 'form-control', 'placeholder' => 'Instrument Name for Onsite Schedule', 'label' => false, 'name' => 'onsite_schedule')); ?>
+                </div>
+            </div>
+         <div class="form-group">
+            <label class="col-md-2 control-label form-control-static" for="status">Status</label>
+            <div class="col-md-4">
+                <?php echo $this->Form->checkbox('status', array('id' => 'status', 'class' => 'form-control-static', 'label' => false, 'name' => 'status')); ?>
+            </div>
+        </div>
 
-                <tr>
-                    <td class="text-center">Quotation</td>
-                    <td class="text-center add_quotation">
-                        <?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Quotation'){ 
-                        //echo $labs_list['Instrumentforgroup']['type_name'];
-                        //} ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">Sales Order</td>
-                    <td class="text-center add_salesorder" id="">
-                        <?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Sales Order'){ 
-                       // echo $labs_list['Instrumentforgroup']['type_name'];
-                        //} ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">Delivery Order</td>
-                    <td class="text-center add_deliveryorder" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Delivery Order'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
-                </tr>
-                <tr>
-                    <td class="text-center">Invoice</td>
-                    <td class="text-center add_invoice" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Invoice'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
-                </tr>
-                <tr>
-                    <td class="text-center">Purchase Order</td>
-                    <td class="text-center add_purchaseorder" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Purchase Order'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
-                </tr>
-                <tr>
-                    <td class="text-center">Sub-Contract Delivery Order</td>
-                    <td class="text-center add_subcontract" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Sub-Contract Delivery Order'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
-                </tr>
-                <tr>
-                    <td class="text-center">Proforma Invoice</td>
-                    <td class="text-center add_proforma" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Proforma Invoice'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
-                </tr>
-                <tr>
-                    <td class="text-center">Purchase Requisition</td>
-                    <td class="text-center add_porequisition" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Purchase Requisition'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
-                </tr>
-                <tr>
-                    <td class="text-center">Recall Service</td>
-                    <td class="text-center add_recall" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='Recall Service'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
-                </tr>
-                <tr>
-                    <td class="text-center">On-Site Schedule</td>
-                    <td class="text-center add_onsite" id=""><?PHP //if($labs_list['Instrumentforgroup']['type_for']=='On-Site Schedule'){ echo $labs_list['Instrumentforgroup']['type_name'];} ?></td>
-                </tr>
-                <?php //endforeach; ?>
-            </tbody>
-        </table> 
+            
     </div>
+        </div>
     <div class="form-group form-actions">
         <div class="col-md-9 col-md-offset-10">
             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary sales_submit', 'escape' => false)); ?>
@@ -189,14 +104,5 @@
                    
 <!-- panel -->
 <?php echo $this->Form->end(); ?>
-<?php echo $this->Html->script('pages/uiProgress'); ?>
-<script>$(function(){ UiProgress.init(); });</script>
-<?php if ($this->Session->flash() != '') { ?>
-    <script> var UiProgress = function() {
-        // Get random number function from a given range
-        var getRandomInt = function(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        };
-    }();
-    </script> 
-<?php } ?>
+<?php echo $this->Html->script('pages/formsValidation'); ?>
+<script>$(function(){ FormsValidation.init(); });</script>

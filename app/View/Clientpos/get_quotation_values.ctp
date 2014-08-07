@@ -12,7 +12,6 @@ if (!empty($quotation_details['Clientpo'])): ?>
             $get_state = 'fa-minus';
         }
         ?>
-
         <div class="group_po_<?PHP echo $po['id'] ?>">
             <div class="form-group">
                 <div class="col-sm-10">
@@ -24,7 +23,7 @@ if (!empty($quotation_details['Clientpo'])): ?>
                     </div>
                 </div>
                 <div class="col-sm-3">
-        <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'label' => false, 'name' => 'po_quantity[]', 'value' => $po['po_quantity'])); ?>
+                        <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'label' => false, 'name' => 'po_quantity[]', 'value' => $po['po_quantity'])); ?>
                 </div>
                 
                 </div>
@@ -50,7 +49,7 @@ if (!empty($quotation_details['Clientpo'])): ?>
                 </div>
             </div>
             <div class="col-sm-3">
-    <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'label' => false, 'name' => 'po_quantity[]')); ?>
+            <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'label' => false, 'name' => 'po_quantity[]')); ?>
             </div>
             <div class="col-md-1">
                 <div class="btn-group btn-group-sm">

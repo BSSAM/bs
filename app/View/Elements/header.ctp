@@ -168,8 +168,8 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Instruments'||$control == 'Procedures'||$control == 'Brands'||$control == 'Ranges'||$control=='Units'||$control=='Titles')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-ruller sidebar-nav-icon"></i>Instruments</a>
-                                 <ul <?php echo $a=($control == 'Instruments'||$control == 'Procedures'||$control == 'Brands'||$control == 'Ranges'|| $control == 'Units'||$control=='Titles')?'style=display:block':'';?> >
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Instruments'||$control == 'Procedures'||$control == 'Brands'||$control == 'Ranges'||$control=='Units'||$control=='Titles'||$control=='Instrumentforgroups')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-ruller sidebar-nav-icon"></i>Instruments</a>
+                                 <ul <?php echo $a=($control == 'Instruments'||$control == 'Procedures'||$control == 'Brands'||$control == 'Ranges'|| $control == 'Units'||$control=='Titles'||$control=='Instrumentforgroups')?'style=display:block':'';?> >
                                     <?php if($user_role['ins_instrument']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Instruments')?'active':''; ?>
@@ -190,7 +190,8 @@
                                     </li>-->
                                     <?php if($user_role['ins_instrumentforgroup']['view'] == 1){ ?>
                                     <li>
-                                         <a href="#"><?php echo 'Instrument for Group'; ?></a>
+                                        <?php  $a=($control == 'Instrumentforgroups')?'active':''; ?>
+                                        <?PHP echo $this->Html->link('Instrument for Group',array('controller'=>'Instrumentforgroups','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
                                     <?php if($user_role['ins_range']['view'] == 1){ ?>
                                     <li>

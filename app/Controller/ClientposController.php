@@ -7,7 +7,7 @@
 class ClientposController extends AppController
 {
     public $helpers = array('Html','Form','Session');
-    public $uses =array('Priority','Paymentterm','Quotation','Currency','Salesorder','Deliveryorder',
+    public $uses =array('Priority','Paymentterm','Quotation','Currency','Salesorder','Deliveryorder','Poinvoice','Podata','Doinvoice','Dodata','Soinvoice','Sodata','Qoinvoice','Qodata',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
                             'Contactpersoninfo','CusSalesperson','Clientpo');
@@ -27,7 +27,6 @@ class ClientposController extends AppController
           $this->set(compact('po_list','customer_quotation_list','po_single'));
           if($this->request->is(array('post','put')))
           {
-             
               $po_number_array  =   $this->request->data['clientpos_no'];
               $po_count_array   =   $this->request->data['po_quantity'];
               $po_array         = array_combine($po_number_array,$po_count_array);
@@ -55,29 +54,47 @@ class ClientposController extends AppController
                    
                     $this->Clientpo->save($this->request->data['Clientpo']);
               }
-
-               
-             
               $this->redirect(array('controller'=>'Clientpos','action'=>'index'));
           }
-          
-         
           //$this->set('clientpo', $clientpos);
     }
     public function Purchaseorder_fullinvoice($id = null)
     {
-        $customer_quotation_list=$this->Quotation->find('list',array('conditions'=>
-                        array('Quotation.customer_id'=>$id,'Quotation.is_approved'=>1,'Quotation.is_assign_po'=>0),'fields'=>array('id','quotationno')));
+      
+        
+        $customer_quotation_list=$this->Quotation->find('all',array('conditions'=>
+                        array('Quotation.customer_id'=>$id,'Quotation.is_approved'=>1,'Quotation.is_assign_po'=>0)));
+        $quotation_array_id=array();
+        foreach($customer_quotation_list as $quo)
+        {
+            $quotation_array_id[count($quo['Device'])] = $quo['Quotation']['quotationno'];
+        }
         $po_list=$this->Clientpo->find('all',array('conditions'=>array('Clientpo.customer_id'=>$id)));
         $po_single=$this->Clientpo->find('first',array('conditions'=>array('Clientpo.customer_id'=>$id)));
-        $this->set(compact('po_list','customer_quotation_list','pos','po_first','po_single'));
+        $this->set(compact('po_list','customer_quotation_list','pos','po_first','po_single','quotation_array_id'));
         $this->set('customer_id',$id);
         if($this->request->is(array('post','put')))
         {
-           
-            $qo_id_array  =   $this->request->data['quotation_id'];
+            $clientpo_number    =   $this->request->data['clientpo_no'];
+            $clientpo_quantity    =   $this->request->data['po_quantity'];
+             //For Quotation array
+            $qo_id_array  =   $this->request->data['quotation_no'];
             $qo_count_array   =   $this->request->data['quo_quantity'];
             $qo_array         = array_combine($qo_id_array,$qo_count_array);
+            
+            //For Sales order array
+            $so_id_array  =   $this->request->data['salesorder_id'];
+            $so_count_array   =   $this->request->data['sales_quantity'];
+            $so_array         = array_combine($so_id_array,$so_count_array);
+            
+            //For Delivery order Array
+            $do_id_array  =   $this->request->data['deliveryorder_id'];
+            $do_count_array   =   $this->request->data['delivery_quantity'];
+            $do_array         = array_combine($do_id_array,$do_count_array);
+            
+             pr($this->request->data);exit;
+            
+           
             
             $quotation_no = $this->request->data['quotation_no'];
             
@@ -143,7 +160,6 @@ class ClientposController extends AppController
             {
                 $this->Clientpo->deleteAll(array('Clientpo.salesorder_id'=>$this->request->data['salesorder_id']));
             }
-            
             foreach($po_array as $key=>$value)
             {
                 $this->Clientpo->create();
@@ -355,5 +371,23 @@ class ClientposController extends AppController
         echo $this->random('clientpo');
         
     }
-    
+    public function get_quotation_relateddetails()
+    {
+        $this->autoRender    =   false;
+        $qo_id =  $this->request->data['qo_id'];
+        $salesorder_details = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotationno'=>$qo_id,'Salesorder.is_approved'=>1,'Salesorder.is_deleted'=>0)));
+        
+        $sales_array['Salesorder']=array();$delivery_array['Deliveryorder']=array();
+        if(!empty($salesorder_details)){
+        foreach($salesorder_details as $salesorder):
+            $sales_array['Salesorder'][$salesorder['Salesorder']['salesorderno']]    =   count($salesorder['Description']);
+            $deliveryorder_details = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$salesorder['Salesorder']['salesorderno'],'Deliveryorder.is_approved'=>1,'Deliveryorder.is_deleted'=>0)));
+            foreach($deliveryorder_details as $delivery):
+                $delivery_array['Deliveryorder'][$delivery['Deliveryorder']['delivery_order_no']]=$delivery['Deliveryorder']['del_description_count'];
+            endforeach;
+        endforeach;
+        } else{ $sales_array;$delivery_array;}
+        $sales_plus_delivery    = array_merge($delivery_array, $sales_array);
+        echo json_encode($sales_plus_delivery);
+    }
 }
