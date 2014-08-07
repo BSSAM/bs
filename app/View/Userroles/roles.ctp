@@ -1,12 +1,14 @@
 <script>
         $(document).ready(function(){
-            $("input:checkbox").attr('checked','checked');
+            $("input:checkbox").attr('checked','unchecked');
+            //$("input:checkbox").removeAttr('checked');
         });
 </script>
-<?php //pr($this->request->data);exit;?>
+
 <h1>
     <i class="gi gi-notes_2"></i>User Role Permissions
 </h1>
+ 
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
@@ -30,7 +32,9 @@
                 <div class="row row_extend">
                        
                     <?php echo $this->Form->create('Userrole',array('class'=>'','id'=>'form-userrole-roles')); ?>
-                <div class="col-md-6">
+                    
+                    <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="panel panel-danger"> 
                         <div class="panel-heading bg-purple">
                             <h3 class="panel-title  text-white"><b>Users</b>
@@ -39,19 +43,14 @@
                                 </span>
                             </h3>
                         </div>
-                        <div class="panel-body panel-over" style="display: none;">
+                        <div class="panel-body panel-over">
                             <div class="table-responsive">
                                 <table class="table">
-                                    
+                                 
                                     <tbody>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5>Branch</h5></td>
-                                            <?php if($this->request->data['other_branch']['add']==1):?>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.add',array('id'=>'add','value'=>'on','checked'=>'checked')); ?><label for="add">Add</label> </div></td>
-                                            <?php elseif($this->request->data['other_branch']['add']==0): ?>
-                                            <td></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.add',array('id'=>'add','value'=>'off','unchecked'=>'unchecked')); ?><label for="add">Add</label> </div></td>
-                                            <?php endif; ?>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.add',array('id'=>'add'));?><label for="edit">add</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.edit',array('id'=>'edit'));?><label for="edit">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.view',array('id'=>'view')); ?><label for="view">View</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_branch.delete',array('id'=>'delete')); ?><label for="delete">Delete</label> </div></td>
@@ -201,7 +200,7 @@
                     </div> <!-- / warning Panel -->
                 </div> <!-- / col-md-6 -->
                 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="panel panel-danger"> 
                         <div class="panel-heading">
                             <h3 class="panel-title  text-white"><b>Instruments</b>
@@ -269,7 +268,7 @@
                             </div>
                         </div>
                     </div> <!-- / Info Panel -->
-                    <!--                            <div class="panel panel-danger"> 
+                                                <div class="panel panel-danger"> 
                                                     <div class="panel-heading bg-pink">
                                                         <h3 class="panel-title  text-white"><b>Settings</b>
                                                             <span class="pull-right">
@@ -308,13 +307,13 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                </div>  / pink Panel -->
+                                                </div>  
                 </div> <!-- / col-md-6 -->
                 
                 <!-- /row -->
                 
                         
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!--                            <div class="panel panel-danger"> 
                                                     <div class="panel-heading">
                                                         <h3 class="panel-title  text-white"><b>Dimensional</b>
@@ -449,7 +448,7 @@
                                                 </div>  / Danger Panel -->
                 </div> <!-- / col-md-6 -->
                 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!--                            <div class="panel panel-danger"> 
                                                     <div class="panel-heading text-white">
                                                         <h3 class="panel-title  text-white"><b>Pressure</b>
@@ -696,8 +695,98 @@
                                                     </div>
                                                 </div> -->
                 </div>
-                <div class="col-md-6">
-                    <div class="panel panel-danger"> 
+                <div class="col-md-12">
+                     <!-- / default Panel -->
+                                
+                                
+                    <!--                            <div class="panel panel-danger"> 
+                                                    <div class="panel-heading bg-seagreen">
+                                                        <h3 class="panel-title  text-white"><b>Temperature</b>
+                                                            <span class="pull-right">
+                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
+                                                            </span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body panel-over" style="display: none;">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                                    </div>
+                                                </div>-->
+                                
+                </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="col-md-12">
+                                
+                                
+                                
+                    <!--                            <div class="panel panel-danger"> 
+                                                    <div class="panel-heading bg-seagreen">
+                                                        <h3 class="panel-title  text-white"><b>Reports</b>
+                                                            <span class="pull-right">
+                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
+                                                            </span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body panel-over" style="display: none;">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                                    </div>
+                                                </div>-->
+                    <!--                            <div class="panel panel-danger"> 
+                                                    <div class="panel-heading bg-seagreen">
+                                                        <h3 class="panel-title  text-white"><b>Data Logs</b>
+                                                            <span class="pull-right">
+                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
+                                                            </span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body panel-over" style="display: none;">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                                    </div>
+                                                </div>-->
+                </div>
+                <div class="col-md-12">
+                    <!--                            <div class="panel panel-danger"> 
+                                                    <div class="panel-heading bg-seagreen">
+                                                        <h3 class="panel-title  text-white"><b>Miscellaneous</b>
+                                                            <span class="pull-right">
+                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
+                                                            </span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body panel-over" style="display: none;">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                                    </div>
+                                                </div>-->
+                                
+                    <!--                            <div class="panel panel-danger"> 
+                                                    <div class="panel-heading bg-seagreen">
+                                                        <h3 class="panel-title  text-white"><b>Temperature Dashboards</b>
+                                                            <span class="pull-right">
+                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
+                                                            </span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body panel-over" style="display: none;">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                                    </div>
+                                    
+                                    
+                                            </div>-->
+                </div>
+                <div class="col-md-12">
+<!--                    <div class="panel panel-danger"> 
+                        <div class="panel-heading bg-seagreen">
+                            <h3 class="panel-title  text-white"><b>Dashboards</b>
+                                <span class="pull-right">
+                                    <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="panel-body panel-over" style="display: none;">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                        </div>
+                    </div>-->
+<div class="panel panel-danger"> 
                         <div class="panel-heading bg-seagreen">
                             <h3 class="panel-title  text-white"><b>Job</b>
                                 <span class="pull-right">
@@ -851,93 +940,6 @@
                                 </table>
                             </div>
                         </div>
-                    </div> <!-- / default Panel -->
-                                
-                                
-                    <!--                            <div class="panel panel-danger"> 
-                                                    <div class="panel-heading bg-seagreen">
-                                                        <h3 class="panel-title  text-white"><b>Temperature</b>
-                                                            <span class="pull-right">
-                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
-                                                            </span>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="panel-body panel-over" style="display: none;">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                                    </div>
-                                                </div>-->
-                                
-                </div>
-                    <div class="col-md-6">
-                                
-                                
-                                
-                    <!--                            <div class="panel panel-danger"> 
-                                                    <div class="panel-heading bg-seagreen">
-                                                        <h3 class="panel-title  text-white"><b>Reports</b>
-                                                            <span class="pull-right">
-                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
-                                                            </span>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="panel-body panel-over" style="display: none;">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                                    </div>
-                                                </div>-->
-                    <!--                            <div class="panel panel-danger"> 
-                                                    <div class="panel-heading bg-seagreen">
-                                                        <h3 class="panel-title  text-white"><b>Data Logs</b>
-                                                            <span class="pull-right">
-                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
-                                                            </span>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="panel-body panel-over" style="display: none;">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                                    </div>
-                                                </div>-->
-                </div>
-                <div class="col-md-6">
-                    <!--                            <div class="panel panel-danger"> 
-                                                    <div class="panel-heading bg-seagreen">
-                                                        <h3 class="panel-title  text-white"><b>Miscellaneous</b>
-                                                            <span class="pull-right">
-                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
-                                                            </span>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="panel-body panel-over" style="display: none;">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                                    </div>
-                                                </div>-->
-                                
-                    <!--                            <div class="panel panel-danger"> 
-                                                    <div class="panel-heading bg-seagreen">
-                                                        <h3 class="panel-title  text-white"><b>Temperature Dashboards</b>
-                                                            <span class="pull-right">
-                                                                <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
-                                                            </span>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="panel-body panel-over" style="display: none;">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                                    </div>
-                                    
-                                    
-                                            </div>-->
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-danger"> 
-                        <div class="panel-heading bg-seagreen">
-                            <h3 class="panel-title  text-white"><b>Dashboards</b>
-                                <span class="pull-right">
-                                    <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
-                                </span>
-                            </h3>
-                        </div>
-                        <div class="panel-body panel-over" style="display: none;">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                        </div>
                     </div>
                     <div class="panel panel-danger"> 
                         <div class="panel-heading bg-seagreen">
@@ -1049,18 +1051,19 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prmanager.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prmanager.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
-<!--                                        <tr>
-                                            <td class="text-center" style="width: 150px;"><h5 class="">Unit</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php// echo $this->Form->checkbox('job_formdatas.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('job_formdatas.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('job_formdatas.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('job_formdatas.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
-                                        </tr>-->
+                                        <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">In Shipping - C & D info</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
+                                        </tr>
                                         
                                     </tbody>
                                 </table> </div>
                         </div></div>
                 </div>
+                    </div>
       
                 <div class="form-group form-actions">
                     <div class="col-md-2 col-md-offset-10">

@@ -154,6 +154,18 @@
                         $a = $this->Logactivity->save($this->request->data['Logactivity']);
                         //pr($a);exit;
                         /******************/
+                        
+                        /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Salesorder';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                        /******************/   
                         $this->Session->setFlash(__('Salesorder has been Added Successfully'));
                         $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
                     }
@@ -183,6 +195,17 @@
                 $this->Salesorder->id=$id;
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
+                    /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Salesorder';
+                        $this->request->data['Datalog']['logactivity'] = 'Edit';
+                        $this->request->data['Datalog']['logid'] = $id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                        /******************/   
 //                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
 //                    if(!empty($device_node))
 //                    {
@@ -204,6 +227,17 @@
             {
                 if($this->Salesorder->updateAll(array('Salesorder.is_deleted'=>1),array('Salesorder.id'=>$id)))
                 {
+                    /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Salesorder';
+                        $this->request->data['Datalog']['logactivity'] = 'Delete';
+                        $this->request->data['Datalog']['logid'] = $id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                        /******************/   
                     $this->Session->setFlash(__('The SalesOrder has been deleted',h($id)));
                     return $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
                 }

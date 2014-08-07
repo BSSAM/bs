@@ -11,7 +11,7 @@ class LabprocessesController extends AppController
     public $helpers =   array('Html','Form','Session');
     public $uses    =   array('Priority','Paymentterm','Quotation','Currency','Deliveryorder','Address','DelDescription','Logactivity',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Labprocess','branch');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Labprocess','branch','Datalog');
     public $components = array('RequestHandler');
      
     public function index()
@@ -37,7 +37,13 @@ class LabprocessesController extends AppController
         
         $this->set('lab_sales_id',$id);
         $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
-            
+        
+        /******************************************************************
+         * 
+         *                      Full Delivery Order
+         * 
+         ******************************************************************/
+               
         if($salesorder_list['Customer']['deliveryordertype_id']==1)
         {
             $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
@@ -89,6 +95,7 @@ class LabprocessesController extends AppController
                     if($this->Deliveryorder->save($delivery['Deliverorder']))
                     {
                         $last_id    =   $this->Deliveryorder->getLastInsertId();
+                        
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
                         
                         foreach($salesorder_list['Description'] as $sale):
@@ -106,7 +113,29 @@ class LabprocessesController extends AppController
                         $this->request->data['Logactivity']['logapprove'] = 1;
                         $this->Logactivity->save($this->request->data['Logactivity']);
                         /******************/
+                        /*
+                         * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $last_id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                        /******************/ 
                     }
+                    
+                        ////////////////////////////////
+                        //      Lab Process Logactivity
+                        ////////////////////////////////
+                        $this->request->data['Logactivity']['logname'] = 'Labprocess';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Labprocess';
+                        $this->request->data['Logactivity']['logid'] = $id;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 2;
+                        $this->Logactivity->save($this->request->data['Logactivity']);
+                        
                     $this->Salesorder->updateAll(array('Salesorder.is_approved_lab' => 1),array('Salesorder.id' => $id));
                     $this->Description->updateAll(array('Description.is_approved_lab' => 1),array('Description.salesorder_id' => $id));
                     $check_description_count    =   $this->Description->find('all',array('conditions'=>array('AND'=>array('Description.salesorder_id'=>$id,'Description.processing' => 1,'Description.checking' => 1))));
@@ -131,6 +160,13 @@ class LabprocessesController extends AppController
             }
             
         }
+        /*****************************************************************
+         * 
+         *                    Partial Delivery Order
+         * 
+         *****************************************************************/
+         
+        
         elseif($salesorder_list['Customer']['deliveryordertype_id']==2)
         {
             $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.is_approved_lab' => 0)));
@@ -166,6 +202,15 @@ class LabprocessesController extends AppController
                 if($device_count==$lab_approved)
                 {
                     $this->Salesorder->updateAll(array('Salesorder.is_approved_lab' => 1),array('Salesorder.id' => $id));
+                    ///////////////////////////////////////////////////
+                    //      Lab Process Logactivity - Partial
+                    ///////////////////////////////////////////////////
+                        $this->request->data['Logactivity']['logname'] = 'Labprocess';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Labprocess - Partial';
+                        $this->request->data['Logactivity']['logid'] = $id;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 2;
+                        $this->Logactivity->save($this->request->data['Logactivity']);
                 }
                 if($lab_approved >=1)
                 {
@@ -199,8 +244,8 @@ class LabprocessesController extends AppController
                         /******************
                         * Data Log
                         */
-                        $this->request->data['Logactivity']['logname'] = 'Quotation';
-                        $this->request->data['Logactivity']['logactivity'] = 'Add Quotation';
+                        $this->request->data['Logactivity']['logname'] = 'Deliveryorder';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Delivery Order';
                         $this->request->data['Logactivity']['logid'] = $last_id;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
@@ -208,6 +253,17 @@ class LabprocessesController extends AppController
                         $a = $this->Logactivity->save($this->request->data['Logactivity']);
                         
                         /******************/
+                        /******************
+                         * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $last_id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                        /******************/ 
                         foreach($approved as $key=>$value)
                         {
                             $this->request->data['DelDescription']['deliveryorder_id']    =    $last_id;  

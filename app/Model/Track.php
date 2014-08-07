@@ -11,19 +11,11 @@ class Track extends AppModel
     
      public $belongsTo = array(
         'Quotation' => array(
-            'className' => 'Quotation',
-            'foreignKey' => 'track_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'Salesperson' => array(
-            'className' => 'Salesperson',
-            'foreignKey' => 'salespeople_id',
+            'className' => 'Logactivity',
+            'foreignKey' => 'logid',
             'conditions' => '',
             'fields' => '',
             'order' => ''
         )
-        
     );
 }
