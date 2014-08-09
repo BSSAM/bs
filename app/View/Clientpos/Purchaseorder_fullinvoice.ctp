@@ -28,6 +28,7 @@
                                  <?PHP echo $this->Form->input('customer_for_quotation_id', array('type' => 'hidden', 'id' => 'customer_for_quotation_id','name'=>'customer_for_quotation_id','value'=>$customer_id)); ?>
                             <!-- END Basic Form Elements Block -->
                             <div class="">
+                                
                         <div class="col-md-6 fc-header-title float_none">
                             <!-- Block with Options -->
                             <div class="block col-md-12">
@@ -124,7 +125,7 @@
                                 </div>
                                 <div class="form-group form-actions">
                                     <div class="col-md-9 col-md-offset-3">
-                                        <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+                                        <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary pofull_invoice_submit', 'escape' => false)); ?>
                                         <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel', array('controller' => 'Clientpos', 'action' => 'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                                     </div>
                                 </div>

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-      
 $(document).ready(function(){
     var count=1;
     $(document).on('click','#add_po',function(){
@@ -11,7 +10,7 @@ $(document).ready(function(){
        if($('#val_pocount').val()!=quo_inst_count)
        {
             $('.po_up').append('<div class="group_po_'+(count++)+'"><div class="form-group"><div class="col-sm-10"><div class="input-group">\n\
-\n\<input type="text" name="clientpos_no[]" id="val_ponumber_'+(count-1)+'" class="form-control"/>\n\
+\n\<input type="text" name="clientpos_no[]" id="val_ponumber_'+(count-1)+'" class="form-control "/>\n\
 <span class="input-group-btn"><button class="btn btn-primary generate_po" id="val_ponumber_'+(count-1)+'" type="button">Generate Po</button></span>\n\
 </div></div><div class="col-sm-3">\n\<input type="text" name="po_quantity[]" id="val_pocount'+(count-1)+'" class="form-control"/> </div>\n\
 <div class="col-md-1"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete='+(count-1)+' ><i class="fa fa-minus"></i></div></div> </div></div></div>');
@@ -63,7 +62,7 @@ $(document).ready(function(){
         var qlength =   $('.'+quotation_selected).length;
         if(quotation_val!='' && qlength==0){
         $('.po_based_clientpo').append('<div class="group_qo_'+(count++)+' '+quotation_selected+'"><div class="form-group"><div class="col-sm-11"><input type="hidden" name="quotation_id[]" value="'+quotation_val+'"/><input type="hidden" name="quotation_no[]" value="'+quotation_selected+'"/><div class="col-sm-6  form-control-static">'+quotation_selected+'</div>\n\
-                                      <div class="col-sm-4"><input class="form-control" readonly="readonly" value="'+quotation_val+'" type="text" name="quo_quantity[]"/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"> <div class="btn btn-alt btn-info qo_id_selected"   data-delete ="'+(count-1)+'"  > <i class="fa fa-minus"></i></div> </div> ');
+                                      <div class="col-sm-4"><input class="form-control clentpo_qo_count" readonly="readonly" value="'+quotation_val+'" type="text" name="quo_quantity[]"/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"> <div class="btn btn-alt btn-info qo_id_selected"   data-delete ="'+(count-1)+'"  > <i class="fa fa-minus"></i></div> </div> ');
         }
         if(qlength==0){
         $.ajax({
@@ -173,6 +172,7 @@ $(document).ready(function(){
     });
     /******************************************************************************************************************/
     $(document).on('click','.so_single_show',function(){
+       
         var po_id_name=$(this).text();
         $('#sales_order').val(po_id_name);
         $('#so_result').fadeOut('slow');
@@ -187,39 +187,23 @@ $(document).ready(function(){
             {
                 var data_node   =$.parseJSON(data);
                 var description_length  =   data_node.Description.length;
-                var po_list  =   data_node.Clientpo;
-                var po_list_length  =   data_node.Clientpo.length;
                 $('#val_socount').val(description_length);
-                var po_ct   =   0;
-                if(po_list_length>0){
-                    $('.sales_po_update').empty();
-                $.each(po_list,function(k,v){
-                    po_ct   =   po_ct+1;
-                    if(po_ct==1){var symbol = 'fa-plus' ;var action="add_so_po"; }else{var symbol = 'fa-minus' ;var action="delete_po";}
-                    $('.sales_po_update').append('<div class="group_po_'+v.id+'"><div class="form-group"><div class="col-sm-10"><div class="input-group">\n\
-\n\<input type="text" name="clientpos_no[]" id="val_ponumber_'+v.id+'" class="form-control" value="'+v.clientpos_no+'"/>\n\
-<span class="input-group-btn"><button class="btn btn-primary generate_po" id="val_ponumber_'+v.id+'" type="button">Generate Po</button></span>\n\
-</div></div><div class="col-sm-3">\n\<input type="text" name="po_quantity[]" id="val_pocount'+v.id+'" class="form-control" value="'+v.po_quantity+'"/> </div>\n\
-<div class="col-md-1"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="'+action+'" data-delete='+v.id+' ><i class="fa '+symbol+'"></i></div></div> </div></div></div>');
-                });
-            }
-               
+                $('.sales_po_update').empty();
+                $('.sales_po_update').append('<div class="group_po_'+(count++)+'"><div class="form-group col-md-8"><input placeholder="Enter Additional PO Number" type="text" name="clientpos_no[]" value="'+data_node.Salesorder.ref_no+'" id="val_ponumber_'+(count-1)+'" class="form-control get_ponumber_collection"/></div><div class="form-group col-sm-3">\n\<input type="text" placeholder="PO Count" name="po_quantity[]" id="val_pocount'+(count-1)+'" class="form-control po_count_each"/> </div>\n\
+<div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="add_so_po" data-delete='+(count-1)+' ><i class="fa fa-plus"></i></div></div></div></div>');
                 $('.so_based_quotation').html('<div class="group_qo_'+data_node.Quotation.id+'"><div class="form-group"><div class="col-sm-12"><input type="hidden" name="quotation_id[]" value="'+data_node.Quotation.id+'"/><input type="hidden" name="quotation_no[]" value="'+data_node.Quotation.quotationno+'"/><div class="col-sm-6  form-control-static">'+data_node.Quotation.quotationno+'</div>\n\
-                                      <div class="col-sm-4"><input class="form-control" type="text" name="quo_quantity[]" value="'+description_length+'" readonly/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"> <div class="btn btn-alt btn-info qo_id_selected"   data-delete ="'+data_node.Quotation.id+'"  > <i class="fa fa-minus"></i></div> </div> ');
-               
+                                      <div class="col-sm-4"><input class="form-control" type="text" name="quo_quantity[]" value="'+description_length+'" readonly/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"></div> ');
             }
 	});
     });
      var count=1;
     $(document).on('click','#add_so_po',function(){
+        
          var so_inst_count  =$('#val_socount').val(); 
        if($('#val_pocount').val()!=so_inst_count)
        {
-            $('.po_up').append('<div class="group_po_'+(count++)+'"><div class="form-group"><div class="col-sm-10"><div class="input-group">\n\
-\n\<input type="text" name="clientpos_no[]" id="val_ponumber_'+(count-1)+'" class="form-control"/>\n\
-<span class="input-group-btn"><button class="btn btn-primary generate_po" id="val_ponumber_'+(count-1)+'" type="button">Generate Po</button></span>\n\
-</div></div><div class="col-sm-3">\n\<input type="text" name="po_quantity[]" id="val_pocount'+(count-1)+'" class="form-control"/> </div>\n\
-<div class="col-md-1"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete='+(count-1)+' ><i class="fa fa-minus"></i></div></div> </div></div></div>');
+            $('.po_up').append('<div class="group_po_'+(count++)+'"><div class="form-group col-md-8"><input placeholder="Enter Additional PO Number" type="text" name="clientpos_no[]" id="val_ponumber_'+(count-1)+'" class="form-control get_ponumber_collection"/></div><div class="form-group col-sm-3">\n\<input type="text" placeholder="PO Count" name="po_quantity[]" id="val_pocount'+(count-1)+'" class="form-control po_count_each"/> </div>\n\
+<div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete='+(count-1)+' ><i class="fa fa-minus"></i></div></div></div></div>');
        }
     });
     $('#sales_order').blur(function(){
@@ -288,5 +272,39 @@ $(document).ready(function(){
      var data_length= $(this).attr('data-delete');
      $('.group_do_'+data_length).remove();
    });
-
+   /***********************************Purchase order full invoice form submit validation******************************/
+   $(document).on('click','.pofull_invoice_submit',function(){
+       var qo_total_count = getValues('.clentpo_qo_count');
+       var po_count =   $('#val_pocount').val();
+       if(po_count!=qo_total_count)
+       {
+           alert('PO Count Not matched with Quotations Count');
+           return false;
+       } 
+   });
+  
+   function getValues(selector)
+   {
+       var tempValues=0;
+        $(selector).each(function(){
+           var th= $(this);
+           tempValues += Number(th.val());
+         });
+        return tempValues;
+    }
+  /**************************************Sales order full invoice form submit validation*********************************/
+   $(document).on('click','.salesorder_fullinvoice_update',function(){
+        var total_reply=0;var check_count=0;
+        var po_total_count = getValues('.po_count_each');
+        var so_count    =$('#val_socount').val();
+        if(po_total_count!=so_count){ alert('PO Count not matched with Salesorder Count');  return false;     }
+        $('.get_ponumber_collection').each(function(){
+           check_count  =   check_count+1;
+           var  inputString = $(this).val();
+           var findme       =  'CPO';
+           var reply_check  =   inputString.indexOf(findme);
+           if(reply_check==0){ alert('Provide original PO Number for '+check_count);  return false;}   
+         });
+   });
+   
 });

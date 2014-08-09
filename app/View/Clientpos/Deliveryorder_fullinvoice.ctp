@@ -56,8 +56,10 @@
                                         <!-- END Block with Options Left Title -->
                                         <!-- Block with Options Left Content -->
                                         <div class="form-group col-md-12 row">
-                                            <?php echo $this->Form->input('salesorder_id', array('id' => 'val_salesorder', 'class' => 'select-chosen required', 'empty' => 'Please select the Salesorder No', 'options' => $customer_salesorder_list, 'label' => false, 'name' => 'salesorder_id', 'style' => 'width: 250px; display: none;')); ?>
-                                            <div class="sales_list_id"></div>   <!-- END Block with Options Left Content -->
+                                            <?php //echo $this->Form->input('salesorder_id', array('id' => 'val_salesorder', 'class' => 'select-chosen required', 'empty' => 'Please select the Salesorder No', 'options' => $customer_salesorder_list, 'label' => false, 'name' => 'salesorder_id', 'style' => 'width: 250px; display: none;')); ?>
+                                            <div class="sales_list_id">
+                                                <p>Select Delivery order to get Salesorder details</p>
+                                            </div>   <!-- END Block with Options Left Content -->
                                         </div>
                                     </div>
                                     <!-- END Block with Options Left -->
@@ -83,30 +85,11 @@
                                     <div class="block col-md-12">
                                         <!-- Block with Options Left Title -->
                                         <div class="block-title clearfix">
-                                            <h2 class="pull-left"><strong>Delivery order Details	</strong> </h2>
+                                            <h2 class="pull-left"><strong>Purchase order Details</strong> </h2>
                                         </div>
                                         <div class="sales_po_update">
-                                                <div class="form-group">
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <?php echo $this->Form->input('clientpos_no', array('id' => 'so_po_gen', 'class' => 'form-control', 'placeholder' => 'Purchase Order No', 'label' => false, 'name' => 'clientpos_no[]', 'type' => 'text')); ?>
-                                                            <span class="input-group-btn">
-                                                                <button class="btn btn-primary generate_po" id="so_po_gen" type="button">Generate Po</button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'label' => false, 'name' => 'po_quantity[]', 'value' => '', 'placeholder' => 'Po Count')); ?>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="btn-group btn-group-sm form-control-static">
-                                                            <div class="btn btn-alt btn-info" id="add_so_po">
-                                                                <i class="fa fa-plus"></i>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </div>
-                                                </div>
+                                            <p>Select Delivery order to get Purchase order Details </p>
+                                        </div>
                                         <!-- END Block with Options Left Content -->
                                     </div>
                                     <!-- END Block with Options Left -->
@@ -121,7 +104,7 @@
                                         <!-- END Block with Options Title -->
                                         <!-- Block with Options Content -->
                                         <div class="invoice_by_quotation">
-                                            <p>Select Quotation to get Invoice Details </p>
+                                            <p>Select Delivery to get Invoice Details </p>
                                         </div>
                                         <!-- END Block with Options Content -->
                                     </div>

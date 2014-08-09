@@ -3,12 +3,11 @@
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
-                          <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Client Po List',array('controller'=>'Clientpos','action'=>'index')); ?></li>
                         <li>Sales Order Full Invoice</li>
                     </ul>
                     <!-- END Forms General Header -->
-                   
             <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
@@ -54,7 +53,7 @@
                                             </div>
                                             <!-- END Block with Options Left Title -->
                                             <!-- Block with Options Left Content -->
-                                            <div class="so_based_quotation">  <p>Select Quotation to get Invoice Details </p> </div>
+                                            <div class="so_based_quotation">  <p>Select Salesorder to get Quotation Details </p> </div>
                                             <!-- END Block with Options Left Content -->
                                         </div>
                                         <!-- END Block with Options Left -->
@@ -64,27 +63,13 @@
                                         <div class="block col-md-12">
                                             <!-- Block with Options Title -->
                                             <div class="block-title">
-                                                <h2><strong>Purchase order order Details</strong> </h2>
+                                                <h2><strong>Purchase order  Details</strong> </h2>
                                             </div>
                                             <!-- END Block with Options Title -->
                                             <!-- Block with Options Content -->
                                             <div class="salesorder_by_quotation">
                                                 <div class="sales_po_update">
-                                                    <div class="form-group col-md-8">
-                                                        <div class="input-group">
-                                                            <?php echo $this->Form->input('po_quantity', array('id' => 'val_pocount', 'class' => 'form-control', 'label' => false, 'name' => 'po_quantity[]', 'value' => '', 'placeholder' => 'Po Count')); ?>
-                                                            <span class="input-group-btn">
-                                                                <button class="btn btn-primary generate_po" id="so_po_gen" type="button">Generate Po</button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-3 row">
-                                                        <div class="btn-group btn-group-sm form-control-static">
-                                                            <div class="btn btn-alt btn-info" id="add_so_po">
-                                                                <i class="fa fa-plus"></i>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
+                                                    <p>Select Salesorder to get Purchase order Details.</p>
                                                 </div>
                                                 <div class="po_up"></div>
                                             </div>
@@ -99,8 +84,8 @@
                                             <div class="block-title clearfix">
                                                 <h2 class="pull-left"><strong>Delivery order Details</strong></h2>
                                             </div>
-                                            <div class="deliveryorder_by_quotation">
-                                                <p>Select Quotation to get Delivery order Details.</p>
+                                            <div class="deliveryorder_by_salesorder">
+                                                <p>Select Salesorder to get Delivery order Details.</p>
                                             </div>
                                             <!-- END Block with Options Left Content -->
                                         </div>
@@ -116,7 +101,7 @@
                                             <!-- END Block with Options Title -->
                                             <!-- Block with Options Content -->
                                             <div class="invoice_by_quotation">
-                                                <p>Select Quotation to get Invoice Details </p>
+                                                <p>Select Salesorder to get Invoice Details </p>
                                             </div>
                                             <!-- END Block with Options Content -->
                                         </div>
@@ -124,7 +109,7 @@
                                     </div>
                                     <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
-                                            <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+                                            <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type'=>'submit','class' => 'btn btn-sm btn-primary salesorder_fullinvoice_update', 'escape' => false)); ?>
                                             <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel', array('controller' => 'Clientpos', 'action' => 'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                                         </div>
                                     </div>
@@ -134,4 +119,4 @@
                             <?php echo $this->Html->script('pages/formsValidation'); ?>
                             <script>$(function(){ FormsValidation.init(); });</script>
                             
-                                       
+                           
