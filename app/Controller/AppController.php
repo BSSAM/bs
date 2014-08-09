@@ -37,9 +37,11 @@ App::uses('Controller', 'Controller');
         {
                 
             $sess_username = $this->Session->read('sess_username');
+            $sess_userid = $this->Session->read('sess_userid');
             if(isset($sess_username))
             {
                 $this->set('username',$sess_username);
+                $this->set('userid',$sess_userid);
             }
             else
             { 

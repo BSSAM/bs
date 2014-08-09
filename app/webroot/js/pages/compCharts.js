@@ -22,7 +22,7 @@ var CompCharts = function() {
                 tooltipFormat: '{{prefix}}{{value}}{{suffix}}'
             };
 			
-			 var miniChartBarOptions_stacked = {
+            var miniChartBarOptions_stacked = {
                 type: 'bar',
                 barWidth: 6,
                 barSpacing: 5,

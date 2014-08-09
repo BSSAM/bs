@@ -1,8 +1,8 @@
 <script>
-        $(document).ready(function(){
-            $("input:checkbox").attr('checked','unchecked');
+        //$(document).ready(function(){
+           // $("input:checkbox").attr('checked','unchecked');
             //$("input:checkbox").removeAttr('checked');
-        });
+        //});
 </script>
 
 <h1>
@@ -27,9 +27,7 @@
                 
                 <h2></h2>
             </div>
-                
-            
-                <div class="row row_extend">
+            <div class="row row_extend">
                        
                     <?php echo $this->Form->create('Userrole',array('class'=>'','id'=>'form-userrole-roles')); ?>
                     

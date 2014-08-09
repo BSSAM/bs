@@ -3,39 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/bs/app/View/Ranges/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/UserrolesController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/header.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Model/Userrole.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Ranges/add.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Instruments/add.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Procedures/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/RangesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Model/Procedure.php</file>
-            <file>file:/D:/wamp/www/bs/app/Model/Datalog.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Units/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Ranges/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/functions.js</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/css/main.css</file>
-            <file>file:/D:/wamp/www/bs/app/Model/User.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Procedures/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/css/bootstrap.min.css</file>
-            <file>file:/D:/wamp/www/bs/app/Model/Customer.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Instruments/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Clientpos/Purchaseorder_fullinvoice.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Procedures/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/widgetsStats.js</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/compCharts.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Userroles/roles.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Userroles/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/AppController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Model/Dashboard.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/UnitsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Units/add.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/DashboardsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/css/plugins.css</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Instruments/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Units/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/compCalendar.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Userroles/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/LoginsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Userroles/edit.ctp</file>
             <file>file:/D:/wamp/www/bs/app/webroot/js/pages/tablesDatatables.js</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/ProceduresController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Salesorders/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/css/custom.css</file>
             <file>file:/D:/wamp/www/bs/app/View/Layouts/default.ctp</file>
         </group>
     </open-files>

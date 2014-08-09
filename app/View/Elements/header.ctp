@@ -46,10 +46,11 @@
                             </div>
                             <div class="sidebar-user-name"><?php echo $username; ?></div>
                             <div class="sidebar-user-links">
-                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
-                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="gi gi-envelope"></i></a>
+                                <?php echo $this->Html->link('<i class="gi gi-user"></i>',array('controller'=>'Users','action'=>'edit',$userid),array( 'escape'=>false,'data-toggle'=>'tooltip','data-placement'=>'bottom','title'=>'Profile'));?>
+<!--                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Profile"></a>-->
+<!--                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="gi gi-envelope"></i></a>-->
                                 <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                <a href="#modal-user-settings" data-toggle="modal" class="enable-tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>
+<!--                                <a href="#modal-user-settings" data-toggle="modal" class="enable-tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>-->
                                
                             <?php echo $this->Html->link('<i class="gi gi-exit"></i>',array('controller'=>'Logins','action'=>'logout',),array( 'escape'=>false,'data-toggle'=>'tooltip','data-placement'=>'bottom','title'=>'Logout'));?>
                             </div>
@@ -333,20 +334,20 @@
                                     </li><?php } ?>
                                 </ul>
                             </li>
-                            <li>
+<!--                            <li>
                                 <a href="" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-vcard sidebar-nav-icon"></i>Sales</a>
                                  <ul>
                                     <li>
-                                          <a href="#"><?php echo 'Contacts'; ?></a>
+                                          <a href="#"><?php //echo 'Contacts'; ?></a>
                                     </li>
                                     <li>
-                                          <a href="#"><?php echo 'Leads'; ?></a>
+                                          <a href="#"><?php //echo 'Leads'; ?></a>
                                     </li>
                                     <li>
-                                         <a href="#"><?php echo 'Tasks'; ?></a>
+                                         <a href="#"><?php //echo 'Tasks'; ?></a>
                                     </li>
                                     <li>
-                                         <a href="#"><?php echo 'Campaigns'; ?></a>
+                                         <a href="#"><?php //echo 'Campaigns'; ?></a>
                                     </li>
                                 </ul>
                             </li>
@@ -355,13 +356,13 @@
                                  <ul>
                                    
                                 </ul>
-                            </li>
+                            </li>-->
                         </ul>
                         
                         <!-- END Sidebar Navigation -->
 
                         <!-- Sidebar Notifications -->
-                        <div class="sidebar-header">
+<!--                        <div class="sidebar-header">
                             <span class="sidebar-header-options clearfix">
                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Refresh"><i class="gi gi-refresh"></i></a>
                             </span>
@@ -372,7 +373,7 @@
                                 <small>5 min ago</small><br>
                                 <i class="fa fa-thumbs-up fa-fw"></i> You had a new sale ($10)
                             </div>
-                            <!--<div class="alert alert-info alert-alt">
+                            <div class="alert alert-info alert-alt">
                                 <small>10 min ago</small><br>
                                 <i class="fa fa-arrow-up fa-fw"></i> Upgraded to Pro plan
                             </div>
@@ -383,8 +384,8 @@
                             <div class="alert alert-danger alert-alt">
                                 <small>Yesterday</small><br>
                                 <i class="fa fa-bug fa-fw"></i> <a href="javascript:void(0)"><strong>New bug submitted</strong></a>
-                            </div>-->
-                        </div>
+                            </div>
+                        </div>-->
                         <!-- END Sidebar Notifications -->
                     </div>
                     <!-- END Sidebar Content -->
@@ -438,41 +439,38 @@
                             </a>
                             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                                 <li class="dropdown-header text-center">Account</li>
-                                <li>
-                                    <!--<a href="">
+<!--                                <li>
+                                    <a href="">
                                         <i class="fa fa-clock-o fa-fw pull-right"></i>
                                         <span class="badge pull-right">10</span>
                                         Updates
-                                    </a>-->
+                                    </a>
                                     <a href="">
                                         <i class="fa fa-envelope-o fa-fw pull-right"></i>
                                         <span class="badge pull-right">5</span>
                                         Messages
                                     </a>
-                                    <!--<a href=""><i class="fa fa-magnet fa-fw pull-right"></i>
+                                    <a href=""><i class="fa fa-magnet fa-fw pull-right"></i>
                                         <span class="badge pull-right">3</span>
                                         Subscriptions
                                     </a>
                                     <a href=""><i class="fa fa-question fa-fw pull-right"></i>
                                         <span class="badge pull-right">11</span>
                                         FAQ
+                                    </a>
+                                </li>-->
+<!--                                <li class="divider"></li>-->
+                                <li>
+                                    <?php echo $this->Html->link('<i class="fa fa-user fa-fw pull-right"></i>Profile',array('controller'=>'Users','action'=>'edit',$userid),array( 'escape'=>false));?>
+                                    <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
+<!--                                    <a href="#modal-user-settings" data-toggle="modal">
+                                        <i class="fa fa-cog fa-fw pull-right"></i>
+                                        Settings
                                     </a>-->
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="">
-                                        <i class="fa fa-user fa-fw pull-right"></i>
-                                        Profile
-                                    </a>
-                                    <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                    <a href="#modal-user-settings" data-toggle="modal">
-                                        <i class="fa fa-cog fa-fw pull-right"></i>
-                                        Settings
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href=""><i class="fa fa-lock fa-fw pull-right"></i> Lock Account</a>
+<!--                                    <a href=""><i class="fa fa-lock fa-fw pull-right"></i> Lock Account</a>-->
                                     <?php echo $this->Html->link('<i class="fa fa-ban fa-fw pull-right"></i>logout',array('controller'=>'Logins','action'=>'logout',),array( 'escape'=>false));?>
                                 </li>
                                
