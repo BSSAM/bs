@@ -306,5 +306,5 @@ $(document).ready(function(){
            if(reply_check==0){ alert('Provide original PO Number for '+check_count);  return false;}   
          });
    });
-   
+   /**************************************Sales order full invoice form submit validation*********************************/
 });
