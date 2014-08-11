@@ -13,6 +13,21 @@ class AdditionalchargesController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Additional Charges Permission
+         *  Controller : Additional Charges
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_additional']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole',$user_role['other_additional']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Additionalcharge->find('all',array('order' => array('Additionalcharge.id' => 'DESC')));
         $this->set('additionalcharge', $data);
         //pr($data);
@@ -20,7 +35,17 @@ class AdditionalchargesController extends AppController
     
     public function add()
     {
-       
+        /* 
+         * ---------------  User Additional Charges Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_additional']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
          
         //$this->set('country',$data);
         if($this->request->is('post'))
@@ -43,7 +68,17 @@ class AdditionalchargesController extends AppController
     
     public function edit($id = null)
     {
+         /* 
+         * ---------------  User Additional Charges Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_additional']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
         
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -82,14 +117,28 @@ class AdditionalchargesController extends AppController
     
     public function delete($id)
     {
+         /* 
+         * ---------------  User Additional Charges Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_additional']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Additionalcharge->delete($id))
+        if($id!='')
         {
+            if($this->Additionalcharge->updateAll(array('Additionalcharge.is_deleted'=>1),array('Additionalcharge.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Additional Charge has been deleted',h($id)));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

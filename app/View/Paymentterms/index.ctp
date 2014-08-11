@@ -13,7 +13,9 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Payment Terms</h2>
+                            <?php if($userrole_cus['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Payment Term',array('controller'=>'Paymentterms','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Payment Term')); ?></h2>
+                            <?php } ?>
                         </div>
                         
 
@@ -42,12 +44,16 @@
                                      
                                         <td class="text-center">
                                             <div class="btn-group">
+                                                <?php if($userrole_cus['edit']==1){ ?>
                                                 <?PHP echo $this->html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Paymentterms',
                                                     'action'=>'edit',$paymentterm_list['Paymentterm']['id']),array('title'=>'Edit',
                                                         'class'=>'btn btn-xs btn-default','data-toggle'=>'tooltip','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole_cus['delete']==1){ ?>
                                                 <?PHP echo $this->Form->postlink('<i class="fa fa-times"></i>',array('controller'=>'Paymentterms',
                                                     'action'=>'delete',$paymentterm_list['Paymentterm']['id']),array('title'=>'Delete',
                                                         'class'=>'btn btn-xs btn-danger','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to delete?')); ?>
+                                                <?php } ?>
                                                  </div>
                                         </td>
                                     </tr>

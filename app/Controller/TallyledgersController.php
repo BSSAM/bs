@@ -13,6 +13,21 @@ class TallyledgersController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Tally ledgers Permission
+         *  Controller : Tally Ledgers
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_tallyledger']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole',$user_role['other_tallyledger']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Tallyledger->find('all',array('order' => array('Tallyledger.id' => 'DESC')));
         $this->set('tallyledger', $data);
         //pr($data);
@@ -20,7 +35,17 @@ class TallyledgersController extends AppController
     
     public function add()
     {
-       
+        /* 
+         * ---------------  User Tally ledger Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_tallyledger']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
          
         //$this->set('country',$data);
         if($this->request->is('post'))
@@ -51,7 +76,17 @@ class TallyledgersController extends AppController
     
     public function edit($id = null)
     {
+        /* 
+         * ---------------  User Tally ledger Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_tallyledger']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
         
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -90,14 +125,29 @@ class TallyledgersController extends AppController
     
     public function delete($id)
     {
+        /* 
+         * ---------------  User Tally ledger Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_tallyledger']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Tallyledger->delete($id))
+        
+        if($id!='')
         {
+            if($this->Tallyledger->updateAll(array('Tallyledger.is_deleted'=>1),array('Tallyledger.id'=>$id)))
+            {
             $this->Session->setFlash(__('Tally Ledger A/C has been deleted',h($id)));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

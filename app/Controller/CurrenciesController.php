@@ -13,6 +13,21 @@ class CurrenciesController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Currency Permission
+         *  Controller : Currency
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_currency']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole',$user_role['other_currency']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Currency->find('all',array('order' => array('Currency.id' => 'DESC')));
         $this->set('currency', $data);
        // pr($data);exit;
@@ -20,6 +35,17 @@ class CurrenciesController extends AppController
     
     public function add()
     {
+         /* 
+         * ---------------  User Country Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_currency']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         $this->loadModel('Country');
          $data = $this->Country->find('list', array('fields' => 'country'));
          //pr($data);exit;
@@ -56,6 +82,17 @@ class CurrenciesController extends AppController
     
     public function edit($id = null)
     {
+        /* 
+         * ---------------  User Country Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_currency']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         $this->loadModel('Country');
         $data = $this->Country->find('list', array('fields' => 'country'));
         $this->set('country',$data);
@@ -98,14 +135,28 @@ class CurrenciesController extends AppController
     
     public function delete($id)
     {
+        /* 
+         * ---------------  User Country Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_currency']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Currency->delete($id))
+        if($id!='')
         {
+            if($this->Currency->updateAll(array('Currency.is_deleted'=>1),array('Currency.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Currency has been deleted',h($id)));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

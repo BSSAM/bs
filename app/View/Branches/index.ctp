@@ -13,7 +13,9 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Branches</h2>
+                            <?php if($userrole['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Branch',array('controller'=>'Branches','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Branch')); ?></h2>
+                            <?php } ?>
                         </div>
                         
 
@@ -35,19 +37,22 @@
                                 <tbody>
                                      <?php foreach($branch as $branch_list): ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $branch_list['Branch']['id']; ?></td>
+                                        <td class="text-center"><?php echo $branch_list['branch']['id']; ?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><a href="javascript:void(0)"><?php echo $branch_list['Branch']['branchname']; ?></a></td>
-                                        <td class="text-center"><?php echo $branch_list['Branch']['address']; ?></td>
-                                        <td class="text-center"><?php echo $branch_list['Branch']['phone']; ?></td>
-                                        <td class="text-center"><?php echo $branch_list['Branch']['fax']; ?></td>
-                                        <td class="text-center"><?php echo $branch_list['Branch']['companyregno']; ?></td>
-                                        <td class="text-center"><?php echo $branch_list['Branch']['gstregno']; ?></td>
+                                        <td class="text-center"><a href="javascript:void(0)"><?php echo $branch_list['branch']['branchname']; ?></a></td>
+                                        <td class="text-center"><?php echo $branch_list['branch']['address']; ?></td>
+                                        <td class="text-center"><?php echo $branch_list['branch']['phone']; ?></td>
+                                        <td class="text-center"><?php echo $branch_list['branch']['fax']; ?></td>
+                                        <td class="text-center"><?php echo $branch_list['branch']['companyregno']; ?></td>
+                                        <td class="text-center"><?php echo $branch_list['branch']['gstregno']; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$branch_list['Branch']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$branch_list['Branch']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                               
+                                                <?php if($userrole['edit']==1){ ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$branch_list['branch']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole['delete']==1){ ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$branch_list['branch']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php } ?>
                                             </div>
                                         </td>
                                     </tr>

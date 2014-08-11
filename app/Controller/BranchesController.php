@@ -10,9 +10,24 @@ class BranchesController extends AppController
 {
     
     public $helpers = array('Html','Form','Session');
-    
+    public $uses    =   array('Branch');   
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Branch Permission
+         *  Controller : Branch
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_branch']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole',$user_role['other_branch']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Branch->find('all',array('order' => array('Branch.id' => 'DESC')));
         $this->set('branch', $data);
        // pr($data);exit;
@@ -20,6 +35,17 @@ class BranchesController extends AppController
     
     public function add()
     {
+         /* 
+         * ---------------  User Branch Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_branch']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $this->loadModel('Currency');
          $data = $this->Currency->find('list', array('fields' => 'currencycode'));
         // pr($data);exit;
@@ -56,6 +82,17 @@ class BranchesController extends AppController
     
     public function edit($id = null)
     {
+        /* 
+         * ---------------  User Branch Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_branch']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $this->loadModel('Currency');
          $data = $this->Currency->find('list', array('fields' => 'currencycode'));
         // pr($data);exit;
@@ -100,14 +137,28 @@ class BranchesController extends AppController
     
     public function delete($id)
     {
+        /* 
+         * ---------------  User Branch Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_branch']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Branch->delete($id))
+         if($id!='')
         {
+            if($this->Branch->updateAll(array('Branch.is_deleted'=>1),array('Branch.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Branch has been deleted',h($id)));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

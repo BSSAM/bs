@@ -11,7 +11,9 @@
 <div class="block full">
     <div class="block-title">
         <h2>List Of Customers</h2>
+        <?php if($userrole_cus['add']==1){ ?>
         <h2 style="float:right;"><?php echo $this->Html->link('Add Customer',array('controller'=>'Customers','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Customer')); ?></h2>
+        <?php } ?>
     </div>
                             
                             
@@ -59,16 +61,20 @@
                                     'class' => 'btn  btn-xs btn-warning', 'data-toggle' => 'tooltip', 'escape' => false));
                                 ?>
                             <div class="btn-group">
+                                <?php if($userrole_cus['edit']==1){ ?>
                                 <?PHP
                                 echo $this->html->link('<i class="fa fa-pencil"></i>', array('controller' => 'Customers',
                                     'action' => 'edit', $customer_list['Customer']['id']), array('title' => 'Edit',
                                     'class' => 'btn btn-xs btn-default', 'data-toggle' => 'tooltip', 'escape' => false));
                                 ?>
+                                <?php } ?>
+                                <?php if($userrole_cus['delete']==1){ ?>
                                 <?PHP
                                 echo $this->Form->postlink('<i class="fa fa-times"></i>', array('controller' => 'Customers',
                                     'action' => 'delete', $customer_list['Customer']['id']), array('title' => 'Delete',
                                     'class' => 'btn btn-xs btn-danger', 'data-toggle' => 'tooltip', 'escape' => false, 'confirm' => 'Are you sure want to delete?'));
                                 ?>
+                                <?php } ?>
                              </div>
                     </td>
                 </tr>

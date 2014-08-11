@@ -13,7 +13,9 @@
 <div class="block full">
     <div class="block-title">
         <h2>List Of Userroles</h2>
+        <?php if($userrole_term['add']==1){ ?>
         <h2 style="float:right;"><?php echo $this->Html->link('Add Userroles',array('controller'=>'Userroles','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Userroles')); ?></h2>
+        <?php } ?>
     </div>
                             
                             
@@ -38,9 +40,15 @@
                     <td class="text-center"><?php echo $userrole_list['Userrole']['description'];?></td>
                     <td class="text-center">
                         <div class=""><?php if(($userrole_list['Userrole']['user_role_id']!=1&&$userrole_list['Userrole']['user_role_id']!=2)){?>
+                             <?php if($userrole_term['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                             <?php } ?>
+                             <?php if($userrole_term['delete']==1){ ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                             <?php } ?>
+                             <?php if($userrole_term['edit']==1){ ?>
                                                 <?php echo $this->Html->link('Role',array('action'=>'roles',$userrole_list['Userrole']['user_role_id']),array('data-toggle'=>'tooltip','title'=>'Roles','class'=>'btn btn-alt btn-xs btn-primary','escape'=>false)); ?>
+                             <?php } ?>
                         <?php } ?></div>
                     </td>
                 </tr>

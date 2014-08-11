@@ -13,6 +13,21 @@ class AssignsController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Assigned To Permission
+         *  Controller : Assigned To 
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_assignedto']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole',$user_role['other_assignedto']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Assign->find('all',array('order' => array('Assign.id' => 'DESC')));
         $this->set('assign', $data);
         //pr($data);
@@ -21,7 +36,17 @@ class AssignsController extends AppController
     public function add()
     {
        
-         
+         /* 
+         * ---------------  User Assigned To Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_assignedto']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         //$this->set('country',$data);
         if($this->request->is('post'))
         {
@@ -43,7 +68,17 @@ class AssignsController extends AppController
     
     public function edit($id = null)
     {
+         /* 
+         * ---------------  User Assigned To Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_assignedto']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
         
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -82,14 +117,28 @@ class AssignsController extends AppController
     
     public function delete($id)
     {
+         /* 
+         * ---------------  User Assigned To Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_assignedto']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Assign->delete($id))
+        if($id!='')
         {
+            if($this->Assign->updateAll(array('Assign.is_deleted'=>1),array('Assign.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Assigned To has been deleted',h($id)));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

@@ -13,6 +13,21 @@ class PrioritiesController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  Priority Permission
+         *  Controller : Priority
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_priority']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole_cus',$user_role['cus_priority']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Priority->find('all',array('order' => array('Priority.id' => 'DESC')));
         $this->set('priority', $data);
         //pr($data);
@@ -20,7 +35,18 @@ class PrioritiesController extends AppController
     
     public function add()
     {
-      
+        
+        /* 
+         * ---------------  Priority Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_priority']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Priority -----------------------------------
+         */
         if($this->request->is('post'))
         {
              $this->request->data['status']=1;
@@ -51,6 +77,17 @@ class PrioritiesController extends AppController
     }
     public function edit($id = NULL)
     {
+        /* 
+         * ---------------  Priority Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_priority']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Priority -----------------------------------
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Priority'));
@@ -79,15 +116,29 @@ class PrioritiesController extends AppController
     }
     public function delete($id)
     {
+        /* 
+         * ---------------  Priority Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_priority']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Priority -----------------------------------
+         */
         $this->autoRender=false;
         if($id=='')
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Priority->delete($id))
+        if($id!='')
         {
+            if($this->Priority->updateAll(array('Priority.is_deleted'=>1),array('Priority.id'=>$id)))
+            {
             $this->Session->setFlash(__('Priority has been deleted'));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }
