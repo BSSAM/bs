@@ -28,7 +28,7 @@ class IndustriesController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Industry->find('all',array('order' => array('Industry.id' => 'DESC')));
+        $data = $this->Industry->find('all',array('conditions'=>array('Industry.is_deleted'=>0)),array('order' => array('Industry.id' => 'DESC')));
         $this->set('industry', $data);
         //pr($data);
     }

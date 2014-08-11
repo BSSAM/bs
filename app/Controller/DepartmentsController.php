@@ -28,7 +28,7 @@ class DepartmentsController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Department->find('all',array('order' => array('Department.id' => 'DESC')));
+        $data = $this->Department->find('all',array('conditions'=>array('Department.is_deleted'=>0)),array('order' => array('Department.id' => 'DESC')));
         $this->set('department', $data);
         //pr($data);
     }

@@ -29,7 +29,7 @@ class UserrolesController extends AppController
          * ---------------  Functionality of Users -----------------------------------
          */
         $this->loadModel('User');
-        $data = $this->Userrole->find('all',array('order' => array('Userrole.id' => 'DESC')));
+        $data = $this->Userrole->find('all',array('conditions'=>array('Userrole.is_deleted'=>0)),array('order' => array('Userrole.id' => 'DESC')));
         $this->set('userrole', $data);
         //pr($data);
     }

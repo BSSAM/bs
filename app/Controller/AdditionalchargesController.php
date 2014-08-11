@@ -28,7 +28,7 @@ class AdditionalchargesController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Additionalcharge->find('all',array('order' => array('Additionalcharge.id' => 'DESC')));
+        $data = $this->Additionalcharge->find('all',array('conditions'=>array('Additionalcharge.is_deleted'=>0)),array('order' => array('Additionalcharge.id' => 'DESC')));
         $this->set('additionalcharge', $data);
         //pr($data);
     }

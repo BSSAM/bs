@@ -28,7 +28,7 @@ class BranchesController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Branch->find('all',array('order' => array('Branch.id' => 'DESC')));
+        $data = $this->Branch->find('all',array('conditions'=>array('Branch.is_deleted'=>0)),array('order' => array('Branch.id' => 'DESC')));
         $this->set('branch', $data);
        // pr($data);exit;
     }

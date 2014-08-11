@@ -27,7 +27,7 @@
 		<?php echo "Best Standard Enterprise"; ?>
 	</title>
 	<?php
-		echo $this->Html->meta('description', 'A great page');
+		echo $this->Html->meta('description', 'Best Standard Enterprise');
 		echo $this->Html->meta('author', 'Samsys');
 		echo $this->Html->meta('robots', 'noindex, nofollow');
 		echo $this->Html->meta('viewport', 'width=device-width,initial-scale=1,maximum-scale=1.0');

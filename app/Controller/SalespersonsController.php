@@ -13,13 +13,29 @@ class SalespersonsController extends AppController
     
     public function index()
     {
-        $data = $this->Salesperson->find('all',array('order' => array('Salesperson.id' => 'DESC')));
+        /*******************************************************
+         *  BS V1.0
+         *  Salespersons Permission
+         *  Controller : Salespersons
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_salesperson']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole_cus',$user_role['cus_salesperson']);
+        /*
+         * ---------------  Functionality of Sales Persons -----------------------------------
+         */
+        $data = $this->Salesperson->find('all',array('conditions'=>array('Salesperson.is_deleted'=>0)),array('order' => array('Salesperson.id' => 'DESC')));
         $this->set('salesperson', $data);
         //pr($data);
     }
     
     public function find()
     {
+        
         $data = $this->Salesperson->find('all');
         $this->set('salesperson', $data);
         
@@ -93,6 +109,17 @@ exit;
     
     public function add()
     {
+        /* 
+         * ---------------  Sales Persons Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_salesperson']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Sales Persons -----------------------------------
+         */
       
         if($this->request->is('post'))
         {
@@ -122,6 +149,17 @@ exit;
     }
     public function edit($id = NULL)
     {
+        /* 
+         * ---------------  Sales Persons Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_salesperson']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Sales Persons -----------------------------------
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Sales Person'));
@@ -150,15 +188,30 @@ exit;
     }
     public function delete($id)
     {
+        /* 
+         * ---------------  Sales Persons Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_salesperson']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Sales Persons -----------------------------------
+         */
         $this->autoRender=false;
         if($id=='')
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Salesperson->delete($id))
+        
+        if($id!='')
         {
+            if($this->Salesperson->updateAll(array('Salesperson.is_deleted'=>1),array('Salesperson.id'=>$id)))
+            {
             $this->Session->setFlash(__('Sales Person Cant be Updated'));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

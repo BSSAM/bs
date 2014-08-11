@@ -20,5 +20,9 @@ class ClientposapprovalController extends AppController {
         $quotation_lists = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' => '0','Customer.acknowledgement_type_id'=>1), 'order' => array('Quotation.id' => 'DESC')));
         $this->set('quotation', $quotation_lists);
     }
+    
+    public function view() {
+        
+    }
 
 }

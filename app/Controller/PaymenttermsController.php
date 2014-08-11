@@ -28,7 +28,7 @@ class PaymenttermsController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Paymentterm->find('all',array('order' => array('Paymentterm.id' => 'DESC')));
+        $data = $this->Paymentterm->find('all',array('conditions'=>array('Paymentterm.is_deleted'=>0)),array('order' => array('Paymentterm.id' => 'DESC')));
         $this->set('paymentterm', $data);
         //pr($data);
     }

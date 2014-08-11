@@ -1,6 +1,6 @@
                             <div class="row">
                                 <!-- Main Title (hidden on small devices for the statistics to fit) -->
-                                <div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
+                                <div class="col-md-4 col-lg-6 ">
                                     <h1>Welcome <strong><?php echo $username; ?></strong></h1>
                                 </div>
                                 <!-- END Main Title -->
@@ -46,9 +46,9 @@
                                                     <small><?php echo $log_activity_message_list['Datalog']['logid']; ?></small>
                                                 </h4>
                                             </td>
-<!--                                            <td class="text-center hidden-xs hidden-sm"><a href="javascript:void(0)">205</a></td>-->
-                                            <td class="text-center hidden-xs hidden-sm"><?PHP echo $log_activity_message_list['Datalog']['logactivity']; ?></td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Datalog']['modified'] ?></small></td>
+<!--                                            <td class="text-center "><a href="javascript:void(0)">205</a></td>-->
+                                            <td class="text-center"><?PHP echo $log_activity_message_list['Datalog']['logactivity']; ?></td>
+                                            <td class="">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Datalog']['modified'] ?></small></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else: ?>
@@ -110,14 +110,14 @@
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_quotation_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_quotation_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm">
+                                            <td class="text-center ">
                                            
                                            <?PHP if($log_activity_quotation_list['Logactivity']['logname'] == 'Quotation'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_quotation_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                             
                                             </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_quotation_list['User']['username'] ?><br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_quotation_list['User']['username'] ?><br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                        <?php endforeach; ?>
                                         <?php else: ?>
@@ -155,14 +155,14 @@
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm">
+                                            <td class="text-center ">
                                            <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                            
                                             
                                             </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                         <?php endif; ?>
                                        <?php endforeach; ?>
@@ -202,14 +202,14 @@
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm">
+                                            <td class="text-center ">
                                            <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                            
                                             
                                             </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                         <?php endif; ?>
                                        <?php endforeach; ?>
@@ -249,14 +249,14 @@
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm">
+                                            <td class="text-center ">
                                            <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                            
                                             
                                             </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                         <?php endif; ?>
                                        <?php endforeach; ?>
@@ -297,14 +297,14 @@
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm">
+                                            <td class="text-center ">
                                            <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                            
                                             
                                             </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                         <?php endif; ?>
                                        <?php endforeach; ?>
@@ -351,12 +351,12 @@
                                                 <td>
                                                     <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_instrument_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_instrument_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_instrument_list['Logactivity']['logid'] ?></em></small></h4>
                                                 </td>
-                                                <td class="text-center hidden-xs hidden-sm">
+                                                <td class="text-center ">
                                                     <?PHP if($log_activity_instrument_list['Logactivity']['logname'] == 'Instrument'){ ?>
                                                     <?PHP echo $this->html->link('Approve',array('controller'=>'Instruments','action'=>'edit',$log_activity_instrument_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
                                                     <?php }?>
                                                 </td>
-                                                <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_instrument_list['User']['username'] ?><br><small><?PHP echo $log_activity_instrument_list['Logactivity']['modified'] ?></small></td>
+                                                <td class="">by <?PHP echo $log_activity_instrument_list['User']['username'] ?><br><small><?PHP echo $log_activity_instrument_list['Logactivity']['modified'] ?></small></td>
                                             </tr>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -387,12 +387,12 @@
                                                 <td>
                                                     <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_procedure_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_procedure_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_procedure_list['Logactivity']['logid'] ?></em></small></h4>
                                                 </td>
-                                                <td class="text-center hidden-xs hidden-sm">
+                                                <td class="text-center ">
                                                     <?PHP if($log_activity_procedure_list['Logactivity']['logname'] == 'Procedure No'){ ?>
                                                     <?PHP echo $this->html->link('Approve',array('controller'=>'Procedures','action'=>'edit',$log_activity_procedure_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
                                                     <?php }?>
                                                 </td>
-                                                <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_procedure_list['User']['username'] ?><br><small><?PHP echo $log_activity_procedure_list['Logactivity']['modified'] ?></small></td>
+                                                <td class="">by <?PHP echo $log_activity_procedure_list['User']['username'] ?><br><small><?PHP echo $log_activity_procedure_list['Logactivity']['modified'] ?></small></td>
                                             </tr>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -430,13 +430,13 @@
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_unit_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_unit_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_unit_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm">
+                                            <td class="text-center ">
                                            <?PHP if($log_activity_unit_list['Logactivity']['logname'] == 'Unit'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Units','action'=>'edit',$log_activity_unit_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                            
                                             </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_unit_list['User']['username'] ?><br><small><?PHP echo $log_activity_unit_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_unit_list['User']['username'] ?><br><small><?PHP echo $log_activity_unit_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                        <?php endforeach; ?>
                                         <?php else: ?>
@@ -475,13 +475,13 @@
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_range_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_range_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_range_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center hidden-xs hidden-sm">
+                                            <td class="text-center ">
                                            <?PHP if($log_activity_range_list['Logactivity']['logname'] == 'Unit'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Units','action'=>'edit',$log_activity_range_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                            
                                             </td>
-                                            <td class="hidden-xs hidden-sm">by <?PHP echo $log_activity_range_list['User']['username'] ?><br><small><?PHP echo $log_activity_range_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_range_list['User']['username'] ?><br><small><?PHP echo $log_activity_range_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                        <?php endforeach; ?>
                                         <?php else: ?>
@@ -525,7 +525,7 @@
                         <div class="col-sm-2 col-lg-2">
                             <!-- Widget -->
                             <div class="widget">
-                                <div class="widget-simple">
+                                <div class="widget-simple min-height165">
                                     <a> <span class="label label-primary custom_float_top animation-floating"><?php echo $total_quotation_view; ?> New</span><h3 class="text-center animation-stretchRight">In Quotation</h3> </a>
                                         <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_quotation_count; ?></strong></h3>
                                 </div>
@@ -536,7 +536,7 @@
                         <div class="col-sm-2 col-lg-2">
                             <!-- Widget -->
                             <div class="widget">
-                                <div class="widget-simple">
+                                <div class="widget-simple min-height165">
                                     <a> <span class="label label-second custom_float_top animation-floating">0 New</span><h3 class="text-center themed-color-amethyst animation-stretchRight">Purchase Order</h3> </a>
                                         <h3 class="text-center themed-color-night animation-stretchRight"><strong>0</strong></h3>
                                 </div>
@@ -546,7 +546,7 @@
                         <div class="col-sm-2 col-lg-2">
                             <!-- Widget -->
                             <div class="widget">
-                                <div class="widget-simple">
+                                <div class="widget-simple min-height165">
                                     <a> <span class="label label-third custom_float_top animation-floating"><?php echo $total_salesorder_view; ?> New</span><h3 class="text-center themed-color-autumn animation-stretchRight">Sales Order</h3> </a>
                                         <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_salesorder_count; ?></strong></h3>
                                 </div>
@@ -556,7 +556,7 @@
                        <div class="col-sm-2 col-lg-2">
                             <!-- Widget -->
                             <div class="widget">
-                                <div class="widget-simple">
+                                <div class="widget-simple min-height165">
                                     <a> <span class="label label-four custom_float_top animation-floating"><?php echo $total_labprocess_count; ?> New</span><h3 class="text-center themed-color-fancy animation-stretchRight">Lab Process</h3> </a>
                                         <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_labprocess_view; ?></strong></h3>
                                 </div>
@@ -566,7 +566,7 @@
                          <div class="col-sm-2 col-lg-2">
                             <!-- Widget -->
                             <div class="widget">
-                                <div class="widget-simple">
+                                <div class="widget-simple min-height165">
                                     <a> <span class="label label-five custom_float_top animation-floating">0 New</span><h3 class="text-center themed-color-spring animation-stretchRight">In Invoice </h3> </a>
                                         <h3 class="text-center themed-color-night animation-stretchRight"><strong>0</strong></h3>
                                 </div>
@@ -576,7 +576,7 @@
                          <div class="col-sm-2 col-lg-2">
                             <!-- Widget -->
                             <div class="widget">
-                                <div class="widget-simple">
+                                <div class="widget-simple min-height165">
                                     <a> <span class="label label-six custom_float_top animation-floating"><?php echo $total_delivery_view; ?> New</span><h3 class="text-center themed-color-dark-night animation-stretchRight">Total Delivery</h3> </a>
                                         <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_delivery_count; ?></strong></h3>
                                 </div>

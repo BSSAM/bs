@@ -28,7 +28,7 @@ class ServicesController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Service->find('all',array('order' => array('Service.id' => 'DESC')));
+        $data = $this->Service->find('all',array('conditions'=>array('Service.is_deleted'=>0)),array('order' => array('Service.id' => 'DESC')));
         $this->set('service', $data);
         //pr($data);
     }

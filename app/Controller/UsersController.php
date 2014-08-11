@@ -23,7 +23,7 @@ class UsersController extends AppController {
          * ---------------  Functionality of Users -----------------------------------
          */
         $this->User->recursive = 1;
-        $data = $this->User->find('all', array('order' => array('User.id' => 'DESC')));
+        $data = $this->User->find('all',array('conditions'=>array('User.is_deleted'=>0)), array('order' => array('User.id' => 'DESC')));
         //pr($data);exit;
         $this->set('user', $data);
     }
