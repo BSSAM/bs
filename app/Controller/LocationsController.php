@@ -13,6 +13,21 @@ class LocationsController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  Location Permission
+         *  Controller : Location
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_location']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole_cus',$user_role['cus_location']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Location->find('all',array('order' => array('Location.id' => 'DESC')));
         $this->set('location', $data);
         //pr($data);
@@ -21,6 +36,17 @@ class LocationsController extends AppController
     public function add()
     {
       
+        /* 
+         * ---------------  Location Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_location']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Location -----------------------------------
+         */
         if($this->request->is('post'))
         {
              $this->request->data['status']=1;
@@ -49,6 +75,17 @@ class LocationsController extends AppController
     }
     public function edit($id = NULL)
     {
+        /* 
+         * ---------------  Location Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_location']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Location -----------------------------------
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Location'));
@@ -77,15 +114,29 @@ class LocationsController extends AppController
     }
     public function delete($id)
     {
+        /* 
+         * ---------------  Location Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_location']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Location -----------------------------------
+         */
         $this->autoRender=false;
         if($id=='')
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Location->delete($id))
+        if($id!='')
         {
+            if($this->Location->updateAll(array('Location.is_deleted'=>1),array('Location.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Location has been deleted'));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

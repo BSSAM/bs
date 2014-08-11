@@ -13,6 +13,21 @@ class PaymenttermsController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  Payment Permission
+         *  Controller : Payment
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_paymentterms']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole_cus',$user_role['cus_paymentterms']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Paymentterm->find('all',array('order' => array('Paymentterm.id' => 'DESC')));
         $this->set('paymentterm', $data);
         //pr($data);
@@ -20,7 +35,17 @@ class PaymenttermsController extends AppController
     
     public function add()
     {
-      
+        /* 
+         * ---------------  Payment Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_paymentterms']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Payment -----------------------------------
+         */
         if($this->request->is('post'))
         {
              $this->request->data['status']=1;
@@ -53,6 +78,17 @@ class PaymenttermsController extends AppController
     }
     public function edit($id = NULL)
     {
+        /* 
+         * ---------------  Payment Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_paymentterms']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Payment -----------------------------------
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Payment Term'));
@@ -81,15 +117,29 @@ class PaymenttermsController extends AppController
     }
     public function delete($id)
     {
+        /* 
+         * ---------------  Payment Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_paymentterms']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Payment -----------------------------------
+         */
         $this->autoRender=false;
         if($id=='')
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Paymentterm->delete($id))
+        if($id!='')
         {
+            if($this->Paymentterm->updateAll(array('Paymentterm.is_deleted'=>1),array('Paymentterm.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Payment Term has been deleted'));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

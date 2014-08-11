@@ -13,7 +13,7 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Users</h2>
-                            <h2 style="float:right;"><?php echo $this->Html->link('Add Users',array('controller'=>'Users','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Users')); ?></h2>
+                            <?php if($userrole['add']==1){ ?><h2 style="float:right;"><?php echo $this->Html->link('Add Users',array('controller'=>'Users','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Users')); ?></h2> <?php } ?>
                         </div>
                         
 
@@ -41,8 +41,12 @@
                                         <td class="text-center">Singapore</td>
                                         <td class="text-center">
                                             <div class="btn-group">
+                                                <?php if($userrole['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$user_list['User']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole['delete']==1){ ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$user_list['User']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php } ?> 
                                                 
                                             </div>
                                         </td>

@@ -13,7 +13,9 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Country</h2>
+                            <?php if($userrole['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Country',array('controller'=>'Countries','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Country')); ?></h2>
+                            <?php } ?>
                         </div>
                         
 
@@ -38,8 +40,12 @@
                                         <td class="text-center"><?php echo $country_list['Country']['countrycode'];?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                               <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$country_list['Country']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php if($userrole['edit']==1){ ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$country_list['Country']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole['delete']==1){ ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$country_list['Country']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php } ?>
                                             </div>
                                         </td>
                                     </tr>

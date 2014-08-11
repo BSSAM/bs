@@ -11,48 +11,36 @@ class UsersController extends AppController {
     public $helpers = array('Html', 'Form', 'Session');
 
     public function index() {
+        /* 
+         * ---------------  User Role Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_user']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole',$user_role['other_user']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $this->User->recursive = 1;
         $data = $this->User->find('all', array('order' => array('User.id' => 'DESC')));
         //pr($data);exit;
         $this->set('user', $data);
-
-//        //pr($data);
-//               // pr($data);exit;
-//        $data1 = $this->User->find('all');
-//         $this->loadModel('Department');
-//        // pr($data1);exit;
-//       for($i=0;$i<(count($data1));$i++)
-//       {
-//        $a = $data1[$i]['User']['department_id'];
-//        $b = explode(',', $a);
-//        $c[]=$b;
-//       }// pr($c);
-//       foreach($c as $d=>$e)
-//       {
-//           foreach($e as $f)
-//           {
-//               pr($f);
-//            $da2[]= $this->Department->findById($f,array('fields' => 'departmentname'));}
-//        
-//       }
-//       pr($da2);exit;
-//       for($i=0;$i<(count($c));$i++)
-//       {
-//           for($j=0;$j<$i;$j++)
-//         
-//           {
-//               $d[]= $c[$i][$j];
-//           }
-//         }
-//       pr($d);
-//       exit;
-//       exit;  
-//          
     }
 
     public function add() {
 
-
+        /* 
+         * ---------------  User Role Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_user']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $this->loadModel('Userrole');
         $data = $this->Userrole->find('list', array('fields' => 'user_role'));
         $this->set('userrole', $data);
@@ -92,7 +80,17 @@ class UsersController extends AppController {
 
     public function edit($id = null) {
 
-
+        /* 
+         * ---------------  User Role Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_user']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
 
         $this->loadModel('Userrole');
         $data = $this->Userrole->find('list', array('fields' => 'user_role'));
@@ -137,12 +135,28 @@ class UsersController extends AppController {
     }
 
     public function delete($id) {
+        
+        /* 
+         * ---------------  User Role Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_user']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
-        if ($this->User->delete($id)) {
+        if($id!='')
+        {
+            if($this->User->updateAll(array('User.is_deleted'=>1),array('User.id'=>$id)))
+            {
             $this->Session->setFlash(__('The User has been deleted', h($id)));
             return $this->redirect(array('action' => 'index'));
+            }
         }
     }
 

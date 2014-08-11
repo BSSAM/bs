@@ -13,7 +13,9 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Currencies</h2>
+                            <?php if($userrole['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Currency',array('controller'=>'Currencies','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Currency')); ?></h2>
+                            <?php } ?>
                         </div>
                         
 
@@ -41,8 +43,12 @@
                                         <td class="text-center"><?php echo $currency_list['Currency']['exchangerate']; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
+                                                <?php if($userrole['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$currency_list['Currency']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole['delete']==1){ ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$currency_list['Currency']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php } ?>
                                             </div>
                                         </td>
                                     </tr>

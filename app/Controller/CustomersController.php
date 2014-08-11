@@ -16,6 +16,21 @@ class CustomersController extends AppController
   
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  Customers Permission
+         *  Controller : Customers
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_customer']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole_cus',$user_role['cus_customer']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $Customer_lists = $this->Customer->find('all',array('conditions'=>array('Customer.is_default'=>1,'Customer.is_deleted'=>0,'Customer.status'=>1),'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
         $this->set('customer', $Customer_lists);
         $this->Address->deleteAll(array('Address.status'=>0));
@@ -23,6 +38,17 @@ class CustomersController extends AppController
     }
     public function add()
     {
+        /* 
+         * ---------------  Customer Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_customer']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Customers -----------------------------------
+         */
         $this->set('customer_id',$this->random('customer'));
         $this->set('tag_id',$this->random('tag'));
         $this->set('group_id',$this->random('group'));
@@ -105,7 +131,17 @@ class CustomersController extends AppController
     }
     public function edit($id = NULL)
     {
-      
+        /* 
+         * ---------------  Customer Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_customer']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Customers -----------------------------------
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Customer Entry'));
@@ -206,6 +242,17 @@ class CustomersController extends AppController
     
     public function delete($id=NULL)
     {
+        /* 
+         * ---------------  Customer Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_customer']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Customers -----------------------------------
+         */
         $this->autoRender=false;
         if($this->Customer->updateAll(array('Customer.is_deleted'=>1,'Customer.status'=>0),array('Customer.id'=>$id)))
         {

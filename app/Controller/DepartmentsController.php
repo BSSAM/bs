@@ -13,6 +13,21 @@ class DepartmentsController extends AppController
     
     public function index()
     {
+         /*******************************************************
+         *  BS V1.0
+         *  User Department Permission
+         *  Controller : Department
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_department']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole',$user_role['other_department']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Department->find('all',array('order' => array('Department.id' => 'DESC')));
         $this->set('department', $data);
         //pr($data);
@@ -21,7 +36,17 @@ class DepartmentsController extends AppController
     public function add()
     {
        
-         
+        /* 
+         * ---------------  User Department Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_department']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         //$this->set('country',$data);
         if($this->request->is('post'))
         {
@@ -43,7 +68,17 @@ class DepartmentsController extends AppController
     
     public function edit($id = null)
     {
+        /* 
+         * ---------------  User Department Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_department']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
         
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -82,14 +117,28 @@ class DepartmentsController extends AppController
     
     public function delete($id)
     {
+        /* 
+         * ---------------  User Department Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_department']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */ 
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Department->delete($id))
+        if($id!='')
         {
+            if($this->Branch->updateAll(array('Department.is_deleted'=>1),array('Department.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Department has been deleted',h($id)));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

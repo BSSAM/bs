@@ -13,6 +13,21 @@ class IndustriesController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  Industry Permission
+         *  Controller : Industry
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_industry']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole_cus',$user_role['cus_industry']);
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
         $data = $this->Industry->find('all',array('order' => array('Industry.id' => 'DESC')));
         $this->set('industry', $data);
         //pr($data);
@@ -20,7 +35,18 @@ class IndustriesController extends AppController
     
     public function add()
     {
-      
+     
+        /* 
+         * ---------------  Industry Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_industry']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Industry -----------------------------------
+         */
         if($this->request->is('post'))
         {
              $this->request->data['status']=1;
@@ -49,6 +75,17 @@ class IndustriesController extends AppController
     }
     public function edit($id = NULL)
     {
+        /* 
+         * ---------------  Industry Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_industry']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Industry -----------------------------------
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -76,16 +113,30 @@ class IndustriesController extends AppController
     }
     public function delete($id)
     {
+        /* 
+         * ---------------  Industry Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_industry']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Industry -----------------------------------
+         */
         $this->autoRender=false;
         
         if($id=='')
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Industry->delete($id))
+        if($id!='')
         {
+            if($this->Industry->updateAll(array('Industry.is_deleted'=>1),array('Industry.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Industry has been deleted'));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

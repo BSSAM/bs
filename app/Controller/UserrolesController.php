@@ -24,9 +24,9 @@ class UserrolesController extends AppController
         if($user_role['other_role']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
-        
+        $this->set('userrole_term',$user_role['other_role']);
         /*
-         * *****************************************************
+         * ---------------  Functionality of Users -----------------------------------
          */
         $this->loadModel('User');
         $data = $this->Userrole->find('all',array('order' => array('Userrole.id' => 'DESC')));
@@ -187,10 +187,13 @@ class UserrolesController extends AppController
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Userrole->delete($id))
+       if($id!='')
         {
+            if($this->Userrole->updateAll(array('Userrole.is_deleted'=>1),array('Userrole.id'=>$id)))
+            {
             $this->Session->setFlash(__('The Userrole has been deleted',h($id)));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
     
@@ -204,9 +207,9 @@ class UserrolesController extends AppController
          *******************************************************/
         
         $user_role = $this->userrole_permission();
-        //if($user_role['other_role']['view'] == 0){ 
-            //return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        //}
+        if($user_role['other_role']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
         
         /*
          * *****************************************************
