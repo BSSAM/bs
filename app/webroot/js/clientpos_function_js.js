@@ -236,7 +236,7 @@ $(document).ready(function(){
     $(document).on('click','.do_single_show',function(){
         var do_id_name=$(this).text();
         var data_count=$(this).attr('data-count');
-        $('#val_deliveryordercount').val(data_count);
+        $('#val_socount').val(data_count);
         $('#val_deliveryorderno_fullinvoice').val(do_id_name);
         $('.do_result').hide('slow');
         var do_id=$(this).attr('id');
@@ -248,10 +248,15 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                alert(data);
-                $('.sales_list_id').append('<div class="group_do_'+(count++)+'"><div class="form-group"><div class="col-sm-11"><input type="hidden" name="salesorder_id[]" value="'+salesorder_val+'"/><input type="hidden" name="salesorder_no[]" value="'+salesorder_selected+'"/><div class="col-sm-6  form-control-static">'+salesorder_selected+'</div>\n\
-                                      <div class="col-sm-4"><input readonly="readonly" class="form-control" type="text" name="so_quantity[]"/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"> <div class="btn btn-alt btn-info do_id_selected"   data-delete ="'+(count-1)+'"  > <i class="fa fa-minus"></i></div> </div> ');
-                $(".do_result").html(html).show();
+                var delivery_data_node  =   $.parseJSON(data);
+                
+                /*******for Salesorder count*********/
+                $('.do_based_salesorder').html(' <div class="form-group col-md-8"><div class="input text"><input type="text" placeholder="Salesorder No" readonly="readonly" value="'+delivery_data_node.Salesorder.salesorderno+'" class="form-control"  name="salesorder_id"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="So Count" value="'+delivery_data_node.Salesorder.Description_count+'" readonly="readonly" class="form-control" name="salesorder_quantity"></div> </div>');
+                /*******for Quotation count*********/
+                $('.do_based_quotation').html(' <div class="form-group col-md-8"><div class="input text"><input type="text" placeholder="Quotation No" readonly="readonly" value="'+delivery_data_node.Quotation.quotationno+'" class="form-control"  name="quotation_id"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="Qo Count" value="'+delivery_data_node.Quotation.device_count+'" readonly="readonly" class="form-control" name="quotation_quantity"></div> </div>');
+                /*******for Purchaseorder count*********/
+                $('.do_based_po').html('<div class="group_po_'+(count++)+'"><div class="form-group col-md-8"><input placeholder="Enter Additional PO Number" type="text" name="clientpos_no[]" value="'+delivery_data_node.Purchaseorder.po_reference_no+'" id="val_ponumber_'+(count-1)+'" class="form-control get_ponumber_collection"/></div><div class="form-group col-sm-3">\n\<input type="text" placeholder="PO Count" name="po_quantity[]" id="val_pocount'+(count-1)+'" class="form-control po_count_each"/> </div>\n\
+<div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="add_so_po" data-delete='+(count-1)+' ><i class="fa fa-plus"></i></div></div></div></div>');
             }
             });
     });
@@ -306,5 +311,20 @@ $(document).ready(function(){
            if(reply_check==0){ alert('Provide original PO Number for '+check_count);  return false;}   
          });
    });
-   /**************************************Sales order full invoice form submit validation*********************************/
+   /**************************************Client po Quotation update*********************************/
+   
+   $(document).on('click','.client_po_quotation_update',function(){
+      
+        var q_id=$(this).attr('data-id');
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Clientposapproval/view",
+            data: 'q_id='+q_id,
+            cache: false,
+            success: function(data)
+            {
+                
+            }
+            });
+    });
 });

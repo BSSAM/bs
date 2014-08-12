@@ -107,7 +107,7 @@ class ClientposController extends AppController
                 $do_count_array   =   $this->request->data['delivery_quantity'];
                 $po_array['Clientpo']['Deliveryorder']         = array_combine($do_id_array,$do_count_array);
                 foreach($po_array['Clientpo']['Deliveryorder'] as $deliveryorderno=>$deliveryordercount){
-                        $this->Deliveryorder->updateAll(array('Deliveryorder.po_reference_no'=>'"'.$this->request->data['clientpo_no'].'"','Deliveryorder.po_generate_type'=>'"'.$po_type.'"','Deliveryorder.is_assign_po'=>1),array('Deliveryorder.delivery_order_no'=>$deliveryorderno));
+                        $this->Deliveryorder->updateAll(array('Deliveryorder.po_reference_no'=>'"'.$this->request->data['clientpo_no'].'"','Deliveryorder.po_generate_type'=>'"'.$po_type.'"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.delivery_order_no'=>$deliveryorderno));
                     }
                 endif;
                 
@@ -220,6 +220,60 @@ class ClientposController extends AppController
         
         if($this->request->is(array('post','put')))
         {
+            
+                $clientpo_number    =   $this->request->data['clientpos_no'];
+                $clientpo_quantity    =   $this->request->data['po_quantity'];
+                if($clientpo_number!='' &&$clientpo_quantity!=''):
+                $po_ids         =   $this->request->data['clientpos_no'];
+                $po_for_deliveryorder   =   implode(',',$po_ids);
+                $do_array['Clientpo']['Purchaseorder']         = array_combine($clientpo_number,$clientpo_quantity);   
+                endif;
+                //For Quotation array
+                if( $this->request->data['quotation_id']!=''&& $this->request->data['quotation_quantity']!=''):
+                $do_array['Clientpo']['Quotation']['quotation_id']           = $this->request->data['quotation_id'];
+                $do_array['Clientpo']['Quotation']['quotation_count']           = $this->request->data['quotation_quantity'];
+                     $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$po_for_deliveryorder.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$this->request->data['quotation_id']));
+                endif;
+                
+                 //For Sales order array
+                if( $this->request->data['salesorder_id']!=''&& $this->request->data['salesorder_quantity']!=''):
+                
+                $do_array['Clientpo']['Salesorder']['salesorder_id'] = $this->request->data['salesorder_id'];
+                $do_array['Clientpo']['Salesorder']['salesorder_count'] = $this->request->data['salesorder_quantity'];
+                    $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$po_for_deliveryorder.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Salesorder.id'=>$this->request->data['salesorder_id']));
+                endif;
+                
+                if( $this->request->data['deliveryorder_id']!=''&& $this->request->data['deliver_quantity']!=''):
+                //For Delivery order Array
+                $do_array['Clientpo']['Deliveryorder']['Deliveryorder_id'] = $this->request->data['deliveryorder_id'];
+                $do_array['Clientpo']['Deliveryorder']['DelDescription_count'] = $this->request->data['deliver_quantity'];
+                       $this->Deliveryorder->updateAll(array('Deliveryorder.po_reference_no'=>'"'.$po_for_deliveryorder.'"','Deliveryorder.po_generate_type'=>'"Manual"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.delivery_order_no'=>$this->request->data['deliveryorder_id']));
+                endif;
+                
+                 //For later changes
+//                if( $this->request->data['deliveryorder_id']!=''&& $this->request->data['delivery_quantity']!=''):
+////                $invoice_id_array           =   $this->request->data['deliveryorder_id'];
+////                $invoice_count_array        =   $this->request->data['delivery_quantity'];
+////                $do_array['Clientpo']['Invoice']   =   array_combine($do_id_array,$do_count_array);
+////                 foreach($po_array['Clientpo']['Invoice'] as $invoiceno=>$invoicecount){
+////                        $this->Invoice->updateAll(array('Invoice.ref_no'=>'"'.$this->request->data['clientpo_no'].'"','Invoice.po_generate_type'=>'"'.$po_type.'"','Deliveryorder.is_assign_po'=>1),array('Invoice.invoice_id'=>$invoiceno));
+////                    }
+//                endif;
+              
+                if(!empty($do_array))
+                {
+                    $clientpo   = serialize($do_array);
+                    $data['Doinvoice']['deliveryorderno']=$this->request->data['deliveryorder_id'];
+                    $data['Doinvoice']['deliveryorder_data']=$clientpo;
+                    $data['Doinvoice']['do_count']=$this->request->data['deliver_quantity'];
+                    $data['Doinvoice']['status']='1';
+                    
+                    if($this->Doinvoice->save($data))
+                    {
+                        $this->redirect(array('controller'=>'Clientpos','action'=>'index'));
+                    }
+                }
+
             /*for quotation array -----later Changes*/
             $qo_id_array  =   $this->request->data['quotation_id'];
             $qo_count_array   =   $this->request->data['quo_quantity'];
@@ -270,17 +324,30 @@ class ClientposController extends AppController
     }
     public function get_delivery_id_details()
     {
-        $delivery_order_details    =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>3,'Deliveryorder.customer_id'=>'CUS-01-10000080')));
-        pr($delivery_order_details);exit;    
         $this->autoRender   =   false;
         $delivery_id= $this->request->data['del_id'];
         $customer_id= $this->request->data['customer_id'];
         if($delivery_id!=''){
-            $delivery_order_details    =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$delivery_id,'Deliveryorder.customer_id'=>$customer_id)));
-            $sales_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$delivery_order_details['Deliveryorder']['salesorder_id'])));
-            echo json_encode($sales_details);
+            $delivery_order_details    =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$delivery_id,'Deliveryorder.customer_id'=>$customer_id),'recursive'=>3));
+            if(!empty($delivery_order_details)){
+            $delivery_array['Deliveryorder']['deliveryorderno']    = $delivery_order_details['Deliveryorder']['delivery_order_no'];
+            $delivery_array['Deliveryorder']['id']    = $delivery_order_details['Deliveryorder']['id'];
+            $delivery_array['Deliveryorder']['DelDescription_count']    = count($delivery_order_details['DelDescription']);
+            }
+            if(!empty($delivery_order_details['Salesorder']['Description'])){
+            $delivery_array['Salesorder']['salesorderno']    = $delivery_order_details['Salesorder']['salesorderno'];
+            $delivery_array['Salesorder']['id']    = $delivery_order_details['Salesorder']['id'];
+            $delivery_array['Salesorder']['Description_count']    = count($delivery_order_details['Salesorder']['Description']);
+            }
+            if(!empty($delivery_order_details['Salesorder']['Quotation'])){
+            $delivery_array['Quotation']['quotationno']    = $delivery_order_details['Salesorder']['Quotation']['quotationno'];
+            $delivery_array['Quotation']['id']    = $delivery_order_details['Salesorder']['Quotation']['id'];
+            $delivery_array['Quotation']['device_count']    = count($delivery_order_details['Salesorder']['Quotation']['Device']);
+            }
+            $delivery_array['Purchaseorder']['po_reference_no']    = $delivery_order_details['Deliveryorder']['po_reference_no'];
+            echo json_encode($delivery_array);
+            
        }
-       
     }
     public function po_search()
     {

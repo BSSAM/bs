@@ -39,7 +39,7 @@
                                             <div class="do_result"></div>
                                         </div>
                                         <div class="form-group col-md-3 row">
-                                            <?php echo $this->Form->input('deliver_quantity', array('id' => 'val_deliveryordercount', 'class' => 'form-control', 'label' => false, 'name' => 'deliver_quantity', 'readonly' => 'readonly', 'value' => '', 'placeholder' => 'DO Count')); ?>
+                                            <?php echo $this->Form->input('deliver_quantity', array('id' => 'val_socount', 'class' => 'form-control', 'label' => false, 'name' => 'deliver_quantity', 'readonly' => 'readonly', 'value' => '', 'placeholder' => 'DO Count')); ?>
                                         </div>
 
                                         <!-- END Block with Options Content -->
@@ -57,7 +57,7 @@
                                         <!-- Block with Options Left Content -->
                                         <div class="form-group col-md-12 row">
                                             <?php //echo $this->Form->input('salesorder_id', array('id' => 'val_salesorder', 'class' => 'select-chosen required', 'empty' => 'Please select the Salesorder No', 'options' => $customer_salesorder_list, 'label' => false, 'name' => 'salesorder_id', 'style' => 'width: 250px; display: none;')); ?>
-                                            <div class="sales_list_id">
+                                            <div class="do_based_salesorder">
                                                 <p>Select Delivery order to get Salesorder details</p>
                                             </div>   <!-- END Block with Options Left Content -->
                                         </div>
@@ -73,7 +73,7 @@
                                         </div>
                                         <!-- END Block with Options Title -->
                                         <!-- Block with Options Content -->
-                                        <div class="so_based_quotation">
+                                        <div class="do_based_quotation">
                                             <p>Select Delivery order to get Quotations</p>
                                         </div>
                                         <!-- END Block with Options Content -->
@@ -87,9 +87,11 @@
                                         <div class="block-title clearfix">
                                             <h2 class="pull-left"><strong>Purchase order Details</strong> </h2>
                                         </div>
-                                        <div class="sales_po_update">
+                                        <div class="do_based_po">
                                             <p>Select Delivery order to get Purchase order Details </p>
                                         </div>
+                                        <div class="po_up"></div>
+                                        
                                         <!-- END Block with Options Left Content -->
                                     </div>
                                     <!-- END Block with Options Left -->

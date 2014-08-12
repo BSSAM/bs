@@ -38,9 +38,11 @@
                             <div class="tab-pane active" id="tab1">
                                 <?PHP echo $this->element('Clientposapproval/pobeforedo'); ?>
                             </div>
+                            
                             <div class="tab-pane" id="tab2">
-                                <?PHP //echo $this->element('Clientposapproval/pobeforeinvoice'); ?>
-                            </div>
+                                <?PHP echo $this->element('Clientposapproval/pobeforeinvoice'); ?>
+                                </div>
+                            
                         </div><!-- panel-body -->
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">

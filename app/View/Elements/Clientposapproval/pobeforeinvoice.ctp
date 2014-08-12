@@ -1,5 +1,12 @@
+<script>
+    $('#beforedo-datatable').dataTable({
+             // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
+                "iDisplayLength": 5,
+                "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
+            });
+    </script>
                         <div class="table-responsive">
-                            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                            <table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
@@ -14,9 +21,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?PHP if(!empty($quotation )):  ?>
-                                     <?php foreach($quotation as $quotation_list): ?>
-                                    <tr>
+                                    <?PHP if(!empty($quotation_lists_bybeforeinvoice )):  ?>
+                                     <?php foreach($quotation_lists_bybeforeinvoice as $quotation_list): ?>
+                                    <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotmatic'){$class="error";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
+                                    <tr class=<?PHP echo $class; ?>>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
@@ -25,22 +33,31 @@
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
                                         <td class="text-center">
                                             <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotmatic'){$class="danger";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
+                                            <?PHP $po_array =  explode(',',$quotation_list['Quotation']['ref_no']);  ?>
+                                            <?PHP foreach($po_array as $po_key=>$po_value): ?>
+                                            <br><br>
                                             <span class="label label-<?PHP echo $class; ?>">
-                                                <?PHP echo $quotation_list['Quotation']['ref_no'] ?>
-                                            </span>
+                                                <?PHP echo $po_value; ?>
+                                            </span></br></br>
+                                            <?PHP endforeach; ?>
                                         </td>
                                         <td class="text-center">
-                                            <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                                 
-                                            </div>
-                                                <?PHP //echo $this->html->link('View', array('url'=>'http://www.google.com'), array('title' => 'View','data-target'=>'#myModal','class' => 'btn btn-alt btn-xs btn-primary', 'data-toggle' => 'modal'));  ?>
-<!--                                            <a href="Customers" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">Launch First</a>-->
-                                        </td>
+                                            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotomatic'){?>
+                                                    <div class="btn-group">
+                                                        <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
+                                                        <?php echo $this->Html->link('Update', array('controller'=>'Clientpos','action' => $invoice_type, $quotation_list['Customer']['id']), array('data-toggle' => 'tooltip', 'title' => 'Update', 'class' => 'btn btn-alt btn-xs btn-danger', 'escape' => false)); ?>
+                                                    </div>
+                                                </td>
+                                            <?PHP }elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){ ?>
+                                                    <div class="btn-group">
+                                                         <?php echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
+                                                    </div>
+                                                <?PHP } ?>
                                     </tr>
                                     <?php endforeach; ?>
                                     <?PHP endif; ?>
-                                   
                                 </tbody>
                             </table>
+</div>
+
+                    
