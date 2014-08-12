@@ -112,6 +112,7 @@
                                     <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_salesorder_count; ?></span></a></li>
                                     <li><a href="#candd">C & D <span class="badge animation-floating"><?php echo $log_activity_cdinfo_count; ?></span></a></li>
                                     <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php echo $log_activity_deliveryorder_count; ?></span></a></li>
+                                    <li><a href="#clientpo">Client PO <span class="badge animation-floating"><?php echo $log_activity_deliveryorder_count; ?></span></a></li>
 <!--                                    <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>-->
                                 </ul>
                             <div class="tab-content">
@@ -262,6 +263,55 @@
                             <!-------------------------------C & D Info----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="candd">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                                    <?PHP if (!empty($log_activity_cdinfo)): ?>
+                                    <thead>
+                                        <tr>
+                                            <th>Flag</th>
+                                            <th>Name(Details)</th>
+                                            <th>Approval</th>
+                                            <th>Created</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($log_activity_cdinfo as $log_activity_cdinfo_list) :?>
+                                    <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'): ?>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-c&d.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_cdinfo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center ">
+                                            <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_cdinfo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?php }?>
+                                            </td>
+                                            <td class="">by <?PHP echo $log_activity_cdinfo_list['User']['username'] ?><br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logtime'] ?></small></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                    <?php else: ?>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No C & D Info Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <?php endif; ?>
+                                    
+                                </table>
+                                </div>
+                                </div>
+                            </div>
+                            
+                            <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------Client PO----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            <div class="tab-pane" id="clientpo">
                                 <div class="block full">
                                 <div class="table-responsive">
                                 <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">

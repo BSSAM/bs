@@ -36,7 +36,7 @@
                                 </thead>
                                 <tbody>
                                      <?php foreach($branch as $branch_list): ?>
-                                    <tr>
+                                    <tr <?php if($branch_list['branch']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $branch_list['branch']['id']; ?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $branch_list['branch']['branchname']; ?></a></td>

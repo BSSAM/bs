@@ -15,13 +15,14 @@ class InstrumentsController extends AppController
         /*******************************************************
          *  BS V1.0
          *  User Role Permission
-         *  Controller : Procedures
+         *  Controller : Instruments
          *  Permission : view 
         *******************************************************/
         $user_role = $this->userrole_permission();
         if($user_role['ins_instrument']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+        $this->set('userrole_cus',$user_role['ins_instrument']);
         /*
          * *****************************************************
          */
@@ -37,9 +38,9 @@ class InstrumentsController extends AppController
         /*******************************************************
          *  BS V1.0
          *  User Role Permission
-         *  Controller : Procedures
+         *  Controller : Instruments
          *  Permission : add 
-         *  Description   :   add Procedures Details page
+         *  Description   :   add Instruments page
          *******************************************************/
         $user_role = $this->userrole_permission();
         if($user_role['ins_instrument']['add'] == 0){ 
@@ -134,7 +135,7 @@ class InstrumentsController extends AppController
          *  Description   :   Edit Procedures Details page
          *******************************************************/
         $user_role = $this->userrole_permission();
-        if($user_role['ins_instrument']['add'] == 0){ 
+        if($user_role['ins_instrument']['edit'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         /*

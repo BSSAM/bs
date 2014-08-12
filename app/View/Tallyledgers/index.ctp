@@ -32,7 +32,7 @@
                                 <tbody>
                                     <?php foreach($tallyledger as $tallyledger_list): ?>
                                        
-                                    <tr>
+                                    <tr <?php if($tallyledger_list['Tallyledger']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $tallyledger_list['Tallyledger']['id'];?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $tallyledger_list['Tallyledger']['tallyledgeraccount'];?></a></td>

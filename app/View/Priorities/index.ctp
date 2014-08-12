@@ -35,7 +35,7 @@
                                 <tbody>
                                      <?php foreach($priority as $priority_list): ?>
                                   
-                                    <tr>
+                                    <tr <?php if($priority_list['Priority']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $priority_list['Priority']['id']; ?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $priority_list['Priority']['priority']; ?></a></td>

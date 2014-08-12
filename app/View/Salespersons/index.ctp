@@ -35,7 +35,7 @@
                                 <tbody>
                                     <?PHP if (!empty($salesperson)): ?>
                                      <?php foreach($salesperson as $salesperson_list): ?>
-                                    <tr>
+                                    <tr <?php if($salesperson_list['Salesperson']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $salesperson_list['Salesperson']['id']; ?></td>
                                         <td class="text-center"><?php echo $salesperson_list['Salesperson']['salesperson']; ?></td>
                                         <td class="text-center"><?php echo $salesperson_list['Salesperson']['salespersoncode']; ?></td>

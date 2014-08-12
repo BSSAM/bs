@@ -10,7 +10,7 @@
 class Department extends AppModel
 {
    
-     public $hasOne = array( 'User' );
+    // public $hasOne = array( 'User' );
      
 }
 

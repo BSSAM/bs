@@ -33,7 +33,7 @@
                                 <tbody>
                                     <?php foreach($service as $service_list): ?>
                                        
-                                    <tr>
+                                    <tr <?php if($service_list['Service']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $service_list['Service']['id'];?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $service_list['Service']['servicetype'];?></a></td>
