@@ -75,3 +75,4 @@ and open the template in the editor.
 .float_none{float:none !important;}
 .word_break{word-break: break-all;}
 .min-height165{min-height:165px;}
+.calender_listing li:hover{cursor:default !important;}

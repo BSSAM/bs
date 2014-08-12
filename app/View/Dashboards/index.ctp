@@ -19,7 +19,7 @@
                             <ul class="nav nav-tabs" data-toggle="tabs">
                                 <li class="active"><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
                                 <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php //echo $log_activity_instrument_count; ?></span></a></li>
-                                <li><a href="#messages">Messages <span class="badge animation-floating"><?php //echo $log_activity_message_count; ?></span></a></li>
+                                <li><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
                             </ul>
                         </div>
                         <!-- END Forum Tabs -->
@@ -28,12 +28,20 @@
                         <div class="tab-content">
                             <!-- Forum -->
                             <div class="tab-pane" id="messages">
+                                <div class="block full">
                                 <div class="table-responsive">
                                 <!-- Intro Category -->
-                                <table id="dashboard_message_all" class="table table-borderless table-striped table-vcenter">
+                                <table id="dashboard_message_all" class="table table-vcenter table-condensed table-bordered dataTable">
+                                    <?PHP if (!empty($log_activity_message)): ?>
+                                    <thead>
+                                        <th>Flag</th>
+                                        <th>Name(Details)</th>
+                                        <th>Process</th>
+                                        <th>Created</th>
+                                    </thead>
                                     <tbody>
-                                        <?PHP if (!empty($log_activity_message)): ?>
-                                        <?php foreach ($log_activity_message as $log_activity_message_list) :?>
+                                    <?php foreach ($log_activity_message as $log_activity_message_list) :?>
+                                    
                                         <tr>
                                             <td class="text-center" style="width: 100px;">
                                                 <?php //if($log_activity_message_list['Datalog']['logname'] == 'Salesorder'){ ?>
@@ -51,14 +59,17 @@
                                             <td class="">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Datalog']['modified'] ?></small></td>
                                         </tr>
                                         <?php endforeach; ?>
+                                        
+                                    </tbody>
                                         <?php else: ?>
+                                    <tbody>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-circle_info"></i> Oops... No Messages Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
                                     </tbody>
+                                    <?php endif; ?>
                                 </table>
 <!--                            <div class="text-center">
                                     <ul class="pagination pagination-sm">
@@ -72,17 +83,18 @@
                                     </ul>
                                 </div>-->
                                 </div>
+                                </div>
                             </div>
                             <!-- END Forum -->
 
                             <!-- Topics -->
                             <div class="tab-pane active" id="job_approval">
                                 <ul class="nav nav-tabs" data-toggle="tabs">
-                                    <li><a href="#quotation">Quotation <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
-                                    <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
-                                    <li><a href="#candd">C & D <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
-                                    <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
-                                    <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php echo $log_activity_count; ?></span></a></li>
+                                    <li><a href="#quotation">Quotation <span class="badge animation-floating"><?php echo $log_activity_quotation_count; ?></span></a></li>
+                                    <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_salesorder_count; ?></span></a></li>
+                                    <li><a href="#candd">C & D <span class="badge animation-floating"><?php echo $log_activity_cdinfo_count; ?></span></a></li>
+                                    <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php echo $log_activity_deliveryorder_count; ?></span></a></li>
+<!--                                    <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>-->
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
@@ -91,65 +103,61 @@
                             <!-------------------------------QUOTATION----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="quotation">
+                                <div class="block full">
                                 <div class="table-responsive">
-                                <table id="qofull-datatable1"  class="table table-borderless table-striped table-vcenter">
-                                     <thead>
-                                        <tr>
-                                            <th>Flag</th>
-                                            <th>Name(Details)</th>
-                                            <th>Approval</th>
-                                            <th>Created</th>
-                                        </tr>
-                                     </thead>
-                                     <tbody>
-                                         <?PHP if (!empty($log_activity_quotation)): ?>
-                                        <?php foreach ($log_activity_quotation as $log_activity_quotation_list) :?>
-                                        
+                                <table id="qofull-datatable1"  class="table table-vcenter table-condensed table-bordered dataTable">
+                                    <?PHP if (!empty($log_activity_quotation)): ?>
+                                    <thead>
+                                        <th>Flag</th>
+                                        <th>Name(Details)</th>
+                                        <th>Approval</th>
+                                        <th>Created</th>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($log_activity_quotation as $log_activity_quotation_list) :?>
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-qn.jpg', array('alt' => 'Quotation','class'=>'')); ?></td>
-                                            <td>
+                                            <td class="">
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_quotation_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_quotation_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
-                                            <td class="text-center ">
-                                           
-                                           <?PHP if($log_activity_quotation_list['Logactivity']['logname'] == 'Quotation'){ ?>
+                                            <td class="text-center">
+                                            <?PHP if($log_activity_quotation_list['Logactivity']['logname'] == 'Quotation'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_quotation_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
-                                           <?php }?>
-                                            
+                                            <?php }?>
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_quotation_list['User']['username'] ?><br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logtime'] ?></small></td>
-                                        </tr>
-                                       <?php endforeach; ?>
+                                            <td class="text-center">by <?PHP echo $log_activity_quotation_list['User']['username'] ?><br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logtime'] ?></small></td>
+                                            </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
                                         <?php else: ?>
+                                    <tbody>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Quotation Approval Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
-                                        
-
                                     </tbody>
+                                    <?php endif; ?>
                                 </table>
+                                </div>
                                 </div>
                             </div>
                              <!---------------------------------------------------------------------------------------->
                             <!-------------------------------SALES ORDER----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="sales">
+                                <div class="block full">
                                 <div class="table-responsive">
-                                <table id="example-datatable" class="table table-borderless table-striped table-vcenter">
-                                     <tbody>
-                                        <tr>
-                                            <th>Flag</th>
-                                            <th>Name(Details)</th>
-                                            <th>Approval</th>
-                                            <th>Created</th>
-                                        </tr>
-                                         <?PHP if (!empty($log_activity_salesorder)): ?>
-                                        <?php foreach ($log_activity_salesorder as $log_activity_salesorder_list) :?>
-                                         <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'): ?>
-                                        
+                                <table id="deliver_cannd" class="table table-vcenter table-condensed table-bordered">
+                                    <?PHP if (!empty($log_activity_salesorder)): ?>
+                                    <thead>
+                                        <th>Flag</th>
+                                        <th>Name(Details)</th>
+                                        <th>Approval</th>
+                                        <th>Created</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($log_activity_salesorder as $log_activity_salesorder_list) :?> 
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-so.jpg', array('alt' => 'Sales Order','class'=>'')); ?></td>
                                             <td>
@@ -164,19 +172,21 @@
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
-                                        <?php endif; ?>
+                                   
                                        <?php endforeach; ?>
+                                         </tbody>
                                         <?php else: ?>
+                                    <tbody>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Sales Order Approval Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
-                                        
-
                                     </tbody>
+                                    <?php endif; ?>
+                                    
                                 </table>
+                                </div>
                                 </div>
                             </div>
                           
@@ -184,46 +194,49 @@
                             <!-------------------------------DELIVERY ORDER----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="delivery">
+                                <div class="block full">
                                 <div class="table-responsive">
-                                <table id="example-datatable" class="table table-borderless table-striped table-vcenter">
-                                     <tbody>
+                                <table id="qofull-datatable1" class="table table-vcenter table-condensed table-bordered">
+                                    <?PHP if (!empty($log_activity_deliveryorder)): ?>
+                                    <thead>
                                         <tr>
                                             <th>Flag</th>
                                             <th>Name(Details)</th>
                                             <th>Approval</th>
                                             <th>Created</th>
                                         </tr>
-                                         <?PHP if (!empty($log_activity_salesorder)): ?>
-                                        <?php foreach ($log_activity_salesorder as $log_activity_salesorder_list) :?>
-                                         <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'): ?>
+                                    </thead>
                                         
+                                    <tbody> 
+                                    <?php foreach ($log_activity_deliveryorder as $log_activity_deliveryorder_list) :?>
+                                    <?PHP if($log_activity_deliveryorder_list['Logactivity']['logname'] == 'Deliveryorder'): ?>
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-do.jpg', array('alt' => 'Delivery Order','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
-                                           <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?PHP if($log_activity_deliveryorder_list['Logactivity']['logname'] == 'Deliveryorder'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_deliveryorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
-                                           
-                                            
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_deliveryorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
-                                        <?php endif; ?>
-                                       <?php endforeach; ?>
-                                        <?php else: ?>
+                                    <?php endif; ?>
+                                    </tbody>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <tbody> 
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Delivery Order Approval Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
-                                        
-
-                                    </tbody>
+                                        <tr><td><br></td></tr>
+                                     </tbody>
+                                    <?php endif; ?>
                                 </table>
+                                </div>
                                 </div>
                             </div>
                             
@@ -231,46 +244,48 @@
                             <!-------------------------------C & D Info----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="candd">
+                                <div class="block full">
                                 <div class="table-responsive">
-                                <table id="example-datatable" class="table table-borderless table-striped table-vcenter">
-                                     <tbody>
+                                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                                    <?PHP if (!empty($log_activity_cdinfo)): ?>
+                                    <thead>
                                         <tr>
                                             <th>Flag</th>
                                             <th>Name(Details)</th>
                                             <th>Approval</th>
                                             <th>Created</th>
                                         </tr>
-                                         <?PHP if (!empty($log_activity_salesorder)): ?>
-                                        <?php foreach ($log_activity_salesorder as $log_activity_salesorder_list) :?>
-                                         <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'): ?>
-                                        
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($log_activity_cdinfo as $log_activity_cdinfo_list) :?>
+                                    <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'): ?>
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-c&d.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_cdinfo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
-                                           <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
-                                           <?php }?>
-                                           
-                                            
+                                            <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_cdinfo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?php }?>
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_cdinfo_list['User']['username'] ?><br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
-                                        <?php endif; ?>
-                                       <?php endforeach; ?>
-                                        <?php else: ?>
+                                    <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                    <?php else: ?>
+                                    <tbody>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No C & D Info Approval Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
-                                        
-
                                     </tbody>
+                                    <?php endif; ?>
+                                    
                                 </table>
+                                </div>
                                 </div>
                             </div>
                             
@@ -278,7 +293,7 @@
                             <!---------------------------------------------------------------------------------------->
                             <!-------------------------------INVOICE----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
-                            <div class="tab-pane" id="invoice">
+<!--                            <div class="tab-pane" id="invoice">
                                 <div class="table-responsive">
                                 <table id="example-datatable" class="table table-borderless table-striped table-vcenter">
                                      <tbody>
@@ -288,39 +303,39 @@
                                             <th>Approval</th>
                                             <th>Created</th>
                                         </tr>
-                                         <?PHP if (!empty($log_activity_salesorder)): ?>
-                                        <?php foreach ($log_activity_salesorder as $log_activity_salesorder_list) :?>
-                                         <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'): ?>
+                                         <?PHP //if (!empty($log_activity_salesorder)): ?>
+                                        <?php //foreach ($log_activity_salesorder as $log_activity_salesorder_list) :?>
+                                         <?PHP //if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'): ?>
                                         
                                         <tr>
-                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-iv.jpg', array('alt' => 'Invoice','class'=>'')); ?></td>
+                                            <td class="text-center" style="width: 80px;"><?php //echo $this->Html->image('letters/letters-iv.jpg', array('alt' => 'Invoice','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP //echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
-                                           <?PHP if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
-                                           <?php }?>
+                                           <?PHP //if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
+                                            <?PHP //echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php //}?>
                                            
                                             
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP //echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
-                                        <?php endif; ?>
-                                       <?php endforeach; ?>
-                                        <?php else: ?>
+                                        <?php //endif; ?>
+                                       <?php //endforeach; ?>
+                                        <?php //else: ?>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Invoice Approval Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
+                                        <?php //endif; ?>
                                         
 
                                     </tbody>
                                 </table>
                                 </div>
-                            </div>
+                            </div>-->
                             </div>
                            
                             </div>
@@ -341,10 +356,19 @@
                             <!---------------------------------------------------------------------------------------->
                             
                             <div class="tab-pane" id="instrument">
+                                <div class="block full">
                                 <div class="table-responsive">
-                                    <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
-                                        <tbody>
+                                    <table id="example-datatable"  class="table table-vcenter table-condensed table-bordered">
                                             <?PHP if (!empty($log_activity_instrument)): ?>
+                                            <thead>
+                                                <tr>
+                                                <th>Flag</th>
+                                                <th>Name(Details)</th>
+                                                <th>Approval</th>
+                                                <th>Created</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                             <?php foreach ($log_activity_instrument as $log_activity_instrument_list) :?>
                                             <tr>
                                                 <td class="text-center" style="width: 80px;"> <?php echo $this->Html->image('letters/letters-in.jpg', array('alt' => 'Instrument','class'=>'')); ?></td>
@@ -359,16 +383,18 @@
                                                 <td class="">by <?PHP echo $log_activity_instrument_list['User']['username'] ?><br><small><?PHP echo $log_activity_instrument_list['Logactivity']['modified'] ?></small></td>
                                             </tr>
                                             <?php endforeach; ?>
+                                            </tbody>
                                         <?php else: ?>
+                                        <tbody>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Instrument Approval Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
-                                        <tr><td><br></td></tr>
                                         </tbody>
-                                </table>
+                                        <?php endif; ?>
+                                    </table>
+                                </div>
                                 </div>
                             </div>
                             
@@ -377,10 +403,19 @@
                             <!---------------------------------------------------------------------------------------->
                             
                             <div class="tab-pane" id="procedureno">
+                                <div class="block full">
                                 <div class="table-responsive">
-                                    <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
+                                    <table id="example-datatable"  class="table table-vcenter table-condensed table-bordered">
+                                        <?PHP if (!empty($log_activity_procedure)): ?>
+                                        <thead>
+                                            <tr>
+                                            <th>Flag</th>
+                                            <th>Name(Details)</th>
+                                            <th>Approval</th>
+                                            <th>Created</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                            <?PHP if (!empty($log_activity_procedure)): ?>
                                             <?php foreach ($log_activity_procedure as $log_activity_procedure_list) :?>
                                             <tr>
                                                 <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-pr.jpg', array('alt' => 'Procedure No','class'=>'')); ?></td>
@@ -394,17 +429,20 @@
                                                 </td>
                                                 <td class="">by <?PHP echo $log_activity_procedure_list['User']['username'] ?><br><small><?PHP echo $log_activity_procedure_list['Logactivity']['modified'] ?></small></td>
                                             </tr>
-                                            <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                        </tbody>
                                         <?php else: ?>
+                                        <tbody>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Procedure Number Approval Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
-                                        <tr><td><br></td></tr>
                                         </tbody>
+                                        <?php endif; ?>
+                                        
                                 </table>
+                                </div>
                                 </div>
                             </div>
                             
@@ -412,44 +450,46 @@
                             <!-------------------------------UNIT----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="unit">
+                                <div class="block full">
                                 <div class="table-responsive">
-                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
-                                     <tbody>
-                                         <tr>
-                                            <th>Flag</th>
-                                            <th>Name(Details)</th>
-                                            <th>Approval</th>
-                                            <th>Created</th>
-                                            
+                                <table id="example-datatable"  class="table table-vcenter table-condensed table-bordered">
+                                     
+                                    <?PHP if (!empty($log_activity_unit)): ?>
+                                    <thead>
+                                        <tr>
+                                        <th>Flag</th>
+                                        <th>Name(Details)</th>
+                                        <th>Approval</th>
+                                        <th>Created</th>
                                         </tr>
-                                         <?PHP if (!empty($log_activity_unit)): ?>
-                                        <?php foreach ($log_activity_unit as $log_activity_unit_list) :?>
-                                        
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($log_activity_unit as $log_activity_unit_list) :?>
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-un.jpg', array('alt' => 'Unit','class'=>'')); ?></td>
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_unit_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_unit_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_unit_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
-                                           <?PHP if($log_activity_unit_list['Logactivity']['logname'] == 'Unit'){ ?>
+                                            <?PHP if($log_activity_unit_list['Logactivity']['logname'] == 'Unit'){ ?>
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Units','action'=>'edit',$log_activity_unit_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
-                                           <?php }?>
-                                           
+                                            <?php }?>
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_unit_list['User']['username'] ?><br><small><?PHP echo $log_activity_unit_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
                                        <?php endforeach; ?>
-                                        <?php else: ?>
+                                    </tbody>
+                                    <?php else: ?>
+                                    <tbody>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Unit Approval Available
                                             </td>
                                         </tr>
-                                        <?php endif; ?>
-                                        
-
                                     </tbody>
+                                    <?php endif; ?>
                                 </table>
+                                </div>
                                 </div>
                             </div>
                             
@@ -457,19 +497,20 @@
                             <!-------------------------------RANGE----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="range">
+                                <div class="block full">
                                 <div class="table-responsive">
-                                <table id="example-datatable"  class="table table-borderless table-striped table-vcenter">
-                                     <tbody>
-                                         <tr>
+                                <table id="example-datatable"  class="table table-vcenter table-condensed table-bordered">
+                                        <?PHP if (!empty($log_activity_range)): ?>
+                                        <thead>
+                                            <tr>
                                             <th>Flag</th>
                                             <th>Name(Details)</th>
                                             <th>Approval</th>
                                             <th>Created</th>
-                                            
-                                        </tr>
-                                         <?PHP if (!empty($log_activity_range)): ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                         <?php foreach ($log_activity_range as $log_activity_range_list) :?>
-                                        
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-ra.jpg', array('alt' => 'Instrument','class'=>'')); ?></td>
                                             <td>
@@ -483,18 +524,19 @@
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_range_list['User']['username'] ?><br><small><?PHP echo $log_activity_range_list['Logactivity']['logtime'] ?></small></td>
                                         </tr>
-                                       <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                        </tbody>
                                         <?php else: ?>
+                                        <tbody>
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Range Approval Available
                                             </td>
                                         </tr>
+                                        </tbody>
                                         <?php endif; ?>
-                                        
-
-                                    </tbody>
                                 </table>
+                                </div>
                                 </div>
                             </div>
                             
@@ -587,6 +629,51 @@
                         </div>
                     </div>
                     <?php } ?>
+                    <div class="block block-alt-noborder full">
+                        <div class="block-title">
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <!--<div class="block-section">
+                                     Add event functionality (initialized in js/pages/compCalendar.js) 
+                                    <form>
+                                        <div class="input-group">
+                                            <input type="text" id="add-event" name="add-event" class="form-control" placeholder="Add Event">
+                                            <div class="input-group-btn">
+                                                <button type="submit" id="add-event-btn" class="btn btn-primary"><i class="gi gi-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>-->
+                                <div class="block-section">
+                                    <div class="block-section text-center text-muted">
+                                        <small><em><i class="fa fa-arrows"></i> Jobs Statistics</em></small>
+                                    </div>
+                                    <ul class="calendar-events calender_listing">
+                                        <li>Quotation</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>Sales Order</li><!--  style="background-color: #9b59b6"  -->
+                                        <li>Delivery Order</li><!--   style="background-color: #3498db"  -->
+                                        <li>Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
+                                        <li>Client PO</li><!--   style="background-color: #f39c12"  -->
+                                        <li>PR</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>PO</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>ELECTRICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>TEMPERATURE</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>MECHANICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>DIMENSION</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>Onsite</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>Sub-Contract</li><!--  style="background-color: #1abc9c"  -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <!-- FullCalendar (initialized in js/pages/compCalendar.js), for more info and examples you can check out http://arshaw.com/fullcalendar/ -->
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+                    </div>
                     <?php if($user_me == 1 || $user_me ==2){ ?>
                     <div class="row">
                         
@@ -683,42 +770,7 @@
                         </div>
                     </div>-->
                              <!-- END Page Content -->
-<div class="block block-alt-noborder full">
-                        <div class="block-title">
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <!--<div class="block-section">
-                                     Add event functionality (initialized in js/pages/compCalendar.js) 
-                                    <form>
-                                        <div class="input-group">
-                                            <input type="text" id="add-event" name="add-event" class="form-control" placeholder="Add Event">
-                                            <div class="input-group-btn">
-                                                <button type="submit" id="add-event-btn" class="btn btn-primary"><i class="gi gi-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>-->
-                                <div class="block-section">
-                                    <div class="block-section text-center text-muted">
-                                        <small><em><i class="fa fa-arrows"></i> Jobs Statistics</em></small>
-                                    </div>
-                                    <ul class="calendar-events">
-                                        <li style="background-color: #1abc9c">Work</li>
-                                        <li style="background-color: #9b59b6">Vacation</li>
-                                        <li style="background-color: #3498db">Cinema</li>
-                                        <li style="background-color: #e74c3c">Gym</li>
-                                        <li style="background-color: #f39c12">Shopping</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <!-- FullCalendar (initialized in js/pages/compCalendar.js), for more info and examples you can check out http://arshaw.com/fullcalendar/ -->
-                                <div id="calendar"></div>
-                            </div>
-                        </div>
-                    </div>
+
                 <!-- Footer -->
                 <footer class="clearfix">
                     <div class="pull-right">
@@ -864,7 +916,8 @@
                 header: {
                     left: 'prev,next',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'month'
+                    //,agendaWeek,agendaDay
                 },
                 firstDay: 1,
                 editable: false,
@@ -889,30 +942,6 @@
                     $(this).remove();
                 },
                 events: [
-                   
-//                    {
-//                        title: 'Live Conference',
-//                        start: new Date(y, m, 3)
-//                    },
-//                    {
-//                        title: 'Top Secret Project',
-//                        start: new Date(y, m, 4),
-//                        end: new Date(y, m, 8),
-//                        color: '#1abc9c'
-//                    },
-//                    {
-//                        title: 'Job Meeting',
-//                        start: new Date(y, m, d, 16, 00),
-//                        allDay: false,
-//                        color: '#f39c12'
-//                    },
-//                    {
-//                        title: 'Awesome Job',
-//                        start: new Date(y, m, d, 9, 0),
-//                        end: new Date(y, m, d, 12, 0),
-//                        allDay: false,
-//                        color: '#d35400'
-//                    },
                     {
                         title: 'Invoice',
                         start: '2014-06-09T12:30:00',
