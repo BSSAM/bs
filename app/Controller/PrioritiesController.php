@@ -28,7 +28,7 @@ class PrioritiesController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Priority->find('all',array('order' => array('Priority.id' => 'DESC')));
+        $data = $this->Priority->find('all',array('conditions'=>array('Priority.is_deleted'=>0)),array('order' => array('Priority.id' => 'DESC')));
         $this->set('priority', $data);
         //pr($data);
     }

@@ -32,5 +32,9 @@ class ClientposapprovalController extends AppController {
         
        
     }
+    
+    public function view() {
+        
+    }
 
 }

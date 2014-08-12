@@ -28,7 +28,7 @@ class TallyledgersController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Tallyledger->find('all',array('order' => array('Tallyledger.id' => 'DESC')));
+        $data = $this->Tallyledger->find('all',array('conditions'=>array('Tallyledger.is_deleted'=>0)),array('order' => array('Tallyledger.id' => 'DESC')));
         $this->set('tallyledger', $data);
         //pr($data);
     }

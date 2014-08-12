@@ -26,9 +26,9 @@ class CurrenciesController extends AppController
         }
         $this->set('userrole',$user_role['other_currency']);
         /*
-         * ---------------  Functionality of Users -----------------------------------
+         * ---------------  Functionality of Currency -----------------------------------
          */
-        $data = $this->Currency->find('all',array('order' => array('Currency.id' => 'DESC')));
+        $data = $this->Currency->find('all',array('conditions'=>array('Currency.is_deleted'=>0)),array('order' => array('Currency.id' => 'DESC')));
         $this->set('currency', $data);
        // pr($data);exit;
     }

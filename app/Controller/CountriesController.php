@@ -26,9 +26,9 @@ class CountriesController extends AppController
         }
         $this->set('userrole',$user_role['other_country']);
         /*
-         * ---------------  Functionality of Users -----------------------------------
+         * ---------------  Functionality of Country -----------------------------------
          */
-        $data = $this->Country->find('all',array('order' => array('Country.id' => 'DESC')));
+        $data = $this->Country->find('all',array('conditions'=>array('Country.is_deleted'=>0)),array('order' => array('Country.id' => 'DESC')));
         $this->set('country', $data);
         //pr($data);
     }

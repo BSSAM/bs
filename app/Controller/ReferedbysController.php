@@ -13,13 +13,39 @@ class ReferedbysController extends AppController
     
     public function index()
     {
-        $data = $this->Referedby->find('all',array('order' => array('Referedby.id' => 'DESC')));
+        /*******************************************************
+         *  BS V1.0
+         *  Referred By Permission
+         *  Controller : Referred By
+         *  Permission : view 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_referredby']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        $this->set('userrole_cus',$user_role['cus_referredby']);
+        /*
+         * ---------------  Functionality of Referred By -----------------------------------
+         */
+        $data = $this->Referedby->find('all',array('conditions'=>array('Referedby.is_deleted'=>0)),array('order' => array('Referedby.id' => 'DESC')));
         $this->set('referedby', $data);
         //pr($data);
     }
     
     public function add()
     {
+        /* 
+         * ---------------  Referred By Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_referredby']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Referred By -----------------------------------
+         */
       
         if($this->request->is('post'))
         {
@@ -49,6 +75,17 @@ class ReferedbysController extends AppController
     }
     public function edit($id = NULL)
     {
+        /* 
+         * ---------------  Referred By Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_referredby']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Referred By -----------------------------------
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Refered Entry'));
@@ -77,15 +114,29 @@ class ReferedbysController extends AppController
     }
     public function delete($id)
     {
+        /* 
+         * ---------------  Referred By Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_referredby']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Referred By -----------------------------------
+         */
         $this->autoRender=false;
         if($id=='')
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Referedby->delete($id))
+        if($id!='')
         {
-            $this->Session->setFlash(__('Priority has been deleted'));
+            if($this->Referedby->updateAll(array('Referedby.is_deleted'=>1),array('Referedby.id'=>$id)))
+            {
+            $this->Session->setFlash(__('Referred By has been deleted'));
             return $this->redirect(array('action'=>'index'));
+            }
         }
     }
 }

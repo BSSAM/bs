@@ -104,6 +104,10 @@ class DashboardsController extends AppController
         //pr($logactivity);exit;
         $this->set('log_activity_quotation', $logactivity_quotation);
         
+        $logactivity_quotation_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Quotation")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_quotation_count', $logactivity_quotation_count);
+        
         /*****************************************************/
         
         /****************** Log Activity - Sales Order ********************/
@@ -112,13 +116,21 @@ class DashboardsController extends AppController
         //pr($logactivity_salesorder);exit;
         $this->set('log_activity_salesorder', $logactivity_salesorder);
         
+        $logactivity_salesorder_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Salesorder")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_salesorder_count', $logactivity_salesorder_count);
+        
         /*****************************************************/
         
         /****************** Log Activity - Delivery Order ********************/
         
         $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder")));
         //pr($logactivity);exit;
-        $this->set('log_activity_labprocess', $logactivity_deliveryorder);
+        $this->set('log_activity_deliveryorder', $logactivity_deliveryorder);
+        
+        $logactivity_deliveryorder_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_deliveryorder_count', $logactivity_deliveryorder_count);
         
         /*****************************************************/
         
@@ -128,13 +140,16 @@ class DashboardsController extends AppController
         //pr($logactivity);exit;
         $this->set('log_activity_cdinfo', $logactivity_cdinfo);
         
+        $logactivity_cdinfo_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"C&Dinfo")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_cdinfo_count', $logactivity_cdinfo_count);
         /*****************************************************/
         
          /****************** Log Activity - Invoice ********************/
         
-        $logactivity_invoice = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Invoice")));
-        //pr($logactivity);exit;
-        $this->set('log_activity_invoice', $logactivity_invoice);
+//        $logactivity_invoice = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Invoice")));
+//        //pr($logactivity);exit;
+//        $this->set('log_activity_invoice', $logactivity_invoice);
         
         /*****************************************************/
         

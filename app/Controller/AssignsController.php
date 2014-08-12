@@ -28,7 +28,7 @@ class AssignsController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Assign->find('all',array('order' => array('Assign.id' => 'DESC')));
+        $data = $this->Assign->find('all',array('conditions'=>array('Assign.is_deleted'=>0)),array('order' => array('Assign.id' => 'DESC')));
         $this->set('assign', $data);
         //pr($data);
     }

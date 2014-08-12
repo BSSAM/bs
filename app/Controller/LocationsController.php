@@ -28,7 +28,7 @@ class LocationsController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Location->find('all',array('order' => array('Location.id' => 'DESC')));
+        $data = $this->Location->find('all',array('conditions'=>array('Location.is_deleted'=>0)),array('order' => array('Location.id' => 'DESC')));
         $this->set('location', $data);
         //pr($data);
     }
