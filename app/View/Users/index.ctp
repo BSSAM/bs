@@ -31,13 +31,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                      <?php foreach($user as $user_list): ?>
                                     <tr>
                                         <td class="text-center"><?php echo $user_list['User']['id']; ?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $user_list['User']['username']; ?></a></td>
                                         <td class="text-center"><?php echo $user_list['Userrole']['user_role']; ?></td>
-                                        <td class="text-center"><span class="label label-warning"><?php echo $user_list['Department']['departmentname']; ?></span></td>
+                                        <td class="text-center word_break">
+                                            <?PHP foreach($user_list['UserDepartment'] as $departments): ?>
+                                            <span class="label label-warning">
+                                            <?php echo $departments['Department']['departmentname']; ?>
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            <?PHP endforeach; ?>
+                                        </td>
                                         <td class="text-center">Singapore</td>
                                         <td class="text-center">
                                             <div class="btn-group">

@@ -29,12 +29,5 @@ class ClientposapprovalController extends AppController {
         $q_id =  $this->request->data['q_id'];
         $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.id'=>$q_id,'Quotation.is_deleted'=>0)));
         $this->set(compact('data'));
-        
-       
     }
-    
-    public function view() {
-        
-    }
-
 }

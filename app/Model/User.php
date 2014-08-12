@@ -12,8 +12,21 @@ class User extends AppModel
 //           'foreignKey'  => 'role',
 //          'associationForeignKey'  => 'user_role_id'
 //           )); 
-    public $belongsTo = array( 'Userrole','Department');
-    
+    public $belongsTo = array( 'Userrole');
+     public $hasMany = array(
+        'UserDepartment' => array(
+            'className' => 'UserDepartment',
+            'foreignKey' => 'user_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'dependent'=>true,
+            'counterQuery' => '',
+      ));
     
 }
 

@@ -16,7 +16,6 @@
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
-                                    
                                     <h2></h2>
                                 </div>
                                 <!-- END Form Elements Title -->

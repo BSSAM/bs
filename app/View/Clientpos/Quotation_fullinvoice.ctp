@@ -14,14 +14,14 @@
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
-                                    <h2 class="pull-right">Track Id : <?PHP //echo $po_first['Clientpo']['track_id']; ?> </h2>
+                                    <h2 class="pull-right">Track Id : <?PHP echo $track_id; ?> </h2>
                                     <h2 class="pull-left"></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                  <?php echo $this->Form->create('Clientpo',array('class'=>'form-horizontal form-bordered','id'=>'form-clientpo-add')); ?>
                                  <?PHP echo $this->Form->input('quotation_id', array('type' => 'hidden', 'id' => 'customer_quotation_no','name'=>'quotation_no')); ?>
-                                 <?PHP echo $this->Form->input('track_id', array('type' => 'hidden', 'id' => 'track_id','name'=>'track_id')); ?>
+                                 <?PHP echo $this->Form->input('track_id', array('type' => 'hidden', 'id' => 'track_id','name'=>'track_id','value'=>$track_id)); ?>
                             <!-- END Basic Form Elements Block -->
                             <div class="">
                                 <div class="col-md-6 fc-header-title float_none">

@@ -21,9 +21,10 @@ class ClientposController extends AppController
     {
           $customer_quotation_list=$this->Quotation->find('list',array('conditions'=>
                         array('Quotation.customer_id'=>$id,'Quotation.is_approved'=>1),'fields'=>array('id','quotationno')));
+          $track_id=$this->random('track');
           $po_list=$this->Clientpo->find('all',array('conditions'=>array('Clientpo.customer_id'=>$id)));
           $po_single=$this->Clientpo->find('first',array('conditions'=>array('Clientpo.customer_id'=>$id)));
-          $this->set(compact('po_list','customer_quotation_list','po_single'));
+          $this->set(compact('po_list','customer_quotation_list','po_single','track_id'));
           if($this->request->is(array('post','put')))
           {
               $po_number_array  =   $this->request->data['clientpos_no'];
@@ -59,8 +60,10 @@ class ClientposController extends AppController
     {
         $customer_quotation_list=$this->Quotation->find('all',array('conditions'=>
                         array('Quotation.customer_id'=>$id,'Quotation.is_approved'=>1,'Quotation.is_assign_po'=>0)));
+       
         if(!empty($customer_quotation_list))
         {
+            $track_id=$this->random('track');
             $quotation_array_id=array();
             foreach($customer_quotation_list as $quo)
             {
@@ -68,7 +71,7 @@ class ClientposController extends AppController
             }
             $po_list=$this->Clientpo->find('all',array('conditions'=>array('Clientpo.customer_id'=>$id)));
             $po_single=$this->Clientpo->find('first',array('conditions'=>array('Clientpo.customer_id'=>$id)));
-            $this->set(compact('po_list','customer_quotation_list','pos','po_first','po_single','quotation_array_id'));
+            $this->set(compact('po_list','customer_quotation_list','pos','po_first','po_single','quotation_array_id','track_id'));
             $this->set('customer_id',$id);
 
             if($this->request->is(array('post','put')))
@@ -448,7 +451,6 @@ class ClientposController extends AppController
     }
     public function get_so_quotations()
     {
-      
 //      $salesorder_details = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.salesorderno'=>'BSO1404136667','Salesorder.customer_id'=>'CUS1403693631')));
 //      pr($salesorder_details);exit;
         $this->autoRender    =   false;

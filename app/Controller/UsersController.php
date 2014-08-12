@@ -9,6 +9,7 @@
 class UsersController extends AppController {
 
     public $helpers = array('Html', 'Form', 'Session');
+    public $uses    =   array('UserDepartment','User');
 
     public function index() {
         /* 
@@ -23,8 +24,8 @@ class UsersController extends AppController {
          * ---------------  Functionality of Users -----------------------------------
          */
         $this->User->recursive = 1;
-        $data = $this->User->find('all',array('conditions'=>array('User.is_deleted'=>0)), array('order' => array('User.id' => 'DESC')));
-        //pr($data);exit;
+        $data = $this->User->find('all',array('conditions'=>array('User.is_deleted'=>0),'order'=>array('User.id' => 'DESC'),'recursive'=>2));
+        
         $this->set('user', $data);
     }
 
@@ -54,12 +55,7 @@ class UsersController extends AppController {
             $this->request->data['status'] = 1;
             //pr($dat);exit;
             //$dat = $this->request->params[''];
-
-            $match2 = $this->request->data['department_id'];
-            $dept = implode(',', $match2);
-            $this->request->data['department_id'] = $dept;
-
-
+           
             $match1 = $this->request->data['username'];
             $data1 = $this->User->findByUsername($match1);
 
@@ -69,8 +65,15 @@ class UsersController extends AppController {
                 return $this->redirect(array('action' => 'add'));
             }
             $this->User->create();
-
+            
             if ($this->User->save($this->request->data)) {
+                $user_id    =   $this->User->getLastInsertId();
+                foreach($this->request->data['department_id'] as $k=>$v):
+                    $this->UserDepartment->create();
+                    $data['UserDepartment']['user_id']=$user_id;
+                    $data['UserDepartment']['department_id']=$v;
+                    $this->UserDepartment->save($data);
+                endforeach;
                 $this->Session->setFlash(__('User is Added'));
                 return $this->redirect(array('action' => 'index'));
             }
@@ -106,6 +109,7 @@ class UsersController extends AppController {
         }
 
         $user = $this->User->findById($id);
+       
         if (empty($user)) {
             $this->Session->setFlash(__('Invalid User'));
             return $this->redirect(array('action' => 'edit'));
@@ -114,10 +118,18 @@ class UsersController extends AppController {
 
         if ($this->request->is(array('post', 'put'))) {
 
-            $match2 = $this->request->data['department_id'];
-            $dept = implode(',', $match2);
-            $this->request->data['department_id'] = $dept;
-
+           $userdepartment_array    =   $this->request->data['department_id'];
+            if(!empty($userdepartment_array))
+            {
+                $this->UserDepartment->deleteAll(array('UserDepartment.user_id' => $id));
+                foreach ($userdepartment_array as $key => $value) {
+                    
+                    $this->UserDepartment->create();
+                    $dept_data = array('user_id' => $id, 'department_id' => $value);
+                    $this->UserDepartment->save($dept_data);
+                }
+               
+            }    
 
             $this->User->id = $id;
 

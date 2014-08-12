@@ -71,8 +71,18 @@
                                        
                                         <label class="col-md-2 control-label" for="val_department">Department</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('department_id', array('id'=>'val_department','class'=>'select-chosen','options' => $department,'data-placeholder'=>'Enter the Department','label'=>false,'name'=>'department_id','multiple'=>true,'style'=>'width: 250px; display: none;')); ?>
+                                         <select  name="data[department_id][]" class="select-chosen required" data-placeholder="Select the Department name" style="width: 250px;" multiple >
+                                                    <?PHP foreach ($department as $k => $v): ?>
+                                                    <?php 
+                                                         $get_sales = $this->User->checkdepartment_value($this->request->data['User']['id'], $k);
+                                                         $selected_procedure = ($get_sales == 1) ? 'selected="selected"' : ''; ?>
+                                                        <option <?PHP echo $selected_procedure; ?> value=<?PHP echo $k ?>><?PHP echo $v; ?></option>
+                                                    <?PHP endforeach; ?>
+                                        </select>
                                         </div>
+<!--                                        <div class="col-md-4">
+                                            <?php //echo $this->Form->input('department_id', array('id'=>'val_department','class'=>'select-chosen','options' => $department,'data-placeholder'=>'Enter the Department','label'=>false,'name'=>'department_id','multiple'=>true,'style'=>'width: 250px; display: none;')); ?>
+                                        </div>-->
                                    
                                     </div>
                                 
