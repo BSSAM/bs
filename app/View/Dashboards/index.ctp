@@ -17,15 +17,33 @@
                         <!-- Forum Tabs Title -->
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
-                                <li class="active"><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
+                                <li class="active"><a href="#home">Home<span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
+                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
                                 <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php //echo $log_activity_instrument_count; ?></span></a></li>
                                 <li><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
                             </ul>
                         </div>
                         <!-- END Forum Tabs -->
-
-                        <!-- Tab Content -->
                         <div class="tab-content">
+                            <!-- Forum -->
+                            <div class="tab-pane active" id="home">
+                                <div class="block full" style=" border: 0px; margin-bottom: 0px;">
+                                    <h1><div class="text-center">BS Enterprise Welcomes You</div>
+                                        <div class="clearfix">
+                                    <blockquote class="pull-left">
+                                        <p>Best Standards boasts having a Management that is far-sighted and are true believers that customer satisfaction is the best & most prized award for any organization.</p>
+                                        <p>With You in mind, we have geared up to diversify our core business from Instrumentation & metrology services to put together a comprehensive pool of companies, all set to provide industry specific professional service to our esteemed clients.</p>
+                                        <small class="pull-right"><cite title="BS Enterprise Team">BS Enterprise Team</cite></small>
+                                    </blockquote>
+                                </div>
+                                   
+                                    </h1>
+                                </div>
+                            </div>
+                        
+                        
+                        <!-- Tab Content -->
+<!--                        <div class="tab-content">-->
                             <!-- Forum -->
                             <div class="tab-pane" id="messages">
                                 <div class="block full">
@@ -88,7 +106,7 @@
                             <!-- END Forum -->
 
                             <!-- Topics -->
-                            <div class="tab-pane active" id="job_approval">
+                            <div class="tab-pane" id="job_approval">
                                 <ul class="nav nav-tabs" data-toggle="tabs">
                                     <li><a href="#quotation">Quotation <span class="badge animation-floating"><?php echo $log_activity_quotation_count; ?></span></a></li>
                                     <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_salesorder_count; ?></span></a></li>
