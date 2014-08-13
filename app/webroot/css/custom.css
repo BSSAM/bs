@@ -76,3 +76,14 @@ and open the template in the editor.
 .word_break{word-break: break-all;}
 .min-height165{min-height:165px;}
 .calender_listing li:hover{cursor:default !important;}
+.list_of_sales_o_form{margin-top:5px;}
+.list_of_sales_o_form label{position:relative;bottom:3px;margin:0 10px;}
+.list_of_sales_o_form .quot_display{position:relative;}
+.quot_display #quoat_list{margin-left:0;top:0;left:0;width:100%;}
+.quot_display #quoat_list .quotation_single{max-width: 100%;}
+.padding_t_b10{padding-top:10px !important;padding-bottom:10px !important;background-color: #ccc !important;position:relative;}
+#result{position: absolute;z-index: 999;width:92%;z-index:10; }
+#result .no_result{width:100%;max-width:100%;max-height: 100%;}
+#result .customer_show{max-height: 100%;}
+#result .no_result:hover{background:#6ad2eb;}
+.upload_file_section{margin-left: 10px; width: 98%;}

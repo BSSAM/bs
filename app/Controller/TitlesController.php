@@ -16,13 +16,15 @@ class TitlesController extends AppController
         /*******************************************************
          *  BS V1.0
          *  User Role Permission
-         *  Controller : Procedures
+         *  Controller : Title
          *  Permission : view 
         *******************************************************/
         $user_role = $this->userrole_permission();
-        if($user_role['other_role']['view'] == 0){ 
+        if($user_role['ins_title']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+        
+        $this->set('userrole_cus',$user_role['ins_title']);
         /*
          * *****************************************************
          */
@@ -33,6 +35,20 @@ class TitlesController extends AppController
     
     public function add()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Title
+         *  Permission : add 
+         *  Description   :   add Title Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_title']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         if($this->request->is('post'))
         {
             if($this->Title->save($this->request->data))
@@ -45,6 +61,20 @@ class TitlesController extends AppController
     }
     public function edit($id = null)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Title
+         *  Permission : edit 
+         *  Description   :   edit Title Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_title']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -74,11 +104,25 @@ class TitlesController extends AppController
     
     public function delete($id)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Title
+         *  Permission : delete 
+         *  Description   :   delete Title Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_title']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Title->delete($id))
+        if($this->Title->updateAll(array('Title.is_deleted'=>1,'Title.status'=>0),array('Title.id'=>$id)))
         {
             $this->Session->setFlash(__('The Title has been deleted',h($id)));
             return $this->redirect(array('controller'=>'Titles','action'=>'index'));

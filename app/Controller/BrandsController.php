@@ -14,6 +14,21 @@ class BrandsController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Brand
+         *  Permission : view 
+        *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_brand']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        $this->set('userrole_cus',$user_role['ins_brand']);
+        /*
+         * *****************************************************
+         */
         $brand_data = $this->Brand->find('all');
         $this->set('brands', $brand_data);
         //pr($data);
@@ -21,6 +36,20 @@ class BrandsController extends AppController
     
     public function add()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Brand
+         *  Permission : add 
+         *  Description   :   add Brand Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_brand']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         if($this->request->is('post'))
         {
             $this->request->data['status']=1;
@@ -34,6 +63,20 @@ class BrandsController extends AppController
     }
     public function edit($id = null)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Brand
+         *  Permission : Edit 
+         *  Description   :   Edit Brand Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_brand']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -63,11 +106,25 @@ class BrandsController extends AppController
     
     public function delete($id)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Brand
+         *  Permission : Delete 
+         *  Description   :   Delete Brand Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_brand']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Brand->delete($id))
+        if($this->Brand->updateAll(array('Brand.is_deleted'=>1,'Brand.status'=>0),array('Brand.id'=>$id)))
         {
             $this->Session->setFlash(__('The Brand has been deleted',h($id)));
             return $this->redirect(array('controller'=>'Brands','action'=>'index'));

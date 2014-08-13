@@ -15,7 +15,9 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Units</h2>
+                            <?php if($userrole_cus['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Unit',array('controller'=>'Units','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Unit')); ?></h2>
+                            <?php } ?>
                         </div>
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -41,8 +43,12 @@
                                         <td class="text-center"><?PHP echo $status; ?></td> 
                                         <td class="text-center">
                                             <div class="btn-group">
+                                                <?php if($userrole_cus['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$unit['Unit']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole_cus['delete']==1){ ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$unit['Unit']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php } ?>
                                             </div>
                                         </td>
                                     </tr>
