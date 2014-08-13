@@ -16,14 +16,43 @@ class InstrumentforgroupsController extends AppController
     public function index()
     {
         APP::import('Model','Instrumentforgroup');
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : instrumentforgroup
+         *  Permission : view 
+        *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_instrumentforgroup']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        $this->set('userrole_cus',$user_role['ins_instrumentforgroup']);
+        /*
+         * *****************************************************
+         */
         //,array('conditions'=>array('Instrumentforgroup.status'=>'1'),
         $instrument_type_data = $this->InstrumentType->find('all',array('conditions'=>array('InstrumentType.is_deleted'=>0)));//,array('group' => array('Instrumentforgroup.group_id'))
        
         $this->set('instrumentforgroups', $instrument_type_data);
         //pr($instrument_data);exit;
     } 
-     public function add()
+    public function add()
     {
+         /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : instrumentforgroup
+         *  Permission : add 
+         *  Description   :   add instrumentforgroup Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_instrumentforgroup']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         $user_role = $this->userrole_permission();
         
         if($user_role['ins_range']['add'] == 0){ 
@@ -66,6 +95,20 @@ class InstrumentforgroupsController extends AppController
     }
     public function edit($id = null)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : instrumentforgroup
+         *  Permission : Edit 
+         *  Description   :   Edit instrumentforgroup Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_instrumentforgroup']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         $user_role = $this->userrole_permission();
         
         if($user_role['ins_range']['edit'] == 0){ 
@@ -108,12 +151,21 @@ class InstrumentforgroupsController extends AppController
     
     public function delete($id)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : instrumentforgroup
+         *  Permission : Delete 
+         *  Description   :   Delete instrumentforgroup Details page
+         *******************************************************/
         $user_role = $this->userrole_permission();
-        
-        if($user_role['ins_range']['delete'] == 0){ 
+        if($user_role['ins_instrumentforgroup']['delete'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
-        
+        /*
+         * *****************************************************
+         */
+               
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();

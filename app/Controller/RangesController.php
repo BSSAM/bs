@@ -13,6 +13,21 @@ class RangesController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Ranges
+         *  Permission : view 
+        *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_range']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        $this->set('userrole_cus',$user_role['ins_range']);
+        /*
+         * *****************************************************
+         */
         $range_data = $this->Range->find('all');
         $this->set('ranges', $range_data);
         
@@ -20,6 +35,20 @@ class RangesController extends AppController
     
     public function add()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Range
+         *  Permission : add 
+         *  Description   :   add Range Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_range']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         $user_role = $this->userrole_permission();
         
         if($user_role['ins_range']['add'] == 0){ 
@@ -66,6 +95,20 @@ class RangesController extends AppController
     }
     public function edit($id = null)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Range
+         *  Permission : Edit 
+         *  Description   :   Edit Range Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_range']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         $user_role = $this->userrole_permission();
         
         if($user_role['ins_range']['edit'] == 0){ 
@@ -118,6 +161,20 @@ class RangesController extends AppController
     
     public function delete($id)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Range
+         *  Permission : Delete 
+         *  Description   :   Delete Range Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_range']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         $user_role = $this->userrole_permission();
         
         if($user_role['ins_range']['delete'] == 0){ 

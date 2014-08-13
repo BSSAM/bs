@@ -8,12 +8,41 @@
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch');
         public function index()
         {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Quotations
+         *  Permission : view 
+        *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_quotation']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        $this->set('userrole_cus',$user_role['job_quotation']);
+        /*
+         * *****************************************************
+         */
             //$this->Quotation->recursive = 1; 
             $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.id' => 'DESC')));
             $this->set('quotation', $quotation_lists);
         }
         public function add()
         {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Quotation
+         *  Permission : add 
+         *  Description   :   add Quotation Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_quotation']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
             $dmt=$this->random('quotation');
             $track_id=$this->random('track');
             $this->set('quotationno', $dmt);
@@ -75,6 +104,20 @@
        
         public function edit($id=NULL)
         {
+               /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Quotation
+         *  Permission : Edit 
+         *  Description   :   Edit Quotation Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_quotation']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
             $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
             //for Contact person info
             
@@ -151,6 +194,20 @@
         }
         public function delete($id=NULL)
         {
+              /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Quotation
+         *  Permission : Delete 
+         *  Description   :   Delete Quotation Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_quotation']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
             if($id!='')
             {
                 if($this->Quotation->updateAll(array('Quotation.is_deleted'=>1),array('Quotation.id'=>$id)))

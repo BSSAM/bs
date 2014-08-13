@@ -13,7 +13,9 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Quotations</h2>
+                            <?php if($userrole_cus['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Quotation',array('controller'=>'Quotations','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Quotation')); ?></h2>
+                            <?php } ?>
                         </div>
                         
 
@@ -35,7 +37,7 @@
                                 <tbody>
                                     <?PHP if(!empty($quotation )):  ?>
                                      <?php foreach($quotation as $quotation_list): ?>
-                                    <tr>
+                                    <tr <?php if($quotation_list['Quotation']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
@@ -50,8 +52,12 @@
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group">
+                                                <?php if($userrole_cus['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole_cus['delete']==1){ ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php } ?>
                                                  
                                             </div>
                                                 <?PHP //echo $this->html->link('View', array('url'=>'http://www.google.com'), array('title' => 'View','data-target'=>'#myModal','class' => 'btn btn-alt btn-xs btn-primary', 'data-toggle' => 'modal'));  ?>

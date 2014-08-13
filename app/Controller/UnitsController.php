@@ -13,6 +13,21 @@ class UnitsController extends AppController
     
     public function index()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Units
+         *  Permission : view 
+        *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_unit']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        $this->set('userrole_cus',$user_role['ins_unit']);
+        /*
+         * *****************************************************
+         */
         $unit_data = $this->Unit->find('all');
         $this->set('units', $unit_data);
         //pr($data);
@@ -20,6 +35,20 @@ class UnitsController extends AppController
     
     public function add()
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Unit
+         *  Permission : add 
+         *  Description   :   add Unit Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_unit']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         $user_role = $this->userrole_permission();
         if($user_role['ins_unit']['add'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
@@ -64,6 +93,20 @@ class UnitsController extends AppController
     }
     public function edit($id = null)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Unit
+         *  Permission : edit 
+         *  Description   :   edit Unit Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_unit']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         $user_role = $this->userrole_permission();
         
         $unit_dat = $this->Unit->find('first',array('conditions'=>array('Unit.id'=>$id),'recursive'=>'2'));
@@ -112,6 +155,20 @@ class UnitsController extends AppController
     
     public function delete($id)
     {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Unit
+         *  Permission : Delete 
+         *  Description   :   Delete Unit Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_unit']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
         $user_role = $this->userrole_permission();
         
         if($user_role['ins_unit']['delete'] == 0){ 

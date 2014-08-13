@@ -7,12 +7,41 @@
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','branch');
         public function index()
         {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Salesorder
+         *  Permission : view 
+        *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_salesorder']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        $this->set('userrole_cus',$user_role['job_salesorder']);
+        /*
+         * *****************************************************
+         */
             //$this->Quotation->recursive = 1; 
             $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
             $this->set('salesorder', $salesorder_list);
         }
         public function add()
         {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Sales Order
+         *  Permission : add 
+         *  Description   :   add Salesorder Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_salesorder']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
             $dmt    =   $this->random('salesorder');
             $track_id=$this->random('track');
             $this->set('our_ref_no', $track_id);
@@ -62,6 +91,20 @@
         }
         public function Salesorder_by_quotation($id=NULL)
         {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Sales Order
+         *  Permission : add 
+         *  Description   :   add Salesorder Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_salesorder']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
             $dmt    =   $this->random('salesorder');
             $this->set('salesorderno', $dmt);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
@@ -179,6 +222,20 @@
         }
         public function edit($id=NULL)
         {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Sales Order
+         *  Permission : Edit 
+         *  Description   :   Edit Salesorder Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_salesorder']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
@@ -222,7 +279,20 @@
         }
         public function delete($id=NULL)
         {
-            
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Sales Order
+         *  Permission : Delete 
+         *  Description   :   Delete Salesorder Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['job_salesorder']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
             if($id!='')
             {
                 if($this->Salesorder->updateAll(array('Salesorder.is_deleted'=>1),array('Salesorder.id'=>$id)))
