@@ -11,8 +11,6 @@
 <!-- END Forms General Header -->
                         
 <div class="row">
-    <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-add')); ?>
-  
     <div class="col-md-12">
         <!-- Basic Form Elements Block -->
         <div class="block">
@@ -44,14 +42,6 @@
                                 </div>
                             
                         </div><!-- panel-body -->
-                    <div class="form-group form-actions">
-                        <div class="col-md-9 col-md-offset-10">
-                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-                                <!-- <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
-                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
-                        </div>
-                    </div>
                 </div>
                 <!-- panel -->
             </div>
@@ -59,7 +49,6 @@
             <!-- END Basic Form Elements Block -->
         </div>
     </div>
-    <?php echo $this->Form->end(); ?>
     <!-- END Basic Form Elements Content -->
 </div>
  

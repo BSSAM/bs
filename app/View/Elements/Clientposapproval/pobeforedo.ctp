@@ -42,17 +42,17 @@
                                             <?PHP endforeach; ?>
                                         </td>
                                         <td class="text-center">
-                                            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotomatic'){?>
+                                            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotomatic'||$quotation_list['Quotation']['po_generate_type']=='Manual' &&$quotation_list['Quotation']['is_poapproved']==0){?>
                                                     <div class="btn-group">
                                                         <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
                                                         <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Settings" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Update</a>
                                                     </div>
-                                                </td>
-                                            <?PHP }elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){ ?>
+                                            <?PHP }elseif($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_poapproved']==1){ ?>
                                                     <div class="btn-group">
                                                          <?php echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
                                                     </div>
-                                                <?PHP } ?>
+                                                <?PHP }?>
+                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
                                     <?PHP endif; ?>

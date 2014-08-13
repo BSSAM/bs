@@ -1,8 +1,7 @@
-<?PHP echo $this->Form->create('Clientposapproval',array('url'=>'Clientposapproval/view')); ?>
-<form action="index.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
-                    <h4 class="sub-header text-center"><strong><?PHP echo $data['Customer']['Customertagname']."(" .$data['Customer']['id'].")"; ?> )</strong></h4>
+<?PHP echo $this->Form->create('Clientposapproval',array('url'=>'quotation_po_update','class'=>'form-horizontal')); ?>
+<?PHP echo $this->Form->input('quotationno',array('type'=>'hidden','name'=>'quotationno','value'=>$data['Quotation']['quotationno'])); ?>                   
+<h4 class="sub-header text-center"><strong><?PHP echo $data['Customer']['Customertagname']."(" .$data['Customer']['id'].")"; ?> )</strong></h4>
                     <div class="row">
-
                         <div class="col-sm-4">
                             <div class="block">
                                 <dl>
@@ -121,44 +120,49 @@
 
                     <h4 class="sub-header text-center">Job Details <strong>( <?PHP echo  $data['Quotation']['track_id']; ?> )</strong></h4>
                     <div class="row">
-
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <div class="block">
                                 <dl>
-                                    <dt>Delivery Order</dt>
-                                    <dd class="word_break">BDO-14256875,BDO-54268952</dd>
+                                   <dt>Quotation Order</dt>
+                                    <dd class="word_break">
+                                        <?PHP echo  $data['Quotation']['quotationno']; ?>
+                                    </dd>
                                 </dl>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <div class="block">
                                 <dl>
                                     <dt>Sales Order</dt>
-                                    <dd class="word_break">BDO-14256875,BDO-54268952</dd>
+                                    <?PHP foreach($quotation_data['Salesorder'] as $k=>$v): ?>
+                                    <dd class="word_break"><?PHP echo  $v; ?></dd>
+                                    <?PHP endforeach; ?>
                                 </dl>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <div class="block">
                                 <dl>
-                                    <dt>Quotation Order</dt>
+                                    <dt>Delivery Order</dt>
+                                    <?PHP foreach($quotation_data['Deliveryorder'] as $k=>$v): ?>
+                                    <dd class="word_break"><?PHP echo  $v; ?></dd>
+                                    <?PHP endforeach; ?>
+                                </dl>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                            <div class="block">
+                                <dl>
+                                    <dt>Invoice Number</dt>
                                     <dd class="word_break">
                                         <?PHP echo  $data['Quotation']['quotationno']; ?>
                                     </dd>
                                 </dl>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="block">
-                                <dl>
-                                    <dt>Invoice Details</dt>
-                                    <dd class="word_break">
-                                        <?PHP echo  $data['Quotation']['quotationno']; ?>
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
+                        
+                        <div class="col-sm-12">
                             <div class="block col-sm-12">
                                 <dl>
                                     <dt>Po Number</dt>
@@ -166,20 +170,21 @@
                                         $quo_po     =   $data['Quotation']['ref_no'];
                                         $arra_po    =   explode(',', $quo_po);
                                     ?>
-                                    <?PHP  
-                                        $quo_po     =   $data['Quotation']['ref_no'];
-                                        $arra_po    =   explode(',', $quo_po);
-                                    ?>
-                                     <?PHP foreach ($arra_po as $po=>$pov): ?>
-                                    <div class="col-md-5 row">
-                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pov,'label'=>false)) ?></dd>
+                                    <?PHP $count    =   0; ?>
+                                     <?PHP foreach ($pos as $pokey=>$pov): ?>
+                                    <?PHP $count    =   $count+1; ?>
+                                    <div class="col-md-6 row">
+                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pokey,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
                                     </div>
-                                    <div class="col-md-5 row">
-                                       <input type="text" class="form-control pull-left" >
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control pull-left" placeholder="PO Count" name="pocount[]" value=<?PHP echo $pov; ?> >
                                     </div>
-                                    <div class="btn btn-alt btn-info pull-right" id="delete_po">
+                                    <?PHP if($count==1&& $type_id!=1): ?>
+                                    <div class="btn btn-alt btn-info pull-right" id="po_plus">
                                     <i class="fa fa-plus"></i></div>
+                                    <?PHP endif; ?>
                                     <?PHP endforeach; ?>
+                                    <div class="po_up"></div>
                                    
                                 </dl>
                             </div>
@@ -193,4 +198,4 @@
                                     <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
                                 </div>
                             </div>
-                        </form>   
+                      <?PHP echo $this->Form->end(); ?>
