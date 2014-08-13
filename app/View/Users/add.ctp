@@ -1,6 +1,6 @@
- <h1>
-                                <i class="gi gi-user"></i>Add Users
-                            </h1>
+<h1>
+    <i class="gi gi-user"></i>Add Users
+</h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">

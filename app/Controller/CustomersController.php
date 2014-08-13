@@ -8,7 +8,7 @@
 class CustomersController extends AppController
 {
     public $helpers = array('Html','Form','Session');
-    public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo','AcknowledgementType',
+    public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo','AcknowledgementType','Quotation',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
                         'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo');
@@ -22,7 +22,6 @@ class CustomersController extends AppController
          *  Controller : Customers
          *  Permission : view 
          *******************************************************/
-        
         $user_role = $this->userrole_permission();
         if($user_role['cus_customer']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
@@ -149,6 +148,14 @@ class CustomersController extends AppController
         }
         
         $customer_details =  $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id,'Customer.status'=>1,'Customer.is_deleted'=>0))); 
+        $completed_quotation    =   $this->Quotation->find('all',array('conditions'=>array('Quotation.customer_id'=>$id,'Quotation.is_jobcompleted'=>0,'Quotation.is_deleted'=>0)));
+        if(count($completed_quotation)>0):
+            $disabled   =   'disabled';
+            $this->set('disabled',$disabled);
+            else:
+                $disabled   =   '';
+                $this->set('disabled',$disabled);
+        endif;
         
         if($this->Session->read('customer_id')==''){ $this->Session->write('customer_id',$id);  }
         $this->set('customer_id',$id);

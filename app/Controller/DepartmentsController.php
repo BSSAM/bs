@@ -43,7 +43,6 @@ class DepartmentsController extends AppController
         if($user_role['other_department']['add'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
-        
         /*
          * ---------------  Functionality of Users -----------------------------------
          */ 

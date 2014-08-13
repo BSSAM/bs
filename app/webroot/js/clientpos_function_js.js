@@ -323,7 +323,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                
+                $('.quotation_fullview').html(data);
             }
             });
     });

@@ -235,7 +235,7 @@
     </div>
      <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('invoice_type_id', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoice_type_id')); ?>
+        <?php echo $this->Form->input('invoice_type_id', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoice_type_id',$disabled)); ?>
     </div>
 
 
@@ -244,11 +244,11 @@
    
     <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('deliveryordertype_id', array('id' => 'val_deliveryordertype', 'class' => 'form-control select-chosen', 'options' => $deliverorder_type, 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype_id')); ?>
+        <?php echo $this->Form->input('deliveryordertype_id', array('id' => 'val_deliveryordertype', 'class' => 'form-control select-chosen', 'options' => $deliverorder_type, 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype_id',$disabled)); ?>
     </div>
     <label class="col-md-2 control-label" for="val_poack">Acknowledgement Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('acknowledgement_type_id', array('id' => 'val_poack', 'class' => 'form-control select-chosen checkbox', 'label' => false, 'name' => 'acknowledgement_type_id','type'=>'select','options'=>$acknowledgement_type,'empty'=>'Select the Acknowledgement Type')); ?>
+        <?php echo $this->Form->input('acknowledgement_type_id', array('id' => 'val_poack', 'class' => 'form-control select-chosen checkbox', 'label' => false, 'name' => 'acknowledgement_type_id','type'=>'select','options'=>$acknowledgement_type,'empty'=>'Select the Acknowledgement Type',$disabled)); ?>
     </div>
 
 </div>

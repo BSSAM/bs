@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 class ClientposapprovalController extends AppController {
 
     public $helpers = array('Html', 'Form', 'Session');
@@ -23,11 +22,10 @@ class ClientposapprovalController extends AppController {
     }
     public function view() 
     {
-        $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>1,'Quotation.is_deleted'=>0),'recursive'=>3));
-        pr($data);
-        $this->autoRender   =   false;
+        $this->layout   =   'ajax';
         $q_id =  $this->request->data['q_id'];
-        $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.id'=>$q_id,'Quotation.is_deleted'=>0)));
-        $this->set(compact('data'));
+        $track_id=$this->random('track');
+        $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$q_id,'Quotation.is_deleted'=>0),'recursive'=>3));
+        $this->set(compact('data','track_id'));
     }
 }

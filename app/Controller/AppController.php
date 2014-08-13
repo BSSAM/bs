@@ -249,7 +249,6 @@ App::uses('Controller', 'Controller');
                     $str1 = implode('-', $parts);
                     $this->Random->updateAll(array('Random.deliveryorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
-                
                  // Invoice Random ID
                 case 'invoice':
                   $random = $this->Random->find('first');
