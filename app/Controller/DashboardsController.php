@@ -27,6 +27,8 @@ class DashboardsController extends AppController
         $this->set('total_quotation_count', $data_quo);
         $data_quo_view = $this->Quotation->find('count',array('conditions'=>array('Quotation.view'=>'0')));
         $this->set('total_quotation_view', $data_quo_view);
+        $data_quo_view_by_date = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_approved'=>2)));
+        $this->set('data_quo_view_by_date', $data_quo_view_by_date);
         /* Sales Order */
         $data_sales = $this->Salesorder->find('count');
         $this->set('total_salesorder_count', $data_sales);
@@ -165,5 +167,10 @@ class DashboardsController extends AppController
         /*****************************************************/
        
       
+    }
+    
+    public function GetEvents()
+    {
+        
     }
 }

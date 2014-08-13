@@ -28,16 +28,7 @@
                             <!-- Forum -->
                             <div class="tab-pane active" id="home">
                                 <div class="block full" style=" border: 0px; margin-bottom: 0px;">
-                                    <h1><div class="text-center">BS Enterprise Welcomes You</div>
-                                        <div class="clearfix">
-                                    <blockquote class="pull-left">
-                                        <p>Best Standards boasts having a Management that is far-sighted and are true believers that customer satisfaction is the best & most prized award for any organization.</p>
-                                        <p>With You in mind, we have geared up to diversify our core business from Instrumentation & metrology services to put together a comprehensive pool of companies, all set to provide industry specific professional service to our esteemed clients.</p>
-                                        <small class="pull-right"><cite title="BS Enterprise Team">BS Enterprise Team</cite></small>
-                                    </blockquote>
-                                </div>
-                                   
-                                    </h1>
+                                    <h1><div class="text-center">BS Enterprise</div></h1>
                                 </div>
                             </div>
                         
@@ -697,51 +688,6 @@
                         </div>
                     </div>
                     <?php } ?>
-                    <div class="block block-alt-noborder full">
-                        <div class="block-title">
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <!--<div class="block-section">
-                                     Add event functionality (initialized in js/pages/compCalendar.js) 
-                                    <form>
-                                        <div class="input-group">
-                                            <input type="text" id="add-event" name="add-event" class="form-control" placeholder="Add Event">
-                                            <div class="input-group-btn">
-                                                <button type="submit" id="add-event-btn" class="btn btn-primary"><i class="gi gi-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>-->
-                                <div class="block-section">
-                                    <div class="block-section text-center text-muted">
-                                        <small><em><i class="fa fa-arrows"></i> Jobs Statistics</em></small>
-                                    </div>
-                                    <ul class="calendar-events calender_listing">
-                                        <li>Quotation</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>Sales Order</li><!--  style="background-color: #9b59b6"  -->
-                                        <li>Delivery Order</li><!--   style="background-color: #3498db"  -->
-                                        <li>Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
-                                        <li>Client PO</li><!--   style="background-color: #f39c12"  -->
-                                        <li>PR</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>PO</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>ELECTRICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>TEMPERATURE</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>MECHANICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>DIMENSION</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>Onsite</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>Sub-Contract</li><!--  style="background-color: #1abc9c"  -->
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <!-- FullCalendar (initialized in js/pages/compCalendar.js), for more info and examples you can check out http://arshaw.com/fullcalendar/ -->
-                                <div id="calendar"></div>
-                            </div>
-                        </div>
-                    </div>
                     <?php if($user_me == 1 || $user_me ==2){ ?>
                     <div class="row">
                         
@@ -803,6 +749,52 @@
                        
                     </div>
                     <?php } ?>
+                    <div class="block block-alt-noborder full">
+                        <div class="block-title">
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <!--<div class="block-section">
+                                     Add event functionality (initialized in js/pages/compCalendar.js) 
+                                    <form>
+                                        <div class="input-group">
+                                            <input type="text" id="add-event" name="add-event" class="form-control" placeholder="Add Event">
+                                            <div class="input-group-btn">
+                                                <button type="submit" id="add-event-btn" class="btn btn-primary"><i class="gi gi-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>-->
+                                <div class="block-section">
+                                    <div class="block-section text-center text-muted">
+                                        <small><em><i class="fa fa-arrows"></i> Jobs Statistics</em></small>
+                                    </div>
+                                    <ul class="calendar-events calender_listing">
+                                        <li class="quote_calendar">Quotation</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>Sales Order</li><!--  style="background-color: #9b59b6"  -->
+                                        <li>Delivery Order</li><!--   style="background-color: #3498db"  -->
+                                        <li>Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
+                                        <li>Client PO</li><!--   style="background-color: #f39c12"  -->
+                                        <li>PR</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>PO</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>ELECTRICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>TEMPERATURE</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>MECHANICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>DIMENSION</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>Onsite</li><!--  style="background-color: #1abc9c"  -->
+                                        <li>Sub-Contract</li><!--  style="background-color: #1abc9c"  -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <!-- FullCalendar (initialized in js/pages/compCalendar.js), for more info and examples you can check out http://arshaw.com/fullcalendar/ -->
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- END Widgets Row -->
                     <!--<div class="block block-alt-noborder full">
                         <div class="row">
@@ -921,10 +913,16 @@
                 </div>
             </div>
         </div>
+        <div>
+            
+        </div>
         
           <script>
              
     $(function(){ 
+        
+        //$('.quote_calendar').function(){
+        
         CompCalendar.init();  });
                 
     var CompCalendar = function() {
@@ -999,8 +997,8 @@
                     var copiedEventObject = $.extend({}, originalEventObject);
 
                     // assign it the date that was reported
-                    copiedEventObject.start = date;
-                    copiedEventObject.allDay = allDay;
+                    //copiedEventObject.start = date;
+                    //copiedEventObject.allDay = allDay;
 
                     // render the event on the calendar
                     // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
@@ -1011,10 +1009,28 @@
                 },
                 events: [
                     {
-                        title: 'Invoice',
-                        start: '2014-06-09T12:30:00',
-                        end: '2014-06-10T12:30:00',
-                        allDay: false
+                        title: '1',
+                        start: '2014-08-09',
+                        allDay: true,
+                        color: '#f39c12'
+                    },
+                    {
+                        title: '3',
+                        start: '2014-08-18',
+                        allDay: true,
+                        color: '#f39c12'
+                    },
+                    {
+                        title: '150',
+                        start: '2014-08-20',
+                        allDay: true,
+                        color: '#f39c12'
+                    },
+                    {
+                        title: '123',
+                        start: '2014-08-29',
+                        allDay: true,
+                        color: '#f39c12'
                     }
                 ]
             });

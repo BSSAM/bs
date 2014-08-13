@@ -240,6 +240,7 @@ class UserrolesController extends AppController
             if($this->Userrole->updateAll(array('Userrole.js_enc'=>"'".$a."'"),array('Userrole.user_role_id'=>$ids)))
             {
                 $this->Session->setFlash(__('Userrole is Updated'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Session->setFlash(__('Userrole Cant be Updated'));
         }
