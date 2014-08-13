@@ -22,7 +22,6 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">ID</th>
-                                        <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">UserName</th>
                                         <th class="text-center">Role</th>
                                         <th class="text-center">Department</th>
@@ -32,10 +31,9 @@
                                 </thead>
                                 <tbody>
                                     
-                                     <?php foreach($user as $user_list): ?>
-                                    <tr>
+                                    <?php foreach($user as $user_list): ?>
+                                    <tr <?php if($user_list['User']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $user_list['User']['id']; ?></td>
-                                        <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $user_list['User']['username']; ?></a></td>
                                         <td class="text-center"><?php echo $user_list['Userrole']['user_role']; ?></td>
                                         <td class="text-center word_break">

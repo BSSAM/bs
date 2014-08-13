@@ -33,7 +33,7 @@
                                 <tbody>
                                     <?php foreach($assign as $assign_list): ?>
                                        
-                                    <tr>
+                                    <tr <?php if($assign_list['Assign']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $assign_list['Assign']['id'];?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $assign_list['Assign']['assignedto'];?></a></td>

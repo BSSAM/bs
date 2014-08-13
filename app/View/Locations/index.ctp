@@ -33,7 +33,7 @@
                                 </thead>
                                 <tbody>
                                      <?php foreach($location as $location_list): ?>
-                                    <tr>
+                                    <tr <?php if($location_list['Location']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $location_list['Location']['id']; ?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $location_list['Location']['locationname']; ?></a></td>

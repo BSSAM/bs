@@ -33,7 +33,7 @@
                                 <tbody>
                                     <?php foreach($additionalcharge as $additionalcharge_list): ?>
                                        
-                                    <tr>
+                                    <tr <?php if($additionalcharge_list['Additionalcharge']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $additionalcharge_list['Additionalcharge']['id'];?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><a href="javascript:void(0)"><?php echo $additionalcharge_list['Additionalcharge']['additionalcharge'];?></a></td>
