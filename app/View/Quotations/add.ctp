@@ -40,7 +40,7 @@ $("#val_reg_date").datepicker("setDate", new Date());
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','enctype'=>'multipart/form-data')); ?>
+                                    <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','enctype'=>'multipart/form-data','id'=>'form-quotation-add')); ?>
                                     <?php echo $this->Form->input('Quotation.customer_id', array('type'=>'hidden','value'=>'')); ?>
                                     <?php echo $this->Form->input('Quotation.track_id', array('type'=>'hidden','value'=>$our_ref_no)); ?>
                                     <?php echo $this->Form->input('Quotation.quotation_id', array('type'=>'hidden','value'=>$quotationno)); ?>

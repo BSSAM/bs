@@ -9,6 +9,7 @@
                                                 'placeholder'=>'Due Amount','label'=>false,'autoComplete'=>'off','disabled'=>'disabled')); ?>
     </div>
 </div>
+
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
@@ -24,6 +25,7 @@
                                                'placeholder'=>'Enter the Customer Address','label'=>false,'rows'=>6,'cols'=>30)); ?>
     </div>
 </div>
+
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
