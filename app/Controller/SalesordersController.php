@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','branch');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog');
         public function index()
         {
         /*******************************************************
@@ -116,7 +116,7 @@
             
             if($this->request->is('post'))
             {
-               
+               //pr($this->request->data);exit;
                if(isset($this->request->data['Salesorder']['salesorder_created']) && $this->request->data['Salesorder']['salesorder_created']==1)
                {
                    //For pending process in Salesorder by quotation
@@ -134,7 +134,7 @@
                    else
                    {
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
-                        // pr($quotation_details);exit;
+                        //pr($quotation_details);exit;
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
                         $this->set(compact('contact_list'));
                         $sales_details =  $quotation_details['Quotation']  ;
@@ -142,6 +142,7 @@
                         $sales['Description']  =    $quotation_details['Device'];
                         $sales['Salesorder']['quotation_id']   =    $sales_details['id'];
                         $device_node_nonstatus    =   $this->Description->find('all',array('conditions'=>array('Description.quotation_id'=>$sales['Salesorder']['quotation_id'],'Description.status'=>0)));
+                        //pr($device_node_nonstatus);exit;
                         if(!empty($device_node_nonstatus))
                         {
                              $this->Description->deleteAll(array('Description.quotation_id'=>$sales['Salesorder']['quotation_id'],'Description.status'=>0));
@@ -181,6 +182,7 @@
                         else
                         {
                             $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
+                            pr($device_node);exit;
                             if(!empty($device_node))
                             {
                                 $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.status'=>0));
@@ -600,6 +602,7 @@
             $document_file_name   =   implode($file_name,'-') ;
             $this->response->file(APP.'webroot'.DS.'files'.DS.'Salesorders'.DS.$salesorder_id.DS.$doc_name,
 			array('download'=> true, 'name'=>$document_file_name));
+            
             return $this->response;  
 	}
         public function remove_salesdocument()

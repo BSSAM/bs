@@ -264,7 +264,8 @@ $(document).ready(function(){
    });
     /**************************Quotation Approval in Quotation Module*************************************/
     $(document).on('click','.approve_quotation',function(){
-       var val_quotationno=$('#val_quotationno').val();
+       var val_quotationno=$('#val_quotationid').val();
+       //alert(val_quotationno);
        
        if(window.confirm("Are you sure?")){
        $.ajax({

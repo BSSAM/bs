@@ -2,6 +2,7 @@
     <label class="col-md-2 control-label" for="val_quotationno">Quotation No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Quotation.quotationno', array('id'=>'val_quotationno','class'=>'form-control','disabled'=>'disabled','label'=>false,'value'=> $this->request->data['Quotation']['quotationno'])); ?>
+        <?php echo $this->Form->input('Quotation.id', array('id'=>'val_quotationid','class'=>'form-control','type'=>'hidden','label'=>false,'value'=> $this->request->data['Quotation']['id'])); ?>
     </div>
    <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">

@@ -400,10 +400,11 @@
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
-            $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.quotationno'=>$id));
+            $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.id'=>$id));
             $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
-            $details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id)));
+            //pr($log);exit;
+            //$details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id)));
 //            $track_id = $details['Quotation']['track_id'];
 //            $customer_id = $details['Quotation']['customer_id'];
 //            $quo_id = $details['Quotation']['id'];
