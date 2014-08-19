@@ -369,7 +369,7 @@ header.navbar-inverse.navbar-fixed-bottom {
     padding: 0;
     width: 100px;
     float: right;
-    height: 50px;
+    height: 37px;
 }
 
 .navbar-form-custom .form-control {
@@ -3892,4 +3892,8 @@ html.scripted:before{
 
 .table-hover tbody tr:hover.info {
   background-color: #c4e3f3 !important;
+}
+.nav-adjusted{
+    position: relative;
+    top: 13px;
 }

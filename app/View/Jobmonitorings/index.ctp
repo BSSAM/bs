@@ -38,10 +38,11 @@
                 <?PHP if (!empty($salesorder_approved_list)): ?>
                 <?php foreach ($salesorder_approved_list as $salesorder): ?>
                 <tr>
-                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['salesorderno'] ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['due_date'] ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['reg_date'] ?></td>
-                    <td class="text-center"><?PHP echo $salesorder['branch']['branchname'] ?></td>
+                    
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['salesorderno']; ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['due_date']; ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['Salesorder']['reg_date']; ?></td>
+                    <td class="text-center"><?PHP echo $salesorder['branch']['branchname']; ?></td>
                     <td class="text-center"><?PHP echo $salesorder['Customer']['Customertagname']; ?></td>
                     <td class="text-center">
                     <?PHP 
@@ -64,6 +65,7 @@
                             $count_r++; 
                         endif; 
                     endforeach;
+                    $status = "";
                     if($count_p ==  $count_desc):
                         $status = " Processing ";
                     endif;
