@@ -91,7 +91,7 @@
                                 <tbody>
                                     <?PHP if(!empty($salesorder )): ?>
                                      <?php foreach($salesorder as $salesorder_list): ?>
-                                    <tr>
+                                    <tr <?php if($salesorder_list['Quotation']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['branch']['branchname'] ?></td>

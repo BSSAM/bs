@@ -74,7 +74,7 @@ if(customer!='')
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
                                    
-                                    <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'Salesorder','action'=>'add')); ?>
+                                    <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'Salesorder','action'=>'salesorder_by_quotation')); ?>
                                     <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden')); ?>
                                     <?PHP if(!empty($sale['Salesorder']['track_id'])): ?>
                                     <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden')); ?>

@@ -416,7 +416,7 @@
                         <!-- Main Sidebar Toggle Button -->
                         <li>
                             <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
-                                <i class="fa fa-bars fa-fw"></i>
+                                <i class="fa fa-bars fa-fw nav-adjusted"></i>
                             </a>
                         </li>
                       
