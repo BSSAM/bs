@@ -182,7 +182,7 @@
                         else
                         {
                             $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
-                            pr($device_node);exit;
+                            //pr($device_node);exit;
                             if(!empty($device_node))
                             {
                                 $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.status'=>0));
