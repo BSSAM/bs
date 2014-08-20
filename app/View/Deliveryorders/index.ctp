@@ -39,7 +39,7 @@
                                 <tbody>
                                     <?PHP if(!empty($deliveryorders )): ?>
                                      <?php foreach($deliveryorders as $deliveryorder): ?>
-                                    <tr>
+                                    <tr <?php if($deliveryorder['Deliveryorder']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_no'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_date'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['salesorder_id'] ?></td>
