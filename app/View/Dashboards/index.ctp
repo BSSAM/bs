@@ -1,4 +1,7 @@
-                            <div class="row">
+<script>
+    var path='<?PHP echo Router::url('/',true); ?>';
+    </script>
+<div class="row">
                                 <!-- Main Title (hidden on small devices for the statistics to fit) -->
                                 <div class="col-md-4 col-lg-6 ">
                                     <h1>Welcome <strong><?php echo $username; ?></strong></h1>
@@ -771,20 +774,20 @@
                                         <small><em><i class="fa fa-arrows"></i> Jobs Statistics</em></small>
                                     </div>
                                     <ul class="calendar-events calender_listing">
-                                        <li class="quote_calendar">Quotation</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>Sales Order</li><!--  style="background-color: #9b59b6"  -->
-                                        <li>Delivery Order</li><!--   style="background-color: #3498db"  -->
-                                        <li>Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
-                                        <li>Client PO</li><!--   style="background-color: #f39c12"  -->
-                                        <li>PR</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>PO</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>ELECTRICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>TEMPERATURE</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>MECHANICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>DIMENSION</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>Onsite</li><!--  style="background-color: #1abc9c"  -->
-                                        <li>Sub-Contract</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">Quotation</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Salesorders">Sales Order</li><!--  style="background-color: #9b59b6"  -->
+                                        <li class="quote_calendar" data-id="Deliveryorders">Delivery Order</li><!--   style="background-color: #3498db"  -->
+                                        <li class="quote_calendar" data-id="Quotations">Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
+                                        <li class="quote_calendar" data-id="Clientpos">Client PO</li><!--   style="background-color: #f39c12"  -->
+                                        <li class="quote_calendar" data-id="Quotations">PR</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">PO</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">ELECTRICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">TEMPERATURE</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">MECHANICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">DIMENSION</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">Onsite</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Quotations">Sub-Contract</li><!--  style="background-color: #1abc9c"  -->
                                     </ul>
                                 </div>
                             </div>
@@ -918,8 +921,10 @@
         </div>
         
           <script>
-             
+              
     $(function(){ 
+        
+      
         
         //$('.quote_calendar').function(){
         
@@ -941,9 +946,10 @@
             $(this).draggable({ zIndex: 999, revert: true, revertDuration: 0 });
         });
     };
-
+ 
     return {
         init: function() {
+            
             /* Initialize drag and drop event functionality */
             initEvents();
 
@@ -951,34 +957,14 @@
             var eventInput      = $('#add-event');
             var eventInputVal   = '';
 
-            // When the add button is clicked
-//            $('#add-event-btn').on('click', function(){
-//                // Get input value
-//                eventInputVal = eventInput.prop('value');
-//
-//                // Check if the user entered something
-//                if ( eventInputVal ) {
-//                    // Add it to the events list
-//                    calendarEvents.append('<li class="animation-slideDown">' + $('<div />').text(eventInputVal).html() + '</li>');
-//
-//                    // Clear input field
-//                    eventInput.prop('value', '');
-//
-//                    // Init Events
-//                    initEvents();
-//                }
-//
-//                // Don't let the form submit
-//                return false;
-//            });
-
-            /* Initialize FullCalendar */
+          
             var date = new Date();
             var d = date.getDate();
             var m = date.getMonth();
             var y = date.getFullYear();
-
+            
             $('#calendar').fullCalendar({
+                
                 header: {
                     left: 'prev,next',
                     center: 'title',
@@ -996,44 +982,84 @@
                     // we need to copy it, so that multiple events don't have a reference to the same object
                     var copiedEventObject = $.extend({}, originalEventObject);
 
-                    // assign it the date that was reported
-                    //copiedEventObject.start = date;
-                    //copiedEventObject.allDay = allDay;
-
-                    // render the event on the calendar
-                    // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
                     $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
 
                     // remove the element from the "Draggable Events" list
                     $(this).remove();
                 },
-                events: [
-                    {
-                        title: '1',
-                        start: '2014-08-09',
-                        allDay: true,
-                        color: '#f39c12'
-                    },
-                    {
-                        title: '3',
-                        start: '2014-08-18',
-                        allDay: true,
-                        color: '#f39c12'
-                    },
-                    {
-                        title: '150',
-                        start: '2014-08-20',
-                        allDay: true,
-                        color: '#f39c12'
-                    },
-                    {
-                        title: '123',
-                        start: '2014-08-29',
-                        allDay: true,
-                        color: '#f39c12'
-                    }
-                ]
+                
+                
             });
+            
+            //////// Calendar For Quotation ///////////////
+            $(document).on('click','.quote_calendar',function(){
+                
+               
+                var calen = $(this).attr('data-id');
+               
+               
+            $('#calendar').empty().fullCalendar({
+                
+                header: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'month'
+                    //,agendaWeek,agendaDay
+                },
+                firstDay: 1,
+                editable: false,
+                droppable: false,
+                drop: function(date, allDay) { // this function is called when something is dropped
+
+                    // retrieve the dropped element's stored Event Object
+                    var originalEventObject = $(this).data('eventObject');
+
+                    // we need to copy it, so that multiple events don't have a reference to the same object
+                    var copiedEventObject = $.extend({}, originalEventObject);
+
+                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+                    // remove the element from the "Draggable Events" list
+                    $(this).remove();
+                },
+                events: path+calen+'/calendar/'
+                
+            });
+         
+     });
+        /////////////// Calendar for Quotation /////////////
+        
+//        //////// Calendar For Salesorder ///////////////
+//            $(document).on('click','.sales_calendar',function(){
+//                
+//            $('#calendar').fullCalendar({
+//                header: {
+//                    left: 'prev,next',
+//                    center: 'title',
+//                    right: 'month'
+//                    //,agendaWeek,agendaDay
+//                },
+//                firstDay: 1,
+//                editable: false,
+//                droppable: false,
+//                drop: function(date, allDay) { // this function is called when something is dropped
+//
+//                    // retrieve the dropped element's stored Event Object
+//                    var originalEventObject = $(this).data('eventObject');
+//
+//                    // we need to copy it, so that multiple events don't have a reference to the same object
+//                    var copiedEventObject = $.extend({}, originalEventObject);
+//
+//                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+//
+//                    // remove the element from the "Draggable Events" list
+//                    $(this).remove();
+//                },
+//                events: path+'Salesorders/calendar/'
+//                
+//            });});
+//        /////////////// Calendar for Salesorder /////////////
+        
         }
     };
 }();

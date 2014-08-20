@@ -500,4 +500,97 @@
                  $this->Document->updateAll(array('Document.status'=>0),array('Document.quotationno'=>$id,'Document.document_name LIKE'=>'%'.$document_id.'%'));
             }
         }
+        
+        public function calendar()
+        {
+            $this->autoRender=false;
+            $cal  =   $this->Quotation->find('all',array('conditions'=>array('Quotation.status'=>1,'Quotation.is_approved'=>1),'group'=>'reg_date','fields'=>array('count(Quotation.reg_date) as title','reg_date as start'),'recursive'=>'-1'));
+           
+            $event_array=array();   
+            foreach($cal as $cal_list=>$v)
+                {
+                  
+                   $event_array[$cal_list]['title']=$v[0]['title'];
+                   $event_array[$cal_list]['start']=$v['Quotation']['start'];
+                    //echo json_encode($cal_list1);
+                        //$cal_list1 = array_push($res1,"allDay: true");
+                   // $res = json_encode($cal_list1);
+                    
+                    // $res1[] = str_replace(array( '{', '}','"' ), '', $res); 
+                    }
+              return json_encode($event_array);
+                   
+               
+                
+               // pr($cal_list2);
+//                foreach ($cal_list2 as $cal_re)
+//                {
+//                    $res = json_encode($cal_re);
+//                    
+//                }
+                //return $res;
+//                echo "<script>
+//                return {
+//        init: function() {
+//            /* Initialize drag and drop event functionality */
+//            initEvents();
+//
+//            /* Add new event in the events list */
+//            var eventInput      = $('#add-event');
+//            var eventInputVal   = '';
+//
+//          
+//            var date = new Date();
+//            var d = date.getDate();
+//            var m = date.getMonth();
+//            var y = date.getFullYear();
+//
+//            $('#calendar').fullCalendar({
+//                header: {
+//                    left: 'prev,next',
+//                    center: 'title',
+//                    right: 'month'
+//                    //,agendaWeek,agendaDay
+//                },
+//                firstDay: 1,
+//                editable: false,
+//                droppable: false,
+//                drop: function(date, allDay) { // this function is called when something is dropped
+//
+//                    // retrieve the dropped element's stored Event Object
+//                    var originalEventObject = $(this).data('eventObject');
+//
+//                    // we need to copy it, so that multiple events don't have a reference to the same object
+//                    var copiedEventObject = $.extend({}, originalEventObject);
+//
+//                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+//
+//                    
+//                    $(this).remove();
+//                },
+//                events: [";
+//                   foreach($cal_list2 as $callist)
+//                    {
+//                    //pr($callist);
+//                       
+//                    echo "{";
+////                        echo "title:'".$callist['title']."',";
+////                        echo "start:'".$callist['start']."',";
+////                        echo "allDay:'".$callist['true']."',";
+//                       echo "},"; 
+//                    }
+//                  echo "]
+//            });
+//        }
+//    };
+//    </script>";
+                //return $cal_list2;
+          //pr($res1);
+          //$result = explode($res1, ':');
+          //$result = implode($res1, ',');
+         // echo $result;
+        }
+        
+        
+        
 }
