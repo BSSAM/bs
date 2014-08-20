@@ -4,12 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/wamp/www/bs/app/View/Elements/header.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/createschedule.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Quotations/edit.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/edit/quotation_info.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Userroles/roles.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Salesorders/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/onsite_func.js</file>
             <file>file:/D:/wamp/www/bs/app/webroot/js/pages/compCalendar.js</file>
             <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Customers/add.ctp</file>
@@ -21,17 +19,15 @@
             <file>file:/D:/wamp/www/bs/app/View/Quotations/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/webroot/js/quo_function_js.js</file>
             <file>file:/D:/wamp/www/bs/app/webroot/css/main.css</file>
-            <file>file:/D:/wamp/www/bs/app/View/Onsites/add.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Quotations/add.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Assigns/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/customer_info.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/UserrolesController.php</file>
             <file>file:/D:/wamp/www/bs/app/Model/Device.php</file>
             <file>file:/D:/wamp/www/bs/app/Model/Track.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/OnsitesController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
             <file>file:/D:/wamp/www/bs/app/Controller/SalespersonsController.php</file>
             <file>file:/D:/wamp/www/bs/app/Controller/DashboardsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Onsites/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Salesorders/salesorder_by_quotation.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/CustomertaglistsController.php</file>
             <file>file:/D:/wamp/www/bs/app/Model/Doinvoice.php</file>
