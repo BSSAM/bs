@@ -81,6 +81,6 @@
                             </div>
                             <!-- END Basic Form Elements Block -->
                         </div>
-    <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
-        <script>$(function(){ FormsValidation.init(); });</script>
+    <?php //echo $this->Html->script('pages/instrumentsvalidation'); ?>
+<!--        <script>$(function(){ FormsValidation.init(); });</script>-->
                         

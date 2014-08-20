@@ -24,7 +24,7 @@
             <td class="text-center"><?PHP echo $cd['Contactpersoninfo']['name']; ?></td>
             <td class="text-center"><?PHP echo $cd['Contactpersoninfo']['phone']; ?></td>
             <td class="text-center"><?PHP echo $cd['assign']['assignedto']; ?></td>
-            <td class="text-center"><?PHP echo $cd['branch']['branchname']; ?></td>
+            <td class="text-center"><?PHP echo $collection_delivery_data['branch']['branchname']; ?></td>
             <td class="text-center"><?PHP echo $cd['remarks']; ?></td>
             <td class="text-center">Request By</td>
         </tr>

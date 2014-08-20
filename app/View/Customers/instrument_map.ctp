@@ -79,7 +79,9 @@
                         <?php echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add', array('type' => 'button', 'class' => 'btn btn-sm btn-primary customerinstrument_add', 'escape' => false)); ?>
                     </div>
                 </div>
-                <table  class="table table-vcenter table-condensed table-bordered">
+                <div class="col-md-12">
+                <div class="table-responsive">
+                <table id="qofull-datatable" class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">S.No</th>
@@ -116,11 +118,13 @@
                            <?PHP endif; ?>     
                     </tbody>
                 </table>
+                </div>
+                </div>
                                 <div class="form-group form-actions">
                                     <div class="col-md-9 col-md-offset-10">
                                         <?php echo $this->Html->link('Back to Customers', array('controller' => 'Customers', 'action' => 'index'), array('class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
                                     </div>
                                 </div>
-    <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
-        <script>$(function(){ FormsValidation.init(); });</script>
+<!--    <?php //echo $this->Html->script('pages/instrumentsvalidation'); ?>
+        <script>$(function(){ FormsValidation.init(); });</script>-->
                         

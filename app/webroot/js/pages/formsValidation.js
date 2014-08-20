@@ -104,7 +104,28 @@ var FormsValidation = function() {
                     val_terms: 'You must agree to the service terms!'
                 }
             });
-            
+//            $().ready(function() {
+//    // validate the form when it is submitted
+//     $("#form-country-add").validate();
+//     $("#val_country").rules("add", {
+//         required:true,
+//         messages: {
+//                required: "Please Enter Country Name."
+//         }
+//      });
+//     $("#last_name").rules("add", {
+//         required:true,
+//         messages: {
+//                required: "Please Enter Description of Project."
+//         }
+//      }
+//      );
+     /*  You Can add oter fields like above
+         Here with messages. But remember you have to mention
+         $("#testingform").validate(); first and then write
+         all other code
+     */
+//});
             $('#form-country-add').validate({
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
@@ -143,7 +164,17 @@ var FormsValidation = function() {
                     },
                     
                 }
+                
             });
+//            $("#val_country").rules("add", { 
+//             required: true,  
+//             minlength: 3
+//            });
+//            $("#val_country").messages("add", { 
+//            required: 'Please enter a Country Name',
+//            minlength: 'Your Country Name must at least 3 characters'
+//            });
+            
             
             
             $('#form-assign-add').validate({

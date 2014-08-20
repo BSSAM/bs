@@ -622,6 +622,27 @@
             }
             
 	}
+        public function calendar()
+        {
+            $this->autoRender=false;
+            $cal  =   $this->Salesorder->find('all',array('conditions'=>array('Salesorder.status'=>1,'Salesorder.is_approved'=>1),'group'=>'reg_date','fields'=>array('count(Salesorder.in_date) as title','in_date as start'),'recursive'=>'-1'));
+           
+            $event_array=array();   
+            foreach($cal as $cal_list=>$v)
+                {
+                  
+                   $event_array[$cal_list]['title']=$v[0]['title'];
+                   $event_array[$cal_list]['start']=$v['Salesorder']['start'];
+                    //echo json_encode($cal_list1);
+                        //$cal_list1 = array_push($res1,"allDay: true");
+                   // $res = json_encode($cal_list1);
+                    
+                    // $res1[] = str_replace(array( '{', '}','"' ), '', $res); 
+                    }
+              return json_encode($event_array);
+        }
         
       
 }
+
+?>

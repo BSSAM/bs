@@ -1,7 +1,7 @@
- <h1><script>
+<script>
     var path='<?PHP echo Router::url('/',true); ?>';
 </script>
-                                <i class="gi gi-user"></i>Edit Instrument
+  <h1>                               <i class="gi gi-user"></i>Edit Instrument
                             </h1>
                         </div>
                     </div>
@@ -120,6 +120,6 @@
                             </div>
                             <!-- END Basic Form Elements Block -->
                         </div>
-    <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
-        <script>$(function(){ FormsValidation.init(); });</script>
+   <?php //echo $this->Html->script('pages/instrumentsvalidation'); ?>
+<!--        <script>$(function(){ FormsValidation.init(); });</script>-->
                         

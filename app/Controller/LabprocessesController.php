@@ -99,6 +99,7 @@ class LabprocessesController extends AppController
                     unset($delivery['Deliverorder']['is_approved']);
                     if($this->Deliveryorder->save($delivery['Deliverorder']))
                     {
+                        pr($delivery['Deliverorder']);exit;
                         $last_id    =   $this->Deliveryorder->getLastInsertId();
                         
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
