@@ -22,7 +22,7 @@
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                 <?php echo $this->Form->create('Branch',array('class'=>'form-horizontal form-bordered','id'=>'form-branch-add')); ?>
+                                 <?php echo $this->Form->create('branch',array('class'=>'form-horizontal form-bordered','id'=>'form-branch-add')); ?>
                                 
                                     <div class="form-group">
                                        

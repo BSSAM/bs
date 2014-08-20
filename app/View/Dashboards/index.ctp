@@ -340,7 +340,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="text-center">
-                                                <i class="gi gi-keys"></i> Oops... No C & D Info Approval Available
+                                                <i class="gi gi-keys"></i> Oops... No Client PO Approval Available
                                             </td>
                                         </tr>
                                     </tbody>

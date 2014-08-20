@@ -10,7 +10,7 @@ class BranchesController extends AppController
 {
     
     public $helpers = array('Html','Form','Session');
-    public $uses    =   array('Branch');   
+    public $uses    =   array('branch');   
     public function index()
     {
         /*******************************************************
@@ -28,7 +28,7 @@ class BranchesController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Branch->find('all',array('conditions'=>array('Branch.is_deleted'=>0)),array('order' => array('Branch.id' => 'DESC')));
+        $data = $this->branch->find('all',array('conditions'=>array('branch.is_deleted'=>0)),array('order' => array('branch.id' => 'DESC')));
         $this->set('branch', $data);
        // pr($data);exit;
     }
@@ -59,7 +59,7 @@ class BranchesController extends AppController
             //pr($dat);exit;
              //$dat = $this->request->params[''];
              $match1 = $this->request->data['branchname'];
-             $data1 = $this->Branch->findByBranchname($match1);
+             $data1 = $this->branch->findByBranchname($match1);
              
             if(!empty($data1))
             {
@@ -67,9 +67,9 @@ class BranchesController extends AppController
                
                 return $this->redirect(array('action'=>'add'));
             }
-            $this->Branch->create();
+            $this->branch->create();
            
-            if($this->Branch->save($this->request->data))
+            if($this->branch->save($this->request->data))
             {
                 $this->Session->setFlash(__('Branch has been  Added successfully'));
                 return $this->redirect(array('action'=>'index'));
@@ -106,7 +106,8 @@ class BranchesController extends AppController
           
         }
         
-        $branch =  $this->Branch->findById($id); 
+        $branch =  $this->branch->findById($id); 
+        //pr($branch);exit;
        if(empty($branch))
        {
             $this->Session->setFlash(__('Invalid Branch'));
@@ -117,10 +118,11 @@ class BranchesController extends AppController
         if($this->request->is(array('post','put')))
        {
              
-              $this->Branch->id = $id;
+              $this->branch->id = $id;
+             // pr( $this->branch->id);exit;
              
           
-              if($this->Branch->save($this->request->data))
+              if($this->branch->save($this->request->data))
            {
                
                $this->Session->setFlash(__('Branch is Updated'));
@@ -154,7 +156,7 @@ class BranchesController extends AppController
         }
          if($id!='')
         {
-            if($this->Branch->updateAll(array('Branch.is_deleted'=>1),array('Branch.id'=>$id)))
+            if($this->branch->updateAll(array('branch.is_deleted'=>1),array('branch.id'=>$id)))
             {
             $this->Session->setFlash(__('The Branch has been deleted',h($id)));
             return $this->redirect(array('action'=>'index'));
