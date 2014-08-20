@@ -1,4 +1,4 @@
-
+<<<<<<< HEAD
 <?php
     class SalesordersController extends AppController
     {
@@ -645,7 +645,7 @@
         
       
 }
-
+=======
 <?php
     class SalesordersController extends AppController
     {
@@ -1273,4 +1273,4 @@
         
       
 }
-
+>>>>>>> origin/master
