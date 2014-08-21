@@ -22,7 +22,9 @@ class DashboardsController extends AppController
         $sess_userrole = $this->Session->read('sess_userrole');
         $this->set('user_me', $sess_userrole);
         
-        /* Quotation */
+        /* Customer */
+        $data_cus = $this->Customer->find('count');
+        $this->set('total_customer_count', $data_cus);
         $data_quo = $this->Quotation->find('count');
         $this->set('total_quotation_count', $data_quo);
         $data_quo_view = $this->Quotation->find('count',array('conditions'=>array('Quotation.view'=>'0')));
@@ -97,6 +99,18 @@ class DashboardsController extends AppController
         $logactivity_range_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Range")));
         //pr($logactivity);exit;
         $this->set('log_activity_range_count', $logactivity_range_count);
+        
+        /*****************************************************/
+        
+        /****************** Log Activity - Customer ********************/
+        
+        $logactivity_customer = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Customer")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_customer', $logactivity_customer);
+        
+        $logactivity_customer_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Customer")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_customer_count', $logactivity_customer_count);
         
         /*****************************************************/
         

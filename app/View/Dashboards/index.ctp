@@ -102,6 +102,7 @@
                             <!-- Topics -->
                             <div class="tab-pane" id="job_approval">
                                 <ul class="nav nav-tabs" data-toggle="tabs">
+                                    <li><a href="#customer">Customer <span class="badge animation-floating"><?php echo $log_activity_customer_count; ?></span></a></li>
                                     <li><a href="#quotation">Quotation <span class="badge animation-floating"><?php echo $log_activity_quotation_count; ?></span></a></li>
                                     <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_salesorder_count; ?></span></a></li>
                                     <li><a href="#candd">C & D <span class="badge animation-floating"><?php echo $log_activity_cdinfo_count; ?></span></a></li>
@@ -111,7 +112,49 @@
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
-                            
+                            <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------Customer----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            <div class="tab-pane" id="customer">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                <table id="cus-datatable1"  class="table table-vcenter table-condensed table-bordered dataTable">
+                                    <?PHP if (!empty($log_activity_customer)): ?>
+                                    <thead>
+                                        <th>Flag</th>
+                                        <th>Name(Details)</th>
+                                        <th>Approval</th>
+                                        <th>Created</th>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($log_activity_customer as $log_activity_customer_list) :?>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-qn.jpg', array('alt' => 'Customer','class'=>'customer_class')); ?></td>
+                                            <td class="">
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_customer_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_customer_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_customer_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center">
+                                            <?PHP if($log_activity_customer_list['Logactivity']['logname'] == 'Customer'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Customers','action'=>'edit',$log_activity_customer_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?php }?>
+                                            </td>
+                                            <td class="text-center">by <?PHP echo $log_activity_customer_list['User']['username'] ?><br><small><?PHP echo $log_activity_customer_list['Logactivity']['logtime'] ?></small></td>
+                                            </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                        <?php else: ?>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Customer Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <?php endif; ?>
+                                </table>
+                                </div>
+                                </div>
+                            </div>
                             <!---------------------------------------------------------------------------------------->
                             <!-------------------------------QUOTATION----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
@@ -579,8 +622,8 @@
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_range_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_range_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_range_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
-                                           <?PHP if($log_activity_range_list['Logactivity']['logname'] == 'Unit'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Units','action'=>'edit',$log_activity_range_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?PHP if($log_activity_range_list['Logactivity']['logname'] == 'Range'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Ranges','action'=>'edit',$log_activity_range_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                            
                                             </td>
