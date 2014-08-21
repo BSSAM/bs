@@ -102,7 +102,7 @@
                             <!-- Topics -->
                             <div class="tab-pane" id="job_approval">
                                 <ul class="nav nav-tabs" data-toggle="tabs">
-                                    <li><a href="#customer">Customer <span class="badge animation-floating"><?php echo $log_activity_customer_count; ?></span></a></li>
+                                    <li><a href="#customer">Customer <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count); ?></span></a></li>
                                     <li><a href="#quotation">Quotation <span class="badge animation-floating"><?php echo $log_activity_quotation_count; ?></span></a></li>
                                     <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_salesorder_count; ?></span></a></li>
                                     <li><a href="#candd">C & D <span class="badge animation-floating"><?php echo $log_activity_cdinfo_count; ?></span></a></li>
@@ -119,7 +119,7 @@
                                 <div class="block full">
                                 <div class="table-responsive">
                                 <table id="cus-datatable1"  class="table table-vcenter table-condensed table-bordered dataTable">
-                                    <?PHP if (!empty($log_activity_customer)): ?>
+                                    <?PHP if (!empty($log_activity_customer)||!empty($log_activity_customertag)): ?>
                                     <thead>
                                         <th>Flag</th>
                                         <th>Name(Details)</th>
