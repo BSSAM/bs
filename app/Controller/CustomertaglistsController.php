@@ -11,7 +11,7 @@ class CustomertaglistsController extends AppController
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
-                        'Deliveryordertype','InvoiceType','Priority');
+                        'Deliveryordertype','InvoiceType','Priority','AcknowledgementType','Quotation');
     public function index($id=NULL)
     {
         /*******************************************************
@@ -74,12 +74,13 @@ class CustomertaglistsController extends AppController
         
         $paymentterm = $this->Paymentterm->find('list', array('fields' => array('id','pay')));
         $priority = $this->Priority->find('list', array('fields' => 'priority'));
+        $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
        
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
         $this->set(compact('salesperson','referedby','data10','data10_count','data11',
                             'data11_count','data12','data12_count','data13','data13_count',
                             'industry','deliverorder_type','invoice_types','location',
-                            'paymentterm','userrole','priority','tag_customer_details'));
+                            'paymentterm','userrole','priority','tag_customer_details','acknowledgement_type'));
      
 
         if($this->request->is('post'))
@@ -160,7 +161,15 @@ class CustomertaglistsController extends AppController
              return $this->redirect(array('action'=>'edit'));
         }
         $customer_details = $this->Customer->find('first',array('conditions'=>array('Customer.status'=>1,'Customer.id'=>$id,'Customer.is_deleted'=>0),'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
-       
+        $completed_quotation    =   $this->Quotation->find('all',array('conditions'=>array('Quotation.customer_id'=>$id,'Quotation.is_jobcompleted'=>0,'Quotation.is_deleted'=>0)));
+      
+        if(count($completed_quotation)>0):
+            $disabled   =   'disabled';
+            $this->set('disabled',$disabled);
+            else:
+                $disabled   =   '';
+                $this->set('disabled',$disabled);
+        endif;
         if($this->Session->read('customer_id')==''){ $this->Session->write('customer_id',$id);  }
         $this->set('customer_id',$id);
         
@@ -188,11 +197,12 @@ class CustomertaglistsController extends AppController
 
         // Model For the Tab Edit Contact Info
         $contactpersoninfo = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.status' => 1, 'Contactpersoninfo.customer_id' => $id), 'order' => array('Contactpersoninfo.id' => 'DESC')));
+        $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
         
         $this->set(compact('salesperson','referedby','data10','data10_count','data11',
                             'data11_count','data12','data12_count',
                             'industry','deliverorder_type','invoice_types','location',
-                            'paymentterm','userrole','priority','tag_customer_details','contactpersoninfo'));
+                            'paymentterm','userrole','priority','tag_customer_details','contactpersoninfo','acknowledgement_type'));
         
         if($this->request->is(array('post','put')))
         {

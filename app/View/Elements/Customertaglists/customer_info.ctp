@@ -183,15 +183,14 @@
 
 </div>
 <div class="form-group">
-   <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('invoice_type_id', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoice_type_id')); ?>
-    </div>
     <label class="col-md-2 control-label" for="val_calibrationtype">Calibration Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('calibrationtype', array('id' => 'val_calibrationtype', 'class' => 'form-control select-chosen', 'options' => array('Singlas' => 'Singlas', 'Non-Singlas' => 'Non-Singlas'), 'empty' => 'Enter the Calibration Type', 'label' => false, 'name' => 'calibrationtype')); ?>
     </div>
-
+   <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('invoice_type_id', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoice_type_id')); ?>
+    </div>
 </div>
 <div class="form-group">
     
@@ -199,10 +198,9 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('deliveryordertype', array('id' => 'val_deliveryordertype', 'class' => 'form-control select-chosen', 'options' => $deliverorder_type, 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype')); ?>
     </div>
-     <label class="col-md-2 control-label" for="val_poack">PO Acknowledgement</label>
+     <label class="col-md-2 control-label" for="val_poack">Acknowledgement Type</label>
     <div class="col-md-4">
-
-        <?php echo $this->Form->checkbox('poack', array('id' => 'val_poack', 'class' => 'checkbox', 'label' => false, 'name' => 'val_poack')); ?>
+        <?php echo $this->Form->input('acknowledgement_type_id', array('id' => 'val_poack', 'class' => 'form-control select-chosen checkbox', 'label' => false, 'name' => 'acknowledgement_type_id','type'=>'select','options'=>$acknowledgement_type,'empty'=>'Select the Acknowledgement Type')); ?>
     </div>
 
 

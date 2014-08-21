@@ -1,5 +1,4 @@
 <div class="form-group">
-    
     <label class="col-md-2 control-label" for="val_customername">Customer Name</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', array('id'=>'val_customername','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,'name'=>'customername','readonly'=>'readonly')); ?>
@@ -8,12 +7,8 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('tag_name', array('id'=>'val_tag','class'=>'form-control ','placeholder'=>'Enter the Tag','label'=>false,'name'=>'tag_name')); ?>
     </div> 
-    
-        
 </div>
 <div class="form-group">
-    
-    
     <label class="col-md-2 control-label" for="val_salespeoples">Sales Persons</label>
     <div class="col-md-4">
     <select id="val_salespeoples" name="data[salesperson_id][]" class="select-chosen required" data-placeholder="Enter the Sales Persons" style="width: 250px;" multiple >
@@ -243,14 +238,13 @@
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('invoice_type_id', array('id'=>'val_invoicetype','class'=>'form-control select-chosen','options' =>$invoice_types,'empty'=>'Enter the Invoice Type','label'=>false,'name'=>'invoice_type_id')); ?>
-    </div>
-        
     <label class="col-md-2 control-label" for="val_calibrationtype">Calibration Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('calibrationtype', array('id'=>'val_calibrationtype','class'=>'form-control select-chosen','options'=>array('Singlas'=>'Singlas','Non-Singlas'=>'Non-Singlas'),'empty'=>'Enter the Calibration Type','label'=>false,'name'=>'calibrationtype')); ?>
+    </div>
+    <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('invoice_type_id', array('id'=>'val_invoicetype','class'=>'form-control select-chosen','options' =>$invoice_types,'empty'=>'Enter the Invoice Type','label'=>false,'name'=>'invoice_type_id')); ?>
     </div>
         
 </div>
@@ -260,9 +254,9 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('deliveryordertype_id', array('id'=>'val_deliveryordertype','class'=>'form-control select-chosen','options'=>$deliverorder_type,'empty'=>'Enter the Delivery Order Type','label'=>false,'name'=>'deliveryordertype_id')); ?>
     </div>
-     <label class="col-md-2 control-label" for="val_poack">PO Acknowledgement</label>
+    <label class="col-md-2 control-label" for="val_poack">Acknowledgement Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->checkbox('poack', array('id'=>'val_poack','class'=>'checkbox','label'=>false,'name'=>'poack')); ?>
+        <?php echo $this->Form->input('acknowledgement_type_id', array('id' => 'val_poack', 'class' => 'form-control select-chosen checkbox', 'label' => false, 'name' => 'acknowledgement_type_id','type'=>'select','options'=>$acknowledgement_type,'empty'=>'Select the Acknowledgement Type',$disabled)); ?>
     </div>
         
    

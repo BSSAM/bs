@@ -221,7 +221,6 @@ class CustomersController extends AppController
             
             if($this->Customer->save($this->request->data))
             {
-               $project = $this->Projectinfo->find('count',array('conditions'=>array('Projectinfo.customer_id'=>$id)));
                $contactperson   = $this->Contactpersoninfo->find('count',array('conditions'=>array('Contactpersoninfo.customer_id'=>$id)));
                $address= $this->Address->find('count',array('conditions'=>array('Address.customer_id'=>$id)));
                 if($contactperson>0)
@@ -231,10 +230,6 @@ class CustomersController extends AppController
                 if($address>0)
                 {
                      $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$id));
-                }
-                if($project>0)
-                {
-                    $this->Projectinfo->updateAll(array('Projectinfo.project_status'=>1),array('Projectinfo.customer_id'=>$id));
                 }
                $this->Session->setFlash(__('Customer has been Updated'));
                $this->redirect(array('action'=>'index'));

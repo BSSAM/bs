@@ -35,7 +35,7 @@ $(document).ready(function(){
    /**********************************************************************************************************************************/
    $('#val_description').blur(function(){
          $('#search_instrument').fadeOut();
-    })
+    });
     
     /*******************************Quotation Instrument Details Add Script*******************************************/
     $(document).on('click','.description_add',function(){
