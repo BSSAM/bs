@@ -33,7 +33,7 @@
             <tbody>
                 
                 <?php foreach ($customer as $customer_list): ?>
-                    <tr <?php if($customer_list['Customer']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                    <tr <?php if($customer_list['Customer']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                         <td class="text-center"><?php echo $customer_list['Customer']['id']; ?></td>
                         <td class="text-center"><a href="javascript:void(0)"><?php echo $customer_list['Customer']['Customertagname']; ?></a></td>
                         <td class="text-center"><?php echo $customer_list['Customer']['phone']; ?></td>

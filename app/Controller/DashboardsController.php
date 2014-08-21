@@ -112,6 +112,14 @@ class DashboardsController extends AppController
         //pr($logactivity);exit;
         $this->set('log_activity_customer_count', $logactivity_customer_count);
         
+        $logactivity_customertag = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"CustomerTagList")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_customertag', $logactivity_customertag);
+        
+        $logactivity_customertag_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"CustomerTagList")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_customertag_count', $logactivity_customertag_count);
+        
         /*****************************************************/
         
         /****************** Log Activity - Quotation ********************/

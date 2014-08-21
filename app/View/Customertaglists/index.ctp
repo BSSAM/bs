@@ -14,7 +14,9 @@
 <div class="block full">
     <div class="block-title">
         <h2>List Of Customers Tags</h2>
+        <?php if($userrole_cus['add']==1){ ?>
         <h2 style="float:right;"><?php echo $this->Html->link('Add Customer Tag',array('controller'=>'Customertaglists','action'=>'add',$customer_id),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Add Customer tag')); ?></h2>
+        <?php } ?>
     </div>
                 
     <div class="table-responsive">
@@ -31,7 +33,7 @@
             <tbody>
                 <?PHP if(!empty($taglists)): ?>
                 <?php foreach ($taglists as $taglist): ?>
-                    <tr>
+                    <tr <?php if($taglist['Customer']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                         <td class="text-center"><?php echo $taglist['Customer']['id']; ?></td>
                         <td class="text-center">
                             <a href="javascript:void(0)">
@@ -48,12 +50,13 @@
                                     'class' => 'btn  btn-xs btn-primary', 'data-toggle' => 'tooltip', 'escape' => false));
                                 ?>
                             <div class="btn-group">
-                                 
+                                 <?php if($userrole_cus['edit']==1){ ?>
                                 <?PHP
                                 echo $this->html->link('<i class="fa fa-pencil"></i>', array('controller' => 'Customertaglists',
                                     'action' => 'edit', $taglist['Customer']['id']), array('title' => 'Edit Tag',
                                     'class' => 'btn btn-xs btn-default', 'data-toggle' => 'tooltip', 'escape' => false));
                                 ?>
+                                 <?php } ?>
                                 <?PHP if($taglist['Customer']['is_default']==0): ?>
                                 <?PHP
                                 echo $this->Form->postlink('<i class="fa fa-times"></i>', array('controller' => 'Customertaglists',

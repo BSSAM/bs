@@ -11,7 +11,7 @@ class CustomersController extends AppController
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo','AcknowledgementType','Quotation',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
-                        'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo');
+                        'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo','Logactivity','Datalog');
     
   
     public function index()
@@ -121,6 +121,31 @@ class CustomersController extends AppController
                     $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$cust_id));
                 }
                 
+                 /******************
+                    * Log Activity For Approval
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'Customer';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Customer';
+                    $this->request->data['Logactivity']['logid'] = $cust_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+                    
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Customer';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $cust_id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/  
+                
                 $this->Session->setFlash(__('Customer has been Added Successfully'));
                 return $this->redirect(array('action'=>'index',));
             }
@@ -148,6 +173,8 @@ class CustomersController extends AppController
         }
         
         $customer_details =  $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id,'Customer.status'=>1,'Customer.is_deleted'=>0))); 
+        $customer_dat = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id),'recursive'=>'2'));
+        $this->set('customer_dat',$customer_dat);
         $completed_quotation    =   $this->Quotation->find('all',array('conditions'=>array('Quotation.customer_id'=>$id,'Quotation.is_jobcompleted'=>0,'Quotation.is_deleted'=>0)));
         if(count($completed_quotation)>0):
             $disabled   =   'disabled';
@@ -231,6 +258,19 @@ class CustomersController extends AppController
                 {
                      $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$id));
                 }
+                
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Customer';
+                    $this->request->data['Datalog']['logactivity'] = 'Edit';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/   
+                
                $this->Session->setFlash(__('Customer has been Updated'));
                $this->redirect(array('action'=>'index'));
             }
@@ -258,6 +298,17 @@ class CustomersController extends AppController
         $this->autoRender=false;
         if($this->Customer->updateAll(array('Customer.is_deleted'=>1,'Customer.status'=>0),array('Customer.id'=>$id)))
         {
+             /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Customer';
+                    $this->request->data['Datalog']['logactivity'] = 'Delete';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+            /******************/   
             $this->Session->setFlash(__('Customer has been deleted'));
             return $this->redirect(array('action'=>'index'));
         }
@@ -769,6 +820,17 @@ class CustomersController extends AppController
             echo json_encode($device_details);
            
         }
+    }
+    
+     public function approve()
+    {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->Customer->updateAll(array('Customer.is_approved'=>1,'Customer.is_approved_date'=>date('Y-m-d'),'Customer.is_approved_by'=>$user_id),array('Customer.id'=>$id));
+            $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Customer'));
+            $details=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id)));
+            
     }
 
 

@@ -399,6 +399,48 @@ $(document).ready(function(){
     
     });
    
+    $(document).on('click','.approve_customer',function(){
+       var val_customerid = customer_id;
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_customerid,
+            url: path_url+'Customers/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+   
+   $(document).on('click','.approve_customertag',function(){
+       var val_customerid = customer_id;
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_customerid,
+            url: path_url+'Customertaglists/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+   
 });
 
 

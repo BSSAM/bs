@@ -11,21 +11,22 @@ class CustomertaglistsController extends AppController
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
-                        'Deliveryordertype','InvoiceType','Priority','AcknowledgementType','Quotation');
+                        'Deliveryordertype','InvoiceType','Priority','AcknowledgementType','Quotation','Logactivity','Datalog');
     public function index($id=NULL)
     {
-        /*******************************************************
+       /*******************************************************
          *  BS V1.0
-         *  User Role Customertaglist
-         *  Controller : Procedures
+         *  Customers Permission
+         *  Controller : Customers
          *  Permission : view 
-        *******************************************************/
+         *******************************************************/
         $user_role = $this->userrole_permission();
-        if($user_role['other_role']['view'] == 0){ 
+        if($user_role['cus_customer']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+        $this->set('userrole_cus',$user_role['cus_customer']);
         /*
-         * *****************************************************
+         * ---------------  Functionality of Users -----------------------------------
          */
         $this->set('customer_id',$id);
         $maintag_data = $this->Customer->find('first',array('conditions'=>array('Customer.status'=>1,'Customer.id'=>$id,'Customer.is_deleted'=>0),'fields'=>array('Customername','customergroup_id')));
@@ -40,7 +41,17 @@ class CustomertaglistsController extends AppController
     
     public function add($id=NULL)
     {
-      
+      /*******************************************************
+         *  BS V1.0
+         *  Customers Permission
+         *  Controller : Customers
+         *  Permission : view 
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_customer']['add'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
         /*******************************************************
          *  BS V1.0
          *  User Role Permission
@@ -130,6 +141,32 @@ class CustomertaglistsController extends AppController
                     $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$cust_id));
                 }
                 
+                
+                 /******************
+                    * Log Activity For Approval
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'CustomerTagList';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add CustomerTagList';
+                    $this->request->data['Logactivity']['logid'] = $cust_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+                    
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'CustomerTagList';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $cust_id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/ 
+                
                 $this->Session->setFlash(__('Customer Tag has been Added Successfully'));
                 $this->Session->delete('tag_id');
                 return $this->redirect(array('controller'=>'Customertaglists','action'=>'index',$id));
@@ -149,7 +186,7 @@ class CustomertaglistsController extends AppController
          *  Description   :   Edit Procedures Details page
          *******************************************************/
         $user_role = $this->userrole_permission();
-        if($user_role['other_role']['add'] ==0){ 
+        if($user_role['cus_customer']['edit'] ==0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         /*
@@ -161,6 +198,8 @@ class CustomertaglistsController extends AppController
              return $this->redirect(array('action'=>'edit'));
         }
         $customer_details = $this->Customer->find('first',array('conditions'=>array('Customer.status'=>1,'Customer.id'=>$id,'Customer.is_deleted'=>0),'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
+        $customer_dat = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id),'recursive'=>'2'));
+        $this->set('customer_dat',$customer_dat);
         $completed_quotation    =   $this->Quotation->find('all',array('conditions'=>array('Quotation.customer_id'=>$id,'Quotation.is_jobcompleted'=>0,'Quotation.is_deleted'=>0)));
       
         if(count($completed_quotation)>0):
@@ -250,6 +289,18 @@ class CustomertaglistsController extends AppController
                      $this->Address->updateAll(array('Address.status'=>1),array('Address.customer_id'=>$this->Session->read('customer_id')));
                 }
                
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'CustomerTagList';
+                    $this->request->data['Datalog']['logactivity'] = 'Edit';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/   
+                
                $this->Session->setFlash(__('Customer Tag has been Updated'));
                return $this->redirect(array('controller'=>'Customertaglists','action'=>'index',$id));
                $this->Session->delete('customer_id');
@@ -267,6 +318,18 @@ class CustomertaglistsController extends AppController
         $this->autoRender=false;
         if($this->Customer->updateAll(array('Customer.is_deleted'=>1,'Customer.status'=>0),array('Customer.id'=>$id)))
         {
+            /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'CustomerTagList';
+                    $this->request->data['Datalog']['logactivity'] = 'Delete';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+            /******************/   
+            
             $this->Session->setFlash(__('Customer has been deleted'));
             return $this->redirect(array('action'=>'index',$id));
         }
@@ -303,5 +366,16 @@ class CustomertaglistsController extends AppController
         {
             echo "deleted";
         }
+    }
+    
+     public function approve()
+    {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->Customer->updateAll(array('Customer.is_approved'=>1,'Customer.is_approved_date'=>date('Y-m-d'),'Customer.is_approved_by'=>$user_id),array('Customer.id'=>$id));
+            $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add CustomerTagList'));
+            $details=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id)));
+            
     }
 }

@@ -129,7 +129,7 @@
                                     <tbody>
                                     <?php foreach ($log_activity_customer as $log_activity_customer_list) :?>
                                         <tr>
-                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-qn.jpg', array('alt' => 'Customer','class'=>'customer_class')); ?></td>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-qn.jpg', array('alt' => 'Customer','class'=>'')); ?></td>
                                             <td class="">
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_customer_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_customer_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_customer_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
@@ -139,6 +139,20 @@
                                             <?php }?>
                                             </td>
                                             <td class="text-center">by <?PHP echo $log_activity_customer_list['User']['username'] ?><br><small><?PHP echo $log_activity_customer_list['Logactivity']['logtime'] ?></small></td>
+                                            </tr>
+                                    <?php endforeach; ?>
+                                    <?php foreach ($log_activity_customertag as $log_activity_customertag_list) :?>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-qn.jpg', array('alt' => 'Customer','class'=>'')); ?></td>
+                                            <td class="">
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_customertag_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_customertag_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_customertag_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center">
+                                            <?PHP if($log_activity_customertag_list['Logactivity']['logname'] == 'CustomerTagList'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Customertaglists','action'=>'edit',$log_activity_customertag_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?php }?>
+                                            </td>
+                                            <td class="text-center">by <?PHP echo $log_activity_customertag_list['User']['username'] ?><br><small><?PHP echo $log_activity_customertag_list['Logactivity']['logtime'] ?></small></td>
                                             </tr>
                                     <?php endforeach; ?>
                                     </tbody>
