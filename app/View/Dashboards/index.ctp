@@ -17,12 +17,11 @@
                         <img src="img/placeholders/headers/dashboard_header.jpg" alt="header image" class="animation-pulseSlow">
                     </div>
                     <div class="block">
-                        <!-- Forum Tabs Title -->
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
                                 <li class="active"><a href="#home">Home<span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
                                 <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
-                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php //echo $log_activity_instrument_count; ?></span></a></li>
+                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($log_activity_instrument_count)+($log_activity_procedure_count)+($log_activity_unit_count)+($log_activity_range_count); ?></span></a></li>
                                 <li><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
                             </ul>
                         </div>
@@ -68,7 +67,7 @@
                                             </td>
 <!--                                            <td class="text-center "><a href="javascript:void(0)">205</a></td>-->
                                             <td class="text-center"><?PHP echo $log_activity_message_list['Datalog']['logactivity']; ?></td>
-                                            <td class="">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Datalog']['modified'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_message_list['User']['username'] ?><br><small><?PHP echo $log_activity_message_list['Datalog']['created'] ?></small></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         
@@ -129,7 +128,7 @@
                                     <tbody>
                                     <?php foreach ($log_activity_customer as $log_activity_customer_list) :?>
                                         <tr>
-                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-qn.jpg', array('alt' => 'Customer','class'=>'')); ?></td>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-cu.jpg', array('alt' => 'Customer','class'=>'')); ?></td>
                                             <td class="">
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_customer_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_customer_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_customer_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
@@ -138,12 +137,12 @@
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Customers','action'=>'edit',$log_activity_customer_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                             <?php }?>
                                             </td>
-                                            <td class="text-center">by <?PHP echo $log_activity_customer_list['User']['username'] ?><br><small><?PHP echo $log_activity_customer_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="text-center">by <?PHP echo $log_activity_customer_list['User']['username'] ?><br><small><?PHP echo $log_activity_customer_list['Logactivity']['created'] ?></small></td>
                                             </tr>
                                     <?php endforeach; ?>
                                     <?php foreach ($log_activity_customertag as $log_activity_customertag_list) :?>
                                         <tr>
-                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-qn.jpg', array('alt' => 'Customer','class'=>'')); ?></td>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-ct.jpg', array('alt' => 'Customer','class'=>'')); ?></td>
                                             <td class="">
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_customertag_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_customertag_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_customertag_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
@@ -152,7 +151,7 @@
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Customertaglists','action'=>'edit',$log_activity_customertag_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                             <?php }?>
                                             </td>
-                                            <td class="text-center">by <?PHP echo $log_activity_customertag_list['User']['username'] ?><br><small><?PHP echo $log_activity_customertag_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="text-center">by <?PHP echo $log_activity_customertag_list['User']['username'] ?><br><small><?PHP echo $log_activity_customertag_list['Logactivity']['created'] ?></small></td>
                                             </tr>
                                     <?php endforeach; ?>
                                     </tbody>
@@ -195,7 +194,7 @@
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Quotations','action'=>'edit',$log_activity_quotation_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                             <?php }?>
                                             </td>
-                                            <td class="text-center">by <?PHP echo $log_activity_quotation_list['User']['username'] ?><br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="text-center">by <?PHP echo $log_activity_quotation_list['User']['username'] ?><br><small><?PHP echo $log_activity_quotation_list['Logactivity']['created'] ?></small></td>
                                             </tr>
                                     <?php endforeach; ?>
                                     </tbody>
@@ -240,7 +239,7 @@
                                            
                                             
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['created'] ?></small></td>
                                         </tr>
                                    
                                        <?php endforeach; ?>
@@ -290,7 +289,7 @@
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_deliveryorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_deliveryorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_deliveryorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['created'] ?></small></td>
                                         </tr>
                                     <?php endif; ?>
                                     </tbody>
@@ -339,7 +338,7 @@
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_cdinfo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                             <?php }?>
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_cdinfo_list['User']['username'] ?><br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_cdinfo_list['User']['username'] ?><br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['created'] ?></small></td>
                                         </tr>
                                     <?php endif; ?>
                                     <?php endforeach; ?>
@@ -388,7 +387,7 @@
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_cdinfo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                             <?php }?>
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_cdinfo_list['User']['username'] ?><br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_cdinfo_list['User']['username'] ?><br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['created'] ?></small></td>
                                         </tr>
                                     <?php endif; ?>
                                     <?php endforeach; ?>
@@ -438,7 +437,7 @@
                                            
                                             
                                             </td>
-                                            <td class="">by <?PHP //echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP //echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['created'] ?></small></td>
                                         </tr>
                                         <?php //endif; ?>
                                        <?php //endforeach; ?>
@@ -499,7 +498,7 @@
                                                     <?PHP echo $this->html->link('Approve',array('controller'=>'Instruments','action'=>'edit',$log_activity_instrument_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
                                                     <?php }?>
                                                 </td>
-                                                <td class="">by <?PHP echo $log_activity_instrument_list['User']['username'] ?><br><small><?PHP echo $log_activity_instrument_list['Logactivity']['modified'] ?></small></td>
+                                                <td class="">by <?PHP echo $log_activity_instrument_list['User']['username'] ?><br><small><?PHP echo $log_activity_instrument_list['Logactivity']['created'] ?></small></td>
                                             </tr>
                                             <?php endforeach; ?>
                                             </tbody>
@@ -546,7 +545,7 @@
                                                     <?PHP echo $this->html->link('Approve',array('controller'=>'Procedures','action'=>'edit',$log_activity_procedure_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
                                                     <?php }?>
                                                 </td>
-                                                <td class="">by <?PHP echo $log_activity_procedure_list['User']['username'] ?><br><small><?PHP echo $log_activity_procedure_list['Logactivity']['modified'] ?></small></td>
+                                                <td class="">by <?PHP echo $log_activity_procedure_list['User']['username'] ?><br><small><?PHP echo $log_activity_procedure_list['Logactivity']['created'] ?></small></td>
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
@@ -594,7 +593,7 @@
                                             <?PHP echo $this->html->link('Approve',array('controller'=>'Units','action'=>'edit',$log_activity_unit_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                             <?php }?>
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_unit_list['User']['username'] ?><br><small><?PHP echo $log_activity_unit_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_unit_list['User']['username'] ?><br><small><?PHP echo $log_activity_unit_list['Logactivity']['created'] ?></small></td>
                                         </tr>
                                        <?php endforeach; ?>
                                     </tbody>
@@ -641,7 +640,7 @@
                                            <?php }?>
                                            
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_range_list['User']['username'] ?><br><small><?PHP echo $log_activity_range_list['Logactivity']['logtime'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_range_list['User']['username'] ?><br><small><?PHP echo $log_activity_range_list['Logactivity']['created'] ?></small></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         </tbody>

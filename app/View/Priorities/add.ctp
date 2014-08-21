@@ -47,7 +47,7 @@
                                     
                                     <label class="col-md-2 control-label" for="val_multipleof">Multiples Of</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('multipleof', array('id'=>'val_multipleof','class'=>'form-control','empty'=>'Enter the Multiples','label'=>false,'name'=>'multipleof')); ?>
+                                            <?php echo $this->Form->input('multipleof', array('id'=>'val_multipleof','class'=>'form-control','empty'=>'Enter the Multiples','label'=>false,'name'=>'multipleof','type'=>'text')); ?>
                                         </div>
                                     
                                 </div>
