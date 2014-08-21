@@ -84,14 +84,4 @@
         </table>
         
         
-        <?php echo $this->Html->script('pages/uiProgress'); ?>
-        <script>$(function(){ UiProgress.init(); });</script>
-        <?php if ($this->Session->flash() != '') { ?>
-            <script> var UiProgress = function() {
-                // Get random number function from a given range
-                var getRandomInt = function(min, max) {
-                    return Math.floor(Math.random() * (max - min + 1)) + min;
-                };
-            }();
-            </script> 
-        <?php } ?>
+      

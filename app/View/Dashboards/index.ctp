@@ -20,7 +20,7 @@
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
                                 <li class="active"><a href="#home">Home<span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
-                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
+                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_deliveryorder_count); ?></span></a></li>
                                 <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($log_activity_instrument_count)+($log_activity_procedure_count)+($log_activity_unit_count)+($log_activity_range_count); ?></span></a></li>
                                 <li><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
                             </ul>
@@ -301,7 +301,7 @@
                                                 <i class="gi gi-keys"></i> Oops... No Delivery Order Approval Available
                                             </td>
                                         </tr>
-                                        <tr><td><br></td></tr>
+                                    
                                      </tbody>
                                     <?php endif; ?>
                                 </table>
