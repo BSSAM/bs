@@ -9,7 +9,6 @@ class Deliveryorder extends AppModel
 {
     //public $actsAs  =   'Containable';
     var $name   =   'Deliveryorder';
-    //public $belongsTo  =   ;
     public $hasMany = array(
         'DelDescription' => array(
             'className' => 'DelDescription',
@@ -35,13 +34,6 @@ class Deliveryorder extends AppModel
             'fields' => '',
             'order' => ''
         ),
-        'Quotation' => array(
-            'className' => 'Quotation',
-            'foreignKey' => 'quotationno',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
         'Invoice' => array(
             'className' => 'Invoice',
             'foreignKey' => 'delivery_order_no',
@@ -52,13 +44,6 @@ class Deliveryorder extends AppModel
          'branch' => array(
             'className' => 'branch',
             'foreignKey' => 'branch_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
-        'InstrumentType' => array(
-            'className' => 'InstrumentType',
-            'foreignKey' => 'instrument_type_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''

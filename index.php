@@ -23,12 +23,12 @@
 /**
  *  Get CakePHP's root directory
  */
-
-/*
+ 
+/* 
  *	BS V1.0
- *	Author :
+ *	Author : 
  */
-
+ 
 define('APP_DIR', 'app');
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__));
