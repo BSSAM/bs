@@ -421,4 +421,11 @@ App::uses('Controller', 'Controller');
               endif;
            }
         }
+        public function getLastQuery($model)
+        {
+            $dbo = $model->getDatasource();
+            $logData = $dbo->getLog();
+            $getLog = end($logData['log']);
+            echo $getLog['query'];
+        }
 }
