@@ -214,6 +214,15 @@ class ClientposController extends AppController
     }
     public function Deliveryorder_fullinvoice($id = null)
     {
+        /*
+         * For Delivery order count check for the respective customer
+         */
+        $deliveryorder_list    =   $this->Deliveryorder->find('all',array('conditions'=>
+                        array('Deliveryorder.customer_id'=>$id,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_assignpo'=>0)));
+        if(count($deliveryorder_list)==0){
+             $this->Session->setFlash('No Delivery orders  found to assign PO for Customer '.$id);
+            $this->redirect(array('controller'=>'Clientpos','action'=>'index'));
+        } 
         $customer_salesorder_list=$this->Salesorder->find('list',array('conditions'=>
                         array('Salesorder.customer_id'=>$id,'Salesorder.is_approved'=>1),'fields'=>array('id','salesorderno')));
         $po_list=$this->Clientpo->find('all',array('conditions'=>array('Clientpo.customer_id'=>$id)));

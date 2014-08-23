@@ -1,6 +1,6 @@
 <script type="text/javascript">
     $(function(){
-         $("#search_instrument").hide();
+    $("#search_instrument").hide();
     $("#val_description").keyup(function() 
     { 
         var instrument = $(this).val();
@@ -84,8 +84,7 @@
     <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type',
-                                      'type'=>'select','options'=>array('singlas'=>'Singlas',
-                                          'no-singlas'=>'Non-Singlas'),'empty'=>'Select Call Type')); ?>
+                                      'type'=>'select','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas'))); ?>
     </div>
 </div>
 

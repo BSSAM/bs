@@ -419,6 +419,7 @@ $(document).ready(function(){
                     if(v.type=='registered'){
                     $('#val_address').val(v.address);}
                 });
+                $('#val_attn').empty().append('<option value="">Select Contact person Name</option>');
                 $.each(contact_person_info,function(k,v){
                     $('#val_attn').append('<option value="'+v.id+'">'+v.name+'</option>');
                 });

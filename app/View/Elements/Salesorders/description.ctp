@@ -62,8 +62,7 @@
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
          <span class="help-block_login ins_error">Enter the Instrument Name</span>
-        <div id="search_instrument">
-        </div>
+        <div id="search_instrument"></div>
     </div>
     <label class="col-md-2 control-label" for="sales_quantity">Quantity</label>
     <div class="col-md-4">

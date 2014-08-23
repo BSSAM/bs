@@ -153,7 +153,6 @@
                         //echo $instrument_type; exit;
                          $this->set('instrument_type',$instrument_type);
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
-                        //pr($quotation_details);exit;
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
                         $this->set(compact('contact_list'));
                         $sales_details =  $quotation_details['Quotation'];

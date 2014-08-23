@@ -111,13 +111,11 @@
                                     </tr>
                                     <?PHP endforeach; ?>
                                     <?PHP endif; ?>
-                                    
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     
-
                     <h4 class="sub-header text-center">Job Details <strong>( <?PHP echo  $data['Quotation']['track_id']; ?> )</strong></h4>
                     <div class="row">
                         <div class="col-sm-3">
@@ -134,9 +132,13 @@
                             <div class="block">
                                 <dl>
                                     <dt>Sales Order</dt>
+                                    <?PHP if(!empty($quotation_data['Salesorder'])): ?>
                                     <?PHP foreach($quotation_data['Salesorder'] as $k=>$v): ?>
                                     <dd class="word_break"><?PHP echo  $v; ?></dd>
                                     <?PHP endforeach; ?>
+                                    <?PHP else: ?>
+                                      <dd class="word_break"><?PHP echo  'Sales Orders not Found'; ?></dd>
+                                    <?PHP endif; ?>
                                 </dl>
                             </div>
                         </div>
@@ -144,9 +146,13 @@
                             <div class="block">
                                 <dl>
                                     <dt>Delivery Order</dt>
+                                    <?PHP if(!empty($quotation_data['Deliveryorder'])): ?>
                                     <?PHP foreach($quotation_data['Deliveryorder'] as $k=>$v): ?>
                                     <dd class="word_break"><?PHP echo  $v; ?></dd>
                                     <?PHP endforeach; ?>
+                                    <?PHP else: ?>
+                                      <dd class="word_break"><?PHP echo  'Delivery Orders not Found'; ?></dd>
+                                    <?PHP endif; ?>
                                 </dl>
                             </div>
                         </div>
@@ -171,7 +177,8 @@
                                         $arra_po    =   explode(',', $quo_po);
                                     ?>
                                     <?PHP $count    =   0; ?>
-                                     <?PHP foreach ($pos as $pokey=>$pov): ?>
+                                    <?PHP if(!empty($pos)){ ?>
+                                    <?PHP foreach ($pos as $pokey=>$pov): ?>
                                     <?PHP $count    =   $count+1; ?>
                                     <div class="col-md-6 row">
                                         <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pokey,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
@@ -184,6 +191,19 @@
                                     <i class="fa fa-plus"></i></div>
                                     <?PHP endif; ?>
                                     <?PHP endforeach; ?>
+                                    <?PHP }else{ ?>
+                                    <?PHP foreach ($arra_po as $pokey=>$pov): ?>
+                                    <?PHP $count    =   $count+1; ?>
+                                    <div class="col-md-12 row">
+                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pov,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
+                                    </div>
+                                    
+                                   <?PHP if($count==1&& $type_id!=1): ?>
+                                    <div class="btn btn-alt btn-info pull-right" id="po_plus">
+                                    <i class="fa fa-plus"></i></div>
+                                    <?PHP endif; ?>
+                                    <?PHP endforeach; ?>
+                                    <?PHP } ?>
                                     <div class="po_up"></div>
                                    
                                 </dl>

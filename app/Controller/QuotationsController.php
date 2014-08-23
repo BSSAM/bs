@@ -290,17 +290,17 @@
             $customer_id =  $this->request->data['customer_id'];
             $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
             $c = count($instrument_details);
-            if($c>0)
+            if($c>0&&$instrument_details[0]['Instrument']['name']!='')
             {
                 for($i = 0; $i<$c;$i++)
                 { 
                     echo "<div class='instrument_id' align='left' id='".$instrument_details[$i]['Instrument']['id']."'>";
-                    echo $name=($instrument_details[$i]['Instrument']['name']!='')?$instrument_details[$i]['Instrument']['name']:'No Results Found';
+                    echo $instrument_details[$i]['Instrument']['name'];
                     echo "<br>";
                     echo "</div>";
                 }
             }
-            else
+            if($instrument_details[0]['Instrument']['name']=='')
             {
                 echo "<div  align='left'>";
                 echo 'No Results Found';

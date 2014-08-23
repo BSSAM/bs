@@ -121,17 +121,16 @@ $(document).ready(function(){
                 
                 parsedata = $.parseJSON(data);
                 var dept    =   parsedata.Instrument;
+                $('#val_brand').empty().append('<option value="">Select Brand Name</option>');
+                $('#val_range').empty().append('<option value="">Select Range</option>');
                 $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
                 {
                      $('#val_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
-                  
                 });
                 
                 $.each(parsedata.Instrument.InstrumentRange, function(k, v)
                 {
-                   
                      $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
-                  
                 });
                     
                 $('#val_department').val(dept.Department.departmentname);

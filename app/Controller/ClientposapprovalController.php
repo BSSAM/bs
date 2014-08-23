@@ -26,6 +26,7 @@ class ClientposapprovalController extends AppController {
         $this->layout   =   'ajax';
         $q_id =  $this->request->data['q_id'];
         $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$q_id,'Quotation.is_deleted'=>0),'recursive'=>3));
+        
         $sales_data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotation_id'=>$q_id,'Salesorder.is_deleted'=>0),'fields'=>array('salesorderno')));
         $delivery_order =   array();$sales_order =   array();
         foreach($sales_data as $sale):
@@ -36,6 +37,7 @@ class ClientposapprovalController extends AppController {
             endforeach;
         endforeach;
         $quotation_data = array_merge($delivery_order,$sales_order);
+       
         $this->set('type_id',$data['Customer']['invoice_type_id']);
         $this->set('quotation_data',$quotation_data);
         $this->set(compact('data','track_id'));
@@ -63,10 +65,12 @@ class ClientposapprovalController extends AppController {
                 break;
             case 4:
                 $po_data_array  = $this->Doinvoice->find('first',array('conditions'=>array('Doinvoice.track_id'=>$data['Quotation']['track_id'])));  
+                if(!empty($po_data_array)):
                 $do_data =   $po_data_array['Doinvoice']['deliveryorder_data'];
                 $dos    = unserialize($do_data);
                 $pos    =   $dos['Clientpo']['Purchaseorder'];
                 $this->set('pos',$pos);
+                endif;
                 break;
         }
       
@@ -74,11 +78,17 @@ class ClientposapprovalController extends AppController {
     public function quotation_po_update()
     {
         if($this->request->is('post')){
+            
+            if(!empty($this->request->data['ponumber'])&&!empty($this->request->data['pocount'])):
             $po_array   =   $this->request->data['ponumber'];
             $ponumbers  =   implode($this->request->data['ponumber'],',');
             $po_count   =   $this->request->data['pocount'];
-            $quotationno    =   $this->request->data['quotationno'];
             $po_list_merge    = array_merge($po_array,$po_count);
+            endif;
+            $po_array   =   $this->request->data['ponumber'];
+            $ponumbers  =   implode($this->request->data['ponumber'],',');
+            $quotationno    =   $this->request->data['quotationno'];
+            
             if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
                 
                  $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0),'recursive'=>3));
@@ -107,12 +117,14 @@ class ClientposapprovalController extends AppController {
                         break;
                     case 4:
                         $po_data_array  = $this->Doinvoice->find('first',array('conditions'=>array('Doinvoice.track_id'=>$data['Quotation']['track_id'])));  
+                        if(!empty($po_data_array)):
                         $do_data =   $po_data_array['Doinvoice']['deliveryorder_data'];
                         $dos    = unserialize($do_data);
                         unset( $dos['Clientpo']['Purchaseorder']);
                         $dos['Clientpo']['Purchaseorder']   =   $po_list_merge;
                         $data_list_for_do   = serialize($dos);
                         $this->Soinvoice->updateAll(array('Soinvoice.salesorder_data'=>'"'.$data_list_for_do.'"'),array('Soinvoice.track_id'=>$data['Quotation']['track_id']));  
+                        endif;
                         break;
                     }
                 /******************
