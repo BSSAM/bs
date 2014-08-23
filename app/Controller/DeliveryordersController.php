@@ -63,15 +63,24 @@
             
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
-            
+            //pr($deliveryorder);exit;
             if($deliveryorder['Deliveryorder']['po_generate_type']=='Automatic' && $deliveryorder['Customer']['acknowledgement_type_id']==1):
                 $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
                  $this->Session->setFlash(__($quo_no.' - Cannot Approve Deliveryorder without PO Number(Manual) '));
                  $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
             endif;
             $this->set(compact('service','deliveryorder'));
+            
+            //$con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['Quotation']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+            //pr($con);            
+            
+            $instrument_type = $deliveryorder['InstrumentType']['deliveryorder'];
+                        //echo $instrument_type; exit;
+                         $this->set('instrument_type',$instrument_type);
+            
             if($this->request->is(array('post','put')))
             {
+                
                 $this->Deliveryorder->id=$id;
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
