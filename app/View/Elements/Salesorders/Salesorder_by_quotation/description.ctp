@@ -181,7 +181,7 @@
     </thead>
     <tbody class="sales_Instrument_info"> 
     <?PHP 
-       
+       //pr($sale['Description']);exit;
             if(!empty($sale['Description'])): $i = 0;
                 foreach($sale['Description'] as $device): $i++;
                     //for($i=1;$i<=count($device['Instrument']);$i++):

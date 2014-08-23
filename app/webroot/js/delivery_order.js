@@ -174,12 +174,13 @@ $(document).ready(function(){
             type: 'POST',
             data:"id="+val_salesorderno,
             url: path_url+'Deliveryorders/approve/',
-            success: function(data)
+            success: function js(data)
             {
-                window.location.reload();
+                //window.location.reload();
+                 alert(data);
             }
-            
         });
+        
     }
     else
     {

@@ -22,20 +22,29 @@ $(document).ready(function(){
     })
     $(document).on('click','.customerinstrument_add',function(){
        
-        if($('#val_description').val()=='')
-        {
-            $('.ins_error').addClass('animation-slideDown');
-            $('.ins_error').css('color','red');
-            $('.ins_error').show();
-            return false;
-        }
+//        if($('#instrument_name').val()=='')
+//        {
+//            $('.instrument_name').addClass('animation-slideDown');
+//            $('.instrument_name').css('color','red');
+//            $('.instrument_name').show();
+//            return false;
+//        }
         var range   =   $('#range_array').val();
         var customer_id =   $('#CustomerInstrumentCustomerId').val();
         var instrument_id   =   $('#instrument_name option:selected').val();
         var instrument_name =    $('#instrument_name option:selected').text();
         var model_no =   $('#model_no').val();
         var unit_price=$('#unit_price').val();
-        var status  =   $('#status').val();
+        //var status  =   $('#status').val();
+        if ($('#status').is(":checked"))
+        {
+            var status = 1;
+        }
+        else
+        {
+            var status = 0;
+        }
+      // return false;
         
         $.ajax({
             type: 'POST',
@@ -47,7 +56,7 @@ $(document).ready(function(){
                 if (node_data.CustomerInstrument.status == "1"){  var status    =   "Active";                 
                 }else{    var status    =   "Inactive";               
                 }
-               $('.customer_instrument_info').append('<tr class="cus_instrument_remove_'+node_data.CustomerInstrument.id+'">\n\\n\
+               $('.customer_instrument_info').empty().append('<tr class="cus_instrument_remove_'+node_data.CustomerInstrument.id+'">\n\\n\
                                     <td class="text-center">'+node_data.Instrument.id+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
                                     <td class="text-center">'+node_data.CustomerInstrument.model_no+'</td>\n\
@@ -78,10 +87,18 @@ $(document).ready(function(){
                 $('.cus_instrument_remove_'+device_id).fadeOut();
             }
         });
+        
+            $('#range_array').empty().append('<option value="" selected="selected">Select Brand</option>');
+            $('#model_no').val(null);
+            $('#unit_price').val(null);
+            $('#status').prop('checked',false);
+            $('#instrument_name_chosen span').text('Select Instrument Name');
+            $('.customer_instrument_info').append('<tbody><tr><td class="text-center">No data available in table</td></tr></tbody>');
     }
    });
   //for customer Instrument Edit process
     $(document).on('click','.cus_instrument_edit',function(){
+       // alert($('#status').val());
       var edit_device_id=$(this).attr('data-edit');
       $('#device_id').val(edit_device_id);
       $('.update_device').html('<button class="btn btn-sm btn-primary cus_ins_update" type="button"><i class="fa fa-plus fa-fw"></i> Update</button>');
@@ -90,14 +107,21 @@ $(document).ready(function(){
             data:"edit_device_id="+ edit_device_id,
             url: path_url+'/Customers/edit_instrument/',
             success:function(data){
+                console.log(data);
                 edit_node=$.parseJSON(data);
                 $('#ins_id').val(edit_node.Instrument.id);
                 $('#ins_name').val(edit_node.Instrument.name);
+                $('#instrument_id').val(edit_node.Instrument.id);
+                $('#instrument_name').text(edit_node.Instrument.name);
+                $('#instrument_name').prop('disabled', 'disabled');
                 $('#model_no').val(edit_node.CustomerInstrument.model_no);
                 $('#unit_price').val(edit_node.CustomerInstrument.unit_price);
+                //$('#status').val(edit_node.CustomerInstrument.status);
                 $('#range_array').empty().append('<option value="">Select Brand</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
                 $('#instrument_name_chosen span').text(edit_node.Instrument.name);
                 var check=(edit_node.CustomerInstrument.status==1)?true:false;
+                //alert(check);
+               // alert($('#status').val());
                 $('#status').prop('checked',check);
             }
         });
@@ -105,22 +129,30 @@ $(document).ready(function(){
    //for Instrument Update Process
     $(document).on('click','.cus_ins_update',function(){
     
-        if($('#val_description').val()=='')
-        {
-            $('.ins_error').addClass('animation-slideDown');
-            $('.ins_error').css('color','red');
-            $('.ins_error').show();
-            return false;
-        }
+//        if($('#instrument_name').val()=='')
+//        {
+//            $('.ins_error').addClass('animation-slideDown');
+//            $('.ins_error').css('color','red');
+//            $('.ins_error').show();
+//            return false;
+//        }
         $('.update_device').html('<button class="btn btn-sm btn-primary customerinstrument_add" type="button"><i class="fa fa-plus fa-fw"></i> add</button>');
         var range   =   $('#range_array').val();
         var customer_id =   $('#CustomerInstrumentCustomerId').val();
-        var instrument_id   =   $('#instrument_name option:selected').val();
-        var instrument_name =    $('#instrument_name option:selected').text();
+        var instrument_id   =   $('#ins_id').val();
+        var instrument_name =    $('#ins_name').val();
+        
         var model_no =   $('#model_no').val();
         var device_id   =   $('#device_id').val();
         var unit_price=$('#unit_price').val();
-        var status  =   $('#status').val();
+        if ($('#status').is(":checked"))
+        {
+            var status = 1;
+        }
+        else
+        {
+            var status = 0;
+        }
         var check=(status==1)?'Active':'In Active';
         $.ajax({
             type: 'POST',
@@ -131,7 +163,7 @@ $(document).ready(function(){
                node_data=$.parseJSON(data);
                $('.cus_instrument_remove_'+device_id).remove();
                $('.customer_instrument_info').append('<tr class="cus_instrument_remove_'+node_data.CustomerInstrument.id+'">\n\\n\
-                                    <td class="text-center">'+node_data.Instrument.id+'</td>\n\
+                                    <td class="text-center">'+node_data.CustomerInstrument.id+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
                                     <td class="text-center">'+node_data.CustomerInstrument.model_no+'</td>\n\
                                     <td class="text-center">'+node_data.Range.range_name+'</td>\n\\n\

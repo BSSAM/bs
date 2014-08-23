@@ -1,6 +1,6 @@
-<span style='color: #000' title='Frames'>   165</span><span style='color: #009' title='Memory'>  19968.00 KB</span><span style='color: #900' title='Time'>   1022.60 ms</span><span  title='Quirksmode'>  <span style='color: #d00'> ON</span></span><br /><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da309f63-trace').style.display = (document.getElementById('cakeErr53f44da309f63-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Address [<b>APP\Controller\ProformasController.php</b>, line <b>502</b>]<div id="cakeErr53f44da309f63-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da309f63-code').style.display = (document.getElementById('cakeErr53f44da309f63-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da309f63-context').style.display = (document.getElementById('cakeErr53f44da309f63-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f44da309f63-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB"></span></span></code>
+<span style='color: #000' title='Frames'>   165</span><span style='color: #009' title='Memory'>  20224.00 KB</span><span style='color: #900' title='Time'>   1165.12 ms</span><span  title='Quirksmode'>  <span style='color: #d00'> ON</span></span><br /><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc2362-trace').style.display = (document.getElementById('cakeErr53f71aabc2362-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Address [<b>APP\Controller\ProformasController.php</b>, line <b>502</b>]<div id="cakeErr53f71aabc2362-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc2362-code').style.display = (document.getElementById('cakeErr53f71aabc2362-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc2362-context').style.display = (document.getElementById('cakeErr53f71aabc2362-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f71aabc2362-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB"></span></span></code>
 <code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$customername&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'customername'</span><span style="color: #007700">];</span></span></code>
-<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$billing_address&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Address'</span><span style="color: #007700">][</span><span style="color: #0000BB">1</span><span style="color: #007700">][</span><span style="color: #DD0000">'address'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f44da309f63-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$billing_address&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Address'</span><span style="color: #007700">][</span><span style="color: #0000BB">1</span><span style="color: #007700">][</span><span style="color: #DD0000">'address'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f71aabc2362-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
 $delivery_data = array(
 	(int) 0 =&gt; array(
 		&#039;Proforma&#039; =&gt; array(
@@ -65,6 +65,9 @@ $delivery_data = array(
 			&#039;cus_salespeople_count&#039; =&gt; null,
 			&#039;cus_referedby_count&#039; =&gt; null,
 			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
 			&#039;status&#039; =&gt; null,
 			&#039;is_deleted&#039; =&gt; null,
 			&#039;Customertagname&#039; =&gt; null
@@ -217,6 +220,9 @@ $delivery_data_list = array(
 		&#039;cus_salespeople_count&#039; =&gt; null,
 		&#039;cus_referedby_count&#039; =&gt; null,
 		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
 		&#039;status&#039; =&gt; null,
 		&#039;is_deleted&#039; =&gt; null,
 		&#039;Customertagname&#039; =&gt; null
@@ -267,9 +273,9 @@ ReflectionMethod::invokeArgs() - [internal], line ??
 Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
 Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
 Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
-[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30b42e-trace').style.display = (document.getElementById('cakeErr53f44da30b42e-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Paymentterm [<b>APP\Controller\ProformasController.php</b>, line <b>509</b>]<div id="cakeErr53f44da30b42e-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30b42e-code').style.display = (document.getElementById('cakeErr53f44da30b42e-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30b42e-context').style.display = (document.getElementById('cakeErr53f44da30b42e-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f44da30b42e-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ref_no&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'ref_no'</span><span style="color: #007700">];</span></span></code>
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc43b0-trace').style.display = (document.getElementById('cakeErr53f71aabc43b0-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Paymentterm [<b>APP\Controller\ProformasController.php</b>, line <b>509</b>]<div id="cakeErr53f71aabc43b0-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc43b0-code').style.display = (document.getElementById('cakeErr53f71aabc43b0-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc43b0-context').style.display = (document.getElementById('cakeErr53f71aabc43b0-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f71aabc43b0-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ref_no&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'ref_no'</span><span style="color: #007700">];</span></span></code>
 <code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$reg_date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'reg_date'</span><span style="color: #007700">];</span></span></code>
-<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$payment_term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymentterm'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymenttype'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f44da30b42e-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$payment_term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymentterm'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymenttype'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f71aabc43b0-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
 $delivery_data = array(
 	(int) 0 =&gt; array(
 		&#039;Proforma&#039; =&gt; array(
@@ -334,6 +340,9 @@ $delivery_data = array(
 			&#039;cus_salespeople_count&#039; =&gt; null,
 			&#039;cus_referedby_count&#039; =&gt; null,
 			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
 			&#039;status&#039; =&gt; null,
 			&#039;is_deleted&#039; =&gt; null,
 			&#039;Customertagname&#039; =&gt; null
@@ -486,6 +495,9 @@ $delivery_data_list = array(
 		&#039;cus_salespeople_count&#039; =&gt; null,
 		&#039;cus_referedby_count&#039; =&gt; null,
 		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
 		&#039;status&#039; =&gt; null,
 		&#039;is_deleted&#039; =&gt; null,
 		&#039;Customertagname&#039; =&gt; null
@@ -543,9 +555,9 @@ ReflectionMethod::invokeArgs() - [internal], line ??
 Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
 Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
 Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
-[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30ca20-trace').style.display = (document.getElementById('cakeErr53f44da30ca20-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Paymentterm [<b>APP\Controller\ProformasController.php</b>, line <b>509</b>]<div id="cakeErr53f44da30ca20-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30ca20-code').style.display = (document.getElementById('cakeErr53f44da30ca20-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30ca20-context').style.display = (document.getElementById('cakeErr53f44da30ca20-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f44da30ca20-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ref_no&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'ref_no'</span><span style="color: #007700">];</span></span></code>
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc5b71-trace').style.display = (document.getElementById('cakeErr53f71aabc5b71-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Paymentterm [<b>APP\Controller\ProformasController.php</b>, line <b>509</b>]<div id="cakeErr53f71aabc5b71-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc5b71-code').style.display = (document.getElementById('cakeErr53f71aabc5b71-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc5b71-context').style.display = (document.getElementById('cakeErr53f71aabc5b71-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f71aabc5b71-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ref_no&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'ref_no'</span><span style="color: #007700">];</span></span></code>
 <code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$reg_date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'reg_date'</span><span style="color: #007700">];</span></span></code>
-<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$payment_term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymentterm'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymenttype'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f44da30ca20-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$payment_term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymentterm'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymenttype'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f71aabc5b71-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
 $delivery_data = array(
 	(int) 0 =&gt; array(
 		&#039;Proforma&#039; =&gt; array(
@@ -610,6 +622,9 @@ $delivery_data = array(
 			&#039;cus_salespeople_count&#039; =&gt; null,
 			&#039;cus_referedby_count&#039; =&gt; null,
 			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
 			&#039;status&#039; =&gt; null,
 			&#039;is_deleted&#039; =&gt; null,
 			&#039;Customertagname&#039; =&gt; null
@@ -762,6 +777,9 @@ $delivery_data_list = array(
 		&#039;cus_salespeople_count&#039; =&gt; null,
 		&#039;cus_referedby_count&#039; =&gt; null,
 		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
 		&#039;status&#039; =&gt; null,
 		&#039;is_deleted&#039; =&gt; null,
 		&#039;Customertagname&#039; =&gt; null
@@ -819,9 +837,9 @@ ReflectionMethod::invokeArgs() - [internal], line ??
 Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
 Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
 Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
-[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30e00b-trace').style.display = (document.getElementById('cakeErr53f44da30e00b-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Description [<b>APP\Controller\ProformasController.php</b>, line <b>512</b>]<div id="cakeErr53f44da30e00b-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30e00b-code').style.display = (document.getElementById('cakeErr53f44da30e00b-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30e00b-context').style.display = (document.getElementById('cakeErr53f44da30e00b-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f44da30e00b-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$salesorderno&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'salesorderno'</span><span style="color: #007700">];</span></span></code>
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc7132-trace').style.display = (document.getElementById('cakeErr53f71aabc7132-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Description [<b>APP\Controller\ProformasController.php</b>, line <b>512</b>]<div id="cakeErr53f71aabc7132-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc7132-code').style.display = (document.getElementById('cakeErr53f71aabc7132-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc7132-context').style.display = (document.getElementById('cakeErr53f71aabc7132-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f71aabc7132-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$salesorderno&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'salesorderno'</span><span style="color: #007700">];</span></span></code>
 <code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></code>
-<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Description'</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f44da30e00b-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Description'</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f71aabc7132-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
 $delivery_data = array(
 	(int) 0 =&gt; array(
 		&#039;Proforma&#039; =&gt; array(
@@ -886,6 +904,9 @@ $delivery_data = array(
 			&#039;cus_salespeople_count&#039; =&gt; null,
 			&#039;cus_referedby_count&#039; =&gt; null,
 			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
 			&#039;status&#039; =&gt; null,
 			&#039;is_deleted&#039; =&gt; null,
 			&#039;Customertagname&#039; =&gt; null
@@ -1038,6 +1059,9 @@ $delivery_data_list = array(
 		&#039;cus_salespeople_count&#039; =&gt; null,
 		&#039;cus_referedby_count&#039; =&gt; null,
 		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
 		&#039;status&#039; =&gt; null,
 		&#039;is_deleted&#039; =&gt; null,
 		&#039;Customertagname&#039; =&gt; null
@@ -1097,9 +1121,9 @@ ReflectionMethod::invokeArgs() - [internal], line ??
 Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
 Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
 Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
-[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30f5bb-trace').style.display = (document.getElementById('cakeErr53f44da30f5bb-trace').style.display == 'none' ? '' : 'none');"><b>Warning</b> (2)</a>: Invalid argument supplied for foreach() [<b>APP\Controller\ProformasController.php</b>, line <b>512</b>]<div id="cakeErr53f44da30f5bb-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30f5bb-code').style.display = (document.getElementById('cakeErr53f44da30f5bb-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da30f5bb-context').style.display = (document.getElementById('cakeErr53f44da30f5bb-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f44da30f5bb-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$salesorderno&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'salesorderno'</span><span style="color: #007700">];</span></span></code>
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc86c0-trace').style.display = (document.getElementById('cakeErr53f71aabc86c0-trace').style.display == 'none' ? '' : 'none');"><b>Warning</b> (2)</a>: Invalid argument supplied for foreach() [<b>APP\Controller\ProformasController.php</b>, line <b>512</b>]<div id="cakeErr53f71aabc86c0-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc86c0-code').style.display = (document.getElementById('cakeErr53f71aabc86c0-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc86c0-context').style.display = (document.getElementById('cakeErr53f71aabc86c0-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f71aabc86c0-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$salesorderno&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'salesorderno'</span><span style="color: #007700">];</span></span></code>
 <code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></code>
-<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Description'</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f44da30f5bb-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Description'</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f71aabc86c0-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
 $delivery_data = array(
 	(int) 0 =&gt; array(
 		&#039;Proforma&#039; =&gt; array(
@@ -1164,6 +1188,9 @@ $delivery_data = array(
 			&#039;cus_salespeople_count&#039; =&gt; null,
 			&#039;cus_referedby_count&#039; =&gt; null,
 			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
 			&#039;status&#039; =&gt; null,
 			&#039;is_deleted&#039; =&gt; null,
 			&#039;Customertagname&#039; =&gt; null
@@ -1316,6 +1343,9 @@ $delivery_data_list = array(
 		&#039;cus_salespeople_count&#039; =&gt; null,
 		&#039;cus_referedby_count&#039; =&gt; null,
 		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
 		&#039;status&#039; =&gt; null,
 		&#039;is_deleted&#039; =&gt; null,
 		&#039;Customertagname&#039; =&gt; null
@@ -1375,9 +1405,9 @@ ReflectionMethod::invokeArgs() - [internal], line ??
 Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
 Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
 Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
-[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da310b77-trace').style.display = (document.getElementById('cakeErr53f44da310b77-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined variable: device_name [<b>APP\Controller\ProformasController.php</b>, line <b>581</b>]<div id="cakeErr53f44da310b77-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da310b77-code').style.display = (document.getElementById('cakeErr53f44da310b77-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da310b77-context').style.display = (document.getElementById('cakeErr53f44da310b77-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f44da310b77-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">tbody</span><span style="color: #007700">&gt;</span><span style="color: #DD0000">';</span></span></code>
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc9bc6-trace').style.display = (document.getElementById('cakeErr53f71aabc9bc6-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined variable: device_name [<b>APP\Controller\ProformasController.php</b>, line <b>581</b>]<div id="cakeErr53f71aabc9bc6-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc9bc6-code').style.display = (document.getElementById('cakeErr53f71aabc9bc6-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabc9bc6-context').style.display = (document.getElementById('cakeErr53f71aabc9bc6-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f71aabc9bc6-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">tbody</span><span style="color: #007700">&gt;</span><span style="color: #DD0000">';</span></span></code>
 <code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$subtotal&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;</span></span></code>
-<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$device_name&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f44da310b77-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$device_name&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f71aabc9bc6-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
 $delivery_data = array(
 	(int) 0 =&gt; array(
 		&#039;Proforma&#039; =&gt; array(
@@ -1442,6 +1472,9 @@ $delivery_data = array(
 			&#039;cus_salespeople_count&#039; =&gt; null,
 			&#039;cus_referedby_count&#039; =&gt; null,
 			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
 			&#039;status&#039; =&gt; null,
 			&#039;is_deleted&#039; =&gt; null,
 			&#039;Customertagname&#039; =&gt; null
@@ -1652,6 +1685,9 @@ $delivery_data_list = array(
 		&#039;cus_salespeople_count&#039; =&gt; null,
 		&#039;cus_referedby_count&#039; =&gt; null,
 		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
 		&#039;status&#039; =&gt; null,
 		&#039;is_deleted&#039; =&gt; null,
 		&#039;Customertagname&#039; =&gt; null
@@ -1712,9 +1748,9 @@ ReflectionMethod::invokeArgs() - [internal], line ??
 Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
 Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
 Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
-[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da31214d-trace').style.display = (document.getElementById('cakeErr53f44da31214d-trace').style.display == 'none' ? '' : 'none');"><b>Warning</b> (2)</a>: Invalid argument supplied for foreach() [<b>APP\Controller\ProformasController.php</b>, line <b>581</b>]<div id="cakeErr53f44da31214d-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da31214d-code').style.display = (document.getElementById('cakeErr53f44da31214d-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f44da31214d-context').style.display = (document.getElementById('cakeErr53f44da31214d-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f44da31214d-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">tbody</span><span style="color: #007700">&gt;</span><span style="color: #DD0000">';</span></span></code>
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabcb8ef-trace').style.display = (document.getElementById('cakeErr53f71aabcb8ef-trace').style.display == 'none' ? '' : 'none');"><b>Warning</b> (2)</a>: Invalid argument supplied for foreach() [<b>APP\Controller\ProformasController.php</b>, line <b>581</b>]<div id="cakeErr53f71aabcb8ef-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabcb8ef-code').style.display = (document.getElementById('cakeErr53f71aabcb8ef-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f71aabcb8ef-context').style.display = (document.getElementById('cakeErr53f71aabcb8ef-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f71aabcb8ef-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">tbody</span><span style="color: #007700">&gt;</span><span style="color: #DD0000">';</span></span></code>
 <code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$subtotal&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;</span></span></code>
-<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$device_name&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f44da31214d-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$device_name&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f71aabcb8ef-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
 $delivery_data = array(
 	(int) 0 =&gt; array(
 		&#039;Proforma&#039; =&gt; array(
@@ -1779,6 +1815,9 @@ $delivery_data = array(
 			&#039;cus_salespeople_count&#039; =&gt; null,
 			&#039;cus_referedby_count&#039; =&gt; null,
 			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
 			&#039;status&#039; =&gt; null,
 			&#039;is_deleted&#039; =&gt; null,
 			&#039;Customertagname&#039; =&gt; null
@@ -1989,6 +2028,9 @@ $delivery_data_list = array(
 		&#039;cus_salespeople_count&#039; =&gt; null,
 		&#039;cus_referedby_count&#039; =&gt; null,
 		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
 		&#039;status&#039; =&gt; null,
 		&#039;is_deleted&#039; =&gt; null,
 		&#039;Customertagname&#039; =&gt; null
@@ -2083,8 +2125,8 @@ endobj
 5 0 obj
 <<
 /Creator (DOMPDF)
-/CreationDate (D:20140820072627+00'00')
-/ModDate (D:20140820072627+00'00')
+/CreationDate (D:20140822102548+00'00')
+/ModDate (D:20140822102548+00'00')
 /Title (PDF)
 >>
 endobj

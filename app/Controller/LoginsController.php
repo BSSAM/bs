@@ -39,9 +39,9 @@ class LoginsController extends AppController
                 $pass_check = $data[$i]['User']['password'];
                 if(($user_check == $post_output['val_username'])&&($pass_check == $post_output['val_password']))
                 {
-                    $this->Session->write('sess_username', $data[$i]['User']['username']);
-                    $this->Session->write('sess_userid', $data[$i]['User']['id']);
-                    $this->Session->write('sess_userrole', $data[$i]['User']['userrole_id']);
+                    $this->Session->write('sess_username', $data[$i]['User']['username'], array('defaults' => 'cake','timeout' => 14400 ));
+                    $this->Session->write('sess_userid', $data[$i]['User']['id'], array('defaults' => 'cake','cookie' => 'bs_ck_ss','timeout' => 14400 ));
+                    $this->Session->write('sess_userrole', $data[$i]['User']['userrole_id'], array('defaults' => 'cake','timeout' => 14400 ));
                     return $this->redirect(array('controller' => 'Dashboards','action'=>'index'));
                 }
             }

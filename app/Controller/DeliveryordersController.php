@@ -25,11 +25,13 @@
             $this->set('payment',$payment);
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set('service',$services);
+            //is_deliveryorder_created
             $this->request->data['Deliveryorder']['delivery_order_no']=$dmt;
             if($this->request->is('post'))
             {
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
+                    $this->request->data['Deliveryorder']['is_deliveryorder_created']=1;
                     /******************* Data Log*/
                         $this->request->data['Logactivity']['logname']   =   'Deliveryorder';
                         $this->request->data['Logactivity']['logactivity']   =   'Add DeliveryOrder';
@@ -51,7 +53,7 @@
                     
                 /******************/    
                     //pr($a);exit;
-                    $this->Session->setFlash(__('Delivery Order has been Added Succefully '));
+                    $this->Session->setFlash(__('Delivery Order has been Added Successfully '));
                     $this->redirect(array('action'=>'index'));
                 }
             }
@@ -123,17 +125,24 @@
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
-            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1),array('Deliveryorder.delivery_order_no'=>$id));
-            if($updated)
+            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type !='=>'Manual'));
+            //return $updated;
+            if($updated!=1)
             {
                 //pr($id1);exit;
                 $user_id = $this->Session->read('sess_userid');
-                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Approved Delivery order'));
+                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Delivery order'));
                 $this->request->data['Invoice']['deliveryorder_id']=$id;
                 $this->request->data['Invoice']['customer_purchaseorder_no']='';
                 $this->request->data['Invoice']['is_approved']=0;
                 $this->Invoice->save($this->request->data);
-               
+            }
+            else
+            {
+                $text = "Purchase Order Needs to be Given(Manually) to get Approval";
+                return $text;
+//                $this->Session->setFlash(__('Purchase Order Needs to be Given(Manually) to get Approval'));
+//                $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
             }
          }
         /*
@@ -147,7 +156,7 @@
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
-            $data = $this->Salesorder->find('all',array('conditions'=>array('salesorderno LIKE'=>'%'.$sales_id.'%','Salesorder.is_approved'=>1)));
+            $data = $this->Salesorder->find('all',array('conditions'=>array('salesorderno LIKE'=>'%'.$sales_id.'%','Salesorder.is_approved'=>1,'Salesorder.is_deliveryorder_created'=>0)));
             $c = count($data);
             if(!empty($c))
             {

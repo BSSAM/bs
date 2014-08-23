@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog');
+                            'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog');
         public function index()
         {
         /*******************************************************
@@ -54,6 +54,11 @@
             
             if($this->request->is('post'))
             {
+                $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                        $instrument_type = $con['InstrumentType']['salesorder'];
+                        //pr($instrument_type);exit;
+                        //echo $instrument_type; exit;
+                         $this->set('instrument_type',$instrument_type);
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                 $this->request->data['Salesorder']['customername']=$this->request->data['sales_customername'];
                 $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
@@ -109,6 +114,9 @@
             $dmt    =   $this->random('salesorder');
             $this->set('salesorderno', $dmt);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
+            
+            
+            //$instrumentforgroup=$this->Instrumentforgroup->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set(compact('service','payment','priority'));
@@ -116,7 +124,14 @@
             
             if($this->request->is('post'))
             {
-               //pr($this->request->data);exit;
+                
+              // pr($this->request->data);exit;
+                
+            
+            //endforeach;
+            //pr($instrument_type);exit;
+            //pr($con);exit;
+                
                if(isset($this->request->data['Salesorder']['salesorder_created']) && $this->request->data['Salesorder']['salesorder_created']==1)
                {
                    //For pending process in Salesorder by quotation
@@ -133,14 +148,19 @@
                    }
                    else
                    {
+                        $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                        $instrument_type = $con['InstrumentType']['salesorder'];
+                        //echo $instrument_type; exit;
+                         $this->set('instrument_type',$instrument_type);
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                         //pr($quotation_details);exit;
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
                         $this->set(compact('contact_list'));
-                        $sales_details =  $quotation_details['Quotation']  ;
+                        $sales_details =  $quotation_details['Quotation'];
                         $sales['Salesorder']   =    $sales_details;
                         $sales['Description']  =    $quotation_details['Device'];
                         $sales['Salesorder']['quotation_id']   =    $sales_details['id'];
+                        
                         $device_node_nonstatus    =   $this->Description->find('all',array('conditions'=>array('Description.quotation_id'=>$sales['Salesorder']['quotation_id'],'Description.status'=>0)));
                         //pr($device_node_nonstatus);exit;
                         if(!empty($device_node_nonstatus))
@@ -155,7 +175,8 @@
                             $description_data  =   $this->saleDescription($sale['id']);
                             $this->Description->save($description_data);
                         endforeach;   
-                       //pr($sales);exit;
+                        //pr($this->request->data);
+                        //pr($sales);exit;
                         $this->request->data =   $sales;
                    }
                }
@@ -166,7 +187,12 @@
                     $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
                     $quotation_id   =   $this->request->data['Salesorder']['quotation_id'];
                     $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
+                    $this->request->data['Salesorder']['created_by']=$this->Session->read('sess_userid');
+                    $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                     
+                    $this->request->data['Salesorder']['po_generate_type']=$quotation_details['Quotation']['po_generate_type'];
+                    //pr($quotation_details);
+                   // pr($this->request->data['Salesorder']);exit;
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();

@@ -60,7 +60,7 @@
                         $options = array('all' => 'All', 'Inlab' => 'In Lab','subcontract'=>'Sub Contract','onsite'=>'On Site');
                         $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button radio-align-call','name'=>'calllocation');
                         echo $this->Form->radio('calllocation', $options, $attributes);
-                   ?>
+                    ?>
                     </div>
             </div>
         </div></div>
