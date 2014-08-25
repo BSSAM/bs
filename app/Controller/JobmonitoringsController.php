@@ -13,6 +13,9 @@ class JobmonitoringsController extends AppController
     public function index()
     {
         $salesorder_approved_list    =   $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1),'recursive'=>2));
+//        foreach($salesorder_approved_list as $list_sales):
+//            $deliver = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$id,'Deliveryorder.is_approved'=>1)));
+//        endforeach;
         //pr($salesorder_approved_list);exit;
         $this->set(compact('salesorder_approved_list'));
             
@@ -22,13 +25,13 @@ class JobmonitoringsController extends AppController
             $this->set('job_sales_no',$id);
             $description_list    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$id,'Description.is_deleted'=>0,'Description.is_approved'=>1),'recursive'=>2));
             $deliver = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$id,'Deliveryorder.is_approved'=>1)));
-            
+            //pr($deliver);exit;
             if($deliver!=''):
                 $this->set('deliver_order',$deliver);
             else:
                 $this->set('deliver_order',0);
             endif;
-    
+            
             if($this->request->is(array('post','put')))
             {
                 $description_ready_deliver_array = $this->request->data['Description']['ready_deliver'];

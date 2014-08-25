@@ -54,7 +54,22 @@
                     $processing=  ($description['Description']['processing']==1)?'checked="checked"':'' ;
                     $checking=   ($description['Description']['checking']==1)?'checked="checked"':'' ;
                     $shipping=   ($description['Description']['shipping']==1)?'checked="checked"':'' ;
-                    if($description['Description']['ready_deliver']==1){$check_ready    =   'checked="checked"';$dis_ready='disabled="disabled"';}else{$check_ready    = '';$dis_ready='';}
+                    
+                    if ($deliver_order != NULL):
+                    if($description['Description']['ready_deliver']==1){
+                        
+                        $check_ready    =   'checked="checked"';
+                        $dis_ready='disabled="disabled"';
+                        
+                    }else{
+                        
+                        $check_ready    = '';$dis_ready='';
+                        
+                    }
+                    else:
+                        $check_ready    =   'disabled="disabled"';
+                        $dis_ready='disabled="disabled"';
+                    endif;
                ?>
                 <tr>
                     <td class="text-center"><?PHP echo $description['Description']['id']; ?></td>

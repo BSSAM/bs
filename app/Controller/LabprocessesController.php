@@ -31,9 +31,32 @@ class LabprocessesController extends AppController
         $data_pending_count = $this->Description->find('count',array('conditions'=>array('AND'=>array('Description.checking'=>0,'Description.is_approved_lab'=>0,'Description.salesorder_id !='=>''))));
         
         $this->Description->unbindModel(array('belongsTo' => array('Brand','Customer','Instrument','Department','Salesorder')), true);
-        $data_processing_count = $this->Description->find('count',array('conditions'=>array('Description.processing'=>1)));
+        
+        $data_processing = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deliveryorder_created'=>0)));
+        $count_process = 0;
+        $count_process1 = 0; 
+        foreach($data_processing as $data_processing_list)
+        {
+        $count_process = $this->Description->find('count',array('conditions'=>array('Description.processing'=>1,'Description.salesorder_id'=>$data_processing_list['Salesorder']['salesorderno'])));
+        $count_process1 += $count_process;//echo $count;exit;
+        }
+        //pr();exit;
+        $data_processing_count = $count_process1;
         $this->Description->unbindModel(array('belongsTo' => array('Brand','Customer','Instrument','Department','Salesorder')), true);
-        $data_checking_count = $this->Description->find('count',array('conditions'=>array('Description.checking ='=>1,'Description.is_approved_lab'=>1 )));
+         $data_checking = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deliveryorder_created'=>0)));
+        $count_check = 0;
+        $count_check1 = 0; 
+        foreach($data_checking as $data_checking_list)
+        {
+        $count_check = $this->Description->find('count',array('conditions'=>array('Description.checking ='=>1,'Description.is_approved_lab'=>1,'Description.salesorder_id'=>$data_processing_list['Salesorder']['salesorderno'])));
+        $count_check1 += $count_check;//echo $count;exit;
+        }
+        //pr();exit;
+        $data_checking_count = $count_check1;
+        
+        
+        
+        //$data_checking_count = $this->Description->find('count',array('conditions'=>array('Description.checking ='=>1,'Description.is_approved_lab'=>1 )));
         $this->set(compact('data_checking_count','data_processing_count','data_pending_count','data_description_count','salesordercount','labprocess'));
         $this->set('count_data', $data_checking_count);
     }  

@@ -3471,6 +3471,7 @@ p, .table, .alert, .carousel {
 
     #page-content {
         padding: 20px 20px 1px;
+        min-height: 754px !important;
     }
 
     .header-section,
