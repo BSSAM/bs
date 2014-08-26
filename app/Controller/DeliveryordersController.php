@@ -64,6 +64,7 @@
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
             //pr($deliveryorder);exit;
+            //pr($deliveryorder['Customer']['Contactpersoninfo']);
             if($deliveryorder['Deliveryorder']['po_generate_type']=='Automatic' && $deliveryorder['Customer']['acknowledgement_type_id']==1):
                 $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
                  $this->Session->setFlash(__($quo_no.' - Cannot Approve Deliveryorder without PO Number(Manual) '));

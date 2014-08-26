@@ -54,7 +54,7 @@
             
             if($this->request->is('post'))
             {
-                $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         $instrument_type = $con['InstrumentType']['salesorder'];
                         //pr($instrument_type);exit;
                         //echo $instrument_type; exit;
@@ -139,21 +139,31 @@
                    if($device_current_status=='pending')
                    {
                         $salesorder_details    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$this->request->data['Salesorder']['quotation_id']),'contain'=>array('Description'=>array('Instrument','Brand','Range','Department','conditions'=>array('Description.pending'=>'1')),'Customer'),'recursive'=>3));
+                        $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
+                        $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+                        $this->set(compact('contact_list'));
                         if($salesorder_details['Customer']['invoice_type_id']!=3)
                         {
                             $this->set('sale',$salesorder_details);
                             $this->set('status_id','pending_status');
                             $this->request->data =   $salesorder_details;
                         }
+                        $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                        
+                        $instrument_type = $con['InstrumentType']['salesorder'];
+                        //pr($instrument_type);exit;
+                        //echo $instrument_type; exit;
+                         $this->set('instrument_type',$instrument_type);
                    }
                    else
                    {
-                        $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                        $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         $instrument_type = $con['InstrumentType']['salesorder'];
                         //echo $instrument_type; exit;
                          $this->set('instrument_type',$instrument_type);
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+                        //pr($contact_list);exit;
                         $this->set(compact('contact_list'));
                         $sales_details =  $quotation_details['Quotation'];
                         $sales['Salesorder']   =    $sales_details;
@@ -188,10 +198,12 @@
                     $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
                     $this->request->data['Salesorder']['created_by']=$this->Session->read('sess_userid');
                     $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
-                    
                     $this->request->data['Salesorder']['po_generate_type']=$quotation_details['Quotation']['po_generate_type'];
-                    //pr($quotation_details);
-                   // pr($this->request->data['Salesorder']);exit;
+                    /* Instrument Type */
+                    $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                    $instrument_type = $con['InstrumentType']['salesorder'];
+                    $this->set('instrument_type',$instrument_type);
+                    
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
@@ -271,8 +283,11 @@
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id),'recursive'=>'2'));
-            
+            //pr($salesorder_details);exit;
             $this->set('salesorder',$salesorder_details);
+            $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Quotation']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                    $instrument_type = $con['InstrumentType']['salesorder'];
+                    $this->set('instrument_type',$instrument_type);
             //pr($salesorder_details);exit;
             
             $this->set(compact('priority','payment','service'));
