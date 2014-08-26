@@ -52,10 +52,10 @@ class InstrumentsController extends AppController
 //         $this->virtualFields['range_name'] =  sprintf('CONCAT(%s.name, " - ", %s.model)', $this->Range->range_name, $this->Unit->unit_name);
         $brand_array =   $this->Brand->find('list',array('conditions'=>array('Brand.status'=>'1'),'fields'=>array('id','brandname')));
         $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
-        $procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1'),'fields'=>array('id','procedure_no')));
+        //$procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1'),'fields'=>array('id','procedure_no')));
         //pr($procedure_array);exit;
         $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
-        $this->set(compact('brand_array','range_array','procedure_array','department_array'));
+        $this->set(compact('brand_array','range_array','department_array'));
         if($this->request->is('post'))
         {
             $instrumentpro_array = $this->request->data['InstrumentProcedure']['procedure_id'];
@@ -147,9 +147,9 @@ class InstrumentsController extends AppController
       
         $brand_array =   $this->Brand->find('list',array('conditions'=>array('Brand.status'=>'1'),'fields'=>array('id','brandname')));
         $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
-        $procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1'),'fields'=>array('id','procedure_no')));
+        //$procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1'),'fields'=>array('id','procedure_no')));
         $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
-        $this->set(compact('brand_array','range_array','procedure_array','department_array'));
+        $this->set(compact('brand_array','range_array','department_array'));
         
         
         if($this->request->is(array('post','put')))
@@ -268,5 +268,23 @@ class InstrumentsController extends AppController
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Instrument'));
             $details=$this->Instrument->find('first',array('conditions'=>array('Instrument.id'=>$id)));
             
+    }
+    public function get_depart()
+    {
+        $this->autoRender   =   false;
+        $depart =  $this->request->data['depart'];
+       // echo $depart;
+        $procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1','Procedure.is_approved'=>'1','Procedure.department_id'=>$depart),'fields'=>array('id','procedure_no')));
+        //$email  =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.status'=>'1','Contactpersoninfo.id'=>$id),'fields'=>array('email')));
+       // pr($procedure_array);
+        if(!empty($procedure_array))
+        {
+            return json_encode($procedure_array);
+        }
+        else 
+        {
+            return "No Procedure Available";
+        }
+           
     }
 }

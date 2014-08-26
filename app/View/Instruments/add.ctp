@@ -1,4 +1,31 @@
- <h1>
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
+<script>
+    $(document).on('change','#department_id',function(){
+      var depart =   $(this).val();
+        $.ajax({
+            type: 'POST',
+            data:"depart="+depart,
+            url: path_url+'Instruments/get_depart/',
+            success:function(data){
+                if(data == 'No Procedure Available')
+                {
+                    $('#procedure').empty().append('<option value="">No Procedure Available</option>');
+                }
+                else
+                {
+                edit_node=$.parseJSON(data);
+                $('#procedure').empty();
+                $.each(edit_node,function(k,v){
+                    $('#procedure').append('<option value="'+k+'">'+v+'</option>');
+                });
+                }
+                 //$('#val_brand').empty().append('<option value="">Select Procedure</option><option value="'+edit_node.id+'">'+edit_node.+'</option>');
+               // $('#procedure').val(data);
+            }
+        });
+   }); 
+</script>
+<h1>
                                 <i class="gi gi-user"></i>Add Instrument
                             </h1>
                         </div>
@@ -36,12 +63,12 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="example-chosen-multiple">Department</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('department_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','name'=>'department_id')); ?>
+                                        <?php echo $this->Form->input('department_id', array('class'=>'form-control','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','name'=>'department_id','id'=>'department_id')); ?>
                                         
                                     </div>
                                     <label class="col-md-2 control-label" for="example-chosen-multiple">Procedure</label>
-                                    <div class="col-md-4">
-                                        <?php echo $this->Form->input('InstrumentProcedure.procedure_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$procedure_array,'data-placeholder'=>'Select Procedure Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
+                                    <div class="col-md-4"><?php //'options'=>$procedure_array,?>
+                                        <?php echo $this->Form->input('InstrumentProcedure.procedure_id', array('id'=>'procedure','class'=>'form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select Procedure Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         
                                     </div>
                                      
