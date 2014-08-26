@@ -175,14 +175,13 @@
                                     <?PHP  
                                         $quo_po     =   $data['Quotation']['ref_no'];
                                         $arra_po    =   explode(',', $quo_po);
-                                        
                                     ?>
                                     <?PHP $count    =   0; ?>
                                     <?PHP if(!empty($pos)){ ?>
                                     <?PHP foreach ($pos as $pokey=>$pov): ?>
                                     <?PHP $count    =   $count+1; ?>
                                     <div class="col-md-6 row">
-                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control get_ponumber_collection','value'=>$pokey,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
+                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pokey,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
                                     </div>
                                     <div class="col-md-3">
                                         <input type="text" class="form-control pull-left" placeholder="PO Count" name="pocount[]" value=<?PHP echo $pov; ?> >
@@ -196,7 +195,7 @@
                                     <?PHP foreach ($arra_po as $pokey=>$pov): ?>
                                     <?PHP $count    =   $count+1; ?>
                                     <div class="col-md-12 row">
-                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control get_ponumber_collection','value'=>$pov,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
+                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pov,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
                                     </div>
                                     
                                    <?PHP if($count==1&& $type_id!=1): ?>
@@ -216,7 +215,7 @@
                      <div class="form-group form-actions">
                                 <div class="col-xs-12 text-right">
                                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-sm btn-primary clientpo_approval_check">Save Changes</button>
+                                    <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
                                 </div>
                             </div>
                       <?PHP echo $this->Form->end(); ?>

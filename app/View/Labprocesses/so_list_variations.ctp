@@ -1,7 +1,7 @@
 <script>
      $('#solistvariation-datatable').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
-                "iDisplayLength": 10,
+                "iDisplayLength": 5,
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
     </script>
@@ -31,7 +31,7 @@
                     <td class="text-center"><?PHP echo $labprocess_list['Customer']['Customertagname'] ?></td>
                     <td class="text-center"><?PHP echo $this->Labprocess->find_priority_type($labprocess_list['Customer']['priority_id']) ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->query_total($labprocess_list['Salesorder']['salesorderno']) ?></td>
-<!--                <td class="text-center"><?PHP //echo $this->Salesorder->query_pending($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
+<!--                    <td class="text-center"><?PHP //echo $this->Salesorder->query_pending($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
                     <td class="text-center"><?PHP //echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
                     <td class="text-center"><?PHP //echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>-->
                     <td class="text-center"><?PHP echo count($labprocess_list['Description']); ?></td>
