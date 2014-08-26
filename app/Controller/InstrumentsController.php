@@ -144,12 +144,13 @@ class InstrumentsController extends AppController
         $instrument_data = $this->Instrument->find('first',array('conditions'=>array('Instrument.id'=>$id),'recursive'=>'2'));
         $instrument_dat = $this->Instrument->find('first',array('conditions'=>array('Instrument.id'=>$id),'recursive'=>'2'));
         $this->set('instrument_dat',$instrument_dat);
+        //pr($instrument_dat);exit;
       
         $brand_array =   $this->Brand->find('list',array('conditions'=>array('Brand.status'=>'1'),'fields'=>array('id','brandname')));
         $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
-        //$procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1'),'fields'=>array('id','procedure_no')));
+        $procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1','Procedure.department_id'=>$instrument_dat['Instrument']['department_id']),'fields'=>array('id','procedure_no')));
         $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
-        $this->set(compact('brand_array','range_array','department_array'));
+        $this->set(compact('brand_array','range_array','procedure_array','department_array'));
         
         
         if($this->request->is(array('post','put')))

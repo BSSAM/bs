@@ -244,7 +244,7 @@ $(document).ready(function(){
                 $('#QuotationCustomerId').val(edit_node.Device.customer_id);
                 $('#val_model_no').val(edit_node.Device.model_no);
                 $('#val_brand').empty().append('<option value="">Select Brand</option><option selected="selected" value="'+edit_node.Brand.id+'">'+edit_node.Brand.brandname+'</option>');
-                $('#val_range').empty().append('<option value="">Select Brand</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
+                $('#val_range').empty().append('<option value="">Select Range</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
                                
                 $('#val_call_location').val(edit_node.Device.call_location);
                 $('#val_call_type').val(edit_node.Device.call_type);
