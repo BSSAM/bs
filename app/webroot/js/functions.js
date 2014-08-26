@@ -415,6 +415,12 @@ $(document).ready(function(){
                 address_node    =   data1.Address;
                 contact_person_info =   data1.Contactpersoninfo;
                 salesperson_node =   data1.CusSalesperson;
+                // Calibration type based on customer for instrument
+                calibrationtype = data1.Customer.calibrationtype;
+                $('#val_call_type').find("option").filter(function(){
+      return ( ($(this).val() == calibrationtype) || ($(this).text() == calibrationtype) )
+    }).prop('selected', true);
+               
                 $.each(address_node,function(k,v){
                     if(v.type=='registered'){
                     $('#val_address').val(v.address);}

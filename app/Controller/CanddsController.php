@@ -14,7 +14,7 @@ class CanddsController extends AppController
     public function index()
     {
         $cd_statistics =    $this->CollectionDelivery->find('all',array('conditions'=>array('CollectionDelivery.status'=>1,'CollectionDelivery.is_deleted'=>0),'group'=>'CollectionDelivery.collection_delivery_date','recursive'=>2));
-        pr($cd_statistics);exit;
+        //pr($cd_statistics);exit;
         $this->set(compact('cd_statistics'));
     }
     public function add()
