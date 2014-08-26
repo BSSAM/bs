@@ -324,6 +324,20 @@ $(document).ready(function(){
            if(reply_check==0){ alert('Provide original PO Number for '+check_count);  return false;}   
          });
    });
+   /**************************************Client po number check in client po approval***************/
+   $(document).on('click','.clientpo_approval_check',function(){
+        var total_reply=0;var check_count=0;
+        $('.get_ponumber_collection').each(function(){
+           check_count  =   check_count+1;
+           var  inputString = $(this).val();
+           var findme       =  'CPO';
+           var reply_check  =   inputString.indexOf(findme);
+           if(reply_check==0){
+               alert('Provide original PO Number');  
+           }
+           return false;
+         });
+   });
    /**************************************Client po Quotation update*********************************/
    
    $(document).on('click','.client_po_quotation_update',function(){
