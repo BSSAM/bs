@@ -1,6 +1,4 @@
-<script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
-</script>
+<script> var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script type="text/javascript">
 </script>                
 <h1>
@@ -13,7 +11,6 @@
     <li><?php echo $this->Html->link('Labprocess',array('controller'=>'Labprocesses','action'=>'index')); ?></li>
 </ul>
 <!-- END Datatables Header -->
-    
 <!-- Datatables Content -->
 <div class="block full">
     <div class="block-title">
@@ -82,7 +79,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?PHP if (!empty($labprocess)): ?>
+               
+                <?PHP if (!empty($labprocess['Description'])): ?>
                 <?php foreach ($labprocess as $labprocess_list): ?>
                 <tr>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['salesorderno'] ?></td>
@@ -95,7 +93,7 @@
                     <td class="text-center"><?PHP echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno']) ?></td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'labs', $labprocess_list['Salesorder']['salesorderno']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
+                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'labs','out','all', $labprocess_list['Salesorder']['salesorderno']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
                         </div>
                     </td>
                 </tr>

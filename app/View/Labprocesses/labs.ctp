@@ -57,8 +57,8 @@
                             <?PHP echo $this->Form->input('Description.processing', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $labs_list['Description']['salesorder_id'], 'name' => $processing,$processed)); ?></td>
                     <td class="text-center">
                             <?PHP echo $this->Form->input('Description.checking', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $labs_list['Description']['salesorder_id'], 'name' => $checking,$checked)); ?></td>
-                <!--<td class="text-center"><?PHP //echo $this->Form->input('Description.checking',array('label'=>false,'id'=>'checking','type'=>'checkbox','class'=>$labs_list['Description']['salesorder_id']));   ?></td>-->
-                <td class="text-center edit_delay" id="<?PHP echo $labs_list['Description']['id']; ?>"><?PHP echo $labs_list['Description']['delay']; ?></td>
+                    <!--<td class="text-center"><?PHP //echo $this->Form->input('Description.checking',array('label'=>false,'id'=>'checking','type'=>'checkbox','class'=>$labs_list['Description']['salesorder_id']));   ?></td>-->
+                    <td class="text-center edit_delay" id="<?PHP echo $labs_list['Description']['id']; ?>"><?PHP echo $labs_list['Description']['delay']; ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

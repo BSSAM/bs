@@ -428,4 +428,41 @@ App::uses('Controller', 'Controller');
             $getLog = end($logData['log']);
             echo $getLog['query'];
         }
+         public function get_solist_calllocation_details($solist=NULL,$call_location=NULL,$id=NULL){
+            
+             switch($solist)
+             {
+                case 'run':
+                //pr($calllocation_id);
+                if($call_location=='all'){
+                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                        return $data_description;
+                   } else{
+                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                        return $data_description;
+                   }
+                    break;
+                    //pr($labprocess);exit;
+                    case 'out':
+                    if($call_location=='all'):
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.processing'=>0,'Description.checking'=>0)));
+                            return $data_description;
+                            else:
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.processing'=>1,'Description.checking'=>0,'Description.sales_calllocation'=>$call_location)));
+                            return $data_description;
+                    endif;
+                    //pr($labprocess);exit;
+                    break;
+                    case 'overdue': 
+                         if($call_location=='all'):
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                                return $data_description;
+                        else:
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                                return $data_description;
+                    endif;
+                    //pr($labprocess);exit;
+                     break;
+              }
+        }
 }

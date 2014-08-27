@@ -30,17 +30,17 @@
                     <td class="text-center"><?PHP echo $labprocess_list['branch']['branchname'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['Customer']['Customertagname'] ?></td>
                     <td class="text-center"><?PHP echo $this->Labprocess->find_priority_type($labprocess_list['Customer']['priority_id']) ?></td>
-                    <td class="text-center"><?PHP echo $this->Salesorder->query_total($labprocess_list['Salesorder']['salesorderno']) ?></td>
-<!--                    <td class="text-center"><?PHP //echo $this->Salesorder->query_pending($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
-                    <td class="text-center"><?PHP //echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
-                    <td class="text-center"><?PHP //echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>-->
-                    <td class="text-center"><?PHP echo count($labprocess_list['Description']); ?></td>
-                    <td class="text-center"><?PHP echo count($labprocess_list['Description']);?></td>
-                    <td class="text-center"><?PHP echo count($labprocess_list['Description']); ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->call_query_total($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->call_query_pending($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->call_query_processing($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->call_query_checking($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
+<!--                    <td class="text-center"><?PHP //echo count($labprocess_list['Description']); ?></td>
+                    <td class="text-center"><?PHP //echo count($labprocess_list['Description']);?></td>
+                    <td class="text-center"><?PHP //echo count($labprocess_list['Description']); ?></td>-->
                    
                     <td class="text-center">
                         <div class="btn-group">
-                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'labs', $labprocess_list['Salesorder']['salesorderno']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
+                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'labs',$solist,$call_location, $labprocess_list['Salesorder']['salesorderno']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
                         </div>
                     </td>
                 </tr>
