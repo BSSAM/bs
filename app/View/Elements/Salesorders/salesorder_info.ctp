@@ -80,9 +80,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
     <div class="col-md-12">
-        
-        <?php echo $this->Form->input('Salesorder.instrument_type', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
-                                                'label'=>false,'empty'=>'-- Select instrument For --','options'=>array('1'=>'We are pleased to quote the item(s) below for calibration service with certificate(s) :'))); ?>
+        <?php echo $this->Form->input('val_instrument_type', array('class'=>'form-control','type'=>'text',
+                                                'label'=>false,'value'=>$instrument_type,'readonly'=>'readonly')); ?>
     </div>
 </div>
-

@@ -14,9 +14,9 @@ class JobmonitoringsController extends AppController
     {
         $salesorder_approved_list    =   $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1),'recursive'=>2));
         foreach($salesorder_approved_list as $list_sales):
-            $deliver = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$id,'Deliveryorder.is_approved'=>1)));
+            $deliver = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1)));
         endforeach;
-        //pr($salesorder_approved_list);exit;
+        //pr($salesorder_approved_list);exit;'Deliveryorder.salesorder_id'=>$id,
         $this->set(compact('salesorder_approved_list'));
             
     }

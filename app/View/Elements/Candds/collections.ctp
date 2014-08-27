@@ -12,6 +12,7 @@
             <th class="text-center">Branch</th>
             <th class="text-center">Remarks</th>
             <th class="text-center">Request By</th>
+            <th class="text-center">Action</th>
         </tr>
     </thead>
     <tbody class="collections_info"> 

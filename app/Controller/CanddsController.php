@@ -45,6 +45,7 @@ class CanddsController extends AppController
                 $cd_last_id =   $this->CollectionDelivery->getLastInsertID();
                 $this->Candd->updateAll(array('Candd.status'=>1 ,'Candd.collection_delivery_id'=>$cd_last_id),array('Candd.cd_date'=>$this->request->data['Candd']['col_an_del_date']));
                 $this->ReadytodeliverItem->updateAll(array('ReadytodeliverItem.status'=>1,'ReadytodeliverItem.collection_delivery_id'=>$cd_last_id),array('ReadytodeliverItem.cd_date'=>$this->request->data['Candd']['col_an_del_date']));
+                
             }
             $this->redirect(array('controller'=>'Candds','action'=>'index'));
         }
@@ -100,6 +101,15 @@ class CanddsController extends AppController
         $delivery_data = $this->ReadytodeliverItem->find('all', array('conditions' => array('ReadytodeliverItem.cd_date' =>$cd_date,'ReadytodeliverItem.is_deleted'=>0), 'recursive' => '2'));
         if (!empty($delivery_data)) {
             echo json_encode($delivery_data);
+        }
+    }
+    public function get_collection_info() 
+    {
+        $this->autoRender = false;
+        $cd_date    =   $this->request->data['cd_date'];
+        $collection_data = $this->Candd->find('all', array('conditions' => array('Candd.cd_date' =>$cd_date,'Candd.is_deleted'=>0), 'recursive' => '2'));
+        if (!empty($collection_data)) {
+            echo json_encode($collection_data);
         }
     }
     

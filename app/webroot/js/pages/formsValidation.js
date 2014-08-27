@@ -260,7 +260,7 @@ var FormsValidation = function() {
                 },
                 rules: {
                     additionalcharge: {
-                        required: true,
+                        required: "#val_additionalcharge",
                         minlength: 3
                     },
                    

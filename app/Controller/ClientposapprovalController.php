@@ -90,7 +90,7 @@ class ClientposapprovalController extends AppController {
             $quotationno    =   $this->request->data['quotationno'];
             
             if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
-                
+               // $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
                  $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0),'recursive'=>3));
                  switch($data['Customer']['invoice_type_id'])
                  {
