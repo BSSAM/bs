@@ -35,8 +35,8 @@
                     <td class="text-center"><?PHP //echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
                     <td class="text-center"><?PHP //echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>-->
                     <td class="text-center"><?PHP echo count($labprocess_list['Description']); ?></td>
-                    <td class="text-center"><?PHP echo count($labprocess_list['Description']);?></td>
-                    <td class="text-center"><?PHP echo count($labprocess_list['Description']); ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno'])//count($labprocess_list['Description']);?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno']); ?></td>
                    
                     <td class="text-center">
                         <div class="btn-group">

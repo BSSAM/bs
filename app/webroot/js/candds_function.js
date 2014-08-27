@@ -215,7 +215,45 @@ $(document).ready(function(){
             }
 	});
     });
-   /********************For Description Move to deliver Script*********************/
+    
+    /*****************************************************************************/
+    $(document).on('click','.candd_collection_add',function(){
+        var cd_date1 =   $('.cd_date').val();
+        if($('.cd_date').val()!==''){
+            $('.collections_info').empty();
+        $.ajax({
+            type: "POST",
+            data:"cd_date="+cd_date1,
+            url: path_url+"/Candds/get_collection_info",
+            cache: false,
+            success: function(data)
+            {
+                var deliver_data_node = $.parseJSON(data);
+                var contact_person      =  deliver_data_node.Customer;
+               // alert(contact_person);
+                //console.log(data);
+                $.each(deliver_data_node,function(k,v){
+                    //alert(v);
+                    $('.collections_info').append('<tr class="colletion_'+v.Candd.id+'">\n\\n\
+                                    <td class="text-center">'+v.Candd.id+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.customername+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.customer_address+'</td>\n\\n\
+                                    <td class="text-center">'+v.Contactpersoninfo.name+'</td>\n\\n\
+                                    <td class="text-center">'+v.Contactpersoninfo.phone+'</td>\n\\n\\n\
+                                    <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.deliveryorderno+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.remarks+'</td><td class="text-center"><div class="btn-group">\n\
+                                    <a data-delete="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_collection_delete">\n\
+                                    <i class="fa fa-times"></i></a></div></td></tr>');
+                });
+            }
+	});}else
+    {
+        alert("Please select the date");
+    }
+    });
+   /********************For Description Move to deliver Script********************+v.branch.branchname+*/
    $('.move_to_deliver').click(function(){
       var assign_text  =   $('#val_assigned_move option:selected').text();
       var assign_value  =   $('#val_assigned_move option:selected').val();

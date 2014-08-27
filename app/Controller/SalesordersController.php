@@ -287,6 +287,7 @@
             $this->set('salesorder',$salesorder_details);
             $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Quotation']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                     $instrument_type = $con['InstrumentType']['salesorder'];
+                    //pr($instrument_type);
                     $this->set('instrument_type',$instrument_type);
             //pr($salesorder_details);exit;
             
