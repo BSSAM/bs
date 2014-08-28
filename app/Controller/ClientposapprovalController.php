@@ -9,7 +9,7 @@ class ClientposapprovalController extends AppController {
 
     public $helpers = array('Html', 'Form', 'Session');
     public $uses = array('Priority', 'Paymentterm', 'Quotation', 'Currency', 'Salesorder', 'Deliveryorder','Logactivity',
-        'Qoinvoice','Soinvoice','Doinvoice',
+        'Qoinvoice','Soinvoice','Doinvoice','Poinvoice',
         'Country', 'Additionalcharge', 'Service', 'CustomerInstrument', 'Customerspecialneed',
         'Instrument', 'Brand', 'Customer', 'Device', 'Unit', 'Logactivity', 'InstrumentType','Poinvoice',
         'Contactpersoninfo', 'CusSalesperson', 'Clientpo');
@@ -40,14 +40,25 @@ class ClientposapprovalController extends AppController {
        
         $this->set('type_id',$data['Customer']['invoice_type_id']);
         $this->set('quotation_data',$quotation_data);
-        $this->set(compact('data','track_id'));
+        
         $track_id=$this->random('track');
+        $this->set(compact('data','track_id'));
+        //pr($data);exit;
         switch($data['Customer']['invoice_type_id'])
         {
             case 1:
-                $po_data_array  = $this->Poinvoice->find('first',array('conditions'=>array('Poinvoice.track_id'=>$data['Quotation']['track_id'])));  
-                $pos    =   array($po_data_array['Poinvoice']['clientpo_number']=>$po_data_array['Poinvoice']['po_count']);
+                $po_data_array  = $this->Poinvoice->find('first',array('conditions'=>array('Poinvoice.track_id'=>$data['Quotation']['track_id'])));
+                if($po_data_array=='')
+                {
+                    $po_data_array  = $this->Poinvoice->updateAll(array('conditions'=>array('Poinvoice.track_id'=>$data['Quotation']['track_id'])));
+                }
+                else
+                {
+                pr($po_data_array);
+                exit;
+                $pos    =   array($po_data_array['poinvoice']['clientpo_number']=>$po_data_array['Poinvoice']['po_count']);
                 $this->set('pos',$pos);
+                }
                 break;
             case 2:
                 $qo_data_array  = $this->Qoinvoice->find('first',array('conditions'=>array('Qoinvoice.track_id'=>$data['Quotation']['track_id'])));  

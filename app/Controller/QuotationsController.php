@@ -66,6 +66,22 @@
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 $this->request->data['Quotation']['branch_id']=$branch['branch']['id'];
+                //pr($this->request->data);
+                //pr($this->request->data['Quotation']['ref_no']);exit;
+//                if ($this->request->data['Quotation']['ref_no'] != '') 
+//                {
+//                    $check_string = strchr($this->request->data['Quotation']['ref_no'], 'CPO');
+//                    $po_type = ($check_string == "") ? 'Manual' : 'Auotomatic';
+//                }
+//                //For Quotation array
+//                if( $this->request->data['Quotation']['quotation_no']!=''):
+//                $qo_id_array  =   $this->request->data['Quotation']['quotation_no'];
+//                $qo_count_array   =   $this->request->data['Quotation']['quo_quantity'];
+//                $po_array['Clientpo']['Quotation']         = array_combine($qo_id_array,$qo_count_array);
+//                    foreach($po_array['Clientpo']['Quotation'] as $quotationno=>$quotationcount){
+//                        $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$this->request->data['Quotation']['clientpo_no'].'"','Quotation.po_generate_type'=>'"'.$po_type.'"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
+//                    }
+//                endif;
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
@@ -307,6 +323,7 @@
                 echo "<br>";
                 echo "</div>"; 
             }
+            
         }
         public function get_brand_value()
         {

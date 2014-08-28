@@ -16,30 +16,30 @@
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
-                                    
+
                                     <h2></h2>
                                 </div>
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
                                 <?php echo $this->Form->create('Assign',array('class'=>'form-horizontal form-bordered','id'=>'form-assign-add')); ?>
-                                
+
                                     <div class="form-group">
-                                       
+
                                         <label class="col-md-2 control-label" for="val_assigned">Assigned To</label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('assignedto', array('id'=>'val_assigned','class'=>'form-control','placeholder'=>'Who is Assigned To','label'=>false,'name'=>'assignedto')); ?>
                                         </div>
-                                   
+
                                         <label class="col-md-2 control-label" for="val_description">Description</label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('description', array('id'=>'val_description','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,'name'=>'description')); ?>
                                         </div>
-                                   
+
                                     </div>
-                                    
-                                   
-                                    
+
+
+
                                      <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
@@ -55,4 +55,3 @@
                         </div>
     <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
-                        
