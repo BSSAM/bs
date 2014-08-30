@@ -401,6 +401,7 @@ $(document).ready(function(){
     });
     $(document).on('click','.customer_show',function(){
         var customer_name=$(this).text();
+        $('#preq_customer').val(customer_name);
         $('#val_customer').val(customer_name);
         $('#result').fadeOut();
         var customer_id=$(this).attr('id');
@@ -438,6 +439,7 @@ $(document).ready(function(){
                 $('#val_fax').val(data1.Customer.fax);
                 $('#val_phone').val(data1.Customer.phone); 
                 $('#val_email').val(data1.Contactpersoninfo.email);
+                $('#PurchaseRequisitionCustomerId').val(data1.Customer.id);
                 $('#SalesorderCustomerId').val(data1.Customer.id);
                 $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
                 $('#pay_id').val(data1.Paymentterm.id);

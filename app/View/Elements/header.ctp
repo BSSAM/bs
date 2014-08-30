@@ -230,8 +230,8 @@
                             </li>-->
                             
                              <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
-                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval')?'style=display:block':'';?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval'||$control=='PurchaseRequisitions'||$control=='Reqpurchaseorders')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
+                                 <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval'||$control=='PurchaseRequisitions'||$control=='Reqpurchaseorders')?'style=display:block':'';?>>
                                     <?php if($user_role['job_quotation']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Clientpos')?'active':''; ?>
@@ -307,17 +307,18 @@
                                           <?php  $a=($control == 'Candds')?'active':''; ?>
                                           <?php echo $this->Html->link('C & D Info',array('controller'=>'Candds','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                   
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
-                                    <li>
-                                          <a href="#"><?php echo 'Purchase Requisition'; ?></a>
+                                   <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                     <li>
+                                          <?php  $a=($control == 'PurchaseRequisitions')?'active':''; ?>
+                                          <?php echo $this->Html->link('Purchase Requisition',array('controller'=>'PurchaseRequisitions','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
-                                    <li>
-                                          <a href="#"><?php echo 'PR_Purchase Order'; ?></a>
+                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                     <li>
+                                          <?php  $a=($control == 'Reqpurchaseorders')?'active':''; ?>
+                                          <?php echo $this->Html->link('PR_Purchase Order',array('controller'=>'Reqpurchaseorders','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                     
+                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Debtchases')?'active':''; ?>
                                         <?php echo $this->Html->link('Debt Chase',array('controller'=>'Debtchases','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>

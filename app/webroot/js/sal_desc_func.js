@@ -278,6 +278,7 @@ $(document).ready(function(){
    $(document).on('click','.quotation_single',function(){
         var quote_id=$(this).text();
         $('#SalesorderQuotationId').val(quote_id);
+        $('#ReqpurchaseorderPrequistionId').val(quote_id);
         $('#quoat_list').fadeOut();
     });
    /************************For Sales order Approval End*********************************/

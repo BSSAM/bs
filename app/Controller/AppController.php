@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
     class AppController extends Controller 
     {
         public $components = array('Session');
-        public $uses    =   array('Description','Random','branch','Device','Customerspecialneed');
+        public $uses    =   array('Description','Random','branch','Device','Customerspecialneed','PreqDevice');
         
         public function beforeFilter()
         {
@@ -322,6 +322,24 @@ App::uses('Controller', 'Controller');
                     $str1 = implode('-', $parts);
                     $this->Random->updateAll(array('Random.track'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
+                case 'PurchasRequisition':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['PurchasRequisition'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                    }
+                    $str1 = implode('-', $parts);
+                    $this->Random->updateAll(array('Random.PurchasRequisition'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
             }
             return $str1;
         }
@@ -464,5 +482,28 @@ App::uses('Controller', 'Controller');
                     //pr($labprocess);exit;
                      break;
               }
+        }
+        //For Purchase order requistion based data creation
+        public function preq_devices($id=NULL)
+        {
+            $devices    =   $this->PreqDevice->find('first',array('conditions'=>array('PreqDevice.id'=>$id,'PreqDevice.status'=>1)));
+            $this->request->data['ReqDevice']['customer_id']          =   $devices['PreqDevice']['customer_id'];
+            $this->request->data['ReqDevice']['instrument_name']        =   $devices['PreqDevice']['instrument_name'];
+            $this->request->data['ReqDevice']['brand_id']             =   $devices['PreqDevice']['prequistionno'];
+            
+            $this->request->data['ReqDevice']['brand_id']             =   $devices['PreqDevice']['brand_id'];
+            $this->request->data['ReqDevice']['sales_quantity']       =   $devices['PreqDevice']['quantity'];
+            $this->request->data['ReqDevice']['model_no']             =   $devices['PreqDevice']['model_no'];
+            $this->request->data['ReqDevice']['range']               =   $devices['PreqDevice']['range'];
+            $this->request->data['ReqDevice']['validity']       =   $devices['PreqDevice']['validity'];
+            $this->request->data['ReqDevice']['discount']       =   $devices['PreqDevice']['discount'];
+            $this->request->data['ReqDevice']['department_name']        =   $devices['PreqDevice']['department_name'];
+            $this->request->data['ReqDevice']['unit_price']      =   $devices['PreqDevice']['unit_price'];
+            $this->request->data['ReqDevice']['account_service'] =   $devices['PreqDevice']['account_service'];
+            $this->request->data['ReqDevice']['title']         =   $devices['PreqDevice']['title'];
+            $this->request->data['ReqDevice']['total']          =   $devices['PreqDevice']['total'];
+            $this->request->data['ReqDevice']['status']               =   0;
+            $this->request->data['ReqDevice']['is_approved']          =   0;
+            return $this->request->data;
         }
 }
