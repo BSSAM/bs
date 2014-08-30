@@ -198,7 +198,8 @@
         </div>
     </div>
   <?php echo $this->Form->end(); ?>
-
+  <?php echo $this->Html->script('pages/formsValidation'); ?>
+        <script>$(function(){ FormsValidation.init(); });</script>
 <?php /*?><?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-project-add')); ?>
   <div id="modal-project" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">

@@ -28,7 +28,7 @@ class RangesController extends AppController
         /*
          * *****************************************************
          */
-        $range_data = $this->Range->find('all');
+        $range_data = $this->Range->find('all',array('conditions'=>array('Range.is_deleted ='=>0)));
         $this->set('ranges', $range_data);
         
     }

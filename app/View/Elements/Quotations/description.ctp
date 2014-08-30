@@ -35,12 +35,15 @@
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
          <span class="help-block_login ins_error">Enter the Instrument Name</span>
+         <span class="help-block_login inscus_error">Instrument Needs Customer Details</span>
+         
         <div id="search_instrument">
         </div>
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
+        <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
     </div>
         
 </div>
@@ -50,6 +53,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
+        <span class="help-block_login insmo_error">Enter the Instrument Model No</span>
     </div>
     <label class="col-md-2 control-label" for="val_validity">Validity (in months) </label>
     <div class="col-md-4">
@@ -63,13 +67,13 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
-        
+        <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
-       
+       <span class="help-block_login insra_error">Enter the Instrument Range</span>
     </div>
 </div>
 <div class="form-group">
@@ -79,7 +83,7 @@
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Call Location')); ?>
-        
+        <span class="help-block_login inscal_error">Enter the Call Location</span>
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
     <div class="col-md-4">
@@ -116,6 +120,7 @@
         <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
+        <span class="help-block_login insser_error">Enter the Account Service</span>
     </div>
     
 </div>

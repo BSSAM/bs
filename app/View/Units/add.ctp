@@ -7,7 +7,7 @@
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Brands',array('controller'=>'Units','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Unit',array('controller'=>'Units','action'=>'index')); ?></li>
                         <li>Add Units</li>
                     </ul>
                     <!-- END Forms General Header -->
@@ -60,6 +60,5 @@
                             </div>
                             <!-- END Basic Form Elements Block -->
                         </div>
-    <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
+    <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
-                        

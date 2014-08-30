@@ -19,11 +19,7 @@ class AdditionalchargesController extends AppController
          *  Controller : Additional Charges
          *  Permission : view
          *******************************************************/
-         $this->mj->find('all');
-         $this->Model->find('all');
-         echo $this->Html->link('ghg', array('controller' => 'gf', 'action' => 'fdf'));
-
-
+        
         $user_role = $this->userrole_permission();
         if($user_role['other_additional']['view'] == 0){
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));

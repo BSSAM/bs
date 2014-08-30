@@ -35,7 +35,7 @@
                                 <tbody>
                                     <?php foreach($brands as $brand): ?>
                                        
-                                    <tr <?php if($brand['Brand']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                    <tr <?php if($brand['Brand']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $brand['Brand']['id'];?></td>
                                         
                                          <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$brand['Brand']['created']);?></td>

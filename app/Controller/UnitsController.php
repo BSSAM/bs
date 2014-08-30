@@ -28,7 +28,7 @@ class UnitsController extends AppController
         /*
          * *****************************************************
          */
-        $unit_data = $this->Unit->find('all');
+        $unit_data = $this->Unit->find('all',array('conditions'=>array('Unit.is_deleted ='=>0)));
         $this->set('units', $unit_data);
         //pr($data);
     }

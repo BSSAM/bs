@@ -29,7 +29,7 @@ class BrandsController extends AppController
         /*
          * *****************************************************
          */
-        $brand_data = $this->Brand->find('all');
+        $brand_data = $this->Brand->find('all',array('conditions'=>array('Brand.is_deleted ='=>0)));
         $this->set('brands', $brand_data);
         //pr($data);
     }

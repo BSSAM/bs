@@ -44,7 +44,7 @@
                                             <?php echo $this->Form->input('firstname', array('id'=>'val_firstname','class'=>'form-control','placeholder'=>'Enter the First Name','label'=>false,'name'=>'firstname')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_password">Last Name</label>
+                                        <label class="col-md-2 control-label" for="val_lastname">Last Name</label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('lastname', array('id'=>'val_lastname','class'=>'form-control','placeholder'=>'Enter the Last Name','label'=>false,'name'=>'lastname')); ?>
                                         </div>
@@ -60,7 +60,7 @@
                                    
                                         <label class="col-md-2 control-label" for="val_userrole">User Role</label>
                                         <div class="col-md-4">
-                                           <?php echo $this->Form->input('userrole_id', array('id'=>'val_userrole','class'=>'select-chosen form-control','options' => $userrole,'empty'=>'Enter the User Role','label'=>false,'name'=>'userrole_id')); ?>
+                                           <?php echo $this->Form->input('userrole_id', array('id'=>'val_userrole','class'=>'form-control','options' => $userrole,'data-placeholder'=>'Enter the User Role','empty'=>'Select the User Role','label'=>false,'name'=>'userrole_id')); ?>
                                         </div>
                                    
                                     </div>
@@ -70,7 +70,7 @@
                                        
                                         <label class="col-md-2 control-label" for="val_department">Department</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('department_id', array('id'=>'val_department','class'=>'select-chosen','options' => $department,'data-placeholder'=>'Enter the Department','label'=>false,'name'=>'department_id','multiple'=>true,'style'=>'width: 250px; display: none;')); ?>
+                                            <?php echo $this->Form->input('department_id', array('id'=>'val_department','class'=>'form-control','options' => $department,'data-placeholder'=>'Enter the Department','label'=>false,'name'=>'department_id','multiple'=>'multiple')); ?>
                                         </div>
                                    
                                     </div>

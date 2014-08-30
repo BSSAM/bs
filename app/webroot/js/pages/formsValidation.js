@@ -181,15 +181,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -215,15 +215,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -247,15 +247,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -281,15 +281,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -313,15 +313,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -399,15 +399,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -453,15 +453,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -487,10 +487,9 @@ var FormsValidation = function() {
                         required: true
                         
                     },
-                    
-                   
-                   
-                   
+                    department_id:{
+                        required:true
+                    }
                 },
                 messages: {
                     username: {
@@ -515,6 +514,9 @@ var FormsValidation = function() {
                         required: 'User Role is Required'
                         
                     },
+                    department_id:{
+                       required: 'Department is Required'
+                    }
                 }
             });
             
@@ -522,15 +524,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -556,15 +558,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -590,15 +592,15 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -619,20 +621,62 @@ var FormsValidation = function() {
                     
                 }
             });
+            $('#form-priority-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.col-md-4 > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    priority: {
+                        required: true,
+                        minlength: 1
+                    },
+                    noofdays: {
+                        required:true
+                    },
+                    multipleof: {
+                        required:true
+                    }
+                   
+                   
+                },
+                messages: {
+                    priority: {
+                        required: 'Priority is Required',
+                        minlength: 'Priority must contain at least 1 characters'
+                    },
+                    noofdays: {
+                        required: 'No of Days is Required',
+                    },
+                    multipleof: {
+                        required: 'Multiples of is Required',
+                    }
+                }
+            });
             
             $('#form-referedby-add').validate({
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -741,16 +785,16 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                    // e.parents('.basic-wizard > tab').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -781,6 +825,21 @@ var FormsValidation = function() {
                         required: true
                     },
                     customertype:{
+                        required:true
+                    },
+                    paymentterm_id:{
+                        required:true
+                    },
+                    calibrationtype: {
+                        required:true
+                    },
+                    invoice_type_id: {
+                        required:true
+                    },
+                    deliveryordertype_id:{
+                        required:true
+                    },
+                    acknowledgement_type_id:{
                         required:true
                     }
                     
@@ -813,10 +872,25 @@ var FormsValidation = function() {
                         required: 'Industry is Required'
                     },
                     location_id: {
-                        required: 'Industry is Required'
+                        required: 'Location is Required'
                     },
                     customertype:{
                         required:'Customer Type is Required'
+                    },
+                    paymentterm_id: {
+                        required:'Payment Term is Required'
+                    },
+                    calibrationtype: {
+                        required:'Calibration Type is Required'
+                    },
+                    invoice_type_id: {
+                        required:'Invoice Type is Required'
+                    },
+                    deliveryordertype_id:{
+                        required:'Deliveryorder Type is Required'
+                    },
+                    acknowledgement_type_id:{
+                        required:'Acknowledgement Type is Required'
                     }
                     
                     
@@ -833,16 +907,16 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
                    // e.parents('.basic-wizard > tab').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
@@ -869,6 +943,21 @@ var FormsValidation = function() {
                         required: true
                     },
                     customertype:{
+                        required:true
+                    },
+                    paymentterm_id:{
+                        required:true
+                    },
+                    calibrationtype: {
+                        required:true
+                    },
+                    invoice_type_id: {
+                        required:true
+                    },
+                    deliveryordertype_id:{
+                        required:true
+                    },
+                    acknowledgement_type_id:{
                         required:true
                     }
                     
@@ -901,6 +990,21 @@ var FormsValidation = function() {
                     },
                     customertype:{
                         required:'Customer Type is Required'
+                    },
+                    paymentterm_id: {
+                        required:'Payment Term is Required'
+                    },
+                    calibrationtype: {
+                        required:'Calibration Type is Required'
+                    },
+                    invoice_type_id: {
+                        required:'Invoice Type is Required'
+                    },
+                    deliveryordertype_id:{
+                        required:'Deliveryorder Type is Required'
+                    },
+                    acknowledgement_type_id:{
+                        required:'Acknowledgement Type is Required'
                     }
                     
                     
@@ -1035,39 +1139,67 @@ var FormsValidation = function() {
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
-                    e.parents('.form-group_val > div').append(error);
+                    e.parents('.col-md-4 > div').append(error);
+                     e.parents('.instrument_details > div').append(error);
                    // e.parents('.basic-wizard > tab').append(error);
                 },
                 highlight: function(e) {
-                    $(e).closest('.form-group_val').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.instrument_details').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block_login').remove();
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group_val').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error');
+                    e.closest('.instrument_details').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
                     customername: {
                         required: true,
                         minlength: 1
+                    },
+                    "data[Quotation][ref_no]": {
+                        required: true
+                    },
+                    "data[Quotation][attn]": {
+                        required: true
+                    },
+                    "data[Quotation][instrument_type_id]": {
+                        required: true    
+                    },
+                    "data[Customerspecialneed][gsttype]":{
+                        required: true
+                    },
+                    "data[Customerspecialneed][currency_id]":{
+                        required: true
+                    } 
+                   
                 },
-                ref_no: {
-                        required: true,
-                        minlength: 1
-                }},
                 messages: {
                     customername: {
                         required: 'Customer Name is Required',
                         minlength: 'Customer Name Should Aleast be 1 Characters'
                     }, 
-                    ref_no: {
-                        required: 'Ref No is Required',
-                        minlength: 'Ref No Should Aleast be 1 Characters'
-                    }
+                    "data[Quotation][ref_no]": {
+                        required: 'Ref No is Required'
+                       },
+                    "data[Quotation][attn]": {
+                        required: 'Contact Person is Required'
+                    },
+                    "data[Quotation][instrument_type_id]":{
+                        required: 'Instrument Details is Required'
+                    },
+                    "data[Customerspecialneed][gsttype]":{
+                        required: 'GST Type is Required'
+                    },
+                    "data[Customerspecialneed][currency_id]":{
+                        required: 'Currency is Required'
+                    } 
                     
                     
-                },
+                }
+                
                 
             });
             
@@ -1111,6 +1243,339 @@ var FormsValidation = function() {
                     
                 },
                 
+            });
+           // $('#form-machine-add').
+            $('#form-machine-add').validate({
+               errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.col-md-4 > div').append(error);
+                     
+                   // e.parents('.basic-wizard > tab').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.col-md-4').removeClass('has-success has-error');
+                    // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 2
+                    },
+                    department_id: {
+                        required: true
+                    },
+                    "data[InstrumentProcedure][procedure_id][]": {
+                        required: true
+                    },
+                    "data[InstrumentBrand][brand_id][]": {
+                        required: true    
+                    },
+                    "data[InstrumentRange][range_id][]":{
+                        required: true
+                    } 
+                   
+                },
+                messages: {
+                    name: {
+                        required: 'Instrument Name is Required',
+                        minlength: 'Instrument Name Should Aleast be 2 Characters'
+                    }, 
+                    department_id: {
+                        required: 'Department is Required'
+                       },
+                    "data[InstrumentProcedure][procedure_id][]": {
+                        required: 'Instrument Procedure No Required'
+                    },
+                    "data[InstrumentBrand][brand_id][]":{
+                        required: 'Brand Name is Required'
+                    },
+                    "data[InstrumentRange][range_id][]":{
+                        required: 'Range is Required'
+                    } 
+                    
+                    
+                }
+                
+                
+            });
+            $('#form-procedure-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    procedure_no: {
+                        required: true,
+                        minlength: 3
+                    },
+                    department_id: {
+                        required: true,
+                    },
+                    
+                },
+                messages: {
+                    procedure_no: {
+                        required: 'Enter Procedure No',
+                        minlength: 'Must consist of at least 3 character'
+                    },
+                    department_id: {
+                        required: 'Select Department Name',
+                    },
+                    
+                }
+            });
+            
+            $('#form-brand-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    brandname: {
+                        required: true,
+                        minlength: 3
+                    },
+                    branddescription: {
+                        required: true,
+                        minlength: 6
+                    },
+                    
+                    
+                },
+                messages: {
+                    brandname: {
+                        required: 'Please enter the Brand Name',
+                        minlength: 'Brand Name must consist of at least 3 characters'
+                    },
+                    branddescription: {
+                        required: 'Please enter the Brand Description',
+                        minlength: 'Description must consist of at least 6 characters'
+                    },
+                }
+            });
+            
+            $('#form-group-add').validate({
+              
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.col-md-4 > div').append(error);
+                   // e.parents('.basic-wizard > tab').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    group_name: {
+                        required: true,
+                        minlength: 1
+                },
+                 
+                    quotation: {
+                        required: true,
+                        minlength: 1
+                },
+                 salesorder: {
+                        required: true,
+                        minlength: 1
+                },
+                deliveryorder: {
+                        required: true,
+                        minlength: 1
+                },
+                invoice: {
+                        required: true,
+                        minlength: 1
+                },
+                purchaseorder: {
+                        required: true,
+                        minlength: 1
+                },
+                performainvoice: {
+                        required: true,
+                        minlength: 1
+                },
+                 subcontract_deliveryorder: {
+                        required: true,
+                        minlength: 1
+                },
+                 purchase_requisition: {
+                        required: true,
+                        minlength: 1
+                },
+                 recall_service: {
+                        required: true,
+                        minlength: 1
+                },
+                 onsite_schedule: {
+                        required: true,
+                        minlength: 1
+                },
+                
+                messages: {
+                    group_name: {
+                        required: "The Group name is required",
+                        minlength: "The Group name must contain at least 3 characters",
+                    },
+                    
+                    quotation: {
+                        required: "Quotation Words are Required",
+                        minlength:  "The Quotation must contain at least 3 characters",
+                    },
+                    salesorder: {
+                        required: true,
+                        minlength: "The Salesorder must contain at least 3 characters",
+                    },
+                    deliveryorder: {
+                        required: true,
+                        minlength: "The Delivery order must contain at least 3 characters",
+                    },
+                    invoice: {
+                        required: true,
+                        minlength: "The Invoice must contain at least 3 characters",
+                    },
+                    purchaseorder: {
+                        required: true,
+                        minlength: "The Purchase order must contain at least 3 characters",
+                    },
+                    performainvoice: {
+                        required: true,
+                        minlength: "The Performa Invoice must contain at least 3 characters",
+                    },
+                    subcontract_deliveryorder: {
+                        required: true,
+                        minlength: "The Subcontract Delivery order must contain at least 3 characters",
+                    },
+                    purchase_requisition: {
+                        required: true,
+                        minlength: "The Purchase order Requisition must contain at least 3 characters",
+                    },
+                    recall_service: {
+                        required: true,
+                        minlength: "The Recall Service must contain at least 3 characters",
+                    },
+                    onsite_schedule: {
+                        required: true,
+                        minlength: "The Onsite Schedule must contain at least 3 characters",
+                    },
+                }
+                },
+            });
+            $('#form-range-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    from_range: {
+                        required: true,
+                        minlength: 1
+                    },
+                    to_range: {
+                        required: true,
+                        minlength: 1
+                    },
+                    unit_id: {
+                        required: true
+                    }
+                   
+                    
+                    
+                },
+                messages: {
+                    from_range: {
+                        required: 'Please enter the Starting Range',
+                        minlength: 'Starting Range must consist of at least 1 character'
+                    },
+                    to_range: {
+                        required: 'Please enter the To Range',
+                        minlength: 'To Range must consist of at least 1 character'
+                    },
+                    unit_id: {
+                        required: 'Please Select The Unit',
+                    },
+                }
+            });
+            $('#form-unit-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    unit_name: {
+                        required: true,
+                        minlength: 1
+                    },
+                    unit_description: {
+                        required: true,
+                        minlength: 6
+                    },
+                    
+                    
+                },
+                messages: {
+                    unit_name: {
+                        required: 'Please enter the Unit Name',
+                        minlength: 'Unit Name must consist of at least 1 characters'
+                    },
+                    unit_description: {
+                        required: 'Please enter the Unit Description',
+                        minlength: 'Description must consist of at least 6 characters'
+                    },
+                }
             });
             
              /*******************************************************************************/

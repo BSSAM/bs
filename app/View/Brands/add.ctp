@@ -56,6 +56,8 @@
                             </div>
                             <!-- END Basic Form Elements Block -->
                         </div>
-    <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
+ 
+  <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
+                        
                         

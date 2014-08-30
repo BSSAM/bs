@@ -69,7 +69,7 @@
     <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
     <div class="col-md-4">
         <div class="row col-md-9">
-            <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+            <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','placeholder'=>'Enter the Purchase Order Number','class'=>'form-control','label'=>false)); ?>
             <?php echo $this->Form->input('Quotation.po_generate_type', array('type'=>'hidden','id'=>'po_gen_type','class'=>'form-control','label'=>false)); ?>
         </div>
         <div class="col-md-4">
@@ -90,9 +90,11 @@
     </div>
 </div>
 <div class="form-group">
- <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
+ <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For</label>
+ <div class="instrument_details">
     <div class="col-md-12">
-        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_customer','class'=>'form-control select-chosen','type'=>'select',
+        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_instrument_type_id','class'=>'form-control select-chosen','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>$instrument_types)); ?>
     </div>
+ </div>
 </div>

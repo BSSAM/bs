@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="example-chosen-multiple">Department</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('department_id', array('class'=>'form-control','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','name'=>'department_id','id'=>'department_id')); ?>
+                                        <?php echo $this->Form->input('department_id', array('class'=>'form-control','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','name'=>'department_id','id'=>'department_id','empty'=>'Select Department')); ?>
                                         
                                     </div>
                                     <label class="col-md-2 control-label" for="example-chosen-multiple">Procedure</label>
@@ -76,14 +76,14 @@
                                    
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Brand</label>
+                                    <label class="col-md-2 control-label" for="brand_id">Brand</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('InstrumentBrand.brand_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$brand_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
+                                        <?php echo $this->Form->input('InstrumentBrand.brand_id', array('id'=>'brand_id','class'=>'form-control','label'=>false,'type'=>'select','options'=>$brand_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         
                                     </div>
-                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Range</label>
+                                    <label class="col-md-2 control-label" for="range_id">Range</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('InstrumentRange.range_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
+                                        <?php echo $this->Form->input('InstrumentRange.range_id', array('id'=>'range_id','class'=>'form-control','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         
                                     </div>
                                    
@@ -108,6 +108,6 @@
                             </div>
                             <!-- END Basic Form Elements Block -->
                         </div>
-    <?php //echo $this->Html->script('pages/instrumentsvalidation'); ?>
-<!--        <script>$(function(){ FormsValidation.init(); });</script>-->
+  <?php echo $this->Html->script('pages/formsValidation'); ?>
+        <script>$(function(){ FormsValidation.init(); });</script>
                         
