@@ -586,6 +586,27 @@ $(document).ready(function(){
     }
        
    });
+   // Brand Approval
+   $(document).on('click','.approve_brand',function(){
+       var val_brandid = $('#brand_id').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_brandid,
+            url: path+'Brands/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
    
    // Range Approval
     $(document).on('click','.approve_range',function(){

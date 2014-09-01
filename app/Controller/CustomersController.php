@@ -457,22 +457,25 @@ class CustomersController extends AppController
     {
         $this->autoRender=false;
         //echo $this->Session->read('customer_id');
+        $con_id= $this->request->data['edit_con_id'];
         $this->loadModel('Contactpersoninfo');
-        $this->request->data['Contactpersoninfo']['email']=$this->request->data['contact_email'];
-        $this->request->data['Contactpersoninfo']['remarks']=$this->request->data['contact_remark'];
-        $this->request->data['Contactpersoninfo']['name']=$this->request->data['contact_name'];
-        $this->request->data['Contactpersoninfo']['department']=$this->request->data['contact_department'];
-        $this->request->data['Contactpersoninfo']['phone']=$this->request->data['contact_phone'];
-        $this->request->data['Contactpersoninfo']['position']=$this->request->data['contact_position'];
-        $this->request->data['Contactpersoninfo']['mobile']=$this->request->data['contact_mobile'];
-        $this->request->data['Contactpersoninfo']['purpose']=$this->request->data['contact_purpose'];
-        $this->request->data['Contactpersoninfo']['customer_id']=$this->Session->read('customer_id');
-        $this->request->data['Contactpersoninfo']['status']=1;
-        if($this->Contactpersoninfo->save($this->request->data))
+        $edit_con_details    =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.serial_id'=>$con_id)));
+        if(!empty($edit_con_details ))
         {
-            
-            echo $this->Contactpersoninfo->id;
+            echo json_encode($edit_con_details);
         }
+        
+//        $this->request->data['Contactpersoninfo']['email']=$this->request->data['contact_email'];
+//        $this->request->data['Contactpersoninfo']['remarks']=$this->request->data['contact_remark'];
+//        $this->request->data['Contactpersoninfo']['name']=$this->request->data['contact_name'];
+//        $this->request->data['Contactpersoninfo']['department']=$this->request->data['contact_department'];
+//        $this->request->data['Contactpersoninfo']['phone']=$this->request->data['contact_phone'];
+//        $this->request->data['Contactpersoninfo']['position']=$this->request->data['contact_position'];
+//        $this->request->data['Contactpersoninfo']['mobile']=$this->request->data['contact_mobile'];
+//        $this->request->data['Contactpersoninfo']['purpose']=$this->request->data['contact_purpose'];
+//        $this->request->data['Contactpersoninfo']['customer_id']=$this->Session->read('customer_id');
+//        $this->request->data['Contactpersoninfo']['status']=1;
+       
     }
     public function contact_delete()
     {

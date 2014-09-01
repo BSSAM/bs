@@ -17,9 +17,9 @@ class LabprocessesController extends AppController
     public function index()
     {
         $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description'=>array('conditions'=>array('Description.processing'=>0,'Description.checking'=>0)))));
-       
+       //pr($labprocess);exit;
         $this->set('labprocess', $labprocess);
-        //pr($labprocess);
+        
         $data_checking_count = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.checking" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno')));
         $salesordercount = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0)));
         
@@ -138,7 +138,7 @@ class LabprocessesController extends AppController
                         /******************
                         * Data Log
                         */
-                        $this->request->data['Logactivity']['logname'] = 'Quotation';
+                        $this->request->data['Logactivity']['logname'] = 'Deliveryorder';
                         $this->request->data['Logactivity']['logactivity'] = 'Add Delivery Order';
                         $this->request->data['Logactivity']['logid'] = $last_id;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
@@ -359,20 +359,38 @@ class LabprocessesController extends AppController
                     //pr($labprocess);exit;
             case 'out':
             if($calllocation_id=='all'):
-                    $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description'=>array('conditions'=>array('Description.processing'=>0,'Description.checking'=>0)))));
-                    $labprocess_list    =   (empty($labprocess['Description']))?'': $labprocess;   
-                    $this->set('labprocess', $labprocess_list);
-                    $this->set('call_location', $calllocation_id);
-                    $this->set('solist', $solist_id);
-                    else:
-                        
-                       $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0, 'Description.sales_calllocation' => $calllocation_id)))));
-                    $labprocess_list    =   (empty($labprocess['Description']))?'': $labprocess;   
+//                    $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description'=>array('conditions'=>array('Description.processing'=>0,'Description.checking'=>0)))));
+//            pr($labprocess);exit;
+//                    $labprocess_list    =   (empty($labprocess['Description']))?'': $labprocess;   
+//                    $this->set('labprocess', $labprocess_list);
+//                    $this->set('call_location', $calllocation_id);
+//                    $this->set('solist', $solist_id);
+//                    else:
+//                        
+//                       $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
+//                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0, 'Description.sales_calllocation' => $calllocation_id)))));
+//                    $labprocess_list    =   (empty($labprocess['Description']))?'': $labprocess;   
+//                   
+//                    $this->set('labprocess', $labprocess_list);
+//                    $this->set('call_location', $calllocation_id);
+//                    $this->set('solist', $solist_id);
+                
+                    
+                    $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1))),'recursive'=>2));
                    
-                    $this->set('labprocess', $labprocess_list);
-                    $this->set('call_location', $calllocation_id);
-                    $this->set('solist', $solist_id);
+                    $this->set('labprocess', $labprocess);
+                        $this->set('call_location', $calllocation_id);
+                        $this->set('solist', $solist_id);
+                   else:
+                        $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id)))));
+                        
+                        $this->set('labprocess', $labprocess);
+                        $this->set('call_location', $calllocation_id);
+                        $this->set('solist', $solist_id);
+                   
+                   
             endif;
             //pr($labprocess);exit;
             break;

@@ -18,7 +18,8 @@ class DashboardsController extends AppController
          * User Role Session
          */
        // $this->random();
-        
+        $user_role = $this->userrole_permission();
+        $this->set('user_role', $user_role);
         $sess_userrole = $this->Session->read('sess_userrole');
         $this->set('user_me', $sess_userrole);
         
@@ -99,6 +100,17 @@ class DashboardsController extends AppController
         $logactivity_range_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Range")));
         //pr($logactivity);exit;
         $this->set('log_activity_range_count', $logactivity_range_count);
+        
+        /*****************************************************/
+         /****************** Log Activity - Brand ********************/
+        
+        $logactivity_brand = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Brand")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_brand', $logactivity_brand);
+        
+        $logactivity_brand_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Brand")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_brand_count', $logactivity_brand_count);
         
         /*****************************************************/
         

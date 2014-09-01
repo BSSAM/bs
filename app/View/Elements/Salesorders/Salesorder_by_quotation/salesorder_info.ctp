@@ -30,7 +30,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'select-chosen form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select the Contact person name','options'=>$contact_list)); ?>
+        <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'select-chosen form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select the Contact person name','options'=>$contact_list,'disabled'=>'disabled')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_phone">Phone</label>
     <div class="col-md-4">
@@ -47,7 +47,7 @@
      <label class="col-md-2 control-label" for="val_email">Email</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.email', array('id'=>'val_email','class'=>'form-control',
-                                                'placeholder'=>'Enter the Email Id','label'=>false)); ?>
+                                                'placeholder'=>'Enter the Email Id','label'=>false,'disabled'=>'disabled')); ?>
     </div>
 </div>
 
@@ -56,11 +56,11 @@
     <label class="col-md-2 control-label" for="val_reg_date">Reg Date</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
-                                                'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
+                                                'placeholder'=>'Enter the Registration date Name','label'=>false,'disabled'=>'disabled')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','disabled'=>'disabled')); ?>
     </div>
 </div>
 
@@ -68,7 +68,7 @@
     <label class="col-md-2 control-label" for="val_in_date">In Date</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.in_date', array('id'=>'val_in_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
-                                                'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
+                                                'placeholder'=>'Enter the Registration date Name','label'=>false,'disabled'=>'disabled')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_out_date">Out Date</label>
     <div class="col-md-4">
@@ -76,14 +76,14 @@
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
     </div>
 </div>
-<div class="form-group">
+<!--<div class="form-group">
     
     <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.priority', array('id' => 'val_priority', 'class' => 'select-chosen form-control', 'label' => false, 'options' => $priority)); ?>
+        <?php //echo $this->Form->input('Salesorder.priority', array('id' => 'val_priority', 'class' => 'select-chosen form-control', 'label' => false, 'options' => $priority)); ?>
     </div>
-    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,)); ?>
-</div>
+    <?php //echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,)); ?>
+</div>-->
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
     <div class="col-md-12">

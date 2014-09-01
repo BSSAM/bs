@@ -42,8 +42,10 @@
                                             <?PHP endforeach; ?>
                                         </td>
                                         <td class="text-center">
-                                            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual' &&$quotation_list['Quotation']['is_poapproved']==0){?>
+                                            <?php //&&$quotation_list['Quotation']['is_poapproved']==0 ?>
+                                            <?PHP if(($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual') &&$quotation_list['Quotation']['is_poapproved']==0  ){?>
                                             <div class="btn-group">
+                                               <?php echo $quotation_list['Quotation']['po_generate_type']; ?>
                                                         <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
                                                         <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Settings" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Update</a>
                                                     </div>

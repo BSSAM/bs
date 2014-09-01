@@ -43,9 +43,11 @@
                         <td class="text-center">
                             
                                 <?PHP
+                                if($customer_list['Customer']['is_approved'] == 1):
                                 echo $this->html->link('Instrument', array('controller' => 'Customers',
                                     'action' => 'instrument_map', $customer_list['Customer']['id']), array('title' => 'Map Instrument',
                                     'class' => 'btn  btn-xs btn-primary', 'data-toggle' => 'tooltip', 'escape' => false));
+                              
                                 ?>
                                 <?PHP $tag_count    = $this->Customer->checktag_list($customer_list['Customer']['customergroup_id']); ?>
                                 <?PHP if($tag_count==1):
@@ -54,11 +56,14 @@
                                         else:
                                         $tag_name   = 'Tag list';$controller='Customertaglists';
                                         $action='index';
-                                        endif; ?>
+                                        endif;
+                                      
+                                ?>
                                 <?PHP
                                 echo $this->html->link($tag_name, array('controller' => $controller,
                                     'action' => $action, $customer_list['Customer']['id']), array('title' => 'Tags',
                                     'class' => 'btn  btn-xs btn-warning', 'data-toggle' => 'tooltip', 'escape' => false));
+                                endif; 
                                 ?>
                             <div class="btn-group">
                                 <?php if($userrole_cus['edit']==1){ ?>

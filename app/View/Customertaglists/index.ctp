@@ -45,9 +45,11 @@
                         <td class="text-center"><?php echo $taglist['Industry']['industryname']; ?></td>
                         <td class="text-center">
                             <?PHP
+                            if($taglist['Customer']['is_approved'] == 1):
                                 echo $this->html->link('Instrument', array('controller' => 'Customers',
                                     'action' => 'instrument_map', $taglist['Customer']['id']), array('title' => 'Map Instrument',
                                     'class' => 'btn  btn-xs btn-primary', 'data-toggle' => 'tooltip', 'escape' => false));
+                            endif;
                                 ?>
                             <div class="btn-group">
                                  <?php if($userrole_cus['edit']==1){ ?>

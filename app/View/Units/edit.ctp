@@ -49,7 +49,12 @@
                                             <div class="pull-right">
                                                 <?php echo $this->Form->input('Unit.id', array('name'=>'unit_id','id'=>'unit_id','type'=>'hidden','value'=>$unit_dat['Unit']['id'])); ?>
                                                 <?php if($user_role['ins_unit']['edit'] == 1 && $unit_dat['Unit']['is_approved']==0): ?>
+                                                <?php if($user_role['app_unit']['view'] == 1){ ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_unit','escape' => false)); ?>
+                                                <?php } else {?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                <?php } ?>
+                                                
                                                 <?php else : ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Units','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>

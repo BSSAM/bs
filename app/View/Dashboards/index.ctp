@@ -20,9 +20,30 @@
                         <div class="block-title">
                             <ul class="nav nav-tabs" data-toggle="tabs">
                                 <li class="active"><a href="#home">Home<span class="badge animation-floating"><?php //echo $log_activity_job_count; ?></span></a></li>
+                                <?php
+                                //echo $user_role['app_customer']['view'];
+                                if($user_role['app_customer']['view'] == 0 && $user_role['app_quotation']['view'] == 0 && $user_role['app_salesorder']['view'] == 0 && $user_role['app_deliveryorder1']['view'] == 0 && $user_role['app_invoice']['view'] == 0 && $user_role['app_prsupervisor']['view'] == 0 && $user_role['app_prmanager']['view'] == 0 && $user_role['app_inship']['view'] == 0){ 
+                                    //return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+                                }
+                                else
+                                {
+                                ?>
                                 <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_deliveryorder_count)+($log_activity_quotation_count); ?></span></a></li>
+                                <?php } 
+                                if($user_role['app_procedureno']['view'] == 0 && $user_role['app_brand']['view'] == 0 && $user_role['app_instrument']['view'] == 0 && $user_role['app_range']['view'] == 0 && $user_role['app_unit']['view'] == 0 ){ 
+                                    //return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+                                }
+                                else
+                                {
+                                ?>
                                 <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($log_activity_instrument_count)+($log_activity_procedure_count)+($log_activity_unit_count)+($log_activity_range_count); ?></span></a></li>
+                                <?php 
+                                }
+                                ?>
+                                <?php 
+                                if($user_role['dash_messages']['view'] != 0){ ?>
                                 <li><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <!-- END Forum Tabs -->
@@ -101,13 +122,25 @@
                             <!-- Topics -->
                             <div class="tab-pane" id="job_approval">
                                 <ul class="nav nav-tabs" data-toggle="tabs">
+                                    <?php if($user_role['app_customer']['view'] != 0){ ?>
                                     <li><a href="#customer">Customer <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count); ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_quotation']['view'] != 0){ ?>
                                     <li><a href="#quotation">Quotation <span class="badge animation-floating"><?php echo $log_activity_quotation_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_salesorder']['view'] != 0){ ?>
                                     <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_salesorder_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_inship']['view'] != 0){ ?>
                                     <li><a href="#candd">C & D <span class="badge animation-floating"><?php echo $log_activity_cdinfo_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_deliveryorder1']['view'] != 0){ ?>
                                     <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php echo $log_activity_deliveryorder_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_clientpo']['view'] != 0){ ?>
                                     <li><a href="#clientpo">Client PO <span class="badge animation-floating"><?php echo $log_activity_deliveryorder_count; ?></span></a></li>
-<!--                                    <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>-->
+                                    <?php } ?>
+<!--                                <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>-->
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
@@ -460,11 +493,21 @@
                             
                             <div class="tab-pane" id="ins_approval">
                                 <ul class="nav nav-tabs" data-toggle="tabs">
+                                    <?php if($user_role['app_instrument']['view'] != 0){ ?>
                                     <li><a href="#instrument">Instrument <span class="badge animation-floating"><?php echo $log_activity_instrument_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_procedureno']['view'] != 0){ ?>
                                     <li><a href="#procedureno">Proc.No <span class="badge animation-floating"><?php echo $log_activity_procedure_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_unit']['view'] != 0){ ?>
                                     <li><a href="#unit">Unit <span class="badge animation-floating"><?php echo $log_activity_unit_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_range']['view'] != 0){ ?>
                                     <li><a href="#range">Range <span class="badge animation-floating"><?php echo $log_activity_range_count; ?></span></a></li>
-                                   
+                                    <?php } ?>
+                                    <?php if($user_role['app_range']['view'] != 0){ ?>
+                                    <li><a href="#brand">Brand <span class="badge animation-floating"><?php echo $log_activity_brand_count; ?></span></a></li>
+                                    <?php } ?>
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
@@ -658,7 +701,52 @@
                                 </div>
                             </div>
                             
-                            
+                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------Brand----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            <div class="tab-pane" id="brand">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                <table id="example-datatable"  class="table table-vcenter table-condensed table-bordered">
+                                        <?PHP if (!empty($log_activity_brand)): ?>
+                                        <thead>
+                                            <tr>
+                                            <th>Flag</th>
+                                            <th>Name(Details)</th>
+                                            <th>Approval</th>
+                                            <th>Created</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach ($log_activity_brand as $log_activity_brand_list) :?>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-br.jpg', array('alt' => 'Instrument','class'=>'')); ?></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_brand_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_brand_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_brand_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center ">
+                                           <?PHP if($log_activity_brand_list['Logactivity']['logname'] == 'Brand'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Brands','action'=>'edit',$log_activity_brand_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                           
+                                            </td>
+                                            <td class="">by <?PHP echo $log_activity_brand_list['User']['username'] ?><br><small><?PHP echo $log_activity_brand_list['Logactivity']['created'] ?></small></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        </tbody>
+                                        <?php else: ?>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Brand Approval Available
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <?php endif; ?>
+                                </table>
+                                </div>
+                                </div>
+                            </div>
                             
                          
                             
@@ -681,6 +769,7 @@
 
                     <!-- Widgets Row -->
                     <?php if($user_me == 1 || $user_me ==2){ ?>
+                    <?php if($user_role['dash_number']['view'] != 0){ ?>
                     <div class="row">
                         <div class="col-sm-2 col-lg-2">
                             <!-- Widget -->
@@ -746,8 +835,10 @@
                             
                         </div>
                     </div>
+                                <?php } ?>
                     <?php } ?>
                     <?php if($user_me == 1 || $user_me ==2){ ?>
+                    <?php if($user_role['dash_graph']['view'] != 0){ ?>
                     <div class="row">
                         
                         <div class="col-sm-6 col-lg-3">
@@ -808,6 +899,8 @@
                        
                     </div>
                     <?php } ?>
+                    <?php } ?>
+                     <?php if($user_role['dash_calendar']['view'] != 0){ ?>
                     <div class="block block-alt-noborder full">
                         <div class="block-title">
                             
@@ -853,7 +946,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                     <?php } ?>
                     <!-- END Widgets Row -->
                     <!--<div class="block block-alt-noborder full">
                         <div class="row">

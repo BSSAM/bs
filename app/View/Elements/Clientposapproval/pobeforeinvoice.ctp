@@ -1,4 +1,5 @@
 <script>
+    var path_url    =   '<?PHP echo Router::url('/',true); ?>';
     $('#beforedo-datatable').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
@@ -6,7 +7,7 @@
             });
     </script>
                         <div class="table-responsive">
-                            <table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
+                            <table id="dofull-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
@@ -31,28 +32,28 @@
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
-                                        <td class="text-center">
+                                        <td class="text-center word_break">
                                             <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotmatic'){$class="danger";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
                                             <?PHP $po_array =  explode(',',$quotation_list['Quotation']['ref_no']);  ?>
                                             <?PHP foreach($po_array as $po_key=>$po_value): ?>
-                                            <br><br>
                                             <span class="label label-<?PHP echo $class; ?>">
                                                 <?PHP echo $po_value; ?>
-                                            </span></br></br>
+                                            </span>&nbsp;&nbsp;
                                             <?PHP endforeach; ?>
                                         </td>
                                         <td class="text-center">
-                                            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotomatic'){?>
-                                                    <div class="btn-group">
+                                            <?php //&&$quotation_list['Quotation']['is_poapproved']==0 ?>
+                                            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual' ){?>
+                                            <div class="btn-group">
                                                         <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
-                                                        <?php echo $this->Html->link('Update', array('controller'=>'Clientpos','action' => $invoice_type, $quotation_list['Customer']['id']), array('data-toggle' => 'tooltip', 'title' => 'Update', 'class' => 'btn btn-alt btn-xs btn-danger', 'escape' => false)); ?>
+                                                        <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Settings" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Update</a>
                                                     </div>
-                                                </td>
-                                            <?PHP }elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){ ?>
+                                            <?PHP }elseif($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_poapproved']==1){ ?>
                                                     <div class="btn-group">
                                                          <?php echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
                                                     </div>
-                                                <?PHP } ?>
+                                                <?PHP }?>
+                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
                                     <?PHP endif; ?>
@@ -61,3 +62,16 @@
 </div>
 
                     
+    <div id="modal-user-settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="block quotation_fullview">
+                    <!-- Grids Content Content -->
+                    
+
+
+                    <!-- END Grids Content Content -->
+                </div>  
+            </div>
+        </div>
+    </div>

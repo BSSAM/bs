@@ -87,6 +87,7 @@ App::uses('Controller', 'Controller');
         public function saleDescription($id=NULL)
         {
             $devices    =   $this->Device->find('first',array('conditions'=>array('Device.id'=>$id,'Device.status'=>1)));
+             $this->request->data['Description']['quo_ins_id']          =   $devices['Device']['id'];
             $this->request->data['Description']['customer_id']          =   $devices['Device']['customer_id'];
             $this->request->data['Description']['instrument_id']        =   $devices['Device']['instrument_id'];
             $this->request->data['Description']['brand_id']             =   $devices['Device']['brand_id'];
@@ -396,9 +397,14 @@ App::uses('Controller', 'Controller');
            unset($create_quotation_from_salesorder_detatils['Salesorder']['id']);
            
            $form_quotation_array['Quotation']       =   $create_quotation_from_salesorder_detatils['Salesorder'];
-           $form_quotation_array['Quotation']['instrument_type_id']=$create_quotation_from_salesorder_detatils['Salesorder']['instrument_type'];
+           $form_quotation_array['Quotation']['instrument_type_id']=$create_quotation_from_salesorder_detatils['Salesorder']['instrument_type_id'];
            $form_quotation_array['Quotation']['quotation_id']=$sales_id;
            $form_quotation_array['Quotation']['salesorder_created']=1;
+           if ($create_quotation_from_salesorder_detatils['Salesorder']['ref_no'] != '') 
+                {
+                    $check_string = strchr($this->request->data['Salesorder']['ref_no'], 'CPO');
+                    $po_type = ($check_string == "") ? 'Manual' : 'Auotomatic';
+                }
            unset($create_quotation_from_salesorder_detatils['Salesorder']['instrument_type']);
            if($this->Quotation->save($form_quotation_array['Quotation']))
            {
@@ -407,6 +413,7 @@ App::uses('Controller', 'Controller');
                 //For Salesorder Quotation id Update
                 $this->Salesorder->updateAll(array('Salesorder.quotation_id'=>$last_quotation_id),array('Salesorder.id'=>$sales_id));
                 //For Salesorder Description Quotation id Update
+                 $this->request->data['Quotation']['po_generate_type']=$po_type;
                 $this->Description->updateAll(array('Description.quotation_id'=>$last_quotation_id),array('Description.salesorder_id'=>$sales_id));
                 $form_quotation_array['Customerspecialneed']['quotation_id']=$last_quotation_id;
                 $form_quotation_array['Customerspecialneed']['remarks']=$create_quotation_from_salesorder_detatils['Salesorder']['remarks'];
@@ -447,29 +454,57 @@ App::uses('Controller', 'Controller');
             echo $getLog['query'];
         }
          public function get_solist_calllocation_details($solist=NULL,$call_location=NULL,$id=NULL){
-            
+           // echo $call_location;
+           // echo $solist;
+             //echo $id;
              switch($solist)
              {
                 case 'run':
                 //pr($calllocation_id);
                 if($call_location=='all'){
-                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.processing'=>1)));
+                        //pr($data_description);exit;
                         return $data_description;
-                   } else{
-                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                   } else if($call_location=='Inlab'){
+                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>'Inlab','Description.processing'=>1)));
+                        //pr($data_description);exit;
+                        return $data_description;
+                   }
+                   else if($call_location=='subcontract'){
+                       $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>'subcontract','Description.processing'=>1)));
+                        //pr($data_description);exit;
+                        return $data_description;
+                   }
+                   else if($call_location=='onsite'){
+                       $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>'onsite','Description.processing'=>1)));
+                        //pr($data_description);exit;
                         return $data_description;
                    }
                     break;
                     //pr($labprocess);exit;
                     case 'out':
-                    if($call_location=='all'):
-                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.processing'=>0,'Description.checking'=>0)));
+                        
+             if($call_location=='all'){
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.processing'=>0)));
+                   
                             return $data_description;
-                            else:
-                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.processing'=>1,'Description.checking'=>0,'Description.sales_calllocation'=>$call_location)));
-                            return $data_description;
-                    endif;
-                    //pr($labprocess);exit;
+                         }
+                            else if($call_location=='Inlab'){
+                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>'Inlab','Description.processing'=>0)));
+                        //pr($data_description);exit;
+                        return $data_description;
+                   }
+                   else if($call_location=='subcontract'){
+                       $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>'subcontract','Description.processing'=>0)));
+                        //pr($data_description);exit;
+                        return $data_description;
+                   }
+                   else if($call_location=='onsite'){
+                       $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>'onsite','Description.processing'=>0)));
+                        //pr($data_description);exit;
+                        return $data_description;
+                   }
+                    
                     break;
                     case 'overdue': 
                          if($call_location=='all'):

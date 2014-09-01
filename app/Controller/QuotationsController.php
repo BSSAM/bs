@@ -66,14 +66,16 @@
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
                 $this->request->data['Quotation']['branch_id']=$branch['branch']['id'];
-                //pr($this->request->data);
-                //pr($this->request->data['Quotation']['ref_no']);exit;
-//                if ($this->request->data['Quotation']['ref_no'] != '') 
-//                {
-//                    $check_string = strchr($this->request->data['Quotation']['ref_no'], 'CPO');
-//                    $po_type = ($check_string == "") ? 'Manual' : 'Auotomatic';
-//                }
-//                //For Quotation array
+//                pr($this->request->data['Quotation']['ref_no']);exit;
+//                $this->request->data['Quotation']['po_generate_type']=$this->request->data['ref_no'];
+//                pr($this->request->data);
+//                pr($this->request->data['Quotation']['ref_no']);exit;
+                if ($this->request->data['Quotation']['ref_no'] != '') 
+                {
+                    $check_string = strchr($this->request->data['Quotation']['ref_no'], 'CPO');
+                    $po_type = ($check_string == "") ? 'Manual' : 'Auotomatic';
+                }
+                //For Quotation array
 //                if( $this->request->data['Quotation']['quotation_no']!=''):
 //                $qo_id_array  =   $this->request->data['Quotation']['quotation_no'];
 //                $qo_count_array   =   $this->request->data['Quotation']['quo_quantity'];
@@ -86,6 +88,7 @@
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
+                    $this->request->data['Quotation']['po_generate_type']=$po_type;
                     $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
                     if(!empty($device_node))
                     {  
@@ -136,7 +139,7 @@
          */
             $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
             //for Contact person info
-            
+            //pr($quotations_list);exit;
             $customer_id    =   $quotations_list['Customer']['id'];
             $salesperson_list    =   $this->CusSalesperson->find('all',array('conditions'=>array('CusSalesperson.customer_id'=>$customer_id)));
             $salespeople         =   '';
@@ -242,7 +245,7 @@
             $this->loadModel('Customer');
             $name =  $this->request->data['name'];
             $this->autoRender = false;
-            $data = $this->Customer->find('all',array('conditions'=>array('Customertagname LIKE'=>'%'.$name.'%','Customer.is_deleted'=>0,'Customer.status'=>1)));
+            $data = $this->Customer->find('all',array('conditions'=>array('Customertagname LIKE'=>'%'.$name.'%','Customer.is_deleted'=>0,'Customer.is_approved'=>1,'Customer.status'=>1)));
             $c = count($data);
             if($c>0)
             {

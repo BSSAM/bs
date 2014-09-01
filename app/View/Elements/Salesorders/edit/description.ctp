@@ -17,6 +17,7 @@
         #search_instrument{
             position: absolute;
             z-index: 999;
+            display: none;
         }
     </style>
 <script type="text/javascript">
@@ -183,9 +184,9 @@
                             <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                            <a data-delete="<?PHP echo $device['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">
+<!--                            <a data-delete="<?PHP //echo $device['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">
                                 <i class="fa fa-times"></i>
-                            </a>
+                            </a>-->
                         </div>
                     </td>
                 </tr>

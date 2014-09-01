@@ -13,7 +13,7 @@ class ClientposController extends AppController
                             'Contactpersoninfo','CusSalesperson','Clientpo');
     public function index()
     {
-        $clientpo    =   $this->Customer->find('all',array('conditions'=>array('Customer.status'=>1,'Customer.is_deleted'=>0)));
+        $clientpo    =   $this->Customer->find('all',array('conditions'=>array('Customer.status'=>1,'Customer.is_deleted'=>0,'Customer.is_approved'=>1)));
         //pr($clientpo);exit;
         $this->set(compact('clientpo'));
     }
@@ -151,8 +151,8 @@ class ClientposController extends AppController
                         array('Quotation.customer_id'=>$id,'Quotation.is_approved'=>1,'Quotation.is_assign_po'=>0),'fields'=>array('id','quotationno')));
         $salesorder_list    =   $this->Salesorder->find('all',array('conditions'=>
                         array('Salesorder.customer_id'=>$id,'Salesorder.is_approved'=>1,'Salesorder.is_deleted'=>0,'Salesorder.is_assign_po'=>0)));
-        if(!empty($salesorder_list))
-        {
+        //if(!empty($salesorder_list))
+        //{
             $po_list=$this->Clientpo->find('all',array('conditions'=>array('Clientpo.customer_id'=>$id)));
             $po_single=$this->Clientpo->find('first',array('conditions'=>array('Clientpo.customer_id'=>$id)));
             $this->set(compact('po_list','customer_quotation_list','pos','po_first','po_single'));
@@ -205,12 +205,12 @@ class ClientposController extends AppController
                 }
                 
             }
-        }
-        else 
-        {
-            $this->Session->setFlash('No Salesorder found to assign PO for Customer '.$id);
-            $this->redirect(array('controller'=>'Clientpos','action'=>'index'));
-        }
+        //}
+//        else 
+//        {
+//            $this->Session->setFlash('No Salesorder found to assign PO for Customer '.$id);
+//            $this->redirect(array('controller'=>'Clientpos','action'=>'index'));
+//        }
     }
     public function Deliveryorder_fullinvoice($id = null)
     {

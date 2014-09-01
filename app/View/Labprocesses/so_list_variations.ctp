@@ -30,7 +30,7 @@
                     <td class="text-center"><?PHP echo $labprocess_list['branch']['branchname'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['Customer']['Customertagname'] ?></td>
                     <td class="text-center"><?PHP echo $this->Labprocess->find_priority_type($labprocess_list['Customer']['priority_id']) ?></td>
-<<<<<<< HEAD
+
                     <td class="text-center"><?PHP echo $this->Salesorder->call_query_total($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->call_query_pending($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->call_query_processing($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
@@ -38,15 +38,15 @@
 <!--                    <td class="text-center"><?PHP //echo count($labprocess_list['Description']); ?></td>
                     <td class="text-center"><?PHP //echo count($labprocess_list['Description']);?></td>
                     <td class="text-center"><?PHP //echo count($labprocess_list['Description']); ?></td>-->
-=======
-                    <td class="text-center"><?PHP echo $this->Salesorder->query_total($labprocess_list['Salesorder']['salesorderno']) ?></td>
+
+<!--                    <td class="text-center"><?PHP //echo $this->Salesorder->query_total($labprocess_list['Salesorder']['salesorderno']) ?></td>-->
 <!--                    <td class="text-center"><?PHP //echo $this->Salesorder->query_pending($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
                     <td class="text-center"><?PHP //echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
                     <td class="text-center"><?PHP //echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>-->
-                    <td class="text-center"><?PHP echo count($labprocess_list['Description']); ?></td>
-                    <td class="text-center"><?PHP echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno'])//count($labprocess_list['Description']);?></td>
-                    <td class="text-center"><?PHP echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno']); ?></td>
->>>>>>> 04935837e867086f4aacbbeabbf7b000fa1abdea
+<!--                    <td class="text-center"><?PHP //echo count($labprocess_list['Description']); ?></td>-->
+<!--                    <td class="text-center"><?PHP //echo $this->Salesorder->query_processing($labprocess_list['Salesorder']['salesorderno'])//count($labprocess_list['Description']);?></td>-->
+<!--                    <td class="text-center"><?PHP //echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno']); ?></td>-->
+
                    
                     <td class="text-center">
                         <div class="btn-group">

@@ -78,9 +78,9 @@
     <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'value'=>$our_ref_no)); ?>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
+    <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For</label>
     <div class="col-md-12">
-        <?php echo $this->Form->input('val_instrument_type', array('class'=>'form-control','type'=>'text',
-                                                'label'=>false,'value'=>$instrument_type,'readonly'=>'readonly')); ?>
+        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_instrument_type_id','class'=>'form-control select-chosen','type'=>'select',
+                                                'label'=>false,'options'=>$instrument_types,'empty'=>'-- Select instrument For --')); ?>
     </div>
 </div>

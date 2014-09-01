@@ -58,12 +58,12 @@
                                        
                                     </tr>
                                     <?php endforeach; ?>
-                                     <?php else: ?>
-                                        <tr>
+                                     <?php //else: ?>
+<!--                                        <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Salesperson Available
                                             </td>
-                                        </tr>
+                                        </tr>-->
                                         <?php endif; ?>
                                     
                                    

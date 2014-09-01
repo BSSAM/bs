@@ -313,7 +313,10 @@ $(document).ready(function(){
                 $('#val_range').empty().append('<option value="">Select Range</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
                                
                 $('#val_call_location').val(edit_node.Device.call_location);
+                //alert(edit_node.Device.call_type);
                 $('#val_call_type').val(edit_node.Device.call_type);
+                //$('#val_call_type').empty().append('<option value="">Select Call Type</option><option selected="selected" value="'+edit_node.Device.call_type+'">'+edit_node.Device.call_type+'</option>');
+                //alert($('#val_call_type').val);
                 $('#val_validity').val(edit_node.Device.validity);
                 
                 $('#val_unit_price').val(edit_node.Device.unit_price);

@@ -64,7 +64,12 @@
                                             <div class="pull-right">
                                                 <?php echo $this->Form->input('Range.id', array('name'=>'range_id','id'=>'range_id','type'=>'hidden','value'=>$range_dat['Range']['id'])); ?>
                                                 <?php if($user_role['ins_range']['edit'] == 1 && $range_dat['Range']['is_approved']==0): ?>
+                                                <?php if($user_role['app_range']['view'] == 1){ ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_range','escape' => false)); ?>
+                                                <?php } else {?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                <?php } ?>
+                                                
                                                 <?php else : ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Units','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>

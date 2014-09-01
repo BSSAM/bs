@@ -28,6 +28,7 @@
         #search_instrument{
             position: absolute;
             z-index: 999;
+            display:none;
         }
     </style>
 <script type="text/javascript">

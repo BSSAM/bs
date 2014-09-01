@@ -80,7 +80,7 @@
             </thead>
             <tbody>
                
-                <?PHP if (!empty($labprocess['Description'])): ?>
+                <?PHP //if (!empty($labprocess['Description'])): ?>
                 <?php foreach ($labprocess as $labprocess_list): ?>
                 <tr>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['salesorderno'] ?></td>
@@ -98,7 +98,7 @@
                     </td>
                 </tr>
                 <?php endforeach; ?>
-                <?PHP endif; ?>
+                <?PHP //endif; ?>
             </tbody>
         </table>
            

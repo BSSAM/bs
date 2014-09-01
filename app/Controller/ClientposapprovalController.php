@@ -54,8 +54,8 @@ class ClientposapprovalController extends AppController {
                 }
                 else
                 {
-                pr($po_data_array);
-                exit;
+               // pr($po_data_array);
+                //exit;
                 $pos    =   array($po_data_array['poinvoice']['clientpo_number']=>$po_data_array['Poinvoice']['po_count']);
                 $this->set('pos',$pos);
                 }

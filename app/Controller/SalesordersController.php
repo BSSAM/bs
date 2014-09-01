@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog');
+                            'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog','InstrumentType');
         public function index()
         {
         /*******************************************************
@@ -49,27 +49,31 @@
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set(compact('service','payment','priority'));
+            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','salesorder')));
+            //pr($instrument_types);exit;
+            $this->set(compact('service','payment','priority','instrument_types'));
             $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             
             if($this->request->is('post'))
             {
                 $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
-                        $instrument_type = $con['InstrumentType']['salesorder'];
+                        //$instrument_type = $con['InstrumentType']['salesorder'];
                         //pr($instrument_type);exit;
                         //echo $instrument_type; exit;
-                         $this->set('instrument_type',$instrument_type);
+                         $this->set('instrument_types',$instrument_types);
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                 $this->request->data['Salesorder']['customername']=$this->request->data['sales_customername'];
                 $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
                 $quotation_array  = explode('-', $this->request->data['Salesorder']['salesorderno']);
                 $quotation_array[0]="BSQ";$quotation_id  =  implode($quotation_array,'-');
+                
                 $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
                 $this->request->data['Salesorder']['quotationno']=$quotation_id;
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
                     $sales_orderid  =   $this->Salesorder->getLastInsertID();
                     $create_quotation   =   $this->create_automatic_quotation($sales_orderid);
+                   
                     /***********************for pending process in Salesorder*************************************/
                     $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0)));
                     if(!empty($device_node))
@@ -139,6 +143,7 @@
                    if($device_current_status=='pending')
                    {
                         $salesorder_details    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$this->request->data['Salesorder']['quotation_id']),'contain'=>array('Description'=>array('Instrument','Brand','Range','Department','conditions'=>array('Description.pending'=>'1')),'Customer'),'recursive'=>3));
+                        //pr($salesorder_details);exit;
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
                         $this->set(compact('contact_list'));
@@ -147,6 +152,8 @@
                             $this->set('sale',$salesorder_details);
                             $this->set('status_id','pending_status');
                             $this->request->data =   $salesorder_details;
+                            
+                            $this->set('pendin',1);
                         }
                         $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         
@@ -160,6 +167,7 @@
                         $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         //pr($this->request->data['Salesorder']['quotation_id']);
                         $instrument_type = $con['InstrumentType']['salesorder'];
+                        $this->set('pendin',0);
                         //pr($instrument_type); exit;
                          $this->set('instrument_type',$instrument_type);
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
@@ -170,6 +178,7 @@
                         $sales['Salesorder']   =    $sales_details;
                         $sales['Description']  =    $quotation_details['Device'];
                         $sales['Salesorder']['quotation_id']   =    $sales_details['id'];
+                        //pr($sales['Description']);exit;
                         
                         $device_node_nonstatus    =   $this->Description->find('all',array('conditions'=>array('Description.quotation_id'=>$sales['Salesorder']['quotation_id'],'Description.status'=>0)));
                         //pr($device_node_nonstatus);exit;
@@ -183,8 +192,10 @@
                         foreach($sales['Description'] as $sale):
                             $this->Description->create();
                             $description_data  =   $this->saleDescription($sale['id']);
+                            
                             $this->Description->save($description_data);
-                        endforeach;   
+                        endforeach;
+                        //pr($sale['id']);exit;
                         //pr($this->request->data);
                         //pr($sales);exit;
                         $this->request->data =   $sales;
@@ -204,6 +215,7 @@
                     $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                     $instrument_type = $con['InstrumentType']['salesorder'];
                     $this->set('instrument_type',$instrument_type);
+                    $this->set('pendin',0);
                     
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
@@ -286,7 +298,7 @@
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id),'recursive'=>'2'));
             //pr($salesorder_details);exit;
             $this->set('salesorder',$salesorder_details);
-            $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Quotation']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+            $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Quotation']['quotationno'],'Quotation.status'=>1)));
                     $instrument_type = $con['InstrumentType']['salesorder'];
                     //pr($instrument_type);
                     $this->set('instrument_type',$instrument_type);
@@ -455,17 +467,34 @@
             $this->autoRender=false;
             $device_id= $this->request->data['device_id'];
             $this->loadModel('Description');
-            if($this->Description->updateAll(array('Description.pending'=>1),array('Description.id'=>$device_id)))
+            //pr($this->Description->updateAll(array('Description.pending'=>1),array('Description.quo_ins_id'=>$device_id)));exit;
+            if($this->Description->updateAll(array('Description.pending'=>1),array('Description.quo_ins_id'=>$device_id)))
             {
                 echo "deleted";
+            }
+        }
+        
+        public function sales_by_quotation_edit_instrument()
+        {
+            $this->autoRender=false;
+            $device_id= $this->request->data['edit_device_id'];
+            //echo $this->request->data['edit_device_id'];
+            $this->loadModel('Device');
+            $edit_device_details    =   $this->Device->find('first',array('conditions'=>array('Device.id'=>$device_id)));
+            //pr($this->Device->find('first',array('conditions'=>array('Device.id'=>$device_id))));exit;
+            if(!empty($edit_device_details ))
+            {
+                echo json_encode($edit_device_details);
             }
         }
         public function sales_edit_instrument()
         {
             $this->autoRender=false;
             $device_id= $this->request->data['edit_device_id'];
+            //echo $this->request->data['edit_device_id'];
             $this->loadModel('Description');
             $edit_device_details    =   $this->Description->find('first',array('conditions'=>array('Description.id'=>$device_id)));
+            //pr($this->Device->find('first',array('conditions'=>array('Device.id'=>$device_id))));exit;
             if(!empty($edit_device_details ))
             {
                 echo json_encode($edit_device_details);

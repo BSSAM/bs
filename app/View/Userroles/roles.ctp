@@ -268,7 +268,7 @@
                     </div> <!-- / Info Panel -->
                                                 <div class="panel panel-danger"> 
                                                     <div class="panel-heading bg-pink">
-                                                        <h3 class="panel-title  text-white"><b>Settings</b>
+                                                        <h3 class="panel-title  text-white"><b>Dashboard</b>
                                                             <span class="pull-right">
                                                                 <a href="#" class="panel-minimize"><i class="fa fa-chevron-down text-white"></i></a>
                                                             </span>
@@ -280,27 +280,21 @@
                                                                 
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="text-center" style="width: 150px;"><h5 class="">C and D Settings</h5></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="add"><label for="remember">Add</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="edit"><label for="remember">Edit</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="view"><label for="remember">View</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="delete"><label for="remember">Delete</label> </div></td>
+                                                                        <td class="text-center" style="width: 150px;"><h5 class="">Weekly Stats - Graph</h5></td>
+                                                                        <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('dash_graph.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-center" style="width: 150px;"><h5>Onsite Email Setting</h5></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="add"><label for="remember">Add</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="edit"><label for="remember">Edit</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="view"><label for="remember">View</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="delete"><label for="remember">Delete</label> </div></td>
+                                                                        <td class="text-center" style="width: 150px;"><h5>Overall Stats - Numbers</h5></td>
+                                                                        <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('dash_number.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-center" style="width: 150px;"><h5>Recall Service Setting</h5></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="add"><label for="remember">Add</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="edit"><label for="remember">Edit</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="view"><label for="remember">View</label> </div></td>
-                                                                        <td class="text-center"><div class="checkbox pull-right"> <input type="checkbox" id="delete"><label for="remember">Delete</label> </div></td>
+                                                                        <td class="text-center" style="width: 150px;"><h5>Calendar</h5></td>
+                                                                        <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('dash_calendar.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                                                     </tr>
-                                                    
+                                                                    <tr>
+                                                                        <td class="text-center" style="width: 150px;"><h5>Dashboard Messages</h5></td>
+                                                                        <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('dash_messages.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                                                    </tr>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -797,6 +791,20 @@
                                     <table class="table">
                                         
                                     <tbody>
+                                         <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Client PO List</h5></td>
+                                            
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_clientpolist.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                            
+                                        </tr>
+                                        
+                                         <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Client Approval Form</h5></td>
+                                            
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_clientapproval.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                            
+                                        </tr>
+                                                  
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Quotation</h5></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_quotation.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
@@ -1055,6 +1063,13 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Client PO</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         
                                     </tbody>

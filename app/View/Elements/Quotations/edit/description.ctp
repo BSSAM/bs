@@ -88,7 +88,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','label'=>false,'name'=>'range','type'=>'select')); ?>
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
     </div>
 </div>
 <div class="form-group">
@@ -97,14 +97,14 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
-                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site'))); ?>
+                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'disabled'=>'disabled')); ?>
         
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type',
                                       'placeholder'=>'Enter the Fax Number','type'=>'select','options'=>array('singlas'=>'Singlas',
-                                          'no-singlas'=>'Non-Singlas'))); ?>
+                                          'no-singlas'=>'Non-Singlas'),'disabled'=>'disabled')); ?>
     </div>
 </div>
 

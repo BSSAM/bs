@@ -130,8 +130,13 @@
                                             <?php echo $this->Form->input('Instrument.id', array('name'=>'instru_id','id'=>'instru_id','type'=>'hidden','value'=>$instrument_dat['Instrument']['id'])); ?>
                                             <?php // echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                             <?php //echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Instruments','action'=>'index'), array('class'=>'btn btn-sm btn-danger','escape' => false)); ?>
-                                                 <?php if($user_role['app_instrument']['add'] == 1 && $instrument_dat['Instrument']['is_approved']==0): ?>
+                                                 <?php if($user_role['ins_instrument']['edit'] == 1 && $instrument_dat['Instrument']['is_approved']==0): ?>
+                                                <?php if($user_role['app_instrument']['view'] == 1){ ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_instrument','escape' => false)); ?>
+                                                <?php } else {?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                <?php } ?>
+                                                     
                                                 <?php else : ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Instrument','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>

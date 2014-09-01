@@ -10,7 +10,7 @@ class BrandsController extends AppController
 {
     
     public $helpers = array('Html','Form','Session');
-    public $uses    =   array('Brand');   
+    public $uses    =   array('Brand','Logactivity','Datalog');   
     
     public function index()
     {
@@ -55,6 +55,31 @@ class BrandsController extends AppController
             $this->request->data['status']=1;
             if($this->Brand->save($this->request->data))
             {
+                $last_insert_id =   $this->Brand->getLastInsertID();
+                 /******************
+                    * Log Activity For Approval
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'Brand';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Brand';
+                    $this->request->data['Logactivity']['logid'] = $last_insert_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+                    
+                /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Brand';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $last_insert_id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/
                 $this->Session->setFlash(__('Brand is Added'));
                 $this->redirect(array('controller'=>'Brands','action'=>'index'));
             }
@@ -77,6 +102,8 @@ class BrandsController extends AppController
         /*
          * *****************************************************
          */
+        $brand_dat = $this->Brand->find('first',array('conditions'=>array('Brand.id'=>$id),'recursive'=>'2'));
+        $this->set('brand_dat',$brand_dat);
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
@@ -93,6 +120,17 @@ class BrandsController extends AppController
             $this->Brand->id = $id;
             if($this->Brand->save($this->request->data))
             {
+                 /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Brand';
+                    $this->request->data['Datalog']['logactivity'] = 'Edit';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/
                $this->Session->setFlash(__('Brand is Updated'));
                return $this->redirect(array('controller'=>'Brands','action'=>'index'));
             }
@@ -126,8 +164,29 @@ class BrandsController extends AppController
         }
         if($this->Brand->updateAll(array('Brand.is_deleted'=>1,'Brand.status'=>0),array('Brand.id'=>$id)))
         {
+             /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Brand';
+                    $this->request->data['Datalog']['logactivity'] = 'Delete';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+            /******************/ 
             $this->Session->setFlash(__('The Brand has been deleted',h($id)));
             return $this->redirect(array('controller'=>'Brands','action'=>'index'));
         }
+    }
+    public function approve()
+    {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->Unit->updateAll(array('Brand.is_approved'=>1),array('Brand.id'=>$id));
+            $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Brand'));
+            $details=$this->Brand->find('first',array('conditions'=>array('Brand.id'=>$id)));
+            
     }
 }
