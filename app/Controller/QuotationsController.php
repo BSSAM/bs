@@ -73,7 +73,7 @@
                 if ($this->request->data['Quotation']['ref_no'] != '') 
                 {
                     $check_string = strchr($this->request->data['Quotation']['ref_no'], 'CPO');
-                    $po_type = ($check_string == "") ? 'Manual' : 'Auotomatic';
+                    $po_type = ($check_string == "") ? 'Manual' : 'Automatic';
                 }
                 //For Quotation array
 //                if( $this->request->data['Quotation']['quotation_no']!=''):
@@ -84,11 +84,12 @@
 //                        $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$this->request->data['Quotation']['clientpo_no'].'"','Quotation.po_generate_type'=>'"'.$po_type.'"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
 //                    }
 //                endif;
+                $this->request->data['Quotation']['po_generate_type']=$po_type;
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
-                    $this->request->data['Quotation']['po_generate_type']=$po_type;
+                    
                     $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
                     if(!empty($device_node))
                     {  
@@ -309,6 +310,10 @@
             $customer_id =  $this->request->data['customer_id'];
             $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
             $c = count($instrument_details);
+            if(!$instrument_details)
+            {
+                echo 'No Results Found';
+            }else{
             if($c>0&&$instrument_details[0]['Instrument']['name']!='')
             {
                 for($i = 0; $i<$c;$i++)
@@ -319,6 +324,8 @@
                     echo "</div>";
                 }
             }
+                        
+            
             if($instrument_details[0]['Instrument']['name']=='')
             {
                 echo "<div  align='left'>";
@@ -326,7 +333,7 @@
                 echo "<br>";
                 echo "</div>"; 
             }
-            
+            }
         }
         public function get_brand_value()
         {

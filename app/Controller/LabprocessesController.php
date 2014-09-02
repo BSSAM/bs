@@ -126,15 +126,6 @@ class LabprocessesController extends AppController
                     //pr($delivery['Deliverorder']);exit;
                     if($this->Deliveryorder->save($delivery['Deliverorder']))
                     {
-                        
-                        $last_id    =   $this->Deliveryorder->getLastInsertId();
-                        $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
-                        
-                        foreach($salesorder_list['Description'] as $sale):
-                            $this->DelDescription->create();
-                            $description_data  =   $this->delDescription($sale['id'],$last_id);
-                            $this->DelDescription->save($description_data);
-                        endforeach;   
                         /******************
                         * Data Log
                         */
@@ -156,6 +147,16 @@ class LabprocessesController extends AppController
                         $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                         /******************/ 
+                        
+                        $last_id    =   $this->Deliveryorder->getLastInsertId();
+                        $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
+                        
+                        foreach($salesorder_list['Description'] as $sale):
+                            $this->DelDescription->create();
+                            $description_data  =   $this->delDescription($sale['id'],$last_id);
+                            $this->DelDescription->save($description_data);
+                        endforeach;   
+                        
                     }
                     
                         ////////////////////////////////

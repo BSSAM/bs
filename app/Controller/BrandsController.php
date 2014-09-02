@@ -183,7 +183,7 @@ class BrandsController extends AppController
     {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
-            $this->Unit->updateAll(array('Brand.is_approved'=>1),array('Brand.id'=>$id));
+            $this->Brand->updateAll(array('Brand.is_approved'=>1),array('Brand.id'=>$id));
             $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Brand'));
             $details=$this->Brand->find('first',array('conditions'=>array('Brand.id'=>$id)));

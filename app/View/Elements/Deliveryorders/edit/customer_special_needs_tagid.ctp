@@ -11,9 +11,11 @@
         </div>
     </div>
 </div>  
-<table  class="table table-vcenter table-condensed table-bordered">
+<div class="col-sm-3 col-lg-12">
+<div class="table-responsive">
+<table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
     <thead>
-       <h4 class="sub-header"><small><b>Instruments List </b></small></h4>
+       
         <tr>
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
@@ -49,3 +51,5 @@
         ?>
     </tbody>
 </table>
+</div>
+</div>

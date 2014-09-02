@@ -19,7 +19,7 @@
                     <div class="block block-alt-noborder">
                     <div class="row">
                             <div class="col-md-12">
-                                <h1><?php echo $message; ?></h1>
+                                <h2><?php echo $message; ?></h2>
                             </div>
                     </div>
                     </div>

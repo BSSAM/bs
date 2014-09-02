@@ -216,7 +216,9 @@
  *
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		'defaults' => 'php',
+                'timeout'  => 28800,  // 4 hours, refers to 'session.gc_maxlifetime' in PHP settings
+                'cookieTimeout' => 10 * 28800, 
 	));
 
 /**

@@ -1,4 +1,5 @@
- <h1>
+<script> var path='<?PHP echo Router::url('/',true); ?>'; </script> 
+<h1>
                                 <i class="gi gi-user"></i>Edit Brand
                             </h1>
                         </div>
