@@ -450,16 +450,18 @@ class CustomersController extends AppController
         $this->request->data['Contactpersoninfo']['status']=0;
         if($this->Contactpersoninfo->save($this->request->data))
         {
-            echo "success";
+            $contact_last_id    =   $this->Contactpersoninfo->getLastInsertID();
+            echo $contact_last_id;
         }
     }
     public function contact_person_edit()
     {
+        
         $this->autoRender=false;
         //echo $this->Session->read('customer_id');
         $con_id= $this->request->data['edit_con_id'];
         $this->loadModel('Contactpersoninfo');
-        $edit_con_details    =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.serial_id'=>$con_id)));
+        $edit_con_details    =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$con_id)));
         if(!empty($edit_con_details ))
         {
             echo json_encode($edit_con_details);
@@ -491,9 +493,36 @@ class CustomersController extends AppController
      public function contact_edit_update()
     {
         $this->autoRender=false;
-        $con_id= $this->request->data['id'];
-        $contactpersoninfo =  $this->Contactpersoninfo->findById($con_id);
-        echo $str = implode(',',$contactpersoninfo['Contactpersoninfo']);
+        
+        
+//        $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.email'=>'"'.$this->request->data['contact_email'].'"',
+//                                                   'Contactpersoninfo.remarks'=>'"'.$this->request->data['contact_remark'].'"',
+//                                                    'Contactpersoninfo.name'=>'"'.$this->request->data['contact_name'].'"',
+//                                                    'Contactpersoninfo.department'=>'"'.$this->request->data['contact_department'].'"',
+//                                                    'Contactpersoninfo.phone'=>'"'.$this->request->data['contact_phone'].'"',
+//                                                    'Contactpersoninfo.position'=>'"'.$this->request->data['contact_position'].'"',
+//                                                    'Contactpersoninfo.mobile'=>'"'.$this->request->data['contact_mobile'].'"', 
+//                                                    'Contactpersoninfo.purpose'=>'"'.$this->request->data['contact_purpose'].'"', 
+//                                                    ),array('Contactpersoninfo.id'=>'"'.$this->request->data['id']));
+//       
+    
+        $this->Contactpersoninfo->id=   $this->request->data['id'];
+        $this->request->data['Contactpersoninfo']['email']=$this->request->data['contact_email'];
+        $this->request->data['Contactpersoninfo']['remarks']=$this->request->data['contact_remark'];
+        $this->request->data['Contactpersoninfo']['name']=$this->request->data['contact_name'];
+        $this->request->data['Contactpersoninfo']['department']=$this->request->data['contact_department'];
+        $this->request->data['Contactpersoninfo']['phone']=$this->request->data['contact_phone'];
+        $this->request->data['Contactpersoninfo']['position']=$this->request->data['contact_position'];
+        $this->request->data['Contactpersoninfo']['mobile']=$this->request->data['contact_mobile'];
+        $this->request->data['Contactpersoninfo']['purpose']=$this->request->data['contact_purpose'];
+        $this->request->data['Contactpersoninfo']['customer_id']=$this->Session->read('customer_id');
+        $this->request->data['Contactpersoninfo']['status']=1;
+        if($this->Contactpersoninfo->save($this->request->data['Contactpersoninfo']))
+        {
+            echo $contact_last_id;
+        }
+        
+        
     }
     
     public function contact_edit_add()

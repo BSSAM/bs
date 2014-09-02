@@ -8,24 +8,23 @@
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','PurchaseRequisition','PreqDevice','PreqCustomerSpecialNeed');
         public function index()
         {
-        /*******************************************************
-         *  BS V1.0
-         *  User Role Permission
-         *  Controller : Quotations
-         *  Permission : view 
-        *******************************************************/
-        $user_role = $this->userrole_permission();
-        if($user_role['job_quotation']['view'] == 0){ 
-            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        }
-        
-        $this->set('userrole_cus',$user_role['job_quotation']);
-        /*
-         * *****************************************************
-         */
+            /*******************************************************
+             *  BS V1.0
+             *  User Role Permission
+             *  Controller : Quotations
+             *  Permission : view 
+            *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['job_quotation']['view'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+
+            $this->set('userrole_cus',$user_role['job_quotation']);
+            /*
+             * *****************************************************
+             */
             //$this->Quotation->recursive = 1; 
             $PurchaseRequisition_lists = $this->PurchaseRequisition->find('all',array('conditions'=>array('PurchaseRequisition.is_deleted'=>'0'),'order' => array('PurchaseRequisition.id' => 'DESC')));
-          
             $this->set('prequistion', $PurchaseRequisition_lists);
         }
         public function add()
@@ -82,7 +81,7 @@
                     }
                     $this->request->data['PreqCustomerSpecialNeed']['purchaserequisitions_id']=$purchaserequisitions_id;
                     $this->PreqCustomerSpecialNeed->save($this->request->data['PreqCustomerSpecialNeed']); 
-                    /******************
+                    /************
                     * Data Log
                     */
                     $this->request->data['Logactivity']['logname'] = 'prequistion_id';
@@ -105,12 +104,12 @@
         public function edit($id=NULL)
         {
                /*******************************************************
-         *  BS V1.0
-         *  User Role Permission
-         *  Controller : Quotation
-         *  Permission : Edit 
-         *  Description   :   Edit Quotation Details page
-         *******************************************************/
+                *  BS V1.0
+                *  User Role Permission
+                *  Controller : Quotation
+                *  Permission : Edit 
+                *  Description   :   Edit Quotation Details page
+                *******************************************************/
         $user_role = $this->userrole_permission();
         if($user_role['job_quotation']['edit'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
@@ -158,9 +157,7 @@
             {
                
                 //to update quotation po generate type
-                
                 $this->PurchaseRequisition->id=$id;
-                
                 if($this->PurchaseRequisition->save($this->request->data['PurchaseRequisition']))
                 {
                     $customer_id=$purchase_requistion_list['PurchaseRequisition']['customer_id'];
@@ -186,19 +183,19 @@
         public function delete($id=NULL)
         {
               /*******************************************************
-         *  BS V1.0
-         *  User Role Permission
-         *  Controller : Quotation
-         *  Permission : Delete 
-         *  Description   :   Delete Quotation Details page
-         *******************************************************/
-        $user_role = $this->userrole_permission();
-        if($user_role['job_quotation']['delete'] == 0){ 
-            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        }
-        /*
-         * *****************************************************
-         */
+                *  BS V1.0
+                *  User Role Permission
+                *  Controller : Quotation
+                *  Permission : Delete 
+                *  Description   :   Delete Quotation Details page
+                *******************************************************/
+               $user_role = $this->userrole_permission();
+               if($user_role['job_quotation']['delete'] == 0){ 
+                   return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+               }
+                /*
+                * *****************************************************
+                */
             if($id!='')
             {
                 if($this->PurchaseRequisition->updateAll(array('PurchaseRequisition.is_deleted'=>1),array('PurchaseRequisition.id'=>$id)))
@@ -451,7 +448,7 @@
                 if(!empty($quotation_files))
                 {
                     if(!is_dir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no)):
-                            mkdir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no);
+                        mkdir(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_no);
                     endif;
                     $document_name  =   time().'_'.$quotation_files['name'];
                     $type = $quotation_files['type'];

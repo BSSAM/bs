@@ -40,7 +40,7 @@
                         <div class="block full row col-sm-12 padding_t_b10">
                         <div class="form-actions  col-sm-7 pull-right">
                             <div class="col-md-4 pull-left">
-                                <?PHP echo $this->Form->create('Reqpurchaseorder', array('action' => 'Preq_by_quotation', 'class' => 'form-horizontal form-bordered list_of_sales_o_form')); ?>
+                                <?PHP echo $this->Form->create('Reqpurchaseorder', array('action' => 'pr_purchaseorder', 'class' => 'form-horizontal form-bordered')); ?>
                             </div>
                             <div class="input-group col-md-8 pull-right quot_display">
                                 <?PHP echo $this->Form->input('prequistion_id', array('placeholder' => 'Purchase Requistion No', 'class' => 'form-control',
@@ -49,8 +49,7 @@
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary quotation_search" type="submit">Proceed</button>
                                 </span> 
-                                <div id="quoat_list">
-                            </div>
+                                <div id="quoat_list"> </div>
                             </div>
                       </div>
                             

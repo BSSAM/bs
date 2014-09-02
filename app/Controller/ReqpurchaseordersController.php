@@ -3,49 +3,45 @@
     {
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument','PurchaseRequisition','ReqDevice',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Reqpurchaseorder','ReqCustomerSpecialNeed',
                             'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog');
         public function index()
         {
-        /*******************************************************
-         *  BS V1.0
-         *  User Role Permission
-         *  Controller : Salesorder
-         *  Permission : view 
-        *******************************************************/
-        $user_role = $this->userrole_permission();
-        if($user_role['job_salesorder']['view'] == 0){ 
-            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        }
-        
-        $this->set('userrole_cus',$user_role['job_salesorder']);
-        /*
-         * *****************************************************
-         */
-            //$this->Quotation->recursive = 1; 
-            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
-            $this->set('salesorder', $salesorder_list);
-        }
+            /*******************************************************
+             *  BS V1.0
+             *  User Role Permission
+             *  Controller : Salesorder
+             *  Permission : view 
+            *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['job_salesorder']['view'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+
+            $this->set('userrole_cus',$user_role['job_salesorder']);
+            /*
+             * *****************************************************
+             */
+                //$this->Quotation->recursive = 1; 
+                $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+                $this->set('salesorder', $salesorder_list);
+       }
         public function add()
         {
-        /*******************************************************
-         *  BS V1.0
-         *  User Role Permission
-         *  Controller : Sales Order
-         *  Permission : add 
-         *  Description   :   add Salesorder Details page
-         *******************************************************/
-        $user_role = $this->userrole_permission();
-        if($user_role['job_salesorder']['add'] == 0){ 
-            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        }
-        /*
-         * *****************************************************
-         */
-            $dmt    =   $this->random('salesorder');
-            $track_id=$this->random('track');
-            $this->set('our_ref_no', $track_id);
-            $this->set('salesorderno', $dmt);
+            /*******************************************************
+             *  BS V1.0
+             *  User Role Permission
+             *  Controller : Sales Order
+             *  Permission : add 
+             *  Description   :   add Salesorder Details page
+             *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['job_salesorder']['add'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+            /*
+             * *****************************************************
+             */
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
@@ -54,47 +50,38 @@
             
             if($this->request->is('post'))
             {
-                $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
-                        $instrument_type = $con['InstrumentType']['salesorder'];
-                        //pr($instrument_type);exit;
-                        //echo $instrument_type; exit;
-                         $this->set('instrument_type',$instrument_type);
-                $customer_id    =   $this->request->data['Salesorder']['customer_id'];
-                $this->request->data['Salesorder']['customername']=$this->request->data['sales_customername'];
-                $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
-                $quotation_array  = explode('-', $this->request->data['Salesorder']['salesorderno']);
-                $quotation_array[0]="BSQ";$quotation_id  =  implode($quotation_array,'-');
-                $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
-                $this->request->data['Salesorder']['quotationno']=$quotation_id;
-                if($this->Salesorder->save($this->request->data['Salesorder']))
+               
+                if($this->Reqpurchaseorder->save($this->request->data['Reqpurchaseorder']))
                 {
-                    $sales_orderid  =   $this->Salesorder->getLastInsertID();
-                    $create_quotation   =   $this->create_automatic_quotation($sales_orderid);
+                    $req_purchaseorderid  =   $this->Reqpurchaseorder->getLastInsertID();
                     /***********************for pending process in Salesorder*************************************/
-                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0)));
+                    $device_node    =   $this->ReqDevice->find('all',array('conditions'=>array('ReqDevice.prequistionno'=>$this->request->data['Reqpurchaseorder']['requisitionno'],'ReqDevice.status'=>0)));
                     if(!empty($device_node))
                     {
-                        $this->Description->updateAll(array('Description.quotationno'=>'"'.$quotation_id.'"','Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0));
+                        $this->ReqDevice->updateAll(array('ReqDevice.reqpurchaseorder_id'=>'"'.$req_purchaseorderid.'"','ReqDevice.status'=>1),array('ReqDevice.prequistionno'=>$this->request->data['Reqpurchaseorder']['requisitionno'],'ReqDevice.status'=>0));
                     }
-                    $sales_document =   $this->SalesDocument->deleteAll(array('SalesDocument.Salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>0));
-                    $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>'"'.$sales_orderid.'"','SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
+                    $this->request->data['ReqCustomerSpecialNeed']['reqpurchaseorder_id']=$req_purchaseorderid;
+                    $this->ReqCustomerSpecialNeed->save($this->request->data['ReqCustomerSpecialNeed']); 
+                    
+                    $this->PurchaseRequisition->updateAll(array('PurchaseRequisition.is_prpurchaseorder_created'=>1),array('PurchaseRequisition.prequistionno'=>$this->request->data['Reqpurchaseorder']['requisitionno']));
+                 
                     /******************
                      * Data Log
                     */
-                    $this->request->data['Logactivity']['logname']   =   'Salesorder';
-                    $this->request->data['Logactivity']['logactivity']   =   'Add SalesOrder';
-                    $this->request->data['Logactivity']['logid']   =   $sales_orderid;
+                    $this->request->data['Logactivity']['logname']   =   'Reqpurchaseorder';
+                    $this->request->data['Logactivity']['logactivity']   =   'Add Reqpurchaseorder';
+                    $this->request->data['Logactivity']['logid']   =   $req_purchaseorderid;
                     $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
                     //pr($a);exit;
                     /******************/
-                    $this->Session->setFlash(__('Salesorder has been Added Successfully'));
-                    $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
+                    $this->Session->setFlash(__('PR_Purchase order  has been Added Successfully'));
+                    $this->redirect(array('controller'=>'Reqpurchaseorders','action'=>'index'));
                 }
             }
         }
-        public function Preq_by_quotation($id=NULL)
+        public function pr_purchaseorder($id=NULL)
         {
             
         /*******************************************************
@@ -111,8 +98,8 @@
         /*
          * *****************************************************
          */
-            $dmt    =   $this->random('salesorder');
-            $this->set('salesorderno', $dmt);
+            $dmt    =   $this->random('pr_purchaseorder');
+            $this->set('prequistionno', $dmt);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             
             
@@ -124,28 +111,32 @@
             
             if($this->request->is('post'))
             {
-                        $requistion_id  =   $this->request->data['Reqpurchaseorder']['prequistion_id'];
-                        $con = $this->PurchaseRequisition->find('first',array('conditions'=>array('PurchaseRequisition.prequistionno'=>$this->request->data['Reqpurchaseorder']['prequistion_id'],'PurchaseRequisition.is_superviser_approved'=>1,'PurchaseRequisition.is_manager_approved'=>1,'PurchaseRequisition.is_deleted '=>0)));
-                     
-                        $instrument_type = $con['InstrumentType']['purchase_requisition'];
-                        //pr($instrument_type); exit;
-                        $this->set('instrument_type',$instrument_type);
-                        
-                        $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$con['PurchaseRequisition']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
-                        //pr($contact_list);exit;
-                        $this->set(compact('contact_list'));
-                        $req_details =  $con['PurchaseRequisition'];
-                        $req_pur['Reqpurchaseorder']    =    $req_details;
-                        $req_pur['PreqDevice']          =    $con['PreqDevice'];
+                       
+                $this->ReqDevice->deleteAll(array('ReqDevice.prequistionno'=>$id,'ReqDevice.status'=>0));
+                $requistion_id  =   $this->request->data['Reqpurchaseorder']['prequistion_id'];
+                $con = $this->PurchaseRequisition->find('first',array('conditions'=>array('PurchaseRequisition.prequistionno'=>$this->request->data['Reqpurchaseorder']['prequistion_id'],'PurchaseRequisition.is_superviser_approved'=>1,'PurchaseRequisition.is_manager_approved'=>1,'PurchaseRequisition.is_deleted '=>0)));
+                
+                $instrument_type = $con['InstrumentType']['purchase_requisition'];
+                //pr($instrument_type); exit;
+                $this->set('instrument_type',$instrument_type);
+                $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$con['PurchaseRequisition']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+                //pr($contact_list);exit;
+                $this->set(compact('contact_list'));
+                $req_details =  $con['PurchaseRequisition'];
+                $req_pur['Reqpurchaseorder']          =    $req_details;
+                $req_pur['ReqCustomerSpecialNeed']    =    $con['PreqCustomerSpecialNeed'];
+                $req_pur['ReqDevice']                 =    $con['PreqDevice'];
                            
-                        $this->set('requistion_details',$req_pur);
-                        foreach($req_pur['PreqDevice'] as $sale):
-                            $this->ReqDevice->create();
-                            $description_data  =   $this->preq_devices($sale['id']);
-                           
-                            $this->ReqDevice->save($description_data);
-                        endforeach;   
-                        $this->request->data =   $req_pur;
+                $this->set('requistion_details',$req_pur);
+                
+                foreach($req_pur['ReqDevice'] as $sale):
+                    $this->ReqDevice->create();
+                     $this->request->data['ReqDevice']['is_approved']          =   0;
+                    $description_data  =   $this->preq_devices($sale['id']);
+                    
+                    $this->ReqDevice->save($description_data);
+                endforeach;   
+                $this->request->data =   $req_pur;
             }
             else
             {
@@ -162,13 +153,13 @@
          *  Permission : Edit 
          *  Description   :   Edit Salesorder Details page
          *******************************************************/
-        $user_role = $this->userrole_permission();
-        if($user_role['job_salesorder']['edit'] == 0){ 
-            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        }
-        /*
-         * *****************************************************
-         */
+            $user_role = $this->userrole_permission();
+            if($user_role['job_salesorder']['edit'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+            /*
+             * *****************************************************
+             */
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
@@ -200,11 +191,11 @@
                         $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                         /******************/   
-//                    $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
-//                    if(!empty($device_node))
-//                    {
-//                        $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$id.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
-//                    }
+                        //$device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
+                        //if(!empty($device_node))
+                        //{
+                        //$this->Description->updateAll(array('Description.salesorder_id'=>'"'.$id.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
+                        //}
                     $this->Session->setFlash(__('Salesorder has been Updated Succefully '));
                     $this->redirect(array('action'=>'index'));
                 }

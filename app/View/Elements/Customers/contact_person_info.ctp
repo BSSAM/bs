@@ -46,7 +46,7 @@
 </div>
 
 <div class="form-group form-actions">
-    <div class="col-md-9 col-md-offset-10">
+    <div class="col-md-9 col-md-offset-10 update_button_for_contactperson ">
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary contactperson_submit','escape' => false)); ?>
     </div>
 </div>
@@ -69,7 +69,7 @@
     <tbody class="contact_info_row">
         <?PHP if(!empty($contactpersoninfo )): ?>
         <?php foreach($contactpersoninfo as $contactpersoninfo_list): ?>
-         <tr>
+         <tr >
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['customer_id']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['name']; ?></td>
@@ -82,7 +82,7 @@
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['remarks']; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default contactperson_editsubmit','escape'=>false)); ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$contactpersoninfo_list['Contactpersoninfo']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 
                                             </div>

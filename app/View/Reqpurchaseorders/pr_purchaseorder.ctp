@@ -2,25 +2,6 @@
 
 <script type="text/javascript">
 $(function(){
-$("#val_customer").keyup(function() 
-{ 
-//alert();    
-var customer = $(this).val();
-var dataString = 'name='+ customer;
-if(customer!='')
-{
-	$.ajax({
-	type: "POST",
-	url: "<?PHP echo Router::url('/',true); ?>Salesorders/search",
-	data: dataString,
-	cache: false,
-	success: function(html)
-	{
-            $("#result").html(html).show();
-	}
-	});
-        }return false;    
-        });
         $("#val_reg_date").datepicker("setDate", new Date());
         $("#val_in_date").datepicker("setDate", new Date());
         var dateMin = $('#val_in_date').datepicker('getDate');   
@@ -31,14 +12,14 @@ if(customer!='')
 </script>
 <h1>
                            
-                                <i class="gi gi-user"></i>Add Sales Order
+                                <i class="gi gi-user"></i>Add PR_Purchase  Order
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Salesorders',array('controller'=>'Salesorders','action'=>'index')); ?></li>
-                        <li>Add Sales Orders</li>
+                        <li><?php echo $this->Html->link('PR_Purchase orders',array('controller'=>'Reqpurchaseorders','action'=>'index')); ?></li>
+                        <li>Add PR_Purchase  Order</li>
                     </ul>
                     <!-- END Forms General Header -->
                     <div class="row">
@@ -48,28 +29,22 @@ if(customer!='')
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
                                     <h2 class="pull-right">
-                                        <?PHP //pr($this->request->data);exit; ?>
-                                        Track Id    : <?PHP echo $this->request->data['Salesorder']['track_id']; ?>
+                                        Track Id    : <?PHP echo $this->request->data['Reqpurchaseorder']['track_id']; ?>
                                     </h2>
                                 </div>
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
+                                    <?php echo $this->Form->create('Reqpurchaseorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'reqpurchaseorders','action'=>'add')); ?>
+                                    <?php echo $this->Form->input('Reqpurchaseorder.customer_id', array('type'=>'hidden')); ?>
+                                    <?php echo $this->Form->input('Reqpurchaseorder.requisitionno', array('type'=>'hidden','value'=>$this->request->data['Reqpurchaseorder']['prequistionno'])); ?>
                                    
-                                    <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'Salesorder','action'=>'salesorder_by_quotation')); ?>
-                                    <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden')); ?>
-                                    <?PHP if(!empty($sale['Salesorder']['track_id'])): ?>
-                                    <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden')); ?>
-                                    <?php echo $this->Form->input('Salesorder.quotationno', array('type'=>'hidden')); ?>
-                                    <?php echo $this->Form->input('Salesorder.quotation_id', array('type'=>'hidden')); ?>
-                                    <?php echo $this->Form->input('device_status', array('type'=>'hidden','value'=>$status_id)); ?>
-                                    <?PHP endif; ?>
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
-                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Sales Order Info</a></li>
-                                                <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs</a></li>
+                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span>Purchase Requisition Info</a></li>
+                                                <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs and Tag ID</a></li>
                                                 <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Description </a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
@@ -85,15 +60,12 @@ if(customer!='')
                                                     <?PHP echo $this->element('Reqpurchaseorders/description'); ?>
                                                     <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-10">
-                                                            <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary sales_submit')); ?>
-                                                            <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel',array('controller'=>'Salesorders','action'=>'index'),array('class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                                                            <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary')); ?>
+                                                            <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel',array('controller'=>'Reqpurchaseorders','action'=>'index'),array('class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                                  <?php echo $this->Form->end(); ?>
-                                                <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Salesorders/Salesorder_by_quotation/file_upload'); ?>
-                                                </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->
                                         </div><!-- panel-body -->
@@ -106,8 +78,7 @@ if(customer!='')
                         </div>
     <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
-         <?php echo $this->Html->script('pages/uiProgress'); ?>
-                            <script>$(function(){ UiProgress.init(); });</script>
+         
                                 
                                
                         

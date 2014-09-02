@@ -96,7 +96,33 @@
             <th class="text-center">Action</th>
         </tr>
     </thead>
-    <tbody class="Instrument_info"> </tbody>
+    <tbody class="Instrument_info"> 
+        <?PHP 
+           
+            if(!empty($purchase_requistion_list['PreqDevice'])):
+                foreach($purchase_requistion_list['PreqDevice'] as $device):?>
+        <tr class="instrument_remove_<?PHP echo $device['id']; ?>">
+                    <td class="text-center"><?PHP echo $device['id']; ?></td>
+                    <td class="text-center"><?PHP echo $device['instrument_name']; ?></td>
+                    <td class="text-center"><?PHP echo $device['model_no']; ?></td>
+                    <td class="text-center"><?PHP echo $device['validity']; ?></td>
+                    <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
+                    <td class="text-center"><?PHP echo $device['account_service']; ?></td>
+                    <td class="text-center"><?PHP echo $device['total']; ?></td>
+                   
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a data-delete="<?PHP echo $device['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+        <?PHP   endforeach;  endif;  ?>
+    </tbody>
 </table>
 </div>
 </div>
