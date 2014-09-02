@@ -159,7 +159,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('sales_titles', array('id'=>'sales_titles','class'=>'form-control','label'=>false,'name'=>'sales_titles','type'=>'select',
             'options'=>array('1'=>'title'))); ?>
-        <?PHP echo $this->Form->input('pending',array('type'=>'text','id'=>'pending','value'=>$pendin)); ?>
+        <?PHP echo $this->Form->input('pending',array('type'=>'hidden','id'=>'pending','value'=>$pendin)); ?>
     </div>
 </div>
 <div class="form-group form-actions">
@@ -168,7 +168,7 @@
     </div>
 </div>
 <div class="col-sm-3 col-lg-12">
-<table  class="table table-vcenter table-condensed table-bordered">
+<table id="beforedo-datatable"  class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">S.No</th>

@@ -11,8 +11,9 @@
         </div>
     </div>
 </div>
-
-<table  class="table table-vcenter table-condensed table-bordered">
+<div class="col-sm-3 col-lg-12">
+    <div class="table-responsive">
+<table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -30,3 +31,5 @@
         
     </tbody>
 </table>
+    </div>
+</div>

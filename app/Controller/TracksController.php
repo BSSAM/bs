@@ -20,9 +20,10 @@
             if(!empty($track_id)){
                 $this->set('track',$track_id);
                 $quotation = $this->Quotation->find('all',array('conditions'=>array('Quotation.track_id'=>$track_id,'Quotation.is_deleted'=>0),'recursive'=>'1'));
+                
                 //pr($quotation);exit;
-                if($quotation==''):
-                    $this->set('message',"There is No Details Found in this Track ID!!!");
+                if(!$quotation):
+                    $this->set('message',"This TRACK ID doesn't provide any Details!!!");
                 else:
                     $this->set('message',"");
                 $salesorder = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.track_id'=>$track_id)));

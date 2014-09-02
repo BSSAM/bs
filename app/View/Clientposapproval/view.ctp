@@ -173,7 +173,7 @@
                                 <dl>
                                     <dt>Po Number</dt>
                                     <?PHP  
-                                        $quo_po     =   $data['Quotation']['ref_no'];
+                                        $quo_po     =   $data['Quotation']['ref_no'];//pr($quo_po);exit;
                                         $arra_po    =   explode(',', $quo_po);
                                     ?>
                                     <?PHP $count    =   0; ?>
