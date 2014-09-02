@@ -74,7 +74,8 @@
         </div>
         <div class="col-md-4">
             <button class="btn btn-sm btn-primary quo_generate_po" id="purchase_order" type="button">Generate Po</button>
-        </div>   
+        </div> 
+        <span class="help-block_login po_name_error">Purchase order Full Invoice needs Single PO</span>
     </div>
     <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">

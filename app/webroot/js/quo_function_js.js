@@ -11,6 +11,7 @@ $(document).ready(function(){
     $("#result").hide();
     $("#val_customer").keyup(function() 
     { 
+        
         var customer = $(this).val();
         var dataString = 'name='+ customer;
         if(customer!='')
@@ -405,9 +406,29 @@ $(document).ready(function(){
         }
    });
     /***********************************************Calculate Device Count Rate Total******************************/
+     $('.po_name_error').hide();
     $(document).on('keyup','#val_ref_no',function(){
-      if($(this).val()=='-'){
-         $('#po_gen_type').val('Normal');
+         $('.po_name_error').hide();
+         var invoice_type_id =   $('#invoice_type_id').val();
+            if($(this).val()=='-'){
+            $('#po_gen_type').val('Normal');
+            }
+        var check_char =$(this).val().indexOf(',');
+        
+        if(check_char !=-1 && invoice_type_id==1 ){
+            $('.po_name_error').addClass('animation-slideDown');
+            $('.po_name_error').css('color','red');
+            $('.po_name_error').show();
+           $(this).val('');
       }
+      
     });
+    /*******************************************Find Invoice type id******************/
+    var invoice_id  =   $('#invoice_type_id').val();
+    if(invoice_id=='')
+    {
+        $('#val_ref_no').attr('readonly','readonly');
+        $('#purchase_order').removeClass('quo_generate_po');
+    }
+   
 });

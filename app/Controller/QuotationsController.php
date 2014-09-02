@@ -69,7 +69,12 @@
 //                pr($this->request->data['Quotation']['ref_no']);exit;
 //                $this->request->data['Quotation']['po_generate_type']=$this->request->data['ref_no'];
 //                pr($this->request->data);
-//                pr($this->request->data['Quotation']['ref_no']);exit;
+                
+                $ref_no_po =   explode(',',$this->request->data['Quotation']['ref_no']);
+                foreach($ref_no_po as $k=>$v):
+                    $count_po[$k]   =   0;
+                endforeach;
+                $p_count_string =   implode($count_po,',');
                 if ($this->request->data['Quotation']['ref_no'] != '') 
                 {
                     $check_string = strchr($this->request->data['Quotation']['ref_no'], 'CPO');
@@ -85,6 +90,7 @@
 //                    }
 //                endif;
                 $this->request->data['Quotation']['po_generate_type']=$po_type;
+                $this->request->data['Quotation']['ref_count']=$p_count_string;
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();

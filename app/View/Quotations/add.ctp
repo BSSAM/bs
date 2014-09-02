@@ -13,8 +13,8 @@
         });
     
  $(function(){
-$("#val_reg_date").datepicker("setDate", new Date());
-});
+    $("#val_reg_date").datepicker("setDate", new Date());
+    });
 </script>
 <h1>
                                 <i class="gi gi-user"></i>Add Quotation
@@ -45,6 +45,7 @@ $("#val_reg_date").datepicker("setDate", new Date());
                                     <?php echo $this->Form->input('Quotation.track_id', array('type'=>'hidden','value'=>$our_ref_no)); ?>
                                     <?php echo $this->Form->input('Quotation.quotation_id', array('type'=>'hidden','value'=>$quotationno)); ?>
                                     <?php echo $this->Form->input('Quotation.quo_device_count', array('type'=>'hidden','id'=>'quotation_device_count')); ?>
+                                    <?php echo $this->Form->input('invoice_type', array('type'=>'hidden','id'=>'invoice_type_id','name'=>'invoice_type_id','value'=>'')); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
@@ -91,9 +92,5 @@ $("#val_reg_date").datepicker("setDate", new Date());
                         </div>
     <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
-         <?php echo $this->Html->script('pages/uiProgress'); ?>
-                            <script>$(function(){ UiProgress.init(); });</script>
-                                
-                               
-                        
+         
                         

@@ -403,6 +403,9 @@ $(document).ready(function(){
         var customer_name=$(this).text();
         $('#preq_customer').val(customer_name);
         $('#val_customer').val(customer_name);
+        //for Quotation_invoice
+        $('#val_ref_no').removeAttr('readonly');
+        $('#purchase_order').addClass('quo_generate_po');
         $('#result').fadeOut();
         var customer_id=$(this).attr('id');
         $.ajax({
@@ -439,6 +442,7 @@ $(document).ready(function(){
                 $('#val_fax').val(data1.Customer.fax);
                 $('#val_phone').val(data1.Customer.phone); 
                 $('#val_email').val(data1.Contactpersoninfo.email);
+                $('#invoice_type_id').val(data1.Customer.invoice_type_id);
                 $('#PurchaseRequisitionCustomerId').val(data1.Customer.id);
                 $('#SalesorderCustomerId').val(data1.Customer.id);
                 $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
