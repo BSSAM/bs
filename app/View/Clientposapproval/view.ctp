@@ -1,6 +1,7 @@
 <?PHP echo $this->Form->create('Clientposapproval',array('url'=>'quotation_po_update','class'=>'form-horizontal')); ?>
 <?PHP echo $this->Form->input('quotationno',array('type'=>'hidden','name'=>'quotationno','value'=>$data['Quotation']['quotationno'])); ?>                   
-<h4 class="sub-header text-center"><strong><?PHP echo $data['Customer']['Customertagname']."(" .$data['Customer']['id'].")"; ?> )</strong></h4>
+<h4 class="sub-header text-center">Customer Details - <strong><?PHP echo $data['Customer']['Customertagname']."(" .$data['Customer']['id'].")"; ?> </strong></h4>
+
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="block">
@@ -116,14 +117,14 @@
                         </div>
                     </div>
                     
-                    <h4 class="sub-header text-center">Job Details <strong>( <?PHP echo  $data['Quotation']['track_id']; ?> )</strong></h4>
+                    <h4 class="sub-header text-center">Job Details - <strong>( <?PHP echo $data['Quotation']['track_id']; ?> )</strong></h4>
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="block">
                                 <dl>
                                    <dt>Quotation Order</dt>
                                     <dd class="word_break">
-                                        <?PHP echo  $data['Quotation']['quotationno']; ?>
+                                        <?PHP echo $data['Quotation']['quotationno']; ?>
                                     </dd>
                                 </dl>
                             </div>
@@ -137,7 +138,7 @@
                                     <dd class="word_break"><?PHP echo  $v; ?></dd>
                                     <?PHP endforeach; ?>
                                     <?PHP else: ?>
-                                      <dd class="word_break"><?PHP echo  'Sales Orders not Found'; ?></dd>
+                                      <dd class="word_break"><?PHP echo 'Sales Orders not Found'; ?></dd>
                                     <?PHP endif; ?>
                                 </dl>
                             </div>
@@ -151,7 +152,7 @@
                                     <dd class="word_break"><?PHP echo  $v; ?></dd>
                                     <?PHP endforeach; ?>
                                     <?PHP else: ?>
-                                      <dd class="word_break"><?PHP echo  'Delivery Orders not Found'; ?></dd>
+                                      <dd class="word_break"><?PHP echo 'Delivery Orders not Found'; ?></dd>
                                     <?PHP endif; ?>
                                 </dl>
                             </div>
@@ -161,9 +162,13 @@
                             <div class="block">
                                 <dl>
                                     <dt>Invoice Number</dt>
-                                    <dd class="word_break">
-                                        <?PHP echo  $data['Quotation']['quotationno']; ?>
-                                    </dd>
+                                    <?PHP if(!empty($quotation_data['Deliveryorder'])): ?>
+                                    <?PHP foreach($quotation_data['Deliveryorder'] as $k=>$v): ?>
+                                    <dd class="word_break"><?PHP echo  $v; ?></dd>
+                                    <?PHP endforeach; ?>
+                                    <?PHP else: ?>
+                                      <dd class="word_break"><?PHP echo 'Invoice not yet Generated!!'; ?></dd>
+                                    <?PHP endif; ?>
                                 </dl>
                             </div>
                         </div>
@@ -171,40 +176,67 @@
                         <div class="col-sm-12">
                             <div class="block col-sm-12">
                                 <dl>
-                                    <dt>Po Number</dt>
+<!--                                    <dt>Po Number</dt>-->
                                     <?PHP  
-                                        $quo_po     =   $data['Quotation']['ref_no'];//pr($quo_po);exit;
-                                        $arra_po    =   explode(',', $quo_po);
+                                        //$quo_po     =   $data['Quotation']['ref_no'];//pr($quo_po);exit;
+//                                    if($type_id ==1):
+//                                        $arra_po    =   $pos;
+//                                        $arra_count    =   $pos_count;
+//                                    else:
+                                        $arra_po    =   explode(',', $pos);
+                                        //pr($arra_po);
+                                        $arra_count    =   explode(',', $pos_count);
+                                        //pr($arra_count);
+//                                    endif;
+                                        
                                     ?>
-                                    <?PHP $count    =   0; ?>
-                                    <?PHP if(!empty($pos)){ ?>
-                                    <?PHP foreach ($pos as $pokey=>$pov): ?>
-                                    <?PHP $count    =   $count+1; ?>
-                                    <div class="col-md-6 row">
-                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pokey,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
+                                    <?PHP $count    =   50; ?>
+                                    <?PHP $count1    =   0; ?>
+                                    <?php $mer =  array_combine($arra_po,$arra_count);?>
+                                    <?PHP foreach ($mer as $pokey=>$po): ?>
+                                    <?PHP $count    =   $count+1;?>
+                                    <?PHP $count1    =   $count1+1;?>
+                                    <div class="group_po_<?php echo $count;?>">
+                                    <div class="form-group">
+                                    <label class="col-md-2 control-label" for="ponumber[]">Purchase Order <?php echo $count1; ?></label>
+                                    <div class="col-md-4 row">
+                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pokey,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]','id'=>'ponumber[]')) ?></dd>
                                     </div>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control pull-left" placeholder="PO Count" name="pocount[]" value=<?PHP echo $pov; ?> >
+                                     <?PHP //endforeach; ?>
+                                     <?PHP //foreach ($arra_count as $pokey_count=>$po_count): ?>
+                                    <?PHP //$count1    =   $count1+1; ?>
+                                     
+                                    <div class="col-md-2">
+                                        <?PHP echo $this->Form->input('pocount',array('type'=>'text','class'=>'form-control','value'=>$po,'label'=>false,'placeholder'=>'PO Count','name'=>'pocount[]','id'=>'pocount[]')) ?></dd>
                                     </div>
-                                    <?PHP if($count==1&& $type_id!=1): ?>
+                                    <?php if($count != 51): ?>
+                                    <div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete=<?php echo $count; ?>><i class="fa fa-minus"></i></div></div></div>
+                                    <?php endif; ?>
+                                    </div>
+                                    </div>
+                                    <?PHP endforeach; ?>
+                                    <?PHP if($count > 1 && $type_id!=1): ?>
+                                    <div class="form-group">
                                     <div class="btn btn-alt btn-info pull-right" id="po_plus">
                                     <i class="fa fa-plus"></i></div>
+                                    </div>
                                     <?PHP endif; ?>
-                                    <?PHP endforeach; ?>
-                                    <?PHP }else{ ?>
-                                    <?PHP foreach ($arra_po as $pokey=>$pov): ?>
-                                    <?PHP $count    =   $count+1; ?>
-                                    <div class="col-md-12 row">
-                                        <?PHP echo $this->Form->input('ponumber',array('type'=>'text','class'=>'form-control','value'=>$pov,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
+                                    <div class="po_up"></div>
+                                   
+                                    
+                                    <?PHP //foreach ($arra_count as $pokey_count=>$po_count): ?>
+                                    <?PHP //$count1    =   $count1+1; ?>
+<!--                                    <div class="col-md-12 row">
+                                        <?PHP //echo $this->Form->input('ponumber_count',array('type'=>'text','class'=>'form-control','value'=>$pokey_count,'label'=>false,'placeholder'=>'PO Number','name'=>'ponumber[]')) ?></dd>
                                     </div>
                                     
-                                   <?PHP if($count==1&& $type_id!=1): ?>
+                                   <?PHP //if($count1==1&& $type_id!=1): ?>
                                     <div class="btn btn-alt btn-info pull-right" id="po_plus">
                                     <i class="fa fa-plus"></i></div>
-                                    <?PHP endif; ?>
-                                    <?PHP endforeach; ?>
-                                    <?PHP } ?>
-                                    <div class="po_up"></div>
+                                    <?PHP //endif; ?>
+                                    <?PHP //endforeach; ?>
+                                    <?PHP //} ?>
+                                    -->
                                    
                                 </dl>
                             </div>

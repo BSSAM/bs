@@ -138,7 +138,7 @@
                                     <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php echo $log_activity_deliveryorder_count; ?></span></a></li>
                                     <?php } ?>
                                     <?php if($user_role['app_clientpo']['view'] != 0){ ?>
-                                    <li><a href="#clientpo">Client PO <span class="badge animation-floating"><?php echo $log_activity_deliveryorder_count; ?></span></a></li>
+                                    <li><a href="#clientpo">Client PO <span class="badge animation-floating"><?php echo $log_activity_client_count; ?></span></a></li>
                                     <?php } ?>
 <!--                                <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>-->
                                 </ul>
@@ -398,7 +398,7 @@
                                 <div class="block full">
                                 <div class="table-responsive">
                                 <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
-                                    <?PHP if (!empty($log_activity_cdinfo)): ?>
+                                    <?PHP if (!empty($log_activity_client)): ?>
                                     <thead>
                                         <tr>
                                             <th>Flag</th>
@@ -408,19 +408,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($log_activity_cdinfo as $log_activity_cdinfo_list) :?>
-                                    <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'): ?>
+                                    <?php foreach ($log_activity_client as $log_activity_clientpo_list) :?>
+                                    <?PHP if($log_activity_clientpo_list['Logactivity']['logname'] == 'ClientPO'): ?>
                                         <tr>
-                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-c&d.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-po.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_cdinfo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_clientpo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_clientpo_list['Logactivity']['logid'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
-                                            <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_cdinfo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP if($log_activity_clientpo_list['Logactivity']['logname'] == 'ClientPO'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_clientpo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                             <?php }?>
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_cdinfo_list['User']['username'] ?><br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['created'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_clientpo_list['User']['username'] ?><br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['created'] ?></small></td>
                                         </tr>
                                     <?php endif; ?>
                                     <?php endforeach; ?>

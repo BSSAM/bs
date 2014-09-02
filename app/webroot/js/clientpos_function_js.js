@@ -215,8 +215,7 @@ $(document).ready(function(){
     });
     /*************************************For Po Update in POP up on ClientPoApproval*************************************************/
     $(document).on('click','#po_plus',function(){
-            $('.po_up').append('<div class="group_po_'+(count++)+'"><div class="form-group col-md-6"><input placeholder="Enter Additional PO Number" type="text" name="ponumber[]" id="val_ponumber_'+(count-1)+'" class="form-control get_ponumber_collection"/></div><div class="form-group col-md-3">\n\<input type="text" placeholder="PO Count" name="pocount[]" id="val_pocount'+(count-1)+'" class="form-control po_count_each"/> </div>\n\
-<div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete='+(count-1)+' ><i class="fa fa-minus"></i></div></div></div></div>');
+            $('.po_up').append('<div class="group_po_'+(count++)+'"><div class="form-group"><label class="col-md-2 control-label" for="ponumber[]">Additional PO Number</label>	<div class="col-md-4 row"><input placeholder="Enter PO Number" type="text" name="ponumber[]" id="val_ponumber_'+(count-1)+'" class="form-control get_ponumber_collection"/></div><div class="col-md-2">\n\<input type="text" placeholder="PO Count" name="pocount[]" id="val_pocount'+(count-1)+'" class="form-control po_count_each"/></div>\n\<div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete='+(count-1)+'><i class="fa fa-minus"></i></div></div></div></div></div>');
     });
     /**************************************************************************************/
     $('#sales_order').blur(function(){

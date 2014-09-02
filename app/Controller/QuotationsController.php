@@ -5,7 +5,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson','Clientpo','branch');
+                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog');
         public function index()
         {
         /*******************************************************
@@ -94,6 +94,7 @@
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
+                    $quotationno    =   $this->request->data['Quotation']['quotationno'];
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
                     
                     $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
@@ -114,12 +115,25 @@
                     $this->request->data['Logactivity']['logname'] = 'Quotation';
                     $this->request->data['Logactivity']['logactivity'] = 'Add Quotation';
                     $this->request->data['Logactivity']['logid'] = $quotation_id;
+                    $this->request->data['Logactivity']['logno'] = $quotationno;
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
 
                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
                     
                     /******************/
+                    
+                    /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Quotation';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $quotationno;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                    /******************/ 
 
                     $this->Session->setFlash(__('Quotation has been added Successfully'));
                     $this->redirect(array('action'=>'index'));
@@ -190,7 +204,7 @@
                     $this->request->data['Quotation']['po_generate_type']='Manual';
                 }
                 $this->Quotation->id=$id;
-                
+                $quotationno = $quotations_list['Quotation']['quotationno'];
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $customer_id=$quotations_list['Quotation']['customer_id'];
@@ -202,12 +216,17 @@
                     $this->Customerspecialneed->id=$this->request->data['Customerspecialneed']['id'];
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);  
                     
-                    $this->request->data['Logactivity']['logname']   =   'Quotation';
-                    $this->request->data['Logactivity']['logactivity']   =   'Add Quotation';
-                    $this->request->data['Logactivity']['logid']   =   $quotations_list['Quotation']['quotationno'];
-                    $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Quotation';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $quotationno;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                    /******************/ 
                     $this->Session->setFlash(__('Quotation has been Updated Successfully'));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -220,7 +239,7 @@
         }
         public function delete($id=NULL)
         {
-              /*******************************************************
+        /*******************************************************
          *  BS V1.0
          *  User Role Permission
          *  Controller : Quotation
@@ -238,6 +257,19 @@
             {
                 if($this->Quotation->updateAll(array('Quotation.is_deleted'=>1),array('Quotation.id'=>$id)))
                 {
+                    $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
+                    $quotationno = $quotation_details['Quotation']['quotationno'];
+                    /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Quotation';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $quotationno;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                    /******************/ 
                     $this->Session->setFlash(__('The Quotation has been deleted',h($id)));
                     return $this->redirect(array('controller'=>'Quotations','action'=>'index'));
                 }
@@ -278,7 +310,7 @@
             $this->autoRender = false;
             $this->loadModel('Customer');
             $customer_id =  $this->request->data['cust_id'];
-            $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$customer_id),'recursive'=>'2'));
+            $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$customer_id,'Customer.is_deleted'=>0,'Customer.is_approved'=>1),'recursive'=>'2'));
            
             if(!empty($customer_data))
             {
