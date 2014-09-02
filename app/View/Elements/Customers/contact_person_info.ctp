@@ -46,12 +46,12 @@
 </div>
 
 <div class="form-group form-actions">
-    <div class="col-md-9 col-md-offset-10 update_button_for_contactperson ">
+    <div class="col-md-9 col-md-offset-10 update_button_for_contactperson">
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary contactperson_submit','escape' => false)); ?>
     </div>
 </div>
     
-<table  class="table table-vcenter table-condensed table-bordered">
+<table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">Customer ID</th>

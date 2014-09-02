@@ -7,9 +7,8 @@ $(document).ready(function(){
    /******************************Contact Person Submit*************************************/
     $('.name_error').hide();
     $('.email_error').hide();
-    $('.contactperson_submit').click(function()
+    $(document).on('click','.contactperson_submit',function()
     {
-        
         if($('#contact_name').val()=='')
         {
             $('.name_error').addClass('animation-slideDown');
@@ -50,7 +49,7 @@ $(document).ready(function(){
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+data+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default contactperson_edit">\n\
                                     <i class="fa fa-pencil"></i></a>\n\
-                                    <a data-delete="'+serial+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">\n\
+                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
             }
         });
@@ -121,7 +120,7 @@ $(document).ready(function(){
             url: path_url+'/customers/contact_edit_update/',
             success:function(data){
                
-               $('.contact_remove_'+id).remove();
+               $('.contact_remove_'+data).remove();
                 $('.contact_info_row').append('<tr class="contact_remove_'+id+'">\n\\n\
                                     <td class="text-center">'+customer_id+'</td>\n\
                                     <td class="text-center">'+contact_name+'</td>\n\\n\
@@ -161,13 +160,10 @@ $(document).ready(function(){
                 data:"delete_id="+ delete_id,
                 url: path_url+'/customers/contact_delete/'
             });
-            $('#'+delete_id).fadeOut();
+            $('.contact_remove_'+delete_id).fadeOut();
         }
     });
     /*****************************Contact person Update Submit***************************/
-    
-    
-    /*****************************************************************************/
     
     
 });

@@ -51,13 +51,13 @@
     </div>
 </div>
 <div class="form-group form-actions">
-    <div class="col-md-9 col-md-offset-10"><div id="check"></div>
+    <div class="col-md-9 col-md-offset-10 update_button_for_contactperson"><div id="check"></div>
         <?php //echo $this->Form->input('',array('id'=>'id')); ?>
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary contactperson_editsubmit','escape' => false)); ?>
     </div>
 </div>
     
-<table  class="table table-vcenter table-condensed table-bordered">
+<table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">Customer ID</th>
@@ -76,7 +76,7 @@
         
         <?PHP if(!empty($contactpersoninfo )): ?>
         <?php foreach($contactpersoninfo as $contactpersoninfo_list): ?>
-         <tr id="<?php echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?>">
+         <tr class="contact_remove_<?php echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?>">
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['customer_id']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['name']; ?></td>
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['email']; ?></td>
@@ -88,8 +88,8 @@
                                         <td class="text-center"><?php echo $contactpersoninfo_list['Contactpersoninfo']['remarks']; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-<!--                                                 <a data-delete=<?PHP //echo $contactpersoninfo_list['Contactpersoninfo']['tag_id']; ?> data-toggle="tooltip" title="Delete" class="btn btn-xs btn-default contactperson_editsubmit">
-                                                <i class="fa fa-pencil"></i></a>-->
+                                                <a data-edit=<?PHP echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?> data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default contactperson_edit">
+                                                <i class="fa fa-pencil"></i></a>
                                                 <a data-delete=<?PHP echo $contactpersoninfo_list['Contactpersoninfo']['id']; ?> data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">
                                                 <i class="fa fa-times"></i></a>
                                             </div>
