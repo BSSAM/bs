@@ -19,17 +19,22 @@
             
             if(!empty($track_id)){
                 $this->set('track',$track_id);
-                $quotation = $this->Quotation->find('all',array('conditions'=>array('Quotation.track_id'=>$track_id),'recursive'=>'1'));
+                $quotation = $this->Quotation->find('all',array('conditions'=>array('Quotation.track_id'=>$track_id,'Quotation.is_deleted'=>0),'recursive'=>'1'));
+                //pr($quotation);exit;
+                if($quotation==''):
+                    $this->set('message',"There is No Details Found in this Track ID!!!");
+                else:
+                    $this->set('message',"");
                 $salesorder = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.track_id'=>$track_id)));
                 $deliveryorder = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.track_id'=>$track_id)));
-                //pr($quotation);
+                //pr($quotation);exit;
                // pr($salesorder);
                 //pr($deliveryorder);
                 //exit;
                 $this->set('Quo_det',$quotation);
                 $this->set('Sal_det',$salesorder);
                 $this->set('Del_det',$deliveryorder);
-                
+                endif;
             }
             else{
                 return $this->redirect(array('controller' => 'Dashboards','action'=>'index'));

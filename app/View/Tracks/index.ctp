@@ -15,6 +15,15 @@
                                     <h3 class="sub-header text-center"><strong><?php echo $track; ?></strong></h3>
                                     
                     </article>
+                    <?php if($message!=''): ?>
+                    <div class="block block-alt-noborder">
+                    <div class="row">
+                            <div class="col-md-12">
+                                <h1><?php echo $message; ?></h1>
+                            </div>
+                    </div>
+                    </div>
+                    <?php else:?>
                     <div class="block block-alt-noborder">
                     <div class="row">
                             <div class="col-md-12">
@@ -305,6 +314,7 @@
                         </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                     <!-- END Blank Alternative Content -->
                 
                 <!-- END Page Content -->
