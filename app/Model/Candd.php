@@ -36,6 +36,13 @@ class Candd extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+          'ReadytodeliverItem' => array(
+            'className' => 'ReadytodeliverItem',
+            'foreignKey' => 'readytodeliver_items_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
         );
 }

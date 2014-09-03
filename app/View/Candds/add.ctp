@@ -16,7 +16,9 @@
                                         <div class="form-group">
                                         <label class="col-md-5 control-label" for="cd_date">C and D Date</label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control input-datepicker-close cd_date" data-date-format="dd-MM-yy" name="cd_date" />
+                                            <?php echo $this->Form->input('',
+                                                  array('id'=>'cd_date','class'=>'form-control input-datepicker-close cd_date','data-date-format'=>'dd-MM-yy','label'=>false,
+                                                  'autoComplete'=>'off','type'=>'text','name'=>'cd_date','value'=>date('d-F-y'))); ?>
                                         </div>
                                     </div>
                                        

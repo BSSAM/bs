@@ -14,8 +14,8 @@ class ClientposapprovalController extends AppController {
         'Instrument', 'Brand', 'Customer', 'Device', 'Unit', 'Logactivity', 'InstrumentType','Poinvoice',
         'Contactpersoninfo', 'CusSalesperson', 'Clientpo');
 
-    public function index() {
-
+    public function index() 
+    {
         //$this->Quotation->recursive = 1; 
         $quotation_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' => '0','Customer.acknowledgement_type_id'=>1), 'order' => array('Quotation.id' => 'DESC')));
         $quotation_lists_bybeforeinvoice = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' => '0','Customer.acknowledgement_type_id'=>2), 'order' => array('Quotation.id' => 'DESC')));
@@ -95,6 +95,7 @@ class ClientposapprovalController extends AppController {
                 break;
         }
       
+      
     }
     public function quotation_po_update()
     {
@@ -113,6 +114,7 @@ class ClientposapprovalController extends AppController {
             
             if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
                 $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+            //,'Quotation.po_approval_date'=>date('Y-m-d')
                // $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
 //                 $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0),'recursive'=>3));
 //                 switch($data['Customer']['invoice_type_id'])
@@ -166,4 +168,20 @@ class ClientposapprovalController extends AppController {
             endif;
         }
     }
+    
+     public function calendar()
+        {
+            $this->autoRender = false;
+            $cal = $this->Quotation->find('all', array('conditions' => array('Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_poapproved'=>1), 'group' => 'po_approval_date', 'fields' => array('count(Quotation.po_approval_date) as title', 'po_approval_date as start'), 'recursive' => '-1'));
+
+            $event_array = array();
+            foreach ($cal as $cal_list => $v) {
+
+                $event_array[$cal_list]['title'] = $v[0]['title'];
+                $event_array[$cal_list]['start'] = $v['Quotation']['start'];
+            }
+            return json_encode($event_array);
+
+        }
+        
 }

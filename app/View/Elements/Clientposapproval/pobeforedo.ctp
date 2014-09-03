@@ -55,11 +55,12 @@
                                                     
                                                 <?PHP }?>
                                             </div>
-                                           <?php if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_poapproved']==1){ ?>
-                                                    <div class="btn-group">
-                                                         <?php echo $this->Form->button('Approved', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
-                                                    </div>
-                                                <?PHP }?>
+                                            <?php if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_poapproved']==1){ ?>
+                                            &nbsp;&nbsp; 
+                                            <span class="label label-info">
+                                                <?PHP echo "Approved"; ?>
+                                            </span> &nbsp;&nbsp;
+                                            <?PHP }?>
                                          </td>
                                     </tr>
                                     <?php endforeach; ?>

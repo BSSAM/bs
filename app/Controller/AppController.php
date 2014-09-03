@@ -403,6 +403,25 @@ App::uses('Controller', 'Controller');
             $this->request->data['ReadytodeliverItem']['status']           =   0;
             return $this->request->data;
         }
+         public function ready_to_deliver_tag($delivery_order_id=NULL,$assign_to=NULL,$cd_date=NULL)
+        {
+            $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
+            $order_data     =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$delivery_order_id,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0)));
+            $cus = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$order_data['Deliveryorder']['customer_id'],'Customer.status'=>1,'Customer.is_deleted'=>0,'Customer.is_approved'=>1)));
+            //$order_data['Deliveryorder']['customer_id'];
+            $this->request->data['Candd']['purpose']                    =   'Delivery';
+            $this->request->data['Candd']['customer_id']                =   $order_data['Deliveryorder']['customer_id'];
+            $this->request->data['Candd']['customername']               =   $cd_date;
+            $this->request->data['Candd']['Contactpersoninfo_id']       =   $cd_date;
+            $this->request->data['Candd']['assign_id']                  =   $cd_date;
+            $this->request->data['Candd']['customer_address']           =   $cd_date;
+            $this->request->data['Candd']['address_id']                 =   $cd_date;
+            $this->request->data['Candd']['phone']                      =   $cd_date;
+            $this->request->data['Candd']['remarks']                    =   $cd_date;
+            $this->request->data['Candd']['cd_date']                    =   $cd_date;
+            $this->request->data['Candd']['status']                     =   0;
+            return $this->request->data;
+        }
         public function  description_update_shipping($deliveryorder_id  =NULL)
         {
             $salesorder_id  =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$deliveryorder_id),'fields'=>array('salesorder_id')));

@@ -189,7 +189,7 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             data:"cd_date="+cd_date,
-            url: path_url+"/Candds/get_delivery_info",
+            url: path_url+"/Candds/get_delivery_tab_info",
             cache: false,
             success: function(data)
             {
@@ -216,7 +216,7 @@ $(document).ready(function(){
 	});
     });
     
-    /*****************************************************************************/
+    /**************************** Candd Collection Tab *********************************/
     $(document).on('click','.candd_collection_add',function(){
         var cd_date1 =   $('.cd_date').val();
         if($('.cd_date').val()!==''){
@@ -253,6 +253,54 @@ $(document).ready(function(){
         alert("Please select the date");
     }
     });
+    
+     /**************************** Candd Delivery Tab *********************************/
+    $(document).on('click','.candd_delivery_add',function(){
+        var cd_date1 =   $('.cd_date').val();
+        if($('.cd_date').val()!==''){
+            $('.deliveries_info').empty();
+        $.ajax({
+            type: "POST",
+            data:"cd_date="+cd_date1,
+            url: path_url+"/Candds/get_delivery_tab_info",
+            cache: false,
+            success: function(data_delivery)
+            {
+                if(!data_delivery)
+                {
+                    var deliver_data_node_delivery = $.parseJSON(data_delivery);
+                    var contact_person      =  deliver_data_node_delivery.Customer;
+                   // alert(contact_person);
+                    //console.log(data);
+                    $.each(deliver_data_node_delivery,function(k,v){
+                        //alert(v);
+                        $('#pofull-datatable').dataTable();
+                        $('.deliveries_info').append('<tr class="delivery_'+v.Candd.id+'">\n\\n\
+                                        <td class="text-center">'+v.Candd.id+'</td>\n\\n\
+                                        <td class="text-center">'+v.Candd.customername+'</td>\n\\n\
+                                        <td class="text-center">'+v.Candd.customer_address+'</td>\n\\n\
+                                        <td class="text-center">'+v.Contactpersoninfo.name+'</td>\n\\n\
+                                        <td class="text-center">'+v.Contactpersoninfo.phone+'</td>\n\\n\\n\
+                                        <td class="text-center">-</td>\n\\n\\n\
+                                        <td class="text-center">-</td>\n\\n\\n\
+                                        <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
+                                        <td class="text-center">'+v.Candd.deliveryorderno+'</td>\n\\n\
+                                        <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
+                                        <td class="text-center"><div class="btn-group">\n\
+                                        <a data-delete="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delivery_delete">\n\
+                                        <i class="fa fa-times"></i></a></div></td></tr>');
+
+                    });
+                }
+            }
+	});}else
+    {
+        alert("Please select the date");
+    }
+    });
+    
+    
+    
    /********************For Description Move to deliver Script********************+v.branch.branchname+*/
    $('.move_to_deliver').click(function(){
       var assign_text  =   $('#val_assigned_move option:selected').text();

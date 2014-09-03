@@ -1,6 +1,6 @@
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-<table  class="table table-vcenter table-condensed table-bordered">
+<table id="pofull-datatable" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">S.No</th>

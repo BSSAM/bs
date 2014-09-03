@@ -131,11 +131,11 @@
                                     <?php if($user_role['app_salesorder']['view'] != 0){ ?>
                                     <li><a href="#sales">Sales Order <span class="badge animation-floating"><?php echo $log_activity_salesorder_count; ?></span></a></li>
                                     <?php } ?>
-                                    <?php if($user_role['app_inship']['view'] != 0){ ?>
-                                    <li><a href="#candd">C & D <span class="badge animation-floating"><?php echo $log_activity_cdinfo_count; ?></span></a></li>
-                                    <?php } ?>
                                     <?php if($user_role['app_deliveryorder1']['view'] != 0){ ?>
                                     <li><a href="#delivery">Delivery Order <span class="badge animation-floating"><?php echo $log_activity_deliveryorder_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_inship']['view'] != 0){ ?>
+                                    <li><a href="#candd">C & D <span class="badge animation-floating"><?php echo $log_activity_cdinfo_count; ?></span></a></li>
                                     <?php } ?>
                                     <?php if($user_role['app_clientpo']['view'] != 0){ ?>
                                     <li><a href="#clientpo">Client PO <span class="badge animation-floating"><?php echo $log_activity_client_count; ?></span></a></li>
@@ -220,7 +220,7 @@
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-qn.jpg', array('alt' => 'Quotation','class'=>'')); ?></td>
                                             <td class="">
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_quotation_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_quotation_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_quotation_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_quotation_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_quotation_list['Logactivity']['logno'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center">
                                             <?PHP if($log_activity_quotation_list['Logactivity']['logname'] == 'Quotation'){ ?>
@@ -927,7 +927,7 @@
                                         <li class="quote_calendar" data-id="Salesorders">Sales Order</li><!--  style="background-color: #9b59b6"  -->
                                         <li class="quote_calendar" data-id="Deliveryorders">Delivery Order</li><!--   style="background-color: #3498db"  -->
                                         <li class="quote_calendar" data-id="Quotations">Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
-                                        <li class="quote_calendar" data-id="Clientpos">Client PO</li><!--   style="background-color: #f39c12"  -->
+                                        <li class="quote_calendar" data-id="Clientposapproval">Client PO</li><!--   style="background-color: #f39c12"  -->
                                         <li class="quote_calendar" data-id="Quotations">PR</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">PO</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">TECHNICAL</li><!--  style="background-color: #1abc9c"  -->

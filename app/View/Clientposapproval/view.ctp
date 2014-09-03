@@ -174,7 +174,9 @@
                         </div>
                         
                         <div class="col-sm-12">
+                            <h4 class="sub-header text-center">Purchase Order Details</h4>
                             <div class="block col-sm-12">
+                                
                                 <dl>
 <!--                                    <dt>Po Number</dt>-->
                                     <?PHP  

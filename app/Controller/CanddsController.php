@@ -16,17 +16,22 @@ class CanddsController extends AppController
         $cd_statistics =    $this->CollectionDelivery->find('all',array('conditions'=>array('CollectionDelivery.status'=>1,'CollectionDelivery.is_deleted'=>0),'group'=>'CollectionDelivery.collection_delivery_date','recursive'=>2));
         //pr($cd_statistics);exit;
         $this->set(compact('cd_statistics'));
+        //echo date('Y-m-d', strtotime('0 days'));
     }
     public function add()
     {   
         $assignto =   $this->Assign->find('list',array('conditions'=>array('Assign.status'=>1),'fields'=>array('id','assignedto')));
         $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver'=>0,'Deliveryorder.ready_to_deliver'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
         $collection_items   =   $this->Candd->find('all',array('conditions'=>array('Candd.status'=>1,'Candd.is_deleted'=>0)));
+        //pr($collection_items);exit;
         $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
         $this->set(compact('assignto','ready_to_deliver_items','collection_items'));
         if($this->request->is('post'))
         {
-            
+            echo date('Y-m-d',$this->request->data['Candd']['col_an_del_date']);
+            //exit;
+            if(date('Y-m-d',$this->request->data['Candd']['col_an_del_date'])>=date('Y-m-d'))
+            {
             $collections_count =   $this->Candd->find('count',array('conditions'=>array('Candd.cd_date'=>$this->request->data['Candd']['col_an_del_date'])));
             $delivery_count    =    $this->ReadytodeliverItem->find('count',array('conditions'=>array('ReadytodeliverItem.cd_date'=>$this->request->data['Candd']['col_an_del_date'])));
             $this->request->data['CollectionDelivery']['collection_delivery_date']=$this->request->data['Candd']['col_an_del_date'];
@@ -48,6 +53,10 @@ class CanddsController extends AppController
                 
             }
             $this->redirect(array('controller'=>'Candds','action'=>'index'));
+            }
+            else {
+                $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
         }
     }
     public function edit($id=NULL)
@@ -103,11 +112,20 @@ class CanddsController extends AppController
             echo json_encode($delivery_data);
         }
     }
+    public function get_delivery_tab_info() 
+    {
+        $this->autoRender = false;
+        $cd_date    =   $this->request->data['cd_date'];
+        $delivery_data1 = $this->Candd->find('all', array('conditions' => array('Candd.cd_date' =>$cd_date,'Candd.is_deleted'=>0,'Candd.purpose'=>'Delivery'), 'recursive' => '2'));
+        if (!empty($delivery_data1)) {
+            echo json_encode($delivery_data1);
+        }
+    }
     public function get_collection_info() 
     {
         $this->autoRender = false;
         $cd_date    =   $this->request->data['cd_date'];
-        $collection_data = $this->Candd->find('all', array('conditions' => array('Candd.cd_date' =>$cd_date,'Candd.is_deleted'=>0), 'recursive' => '2'));
+        $collection_data = $this->Candd->find('all', array('conditions' => array('Candd.cd_date' =>$cd_date,'Candd.is_deleted'=>0,'Candd.purpose'=>'Collection'), 'recursive' => '2'));
         if (!empty($collection_data)) {
             echo json_encode($collection_data);
         }
@@ -159,25 +177,25 @@ class CanddsController extends AppController
             /******************
                     * Log Activity For Approval
                     */
-                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Collection';
-                    $this->request->data['Logactivity']['logid'] = $candd_last_id;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
+//                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
+//                    $this->request->data['Logactivity']['logactivity'] = 'Add Collection';
+//                    $this->request->data['Logactivity']['logid'] = $candd_last_id;
+//                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                    $this->request->data['Logactivity']['logapprove'] = 1;
+//
+//                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+//                    
                 /******************/
                     
                 /******************
                     * Data Log Activity
                     */
-                    $this->request->data['Datalog']['logname'] = 'C&Dinfo';
-                    $this->request->data['Datalog']['logactivity'] = 'Add Collection';
-                    $this->request->data['Datalog']['logid'] = $candd_last_id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
+//                    $this->request->data['Datalog']['logname'] = 'C&Dinfo';
+//                    $this->request->data['Datalog']['logactivity'] = 'Add Collection';
+//                    $this->request->data['Datalog']['logid'] = $candd_last_id;
+//                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+//                    
+//                    $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                 /******************/ 
             if(!empty($candd_data))
@@ -197,7 +215,11 @@ class CanddsController extends AppController
         foreach ($export as $ex=>$val)
         {
             $move_deliver_data  =   $this->ready_to_deliver($val,$assign_to,$cd_date);
+            $deliver_data_for_tag  =   $this->ready_to_deliver_tag($val,$assign_to,$cd_date);
             $this->ReadytodeliverItem->create();
+            $this->Candd->create();
+            $this->Candd->save($deliver_data_for_tag);
+            
             if($this->ReadytodeliverItem->save($move_deliver_data))
             {
                 $this->description_update_shipping($val);
@@ -205,25 +227,25 @@ class CanddsController extends AppController
                 /******************
                     * Log Activity For Approval
                     */
-                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
-                    $this->request->data['Logactivity']['logid'] = $val;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+//                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
+//                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
+//                    $this->request->data['Logactivity']['logid'] = $val;
+//                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                    $this->request->data['Logactivity']['logapprove'] = 1;
+//
+//                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
                     
                 /******************/
                     
                 /******************
                     * Data Log Activity
                     */
-                    $this->request->data['Datalog']['logname'] = 'C&Dinfo';
-                    $this->request->data['Datalog']['logactivity'] = 'Add Delivery';
-                    $this->request->data['Datalog']['logid'] = $val;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
+//                    $this->request->data['Datalog']['logname'] = 'C&Dinfo';
+//                    $this->request->data['Datalog']['logactivity'] = 'Add Delivery';
+//                    $this->request->data['Datalog']['logid'] = $val;
+//                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+//                    
+//                    $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                 /******************/ 
             }
