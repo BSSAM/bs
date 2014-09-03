@@ -51,8 +51,8 @@
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
-            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','quotation')));
-            
+            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','purchase_requisition')));
+           
             $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             
@@ -79,7 +79,7 @@
                     {  
                         $this->PreqDevice->updateAll(array('PreqDevice.customer_id'=>'"'.$customer_id.'"','PreqDevice.prequistion_id'=>$purchaserequisitions_id,'PreqDevice.status'=>1),array('PreqDevice.prequistionno'=>$requistion_no,'PreqDevice.status'=>0));
                     }
-                    $this->request->data['PreqCustomerSpecialNeed']['purchaserequisitions_id']=$purchaserequisitions_id;
+                    $this->request->data['PreqCustomerSpecialNeed']['prequistion_id']=$purchaserequisitions_id;
                     $this->PreqCustomerSpecialNeed->save($this->request->data['PreqCustomerSpecialNeed']); 
                     /************
                     * Data Log
@@ -201,7 +201,7 @@
                 if($this->PurchaseRequisition->updateAll(array('PurchaseRequisition.is_deleted'=>1),array('PurchaseRequisition.id'=>$id)))
                 {
                     $this->Session->setFlash(__('The PurchaseRequisition has been deleted',h($id)));
-                    return $this->redirect(array('controller'=>'PurchaseRequisition','action'=>'index'));
+                    return $this->redirect(array('controller'=>'PurchaseRequisitions','action'=>'index'));
                 }
             }
             else
@@ -316,12 +316,12 @@
             $this->loadModel('PreqDevice');
             $this->request->data['PreqDevice']['prequistionno'] =   $this->request->data['prequistion_id'];
             $this->request->data['PreqDevice']['instrument_name']      =   $this->request->data['instrument_name'];
-            $this->request->data['PreqDevice']['brand_id']      =   $this->request->data['instrument_brand'];
+            $this->request->data['PreqDevice']['brand_name']      =   $this->request->data['instrument_brand'];
             $this->request->data['PreqDevice']['quantity']      =   $this->request->data['instrument_quantity'];
             $this->request->data['PreqDevice']['model_no']      =   $this->request->data['instrument_modelno'];
             $this->request->data['PreqDevice']['range']         =   $this->request->data['instrument_range'];
             $this->request->data['PreqDevice']['validity']      =   $this->request->data['instrument_validity'];
-            $this->request->data['PreqDevice']['discount']      =   $this->request->data['instrument_discount'];
+            $this->request->data['PreqDevice']['device_discount']      =   $this->request->data['instrument_discount'];
             $this->request->data['PreqDevice']['department_name'] =   $this->request->data['instrument_department'];
             $this->request->data['PreqDevice']['unit_price']    =   $this->request->data['instrument_unitprice'];
             $this->request->data['PreqDevice']['account_service']=  $this->request->data['instrument_account'];
@@ -339,17 +339,17 @@
         {
             $this->autoRender=false;
             $device_id= $this->request->data['device_id'];
-            if($this->Device->updateAll(array('Device.is_deleted'=>1),array('Device.id'=>$device_id)))
+            if($this->PreqDevice->updateAll(array('PreqDevice.is_deleted'=>1),array('PreqDevice.id'=>$device_id)))
             {
                 echo "deleted";
             }
         }
         public function edit_instrument()
         {
+           
             $this->autoRender=false;
             $device_id= $this->request->data['edit_device_id'];
-            $this->loadModel('Device');
-            $edit_device_details    =   $this->Device->find('first',array('conditions'=>array('Device.id'=>$device_id)));
+            $edit_device_details    =   $this->PreqDevice->find('first',array('conditions'=>array('PreqDevice.id'=>$device_id)));
             if(!empty($edit_device_details ))
             {
                 echo json_encode($edit_device_details);
@@ -358,24 +358,21 @@
         public function update_instrument()
         {
             $this->autoRender = false;
-            $this->Device->id                               =   $this->request->data['device_id'];
-            $this->request->data['Device']['customer_id']   =   $this->request->data['customer_id'];
-            $this->request->data['Device']['instrument_id'] =   $this->request->data['instrument_id'];
-            $this->request->data['Device']['brand_id']      =   $this->request->data['instrument_brand'];
-            $this->request->data['Device']['quantity']      =   $this->request->data['instrument_quantity'];
-            $this->request->data['Device']['model_no']      =   $this->request->data['instrument_modelno'];
-            $this->request->data['Device']['range']         =   $this->request->data['instrument_range'];
-            $this->request->data['Device']['call_location'] =   $this->request->data['instrument_calllocation'];
-            $this->request->data['Device']['call_type']     =   $this->request->data['instrument_calltype'];
-            $this->request->data['Device']['validity']      =   $this->request->data['instrument_validity'];
-            $this->request->data['Device']['discount']      =   $this->request->data['instrument_discount'];
-            $this->request->data['Device']['department']    =   $this->request->data['instrument_department'];
-            $this->request->data['Device']['unit_price']    =   $this->request->data['instrument_unitprice'];
-            $this->request->data['Device']['account_service']=  $this->request->data['instrument_account'];
-             $this->request->data['Device']['total']         =   $this->request->data['instrument_total'];
-            $this->request->data['Device']['title']         =   $this->request->data['instrument_title'];
-            $this->request->data['Device']['status']        =   1;
-            if($this->Device->save($this->request->data))
+            $this->PreqDevice->id                               =   $this->request->data['device_id'];
+            $this->request->data['PreqDevice']['instrument_name']      =   $this->request->data['instrument_name'];
+            $this->request->data['PreqDevice']['brand_name']      =   $this->request->data['instrument_brand'];
+            $this->request->data['PreqDevice']['quantity']      =   $this->request->data['instrument_quantity'];
+            $this->request->data['PreqDevice']['model_no']      =   $this->request->data['instrument_modelno'];
+            $this->request->data['PreqDevice']['range']         =   $this->request->data['instrument_range'];
+            $this->request->data['PreqDevice']['validity']      =   $this->request->data['instrument_validity'];
+            $this->request->data['PreqDevice']['device_discount']=   $this->request->data['instrument_discount'];
+            $this->request->data['PreqDevice']['department_name'] =   $this->request->data['instrument_department'];
+            $this->request->data['PreqDevice']['unit_price']    =   $this->request->data['instrument_unitprice'];
+            $this->request->data['PreqDevice']['account_service']=  $this->request->data['instrument_account'];
+            $this->request->data['PreqDevice']['total']         =   $this->request->data['instrument_total'];
+            $this->request->data['PreqDevice']['title']         =   $this->request->data['instrument_title'];
+            $this->request->data['PreqDevice']['status']        =   0;
+            if($this->PreqDevice->save($this->request->data))
             {
                echo "Updated";
                 

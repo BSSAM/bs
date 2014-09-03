@@ -34,7 +34,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control',
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','placeholder'=>'Enter the Instrument Range',
                                                 'label'=>false,'name'=>'range','type'=>'text')); ?>
        
     </div>
@@ -45,8 +45,8 @@
     
     <label class="col-md-2 control-label" for="val_discount1">Discount </label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control',
-                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>
+        <?php echo $this->Form->input('device_discount', array('id'=>'val_discount1','class'=>'form-control',
+                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'device_discount','type'=>'text')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
     <div class="col-md-4">
@@ -77,13 +77,13 @@
     </div>
 </div>
 <div class="form-group form-actions">
-    <div class="col-md-9 col-md-offset-10 update_device">
+    <div class="col-md-9 col-md-offset-10 pre_update_device">
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary preqdescription_add','escape' => false)); ?>
     </div>
 </div>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-<table  class="table table-vcenter table-condensed table-bordered">
+<table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -97,31 +97,7 @@
         </tr>
     </thead>
     <tbody class="Instrument_info"> 
-        <?PHP 
-           
-            if(!empty($purchase_requistion_list['PreqDevice'])):
-                foreach($purchase_requistion_list['PreqDevice'] as $device):?>
-        <tr class="instrument_remove_<?PHP echo $device['id']; ?>">
-                    <td class="text-center"><?PHP echo $device['id']; ?></td>
-                    <td class="text-center"><?PHP echo $device['instrument_name']; ?></td>
-                    <td class="text-center"><?PHP echo $device['model_no']; ?></td>
-                    <td class="text-center"><?PHP echo $device['validity']; ?></td>
-                    <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
-                    <td class="text-center"><?PHP echo $device['account_service']; ?></td>
-                    <td class="text-center"><?PHP echo $device['total']; ?></td>
-                   
-                    <td class="text-center">
-                        <div class="btn-group">
-                            <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                            <a data-delete="<?PHP echo $device['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-        <?PHP   endforeach;  endif;  ?>
+        
     </tbody>
 </table>
 </div>

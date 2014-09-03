@@ -53,9 +53,9 @@
 <div class="form-group">
      <label class="col-md-2 control-label" for="val_payment_term">Payment Terms</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('payment_term', array('id'=>'val_payment_term','class'=>'form-control','label'=>false,
-           'placeholder'=>'Enter the Payment Terms','disabled'=>'disabled','type'=>'text')); ?>
-         <?PHP echo $this->Form->input('paymentterm_id',array('type'=>'hidden','id'=>'pay_id')); ?>
+        <?php echo $this->Form->input('paymentterm_name', array('id'=>'val_payment_term','class'=>'form-control','label'=>false,
+           'placeholder'=>'Enter the Payment Terms','readonly'=>'readonly','type'=>'text')); ?>
+         <?PHP //echo $this->Form->input('paymentterm_id',array('type'=>'hidden','id'=>'pay_id')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_reg_date">Reg Date</label>
     <div class="col-md-4">
@@ -65,15 +65,13 @@
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
-    <div class="col-md-4">
-        <div class="row col-md-9">
+            <div class="col-md-4">
             <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
-            <?php echo $this->Form->input('Quotation.po_generate_type', array('type'=>'hidden','id'=>'po_gen_type','class'=>'form-control','label'=>false)); ?>
+            <?php //echo $this->Form->input('Quotation.po_generate_type', array('type'=>'hidden','id'=>'po_gen_type','class'=>'form-control','label'=>false)); ?>
         </div>
-        <div class="col-md-4">
+<!--        <div class="col-md-4">
             <button class="btn btn-sm btn-primary quo_generate_po" id="purchase_order" type="button">Generate Po</button>
-        </div>   
-    </div>
+        </div>   -->
     <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
