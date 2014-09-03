@@ -180,6 +180,16 @@ class DashboardsController extends AppController
         //pr($logactivity);exit;
         $this->set('log_activity_cdinfo_count', $logactivity_cdinfo_count);
         /*****************************************************/
+         /****************** Log Activity - Client PO ********************/
+        
+        $logactivity_client = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"ClientPO")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_client', $logactivity_client);
+        
+        $logactivity_client_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"ClientPO")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_client_count', $logactivity_client_count);
+        /*****************************************************/
         
          /****************** Log Activity - Invoice ********************/
         
