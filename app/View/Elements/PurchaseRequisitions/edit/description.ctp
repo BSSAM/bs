@@ -98,7 +98,7 @@
            
             if(!empty($purchase_requistion_list['PreqDevice'])):
                 foreach($purchase_requistion_list['PreqDevice'] as $device):?>
-        <tr class="pre_instrument_remove_<?PHP echo $device['id']; ?>">
+                <tr class="pre_instrument_remove_<?PHP echo $device['id']; ?>">
                     <td class="text-center"><?PHP echo $device['id']; ?></td>
                     <td class="text-center"><?PHP echo $device['instrument_name']; ?></td>
                     <td class="text-center"><?PHP echo $device['model_no']; ?></td>

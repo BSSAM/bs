@@ -54,10 +54,11 @@ class ClientposController extends AppController
               }
               $this->redirect(array('controller'=>'Clientpos','action'=>'index'));
           }
-          //$this->set('clientpo', $clientpos);
+         
     }
     public function Purchaseorder_fullinvoice($id = null)
     {
+        //To check remaining Quotations there to assign po 
         $customer_quotation_list=$this->Quotation->find('all',array('conditions'=>
                         array('Quotation.customer_id'=>$id,'Quotation.is_approved'=>1,'Quotation.is_assign_po'=>0)));
        
@@ -68,7 +69,7 @@ class ClientposController extends AppController
             foreach($customer_quotation_list as $quo)
             {
                 $quotation_array_id[count($quo['Device'])] = $quo['Quotation']['quotationno'];
-            }
+            }   
             $po_list=$this->Clientpo->find('all',array('conditions'=>array('Clientpo.customer_id'=>$id)));
             $po_single=$this->Clientpo->find('first',array('conditions'=>array('Clientpo.customer_id'=>$id)));
             $this->set(compact('po_list','customer_quotation_list','pos','po_first','po_single','quotation_array_id','track_id'));
@@ -76,46 +77,71 @@ class ClientposController extends AppController
 
             if($this->request->is(array('post','put')))
             {
-                
+               
                 $clientpo_number    =   $this->request->data['clientpo_no'];
                 $clientpo_quantity    =   $this->request->data['po_quantity'];
-                if ($this->request->data['clientpo_no'] != '') 
-                {
-                    $check_string = strchr($this->request->data['clientpo_no'], 'CPO');
-                    $po_type = ($check_string == "") ? 'Manual' : 'Auotomatic';
-                }
+                // For po count satisfied calculation
+                $quo_total_count=0;
+                foreach($this->request->data['quo_quantity'] as $k=>$v):
+                    $quo_total_count    +=   $v;
+                endforeach;
+                
+                $po_sat =   ($quo_total_count==$clientpo_quantity)?1:0;
+                
+//                if ($this->request->data['clientpo_no'] != '') 
+//                {
+//                    //$check_string = strchr($this->request->data['clientpo_no'], 'CPO');
+//                    $po_type = ($check_string == "") ? 'Manual' : 'Auotomatic';
+//                }
                 //For Quotation array
+                $po_type = 'Manual';
                 if( $this->request->data['quotation_no']!=''&& $this->request->data['quo_quantity']!=''):
                 $qo_id_array  =   $this->request->data['quotation_no'];
                 $qo_count_array   =   $this->request->data['quo_quantity'];
                 $po_array['Clientpo']['Quotation']         = array_combine($qo_id_array,$qo_count_array);
                     foreach($po_array['Clientpo']['Quotation'] as $quotationno=>$quotationcount){
-                        $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$this->request->data['clientpo_no'].'"','Quotation.po_generate_type'=>'"'.$po_type.'"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
+                        $this->Quotation->updateAll(array('Quotation.ref_count'=>'"'.$this->request->data['po_quantity'].'"','Quotation.ref_no'=>'"'.$this->request->data['clientpo_no'].'"','Quotation.po_generate_type'=>'"'.$po_type.'"','Quotation.is_assign_po'=>1,'Quotation.is_pocount_satisfied'=>$po_sat),array('Quotation.quotationno'=>$quotationno));
+                        //For data  log and log activity
+                        $this->Logactivity->create();
+                        $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add';
+                        $this->request->data['Logactivity']['logid'] = $quotationno;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 0;
+                        $this->Logactivity->save($this->request->data['Logactivity']);
+                        
+                        //For data log
+                         $this->Datalog->create();
+                        $this->request->data['Datalog']['logname'] = 'ClientPO';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $quotationno;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                         $this->Datalog->save($this->request->data['Datalog']);
+                        
                     }
                 endif;
-                
-                 //For Sales order array
-                if( $this->request->data['salesorder_id']!=''&& $this->request->data['sales_quantity']!=''):
+                //For Sales order array
+                if( !empty($this->request->data['salesorder_id'])&&!empty( $this->request->data['sales_quantity'])):
                 $so_id_array  =   $this->request->data['salesorder_id'];
                 $so_count_array   =   $this->request->data['sales_quantity'];
                 $po_array['Clientpo']['Salesorder']           = array_combine($so_id_array,$so_count_array);
                 foreach($po_array['Clientpo']['Salesorder'] as $salesorderno=>$salesordercount){
-                        $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$this->request->data['clientpo_no'].'"','Salesorder.po_generate_type'=>'"'.$po_type.'"','Salesorder.is_assign_po'=>1),array('Salesorder.id'=>$salesorderno));
+                        $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$this->request->data['clientpo_no'].'"','Salesorder.po_generate_type'=>'"'.$po_type.'"','Salesorder.is_assign_po'=>1,'Salesorder.is_pocount_satisfied'=>$po_sat),array('Salesorder.id'=>$salesorderno));
                     }
                 endif;
-                
-                if( $this->request->data['deliveryorder_id']!=''&& $this->request->data['delivery_quantity']!=''):
+                if( !empty($this->request->data['deliveryorder_id'])&&!empty($this->request->data['delivery_quantity'])):
                 //For Delivery order Array
                 $do_id_array  =   $this->request->data['deliveryorder_id'];
                 $do_count_array   =   $this->request->data['delivery_quantity'];
                 $po_array['Clientpo']['Deliveryorder']         = array_combine($do_id_array,$do_count_array);
                 foreach($po_array['Clientpo']['Deliveryorder'] as $deliveryorderno=>$deliveryordercount){
-                        $this->Deliveryorder->updateAll(array('Deliveryorder.po_reference_no'=>'"'.$this->request->data['clientpo_no'].'"','Deliveryorder.po_generate_type'=>'"'.$po_type.'"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.delivery_order_no'=>$deliveryorderno));
+                        $this->Deliveryorder->updateAll(array('Deliveryorder.po_reference_no'=>'"'.$this->request->data['clientpo_no'].'"','Deliveryorder.po_generate_type'=>'"'.$po_type.'"','Deliveryorder.is_assignpo'=>1,'Deliveryorder.is_pocount_satisfied'=>$po_sat),array('Deliveryorder.delivery_order_no'=>$deliveryorderno));
                     }
                 endif;
                 
+                //For Invoice order Array need to change(Correction)
                 if( $this->request->data['deliveryorder_id']!=''&& $this->request->data['delivery_quantity']!=''):
-                //For Invoice order Array
+                
                 $invoice_id_array           =   $this->request->data['deliveryorder_id'];
                 $invoice_count_array        =   $this->request->data['delivery_quantity'];
                 $po_array['Clientpo']['Invoice']   =   array_combine($do_id_array,$do_count_array);
@@ -123,7 +149,9 @@ class ClientposController extends AppController
                         $this->Invoice->updateAll(array('Invoice.ref_no'=>'"'.$this->request->data['clientpo_no'].'"','Invoice.po_generate_type'=>'"'.$po_type.'"','Deliveryorder.is_assign_po'=>1),array('Invoice.invoice_id'=>$invoiceno));
                     }
                 endif;
-                
+                    
+                    
+                  
                 if(!empty($po_array))
                 {
                     $clientpo   = serialize($po_array);
