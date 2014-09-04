@@ -228,7 +228,7 @@
             }
             else
             {
-                    echo "<div class='no_result' align='left'>";
+                    echo "<div class='preno_result' align='left'>";
                     echo "No Results Found";
                     echo "<br>";
                     echo "</div>";

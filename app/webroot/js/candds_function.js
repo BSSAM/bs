@@ -43,23 +43,19 @@ $(document).ready(function(){
                                     <i class="fa fa-times"></i></a></div></td></tr>');
                 
             }
-            else if(candd.Candd.purpose=='Delivery')
+            else if(candd_data_node.Candd.purpose=='Delivery')
             {
-                $('.deliveries_info').append('<tr class="instrument_remove_'+data+'">\n\\n\
-                                    <td class="text-center">'+data+'</td>\n\\n\
-                                    <td class="text-center">Customer Name</td>\n\\n\
-                                    <td class="text-center">Customer Address</td>\n\\n\
-                                    <td class="text-center">ATTN</td>\n\\n\
-                                    <td class="text-center">Phone</td>\n\\n\
-                                    <td class="text-center">Sales Order Nos</td>\n\\n\
-                                    <td class="text-center">Delivery Order Nos</td>\n\\n\
-                                    <td class="text-center">Assigned To</td>\n\\n\
-                                    <td class="text-center">Remarks</td>\n\\n\\n\
-                                    <td class="text-center">Request By</td>\n\\n\
-                                    <td class="text-center">Action</td>\n\\n\
+                $('.deliveries_info').append('<tr class="instrument_remove_'+candd_data_node.Candd.id+'">\n\\n\
+                                    <td class="text-center">'+candd_data_node.Candd.id+'</td>\n\\n\
+                                    <td class="text-center">'+candd_data_node.Candd.customername+'</td>\n\\n\
+                                    <td class="text-center">'+candd_data_node.Candd.customer_address+'</td>\n\\n\
+                                    <td class="text-center">'+candd_data_node.Contactpersoninfo.name+'</td>\n\\n\
+                                    <td class="text-center">'+candd_data_node.Candd.phone+'</td>\n\\n\
+                                    <td class="text-center">'+candd_data_node.assign.assignedto+'</td>\n\\n\
+                                     <td class="text-center">'+candd_data_node.branch.branchname+'</td>\n\\n\
+                                    <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
                                     <td class="text-center"><div class="btn-group">\n\
-                                    <a data-edit="'+data+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
-                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
+                                    <a data-delete="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger candd_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
             }
             var customer_name = $("#val_customer_candd").val('');

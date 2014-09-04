@@ -1,4 +1,4 @@
-<?PHP echo $this->Form->create('Clientposapproval',array('url'=>'quotation_po_update','class'=>'form-horizontal')); ?>
+<?PHP echo $this->Form->create('Clientposapproval',array('url'=>'quotation_po_update','class'=>'form-horizontal','id'=>'form-poapp-view')); ?>
 <?PHP echo $this->Form->input('quotationno',array('type'=>'hidden','name'=>'quotationno','value'=>$data['Quotation']['quotationno'])); ?>                   
 <h4 class="sub-header text-center">Customer Details - <strong><?PHP echo $data['Customer']['Customertagname']."(" .$data['Customer']['id'].")"; ?> </strong></h4>
 
@@ -217,13 +217,7 @@
                                     </div>
                                     </div>
                                     <?PHP endforeach; ?>
-                                    <?PHP if($count > 1 && $type_id!=1): ?>
-                                    <div class="form-group">
-                                    <div class="btn btn-alt btn-info pull-right" id="po_plus">
-                                    <i class="fa fa-plus"></i></div>
-                                    </div>
-                                    <?PHP endif; ?>
-                                    <div class="po_up"></div>
+                                    
                                    
                                     
                                     <?PHP //foreach ($arra_count as $pokey_count=>$po_count): ?>
@@ -241,6 +235,13 @@
                                     -->
                                    
                                 </dl>
+                                <?PHP if($count > 1 && $type_id!=1): ?>
+                                    <div class="form-group">
+                                    <div class="btn btn-alt btn-info pull-right" id="po_plus">
+                                    <i class="fa fa-plus"></i></div>
+                                    </div>
+                                    <?PHP endif; ?>
+                                    <div class="po_up"></div>
                             </div>
                         </div>  
 
@@ -253,3 +254,5 @@
                                 </div>
                             </div>
                       <?PHP echo $this->Form->end(); ?>
+<?php echo $this->Html->script('pages/formsValidation'); ?>
+        <script>$(function(){ FormsValidation.init(); });</script>

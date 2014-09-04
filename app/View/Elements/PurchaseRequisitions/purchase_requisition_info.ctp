@@ -1,3 +1,21 @@
+<script>
+$(document).ready(function () {
+  $(".preno_result").click(function (e) { //<--------pass here
+      e.stopPropagation(); // <--------------stop here
+      $("#result").toggle("slow");
+      $("#preq_customer").val();
+  });
+  $(document).click(function () { // you don't need the else part to fadeout
+      var $el = $("#result");
+      if ($el.is(":visible")) {
+          $el.fadeOut(200);
+      }
+   });
+});
+$(document).on('click','.preno_result',function(e){
+   e.stopPropagation();
+   });
+</script>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_prequistionno">Purchase requisition No</label>
     <div class="col-md-4">

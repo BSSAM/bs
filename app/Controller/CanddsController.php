@@ -216,6 +216,7 @@ class CanddsController extends AppController
         {
             $move_deliver_data  =   $this->ready_to_deliver($val,$assign_to,$cd_date);
             $deliver_data_for_tag  =   $this->ready_to_deliver_tag($val,$assign_to,$cd_date);
+            pr($deliver_data_for_tag);exit;
             $this->ReadytodeliverItem->create();
             $this->Candd->create();
             $this->Candd->save($deliver_data_for_tag);

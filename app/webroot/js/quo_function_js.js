@@ -155,6 +155,7 @@ $(document).ready(function(){
                                     <a data-edit="'+data+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
+                $(".dataTables_empty").hide();
                 
                 
                 $('#val_quantity').val(null);
@@ -279,7 +280,7 @@ $(document).ready(function(){
                                     <a data-edit="'+device_id+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+device_id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
-                
+                $(".dataTables_empty").hide();
                 $('#val_quantity').val(null);
                 $('#val_description').val(null);
                 $('#val_model_no').val(null);
