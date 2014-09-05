@@ -29,7 +29,7 @@
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['salesorderno'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['branch']['branchname'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['Customer']['Customertagname'] ?></td>
-                    <td class="text-center"><?PHP echo $this->Labprocess->find_priority_type($labprocess_list['Customer']['priority_id']) ?></td>
+                    <td class="text-center"><?PHP echo $this->Labprocess->find_priority_type($labprocess_list['Salesorder']['priority']) ?></td>
 
                     <td class="text-center"><?PHP echo $this->Salesorder->call_query_total($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->call_query_pending($labprocess_list['Salesorder']['salesorderno'],$call_location) ?></td>
