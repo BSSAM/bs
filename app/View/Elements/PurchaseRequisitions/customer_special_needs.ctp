@@ -3,10 +3,8 @@
     <label class="col-md-2 control-label" for="val_salesperson">Sales person</label>
     <div class="col-md-4">
         <?php
-        echo $this->Form->input('PreqCustomerSpecialNeed.salesperson', array('id' => 'val_salesperson', 'class' => 'form-control',
+        echo $this->Form->input('PreqCustomerSpecialNeed.salesperson_name', array('id' => 'val_salesperson', 'class' => 'form-control',
             'placeholder' => 'Sales Person Name', 'label' => false,'readonly'));
-        echo $this->Form->input('Customerspecialneed.salespeople_id',array('type'=>'hidden','id'=>'salespeople_id'));
-       
         ?>
     </div>
     <label class="col-md-2 control-label" for="val_projectname">Project name</label>

@@ -291,3 +291,18 @@ $(document).ready(function(){
       }
     });
 });
+/***************************Instrument Delete Script for PR_Purchase order**************************/
+    $(document).on('click','.prpur_instrument_delete',function(){
+      var device_id=$(this).attr('data-delete');
+      var result    =   confirm('Are you sure want to delete?');
+      if(result==true){
+       $.ajax({
+            type: 'POST',
+            data:"device_id="+ device_id,
+            url: path_url+'/Reqpurchaseorders/delete_instrument/',
+            success:function(data){
+                $('.prpur_instrument_remove_'+device_id).fadeOut();
+            }
+        });
+    }
+   });

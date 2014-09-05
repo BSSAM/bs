@@ -71,7 +71,6 @@
                 if($this->PurchaseRequisition->save($this->request->data['PurchaseRequisition']))
                 {
                     $purchaserequisitions_id   =   $this->PurchaseRequisition->getLastInsertID();
-                    
                     $requistion_no  =   $this->request->data['PurchaseRequisition']['prequistionno'];
                     $device_node    =   $this->PreqDevice->find('all',array('conditions'=>array('PreqDevice.prequistionno'=>$requistion_no)));
                     $this->PreqDevice->deleteAll(array('PreqDevice.prequistionno'=>'','PreqDevice.status'=>0));
@@ -85,7 +84,7 @@
                     * Data Log
                     */
                     $this->request->data['Logactivity']['logname'] = 'prequistion_id';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Quotation';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Purchase Requisition';
                     $this->request->data['Logactivity']['logid'] = $purchaserequisitions_id;
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;

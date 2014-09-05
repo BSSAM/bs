@@ -40,7 +40,7 @@
                         <div class="block full row col-sm-12 padding_t_b10">
                         <div class="form-actions  col-sm-7 pull-right">
                             <div class="col-md-4 pull-left">
-                                <?PHP echo $this->Form->create('Reqpurchaseorder', array('action' => 'pr_purchaseorder', 'class' => 'form-horizontal form-bordered')); ?>
+                                <?PHP echo $this->Form->create('Reqpurchaseorder', array('controller'=>'Reqpurchaseorders','action' => 'pr_purchaseorder', 'class' => 'form-horizontal form-bordered')); ?>
                             </div>
                             <div class="input-group col-md-8 pull-right quot_display">
                                 <?PHP echo $this->Form->input('prequistion_id', array('placeholder' => 'Purchase Requistion No', 'class' => 'form-control',
@@ -61,8 +61,8 @@
                                 <thead>
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
-                                        <th class="text-center">Sales Orders No</th>
-                                        <th class="text-center">Reg Date</th>
+                                        <th class="text-center">Purchase Requistion</th>
+                                        <th class="text-center">Date</th>
                                         <th class="text-center">Branch</th>
                                         <th class="text-center">Customer</th>
                                         <th class="text-center">Phone</th>
@@ -72,20 +72,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?PHP if(!empty($salesorder )): ?>
-                                     <?php foreach($salesorder as $salesorder_list): ?>
-                                    <tr <?php if($salesorder_list['Salesorder']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['branch']['branchname'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Customer']['Customertagname'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
-                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['ref_no'] ?></td>
+                                    <?PHP if(!empty($req_purchase)): ?>
+                                     <?php foreach($req_purchase as $req_purchaseorder): ?>
+                                    <tr <?php if($req_purchaseorder['Reqpurchaseorder']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['reqpurchaseno'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['reg_date'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['branch']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Customer']['Customertagname'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['phone'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['email'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
                                         </td>
                                     </tr>

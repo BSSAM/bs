@@ -1,7 +1,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_prequistionno">Purchase requisition No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Reqpurchaseorder.reqpurchaseno', array('id'=>'val_quotationno','class'=>'form-control','readonly'=>'readonly','label'=>false,'value'=> $prequistionno)); ?>
+        <?php echo $this->Form->input('Reqpurchaseorder.reqpurchaseno', array('id'=>'val_quotationno','class'=>'form-control','readonly'=>'readonly','label'=>false)); ?>
     </div>
     <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
@@ -75,6 +75,6 @@
 <div class="form-group">
  <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
     <div class="col-md-12">
-        <?php echo $this->Form->input('Reqpurchaseorder.instrument_type_name', array('class'=>'form-control', 'label'=>false,'value'=>$this->request->data['InstrumentType']['purchase_requisition'],'readonly'=>'readonly')); ?>
+        <?php echo $this->Form->input('Reqpurchaseorder.instrument_type_name', array('class'=>'form-control', 'label'=>false,'readonly'=>'readonly')); ?>
     </div>
 </div>

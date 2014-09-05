@@ -9,11 +9,11 @@ class Reqpurchaseorder extends AppModel
 {
     public $actsAs = array('Containable');
     public $useTable   =   'reqpurchaseorders';
-    var $belongsTo  =   array('Customer','branch','InstrumentType');
+    var $belongsTo  =   array('Customer','branch');
     public $hasMany = array(
-        'PreqDevice' => array(
-            'className' => 'PreqDevice',
-            'foreignKey' => 'prequistion_id',
+        'ReqDevice' => array(
+            'className' => 'ReqDevice',
+            'foreignKey' => 'reqpurchaseorder_id',
             'conditions' => array('is_deleted'=>0),
             'dependent'=> true,
             'fields' => '',
@@ -26,9 +26,9 @@ class Reqpurchaseorder extends AppModel
         ),
         );
     public $hasOne = array(
-        'PreqCustomerSpecialNeed' => array(
-            'className' => 'PreqCustomerSpecialNeed',
-            'foreignKey' => 'prequistion_id',
+        'ReqCustomerSpecialNeed' => array(
+            'className' => 'ReqCustomerSpecialNeed',
+            'foreignKey' => 'reqpurchaseorder_id',
             'dependent'=> true,
         ));
 }

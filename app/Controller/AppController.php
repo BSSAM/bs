@@ -524,24 +524,24 @@ App::uses('Controller', 'Controller');
         public function preq_devices($id=NULL)
         {
             $devices    =   $this->PreqDevice->find('first',array('conditions'=>array('PreqDevice.id'=>$id,'PreqDevice.status'=>1)));
-            $this->request->data['ReqDevice']['customer_id']          =   $devices['PreqDevice']['customer_id'];
-            $this->request->data['ReqDevice']['instrument_name']        =   $devices['PreqDevice']['instrument_name'];
-            $this->request->data['ReqDevice']['brand_id']             =   $devices['PreqDevice']['prequistionno'];
-            $this->request->data['ReqDevice']['prequistionno']             =   $devices['PreqDevice']['prequistionno'];
+            $this->request->data['ReqDevice']['customer_id']        =   $devices['PreqDevice']['customer_id'];
+            $this->request->data['ReqDevice']['instrument_name']    =   $devices['PreqDevice']['instrument_name'];
+            $this->request->data['ReqDevice']['brand_id']           =   $devices['PreqDevice']['prequistionno'];
+            $this->request->data['ReqDevice']['prequistionno']      =   $devices['PreqDevice']['prequistionno'];
             
-            $this->request->data['ReqDevice']['brand_id']             =   $devices['PreqDevice']['brand_id'];
-            $this->request->data['ReqDevice']['sales_quantity']       =   $devices['PreqDevice']['quantity'];
-            $this->request->data['ReqDevice']['model_no']             =   $devices['PreqDevice']['model_no'];
-            $this->request->data['ReqDevice']['range']               =   $devices['PreqDevice']['range'];
-            $this->request->data['ReqDevice']['validity']       =   $devices['PreqDevice']['validity'];
-            $this->request->data['ReqDevice']['discount']       =   $devices['PreqDevice']['discount'];
-            $this->request->data['ReqDevice']['department_name']        =   $devices['PreqDevice']['department_name'];
-            $this->request->data['ReqDevice']['unit_price']      =   $devices['PreqDevice']['unit_price'];
-            $this->request->data['ReqDevice']['account_service'] =   $devices['PreqDevice']['account_service'];
-            $this->request->data['ReqDevice']['title']         =   $devices['PreqDevice']['title'];
-            $this->request->data['ReqDevice']['total']          =   $devices['PreqDevice']['total'];
-            $this->request->data['ReqDevice']['status']               =   0;
-            $this->request->data['ReqDevice']['is_approved']          =   0;
+            $this->request->data['ReqDevice']['brand_name']           =   $devices['PreqDevice']['brand_name'];
+            $this->request->data['ReqDevice']['quantity']           =   $devices['PreqDevice']['quantity'];
+            $this->request->data['ReqDevice']['model_no']           =   $devices['PreqDevice']['model_no'];
+            $this->request->data['ReqDevice']['range']              =   $devices['PreqDevice']['range'];
+            $this->request->data['ReqDevice']['validity']           =   $devices['PreqDevice']['validity'];
+            $this->request->data['ReqDevice']['discount']           =   $devices['PreqDevice']['device_discount'];
+            $this->request->data['ReqDevice']['department_name']    =   $devices['PreqDevice']['department_name'];
+            $this->request->data['ReqDevice']['unit_price']         =   $devices['PreqDevice']['unit_price'];
+            $this->request->data['ReqDevice']['account_service']    =   $devices['PreqDevice']['account_service'];
+            $this->request->data['ReqDevice']['title']              =   $devices['PreqDevice']['title'];
+            $this->request->data['ReqDevice']['total']              =   $devices['PreqDevice']['total'];
+            $this->request->data['ReqDevice']['status']             =   0;
+            $this->request->data['ReqDevice']['is_approved']        =   0;
             return $this->request->data;
         }
 }

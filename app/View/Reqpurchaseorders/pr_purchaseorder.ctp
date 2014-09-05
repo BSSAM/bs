@@ -1,5 +1,4 @@
 <script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
-
 <script type="text/javascript">
 $(function(){
         $("#val_reg_date").datepicker("setDate", new Date());
@@ -35,9 +34,11 @@ $(function(){
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Reqpurchaseorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'reqpurchaseorders','action'=>'add')); ?>
+                                    <?php echo $this->Form->create('Reqpurchaseorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'Reqpurchaseorders','action'=>'add')); ?>
                                     <?php echo $this->Form->input('Reqpurchaseorder.customer_id', array('type'=>'hidden')); ?>
-                                    <?php echo $this->Form->input('Reqpurchaseorder.requisitionno', array('type'=>'hidden','value'=>$this->request->data['Reqpurchaseorder']['prequistionno'])); ?>
+                                    <?php echo $this->Form->input('Reqpurchaseorder.prequisitionno', array('type'=>'hidden','value'=>$this->request->data['Reqpurchaseorder']['prequistionno'])); ?>
+                                    <?php echo $this->Form->input('Reqpurchaseorder.track_id', array('type'=>'hidden','value'=>$this->request->data['Reqpurchaseorder']['track_id'])); ?>
+                                    <?php echo $this->Form->input('Reqpurchaseorder.branch', array('type'=>'hidden','value'=>$this->request->data['Reqpurchaseorder']['track_id'])); ?>
                                    
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->

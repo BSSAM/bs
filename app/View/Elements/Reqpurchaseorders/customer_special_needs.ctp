@@ -3,7 +3,7 @@
     <label class="col-md-2 control-label" for="val_salesperson">Sales person</label>
     <div class="col-md-4">
         <?php
-        echo $this->Form->input('ReqCustomerSpecialNeed.salesperson', array('id' => 'val_salesperson', 'class' => 'form-control',
+        echo $this->Form->input('ReqCustomerSpecialNeed.salesperson_name', array('id' => 'val_salesperson', 'class' => 'form-control',
             'placeholder' => 'Sales Person Name', 'label' => false,'readonly'));
         ?>
     </div>
@@ -19,8 +19,7 @@
     <label class="col-md-2 control-label" for="val_gsttype">GST type</label>
     <div class="col-md-4">
         <?php
-        echo $this->Form->input('ReqCustomerSpecialNeed.gsttype', array('id' => 'val_gsttype', 'class' => 'form-control gsttype select-chosen', 'type' => 'select',
-            'label' => false, 'options' => array('Standard' => 'Standard Rated', 'Zero' => 'Zero Rated'),'empty'=>'Select GST Type'));
+            echo $this->Form->input('ReqCustomerSpecialNeed.gsttype', array('id' => 'val_gsttype', 'class' => 'form-control','readonly', 'label' => false));
         ?>
         
     </div>
@@ -35,11 +34,10 @@ echo $this->Form->input('ReqCustomerSpecialNeed.gst', array('id' => 'val_gst', '
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_currency">Currency</label>
     <div class="col-md-4">
-<?php
-echo $this->Form->input('ReqCustomerSpecialNeed.currency_id', array('id' => 'val_currency', 'class' => 'form-control country_value select-chosen', 'type' => 'select',
-    'label' => false ,'empty'=>'Select Currency Type'));
-?>
-        
+        <?php
+        echo $this->Form->input('ReqCustomerSpecialNeed.currency_id', array('id' => 'val_currency', 'class' => 'form-control country_value select-chosen', 'type' => 'select',
+            'label' => false ,'empty'=>'Select Currency Type','options' => $country,));
+        ?>
     </div>
     <label class="col-md-2 control-label" for="val_currency_value">Currency Value</label>
     <div class="col-md-4">
@@ -55,7 +53,7 @@ echo $this->Form->input('ReqCustomerSpecialNeed.currency_value', array('id' => '
     <div class="col-md-4">
 <?php
 echo $this->Form->input('ReqCustomerSpecialNeed.additionalcharge_id', array('id' => 'val_additional_service_charge', 'class' => 'form-control select-chosen', 'type' => 'select',
-    'label' => false,'empty'=>'Select Service Charge'));
+    'label' => false,'empty'=>'Select Service Charge', 'options' => $additional));
 ?>
         
     </div>
