@@ -6,7 +6,7 @@
     <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.due_amount', array('id' => 'val_dueamount', 'class' => 'form-control',
-            'placeholder' => 'Due Amount', 'label' => false, 'disabled' => 'disabled'));
+            'placeholder' => 'Due Amount', 'label' => false, 'readonly'=>'readonly'));
         ?>
     </div>
 </div>
@@ -30,7 +30,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'select-chosen form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select the Contact person name','options'=>$contact_list,'disabled'=>'disabled')); ?>
+        <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'select-chosen form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select the Contact person name','options'=>$contact_list,'readonly'=>'readonly')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_phone">Phone</label>
     <div class="col-md-4">
@@ -47,7 +47,7 @@
      <label class="col-md-2 control-label" for="val_email">Email</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.email', array('id'=>'val_email','class'=>'form-control',
-                                                'placeholder'=>'Enter the Email Id','label'=>false,'disabled'=>'disabled')); ?>
+                                                'placeholder'=>'Enter the Email Id','label'=>false,'readonly'=>'readonly')); ?>
     </div>
 </div>
 
@@ -56,11 +56,11 @@
     <label class="col-md-2 control-label" for="val_reg_date">Reg Date</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
-                                                'placeholder'=>'Enter the Registration date Name','label'=>false,'disabled'=>'disabled')); ?>
+                                                'placeholder'=>'Enter the Registration date Name','label'=>false,'readonly'=>'readonly')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','disabled'=>'disabled')); ?>
+        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','readonly'=>'readonly')); ?>
     </div>
 </div>
 
@@ -68,7 +68,7 @@
     <label class="col-md-2 control-label" for="val_in_date">In Date</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.in_date', array('id'=>'val_in_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
-                                                'placeholder'=>'Enter the Registration date Name','label'=>false,'disabled'=>'disabled')); ?>
+                                                'placeholder'=>'Enter the Registration date Name','label'=>false,'readonly'=>'readonly')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_out_date">Out Date</label>
     <div class="col-md-4">
