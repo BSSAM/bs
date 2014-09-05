@@ -10,16 +10,25 @@
     </div>
 </div>
 <div class="form-group">
-      <label class="col-md-2 control-label" for="del_address_id">Delivery Addresses List</label>
+<!--      <label class="col-md-2 control-label" for="del_address_id">Delivery Addresses List</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.delivery_address', array('id'=>'del_address_id','class'=>'form-control',
-            'label'=>false,'type'=>'select','options'=>array($deliveryorder['Deliveryorder']['delivery_address']=>$deliveryorder['Deliveryorder']['delivery_address']),'selected'=>'selected')); ?>
+        <?php //echo $this->Form->input('Deliveryorder.delivery_address', array('id'=>'del_address_id','class'=>'form-control',
+            //'label'=>false,'type'=>'select','options'=>array($deliveryorder['Deliveryorder']['delivery_address']=>$deliveryorder['Deliveryorder']['delivery_address']),'selected'=>'selected')); ?>
     </div>
     
     <label class="col-md-2 control-label" for="del_customer_address">Customer Address</label>
     <div class="col-md-4">
-        <?php echo $this->Form->textarea('Deliveryorder.customer_address', array('id'=>'del_customer_address','class'=>'form-control',
-                                               'label'=>false,'rows'=>6,'cols'=>30)); ?>
+        <?php //echo $this->Form->textarea('Deliveryorder.customer_address', array('id'=>'del_customer_address','class'=>'form-control',
+                                               //'label'=>false,'rows'=>6,'cols'=>30)); ?>
+    </div>-->
+    <label class="col-md-2 control-label" for="val_addr">Select Address</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('Deliveryorder.delivery_address', array('id'=>'val_addr','class'=>'form-control select-chosen','label'=>false,'name'=>'addr','type'=>'select','empty'=>'Select Delivery Address','options'=>array('registered'=>'Registered','billing'=>'Billing','delivery'=>'Delivery'))); ?>
+    </div>
+    <label class="col-md-2 control-label" for="val_address">Delivery Address</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->textarea('Deliveryorder.customer_address', array('class'=>'form-control',
+                                               'placeholder'=>'Enter the Delivery Address','label'=>false,'rows'=>4,'cols'=>30)); ?>
     </div>
 </div>
 <div class="form-group">

@@ -1,5 +1,30 @@
 <script>
     var path='<?PHP echo Router::url('/',true); ?>';
+   $(document).on('click','.approve_clientpo',function(){
+       
+    // before check wich action to do
+    if ( $(this).hasClass('btn-primary') ){
+        // this is the first click
+        $(this).removeClass( 'btn-primary' );
+        $(this).addClass( 'btn-danger' );
+        $(this).val( 'Confirm' );
+        var THIS = $(this);
+        setTimeout(function(){
+            THIS.removeClass( 'btn-danger' );
+            THIS.addClass( 'btn-primary' );
+            THIS.val( 'Approve' );
+        }, 5000);
+    }
+    if ( $(this).hasClass('btn-danger') ){
+        // this is the second/confirmation click
+        $(this).removeClass( 'btn-danger' );
+        $(this).addClass( 'btn-primary' );
+        $(this).val( 'Approve' );
+
+        // do your action
+    }
+   });
+   
     </script>
 <div class="row">
                                 <!-- Main Title (hidden on small devices for the statistics to fit) -->
@@ -417,7 +442,7 @@
                                             </td>
                                             <td class="text-center ">
                                             <?PHP if($log_activity_clientpo_list['Logactivity']['logname'] == 'ClientPO'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_clientpo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_clientpo')) ?>
                                             <?php }?>
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_clientpo_list['User']['username'] ?><br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['created'] ?></small></td>

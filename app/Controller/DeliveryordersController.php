@@ -10,7 +10,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Datalog','Logactivity');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Datalog','Logactivity','Contactpersoninfo');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -27,6 +27,8 @@
             $this->set('service',$services);
             //is_deliveryorder_created
             $this->request->data['Deliveryorder']['delivery_order_no']=$dmt;
+        
+            
             if($this->request->is('post'))
             {
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
@@ -192,15 +194,32 @@
             $sales_id =  $this->request->data['sales_id'];
             $this->autoRender = false;
             $sales_data = $this->Salesorder->find('first',array('conditions'=>array('salesorderno'=>$sales_id,'Salesorder.is_approved'=>'1'),'recursive'=>'2'));
+            $contact_list   =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.customer_id'=>$sales_data['Customer']['id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+            //$this->set(compact('contact_list'));
+            
+            $sales_data= array_merge($sales_data, $contact_list);
+            //pr($sales_data1);
             if(!empty($sales_data))
             {
                 echo json_encode($sales_data);
+                //echo json_encode($contact_list);
             }
             else
             {
                 echo "failure";
             }
             
+        }
+        public function get_delivery_address() 
+        {
+        $this->autoRender = false;
+        $this->loadModel('Address');
+        $address = $this->request->data['address'];
+        $customer_id = $this->request->data['customer_id'];
+        $customer_address_data = $this->Address->find('first', array('conditions' => array('Address.customer_id' => $customer_id,'Address.type' => $address,'Address.status'=>1)));
+        if (!empty($customer_address_data)) {
+           echo $customer_address_data['Address']['address'];
+        }
         }
         
        
