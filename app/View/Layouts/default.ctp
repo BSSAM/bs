@@ -60,7 +60,7 @@
                 echo $this->Html->script(array('sal_desc_func','functions','labprocess_js',
                     'delivery_order','pur_function_js','quo_function_js','cus_function','candds_function',
                     'invoice_function_js','subcontract_function_js','cus_tag_function_js','clientpos_function_js','customer_contactperson_js','Purchaseorder_requititon'));
-                echo $this->Html->script('angular/angular.min');
+                //echo $this->Html->script('angular/angular.min');
                 ?>
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
                 <?php 
@@ -87,7 +87,7 @@
     
     <?php echo $this->Html->script('pages/login'); ?>
     <script>$(function(){ Login.init(); });</script>
-    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<!--    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
     <?php //echo $this->Html->script('helpers/gmaps.min'); ?>
     <?php echo $this->Html->script('pages/index'); ?>
     <script>$(function(){ Index.init(); });</script>

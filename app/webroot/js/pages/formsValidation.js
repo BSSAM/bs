@@ -1266,7 +1266,6 @@ var FormsValidation = function() {
                 rules: {
                     name: {
                         required: true,
-                        minlength: 2
                     },
                     department_id: {
                         required: true
@@ -1285,7 +1284,6 @@ var FormsValidation = function() {
                 messages: {
                     name: {
                         required: 'Instrument Name is Required',
-                        minlength: 'Instrument Name Should Aleast be 2 Characters'
                     }, 
                     department_id: {
                         required: 'Department is Required'
@@ -1322,8 +1320,7 @@ var FormsValidation = function() {
                 },
                 rules: {
                     procedure_no: {
-                        required: true,
-                        minlength: 3
+                        required: true
                     },
                     department_id: {
                         required: true,
@@ -1333,7 +1330,6 @@ var FormsValidation = function() {
                 messages: {
                     procedure_no: {
                         required: 'Enter Procedure No',
-                        minlength: 'Must consist of at least 3 character'
                     },
                     department_id: {
                         required: 'Select Department Name',
@@ -1360,11 +1356,11 @@ var FormsValidation = function() {
                 rules: {
                     brandname: {
                         required: true,
-                        minlength: 3
+                      
                     },
                     branddescription: {
                         required: true,
-                        minlength: 6
+                       
                     },
                     
                     
@@ -1372,11 +1368,11 @@ var FormsValidation = function() {
                 messages: {
                     brandname: {
                         required: 'Please enter the Brand Name',
-                        minlength: 'Brand Name must consist of at least 3 characters'
+                       
                     },
                     branddescription: {
                         required: 'Please enter the Brand Description',
-                        minlength: 'Description must consist of at least 6 characters'
+                        
                     },
                 }
             });
@@ -1561,7 +1557,7 @@ var FormsValidation = function() {
                     },
                     unit_description: {
                         required: true,
-                        minlength: 6
+                        minlength: 1
                     },
                     
                     
@@ -1573,7 +1569,7 @@ var FormsValidation = function() {
                     },
                     unit_description: {
                         required: 'Please enter the Unit Description',
-                        minlength: 'Description must consist of at least 6 characters'
+                        minlength: 'Description must consist of at least 1 characters'
                     },
                 }
             });
