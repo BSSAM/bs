@@ -209,7 +209,7 @@
                                     <?PHP //$count1    =   $count1+1; ?>
                                      
                                     <div class="col-md-2">
-                                        <?PHP echo $this->Form->input('pocount',array('type'=>'text','class'=>'form-control','value'=>$po,'label'=>false,'placeholder'=>'PO Count','name'=>'pocount[]','id'=>'pocount[]')) ?></dd>
+                                        <?PHP echo $this->Form->input('pocount',array('type'=>'text','class'=>'form-control','value'=>$po,'label'=>false,'placeholder'=>'PO Count','name'=>'pocount[]','id'=>'pocount[]','readonly'=>'readonly')) ?></dd>
                                     </div>
                                     <?php if($count != 51): ?>
                                     <div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete=<?php echo $count; ?>><i class="fa fa-minus"></i></div></div></div>
@@ -244,13 +244,12 @@
                                     <div class="po_up"></div>
                             </div>
                         </div>  
-
                         <!-- END Grids Content Content -->
                     </div>
                      <div class="form-group form-actions">
                                 <div class="col-xs-12 text-right">
-                                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+                                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                       <?PHP echo $this->Form->end(); ?>

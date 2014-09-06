@@ -56,7 +56,7 @@
                                         </div>
                                         <!-- END Block with Options Left Title -->
                                         <!-- Block with Options Left Content -->
-                                        <div class="po_based_clientpo"><p>Select Quotations to get purchase order details.</p></div>
+                                        <div class="qo_based_purchaseorder"><p>Select Quotations to get purchase order details.</p></div>
                                         <!-- END Block with Options Left Content -->
                                     </div>
                                     <!-- END Block with Options Left -->
@@ -70,7 +70,7 @@
                                         </div>
                                         <!-- END Block with Options Title -->
                                         <!-- Block with Options Content -->
-                                        <div class="salesorder_by_quotation">
+                                        <div class="qo_based_salesorder">
                                             <p>Select Quotation to get Salesorder Details.. </p>
                                         </div>
                                         <!-- END Block with Options Content -->
@@ -82,9 +82,9 @@
                                     <div class="block col-md-12">
                                         <!-- Block with Options Left Title -->
                                         <div class="block-title clearfix">
-                                            <h2 class="pull-left"><strong>Delivery order Details	</strong> </h2>
+                                            <h2 class="pull-left"><strong>Delivery order Details</strong> </h2>
                                         </div>
-                                        <div class="deliveryorder_by_quotation">
+                                        <div class="qo_based_deliveryorder">
                                             <p>Select Quotation to get Delivery order Details.</p>
                                         </div>
                                         <!-- END Block with Options Left Content -->
@@ -100,7 +100,7 @@
                                         </div>
                                         <!-- END Block with Options Title -->
                                         <!-- Block with Options Content -->
-                                        <div class="invoice_by_quotation">
+                                        <div class="qo_based_invoice">
                                             <p>Select Quotation to get Invoice Details </p>
                                         </div>
                                         <!-- END Block with Options Content -->

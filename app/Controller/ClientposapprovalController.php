@@ -111,10 +111,11 @@ class ClientposapprovalController extends AppController {
             $ponumbers  =   implode($this->request->data['ponumber'],',');
             $po_count  =   implode($this->request->data['pocount'],',');
             $quotationno    =   $this->request->data['quotationno'];
-            
+           
             if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
-                $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
-            //,'Quotation.po_approval_date'=>date('Y-m-d')
+                $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+                
+                //,'Quotation.po_approval_date'=>date('Y-m-d')
                // $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
 //                 $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0),'recursive'=>3));
 //                 switch($data['Customer']['invoice_type_id'])
@@ -155,7 +156,8 @@ class ClientposapprovalController extends AppController {
                 /******************
                 * Data Log
                 */
-                if($data['Quotation']['ispoapproved']==0):
+               
+                if($data['Quotation']['is_poapproved']==0):
                     $this->request->data['Logactivity']['logname'] = 'ClientPO';
                     $this->request->data['Logactivity']['logactivity'] = 'Add';
                     $this->request->data['Logactivity']['logid'] = $quotationno;

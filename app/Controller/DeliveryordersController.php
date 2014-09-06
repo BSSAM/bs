@@ -109,7 +109,7 @@
         {
             if($id!='')
             {
-                if($this->Deliveryorder->updateAll(array('Deliveryorder.is_deleted'=>0),array('Deliveryorder.id'=>$id)));
+                if($this->Deliveryorder->updateAll(array('Deliveryorder.is_deleted'=>1),array('Deliveryorder.id'=>$id)));
                 {
                      /******************
                     * Data Log Activity

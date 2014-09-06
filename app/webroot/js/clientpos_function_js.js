@@ -31,8 +31,10 @@ $(document).ready(function(){
                 }
        });
    });
+   /****************************************for Quotation full invoice************************************/
    $(document).on('change','#val_quotation',function(){
        $('#customer_quotation_no').val($('#val_quotation option:selected').text());
+       var quotation_selected   =   $('#val_quotation option:selected').text();
        var  quotation_id =$(this).val();
        if(quotation_id!=''){
         $.ajax({
@@ -40,12 +42,41 @@ $(document).ready(function(){
                 data:"quotation_id="+quotation_id,
 		url: path_url+'/Clientpos/get_quotation_values/',
                 success:function(data){
-                   // var data_node   =   $.parseJSON(data);
-                    var $response    =   $(data);
-                    $('.quo_based_clientpo').html(data);
-                    //$('#val_quotationcount').val(data_node.Device.length);
-                    $('#val_quotationcount').val($response.filter('#device_length').val());
-                    //$('#track_id').val(data_node.Quotation.track_id);
+//                      // var data_node   =   $.parseJSON(data);
+//                      var $response    =   $(data);
+//                      $('.quo_based_clientpo').html(data);
+//                      //$('#val_quotationcount').val(data_node.Device.length);
+//                      $('#val_quotationcount').val($response.filter('#device_length').val());
+//                      //$('#track_id').val(data_node.Quotation.track_id);
+                    //for salesorder render
+                    var parse_node  =   $.parseJSON(data);
+                    $('#val_quotationcount').val(parse_node.Quotation.quo_count);
+                    if($.isEmptyObject(parse_node.Salesorder)){
+                        $('.qo_based_salesorder').append('<p class="themed-color-fire  pull-left">Sales order not yet created for '+quotation_selected+'</p>'); }
+                    else{$('.qo_based_salesorder').empty();
+                         $('.qo_based_salesorder').html('<p class="themed-color-spring">Salesorders for '+quotation_selected+'</p>');
+                    $.each(parse_node.Salesorder,function(k,v){
+                      $('.qo_based_salesorder').append('<div class="form-group col-md-8"><div class="input text"><input type="text" value="'+v.salesorder_no+'" readonly="readonly" placeholder="Sales Order No" class="form-control" id="val_salesorderno" name="salesorder_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="So Count" value="'+v.so_count+'" readonly="readonly" class="form-control" id="val_salesordercount" name="sales_quantity[]"></div></div>');
+                    });}
+                    
+                    //for Purchase order render
+                    if($.isEmptyObject(parse_node.Purchaseorder)){
+                        $('.qo_based_purchaseorder').append('<p class="themed-color-fire  pull-left">Purchase order not yet created for '+quotation_selected+'</p>'); }
+                    else{$('.qo_based_purchaseorder').empty();
+                         $('.qo_based_purchaseorder').html('<p class="themed-color-spring">Purchase order for '+quotation_selected+'</p>');
+                    $.each(parse_node.Purchaseorder,function(k,v){
+                      $('.qo_based_purchaseorder').append('<div class="form-group col-md-8"><div class="input text"><input type="text" value="'+v.po_no+'" readonly="readonly" placeholder="PO Number" class="form-control" id="val_salesorderno" name="clientpos_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="PO Count" value="'+v.po_count+'" readonly="readonly" class="form-control" id="val_salesordercount" name="po_quantity[]"></div></div>');
+                    });}
+                    
+                    //for deliveryorder render
+                    if($.isEmptyObject(parse_node.Deliveryorder)){
+                        $('.qo_based_deliveryorder').append('<p class="themed-color-fire">Delivery order not yet created for '+quotation_selected+'</p>'); }
+                    else{$('.qo_based_deliveryorder').empty();  
+                        $('.qo_based_deliveryorder').html('<p class="themed-color-spring">Delivery orders for '+quotation_selected+'</p>');
+                    $.each(parse_node.Deliveryorder,function(k,v){
+                      $('.qo_based_deliveryorder').append('<div class="form-group col-md-8"><div class="input text"><input type="text" value="'+v.deliveryorder_no+'" readonly="readonly" placeholder="Delivery Order No" class="form-control" id="val_deliveryorderno" name="deliveryorder_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="Do Count" value="'+v.do_count+'" readonly="readonly" class="form-control" id="val_deliveryordercount" name="delivery_quantity[]"></div></div>');
+
+                    });}
                   
                 }
             });
@@ -193,7 +224,7 @@ $(document).ready(function(){
 <div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="add_so_po" data-delete='+(count-1)+' ><i class="fa fa-plus"></i></div></div></div></div>');
                 $('.so_based_quotation').html('<div class="group_qo_'+data_node.Quotation.id+'"><div class="form-group"><div class="col-sm-12"><input type="hidden" name="quotation_id[]" value="'+data_node.Quotation.id+'"/><input type="hidden" name="quotation_no[]" value="'+data_node.Quotation.quotationno+'"/><div class="col-sm-6  form-control-static">'+data_node.Quotation.quotationno+'</div>\n\
                                       <div class="col-sm-4"><input class="form-control" type="text" name="quo_quantity[]" value="'+description_length+'" readonly/></div><div class="col-md-1"> <div class="btn-group btn-group-sm"></div> ');
-            }
+                  }
 	});
     });
      var count=1;
@@ -228,6 +259,7 @@ $(document).ready(function(){
     { 
         var do_id = $(this).val();
         var customer_id =   $('#customer_for_quotation_id').val();
+      
         var dataString = 'do_id='+ do_id+'&customer_id='+customer_id;
         if(do_id!='')
         {
@@ -248,7 +280,7 @@ $(document).ready(function(){
     $(document).on('click','.do_single_show',function(){
         var do_id_name=$(this).text();
         var data_count=$(this).attr('data-count');
-        $('#val_socount').val(data_count);
+        $('#val_docount').val(data_count);
         $('#val_deliveryorderno_fullinvoice').val(do_id_name);
         $('.do_result').hide('slow');
         var do_id=$(this).attr('id');
@@ -263,9 +295,9 @@ $(document).ready(function(){
                 var delivery_data_node  =   $.parseJSON(data);
                 
                 /*******for Salesorder count*********/
-                $('.do_based_salesorder').html(' <div class="form-group col-md-8"><div class="input text"><input type="text" placeholder="Salesorder No" readonly="readonly" value="'+delivery_data_node.Salesorder.salesorderno+'" class="form-control"  name="salesorder_id"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="So Count" value="'+delivery_data_node.Salesorder.Description_count+'" readonly="readonly" class="form-control" name="salesorder_quantity"></div> </div>');
+                $('.do_based_salesorder').html(' <div class="form-group col-md-8"><div class="input text"><input type="text" placeholder="Salesorder No" readonly="readonly" value="'+delivery_data_node.Salesorder.salesorderno+'" class="form-control"  name="salesorder_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="So Count" value="'+delivery_data_node.Salesorder.Description_count+'" readonly="readonly" class="form-control" name="salesorder_quantity[]"></div> </div>');
                 /*******for Quotation count*********/
-                $('.do_based_quotation').html(' <div class="form-group col-md-8"><div class="input text"><input type="text" placeholder="Quotation No" readonly="readonly" value="'+delivery_data_node.Quotation.quotationno+'" class="form-control"  name="quotation_id"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="Qo Count" value="'+delivery_data_node.Quotation.device_count+'" readonly="readonly" class="form-control" name="quotation_quantity"></div> </div>');
+                $('.do_based_quotation').html(' <div class="form-group col-md-8"><div class="input text"><input type="text" placeholder="Quotation No" readonly="readonly" value="'+delivery_data_node.Quotation.quotationno+'" class="form-control"  name="quotation_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="Qo Count" value="'+delivery_data_node.Quotation.device_count+'" readonly="readonly" class="form-control" name="quotation_quantity[]"></div> </div>');
                 /*******for Purchaseorder count*********/
                 $('.do_based_po').html('<div class="group_po_'+(count++)+'"><div class="form-group col-md-8"><input placeholder="Enter Additional PO Number" type="text" name="clientpos_no[]" value="'+delivery_data_node.Purchaseorder.po_reference_no+'" id="val_ponumber_'+(count-1)+'" class="form-control get_ponumber_collection"/></div><div class="form-group col-sm-3">\n\<input type="text" placeholder="PO Count" name="po_quantity[]" id="val_pocount'+(count-1)+'" class="form-control po_count_each"/> </div>\n\
 <div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="add_so_po" data-delete='+(count-1)+' ><i class="fa fa-plus"></i></div></div></div></div>');
@@ -339,4 +371,18 @@ $(document).ready(function(){
             }
             });
     });
+    /**************************************Delivery order full invoice form submit validation*********************************/
+   $(document).on('click','.deliveryorder_fullinvoice_update',function(){
+        var total_reply=0;var check_count=0;
+        var po_total_count = getValues('.po_count_each');
+        var do_count    =$('#val_docount').val();
+        if(po_total_count!=do_count){ alert('PO Count does not matched with Delivery order Count');  return false;     }
+        $('.get_ponumber_collection').each(function(){
+           check_count  =   check_count+1;
+           var  inputString = $(this).val();
+           var findme       =  'CPO';
+           var reply_check  =   inputString.indexOf(findme);
+           if(reply_check==0){ alert('Provide original PO Number for '+check_count);  return false;}   
+         });
+   });
 });

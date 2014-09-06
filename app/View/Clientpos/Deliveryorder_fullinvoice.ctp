@@ -39,7 +39,7 @@
                                             <div class="do_result"></div>
                                         </div>
                                         <div class="form-group col-md-3 row">
-                                            <?php echo $this->Form->input('deliver_quantity', array('id' => 'val_socount', 'class' => 'form-control', 'label' => false, 'name' => 'deliver_quantity', 'readonly' => 'readonly', 'value' => '', 'placeholder' => 'DO Count')); ?>
+                                            <?php echo $this->Form->input('deliver_quantity', array('id' => 'val_docount', 'class' => 'form-control', 'label' => false, 'name' => 'deliver_quantity', 'readonly' => 'readonly', 'value' => '', 'placeholder' => 'DO Count')); ?>
                                         </div>
 
                                         <!-- END Block with Options Content -->
@@ -91,7 +91,6 @@
                                             <p>Select Delivery order to get Purchase order Details </p>
                                         </div>
                                         <div class="po_up"></div>
-                                        
                                         <!-- END Block with Options Left Content -->
                                     </div>
                                     <!-- END Block with Options Left -->
@@ -114,7 +113,7 @@
                                 </div>
                                 <div class="form-group form-actions">
                                     <div class="col-md-9 col-md-offset-3">
-                                        <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+                                        <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary deliveryorder_fullinvoice_update', 'escape' => false)); ?>
                                         <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel', array('controller' => 'Clientpos', 'action' => 'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                                     </div>
                                 </div>
