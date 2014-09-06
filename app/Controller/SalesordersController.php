@@ -315,7 +315,8 @@
                     //pr($instrument_type);
                     $this->set('instrument_type',$instrument_type);
             //pr($salesorder_details);exit;
-            
+            $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$con['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+            $this->set(compact('contact_list'));
             $this->set(compact('priority','payment','service'));
             if($this->request->is(array('post','put')))
             {

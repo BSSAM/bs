@@ -1574,33 +1574,33 @@ var FormsValidation = function() {
                 }
             });
             
-             $('#form-poapp-view').validate({
-                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
-                errorElement: 'div',
-                errorPlacement: function(error, e) {
-                    e.parents('.col-md-4 > div').append(error);
-                },
-                highlight: function(e) {
-                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
-                    $(e).closest('.help-block_login').remove();
-                },
-                success: function(e) {
-                    // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
-                    e.closest('.help-block_login').remove();
-                },
-                rules: {
-                    "ponumber[]": {
-                        required: true
-                    }
-                },
-                messages: {
-                    "ponumber[]": {
-                        required: 'Please enter the PO Number',
-                        excluded: [':disabled']
-                    }
-                }
-            });
+//             $('#form-poapp-view').validate({
+//                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+//                errorElement: 'div',
+//                errorPlacement: function(error, e) {
+//                    e.parents('.col-md-4 > div').append(error);
+//                },
+//                highlight: function(e) {
+//                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+//                    $(e).closest('.help-block_login').remove();
+//                },
+//                success: function(e) {
+//                    // You can use the following if you would like to highlight with green color the input after successful validation!
+//                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+//                    e.closest('.help-block_login').remove();
+//                },
+//                rules: {
+//                    "ponumber[]": {
+//                        required: true
+//                    }
+//                },
+//                messages: {
+//                    "ponumber[]": {
+//                        required: 'Please enter the PO Number',
+//                        excluded: [':disabled']
+//                    }
+//                }
+//            });
              /*******************************************************************************/
             
             

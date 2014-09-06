@@ -1,4 +1,29 @@
-<?PHP echo $this->Form->create('Clientposapproval',array('url'=>'quotation_po_update','class'=>'form-horizontal','id'=>'form-poapp-view')); ?>
+<script>
+$('has-error1').attr("style","display:none");
+$(".form-horizontal").submit(function(e){
+    if($('#ponumber[]').val=''){
+        alert('wrong');
+    }
+//    var isFormValid = true;
+//    $(".form-horizontal input:text").{
+//            
+//            isFormValid = false;
+//                alert("fail");  
+//           $(this).addClass("error_show");     
+//        } else {
+//            alert("success");
+//            isFormValid = true;
+//            $(this).removeClass("error_show");   
+//        }
+//    });
+//    if (!isFormValid) {
+//          
+//        //$('has-error').addClass('help-block_login animation-slideDown');
+//    }
+//    return isFormValid;
+});
+</script>
+<?PHP echo $this->Form->create('Clientposapproval',array('url'=>'quotation_po_update','class'=>'form-horizontal')); ?>
 <?PHP echo $this->Form->input('quotationno',array('type'=>'hidden','name'=>'quotationno','value'=>$data['Quotation']['quotationno'])); ?>                   
 <h4 class="sub-header text-center">Customer Details - <strong><?PHP echo $data['Customer']['Customertagname']."(" .$data['Customer']['id'].")"; ?> </strong></h4>
 
@@ -217,7 +242,7 @@
                                     </div>
                                     </div>
                                     <?PHP endforeach; ?>
-                                    
+<!--                                    <div class="has-error1">There should be no Empty Purchase Orders</div>-->
                                    
                                     
                                     <?PHP //foreach ($arra_count as $pokey_count=>$po_count): ?>

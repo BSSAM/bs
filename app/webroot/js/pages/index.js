@@ -31,24 +31,24 @@ var Index = function() {
              */
 
             // Set default height to Google Maps container
-            $('.gmap').css('height', '220px');
-
-            // Initialize Timeline map
-            new GMaps({
-                div: '#gmap-timeline',
-                lat: -33.863,
-                lng: 151.202,
-                zoom: 15,
-                disableDefaultUI: true,
-                scrollwheel: false
-            }).addMarkers([
-                {
-                    lat: -33.863,
-                    lng: 151.202,
-                    animation: google.maps.Animation.DROP,
-                    infoWindow: {content: '<strong>Cafe-Bar: Example Address</strong>'}
-                }
-            ]);
+//            $('.gmap').css('height', '220px');
+//
+//            // Initialize Timeline map
+//            new GMaps({
+//                div: '#gmap-timeline',
+//                lat: -33.863,
+//                lng: 151.202,
+//                zoom: 15,
+//                disableDefaultUI: true,
+//                scrollwheel: false
+//            }).addMarkers([
+//                {
+//                    lat: -33.863,
+//                    lng: 151.202,
+//                    animation: google.maps.Animation.DROP,
+//                    infoWindow: {content: '<strong>Cafe-Bar: Example Address</strong>'}
+//                }
+//            ]);
 
             /*
              * Flot 0.8.2 Jquery plugin is used for charts

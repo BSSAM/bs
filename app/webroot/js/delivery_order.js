@@ -37,7 +37,7 @@ $(document).ready(function(){
                     $('#del_dueamount').val(sales_node.Salesorder.due_amount);                
                     $('#del_customer_address').val(sales_node.Customer.regaddress);
                     $('#del_email').val(sales_node.Salesorder.email);
-                    $('#del_attn').append('<option value="'+sales_node.Salesorder.attn+'">'+sales_node.Salesorder.attn+'</option>');
+                    $('#del_attn').append('<option value="'+sales_node.Contactpersoninfo.id+'">'+sales_node.Contactpersoninfo.name+'</option>');
                     $('#del_phone').val(sales_node.Customer.phone);
                     $('#del_fax').val(sales_node.Customer.fax);
                     $('#val_ref_no').val(sales_node.Salesorder.ref_no);
@@ -49,6 +49,7 @@ $(document).ready(function(){
                         }
                         else
                         {
+                            $('.delivery_instrument_node .dataTables_empty').hide();
                             $('.delivery_instrument_node').append('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.id+'">\n\\n\
                                     <td class="text-center">'+value.id+'</td>\n\
@@ -188,6 +189,30 @@ $(document).ready(function(){
     }
        
    });
+   
+   $(document).on('change','#val_addr',function(){
+       var address =$(this).val();
+       var customer_id =$('#DeliveryorderCustomerId').val();
+       if(address!=''&&customer_id!='')
+       {
+           $.ajax({
+            type: "POST",
+            url: path_url+"/Deliveryorders/get_delivery_address",
+            data: 'address='+address+'&customer_id='+customer_id,
+            cache: false,
+            success: function(data)
+            {
+                
+             $('#DeliveryorderCustomerAddress').val(data);
+            }
+	});
+       }
+       else
+       {
+           
+           $('#DeliveryorderCustomerAddress').val('');
+       }
+    });
    /************************For Delivery order Approval End*********************************/
     
     

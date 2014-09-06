@@ -31,7 +31,7 @@
    
     <label class="col-md-2 control-label" for="val_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','options'=>array($salesorder['Salesorder']['attn']=>$salesorder['Salesorder']['attn']),'selected'=>'selected' ,'readonly'=>'readonly')); ?>
+       <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'select-chosen form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select the Contact person name','options'=>$contact_list,'readonly'=>'readonly')); ?>
     </div>
      <label class="col-md-2 control-label" for="val_email">Email</label>
     <div class="col-md-4">
@@ -57,7 +57,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_reg_date">Reg Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'mm/dd/yy',
+        <?php echo $this->Form->input('Salesorder.reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
        
     </div>
