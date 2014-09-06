@@ -98,3 +98,17 @@ and open the template in the editor.
 #sales_list .delivery_no_result{padding: 13px 0px; max-width: 305px; min-width: 305px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important; }
 #sales_list .delivery_no_result:hover{background:#6ad2eb;}
 //#sales_list:hover{background:#6ad2eb;}
+
+/*.has-error1{
+    display: none;
+    color: #D63301;
+}*/
+/*.error{
+    display: none;
+    margin-left: 10px;
+}      
+ */
+.error_show{
+    //color: red;
+    border: 1px #F00 solid;
+}

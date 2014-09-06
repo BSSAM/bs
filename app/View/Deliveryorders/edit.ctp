@@ -80,6 +80,7 @@ if(customer!='')
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Delivery Order Info</a></li>
                                                 <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Customer Special Needs and Tag ID</a></li>
+                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Upload Your Files </a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
@@ -89,11 +90,8 @@ if(customer!='')
                                                 </div>
                                                 <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Deliveryorders/edit/customer_special_needs_tagid'); ?>
-                                                </div>
-                                                <a href="../Elements/Deliveryorders/edit/deliveryorder_info.ctp"></a>
-                                            </div><!-- tab-content -->
-                                            <!-- #basicWizard -->
-                                        </div><!-- panel-body -->
+                                                
+                                           
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-10">
                                             <?php if($user_role['app_deliveryorder1']['add'] == 1 && $deliveryorder['Deliveryorder']['is_approved']==0): ?>
@@ -104,11 +102,21 @@ if(customer!='')
                                             <?php endif; ?>
                                             </div>
                                         </div>
-                                    </div>
+                                  
                                     <!-- panel -->
                                     <?php echo $this->Form->end(); ?>
+                               
+                                                <a href="../Elements/Deliveryorders/edit/deliveryorder_info.ctp"></a>
+                                    </div>
+                                                 <div class="tab-pane" id="tab3">
+                                                    <?PHP echo $this->element('Deliveryorders/file_upload'); ?>
+                                                 </div>
+                                            </div><!-- tab-content -->
+                                            <!-- #basicWizard -->
+                                        </div>
+                                         </div>
                                 </div>
-                                    
+                            </div>
                                 <!-- END Basic Form Elements Content -->
                             </div>
                             <!-- END Basic Form Elements Block -->
