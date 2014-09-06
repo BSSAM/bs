@@ -137,7 +137,10 @@
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
-            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type !='=>'Manual'));
+            $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.delivery_order_no'=>$id),'recursive'=>2));
+            $deliver_customer = $deliveryorder['Deliveryorder']['customer_id'];
+            //pr($deliveryorder);exit;
+            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type !='=>'Manual','Customer.acknowledgement_type_id='=>1));
             //return $updated;
             if($updated!=1)
             {

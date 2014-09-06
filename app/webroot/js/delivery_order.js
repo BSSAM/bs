@@ -178,7 +178,7 @@ $(document).ready(function(){
             success: function js(data)
             {
                 //window.location.reload();
-                 alert(data);
+                 console.log(data);
             }
         });
         

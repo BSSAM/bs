@@ -1,12 +1,12 @@
 
 <h1>
-    <i class="gi gi-user"></i>Clent Po Approval Dashboard
+    <i class="gi gi-user"></i>Client PO Approval Dashboard
 </h1>
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-    <li>Clent Po Approval Dashboard</li>
+    <li>Client PO Approval Dashboard</li>
 </ul>
 <!-- END Forms General Header -->
                         
