@@ -63,15 +63,17 @@ $(document).ready(function(){
                     if($.isEmptyObject(parse_node.Purchaseorder)){
                         $('.qo_based_purchaseorder').append('<p class="themed-color-fire  pull-left">Purchase order not yet created for '+quotation_selected+'</p>'); }
                     else{$('.qo_based_purchaseorder').empty();
+                         $('.po_add_qopo').html('<div id="poforqo_plus" class="btn btn-alt btn-info pull-left"><i class="fa fa-plus"></i></div>');
                          $('.qo_based_purchaseorder').html('<p class="themed-color-spring">Purchase order for '+quotation_selected+'</p>');
                     $.each(parse_node.Purchaseorder,function(k,v){
-                      $('.qo_based_purchaseorder').append('<div class="form-group col-md-8"><div class="input text"><input type="text" value="'+v.po_no+'" readonly="readonly" placeholder="PO Number" class="form-control" id="val_salesorderno" name="clientpos_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="PO Count" value="'+v.po_count+'" readonly="readonly" class="form-control" id="val_salesordercount" name="po_quantity[]"></div></div>');
+                      $('.qo_based_purchaseorder').append('<div class="form-group col-md-6"><div class="input text"><input type="text" value="'+v.po_no+'" readonly="readonly" placeholder="PO Number" class="form-control" id="val_salesorderno" name="clientpos_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="PO Count" value="'+v.po_count+'" readonly="readonly" class="form-control" id="val_salesordercount" name="po_quantity[]"></div></div>');
                     });}
                     
                     //for deliveryorder render
                     if($.isEmptyObject(parse_node.Deliveryorder)){
                         $('.qo_based_deliveryorder').append('<p class="themed-color-fire">Delivery order not yet created for '+quotation_selected+'</p>'); }
-                    else{$('.qo_based_deliveryorder').empty();  
+                    else{$('.qo_based_deliveryorder').empty(); 
+                       
                         $('.qo_based_deliveryorder').html('<p class="themed-color-spring">Delivery orders for '+quotation_selected+'</p>');
                     $.each(parse_node.Deliveryorder,function(k,v){
                       $('.qo_based_deliveryorder').append('<div class="form-group col-md-8"><div class="input text"><input type="text" value="'+v.deliveryorder_no+'" readonly="readonly" placeholder="Delivery Order No" class="form-control" id="val_deliveryorderno" name="deliveryorder_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="Do Count" value="'+v.do_count+'" readonly="readonly" class="form-control" id="val_deliveryordercount" name="delivery_quantity[]"></div></div>');
@@ -247,6 +249,9 @@ $(document).ready(function(){
     /*************************************For Po Update in POP up on ClientPoApproval*************************************************/
     $(document).on('click','#po_plus',function(){
             $('.po_up').append('<div class="group_po_'+(count++)+'"><div class="form-group"><label class="col-md-2 control-label" for="ponumber[]">Additional PO Number</label>	<div class="col-md-4 row"><input placeholder="Enter PO Number" type="text" name="ponumber[]" id="val_ponumber_'+(count-1)+'" class="form-control get_ponumber_collection"/></div><div class="col-md-2">\n\<input type="text" placeholder="PO Count" name="pocount[]" id="val_pocount'+(count-1)+'" class="form-control po_count_each"/></div>\n\<div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete='+(count-1)+'><i class="fa fa-minus"></i></div></div></div></div></div>');
+    });
+     $(document).on('click','#poforqo_plus',function(){
+            $('.po_up').append('<div class = "group_po_'+(count++)+'"><div class = "form-group col-md-6"><div class = "input text"><input placeholder = "Enter PO Number" type = "text" name = "clientpos_id[]" id = "val_ponumber_'+(count-1)+'" class = "form-control get_ponumber_collection"/></div></div><div class = "form-group col-md-3 row"><div class="input text"><input type = "text" placeholder = "PO Count" name = "po_quantity[]" id = "val_pocount'+(count-1)+'" class = "form-control po_count_each"/></div></div> <div class = "form-group col-md-3 row"><div class = "btn btn-alt btn-info" id = "delete_po" data-delete = '+(count-1)+'><i class = "fa fa-minus"></i></div></div></div>');
     });
     /**************************************************************************************/
     $('#sales_order').blur(function(){

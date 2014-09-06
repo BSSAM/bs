@@ -18,8 +18,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?PHP if(!empty($salesorder['SalesDocument'])): ?>
-                                    <?PHP foreach($salesorder['SalesDocument'] as $document): ?>
+                                    <?PHP if(!empty($deliveryorder['DoDocument'])): ?>
+                                    <?PHP foreach($deliveryorder['DoDocument'] as $document): ?>
                                     <?PHP $file_name    = explode('_',$document['document_name']); 
                                           unset($file_name[0]); 
                                           $document_file_name   =   implode($file_name,'-') ; ?>
@@ -51,10 +51,10 @@
                                             <div class="btn-group">
                                             <?PHP
 						echo $this->Html->link('<i class="gi gi-disk_save"></i>',
-                                                array('controller'=>'Salesorders','action'=>'attachment',
-						$salesorder['Salesorder']['salesorderno'],$document['document_name']),array('escape'=>false,'class'=>'btn btn-xs btn-default','data-toggle'=>'tooltip','title'=>'Download'));
+                                                array('controller'=>'Deliveryorders','action'=>'attachment',
+						$document['deliveryorder_no'],$document['document_name']),array('escape'=>false,'class'=>'btn btn-xs btn-default','data-toggle'=>'tooltip','title'=>'Download'));
                                             ?>
-                                            <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-default sales_document_delete" data-salesorder_id="<?PHP echo $salesorder['Salesorder']['salesorderno']; ?>" data-id="<?PHP echo $document['id']; ?>" data-name="<?PHP echo $document_file_name; ?>" data-org_name="<?PHP echo $document['document_name']; ?>"><i class="gi gi-bin"></i></a>
+                                            <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-default sales_document_delete" data-deliveryorder_id="<?PHP echo $document['deliveryorder_no']; ?>" data-id="<?PHP echo $document['id']; ?>" data-name="<?PHP echo $document_file_name; ?>" data-org_name="<?PHP echo $document['document_name']; ?>"><i class="gi gi-bin"></i></a>
                                             </div>
                                         </td>
                                     </tr>

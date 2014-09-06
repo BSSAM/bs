@@ -56,7 +56,8 @@
                                         </div>
                                         <!-- END Block with Options Left Title -->
                                         <!-- Block with Options Left Content -->
-                                        <div class="qo_based_purchaseorder"><p>Select Quotations to get purchase order details.</p></div>
+                                        <div class="qo_based_purchaseorder"><p>Select Quotations to get purchase order details.</p></div><div class="po_add_qopo"></div>
+                                        <div class="po_up"></div>
                                         <!-- END Block with Options Left Content -->
                                     </div>
                                     <!-- END Block with Options Left -->
@@ -119,9 +120,4 @@
     
     <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
-        
-        
-      
-                            
-                        
-                        
+               

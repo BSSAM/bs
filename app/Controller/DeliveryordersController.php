@@ -8,7 +8,7 @@
     class DeliveryordersController extends AppController
     {
         public $helpers = array('Html','Form','Session');
-        public $uses =array('Priority','Paymentterm','Quotation','Currency',
+        public $uses =array('Priority','Paymentterm','Quotation','Currency','DoDocument',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Datalog','Logactivity','Contactpersoninfo');
         public function index()
@@ -26,14 +26,23 @@
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set('service',$services);
             //is_deliveryorder_created
-            $this->request->data['Deliveryorder']['delivery_order_no']=$dmt;
+            //$this->request->data['Deliveryorder']['delivery_order_no']=$dmt;
         
             
             if($this->request->is('post'))
             {
+               
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
+                   
+                    $del_last_id    =   $this->Deliveryorder->getLastInsertID();
                     $this->request->data['Deliveryorder']['is_deliveryorder_created']=1;
+                    $document_node    =   $this->DoDocument->find('all',array('conditions'=>array('DoDocument.deliveryorder_no'=>$this->request->data['Deliveryorder']['delivery_order_no'])));
+                   
+                    if(!empty($document_node))
+                    {  
+                        $this->DoDocument->updateAll(array('DoDocument.deliveryorder_id'=>$del_last_id,'DoDocument.customer_id'=>'"'.$this->request->data['Deliveryorder']['customer_id'].'"'),array('DoDocument.deliveryorder_no'=>$this->request->data['Deliveryorder']['delivery_order_no'],'DoDocument.status'=>1));
+                    }
                     /******************* Data Log*/
                         $this->request->data['Logactivity']['logname']   =   'Deliveryorder';
                         $this->request->data['Logactivity']['logactivity']   =   'Add DeliveryOrder';
@@ -62,10 +71,9 @@
         }
         public function edit($id=NULL)
         {
-            
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
-            //pr($deliveryorder);exit;
+//            pr($deliveryorder);exit;
             //pr($deliveryorder['Customer']['Contactpersoninfo']);
             if($deliveryorder['Deliveryorder']['po_generate_type']=='Automatic' && $deliveryorder['Customer']['acknowledgement_type_id']==1):
                 $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
@@ -224,6 +232,63 @@
            echo $customer_address_data['Address']['address'];
         }
         }
+         public function file_upload($id=NULL)
+        {
+            $this->autoRender=false;
+            if($this->request->is('post'))
+            {
+                $deliveryorder_no  =   $_POST['deliveryorder_no'] ;  
+                $deliveryorder_files   =   $_FILES['file'];
+                $document_array    = array();
+                if(!empty($deliveryorder_files))
+                {
+                    if(!is_dir(APP.'webroot'.DS.'files'.DS.'Deliveryorders'.DS.$deliveryorder_no)):
+                            mkdir(APP.'webroot'.DS.'files'.DS.'Deliveryorders'.DS.$deliveryorder_no);
+                    endif;
+                    $document_name  =   time().'_'.$deliveryorder_files['name'];
+                    $type = $deliveryorder_files['type'];
+                    $size = $deliveryorder_files['size'];
+                    $tmpPath = $deliveryorder_files['tmp_name'];
+                    $originalPath = APP.'webroot'.DS.'files'.DS.'Deliveryorders'.DS.$deliveryorder_no.DS.$document_name;
+                    if(move_uploaded_file($tmpPath,$originalPath))
+                    {
+                        $document_array['DoDocument']['document_name']= $document_name;
+                        $document_array['DoDocument']['deliveryorder_no']= $deliveryorder_no;
+                        $document_array['DoDocument']['document_size']= $size;
+                        $document_array['DoDocument']['upload_type']= 'Individual';
+                        $document_array['DoDocument']['document_type']= $deliveryorder_files['type'];
+                        $this->DoDocument->create();
+                        $this->DoDocument->save($document_array);
+                    }
+                }
+              }
+        }
+        public function delete_document($id=NULL)
+        {
+            $this->autoRender   =   false;
+            $document_id    =   $this->request->data['document_id'];
+            $files = scandir(APP.'webroot'.DS.'files'.DS.'Deliveryorders'.DS.$id); 
+//            if(in_array($document_id,$files))
+//            {
+//                echo "yes";exit;
+//                foreach($files as $file=>$v)
+//                {
+//                    unlink(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$id.DS.$v);
+//                }
+//            }
+            if($document_id!='')
+            {
+                 $this->DoDocument->updateAll(array('DoDocument.status'=>0),array('DoDocument.deliveryorder_no'=>$id,'DoDocument.document_name LIKE'=>'%'.$document_id.'%'));
+            }
+        }
+         public function attachment($deliveryorder_id= NULL,$doc_name=NULL)
+        {
+            $file_name    = explode('_',$doc_name);unset($file_name[0]); 
+            $document_file_name   =   implode($file_name,'-') ;
+            $this->response->file(APP.'webroot'.DS.'files'.DS.'Deliveryorders'.DS.$deliveryorder_id.DS.$doc_name,
+			array('download'=> true, 'name'=>$document_file_name));
+            return $this->response;  
+	}
         
        
 }

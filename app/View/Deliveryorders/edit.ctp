@@ -106,10 +106,10 @@ if(customer!='')
                                     <!-- panel -->
                                     <?php echo $this->Form->end(); ?>
                                
-                                                <a href="../Elements/Deliveryorders/edit/deliveryorder_info.ctp"></a>
+                                               
                                     </div>
                                                  <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Deliveryorders/file_upload'); ?>
+                                                    <?PHP echo $this->element('Deliveryorders/edit/file_upload'); ?>
                                                  </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->

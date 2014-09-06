@@ -72,6 +72,7 @@
                                     <?php echo $this->Form->create('Deliveryorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
                                     <?php echo $this->Form->input('Deliveryorder.customer_id', array('type'=>'hidden','value'=>'')); ?>
                                     <?php echo $this->Form->input('Deliveryorder.salesorder_id', array('type'=>'hidden','value'=>'')); ?>
+                                    <?php echo $this->Form->input('Deliveryorder.delivery_order_no', array('type'=>'hidden','value'=>$deliveryorderno)); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
@@ -99,13 +100,13 @@
                                     <!-- panel -->
                                     <?php echo $this->Form->end(); ?>
                                     </div>
-                                                 <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Deliveryorders/file_upload'); ?>
-                                                 </div>
-                                            </div><!-- tab-content -->
-                                            <!-- #basicWizard -->
+                                        <div class="tab-pane" id="tab3">
+                                            <?PHP echo $this->element('Deliveryorders/file_upload'); ?>
                                         </div>
-                                         </div>
+                                        </div><!-- tab-content -->
+                                        <!-- #basicWizard -->
+                                        </div>
+                                        </div>
                                 </div>
                                 <!-- END Basic Form Elements Content -->
                             </div>

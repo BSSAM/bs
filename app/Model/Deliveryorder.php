@@ -18,6 +18,18 @@ class Deliveryorder extends AppModel
             'fields' => '',
             'order' => '',
            
+        ),
+        'DoDocument' => array(
+            'className' => 'DoDocument',
+            'foreignKey' => 'deliveryorder_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => '',
         ));
     public $belongsTo = array(
         'Customer' => array(
