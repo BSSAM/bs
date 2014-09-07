@@ -155,6 +155,7 @@ class CustomersController extends AppController
     }
     public function edit($id = NULL)
     {
+        //pr($id);exit;
         /* 
          * ---------------  Customer Condition  -------------------------------------
          */
@@ -210,13 +211,16 @@ class CustomersController extends AppController
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
         $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
         // Model For the Tab Edit Contact Info
-        $contactpersoninfo = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.status' => 1, 'Contactpersoninfo.customer_id' => $id), 'order' => array('Contactpersoninfo.id' => 'DESC')));
+        //pr($id);exit;
+        $contactpersoninfo = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.status' => 1, 'Contactpersoninfo.customer_id' => $id)));
+        //pr($contactpersoninfo);exit;
         $this->set(compact('priority','location','salesperson','referedby','data10','data10_count','data11',
                             'data11_count','data12','data12_count','industry','deliverorder_type',
                             'invoice_types','paymentterm','userrole','industry','contactpersoninfo','acknowledgement_type'));
      
         if($this->request->is(array('post','put')))
         {
+            //pr($id);exit;
             $this->Customer->id = $id;
             $refer_array = $this->request->data['referedbies_id'];
             $sales_array = $this->request->data['salesperson_id'];
@@ -504,8 +508,12 @@ class CustomersController extends AppController
         $this->request->data['Contactpersoninfo']['position']=$this->request->data['contact_position'];
         $this->request->data['Contactpersoninfo']['mobile']=$this->request->data['contact_mobile'];
         $this->request->data['Contactpersoninfo']['purpose']=$this->request->data['contact_purpose'];
-        $this->request->data['Contactpersoninfo']['customer_id']=$this->Session->read('customer_id');
+        $this->request->data['Contactpersoninfo']['customer_id']=$this->request->data['customer_id'];
+        $this->request->data['Contactpersoninfo']['tag_id']=$this->request->data['tag_id'];
+        //$this->request->data['Contactpersoninfo']['serial_id']=$this->request->data['serial_id'];
+        $this->request->data['Contactpersoninfo']['customergroup_id']=$this->request->data['group_id'];
         $this->request->data['Contactpersoninfo']['status']=1;
+        
         if($this->Contactpersoninfo->save($this->request->data['Contactpersoninfo']))
         {
             $contact_last_id    =  $this->request->data['id'];

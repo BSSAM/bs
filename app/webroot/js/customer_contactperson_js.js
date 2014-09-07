@@ -61,6 +61,7 @@ $(document).ready(function(){
         $('#contact_purpose').val(null);
         $('#contact_remark').val(null);
         $('.name_error').hide();
+        $('.odd .dataTables_empty').hide();
     });
     /******************************* Customer Contact person  Edit  *************************/
      $(document).on('click','.contactperson_edit',function(){
@@ -94,6 +95,7 @@ $(document).ready(function(){
    $(document).on('click','.contactperson_editsubmit',function()
     {
         var customer_id =$('#customer_id').val();
+        //alert(customer_id);return false;
         var id= $(this).attr('id');
         if($('#contact_name').val()=='')
         {
@@ -119,7 +121,7 @@ $(document).ready(function(){
             data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile+"&tag_id="+tag_id+"&customer_id="+customer_id+"&group_id="+group_id+"&id="+id,
             url: path_url+'/customers/contact_edit_update/',
             success:function(data){
-               
+               //console.log(data);return false;
                $('.contact_remove_'+data).remove();
                 $('.contact_info_row').append('<tr class="contact_remove_'+id+'">\n\\n\
                                     <td class="text-center">'+customer_id+'</td>\n\
@@ -147,6 +149,7 @@ $(document).ready(function(){
         $('#contact_purpose').val(null);
         $('#contact_remark').val(null);
         $('.name_error').hide();
+        $('.odd .dataTables_empty').hide();
     });
     /**********************Contact person Delete (Customer Module)*************************/
     $(document).on('click','.contact_delete',function()
