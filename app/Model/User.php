@@ -7,6 +7,9 @@
  */
 class User extends AppModel
 {
+    public $virtualFields = array(
+    'full_name' => 'CONCAT(User.firstname, " ", User.lastname)'
+    );
 //   public $belongsTo = array( 'role'  => array(
 //           'className'              => 'Userrole',
 //           'foreignKey'  => 'role',

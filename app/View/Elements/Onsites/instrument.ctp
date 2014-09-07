@@ -34,9 +34,9 @@
         <?php echo $this->Form->input('sno', array('id'=>'val_sno','class'=>'form-control','disabled'=>'disabled','label'=>false,'name'=>'sno')); ?>
     </div>
         
-    <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
+    <label class="col-md-2 control-label" for="onsite_quantity">Quantity</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
+        <?php echo $this->Form->input('onsite_quantity', array('id'=>'onsite_quantity','class'=>'form-control','label'=>false,'name'=>'onsite_quantity')); ?>
     </div>
         
 </div>
@@ -154,11 +154,11 @@
             <th class="text-center">Call Type</th>
              <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
-            <th class="text-center">Account Service</th>
+            <th class="text-center">Department</th>
             <th class="text-center">Total</th>
         </tr>
     </thead>
-    <tbody class="Instrument_info"> 
+    <tbody class="onsite_instrument_node"> 
    
     </tbody>
 </table>

@@ -79,7 +79,7 @@ class SubcontractdosController extends AppController
     {
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
-            $data = $this->Description->find('all',array('conditions'=>array('salesorder_id LIKE'=>'%'.$sales_id.'%','Description.is_approved'=>'1','Description.sales_calllocation'=>'subcontract')));
+            $data = $this->Description->find('all',array('conditions'=>array('salesorder_id LIKE'=>'%'.$sales_id.'%','Description.is_approved'=>'1','Description.sales_calllocation'=>'subcontract'),'group'=>'Description.salesorder_id'));
             $c = count($data);
             if(!empty($c))
             {

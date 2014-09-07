@@ -318,21 +318,21 @@
                                           <?php echo $this->Html->link('PR_Purchase Order',array('controller'=>'Reqpurchaseorders','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
                                     
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <?php //if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>
-                                        <?php  $a=($control == 'Debtchases')?'active':''; ?>
-                                        <?php echo $this->Html->link('Debt Chase',array('controller'=>'Debtchases','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
+                                        <?php  //$a=($control == 'Debtchases')?'active':''; ?>
+                                        <?php //echo $this->Html->link('Debt Chase',array('controller'=>'Debtchases','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li><?php  // } ?>
                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Onsites')?'active':''; ?>
                                         <?php echo $this->Html->link('OnSite Schedule',array('controller'=>'Onsites','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <?php //if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>
-                                        <?php  $a=($control == 'Recallservices')?'active':''; ?>
-                                        <?php echo $this->Html->link('Recall Service',array('controller'=>'Recallservices','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
+                                        <?php  //$a=($control == 'Recallservices')?'active':''; ?>
+                                        <?php //echo $this->Html->link('Recall Service',array('controller'=>'Recallservices','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li><?php //} ?>
                                 </ul>
                             </li>
 <!--                            <li>

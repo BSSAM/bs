@@ -66,7 +66,7 @@ $(document).ready(function(){
                          $('.po_add_qopo').html('<div id="poforqo_plus" class="btn btn-alt btn-info pull-left"><i class="fa fa-plus"></i></div>');
                          $('.qo_based_purchaseorder').html('<p class="themed-color-spring">Purchase order for '+quotation_selected+'</p>');
                     $.each(parse_node.Purchaseorder,function(k,v){
-                      $('.qo_based_purchaseorder').append('<div class="form-group col-md-6"><div class="input text"><input type="text" value="'+v.po_no+'" readonly="readonly" placeholder="PO Number" class="form-control" id="val_salesorderno" name="clientpos_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="PO Count" value="'+v.po_count+'" readonly="readonly" class="form-control" id="val_salesordercount" name="po_quantity[]"></div></div>');
+                      $('.qo_based_purchaseorder').append('<div class="form-group col-md-6"><div class="input text"><input type="text" value="'+v.po_no+'"  placeholder="PO Number" class="form-control" id="val_salesorderno" name="clientpos_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="PO Count" value="'+v.po_count+'"  class="form-control" id="val_salesordercount" name="po_quantity[]"></div></div>');
                     });}
                     
                     //for deliveryorder render

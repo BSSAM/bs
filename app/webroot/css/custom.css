@@ -112,3 +112,9 @@ and open the template in the editor.
     //color: red;
     border: 1px #F00 solid;
 }
+/* for Onsite Schedule*/
+#onsite_list{position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
+.onsite_qo_single{padding: 13px 0px; max-width: 230px; min-width: 225px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important;}
+.onsite_qo_single:hover{ background:#6ad2eb; color:#FFF; cursor:pointer;}
+.no_result  {padding: 13px 0px; max-width: 230px; min-width: 224px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important; }
+.no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}

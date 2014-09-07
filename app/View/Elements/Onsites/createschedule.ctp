@@ -1,9 +1,9 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('customername', 
+        <?php echo $this->Form->input('Onsite.customer_name', 
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
-                    'autoComplete'=>'off','type'=>'text','name'=>'customername')); ?>
+                    'autoComplete'=>'off','type'=>'text','name'=>'data[Onsite][customer_name]')); ?>
         <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'customer_id')); ?>
         <div id="result">
         </div>
@@ -52,7 +52,7 @@
     </div>
    <label class="col-md-2 control-label" for="val_details">Details</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('details', array('id'=>'val_details','class'=>'form-control','label'=>false,
+        <?php echo $this->Form->textarea('details', array('id'=>'val_details','class'=>'form-control','label'=>false,
            'placeholder'=>'Enter the Details')); ?>
     </div>
    
@@ -62,11 +62,11 @@
     
      <label class="col-md-2 control-label" for="val_schedule_no">Onsite Schedule No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('scheduleno', array('id'=>'val_schedule_no','class'=>'form-control','label'=>false,'placeholder'=>'Onsite Schedule No',)); ?>
+        <?php echo $this->Form->input('scheduleno', array('id'=>'val_schedule_no','class'=>'form-control','label'=>false,'placeholder'=>'Onsite Schedule No','value'=>$onsite_no)); ?>
     </div>
      <label class="col-md-2 control-label" for="val_date">Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
+        <?php echo $this->Form->input('schedule_date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Date','label'=>false)); ?>
      
     </div>
@@ -77,7 +77,7 @@
     <label class="col-md-2 control-label" for="val_time">Onsite Schedule Time</label>
     <div class="col-md-4">
          <div class="input-group bootstrap-timepicker">
-                                                    <input type="text" id="example-timepicker24" name="example-timepicker24" class="form-control input-timepicker24">
+                                                    <input type="text" id="example-timepicker24" name="schedule_time" class="form-control input-timepicker24">
                                                     <span class="input-group-btn">
                                                         <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-clock-o"></i></a>
                                                     </span>
@@ -96,7 +96,7 @@
      <label class="col-md-2 control-label" for="val_remarks">Remarks</label>
     <div class="col-md-4">
         <?php
-        echo $this->Form->input('Customerspecialneed.remarks', array('id' => 'val_remarks', 'class' => 'form-control',
+        echo $this->Form->input('Onsite.remarks', array('id' => 'val_remarks', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea'));
         ?>    
     </div>

@@ -34,6 +34,7 @@ class ClientposController extends AppController
           $this->set(compact('po_list','customer_quotation_list','po_single','track_id'));
           if($this->request->is(array('post','put')))
           {
+              
              
               if(!empty($this->request->data['clientpos_id'])&& !empty($this->request->data['po_quantity'])):
                 $po_number_array    =   $this->request->data['clientpos_id'];
@@ -42,14 +43,13 @@ class ClientposController extends AppController
                 $imploded_po_count  =   implode(',',$po_count_array);
                 $qo_array['Clientpo']['Purchaseorder']           =   array_combine($po_number_array,$po_count_array);
               endif;
-              
-              //For Quotation array
+             
               if ($this->request->data['quotation_no'] != '' &&$this->request->data['quo_quantity'] != ''):
                 $qo_id_array = $this->request->data['quotation_no'];
                 $qo_count_array = $this->request->data['quo_quantity'];
                 $qo_array['Clientpo']['Quotation'] = array($qo_id_array => $qo_count_array);
                 foreach ($qo_array['Clientpo']['Quotation'] as $qokey => $qocount) {
-                    $this->Quotation->updateAll(array('Quotation.track_id'=>'"'.$this->request->data['track_id'].'"','Quotation.ref_count'=>'"'.$imploded_po.'"','Quotation.ref_no'=>'"'.$imploded_po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1,'Quotation.is_pocount_satisfied'=>1),array('Quotation.quotationno'=>$qokey));
+                    $this->Quotation->updateAll(array('Quotation.track_id'=>'"'.$this->request->data['track_id'].'"','Quotation.ref_count'=>'"'.$imploded_po_count.'"','Quotation.ref_no'=>'"'.$imploded_po.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1,'Quotation.is_pocount_satisfied'=>1),array('Quotation.quotationno'=>$qokey));
                         //For data  log and log activity
                         $this->Logactivity->create();
                         $this->request->data['Logactivity']['logname'] = 'ClientPO';
@@ -427,10 +427,10 @@ class ClientposController extends AppController
         
         $pos_array  = array_combine($exploded_ref_no, $exploded_ref_count);
         $count=0;
-       
+      
         if(!empty($pos_array)):
             foreach($pos_array as $k=>$v):
-                $total_array['Purchaseorder'][$count]    =   array('po_no'=>$v,'po_count'=>$k);
+                $total_array['Purchaseorder'][$count]    =   array('po_no'=>$k,'po_count'=>$v);
                 $count  =   $count+1;
             endforeach;
         endif;
@@ -446,6 +446,7 @@ class ClientposController extends AppController
                 $total_array['Deliveryorder'][$k]  =   array('deliveryorder_no'=>$v['Deliveryorder']['delivery_order_no'],'do_count'=>count($v['DelDescription'])); 
             endforeach;
         endif;
+        
         if(!empty($total_array)):
             echo json_encode($total_array);
         endif;

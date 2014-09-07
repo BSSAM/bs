@@ -19,7 +19,7 @@ class InvoicesController extends AppController
         //pr($unapproved_order_list);exit;
         
         $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1)));
-//              pr($prepareinvoice_approved_list);exit;
+              pr($prepareinvoice_approved_list);exit;
         $approved_order_list   =    $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
         //pr($approved_order_list);exit;
         $this->set(compact('unapproved_order_list','prepareinvoice_approved_list','approved_order_list'));

@@ -1,6 +1,28 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
+<script type="text/javascript">
+    $(function(){
+        $("#onsite_list").hide();
+        $("#onsite_input_search").keyup(function() 
+        { 
+            var quotation_id = $(this).val();
+            var dataString = 'id='+ quotation_id;
+            if(quotation_id!='')
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "<?PHP echo Router::url('/',true); ?>/Onsites/quotation_search",
+                    data: dataString,
+                    cache: false,
+                    success: function(html)
+                    {
+                        $("#onsite_list").html(html).show();
+                    }
+                });
+            }return false;    
+        });});
+</script>     
 
                     <h1>
                         <i class="gi gi-user"></i>Add Onsite Schedule
@@ -30,7 +52,7 @@
                                                     <button class="btn btn-primary onsite_search" type="button">Proceed</button>
                                                 </span>
                                             </div>
-                                            <div id="sales_list">
+                                            <div id="onsite_list">
                                             </div>
                                         </div>
                                     </h2>
@@ -39,8 +61,11 @@
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
                                     <?php echo $this->Form->create('Onsite',array('class'=>'form-horizontal form-bordered','id'=>'form-onsite-add')); ?>
-                                    <?php //echo $this->Form->input('Deliveryorder.customer_id', array('type'=>'hidden','value'=>'')); ?>
-                                    <?php // echo $this->Form->input('Deliveryorder.salesorder_id', array('type'=>'hidden','value'=>'')); ?>
+                                    <?php echo $this->Form->input('Onsite.onsiteschedule_no', array('type'=>'hidden','value'=>$onsite_no,'id'=>'onsiteschedule_no')); ?>
+                                    <?php echo $this->Form->input('Onsite.quotation_id', array('type'=>'hidden','id'=>'quotation_id')); ?>
+                                    <?php echo $this->Form->input('Onsite.quotationno', array('type'=>'hidden','id'=>'quotationno')); ?>
+                                    <?php echo $this->Form->input('Onsite.customer_id', array('type'=>'hidden','id'=>'customer_id')); ?>
+                                   
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
@@ -61,22 +86,24 @@
                                                 </div>
                                                  <div class="tab-pane" id="tab3">
                                                     <?PHP echo $this->element('Onsites/engineer'); ?>
+                                                     <div class="form-group form-actions">
+                                                         <div class="col-md-9 col-md-offset-10">
+                                                             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary onsite_submit', 'escape' => false)); ?>
+                                                             <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                                                         </div>
+                                                     </div>
                                                 </div>
+                                               <?php echo $this->Form->end(); ?>
                                                 <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Onsites/fileupload'); ?>
+                                                    <?PHP echo $this->element('Onsites/file_upload'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->
                                         </div><!-- panel-body -->
-                                        <div class="form-group form-actions">
-                                            <div class="col-md-9 col-md-offset-10">
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary onsite_submit','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <!-- panel -->
-                                    <?php echo $this->Form->end(); ?>
+                                   
                                 </div>
                                 <!-- END Basic Form Elements Content -->
                             </div>
