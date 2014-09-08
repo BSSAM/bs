@@ -234,10 +234,11 @@
                                  <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval'||$control=='PurchaseRequisitions'||$control=='Reqpurchaseorders')?'style=display:block':'';?>>
                                     <?php if($user_role['job_quotation']['view'] == 1){ ?>
                                     <li>
-                                        <?php  $a=($control == 'Clientpos')?'active':''; ?>
+                                        <?php  if($user_role['app_clientpo']['view'] == 1) ?>
+                                         <?php  $a=($control == 'Clientpos')?'active':''; ?>
                                          <?php echo $this->Html->link('Client Po List',array('controller'=>'Clientpos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                     <?php if($user_role['job_quotation']['view'] == 1){ ?>
+                                     <?php if($user_role['app_clientpo']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Clientposapproval')?'active':''; ?>
                                          <?php echo $this->Html->link('Client Po Approval',array('controller'=>'Clientposapproval','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
@@ -279,13 +280,13 @@
                                     </li><?php } ?>
                                     
                                     
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <?php if($user_role['job_subcontract']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Subcontractdos')?'active':''; ?>
                                          <?php echo $this->Html->link('Sub Contract DO',array('controller'=>'Subcontractdos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
                                     
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <?php if($user_role['job_jobmonitor']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Jobmonitorings')?'active':''; ?>
                                          <?php echo $this->Html->link('Job Monitoring',array('controller'=>'Jobmonitorings','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
@@ -297,22 +298,22 @@
                                          <?php echo $this->Html->link('Proforma Invoice',array('controller'=>'Proformas','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
 <!--                                          <a href="#"><?php //echo 'Proforma Invoice'; ?></a>-->
                                     </li><?php } ?>
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <?php if($user_role['job_invoice']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Invoices')?'active':''; ?>
                                           <?php echo $this->Html->link('Invoice',array('controller'=>'Invoices','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <?php if($user_role['job_candd']['view'] == 1){ ?>
                                      <li>
                                           <?php  $a=($control == 'Candds')?'active':''; ?>
                                           <?php echo $this->Html->link('C & D Info',array('controller'=>'Candds','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                   <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                   <?php if($user_role['job_purchasereq']['view'] == 1){ ?>
                                      <li>
                                           <?php  $a=($control == 'PurchaseRequisitions')?'active':''; ?>
                                           <?php echo $this->Html->link('Purchase Requisition',array('controller'=>'PurchaseRequisitions','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                     <?php if($user_role['job_prpurchaseorder']['view'] == 1){ ?>
                                      <li>
                                           <?php  $a=($control == 'Reqpurchaseorders')?'active':''; ?>
                                           <?php echo $this->Html->link('PR_Purchase Order',array('controller'=>'Reqpurchaseorders','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
@@ -323,7 +324,7 @@
                                         <?php  //$a=($control == 'Debtchases')?'active':''; ?>
                                         <?php //echo $this->Html->link('Debt Chase',array('controller'=>'Debtchases','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php  // } ?>
-                                    <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                    <?php if($user_role['job_onsite']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Onsites')?'active':''; ?>
                                         <?php echo $this->Html->link('OnSite Schedule',array('controller'=>'Onsites','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>

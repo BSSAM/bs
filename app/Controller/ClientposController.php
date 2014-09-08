@@ -13,6 +13,9 @@ class ClientposController extends AppController
                             'Contactpersoninfo','CusSalesperson','Clientpo');
     public function index()
     {
+//        if($user_role['app_clientpo']['view'] == 0){ 
+//         return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+//        }
         $clientpo    =   $this->Customer->find('all',array('conditions'=>array('Customer.status'=>1,'Customer.is_deleted'=>0,'Customer.is_approved'=>1)));
         //pr($clientpo);exit;
         $this->set(compact('clientpo'));
@@ -490,7 +493,7 @@ class ClientposController extends AppController
         //echo $name;
         $customer_id    =   $this->request->data['customer_id'];
         $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no LIKE'=>'%'.$name.'%','Quotation.customer_id'=>$customer_id,'Quotation.is_pocount_satisfied'=>0)));
-        pr($data);exit;
+        //pr($data);exit;
         $c = count($data);
         if($c>0)
         {

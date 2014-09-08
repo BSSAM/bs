@@ -16,7 +16,10 @@ class ClientposapprovalController extends AppController {
 
     public function index() 
     {
-        //$this->Quotation->recursive = 1; 
+        //$this->Quotation->recursive = 1;
+//        if($user_role['app_clientpo']['view'] == 0){ 
+//         return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+//        }
         $quotation_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Quotation.is_approved' =>1), 'order' => array('Quotation.id' => 'DESC')));
         $quotation_lists_bybeforeinvoice = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>2,'Quotation.is_approved' =>1), 'order' => array('Quotation.id' => 'DESC')));
         $this->set(compact('quotation_list_bybeforedo','quotation_lists_bybeforeinvoice'));
