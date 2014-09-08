@@ -1,5 +1,6 @@
-<script> var path_url='<?PHP echo Router::url('/',true); ?>';</script>
-<h1> <i class="gi gi-user"></i>Edit Instrument for Group </h1>
+ <h1><script>
+    var path='<?PHP echo Router::url('/',true); ?>';
+</script> <i class="gi gi-user"></i>Edit Instrument for Group </h1>
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
@@ -93,8 +94,20 @@
         </div>
     <div class="form-group form-actions">
         <div class="col-md-9 col-md-offset-10">
-            <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary sales_submit', 'escape' => false)); ?>
-        </div>
+            <?php //echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary sales_submit', 'escape' => false)); ?>
+        
+        <?php echo $this->Form->input('InstrumentType.id', array('name'=>'group_id','id'=>'group_id','type'=>'hidden','value'=>$ins_dat['InstrumentType']['id'])); ?>
+        <?php if($user_role['ins_instrumentforgroup']['edit'] == 1 && $ins_dat['InstrumentType']['is_approved']==0): ?>
+        <?php if($user_role['app_instrumentgroup']['view'] == 1){ ?>
+        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_group','escape' => false)); ?>
+        <?php } else {?>
+        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary sales_submit','escape' => false)); ?>
+        <?php } ?>
+        <?php else : ?>
+        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary sales_submit','escape' => false)); ?>
+        
+        <?php endif; ?>
+           </div>                                     
     </div>
     <?php echo $this->Form->end(); ?>
 </div>

@@ -32,7 +32,7 @@
                                     
                                     <?php foreach($instrumentforgroups as $instrument): ?>
                                        
-                                    <tr <?php if($instrument['InstrumentType']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                    <tr <?php if($instrument['InstrumentType']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                     <td class="text-center"><?php echo $instrument['InstrumentType']['id'];?></td>
                                         <td class="text-center"><?php echo $instrument['InstrumentType']['group_name'];?></td>
                                         <td class="text-center"><?php echo $instrument['InstrumentType']['group_description'];?></td>

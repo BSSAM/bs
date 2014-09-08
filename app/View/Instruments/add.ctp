@@ -53,17 +53,17 @@
                                     <div class="form-group">
                                         <label class="col-md-2 control-label" for="machine_name">Name</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('name', array('id'=>'machine_name','class'=>'form-control','placeholder'=>'Enter the Instrument Name','label'=>false,'name'=>'name')); ?>
+                                            <?php echo $this->Form->input('Instrument.name', array('id'=>'machine_name','class'=>'form-control','placeholder'=>'Enter the Instrument Name','label'=>false)); ?>
                                         </div>
                                         <label class="col-md-2 control-label" for="machine_description">Description</label>
                                         <div class="col-md-4">
-                                           <?php echo $this->Form->input('description', array('id'=>'machine_description','class'=>'form-control','label'=>false,'name'=>'description','type'=>'textarea')); ?>
+                                           <?php echo $this->Form->input('Instrument.description', array('id'=>'machine_description','class'=>'form-control','label'=>false,'type'=>'textarea')); ?>
                                         </div>
                                     </div>
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="example-chosen-multiple">Department</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('department_id', array('class'=>'form-control','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','name'=>'department_id','id'=>'department_id','empty'=>'Select Department')); ?>
+                                        <?php echo $this->Form->input('Instrument.department_id', array('class'=>'form-control','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','id'=>'department_id','empty'=>'Select Department')); ?>
                                         
                                     </div>
                                     <label class="col-md-2 control-label" for="example-chosen-multiple">Procedure</label>
@@ -92,7 +92,7 @@
                                     
                                     <label class="col-md-2 control-label" for="status">Active</label>
                                     <div class="col-md-4 form-control-static">
-                                            <?php echo $this->Form->checkbox('status', array('id'=>'status','class'=>'','label'=>false,'name'=>'status')); ?>
+                                            <?php echo $this->Form->checkbox('Instrument.status', array('id'=>'status','class'=>'','label'=>false)); ?>
                                     </div>
                                 </div>
                                      <div class="form-group form-actions">

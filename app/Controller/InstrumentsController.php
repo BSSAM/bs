@@ -61,8 +61,9 @@ class InstrumentsController extends AppController
             $instrumentpro_array = $this->request->data['InstrumentProcedure']['procedure_id'];
             $instrumentbra_array = $this->request->data['InstrumentBrand']['brand_id'];
             $instrumentran_array = $this->request->data['InstrumentRange']['range_id'];
-           // pr($this->request->data);exit;
-            if($this->Instrument->save($this->request->data))
+            $this->request->data['Instrument']['ins_date'] = date('Y-m-d');
+           
+            if($this->Instrument->save($this->request->data['Instrument']))
             {
                 $last_insert_id =   $this->Instrument->getLastInsertID();
                 if(!empty($instrumentpro_array))
@@ -287,5 +288,84 @@ class InstrumentsController extends AppController
             return "No Procedure Available";
         }
            
+    }
+    
+    public function other($id=NULL)
+    {
+        $this->autoRender = false;
+        $cal = $this->Instrument->find('all', array('conditions' => array('Instrument.status' => 1, 'Instrument.is_approved' => 1,'Instrument.department_id >'=>4), 'group' => 'ins_date', 'fields' => array('count(Instrument.ins_date) as title', 'ins_date as start'), 'recursive' => '-1'));
+
+        $event_array = array();
+        foreach ($cal as $cal_list => $v) {
+            $event_array[$cal_list]['title'] = $v[0]['title'];
+            $event_array[$cal_list]['start'] = $v['Instrument']['start'];
+        }
+        return json_encode($event_array);
+
+    }
+    public function temp($id=NULL)
+    {
+        $this->autoRender = false;
+        $cal = $this->Instrument->find('all', array('conditions' => array('Instrument.status' => 1, 'Instrument.is_approved' => 1, 'Instrument.department_id'=>4), 'group' => 'ins_date', 'fields' => array('count(Instrument.ins_date) as title', 'ins_date as start'), 'recursive' => '-1'));
+        //pr($cal);exit;
+        $event_array = array();
+        foreach ($cal as $cal_list => $v) {
+            $event_array[$cal_list]['title'] = $v[0]['title'];
+            $event_array[$cal_list]['start'] = $v['Instrument']['start'];
+        }
+        return json_encode($event_array);
+
+    }
+    public function pre($id=NULL)
+    {
+        $this->autoRender = false;
+        $cal = $this->Instrument->find('all', array('conditions' => array('Instrument.status' => 1, 'Instrument.is_approved' => 1, 'Instrument.department_id'=>3), 'group' => 'ins_date', 'fields' => array('count(Instrument.ins_date) as title', 'ins_date as start'), 'recursive' => '-1'));
+        //pr($cal);exit;
+        $event_array = array();
+        foreach ($cal as $cal_list => $v) {
+            $event_array[$cal_list]['title'] = $v[0]['title'];
+            $event_array[$cal_list]['start'] = $v['Instrument']['start'];
+        }
+        return json_encode($event_array);
+
+    }
+    public function ele($id=NULL)
+    {
+        $this->autoRender = false;
+        $cal = $this->Instrument->find('all', array('conditions' => array('Instrument.status' => 1, 'Instrument.is_approved' => 1, 'Instrument.department_id'=>2), 'group' => 'ins_date', 'fields' => array('count(Instrument.ins_date) as title', 'ins_date as start'), 'recursive' => '-1'));
+        //pr($cal);exit;
+        $event_array = array();
+        foreach ($cal as $cal_list => $v) {
+            $event_array[$cal_list]['title'] = $v[0]['title'];
+            $event_array[$cal_list]['start'] = $v['Instrument']['start'];
+        }
+        return json_encode($event_array);
+
+    }
+    public function dim($id=NULL)
+    {
+        $this->autoRender = false;
+        $cal = $this->Instrument->find('all', array('conditions' => array('Instrument.status' => 1, 'Instrument.is_approved' => 1, 'Instrument.department_id'=>1), 'group' => 'ins_date', 'fields' => array('count(Instrument.ins_date) as title', 'ins_date as start'), 'recursive' => '-1'));
+        //pr($cal);exit;
+        $event_array = array();
+        foreach ($cal as $cal_list => $v) {
+            $event_array[$cal_list]['title'] = $v[0]['title'];
+            $event_array[$cal_list]['start'] = $v['Instrument']['start'];
+        }
+        return json_encode($event_array);
+
+    }
+    public function tech($id=NULL)
+    {
+        $this->autoRender = false;
+        $cal = $this->Instrument->find('all', array('conditions' => array('Instrument.status' => 1, 'Instrument.is_approved' => 1), 'group' => 'ins_date', 'fields' => array('count(Instrument.ins_date) as title', 'ins_date as start'), 'recursive' => '-1'));
+
+        $event_array = array();
+        foreach ($cal as $cal_list => $v) {
+            $event_array[$cal_list]['title'] = $v[0]['title'];
+            $event_array[$cal_list]['start'] = $v['Instrument']['start'];
+        }
+        return json_encode($event_array);
+
     }
 }

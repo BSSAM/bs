@@ -541,6 +541,9 @@
                                     <?php if($user_role['app_range']['view'] != 0){ ?>
                                     <li><a href="#brand">Brand <span class="badge animation-floating"><?php echo $log_activity_brand_count; ?></span></a></li>
                                     <?php } ?>
+                                    <?php if($user_role['app_instrumentgroup']['view'] != 0){ ?>
+                                    <li><a href="#group">Instruments for Group <span class="badge animation-floating"><?php echo $log_activity_group_count; ?></span></a></li>
+                                    <?php } ?>
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
@@ -780,7 +783,52 @@
                                 </div>
                                 </div>
                             </div>
-                            
+                            <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------Instrument For Group----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            <div class="tab-pane" id="group">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                <table id="qofull-datatable1"  class="table table-vcenter table-condensed table-bordered">
+                                        <?PHP if (!empty($log_activity_group)): ?>
+                                        <thead>
+                                            <tr>
+                                            <th>Flag</th>
+                                            <th>Name(Details)</th>
+                                            <th>Approval</th>
+                                            <th>Created</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach ($log_activity_group as $log_activity_group_list) :?>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-br.jpg', array('alt' => 'Instrument','class'=>'')); ?></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_group_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_group_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_group_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center ">
+                                           <?PHP if($log_activity_group_list['Logactivity']['logname'] == 'Instrument For Group'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Instrumentforgroups','action'=>'edit',$log_activity_group_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                           
+                                            </td>
+                                            <td class="">by <?PHP echo $log_activity_group_list['User']['username'] ?><br><small><?PHP echo $log_activity_group_list['Logactivity']['created'] ?></small></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        </tbody>
+                                        <?php else: ?>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Instrument for Group Approval Available
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <?php endif; ?>
+                                </table>
+                                </div>
+                                </div>
+                            </div>
                          
                             
                             </div>
@@ -958,17 +1006,19 @@
                                     <ul class="calendar-events calender_listing">
                                         <li class="quote_calendar" data-id="Quotations">Quotation</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Salesorders">Sales Order</li><!--  style="background-color: #9b59b6"  -->
+                                        <li class="quote_calendar" data-id="Quotations">Client PO</li><!--   style="background-color: #f39c12"  -->
                                         <li class="quote_calendar" data-id="Deliveryorders">Delivery Order</li><!--   style="background-color: #3498db"  -->
                                         <li class="quote_calendar" data-id="Quotations">Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">Client PO</li><!--   style="background-color: #f39c12"  -->
+                                        <li class="quote_calendar" data-id="Onsites">Onsite</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">PR</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">PO</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">ELECTRICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">TEMPERATURE</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">MECHANICAL</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">DIMENSION</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Onsites">Onsite</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Instruments/tech">TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Instruments/dim">DIMENSIONAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Instruments/ele">ELECTRICAL</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Instruments/pre">PRESSURE</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Instruments/temp">TEMPERATURE</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Instruments/other">OTHERS</li>
+                                        
                                    </ul>
                                 </div>
                             </div>

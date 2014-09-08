@@ -3,8 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/xampp/htdocs/bs/app/Controller/ClientposController.php</file>
-            <file>file:/F:/xampp/htdocs/bs/app/View/Clientpos/Purchaseorder_fullinvoice.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Ranges/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instruments/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instrumentforgroups/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Ranges/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/AppController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instruments/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/DashboardsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/RangesController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instrumentforgroups/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/QuotationsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Instrument.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instrumentforgroups/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/ProceduresController.php</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/functions.js</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentforgroupsController.php</file>
         </group>
     </open-files>
 </project-private>

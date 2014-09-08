@@ -632,6 +632,27 @@ $(document).ready(function(){
     }
        
    });
+    // Instrument Group Approval
+    $(document).on('click','.approve_group',function(){
+       var group_id = $('#group_id').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+group_id,
+            url: path+'Instrumentforgroups/approve/',
+            success: function(data)
+            {
+                window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
     
    
 }); 

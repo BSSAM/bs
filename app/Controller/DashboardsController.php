@@ -113,6 +113,17 @@ class DashboardsController extends AppController
         $this->set('log_activity_brand_count', $logactivity_brand_count);
         
         /*****************************************************/
+         /****************** Log Activity - Instrument For Group ********************/
+        
+        $logactivity_group = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Instrument For Group")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_group', $logactivity_group);
+        
+        $logactivity_group_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Instrument For Group")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_group_count', $logactivity_group_count);
+        
+        /*****************************************************/
         
         /****************** Log Activity - Customer ********************/
         

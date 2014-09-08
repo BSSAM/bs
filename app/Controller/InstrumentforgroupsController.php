@@ -11,7 +11,7 @@ class InstrumentforgroupsController extends AppController
     public $uses = array('Priority', 'Paymentterm', 'Quotation', 'Currency', 'Document',
         'Country', 'Additionalcharge', 'Service', 'CustomerInstrument', 'Customerspecialneed',
         'Instrument', 'Brand', 'Customer', 'Device', 'Unit', 'Logactivity', 'InstrumentType',
-        'Contactpersoninfo', 'CusSalesperson', 'Clientpo', 'branch','Datalog');
+        'Contactpersoninfo', 'CusSalesperson', 'Clientpo', 'branch','Datalog','Logactivity');
 
     public function index()
     {
@@ -120,7 +120,9 @@ class InstrumentforgroupsController extends AppController
              return $this->redirect(array('action'=>'edit'));
         }
         $instrumentgroup =  $this->InstrumentType->findById($id); 
-        
+        $ins_dat = $this->InstrumentType->find('first',array('conditions'=>array('InstrumentType.id'=>$id),'recursive'=>'2'));
+        //pr($ins_dat);exit;
+        $this->set('ins_dat',$ins_dat);
         if($this->request->is(array('post','put')))
         {
             $this->InstrumentType->id = $id;
@@ -308,6 +310,15 @@ class InstrumentforgroupsController extends AppController
             $this->Instrumentforgroup->saveField('delay', $title);
             echo $title;
         }
+    }
+    public function approve()
+    {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->InstrumentType->updateAll(array('InstrumentType.is_approved'=>1),array('InstrumentType.id'=>$id));
+            $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Instruments for Group'));
+            //$details=$this->Instrumentforgroup->find('first',array('conditions'=>array('Instrumentforgroup.id'=>$id)));
     }
 }
 

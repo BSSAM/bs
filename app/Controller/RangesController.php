@@ -55,7 +55,7 @@ class RangesController extends AppController
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         
-        $unit_array =   $this->Unit->find('list',array('conditions'=>array('Unit.status'=>'1'),'fields'=>array('id','unit_name')));
+        $unit_array =   $this->Unit->find('list',array('conditions'=>array('Unit.status'=>'1','Unit.is_approved'=>'1'),'fields'=>array('id','unit_name')));
         $this->set('units',$unit_array);
       
         if($this->request->is('post'))
@@ -115,7 +115,7 @@ class RangesController extends AppController
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         
-        $unit_array =   $this->Unit->find('list',array('conditions'=>array('Unit.status'=>'1'),'fields'=>array('id','unit_name')));
+        $unit_array =   $this->Unit->find('list',array('conditions'=>array('Unit.status'=>'1','Unit.is_approved'=>'1'),'fields'=>array('id','unit_name')));
         $this->set('units',$unit_array);
         
         $range_dat = $this->Range->find('first',array('conditions'=>array('Range.id'=>$id),'recursive'=>'2'));
