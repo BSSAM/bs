@@ -9,7 +9,20 @@
          submit    : 'Save',
          tooltip   : 'Click to edit the title'
     });
+//    var oTable = $('#example-datatable').dataTable({
+//    //some properties
+//})
+//var oSettings = oTable.fnSettings();
+//oSettings._iDisplayLength = 50;
+//oTable.fnDraw();
+//     $('#example-datatable').dataTable( {
+//        "iDisplayLength": 50,
+//    "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
+//    } );
 });
+
+   
+
 </script>                
 <h1>
     <i class="gi gi-user"></i>Lab Process of <?php echo $lab_sales_id; ?> 

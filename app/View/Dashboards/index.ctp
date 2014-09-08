@@ -1,29 +1,36 @@
 <script>
     var path='<?PHP echo Router::url('/',true); ?>';
    $(document).on('click','.approve_clientpo',function(){
+       var val_quotationid = $('#quo_po_app').val();
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_quotationid,
+            url: path_url+'Clientpos/approve/',
+            success: function(data)
+            {
+                if(data=='success')
+                    {
+                        alert('Client PO is Approved');
+                        window.location.reload();
+                    }
+                    else
+                        {
+                             alert('Client PO is Approval Failed due to unknown Cause');
+                              window.location.reload();
+                        }
+                
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
        
-    // before check wich action to do
-    if ( $(this).hasClass('btn-primary') ){
-        // this is the first click
-        $(this).removeClass( 'btn-primary' );
-        $(this).addClass( 'btn-danger' );
-        $(this).val( 'Confirm' );
-        var THIS = $(this);
-        setTimeout(function(){
-            THIS.removeClass( 'btn-danger' );
-            THIS.addClass( 'btn-primary' );
-            THIS.val( 'Approve' );
-        }, 5000);
-    }
-    if ( $(this).hasClass('btn-danger') ){
-        // this is the second/confirmation click
-        $(this).removeClass( 'btn-danger' );
-        $(this).addClass( 'btn-primary' );
-        $(this).val( 'Approve' );
-
-        // do your action
-    }
    });
+   
    
     </script>
 <div class="row">
@@ -344,7 +351,7 @@
                                             </td>
                                             <td class="text-center ">
                                            <?PHP if($log_activity_deliveryorder_list['Logactivity']['logname'] == 'Deliveryorder'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_deliveryorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Deliveryorders','action'=>'edit',$log_activity_deliveryorder_list['Logactivity']['logno']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_deliveryorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['created'] ?></small></td>
@@ -439,6 +446,7 @@
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-po.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
                                             <td>
                                                 <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_clientpo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_clientpo_list['Logactivity']['logid'] ?></em></small></h4>
+                                            <input type="hidden" id="quo_po_app" value="<?PHP echo $log_activity_clientpo_list['Logactivity']['logid'] ?>">
                                             </td>
                                             <td class="text-center ">
                                             <?PHP if($log_activity_clientpo_list['Logactivity']['logname'] == 'ClientPO'){ ?>
@@ -952,7 +960,7 @@
                                         <li class="quote_calendar" data-id="Salesorders">Sales Order</li><!--  style="background-color: #9b59b6"  -->
                                         <li class="quote_calendar" data-id="Deliveryorders">Delivery Order</li><!--   style="background-color: #3498db"  -->
                                         <li class="quote_calendar" data-id="Quotations">Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
-                                        <li class="quote_calendar" data-id="Clientposapproval">Client PO</li><!--   style="background-color: #f39c12"  -->
+                                        <li class="quote_calendar" data-id="Quotations">Client PO</li><!--   style="background-color: #f39c12"  -->
                                         <li class="quote_calendar" data-id="Quotations">PR</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">PO</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
@@ -960,9 +968,8 @@
                                         <li class="quote_calendar" data-id="Quotations">TEMPERATURE</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">MECHANICAL</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">DIMENSION</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">Onsite</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">Sub-Contract</li><!--  style="background-color: #1abc9c"  -->
-                                    </ul>
+                                        <li class="quote_calendar" data-id="Onsites">Onsite</li><!--  style="background-color: #1abc9c"  -->
+                                   </ul>
                                 </div>
                             </div>
                             <div class="col-md-10">

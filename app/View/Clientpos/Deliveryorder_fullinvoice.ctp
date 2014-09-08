@@ -14,7 +14,7 @@
                                 <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
-                                    <h2 class="pull-right">Track Id : <?PHP //echo $po_first['Clientpo']['track_id']; ?> </h2>
+<!--                                    <h2 class="pull-right">Track Id : <?PHP //echo $po_first['Clientpo']['track_id']; ?> </h2>-->
                                     <h2 class="pull-left"></h2>
                                 </div>
                                 <!-- END Form Elements Title -->

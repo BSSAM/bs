@@ -35,7 +35,7 @@
     <label class="col-md-2 control-label" for="del_attn">ATTN</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.attn', array('id'=>'del_attn',
-            'class'=>'form-control','label'=>false,'type'=>'select','options'=>array($deliveryorder['Deliveryorder']['attn']=>$deliveryorder['Deliveryorder']['attn']),'selected'=>'selected')); ?>
+            'class'=>'form-control','label'=>false,'type'=>'select','options'=>array($contact),'selected'=>'selected')); ?>
     </div>
     <label class="col-md-2 control-label" for="del_email">Email</label>
     <div class="col-md-4">

@@ -487,8 +487,10 @@ class ClientposController extends AppController
     {
         $this->autoRender   =   false;
         $name =  $this->request->data['po_id'];
+        //echo $name;
         $customer_id    =   $this->request->data['customer_id'];
-        $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no LIKE'=>'%'.$name.'%','Quotation.customer_id'=>$customer_id)));
+        $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no LIKE'=>'%'.$name.'%','Quotation.customer_id'=>$customer_id,'Quotation.is_pocount_satisfied'=>0)));
+        pr($data);exit;
         $c = count($data);
         if($c>0)
         {
@@ -565,7 +567,7 @@ class ClientposController extends AppController
         $this->layout   =   'ajax';
         $po_id =  $this->request->data['po_id'];
         $customer_id    =   $this->request->data['customer_id'];
-        $quotations = $this->Clientpo->find('all',array('conditions'=>array('clientpos_no'=>$po_id,'Clientpo.customer_id'=>$customer_id)));
+        $quotations = $this->Clientpo->find('all',array('conditions'=>array('clientpos_no'=>$po_id,'Clientpo.customer_id'=>$customer_id,'Clientpo.is_pocount_satisfied'=>0)));
         $this->set(compact('quotations'));
 //        if(!empty($data))
 //        {
@@ -618,4 +620,33 @@ class ClientposController extends AppController
         $sales_plus_delivery    = array_merge($delivery_array, $sales_array);
         echo json_encode($sales_plus_delivery);
     }
+    
+    public function approve()
+        {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $quotation=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id),'recursive'=>2));
+            //$quotation
+            $updated    =   $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1,'Quotation.po_approval_date'=>date('d-m-y')),array('Quotation.quotationno'=>$id,'Quotation.po_generate_type !='=>'Manual'));
+            //return $updated;
+            if($updated!=1)
+            {
+                //pr($id1);exit;
+                $user_id = $this->Session->read('sess_userid');
+                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Clientpo'));
+                echo "success";
+//                $this->request->data['Invoice']['deliveryorder_id']=$id;
+//                $this->request->data['Invoice']['customer_purchaseorder_no']='';
+//                $this->request->data['Invoice']['is_approved']=0;
+//                $this->Invoice->save($this->request->data);
+            }
+            else
+            {
+                $text = "Purchase Order Needs to be Given(Manually) to get Approval";
+                return $text;
+                echo "failure";
+//                $this->Session->setFlash(__('Purchase Order Needs to be Given(Manually) to get Approval'));
+//                $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
+            }
+         }
 }

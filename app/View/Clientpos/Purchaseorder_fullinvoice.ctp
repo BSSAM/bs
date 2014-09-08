@@ -17,7 +17,7 @@
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title clearfix">
-                                    <h2 class="pull-right">Track Id : <?PHP echo $track_id; ?> </h2>
+<!--                                    <h2 class="pull-right">Track Id : <?PHP //echo $track_id; ?> </h2>-->
                                     <h2 class="pull-left"><?PHP echo $this->ClientPO->get_customer_name($this->request->pass[0]); ?></h2>
                                 </div>
                                 <!-- END Form Elements Title -->

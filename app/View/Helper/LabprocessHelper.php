@@ -31,7 +31,7 @@ App::uses('Helper', 'View');
  */
 class LabprocessHelper extends AppHelper 
 {
-    public $uses    =   array('Salesorder','Description');
+    public $uses    =   array('Salesorder','Description','Priority');
    
     public function labprocess_checking($id = null)
     {
@@ -73,6 +73,7 @@ class LabprocessHelper extends AppHelper
         $this->Priority   =   new priority();
         //echo $id;
         $pri_type = $this->Priority->findById($id);
+        //pr($pri_type);
         //pr($pri_type);exit;
         //pr($pri_type['Priority']['priority']);exit;
 //        if($pri_type['Priority']['priority']=='')

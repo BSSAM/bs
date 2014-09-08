@@ -73,12 +73,22 @@
         {
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
-//            pr($deliveryorder);exit;
+            $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
+            $quo=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quo_no),'recursive'=>2));
+            $posat = $quo['Quotation']['is_pocount_satisfied'];
+            //pr($deliveryorder);exit;
             //pr($deliveryorder['Customer']['Contactpersoninfo']);
+            //$this->request->data['Contactpersoninfo
             if($deliveryorder['Deliveryorder']['po_generate_type']=='Automatic' && $deliveryorder['Customer']['acknowledgement_type_id']==1):
-                $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
-                 $this->Session->setFlash(__($quo_no.' - Cannot Approve Deliveryorder without PO Number(Manual) '));
-                 $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
+                $this->set('approval','automaticdo');
+                $this->Session->setFlash(__($quo_no.' - Cannot Approve Deliveryorder without PO Number(Manual) '));
+                $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
+            elseif($deliveryorder['Deliveryorder']['po_generate_type']=='Manual' && $deliveryorder['Customer']['acknowledgement_type_id']==1 && $posat !=1 ):
+                $this->set('approval','manualdo');
+                $this->Session->setFlash(__($quo_no.' - Cannot Approve Deliveryorder without Equal PO Count(Manual) '));
+                $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
+             else:
+                 $this->set('approval','manualdocount');
             endif;
             $this->set(compact('service','deliveryorder'));
             
@@ -86,8 +96,14 @@
             //pr($con);            
             
             $instrument_type = $deliveryorder['InstrumentType']['deliveryorder'];
+            $contact = $deliveryorder['Customer']['Contactpersoninfo'];
+            foreach($contact as $contactlist)
+            {
+                $var = $contactlist['name'];
+            }
                         //echo $instrument_type; exit;
                          $this->set('instrument_type',$instrument_type);
+                          $this->set('contact',$var);
             
             if($this->request->is(array('post','put')))
             {
@@ -289,6 +305,20 @@
 			array('download'=> true, 'name'=>$document_file_name));
             return $this->response;  
 	}
+        public function calendar()
+        {
+            $this->autoRender = false;
+            $cal = $this->Deliveryorder->find('all', array('conditions' => array('Deliveryorder.status' => 1, 'Deliveryorder.is_approved' => 1), 'group' => 'delivery_order_date', 'fields' => array('count(Deliveryorder.delivery_order_date) as title', 'delivery_order_date as start'), 'recursive' => '-1'));
+
+            $event_array = array();
+            foreach ($cal as $cal_list => $v) {
+
+                $event_array[$cal_list]['title'] = $v[0]['title'];
+                $event_array[$cal_list]['start'] = $v['Deliveryorder']['start'];
+            }
+            return json_encode($event_array);
+
+        }
         
        
 }
