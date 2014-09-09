@@ -146,8 +146,8 @@ class LabprocessesController extends AppController
                         ////////////////////////////////
                         $this->request->data['Logactivity']['logname'] = 'Labprocess';
                         $this->request->data['Logactivity']['logactivity'] = 'Add Labprocess';
-                        $this->request->data['Logactivity']['logid'] = $delivery['Deliverorder']['id'];
-                        $this->request->data['Logactivity']['logno'] = $id;
+                        $this->request->data['Logactivity']['logid'] = $last_id;
+                        $this->request->data['Logactivity']['logno'] = $dmt;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 2;
                         $this->Logactivity->save($this->request->data['Logactivity']);
@@ -157,8 +157,8 @@ class LabprocessesController extends AppController
                         */
                         $this->request->data['Logactivity']['logname'] = 'Deliveryorder';
                         $this->request->data['Logactivity']['logactivity'] = 'Add Delivery Order';
-                        $this->request->data['Logactivity']['logid'] = $dmt;
-                        $this->request->data['Logactivity']['logno'] = $delivery['Deliverorder']['id'];
+                        $this->request->data['Logactivity']['logid'] = $last_id;
+                        $this->request->data['Logactivity']['logno'] = $dmt;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
                         $this->Logactivity->save($this->request->data['Logactivity']);
@@ -272,29 +272,7 @@ class LabprocessesController extends AppController
                     $delivery['Deliverorder']['branch_id']  = $branch['branch']['id'];
                     unset($delivery['Deliverorder']['id']);
                     unset($delivery['Deliverorder']['is_approved']);
-                    /******************
-                        * Data Log
-                        */
-                        $this->request->data['Logactivity']['logname'] = 'Deliveryorder';
-                        $this->request->data['Logactivity']['logactivity'] = 'Add Delivery Order';
-                        $this->request->data['Logactivity']['logid'] = $dmt;
-                        $this->request->data['Logactivity']['logno'] = $delivery['Deliverorder']['id'];
-                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                        $this->request->data['Logactivity']['logapprove'] = 1;
-                        $this->Logactivity->save($this->request->data['Logactivity']);
-                        /******************/
-                    //pr($delivery['Deliverorder']);exit;
-                         /*
-                         * Data Log Activity
-                        */
-                        $this->request->data['Datalog']['logname'] = 'Deliveryorder';
-                        $this->request->data['Datalog']['logactivity'] = 'Add';
-                        $this->request->data['Datalog']['logid'] = $dmt;
-                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                     
-                        $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                        /******************/ 
                     if($this->Deliveryorder->save($delivery['Deliverorder']))
                     {
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
@@ -316,6 +294,29 @@ class LabprocessesController extends AppController
                         }
                     }
                     $check_description_count    =   $this->Description->find('all',array('conditions'=>array('AND'=>array('Description.salesorder_id'=>$id,'Description.processing' => 1,'Description.checking' => 1))));
+                    /******************
+                        * Data Log
+                        */
+                        $this->request->data['Logactivity']['logname'] = 'Deliveryorder';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Delivery Order';
+                        $this->request->data['Logactivity']['logid'] = $last_id;
+                        $this->request->data['Logactivity']['logno'] = $dmt;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
+                        $this->Logactivity->save($this->request->data['Logactivity']);
+                        /******************/
+                    //pr($delivery['Deliverorder']);exit;
+                         /*
+                         * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $dmt;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                        /******************/ 
                     if($check_description_count !=0)    
                     {
                         foreach($check_description_count as $description)

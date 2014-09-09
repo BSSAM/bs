@@ -246,6 +246,13 @@ class InstrumentsController extends AppController
         if($this->Instrument->updateAll(array('Instrument.is_deleted'=>1,'Instrument.status'=>0),array('Instrument.id'=>$id)))
         {
             /******************
+            * Log Activity For Delete
+            */
+            
+            $this->Logactivity->deleteAll(array('Logactivity.logname'=>'Instrument','logactivity.logactivity'=>'Add Instrument'),array('Logactivity.logid'=>$id));
+                    
+            /******************/
+            /******************
                     * Data Log Activity
                     */
                     $this->request->data['Datalog']['logname'] = 'Instrument';

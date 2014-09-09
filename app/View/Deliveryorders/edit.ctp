@@ -94,7 +94,7 @@ if(customer!='')
                                            
                                         <div class="form-group form-actions">
                                             <div class="col-md-9 col-md-offset-10">
-                                            <?php if($user_role['app_deliveryorder1']['add'] == 1 && $deliveryorder['Deliveryorder']['is_approved']==1 && $approval=='manualdocount'): ?>
+                                            <?php if($user_role['app_deliveryorder1']['view'] == 1 && $deliveryorder['Deliveryorder']['is_approved']==0 && $approval=='manualdocount'): ?>
                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_deliveryorder','escape' => false)); ?>
                                             <?php else : ?>
                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>

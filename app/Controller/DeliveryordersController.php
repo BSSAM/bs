@@ -161,16 +161,17 @@
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
+            //pr($id);exit;
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.delivery_order_no'=>$id),'recursive'=>2));
             $deliver_customer = $deliveryorder['Deliveryorder']['customer_id'];
             //pr($deliveryorder);exit;
-            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type !='=>'Manual','Customer.acknowledgement_type_id='=>1));
+            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
             //return $updated;
-            if($updated!=1)
+            if($updated==1)
             {
                 //pr($id1);exit;
                 $user_id = $this->Session->read('sess_userid');
-                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Delivery order'));
+                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
                 $this->request->data['Invoice']['deliveryorder_id']=$id;
                 $this->request->data['Invoice']['customer_purchaseorder_no']='';
                 $this->request->data['Invoice']['is_approved']=0;

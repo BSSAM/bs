@@ -1,7 +1,9 @@
 <script>
+    var path_url='<?PHP echo Router::url('/',true); ?>';
     var path='<?PHP echo Router::url('/',true); ?>';
+    
    $(document).on('click','.approve_clientpo',function(){
-       var val_quotationid = $('#quo_po_app').val();
+       var val_quotationid = $(this).attr('id');
        if(window.confirm("Are you sure?")){
        $.ajax({
             type: 'POST',
@@ -9,6 +11,7 @@
             url: path_url+'Clientpos/approve/',
             success: function(data)
             {
+                console.log(data);
                 if(data=='success')
                     {
                         alert('Client PO is Approved');
@@ -17,7 +20,7 @@
                     else
                         {
                              alert('Client PO is Approval Failed due to unknown Cause');
-                              window.location.reload();
+                             window.location.reload();
                         }
                 
             }
@@ -60,7 +63,7 @@
                                 else
                                 {
                                 ?>
-                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_deliveryorder_count)+($log_activity_quotation_count); ?></span></a></li>
+                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_quotation_count)+($log_activity_client_count); ?></span></a></li>
                                 <?php } 
                                 if($user_role['app_procedureno']['view'] == 0 && $user_role['app_brand']['view'] == 0 && $user_role['app_instrument']['view'] == 0 && $user_role['app_range']['view'] == 0 && $user_role['app_unit']['view'] == 0 ){ 
                                     //return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
@@ -68,7 +71,7 @@
                                 else
                                 {
                                 ?>
-                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($log_activity_instrument_count)+($log_activity_procedure_count)+($log_activity_unit_count)+($log_activity_range_count)+($log_activity_brand_count); ?></span></a></li>
+                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($log_activity_instrument_count)+($log_activity_procedure_count)+($log_activity_unit_count)+($log_activity_range_count)+($log_activity_brand_count)+($log_activity_group_count); ?></span></a></li>
                                 <?php 
                                 }
                                 ?>
@@ -351,7 +354,7 @@
                                             </td>
                                             <td class="text-center ">
                                            <?PHP if($log_activity_deliveryorder_list['Logactivity']['logname'] == 'Deliveryorder'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Deliveryorders','action'=>'edit',$log_activity_deliveryorder_list['Logactivity']['logno']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Deliveryorders','action'=>'edit',$log_activity_deliveryorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_deliveryorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['created'] ?></small></td>
@@ -445,15 +448,15 @@
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-po.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_clientpo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_clientpo_list['Logactivity']['logid'] ?></em></small></h4>
-                                            <input type="hidden" id="quo_po_app" value="<?PHP echo $log_activity_clientpo_list['Logactivity']['logid'] ?>">
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_clientpo_list['Logactivity']['logname']; ?></strong></a> <br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['logactivity']; ?>   -  <em><?PHP echo $log_activity_clientpo_list['Logactivity']['logid']; ?></em></small></h4>
+                                            <input type="hidden" id="quo_po_app" value="<?PHP echo $log_activity_clientpo_list['Logactivity']['logid']; ?>">
                                             </td>
                                             <td class="text-center ">
                                             <?PHP if($log_activity_clientpo_list['Logactivity']['logname'] == 'ClientPO'){ ?>
-                                            <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_clientpo')) ?>
+                                            <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_clientpo','id'=>$log_activity_clientpo_list['Logactivity']['logid'])) ?>
                                             <?php }?>
                                             </td>
-                                            <td class="">by <?PHP echo $log_activity_clientpo_list['User']['username'] ?><br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['created'] ?></small></td>
+                                            <td class="">by <?PHP echo $log_activity_clientpo_list['User']['username']; ?><br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['created']; ?></small></td>
                                         </tr>
                                     <?php endif; ?>
                                     <?php endforeach; ?>

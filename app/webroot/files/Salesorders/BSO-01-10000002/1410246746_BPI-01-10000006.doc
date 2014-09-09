@@ -1,0 +1,2220 @@
+<pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd92eff92-trace').style.display = (document.getElementById('cakeErr53f5fd92eff92-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Address [<b>APP\Controller\ProformasController.php</b>, line <b>310</b>]<div id="cakeErr53f5fd92eff92-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd92eff92-code').style.display = (document.getElementById('cakeErr53f5fd92eff92-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd92eff92-context').style.display = (document.getElementById('cakeErr53f5fd92eff92-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f5fd92eff92-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB"></span></span></code>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$customername&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'customername'</span><span style="color: #007700">];</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$billing_address&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Address'</span><span style="color: #007700">][</span><span style="color: #0000BB">1</span><span style="color: #007700">][</span><span style="color: #DD0000">'address'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f5fd92eff92-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+$delivery_data = array(
+	(int) 0 =&gt; array(
+		&#039;Proforma&#039; =&gt; array(
+			&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+			&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+			&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; &#039;0&#039;,
+			&#039;proforma_id&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+			&#039;track_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+			&#039;branchname&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; &#039;null&#039;,
+			&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+			&#039;fax&#039; =&gt; &#039;12345689&#039;,
+			&#039;email&#039; =&gt; &#039;&#039;,
+			&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+			&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+			&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; &#039;4&#039;,
+			&#039;instrument_type&#039; =&gt; &#039;&#039;,
+			&#039;remarks&#039; =&gt; &#039;&#039;,
+			&#039;service_id&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+			&#039;is_deleted&#039; =&gt; &#039;0&#039;
+		),
+		&#039;Customer&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;customergroup_id&#039; =&gt; null,
+			&#039;tag_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;tag_name&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;postalcode&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;industry_id&#039; =&gt; null,
+			&#039;location_id&#039; =&gt; null,
+			&#039;customertype&#039; =&gt; null,
+			&#039;requirements&#039; =&gt; null,
+			&#039;paymentterm_id&#039; =&gt; null,
+			&#039;priority_id&#039; =&gt; null,
+			&#039;calibrationtype&#039; =&gt; null,
+			&#039;invoice_type_id&#039; =&gt; null,
+			&#039;deliveryordertype_id&#039; =&gt; null,
+			&#039;tag&#039; =&gt; null,
+			&#039;acknowledgement_type_id&#039; =&gt; null,
+			&#039;cus_salespeople_count&#039; =&gt; null,
+			&#039;cus_referedby_count&#039; =&gt; null,
+			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;Customertagname&#039; =&gt; null
+		),
+		&#039;Salesorder&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; null,
+			&#039;track_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;quotationno&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; null,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;email&#039; =&gt; null,
+			&#039;reg_date&#039; =&gt; null,
+			&#039;ref_no&#039; =&gt; null,
+			&#039;our_ref_no&#039; =&gt; null,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; null,
+			&#039;instrument_type&#039; =&gt; null,
+			&#039;remarks&#039; =&gt; null,
+			&#039;service_id&#039; =&gt; null,
+			&#039;sal_description_count&#039; =&gt; null,
+			&#039;po_generate_type&#039; =&gt; null,
+			&#039;is_assign_po&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;is_deliveryorder_created&#039; =&gt; null,
+			&#039;is_jobcompleted&#039; =&gt; null,
+			&#039;solist_diff&#039; =&gt; null
+		)
+	)
+)
+$file_type = &#039;doc&#039;
+$filename = &#039;BPI-01-10000006&#039;
+$html = &#039;&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; /&gt;
+&lt;title&gt;PDF&lt;/title&gt;
+&lt;style&gt;
+body { background-color:#fff; font-family:&quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+* { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+.group:before, .group:after { content: &quot;&quot;; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+.pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 900px; }
+.header_id { padding:10px 0; width:100%; display:block; }
+.logo { margin-top:10px;display:inline-block;width:50%; }
+.address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+.address_details p { float:left; width:100%; }
+.address_details a { color: #1bbae1; float:left; width:100%; }
+.cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+.address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+.address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+.address_box p { display:inline-block;}
+.invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+.invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+.invoice_add h5 { display:inline-block; width:30%; }
+.invoice_add span { margin-right:15px;display:inline-block; }
+.invoice_add abbr { font-style: italic;display:inline-block; }
+.services_details { margin-top:20px; width:100%; }
+.services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+.services_details h4 abbr { width: 22%; display:inline-block;}
+.services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+.invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+.invoice_table table { width:100%; border:1px  solid #ccc; border-bottom:none; border-left:none; }
+.invoice_table table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc; border-top:none; border-right:none; }
+.invoice_table table thead { background-color: #f1f1f1; }
+.instrument h4 { font-weight:normal; }
+.instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+    
+&lt;/style&gt;
+&lt;/head&gt;&#039;
+$delivery_data_list = array(
+	&#039;Proforma&#039; =&gt; array(
+		&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+		&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+		&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; &#039;0&#039;,
+		&#039;proforma_id&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+		&#039;track_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+		&#039;branchname&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; &#039;null&#039;,
+		&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+		&#039;fax&#039; =&gt; &#039;12345689&#039;,
+		&#039;email&#039; =&gt; &#039;&#039;,
+		&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+		&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+		&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; &#039;4&#039;,
+		&#039;instrument_type&#039; =&gt; &#039;&#039;,
+		&#039;remarks&#039; =&gt; &#039;&#039;,
+		&#039;service_id&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+		&#039;is_deleted&#039; =&gt; &#039;0&#039;
+	),
+	&#039;Customer&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;customergroup_id&#039; =&gt; null,
+		&#039;tag_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;tag_name&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;postalcode&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;industry_id&#039; =&gt; null,
+		&#039;location_id&#039; =&gt; null,
+		&#039;customertype&#039; =&gt; null,
+		&#039;requirements&#039; =&gt; null,
+		&#039;paymentterm_id&#039; =&gt; null,
+		&#039;priority_id&#039; =&gt; null,
+		&#039;calibrationtype&#039; =&gt; null,
+		&#039;invoice_type_id&#039; =&gt; null,
+		&#039;deliveryordertype_id&#039; =&gt; null,
+		&#039;tag&#039; =&gt; null,
+		&#039;acknowledgement_type_id&#039; =&gt; null,
+		&#039;cus_salespeople_count&#039; =&gt; null,
+		&#039;cus_referedby_count&#039; =&gt; null,
+		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;Customertagname&#039; =&gt; null
+	),
+	&#039;Salesorder&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; null,
+		&#039;track_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;quotationno&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; null,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;email&#039; =&gt; null,
+		&#039;reg_date&#039; =&gt; null,
+		&#039;ref_no&#039; =&gt; null,
+		&#039;our_ref_no&#039; =&gt; null,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; null,
+		&#039;instrument_type&#039; =&gt; null,
+		&#039;remarks&#039; =&gt; null,
+		&#039;service_id&#039; =&gt; null,
+		&#039;sal_description_count&#039; =&gt; null,
+		&#039;po_generate_type&#039; =&gt; null,
+		&#039;is_assign_po&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;is_deliveryorder_created&#039; =&gt; null,
+		&#039;is_jobcompleted&#039; =&gt; null,
+		&#039;solist_diff&#039; =&gt; null
+	)
+)
+$customername = null</pre><pre class="stack-trace">ProformasController::word() - APP\Controller\ProformasController.php, line 310
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd92f268b-trace').style.display = (document.getElementById('cakeErr53f5fd92f268b-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Paymentterm [<b>APP\Controller\ProformasController.php</b>, line <b>317</b>]<div id="cakeErr53f5fd92f268b-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd92f268b-code').style.display = (document.getElementById('cakeErr53f5fd92f268b-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd92f268b-context').style.display = (document.getElementById('cakeErr53f5fd92f268b-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f5fd92f268b-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ref_no&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'ref_no'</span><span style="color: #007700">];</span></span></code>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$reg_date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'reg_date'</span><span style="color: #007700">];</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$payment_term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymentterm'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymenttype'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f5fd92f268b-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+$delivery_data = array(
+	(int) 0 =&gt; array(
+		&#039;Proforma&#039; =&gt; array(
+			&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+			&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+			&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; &#039;0&#039;,
+			&#039;proforma_id&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+			&#039;track_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+			&#039;branchname&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; &#039;null&#039;,
+			&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+			&#039;fax&#039; =&gt; &#039;12345689&#039;,
+			&#039;email&#039; =&gt; &#039;&#039;,
+			&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+			&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+			&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; &#039;4&#039;,
+			&#039;instrument_type&#039; =&gt; &#039;&#039;,
+			&#039;remarks&#039; =&gt; &#039;&#039;,
+			&#039;service_id&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+			&#039;is_deleted&#039; =&gt; &#039;0&#039;
+		),
+		&#039;Customer&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;customergroup_id&#039; =&gt; null,
+			&#039;tag_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;tag_name&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;postalcode&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;industry_id&#039; =&gt; null,
+			&#039;location_id&#039; =&gt; null,
+			&#039;customertype&#039; =&gt; null,
+			&#039;requirements&#039; =&gt; null,
+			&#039;paymentterm_id&#039; =&gt; null,
+			&#039;priority_id&#039; =&gt; null,
+			&#039;calibrationtype&#039; =&gt; null,
+			&#039;invoice_type_id&#039; =&gt; null,
+			&#039;deliveryordertype_id&#039; =&gt; null,
+			&#039;tag&#039; =&gt; null,
+			&#039;acknowledgement_type_id&#039; =&gt; null,
+			&#039;cus_salespeople_count&#039; =&gt; null,
+			&#039;cus_referedby_count&#039; =&gt; null,
+			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;Customertagname&#039; =&gt; null
+		),
+		&#039;Salesorder&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; null,
+			&#039;track_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;quotationno&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; null,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;email&#039; =&gt; null,
+			&#039;reg_date&#039; =&gt; null,
+			&#039;ref_no&#039; =&gt; null,
+			&#039;our_ref_no&#039; =&gt; null,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; null,
+			&#039;instrument_type&#039; =&gt; null,
+			&#039;remarks&#039; =&gt; null,
+			&#039;service_id&#039; =&gt; null,
+			&#039;sal_description_count&#039; =&gt; null,
+			&#039;po_generate_type&#039; =&gt; null,
+			&#039;is_assign_po&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;is_deliveryorder_created&#039; =&gt; null,
+			&#039;is_jobcompleted&#039; =&gt; null,
+			&#039;solist_diff&#039; =&gt; null
+		)
+	)
+)
+$file_type = &#039;doc&#039;
+$filename = &#039;BPI-01-10000006&#039;
+$html = &#039;&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; /&gt;
+&lt;title&gt;PDF&lt;/title&gt;
+&lt;style&gt;
+body { background-color:#fff; font-family:&quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+* { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+.group:before, .group:after { content: &quot;&quot;; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+.pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 900px; }
+.header_id { padding:10px 0; width:100%; display:block; }
+.logo { margin-top:10px;display:inline-block;width:50%; }
+.address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+.address_details p { float:left; width:100%; }
+.address_details a { color: #1bbae1; float:left; width:100%; }
+.cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+.address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+.address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+.address_box p { display:inline-block;}
+.invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+.invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+.invoice_add h5 { display:inline-block; width:30%; }
+.invoice_add span { margin-right:15px;display:inline-block; }
+.invoice_add abbr { font-style: italic;display:inline-block; }
+.services_details { margin-top:20px; width:100%; }
+.services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+.services_details h4 abbr { width: 22%; display:inline-block;}
+.services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+.invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+.invoice_table table { width:100%; border:1px  solid #ccc; border-bottom:none; border-left:none; }
+.invoice_table table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc; border-top:none; border-right:none; }
+.invoice_table table thead { background-color: #f1f1f1; }
+.instrument h4 { font-weight:normal; }
+.instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+    
+&lt;/style&gt;
+&lt;/head&gt;&#039;
+$delivery_data_list = array(
+	&#039;Proforma&#039; =&gt; array(
+		&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+		&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+		&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; &#039;0&#039;,
+		&#039;proforma_id&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+		&#039;track_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+		&#039;branchname&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; &#039;null&#039;,
+		&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+		&#039;fax&#039; =&gt; &#039;12345689&#039;,
+		&#039;email&#039; =&gt; &#039;&#039;,
+		&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+		&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+		&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; &#039;4&#039;,
+		&#039;instrument_type&#039; =&gt; &#039;&#039;,
+		&#039;remarks&#039; =&gt; &#039;&#039;,
+		&#039;service_id&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+		&#039;is_deleted&#039; =&gt; &#039;0&#039;
+	),
+	&#039;Customer&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;customergroup_id&#039; =&gt; null,
+		&#039;tag_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;tag_name&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;postalcode&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;industry_id&#039; =&gt; null,
+		&#039;location_id&#039; =&gt; null,
+		&#039;customertype&#039; =&gt; null,
+		&#039;requirements&#039; =&gt; null,
+		&#039;paymentterm_id&#039; =&gt; null,
+		&#039;priority_id&#039; =&gt; null,
+		&#039;calibrationtype&#039; =&gt; null,
+		&#039;invoice_type_id&#039; =&gt; null,
+		&#039;deliveryordertype_id&#039; =&gt; null,
+		&#039;tag&#039; =&gt; null,
+		&#039;acknowledgement_type_id&#039; =&gt; null,
+		&#039;cus_salespeople_count&#039; =&gt; null,
+		&#039;cus_referedby_count&#039; =&gt; null,
+		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;Customertagname&#039; =&gt; null
+	),
+	&#039;Salesorder&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; null,
+		&#039;track_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;quotationno&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; null,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;email&#039; =&gt; null,
+		&#039;reg_date&#039; =&gt; null,
+		&#039;ref_no&#039; =&gt; null,
+		&#039;our_ref_no&#039; =&gt; null,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; null,
+		&#039;instrument_type&#039; =&gt; null,
+		&#039;remarks&#039; =&gt; null,
+		&#039;service_id&#039; =&gt; null,
+		&#039;sal_description_count&#039; =&gt; null,
+		&#039;po_generate_type&#039; =&gt; null,
+		&#039;is_assign_po&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;is_deliveryorder_created&#039; =&gt; null,
+		&#039;is_jobcompleted&#039; =&gt; null,
+		&#039;solist_diff&#039; =&gt; null
+	)
+)
+$customername = null
+$billing_address = null
+$phone = null
+$fax = null
+$email = null
+$our_ref_no = null
+$ref_no = null
+$reg_date = &#039;14-July-14&#039;</pre><pre class="stack-trace">ProformasController::word() - APP\Controller\ProformasController.php, line 317
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9300afe-trace').style.display = (document.getElementById('cakeErr53f5fd9300afe-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Paymentterm [<b>APP\Controller\ProformasController.php</b>, line <b>317</b>]<div id="cakeErr53f5fd9300afe-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9300afe-code').style.display = (document.getElementById('cakeErr53f5fd9300afe-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9300afe-context').style.display = (document.getElementById('cakeErr53f5fd9300afe-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f5fd9300afe-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ref_no&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'ref_no'</span><span style="color: #007700">];</span></span></code>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$reg_date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'reg_date'</span><span style="color: #007700">];</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$payment_term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymentterm'</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">'&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Customer'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Paymentterm'</span><span style="color: #007700">][</span><span style="color: #DD0000">'paymenttype'</span><span style="color: #007700">];</span></span></code></span></pre><pre id="cakeErr53f5fd9300afe-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+$delivery_data = array(
+	(int) 0 =&gt; array(
+		&#039;Proforma&#039; =&gt; array(
+			&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+			&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+			&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; &#039;0&#039;,
+			&#039;proforma_id&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+			&#039;track_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+			&#039;branchname&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; &#039;null&#039;,
+			&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+			&#039;fax&#039; =&gt; &#039;12345689&#039;,
+			&#039;email&#039; =&gt; &#039;&#039;,
+			&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+			&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+			&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; &#039;4&#039;,
+			&#039;instrument_type&#039; =&gt; &#039;&#039;,
+			&#039;remarks&#039; =&gt; &#039;&#039;,
+			&#039;service_id&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+			&#039;is_deleted&#039; =&gt; &#039;0&#039;
+		),
+		&#039;Customer&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;customergroup_id&#039; =&gt; null,
+			&#039;tag_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;tag_name&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;postalcode&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;industry_id&#039; =&gt; null,
+			&#039;location_id&#039; =&gt; null,
+			&#039;customertype&#039; =&gt; null,
+			&#039;requirements&#039; =&gt; null,
+			&#039;paymentterm_id&#039; =&gt; null,
+			&#039;priority_id&#039; =&gt; null,
+			&#039;calibrationtype&#039; =&gt; null,
+			&#039;invoice_type_id&#039; =&gt; null,
+			&#039;deliveryordertype_id&#039; =&gt; null,
+			&#039;tag&#039; =&gt; null,
+			&#039;acknowledgement_type_id&#039; =&gt; null,
+			&#039;cus_salespeople_count&#039; =&gt; null,
+			&#039;cus_referedby_count&#039; =&gt; null,
+			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;Customertagname&#039; =&gt; null
+		),
+		&#039;Salesorder&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; null,
+			&#039;track_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;quotationno&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; null,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;email&#039; =&gt; null,
+			&#039;reg_date&#039; =&gt; null,
+			&#039;ref_no&#039; =&gt; null,
+			&#039;our_ref_no&#039; =&gt; null,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; null,
+			&#039;instrument_type&#039; =&gt; null,
+			&#039;remarks&#039; =&gt; null,
+			&#039;service_id&#039; =&gt; null,
+			&#039;sal_description_count&#039; =&gt; null,
+			&#039;po_generate_type&#039; =&gt; null,
+			&#039;is_assign_po&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;is_deliveryorder_created&#039; =&gt; null,
+			&#039;is_jobcompleted&#039; =&gt; null,
+			&#039;solist_diff&#039; =&gt; null
+		)
+	)
+)
+$file_type = &#039;doc&#039;
+$filename = &#039;BPI-01-10000006&#039;
+$html = &#039;&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; /&gt;
+&lt;title&gt;PDF&lt;/title&gt;
+&lt;style&gt;
+body { background-color:#fff; font-family:&quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+* { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+.group:before, .group:after { content: &quot;&quot;; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+.pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 900px; }
+.header_id { padding:10px 0; width:100%; display:block; }
+.logo { margin-top:10px;display:inline-block;width:50%; }
+.address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+.address_details p { float:left; width:100%; }
+.address_details a { color: #1bbae1; float:left; width:100%; }
+.cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+.address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+.address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+.address_box p { display:inline-block;}
+.invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+.invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+.invoice_add h5 { display:inline-block; width:30%; }
+.invoice_add span { margin-right:15px;display:inline-block; }
+.invoice_add abbr { font-style: italic;display:inline-block; }
+.services_details { margin-top:20px; width:100%; }
+.services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+.services_details h4 abbr { width: 22%; display:inline-block;}
+.services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+.invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+.invoice_table table { width:100%; border:1px  solid #ccc; border-bottom:none; border-left:none; }
+.invoice_table table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc; border-top:none; border-right:none; }
+.invoice_table table thead { background-color: #f1f1f1; }
+.instrument h4 { font-weight:normal; }
+.instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+    
+&lt;/style&gt;
+&lt;/head&gt;&#039;
+$delivery_data_list = array(
+	&#039;Proforma&#039; =&gt; array(
+		&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+		&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+		&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; &#039;0&#039;,
+		&#039;proforma_id&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+		&#039;track_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+		&#039;branchname&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; &#039;null&#039;,
+		&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+		&#039;fax&#039; =&gt; &#039;12345689&#039;,
+		&#039;email&#039; =&gt; &#039;&#039;,
+		&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+		&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+		&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; &#039;4&#039;,
+		&#039;instrument_type&#039; =&gt; &#039;&#039;,
+		&#039;remarks&#039; =&gt; &#039;&#039;,
+		&#039;service_id&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+		&#039;is_deleted&#039; =&gt; &#039;0&#039;
+	),
+	&#039;Customer&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;customergroup_id&#039; =&gt; null,
+		&#039;tag_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;tag_name&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;postalcode&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;industry_id&#039; =&gt; null,
+		&#039;location_id&#039; =&gt; null,
+		&#039;customertype&#039; =&gt; null,
+		&#039;requirements&#039; =&gt; null,
+		&#039;paymentterm_id&#039; =&gt; null,
+		&#039;priority_id&#039; =&gt; null,
+		&#039;calibrationtype&#039; =&gt; null,
+		&#039;invoice_type_id&#039; =&gt; null,
+		&#039;deliveryordertype_id&#039; =&gt; null,
+		&#039;tag&#039; =&gt; null,
+		&#039;acknowledgement_type_id&#039; =&gt; null,
+		&#039;cus_salespeople_count&#039; =&gt; null,
+		&#039;cus_referedby_count&#039; =&gt; null,
+		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;Customertagname&#039; =&gt; null
+	),
+	&#039;Salesorder&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; null,
+		&#039;track_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;quotationno&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; null,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;email&#039; =&gt; null,
+		&#039;reg_date&#039; =&gt; null,
+		&#039;ref_no&#039; =&gt; null,
+		&#039;our_ref_no&#039; =&gt; null,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; null,
+		&#039;instrument_type&#039; =&gt; null,
+		&#039;remarks&#039; =&gt; null,
+		&#039;service_id&#039; =&gt; null,
+		&#039;sal_description_count&#039; =&gt; null,
+		&#039;po_generate_type&#039; =&gt; null,
+		&#039;is_assign_po&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;is_deliveryorder_created&#039; =&gt; null,
+		&#039;is_jobcompleted&#039; =&gt; null,
+		&#039;solist_diff&#039; =&gt; null
+	)
+)
+$customername = null
+$billing_address = null
+$phone = null
+$fax = null
+$email = null
+$our_ref_no = null
+$ref_no = null
+$reg_date = &#039;14-July-14&#039;</pre><pre class="stack-trace">ProformasController::word() - APP\Controller\ProformasController.php, line 317
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd930359a-trace').style.display = (document.getElementById('cakeErr53f5fd930359a-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined index: Description [<b>APP\Controller\ProformasController.php</b>, line <b>320</b>]<div id="cakeErr53f5fd930359a-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd930359a-code').style.display = (document.getElementById('cakeErr53f5fd930359a-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd930359a-context').style.display = (document.getElementById('cakeErr53f5fd930359a-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f5fd930359a-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$salesorderno&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'salesorderno'</span><span style="color: #007700">];</span></span></code>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Description'</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f5fd930359a-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+$delivery_data = array(
+	(int) 0 =&gt; array(
+		&#039;Proforma&#039; =&gt; array(
+			&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+			&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+			&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; &#039;0&#039;,
+			&#039;proforma_id&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+			&#039;track_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+			&#039;branchname&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; &#039;null&#039;,
+			&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+			&#039;fax&#039; =&gt; &#039;12345689&#039;,
+			&#039;email&#039; =&gt; &#039;&#039;,
+			&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+			&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+			&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; &#039;4&#039;,
+			&#039;instrument_type&#039; =&gt; &#039;&#039;,
+			&#039;remarks&#039; =&gt; &#039;&#039;,
+			&#039;service_id&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+			&#039;is_deleted&#039; =&gt; &#039;0&#039;
+		),
+		&#039;Customer&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;customergroup_id&#039; =&gt; null,
+			&#039;tag_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;tag_name&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;postalcode&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;industry_id&#039; =&gt; null,
+			&#039;location_id&#039; =&gt; null,
+			&#039;customertype&#039; =&gt; null,
+			&#039;requirements&#039; =&gt; null,
+			&#039;paymentterm_id&#039; =&gt; null,
+			&#039;priority_id&#039; =&gt; null,
+			&#039;calibrationtype&#039; =&gt; null,
+			&#039;invoice_type_id&#039; =&gt; null,
+			&#039;deliveryordertype_id&#039; =&gt; null,
+			&#039;tag&#039; =&gt; null,
+			&#039;acknowledgement_type_id&#039; =&gt; null,
+			&#039;cus_salespeople_count&#039; =&gt; null,
+			&#039;cus_referedby_count&#039; =&gt; null,
+			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;Customertagname&#039; =&gt; null
+		),
+		&#039;Salesorder&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; null,
+			&#039;track_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;quotationno&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; null,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;email&#039; =&gt; null,
+			&#039;reg_date&#039; =&gt; null,
+			&#039;ref_no&#039; =&gt; null,
+			&#039;our_ref_no&#039; =&gt; null,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; null,
+			&#039;instrument_type&#039; =&gt; null,
+			&#039;remarks&#039; =&gt; null,
+			&#039;service_id&#039; =&gt; null,
+			&#039;sal_description_count&#039; =&gt; null,
+			&#039;po_generate_type&#039; =&gt; null,
+			&#039;is_assign_po&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;is_deliveryorder_created&#039; =&gt; null,
+			&#039;is_jobcompleted&#039; =&gt; null,
+			&#039;solist_diff&#039; =&gt; null
+		)
+	)
+)
+$file_type = &#039;doc&#039;
+$filename = &#039;BPI-01-10000006&#039;
+$html = &#039;&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; /&gt;
+&lt;title&gt;PDF&lt;/title&gt;
+&lt;style&gt;
+body { background-color:#fff; font-family:&quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+* { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+.group:before, .group:after { content: &quot;&quot;; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+.pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 900px; }
+.header_id { padding:10px 0; width:100%; display:block; }
+.logo { margin-top:10px;display:inline-block;width:50%; }
+.address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+.address_details p { float:left; width:100%; }
+.address_details a { color: #1bbae1; float:left; width:100%; }
+.cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+.address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+.address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+.address_box p { display:inline-block;}
+.invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+.invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+.invoice_add h5 { display:inline-block; width:30%; }
+.invoice_add span { margin-right:15px;display:inline-block; }
+.invoice_add abbr { font-style: italic;display:inline-block; }
+.services_details { margin-top:20px; width:100%; }
+.services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+.services_details h4 abbr { width: 22%; display:inline-block;}
+.services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+.invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+.invoice_table table { width:100%; border:1px  solid #ccc; border-bottom:none; border-left:none; }
+.invoice_table table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc; border-top:none; border-right:none; }
+.invoice_table table thead { background-color: #f1f1f1; }
+.instrument h4 { font-weight:normal; }
+.instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+    
+&lt;/style&gt;
+&lt;/head&gt;&#039;
+$delivery_data_list = array(
+	&#039;Proforma&#039; =&gt; array(
+		&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+		&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+		&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; &#039;0&#039;,
+		&#039;proforma_id&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+		&#039;track_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+		&#039;branchname&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; &#039;null&#039;,
+		&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+		&#039;fax&#039; =&gt; &#039;12345689&#039;,
+		&#039;email&#039; =&gt; &#039;&#039;,
+		&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+		&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+		&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; &#039;4&#039;,
+		&#039;instrument_type&#039; =&gt; &#039;&#039;,
+		&#039;remarks&#039; =&gt; &#039;&#039;,
+		&#039;service_id&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+		&#039;is_deleted&#039; =&gt; &#039;0&#039;
+	),
+	&#039;Customer&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;customergroup_id&#039; =&gt; null,
+		&#039;tag_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;tag_name&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;postalcode&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;industry_id&#039; =&gt; null,
+		&#039;location_id&#039; =&gt; null,
+		&#039;customertype&#039; =&gt; null,
+		&#039;requirements&#039; =&gt; null,
+		&#039;paymentterm_id&#039; =&gt; null,
+		&#039;priority_id&#039; =&gt; null,
+		&#039;calibrationtype&#039; =&gt; null,
+		&#039;invoice_type_id&#039; =&gt; null,
+		&#039;deliveryordertype_id&#039; =&gt; null,
+		&#039;tag&#039; =&gt; null,
+		&#039;acknowledgement_type_id&#039; =&gt; null,
+		&#039;cus_salespeople_count&#039; =&gt; null,
+		&#039;cus_referedby_count&#039; =&gt; null,
+		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;Customertagname&#039; =&gt; null
+	),
+	&#039;Salesorder&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; null,
+		&#039;track_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;quotationno&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; null,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;email&#039; =&gt; null,
+		&#039;reg_date&#039; =&gt; null,
+		&#039;ref_no&#039; =&gt; null,
+		&#039;our_ref_no&#039; =&gt; null,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; null,
+		&#039;instrument_type&#039; =&gt; null,
+		&#039;remarks&#039; =&gt; null,
+		&#039;service_id&#039; =&gt; null,
+		&#039;sal_description_count&#039; =&gt; null,
+		&#039;po_generate_type&#039; =&gt; null,
+		&#039;is_assign_po&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;is_deliveryorder_created&#039; =&gt; null,
+		&#039;is_jobcompleted&#039; =&gt; null,
+		&#039;solist_diff&#039; =&gt; null
+	)
+)
+$customername = null
+$billing_address = null
+$phone = null
+$fax = null
+$email = null
+$our_ref_no = null
+$ref_no = null
+$reg_date = &#039;14-July-14&#039;
+$payment_term = &#039;&#039;
+$salesorderno = &#039;BSO1405339172&#039;</pre><pre class="stack-trace">ProformasController::word() - APP\Controller\ProformasController.php, line 320
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9305d04-trace').style.display = (document.getElementById('cakeErr53f5fd9305d04-trace').style.display == 'none' ? '' : 'none');"><b>Warning</b> (2)</a>: Invalid argument supplied for foreach() [<b>APP\Controller\ProformasController.php</b>, line <b>320</b>]<div id="cakeErr53f5fd9305d04-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9305d04-code').style.display = (document.getElementById('cakeErr53f5fd9305d04-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9305d04-context').style.display = (document.getElementById('cakeErr53f5fd9305d04-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f5fd9305d04-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$salesorderno&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Proforma'</span><span style="color: #007700">][</span><span style="color: #DD0000">'salesorderno'</span><span style="color: #007700">];</span></span></code>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$delivery_data_list</span><span style="color: #007700">[</span><span style="color: #DD0000">'Salesorder'</span><span style="color: #007700">][</span><span style="color: #DD0000">'Description'</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f5fd9305d04-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+$delivery_data = array(
+	(int) 0 =&gt; array(
+		&#039;Proforma&#039; =&gt; array(
+			&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+			&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+			&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; &#039;0&#039;,
+			&#039;proforma_id&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+			&#039;track_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+			&#039;branchname&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; &#039;null&#039;,
+			&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+			&#039;fax&#039; =&gt; &#039;12345689&#039;,
+			&#039;email&#039; =&gt; &#039;&#039;,
+			&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+			&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+			&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; &#039;4&#039;,
+			&#039;instrument_type&#039; =&gt; &#039;&#039;,
+			&#039;remarks&#039; =&gt; &#039;&#039;,
+			&#039;service_id&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+			&#039;is_deleted&#039; =&gt; &#039;0&#039;
+		),
+		&#039;Customer&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;customergroup_id&#039; =&gt; null,
+			&#039;tag_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;tag_name&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;postalcode&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;industry_id&#039; =&gt; null,
+			&#039;location_id&#039; =&gt; null,
+			&#039;customertype&#039; =&gt; null,
+			&#039;requirements&#039; =&gt; null,
+			&#039;paymentterm_id&#039; =&gt; null,
+			&#039;priority_id&#039; =&gt; null,
+			&#039;calibrationtype&#039; =&gt; null,
+			&#039;invoice_type_id&#039; =&gt; null,
+			&#039;deliveryordertype_id&#039; =&gt; null,
+			&#039;tag&#039; =&gt; null,
+			&#039;acknowledgement_type_id&#039; =&gt; null,
+			&#039;cus_salespeople_count&#039; =&gt; null,
+			&#039;cus_referedby_count&#039; =&gt; null,
+			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;Customertagname&#039; =&gt; null
+		),
+		&#039;Salesorder&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; null,
+			&#039;track_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;quotationno&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; null,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;email&#039; =&gt; null,
+			&#039;reg_date&#039; =&gt; null,
+			&#039;ref_no&#039; =&gt; null,
+			&#039;our_ref_no&#039; =&gt; null,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; null,
+			&#039;instrument_type&#039; =&gt; null,
+			&#039;remarks&#039; =&gt; null,
+			&#039;service_id&#039; =&gt; null,
+			&#039;sal_description_count&#039; =&gt; null,
+			&#039;po_generate_type&#039; =&gt; null,
+			&#039;is_assign_po&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;is_deliveryorder_created&#039; =&gt; null,
+			&#039;is_jobcompleted&#039; =&gt; null,
+			&#039;solist_diff&#039; =&gt; null
+		)
+	)
+)
+$file_type = &#039;doc&#039;
+$filename = &#039;BPI-01-10000006&#039;
+$html = &#039;&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; /&gt;
+&lt;title&gt;PDF&lt;/title&gt;
+&lt;style&gt;
+body { background-color:#fff; font-family:&quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+* { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+.group:before, .group:after { content: &quot;&quot;; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+.pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 900px; }
+.header_id { padding:10px 0; width:100%; display:block; }
+.logo { margin-top:10px;display:inline-block;width:50%; }
+.address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+.address_details p { float:left; width:100%; }
+.address_details a { color: #1bbae1; float:left; width:100%; }
+.cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+.address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+.address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+.address_box p { display:inline-block;}
+.invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+.invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+.invoice_add h5 { display:inline-block; width:30%; }
+.invoice_add span { margin-right:15px;display:inline-block; }
+.invoice_add abbr { font-style: italic;display:inline-block; }
+.services_details { margin-top:20px; width:100%; }
+.services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+.services_details h4 abbr { width: 22%; display:inline-block;}
+.services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+.invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+.invoice_table table { width:100%; border:1px  solid #ccc; border-bottom:none; border-left:none; }
+.invoice_table table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc; border-top:none; border-right:none; }
+.invoice_table table thead { background-color: #f1f1f1; }
+.instrument h4 { font-weight:normal; }
+.instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+    
+&lt;/style&gt;
+&lt;/head&gt;&#039;
+$delivery_data_list = array(
+	&#039;Proforma&#039; =&gt; array(
+		&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+		&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+		&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; &#039;0&#039;,
+		&#039;proforma_id&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+		&#039;track_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+		&#039;branchname&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; &#039;null&#039;,
+		&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+		&#039;fax&#039; =&gt; &#039;12345689&#039;,
+		&#039;email&#039; =&gt; &#039;&#039;,
+		&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+		&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+		&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; &#039;4&#039;,
+		&#039;instrument_type&#039; =&gt; &#039;&#039;,
+		&#039;remarks&#039; =&gt; &#039;&#039;,
+		&#039;service_id&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+		&#039;is_deleted&#039; =&gt; &#039;0&#039;
+	),
+	&#039;Customer&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;customergroup_id&#039; =&gt; null,
+		&#039;tag_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;tag_name&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;postalcode&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;industry_id&#039; =&gt; null,
+		&#039;location_id&#039; =&gt; null,
+		&#039;customertype&#039; =&gt; null,
+		&#039;requirements&#039; =&gt; null,
+		&#039;paymentterm_id&#039; =&gt; null,
+		&#039;priority_id&#039; =&gt; null,
+		&#039;calibrationtype&#039; =&gt; null,
+		&#039;invoice_type_id&#039; =&gt; null,
+		&#039;deliveryordertype_id&#039; =&gt; null,
+		&#039;tag&#039; =&gt; null,
+		&#039;acknowledgement_type_id&#039; =&gt; null,
+		&#039;cus_salespeople_count&#039; =&gt; null,
+		&#039;cus_referedby_count&#039; =&gt; null,
+		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;Customertagname&#039; =&gt; null
+	),
+	&#039;Salesorder&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; null,
+		&#039;track_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;quotationno&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; null,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;email&#039; =&gt; null,
+		&#039;reg_date&#039; =&gt; null,
+		&#039;ref_no&#039; =&gt; null,
+		&#039;our_ref_no&#039; =&gt; null,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; null,
+		&#039;instrument_type&#039; =&gt; null,
+		&#039;remarks&#039; =&gt; null,
+		&#039;service_id&#039; =&gt; null,
+		&#039;sal_description_count&#039; =&gt; null,
+		&#039;po_generate_type&#039; =&gt; null,
+		&#039;is_assign_po&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;is_deliveryorder_created&#039; =&gt; null,
+		&#039;is_jobcompleted&#039; =&gt; null,
+		&#039;solist_diff&#039; =&gt; null
+	)
+)
+$customername = null
+$billing_address = null
+$phone = null
+$fax = null
+$email = null
+$our_ref_no = null
+$ref_no = null
+$reg_date = &#039;14-July-14&#039;
+$payment_term = &#039;&#039;
+$salesorderno = &#039;BSO1405339172&#039;</pre><pre class="stack-trace">ProformasController::word() - APP\Controller\ProformasController.php, line 320
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9307a57-trace').style.display = (document.getElementById('cakeErr53f5fd9307a57-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Undefined variable: device_name [<b>APP\Controller\ProformasController.php</b>, line <b>398</b>]<div id="cakeErr53f5fd9307a57-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9307a57-code').style.display = (document.getElementById('cakeErr53f5fd9307a57-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd9307a57-context').style.display = (document.getElementById('cakeErr53f5fd9307a57-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f5fd9307a57-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">tbody</span><span style="color: #007700">&gt;</span><span style="color: #DD0000">';</span></span></code>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$subtotal&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$device_name&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f5fd9307a57-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+$delivery_data = array(
+	(int) 0 =&gt; array(
+		&#039;Proforma&#039; =&gt; array(
+			&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+			&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+			&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; &#039;0&#039;,
+			&#039;proforma_id&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+			&#039;track_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+			&#039;branchname&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; &#039;null&#039;,
+			&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+			&#039;fax&#039; =&gt; &#039;12345689&#039;,
+			&#039;email&#039; =&gt; &#039;&#039;,
+			&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+			&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+			&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; &#039;4&#039;,
+			&#039;instrument_type&#039; =&gt; &#039;&#039;,
+			&#039;remarks&#039; =&gt; &#039;&#039;,
+			&#039;service_id&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+			&#039;is_deleted&#039; =&gt; &#039;0&#039;
+		),
+		&#039;Customer&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;customergroup_id&#039; =&gt; null,
+			&#039;tag_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;tag_name&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;postalcode&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;industry_id&#039; =&gt; null,
+			&#039;location_id&#039; =&gt; null,
+			&#039;customertype&#039; =&gt; null,
+			&#039;requirements&#039; =&gt; null,
+			&#039;paymentterm_id&#039; =&gt; null,
+			&#039;priority_id&#039; =&gt; null,
+			&#039;calibrationtype&#039; =&gt; null,
+			&#039;invoice_type_id&#039; =&gt; null,
+			&#039;deliveryordertype_id&#039; =&gt; null,
+			&#039;tag&#039; =&gt; null,
+			&#039;acknowledgement_type_id&#039; =&gt; null,
+			&#039;cus_salespeople_count&#039; =&gt; null,
+			&#039;cus_referedby_count&#039; =&gt; null,
+			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;Customertagname&#039; =&gt; null
+		),
+		&#039;Salesorder&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; null,
+			&#039;track_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;quotationno&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; null,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;email&#039; =&gt; null,
+			&#039;reg_date&#039; =&gt; null,
+			&#039;ref_no&#039; =&gt; null,
+			&#039;our_ref_no&#039; =&gt; null,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; null,
+			&#039;instrument_type&#039; =&gt; null,
+			&#039;remarks&#039; =&gt; null,
+			&#039;service_id&#039; =&gt; null,
+			&#039;sal_description_count&#039; =&gt; null,
+			&#039;po_generate_type&#039; =&gt; null,
+			&#039;is_assign_po&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;is_deliveryorder_created&#039; =&gt; null,
+			&#039;is_jobcompleted&#039; =&gt; null,
+			&#039;solist_diff&#039; =&gt; null
+		)
+	)
+)
+$file_type = &#039;doc&#039;
+$filename = &#039;BPI-01-10000006&#039;
+$html = &#039;&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; /&gt;
+&lt;title&gt;PDF&lt;/title&gt;
+&lt;style&gt;
+body { background-color:#fff; font-family:&quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+* { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+.group:before, .group:after { content: &quot;&quot;; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+.pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 900px; }
+.header_id { padding:10px 0; width:100%; display:block; }
+.logo { margin-top:10px;display:inline-block;width:50%; }
+.address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+.address_details p { float:left; width:100%; }
+.address_details a { color: #1bbae1; float:left; width:100%; }
+.cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+.address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+.address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+.address_box p { display:inline-block;}
+.invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+.invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+.invoice_add h5 { display:inline-block; width:30%; }
+.invoice_add span { margin-right:15px;display:inline-block; }
+.invoice_add abbr { font-style: italic;display:inline-block; }
+.services_details { margin-top:20px; width:100%; }
+.services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+.services_details h4 abbr { width: 22%; display:inline-block;}
+.services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+.invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+.invoice_table table { width:100%; border:1px  solid #ccc; border-bottom:none; border-left:none; }
+.invoice_table table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc; border-top:none; border-right:none; }
+.invoice_table table thead { background-color: #f1f1f1; }
+.instrument h4 { font-weight:normal; }
+.instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+    
+&lt;/style&gt;
+&lt;/head&gt;&lt;body&gt;
+&lt;div class=&quot;pdf_container group&quot;&gt; 
+     &lt;!-- header part--&gt;
+     &lt;div class=&quot;header_id&quot;&gt;
+          &lt;div class=&quot;f_left logo&quot;&gt;&lt;img src=&quot;logo_1.png&quot; width=&quot;273&quot; height=&quot;50&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;
+          &lt;div class=&quot;address_details f_right&quot;&gt;
+               &lt;p&gt;41 SENOKO DRIVE&lt;/p&gt;
+               &lt;p&gt;SINGAPORE&lt;/p&gt;
+               &lt;p&gt;758249&lt;/p&gt;
+               &lt;p&gt; 6458 4411&lt;/p&gt;
+               &lt;a href=&quot;#&quot; title=&quot;&quot;&gt;invoice@bestandards.com&lt;/a&gt;
+               &lt;div class=&quot;cmpny_reg&quot;&gt;GST REG NO. M200510697 / COMPANY REG NO. 200510697M&lt;/div&gt;
+          &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;address_box&quot;&gt;
+          &lt;p&gt;  &lt;/p&gt;
+          &lt;p&gt;  &lt;/p&gt;
+          &lt;p&gt; Singapore 758301 &lt;/p&gt;
+          &lt;div class=&quot;invoice_address_blog&quot;&gt;
+               &lt;div class=&quot;invoice_add&quot;&gt;
+                    &lt;h5&gt;ATTN &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;Mr Thai Tian Loy&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add&quot;&gt;
+                    &lt;h5&gt;TEL &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;  &lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add&quot;&gt;
+                    &lt;h5&gt;FAX &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add&quot;&gt;
+                    &lt;h5&gt;EMAIL &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;&lt;/abbr&gt;&lt;/div&gt;
+          &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;address_box&quot;&gt;
+          &lt;h2 class=&quot;&quot;&gt; BPI-01-10000006 &lt;/h2&gt;
+          &lt;div class=&quot;invoice_address_blog f_left&quot;&gt;
+               &lt;div class=&quot;invoice_add f_left&quot;&gt;
+                    &lt;h5&gt; TRACK ID &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add f_left&quot;&gt;
+                    &lt;h5&gt;PURCHASE ORDER NUMBER &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add f_left&quot;&gt;
+                    &lt;h5&gt;DATE &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;14-July-14&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add f_left&quot;&gt;
+                    &lt;h5&gt; PAYMENT TERMS &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt; &lt;/abbr&gt;&lt;/div&gt;
+          &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;services_details f_left&quot;&gt;
+          &lt;p&gt;Being provided calibration service of the following(s) :&lt;/p&gt;
+          &lt;h4 class=&quot;f_left&quot;&gt;&lt;abbr&gt;SALES ORDER NO&lt;/abbr&gt;&lt;span&gt; BSO1405339172&lt;/span&gt;&lt;/h4&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;invoice_table f_left&quot;&gt;
+          &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
+               &lt;thead&gt;
+                    &lt;tr&gt;
+                         &lt;th&gt;Instrument&lt;/th&gt;
+                         &lt;th&gt;Brand&lt;/th&gt;
+                         &lt;th&gt;Model&lt;/th&gt;
+                         &lt;th&gt;Serial No&lt;/th&gt;
+                         &lt;th&gt;Quantity&lt;/th&gt;
+                         &lt;th&gt;Unit Price $(SGD)&lt;/th&gt;
+                         &lt;th&gt;Total Price $(SGD)&lt;/th&gt;
+                    &lt;/tr&gt;
+               &lt;/thead&gt;
+               &lt;tbody&gt;&#039;
+$delivery_data_list = array(
+	&#039;Proforma&#039; =&gt; array(
+		&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+		&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+		&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; &#039;0&#039;,
+		&#039;proforma_id&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+		&#039;track_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+		&#039;branchname&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; &#039;null&#039;,
+		&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+		&#039;fax&#039; =&gt; &#039;12345689&#039;,
+		&#039;email&#039; =&gt; &#039;&#039;,
+		&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+		&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+		&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; &#039;4&#039;,
+		&#039;instrument_type&#039; =&gt; &#039;&#039;,
+		&#039;remarks&#039; =&gt; &#039;&#039;,
+		&#039;service_id&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+		&#039;is_deleted&#039; =&gt; &#039;0&#039;
+	),
+	&#039;Customer&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;customergroup_id&#039; =&gt; null,
+		&#039;tag_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;tag_name&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;postalcode&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;industry_id&#039; =&gt; null,
+		&#039;location_id&#039; =&gt; null,
+		&#039;customertype&#039; =&gt; null,
+		&#039;requirements&#039; =&gt; null,
+		&#039;paymentterm_id&#039; =&gt; null,
+		&#039;priority_id&#039; =&gt; null,
+		&#039;calibrationtype&#039; =&gt; null,
+		&#039;invoice_type_id&#039; =&gt; null,
+		&#039;deliveryordertype_id&#039; =&gt; null,
+		&#039;tag&#039; =&gt; null,
+		&#039;acknowledgement_type_id&#039; =&gt; null,
+		&#039;cus_salespeople_count&#039; =&gt; null,
+		&#039;cus_referedby_count&#039; =&gt; null,
+		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;Customertagname&#039; =&gt; null
+	),
+	&#039;Salesorder&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; null,
+		&#039;track_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;quotationno&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; null,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;email&#039; =&gt; null,
+		&#039;reg_date&#039; =&gt; null,
+		&#039;ref_no&#039; =&gt; null,
+		&#039;our_ref_no&#039; =&gt; null,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; null,
+		&#039;instrument_type&#039; =&gt; null,
+		&#039;remarks&#039; =&gt; null,
+		&#039;service_id&#039; =&gt; null,
+		&#039;sal_description_count&#039; =&gt; null,
+		&#039;po_generate_type&#039; =&gt; null,
+		&#039;is_assign_po&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;is_deliveryorder_created&#039; =&gt; null,
+		&#039;is_jobcompleted&#039; =&gt; null,
+		&#039;solist_diff&#039; =&gt; null
+	)
+)
+$customername = null
+$billing_address = null
+$phone = null
+$fax = null
+$email = null
+$our_ref_no = null
+$ref_no = null
+$reg_date = &#039;14-July-14&#039;
+$payment_term = &#039;&#039;
+$salesorderno = &#039;BSO1405339172&#039;
+$subtotal = (int) 0</pre><pre class="stack-trace">ProformasController::word() - APP\Controller\ProformasController.php, line 398
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
+[main] - APP\webroot\index.php, line 108</pre></div></pre><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd930a1fb-trace').style.display = (document.getElementById('cakeErr53f5fd930a1fb-trace').style.display == 'none' ? '' : 'none');"><b>Warning</b> (2)</a>: Invalid argument supplied for foreach() [<b>APP\Controller\ProformasController.php</b>, line <b>398</b>]<div id="cakeErr53f5fd930a1fb-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd930a1fb-code').style.display = (document.getElementById('cakeErr53f5fd930a1fb-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr53f5fd930a1fb-context').style.display = (document.getElementById('cakeErr53f5fd930a1fb-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr53f5fd930a1fb-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">tbody</span><span style="color: #007700">&gt;</span><span style="color: #DD0000">';</span></span></code>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$subtotal&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach(</span><span style="color: #0000BB">$device_name&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$device</span><span style="color: #007700">):</span></span></code></span></pre><pre id="cakeErr53f5fd930a1fb-context" class="cake-context" style="display: none;">$id = &#039;BPI-01-10000006&#039;
+$delivery_data = array(
+	(int) 0 =&gt; array(
+		&#039;Proforma&#039; =&gt; array(
+			&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+			&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+			&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; &#039;0&#039;,
+			&#039;proforma_id&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+			&#039;track_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+			&#039;branchname&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; &#039;null&#039;,
+			&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+			&#039;fax&#039; =&gt; &#039;12345689&#039;,
+			&#039;email&#039; =&gt; &#039;&#039;,
+			&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+			&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+			&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; &#039;4&#039;,
+			&#039;instrument_type&#039; =&gt; &#039;&#039;,
+			&#039;remarks&#039; =&gt; &#039;&#039;,
+			&#039;service_id&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+			&#039;is_deleted&#039; =&gt; &#039;0&#039;
+		),
+		&#039;Customer&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;customergroup_id&#039; =&gt; null,
+			&#039;tag_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;tag_name&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;postalcode&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;industry_id&#039; =&gt; null,
+			&#039;location_id&#039; =&gt; null,
+			&#039;customertype&#039; =&gt; null,
+			&#039;requirements&#039; =&gt; null,
+			&#039;paymentterm_id&#039; =&gt; null,
+			&#039;priority_id&#039; =&gt; null,
+			&#039;calibrationtype&#039; =&gt; null,
+			&#039;invoice_type_id&#039; =&gt; null,
+			&#039;deliveryordertype_id&#039; =&gt; null,
+			&#039;tag&#039; =&gt; null,
+			&#039;acknowledgement_type_id&#039; =&gt; null,
+			&#039;cus_salespeople_count&#039; =&gt; null,
+			&#039;cus_referedby_count&#039; =&gt; null,
+			&#039;is_default&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_date&#039; =&gt; null,
+			&#039;is_approved_by&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;Customertagname&#039; =&gt; null
+		),
+		&#039;Salesorder&#039; =&gt; array(
+			&#039;id&#039; =&gt; null,
+			&#039;created&#039; =&gt; null,
+			&#039;modified&#039; =&gt; null,
+			&#039;created_by&#039; =&gt; null,
+			&#039;modified_by&#039; =&gt; null,
+			&#039;view&#039; =&gt; null,
+			&#039;salesorderno&#039; =&gt; null,
+			&#039;track_id&#039; =&gt; null,
+			&#039;branch_id&#039; =&gt; null,
+			&#039;quotation_id&#039; =&gt; null,
+			&#039;quotationno&#039; =&gt; null,
+			&#039;customer_id&#039; =&gt; null,
+			&#039;customername&#039; =&gt; null,
+			&#039;address&#039; =&gt; null,
+			&#039;due_amount&#039; =&gt; null,
+			&#039;attn&#039; =&gt; null,
+			&#039;phone&#039; =&gt; null,
+			&#039;fax&#039; =&gt; null,
+			&#039;email&#039; =&gt; null,
+			&#039;reg_date&#039; =&gt; null,
+			&#039;ref_no&#039; =&gt; null,
+			&#039;our_ref_no&#039; =&gt; null,
+			&#039;in_date&#039; =&gt; null,
+			&#039;due_date&#039; =&gt; null,
+			&#039;priority&#039; =&gt; null,
+			&#039;instrument_type&#039; =&gt; null,
+			&#039;remarks&#039; =&gt; null,
+			&#039;service_id&#039; =&gt; null,
+			&#039;sal_description_count&#039; =&gt; null,
+			&#039;po_generate_type&#039; =&gt; null,
+			&#039;is_assign_po&#039; =&gt; null,
+			&#039;is_approved&#039; =&gt; null,
+			&#039;is_approved_lab&#039; =&gt; null,
+			&#039;status&#039; =&gt; null,
+			&#039;is_deleted&#039; =&gt; null,
+			&#039;is_deliveryorder_created&#039; =&gt; null,
+			&#039;is_jobcompleted&#039; =&gt; null,
+			&#039;solist_diff&#039; =&gt; null
+		)
+	)
+)
+$file_type = &#039;doc&#039;
+$filename = &#039;BPI-01-10000006&#039;
+$html = &#039;&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; /&gt;
+&lt;title&gt;PDF&lt;/title&gt;
+&lt;style&gt;
+body { background-color:#fff; font-family:&quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+* { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+.group:before, .group:after { content: &quot;&quot;; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+.pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 900px; }
+.header_id { padding:10px 0; width:100%; display:block; }
+.logo { margin-top:10px;display:inline-block;width:50%; }
+.address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+.address_details p { float:left; width:100%; }
+.address_details a { color: #1bbae1; float:left; width:100%; }
+.cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+.address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+.address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+.address_box p { display:inline-block;}
+.invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+.invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+.invoice_add h5 { display:inline-block; width:30%; }
+.invoice_add span { margin-right:15px;display:inline-block; }
+.invoice_add abbr { font-style: italic;display:inline-block; }
+.services_details { margin-top:20px; width:100%; }
+.services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+.services_details h4 abbr { width: 22%; display:inline-block;}
+.services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+.invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+.invoice_table table { width:100%; border:1px  solid #ccc; border-bottom:none; border-left:none; }
+.invoice_table table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc; border-top:none; border-right:none; }
+.invoice_table table thead { background-color: #f1f1f1; }
+.instrument h4 { font-weight:normal; }
+.instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+    
+&lt;/style&gt;
+&lt;/head&gt;&lt;body&gt;
+&lt;div class=&quot;pdf_container group&quot;&gt; 
+     &lt;!-- header part--&gt;
+     &lt;div class=&quot;header_id&quot;&gt;
+          &lt;div class=&quot;f_left logo&quot;&gt;&lt;img src=&quot;logo_1.png&quot; width=&quot;273&quot; height=&quot;50&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;
+          &lt;div class=&quot;address_details f_right&quot;&gt;
+               &lt;p&gt;41 SENOKO DRIVE&lt;/p&gt;
+               &lt;p&gt;SINGAPORE&lt;/p&gt;
+               &lt;p&gt;758249&lt;/p&gt;
+               &lt;p&gt; 6458 4411&lt;/p&gt;
+               &lt;a href=&quot;#&quot; title=&quot;&quot;&gt;invoice@bestandards.com&lt;/a&gt;
+               &lt;div class=&quot;cmpny_reg&quot;&gt;GST REG NO. M200510697 / COMPANY REG NO. 200510697M&lt;/div&gt;
+          &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;address_box&quot;&gt;
+          &lt;p&gt;  &lt;/p&gt;
+          &lt;p&gt;  &lt;/p&gt;
+          &lt;p&gt; Singapore 758301 &lt;/p&gt;
+          &lt;div class=&quot;invoice_address_blog&quot;&gt;
+               &lt;div class=&quot;invoice_add&quot;&gt;
+                    &lt;h5&gt;ATTN &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;Mr Thai Tian Loy&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add&quot;&gt;
+                    &lt;h5&gt;TEL &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;  &lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add&quot;&gt;
+                    &lt;h5&gt;FAX &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add&quot;&gt;
+                    &lt;h5&gt;EMAIL &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;&lt;/abbr&gt;&lt;/div&gt;
+          &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;address_box&quot;&gt;
+          &lt;h2 class=&quot;&quot;&gt; BPI-01-10000006 &lt;/h2&gt;
+          &lt;div class=&quot;invoice_address_blog f_left&quot;&gt;
+               &lt;div class=&quot;invoice_add f_left&quot;&gt;
+                    &lt;h5&gt; TRACK ID &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add f_left&quot;&gt;
+                    &lt;h5&gt;PURCHASE ORDER NUMBER &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add f_left&quot;&gt;
+                    &lt;h5&gt;DATE &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt;14-July-14&lt;/abbr&gt;&lt;/div&gt;
+               &lt;div class=&quot;invoice_add f_left&quot;&gt;
+                    &lt;h5&gt; PAYMENT TERMS &lt;/h5&gt;
+                    &lt;span&gt;:&lt;/span&gt;&lt;abbr&gt; &lt;/abbr&gt;&lt;/div&gt;
+          &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;services_details f_left&quot;&gt;
+          &lt;p&gt;Being provided calibration service of the following(s) :&lt;/p&gt;
+          &lt;h4 class=&quot;f_left&quot;&gt;&lt;abbr&gt;SALES ORDER NO&lt;/abbr&gt;&lt;span&gt; BSO1405339172&lt;/span&gt;&lt;/h4&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;invoice_table f_left&quot;&gt;
+          &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
+               &lt;thead&gt;
+                    &lt;tr&gt;
+                         &lt;th&gt;Instrument&lt;/th&gt;
+                         &lt;th&gt;Brand&lt;/th&gt;
+                         &lt;th&gt;Model&lt;/th&gt;
+                         &lt;th&gt;Serial No&lt;/th&gt;
+                         &lt;th&gt;Quantity&lt;/th&gt;
+                         &lt;th&gt;Unit Price $(SGD)&lt;/th&gt;
+                         &lt;th&gt;Total Price $(SGD)&lt;/th&gt;
+                    &lt;/tr&gt;
+               &lt;/thead&gt;
+               &lt;tbody&gt;&#039;
+$delivery_data_list = array(
+	&#039;Proforma&#039; =&gt; array(
+		&#039;id&#039; =&gt; &#039;BPI-01-10000006&#039;,
+		&#039;created&#039; =&gt; &#039;2014-07-17 09:47:32&#039;,
+		&#039;modified&#039; =&gt; &#039;2014-07-17 09:49:07&#039;,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; &#039;0&#039;,
+		&#039;proforma_id&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; &#039;BSO1405339172&#039;,
+		&#039;track_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; &#039;CUS1404389207&#039;,
+		&#039;branchname&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; &#039;sdfsdfsdf&#039;,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; &#039;null&#039;,
+		&#039;phone&#039; =&gt; &#039;9566633605&#039;,
+		&#039;fax&#039; =&gt; &#039;12345689&#039;,
+		&#039;email&#039; =&gt; &#039;&#039;,
+		&#039;reg_date&#039; =&gt; &#039;14-July-14&#039;,
+		&#039;ref_no&#039; =&gt; &#039;22222222222222&#039;,
+		&#039;our_ref_no&#039; =&gt; &#039;&#039;,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; &#039;4&#039;,
+		&#039;instrument_type&#039; =&gt; &#039;&#039;,
+		&#039;remarks&#039; =&gt; &#039;&#039;,
+		&#039;service_id&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; &#039;0&#039;,
+		&#039;is_deleted&#039; =&gt; &#039;0&#039;
+	),
+	&#039;Customer&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;customergroup_id&#039; =&gt; null,
+		&#039;tag_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;tag_name&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;postalcode&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;industry_id&#039; =&gt; null,
+		&#039;location_id&#039; =&gt; null,
+		&#039;customertype&#039; =&gt; null,
+		&#039;requirements&#039; =&gt; null,
+		&#039;paymentterm_id&#039; =&gt; null,
+		&#039;priority_id&#039; =&gt; null,
+		&#039;calibrationtype&#039; =&gt; null,
+		&#039;invoice_type_id&#039; =&gt; null,
+		&#039;deliveryordertype_id&#039; =&gt; null,
+		&#039;tag&#039; =&gt; null,
+		&#039;acknowledgement_type_id&#039; =&gt; null,
+		&#039;cus_salespeople_count&#039; =&gt; null,
+		&#039;cus_referedby_count&#039; =&gt; null,
+		&#039;is_default&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_date&#039; =&gt; null,
+		&#039;is_approved_by&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;Customertagname&#039; =&gt; null
+	),
+	&#039;Salesorder&#039; =&gt; array(
+		&#039;id&#039; =&gt; null,
+		&#039;created&#039; =&gt; null,
+		&#039;modified&#039; =&gt; null,
+		&#039;created_by&#039; =&gt; null,
+		&#039;modified_by&#039; =&gt; null,
+		&#039;view&#039; =&gt; null,
+		&#039;salesorderno&#039; =&gt; null,
+		&#039;track_id&#039; =&gt; null,
+		&#039;branch_id&#039; =&gt; null,
+		&#039;quotation_id&#039; =&gt; null,
+		&#039;quotationno&#039; =&gt; null,
+		&#039;customer_id&#039; =&gt; null,
+		&#039;customername&#039; =&gt; null,
+		&#039;address&#039; =&gt; null,
+		&#039;due_amount&#039; =&gt; null,
+		&#039;attn&#039; =&gt; null,
+		&#039;phone&#039; =&gt; null,
+		&#039;fax&#039; =&gt; null,
+		&#039;email&#039; =&gt; null,
+		&#039;reg_date&#039; =&gt; null,
+		&#039;ref_no&#039; =&gt; null,
+		&#039;our_ref_no&#039; =&gt; null,
+		&#039;in_date&#039; =&gt; null,
+		&#039;due_date&#039; =&gt; null,
+		&#039;priority&#039; =&gt; null,
+		&#039;instrument_type&#039; =&gt; null,
+		&#039;remarks&#039; =&gt; null,
+		&#039;service_id&#039; =&gt; null,
+		&#039;sal_description_count&#039; =&gt; null,
+		&#039;po_generate_type&#039; =&gt; null,
+		&#039;is_assign_po&#039; =&gt; null,
+		&#039;is_approved&#039; =&gt; null,
+		&#039;is_approved_lab&#039; =&gt; null,
+		&#039;status&#039; =&gt; null,
+		&#039;is_deleted&#039; =&gt; null,
+		&#039;is_deliveryorder_created&#039; =&gt; null,
+		&#039;is_jobcompleted&#039; =&gt; null,
+		&#039;solist_diff&#039; =&gt; null
+	)
+)
+$customername = null
+$billing_address = null
+$phone = null
+$fax = null
+$email = null
+$our_ref_no = null
+$ref_no = null
+$reg_date = &#039;14-July-14&#039;
+$payment_term = &#039;&#039;
+$salesorderno = &#039;BSO1405339172&#039;
+$subtotal = (int) 0</pre><pre class="stack-trace">ProformasController::word() - APP\Controller\ProformasController.php, line 398
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 185
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 160
+[main] - APP\webroot\index.php, line 108</pre></div></pre><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PDF</title>
+<style>
+body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+* { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+.group:before, .group:after { content: ""; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+.pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 900px; }
+.header_id { padding:10px 0; width:100%; display:block; }
+.logo { margin-top:10px;display:inline-block;width:50%; }
+.address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+.address_details p { float:left; width:100%; }
+.address_details a { color: #1bbae1; float:left; width:100%; }
+.cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+.address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+.address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+.address_box p { display:inline-block;}
+.invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+.invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+.invoice_add h5 { display:inline-block; width:30%; }
+.invoice_add span { margin-right:15px;display:inline-block; }
+.invoice_add abbr { font-style: italic;display:inline-block; }
+.services_details { margin-top:20px; width:100%; }
+.services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+.services_details h4 abbr { width: 22%; display:inline-block;}
+.services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+.invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+.invoice_table table { width:100%; border:1px  solid #ccc; border-bottom:none; border-left:none; }
+.invoice_table table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc; border-top:none; border-right:none; }
+.invoice_table table thead { background-color: #f1f1f1; }
+.instrument h4 { font-weight:normal; }
+.instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+    
+</style>
+</head><body>
+<div class="pdf_container group"> 
+     <!-- header part-->
+     <div class="header_id">
+          <div class="f_left logo"><img src="logo_1.png" width="273" height="50" alt="" /></div>
+          <div class="address_details f_right">
+               <p>41 SENOKO DRIVE</p>
+               <p>SINGAPORE</p>
+               <p>758249</p>
+               <p> 6458 4411</p>
+               <a href="#" title="">invoice@bestandards.com</a>
+               <div class="cmpny_reg">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
+          </div>
+     </div>
+     <div class="address_box">
+          <p>  </p>
+          <p>  </p>
+          <p> Singapore 758301 </p>
+          <div class="invoice_address_blog">
+               <div class="invoice_add">
+                    <h5>ATTN </h5>
+                    <span>:</span><abbr>Mr Thai Tian Loy</abbr></div>
+               <div class="invoice_add">
+                    <h5>TEL </h5>
+                    <span>:</span><abbr>  </abbr></div>
+               <div class="invoice_add">
+                    <h5>FAX </h5>
+                    <span>:</span><abbr></abbr></div>
+               <div class="invoice_add">
+                    <h5>EMAIL </h5>
+                    <span>:</span><abbr></abbr></div>
+          </div>
+     </div>
+     <div class="address_box">
+          <h2 class=""> BPI-01-10000006 </h2>
+          <div class="invoice_address_blog f_left">
+               <div class="invoice_add f_left">
+                    <h5> TRACK ID </h5>
+                    <span>:</span><abbr></abbr></div>
+               <div class="invoice_add f_left">
+                    <h5>PURCHASE ORDER NUMBER </h5>
+                    <span>:</span><abbr></abbr></div>
+               <div class="invoice_add f_left">
+                    <h5>DATE </h5>
+                    <span>:</span><abbr>14-July-14</abbr></div>
+               <div class="invoice_add f_left">
+                    <h5> PAYMENT TERMS </h5>
+                    <span>:</span><abbr> </abbr></div>
+          </div>
+     </div>
+     <div class="services_details f_left">
+          <p>Being provided calibration service of the following(s) :</p>
+          <h4 class="f_left"><abbr>SALES ORDER NO</abbr><span> BSO1405339172</span></h4>
+     </div>
+     <div class="invoice_table f_left">
+          <table cellpadding="0" cellspacing="0">
+               <thead>
+                    <tr>
+                         <th>Instrument</th>
+                         <th>Brand</th>
+                         <th>Model</th>
+                         <th>Serial No</th>
+                         <th>Quantity</th>
+                         <th>Unit Price $(SGD)</th>
+                         <th>Total Price $(SGD)</th>
+                    </tr>
+               </thead>
+               <tbody><tr>
+                         <td colspan="6">SUBTOTAL</td>
+                         <td>$0.00</td>
+                    </tr>
+                    <tr>
+                         <td colspan="6">GST ( 7.00% )</td>
+                         <td>$0.00</td>
+                    </tr>
+                    <tr>
+                         <td colspan="6"><h4>TOTAL DUE</h4></td>
+                         <td><h4>$0.00</h4></td>
+                    </tr>
+               </tbody>
+          </table>
+     </div>
+</div>
+</body>
+</html>
