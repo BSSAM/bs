@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 09, 2014 at 03:30 PM
+-- Generation Time: Sep 10, 2014 at 02:52 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -506,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
 --
 
 INSERT INTO `customers` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `customergroup_id`, `tag_id`, `branch_id`, `tag_name`, `customername`, `postalcode`, `phone`, `fax`, `industry_id`, `location_id`, `customertype`, `requirements`, `paymentterm_id`, `priority_id`, `calibrationtype`, `invoice_type_id`, `deliveryordertype_id`, `tag`, `acknowledgement_type_id`, `cus_salespeople_count`, `cus_referedby_count`, `is_default`, `is_approved`, `is_approved_date`, `is_approved_by`, `status`, `is_deleted`) VALUES
-('CUS-01-10000003', '2014-09-08 11:25:26', '2014-09-08 11:26:57', NULL, NULL, 0, 'CGRU-01-10000003', 'TAG-01-10000003', NULL, 'Singapore', 'PPW FOXCOEN PVT LTD', '125456', '9842017520', '044-56256325645', 1, 1, 'Customer/Sub-Contractor', 'Requirement', 1, '1', 'Singlas', '3', '1', NULL, 1, NULL, NULL, 1, 1, '0000-00-00', NULL, 1, 0);
+('CUS-01-10000003', '2014-09-08 11:25:26', '2014-09-10 14:23:40', NULL, NULL, 0, 'CGRU-01-10000003', 'TAG-01-10000003', NULL, 'Singapore', 'PPW FOXCOEN PVT LTD', '125456', '9842017520', '044-56256325645', 1, 1, 'Customer/Sub-Contractor', 'Requirement', 1, '1', 'Singlas', '3', '1', NULL, 1, NULL, NULL, 1, 1, '0000-00-00', NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -649,14 +649,14 @@ CREATE TABLE IF NOT EXISTS `cus_referbies` (
   `referedby_id` varchar(200) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `cus_referbies`
 --
 
 INSERT INTO `cus_referbies` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `customer_id`, `tag_id`, `customergroup_id`, `referedby_id`, `status`) VALUES
-(2, '2014-09-08 11:26:57', '2014-09-08 11:26:57', NULL, NULL, 0, 'CUS-01-10000003', NULL, NULL, '1', 1);
+(4, '2014-09-10 14:23:40', '2014-09-10 14:23:40', NULL, NULL, 0, 'CUS-01-10000003', NULL, NULL, '1', 1);
 
 -- --------------------------------------------------------
 
@@ -677,15 +677,15 @@ CREATE TABLE IF NOT EXISTS `cus_salespeople` (
   `salespeople_id` varchar(200) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `cus_salespeople`
 --
 
 INSERT INTO `cus_salespeople` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `customer_id`, `tag_id`, `customergroup_id`, `salespeople_id`, `status`) VALUES
-(4, '2014-09-08 11:26:57', '2014-09-08 11:26:57', NULL, NULL, 0, 'CUS-01-10000003', NULL, NULL, '2', 1),
-(3, '2014-09-08 11:26:57', '2014-09-08 11:26:57', NULL, NULL, 0, 'CUS-01-10000003', NULL, NULL, '1', 1);
+(8, '2014-09-10 14:23:40', '2014-09-10 14:23:40', NULL, NULL, 0, 'CUS-01-10000003', NULL, NULL, '2', 1),
+(7, '2014-09-10 14:23:40', '2014-09-10 14:23:40', NULL, NULL, 0, 'CUS-01-10000003', NULL, NULL, '1', 1);
 
 -- --------------------------------------------------------
 
@@ -704,7 +704,7 @@ CREATE TABLE IF NOT EXISTS `datalogs` (
   `viewed` int(11) DEFAULT '0',
   `viewed_by` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Dumping data for table `datalogs`
@@ -746,7 +746,13 @@ INSERT INTO `datalogs` (`id`, `logname`, `logid`, `logactivity`, `user_id`, `cre
 (33, 'Quotation', 'BSQ-01-10000005', 'Add', '1', '2014-09-09 13:21:26', '2014-09-09 13:21:26', 0, NULL),
 (34, 'Salesorder', '2', 'Add', '1', '2014-09-09 13:22:18', '2014-09-09 13:22:18', 0, NULL),
 (35, 'Deliveryorder', 'BDO-01-10000003', 'Add', '1', '2014-09-09 13:25:01', '2014-09-09 13:25:01', 0, NULL),
-(36, 'ClientPO', 'BSQ-01-10000005', 'Add', '1', '2014-09-09 13:28:06', '2014-09-09 13:28:06', 0, NULL);
+(36, 'ClientPO', 'BSQ-01-10000005', 'Add', '1', '2014-09-09 13:28:06', '2014-09-09 13:28:06', 0, NULL),
+(37, 'Customer', 'CUS-01-10000003', 'Edit', '1', '2014-09-10 06:05:10', '2014-09-10 06:05:10', 0, NULL),
+(38, 'Quotation', 'BSQ-01-10000007', 'Add', '1', '2014-09-10 10:28:40', '2014-09-10 10:28:40', 0, NULL),
+(39, 'Salesorder', '3', 'Add', '1', '2014-09-10 10:31:09', '2014-09-10 10:31:09', 0, NULL),
+(40, 'Customer', 'CUS-01-10000003', 'Edit', '1', '2014-09-10 14:23:40', '2014-09-10 14:23:40', 0, NULL),
+(41, 'Quotation', 'BSQ-01-10000011', 'Add', '1', '2014-09-10 14:24:47', '2014-09-10 14:24:47', 0, NULL),
+(42, 'Salesorder', '4', 'Add', '1', '2014-09-10 14:25:08', '2014-09-10 14:25:08', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1288,7 +1294,7 @@ CREATE TABLE IF NOT EXISTS `logactivities` (
   `logtime` datetime DEFAULT NULL,
   `created` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `logactivities`
@@ -1316,7 +1322,19 @@ INSERT INTO `logactivities` (`id`, `logname`, `logactivity`, `logid`, `logno`, `
 (22, 'Quotation', 'Add Quotation', '2', 'BSQ-01-10000005', NULL, '1', 2, '1', NULL, '2014-09-09'),
 (23, 'Salesorder', 'Add SalesOrder', 'BSO-01-10000004', '', NULL, NULL, 2, '1', NULL, '2014-09-09'),
 (24, 'Deliveryorder', 'Add Delivery Order', '2', '', NULL, '1', 2, NULL, NULL, '2014-09-09'),
-(25, 'ClientPO', 'Add', 'BSQ-01-10000005', '', NULL, '1', 2, '1', NULL, '2014-09-09');
+(25, 'ClientPO', 'Add', 'BSQ-01-10000005', '', NULL, '1', 2, '1', NULL, '2014-09-09'),
+(26, 'Prequisition', 'Add Purchase Requisition', '1', '', NULL, '1', 1, NULL, NULL, '2014-09-10'),
+(27, 'Prequisition', 'Add Manager', '2', 'BRF-01-10000005', NULL, '1', 1, NULL, NULL, '2014-09-10'),
+(28, 'Prequisition', 'Add Manager', '3', 'BRF-01-10000007', NULL, '1', 1, NULL, NULL, '2014-09-10'),
+(29, 'Prequisition', 'Add Supervisor', '4', 'BRF-01-10000009', NULL, '1', 1, NULL, NULL, '2014-09-10'),
+(30, 'Prequisition', 'Add Manager', '4', 'BRF-01-10000009', NULL, '1', 1, NULL, NULL, '2014-09-10'),
+(31, 'Quotation', 'Add Quotation', '3', 'BSQ-01-10000007', NULL, '1', 2, '1', NULL, '2014-09-10'),
+(32, 'Salesorder', 'Add SalesOrder', 'BSO-01-10000006', '', NULL, NULL, 2, '1', NULL, '2014-09-10'),
+(33, 'Prequisition', 'Add Supervisor', '5', 'BRF-01-10000011', NULL, '1', 2, '1', NULL, '2014-09-10'),
+(34, 'Prequisition', 'Add Manager', '5', 'BRF-01-10000011', NULL, '1', 2, '1', NULL, '2014-09-10'),
+(35, 'Reqpurchaseorder', 'Add Reqpurchaseorder', '1', '', NULL, NULL, 1, NULL, NULL, '2014-09-10'),
+(36, 'Quotation', 'Add Quotation', '4', 'BSQ-01-10000011', NULL, '1', 2, '1', NULL, '2014-09-10'),
+(37, 'Salesorder', 'Add SalesOrder', 'BSO-01-10000009', '', NULL, NULL, 2, '1', NULL, '2014-09-10');
 
 -- --------------------------------------------------------
 
@@ -1520,7 +1538,18 @@ CREATE TABLE IF NOT EXISTS `prequistions` (
   `is_poapproved` int(11) NOT NULL DEFAULT '0',
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `prequistions`
+--
+
+INSERT INTO `prequistions` (`id`, `track_id`, `prequistionno`, `customer_id`, `branch_id`, `customername`, `address`, `due_amount`, `attn`, `phone`, `fax`, `email`, `paymentterm_name`, `reg_date`, `ref_no`, `po_generate_type`, `discount`, `priority`, `instrument_type_id`, `is_approved`, `status`, `created`, `modified`, `created_by`, `modified_by`, `view`, `is_prpurchaseorder_created`, `is_jobcompleted`, `is_superviser_approved`, `is_manager_approved`, `is_assign_po`, `is_poapproved`, `is_deleted`) VALUES
+(1, 'BSTRA-01-10000019', 'BRF-01-10000003', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '0 days', '10-September-14', 'asdad', NULL, '', NULL, '1', 0, 1, '2014-09-10 06:06:51', '2014-09-10 06:06:51', 9, NULL, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, 'BSTRA-01-10000021', 'BRF-01-10000005', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '0 days', '10-September-14', 'aaaaaa', NULL, '2', NULL, '1', 0, 1, '2014-09-10 07:28:37', '2014-09-10 07:28:37', 9, NULL, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 'BSTRA-01-10000023', 'BRF-01-10000007', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '0 days', '10-September-14', 'sss', NULL, '2', NULL, '1', 0, 1, '2014-09-10 07:35:38', '2014-09-10 07:35:38', 9, NULL, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 'BSTRA-01-10000025', 'BRF-01-10000009', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '2', '9842017520', '044-56256325645', 'remi@gmail.com', '0 days', '10-September-14', 'gg', NULL, '2', NULL, '1', 0, 1, '2014-09-10 07:38:16', '2014-09-10 07:38:16', 9, NULL, 0, 0, 0, 0, 0, 0, 0, 0),
+(5, 'BSTRA-01-10000032', 'BRF-01-10000011', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '0 days', '10-September-14', 'aaaaa', NULL, '2', NULL, '1', 0, 1, '2014-09-10 13:33:06', '2014-09-10 13:33:06', 9, NULL, 0, 1, 0, 1, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1548,7 +1577,18 @@ CREATE TABLE IF NOT EXISTS `preq_customerspecialneeds` (
   `remarks` text,
   `service_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `preq_customerspecialneeds`
+--
+
+INSERT INTO `preq_customerspecialneeds` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `prequistion_id`, `salespeople_id`, `salesperson_name`, `projectname`, `gsttype`, `gst`, `currency_id`, `currency_value`, `additionalcharge_id`, `additional_service_value`, `remarks`, `service_id`) VALUES
+(1, '2014-09-10 06:06:51', '2014-09-10 06:06:51', NULL, NULL, 0, '1', NULL, 'Mr. Kathak , Mr. Ohm', 'aa', 'Standard', 7, 1, 2, 1, '2', 'er', 1),
+(2, '2014-09-10 07:28:37', '2014-09-10 07:28:37', NULL, NULL, 0, '2', NULL, 'Mr. Kathak , Mr. Ohm', 'ss', 'Standard', 7, 2, NULL, 1, '', 'sss', 1),
+(3, '2014-09-10 07:35:38', '2014-09-10 07:35:38', NULL, NULL, 0, '3', NULL, 'Mr. Kathak , Mr. Ohm', 'asd', 'Standard', 7, 1, 2, 1, '3', '', 1),
+(4, '2014-09-10 07:38:16', '2014-09-10 07:38:16', NULL, NULL, 0, '4', NULL, 'Mr. Kathak , Mr. Ohm', 'pro', 'Standard', 7, 1, 2, 1, '2', 'rem', 1),
+(5, '2014-09-10 13:33:07', '2014-09-10 13:33:07', NULL, NULL, 0, '5', NULL, 'Mr. Kathak , Mr. Ohm', 'sda', 'Standard', 7, 1, 2, 1, '3', 'dsd', 1);
 
 -- --------------------------------------------------------
 
@@ -1582,7 +1622,29 @@ CREATE TABLE IF NOT EXISTS `preq_devices` (
   `is_approved` int(11) DEFAULT NULL,
   `is_deleted` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `preq_devices`
+--
+
+INSERT INTO `preq_devices` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `prequistion_id`, `customer_id`, `instrument_name`, `prequistionno`, `brand_name`, `quantity`, `model_no`, `range`, `validity`, `unit_price`, `device_discount`, `department_name`, `account_service`, `total`, `title`, `status`, `is_approved`, `is_deleted`) VALUES
+(1, '2014-09-10 06:06:02', '2014-09-10 06:06:43', NULL, NULL, 0, '1', 'CUS-01-10000003', 'asdasd', 'BRF-01-10000003', 'asd', '2', 'asd', 'asd', 12, '2', '2', 'sd', 'Calibration Service', '1.96', '1', 1, NULL, 0),
+(2, '2014-09-10 06:06:02', '2014-09-10 06:06:48', NULL, NULL, 0, '1', 'CUS-01-10000003', 'asdasd', 'BRF-01-10000003', 'asd', '2', 'asd', 'asd', 12, '2', '2', 'sd', 'Calibration Service', '1.96', '1', 1, NULL, 0),
+(3, '2014-09-10 07:28:33', '2014-09-10 07:28:33', NULL, NULL, 0, '2', 'CUS-01-10000003', 'aasd', 'BRF-01-10000005', 'sad', '3', 'ad', 'sd', 12, '2', '2', 'sad', 'Calibration Service', '1.96', '1', 1, NULL, 0),
+(4, '2014-09-10 07:28:33', '2014-09-10 07:28:33', NULL, NULL, 0, '2', 'CUS-01-10000003', 'aasd', 'BRF-01-10000005', 'sad', '3', 'ad', 'sd', 12, '2', '2', 'sad', 'Calibration Service', '1.96', '1', 1, NULL, 0),
+(5, '2014-09-10 07:28:33', '2014-09-10 07:28:33', NULL, NULL, 0, '2', 'CUS-01-10000003', 'aasd', 'BRF-01-10000005', 'sad', '3', 'ad', 'sd', 12, '2', '2', 'sad', 'Calibration Service', '1.96', '1', 1, NULL, 0),
+(6, '2014-09-10 07:35:37', '2014-09-10 07:35:37', NULL, NULL, 0, '3', 'CUS-01-10000003', 'aasd', 'BRF-01-10000007', 'sad', '3', 'sadads', 'sd', 12, '23', '2', 'asd', 'Calibration Service', '22.54', '1', 1, NULL, 0),
+(7, '2014-09-10 07:35:37', '2014-09-10 07:35:37', NULL, NULL, 0, '3', 'CUS-01-10000003', 'aasd', 'BRF-01-10000007', 'sad', '3', 'sadads', 'sd', 12, '23', '2', 'asd', 'Calibration Service', '22.54', '1', 1, NULL, 0),
+(8, '2014-09-10 07:35:37', '2014-09-10 07:35:37', NULL, NULL, 0, '3', 'CUS-01-10000003', 'aasd', 'BRF-01-10000007', 'sad', '3', 'sadads', 'sd', 12, '23', '2', 'asd', 'Calibration Service', '22.54', '1', 1, NULL, 0),
+(9, '2014-09-10 07:38:15', '2014-09-10 07:38:15', NULL, NULL, 0, '4', 'CUS-01-10000003', 'ssss', 'BRF-01-10000009', 'xcv', '6', 'cxv', 'cxv', 12, '56', '4', 'fdg', 'Calibration Service', '53.76', '1', 1, NULL, 0),
+(10, '2014-09-10 07:38:15', '2014-09-10 07:38:15', NULL, NULL, 0, '4', 'CUS-01-10000003', 'ssss', 'BRF-01-10000009', 'xcv', '6', 'cxv', 'cxv', 12, '56', '4', 'fdg', 'Calibration Service', '53.76', '1', 1, NULL, 0),
+(11, '2014-09-10 07:38:15', '2014-09-10 07:38:15', NULL, NULL, 0, '4', 'CUS-01-10000003', 'ssss', 'BRF-01-10000009', 'xcv', '6', 'cxv', 'cxv', 12, '56', '4', 'fdg', 'Calibration Service', '53.76', '1', 1, NULL, 0),
+(12, '2014-09-10 07:38:15', '2014-09-10 07:38:15', NULL, NULL, 0, '4', 'CUS-01-10000003', 'ssss', 'BRF-01-10000009', 'xcv', '6', 'cxv', 'cxv', 12, '56', '4', 'fdg', 'Calibration Service', '53.76', '1', 1, NULL, 0),
+(13, '2014-09-10 07:38:15', '2014-09-10 07:38:15', NULL, NULL, 0, '4', 'CUS-01-10000003', 'ssss', 'BRF-01-10000009', 'xcv', '6', 'cxv', 'cxv', 12, '56', '4', 'fdg', 'Calibration Service', '53.76', '1', 1, NULL, 0),
+(14, '2014-09-10 07:38:15', '2014-09-10 07:38:15', NULL, NULL, 0, '4', 'CUS-01-10000003', 'ssss', 'BRF-01-10000009', 'xcv', '6', 'cxv', 'cxv', 12, '56', '4', 'fdg', 'Calibration Service', '53.76', '1', 1, NULL, 0),
+(15, '2014-09-10 13:33:04', '2014-09-10 13:33:04', NULL, NULL, 0, '5', 'CUS-01-10000003', 'asd', 'BRF-01-10000011', 'asd', '2', 'asd', 'sad', 12, '2', '2', 'sad', 'Calibration Service', '1.96', '1', 1, NULL, 0),
+(16, '2014-09-10 13:33:05', '2014-09-10 13:33:05', NULL, NULL, 0, '5', 'CUS-01-10000003', 'asd', 'BRF-01-10000011', 'asd', '2', 'asd', 'sad', 12, '2', '2', 'sad', 'Calibration Service', '1.96', '1', 1, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -1819,7 +1881,7 @@ CREATE TABLE IF NOT EXISTS `quotations` (
   `is_pocount_satisfied` int(11) DEFAULT '0',
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `quotations`
@@ -1827,7 +1889,9 @@ CREATE TABLE IF NOT EXISTS `quotations` (
 
 INSERT INTO `quotations` (`id`, `track_id`, `quotationno`, `customer_id`, `branch_id`, `customername`, `address`, `due_amount`, `attn`, `phone`, `fax`, `email`, `paymentterm_id`, `reg_date`, `ref_no`, `ref_count`, `po_generate_type`, `discount`, `priority`, `instrument_type_id`, `is_approved`, `status`, `created`, `modified`, `created_by`, `modified_by`, `view`, `salesorder_created`, `is_delivery_approved`, `quo_device_count`, `is_jobcompleted`, `total_device_rate`, `is_assign_po`, `po_approval_date`, `is_poapproved`, `is_pocount_satisfied`, `is_deleted`) VALUES
 (1, 'BSTRA-01-10000009', 'BSQ-01-10000003', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', 1, '09-September-14', 'PO-01-10000005,sssss', '1,1', 'Manual', '2', '1', '1', 1, 1, '2014-09-09 07:11:13', '2014-09-09 07:11:13', 9, NULL, 0, 1, 0, NULL, 0, NULL, 1, NULL, 0, 1, 0),
-(2, 'BSTRA-01-10000015', 'BSQ-01-10000005', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', 1, '09-September-14', 'PO-01-10000007,PAOAHDDD', '1,1', 'Manual', '2', '1', '1', 1, 1, '2014-09-09 13:21:26', '2014-09-09 13:21:26', 9, NULL, 0, 1, 0, NULL, 0, NULL, 1, '0000-00-00', 1, 1, 0);
+(2, 'BSTRA-01-10000015', 'BSQ-01-10000005', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', 1, '09-September-14', 'PO-01-10000007,PAOAHDDD', '1,1', 'Manual', '2', '1', '1', 1, 1, '2014-09-09 13:21:26', '2014-09-09 13:21:26', 9, NULL, 0, 1, 0, NULL, 0, NULL, 1, '0000-00-00', 1, 1, 0),
+(3, 'BSTRA-01-10000027', 'BSQ-01-10000007', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', 1, '10-September-14', 'CPO-01-10000009', '0', 'Automatic', '', '1', '1', 1, 1, '2014-09-10 10:28:39', '2014-09-10 10:28:39', 9, NULL, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 0, 0),
+(4, 'BSTRA-01-10000034', 'BSQ-01-10000011', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', 1, '10-September-14', 'aaaaaa', '0', 'Manual', '2', '1', '1', 1, 1, '2014-09-10 14:24:46', '2014-09-10 14:24:46', 9, NULL, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1855,7 +1919,7 @@ CREATE TABLE IF NOT EXISTS `quo_customerspecialneeds` (
   `remarks` text,
   `service_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `quo_customerspecialneeds`
@@ -1863,7 +1927,9 @@ CREATE TABLE IF NOT EXISTS `quo_customerspecialneeds` (
 
 INSERT INTO `quo_customerspecialneeds` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `quotation_id`, `salespeople_id`, `salesperson_name`, `projectname`, `gsttype`, `gst`, `currency_id`, `currency_value`, `additionalcharge_id`, `additional_service_value`, `remarks`, `service_id`) VALUES
 (1, '2014-09-09 07:11:13', '2014-09-09 07:11:13', NULL, NULL, 0, '1', NULL, NULL, 'AA', 'Standard', 7, 1, 2, 1, '2', 'remark', 1),
-(2, '2014-09-09 13:21:26', '2014-09-09 13:21:26', NULL, NULL, 0, '2', NULL, NULL, 'adasda', 'Standard', 7, 1, 2, 1, '2', 'remark', 1);
+(2, '2014-09-09 13:21:26', '2014-09-09 13:21:26', NULL, NULL, 0, '2', NULL, NULL, 'adasda', 'Standard', 7, 1, 2, 1, '2', 'remark', 1),
+(3, '2014-09-10 10:28:39', '2014-09-10 10:28:39', NULL, NULL, 0, '3', NULL, NULL, '', 'Standard', 7, 1, 2, 1, '', '', NULL),
+(4, '2014-09-10 14:24:47', '2014-09-10 14:24:47', NULL, NULL, 0, '4', NULL, NULL, '222', 'Standard', 7, 1, 2, 1, '1', 'rem', 1);
 
 -- --------------------------------------------------------
 
@@ -1899,7 +1965,7 @@ CREATE TABLE IF NOT EXISTS `quo_devices` (
   `is_approved` int(11) DEFAULT NULL,
   `is_deleted` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `quo_devices`
@@ -1909,7 +1975,11 @@ INSERT INTO `quo_devices` (`id`, `created`, `modified`, `created_by`, `modified_
 (1, '2014-09-09 07:10:31', '2014-09-09 07:10:31', NULL, NULL, 0, '1', 'CUS-01-10000003', '4', 'BSQ-01-10000003', 1, '2', '2233', '1', 'Inlab', 'Singlas', 12, '2', '2', '3', 'calibration service', '1.96', '1', 1, NULL, 0),
 (2, '2014-09-09 07:10:31', '2014-09-09 07:10:31', NULL, NULL, 0, '1', 'CUS-01-10000003', '4', 'BSQ-01-10000003', 1, '2', '2233', '1', 'Inlab', 'Singlas', 12, '2', '2', '3', 'calibration service', '1.96', '1', 1, NULL, 0),
 (3, '2014-09-09 13:21:22', '2014-09-09 13:21:22', NULL, NULL, 0, '2', 'CUS-01-10000003', '4', 'BSQ-01-10000005', 1, '2', '2233', '1', 'Inlab', 'Singlas', 12, '2', '2', '3', 'calibration service', '1.96', '1', 1, NULL, 0),
-(4, '2014-09-09 13:21:22', '2014-09-09 13:21:22', NULL, NULL, 0, '2', 'CUS-01-10000003', '4', 'BSQ-01-10000005', 1, '2', '2233', '1', 'Inlab', 'Singlas', 12, '2', '2', '3', 'calibration service', '1.96', '1', 1, NULL, 0);
+(4, '2014-09-09 13:21:22', '2014-09-09 13:21:22', NULL, NULL, 0, '2', 'CUS-01-10000003', '4', 'BSQ-01-10000005', 1, '2', '2233', '1', 'Inlab', 'Singlas', 12, '2', '2', '3', 'calibration service', '1.96', '1', 1, NULL, 0),
+(5, '2014-09-10 10:28:36', '2014-09-10 10:28:36', NULL, NULL, 0, '3', 'CUS-01-10000003', '4', 'BSQ-01-10000007', 1, '2', '2233', '1', 'Inlab', 'Singlas', 12, '2', '', '3', 'calibration service', '2', '1', 1, NULL, 0),
+(6, '2014-09-10 10:28:36', '2014-09-10 10:28:36', NULL, NULL, 0, '3', 'CUS-01-10000003', '4', 'BSQ-01-10000007', 1, '2', '2233', '1', 'Inlab', 'Singlas', 12, '2', '', '3', 'calibration service', '2', '1', 1, NULL, 0),
+(7, '2014-09-10 14:24:44', '2014-09-10 14:24:44', NULL, NULL, 0, '4', 'CUS-01-10000003', '4', 'BSQ-01-10000011', 1, '2', '2233', '1', 'subcontract', 'Singlas', 12, '2', '2', '3', 'calibration service', '1.96', '1', 1, NULL, 0),
+(8, '2014-09-10 14:24:44', '2014-09-10 14:24:44', NULL, NULL, 0, '4', 'CUS-01-10000003', '4', 'BSQ-01-10000011', 1, '2', '2233', '1', 'subcontract', 'Singlas', 12, '2', '2', '3', 'calibration service', '1.96', '1', 1, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -1974,7 +2044,7 @@ CREATE TABLE IF NOT EXISTS `randoms` (
 --
 
 INSERT INTO `randoms` (`id`, `customer`, `tag`, `group`, `instrument`, `quotation`, `salesorder`, `deliveryorder`, `invoice`, `clientpo`, `proforma`, `track`, `PurchasRequisition`, `pr_purchaseorder`, `onsites`) VALUES
-(1, 'CUS-01-10000004', 'TAG-01-10000004', 'CGRU-01-10000004', 'BIT-01-10000001', 'BSQ-01-10000006', 'BSO-01-10000005', 'BDO-01-10000003', 'BIN-01-10000001', 'CPO-01-10000007', 'BPI-01-10000001', 'BSTRA-01-10000017', 'BRF-01-10000001', 'BPO-01-10000001', 'OSS-01-10000004');
+(1, 'CUS-01-10000005', 'TAG-01-10000005', 'CGRU-01-10000005', 'BIT-01-10000001', 'BSQ-01-10000012', 'BSO-01-10000010', 'BDO-01-10000003', 'BIN-01-10000001', 'CPO-01-10000009', 'BPI-01-10000001', 'BSTRA-01-10000036', 'BRF-01-10000012', 'BPO-01-10000002', 'OSS-01-10000005');
 
 -- --------------------------------------------------------
 
@@ -2101,7 +2171,14 @@ CREATE TABLE IF NOT EXISTS `reqpurchaseorders` (
   `is_poapproved` int(11) NOT NULL DEFAULT '0',
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `reqpurchaseorders`
+--
+
+INSERT INTO `reqpurchaseorders` (`id`, `track_id`, `reqpurchaseno`, `prequisitionno`, `customer_id`, `branch_id`, `customername`, `address`, `due_amount`, `attn`, `phone`, `fax`, `email`, `paymentterm_name`, `reg_date`, `ref_no`, `po_generate_type`, `discount`, `priority`, `instrument_type_name`, `is_approved`, `status`, `created`, `modified`, `created_by`, `modified_by`, `view`, `is_assign_po`, `is_poapproved`, `is_deleted`) VALUES
+(1, 'BSTRA-01-10000032', 'BPO-01-10000002', 'BRF-01-10000011', 'CUS-01-10000003', 1, 'PPW FOXCOEN PVT LTD ( Singapore ) ', '12, Mary Land,\r\nSealand', NULL, '', '9842017520', '044-56256325645', 'samir@ppw.com', '0 days', '10-September-14', 'aaaaa', NULL, '2', NULL, 'Calibration for Purchase Requisition', 1, 1, '2014-09-10 13:35:11', '2014-09-10 13:35:11', NULL, NULL, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2129,7 +2206,14 @@ CREATE TABLE IF NOT EXISTS `reqpur_customerspecialneeds` (
   `remarks` text,
   `service_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `reqpur_customerspecialneeds`
+--
+
+INSERT INTO `reqpur_customerspecialneeds` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `reqpurchaseorder_id`, `salespeople_id`, `salesperson_name`, `projectname`, `gsttype`, `gst`, `currency_id`, `currency_value`, `additionalcharge_id`, `additional_service_value`, `remarks`, `service_id`) VALUES
+(1, '2014-09-10 13:35:12', '2014-09-10 13:35:12', NULL, NULL, 0, '1', NULL, 'Mr. Kathak , Mr. Ohm', 'sda', 'Standard', 7, 1, 2, 1, '3', 'dsd', 1);
 
 -- --------------------------------------------------------
 
@@ -2163,7 +2247,15 @@ CREATE TABLE IF NOT EXISTS `reqpur_devices` (
   `is_approved` int(11) DEFAULT NULL,
   `is_deleted` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `reqpur_devices`
+--
+
+INSERT INTO `reqpur_devices` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `reqpurchaseorder_id`, `customer_id`, `instrument_name`, `prequistionno`, `brand_name`, `quantity`, `model_no`, `range`, `validity`, `unit_price`, `discount`, `department_name`, `account_service`, `total`, `title`, `status`, `is_approved`, `is_deleted`) VALUES
+(1, '2014-09-10 13:34:46', '2014-09-10 13:34:46', NULL, NULL, 0, '1', 'CUS-01-10000003', 'asd', 'BRF-01-10000011', 'asd', '2', 'asd', 'sad', 12, '2', '2', 'sad', 'Calibration Service', '1.96', '1', 1, 0, 0),
+(2, '2014-09-10 13:34:47', '2014-09-10 13:34:47', NULL, NULL, 0, '1', 'CUS-01-10000003', 'asd', 'BRF-01-10000011', 'asd', '2', 'asd', 'sad', 12, '2', '2', 'sad', 'Calibration Service', '1.96', '1', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2221,7 +2313,9 @@ CREATE TABLE IF NOT EXISTS `salesorders` (
 
 INSERT INTO `salesorders` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `salesorderno`, `track_id`, `branch_id`, `quotation_id`, `quotationno`, `customer_id`, `customername`, `address`, `due_amount`, `attn`, `phone`, `fax`, `email`, `reg_date`, `ref_no`, `ref_count`, `our_ref_no`, `in_date`, `due_date`, `priority`, `instrument_type_id`, `remarks`, `service_id`, `sal_description_count`, `po_generate_type`, `is_assign_po`, `is_poapproved`, `is_pocount_satisfied`, `is_approved`, `is_approved_lab`, `status`, `is_deleted`, `is_deliveryorder_created`, `is_jobcompleted`) VALUES
 ('BSO-01-10000002', '2014-09-09 07:12:30', '2014-09-09 07:12:30', 1, NULL, 0, 'BSO-01-10000002', 'BSTRA-01-10000009', 1, '1', 'BSQ-01-10000003', 'CUS-01-10000003', NULL, '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '09-September-14', 'PO-01-10000005,sssss,', 2, NULL, '09-September-14', '13-September-14', NULL, NULL, '', 1, NULL, 'Manual', 1, 0, 1, '1', 1, 1, 0, 1, 0),
-('BSO-01-10000004', '2014-09-09 13:22:18', '2014-09-09 13:22:18', 1, NULL, 0, 'BSO-01-10000004', 'BSTRA-01-10000015', 1, '2', 'BSQ-01-10000005', 'CUS-01-10000003', NULL, '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '09-September-14', 'PO-01-10000007,PAOAHDDD', 2, NULL, '09-September-14', '13-September-14', NULL, NULL, 'remark', 1, NULL, 'Manual', 1, 0, 1, '1', 1, 1, 0, 1, 0);
+('BSO-01-10000004', '2014-09-09 13:22:18', '2014-09-09 13:22:18', 1, NULL, 0, 'BSO-01-10000004', 'BSTRA-01-10000015', 1, '2', 'BSQ-01-10000005', 'CUS-01-10000003', NULL, '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '09-September-14', 'PO-01-10000007,PAOAHDDD', 2, NULL, '09-September-14', '13-September-14', NULL, NULL, 'remark', 1, NULL, 'Manual', 1, 0, 1, '1', 1, 1, 0, 1, 0),
+('BSO-01-10000006', '2014-09-10 10:31:08', '2014-09-10 10:31:08', 1, NULL, 0, 'BSO-01-10000006', 'BSTRA-01-10000027', 1, '3', 'BSQ-01-10000007', 'CUS-01-10000003', NULL, '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '10-September-14', 'CPO-01-10000009', NULL, NULL, '10-September-14', '14-September-14', NULL, NULL, '', 1, NULL, 'Automatic', 0, 0, NULL, '1', 0, 1, 0, 0, 0),
+('BSO-01-10000009', '2014-09-10 14:25:08', '2014-09-10 14:25:08', 1, NULL, 0, 'BSO-01-10000009', 'BSTRA-01-10000034', 1, '4', 'BSQ-01-10000011', 'CUS-01-10000003', NULL, '12, Mary Land,\r\nSealand', NULL, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '10-September-14', 'aaaaaa', NULL, NULL, '10-September-14', '14-September-14', NULL, NULL, '', 1, NULL, 'Manual', 0, 0, NULL, '1', 0, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2297,7 +2391,7 @@ CREATE TABLE IF NOT EXISTS `sal_description` (
   `is_approved_lab` int(11) DEFAULT '0',
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `sal_description`
@@ -2307,7 +2401,11 @@ INSERT INTO `sal_description` (`id`, `created`, `modified`, `created_by`, `modif
 (1, '2014-09-09 07:12:00', '2014-09-09 09:23:58', NULL, NULL, 0, NULL, 'BSO-01-10000002', 1, 'BSQ-01-10000003', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'Inlab', 'Singlas', 12, '2', '2', 3, 'calibration service', '1', '1.96', 0, '1', 1, 0, '0', 0, NULL, 1, '1', NULL, 1, 0),
 (2, '2014-09-09 07:12:00', '2014-09-09 09:23:58', NULL, NULL, 0, NULL, 'BSO-01-10000002', 1, 'BSQ-01-10000003', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'Inlab', 'Singlas', 12, '2', '2', 3, 'calibration service', '1', '1.96', 0, '1', 1, 0, '0', 0, NULL, 1, '1', NULL, 1, 0),
 (3, '2014-09-09 13:21:50', '2014-09-09 13:25:01', NULL, NULL, 0, NULL, 'BSO-01-10000004', 2, 'BSQ-01-10000005', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'Inlab', 'Singlas', 12, '2', '2', 3, 'calibration service', '1', '1.96', 0, '1', 1, 0, '0', 0, NULL, 1, '1', NULL, 1, 0),
-(4, '2014-09-09 13:21:50', '2014-09-09 13:25:01', NULL, NULL, 0, NULL, 'BSO-01-10000004', 2, 'BSQ-01-10000005', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'Inlab', 'Singlas', 12, '2', '2', 3, 'calibration service', '1', '1.96', 0, '1', 1, 0, '0', 0, NULL, 1, '1', NULL, 1, 0);
+(4, '2014-09-09 13:21:50', '2014-09-09 13:25:01', NULL, NULL, 0, NULL, 'BSO-01-10000004', 2, 'BSQ-01-10000005', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'Inlab', 'Singlas', 12, '2', '2', 3, 'calibration service', '1', '1.96', 0, '1', 1, 0, '0', 0, NULL, 1, '1', NULL, 1, 0),
+(5, '2014-09-10 10:29:50', '2014-09-10 10:29:50', NULL, NULL, 0, NULL, 'BSO-01-10000006', 3, 'BSQ-01-10000007', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'Inlab', 'Singlas', 12, '2', '', 3, 'calibration service', '1', '2', 0, '1', 0, 0, '0', 0, NULL, 1, '1', NULL, 0, 0),
+(6, '2014-09-10 10:29:50', '2014-09-10 10:29:50', NULL, NULL, 0, NULL, 'BSO-01-10000006', 3, 'BSQ-01-10000007', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'Inlab', 'Singlas', 12, '2', '', 3, 'calibration service', '1', '2', 0, '1', 0, 0, '0', 0, NULL, 1, '1', NULL, 0, 0),
+(7, '2014-09-10 14:25:04', '2014-09-10 14:25:04', NULL, NULL, 0, NULL, 'BSO-01-10000009', 4, 'BSQ-01-10000011', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'subcontract', 'Singlas', 12, '2', '2', 3, 'calibration service', '1', '1.96', 0, '0', 0, 0, '0', 0, NULL, 1, '1', NULL, 0, 0),
+(8, '2014-09-10 14:25:04', '2014-09-10 14:25:04', NULL, NULL, 0, NULL, 'BSO-01-10000009', 4, 'BSQ-01-10000011', 'CUS-01-10000003', '2', 4, '2233', 1, '1', 'subcontract', 'Singlas', 12, '2', '2', 3, 'calibration service', '1', '1.96', 0, '0', 0, 0, '0', 0, NULL, 1, '1', NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2400,7 +2498,14 @@ CREATE TABLE IF NOT EXISTS `subcontractdos` (
   `subcontract_remarks` varchar(200) DEFAULT NULL,
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `subcontractdos`
+--
+
+INSERT INTO `subcontractdos` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `subcontract_dono`, `customer_id`, `salesorder_id`, `branch_id`, `subcontract_name`, `subcontract_address`, `subcontract_date`, `subcontract_duedate`, `subcontract_salesperson`, `service_id`, `subcontract_attn`, `subcontract_phone`, `subcontract_fax`, `subcontract_email`, `subcontract_ref_no`, `subcontract_track_id`, `subcontract_remarks`, `is_deleted`) VALUES
+(1, '2014-09-10 14:26:21', '2014-09-10 14:26:21', NULL, NULL, 0, 'BSSDO1410361169', 'CUS-01-10000003', 'BSO-01-10000009', NULL, 'PPW FOXCOEN PVT LTD', '12, Mary Land,Sealand', '03-September-14', '11-September-14', 'Mr. Kathak , Mr. Ohm', 1, '1', '9842017520', '044-56256325645', 'samir@ppw.com', '', NULL, 'rem', 0);
 
 -- --------------------------------------------------------
 
@@ -2419,7 +2524,15 @@ CREATE TABLE IF NOT EXISTS `subcontract_descriptions` (
   `description_id` varchar(200) DEFAULT NULL,
   `status` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `subcontract_descriptions`
+--
+
+INSERT INTO `subcontract_descriptions` (`id`, `created`, `modified`, `created_by`, `modified_by`, `view`, `subcontractdo_id`, `description_id`, `status`) VALUES
+(1, '2014-09-10 14:26:21', '2014-09-10 14:26:21', NULL, NULL, NULL, '1', '7', 1),
+(2, '2014-09-10 14:26:21', '2014-09-10 14:26:21', NULL, NULL, NULL, '1', '8', 1);
 
 -- --------------------------------------------------------
 
