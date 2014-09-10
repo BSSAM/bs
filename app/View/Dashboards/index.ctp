@@ -33,6 +33,36 @@
     }
        
    });
+   $(document).on('click','.approve_prsuper',function(){
+       var val_prsuper = $(this).attr('id');
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_prsuper,
+            url: path_url+'PurchaseRequisitions/approve_superviser/',
+            success: function(data)
+            {
+                console.log(data);
+                if(data=='success')
+                {
+                    alert('Purchase Requisition is Approved & Forwarded to Manager');
+                    window.location.reload();
+                }
+                else
+                {
+                    alert('Purchase Requisition is Approval Failed due to unknown Cause');
+                    window.location.reload();
+                }
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
    
    
     </script>
@@ -63,7 +93,7 @@
                                 else
                                 {
                                 ?>
-                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_quotation_count)+($log_activity_client_count); ?></span></a></li>
+                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_quotation_count)+($log_activity_client_count)+($log_activity_prpur_count)+($log_activity_prman_count)+($log_activity_prsuper_count); ?></span></a></li>
                                 <?php } 
                                 if($user_role['app_procedureno']['view'] == 0 && $user_role['app_brand']['view'] == 0 && $user_role['app_instrument']['view'] == 0 && $user_role['app_range']['view'] == 0 && $user_role['app_unit']['view'] == 0 ){ 
                                     //return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
@@ -175,6 +205,15 @@
                                     <?php if($user_role['app_clientpo']['view'] != 0){ ?>
                                     <li><a href="#clientpo">Client PO <span class="badge animation-floating"><?php echo $log_activity_client_count; ?></span></a></li>
                                     <?php } ?>
+                                    <?php if($user_role['app_prmanager']['view'] != 0){ ?>
+                                    <li><a href="#prman">PR - Manager<span class="badge animation-floating"><?php echo $log_activity_prman_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_prsupervisor']['view'] != 0){ ?>
+                                    <li><a href="#prsuper">PR - Supervisor<span class="badge animation-floating"><?php echo $log_activity_prsuper_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php //if($user_role['app_prsupervisor']['view'] != 0){ ?>
+                                    <li><a href="#prpur">PR Purchase<span class="badge animation-floating"><?php echo $log_activity_prpur_count; ?></span></a></li>
+                                    <?php //} ?>
 <!--                                <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>-->
                                 </ul>
                             <div class="tab-content">
@@ -466,6 +505,150 @@
                                         <tr>
                                             <td class="text-center">
                                                 <i class="gi gi-keys"></i> Oops... No Client PO Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <?php endif; ?>
+                                    
+                                </table>
+                                </div>
+                                </div>
+                            </div>
+                             <!---------------------------------------------------------------------------------------->
+                            <!------------------------------- PR - Manager ----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            <div class="tab-pane" id="prman">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                <table id="deliver_cannd" class="table table-vcenter table-condensed table-bordered">
+                                    <?PHP if (!empty($log_activity_prman)): ?>
+                                    <thead>
+                                        <th>Flag</th>
+                                        <th>Name(Details)</th>
+                                        <th>Approval</th>
+                                        <th>Created</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($log_activity_prman as $log_activity_prman_list) :?> 
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-pr.jpg', array('alt' => 'PR-Manager','class'=>'')); ?></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prman_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prman_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prman_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center ">
+                                           <?PHP if($log_activity_prman_list['Logactivity']['logactivity'] == 'Add Manager'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'PurchaseRequisitions','action'=>'edit',$log_activity_prman_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                           
+                                            
+                                            </td>
+                                            <td class="">by <?PHP echo $log_activity_prman_list['User']['username'] ?><br><small><?PHP echo $log_activity_prman_list['Logactivity']['created'] ?></small></td>
+                                        </tr>
+                                   
+                                       <?php endforeach; ?>
+                                         </tbody>
+                                        <?php else: ?>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No PR - Manager Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <?php endif; ?>
+                                    
+                                </table>
+                                </div>
+                                </div>
+                            </div>
+                            
+                            <!---------------------------------------------------------------------------------------->
+                            <!------------------------------- PR - Supervisor ----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            <div class="tab-pane" id="prsuper">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                <table id="deliver_cannd" class="table table-vcenter table-condensed table-bordered">
+                                    <?PHP if (!empty($log_activity_prsuper)): ?>
+                                    <thead>
+                                        <th>Flag</th>
+                                        <th>Name(Details)</th>
+                                        <th>Approval</th>
+                                        <th>Created</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($log_activity_prsuper as $log_activity_prsuper_list) :?> 
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-pr.jpg', array('alt' => 'PR-Super','class'=>'')); ?></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prsuper_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prsuper_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prsuper_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center ">
+                                           <?PHP if($log_activity_prsuper_list['Logactivity']['logactivity'] == 'Add Supervisor'){ ?>
+                                            <?PHP // echo $this->html->link('Approve',array('controller'=>'PurchaseRequisitions','action'=>'edit',$log_activity_prsuper_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                                <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_prsuper','id'=>$log_activity_prsuper_list['Logactivity']['logid'])) ?>
+                                           <?php }?>
+                                           
+                                            
+                                            </td>
+                                            <td class="">by <?PHP echo $log_activity_prsuper_list['User']['username'] ?><br><small><?PHP echo $log_activity_prsuper_list['Logactivity']['created'] ?></small></td>
+                                        </tr>
+                                   
+                                       <?php endforeach; ?>
+                                         </tbody>
+                                        <?php else: ?>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No PR - Supervisor Approval Available
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <?php endif; ?>
+                                    
+                                </table>
+                                </div>
+                                </div>
+                            </div>
+                            <!---------------------------------------------------------------------------------------->
+                            <!------------------------------- PR Purchase ----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            <div class="tab-pane" id="prpur">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                <table id="deliver_cannd" class="table table-vcenter table-condensed table-bordered">
+                                    <?PHP if (!empty($log_activity_prpur)): ?>
+                                    <thead>
+                                        <th>Flag</th>
+                                        <th>Name(Details)</th>
+                                        <th>Approval</th>
+                                        <th>Created</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($log_activity_prpur as $log_activity_prpur_list) :?> 
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-pr.jpg', array('alt' => 'PR-Purchase','class'=>'')); ?></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prpur_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prpur_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prpur_list['Logactivity']['logid'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center ">
+                                           <?PHP if($log_activity_prpur_list['Logactivity']['logname'] == 'PRPurchase'){ ?>
+                                            <?PHP  echo $this->html->link('Approve',array('controller'=>'Reqpurchaseorders','action'=>'edit',$log_activity_prpur_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                                
+                                           <?php }?>
+                                           
+                                            
+                                            </td>
+                                            <td class="">by <?PHP echo $log_activity_prpur_list['User']['username'] ?><br><small><?PHP echo $log_activity_prpur_list['Logactivity']['created'] ?></small></td>
+                                        </tr>
+                                   
+                                       <?php endforeach; ?>
+                                         </tbody>
+                                        <?php else: ?>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No PR - Purchase Order Approval Available
                                             </td>
                                         </tr>
                                     </tbody>

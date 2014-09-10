@@ -210,30 +210,7 @@ $(document).ready(function(){
         });
         
    });
-    /**************************Quotation Approval in Quotation Module*************************************/
-    $(document).on('click','.approve_quotation',function(){
-       var val_quotationno=$('#val_quotationid').val();
-       //alert(val_quotationno);
-       
-       if(window.confirm("Are you sure?")){
-       $.ajax({
-            type: 'POST',
-            data:"id="+val_quotationno,
-            url: path+'Quotations/approve/',
-            success: function(data)
-            {
-                //return false;
-               window.location.reload();
-            }
-            
-        });
-    }
-    else
-    {
-        return false;
-    }
-       
-   });
+   
    /**********************************File Upload refresh**********************************************/
    $(document).on('click','.refresh_file_upload',function(){
       
@@ -265,25 +242,7 @@ $(document).ready(function(){
         });
    });
      /**********************************************Generate Po for Quotation*****************************/
-   $(document).on('click','.quo_generate_po',function()
-   {
-       
-       var po_id    =   $(this).attr('id');
-       var confirm   =window.confirm('I dont have Po number.Need to generate temporary po');  
-       if(confirm==true)
-       {
-            $.ajax({
-            type:'POST',
-            url:path_url+'/Clientpos/get_random_ponumber/',
-            success:function(data){
-                  $('#val_ref_no').val(data);
-                  $('#val_ref_no').attr('readonly','readonly');
-                  $('#po_gen_type').val('Automatic');
-                    
-                }
-            });
-        }
-   });
+  
     /***********************************************Calculate Device Count Rate Total******************************/
     $(document).on('keyup','#val_ref_no',function(){
       if($(this).val()=='-'){
@@ -305,4 +264,51 @@ $(document).ready(function(){
             }
         });
     }
+   });
+   
+   /**************************PR Approval *************************************/
+    $(document).on('click','.approve_pr',function(){
+       var val_pr_id=$('#pr_id').val();
+       //alert(val_quotationno);
+       
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_pr_id,
+            url: path+'PurchaseRequisitions/approve_manager/',
+            success: function(data)
+            {
+                window.location.reload(); 
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+   
+   $(document).on('click','.approve_prpur',function(){
+       var val_prpur_id=$('#prpur_id').val();
+       //alert(val_quotationno);
+       
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_prpur_id,
+            url: path+'Reqpurchaseorders/approve/',
+            success: function(data)
+            {
+                window.location.reload(); 
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
    });

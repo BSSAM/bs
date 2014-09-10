@@ -201,6 +201,37 @@ class DashboardsController extends AppController
         //pr($logactivity);exit;
         $this->set('log_activity_client_count', $logactivity_client_count);
         /*****************************************************/
+         /****************** Log Activity - PR Manager ********************/
+        
+        $logactivity_prman = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Prequisition",'Logactivity.logactivity'=>"Add Manager")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_prman', $logactivity_prman);
+        
+        $logactivity_prman_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Prequisition",'Logactivity.logactivity'=>"Add Manager")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_prman_count', $logactivity_prman_count);
+        /*****************************************************/
+         /****************** Log Activity - PR Supervisor ********************/
+        
+        $logactivity_prsuper = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Prequisition",'Logactivity.logactivity'=>"Add Supervisor")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_prsuper', $logactivity_prsuper);
+        
+        $logactivity_prsuper_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Prequisition",'Logactivity.logactivity'=>"Add Supervisor")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_prsuper_count', $logactivity_prsuper_count);
+        /*****************************************************/
+        
+        /****************** Log Activity - PR Purchase Order ********************/
+        
+        $logactivity_prpur = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"PRPurchase")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_prpur', $logactivity_prpur);
+        
+        $logactivity_prpur_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"PRPurchase")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_prpur_count', $logactivity_prpur_count);
+        /*****************************************************/
         
          /****************** Log Activity - Invoice ********************/
         

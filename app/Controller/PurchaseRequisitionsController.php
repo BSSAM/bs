@@ -81,15 +81,20 @@
                     $this->request->data['PreqCustomerSpecialNeed']['prequistion_id']=$purchaserequisitions_id;
                     $this->PreqCustomerSpecialNeed->save($this->request->data['PreqCustomerSpecialNeed']); 
                     /************
-                    * Data Log
+                    * Log Activities - Prequisition Approval
                     */
-                    $this->request->data['Logactivity']['logname'] = 'prequistion_id';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Purchase Requisition';
+                    $this->request->data['Logactivity']['logname'] = 'Prequisition';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Supervisor';
                     $this->request->data['Logactivity']['logid'] = $purchaserequisitions_id;
+                    $this->request->data['Logactivity']['logno'] = $requistion_no;
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
 
                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                    $this->Logactivity->create();
+                    
+                    
                     
                     /******************/
 
@@ -118,7 +123,7 @@
          */
             $purchase_requistion_list=$this->PurchaseRequisition->find('first',array('conditions'=>array('PurchaseRequisition.id'=>$id,'PurchaseRequisition.is_deleted'=>'0'),'recursive'=>2));
             //for Contact person info
-           
+           $this->set('pr_dat',$purchase_requistion_list);
             $customer_id    =   $purchase_requistion_list['Customer']['id'];
             $salesperson_list    =   $this->CusSalesperson->find('all',array('conditions'=>array('CusSalesperson.customer_id'=>$customer_id)));
             $salespeople         =   '';
@@ -163,12 +168,7 @@
                     $this->PreqCustomerSpecialNeed->id=$this->request->data['PreqCustomerSpecialNeed']['id'];
                     $this->PreqCustomerSpecialNeed->save($this->request->data['PreqCustomerSpecialNeed']);  
                     
-                    $this->request->data['Logactivity']['logname']   =   'PurchaseRequisition';
-                    $this->request->data['Logactivity']['logactivity']   =   'Add PurchaseRequisition';
-                    $this->request->data['Logactivity']['logid']   =   $this->request->data['PurchaseRequisition']['prequistionno'];
-                    $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                   
                     $this->Session->setFlash(__('PurchaseRequisition has been Updated Successfully'));
                     $this->redirect(array('action'=>'index'));
                 }
@@ -378,26 +378,37 @@
             }
      
         }
-        public function approve()
+        public function approve_superviser()
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
-            $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.id'=>$id));
+            if($this->PurchaseRequisition->updateAll(array('PurchaseRequisition.is_superviser_approved'=>1),array('PurchaseRequisition.id'=>$id)))
+            {
             $user_id = $this->Session->read('sess_userid');
-            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
-            //pr($log);exit;
-            //$details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id)));
-//            $track_id = $details['Quotation']['track_id'];
-//            $customer_id = $details['Quotation']['customer_id'];
-//            $quo_id = $details['Quotation']['id'];
-//            $d=date("d");
-//            $m=date("m");
-//            $y=date("Y");
-//            $t=time();
-//            $dmt='CPO'.($d+$m+$y+$t);
-//            $clientpo_id = $dmt;
-//            $device_node    =   $this->Device->find('count',array('conditions'=>array('Device.quotation_id'=>$quo_id)));
-//            $this->Clientpo->save(array('quotation_no'=>$id,'quotation_id'=> $quo_id,'clientpos_no'=>$clientpo_id,'track_id'=>$track_id,'customer_id'=>$customer_id,'quo_quantity'=>$device_node));
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Supervisor'));
+            $purchase_requistion_list=$this->PurchaseRequisition->find('first',array('conditions'=>array('PurchaseRequisition.id'=>$id,'PurchaseRequisition.is_deleted'=>'0'),'recursive'=>2));
+            $this->request->data['Logactivity']['logname'] = 'Prequisition';
+            $this->request->data['Logactivity']['logactivity'] = 'Add Manager';
+            $this->request->data['Logactivity']['logid'] = $id;
+            $this->request->data['Logactivity']['logno'] = $purchase_requistion_list['PurchaseRequisition']['prequistionno'];
+            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+            $this->request->data['Logactivity']['logapprove'] = 1;
+
+            $b = $this->Logactivity->save($this->request->data['Logactivity']);
+            echo "success";
+            }
+            else{
+                echo "failure";
+            }
+            
+        }
+        public function approve_manager()
+        {
+            $this->autoRender=false;
+            $id =  $this->request->data['id'];
+            $this->PurchaseRequisition->updateAll(array('PurchaseRequisition.is_manager_approved'=>1),array('PurchaseRequisition.id'=>$id,'PurchaseRequisition.is_superviser_approved'=>1));
+            $user_id = $this->Session->read('sess_userid');
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Manager'));
         }
         public function get_contact_email()
         {

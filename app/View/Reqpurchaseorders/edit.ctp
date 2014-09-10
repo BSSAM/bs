@@ -58,8 +58,19 @@ $(function(){
                                                     <?PHP echo $this->element('Reqpurchaseorders/edit/description'); ?>
                                                     <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-10">
-                                                            <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary')); ?>
-                                                            <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel',array('controller'=>'Reqpurchaseorders','action'=>'index'),array('class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                                                            <?php echo $this->Form->input('Reqpurchaseorder.id', array('name'=>'prpur_id','id'=>'prpur_id','type'=>'hidden','value'=>$requistion_details['Reqpurchaseorder']['id'])); ?>
+                                                            <?php if($user_role['job_prpurchaseorder']['edit'] == 1 && $requistion_details['Reqpurchaseorder']['is_approved']==0): ?>
+                                                            <?php // if($user_role['app_prpurchaseorder']['view'] == 1){ ?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_prpur','escape' => false)); ?>
+                                                            <?php //} else {?>
+                                                            <?php // echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                            <?php //} ?>
+
+                                                            <?php else : ?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Reqpurchaseorders','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                                            <?php endif; ?>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
