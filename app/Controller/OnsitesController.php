@@ -131,7 +131,7 @@
         /*
          * *****************************************************
          */
-            $quotations_list=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
+            $quotations_list=$this->Onsite->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
             //for Contact person info
             //pr($quotations_list);exit;
             $customer_id    =   $quotations_list['Customer']['id'];
