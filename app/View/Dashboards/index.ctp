@@ -1053,8 +1053,8 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-simple min-height165">
-                                    <a> <span class="label label-second custom_float_top animation-floating">0 New</span><h3 class="text-center themed-color-amethyst animation-stretchRight">Purchase Order</h3> </a>
-                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>0</strong></h3>
+                                    <a> <span class="label label-second custom_float_top animation-floating"><?php echo $total_po_count; ?> New</span><h3 class="text-center themed-color-amethyst animation-stretchRight">Purchase Order</h3> </a>
+                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_po_count; ?></strong></h3>
                                 </div>
                             </div>
                             <!-- END Widget -->
@@ -1192,11 +1192,11 @@
                                     <ul class="calendar-events calender_listing">
                                         <li class="quote_calendar" data-id="Quotations">Quotation</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Salesorders">Sales Order</li><!--  style="background-color: #9b59b6"  -->
-                                        <li class="quote_calendar" data-id="Quotations">Client PO</li><!--   style="background-color: #f39c12"  -->
+                                        <li class="quote_calendar" data-id="Quotations/calendar_clientpo">Client PO</li><!--   style="background-color: #f39c12"  -->
                                         <li class="quote_calendar" data-id="Deliveryorders">Delivery Order</li><!--   style="background-color: #3498db"  -->
                                         <li class="quote_calendar" data-id="Quotations">Sub-Contract DO</li><!--  style="background-color: #e74c3c"  -->
                                         <li class="quote_calendar" data-id="Onsites">Onsite</li><!--  style="background-color: #1abc9c"  -->
-                                        <li class="quote_calendar" data-id="Quotations">PR</li><!--  style="background-color: #1abc9c"  -->
+                                        <li class="quote_calendar" data-id="Reqpurchaseorders">PR</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Quotations">PO</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Instruments/tech">TECHNICAL</li><!--  style="background-color: #1abc9c"  -->
                                         <li class="quote_calendar" data-id="Instruments/dim">DIMENSIONAL</li><!--  style="background-color: #1abc9c"  -->

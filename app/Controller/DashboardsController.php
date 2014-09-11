@@ -35,6 +35,9 @@ class DashboardsController extends AppController
         /* Sales Order */
         $data_sales = $this->Salesorder->find('count');
         $this->set('total_salesorder_count', $data_sales);
+        //Purchase order
+         $data_pur = $this->Quotation->find('count',array('conditions'=>array('Quotation.is_pocount_satisfied'=>'0','Quotation.is_poapproved'=>'0')));
+        $this->set('total_po_count', $data_pur);
         $data_sales_view = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.view'=>'0')));
         $this->set('total_salesorder_view', $data_sales_view);
         /* Lab Process */

@@ -580,6 +580,20 @@
             return json_encode($event_array);
 
         }
+        public function calendar_clientpo()
+        {
+            $this->autoRender = false;
+            $cal = $this->Quotation->find('all', array('conditions' => array('Quotation.is_assign_po' => 1), 'group' => 'reg_date', 'fields' => array('count(Quotation.reg_date) as title', 'reg_date as start'), 'recursive' => '-1'));
+
+            $event_array = array();
+            foreach ($cal as $cal_list => $v) {
+
+                $event_array[$cal_list]['title'] = $v[0]['title'];
+                $event_array[$cal_list]['start'] = $v['Quotation']['start'];
+            }
+            return json_encode($event_array);
+
+        }
         
         
         
