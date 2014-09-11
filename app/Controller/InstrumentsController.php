@@ -50,11 +50,11 @@ class InstrumentsController extends AppController
          * *****************************************************
          */
 //         $this->virtualFields['range_name'] =  sprintf('CONCAT(%s.name, " - ", %s.model)', $this->Range->range_name, $this->Unit->unit_name);
-        $brand_array =   $this->Brand->find('list',array('conditions'=>array('Brand.status'=>'1'),'fields'=>array('id','brandname')));
+        $brand_array =   $this->Brand->find('list',array('conditions'=>array('Brand.status'=>'1','Brand.is_Approved'=>'1'),'fields'=>array('id','brandname')));
         $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
         //$procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1'),'fields'=>array('id','procedure_no')));
         //pr($procedure_array);exit;
-        $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
+        $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1','Range.is_approved'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
         $this->set(compact('brand_array','range_array','department_array'));
         if($this->request->is('post'))
         {
@@ -147,10 +147,10 @@ class InstrumentsController extends AppController
         $this->set('instrument_dat',$instrument_dat);
         //pr($instrument_dat);exit;
       
-        $brand_array =   $this->Brand->find('list',array('conditions'=>array('Brand.status'=>'1'),'fields'=>array('id','brandname')));
+        $brand_array =   $this->Brand->find('list',array('conditions'=>array('Brand.status'=>'1','Brand.is_approved'=>'1'),'fields'=>array('id','brandname')));
         $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
-        $procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1','Procedure.department_id'=>$instrument_dat['Instrument']['department_id']),'fields'=>array('id','procedure_no')));
-        $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
+        $procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1','Procedure.department_id'=>$instrument_dat['Instrument']['department_id'],'Procedure.is_approved'=>'1'),'fields'=>array('id','procedure_no')));
+        $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1','Range.is_approved'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
         $this->set(compact('brand_array','range_array','procedure_array','department_array'));
         
         
