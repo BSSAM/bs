@@ -651,9 +651,12 @@ $(document).ready(function(){
     {
         return false;
     }
-       
    });
-    
-   
 }); 
-    
+//   $(document).ready(function () {
+//    $(document).beforeSend(function () {
+//         NProgress.start();
+//    }).ajaxStop(function () {
+//          NProgress.done();
+//    });
+//}); 

@@ -55,7 +55,8 @@
                 echo $this->Html->css('custom');
                 echo $this->Html->css('file_upload_css/jquery.fileupload');
 		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
-		echo $this->Html->script('jquery.min');
+		echo $this->Html->script('pages/uiProgress');
+                echo $this->Html->script('jquery.min');
                 echo $this->Html->script('jedit/jquery.jeditable');
                 echo $this->Html->script(array('sal_desc_func','functions','labprocess_js','onsite_schedule',
                     'delivery_order','pur_function_js','quo_function_js','cus_function','candds_function',
@@ -84,13 +85,21 @@
    
     <?php echo $this->Html->script('pages/tablesDatatables'); ?>
     <script>$(function(){ TablesDatatables.init(); });</script>
-    
+    <script>$(function(){ UiProgress.init(); });</script>
     <?php echo $this->Html->script('pages/login'); ?>
     <script>$(function(){ Login.init(); });</script>
 <!--    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
     <?php //echo $this->Html->script('helpers/gmaps.min'); ?>
     <?php echo $this->Html->script('pages/index'); ?>
     <script>$(function(){ Index.init(); });</script>
+    <script>
+    function ni_start(){
+       NProgress.start();
+   }
+   function ni_end(){
+       NProgress.done(); 
+   }
+    </script>
 </body>
 </html>
   

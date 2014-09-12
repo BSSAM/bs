@@ -24,6 +24,8 @@ $(document).ready(function(){
             type: "POST",
             url: path_url+"/Onsites/get_qo_details",
             data: 'qo_id='+qo_id,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             cache: false,
             success: function(data)
             {
@@ -44,11 +46,11 @@ $(document).ready(function(){
                     $('#val_attn').val(contact_person_node.name);
                     $('#val_email').val(contact_person_node.email);
                     
-                   $('#onsite_customer').val(onsite_node.Customer.customername);
+                    $('#onsite_customer').val(onsite_node.Customer.customername);
                     $('#val_fax').val(onsite_node.Customer.fax);
                   
                     $('#val_phone').val(onsite_node.Quotation.phone);                
-                   $('.onsite_instrument_node').empty();
+                    $('.onsite_instrument_node').empty();
                        $.each(onsite_node.OnsiteInstrument,function(key,value){  
                         if(onsite_node.OnsiteInstrument.length===0)
                         {
@@ -83,6 +85,7 @@ $(document).ready(function(){
                     return false;
                 }
             },
+          
             error: function () 
             {
                 alert('Sorry ! Unable to fetch details');
@@ -101,6 +104,8 @@ $(document).ready(function(){
            $.ajax({
             type: "POST",
             url: path_url+"/Onsites/add_engineers",
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             data: 'engineer_name='+engineer_name+'&engineer_email='+engineer_email+'&onsiteschedule_no='+onsiteschedule_no,
             cache: false,
             success: function(data)
@@ -134,7 +139,10 @@ $(document).ready(function(){
        $.ajax({
             type: 'POST',
             data:"engineer_id="+ eng_id,
+            
             url: path_url+'/Onsites/delete_engineer/',
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success:function(data){
                 if(data==1){
                 $('.engineer_remove_'+eng_id).fadeOut();
@@ -239,6 +247,8 @@ $(document).ready(function(){
             type: 'POST',
             data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total+"&quotationid="+quotation_id+"&quotationno="+quotation_no,
             url: path+'Onsites/add_instrument/',
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success: function(data)
             {
                $('.onsite_instrument_node').append('<tr class="onsite_instrument_remove_'+data+'">\n\\n\
@@ -282,6 +292,8 @@ $(document).ready(function(){
             type: "POST",
             url: path+"Quotations/get_brand_value",
             data: 'instrument_id='+instrument_id+'&customer_id='+customer_id,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             cache: false,
             
             success: function(data)
@@ -315,7 +327,10 @@ $(document).ready(function(){
        $.ajax({
             type: 'POST',
             data:"edit_device_id="+ edit_device_id,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             url: path_url+'/Onsites/edit_instrument/',
+            
             success:function(data){
                edit_node=$.parseJSON(data);
                 $('#onsite_description').attr('readonly','readonly');
@@ -384,6 +399,8 @@ $(document).ready(function(){
         $.ajax({
             type: 'POST',
             data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total+"&quotationid="+quotation_id+"&quotationno="+quotation_no,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             url: path+'Onsites/update_instrument/',
             success: function(data)
             {
@@ -425,10 +442,13 @@ $(document).ready(function(){
             type: 'POST',
             data:"device_id="+ device_id,
             url: path+'/Onsites/delete_instrument/',
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success:function(data){
                 $('.onsite_instrument_remove_'+device_id).fadeOut();
             }
         });
     }
    });
+   
 });
