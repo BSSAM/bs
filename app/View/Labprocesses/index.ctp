@@ -32,6 +32,7 @@
         <div class="col-sm-3 col-lg-13">
             <div class="block text-center"><h4>Checking Qty</h4><p><code><?php echo $data_checking_count; ?></code></p></div>
         </div>
+        
         <div class="">
             <div class="col-sm-6">
                 <div class="block">
@@ -41,7 +42,7 @@
                    <?PHP 
                    $options = array('out' => 'Outstanding SO List', 'run' => 'Running SO List','overdue'=>'Overdue SO List');?>
                    <?php      
-                   $attributes = array('legend' => false,'value'=>'out','class'=>'so_list_button radio-align','name'=>'solist'); ?>
+                   $attributes = array('legend' => false,'value'=>'out','class'=>'so_list_button radio-align','name'=>'solist','id'=>'solist'); ?>
                    <?php      
                    echo $this->Form->radio('solist', $options, $attributes);
                    ?>
@@ -55,14 +56,78 @@
                     </div>
                     <?PHP 
                         $options = array('all' => 'All', 'Inlab' => 'In Lab','subcontract'=>'Sub Contract','onsite'=>'On Site');
-                        $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button radio-align-call','name'=>'calllocation');
+                        $attributes = array('legend' => false,'value'=>'all','class'=>'call_list_button radio-align-call','name'=>'calllocation','id'=>'calllocation');
                         echo $this->Form->radio('calllocation', $options, $attributes);
                     ?>
                     </div>
             </div>
-        </div></div>
-    <div class="table-responsive">
+        </div>
         <div class="so_paste">
+    <div class="col-sm-6 col-lg-12">
+            
+            <div class="block text-center"><div class="block-title" style="margin-bottom: 0px"><h4>Department</h4></div><div class="table-responsive">
+                            <table class="table table-borderless table-condensed text-center">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="text-center">
+                                           Dimensional
+                                        </th>
+                                        <th class="text-center">
+                                            Electrical
+                                        </th>
+                                        <th class="text-center">
+                                            Pressure
+                                        </th>
+                                        <th class="text-center">
+                                            Temperature
+                                        </th>
+                                        <th class="text-center">
+                                            Miscellaneous
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th><code>Total</code></th>
+                                        
+                                        <td>10</td>
+                                        <td>22</td>
+                                        <td>3</td>
+                                        <td>7</td>
+                                    </tr>
+                                    <tr>
+                                        <th><code>pending</code></th>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <th><code>processing</code></th>
+                                        <td>5</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>7</td>
+                                    </tr>
+                                    <tr>
+                                        <th><code>checking</code></th>
+                                        <td>5</td>
+                                        <td>6</td>
+                                        <td>20</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div></div>
+        
+    
+    <div class="table-responsive">
+        
         <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
@@ -82,6 +147,7 @@
                
                 <?PHP //if (!empty($labprocess['Description'])): ?>
                 <?php foreach ($labprocess as $labprocess_list): ?>
+                <?php if (!empty($labprocess_list['Description'])): ?>
                 <tr>
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['salesorderno'] ?></td>
                     <td class="text-center"><?PHP echo $labprocess_list['branch']['branchname'] ?></td>
@@ -97,11 +163,12 @@
                         </div>
                     </td>
                 </tr>
+                <?php endif; ?>
                 <?php endforeach; ?>
                 <?PHP //endif; ?>
             </tbody>
         </table>
-           
+           </div>
         </div>
         <?php echo $this->Html->script('pages/uiProgress'); ?>
         <script>$(function(){ UiProgress.init(); });</script>
