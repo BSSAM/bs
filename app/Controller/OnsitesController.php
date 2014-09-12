@@ -29,20 +29,20 @@
         }
         public function add()
         {
-        /*******************************************************
-         *  BS V1.0
-         *  User Role Permission
-         *  Controller : Quotation
-         *  Permission : add 
-         *  Description   :   add Quotation Details page
-         *******************************************************/
-        $user_role = $this->userrole_permission();
-        if($user_role['job_quotation']['add'] == 0){ 
-            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        }
-        /*
-         * *****************************************************
-         */
+            /*******************************************************
+             *  BS V1.0
+             *  User Role Permission
+             *  Controller : Onsites
+             *  Permission : add 
+             *  Description   :   add Onsites Details page
+             *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['job_onsite']['add'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+            /*
+             * *****************************************************
+             */
             $onsite_no=$this->random('onsites');
             $track_id=$this->random('track');
             $user_list  =   $this->User->find('list',array('conditions'=>array('User.status'=>'1','User.is_deleted'=>0),'fields'=>array('emailid','full_name')));
@@ -63,11 +63,13 @@
             {
                 
                 $date = date('m/d/Y h:i:s a', time());
-                $this->request->data['Quotation']['created_by'] = $date;
+                $this->request->data['Onsite']['schedule_created'] = $date;
                 $customer_id=$this->request->data['Onsite']['customer_id'];
-                $this->request->data['Onsite']['customername']=$this->request->data['customername'];
+               
                 $this->request->data['Onsite']['branch_id']=$branch['branch']['id'];
                 $quotationno    =   $this->request->data['Onsite']['quotationno'];
+                //pr($this->request->data['Onsite']);exit;
+                $this->Onsite->set($this->request->data['Onsite']);
                 if($this->Onsite->save($this->request->data['Onsite']))
                 {
                     $onsite_id   =   $this->Onsite->getLastInsertID();
@@ -77,18 +79,17 @@
                     {  
                         $this->OnsiteInstrument->updateAll(array('OnsiteInstrument.onsite_id'=>$onsite_id,'OnsiteInstrument.status'=>1),array('OnsiteInstrument.quotationno'=>$quotationno,'OnsiteInstrument.status'=>0));
                     }
-                    $this->OnsiteDocument->updateAll(array('OnsiteDocument.onsite_id'=>$onsite_id,'OnsiteDocument.customer_id'=>'"'.$this->request->data['Onsite']['customer_id'].'"'),array('OnsiteDocument.quotationno'=>$quotationno,'OnsiteDocument.status'=>1));
+                    $this->OnsiteDocument->updateAll(array('OnsiteDocument.onsite_id'=>$onsite_id,'OnsiteDocument.customer_id'=>'"'.$this->request->data['Onsite']['customer_id'].'"'),array('OnsiteDocument.status'=>1));
                    
                     $onsiteschdule_no=$this->request->data['Onsite']['onsiteschedule_no'];
                     $this->OnsiteEngineer->updateAll(array('OnsiteEngineer.onsite_id'=>$onsite_id),array('OnsiteEngineer.onsiteschedule_no'=>$onsiteschdule_no));
-                   
                     /******************
                     * Data Log
                     */
-                    $this->request->data['Logactivity']['logname'] = 'Quotation';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Quotation';
-                    $this->request->data['Logactivity']['logid'] = $quotation_id;
-                    $this->request->data['Logactivity']['logno'] = $quotationno;
+                    $this->request->data['Logactivity']['logname'] = 'Onsite';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Onsite';
+                    $this->request->data['Logactivity']['logid'] = $onsite_id;
+                    $this->request->data['Logactivity']['logno'] = $onsiteschdule_no;
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
 
@@ -99,17 +100,21 @@
                     /******************
                     * Data Log Activity
                     */
-                    $this->request->data['Datalog']['logname'] = 'Quotation';
+                    $this->request->data['Datalog']['logname'] = 'Onsite';
                     $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $quotationno;
+                    $this->request->data['Datalog']['logid'] = $onsite_id;
                     $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                     
                     $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                     /******************/ 
 
-                    $this->Session->setFlash(__('Quotation has been added Successfully'));
+                    $this->Session->setFlash(__('Onsite Schedule has been added Successfully'));
                     $this->redirect(array('action'=>'index'));
+                }
+                else
+                {
+                   //pr($this->Onsite->validationErrors);exit;
                 }
                
             }
@@ -118,76 +123,53 @@
         public function edit($id=NULL)
         {
                /*******************************************************
-         *  BS V1.0
-         *  User Role Permission
-         *  Controller : Quotation
-         *  Permission : Edit 
-         *  Description   :   Edit Quotation Details page
-         *******************************************************/
-        $user_role = $this->userrole_permission();
-        if($user_role['job_quotation']['edit'] == 0){ 
-            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-        }
-        /*
-         * *****************************************************
-         */
-            $quotations_list=$this->Onsite->find('first',array('conditions'=>array('Quotation.id'=>$id,'Quotation.is_deleted'=>'0'),'recursive'=>2));
-            //for Contact person info
-            //pr($quotations_list);exit;
-            $customer_id    =   $quotations_list['Customer']['id'];
-            $salesperson_list    =   $this->CusSalesperson->find('all',array('conditions'=>array('CusSalesperson.customer_id'=>$customer_id)));
-            $salespeople         =   '';
-            if(!empty($quotations_list['Clientpo']))
-            {
-                $po_list        =   '';
-                foreach($quotations_list['Clientpo'] as $po)
-                {
-                    $po_list .=$po['clientpos_no'].',';
-                }
-                $this->set('po_list',$po_list);
-            }
-            else {
-                $this->set('po_list','');
-            }
-            foreach($salesperson_list as $salesper)
-            {
-                $salespeople.=$salesper['Salesperson']['salesperson'].' , ';
-            }
-            $person_list    =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$customer_id),'fields'=>array('id','name')));
-            if(empty($quotation_details)){
-                $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id),'recursive'=>2));
-            }
-            //pr($quotation_details);exit;
-            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','quotation')));
-            $our_ref_no=$quotations_list['Quotation']['track_id'];
+                *  BS V1.0
+                *  User Role Permission
+                *  Controller : Onsite
+                *  Permission : Edit 
+                *  Description   :   Edit Onsite Details page
+                *******************************************************/
+               $user_role = $this->userrole_permission();
+               if($user_role['job_onsite']['edit'] == 0){ 
+                   return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+               }
+               /*
+                * *****************************************************
+                */
+            $onsite_list=$this->Onsite->find('first',array('conditions'=>array('Onsite.id'=>$id,'Onsite.is_deleted'=>0),'recursive'=>2));
+           
+            $onsite_no  =   $onsite_list['Onsite']['onsiteschedule_no'];
+            $user_list  =   $this->User->find('list',array('conditions'=>array('User.status'=>'1','User.is_deleted'=>0),'fields'=>array('emailid','full_name')));
+            
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
+            $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','quotation')));
             
             $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             
-            $this->set(compact('instrument_types','person_list','our_ref_no','country','priority','payment','quotations_list','additional','service','quotations_list','salespeople'));
+            $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
+            
+            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+           
+            $this->set(compact('instrument_types','person_list','our_ref_no','country','priority','payment','quotations_list','additional','service','quotations_list','salespeople','onsite_list','onsite_no','user_list'));
             if($this->request->is(array('post','put')))
             {
-                //to update quotation po generate type
-                if($quotations_list['Quotation']['ref_no']!=$this->request->data['Quotation']['ref_no'])
+                $this->Onsite->id=$id;
+               
+                $quotationno    =   $this->request->data['Onsite']['quotationno'];
+                if($this->Onsite->save($this->request->data['Onsite']))
                 {
-                    $this->request->data['Quotation']['po_generate_type']='Manual';
-                }
-                $this->Quotation->id=$id;
-                $quotationno = $quotations_list['Quotation']['quotationno'];
-                if($this->Quotation->save($this->request->data['Quotation']))
-                {
-                    $customer_id=$quotations_list['Quotation']['customer_id'];
-//                    $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
-//                    if(!empty($device_node))
-//                    {
-//                        $this->Device->updateAll(array('Device.quotation_id'=>$id,'Device.status'=>1,'Device.quotationno'=>'"'.$this->request->data['Quotation']['quotationno'].'"'),array('Device.customer_id'=>$customer_id,'Device.quotationno'=>$this->request->data['Quotation']['quotationno'],'Device.status'=>0));
-//                    }
-                    $this->Customerspecialneed->id=$this->request->data['Customerspecialneed']['id'];
-                    $this->Customerspecialneed->save($this->request->data['Customerspecialneed']);  
+                   $device_node    =   $this->OnsiteInstrument->find('all',array('conditions'=>array('OnsiteInstrument.quotationno'=>$quotationno)));
+                    if(!empty($device_node))
+                    {  
+                        $this->OnsiteInstrument->updateAll(array('OnsiteInstrument.onsite_id'=>$id,'OnsiteInstrument.status'=>1),array('OnsiteInstrument.quotationno'=>$quotationno));
+                    }
+                    $this->OnsiteDocument->updateAll(array('OnsiteDocument.onsite_id'=>$id,'OnsiteDocument.customer_id'=>'"'.$this->request->data['Onsite']['customer_id'].'"'),array('OnsiteDocument.status'=>1,'OnsiteDocument.onsiteschedule_no'=>$this->request->data['Onsite']['onsiteschedule_no']));
+                   
+                    $onsiteschdule_no=$this->request->data['Onsite']['onsiteschedule_no'];
+                    $this->OnsiteEngineer->updateAll(array('OnsiteEngineer.onsite_id'=>$id),array('OnsiteEngineer.onsiteschedule_no'=>$onsiteschdule_no));
                     
                     /******************
                     * Data Log Activity
@@ -207,7 +189,7 @@
             }
             else
             {
-                $this->request->data=$quotations_list;
+                $this->request->data=$onsite_list;
             }
         }
         public function delete($id=NULL)
@@ -329,7 +311,7 @@
             {
                 for($i = 0; $i<$c;$i++)
                 { 
-                    echo "<div class='instrument_id' align='left' id='".$instrument_details[$i]['Instrument']['id']."'>";
+                    echo "<div class='onsite_instrument_id' align='left' id='".$instrument_details[$i]['Instrument']['id']."'>";
                     echo $instrument_details[$i]['Instrument']['name'];
                     echo "<br>";
                     echo "</div>";
@@ -362,27 +344,29 @@
         public function add_instrument()
         {
             $this->autoRender = false;
-            $this->loadModel('Device');
-            $this->request->data['Device']['quotationno']   =   $this->request->data['quotationno'];
-            $this->request->data['Device']['customer_id']   =   $this->request->data['customer_id'];
-            $this->request->data['Device']['instrument_id'] =   $this->request->data['instrument_id'];
-            $this->request->data['Device']['brand_id']      =   $this->request->data['instrument_brand'];
-            $this->request->data['Device']['quantity']      =   $this->request->data['instrument_quantity'];
-            $this->request->data['Device']['model_no']      =   $this->request->data['instrument_modelno'];
-            $this->request->data['Device']['range']         =   $this->request->data['instrument_range'];
-            $this->request->data['Device']['call_location'] =   $this->request->data['instrument_calllocation'];
-            $this->request->data['Device']['call_type']     =   $this->request->data['instrument_calltype'];
-            $this->request->data['Device']['validity']      =   $this->request->data['instrument_validity'];
-            $this->request->data['Device']['discount']      =   $this->request->data['instrument_discount'];
-            $this->request->data['Device']['department_id'] =   $this->request->data['instrument_department'];
-            $this->request->data['Device']['unit_price']    =   $this->request->data['instrument_unitprice'];
-            $this->request->data['Device']['account_service']=  $this->request->data['instrument_account'];
-            $this->request->data['Device']['total']         =   $this->request->data['instrument_total'];
-            $this->request->data['Device']['title']         =   $this->request->data['instrument_title'];
-            $this->request->data['Device']['status']        =   0;
-            if($this->Device->save($this->request->data))
+            $this->loadModel('OnsiteInstrument');
+            $this->request->data['OnsiteInstrument']['quotation_id']    = $this->request->data['quotationid'];
+            $this->request->data['OnsiteInstrument']['quotationno']     = $this->request->data['quotationno'];
+            $this->request->data['OnsiteInstrument']['customer_id']     = $this->request->data['customer_id'];
+            $this->request->data['OnsiteInstrument']['onsite_quantity'] = $this->request->data['instrument_quantity'];
+            $this->request->data['OnsiteInstrument']['instrument_id']   = $this->request->data['instrument_id'];
+            $this->request->data['OnsiteInstrument']['model_no']        = $this->request->data['instrument_modelno'];
+            $this->request->data['OnsiteInstrument']['brand_id']        =  $this->request->data['instrument_brand'];
+            $this->request->data['OnsiteInstrument']['onsite_range']    = $this->request->data['instrument_range'];
+            $this->request->data['OnsiteInstrument']['onsite_calllocation'] = $this->request->data['instrument_calllocation'];
+            $this->request->data['OnsiteInstrument']['onsite_calltype']     = $this->request->data['instrument_calltype'];
+            $this->request->data['OnsiteInstrument']['onsite_validity']     = $this->request->data['instrument_validity'];
+            $this->request->data['OnsiteInstrument']['onsite_discount']     = $this->request->data['instrument_discount'];
+            $this->request->data['OnsiteInstrument']['department']       =$this->request->data['instrument_department'];
+            $this->request->data['OnsiteInstrument']['onsite_accountservice'] = $this->request->data['instrument_account'];
+            $this->request->data['OnsiteInstrument']['onsite_unitprice']      = $this->request->data['instrument_unitprice'];
+            $this->request->data['OnsiteInstrument']['onsite_titles']         = $this->request->data['instrument_title'];
+            $this->request->data['OnsiteInstrument']['onsite_total']          = $this->request->data['instrument_total'];
+            $this->request->data['OnsiteInstrument']['status']                = 0;
+         
+            if($this->OnsiteInstrument->save($this->request->data))
             {
-                $device_id=$this->Device->getLastInsertID();
+                $device_id=$this->OnsiteInstrument->getLastInsertID();
                 echo $device_id;
             }
      
@@ -391,7 +375,7 @@
         {
             $this->autoRender=false;
             $device_id= $this->request->data['device_id'];
-            if($this->Device->updateAll(array('Device.is_deleted'=>1),array('Device.id'=>$device_id)))
+            if($this->OnsiteInstrument->updateAll(array('OnsiteInstrument.is_deleted'=>1),array('OnsiteInstrument.id'=>$device_id)))
             {
                 echo "deleted";
             }
@@ -400,8 +384,10 @@
         {
             $this->autoRender=false;
             $device_id= $this->request->data['edit_device_id'];
-            $this->loadModel('Device');
-            $edit_device_details    =   $this->Device->find('first',array('conditions'=>array('Device.id'=>$device_id)));
+//            $device_id  =  1;
+            $this->loadModel('OnsiteInstrument');
+            $edit_device_details    =   $this->OnsiteInstrument->find('first',array('conditions'=>array('OnsiteInstrument.id'=>$device_id)));
+           
             if(!empty($edit_device_details ))
             {
                 echo json_encode($edit_device_details);
@@ -410,24 +396,26 @@
         public function update_instrument()
         {
             $this->autoRender = false;
-            $this->Device->id                               =   $this->request->data['device_id'];
-            $this->request->data['Device']['customer_id']   =   $this->request->data['customer_id'];
-            $this->request->data['Device']['instrument_id'] =   $this->request->data['instrument_id'];
-            $this->request->data['Device']['brand_id']      =   $this->request->data['instrument_brand'];
-            $this->request->data['Device']['quantity']      =   $this->request->data['instrument_quantity'];
-            $this->request->data['Device']['model_no']      =   $this->request->data['instrument_modelno'];
-            $this->request->data['Device']['range']         =   $this->request->data['instrument_range'];
-            $this->request->data['Device']['call_location'] =   $this->request->data['instrument_calllocation'];
-            $this->request->data['Device']['call_type']     =   $this->request->data['instrument_calltype'];
-            $this->request->data['Device']['validity']      =   $this->request->data['instrument_validity'];
-            $this->request->data['Device']['discount']      =   $this->request->data['instrument_discount'];
-            $this->request->data['Device']['department']    =   $this->request->data['instrument_department'];
-            $this->request->data['Device']['unit_price']    =   $this->request->data['instrument_unitprice'];
-            $this->request->data['Device']['account_service']=  $this->request->data['instrument_account'];
-             $this->request->data['Device']['total']         =   $this->request->data['instrument_total'];
-            $this->request->data['Device']['title']         =   $this->request->data['instrument_title'];
-            $this->request->data['Device']['status']        =   1;
-            if($this->Device->save($this->request->data))
+            $this->OnsiteInstrument->id                                 =   $this->request->data['instrument_id'];
+             $this->request->data['OnsiteInstrument']['quotation_id']   = $this->request->data['quotationid'];
+            $this->request->data['OnsiteInstrument']['quotationno']     = $this->request->data['quotationno'];
+            $this->request->data['OnsiteInstrument']['customer_id']     = $this->request->data['customer_id'];
+            $this->request->data['OnsiteInstrument']['onsite_quantity'] = $this->request->data['instrument_quantity'];
+            $this->request->data['OnsiteInstrument']['instrument_id']   = $this->request->data['instrument_id'];
+            $this->request->data['OnsiteInstrument']['model_no']        = $this->request->data['instrument_modelno'];
+            $this->request->data['OnsiteInstrument']['brand_id']        =  $this->request->data['instrument_brand'];
+            $this->request->data['OnsiteInstrument']['onsite_range']    = $this->request->data['instrument_range'];
+            $this->request->data['OnsiteInstrument']['onsite_calllocation'] = $this->request->data['instrument_calllocation'];
+            $this->request->data['OnsiteInstrument']['onsite_calltype']     = $this->request->data['instrument_calltype'];
+            $this->request->data['OnsiteInstrument']['onsite_validity']     = $this->request->data['instrument_validity'];
+            $this->request->data['OnsiteInstrument']['onsite_discount']     = $this->request->data['instrument_discount'];
+            $this->request->data['OnsiteInstrument']['department']          =$this->request->data['instrument_department'];
+            $this->request->data['OnsiteInstrument']['onsite_accountservice'] = $this->request->data['instrument_account'];
+            $this->request->data['OnsiteInstrument']['onsite_unitprice']      = $this->request->data['instrument_unitprice'];
+            $this->request->data['OnsiteInstrument']['onsite_titles']         = $this->request->data['instrument_title'];
+            $this->request->data['OnsiteInstrument']['onsite_total']          = $this->request->data['instrument_total'];
+            $this->request->data['OnsiteInstrument']['status']                = 1;
+            if($this->OnsiteInstrument->save($this->request->data))
             {
                echo "Updated";
                 
@@ -469,11 +457,11 @@
             }
            
         }
-        public function attachment($quotation_id= NULL,$doc_name=NULL)
+        public function attachment($onsite_id= NULL,$doc_name=NULL)
         {
             $file_name    = explode('_',$doc_name);unset($file_name[0]); 
             $document_file_name   =   implode($file_name,'-') ;
-            $this->response->file(APP.'webroot'.DS.'files'.DS.'Quotations'.DS.$quotation_id.DS.$doc_name,
+            $this->response->file(APP.'webroot'.DS.'files'.DS.'Onsites'.DS.$onsite_id.DS.$doc_name,
 			array('download'=> true, 'name'=>$document_file_name));
             return $this->response;  
 	}
@@ -563,6 +551,7 @@
             {
                 $data = $this->Device->find('all',array('conditions'=>array('Device.call_location'=>'Onsite','Device.is_deleted'=>0),'group' => array('Device.quotationno')));
                 $c = count($data);
+              
                 if($c!=0)
                 {
                      for($i = 0; $i<$c;$i++)
@@ -597,13 +586,10 @@
                 if($this->OnsiteEngineer->save($this->request->data['OnsiteEngineer']))
                 {
                    return $this->OnsiteEngineer->getLastInsertID();
-
                 }
             endif;
-            
-            
         }
-         public function delete_engineer()
+        public function delete_engineer()
         {
             $this->autoRender=false;
             $engineer_id= $this->request->data['engineer_id'];
@@ -614,20 +600,21 @@
         }
        public function get_qo_details()
         {
-            
             $this->loadModel('Quotation');
             $qo_id =  $this->request->data['qo_id'];
+//            $qo_id  =   'BSQ-01-10000602';
             $this->autoRender = false;
             $qo_data = $this->Quotation->find('first',array('conditions'=>array('quotationno'=>$qo_id,'Quotation.is_approved'=>'1','Quotation.is_deleted'=>0),'recursive'=>'2'));
+           
             unset($qo_data['Device']);
             $qo_device['Device']   =   $this->Device->find('all',array('conditions'=>array('Device.quotationno'=>$qo_id,'Device.is_deleted'=>0,'Device.call_location'=>'Onsite'),'recursive'=>'1'));
+//            pr($qo_device);exit;
             // for Onsite instruments add
-            $this->add_onsite_instruments($qo_device['Device']);
+            $this->add_onsite_instruments($qo_device['Device'],$qo_id);
             $onsite_device['OnsiteInstrument']  =   $this->OnsiteInstrument->find('all',array('conditions'=>array('OnsiteInstrument.quotationno'=>$qo_id,'OnsiteInstrument.is_deleted'=>0,'OnsiteInstrument.onsite_calllocation'=>'Onsite'),'recursive'=>'1'));
-           
-            $contact_list   =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.customer_id'=>$qo_data['Customer']['id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+            $contact_list   =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$qo_data['Quotation']['attn'],'Contactpersoninfo.status'=>1),'fields'=>array('name','email')));
+//             pr($contact_list);exit;
             //$this->set(compact('contact_list'));
-            
             $qo_data_merge= array_merge($qo_data, $contact_list);
             $total_qo   =   array_merge($qo_data_merge, $onsite_device);
             

@@ -38,12 +38,6 @@ class OnsiteInstrument extends AppModel
             'fields' => '',
             'order' => ''
         ),
-        'Department' => array(
-            'className' => 'Department',
-            'foreignKey' => 'department_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        )
+        
     );
 }

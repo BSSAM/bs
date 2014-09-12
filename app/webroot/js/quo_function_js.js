@@ -50,62 +50,62 @@ $(document).ready(function(){
        
         if($('#val_customer').val()!='')
         {
-        if($('#val_description').val()=='')
-        {
-            $('.ins_error').addClass('animation-slideDown');
-            $('.ins_error').css('color','red');
-            $('.ins_error').show();
-            return false;
-        }
-        else if($('#val_quantity').val()=='')
-        {
-            $('.insqn_error').addClass('animation-slideDown');
-            $('.insqn_error').css('color','red');
-            $('.insqn_error').show();
-            return false;
-        }
-        else if($('#val_model_no').val()=='')
-        {
-            $('.insmo_error').addClass('animation-slideDown');
-            $('.insmo_error').css('color','red');
-            $('.insmo_error').show();
-            return false;
-        }
-        else if($('#val_brand').val()=='')
-        {
-            $('.insbr_error').addClass('animation-slideDown');
-            $('.insbr_error').css('color','red');
-            $('.insbr_error').show();
-            return false;
-        }
-        else if($('#val_range').val()=='')
-        {
-            $('.insra_error').addClass('animation-slideDown');
-            $('.insra_error').css('color','red');
-            $('.insra_error').show();
-            return false;
-        }
-        else if($('#val_call_location').val()=='')
-        {
-            $('.inscal_error').addClass('animation-slideDown');
-            $('.inscal_error').css('color','red');
-            $('.inscal_error').show();
-            return false;
-        }
-        else if($('#val_account_service').val()=='')
-        {
-            $('.insser_error').addClass('animation-slideDown');
-            $('.insser_error').css('color','red');
-            $('.insser_error').show();
-            return false;
-        }
-        else
-        {
-            $('.ins_error').empty();
-            $('.insqn_error').empty();
-            $('.insmo_error').empty();
-            
-        }
+            if($('#val_description').val()=='')
+            {
+                $('.ins_error').addClass('animation-slideDown');
+                $('.ins_error').css('color','red');
+                $('.ins_error').show();
+                return false;
+            }
+            else if($('#val_quantity').val()=='')
+            {
+                $('.insqn_error').addClass('animation-slideDown');
+                $('.insqn_error').css('color','red');
+                $('.insqn_error').show();
+                return false;
+            }
+            else if($('#val_model_no').val()=='')
+            {
+                $('.insmo_error').addClass('animation-slideDown');
+                $('.insmo_error').css('color','red');
+                $('.insmo_error').show();
+                return false;
+            }
+            else if($('#val_brand').val()=='')
+            {
+                $('.insbr_error').addClass('animation-slideDown');
+                $('.insbr_error').css('color','red');
+                $('.insbr_error').show();
+                return false;
+            }
+            else if($('#val_range').val()=='')
+            {
+                $('.insra_error').addClass('animation-slideDown');
+                $('.insra_error').css('color','red');
+                $('.insra_error').show();
+                return false;
+            }
+            else if($('#val_call_location').val()=='')
+            {
+                $('.inscal_error').addClass('animation-slideDown');
+                $('.inscal_error').css('color','red');
+                $('.inscal_error').show();
+                return false;
+            }
+            else if($('#val_account_service').val()=='')
+            {
+                $('.insser_error').addClass('animation-slideDown');
+                $('.insser_error').css('color','red');
+                $('.insser_error').show();
+                return false;
+            }
+            else
+            {
+                $('.ins_error').empty();
+                $('.insqn_error').empty();
+                $('.insmo_error').empty();
+
+            }
         }
         else
         {

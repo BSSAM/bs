@@ -1,8 +1,8 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
+    <label class="col-md-2 control-label" for="onsite_customer">Customer Name</label>
     <div class="col-md-4">
         <?php
-        echo $this->Form->input('Onsite.customer_name', array('id' => 'val_customer', 'class' => 'form-control', 'placeholder' => 'Enter the Customer Name', 'label' => false,
+        echo $this->Form->input('Onsite.customer_name', array('id' => 'onsite_customer', 'class' => 'form-control', 'placeholder' => 'Enter the Customer Name', 'label' => false,
             'autoComplete' => 'off', 'type' => 'text', 'name' => 'data[Onsite][customer_name]', 'readonly' => 'readonly'));
         ?>
         <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'customer_id'));  ?>
@@ -60,7 +60,7 @@
     
      <label class="col-md-2 control-label" for="val_schedule_no">Onsite Schedule No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('scheduleno', array('id'=>'val_schedule_no','class'=>'form-control','label'=>false,'placeholder'=>'Onsite Schedule No','value'=>$onsite_no)); ?>
+        <?php echo $this->Form->input('onsiteschedule_no', array('id'=>'val_schedule_no','class'=>'form-control','label'=>false,'placeholder'=>'Onsite Schedule No','value'=>$onsite_no,'readonly'=>'readonly')); ?>
     </div>
      <label class="col-md-2 control-label" for="val_date">Date</label>
     <div class="col-md-4">
@@ -73,7 +73,9 @@
     <label class="col-md-2 control-label" for="val_time">Onsite Schedule Time</label>
     <div class="col-md-4">
         <div class="input-group bootstrap-timepicker">
-            <input type="text" id="example-timepicker24" name="schedule_time" class="form-control input-timepicker24">
+            <?php echo $this->Form->input('schedule_time', array('id'=>'example-timepicker24','class'=>'form-control input-timepicker24',
+                                                'label'=>false)); ?>
+<!--            <input type="text" id="example-timepicker24" name="schedule_time" class="form-control input-timepicker24">-->
             <span class="input-group-btn">
                 <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-clock-o"></i></a>
             </span>

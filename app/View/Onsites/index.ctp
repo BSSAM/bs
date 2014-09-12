@@ -12,7 +12,9 @@
                     <!-- FullCalendar Content -->
                     <div class="block block-alt-noborder full">
                         <div class="block-title">
-                            <h2 style="float:right;"><?php echo $this->Html->link('Add Onsite Schedule',array('controller'=>'Onsites','action'=>'add'),array('class'=>'btn btn-xs btn-success','data-toggle'=>'tooltip','tile'=>'Add Onsite Schedule')); ?></h2>
+                            <h2 style="float:right;">
+                                <?php echo $this->Html->link('Add Onsite Schedule',array('controller'=>'Onsites','action'=>'add'),array('class'=>'btn btn-xs btn-success','data-toggle'=>'tooltip','tile'=>'Add Onsite Schedule')); ?>
+                            </h2>
                         </div>
                         <div class="row">
 <!--                            <div class="col-md-2">

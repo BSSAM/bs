@@ -7,10 +7,8 @@
  */
 class Onsite extends AppModel
 {
-    public $useTable = false;
-    
     public $actsAs = array('Containable');
-    var $belongsTo  =   array('Customer','branch','InstrumentType');
+    var $belongsTo  =   array('Customer','branch');
     public $hasMany = array(
         'OnsiteDocument' => array(
             'className' => 'OnsiteDocument',
@@ -28,7 +26,7 @@ class Onsite extends AppModel
         'OnsiteEngineer' => array(
             'className' => 'OnsiteEngineer',
             'foreignKey' => 'onsite_id',
-            'conditions' => '',
+            'conditions' => array('is_deleted'=>0),
             'fields' => '',
             'order' => '',
             'limit' => '',
@@ -40,7 +38,7 @@ class Onsite extends AppModel
         'OnsiteInstrument' => array(
             'className' => 'OnsiteInstrument',
             'foreignKey' => 'onsite_id',
-            'conditions' => '',
+            'conditions' => array('is_deleted'=>0),
             'fields' => '',
             'order' => '',
             'limit' => '',
@@ -50,12 +48,7 @@ class Onsite extends AppModel
             'counterQuery' => '',
         )
         );
-    public $hasOne = array(
-        'Customerspecialneed' => array(
-            'className' => 'Customerspecialneed',
-            'foreignKey' => 'quotation_id',
-            'dependent'=> true,
-        ));
+  
 }
 
 ?>

@@ -84,6 +84,11 @@ var TablesDatatables = function() {
                 "iDisplayLength": 5,
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
+              $('#engineer-datatable').dataTable({
+             // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
+                "iDisplayLength": 5,
+                "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
+            });
          
 /***********************************************************************************************************/
             /* Add Bootstrap classes to select and input elements added by datatables above the table */

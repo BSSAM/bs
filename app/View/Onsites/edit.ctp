@@ -23,17 +23,17 @@
 </script>     
 
                     <h1>
-                        <i class="gi gi-user"></i>Add Onsite Schedule
+                        <i class="gi gi-user"></i>Edit Onsite Schedule
                     </h1>
                     </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
                         <li><?php echo $this->Html->link('Onsite Schedule',array('controller'=>'Onsites','action'=>'index')); ?></li>
-                        <li>Add Onsite Schedule</li>
+                        <li>Edit Onsite Schedule</li>
                     </ul>
                     <!-- END Forms General Header -->
-
+                  
             <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
@@ -44,14 +44,13 @@
                                         <div class="col-md-4 search_move">
                                             <div class="input-group">
                                                 <div>
-                                                    <input type="text" class="form-control" autoComplete='off' placeholder="Enter Quotation No" id="onsite_input_search"/>
+                                                    <input type="text" class="form-control" autoComplete='off' placeholder="Enter Quotation No" value=<?PHP echo  $onsite_list['Onsite']['quotationno']?>  readonly="readonly"/>
                                                 </div>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary onsite_search" type="button">Proceed</button>
                                                 </span>
                                             </div>
-                                            <div id="onsite_list">
-                                            </div>
+                                            <div id="onsite_list"></div>
                                         </div>
                                     </h2>
                                 </div>
@@ -60,9 +59,9 @@
                                 <div class="panel panel-default">
                                     <?php echo $this->Form->create('Onsite',array('class'=>'form-horizontal form-bordered','id'=>'form-onsite-add')); ?>
                                     <?php echo $this->Form->input('Onsite.onsiteschedule_no', array('type'=>'hidden','value'=>$onsite_no,'id'=>'onsiteschedule_no')); ?>
-                                    <?php echo $this->Form->input('Onsite.quotation_id', array('type'=>'hidden','id'=>'quotation_id')); ?>
-                                    <?php echo $this->Form->input('Onsite.quotationno', array('type'=>'hidden','id'=>'quotationno')); ?>
-                                    <?php echo $this->Form->input('Onsite.customer_id', array('type'=>'hidden','id'=>'customer_id')); ?>
+                                    <?php echo $this->Form->input('Onsite.quotation_id', array('type'=>'hidden','id'=>'quotation_id','value'=>$onsite_list['Onsite']['quotation_id'])); ?>
+                                    <?php echo $this->Form->input('Onsite.quotationno', array('type'=>'hidden','id'=>'quotationno','value'=>$onsite_list['Onsite']['quotationno'])); ?>
+                                    <?php echo $this->Form->input('Onsite.customer_id', array('type'=>'hidden','id'=>'customer_id','value'=>$onsite_list['Onsite']['customer_id'])); ?>
                                    
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
@@ -77,23 +76,23 @@
                                             <br><br>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab1">
-                                                    <?PHP echo $this->element('Onsites/createschedule'); ?>
+                                                    <?PHP echo $this->element('Onsites/edit/createschedule'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab2">
-                                                    <?PHP echo $this->element('Onsites/instrument'); ?>
+                                                    <?PHP echo $this->element('Onsites/edit/instrument'); ?>
                                                 </div>
                                                  <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Onsites/engineer'); ?>
+                                                    <?PHP echo $this->element('Onsites/edit/engineer'); ?>
                                                      <div class="form-group form-actions">
                                                          <div class="col-md-9 col-md-offset-10">
-                                                             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary onsite_submit', 'escape' => false)); ?>
-                                                             <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
-                                                         </div>
+                                                             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary onsite_submit', 'escape' => false)); ?>
+                                                             <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel', array('controller'=>'Onsites','action'=>'index'),array('class' => 'btn btn-sm btn-warning','escape' => false)); ?>
+                                                      </div>
                                                      </div>
                                                 </div>
                                                <?php echo $this->Form->end(); ?>
                                                 <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Onsites/file_upload'); ?>
+                                                    <?PHP echo $this->element('Onsites/edit/file_upload'); ?>
                                                 </div>
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->

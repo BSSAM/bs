@@ -1,6 +1,4 @@
-<script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
-</script>
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script type="text/javascript">
     $(function(){
         $("#onsite_list").hide();
@@ -52,8 +50,7 @@
                                                     <button class="btn btn-primary onsite_search" type="button">Proceed</button>
                                                 </span>
                                             </div>
-                                            <div id="onsite_list">
-                                            </div>
+                                            <div id="onsite_list"></div>
                                         </div>
                                     </h2>
                                 </div>
@@ -86,10 +83,10 @@
                                                 </div>
                                                  <div class="tab-pane" id="tab3">
                                                     <?PHP echo $this->element('Onsites/engineer'); ?>
-                                                     <div class="form-group form-actions">
+                                                     <div class="form-group form-actions form-control-static">
                                                          <div class="col-md-9 col-md-offset-10">
                                                              <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary onsite_submit', 'escape' => false)); ?>
-                                                             <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                                                             <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel', array('controller'=>'Onsites','action'=>'index'),array('class' => 'btn btn-sm btn-warning','escape' => false)); ?>
                                                          </div>
                                                      </div>
                                                 </div>
@@ -111,7 +108,5 @@
                         </div>
                 <?php echo $this->Html->script('pages/formsValidation'); ?>
                 <script>$(function(){ FormsValidation.init(); });</script>
-                <?php echo $this->Html->script('pages/uiProgress'); ?>
-                <script>$(function(){ UiProgress.init(); });</script>
-                        
+            
                         

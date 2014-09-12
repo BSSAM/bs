@@ -108,7 +108,6 @@ App::uses('Controller', 'Controller');
             $this->request->data['Description']['is_approved']          =   0;
             return $this->request->data;
         }
-        
         public function random($module)
         {
             switch ($module)
@@ -562,14 +561,17 @@ App::uses('Controller', 'Controller');
             $this->request->data['ReqDevice']['is_approved']        =   0;
             return $this->request->data;
         }
-         public function add_onsite_instruments($data=NULL)
+         public function add_onsite_instruments($data=NULL,$quotation_id=NULL)
         {
+            $device_count   =   count($data);
+            $onsite_count   =   $this->OnsiteInstrument->find('count',array('OnsiteInstrument.quotationno'=>$quotation_id,'OnsiteInstrument.status'=>0,'OnsiteInstrument.is_deleted'=>0));
+            if($onsite_count!=$device_count):
             foreach($data as $onsite_ins):
                 $this->OnsiteInstrument->create();
                 $this->request->data['OnsiteInstrument']['quotation_id']            =   $onsite_ins['Device']['quotation_id'];
                 $this->request->data['OnsiteInstrument']['quotationno']             =   $onsite_ins['Device']['quotationno'];
                 $this->request->data['OnsiteInstrument']['customer_id']             =   $onsite_ins['Device']['customer_id'];
-                $this->request->data['OnsiteInstrument']['onsite_quantity']         =   '';
+                $this->request->data['OnsiteInstrument']['onsite_quantity']         =   $device_count;
                 $this->request->data['OnsiteInstrument']['instrument_id']           =   $onsite_ins['Device']['instrument_id'];
                 $this->request->data['OnsiteInstrument']['model_no']                =   $onsite_ins['Device']['model_no'];
                 $this->request->data['OnsiteInstrument']['brand_id']                =   $onsite_ins['Device']['brand_id'];
@@ -578,7 +580,7 @@ App::uses('Controller', 'Controller');
                 $this->request->data['OnsiteInstrument']['onsite_calltype']         =   $onsite_ins['Device']['call_type'];
                 $this->request->data['OnsiteInstrument']['onsite_validity']         =   $onsite_ins['Device']['validity'];
                 $this->request->data['OnsiteInstrument']['onsite_discount']         =   $onsite_ins['Device']['discount'];
-                $this->request->data['OnsiteInstrument']['department_id']           =   $onsite_ins['Device']['department_id'];
+                $this->request->data['OnsiteInstrument']['department']              =   $onsite_ins['Department']['departmentname'];
                 $this->request->data['OnsiteInstrument']['onsite_accountservice']   =   $onsite_ins['Device']['account_service'];
                 $this->request->data['OnsiteInstrument']['onsite_unitprice']        =   $onsite_ins['Device']['unit_price'];
                 $this->request->data['OnsiteInstrument']['onsite_titles']           =   $onsite_ins['Device']['title'];
@@ -586,5 +588,6 @@ App::uses('Controller', 'Controller');
                 $this->request->data['OnsiteInstrument']['status']                  =   0;
                 $this->OnsiteInstrument->save($this->request->data['OnsiteInstrument']);
             endforeach;
+        endif;
         }
 }
