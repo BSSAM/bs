@@ -24,6 +24,7 @@
                 <?PHP //pr($labprocess);exit; ?>
                 <?PHP if (!empty($labprocess)): ?>
                 <?php foreach ($labprocess as $labprocess_list): ?>
+                <?PHP if(!empty($labprocess_list['Description'])): ?>
                 <tr>
                     
                     <td class="text-center"><?PHP echo $labprocess_list['Salesorder']['salesorderno'] ?></td>
@@ -54,6 +55,7 @@
                         </div>
                     </td>
                 </tr>
+                <?php endif; ?>
                 <?php endforeach; ?>
                 <?PHP  endif; ?>
             </tbody>
