@@ -22,6 +22,33 @@
         }
     </style>
 <script type="text/javascript">
+    $(function(){
+    $(document).on('change','#val_priority',function(){
+//        $(this).addClass('instrument_select');
+//        var instrument_id =   $('ul.chosen-results').find('.instrument_select').attr('data-option-array-index');
+//        var instrument_name=   $('ul.chosen-results').find('.instrument_select').text();
+//        $('#ins_id').val(instrument_id);
+//        $('#ins_name').val(instrument_name);
+        var priority_id   =   $(this).val();
+        
+        $.ajax({
+		type: 'POST',
+                data:"priority_id="+priority_id,
+		url: path_url+'Salesorders/dates_sales/',
+                success:function(data){
+                    var data = parseInt(data);
+                    console.log(data);
+                    // $("#val_reg_date").datepicker("setDate", new Date());
+                    $('#val_in_date').datepicker("setDate", new Date());
+                    var dateMin = $('#val_in_date').datepicker('getDate');   
+                    var addDays = new Date();
+                    addDays.setDate(addDays.getDate() + data);
+                    $("#val_out_date").datepicker("setDate",addDays);
+                    //$('#range_array').empty().append(data);
+                }
+            });
+    });
+    });
 $(function(){
 $("#val_customer").keyup(function() 
 { 

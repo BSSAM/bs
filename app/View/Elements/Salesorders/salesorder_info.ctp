@@ -55,7 +55,15 @@
     </div>
      <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
+        <div class="row col-md-9">
+            <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','placeholder'=>'Enter the Purchase Order Number','class'=>'form-control','label'=>false)); ?>
+            <?php echo $this->Form->input('Salesorder.po_generate_type', array('type'=>'hidden','id'=>'po_gen_type','class'=>'form-control','label'=>false)); ?>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-sm btn-primary sal_generate_po" id="purchase_order" type="button">Generate Po</button>
+        </div> 
+        <span class="help-block_login po_name_error">Purchase order Full Invoice needs Single PO</span>
+        <?php //echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
     </div>
 </div>
 <div class="form-group">

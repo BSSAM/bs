@@ -56,6 +56,7 @@
             
             if($this->request->is('post'))
             {
+                pr($this->request->data['Salesorder']['priority']);exit;
                 $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         //$instrument_type = $con['InstrumentType']['salesorder'];
                         //pr($instrument_type);exit;
@@ -69,6 +70,29 @@
                 
                 $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
                 $this->request->data['Salesorder']['quotationno']=$quotation_id;
+                
+                // PO Auto Generate
+                $ref_no_po =   explode(',',$this->request->data['Salesorder']['ref_no']);
+                foreach($ref_no_po as $k=>$v):
+                    $count_po[$k]   =   0;
+                endforeach;
+                $p_count_string =   implode($count_po,',');
+                if ($this->request->data['Salesorder']['ref_no'] != '') 
+                {
+                    $check_string = strchr($this->request->data['Salesorder']['ref_no'], 'CPO');
+                    $po_type = ($check_string == "") ? 'Manual' : 'Automatic';
+                }
+                //For Quotation array
+//                if( $this->request->data['Quotation']['quotation_no']!=''):
+//                $qo_id_array  =   $this->request->data['Quotation']['quotation_no'];
+//                $qo_count_array   =   $this->request->data['Quotation']['quo_quantity'];
+//                $po_array['Clientpo']['Quotation']         = array_combine($qo_id_array,$qo_count_array);
+//                    foreach($po_array['Clientpo']['Quotation'] as $quotationno=>$quotationcount){
+//                        $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$this->request->data['Quotation']['clientpo_no'].'"','Quotation.po_generate_type'=>'"'.$po_type.'"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
+//                    }
+//                endif;
+                $this->request->data['Salesorder']['po_generate_type']=$po_type;
+                $this->request->data['Salesorder']['ref_count']=$p_count_string;
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
                     $sales_orderid  =   $this->Salesorder->getLastInsertID();
@@ -709,6 +733,18 @@
             }
             
 	}
+        
+        public function dates_sales()
+        {
+            $this->autoRender=false;
+            $this->layout   =   'ajax';
+            $priority_id  =   $this->request->data['priority_id'];
+            $priority_info    =    $this->Priority->find('first',array('conditions'=>array('Priority.id'=>$priority_id),'order'=>'Priority.id desc'));
+            //pr($priority_info);
+            $val = $priority_info['Priority']['noofdays'];
+            echo $val;
+        }
+        
         public function calendar()
         {
             $this->autoRender=false;

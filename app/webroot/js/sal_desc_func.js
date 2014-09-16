@@ -571,6 +571,27 @@ if(pending == 1)
         });
     }
    });
+     /**********************************************Generate Po for Salesorder*****************************/
+   $(document).on('click','.sal_generate_po',function()
+   {
+       
+       var po_id    =   $(this).attr('id');
+       var confirm   =window.confirm('I dont have Po number.Need to generate temporary po');  
+       if(confirm==true)
+       {
+            $.ajax({
+            type:'POST',
+            url:path_url+'/Clientpos/get_random_ponumber/',
+            success:function(data){
+                  $('#val_ref_no').val(data);
+                  $('#val_ref_no').attr('readonly','readonly');
+                  $('#po_gen_type').val('Automatic');
+                    
+                }
+            });
+        }
+   });
+   
    
     
 });

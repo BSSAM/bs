@@ -19,7 +19,7 @@ $(document).ready(function(){
                     $('#range_array').empty().append(data);
                 }
             });
-    })
+    });
     $(document).on('click','.customerinstrument_add',function(){
        
 //        if($('#instrument_name').val()=='')
