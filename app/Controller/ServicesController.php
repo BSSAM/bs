@@ -83,7 +83,7 @@ class ServicesController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
           
         }
         
@@ -91,7 +91,7 @@ class ServicesController extends AppController
        if(empty($service))
        {
             $this->Session->setFlash(__('Invalid Service Type'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
           
        }
         //$this->set('country',$data);

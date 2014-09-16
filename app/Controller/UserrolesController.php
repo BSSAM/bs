@@ -119,6 +119,7 @@ class UserrolesController extends AppController
         
         $userrole =  $this->Userrole->findById($id);
         $user_role_id = $userrole['Userrole']['user_role_id'];
+        
          if($user_role_id == 1 || $user_role_id == 2)
         {
              return $this->redirect(array('action'=>'index'));
@@ -127,14 +128,23 @@ class UserrolesController extends AppController
        if(empty($userrole))
        {
            $this->Session->setFlash(__('Invalid Userrole'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
           
        }
        
         
          if($this->request->is(array('post','put')))
        {
+             $match1 = $this->request->data['user_role'];
+        //pr($match1);exit;
+             $data1 = $this->Userrole->findByUserRole($match1);
              
+            if(!empty($data1))
+            {
+                $this->Session->setFlash(__('User Role Already Exist'));
+               
+                return $this->redirect(array('action'=>'index'));
+            }
               $this->Userrole->id = $id;
              
           

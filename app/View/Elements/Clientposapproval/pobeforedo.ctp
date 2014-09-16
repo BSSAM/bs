@@ -33,7 +33,7 @@
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
                                         <td class="text-center word_break">
-                                            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotmatic'){$class="danger";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
+                                            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'){$class="danger";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
                                             <?PHP $po_array =  explode(',',$quotation_list['Quotation']['ref_no']);  ?>
                                             <?PHP foreach($po_array as $po_key=>$po_value): ?>
                                             <span class="label label-<?PHP echo $class; ?>">

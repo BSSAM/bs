@@ -81,7 +81,7 @@ class DepartmentsController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
           
         }
         
@@ -89,7 +89,7 @@ class DepartmentsController extends AppController
        if(empty($department))
        {
             $this->Session->setFlash(__('Invalid Department'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
           
        }
         //$this->set('country',$data);

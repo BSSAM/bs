@@ -56,17 +56,17 @@ class CurrenciesController extends AppController
         if($this->request->is('post'))
         {
              $this->request->data['status']=1;
-            //pr($dat);exit;
-             //$dat = $this->request->params[''];
-            //$match1 = $this->request->data['country_id'];
-//             $data1 = $this->Currency->findByCountryId($match1);
-//             
-//            if(!empty($data1))
-//            {
-//                $this->Session->setFlash(__('Country Entered is Already Exist'));
-//               
-//                return $this->redirect(array('action'=>'add'));
-//            }
+           // pr($dat);exit;
+            // $dat = $this->request->params[''];
+             $match1 = $this->request->data['country_id'];
+             $data1 = $this->Currency->findByCountryId($match1);
+             
+            if(!empty($data1))
+            {
+                $this->Session->setFlash(__('Country Entered is Already Exist'));
+               
+                return $this->redirect(array('action'=>'index'));
+            }
             $this->Currency->create();
            
             if($this->Currency->save($this->request->data))
@@ -100,7 +100,7 @@ class CurrenciesController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
           
         }
         
@@ -108,13 +108,21 @@ class CurrenciesController extends AppController
        if(empty($currency))
        {
             $this->Session->setFlash(__('Invalid Currency'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
           
        }
         //$this->set('country',$data);
         if($this->request->is(array('post','put')))
        {
+             $match1 = $this->request->data['country_id'];
+             $data1 = $this->Currency->findByCountryId($match1);
              
+            if(!empty($data1))
+            {
+                $this->Session->setFlash(__('Country Entered is Already Exist'));
+               
+                return $this->redirect(array('action'=>'index'));
+            }
               $this->Currency->id = $id;
              
           

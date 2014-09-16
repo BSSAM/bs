@@ -38,6 +38,7 @@
         var instrument = $(this).val();
         var customer_id = $('#SalesorderCustomerId').val();
         var dataString = 'customer_id='+ customer_id+'&instrument='+instrument;
+        
         if(customer_id!='')
         {
             $.ajax({
@@ -52,6 +53,11 @@
             });
         }return false;    
     });
+    
+    });
+    $('#val_instrument').blur(function(){
+         $(this).val('');
+         $('#search_instrument').fadeOut();
     });
 </script>
 <div class="form-group">

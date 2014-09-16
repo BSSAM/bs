@@ -109,7 +109,7 @@ class ProceduresController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $procedure_data = $this->Procedure->findById($id); 
         if($this->request->is(array('post','put')))

@@ -59,7 +59,7 @@ class IndustriesController extends AppController
             {
                 $this->Session->setFlash(__('Industry Entered is Already Exist'));
                
-                return $this->redirect(array('action'=>'add'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Industry->create();
            
@@ -89,13 +89,13 @@ class IndustriesController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $industry_details =  $this->Industry->findById($id); 
         if(empty($industry_details))
         {
            $this->Session->setFlash(__('Invalid Industry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

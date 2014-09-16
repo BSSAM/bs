@@ -65,7 +65,7 @@ class BranchesController extends AppController
             {
                 $this->Session->setFlash(__('Branch Entered is Already Exist'));
                
-                return $this->redirect(array('action'=>'add'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->branch->create();
            
@@ -102,7 +102,7 @@ class BranchesController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
           
         }
         
@@ -111,7 +111,7 @@ class BranchesController extends AppController
        if(empty($branch))
        {
             $this->Session->setFlash(__('Invalid Branch'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
           
        }
         //$this->set('country',$data);

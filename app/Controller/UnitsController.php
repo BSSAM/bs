@@ -118,13 +118,13 @@ class UnitsController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $units =  $this->Unit->findById($id); 
         if(empty($units))
         {
             $this->Session->setFlash(__('Invalid Unit'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

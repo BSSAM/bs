@@ -59,7 +59,7 @@ class LocationsController extends AppController
             {
                 $this->Session->setFlash(__('Location Entered is Already Exist'));
                
-                return $this->redirect(array('action'=>'add'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Location->create();
            
@@ -89,13 +89,13 @@ class LocationsController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Location'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $location_details =  $this->Location->findById($id); 
         if(empty($location_details))
         {
            $this->Session->setFlash(__('Invalid Location'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

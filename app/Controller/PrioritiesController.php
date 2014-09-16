@@ -61,7 +61,7 @@ class PrioritiesController extends AppController
             
                 $this->Session->setFlash(__('Priority Already Exist'));
                
-                return $this->redirect(array('action'=>'add'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Priority->create();
            
@@ -91,13 +91,13 @@ class PrioritiesController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Priority'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $priority_details =  $this->Priority->findById($id); 
         if(empty($priority_details))
         {
            $this->Session->setFlash(__('Invalid Priority'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

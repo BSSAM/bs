@@ -59,7 +59,7 @@ class ReferedbysController extends AppController
             {
                 $this->Session->setFlash(__('Referred By Entered is Already Exist'));
                
-                return $this->redirect(array('action'=>'add'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Referedby->create();
            
@@ -89,13 +89,13 @@ class ReferedbysController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Refered Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $refer_details =  $this->Referedby->findById($id); 
         if(empty($refer_details))
         {
            $this->Session->setFlash(__('Invalid Refered Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

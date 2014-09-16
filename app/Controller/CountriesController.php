@@ -82,7 +82,7 @@ class CountriesController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
           
         }
         
@@ -90,7 +90,7 @@ class CountriesController extends AppController
        if(empty($country))
        {
             $this->Session->setFlash(__('Invalid Country'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
           
        }
         //$this->set('country',$data);

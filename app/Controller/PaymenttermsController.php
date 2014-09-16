@@ -62,7 +62,7 @@ class PaymenttermsController extends AppController
             
                 $this->Session->setFlash(__('Both Payment Type & Term  Already Exist'));
                
-                return $this->redirect(array('action'=>'add'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Paymentterm->create();
            
@@ -92,13 +92,13 @@ class PaymenttermsController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Payment Term'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $payment_details =  $this->Paymentterm->findById($id); 
         if(empty($payment_details))
         {
            $this->Session->setFlash(__('Invalid Payment Term'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

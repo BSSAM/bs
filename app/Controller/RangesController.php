@@ -124,13 +124,13 @@ class RangesController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $ranges =  $this->Range->findById($id); 
         if(empty($ranges))
         {
             $this->Session->setFlash(__('Invalid Range'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

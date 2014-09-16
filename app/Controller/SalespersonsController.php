@@ -133,7 +133,7 @@ exit;
             {
                 $this->Session->setFlash(__('Sales Person Name is Already Exist'));
                
-                return $this->redirect(array('action'=>'add'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Salesperson->create();
            
@@ -163,13 +163,13 @@ exit;
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Sales Person'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $sales_details =  $this->Salesperson->findById($id); 
         if(empty($sales_details))
         {
            $this->Session->setFlash(__('Invalid Sales Person'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

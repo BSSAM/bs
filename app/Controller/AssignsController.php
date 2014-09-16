@@ -82,7 +82,7 @@ class AssignsController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
           
         }
         
@@ -90,7 +90,7 @@ class AssignsController extends AppController
        if(empty($assign))
        {
             $this->Session->setFlash(__('Invalid Assign To'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
           
        }
         //$this->set('country',$data);

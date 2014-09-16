@@ -8,7 +8,7 @@
                         <li><?php echo $this->Html->link('Currency',array('controller'=>'Currencies','action'=>'index')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
-
+                    <?php echo $this->element('message');?>
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">

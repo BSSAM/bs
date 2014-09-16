@@ -62,7 +62,7 @@ class UsersController extends AppController {
             if (!empty($data1)) {
                 $this->Session->setFlash(__('Username Entered is Already Exist'));
 
-                return $this->redirect(array('action' => 'add'));
+                return $this->redirect(array('action' => 'index'));
             }
             $this->User->create();
             
@@ -105,14 +105,14 @@ class UsersController extends AppController {
 
         if (empty($id)) {
             $this->Session->setFlash(__('Invalid Entry'));
-            return $this->redirect(array('action' => 'edit'));
+            return $this->redirect(array('action' => 'index'));
         }
 
         $user = $this->User->findById($id);
        
         if (empty($user)) {
             $this->Session->setFlash(__('Invalid User'));
-            return $this->redirect(array('action' => 'edit'));
+            return $this->redirect(array('action' => 'index'));
         }
 
 

@@ -59,7 +59,7 @@ class TallyledgersController extends AppController
             {
                 $this->Session->setFlash(__('Tally Ledger A/C Entered is Already Exist'));
                
-                return $this->redirect(array('action'=>'add'));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Tallyledger->create();
            
@@ -90,7 +90,7 @@ class TallyledgersController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
           
         }
         
@@ -98,7 +98,7 @@ class TallyledgersController extends AppController
        if(empty($tallyledger))
        {
             $this->Session->setFlash(__('Invalid Tally ledger A/C'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
           
        }
         //$this->set('country',$data);

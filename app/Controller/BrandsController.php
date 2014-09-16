@@ -107,13 +107,13 @@ class BrandsController extends AppController
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));
-             return $this->redirect(array('action'=>'edit'));
+             return $this->redirect(array('action'=>'index'));
         }
         $brands =  $this->Brand->findById($id); 
         if(empty($brands))
         {
             $this->Session->setFlash(__('Invalid Brand'));
-            return $this->redirect(array('action'=>'edit'));
+            return $this->redirect(array('action'=>'index'));
         }
         if($this->request->is(array('post','put')))
         {

@@ -21,6 +21,7 @@ class ClientposapprovalController extends AppController {
 //         return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
 //        }
         $quotation_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Quotation.is_approved' =>1), 'order' => array('Quotation.id' => 'DESC')));
+        //pr($quotation_list_bybeforedo);exit;
         $quotation_lists_bybeforeinvoice = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>2,'Quotation.is_approved' =>1), 'order' => array('Quotation.id' => 'DESC')));
         $this->set(compact('quotation_list_bybeforedo','quotation_lists_bybeforeinvoice'));
     }
@@ -29,8 +30,8 @@ class ClientposapprovalController extends AppController {
         $this->layout   =   'ajax';
         $q_id =  $this->request->data['q_id'];
         $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$q_id,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
-        
         $sales_data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotation_id'=>$q_id,'Salesorder.is_deleted'=>0),'fields'=>array('salesorderno')));
+        //pr($sales_data['Salesorder']['is_deliveryorder_created']);exit;
         $delivery_order =   array();$sales_order =   array();
         foreach($sales_data as $sale):
             $sales_order['Salesorder'][]=$sale['Salesorder']['id'];

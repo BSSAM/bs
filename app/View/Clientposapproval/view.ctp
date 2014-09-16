@@ -234,7 +234,7 @@ $(".form-horizontal").submit(function(e){
                                     <?PHP //$count1    =   $count1+1; ?>
                                      
                                     <div class="col-md-2">
-                                        <?PHP echo $this->Form->input('pocount',array('type'=>'text','class'=>'form-control','value'=>$po,'label'=>false,'placeholder'=>'PO Count','name'=>'pocount[]','id'=>'pocount[]','readonly'=>'readonly')) ?></dd>
+                                        <?PHP echo $this->Form->input('pocount',array('type'=>'text','class'=>'form-control','value'=>$po,'label'=>false,'placeholder'=>'PO Count','name'=>'pocount[]','id'=>'pocount[]')) ?></dd>
                                     </div>
                                     <?php if($count != 51): ?>
                                     <div class="col-md-1 row"><div class="btn-group btn-group-sm form-control-static"><div class="btn btn-alt btn-info" id="delete_po" data-delete=<?php echo $count; ?>><i class="fa fa-minus"></i></div></div></div>
