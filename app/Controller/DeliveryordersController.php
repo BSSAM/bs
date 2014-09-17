@@ -73,6 +73,7 @@
         {
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
+            //pr($deliveryorder);
             $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
             $quo=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quo_no),'recursive'=>2));
             $posat = $quo['Quotation']['is_pocount_satisfied'];
@@ -164,11 +165,36 @@
             //pr($id);exit;
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.delivery_order_no'=>$id),'recursive'=>2));
             $deliver_customer = $deliveryorder['Deliveryorder']['customer_id'];
-            //pr($deliveryorder);exit;
-            $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
-            //return $updated;
-            if($updated==1)
+            $ack_type = $deliveryorder['Customer']['acknowledgement_type_id'];
+            if($ack_type == 1)
             {
+                //pr($deliveryorder);exit;
+                $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
+                //return $updated;
+                if($updated==1)
+                {
+                    //pr($id1);exit;
+                    $user_id = $this->Session->read('sess_userid');
+                    $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
+                    $this->request->data['Invoice']['deliveryorder_id']=$id;
+                    $this->request->data['Invoice']['customer_purchaseorder_no']='';
+                    $this->request->data['Invoice']['is_approved']=0;
+                    $this->Invoice->save($this->request->data);
+                }
+                else
+                {
+                    $this->Session->setFlash(__('Purchase Order Needs to be Given(Manually) to get Approval'));
+                    $text = "Purchase Order Needs to be Given(Manually) to get Approval";
+                    return $text;
+                    
+    //                $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
+                }
+            }
+            else
+            {
+                $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Customer.acknowledgement_type_id'=>2));
+                if($updated==1)
+                {
                 //pr($id1);exit;
                 $user_id = $this->Session->read('sess_userid');
                 $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
@@ -176,15 +202,10 @@
                 $this->request->data['Invoice']['customer_purchaseorder_no']='';
                 $this->request->data['Invoice']['is_approved']=0;
                 $this->Invoice->save($this->request->data);
+                }
             }
-            else
-            {
-                $text = "Purchase Order Needs to be Given(Manually) to get Approval";
-                return $text;
-//                $this->Session->setFlash(__('Purchase Order Needs to be Given(Manually) to get Approval'));
-//                $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
-            }
-         }
+            
+        }
         /*
          * Function Name:salesorder_id_search
          * Description   :   for salesorder Search

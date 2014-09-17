@@ -149,6 +149,7 @@ class LabprocessesController extends AppController
     {
        
         $salesorder_list    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_approved'=>1,'Salesorder.is_deliveryorder_created'=>0)));
+        $quotation_list    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_list['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.is_deliveryorder_created'=>0)));
         //pr($salesorder_list);exit;
         $this->set('lab_sales_id',$id);
         $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
@@ -216,6 +217,7 @@ class LabprocessesController extends AppController
                     {
                         
                        $last_id    =   $this->Deliveryorder->getLastInsertId();
+                        $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$quotation_list['Quotation']['id']));
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
                         
                         foreach($salesorder_list['Description'] as $sale):
@@ -327,6 +329,7 @@ class LabprocessesController extends AppController
                 $lab_approved = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.checking' => 1, 'Description.is_approved_lab' => 1, 'Description.processing' => 1)));
                 if($device_count==$lab_approved)
                 {
+                    $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$quotation_list['Quotation']['id']));
                     $this->Salesorder->updateAll(array('Salesorder.is_approved_lab' => 1),array('Salesorder.id' => $id));
                     ///////////////////////////////////////////////////
                     //      Lab Process Logactivity - Partial

@@ -1,9 +1,29 @@
 <script>
+var path_url='<?PHP echo Router::url('/',true); ?>';
 $('has-error1').attr("style","display:none");
 $(".form-horizontal").submit(function(e){
-    if($('#ponumber[]').val=''){
-        alert('wrong');
-    }
+//    alert('asd');
+//    if($('#ponumber[]').val=''){
+//        alert('wrong');
+//    }
+     /* Stop form from submitting normally */
+    e.preventDefault();
+
+    /* Clear result div*/
+   // $("#result").html('');
+
+    /* Get some values from elements on the page: */
+    var values = $(this).serialize();
+
+    /* Send the data using post and put the results in a div */
+    $.ajax({
+        url: "<?PHP echo Router::url('/',true); ?>Clientposapproval/quotation_po_update",
+        type: "post",
+        data: values,
+        success: function(data){
+            window.location.reload();
+        }
+    });
 //    var isFormValid = true;
 //    $(".form-horizontal input:text").{
 //            
@@ -271,12 +291,15 @@ $(".form-horizontal").submit(function(e){
                         </div>  
                         <!-- END Grids Content Content -->
                     </div>
+                    <?php echo $this->element('message');?>
+                    <?php if($data['Quotation']['is_assign_po']!=1 && $data['Quotation']['po_generate_type']!="Manual"): ?>
                      <div class="form-group form-actions">
                                 <div class="col-xs-12 text-right">
                                     <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
                                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
+                    <?php endif; ?>
                       <?PHP echo $this->Form->end(); ?>
 <?php echo $this->Html->script('pages/formsValidation'); ?>
         <script>$(function(){ FormsValidation.init(); });</script>
