@@ -1,3 +1,8 @@
+<style>
+    #result{
+        margin-top: 35px;
+    }
+</style>
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
@@ -8,7 +13,9 @@
         { 
             var device_status   =    $('input:radio[name=quotation_device_status]:checked').val();
             var quotation_id = $(this).val();
-            var dataString = 'id='+ quotation_id+'&device_status='+device_status;
+            var customer_id = $('#val_customer').val();
+            var customer_single_id =   $('#customer_id').val();
+            var dataString = 'id='+ quotation_id+'&device_status='+device_status+'&single_cus_id='+customer_single_id;
             if(quotation_id!='')
             {
                 $.ajax({
@@ -48,8 +55,10 @@
                             </div>
                         </div>
                         <div class="block full row col-sm-12 padding_t_b10">
+<!--                             <label class="col-md-2 control-label">Existing Quotation</label>-->
                         <div class="form-actions  col-sm-7 pull-right">
                             <div class="col-md-4 pull-left">
+                               
                             <?PHP echo $this->Form->create('Salesorder', array('action' => 'Salesorder_by_quotation', 'class' => 'form-horizontal form-bordered list_of_sales_o_form')); ?>
                             <?PHP   
                                 $options = array('processing' => 'Processing', 'pending' => 'Pending');
@@ -58,7 +67,16 @@
                             ?>
                             </div>
                             <div class="input-group col-md-8 pull-right quot_display">
-                                <?PHP echo $this->Form->input('quotation_id', array('placeholder' => 'Quotation Id', 'class' => 'form-control',
+                           <?php echo $this->Form->input('customername', 
+                            array('id'=>'val_customer_sales','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
+                            'autoComplete'=>'off','type'=>'text','name'=>'customername')); ?>
+                            <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'customer_id')); ?>
+                            <div id="result"></div>
+                                 </div>
+                            <div class="input-group col-md-8 pull-right quot_display">
+                           
+                                
+                                <?PHP echo $this->Form->input('quotation_id', array('placeholder' => 'Existing Quotation No to be entered here', 'class' => 'form-control',
                                     'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
                                 ?>
                                 <?PHP echo $this->Form->input('salesorder_created', array('type' => 'hidden', 'value' => 1)); ?>

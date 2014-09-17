@@ -576,6 +576,7 @@
             $this->autoRender = false;
             $this->loadModel('Quotation');
             $name =  $this->request->data['id'];
+            $cus_id = $this->request->data['single_cus_id'];
             $device_status =  $this->request->data['device_status'];
             if($device_status=='pending')
             {
@@ -603,8 +604,11 @@
             }
             else
             {
-                 
+                 if($cus_id == ''):
                  $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno LIKE'=>'%'.$name.'%','Quotation.is_approved'=>'1','Quotation.salesorder_created'=>0)));
+                 else:
+                 $data = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno LIKE'=>'%'.$name.'%','Quotation.customer_id'=>$cus_id,'Quotation.is_approved'=>'1','Quotation.salesorder_created'=>0)));
+                 endif;
                  $c = count($data);
                  if($c!=0)
                  {
@@ -765,7 +769,32 @@
               return json_encode($event_array);
         }
         
-      
+        public function search_sales_customer_no()
+        {
+            $this->loadModel('Customer');
+            $name =  $this->request->data['name'];
+            $this->autoRender = false;
+            $data = $this->Customer->find('all',array('conditions'=>array('Customertagname LIKE'=>'%'.$name.'%','Customer.is_deleted'=>0,'Customer.is_approved'=>1,'Customer.status'=>1)));
+            $c = count($data);
+            if($c>0)
+            {
+                for($i = 0; $i<$c;$i++)
+                { 
+                    echo "<div class='customer_show_sales' align='left' id='".$data[$i]['Customer']['id']."'>";
+                    echo $data[$i]['Customer']['Customertagname'];
+                    echo "<br>";
+                    echo "</div>";
+                }
+            }
+            else
+            {
+                    echo "<div class='no_result' align='left'>";
+                    echo "No Results Found";
+                    echo "<br>";
+                    echo "</div>";
+            }
+            
+        }
 }
 
 ?>

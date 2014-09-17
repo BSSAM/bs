@@ -296,6 +296,7 @@ $(document).ready(function(){
     /****************Salesorder index page Quotation count Search*********************/
      $('.quotation_search').click(function(){
         var quotation_single_id =   $('#SalesorderQuotationId').val();
+        
        $.ajax({
           type:'POST',
           url:path_url+'Salesorders/check_quotation_count',
@@ -592,6 +593,34 @@ if(pending == 1)
         }
    });
    
-   
+   $("#result").hide();
+    $("#val_customer_sales").keyup(function() 
+    { 
+        
+        var customer = $(this).val();
+        var dataString = 'name='+ customer;
+        if(customer!='')
+        {
+            $.ajax({
+            type: "POST",
+            url: path_url+"/Salesorders/search_sales_customer_no",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                $("#result").html(html).show();
+            }
+            });
+        }
+    });
+    $(document).on('click','.customer_show_sales',function(){
+        var customer_name=$(this).text();
+        $('#result').fadeOut();
+        var customer_id=$(this).attr('id');
+        //alert(customer_name);
+        //alert(customer_id);
+        $('#val_customer_sales').val(customer_name);
+        $('#customer_id').val(customer_id);
+    });
     
 });

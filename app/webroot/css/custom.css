@@ -88,6 +88,7 @@ and open the template in the editor.
 #result {position: absolute;z-index: 999;width:92%;z-index:10; }
 #result .no_result{width:100%;max-width:100%;max-height: 100%;}
 #result .customer_show{max-height: 100%;}
+#result .customer_show_sales{max-height: 100%;}
 #result .no_result:hover{background:#6ad2eb;}
 #result .preno_result {padding: 13px 0px; max-width: 305px; min-width: 305px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important; }
 
