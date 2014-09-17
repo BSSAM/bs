@@ -37,12 +37,14 @@
 		url: path_url+'Salesorders/dates_sales/',
                 success:function(data){
                     var data = parseInt(data);
-                    console.log(data);
+                    //console.log(data);
                     // $("#val_reg_date").datepicker("setDate", new Date());
-                    $('#val_in_date').datepicker("setDate", new Date());
+                    //$('#val_in_date').datepicker("setDate", new Date());
                     var dateMin = $('#val_in_date').datepicker('getDate');   
+                   // alert(dateMin.getDate());//return false;
+                    
                     var addDays = new Date();
-                    addDays.setDate(addDays.getDate() + data);
+                    addDays.setDate(dateMin.getDate() + data);
                     $("#val_out_date").datepicker("setDate",addDays);
                     //$('#range_array').empty().append(data);
                 }
