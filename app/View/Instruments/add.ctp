@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="example-chosen-multiple">Department</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('Instrument.department_id', array('class'=>'form-control','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','id'=>'department_id','empty'=>'Select Department')); ?>
+                                        <?php echo $this->Form->input('Instrument.department_id', array('class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','id'=>'department_id','empty'=>'Select Department')); ?>
                                         
                                     </div>
                                     <label class="col-md-2 control-label" for="example-chosen-multiple">Procedure</label>

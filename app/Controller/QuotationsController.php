@@ -344,33 +344,36 @@
         public function instrument_search()
         {
             $this->autoRender = false;
-            $instrument =  $this->request->data['instrument'];
-            $customer_id =  $this->request->data['customer_id'];
+//            $instrument =  $this->request->data['instrument'];
+//            $customer_id =  $this->request->data['customer_id'];
+             $instrument =  'Test';
+            $customer_id =  'CUS-01-10000121';
             $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
+            pr($instrument_details);exit;
             $c = count($instrument_details);
             if(!$instrument_details)
             {
                 echo 'No Results Found';
-            }else{
-            if($c>0&&$instrument_details[0]['Instrument']['name']!='')
+            }
+            else
             {
-                for($i = 0; $i<$c;$i++)
-                { 
-                    echo "<div class='instrument_id' align='left' id='".$instrument_details[$i]['Instrument']['id']."'>";
-                    echo $instrument_details[$i]['Instrument']['name'];
-                    echo "<br>";
-                    echo "</div>";
+                if($c>0&&$instrument_details[0]['Instrument']['name']!='')
+                {
+                    for($i = 0; $i<$c;$i++)
+                    { 
+                        echo "<div class='instrument_id' align='left' id='".$instrument_details[$i]['Instrument']['id']."'>";
+                        echo $instrument_details[$i]['Instrument']['name'];
+                        echo "<br>";
+                        echo "</div>";
+                    }
                 }
-            }
-                        
-            
-            if($instrument_details[0]['Instrument']['name']=='')
-            {
-                echo "<div  align='left'>";
-                echo 'No Results Found';
-                echo "<br>";
-                echo "</div>"; 
-            }
+                if($instrument_details[0]['Instrument']['name']=='')
+                {
+                    echo "<div  align='left'>";
+                    echo 'No Results Found';
+                    echo "<br>";
+                    echo "</div>"; 
+                }
             }
         }
         public function get_brand_value()

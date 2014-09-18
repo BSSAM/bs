@@ -13,7 +13,6 @@ class CustomersController extends AppController
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
                         'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo','Logactivity','Datalog');
     
-  
     public function index()
     {
         /*******************************************************
@@ -568,7 +567,6 @@ class CustomersController extends AppController
     }
     public function instrument_map($id=NULL)
     {
-       
         if($id!=NULL)
         {
            $customer_entry  =    $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id),'recursive'=>'3'));
@@ -600,19 +598,26 @@ class CustomersController extends AppController
         $this->autoRender=false;
        
         $this->loadModel('CustomerInstrument');
-        
+        $instrument_id  =   $this->request->data['instrument_id'];
+        $range_id       =   $this->request->data['range_id'];
+        $model_no       =   $this->request->data['model_no'];
+        $customer_instruments  = $this->CustomerInstrument->find('all',  array('conditions'=>array('model_no'=>$model_no,'range_id'=>$range_id, 'instrument_id'=>$instrument_id,'CustomerInstrument.is_deleted'=>0)));
+        if(count($customer_instruments)==0){
         $data = $this->CustomerInstrument->save($this->request->data);
-        if($data)
-        {
-          $last_id  =    $this->CustomerInstrument->getLastInsertId();
-          if($last_id!='')
-          {
-              $last_data = $this->CustomerInstrument->find('first', array('conditions' => array('CustomerInstrument.id' => $last_id)));
-               if(!empty($last_data))
-               {
-                  echo json_encode($last_data);
-               }
+            if($data)
+            {
+              $last_id  =    $this->CustomerInstrument->getLastInsertId();
+              if($last_id!='')
+              {
+                  $last_data = $this->CustomerInstrument->find('first', array('conditions' => array('CustomerInstrument.id' => $last_id)));
+                   if(!empty($last_data))
+                   {
+                      echo json_encode($last_data);
+                   }
+                }
             }
+        }else{
+            return 0;
         }
     }
     public function delete_cusinstrument()
@@ -862,6 +867,31 @@ class CustomersController extends AppController
             $details=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id)));
             
     }
-
+    public function instrument_search()
+    {
+        $this->autoRender = false;
+        $name =  $this->request->data['name'];
+        $data = $this->Instrument->find('all',array('conditions'=>array('Instrument name LIKE'=>'%'.$name.'%','Instrument.is_deleted'=>0,'Instrument.is_approved'=>1)));
+        $c = count($data);
+            if($c>0)
+            {
+                for($i = 0; $i<$c;$i++)
+                { 
+                    echo "<div class='customer_instrument_show' align='left' id='".$data[$i]['Instrument']['id']."'>";
+                    echo $data[$i]['Instrument']['name'];
+                    echo "<br>";
+                    echo "</div>";
+                }
+            }
+            else
+            {
+                    echo "<div class='no_result' align='left'>";
+                    echo "No Results Found";
+                    echo "<br>";
+                    echo "</div>";
+            }
+            
+        
+    }
 
 }

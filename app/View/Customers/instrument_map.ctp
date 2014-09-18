@@ -1,22 +1,20 @@
-<script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
-    </script>
-    <h1>
-        <i class="gi gi-user"></i>Instrument Pricing
-    </h1>
-                        </div>
-                    </div>
-                    <ul class="breadcrumb breadcrumb-top">
-                        <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
-                        <li>Instrument Pricing</li>
-                    </ul>
-                    <!-- END Forms General Header -->
+<script>var path_url = '<?PHP echo Router::url('/', true); ?>';</script>
+<h1><i class="gi gi-user"></i>Instrument Pricing</h1>
+</div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li><?php echo $this->Html->link('Home', array('controller' => 'Dashboards', 'action' => 'index')); ?></li>
+    <li><?php echo $this->Html->link('Customers', array('controller' => 'Customers', 'action' => 'index')); ?></li>
+    <li>Instrument Pricing</li>
+</ul>
+<!-- END Forms General Header -->
             <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
+                            <div class="Customer_instrumentmessage"></div>
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
+                                
                                 <div class="block-title">
                                     <h2></h2>
                                 </div>
@@ -35,8 +33,8 @@
                                     </div>
                                     <label class="col-md-2 control-label" for="machine_description">Instrument Name</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('instrument_name', array('id' => 'instrument_name', 'class' => 'form-control select-chosen', 'label' => false, 'name' => 'instrument_name', 'type' => 'select', 'options' => $instruments, 'empty' => 'Select Instument Name')); ?>
-
+                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name', 'type' => 'input')); ?>
+                                        <div class="instrument_result"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -68,12 +66,7 @@
                                             <?php echo $this->Form->checkbox('status', array('id'=>'status','class'=>'','label'=>false,'name'=>'status')); ?>
                                     </div>
                                 </div>
-                                   
                                 </div>
-                                 
-                                     
-                              
-                            
                 <div class="form-group form-actions">
                     <div class="col-md-9 col-md-offset-10 update_device">
                         <?php echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add', array('type' => 'button', 'class' => 'btn btn-sm btn-primary customerinstrument_add', 'escape' => false)); ?>
@@ -96,7 +89,7 @@
                     <tbody class="customer_instrument_info"> 
                            <?PHP if(!empty($customer_instruments)):?> 
                              <?PHP foreach($customer_instruments as $cusins):?>  
-                        <tr class="cus_instrument_remove_<?PHP echo $cusins['CustomerInstrument']['id']; ?>">
+                            <tr class="cus_instrument_remove_<?PHP echo $cusins['CustomerInstrument']['id']; ?>">
                             <td class="text-center"><?PHP echo $cusins['CustomerInstrument']['id']; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['Instrument']['name']; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['model_no']; ?></td>

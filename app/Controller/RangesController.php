@@ -60,6 +60,11 @@ class RangesController extends AppController
       
         if($this->request->is('post'))
         {
+            $unit_id    =   $this->request->data['unit_id'];
+            $unit_array =   $this->Unit->find('first',array('conditions'=>array('Unit.id'=>$unit_id,'Unit.status'=>'1','Unit.is_approved'=>'1'),'fields'=>array('id','unit_name')));
+            $range_name =   "(".$this->request->data['from_range']."~".$this->request->data['to_range'].")/".$unit_array['Unit']['unit_name'];
+            $this->request->data['range_name']=$range_name;
+            
             if($this->Range->save($this->request->data))
             {
                 $last_insert_id =   $this->Range->getLastInsertID();
@@ -135,6 +140,10 @@ class RangesController extends AppController
         if($this->request->is(array('post','put')))
         {
             $this->Range->id = $id;
+            $unit_id    =   $this->request->data['unit_id'];
+            $unit_array =   $this->Unit->find('first',array('conditions'=>array('Unit.id'=>$unit_id,'Unit.status'=>'1','Unit.is_approved'=>'1'),'fields'=>array('id','unit_name')));
+            $range_name =   "(".$this->request->data['from_range']."~".$this->request->data['to_range'].")/".$unit_array['Unit']['unit_name'];
+            $this->request->data['range_name']=$range_name;
             if($this->Range->save($this->request->data))
             {
                 /******************
