@@ -31,9 +31,10 @@
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('Customer.customername', array('id' => 'customer_name', 'class' => 'form-control', 'placeholder' => 'Customer Name', 'label' => false, 'disabled' => 'disabled', 'value' => $customer_entry['Customer']['Customertagname'])); ?>
                                     </div>
-                                    <label class="col-md-2 control-label" for="machine_description">Instrument Name</label>
+                                    <label class="col-md-2 control-label" for="customer_instrument">Instrument Name</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name', 'type' => 'input')); ?>
+                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name')); ?>
+                                        <?PHP echo $this->Form->input('in_id', array('type' => 'hidden', 'id' => 'in_id')); ?>
                                         <div class="instrument_result"></div>
                                     </div>
                                 </div>
@@ -45,9 +46,7 @@
                                     </div>
                                     <label class="col-md-2 control-label" for="range">Range</label>
                                     <div class="col-md-4">
-                                        <select id="range_array" name="range" class="form-control" data-placeholder="Select Range Name" style="width: 250px;" >
-                                            
-                                        </select>
+                                        <select id="range_array" name="range" class="form-control" data-placeholder="Select Range Name" style="width: 250px;"></select>
                                         <?php //echo $this->Form->input('range', array('id'=>'range','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                             
                                     </div>

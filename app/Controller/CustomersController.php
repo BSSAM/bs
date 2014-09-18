@@ -871,8 +871,9 @@ class CustomersController extends AppController
     {
         $this->autoRender = false;
         $name =  $this->request->data['name'];
-        $data = $this->Instrument->find('all',array('conditions'=>array('Instrument name LIKE'=>'%'.$name.'%','Instrument.is_deleted'=>0,'Instrument.is_approved'=>1)));
+        $data = $this->Instrument->find('all',array('conditions'=>array('Instrument.name LIKE'=>'%'.$name.'%','Instrument.is_deleted'=>0,'Instrument.is_approved'=>1)));
         $c = count($data);
+        //echo $c; 
             if($c>0)
             {
                 for($i = 0; $i<$c;$i++)

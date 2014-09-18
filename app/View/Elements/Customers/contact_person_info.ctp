@@ -1,3 +1,10 @@
+<script>
+if(table.fnSettings().aoData.length===0) {
+    alert('no data');
+} else {
+    alert('data exists!');
+}
+</script>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_salespeoples">Name</label>
     <div class="col-md-4">

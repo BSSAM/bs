@@ -42,7 +42,7 @@
                                         
                                          <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$range['Range']['created']);?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><?php echo $range['Range']['range_name'].'/'.$range['Unit']['unit_name'];?></td>
+                                        <td class="text-center"><?php echo $range['Range']['range_name'];?></td>
                                         <td class="text-center"><?php echo $range['Range']['range_description'];?></td>
                                         <?php $status   =   ($range['Range']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
                                         <td class="text-center"><?PHP echo $status; ?></td>

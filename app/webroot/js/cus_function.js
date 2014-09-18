@@ -4,16 +4,21 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-    $(document).on('click','#customer_instrument_show',function(){
-
+    $("#instrument_result",window.parent.document).hide();
+    $(document).on('click','.customer_instrument_show',function(){
+        
         var instrument_id   =   $(this).attr('id');
+        $('#in_id').val(instrument_id);
+        $(".instrument_result").fadeOut();
+        var ins_text=$(this).text();
+        $('#customer_instrument').val(ins_text);
+        //alert(instrument_id);
 //        alert(instrument_id);
         $.ajax({
 		type: 'POST',
                 data:"instrument_id="+instrument_id,
 		url: path_url+'/customers/get_range/',
                 beforeSend: ni_start(),  
-               
                 success:function(data){
                     $('#range_array').empty();
                     $('#range_array').append(data);
@@ -32,8 +37,9 @@ $(document).ready(function(){
 //        }
         var range   =   $('#range_array').val();
         var customer_id =   $('#CustomerInstrumentCustomerId').val();
-        var instrument_id   =   $('#instrument_name option:selected').val();
-        var instrument_name =    $('#instrument_name option:selected').text();
+        var instrument_id   =   $('#in_id').val();
+        //alert(instrument_id); return false;
+        var instrument_name =    $('#customer_instrument').val();
         var model_no =   $('#model_no').val();
         var unit_price=$('#unit_price').val();
         //var status  =   $('#status').val();
@@ -66,7 +72,7 @@ $(document).ready(function(){
                                         <a data-delete="'+node_data.CustomerInstrument.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">\n\
                                         <i class="fa fa-times"></i></a></div></td></tr>');
                     $('ul.chosen-results li:first-child').addClass('result-selected');
-                    //$('#instrument_name').prop('selectedIndex', 0);
+                    $('#customer_instrument').val(null);
                     $('#model_no').val(null);
                     $('#unit_price').val(null);
                     $('#range_array').empty().append('<option value="">Select Range</option>');
@@ -117,10 +123,11 @@ $(document).ready(function(){
                 console.log(data);
                 edit_node=$.parseJSON(data);
                 $('#ins_id').val(edit_node.Instrument.id);
+                $('#in_id').val(edit_node.Instrument.id);
                 $('#ins_name').val(edit_node.Instrument.name);
                 $('#instrument_id').val(edit_node.Instrument.id);
-                $('#instrument_name').text(edit_node.Instrument.name);
-                $('#instrument_name').prop('disabled', 'disabled');
+                $('#customer_instrument').val(edit_node.Instrument.name);
+                $('#customer_instrument').prop('disabled', 'disabled');
                 $('#model_no').val(edit_node.CustomerInstrument.model_no);
                 $('#unit_price').val(edit_node.CustomerInstrument.unit_price);
                 //$('#status').val(edit_node.CustomerInstrument.status);
@@ -146,8 +153,8 @@ $(document).ready(function(){
         $('.update_device').html('<button class="btn btn-sm btn-primary customerinstrument_add" type="button"><i class="fa fa-plus fa-fw"></i> add</button>');
         var range   =   $('#range_array').val();
         var customer_id =   $('#CustomerInstrumentCustomerId').val();
-        var instrument_id   =   $('#ins_id').val();
-        var instrument_name =    $('#ins_name').val();
+        var instrument_id   =   $('#in_id').val();
+        var instrument_name =    $('#customer_instrument').val();
         
         var model_no =   $('#model_no').val();
         var device_id   =   $('#device_id').val();
@@ -180,7 +187,7 @@ $(document).ready(function(){
                                     <a data-edit="'+node_data.CustomerInstrument.id+'"class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+node_data.CustomerInstrument.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
-                
+                $('#customer_instrument').val(null);
                 $('#range_array').append('<option value="" selected="selected">Select Brand</option>');
                 $('#model_no').val(null);
                 $('#unit_price').val(null);
@@ -492,7 +499,7 @@ $(document).ready(function(){
             cache: false,
             success: function(html)
             {
-                $("#instrument_result").html(html).show();
+                $(".instrument_result").html(html).show();
             }
             });
         }return false;    
