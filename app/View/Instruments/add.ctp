@@ -78,12 +78,12 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="brand_id">Brand</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('InstrumentBrand.brand_id', array('id'=>'brand_id','class'=>'form-control','label'=>false,'type'=>'select','options'=>$brand_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
+                                        <?php echo $this->Form->input('InstrumentBrand.brand_id', array('id'=>'brand_id','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$brand_array,'data-placeholder'=>'Select Brand','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         
                                     </div>
                                     <label class="col-md-2 control-label" for="range_id">Range</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('InstrumentRange.range_id', array('id'=>'range_id','class'=>'form-control','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
+                                        <?php echo $this->Form->input('InstrumentRange.range_id', array('id'=>'range_id','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         
                                     </div>
                                    
@@ -97,8 +97,8 @@
                                 </div>
                                      <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary pull-right','escape' => false)); ?>
+                                            <?php //echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
 <!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
                                         </div>
