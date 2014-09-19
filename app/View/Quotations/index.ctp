@@ -55,11 +55,17 @@
                                                 <?php if($userrole_cus['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php } ?>
+                                               
+                                            </div>
                                                 <?php if($userrole_cus['delete']==1){ ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 <?php } ?>
-                                                 
-                                            </div>
+                                                <?php if($userrole_cus['view']==1){ ?>
+                                                <?php echo $this->Form->postLink('PDF',array('action'=>'pdf',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole_cus['view']==1){ ?>
+                                                <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$quotation_list['Quotation']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
                                                 <?PHP //echo $this->html->link('View', array('url'=>'http://www.google.com'), array('title' => 'View','data-target'=>'#myModal','class' => 'btn btn-alt btn-xs btn-primary', 'data-toggle' => 'modal'));  ?>
 <!--                                            <a href="Customers" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">Launch First</a>-->
                                         </td>

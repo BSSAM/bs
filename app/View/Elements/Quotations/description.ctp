@@ -17,7 +17,7 @@
             cache: false,
             success: function(html)
             {
-                //alert(html);
+                //console.log(html);
                 $("#search_instrument").html(html).show();
             }
             });

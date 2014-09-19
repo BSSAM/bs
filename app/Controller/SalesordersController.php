@@ -56,7 +56,7 @@
             
             if($this->request->is('post'))
             {
-                pr($this->request->data['Salesorder']['priority']);exit;
+                //pr($this->request->data['Salesorder']['priority']);exit;
                 $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         //$instrument_type = $con['InstrumentType']['salesorder'];
                         //pr($instrument_type);exit;
