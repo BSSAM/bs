@@ -51,8 +51,10 @@
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$deliveryorder['Deliveryorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$deliveryorder['Deliveryorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure want to delete order  '.$deliveryorder['Deliveryorder']['delivery_order_no'].'?')); ?>
-                                                
                                             </div>
+                                            <?php if($userrole_cus['view']==1 && $deliveryorder['Deliveryorder']['is_approved'] == 1){ ?>
+                                            <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$deliveryorder['Deliveryorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

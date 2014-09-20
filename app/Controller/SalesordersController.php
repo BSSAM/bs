@@ -1,7 +1,7 @@
 <?php
     class SalesordersController extends AppController
     {
-        public $helpers = array('Html','Form','Session');
+        public $helpers = array('Html','Form','Session','xls','Number');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog','InstrumentType');
@@ -795,6 +795,217 @@
             }
             
         }
+        
+        function pdf($id = NULL) 
+        {
+        
+            $this->autoRender = false;
+            $salesorder_data = $this->Salesorder->find('first', array('conditions' => array('Salesorder.id' => $id),'recursive'=>3));
+            //pr($salesorder_data);exit;
+            $file_type = 'pdf';
+            $filename = $salesorder_data['Salesorder']['salesorderno'];
+            $html = '<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                    <meta charset="utf-8" />
+                    <title>'.$salesorder_data['Salesorder']['salesorderno'].'</title>
+                    <style>
+                    body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+                    * { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+                    .group:before, .group:after { content: ""; display: table; }
+                    .group:after { clear: both; }
+                    .group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+                    .pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 700px; }
+                    .header_id { padding:10px 0; width:100%; display:block; }
+                    .logo { margin-top:10px;display:inline-block;width:50%; }
+                    .address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+                    .address_details p { float:left; width:100%; }
+                    .address_details a { color: #1bbae1; float:left; width:100%; }
+                    .cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+                    .address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+                    .address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+                    .address_box p { display:inline-block;}
+                    .invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+                    .invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+                    .invoice_add h5 { display:inline-block; width:30%; }
+                    .invoice_add span { margin-right:15px;display:inline-block; }
+                    .invoice_add abbr { font-style: italic;display:inline-block; }
+                    .services_details { margin-top:20px; width:100%; }
+                    .services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+                    .services_details h4 abbr { width: 22%; display:inline-block;}
+                    .services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+                    .invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+                    .invoice_table table { width:100%; border:1px  solid #ccc !important; border-bottom:none !important; border-left:none !important; }
+                    .invoice_table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc !important; border-top:none !important; border-right:none !important; }
+                    .invoice_table table thead { background-color: #f1f1f1; }
+                    .instrument h4 { font-weight:normal; }
+                    .instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+                    .address_table{width:50%;display:inline-block;}
+                        .address_table table{width:100%;border:1px solid #ccc;}
+                      .address_table td { padding: 10px; text-align: left !important; text-transform:none; border:none !important; }
+                    </style>
+                    </head>';
+            //foreach ($salesorder_data as $salesorder_data_list):
+                $customername = $salesorder_data['Customer']['customername'];
+                $billing_address = $salesorder_data['Salesorder']['address'];
+                $postalcode = $salesorder_data['Customer']['postalcode'];
+                $contactperson = $salesorder_data['Quotation']['Customer']['Contactpersoninfo'][0]['name'];
+                $phone = $salesorder_data['Salesorder']['phone'];
+                $fax = $salesorder_data['Salesorder']['fax'];
+                $email = $salesorder_data['Salesorder']['email'];
+                //$our_ref_no = $salesorder_data_list['Quotation']['ref_no'];
+                $ref_no = $salesorder_data['Salesorder']['ref_no'];
+                $reg_date = $salesorder_data['Salesorder']['reg_date'];
+                $payment_term = $salesorder_data['Quotation']['Customer']['Paymentterm']['paymentterm'] . ' ' . $salesorder_data['Quotation']['Customer']['Paymentterm']['paymenttype'];
+                $salesorderno = $salesorder_data['Salesorder']['salesorderno'];
+            
+                foreach($salesorder_data['Description'] as $device):
+                    $device_name[] = $device;
+                endforeach;
+                
+            //endforeach;
+            $html .= '<body>
+                <div class="pdf_container group"> 
+                     <!-- header part-->
+                     <div class="header_id">
+                          <div class="f_left logo"><img src="img/logoBs.png" width="273" height="50" alt="" /></div>
+                          <div class="address_details f_right">
+                               <p>41 SENOKO DRIVE</p>
+                               <p>SINGAPORE</p>
+                               <p>758249</p>
+                               <p> 6458 4411</p>
+                               <a href="#" title="">invoice@bestandards.com</a>
+                               <div class="cmpny_reg">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
+                          </div>
+                     </div>
+                            <div class="address_table" style="margin-bottom:20px;">
+                          <table style="height:250px;">
+                          <tbody>
+                          <tr><td>'.$customername.'<br>'.$billing_address.'<br>'.$postalcode.'</td></tr>
+                          <tr><td style="text-transform:uppercase;font-weight:bold;">ATTN:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$contactperson.'</span></td></tr>
+                          <tr><td style="text-transform:uppercase;font-weight:bold;">TEL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$phone.'</span></td></tr>
+                          <tr><td style="text-transform:uppercase;font-weight:bold;">FAX:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$fax.'</span></td></tr>
+                          <tr><td style="text-transform:uppercase;font-weight:bold;">EMAIL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$email.'</span></td></tr>
+                </tbody>
+                          </table>
+
+                </div>
+                        <div class="address_table" style="margin-bottom:20px;">
+                          <table style="height:250px;">
+                          <tbody>
+                          <tr><td style="text-align:center;font-weight:bold;font-size:20px;">'.$salesorderno.'</td></tr>
+                         <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PO NO:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$ref_no.'</span></td></tr>
+                          
+                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">DATE:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$reg_date.'</span></td></tr>
+                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PAYMENT TERM:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$payment_term.'</span></td></tr>
+                </tbody>
+                          </table>
+
+                </div>
+                     <div class="services_details f_left">
+                          <p>Being provided calibration service of the following(s) :</p>
+                          <h4 class="f_left"><abbr>SALESORDER NO</abbr><span> '.$salesorderno.'</span></h4>
+                     </div>
+                     <div class="invoice_table f_left">
+                          <table cellpadding="0" cellspacing="0">
+                               <thead>
+                                    <tr>
+                                         <th>Instrument</th>
+                                         <th>Brand</th>
+                                         <th>Model</th>
+                                         <th>Serial No</th>
+                                         <th>Quantity</th>
+                                         <th>Unit Price $(SGD)</th>
+                                         <th>Total Price $(SGD)</th>
+                                    </tr>
+                               </thead>
+                               <tbody>';
+                $subtotal = 0;
+                foreach($device_name as $device):
+                    $html .= '
+                    <tr>
+                        <td class="instrument"><h4>'.$device['Instrument']['name'].'</h4>
+                            <span>Faulty</span> <span>'.$device['Range']['range_name'].'</span></td>
+                        <td>'.$device['Brand']['brandname'].'</td>
+                        <td>'.$device['model_no'].'</td>
+                        <td>53254324</td>
+                        <td>1</td>
+                        <td> $'.$device['sales_unitprice'].'</td>
+                        <td> $'.$device['sales_total'].'</td>
+                    </tr>';
+                $subtotal = $subtotal + $device['sales_total']; 
+                endforeach;
+                
+                $gst = $subtotal * 0.07;
+                $total_due = $gst + $subtotal;
+                App::uses('CakeNumber', 'Utility');$currency = 'USD';
+                $total_due = CakeNumber::currency($total_due, $currency);
+                $gst = CakeNumber::currency($gst, $currency);
+                $subtotal = CakeNumber::currency($subtotal, $currency);
+                $html .= '<tr>
+                         <td colspan="6">SUBTOTAL</td>
+                         <td>'.$subtotal.'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="6">GST ( 7.00% )</td>
+                         <td>'.$gst.'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="6"><h4>TOTAL DUE</h4></td>
+                         <td><h4>'.$total_due.'</h4></td>
+                    </tr>
+               </tbody>
+          </table>
+     </div>
+</div>
+</body>
+</html>';
+                //pr($html);exit;
+        $this->export_report_all_format($file_type, $filename, $html);
+    }
+    function export_report_all_format($file_type, $filename, $html)
+    {    
+        
+        if($file_type == 'pdf')
+        {
+    
+            App::import('Vendor', 'dompdf', array('file' => 'dompdf' . DS . 'dompdf_config.inc.php'));
+            $this->dompdf = new DOMPDF();        
+            $papersize = "a4";
+            $orientation = 'portrait';        
+            $this->dompdf->load_html($html);
+            $this->dompdf->set_paper($papersize, $orientation);        
+            $this->dompdf->render();
+            $this->dompdf->stream("Saleorder-".$filename.".pdf");
+            echo $this->dompdf->output();
+           // $output = $this->dompdf->output();
+            //file_put_contents($filename.'.pdf', $output);
+            die();
+            
+        
+        }    
+        else if($file_type == 'xls')
+        {    
+            $file = $filename.".xls";
+            header('Content-Type: text/html');
+            header("Content-type: application/x-msexcel"); //tried adding  charset='utf-8' into header
+            header("Content-Disposition: attachment; filename=$file");
+            echo $html;
+            
+        }
+        else if($file_type == 'doc')
+        {                
+            $file = $filename.".doc";
+            header("Content-type: application/vnd.ms-word");
+            header("Content-Disposition: attachment;Filename=$file");
+            echo $html;
+            
+        }
+
+        
+    }
+        
+        
 }
 
 ?>

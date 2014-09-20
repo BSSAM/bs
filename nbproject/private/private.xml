@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/wamp/www/bs/app/View/Instruments/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Quotations/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Instruments/add.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/CustomersController.php</file>
             <file>file:/D:/wamp/www/bs/app/Controller/ProformasController.php</file>

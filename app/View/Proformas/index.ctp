@@ -56,8 +56,8 @@
                                                 
                                             </div>
                                             <?php echo $this->Form->postLink('PDF',array('action'=>'pdf',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
-                                            <?php echo $this->Form->postLink('XLS',array('action'=>'xls',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
-                                            <?php echo $this->Form->postLink('WORD',array('action'=>'word',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
+                                            <?php //echo $this->Form->postLink('XLS',array('action'=>'xls',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
+                                            <?php //echo $this->Form->postLink('WORD',array('action'=>'word',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Download','class'=>'btn btn-xs btn-danger label','escape'=>false)); ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

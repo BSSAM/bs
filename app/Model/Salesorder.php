@@ -67,6 +67,13 @@ class Salesorder extends AppModel
             'fields' => '',
             'order' => ''
         ),
+        'Instrumentforgroup' => array(
+            'className' => 'Instrumentforgroup',
+            'foreignKey' => 'instrument_type_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
        
     );
 }

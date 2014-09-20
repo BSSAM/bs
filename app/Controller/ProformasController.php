@@ -314,6 +314,7 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
             $our_ref_no = $delivery_data_list['Salesorder']['our_ref_no'];
             $ref_no = $delivery_data_list['Salesorder']['ref_no'];
             $reg_date = $delivery_data_list['Proforma']['reg_date'];
+            $contact = $delivery_data_list['Quotation']['Customer']['Contactpersoninfo'][0]['name'];
             $payment_term = $delivery_data_list['Customer']['Paymentterm']['paymentterm'] . ' ' . $delivery_data_list['Customer']['Paymentterm']['paymenttype'];
             $salesorderno = $delivery_data_list['Proforma']['salesorderno'];
             
@@ -330,7 +331,7 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
 <div class="pdf_container group"> 
      <!-- header part-->
      <div class="header_id">
-          <div class="f_left logo"><img src="logo_1.png" width="273" height="50" alt="" /></div>
+          <div class="f_left logo"><img src="img/logoBs.png" width="273" height="50" alt="" /></div>
           <div class="address_details f_right">
                <p>41 SENOKO DRIVE</p>
                <p>SINGAPORE</p>
@@ -347,7 +348,7 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
           <div class="invoice_address_blog">
                <div class="invoice_add">
                     <h5>ATTN </h5>
-                    <span>:</span><abbr>Mr Thai Tian Loy</abbr></div>
+                    <span>:</span><abbr>'.$contact.'</abbr></div>
                <div class="invoice_add">
                     <h5>TEL </h5>
                     <span>:</span><abbr> '.$phone.' </abbr></div>
@@ -506,6 +507,7 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
             $our_ref_no = $delivery_data_list['Salesorder']['our_ref_no'];
             $ref_no = $delivery_data_list['Salesorder']['ref_no'];
             $reg_date = $delivery_data_list['Proforma']['reg_date'];
+            $proformano = $delivery_data_list['Proforma']['id'];
             $payment_term = $delivery_data_list['Customer']['Paymentterm']['paymentterm'] . ' ' . $delivery_data_list['Customer']['Paymentterm']['paymenttype'];
             $salesorderno = $delivery_data_list['Proforma']['salesorderno'];
             
@@ -522,7 +524,7 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
 <div class="pdf_container group"> 
      <!-- header part-->
      <div class="header_id">
-          <div class="f_left logo"><img src="logo_1.png" width="273" height="50" alt="" /></div>
+          <div class="f_left logo"><img src="img/logoBs.png" width="273" height="50" alt="" /></div>
           <div class="address_details f_right">
                <p>41 SENOKO DRIVE</p>
                <p>SINGAPORE</p>
@@ -532,33 +534,42 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
                <div class="cmpny_reg">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
           </div>
      </div>
-            <div class="address_table" style="margin-bottom:20px;">
-          <table style="height:250px;">
-          <tbody>
-          <tr><td>Rolls Royce Company
-          <br>
-           11 Senoko Avenue <br>
-          Singapore 758301</td></tr>
-          <tr><td style="text-transform:uppercase;font-weight:bold;">ATTN:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">Mr Thai Tian Loy</span></td></tr>
-          <tr><td style="text-transform:uppercase;font-weight:bold;">TEL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">67581211/-/-</span></td></tr>
-          <tr><td style="text-transform:uppercase;font-weight:bold;">FAX:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">66431214</span></td></tr>
-          <tr><td style="text-transform:uppercase;font-weight:bold;">EMAIL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;"> tianloy@teesin.com.sg</span></td></tr>
-</tbody>
-          </table>
-          
-</div>
-        <div class="address_table" style="margin-bottom:20px;">
-          <table style="height:250px;">
-          <tbody>
-          <tr><td style="text-align:center;font-weight:bold;font-size:20px;">BIN-14-000003</td></tr>
-         <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">OUR REF NO:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">BQS-14-000011</span></td></tr>
-          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">YOUR REF NO:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">po123321321</span></td></tr>
-          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">DATE:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">12-Jun-2014</span></td></tr>
-          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PAYMENT TERMS:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;"> 30 Days</span></td></tr>
-</tbody>
-          </table>
-          
-</div>
+            <div class="address_box">
+          <p> '.$customername.' </p>
+          <p> '.$billing_address.' </p>
+          <p> Singapore 758301 </p>
+          <div class="invoice_address_blog">
+               <div class="invoice_add">
+                    <h5>ATTN </h5>
+                    <span>:</span><abbr>'.$contact.'</abbr></div>
+               <div class="invoice_add">
+                    <h5>TEL </h5>
+                    <span>:</span><abbr> '.$phone.' </abbr></div>
+               <div class="invoice_add">
+                    <h5>FAX </h5>
+                    <span>:</span><abbr>'.$fax.'</abbr></div>
+               <div class="invoice_add">
+                    <h5>EMAIL </h5>
+                    <span>:</span><abbr>'.$email.'</abbr></div>
+          </div>
+     </div>
+     <div class="address_box">
+          <h2 class=""> '.$id.' </h2>
+          <div class="invoice_address_blog f_left">
+               <div class="invoice_add f_left">
+                    <h5> TRACK ID </h5>
+                    <span>:</span><abbr>'.$our_ref_no.'</abbr></div>
+               <div class="invoice_add f_left">
+                    <h5>PURCHASE ORDER NUMBER </h5>
+                    <span>:</span><abbr>'.$ref_no.'</abbr></div>
+               <div class="invoice_add f_left">
+                    <h5>DATE </h5>
+                    <span>:</span><abbr>'.$reg_date.'</abbr></div>
+               <div class="invoice_add f_left">
+                    <h5> PAYMENT TERMS </h5>
+                    <span>:</span><abbr>'.$payment_term.'</abbr></div>
+          </div>
+     </div>
      <div class="services_details f_left">
           <p>Being provided calibration service of the following(s) :</p>
           <h4 class="f_left"><abbr>SALES ORDER NO</abbr><span> '.$salesorderno.'</span></h4>
@@ -682,11 +693,11 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
-            $data1 = $this->Proforma->find('all',array('conditions'=>array('Proforma.salesorderno LIKE'=>'%'.$sales_id.'%','Proforma.is_approved'=>'1')));
+           // $data1 = $this->Proforma->find('all',array('conditions'=>array('Proforma.salesorderno LIKE'=>'%'.$sales_id.'%','Proforma.is_approved'=>'1')));
             $data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.salesorderno LIKE'=>'%'.$sales_id.'%','Salesorder.is_approved'=>'1')));
             $c = count($data);
-            $d = count($data1);
-            if(!empty($c)&&!empty($d))
+            //$d = count($data1);&&!empty($d)
+            if(!empty($c))
             {
                 for($i = 0; $i<$c;$i++)
                 {    
@@ -704,14 +715,14 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
                 echo "</div>";
             }
         }
-        
+        //////// delivery_order.js
         public function get_sales_details()
         {
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sales_id'];
             $this->autoRender = false;
             $dmt = array('BPI'=>array('id' => $this->random('proforma')));
-            $sales_data = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.salesorderno'=>$sales_id,'Salesorder.is_approved'=>'1'),'recursive'=>'2'));
+            $sales_data = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.salesorderno'=>$sales_id,'Salesorder.is_approved'=>'1'),'recursive'=>'3'));
             if(!empty($sales_data))
             {
                 $tot = array_merge($sales_data,$dmt);

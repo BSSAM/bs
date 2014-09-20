@@ -48,11 +48,11 @@
                         
                         <div class="block-title">
                             <h2>List Of Sales Order </h2> 
-                            
-                            
+                            <?php if($userrole_cus['add']==1){ ?>                            
                             <div style="float:right;">
                                     <h2><?php echo $this->Html->link('Add Salesorders', array('controller' => 'Salesorders', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Sales Order')); ?></h2>
                             </div>
+                            <?php } ?>
                         </div>
                         <div class="block full row col-sm-12 padding_t_b10">
 <!--                             <label class="col-md-2 control-label">Existing Quotation</label>-->
@@ -119,9 +119,16 @@
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
+                                                <?php if($userrole_cus['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php } ?>
                                             </div>
+                                            <?php if($userrole_cus['delete']==1){ ?>
+                                            <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                            <?php } ?>
+                                            <?php if($userrole_cus['view']==1 && $salesorder_list['Salesorder']['is_approved'] == 1){ ?>
+                                            <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
