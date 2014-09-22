@@ -5,7 +5,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog');
+                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title');
         public function index()
         {
         /*******************************************************
@@ -58,7 +58,12 @@
             
             $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             $this->set(compact('service','additional','instrument_types','country','priority','payment'));
-           
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             if($this->request->is('post'))
             {
                 $date = date('m/d/Y h:i:s a', time());

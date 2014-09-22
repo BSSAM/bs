@@ -25,6 +25,23 @@
         return false;    
     });});
 
+$('#val_title').multiselect({
+    onChange: function(option, checked) {
+        alert("sd");
+        var selected = 0;
+        $('option', $('#val_title')).each(function() {
+            if ($(this).prop('selected')) {
+                selected++;
+            }
+        });
+ 
+        if (selected >= 1) {
+            $('#val_title').siblings('div').children('ul').dropdown('toggle');
+        }
+    }
+});
+
+
 </script>
 <div class="form-group">
      <label class="col-md-2 control-label" for="val_description">Instrument</label>
@@ -125,8 +142,8 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_title">Titles</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('title', array('id'=>'val_title','class'=>'form-control','label'=>false,'name'=>'title','type'=>'select',
-            'options'=>array('1'=>'title'))); ?>
+        <?php echo $this->Form->input('title', array('id'=>'val_title','class'=>'form-control select-chosen required','label'=>false,'name'=>'title',
+            'options'=>$titles,'placeholder'=>'Enter the Title','multiple')); ?>
     </div>
 </div>
 <div class="form-group form-actions">

@@ -660,52 +660,6 @@
                             </div>
                             
                             
-                            <!---------------------------------------------------------------------------------------->
-                            <!-------------------------------INVOICE----------------------------------------------->
-                            <!---------------------------------------------------------------------------------------->
-<!--                            <div class="tab-pane" id="invoice">
-                                <div class="table-responsive">
-                                <table id="example-datatable" class="table table-borderless table-striped table-vcenter">
-                                     <tbody>
-                                        <tr>
-                                            <th>Flag</th>
-                                            <th>Name(Details)</th>
-                                            <th>Approval</th>
-                                            <th>Created</th>
-                                        </tr>
-                                         <?PHP //if (!empty($log_activity_salesorder)): ?>
-                                        <?php //foreach ($log_activity_salesorder as $log_activity_salesorder_list) :?>
-                                         <?PHP //if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'): ?>
-                                        
-                                        <tr>
-                                            <td class="text-center" style="width: 80px;"><?php //echo $this->Html->image('letters/letters-iv.jpg', array('alt' => 'Invoice','class'=>'')); ?></td>
-                                            <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP //echo $log_activity_salesorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_salesorder_list['Logactivity']['logid'] ?></em></small></h4>
-                                            </td>
-                                            <td class="text-center ">
-                                           <?PHP //if($log_activity_salesorder_list['Logactivity']['logname'] == 'Salesorder'){ ?>
-                                            <?PHP //echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_salesorder_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
-                                           <?php //}?>
-                                           
-                                            
-                                            </td>
-                                            <td class="">by <?PHP //echo $log_activity_salesorder_list['User']['username'] ?><br><small><?PHP echo $log_activity_salesorder_list['Logactivity']['created'] ?></small></td>
-                                        </tr>
-                                        <?php //endif; ?>
-                                       <?php //endforeach; ?>
-                                        <?php //else: ?>
-                                        <tr>
-                                            <td class="text-center">
-                                                <i class="gi gi-keys"></i> Oops... No Invoice Approval Available
-                                            </td>
-                                        </tr>
-                                        <?php //endif; ?>
-                                        
-
-                                    </tbody>
-                                </table>
-                                </div>
-                            </div>-->
                             </div>
                            
                             </div>

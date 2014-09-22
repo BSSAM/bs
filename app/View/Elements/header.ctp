@@ -199,7 +199,7 @@
                                         <?php  $a=($control == 'Ranges')?'active':''; ?>
                                         <?PHP echo $this->Html->link('Range',array('controller'=>'Ranges','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
-                                    <?php if($user_role['cus_title']['view'] == 1){ ?>
+                                    <?php if($user_role['ins_title']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Titles')?'active':''; ?>
                                         <?php echo $this->Html->link('Title',array('controller'=>'Titles','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
@@ -211,30 +211,14 @@
                                     </li><?php } ?>
                                 </ul>
                             </li>
-<!--                            <li>
-                                <a href="" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-settings sidebar-nav-icon"></i>Settings</a>
-                                 <ul>
-                                    <?php //if($user_role['set_candd']['view'] == 1){ ?>
-                                    <li>
-                                          <a href="#"><?php //echo 'C & D Settings'; ?></a>
-                                    </li><?php //} ?>
-                                    <?php //if($user_role['set_onsiteemail']['view'] == 1){ ?>
-                                    <li>
-                                          <a href="#"><?php// echo 'Onsite Email Settings'; ?></a>
-                                    </li><?php// } ?>
-                                    <?php //if($user_role['set_recallservice']['view'] == 1){ ?>
-                                    <li>
-                                         <a href="#"><?php //echo 'Recall Service Settings'; ?></a>
-                                    </li><?php// } ?>
-                                </ul>
-                            </li>-->
+
                             
                              <li>
                                 <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval'||$control=='PurchaseRequisitions'||$control=='Reqpurchaseorders')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
                                  <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval'||$control=='PurchaseRequisitions'||$control=='Reqpurchaseorders')?'style=display:block':'';?>>
-                                    <?php if($user_role['job_quotation']['view'] == 1){ ?>
+                                    <?php //if($user_role['job_quotation']['view'] == 1){ ?>
                                     <li>
-                                        <?php  if($user_role['app_clientpo']['view'] == 1) ?>
+                                        <?php  if($user_role['app_clientpo']['view'] == 1) {?>
                                          <?php  $a=($control == 'Clientpos')?'active':''; ?>
                                          <?php echo $this->Html->link('Client Po List',array('controller'=>'Clientpos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
