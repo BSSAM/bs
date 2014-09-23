@@ -353,7 +353,7 @@
             $customer_id =  $this->request->data['customer_id'];
             //$instrument =  'Test';
             //$customer_id =  'CUS-01-10000121';,'group'=>array('Instrument.id')
-            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')),'group'=>'Instrument.id')));
+            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
 //            foreach($instrument_details as $loop):
 //            echo json_encode($loop['Instrument']);
 //            endforeach;
@@ -402,6 +402,11 @@
         {
             $this->autoRender = false;
             $this->loadModel('Device');
+            
+            //$this->request->data['Device'] = json_decode(file_get_contents("php://input"));
+            
+            //pr($this->request->data['Device']);
+            //exit;
             $this->request->data['Device']['quotationno']   =   $this->request->data['quotationno'];
             $this->request->data['Device']['customer_id']   =   $this->request->data['customer_id'];
             $this->request->data['Device']['instrument_id'] =   $this->request->data['instrument_id'];
@@ -419,10 +424,13 @@
             $this->request->data['Device']['total']         =   $this->request->data['instrument_total'];
             $this->request->data['Device']['title']         =   $this->request->data['instrument_title'];
             $this->request->data['Device']['status']        =   0;
+            $data = json_decode(file_get_contents("php://input"));
+
             if($this->Device->save($this->request->data))
             {
                 $device_id=$this->Device->getLastInsertID();
                 echo $device_id;
+                
             }
      
         }

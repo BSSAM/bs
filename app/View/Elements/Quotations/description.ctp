@@ -41,9 +41,97 @@ $('#val_title').multiselect({
     }
 });
 
+    function Quotationcontroller($scope, $timeout, $http)
+    {
+        $scope.show_serial = false;
+        $scope.show_potno = false;
+        $scope.instruments = [];
+        //
+        
+        $scope.title_change = function()
+        {
+            var customer_id =   $('#QuotationCustomerId').val();
+            var quotation_id =   $('#QuotationQuotationId').val();
+            var instrument_id   =   $('#QuotationInstrumentId').val();
+            var instrument_quantity =   $('#val_quantity').val();
+            var instrument_name=$('#val_description').val();
+            var instrument_modelno=$('#val_model_no').val();
+            var instrument_brand=$('#val_brand').val();
+            var instrument_range=$('#val_range').val();
+            var instrument_calllocation=$('#val_call_location').val();
+            var instrument_calltype=$('#val_call_type').val();
+            var instrument_validity=$('#val_validity').val();
+            var instrument_unitprice=$('#val_unit_price').val();
+            var instrument_discount=$('#val_discount').val();
+            var instrument_cal=instrument_unitprice*instrument_discount/100;
+            var instrument_total= instrument_unitprice - instrument_cal;
 
+            var instrument_department=$('#val_department_id').val();
+            var instrument_account=$('#val_account_service').val();
+            var instrument_title=$('#val_title').val();
+             
+             //{"instrument_validity":instrument_validity,"customer_id":customer_id,"instrument_id":instrument_id,"instrument_quantity":instrument_quantity,"instrument_brand":instrument_brand,"instrument_modelno":instrument_modelno,"instrument_range":instrument_range,"instrument_calllocation":instrument_calllocation,"instrument_calltype":instrument_calltype,"instrument_unitprice":instrument_unitprice,"instrument_discount":instrument_discount,"instrument_department":instrument_department,"instrument_account":instrument_account,"instrument_title":instrument_title,"instrument_total":instrument_total,"quotationno":quotation_id}
+             
+            for ( var i = 1; i <= instrument_quantity; i++ ){
+                $http.post(path_url+'Quotations/add_instrument/', "instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total+"&quotationno="+quotation_id).success(function(data){
+                    $new_data = {serial:data,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,validity:instrument_validity,price:instrument_unitprice,service:instrument_account,total:instrument_total};
+                    $scope.instruments.push($new_data);
+                });
+                //$new_data = {serial:i,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,validity:instrument_validity,price:instrument_unitprice,service:instrument_account,total:instrument_total};
+                
+            }
+            //console.log($scope.titles);
+            if($scope.titles.indexOf("0") != "-1")
+                $scope.show_serial = true;
+            if($scope.titles.indexOf("1") != "-1")
+                $scope.show_potno = true;
+
+            $scope.pagination();
+        }
+       $scope.no_of_page = [];
+       $scope.current_page = 1;
+       $scope.start = 0;
+       $scope.end = 0;
+       $scope.pagination = function(){
+           $scope.total = $scope.instruments.length;
+           $scope.perpage = 5;
+
+           $scope.length = Math.ceil($scope.total/$scope.perpage);
+
+           $scope.no_of_page = [];
+
+           for(i=1;i<=$scope.length;i++)
+           $scope.no_of_page.push(i);
+
+           $scope.start = ($scope.current_page - 1) * $scope.perpage;
+           $scope.end = ($scope.current_page * $scope.perpage) - 1;
+        }
+
+        $scope.set_page = function(pg)
+        {
+            $scope.current_page = pg;
+            $scope.pagination();
+        }
+
+       $scope.filter_and_set = function(total)
+       {
+           $scope.current_page = 1;
+           $scope.total = total;
+            $scope.perpage = 5;
+
+           $scope.length = Math.ceil($scope.total/$scope.perpage);
+
+           $scope.no_of_page = [];
+
+            for(i=1;i<=$scope.length;i++)
+           $scope.no_of_page.push(i);
+
+           $scope.start = ($scope.current_page - 1) * $scope.perpage;
+           $scope.end = ($scope.current_page * $scope.perpage) - 1;
+       }
+    }
 </script>
-<div class="form-group">
+<div class="form-group" >
      <label class="col-md-2 control-label" for="val_description">Instrument</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
@@ -142,18 +230,21 @@ $('#val_title').multiselect({
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_title">Titles</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('title', array('id'=>'val_title','class'=>'form-control select-chosen required','label'=>false,'name'=>'title',
+        <?php echo $this->Form->input('title', array('id'=>'val_title', 'ng-model' => 'titles', 'class'=>'form-control','label'=>false,'name'=>'title',
             'options'=>$titles,'placeholder'=>'Enter the Title','multiple')); ?>
     </div>
 </div>
 <div class="form-group form-actions">
     <div class="col-md-9 col-md-offset-10 update_device">
-        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
     </div>
 </div>
+<ul ng-repeat="pg in no_of_page"><li ng-click="set_page(pg);">{{pg}}</li></ul>
+<input type="text" ng-model="sss" ng-change="filter_and_set((instruments | filter:sss).length);">
+
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-<table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
+<table class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -165,11 +256,28 @@ $('#val_title').multiselect({
             <th class="text-center">Unit Price</th>
             <th class="text-center">Account Service</th>
             <th class="text-center">Total</th>
+            <th class="text-center" ng-show="show_serial">Serialno</th>
+            <th class="text-center" ng-show="show_potno">potno</th>
             <th class="text-center">Action</th>
         </tr>
     </thead>
     <tbody class="Instrument_info"> 
+        <tr ng-repeat="res in instruments | filter:sss" ng-show="start<=$index && $index <= end">
+            <td>{{$index + 1}}</td>
+            <td>{{res.name}}</td>
+            <td>{{res.model}}</td>
+            <td>{{res.location}}</td>
+            <td>{{res.type}}</td>
+            <td>{{res.validity}}</td>
+            <td>{{res.price}}</td>
+            <td>{{res.service}}</td>
+            <td>{{res.total}}</td>
+            <td ng-show="show_serial"></td>
+            <td ng-show="show_potno"></td>
+            <td></td>
+        </tr>
     </tbody>
 </table>
+   
 </div>
 </div>

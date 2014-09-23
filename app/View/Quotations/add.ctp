@@ -58,7 +58,7 @@
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
                                             
-                                            <div class="tab-content">
+                                            <div class="tab-content" ng-app ng-controller="Quotationcontroller">
                                                 <div class="tab-pane active" id="tab1">
                                                     <?PHP echo $this->element('Quotations/quotation_info'); ?>
                                                 </div>

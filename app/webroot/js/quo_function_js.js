@@ -46,7 +46,7 @@ $(document).ready(function(){
     });
     
     /*******************************Quotation Instrument Details Add Script*******************************************/
-    $(document).on('click','.description_add',function(){
+    $(document).on('click','.description_add111',function(){
        
         if($('#val_customer').val()!='')
         {
@@ -141,20 +141,22 @@ $(document).ready(function(){
             url: path+'Quotations/add_instrument/',
             success: function(data)
             {
-               $('.Instrument_info').append('<tr class="instrument_remove_'+data+'">\n\\n\
-                                    <td class="text-center">'+data+'</td>\n\
-                                    <td class="text-center">'+instrument_name+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_modelno+'</td>\n\
-                                    <td class="text-center">'+instrument_calllocation+'</td>\n\
-                                    <td class="text-center">'+instrument_calltype+'</td>\n\
-                                    <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_account+'</td>\n\
-                                    <td class="text-center">'+instrument_total+'</td>\n\\n\
-                                    <td class="text-center"><div class="btn-group">\n\
-                                    <a data-edit="'+data+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
-                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
+//               $('.Instrument_info').append('<tr class="instrument_remove_'+data+'">\n\\n\
+//                                    <td class="text-center">'+data+'</td>\n\
+//                                    <td class="text-center">'+instrument_name+'</td>\n\\n\
+//                                    <td class="text-center">'+instrument_modelno+'</td>\n\
+//                                    <td class="text-center">'+instrument_calllocation+'</td>\n\
+//                                    <td class="text-center">'+instrument_calltype+'</td>\n\
+//                                    <td class="text-center">'+instrument_validity+'</td>\n\
+//                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
+//                                    <td class="text-center">'+instrument_account+'</td>\n\
+//                                    <td class="text-center">'+instrument_total+'</td>\n\\n\\n\
+//                                    <td class="text-center" ng-show="show_serial">{{show_serial}}</td>\n\\n\\n\
+//                                    <td class="text-center" ng-show="show_potno">{{show_potno}}</td>\n\\n\
+//                                    <td class="text-center"><div class="btn-group">\n\
+//                                    <a data-edit="'+data+'"class="btn btn-xs btn-default instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
+//                                    <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger instrument_delete">\n\
+//                                    <i class="fa fa-times"></i></a></div></td></tr>');
                 $(".dataTables_empty").hide();
                 
                 

@@ -56,12 +56,12 @@
                 echo $this->Html->css('file_upload_css/jquery.fileupload');
 		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
 		echo $this->Html->script('pages/uiProgress');
-                echo $this->Html->script('jquery.min');
+                echo $this->Html->script(array('jquery.min'));
                 echo $this->Html->script('jedit/jquery.jeditable');
                 echo $this->Html->script(array('sal_desc_func','functions','labprocess_js','onsite_schedule',
                     'delivery_order','pur_function_js','quo_function_js','cus_function','candds_function',
                     'invoice_function_js','subcontract_function_js','cus_tag_function_js','clientpos_function_js','customer_contactperson_js','Purchaseorder_requititon'));
-                //echo $this->Html->script('angular/angular.min');
+                echo $this->Html->script('angular/angular.min');
                 ?>
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
                 <?php 
