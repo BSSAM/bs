@@ -27,7 +27,7 @@
                                     <div class="form-group">
                                         <label class="col-md-2 control-label" for="brandname">Brand Name</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('brandname', array('id'=>'brandname','class'=>'form-control','placeholder'=>'Enter the Department Name','label'=>false,'name'=>'brandname')); ?>
+                                            <?php echo $this->Form->input('brandname', array('id'=>'brandname','class'=>'form-control','placeholder'=>'Enter the Brand Name','label'=>false,'name'=>'brandname')); ?>
                                         </div>
                                         <label class="col-md-2 control-label" for="branddescription">Brand Description</label>
                                         <div class="col-md-4">

@@ -3,26 +3,41 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/bs/app/View/Instruments/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/sal_desc_func.js</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/delivery_order.js</file>
             <file>file:/D:/wamp/www/bs/app/View/Quotations/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Users/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Deliveryorders/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Proformas/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Quotation.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Instruments/add.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/CustomersController.php</file>
             <file>file:/D:/wamp/www/bs/app/Controller/ProformasController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Model/CustomerInstrument.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Proformas/export.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Salesorder.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Customers/instrument_map.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Instruments/edit.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Ranges/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/QuotationsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Labprocesses/labs.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/quotation_info.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Quotations/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/LabprocessesController.php</file>
             <file>file:/D:/wamp/www/bs/app/webroot/js/quo_function_js.js</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/css/custom.css</file>
             <file>file:/D:/wamp/www/bs/app/View/Proformas/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/webroot/js/cus_function.js</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/description.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Quotations/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instruments/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/CustomersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instruments/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/formsValidation.js</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/DeliveryordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/css/custom.css</file>
+            <file>file:/D:/wamp/www/bs/app/View/Salesorders/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Proformas/deliveryorder_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Layouts/default.ctp</file>
         </group>
     </open-files>
 </project-private>

@@ -317,7 +317,7 @@ class InstrumentforgroupsController extends AppController
             $id =  $this->request->data['id'];
             $this->InstrumentType->updateAll(array('InstrumentType.is_approved'=>1),array('InstrumentType.id'=>$id));
             $user_id = $this->Session->read('sess_userid');
-            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Instruments for Group'));
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logname'=>'Instrument For Group'));
             //$details=$this->Instrumentforgroup->find('first',array('conditions'=>array('Instrumentforgroup.id'=>$id)));
     }
 }

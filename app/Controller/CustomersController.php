@@ -146,7 +146,7 @@ class CustomersController extends AppController
                 /******************/  
                 
                 $this->Session->setFlash(__('Customer has been Added Successfully'));
-                return $this->redirect(array('action'=>'index',));
+                return $this->redirect(array('action'=>'index'));
             }
             $this->Session->setFlash(__('Customer Could Not be Added'));
         }
@@ -891,8 +891,6 @@ class CustomersController extends AppController
                     echo "<br>";
                     echo "</div>";
             }
-            
-        
     }
 
 }

@@ -50,18 +50,18 @@
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','salesorder')));
-            //pr($instrument_types);exit;
+            
             $this->set(compact('service','payment','priority','instrument_types'));
             $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             
             if($this->request->is('post'))
             {
-                //pr($this->request->data['Salesorder']['priority']);exit;
-                $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+               
+                //$con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         //$instrument_type = $con['InstrumentType']['salesorder'];
                         //pr($instrument_type);exit;
                         //echo $instrument_type; exit;
-                         $this->set('instrument_types',$instrument_types);
+                $this->set('instrument_types',$instrument_types);
                 $customer_id    =   $this->request->data['Salesorder']['customer_id'];
                 $this->request->data['Salesorder']['customername']=$this->request->data['sales_customername'];
                 $this->request->data['Salesorder']['id']=$this->request->data['Salesorder']['salesorderno'];
@@ -105,7 +105,7 @@
                         $this->Description->updateAll(array('Description.quotationno'=>'"'.$quotation_id.'"','Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0));
                     }
                     $sales_document =   $this->SalesDocument->deleteAll(array('SalesDocument.Salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>0));
-                    $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
+                    $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>'"'.$this->request->data['Salesorder']['salesorderno'].'"','SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
                     /******************
                      * Data Log
                     */
@@ -129,7 +129,7 @@
                     $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                     /******************/ 
-                    $this->Session->setFlash(__('Salesorder has been Added Successfully'));
+                    $this->Session->setFlash(__('Salesorder & Quotation has been Added Successfully'));
                     $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
                 }
             }

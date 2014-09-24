@@ -166,8 +166,10 @@ class LabprocessesController extends AppController
             $data_description=  $this->get_solist_calllocation_details($solist,$call_location,$id);
                 
             $this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
+            //pr($data_description);exit;
             //pr()
             $this->set('labs', $data_description);
+            
             if ($this->request->is(array('post', 'put'))) 
             {
                 $checking_array = $this->request->data['Description']['checking'];
@@ -298,8 +300,9 @@ class LabprocessesController extends AppController
         {
             $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.is_approved_lab' => 0)));
             $this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
-            
+            //pr($data_description);exit;
             $this->set('labs', $data_description);
+            
             if ($this->request->is(array('post', 'put'))) 
             {
                 $checking_array = $this->request->data['Description']['checking'];
