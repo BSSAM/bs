@@ -403,41 +403,51 @@
             $this->autoRender = false;
             $this->loadModel('Device');
             
-            //$this->request->data['Device'] = json_decode(file_get_contents("php://input"));
-            
-            //pr($this->request->data['Device']);
+            $this->request->data = json_decode(file_get_contents("php://input"));
+            $data = array();
+            //pr($this->request->data);
             //exit;
-            $this->request->data['Device']['quotationno']   =   $this->request->data['quotationno'];
-            $this->request->data['Device']['customer_id']   =   $this->request->data['customer_id'];
-            $this->request->data['Device']['instrument_id'] =   $this->request->data['instrument_id'];
-            $this->request->data['Device']['brand_id']      =   $this->request->data['instrument_brand'];
-            $this->request->data['Device']['quantity']      =   $this->request->data['instrument_quantity'];
-            $this->request->data['Device']['model_no']      =   $this->request->data['instrument_modelno'];
-            $this->request->data['Device']['range']         =   $this->request->data['instrument_range'];
-            $this->request->data['Device']['call_location'] =   $this->request->data['instrument_calllocation'];
-            $this->request->data['Device']['call_type']     =   $this->request->data['instrument_calltype'];
-            $this->request->data['Device']['validity']      =   $this->request->data['instrument_validity'];
-            $this->request->data['Device']['discount']      =   $this->request->data['instrument_discount'];
-            $this->request->data['Device']['department_id'] =   $this->request->data['instrument_department'];
-            $this->request->data['Device']['unit_price']    =   $this->request->data['instrument_unitprice'];
-            $this->request->data['Device']['account_service']=  $this->request->data['instrument_account'];
-            $this->request->data['Device']['total']         =   $this->request->data['instrument_total'];
-            $this->request->data['Device']['title']         =   $this->request->data['instrument_title'];
-            $this->request->data['Device']['status']        =   0;
-            $data = json_decode(file_get_contents("php://input"));
-
-            if($this->Device->save($this->request->data))
+            
+            $quantity = $this->request->data->instrument_quantity;
+            
+            $instrument_ids = array();
+            
+            for($i=0;$i<$quantity;$i++)
             {
-                $device_id=$this->Device->getLastInsertID();
-                echo $device_id;
-                
+                $data['quotationno']   =   $this->request->data->quotationno;
+                $data['customer_id']   =   $this->request->data->customer_id;
+                $data['instrument_id'] =   $this->request->data->instrument_id;
+                $data['brand_id']      =   $this->request->data->instrument_brand;
+                $data['quantity']      =   $this->request->data->instrument_quantity;
+                $data['model_no']      =   $this->request->data->instrument_modelno;
+                $data['range']         =   $this->request->data->instrument_range;
+                $data['call_location'] =   $this->request->data->instrument_calllocation;
+                $data['call_type']     =   $this->request->data->instrument_calltype;
+                $data['validity']      =   $this->request->data->instrument_validity;
+                $data['discount']      =   $this->request->data->instrument_discount;
+                $data['department_id'] =   $this->request->data->instrument_department;
+                $data['unit_price']    =   $this->request->data->instrument_unitprice;
+                $data['account_service']=  $this->request->data->instrument_account;
+                $data['total']         =   $this->request->data->instrument_total;
+                $data['title']         =   $this->request->data->instrument_title;
+                $data['status']        =   0;
+
+                $this->Device->create();
+                if($this->Device->save($data))
+                {
+                    $instrument_ids[]=$this->Device->getLastInsertID();
+                    
+
+                }   
             }
-     
+            
+            header('Content-Type: application/json');
+            echo json_encode($instrument_ids);
         }
-        public function delete_instrument()
+        public function delete_instrument($device_id)
         {
             $this->autoRender=false;
-            $device_id= $this->request->data['device_id'];
+            //$device_id= $this->request->data['device_id'];
             if($this->Device->updateAll(array('Device.is_deleted'=>1),array('Device.id'=>$device_id)))
             {
                 echo "deleted";

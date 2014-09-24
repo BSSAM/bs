@@ -46,7 +46,13 @@ $('#val_title').multiselect({
         $scope.show_serial = false;
         $scope.show_potno = false;
         $scope.instruments = [];
-        //
+        $scope.mode = 'add';
+        $scope.edit_id = '';
+        $scope.no_of_page = [];
+        $scope.current_page = 1;
+        $scope.start = 0;
+        $scope.end = 0;
+        $scope.edit_index = '';
         
         $scope.title_change = function()
         {
@@ -70,41 +76,147 @@ $('#val_title').multiselect({
             var instrument_account=$('#val_account_service').val();
             var instrument_title=$('#val_title').val();
              
-             //{"instrument_validity":instrument_validity,"customer_id":customer_id,"instrument_id":instrument_id,"instrument_quantity":instrument_quantity,"instrument_brand":instrument_brand,"instrument_modelno":instrument_modelno,"instrument_range":instrument_range,"instrument_calllocation":instrument_calllocation,"instrument_calltype":instrument_calltype,"instrument_unitprice":instrument_unitprice,"instrument_discount":instrument_discount,"instrument_department":instrument_department,"instrument_account":instrument_account,"instrument_title":instrument_title,"instrument_total":instrument_total,"quotationno":quotation_id}
-             
-            for ( var i = 1; i <= instrument_quantity; i++ ){
-                $http.post(path_url+'Quotations/add_instrument/', "instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total+"&quotationno="+quotation_id).success(function(data){
-                    $new_data = {serial:data,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,validity:instrument_validity,price:instrument_unitprice,service:instrument_account,total:instrument_total};
-                    $scope.instruments.push($new_data);
-                });
-                //$new_data = {serial:i,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,validity:instrument_validity,price:instrument_unitprice,service:instrument_account,total:instrument_total};
+            
+                $http.post(path_url+'Quotations/add_instrument/', {instrument_quantity:instrument_quantity,"instrument_validity":instrument_validity,"customer_id":customer_id,"instrument_id":instrument_id,"instrument_quantity":instrument_quantity,"instrument_brand":instrument_brand,"instrument_modelno":instrument_modelno,"instrument_range":instrument_range,"instrument_calllocation":instrument_calllocation,"instrument_calltype":instrument_calltype,"instrument_unitprice":instrument_unitprice,"instrument_discount":instrument_discount,"instrument_department":instrument_department,"instrument_account":instrument_account,"instrument_title":instrument_title,"instrument_total":instrument_total,"quotationno":quotation_id}).success(function(data){
+                    
+        
+                    $.each(data,function(k,v){
+                        $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
+                        $scope.instruments.push($new_data);
+                    });
+                    
+                    $scope.pagination();
+                    
                 
-            }
-            //console.log($scope.titles);
+                });
+                
             if($scope.titles.indexOf("0") != "-1")
                 $scope.show_serial = true;
             if($scope.titles.indexOf("1") != "-1")
                 $scope.show_potno = true;
-
-            $scope.pagination();
+            
+            $('#val_quantity').val(null);
+                $('#val_description').val(null);
+                $('#val_model_no').val(null);
+                $('#val_brand').empty().append('<option value="">Select Brand</option>');
+                $('#val_range').val(null);
+                $('#val_unit_price').val(null);
+                $('#val_discount1').val(null);
+                $('#val_description').val(null);
+            
         }
-       $scope.no_of_page = [];
-       $scope.current_page = 1;
-       $scope.start = 0;
-       $scope.end = 0;
+       
+       
+       $scope.update_instrumnent = function()
+       {
+           var customer_id =   $('#QuotationCustomerId').val();
+            var quotation_id =   $('#QuotationQuotationId').val();
+            var instrument_id   =   $('#QuotationInstrumentId').val();
+            var instrument_quantity =   $('#val_quantity').val();
+            var instrument_name=$('#val_description').val();
+            var instrument_modelno=$('#val_model_no').val();
+            var instrument_brand=$('#val_brand').val();
+            var instrument_range=$('#val_range').val();
+            var instrument_calllocation=$('#val_call_location').val();
+            var instrument_calltype=$('#val_call_type').val();
+            var instrument_validity=$('#val_validity').val();
+            var instrument_unitprice=$('#val_unit_price').val();
+            var instrument_discount=$('#val_discount').val();
+            var instrument_cal=instrument_unitprice*instrument_discount/100;
+            var instrument_total= instrument_unitprice - instrument_cal;
+
+            var instrument_department=$('#val_department_id').val();
+            var instrument_account=$('#val_account_service').val();
+            var instrument_title=$('#val_title').val();
+             
+            
+                $http.post(path_url+'Quotations/add_instrument/', {device_id:$scope.edit_id,instrument_quantity:instrument_quantity,"instrument_validity":instrument_validity,"customer_id":customer_id,"instrument_id":instrument_id,"instrument_quantity":instrument_quantity,"instrument_brand":instrument_brand,"instrument_modelno":instrument_modelno,"instrument_range":instrument_range,"instrument_calllocation":instrument_calllocation,"instrument_calltype":instrument_calltype,"instrument_unitprice":instrument_unitprice,"instrument_discount":instrument_discount,"instrument_department":instrument_department,"instrument_account":instrument_account,"instrument_title":instrument_title,"instrument_total":instrument_total,"quotationno":quotation_id}).success(function(data){
+                    
+        
+                    $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
+                        
+                    $scope.pagination();
+                    
+                
+                });
+                
+            if($scope.titles.indexOf("0") != "-1")
+                $scope.show_serial = true;
+            if($scope.titles.indexOf("1") != "-1")
+                $scope.show_potno = true;
+            
+                $('#val_quantity').val(null).prop("disabled", false);
+                $('#val_description').val(null).prop("disabled", false);
+                $('#val_model_no').val(null);
+                $('#val_brand').empty().append('<option value="">Select Brand</option>');
+                $('#val_range').val(null);
+                $('#val_unit_price').val(null);
+                $('#val_discount1').val(null);
+                $('#val_description').val(null);
+       }
+       
+       $scope.delete_instrument = function(index)
+       {
+           res = $scope.instruments[index];
+        
+            $http.get(path_url+'Quotations/delete_instrument/'+res.serial).success(function(data){
+               instrument = [];
+               
+                $.each($scope.instruments, function(k,v){
+                  if(k!=index) 
+                  instrument.push(v);
+               });
+               
+               $scope.instruments = instrument;
+               
+               $scope.pagination();
+            });
+       }
+       
+       $scope.edit_instrument = function(index)
+       {
+            res = $scope.instruments[index];
+            $scope.mode = 'edit';
+            
+            $scope.edit_id = res.serial;
+            $scope.edit_index = index;
+        
+            $('#QuotationCustomerId').val(res.customer_id);
+            $('#QuotationQuotationId').val(res.quotation_id);
+            $('#QuotationInstrumentId').val(res.instrument_id);
+            $('#val_quantity').val(1).prop("disabled", true);
+            $('#val_description').val(res.name).prop("disabled", true);
+            $('#val_model_no').val(res.model);
+            $('#val_brand').val(res.instrument_brand);
+            $('#val_range').val(res.instrument_range);
+            $('#val_call_location').val(res.location);
+            $('#val_call_type').val(res.type);
+            $('#val_validity').val(res.validity);
+            $('#val_unit_price').val(res.price);
+            $('#val_discount').val(res.instrument_discount);
+            
+
+            $('#val_department_id').val(res.instrument_department);
+            $('#val_account_service').val(res.service);
+            $('#val_title').val(res.instrument_title);
+       }
+       
+       
        $scope.pagination = function(){
            $scope.total = $scope.instruments.length;
            $scope.perpage = 5;
 
-           $scope.length = Math.ceil($scope.total/$scope.perpage);
+           $scope.length1 = Math.ceil($scope.total/$scope.perpage);
 
            $scope.no_of_page = [];
 
-           for(i=1;i<=$scope.length;i++)
+           for(i=1;i<=$scope.length1;i++)
            $scope.no_of_page.push(i);
 
            $scope.start = ($scope.current_page - 1) * $scope.perpage;
            $scope.end = ($scope.current_page * $scope.perpage) - 1;
+           
+           console.log($scope.no_of_page);
         }
 
         $scope.set_page = function(pg)
@@ -119,11 +231,11 @@ $('#val_title').multiselect({
            $scope.total = total;
             $scope.perpage = 5;
 
-           $scope.length = Math.ceil($scope.total/$scope.perpage);
+           $scope.length1 = Math.ceil($scope.total/$scope.perpage);
 
            $scope.no_of_page = [];
 
-            for(i=1;i<=$scope.length;i++)
+            for(i=1;i<=$scope.length1;i++)
            $scope.no_of_page.push(i);
 
            $scope.start = ($scope.current_page - 1) * $scope.perpage;
@@ -234,11 +346,20 @@ $('#val_title').multiselect({
             'options'=>$titles,'placeholder'=>'Enter the Title','multiple')); ?>
     </div>
 </div>
-<div class="form-group form-actions">
+<div class="form-group form-actions" ng-show="mode=='add'">
     <div class="col-md-9 col-md-offset-10 update_device">
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
+        
     </div>
 </div>
+
+<div class="form-group form-actions" ng-show="mode=='edit'">
+    <div class="col-md-9 col-md-offset-10 update_device">
+        
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> update',array('type'=>'button', 'ng-click' => 'update_instrumnent()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
+    </div>
+</div>
+
 <ul ng-repeat="pg in no_of_page"><li ng-click="set_page(pg);">{{pg}}</li></ul>
 <input type="text" ng-model="sss" ng-change="filter_and_set((instruments | filter:sss).length);">
 
@@ -274,7 +395,17 @@ $('#val_title').multiselect({
             <td>{{res.total}}</td>
             <td ng-show="show_serial"></td>
             <td ng-show="show_potno"></td>
-            <td></td>
+            <td>
+                <div class="btn-group">
+                            <a ng-click="edit_instrument($index)" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a ng-click="delete_instrument($index)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger">
+                                <i class="fa fa-times"></i>
+                            </a>
+                </div>
+                
+            </td>
         </tr>
     </tbody>
 </table>
