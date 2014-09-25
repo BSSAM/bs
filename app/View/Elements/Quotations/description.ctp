@@ -384,6 +384,7 @@ $('#val_title').multiselect({
     </thead>
     <tbody class="Instrument_info"> 
         <tr ng-repeat="res in instruments | filter:sss" ng-show="start<=$index && $index <= end">
+            
             <td>{{$index + 1}}</td>
             <td>{{res.name}}</td>
             <td>{{res.model}}</td>
@@ -407,6 +408,7 @@ $('#val_title').multiselect({
                 
             </td>
         </tr>
+        <tr ng-hide="instruments.length"><td>No Instruments found</td></tr>
     </tbody>
 </table>
    
