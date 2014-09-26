@@ -542,10 +542,10 @@ App::uses('Controller', 'Controller');
                     //pr($labprocess);exit;
                     case 'out':
                     if($call_location=='all'):
-                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.processing'=>0,'Description.checking'=>0)));
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
                             return $data_description;
                             else:
-                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.processing'=>1,'Description.checking'=>0,'Description.sales_calllocation'=>$call_location)));
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>$call_location)));
                             return $data_description;
                     endif;
                     //pr($labprocess);exit;

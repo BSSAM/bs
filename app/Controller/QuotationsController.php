@@ -436,8 +436,6 @@
                 if($this->Device->save($data))
                 {
                     $instrument_ids[]=$this->Device->getLastInsertID();
-                    
-
                 }   
             }
             
