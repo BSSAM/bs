@@ -58,14 +58,14 @@
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
                                             
-                                            <div class="tab-content" ng-app ng-controller="Quotationcontroller">
+                                            <div class="tab-content" >
                                                 <div class="tab-pane active" id="tab1">
                                                     <?PHP echo $this->element('Quotations/quotation_info'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Quotations/customer_special_needs'); ?>
                                                 </div>
-                                                <div class="tab-pane" id="tab3">
+                                                <div class="tab-pane" id="tab3" ng-app ng-controller="Quotationcontroller">
                                                     <?PHP echo $this->element('Quotations/description'); ?>
                                                     <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-10">

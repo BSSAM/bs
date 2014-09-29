@@ -18,28 +18,58 @@
             success: function(html)
             {
                 //console.log(html);
+                //return false;
                 $("#search_instrument").html(html).show();
             }
             });
         }
         return false;    
     });});
-
-$('#val_title').multiselect({
-    onChange: function(option, checked) {
-        alert("sd");
-        var selected = 0;
-        $('option', $('#val_title')).each(function() {
-            if ($(this).prop('selected')) {
-                selected++;
+$(function(){
+$("#search_cusinstrument").hide();
+    $("#val_model_no").keyup(function() 
+    { 
+       
+        var model_no = $(this).val(); //alert(model_no);
+        var customer_id = $('#QuotationCustomerId').val();
+        //alert(instrument);
+        var device_id = $('#QuotationInstrumentId').val();
+        //alert(customer_id);
+        var dataString = 'device_id='+ device_id+'&model_no='+model_no+'&customer_id='+customer_id;
+        if(device_id!='')
+        {
+            $.ajax({
+            type: "POST",
+            url: path_url+"Quotations/model_search",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                //console.log(html);
+                //return false;
+                $("#search_cusinstrument").html(html).show();
             }
-        });
- 
-        if (selected >= 1) {
-            $('#val_title').siblings('div').children('ul').dropdown('toggle');
+            });
         }
-    }
-});
+        return false;    
+    });});
+
+
+    $('#val_title').multiselect({
+        onChange: function(option, checked) {
+            //alert("sd");
+            var selected = 0;
+            $('option', $('#val_title')).each(function() {
+                if ($(this).prop('selected')) {
+                    selected++;
+                }
+            });
+
+            if (selected >= 1) {
+                $('#val_title').siblings('div').children('ul').dropdown('toggle');
+            }
+        }
+    });
 
     function Quotationcontroller($scope, $timeout, $http)
     {
@@ -56,53 +86,74 @@ $('#val_title').multiselect({
         
         $scope.title_change = function()
         {
-            var customer_id =   $('#QuotationCustomerId').val();
-            var quotation_id =   $('#QuotationQuotationId').val();
-            var instrument_id   =   $('#QuotationInstrumentId').val();
-            var instrument_quantity =   $('#val_quantity').val();
-            var instrument_name=$('#val_description').val();
-            var instrument_modelno=$('#val_model_no').val();
-            var instrument_brand=$('#val_brand').val();
-            var instrument_range=$('#val_range').val();
-            var instrument_calllocation=$('#val_call_location').val();
-            var instrument_calltype=$('#val_call_type').val();
-            var instrument_validity=$('#val_validity').val();
-            var instrument_unitprice=$('#val_unit_price').val();
-            var instrument_discount=$('#val_discount').val();
-            var instrument_cal=instrument_unitprice*instrument_discount/100;
-            var instrument_total= instrument_unitprice - instrument_cal;
+           
+                
+                var customer_id =   $('#QuotationCustomerId').val();
+                var quotation_id =   $('#QuotationQuotationId').val();
+                var instrument_id   =   $('#QuotationInstrumentId').val();
+                var instrument_quantity =   $('#val_quantity').val();
+                var instrument_name=$('#val_description').val();
+                var instrument_modelno=$('#val_model_no').val();
+                var instrument_brand=$('#val_brand').val();
+                var instrument_range=$('#val_range').val();
+                var instrument_calllocation=$('#val_call_location').val();
+                var instrument_calltype=$('#val_call_type').val();
+                var instrument_validity=$('#val_validity').val();
+                var instrument_unitprice=$('#val_unit_price').val();
+                var instrument_discount=$('#val_discount').val();
+                var instrument_cal=instrument_unitprice*instrument_discount/100;
+                var instrument_total= instrument_unitprice - instrument_cal;
 
-            var instrument_department=$('#val_department_id').val();
-            var instrument_account=$('#val_account_service').val();
-            var instrument_title=$('#val_title').val();
-             
-            
-                $http.post(path_url+'Quotations/add_instrument/', {instrument_quantity:instrument_quantity,"instrument_validity":instrument_validity,"customer_id":customer_id,"instrument_id":instrument_id,"instrument_quantity":instrument_quantity,"instrument_brand":instrument_brand,"instrument_modelno":instrument_modelno,"instrument_range":instrument_range,"instrument_calllocation":instrument_calllocation,"instrument_calltype":instrument_calltype,"instrument_unitprice":instrument_unitprice,"instrument_discount":instrument_discount,"instrument_department":instrument_department,"instrument_account":instrument_account,"instrument_title":instrument_title,"instrument_total":instrument_total,"quotationno":quotation_id}).success(function(data){
-                    
-        
-                    $.each(data,function(k,v){
-                        $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
-                        $scope.instruments.push($new_data);
+                var instrument_department=$('#val_department_id').val();
+                var instrument_account=$('#val_account_service').val();
+                var instrument_title=$('#val_title').val();
+
+
+                    $http.post(path_url+'Quotations/add_instrument/',{
+                        instrument_quantity:instrument_quantity,
+                        "instrument_validity":instrument_validity,
+                        "customer_id":customer_id,
+                        "instrument_id":instrument_id,
+    //                    "instrument_quantity":instrument_quantity,
+                        "instrument_brand":instrument_brand,
+                        "instrument_modelno":instrument_modelno,
+                        "instrument_range":instrument_range,
+                        "instrument_calllocation":instrument_calllocation,
+                        "instrument_calltype":instrument_calltype,
+                        "instrument_unitprice":instrument_unitprice,
+                        "instrument_discount":instrument_discount,
+                        "instrument_department":instrument_department,
+                        "instrument_account":instrument_account,
+                        "instrument_title":instrument_title,
+                        "instrument_total":instrument_total,
+                        "quotationno":quotation_id
+                    }).success(function(data){
+
+
+                        $.each(data,function(k,v){
+                            $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
+                            $scope.instruments.push($new_data);
+                        });
+
+                        $scope.pagination();
+
+
                     });
-                    
-                    $scope.pagination();
-                    
-                
-                });
-                
-            if($scope.titles.indexOf("0") != "-1")
-                $scope.show_serial = true;
-            if($scope.titles.indexOf("1") != "-1")
-                $scope.show_potno = true;
+
+                if($scope.titles.indexOf("0") != "-1")
+                    $scope.show_serial = true;
+                if($scope.titles.indexOf("1") != "-1")
+                    $scope.show_potno = true;
+
+                $('#val_quantity').val(null);
+                    $('#val_description').val(null);
+                    $('#val_model_no').val(null);
+                    $('#val_brand').empty().append('<option value="">Select Brand</option>');
+                    $('#val_range').val(null);
+                    $('#val_unit_price').val(null);
+                    $('#val_discount1').val(null);
+                    $('#val_description').val(null);
             
-            $('#val_quantity').val(null);
-                $('#val_description').val(null);
-                $('#val_model_no').val(null);
-                $('#val_brand').empty().append('<option value="">Select Brand</option>');
-                $('#val_range').val(null);
-                $('#val_unit_price').val(null);
-                $('#val_discount1').val(null);
-                $('#val_description').val(null);
             
         }
        
@@ -243,21 +294,23 @@ $('#val_title').multiselect({
        }
     }
 </script>
+<ng-form name="quotation_add" novalidate>
 <div class="form-group" >
      <label class="col-md-2 control-label" for="val_description">Instrument</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
-                array('id'=>'val_description','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,
+                array('id'=>'val_description','class'=>'form-control','ng-model' => 'desc_quo_model','required','placeholder'=>'Enter the Description','label'=>false,
                     'name'=>'description','autoComplete'=>'off')); ?>
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
-         <span class="help-block_login ins_error">Enter the Instrument Name</span>
+        <!-- ng-if="quotation_add.desc_quo_model.$viewValue.length>0" -->
+        <span class="help-block_login ins_error">Enter the Instrument Name</span>
          <span class="help-block_login inscus_error">Instrument Needs Customer Details</span>
         <div id="search_instrument">  </div>
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','required','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
         <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
     </div>
         
@@ -266,8 +319,11 @@ $('#val_title').multiselect({
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_address">Model No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
+        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','required','ng-model' => 'model_quo_model','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
+        <div id="search_cusinstrument">  </div>
+         <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
+                                                //'label'=>false,'name'=>'model_no','type'=>'select','empty'=>'Enter the Model Number')); ?>
         <span class="help-block_login insmo_error">Enter the Instrument Model No</span>
     </div>
     <label class="col-md-2 control-label" for="val_validity">Validity (in months) </label>
@@ -280,13 +336,13 @@ $('#val_title').multiselect({
     
     <label class="col-md-2 control-label" for="val_brand">Brand</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
+        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control','ng-model' => 'brand_quo_model','required',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
         <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control',
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','ng-model' => 'range_quo_model','required',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
        <span class="help-block_login insra_error">Enter the Instrument Range</span>
     </div>
@@ -295,14 +351,14 @@ $('#val_title').multiselect({
     
     <label class="col-md-2 control-label" for="val_call_location">Call Location</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control',
+        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control','ng-model' => 'loca_quo_model','required',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Call Location')); ?>
         <span class="help-block_login inscal_error">Enter the Call Location</span>
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type',
+        <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model','required',
                                       'type'=>'select','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas'))); ?>
     </div>
 </div>
@@ -332,7 +388,7 @@ $('#val_title').multiselect({
     </div>
      <label class="col-md-2 control-label" for="val_account_service">Account Service</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control',
+        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control','ng-model' => 'service_quo_model','required',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
         <span class="help-block_login insser_error">Enter the Account Service</span>
@@ -348,7 +404,7 @@ $('#val_title').multiselect({
 </div>
 <div class="form-group form-actions" ng-show="mode=='add'">
     <div class="col-md-9 col-md-offset-10 update_device">
-        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-disabled' => 'quotation_add.$invalid', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
         
     </div>
 </div>
@@ -411,6 +467,6 @@ $('#val_title').multiselect({
         <tr ng-hide="instruments.length"><td>No Instruments found</td></tr>
     </tbody>
 </table>
-   
+</ng-form>
 </div>
 </div>
