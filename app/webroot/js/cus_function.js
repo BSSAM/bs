@@ -454,6 +454,8 @@ $(document).ready(function(){
             url: path_url+'Customers/approve/',
             success: function(data)
             {
+                //console.log(data);
+                //return false;
                 window.location.reload();
             }
             
