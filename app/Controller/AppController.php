@@ -100,7 +100,7 @@ App::uses('Controller', 'Controller');
             $this->request->data['Description']['department_id']        =   $devices['Device']['department_id'];
             $this->request->data['Description']['sales_unitprice']      =   $devices['Device']['unit_price'];
             $this->request->data['Description']['sales_accountservice'] =   $devices['Device']['account_service'];
-            $this->request->data['Description']['sales_titles']         =   $devices['Device']['title'];
+            //$this->request->data['Description']['sales_titles']         =   $devices['Device']['title'];
             $this->request->data['Description']['sales_total']          =   $devices['Device']['total'];
             $this->request->data['Description']['quotation_id']         =   $devices['Device']['quotation_id'];
             $this->request->data['Description']['quotationno']          =   $devices['Quotation']['quotationno'];
@@ -490,33 +490,9 @@ App::uses('Controller', 'Controller');
                     $this->Device->save($this->request->data['Device']);
                   endforeach;
               endif;
-              /******************
-                    * Data Log
-                    */
-                    $this->request->data['Logactivity']['logname'] = 'Quotation';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Quotation';
-                    $this->request->data['Logactivity']['logid'] = $last_quotation_id;
-                    $this->request->data['Logactivity']['logno'] = $create_quotation_from_salesorder_detatils['Salesorder']['quotationno'];
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
-                    /******************/
-                    
-                    /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Quotation';
-                    $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $create_quotation_from_salesorder_detatils['Salesorder']['quotationno'];
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                    /******************/ 
-                   // pr($a);exit;
+              
            }
+           return $last_quotation_id;
         }
         public function getLastQuery($model)
         {

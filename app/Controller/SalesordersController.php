@@ -96,25 +96,43 @@
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
                     $sales_orderid  =   $this->Salesorder->getLastInsertID();
+//                    echo "SalesLast - ".$sales_orderid;
+//                    echo "<br>";
                     $create_quotation   =   $this->create_automatic_quotation($sales_orderid);
-                   
+//                    echo "SalesLast : ".$sales_orderid;
+//                    echo "<br>";
+//                    echo "OtherSales : ".$this->request->data['Salesorder']['salesorderno'];
+//                    echo "<br>";
+//                   echo "Quotation - ".$create_quotation;
+//                   echo "<br>";
+                  // pr($create_quotation);
+                    //pr($quotation_lists);exit;
                     /***********************for pending process in Salesorder*************************************/
                     $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0)));
                     if(!empty($device_node))
                     {
-                        $this->Description->updateAll(array('Description.quotationno'=>'"'.$quotation_id.'"','Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0));
+                        $this->Description->updateAll(array('Description.quotationno'=>'"'.$quotation_id.'"','Description.salesorder_id'=>'"'.$this->request->data['Salesorder']['salesorderno'].'"','Description.status'=>1),array('Description.customer_id'=>$customer_id,'Description.salesorder_id'=>$this->request->data['Salesorder']['salesorderno'],'Description.status'=>0));
                     }
                     $sales_document =   $this->SalesDocument->deleteAll(array('SalesDocument.Salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>0));
                     $this->SalesDocument->updateAll(array('SalesDocument.salesorder_id'=>'"'.$this->request->data['Salesorder']['salesorderno'].'"','SalesDocument.customer_id'=>'"'.$customer_id.'"'),array('SalesDocument.salesorderno'=>$this->request->data['Salesorder']['salesorderno'],'SalesDocument.status'=>1));
                     /******************
                      * Data Log
                     */
+//                    echo "After";
+//                    echo "<br>";
+//                    echo "SalesLast - ".$sales_orderid;
+//                    echo "<br>";
+//                    echo "OtherSales : ".$this->request->data['Salesorder']['salesorderno'];
+//                    echo "<br>";
+//                   echo "Quotation - ".$create_quotation;
+//                   echo "<br>";
                     $this->request->data['Logactivity']['logname']   =   'Salesorder';
                     $this->request->data['Logactivity']['logactivity']   =   'Add SalesOrder';
-                    $this->request->data['Logactivity']['logid']   =   $sales_orderid;
-                    $this->request->data['Logactivity']['logno']   =   $sales_orderid;
-                    $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logid']   =   $this->request->data['Salesorder']['salesorderno'];
+                    $this->request->data['Logactivity']['logno']   =   $this->request->data['Salesorder']['salesorderno'];
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
+                    $this->Logactivity->create();
                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
                     //pr($a);exit;
                     /******************/
@@ -123,12 +141,49 @@
                     */
                     $this->request->data['Datalog']['logname'] = 'Salesorder';
                     $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $sales_orderid;
+                    $this->request->data['Datalog']['logid'] = $this->request->data['Salesorder']['salesorderno'];
                     $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
+                    $this->Datalog->create();
                     $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                     /******************/ 
+                    
+                    /******************
+                    * Data Log
+                    */
+                    $quotation_lists = $this->Quotation->find('first',array('conditions'=>array('Quotation.is_deleted'=>'0','Quotation.status'=>'1','Quotation.id'=>$create_quotation)));
+                    //pr($quotation_lists);
+                    $this->request->data['Logactivity']['logname'] = 'Quotation';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Quotation';
+                    $this->request->data['Logactivity']['logid'] = $create_quotation;
+                    $this->request->data['Logactivity']['logno'] = $quotation_lists['Quotation']['quotationno'];
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+                    $this->Logactivity->create();
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                    /******************/
+                    
+                    /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Quotation';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $quotation_lists['Quotation']['quotationno'];
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    $this->Datalog->create();
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+//                    echo "Atlast";
+//                    echo "<br>";
+//                    echo "SalesLast - ".$sales_orderid;
+//                    echo "<br>";
+//                    echo "OtherSales : ".$this->request->data['Salesorder']['salesorderno'];
+//                    echo "<br>";
+//                   echo "Quotation - ".$create_quotation;
+//                   echo "<br>";
+                    /******************/ 
+                    //exit;
+                    
                     $this->Session->setFlash(__('Salesorder & Quotation has been Added Successfully'));
                     $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
                 }

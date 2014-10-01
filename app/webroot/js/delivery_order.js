@@ -179,10 +179,11 @@ $(document).ready(function(){
             url: path_url+'Deliveryorders/approve/',
             success: function js(data)
             {
-                var url = path_url+"Deliveryorders/";    
-                $(location).attr('href',url);
+                //var url = path_url+"Deliveryorders/";    
+               // $(location).attr('href',url);
                 //window.location.reload();
-                 //console.log(data);
+                 console.log(data);
+                 return false;
             }
         });
         

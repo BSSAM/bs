@@ -180,6 +180,9 @@
             //pr($id);exit;
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.delivery_order_no'=>$id),'recursive'=>2));
             $deliver_customer = $deliveryorder['Deliveryorder']['customer_id'];
+            $customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
+            pr($this->request->data['Invoice']);
+            pr($customer);exit;
             $ack_type = $deliveryorder['Customer']['acknowledgement_type_id'];
             if($ack_type == 1)
             {
