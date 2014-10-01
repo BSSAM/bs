@@ -82,6 +82,10 @@
                     $check_string = strchr($this->request->data['Salesorder']['ref_no'], 'CPO');
                     $po_type = ($check_string == "") ? 'Manual' : 'Automatic';
                 }
+                else
+                {
+                    $po_type = 'Automatic';
+                }
                 //For Quotation array
 //                if( $this->request->data['Quotation']['quotation_no']!=''):
 //                $qo_id_array  =   $this->request->data['Quotation']['quotation_no'];
