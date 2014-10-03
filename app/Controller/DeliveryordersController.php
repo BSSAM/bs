@@ -183,8 +183,8 @@
             $customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
             $this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
             $this->PrepareInvoice->save($this->request->data);
-            pr($this->PrepareInvoice->find('all'));
-            pr($customer);exit;
+            //pr($this->PrepareInvoice->find('all'));
+            //pr($customer);exit;
             $ack_type = $deliveryorder['Customer']['acknowledgement_type_id'];
             if($ack_type == 1)
             {
@@ -198,7 +198,7 @@
                     $customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
                     $this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
                     $this->PrepareInvoice->save($this->request->data);
-                    pr($customer);exit;
+                    //pr($customer);exit;
                     $user_id = $this->Session->read('sess_userid');
                     $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
                     $this->request->data['Invoice']['deliveryorder_id']=$id;

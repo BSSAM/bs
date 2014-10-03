@@ -83,10 +83,23 @@ $("#search_cusinstrument").hide();
         $scope.start = 0;
         $scope.end = 0;
         $scope.edit_index = '';
-        
+        $('#val_description').prop('required', true);
+        $('#val_quantity').prop('required', true);
+        $('#val_model_no').prop('required', true);
+        $('#val_brand').prop('required', true);
+        $('#val_range').prop('required', true);
+        $('#val_call_location').prop('required', true);
+        $('#val_call_type').prop('required', true);
+        $('#val_account_service').prop('required', true);
+        //$('#val_description').prop('required', true);
+        //$('#val_quantity').prop('required', true);
+        //$("#val_description").attr("required","required");
+        //$("#val_quantity").attr("required","required");
         $scope.title_change = function()
         {
-           
+                //$("#val_description").attr("required","required");
+                //$("#val_quantity").attr("required","required");
+                
                 
                 var customer_id =   $('#QuotationCustomerId').val();
                 var quotation_id =   $('#QuotationQuotationId').val();
@@ -145,15 +158,24 @@ $("#search_cusinstrument").hide();
                 if($scope.titles.indexOf("1") != "-1")
                     $scope.show_potno = true;
 
-                $('#val_quantity').val(null);
+                    $('#val_quantity').val(null);
                     $('#val_description').val(null);
                     $('#val_model_no').val(null);
                     $('#val_brand').empty().append('<option value="">Select Brand</option>');
                     $('#val_range').val(null);
                     $('#val_unit_price').val(null);
                     $('#val_discount1').val(null);
-                    $('#val_description').val(null);
-            
+//                    $('#val_description').val(null);
+//                    $('#val_description').removeAttr("required");
+//                    $('#val_quantity').removeAttr("required");
+                    $('#val_description').prop('required', false);
+                    $('#val_quantity').prop('required', false);
+                    $('#val_model_no').prop('required', false);
+                    $('#val_brand').prop('required', false);
+                    $('#val_range').prop('required', false);
+                    $('#val_call_location').prop('required', false);
+                    $('#val_call_type').prop('required', false);
+                    $('#val_account_service').prop('required', false);
             
         }
        
@@ -231,7 +253,7 @@ $("#search_cusinstrument").hide();
             
             $scope.edit_id = res.serial;
             $scope.edit_index = index;
-        
+            console.log(res);
             $('#QuotationCustomerId').val(res.customer_id);
             $('#QuotationQuotationId').val(res.quotation_id);
             $('#QuotationInstrumentId').val(res.instrument_id);
@@ -299,7 +321,7 @@ $("#search_cusinstrument").hide();
      <label class="col-md-2 control-label" for="val_description">Instrument</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
-                array('id'=>'val_description','class'=>'form-control','ng-model' => 'desc_quo_model','required','placeholder'=>'Enter the Description','label'=>false,
+                array('id'=>'val_description','class'=>'form-control','ng-model' => 'desc_quo_model','placeholder'=>'Enter the Description','label'=>false,
                     'name'=>'description','autoComplete'=>'off')); ?>
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
@@ -310,7 +332,7 @@ $("#search_cusinstrument").hide();
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','required','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
         <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
     </div>
         
@@ -319,7 +341,7 @@ $("#search_cusinstrument").hide();
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_address">Model No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','required','ng-model' => 'model_quo_model','class'=>'form-control',
+        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
         <div id="search_cusinstrument">  </div>
          <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
@@ -336,13 +358,13 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_brand">Brand</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control','ng-model' => 'brand_quo_model','required',
+        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control','ng-model' => 'brand_quo_model',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
         <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','ng-model' => 'range_quo_model','required',
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','ng-model' => 'range_quo_model',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
        <span class="help-block_login insra_error">Enter the Instrument Range</span>
     </div>
@@ -351,15 +373,15 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_call_location">Call Location</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control','ng-model' => 'loca_quo_model','required',
+        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control','ng-model' => 'loca_quo_model',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Call Location')); ?>
         <span class="help-block_login inscal_error">Enter the Call Location</span>
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model','required',
-                                      'type'=>'select','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas'))); ?>
+        <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model',
+                                      'type'=>'select','ng-init'=>'type_quo_model="Singlas"','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas'))); ?>
     </div>
 </div>
 
@@ -388,7 +410,7 @@ $("#search_cusinstrument").hide();
     </div>
      <label class="col-md-2 control-label" for="val_account_service">Account Service</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control','ng-model' => 'service_quo_model','required',
+        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control','ng-model' => 'service_quo_model',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
         <span class="help-block_login insser_error">Enter the Account Service</span>
