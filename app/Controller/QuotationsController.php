@@ -458,6 +458,20 @@
             }
            
         }
+         public function get_brand_value_edit()
+        {
+            $this->autoRender = false;
+            $this->request->data = json_decode(file_get_contents("php://input"));
+            $instrument_id =  $this->request->data->instrument_id;
+            $customer_id =  $this->request->data->customer_id;
+            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id),'recursive'=>'3'));
+            
+            if(!empty($brand_details))
+            {
+                echo json_encode($brand_details);
+            }
+           
+        }
         public function get_range_value()
         {
             $this->autoRender = false;

@@ -141,16 +141,13 @@ $("#search_cusinstrument").hide();
                         "instrument_total":instrument_total,
                         "quotationno":quotation_id
                     }).success(function(data){
-
-
+                        //alert(data);
                         $.each(data,function(k,v){
+                            //console.log(k);
                             $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
                             $scope.instruments.push($new_data);
                         });
-
                         $scope.pagination();
-
-
                     });
 
                 if($scope.titles.indexOf("0") != "-1")
@@ -249,18 +246,68 @@ $("#search_cusinstrument").hide();
        $scope.edit_instrument = function(index)
        {
             res = $scope.instruments[index];
+            ///console.log(res);
             $scope.mode = 'edit';
-            
+            var brand = res.instrument_brand;
             $scope.edit_id = res.serial;
             $scope.edit_index = index;
-            console.log(res);
+            var instrument_id = res.instrument_id;
+            //alert(instrument_id);
+            var customer_id = res.customer_id;
+            //alert(customer_id);
+            $http.post(path_url+'Quotations/get_brand_value_edit/',{"instrument_id":instrument_id,"customer_id":customer_id}).success(function(data)
+            {
+               // alert(instrument_id);
+                //console.log(data);
+               /// parsedata = $.parseJSON(data);
+                var dept    =   data.Instrument;
+                $('#val_brand').empty().append('<option value="">Select Brand Name</option>');
+//                $('#val_range').empty().append('<option value="">Select Range</option>');
+                $.each(data.Instrument.InstrumentBrand, function(k, v)
+                {
+                     $('#val_brand').append('<option value="'+v.Brand.id+'">'+v.Brand.brandname+'</option>');
+                     
+                     if(k == (data.Instrument.InstrumentBrand).length - 1)
+                     {
+                        //console.log(res.instrument_brand);
+                        $('#val_brand').val(res.instrument_brand);
+                        $('#val_brand option[value="'+res.instrument_brand+'"]').prop('selected', true);
+                     }
+                });
+                //$('#val_brand').find('<option value="'+res.instrument_brand+'></option>');
+               // alert(res.instrument_brand);
+//                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
+//                {
+//                     $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+//                });
+                    
+                $('#val_department').val(dept.Department.departmentname);
+                
+                //$('#val_department_id').val(dept.Department.id);
+                //$('#val_model_no').val(parsedata.CustomerInstrument.model_no);
+                //$('#QuotationInstrumentId').val(instrument_id);
+            });
+            
             $('#QuotationCustomerId').val(res.customer_id);
             $('#QuotationQuotationId').val(res.quotation_id);
             $('#QuotationInstrumentId').val(res.instrument_id);
             $('#val_quantity').val(1).prop("disabled", true);
             $('#val_description').val(res.name).prop("disabled", true);
             $('#val_model_no').val(res.model);
-            $('#val_brand').val(res.instrument_brand);
+            /*setTimeout(function(){
+                console.log(res.instrument_brand);
+                $('#val_brand').val(res.instrument_brand);
+                $('#val_brand option[value="'+res.instrument_brand+'"]').prop('selected', true);
+            },500);*/
+            //var a = $('#val_brand').val();
+            // console.log(a);
+            //$("#val_brand option[value='" + res.instrument_brand + "']").attr("selected", 1);
+            //$("#val_brand").multiselect("refresh");
+            //$("#val_brand option[value='" + res.instrument_brand + "']").attr('selected', 'selected');
+            
+            //$("#val_brand > option").filter( function() {
+            //return $(this).val() == brand; 
+            //}).prop('selected', true); //use .prop, not .attr
             $('#val_range').val(res.instrument_range);
             $('#val_call_location').val(res.location);
             $('#val_call_type').val(res.type);
@@ -272,7 +319,8 @@ $("#search_cusinstrument").hide();
             $('#val_department_id').val(res.instrument_department);
             $('#val_account_service').val(res.service);
             $('#val_title').val(res.instrument_title);
-       }
+        }
+       
        
        
        $scope.pagination = function(){
@@ -342,7 +390,7 @@ $("#search_cusinstrument").hide();
     <label class="col-md-2 control-label" for="val_address">Model No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control',
-                                               'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
+                                               'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','autoComplete'=>'off')); ?>
         <div id="search_cusinstrument">  </div>
          <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                 //'label'=>false,'name'=>'model_no','type'=>'select','empty'=>'Enter the Model Number')); ?>
@@ -438,9 +486,21 @@ $("#search_cusinstrument").hide();
     </div>
 </div>
 
-<ul ng-repeat="pg in no_of_page"><li ng-click="set_page(pg);">{{pg}}</li></ul>
-<input type="text" ng-model="sss" ng-change="filter_and_set((instruments | filter:sss).length);">
-
+    <div class="pull-left dataTables_paginate paging_bootstrap custom_pagination">
+        <ul ng-repeat="pg in no_of_page" class="pagination pagination-sm remove-margin">
+            
+            <li ng-click="set_page(pg);"><a href="#">{{pg}}</a></li>
+          
+        </ul>
+    </div>
+<div class="col-md-6 pull-right">
+<label>
+<div class="input-group">
+    <input type="text" ng-model="sss" ng-change="filter_and_set((instruments | filter:sss).length);" class="form-control" placeholder="Search">
+    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+</div>
+</label>
+</div>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
 <table class="table table-vcenter table-condensed table-bordered">
