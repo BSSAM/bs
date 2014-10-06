@@ -29,15 +29,17 @@
                         <?PHP //pr($unapproved_order_list);exit; ?>
                         <?PHP if(!empty($prepareinvoice_approved_list)):?>
                         <?PHP foreach($prepareinvoice_approved_list as $list): ?>
+                        <?php if($list['Customer']['invoice_type_id']==1): ?>
                         <tr class="invoice_<?PHP echo $list['Invoice']['id']; ?>">
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['po_reference_no']; ?></td>
                             <td class="text-center"><?PHP echo $list['Customer']['customername']; ?></td>
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['customer_address'];; ?></td>
-                            <td class="text-center cust_purchase_order_no" id="<?PHP echo $list['Invoice']['id'] ?>"><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
+                            <!-- cust_purchase_order_no --><td class="text-center" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo $list['Deliveryorder']['quotationno']; ?><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
                             <td class="text-center"><a href="javascript:void(0);" class="prepare" id="<?PHP echo $list['Invoice']['id']; ?>"><?PHP echo  'Prepare Invoice'; ?></a></td>
 <!--                            <td class="text-center"> <a href="#modal-regular<?PHP //echo $list['Deliveryorder']['id'] ?>" class="btn btn-primary" data-toggle="modal">View</a></td>-->
                             
                         </tr>
+                        <?php endif; ?>
                     <div id="modal-regular<?PHP echo $list['Deliveryorder']['id'] ?>" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog pop_up_instrument">
                             <div class="modal-content">

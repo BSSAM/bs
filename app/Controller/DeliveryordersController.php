@@ -181,8 +181,8 @@
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.delivery_order_no'=>$id),'recursive'=>2));
             $deliver_customer = $deliveryorder['Deliveryorder']['customer_id'];
             $customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
-            $this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
-            $this->PrepareInvoice->save($this->request->data);
+            //$this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
+            //$this->PrepareInvoice->save($this->request->data);
             //pr($this->PrepareInvoice->find('all'));
             //pr($customer);exit;
             $ack_type = $deliveryorder['Customer']['acknowledgement_type_id'];
@@ -195,17 +195,17 @@
                 {
                     //pr($this->request->data['Invoice']);exit;
                     //pr($id1);exit;
-                    $customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
-                    $this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
-                    $this->PrepareInvoice->save($this->request->data);
+                    //$customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
+                    //$this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
+                    //$this->PrepareInvoice->save($this->request->data);
                     //pr($customer);exit;
                     $user_id = $this->Session->read('sess_userid');
                     $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
-                    $this->request->data['Invoice']['deliveryorder_id']=$id;
-                    $this->request->data['Invoice']['customer_purchaseorder_no']='';
-                    $this->request->data['Invoice']['is_approved']=0;
-                    $this->request->data['Invoice'] = $customer;
-                    $this->Invoice->save($this->request->data);
+//                    $this->request->data['Invoice']['deliveryorder_id']=$id;
+//                    $this->request->data['Invoice']['customer_purchaseorder_no']='';
+//                    $this->request->data['Invoice']['is_approved']=0;
+//                    $this->request->data['Invoice'] = $customer;
+//                    $this->Invoice->save($this->request->data);
                 }
                 else
                 {
@@ -216,19 +216,39 @@
     //                $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
                 }
             }
+            else if($ack_type == 2)
+            {
+                //pr($deliveryorder);exit;
+                $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Customer.acknowledgement_type_id'=>2));
+                //return $updated;
+                if($updated==1)
+                {
+                    //pr($this->request->data['Invoice']);exit;
+                    //pr($id1);exit;
+                    //$customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
+                    //$this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
+                    //$this->PrepareInvoice->save($this->request->data);
+                    //pr($customer);exit;
+                    $user_id = $this->Session->read('sess_userid');
+                    $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
+                    
+                }
+                
+            }
             else
             {
-                $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y','now')),array('Deliveryorder.delivery_order_no'=>$id,'Customer.acknowledgement_type_id'=>2));
+                $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y','now')),array('Deliveryorder.delivery_order_no'=>$id,'Customer.acknowledgement_type_id'=>3));
                 if($updated==1)
                 {
                 //pr($id1);exit;
                 $user_id = $this->Session->read('sess_userid');
                 $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
-                $this->request->data['Invoice']['deliveryorder_id']=$id;
-                $this->request->data['Invoice']['customer_purchaseorder_no']='';
-                $this->request->data['Invoice']['is_approved']=0;
-                $this->Invoice->save($this->request->data);
+//                $this->request->data['Invoice']['deliveryorder_id']=$id;
+//                $this->request->data['Invoice']['customer_purchaseorder_no']='';
+//                $this->request->data['Invoice']['is_approved']=0;
+//                $this->Invoice->save($this->request->data);
                 }
+                
             }
             
         }

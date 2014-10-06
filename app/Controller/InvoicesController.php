@@ -11,14 +11,14 @@ class InvoicesController extends AppController
    
     public $helpers = array('Html','Form','Session');
     public $components = array('RequestHandler');
-    public $uses    =   array('Deliveryorder','Invoice');
+    public $uses    =   array('Deliveryorder','Invoice','Quotation');
     public function index()
     {
        
         $unapproved_order_list    =   $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'0'),'recursive'=>4));
         //pr($unapproved_order_list);exit;
         
-        $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1)));
+        $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0),'group' => 'Deliveryorder.quotationno'));
               //pr($prepareinvoice_approved_list);exit;
         $approved_order_list   =    $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
         //pr($approved_order_list);exit;
@@ -47,6 +47,39 @@ class InvoicesController extends AppController
             $this->Invoice->saveField('customer_puchaseorder_no', $purchase_id);
             echo $purchase_id;
         }
+    }
+    public function preparein()
+    {
+        $this->autoRender   =   false;
+        $quo_id= $this->request->data['id'];
+        $quo_list    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.is_deleted'=>0,'Quotation.status'=>1),'recursive'=>4));
+        $del_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.quotationno'=>$quo_id)));
+        //pr($del_list);exit;
+        function imp($imp)
+        {
+            return implode(",", $imp);
+        }
+        foreach($del_list as $del):
+            $del_id[] = $del['Deliveryorder']['id'];
+            $del_no[] = $del['Deliveryorder']['delivery_order_no'];
+        endforeach;
+        $deliveryorder_no = imp($del_no); pr($deliveryorder_no);exit;
+        $deliveryorder_id = imp($del_id);
+        ;
+        
+        pr($quo_list);exit;
+        $this->request->data['Invoice']['branch_id']   =   $quo_list['Quotation']['branch_id'];
+        $this->request->data['Invoice']['deliveryorder_id']   =   $deliveryorder_no;
+        $this->request->data['Invoice']['customer_id']   =   $quo_list['Quotation']['customer_id'];
+        $this->request->data['Invoice']['customername'] = $quo_list['Quotation']['customername'];
+        $this->request->data['Invoice']['regaddress'] = $quo_list['Quotation']['address'];
+        $this->request->data['Invoice']['contactperson_id'] = $quo_list['Quotation']['customername'];
+        $this->request->data['Invoice']['customername'] = $quo_list['Quotation']['customername'];
+        $this->request->data['Invoice']['customername'] = $quo_list['Quotation']['customername'];
+        $this->request->data['Invoice']['customername'] = $quo_list['Quotation']['customername'];
+        
+        $this->request->data['Invoice']['logapprove'] = 1;
+        
     }
     public function invoice_approved()
     {
