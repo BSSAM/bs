@@ -12,7 +12,7 @@ class Invoice extends AppModel
                 'Deliveryorder'=>array(
                 'className'=>'Deliveryorder',
                 'foreignKey'=>'deliveryorder_id',
-                ),'Salesorder'
+                ),'Salesorder','branch'
                                 
         );
 }

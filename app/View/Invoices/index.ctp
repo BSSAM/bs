@@ -15,6 +15,7 @@
             <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
+                            <?php echo $this->element('message');?>
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
                                 <!-- END Form Elements Title -->

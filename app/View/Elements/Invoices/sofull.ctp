@@ -20,7 +20,7 @@ $(document).on('click','.sofull-prepare',function(){
             url: path_url+'Invoices/preparein/',
             success: function(data)
             {
-                console.log(data);
+                 window.location.reload();
 //                if(data=='success')
 //                    {
 //                        alert('Client PO is Approved');

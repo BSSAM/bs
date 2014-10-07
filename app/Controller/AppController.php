@@ -251,7 +251,7 @@ App::uses('Controller', 'Controller');
                  // Invoice Random ID
                 case 'invoice':
                   $random = $this->Random->find('first');
-                    $str = $random['Random']['customer'];
+                    $str = $random['Random']['invoice'];
                     $i = 1;
                     $parts = explode('-', $str);
                     if($parts[2]==99999999)
