@@ -1,4 +1,10 @@
 <script type="text/javascript">
+    
+
+   
+
+</script>  
+<script type="text/javascript">
     $(function(){
     $("#search_instrument").hide();
     $("#val_description").keyup(function() 
@@ -95,6 +101,26 @@ $("#search_cusinstrument").hide();
         //$('#val_quantity').prop('required', true);
         //$("#val_description").attr("required","required");
         //$("#val_quantity").attr("required","required");
+        $(function() {
+    $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
+         id        : 'data[Description][id]',
+         name      : 'data[Description][delay]',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Click to edit the title'
+    });
+//    var oTable = $('#example-datatable').dataTable({
+//    //some properties
+//})
+//var oSettings = oTable.fnSettings();
+//oSettings._iDisplayLength = 50;
+//oTable.fnDraw();
+//     $('#example-datatable').dataTable( {
+//        "iDisplayLength": 50,
+//    "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
+//    } );
+});
         $scope.title_change = function()
         {
                 //$("#val_description").attr("required","required");
@@ -143,8 +169,10 @@ $("#search_cusinstrument").hide();
                     }).success(function(data){
                         //alert(data);
                         $.each(data,function(k,v){
-                            //console.log(k);
-                            $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
+                            console.log(k);
+                            console.log(v);
+                            //,"id":k
+                            $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
                             $scope.instruments.push($new_data);
                         });
                         $scope.pagination();
@@ -177,8 +205,11 @@ $("#search_cusinstrument").hide();
         }
        
        
-       $scope.update_instrumnent = function()
+       $scope.update_instrument = function()
        {
+           //res = $scope.instruments[index];
+            ///console.log(res);
+            $scope.mode = 'add';
            var customer_id =   $('#QuotationCustomerId').val();
             var quotation_id =   $('#QuotationQuotationId').val();
             var instrument_id   =   $('#QuotationInstrumentId').val();
@@ -200,7 +231,7 @@ $("#search_cusinstrument").hide();
             var instrument_title=$('#val_title').val();
              
             
-                $http.post(path_url+'Quotations/add_instrument/', {device_id:$scope.edit_id,instrument_quantity:instrument_quantity,"instrument_validity":instrument_validity,"customer_id":customer_id,"instrument_id":instrument_id,"instrument_quantity":instrument_quantity,"instrument_brand":instrument_brand,"instrument_modelno":instrument_modelno,"instrument_range":instrument_range,"instrument_calllocation":instrument_calllocation,"instrument_calltype":instrument_calltype,"instrument_unitprice":instrument_unitprice,"instrument_discount":instrument_discount,"instrument_department":instrument_department,"instrument_account":instrument_account,"instrument_title":instrument_title,"instrument_total":instrument_total,"quotationno":quotation_id}).success(function(data){
+                $http.post(path_url+'Quotations/update_instrument/', {device_id:$scope.edit_id,instrument_quantity:instrument_quantity,"instrument_validity":instrument_validity,"customer_id":customer_id,"instrument_id":instrument_id,"instrument_quantity":instrument_quantity,"instrument_brand":instrument_brand,"instrument_modelno":instrument_modelno,"instrument_range":instrument_range,"instrument_calllocation":instrument_calllocation,"instrument_calltype":instrument_calltype,"instrument_unitprice":instrument_unitprice,"instrument_discount":instrument_discount,"instrument_department":instrument_department,"instrument_account":instrument_account,"instrument_title":instrument_title,"instrument_total":instrument_total,"quotationno":quotation_id}).success(function(data){
                     
         
                     $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
@@ -364,6 +395,7 @@ $("#search_cusinstrument").hide();
        }
     }
 </script>
+
 <ng-form name="quotation_add" novalidate>
 <div class="form-group" >
      <label class="col-md-2 control-label" for="val_description">Instrument</label>
@@ -482,7 +514,7 @@ $("#search_cusinstrument").hide();
 <div class="form-group form-actions" ng-show="mode=='edit'">
     <div class="col-md-9 col-md-offset-10 update_device">
         
-        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> update',array('type'=>'button', 'ng-click' => 'update_instrumnent()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> update',array('type'=>'button', 'ng-click' => 'update_instrument()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
     </div>
 </div>
 
@@ -532,8 +564,8 @@ $("#search_cusinstrument").hide();
             <td>{{res.price}}</td>
             <td>{{res.service}}</td>
             <td>{{res.total}}</td>
-            <td ng-show="show_serial"></td>
-            <td ng-show="show_potno"></td>
+            <td ng-show="show_serial" class="text-center edit_title1" id="{{res.id}}"></td>
+            <td ng-show="show_potno" class="text-center edit_title2" id="{{res.id}}"></td>
             <td>
                 <div class="btn-group">
                             <a ng-click="edit_instrument($index)" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit">

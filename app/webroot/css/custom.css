@@ -135,3 +135,4 @@ and open the template in the editor.
 // Pagination
 .custom_pagination{margin-left:15px;}
 .custom_pagination li:last-child>a{background: #1bbae1;color: #fff;}
+#example-datatable_wrapper{overflow-x: auto;}

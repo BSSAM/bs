@@ -9,10 +9,7 @@ class Invoice extends AppModel
 {
    // public $useTable = 'prepare_invoices';
     public $belongsTo   =  array(
-                'Deliveryorder'=>array(
-                'className'=>'Deliveryorder',
-                'foreignKey'=>'deliveryorder_id',
-                ),'Salesorder','branch'
+                'Deliveryorder','Salesorder','branch','instrument_type','Quotation'
                                 
         );
 }

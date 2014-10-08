@@ -54,6 +54,7 @@ class InvoicesController extends AppController
         $this->autoRender   =   false;
         $quo_id= $this->request->data['id'];
         $quo_list    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.is_deleted'=>0,'Quotation.status'=>1),'recursive'=>4));
+        pr($quo_list);exit;
         $del_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.quotationno'=>$quo_id),'recursive'=>3));
         //pr($del_list);exit;
         function imp($imp)
@@ -90,6 +91,7 @@ class InvoicesController extends AppController
         $this->request->data['Invoice']['invoiceno']   =   $dmt;
         $this->request->data['Invoice']['branch_id']   =   $quo_list['Quotation']['branch_id'];
         $this->request->data['Invoice']['deliveryorder_id']   =   $deliveryorder_no;
+        $this->request->data['Invoice']['quotation_id'] = $quo_list['Quotation']['id'];
         $this->request->data['Invoice']['customer_id']   =   $quo_list['Quotation']['customer_id'];
         $this->request->data['Invoice']['customername'] = $quo_list['Quotation']['customername'];
         $this->request->data['Invoice']['regaddress'] = $quo_list['Quotation']['address'];
@@ -103,7 +105,8 @@ class InvoicesController extends AppController
         $this->request->data['Invoice']['paymentterms_id'] = $quo_list['Quotation']['paymentterm_id'];
         $this->request->data['Invoice']['track_id'] = $quo_list['Quotation']['track_id'];
         $this->request->data['Invoice']['ourrefno'] = $quo_list['Quotation']['quotationno'];
-        $this->request->data['Invoice']['ref_no'] = $quo_list['Quotation']['ref_no'];
+        $this->request->data['Invoice']['regaddress'] = $quo_list['Quotation']['address'];
+        $this->request->data['Invoice']['acknowledgement_type_id'] = $quo_list['Customer']['acknowledgement_type_id'];
         $this->request->data['Invoice']['instrument_type_id'] = $quo_list['Quotation']['instrument_type_id'];
         $this->request->data['Invoice']['salesperson_id'] = $quo_list['Quotation']['instrument_type_id'];
         $this->request->data['Invoice']['gst'] = $quo_list['Customerspecialneed']['gst'];
@@ -135,6 +138,19 @@ class InvoicesController extends AppController
 
         /******************/   
         $this->Session->setFlash(__('The Invoice has been created',h($dmt)));
+    }
+    public function edit($id=NULL)
+    {
+        $invoice =$this->Invoice->find('first',array('conditions'=>array('Invoice.is_approved'=>'0'),'recursive'=>3));
+        $desc = $invoice['Salesorder']['Description'];
+        //pr($desc);exit;
+        $total = 0;
+        foreach($desc as $desc_total):
+            $total = $total + $desc_total['sales_total'];
+        endforeach;
+        $this->set('total',$total);
+        $this->set('invoices',$invoice);
+        $this->set('desc',$desc);
     }
     public function invoice_approved()
     {
