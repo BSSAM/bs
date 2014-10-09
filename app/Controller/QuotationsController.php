@@ -919,6 +919,109 @@
         
     }
         
-        
+    public function update_title1()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title1']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title1_val', $title);
+            echo $title;
+        }
+    }    
+    public function update_title2()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title2']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title2_val', $title);
+            echo $title;
+        }
+    } 
+    public function update_title3()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title3']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title3_val', $title);
+            echo $title;
+        }
+    } 
+    public function update_title4()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title4']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title4_val', $title);
+            echo $title;
+        }
+    } 
+    public function update_title5()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title5']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title5_val', $title);
+            echo $title;
+        }
+    } 
+    public function update_title6()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title6']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title6_val', $title);
+            echo $title;
+        }
+    } 
+    public function update_title7()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title7']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title7_val', $title);
+            echo $title;
+        }
+    } 
+    public function update_title8()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title8']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title8_val', $title);
+            echo $title;
+        }
+    } 
         
 }

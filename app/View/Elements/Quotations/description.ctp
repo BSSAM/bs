@@ -1,9 +1,23 @@
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script type="text/javascript">
-    
-
-   
-
-</script>  
+    function setMaximumSelected(amount,element) {
+        var itemsSelected = [];
+        for (var i=0;i<element.options.length;i++) {
+                if (element.options[i].selected) itemsSelected[itemsSelected.length]=i;
+        }
+        if (itemsSelected.length>5) {
+                itemsSelected = element.getAttribute("itemsSelected").split(",");
+                for (i=0;i<element.options.length;i++) {
+                        element.options[i].selected = false;
+                }
+                for (i=0;i<itemsSelected.length;i++) {
+                        element.options[itemsSelected[i]].selected = true;
+                }			
+        } else {
+                element.setAttribute("itemsSelected",itemsSelected.toString());	
+        }
+    }
+</script>
 <script type="text/javascript">
     $(function(){
     $("#search_instrument").hide();
@@ -30,7 +44,9 @@
             });
         }
         return false;    
-    });});
+    });
+    //$(".val_title").chosen({max_selected_options: 5});
+    });
 $(function(){
 $("#search_cusinstrument").hide();
     $("#val_model_no").keyup(function() 
@@ -76,11 +92,18 @@ $("#search_cusinstrument").hide();
             }
         }
     });
+    
 
     function Quotationcontroller($scope, $timeout, $http)
     {
-        $scope.show_serial = false;
-        $scope.show_potno = false;
+        $scope.show_title1 = false;
+        $scope.show_title2 = false;
+        $scope.show_title3 = false;
+        $scope.show_title4 = false;
+        $scope.show_title5 = false;
+        $scope.show_title6 = false;
+        $scope.show_title7 = false;
+        $scope.show_title8 = false;
         $scope.instruments = [];
         $scope.mode = 'add';
         $scope.edit_id = '';
@@ -101,31 +124,14 @@ $("#search_cusinstrument").hide();
         //$('#val_quantity').prop('required', true);
         //$("#val_description").attr("required","required");
         //$("#val_quantity").attr("required","required");
-        $(function() {
-    $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
-         id        : 'data[Description][id]',
-         name      : 'data[Description][delay]',
-         type      : 'text',
-         cancel    : 'Cancel',
-         submit    : 'Save',
-         tooltip   : 'Click to edit the title'
-    });
-//    var oTable = $('#example-datatable').dataTable({
-//    //some properties
-//})
-//var oSettings = oTable.fnSettings();
-//oSettings._iDisplayLength = 50;
-//oTable.fnDraw();
-//     $('#example-datatable').dataTable( {
-//        "iDisplayLength": 50,
-//    "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
-//    } );
-});
+       
+            
+            
         $scope.title_change = function()
         {
                 //$("#val_description").attr("required","required");
                 //$("#val_quantity").attr("required","required");
-                
+                 
                 
                 var customer_id =   $('#QuotationCustomerId').val();
                 var quotation_id =   $('#QuotationQuotationId').val();
@@ -174,14 +180,93 @@ $("#search_cusinstrument").hide();
                             //,"id":k
                             $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
                             $scope.instruments.push($new_data);
+                            setTimeout(
+                                    function(){
+                            $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
+                                    id        : 'device_id',
+                                    name      : 'title1',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit',
+                                    
+                               });
+                            $('.edit_title2').editable(path_url+'/Quotations/update_title2', {
+                                    id        : 'device_id',
+                                    name      : 'title2',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title3').editable(path_url+'/Quotations/update_title3', {
+                                    id        : 'device_id',
+                                    name      : 'title3',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title4').editable(path_url+'/Quotations/update_title4', {
+                                    id        : 'device_id',
+                                    name      : 'title4',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title5').editable(path_url+'/Quotations/update_title5', {
+                                    id        : 'device_id',
+                                    name      : 'title5',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title6').editable(path_url+'/Quotations/update_title6', {
+                                    id        : 'device_id',
+                                    name      : 'title6',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title7').editable(path_url+'/Quotations/update_title7', {
+                                    id        : 'device_id',
+                                    name      : 'title7',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title8').editable(path_url+'/Quotations/update_title8', {
+                                    id        : 'device_id',
+                                    name      : 'title8',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });},50);
                         });
                         $scope.pagination();
                     });
 
                 if($scope.titles.indexOf("0") != "-1")
-                    $scope.show_serial = true;
+                    $scope.show_title1 = true;
                 if($scope.titles.indexOf("1") != "-1")
-                    $scope.show_potno = true;
+                    $scope.show_title2 = true;
+                if($scope.titles.indexOf("2") != "-1")
+                    $scope.show_title3 = true;
+                if($scope.titles.indexOf("3") != "-1")
+                    $scope.show_title4 = true;
+                if($scope.titles.indexOf("4") != "-1")
+                    $scope.show_title5 = true;
+                if($scope.titles.indexOf("5") != "-1")
+                    $scope.show_title6 = true;
+                if($scope.titles.indexOf("6") != "-1")
+                    $scope.show_title7 = true;
+                if($scope.titles.indexOf("7") != "-1")
+                    $scope.show_title8 = true;
 
                     $('#val_quantity').val(null);
                     $('#val_description').val(null);
@@ -210,7 +295,7 @@ $("#search_cusinstrument").hide();
            //res = $scope.instruments[index];
             ///console.log(res);
             $scope.mode = 'add';
-           var customer_id =   $('#QuotationCustomerId').val();
+            var customer_id =   $('#QuotationCustomerId').val();
             var quotation_id =   $('#QuotationQuotationId').val();
             var instrument_id   =   $('#QuotationInstrumentId').val();
             var instrument_quantity =   $('#val_quantity').val();
@@ -237,14 +322,92 @@ $("#search_cusinstrument").hide();
                     $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
                         
                     $scope.pagination();
-                    
+                    setTimeout(
+                        function(){
+                            $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
+                                    id        : 'device_id',
+                                    name      : 'title1',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title2').editable(path_url+'/Quotations/update_title2', {
+                                    id        : 'device_id',
+                                    name      : 'title2',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title3').editable(path_url+'/Quotations/update_title3', {
+                                    id        : 'device_id',
+                                    name      : 'title3',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title4').editable(path_url+'/Quotations/update_title4', {
+                                    id        : 'device_id',
+                                    name      : 'title4',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title5').editable(path_url+'/Quotations/update_title5', {
+                                    id        : 'device_id',
+                                    name      : 'title5',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title6').editable(path_url+'/Quotations/update_title6', {
+                                    id        : 'device_id',
+                                    name      : 'title6',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title7').editable(path_url+'/Quotations/update_title7', {
+                                    id        : 'device_id',
+                                    name      : 'title7',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title8').editable(path_url+'/Quotations/update_title8', {
+                                    id        : 'device_id',
+                                    name      : 'title8',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                        },50);
                 
                 });
                 
             if($scope.titles.indexOf("0") != "-1")
-                $scope.show_serial = true;
+                $scope.show_title1 = true;
             if($scope.titles.indexOf("1") != "-1")
-                $scope.show_potno = true;
+                $scope.show_title2 = true;
+            if($scope.titles.indexOf("2") != "-1")
+                $scope.show_title3 = true;
+            if($scope.titles.indexOf("3") != "-1")
+                $scope.show_title4 = true;
+            if($scope.titles.indexOf("4") != "-1")
+                $scope.show_title5 = true;
+            if($scope.titles.indexOf("5") != "-1")
+                $scope.show_title6 = true;
+            if($scope.titles.indexOf("6") != "-1")
+                $scope.show_title7 = true;
+            if($scope.titles.indexOf("7") != "-1")
+                $scope.show_title8 = true;
             
                 $('#val_quantity').val(null).prop("disabled", false);
                 $('#val_description').val(null).prop("disabled", false);
@@ -313,7 +476,72 @@ $("#search_cusinstrument").hide();
 //                });
                     
                 $('#val_department').val(dept.Department.departmentname);
-                
+                setTimeout(
+                                    function(){
+                            $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
+                                    id        : 'device_id',
+                                    name      : 'title1',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title2').editable(path_url+'/Quotations/update_title2', {
+                                    id        : 'device_id',
+                                    name      : 'title2',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title3').editable(path_url+'/Quotations/update_title3', {
+                                    id        : 'device_id',
+                                    name      : 'title3',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title4').editable(path_url+'/Quotations/update_title4', {
+                                    id        : 'device_id',
+                                    name      : 'title4',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title5').editable(path_url+'/Quotations/update_title5', {
+                                    id        : 'device_id',
+                                    name      : 'title5',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title6').editable(path_url+'/Quotations/update_title6', {
+                                    id        : 'device_id',
+                                    name      : 'title6',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title7').editable(path_url+'/Quotations/update_title7', {
+                                    id        : 'device_id',
+                                    name      : 'title7',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });
+                            $('.edit_title8').editable(path_url+'/Quotations/update_title8', {
+                                    id        : 'device_id',
+                                    name      : 'title8',
+                                    type      : 'text',
+                                    cancel    : 'Cancel',
+                                    submit    : 'Save',
+                                    tooltip   : 'Click to edit'
+                               });},50);
                 //$('#val_department_id').val(dept.Department.id);
                 //$('#val_model_no').val(parsedata.CustomerInstrument.model_no);
                 //$('#QuotationInstrumentId').val(instrument_id);
@@ -500,8 +728,8 @@ $("#search_cusinstrument").hide();
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_title">Titles</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('title', array('id'=>'val_title', 'ng-model' => 'titles', 'class'=>'form-control','label'=>false,'name'=>'title',
-            'options'=>$titles,'placeholder'=>'Enter the Title','multiple')); ?>
+        <?php echo $this->Form->input('title', array('id'=>'val_title', 'ng-model' => 'titles', 'class'=>'form-control val_title','label'=>false,'name'=>'title',
+            'options'=>$titles,'placeholder'=>'Enter the Title','multiple','onclick'=>'setMaximumSelected(5,this)')); ?>
     </div>
 </div>
 <div class="form-group form-actions" ng-show="mode=='add'">
@@ -547,8 +775,15 @@ $("#search_cusinstrument").hide();
             <th class="text-center">Unit Price</th>
             <th class="text-center">Account Service</th>
             <th class="text-center">Total</th>
-            <th class="text-center" ng-show="show_serial">Serialno</th>
-            <th class="text-center" ng-show="show_potno">potno</th>
+            <th class="text-center edit_title1" ng-show="show_title1"><?php echo $titles[0]; ?></th>
+            <th class="text-center edit_title2" ng-show="show_title2"><?php echo $titles[1]; ?></th>
+            <th class="text-center edit_title3" ng-show="show_title3"><?php echo $titles[2]; ?></th>
+            <th class="text-center edit_title4" ng-show="show_title4"><?php echo $titles[3]; ?></th>
+            <th class="text-center edit_title5" ng-show="show_title5"><?php echo $titles[4]; ?></th>
+            <th class="text-center edit_title6" ng-show="show_title6"><?php echo $titles[5]; ?></th>
+            <th class="text-center edit_title7" ng-show="show_title7"><?php echo $titles[6]; ?></th>
+            <th class="text-center edit_title8" ng-show="show_title8"><?php echo $titles[7]; ?></th>
+            
             <th class="text-center">Action</th>
         </tr>
     </thead>
@@ -564,8 +799,14 @@ $("#search_cusinstrument").hide();
             <td>{{res.price}}</td>
             <td>{{res.service}}</td>
             <td>{{res.total}}</td>
-            <td ng-show="show_serial" class="text-center edit_title1" id="{{res.id}}"></td>
-            <td ng-show="show_potno" class="text-center edit_title2" id="{{res.id}}"></td>
+            <td ng-show="show_title1" class="text-center edit_title1" id="{{res.id}}">{{res.title1_val}}</td>
+            <td ng-show="show_title2" class="text-center edit_title2" id="{{res.id}}">{{res.title2_val}}</td>
+            <td ng-show="show_title3" class="text-center edit_title3" id="{{res.id}}">{{res.title3_val}}</td>
+            <td ng-show="show_title4" class="text-center edit_title4" id="{{res.id}}">{{res.title4_val}}</td>
+            <td ng-show="show_title5" class="text-center edit_title5" id="{{res.id}}">{{res.title5_val}}</td>
+            <td ng-show="show_title6" class="text-center edit_title6" id="{{res.id}}">{{res.title6_val}}</td>
+            <td ng-show="show_title7" class="text-center edit_title7" id="{{res.id}}">{{res.title7_val}}</td>
+            <td ng-show="show_title8" class="text-center edit_title8" id="{{res.id}}">{{res.title8_val}}</td>
             <td>
                 <div class="btn-group">
                             <a ng-click="edit_instrument($index)" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit">
@@ -578,7 +819,7 @@ $("#search_cusinstrument").hide();
                 
             </td>
         </tr>
-        <tr ng-hide="instruments.length"><td>No Instruments found</td></tr>
+        <tr ng-hide="instruments.length"><td colspan="10">No Instruments found</td></tr>
     </tbody>
 </table>
 </ng-form>
