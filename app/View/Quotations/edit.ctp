@@ -68,7 +68,7 @@ if(customer!='')
                                                 <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Quotations/edit/customer_special_needs'); ?>
                                                 </div>
-                                                <div class="tab-pane" id="tab3">
+                                                <div class="tab-pane" id="tab3" ng-app ng-controller="Quotationcontroller">
                                                    <?PHP echo $this->element('Quotations/edit/description'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab4">

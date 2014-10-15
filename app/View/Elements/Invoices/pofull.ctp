@@ -35,7 +35,7 @@
                             <td class="text-center"><?PHP echo $list['Customer']['customername']; ?></td>
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['customer_address'];; ?></td>
                             <!-- cust_purchase_order_no --><td class="text-center" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo $list['Deliveryorder']['quotationno']; ?><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
-                            <td class="text-center"><a href="javascript:void(0);" class="prepare" id="<?PHP echo $list['Invoice']['id']; ?>"><?PHP echo  'Prepare Invoice'; ?></a></td>
+                            <td class="text-center"><a href="javascript:void(0);" class="pofull-prepare" id="<?PHP echo $list['Invoice']['id']; ?>"><?PHP echo  'Prepare Invoice'; ?></a></td>
 <!--                            <td class="text-center"> <a href="#modal-regular<?PHP //echo $list['Deliveryorder']['id'] ?>" class="btn btn-primary" data-toggle="modal">View</a></td>-->
                             
                         </tr>
