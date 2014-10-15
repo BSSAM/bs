@@ -37,6 +37,7 @@ if(customer!='')
 
 <div class="row">
                         <div class="col-md-12">
+                            <?PHP echo $this->element('message'); ?>
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
