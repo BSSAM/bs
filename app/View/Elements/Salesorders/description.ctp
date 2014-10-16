@@ -152,7 +152,7 @@ $("#search_cusinstrument").hide();
                 var instrument_name=$('#val_instrument').val();
                 var instrument_modelno=$('#val_model_no').val();
                 var instrument_brand=$('#val_brand').val();
-                var instrument_range=$('#val_range').val();
+                var instrument_range=$('#sales_range').val();
                 var instrument_calllocation=$('#sales_calllocation').val();
                 var instrument_calltype=$('#sales_calltype').val();
                 var instrument_validity=$('#sales_validity').val();
@@ -166,11 +166,12 @@ $("#search_cusinstrument").hide();
                 var instrument_title=$('#val_title').val();
 
 
-                    $http.post(path_url+'Quotations/sales_add_instrument/',{
+                    $http.post(path_url+'Salesorders/sales_add_instrument/',{
                         instrument_quantity:instrument_quantity,
                         "instrument_validity":instrument_validity,
                         "customer_id":customer_id,
                         "instrument_id":instrument_id,
+                        instrument_name:instrument_name,
     //                    "instrument_quantity":instrument_quantity,
                         "instrument_brand":instrument_brand,
                         "instrument_modelno":instrument_modelno,
@@ -190,11 +191,11 @@ $("#search_cusinstrument").hide();
                             console.log(k);
                             console.log(v);
                             //,"id":k
-                            $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
+                            $new_data = {serial:v,customer_id:customer_id,salesorder_id:salesorder_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
                             $scope.instruments.push($new_data);
                             setTimeout(
                                     function(){
-                            $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
+                            $('.edit_title1').editable(path_url+'/Salesorders/update_title1', {
                                     id        : 'device_id',
                                     name      : 'title1',
                                     type      : 'text',
@@ -203,7 +204,7 @@ $("#search_cusinstrument").hide();
                                     tooltip   : 'Click to edit',
                                     
                                });
-                            $('.edit_title2').editable(path_url+'/Quotations/update_title2', {
+                            $('.edit_title2').editable(path_url+'/Salesorders/update_title2', {
                                     id        : 'device_id',
                                     name      : 'title2',
                                     type      : 'text',
@@ -211,7 +212,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title3').editable(path_url+'/Quotations/update_title3', {
+                            $('.edit_title3').editable(path_url+'/Salesorders/update_title3', {
                                     id        : 'device_id',
                                     name      : 'title3',
                                     type      : 'text',
@@ -219,7 +220,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title4').editable(path_url+'/Quotations/update_title4', {
+                            $('.edit_title4').editable(path_url+'/Salesorders/update_title4', {
                                     id        : 'device_id',
                                     name      : 'title4',
                                     type      : 'text',
@@ -227,7 +228,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title5').editable(path_url+'/Quotations/update_title5', {
+                            $('.edit_title5').editable(path_url+'/Salesorders/update_title5', {
                                     id        : 'device_id',
                                     name      : 'title5',
                                     type      : 'text',
@@ -235,7 +236,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title6').editable(path_url+'/Quotations/update_title6', {
+                            $('.edit_title6').editable(path_url+'/Salesorders/update_title6', {
                                     id        : 'device_id',
                                     name      : 'title6',
                                     type      : 'text',
@@ -243,7 +244,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title7').editable(path_url+'/Quotations/update_title7', {
+                            $('.edit_title7').editable(path_url+'/Salesorders/update_title7', {
                                     id        : 'device_id',
                                     name      : 'title7',
                                     type      : 'text',
@@ -251,7 +252,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title8').editable(path_url+'/Quotations/update_title8', {
+                            $('.edit_title8').editable(path_url+'/Salesorders/update_title8', {
                                     id        : 'device_id',
                                     name      : 'title8',
                                     type      : 'text',
@@ -280,24 +281,23 @@ $("#search_cusinstrument").hide();
                 if($scope.titles.indexOf("7") != "-1")
                     $scope.show_title8 = true;
 
-                    $('#val_quantity').val(null);
-                    $('#val_description').val(null);
+                    $('#sales_quantity').val(null);
+                    $('#val_instrument').val(null);
                     $('#val_model_no').val(null);
                     $('#val_brand').empty().append('<option value="">Select Brand</option>');
-                    $('#val_range').val(null);
-                    $('#val_unit_price').val(null);
-                    $('#val_discount1').val(null);
+                    $('#sales_range').val(null);
+                    
 //                    $('#val_description').val(null);
 //                    $('#val_description').removeAttr("required");
 //                    $('#val_quantity').removeAttr("required");
-                    $('#val_description').prop('required', false);
-                    $('#val_quantity').prop('required', false);
-                    $('#val_model_no').prop('required', false);
-                    $('#val_brand').prop('required', false);
-                    $('#val_range').prop('required', false);
-                    $('#val_call_location').prop('required', false);
-                    $('#val_call_type').prop('required', false);
-                    $('#val_account_service').prop('required', false);
+//                    $('#val_description').prop('required', false);
+//                    $('#val_quantity').prop('required', false);
+//                    $('#val_model_no').prop('required', false);
+//                    $('#val_brand').prop('required', false);
+//                    $('#val_range').prop('required', false);
+//                    $('#val_call_location').prop('required', false);
+//                    $('#val_call_type').prop('required', false);
+//                    $('#val_account_service').prop('required', false);
             
         }
        
@@ -307,32 +307,52 @@ $("#search_cusinstrument").hide();
            //res = $scope.instruments[index];
            //console.log(res);
             $scope.mode = 'add';
-            var customer_id =   $('#QuotationCustomerId').val();
-            var quotation_id =   $('#QuotationQuotationId').val();
-            var instrument_id   =   $('#QuotationInstrumentId').val();
-            var instrument_quantity =   $('#val_quantity').val();
-            var instrument_name=$('#val_description').val();
-            var instrument_modelno=$('#val_model_no').val();
-            var instrument_brand=$('#val_brand').val();
-            var instrument_range=$('#val_range').val();
-            var instrument_calllocation=$('#val_call_location').val();
-            var instrument_calltype=$('#val_call_type').val();
-            var instrument_validity=$('#val_validity').val();
-            var instrument_unitprice=$('#val_unit_price').val();
-            var instrument_discount=$('#val_discount').val();
-            var instrument_cal=instrument_unitprice*instrument_discount/100;
-            var instrument_total= instrument_unitprice - instrument_cal;
+//            var customer_id =   $('#QuotationCustomerId').val();
+//            var quotation_id =   $('#QuotationQuotationId').val();
+//            var instrument_id   =   $('#QuotationInstrumentId').val();
+//            var instrument_quantity =   $('#val_quantity').val();
+//            var instrument_name=$('#val_description').val();
+//            var instrument_modelno=$('#val_model_no').val();
+//            var instrument_brand=$('#val_brand').val();
+//            var instrument_range=$('#val_range').val();
+//            var instrument_calllocation=$('#val_call_location').val();
+//            var instrument_calltype=$('#val_call_type').val();
+//            var instrument_validity=$('#val_validity').val();
+//            var instrument_unitprice=$('#val_unit_price').val();
+//            var instrument_discount=$('#val_discount').val();
+//            var instrument_cal=instrument_unitprice*instrument_discount/100;
+//            var instrument_total= instrument_unitprice - instrument_cal;
+//
+//            var instrument_department=$('#val_department_id').val();
+//            var instrument_account=$('#val_account_service').val();
+//            var instrument_title=$('#val_title').val();
+                var customer_id =   $('#SalesorderCustomerId').val();
+                var salesorder_id =   $('#SalesorderSalesorderId').val();
+                var instrument_id   =   $('#SalesorderInstrumentId').val();
+                var instrument_quantity =   $('#sales_quantity').val();
+                var instrument_name=$('#val_instrument').val();
+                var instrument_modelno=$('#val_model_no').val();
+                var instrument_brand=$('#val_brand').val();
+                var instrument_range=$('#sales_range').val();
+                var instrument_calllocation=$('#sales_calllocation').val();
+                var instrument_calltype=$('#sales_calltype').val();
+                var instrument_validity=$('#sales_validity').val();
+                var instrument_unitprice=$('#sales_unitprice').val();
+                var instrument_discount=$('#sales_discount').val();
+                var instrument_cal=instrument_unitprice*instrument_discount/100;
+                var instrument_total= instrument_unitprice - instrument_cal;
 
-            var instrument_department=$('#val_department_id').val();
-            var instrument_account=$('#val_account_service').val();
-            var instrument_title=$('#val_title').val();
+                var instrument_department=$('#sales_department_id').val();
+                var instrument_account=$('#sales_accountservice').val();
+                var instrument_title=$('#val_title').val();
              
             
-                $http.post(path_url+'Quotations/update_instrument/', {
+                $http.post(path_url+'Salesorders/update_instrument/', {
                     device_id:$scope.edit_id,
                     instrument_quantity:instrument_quantity,
                     "instrument_validity":instrument_validity,
                     "customer_id":customer_id,
+                    instrument_name:instrument_name,
                     "instrument_id":instrument_id,
                     "instrument_brand":instrument_brand,
                     "instrument_modelno":instrument_modelno,
@@ -341,22 +361,22 @@ $("#search_cusinstrument").hide();
                     "instrument_calltype":instrument_calltype,
                     "instrument_unitprice":instrument_unitprice,
                     "instrument_discount":instrument_discount,
+                    "instrument_total":instrument_total,
                     "instrument_department":instrument_department,
                     "instrument_account":instrument_account,
                     "instrument_title":instrument_title,
-                    "instrument_total":instrument_total,
-                    "quotationno":quotation_id
+                    "salesorder_id":salesorder_id
                 }).success(function(data){
-                    console.log(data);
+                            //console.log(data);
                     //return false;
         
-                    $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
+                    $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,salesorder_id:salesorder_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
                         //res = $scope.instruments[$scope.edit_index];
                         //console.log(res);
                     $scope.pagination();
                     setTimeout(
                         function(){
-                            $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
+                            $('.edit_title1').editable(path_url+'/Salesorders/update_title1', {
                                     id        : 'device_id',
                                     name      : 'title1',
                                     type      : 'text',
@@ -364,7 +384,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title2').editable(path_url+'/Quotations/update_title2', {
+                            $('.edit_title2').editable(path_url+'/Salesorders/update_title2', {
                                     id        : 'device_id',
                                     name      : 'title2',
                                     type      : 'text',
@@ -372,7 +392,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title3').editable(path_url+'/Quotations/update_title3', {
+                            $('.edit_title3').editable(path_url+'/Salesorders/update_title3', {
                                     id        : 'device_id',
                                     name      : 'title3',
                                     type      : 'text',
@@ -380,7 +400,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title4').editable(path_url+'/Quotations/update_title4', {
+                            $('.edit_title4').editable(path_url+'/Salesorders/update_title4', {
                                     id        : 'device_id',
                                     name      : 'title4',
                                     type      : 'text',
@@ -388,7 +408,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title5').editable(path_url+'/Quotations/update_title5', {
+                            $('.edit_title5').editable(path_url+'/Salesorders/update_title5', {
                                     id        : 'device_id',
                                     name      : 'title5',
                                     type      : 'text',
@@ -396,7 +416,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title6').editable(path_url+'/Quotations/update_title6', {
+                            $('.edit_title6').editable(path_url+'/Salesorders/update_title6', {
                                     id        : 'device_id',
                                     name      : 'title6',
                                     type      : 'text',
@@ -404,7 +424,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title7').editable(path_url+'/Quotations/update_title7', {
+                            $('.edit_title7').editable(path_url+'/Salesorders/update_title7', {
                                     id        : 'device_id',
                                     name      : 'title7',
                                     type      : 'text',
@@ -412,7 +432,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title8').editable(path_url+'/Quotations/update_title8', {
+                            $('.edit_title8').editable(path_url+'/Salesorders/update_title8', {
                                     id        : 'device_id',
                                     name      : 'title8',
                                     type      : 'text',
@@ -458,7 +478,7 @@ $("#search_cusinstrument").hide();
        {
            res = $scope.instruments[index];
         
-            $http.get(path_url+'Quotations/delete_instrument/'+res.serial).success(function(data){
+            $http.get(path_url+'Salesorders/delete_instrument/'+res.serial).success(function(data){
                instrument = [];
                
                 $.each($scope.instruments, function(k,v){
@@ -475,7 +495,7 @@ $("#search_cusinstrument").hide();
        $scope.edit_instrument = function(index)
        {
             res = $scope.instruments[index];
-            ///console.log(res);
+            //console.log(res); return false;
             $scope.mode = 'edit';
             var brand = res.instrument_brand;
             $scope.edit_id = res.serial;
@@ -484,7 +504,7 @@ $("#search_cusinstrument").hide();
             //alert(instrument_id);
             var customer_id = res.customer_id;
             //alert(customer_id);
-            $http.post(path_url+'Quotations/get_brand_value_edit/',{"instrument_id":instrument_id,"customer_id":customer_id}).success(function(data)
+            $http.post(path_url+'Salesorders/get_brand_value_edit/',{"instrument_id":instrument_id,"customer_id":customer_id}).success(function(data)
             {
                // alert(instrument_id);
                 //console.log(data);
@@ -513,7 +533,7 @@ $("#search_cusinstrument").hide();
                 $('#val_department').val(dept.Department.departmentname);
                 setTimeout(
                                     function(){
-                            $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
+                            $('.edit_title1').editable(path_url+'/Salesorders/update_title1', {
                                     id        : 'device_id',
                                     name      : 'title1',
                                     type      : 'text',
@@ -521,7 +541,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title2').editable(path_url+'/Quotations/update_title2', {
+                            $('.edit_title2').editable(path_url+'/Salesorders/update_title2', {
                                     id        : 'device_id',
                                     name      : 'title2',
                                     type      : 'text',
@@ -529,7 +549,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title3').editable(path_url+'/Quotations/update_title3', {
+                            $('.edit_title3').editable(path_url+'/Salesorders/update_title3', {
                                     id        : 'device_id',
                                     name      : 'title3',
                                     type      : 'text',
@@ -537,7 +557,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title4').editable(path_url+'/Quotations/update_title4', {
+                            $('.edit_title4').editable(path_url+'/Salesorders/update_title4', {
                                     id        : 'device_id',
                                     name      : 'title4',
                                     type      : 'text',
@@ -545,7 +565,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title5').editable(path_url+'/Quotations/update_title5', {
+                            $('.edit_title5').editable(path_url+'/Salesorders/update_title5', {
                                     id        : 'device_id',
                                     name      : 'title5',
                                     type      : 'text',
@@ -553,7 +573,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title6').editable(path_url+'/Quotations/update_title6', {
+                            $('.edit_title6').editable(path_url+'/Salesorders/update_title6', {
                                     id        : 'device_id',
                                     name      : 'title6',
                                     type      : 'text',
@@ -561,7 +581,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title7').editable(path_url+'/Quotations/update_title7', {
+                            $('.edit_title7').editable(path_url+'/Salesorders/update_title7', {
                                     id        : 'device_id',
                                     name      : 'title7',
                                     type      : 'text',
@@ -569,7 +589,7 @@ $("#search_cusinstrument").hide();
                                     submit    : 'Save',
                                     tooltip   : 'Click to edit'
                                });
-                            $('.edit_title8').editable(path_url+'/Quotations/update_title8', {
+                            $('.edit_title8').editable(path_url+'/Salesorders/update_title8', {
                                     id        : 'device_id',
                                     name      : 'title8',
                                     type      : 'text',
@@ -581,12 +601,14 @@ $("#search_cusinstrument").hide();
                 //$('#val_model_no').val(parsedata.CustomerInstrument.model_no);
                 //$('#QuotationInstrumentId').val(instrument_id);
             });
-            
-            $('#QuotationCustomerId').val(res.customer_id);
-            $('#QuotationQuotationId').val(res.quotation_id);
-            $('#QuotationInstrumentId').val(res.instrument_id);
-            $('#val_quantity').val(1).prop("disabled", true);
-            $('#val_description').val(res.name).prop("disabled", true);
+            var customer_id =   $('#SalesorderCustomerId').val();
+                var salesorder_id =   $('#SalesorderSalesorderId').val();
+                var instrument_id   =   $('#SalesorderInstrumentId').val();
+            $('#SalesorderCustomerId').val(res.customer_id);
+            $('#SalesorderSalesorderId').val(res.salesorder_id);
+            $('#SalesorderInstrumentId').val(res.instrument_id);
+            $('#sales_quantity').val(1).prop("disabled", true);
+            $('#val_instrument').val(res.name).prop("disabled", true);
             $('#val_model_no').val(res.model);
             /*setTimeout(function(){
                 console.log(res.instrument_brand);
@@ -602,17 +624,13 @@ $("#search_cusinstrument").hide();
             //$("#val_brand > option").filter( function() {
             //return $(this).val() == brand; 
             //}).prop('selected', true); //use .prop, not .attr
-            $('#val_range').val(res.instrument_range);
-            $('#val_call_location').val(res.location);
-            $('#val_call_type').val(res.type);
-            $('#val_validity').val(res.validity);
-            $('#val_unit_price').val(res.price);
-            $('#val_discount').val(res.instrument_discount);
-            
-
-            $('#val_department_id').val(res.instrument_department);
-            $('#val_account_service').val(res.service);
-            $('#val_title').val(res.instrument_title);
+            $('#sales_range').val(res.instrument_range);
+            $('#sales_calllocation').val(res.location);
+            $('#sales_calltype').val(res.type);
+            $('#sales_validity').val(res.validity);
+            $('#val_department').val(res.instrument_department);
+            $('#sales_accountservice').val(res.service);
+           // $('#val_title').val(res.instrument_title);
         }
        
        
@@ -716,31 +734,24 @@ $("#search_cusinstrument").hide();
     <div class="col-md-4">
         <?php echo $this->Form->input('call_location', array('id'=>'sales_calllocation','class'=>'form-control','ng-model' => 'loca_sales_model',
                                                 'label'=>false,'name'=>'sales_calllocation','type'=>'select','options'=>array('Inlab'=>'In-Lab',
-                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site','empty'=>'Select Call Location'))); ?>
+                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Call Location')); ?>
      
     </div>
     <label class="col-md-2 control-label" for="sales_calltype">Call Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'sales_calltype','class'=>'form-control','label'=>false,'name'=>'sales_calltype','ng-model' => 'type_sales_model',
-                                      'type'=>'select','options'=>array('singlas'=>'Singlas',
-                                          'no-singlas'=>'Non-Singlas','empty'=>'Select Call Type'))); ?>
+                                      'type'=>'select','options'=>array('Singlas'=>'Singlas',
+                                          'Non-Singlas'=>'Non-Singlas'),'empty'=>'Select Call Type')); ?>
     </div>
 </div>
 
-<div class="form-group">
-    
-    <label class="col-md-2 control-label" for="sales_unitprice">Unit Price</label>
-    <div class="col-md-4">
+
         <?php echo $this->Form->input('sales_unitprice', array('id'=>'sales_unitprice','class'=>'form-control','label'=>false,
-            'name'=>'sales_unitprice','placeholder'=>'Enter the Unit Price','disabled'=>'disabled')); ?>
-    </div>
-    <label class="col-md-2 control-label" for="sales_discount">Discount </label>
-    <div class="col-md-4">
+            'name'=>'sales_unitprice','placeholder'=>'Enter the Unit Price','type'=>'hidden')); ?>
+    
         <?php echo $this->Form->input('sales_discount', array('id'=>'sales_discount','class'=>'form-control',
-                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'sales_discount','type'=>'text')); ?>
-        
-    </div>
-</div>
+                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'sales_discount','type'=>'hidden')); ?>
+    
 
 <div class="form-group">
     
@@ -779,7 +790,7 @@ $("#search_cusinstrument").hide();
 </div>-->
 <div class="form-group form-actions" ng-show="mode=='add'">
     <div class="col-md-9 col-md-offset-10 sales_update_device">
-        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-disabled' => 'quotation_add.$invalid', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary sales_description_add','escape' => false)); ?>
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-disabled' => 'salesorder_add.$invalid', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary sales_description_add','escape' => false)); ?>
         
     </div>
 </div>
@@ -817,9 +828,9 @@ $("#search_cusinstrument").hide();
             <th class="text-center">Call Location</th>
             <th class="text-center">Call Type</th>
             <th class="text-center">Validity</th>
-            <th class="text-center">Unit Price</th>
+<!--            <th class="text-center">Unit Price</th>-->
             <th class="text-center">Account Service</th>
-            <th class="text-center">Total</th>
+<!--            <th class="text-center">Total</th>-->
             <th class="text-center edit_title1" ng-show="show_title1"><?php echo $titles[0]; ?></th>
             <th class="text-center edit_title2" ng-show="show_title2"><?php echo $titles[1]; ?></th>
             <th class="text-center edit_title3" ng-show="show_title3"><?php echo $titles[2]; ?></th>
@@ -841,9 +852,9 @@ $("#search_cusinstrument").hide();
             <td>{{res.location}}</td>
             <td>{{res.type}}</td>
             <td>{{res.validity}}</td>
-            <td>{{res.price}}</td>
+<!--            <td>{{res.price}}</td>-->
             <td>{{res.service}}</td>
-            <td>{{res.total}}</td>
+<!--            <td>{{res.total}}</td>-->
             <td ng-show="show_title1" class="text-center edit_title1" id="{{res.id}}">{{res.title1_val}}</td>
             <td ng-show="show_title2" class="text-center edit_title2" id="{{res.id}}">{{res.title2_val}}</td>
             <td ng-show="show_title3" class="text-center edit_title3" id="{{res.id}}">{{res.title3_val}}</td>
