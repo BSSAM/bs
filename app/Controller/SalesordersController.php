@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session','xls','Number');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog','InstrumentType');
+                            'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog','InstrumentType','Title');
         public function index()
         {
         /*******************************************************
@@ -53,7 +53,12 @@
             
             $this->set(compact('service','payment','priority','instrument_types'));
             $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
-            
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             if($this->request->is('post'))
             {
                
@@ -504,33 +509,119 @@
         }
         public function instrument_search()
         {
+//            $this->autoRender = false;
+//            $instrument =  $this->request->data['instrument'];
+//            $customer_id =  $this->request->data['customer_id'];
+//            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id)));
+//            foreach($instrument_details as $instrument)
+//            {
+//                echo "<div class='sales_instrument_id' align='left' id='".$instrument['Instrument']['id']."'>";
+//                $instrument_list= $this->Instrument->find('all',array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument['Instrument']['name'].'%'),'fields'=>array('Instrument.name')));
+//                foreach($instrument_list as $li)
+//                {
+//                    echo $li['Instrument']['name'];
+//                }
+//                echo "<br>";
+//                echo "</div>";
+//            }
             $this->autoRender = false;
-            $instrument =  $this->request->data['instrument'];
-            $customer_id =  $this->request->data['customer_id'];
-            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id)));
-            foreach($instrument_details as $instrument)
-            {
-                echo "<div class='sales_instrument_id' align='left' id='".$instrument['Instrument']['id']."'>";
-                $instrument_list= $this->Instrument->find('all',array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument['Instrument']['name'].'%'),'fields'=>array('Instrument.name')));
-                foreach($instrument_list as $li)
+             $instrument =  $this->request->data['instrument'];
+             $customer_id =  $this->request->data['customer_id'];
+             //pr($customer_id);
+            //$instrument =  'a';
+            //$customer_id =  'CUS-01-10000003';
+            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'group'=>array('Instrument.id'),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
+            //pr($instrument_details);
+            //pr(count($instrument_details));
+            //// echo json_encode($instrument_details);
+           // exit;
+            if(count($instrument_details)!=''):
+                foreach($instrument_details as $list)
                 {
-                    echo $li['Instrument']['name'];
+                    //if($list['Instrument']['name'];
+                    if($list['Instrument']['name']!='')
+                    {
+                    //echo "<br>";
+                    echo "<div class='sales_instrument_id' align='left' id='".$list['Instrument']['id']."'>";
+                    echo $list['Instrument']['name'];
+                    echo "<br>";
+                    echo "</div>";
+                    }
                 }
+            else:
+                echo "<div  align='left'>";
+                echo 'No Results Found';
                 echo "<br>";
-                echo "</div>";
-            }
+                echo "</div>"; 
+            endif;
+           
+           
+        }
+        
+        public function model_search()
+        {
+            $this->autoRender = false;
+             $model_no =  $this->request->data['model_no'];
+             $device_id =  $this->request->data['device_id'];
+             $customer_id =  $this->request->data['customer_id'];
+            //$instrument =  'a';
+            //$customer_id =  'CUS-01-10000003';
+            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id,'CustomerInstrument.model_no LIKE'=>'%'.$model_no.'%','CustomerInstrument.instrument_id'=>$device_id)));
+            //pr($instrument_details);
+            //exit;
+            //pr(count($instrument_details));
+            if(count($instrument_details)!=''):
+                foreach($instrument_details as $list)
+                {
+                    //if($list['Instrument']['name'];
+                    if($list['CustomerInstrument']['model_no']!='')
+                    {
+                    //echo "<br>";
+                    echo "<div class='customerins_id' align='left' id='".$list['CustomerInstrument']['id']."'>";
+                    echo $list['CustomerInstrument']['model_no'];
+                    echo "<br>";
+                    echo "</div>";
+                    }
+                }
+            else:
+                echo "<div  align='left'>";
+                echo 'No Results Found';
+                echo "<br>";
+                echo "</div>"; 
+            endif;
         }
         public function get_brand_value()
         {
+//            $this->autoRender = false;
+//            $instrument_id =  $this->request->data['instrument_id'];
+//            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id),'recursive'=>'3'));
+//            if(!empty($brand_details))
+//            {
+//                echo json_encode($brand_details);
+//            }
+//            //pr($brand_list);
             $this->autoRender = false;
             $instrument_id =  $this->request->data['instrument_id'];
-            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id),'recursive'=>'3'));
+            $customer_id =  $this->request->data['customer_id'];
+            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id),'recursive'=>'3'));
+            
             if(!empty($brand_details))
             {
                 echo json_encode($brand_details);
             }
-            //pr($brand_list);
-     
+        }
+        public function get_range_value()
+        {
+            $this->autoRender = false;
+            $instrument_id =  $this->request->data['instrument_id'];
+            $customer_id =  $this->request->data['customer_id'];
+            $range_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id),'recursive'=>'3'));
+            
+            if(!empty($range_details))
+            {
+                return json_encode($range_details);
+            }
+           
         }
         public function sales_add_instrument()
         {

@@ -670,7 +670,7 @@ $("#search_cusinstrument").hide();
 </div>
     
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_address">Model No</label>
+    <label class="col-md-2 control-label" for="val_model_no">Model No</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','autoComplete'=>'off')); ?>
