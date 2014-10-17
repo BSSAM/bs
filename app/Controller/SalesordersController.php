@@ -685,7 +685,7 @@
             $this->autoRender=false;
             //$device_id= $this->request->data['device_id'];
             $this->loadModel('Description');
-            //pr($id);exit;
+            pr($id);
             //pr($this->Description->updateAll(array('Description.pending'=>1),array('Description.quo_ins_id'=>$device_id)));exit;
             if($this->Description->updateAll(array('Description.pending'=>1),array('Description.id'=>$id)))
             {
@@ -790,11 +790,43 @@
             //pr($this->params['requested']);exit;
             $this->request->data = json_decode(file_get_contents("php://input"));
             $sales_id= $this->request->data->sales_id;
+            $quo_id = $this->request->data->quo_id;
             $this->loadModel('Description');
             $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id)));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach;
+            if(empty($edit_device_details)):
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$quo_id,'Description.pending'=>1)));
+            foreach($edit_device_details as $edit_device):
+                $edit_device_val[]=$edit_device;
+            endforeach;
+            endif;
+           //pr($edit_device_val);exit;
+            if(!empty($edit_device_val ))
+            {
+                echo json_encode($edit_device_val);
+            }
+            
+        }
+        
+        /// Continue for edit 
+        
+        public function instrument_edit()
+        {
+            $this->autoRender=false;
+            // = json_decode(file_get_contents("php://input"));
+            //pr($this->params['requested']);exit;
+            $this->request->data = json_decode(file_get_contents("php://input"));
+            $sales_id= $this->request->data->sales_id;
+            
+            
+            $this->loadModel('Description');
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id)));
+            foreach($edit_device_details as $edit_device):
+                $edit_device_val[]=$edit_device;
+            endforeach;
+            
            //pr($edit_device_val);exit;
             if(!empty($edit_device_val ))
             {

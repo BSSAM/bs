@@ -84,6 +84,7 @@
         //$("#val_description").attr("required","required");
         //$("#val_quantity").attr("required","required");
         var sales_id = $('#val_salesorderno').val();
+        var quo_id = $('#SalesorderQuotationno').val();
         
         $scope.pagination = function(){
            $scope.total = $scope.instruments.length;
@@ -102,7 +103,7 @@
            //console.log($scope.no_of_page);
         }
             $http.post(path_url+'Salesorders/instrument/',{
-                        sales_id:sales_id,
+                        sales_id:sales_id,quo_id:quo_id,
                     }).success(function(data){
                         
                         $.each(data,function(k,v){
@@ -434,7 +435,7 @@
            res = $scope.instruments[index];
         
             $http.get(path_url+'Salesorders/delete_instrument_quo/'+res.serial).success(function(data){
-                //console.log(data);
+                console.log(data);
                instrument = [];
                
                 $.each($scope.instruments, function(k,v){

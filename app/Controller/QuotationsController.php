@@ -24,7 +24,7 @@
          * *****************************************************
          */
             //$this->Quotation->recursive = 1; 
-            $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.id' => 'DESC')));
+            $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));
             $this->set('quotation', $quotation_lists);
         }
         public function add()
