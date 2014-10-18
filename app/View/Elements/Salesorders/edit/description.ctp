@@ -89,7 +89,7 @@
            
            //console.log($scope.no_of_page);
         }
-            $http.post(path_url+'Salesorders/instrument/',{
+            $http.post(path_url+'Salesorders/instrument_edit/',{
                         sales_id:sales_id,
                     }).success(function(data){
                         
@@ -397,6 +397,7 @@
         <?php  //echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary sales_description_add','escape' => false)); ?>
     </div>
 </div>-->
+<div class="col-md-12 col-sm-3 clearfix">
   <div class="pull-left dataTables_paginate paging_bootstrap custom_pagination">
         <ul ng-repeat="pg in no_of_page" class="pagination pagination-sm remove-margin">
             
@@ -404,13 +405,14 @@
           
         </ul>
     </div>
-<div class="col-md-6 pull-right">
+<div class="pull-right col-md-3 col-sm-3">
 <label>
 <div class="input-group">
     <input type="text" ng-model="sss" ng-change="filter_and_set((instruments | filter:sss).length);" class="form-control" placeholder="Search">
     <span class="input-group-addon"><i class="fa fa-search"></i></span>
 </div>
 </label>
+</div>
 </div>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">

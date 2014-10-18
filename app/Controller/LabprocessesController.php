@@ -348,6 +348,7 @@ class LabprocessesController extends AppController
                 if($lab_approved >=1)
                 {
                     $approved_device = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_approved_lab' => 1,)));
+                    //pr($approved_device);exit;
                     $approved = Hash::extract($approved_device,'{n}.Description.id');
                     $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'delivery')));
                     $dmt=$this->random('deliveryorder');
@@ -364,7 +365,7 @@ class LabprocessesController extends AppController
                     $delivery['Deliverorder']['branch_id']  = $branch['branch']['id'];
                     unset($delivery['Deliverorder']['id']);
                     unset($delivery['Deliverorder']['is_approved']);
-                    
+                    pr($delivery);exit;
                     if($this->Deliveryorder->save($delivery['Deliverorder']))
                     {
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));

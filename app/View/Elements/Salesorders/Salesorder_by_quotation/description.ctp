@@ -325,8 +325,22 @@
                 }).success(function(data){
                             //console.log(data);
                     //return false;
-        
-                    $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,salesorder_id:salesorder_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
+                    $scope.instruments[$scope.edit_index]['serial']=$scope.edit_id;
+                    $scope.instruments[$scope.edit_index]['customer_id']=customer_id;
+                    $scope.instruments[$scope.edit_index]['salesorder_id']=salesorder_id;
+                    $scope.instruments[$scope.edit_index]['instrument_id']=instrument_id;
+                    $scope.instruments[$scope.edit_index]['name']=instrument_name;
+                    $scope.instruments[$scope.edit_index]['model']=instrument_modelno;
+                    $scope.instruments[$scope.edit_index]['location']=instrument_calllocation;
+                    $scope.instruments[$scope.edit_index]['type']=instrument_calltype;
+                    $scope.instruments[$scope.edit_index]['instrument_brand']=instrument_brand;
+                    $scope.instruments[$scope.edit_index]['validity']=instrument_validity;
+                    $scope.instruments[$scope.edit_index]['instrument_range']=instrument_range;
+                    $scope.instruments[$scope.edit_index]['price']=instrument_unitprice;
+                    $scope.instruments[$scope.edit_index]['service']=instrument_account;
+                    $scope.instruments[$scope.edit_index]['total']=instrument_total;
+                    $scope.instruments[$scope.edit_index]['instrument_discount']=instrument_discount;
+                    $scope.instruments[$scope.edit_index]['instrument_department']=instrument_department;
                         //res = $scope.instruments[$scope.edit_index];
                         //console.log(res);
                     $scope.pagination();
