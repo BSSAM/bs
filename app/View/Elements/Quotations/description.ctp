@@ -125,14 +125,45 @@ $("#search_cusinstrument").hide();
         //$("#val_description").attr("required","required");
         //$("#val_quantity").attr("required","required");
        
+        $scope.validate = function()
+        {
+            counter = 0;
+            val_cus_ins = $('#val_description').val();
+            //alert(val_cus_ins);
+            $(".error-custom").each(function(){
+                if(!($(this).val()).trim())
+                {
+//                    if((counter == 0) && (val_cus_ins ==''))
+//                    {
+//                        $(this).parent().parent().addClass('error_custom_data');
+//                        //return false;
+//                    }
+//                    else
+//                    {
+                        $(this).parent().parent().removeClass('error_custom_data');
+                        $(this).parent().parent().addClass('error_data');
+                        counter++;
+                    //}
+                }
+                else
+                    $(this).parent().parent().removeClass('error_data');
+            });
+           
             
+            if(counter)
+                return false;
+            else
+                return true;
+        }
             
         $scope.title_change = function()
         {
                 //$("#val_description").attr("required","required");
                 //$("#val_quantity").attr("required","required");
                  
-                
+                 if(!$scope.validate())
+                     return false;
+                 
                 var customer_id =   $('#QuotationCustomerId').val();
                 var quotation_id =   $('#QuotationQuotationId').val();
                 var instrument_id   =   $('#QuotationInstrumentId').val();
@@ -175,8 +206,8 @@ $("#search_cusinstrument").hide();
                     }).success(function(data){
                         //alert(data);
                         $.each(data,function(k,v){
-                            console.log(k);
-                            console.log(v);
+                            //console.log(k);
+                            //console.log(v);
                             //,"id":k
                             $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
                             $scope.instruments.push($new_data);
@@ -663,24 +694,41 @@ $("#search_cusinstrument").hide();
        }
     }
 </script>
-
-<ng-form name="quotation_add" novalidate>
+<style>
+    .quotation_add .help-block_login{
+        display:none;
+    }
+    .quotation_add .error_data .help-block_login{
+        display:block !important; color: red;
+    }
+    .quotation_add .error_data .error-custom{
+        border:1px solid red;
+    }
+    .quotation_add .error_custom_data .help-block_login_cus{
+        display:block !important; color: red;
+    }
+    .quotation_add .error_custom_data .error-custom{
+        border:1px solid red;
+    }
+    
+</style>
+<div class="quotation_add" >
 <div class="form-group" >
      <label class="col-md-2 control-label" for="val_description">Instrument</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
-                array('id'=>'val_description','class'=>'form-control','ng-model' => 'desc_quo_model','placeholder'=>'Enter the Description','label'=>false,
+                array('id'=>'val_description','class'=>'form-control error-custom','ng-model' => 'desc_quo_model','placeholder'=>'Enter the Description','label'=>false,
                     'name'=>'description','autoComplete'=>'off')); ?>
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
         <!-- ng-if="quotation_add.desc_quo_model.$viewValue.length>0" -->
         <span class="help-block_login ins_error">Enter the Instrument Name</span>
-         <span class="help-block_login inscus_error">Instrument Needs Customer Details</span>
+        <span class="help-block_login_cus inscus_error">Instrument Needs Customer Details</span>
         <div id="search_instrument">  </div>
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control error-custom','label'=>false,'name'=>'quantity')); ?>
         <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
     </div>
         
@@ -689,7 +737,7 @@ $("#search_cusinstrument").hide();
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_model_no">Model No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control',
+        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control error-custom',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','autoComplete'=>'off')); ?>
         <div id="search_cusinstrument">  </div>
          <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
@@ -706,13 +754,13 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_brand">Brand</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control','ng-model' => 'brand_quo_model',
+        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control error-custom','ng-model' => 'brand_quo_model',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
         <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
     </div>
     <label class="col-md-2 control-label" for="val_range">Range</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','ng-model' => 'range_quo_model',
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control error-custom','ng-model' => 'range_quo_model',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
        <span class="help-block_login insra_error">Enter the Instrument Range</span>
     </div>
@@ -721,7 +769,7 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_call_location">Call Location</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control','ng-model' => 'loca_quo_model',
+        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control error-custom','ng-model' => 'loca_quo_model',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Call Location')); ?>
         <span class="help-block_login inscal_error">Enter the Call Location</span>
@@ -730,6 +778,7 @@ $("#search_cusinstrument").hide();
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model',
                                       'type'=>'select','ng-init'=>'type_quo_model="Singlas"','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas'))); ?>
+        
     </div>
 </div>
 
@@ -758,7 +807,7 @@ $("#search_cusinstrument").hide();
     </div>
      <label class="col-md-2 control-label" for="val_account_service">Account Service</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control','ng-model' => 'service_quo_model',
+        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control error-custom','ng-model' => 'service_quo_model',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
         <span class="help-block_login insser_error">Enter the Account Service</span>
@@ -862,6 +911,6 @@ $("#search_cusinstrument").hide();
         <tr ng-hide="instruments.length"><td colspan="10">No Instruments found</td></tr>
     </tbody>
 </table>
-</ng-form>
+</div>
 </div>
 </div>

@@ -16,7 +16,7 @@ class LabprocessesController extends AppController
      
     public function index()
     {
-        $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description')));
+        $labprocess = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved_lab'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description')));
         
         //$labprocess2 = $this->Salesorder->find('all',array('recursive'=>-1));
         //pr($labprocess);exit;
@@ -148,7 +148,7 @@ class LabprocessesController extends AppController
     public function labs($solist=NULL,$call_location=NULL,$id=NULL)
     {
        
-        $salesorder_list    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_approved'=>1,'Salesorder.is_deliveryorder_created'=>0)));
+        $salesorder_list    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0)));
         $quotation_list    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_list['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.is_deliveryorder_created'=>0)));
         //pr($salesorder_list);exit;
         $this->set('lab_sales_id',$id);
@@ -307,7 +307,9 @@ class LabprocessesController extends AppController
             if ($this->request->is(array('post', 'put'))) 
             {
                 $checking_array = $this->request->data['Description']['checking'];
+               // pr($checking_array);
                 $description_array = $this->request->data['Description']['processing'];
+                //pr($description_array);
                 if (!empty($description_array)) 
                 {
                     foreach ($description_array as $key => $value) 
@@ -331,6 +333,10 @@ class LabprocessesController extends AppController
                 }  
                 $device_count = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
                 $lab_approved = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.checking' => 1, 'Description.is_approved_lab' => 1, 'Description.processing' => 1)));
+//                $device_count = 2;
+//                $lab_approved = 1;
+//                pr($device_count);
+//                pr($lab_approved);
                 if($device_count==$lab_approved)
                 {
                     $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$quotation_list['Quotation']['id']));
@@ -352,21 +358,21 @@ class LabprocessesController extends AppController
                     $approved = Hash::extract($approved_device,'{n}.Description.id');
                     $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'delivery')));
                     $dmt=$this->random('deliveryorder');
-                    $delivery['Deliverorder']   =  $salesorder_list['Salesorder'];
-                    $delivery['Deliverorder']['po_reference_no']   =  $salesorder_list['Salesorder']['ref_no'];
-                    $delivery['Deliverorder']['delivery_order_no']  = $dmt;  
-                    $delivery['Deliverorder']['salesorder_id']  = $id; 
-                    $delivery['Deliverorder']['delivery_address']  = $address_list['Address']['address']; 
-                    $delivery['Deliverorder']['customer_address']  = $salesorder_list['Salesorder']['address']; 
-                    $delivery['Deliverorder']['delivery_order_date']  = date('d-M-y');
-                    $delivery['Deliverorder']['instrument_type_id']  = $salesorder_list['Salesorder']['instrument_type_id']; 
-                    $delivery['Deliverorder']['our_reference_no']  = $salesorder_list['Salesorder']['track_id']; 
-                    $delivery['Deliverorder']['your_reference_no']  = $salesorder_list['Salesorder']['ref_no']; 
-                    $delivery['Deliverorder']['branch_id']  = $branch['branch']['id'];
-                    unset($delivery['Deliverorder']['id']);
-                    unset($delivery['Deliverorder']['is_approved']);
-                    pr($delivery);exit;
-                    if($this->Deliveryorder->save($delivery['Deliverorder']))
+                    $delivery['Deliveryorder']   =  $salesorder_list['Salesorder'];
+                    $delivery['Deliveryorder']['po_reference_no']   =  $salesorder_list['Salesorder']['ref_no'];
+                    $delivery['Deliveryorder']['delivery_order_no']  = $dmt;  
+                    $delivery['Deliveryorder']['salesorder_id']  = $id; 
+                    $delivery['Deliveryorder']['delivery_address']  = $address_list['Address']['address']; 
+                    $delivery['Deliveryorder']['customer_address']  = $salesorder_list['Salesorder']['address']; 
+                    $delivery['Deliveryorder']['delivery_order_date']  = date('d-M-y');
+                    $delivery['Deliveryorder']['instrument_type_id']  = $salesorder_list['Salesorder']['instrument_type_id']; 
+                    $delivery['Deliveryorder']['our_reference_no']  = $salesorder_list['Salesorder']['track_id']; 
+                    $delivery['Deliveryorder']['your_reference_no']  = $salesorder_list['Salesorder']['ref_no']; 
+                    $delivery['Deliveryorder']['branch_id']  = $branch['branch']['id'];
+                    unset($delivery['Deliveryorder']['id']);
+                    unset($delivery['Deliveryorder']['is_approved']);
+                    //pr($delivery);exit;
+                    if($this->Deliveryorder->save($delivery['Deliveryorder']))
                     {
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
                         $last_id    =   $this->Deliveryorder->getLastInsertId();

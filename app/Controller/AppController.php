@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
     class AppController extends Controller 
     {
         public $components = array('Session');
-        public $uses    =   array('Description','Random','branch','Device','Customerspecialneed','PreqDevice','OnsiteInstrument');
+        public $uses    =   array('Description','Random','branch','Device','Customerspecialneed','PreqDevice','OnsiteInstrument','DelDescription');
         
         public function beforeFilter()
         {
