@@ -247,21 +247,39 @@
                    $device_current_status   =  $this->request->data['quotation_device_status']; 
                    if($device_current_status=='pending')
                    {
+                       
                         $salesorder_details    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$this->request->data['Salesorder']['quotation_id']),'contain'=>array('Description'=>array('Instrument','Brand','Range','Department','conditions'=>array('Description.pending'=>'1')),'Customer'),'recursive'=>3));
-                        //pr($salesorder_details);exit;
+                        
+                        
+                        //$this->request->data['Salesorder'] = $salesorder_details;
+                        //pr($this->request->data['Salesorder']);exit;
+                        
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
+                        //pr($quotation_details);exit;
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
                         $this->set(compact('contact_list'));
+                        $this->set('pendin',0);
                         if($salesorder_details['Customer']['invoice_type_id']!=3)
                         {
                             $this->set('sale',$salesorder_details);
                             $this->set('status_id','pending_status');
                             $this->request->data =   $salesorder_details;
-                            
                             $this->set('pendin',1);
                         }
-                        $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
-                        
+                        else
+                        {
+                            $this->Session->setFlash('Salesorder full invoice');
+                            $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
+                        }
+                        $sales_details =  $quotation_details['Quotation'];
+                        $sales['Salesorder']   =    $sales_details;
+                        $sales['Description']  =    $quotation_details['Device'];
+                        $sales['Salesorder']['quotation_id']   =    $sales_details['id'];
+                         $this->set('status_id','');
+                        $this->set('sale',$sales);
+                        //pr($this->request->data);exit;
+                        $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                        //pr($con);exit;
                         $instrument_type = $con['InstrumentType']['salesorder'];
                         //pr($instrument_type);exit;
                         //echo $instrument_type; exit;
@@ -271,6 +289,9 @@
                    {
                         $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         //pr($con);
+                        $con_inv_type = $con['Customer']['invoice_type_id']; 
+                        //pr($con_inv_type);
+                        $this->set('con_inv_type',$con_inv_type);
                         //pr($this->request->data['Salesorder']['quotation_id']);
                         $instrument_type = $con['InstrumentType']['salesorder'];
                         $this->set('pendin',0);
@@ -316,6 +337,7 @@
                     $this->request->data['Salesorder']['branch_id']=$branch['branch']['id'];
                     $this->request->data['Salesorder']['created_by']=$this->Session->read('sess_userid');
                     $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
+                    //pr($quotation_details);exit;
                     $this->request->data['Salesorder']['po_generate_type']=$quotation_details['Quotation']['po_generate_type'];
                     /* Instrument Type */
                     $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
@@ -685,7 +707,7 @@
             $this->autoRender=false;
             //$device_id= $this->request->data['device_id'];
             $this->loadModel('Description');
-            pr($id);
+            //pr($id);exit;
             //pr($this->Description->updateAll(array('Description.pending'=>1),array('Description.quo_ins_id'=>$device_id)));exit;
             if($this->Description->updateAll(array('Description.pending'=>1),array('Description.id'=>$id)))
             {
@@ -793,9 +815,11 @@
             $quo_id = $this->request->data->quo_id;
             $this->loadModel('Description');
             $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id)));
+            //pr($edit_device_details);
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach;
+            //pr($edit_device_val);exit;
             if(empty($edit_device_details)):
             $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$quo_id,'Description.pending'=>1)));
             foreach($edit_device_details as $edit_device):

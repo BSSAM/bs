@@ -46,7 +46,7 @@ $(document).on('click','.dofull-prepare',function(){
 </script>     
 <div class="table-responsive">
 <div class="col-sm-3 col-lg-12">
-                    <table id="sofull-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="dofull-datatable"  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">PO Reference No</th>
@@ -62,7 +62,7 @@ $(document).on('click','.dofull-prepare',function(){
                         <?PHP //pr($unapproved_order_list);exit; ?>
                         <?PHP if(!empty($prepareinvoice_approved_list)):?>
                         <?PHP foreach($prepareinvoice_approved_list as $list): ?>
-                        <?php if($list['Customer']['invoice_type_id']==3): ?>
+                        <?php if($list['Customer']['invoice_type_id']==4): ?>
                         <tr class="invoice_<?PHP echo $list['Invoice']['id']; ?>">
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['po_reference_no']; ?></td>
                             <td class="text-center"><?PHP echo $list['Customer']['customername']; ?></td>

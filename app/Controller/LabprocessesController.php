@@ -376,13 +376,34 @@ class LabprocessesController extends AppController
                     {
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
                         $last_id    =   $this->Deliveryorder->getLastInsertId();
-                        foreach($salesorder_list['Description'] as $sale):
+                        $devices_1   =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$salesorder_list['Salesorder']['id'],'Description.status'=>1,'Description.processing'=>1,'Description.checking'=>1)));
+                          
+                        foreach($devices_1 as $sale_1):
+                             $this->request->data['DelDescription']['deliveryorder_id']          =   $last_id;
+                            $this->request->data['DelDescription']['salesorder_id']             =   $sale_1['Description']['salesorder_id'];
+                            $this->request->data['DelDescription']['quotation_id']              =   $sale_1['Description']['quotation_id'];
+                            $this->request->data['DelDescription']['quotationno']               =   $sale_1['Description']['quotationno'];
+                            $this->request->data['DelDescription']['customer_id']               =   $sale_1['Description']['customer_id'];
+                            $this->request->data['DelDescription']['delivery_quantity']         =   $sale_1['Description']['sales_quantity'];
+                            $this->request->data['DelDescription']['instrument_id']             =   $sale_1['Description']['instrument_id'];
+                            $this->request->data['DelDescription']['model_no']                  =   $sale_1['Description']['model_no'];
+                            $this->request->data['DelDescription']['brand_id']                  =   $sale_1['Description']['brand_id'];
+                            $this->request->data['DelDescription']['delivery_range']            =   $sale_1['Description']['sales_range'];
+                            $this->request->data['DelDescription']['delivery_calllocation']     =   $sale_1['Description']['sales_calllocation'];
+                            $this->request->data['DelDescription']['delivery_calltype']         =   $sale_1['Description']['sales_calltype'];
+                            $this->request->data['DelDescription']['delivery_validity']         =   $sale_1['Description']['sales_validity'];
+                            $this->request->data['DelDescription']['delivery_unitprice']        =   $sale_1['Description']['sales_unitprice'];
+                            $this->request->data['DelDescription']['delivery_discount']         =   $sale_1['Description']['sales_discount'];
+                            $this->request->data['DelDescription']['department_id']             =   $sale_1['Description']['department_id'];
+                            $this->request->data['DelDescription']['delivery_accountservice']   =   $sale_1['Description']['sales_accountservice'];
+                            $this->request->data['DelDescription']['delivery_titles']           =   $sale_1['Description']['sales_titles'];
+                            $this->request->data['DelDescription']['delivery_total']           =   $sale_1['Description']['sales_total'];
+                            //return $this->request->data;
+                            //$description_data  =   $this->delDescription($sale['id'],$last_id);
                             $this->DelDescription->create();
-                            $description_data  =   $this->delDescription($sale['id'],$last_id);
-                            $this->DelDescription->save($description_data);
-                        endforeach;   
+                            $this->DelDescription->save($this->request->data);
+                        endforeach;  
                         
-                       
                         foreach($approved as $key=>$value)
                         {
                             $this->request->data['DelDescription']['deliveryorder_id']    =    $last_id;  

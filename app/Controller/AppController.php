@@ -390,26 +390,29 @@ App::uses('Controller', 'Controller');
         {
             
             $devices    =   $this->Description->find('first',array('conditions'=>array('Description.id'=>$des_id,'Description.status'=>1,'Description.processing'=>1,'Description.checking'=>1)));
-            $this->request->data['DelDescription']['deliveryorder_id']          =   $del_id;
-            $this->request->data['DelDescription']['salesorder_id']             =   $devices['Description']['salesorder_id'];
-            $this->request->data['DelDescription']['quotation_id']              =   $devices['Description']['quotation_id'];
-            $this->request->data['DelDescription']['quotationno']               =   $devices['Description']['quotationno'];
-            $this->request->data['DelDescription']['customer_id']               =   $devices['Description']['customer_id'];
-            $this->request->data['DelDescription']['delivery_quantity']         =   $devices['Description']['sales_quantity'];
-            $this->request->data['DelDescription']['instrument_id']             =   $devices['Description']['instrument_id'];
-            $this->request->data['DelDescription']['model_no']                  =   $devices['Description']['model_no'];
-            $this->request->data['DelDescription']['brand_id']                  =   $devices['Description']['brand_id'];
-            $this->request->data['DelDescription']['delivery_range']            =   $devices['Description']['sales_range'];
-            $this->request->data['DelDescription']['delivery_calllocation']     =   $devices['Description']['sales_calllocation'];
-            $this->request->data['DelDescription']['delivery_calltype']         =   $devices['Description']['sales_calltype'];
-            $this->request->data['DelDescription']['delivery_validity']         =   $devices['Description']['sales_validity'];
-            $this->request->data['DelDescription']['delivery_unitprice']        =   $devices['Description']['sales_unitprice'];
-            $this->request->data['DelDescription']['delivery_discount']         =   $devices['Description']['sales_discount'];
-            $this->request->data['DelDescription']['department_id']             =   $devices['Description']['department_id'];
-            $this->request->data['DelDescription']['delivery_accountservice']   =   $devices['Description']['sales_accountservice'];
-            $this->request->data['DelDescription']['delivery_titles']           =   $devices['Description']['sales_titles'];
-            $this->request->data['DelDescription']['delivery_total']           =   $devices['Description']['sales_total'];
-            return $this->request->data;
+            
+            if(!empty($devices)):
+                $this->request->data['DelDescription']['deliveryorder_id']          =   $del_id;
+                $this->request->data['DelDescription']['salesorder_id']             =   $devices['Description']['salesorder_id'];
+                $this->request->data['DelDescription']['quotation_id']              =   $devices['Description']['quotation_id'];
+                $this->request->data['DelDescription']['quotationno']               =   $devices['Description']['quotationno'];
+                $this->request->data['DelDescription']['customer_id']               =   $devices['Description']['customer_id'];
+                $this->request->data['DelDescription']['delivery_quantity']         =   $devices['Description']['sales_quantity'];
+                $this->request->data['DelDescription']['instrument_id']             =   $devices['Description']['instrument_id'];
+                $this->request->data['DelDescription']['model_no']                  =   $devices['Description']['model_no'];
+                $this->request->data['DelDescription']['brand_id']                  =   $devices['Description']['brand_id'];
+                $this->request->data['DelDescription']['delivery_range']            =   $devices['Description']['sales_range'];
+                $this->request->data['DelDescription']['delivery_calllocation']     =   $devices['Description']['sales_calllocation'];
+                $this->request->data['DelDescription']['delivery_calltype']         =   $devices['Description']['sales_calltype'];
+                $this->request->data['DelDescription']['delivery_validity']         =   $devices['Description']['sales_validity'];
+                $this->request->data['DelDescription']['delivery_unitprice']        =   $devices['Description']['sales_unitprice'];
+                $this->request->data['DelDescription']['delivery_discount']         =   $devices['Description']['sales_discount'];
+                $this->request->data['DelDescription']['department_id']             =   $devices['Description']['department_id'];
+                $this->request->data['DelDescription']['delivery_accountservice']   =   $devices['Description']['sales_accountservice'];
+                $this->request->data['DelDescription']['delivery_titles']           =   $devices['Description']['sales_titles'];
+                $this->request->data['DelDescription']['delivery_total']           =   $devices['Description']['sales_total'];
+                return $this->request->data;
+            endif;
         }
         public function ready_to_deliver($delivery_order_id=NULL,$assign_to=NULL,$cd_date=NULL)
         {

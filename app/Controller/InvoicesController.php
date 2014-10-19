@@ -54,7 +54,7 @@ class InvoicesController extends AppController
         $this->autoRender   =   false;
         $quo_id= $this->request->data['id'];
         $quo_list    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.is_deleted'=>0,'Quotation.status'=>1),'recursive'=>4));
-        pr($quo_list);exit;
+        //pr($quo_list);exit;
         $del_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.quotationno'=>$quo_id),'recursive'=>3));
         //pr($del_list);exit;
         function imp($imp)

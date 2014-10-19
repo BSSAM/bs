@@ -105,10 +105,11 @@
             $http.post(path_url+'Salesorders/instrument/',{
                         sales_id:sales_id,quo_id:quo_id,
                     }).success(function(data){
-                        
+                        //console.log(data);
                         $.each(data,function(k,v){
                             //console.log(k);
-                            console.log(v);
+                            //console.log(v);
+                            
                             //alert(v.Device.account_service);
                             $new_data = {
                                 serial:v.Description.id,
@@ -449,7 +450,8 @@
            res = $scope.instruments[index];
         
             $http.get(path_url+'Salesorders/delete_instrument_quo/'+res.serial).success(function(data){
-                console.log(data);
+                //console.log(data);
+                //return false;
                instrument = [];
                
                 $.each($scope.instruments, function(k,v){
@@ -833,9 +835,11 @@
                             <a ng-click="edit_instrument($index)" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-pencil"></i>
                             </a>
+                    <?php if($con_inv_type != 3): ?>
                             <a ng-click="delete_instrument($index)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger">
                                 <i class="fa fa-times"></i>
                             </a>
+                    <?php endif; ?>
                 </div>
                 
             </td>

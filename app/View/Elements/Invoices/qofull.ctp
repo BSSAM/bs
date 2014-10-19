@@ -10,6 +10,40 @@
          tooltip   : 'Click to edit the title'
     });
 });
+
+$(document).on('click','.qofull-prepare',function(){
+       var val_quotationid = $(this).attr('id');
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_quotationid,
+            url: path_url+'Invoices/preparein/',
+            success: function(data)
+            {
+                //console.log(data);
+                window.location.reload();
+//                if(data=='success')
+//                    {
+//                        alert('Client PO is Approved');
+//                        window.location.reload();
+//                    }
+//                    else
+//                        {
+//                             alert('Client PO is Approval Failed due to unknown Cause');
+//                             window.location.reload();
+//                        }
+                
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+
 </script>     
 <div class="table-responsive">
 <div class="col-sm-3 col-lg-12">
@@ -19,7 +53,7 @@
                             <th class="text-center">PO Reference No</th>
                             <th class="text-center">Customer Name</th>
                             <th class="text-center">Customer Address</th>
-                            <th class="text-center">Customer Purchase order No</th>
+                            <th class="text-center">Customer Quotation No</th>
                             <th class="text-center">Prepare Invoice</th>
 <!--                            <th class="text-center">View</th>-->
 
@@ -33,9 +67,9 @@
                         <tr class="invoice_<?PHP echo $list['Invoice']['id']; ?>">
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['po_reference_no']; ?></td>
                             <td class="text-center"><?PHP echo $list['Customer']['customername']; ?></td>
-                            <td class="text-center"><?PHP echo $list['Deliveryorder']['customer_address'];; ?></td>
+                            <td class="text-center"><?PHP echo $list['Deliveryorder']['customer_address']; ?></td>
                             <!-- cust_purchase_order_no --><td class="text-center" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo $list['Deliveryorder']['quotationno']; ?><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
-                            <td class="text-center"><a href="javascript:void(0);" class="qofull-prepare" id="<?PHP echo $list['Invoice']['id']; ?>"><?PHP echo  'Prepare Invoice'; ?></a></td>
+                            <td class="text-center"><a href="javascript:void(0);" class="qofull-prepare" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo  'Prepare Invoice'; ?></a></td>
 <!--                            <td class="text-center"> <a href="#modal-regular<?PHP //echo $list['Deliveryorder']['id'] ?>" class="btn btn-primary" data-toggle="modal">View</a></td>-->
                             
                         </tr>
