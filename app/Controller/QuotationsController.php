@@ -502,7 +502,7 @@
             //exit;
             
             $quantity = $this->request->data->instrument_quantity;
-            
+            //pr($quantity);exit;
             $instrument_ids = array();
             
             for($i=0;$i<$quantity;$i++)
@@ -524,7 +524,7 @@
                 $data['total']         =   $this->request->data->instrument_total;
                 $data['title']         =   $this->request->data->instrument_title;
                 $data['status']        =   0;
-
+                //pr($data);//exit;
                 $this->Device->create();
                 if($this->Device->save($data))
                 {
@@ -535,6 +535,7 @@
             
             header('Content-Type: application/json');
             echo json_encode($instrument_ids);
+            //exit;
         }
         public function delete_instrument($device_id)
         {

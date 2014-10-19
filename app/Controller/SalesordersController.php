@@ -257,6 +257,7 @@
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                         //pr($quotation_details);exit;
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+                        //pr($contact_list);exit;
                         $this->set(compact('contact_list'));
                         $this->set('pendin',0);
                         if($salesorder_details['Customer']['invoice_type_id']!=3)
@@ -271,19 +272,37 @@
                             $this->Session->setFlash('Salesorder full invoice');
                             $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
                         }
+                        //pr($quotation_details['Quotation']);exit;
                         $sales_details =  $quotation_details['Quotation'];
                         $sales['Salesorder']   =    $sales_details;
                         $sales['Description']  =    $quotation_details['Device'];
                         $sales['Salesorder']['quotation_id']   =    $sales_details['id'];
                          $this->set('status_id','');
                         $this->set('sale',$sales);
+                        //pr($sales['Description']);exit;
+                        
                         //pr($this->request->data);exit;
-                        $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                        $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotation_details['Quotation']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
+                        $con_inv_type = $con['Customer']['invoice_type_id']; 
+                        $this->set('con_inv_type',$con_inv_type);
                         //pr($con);exit;
-                        $instrument_type = $con['InstrumentType']['salesorder'];
+                        //$contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+                        $instrument_type = array($con['InstrumentType']['id']=>$con['InstrumentType']['salesorder']);
                         //pr($instrument_type);exit;
                         //echo $instrument_type; exit;
                          $this->set('instrument_type',$instrument_type);
+                         pr($sales['Description']);exit;
+//                         foreach($sales['Description'] as $sale):
+//                            $this->Description->create();
+//                            $description_data  =   $this->saleDescription_pending($sale['id']);
+//                            $description_data['Description']['salesorder_id']=$dmt;
+//                            $this->Description->save($description_data);
+//                        endforeach;
+//                        //pr($sale['id']);exit;
+//                        //pr($this->request->data);
+//                        //pr($sales);exit;
+//                        pr($sales);exit;
+//                        $this->request->data =   $sales;
                    }
                    else
                    {

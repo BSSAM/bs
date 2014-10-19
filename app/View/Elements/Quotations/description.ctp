@@ -154,15 +154,15 @@ $("#search_cusinstrument").hide();
                 return false;
             else
                 return true;
-        }
+        };
             
         $scope.title_change = function()
         {
                 //$("#val_description").attr("required","required");
                 //$("#val_quantity").attr("required","required");
                  
-                 if(!$scope.validate())
-                     return false;
+                 //if(!$scope.validate())
+                  //   return false;
                  
                 var customer_id =   $('#QuotationCustomerId').val();
                 var quotation_id =   $('#QuotationQuotationId').val();
@@ -204,12 +204,30 @@ $("#search_cusinstrument").hide();
                         "instrument_total":instrument_total,
                         "quotationno":quotation_id
                     }).success(function(data){
-                        //alert(data);
-                        $.each(data,function(k,v){
+                         $.each(data,function(k,v){
                             //console.log(k);
                             //console.log(v);
                             //,"id":k
-                            $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
+                            $new_data = {
+                                serial:v,
+                                customer_id:customer_id,
+                                quotation_id:quotation_id,
+                                "id":v,
+                                "instrument_id":instrument_id,
+                                name:instrument_name,
+                                model:instrument_modelno,
+                                location:instrument_calllocation,
+                                type:instrument_calltype,
+                                "instrument_brand":instrument_brand,
+                                validity:instrument_validity,
+                                "instrument_range":instrument_range,
+                                price:instrument_unitprice,
+                                service:instrument_account,
+                                total:instrument_total,
+                                "instrument_discount":instrument_discount,
+                                "instrument_title":instrument_title,
+                                "instrument_department":instrument_department
+                            };
                             $scope.instruments.push($new_data);
                             setTimeout(
                                     function(){
@@ -298,7 +316,9 @@ $("#search_cusinstrument").hide();
                     $scope.show_title7 = true;
                 if($scope.titles.indexOf("7") != "-1")
                     $scope.show_title8 = true;
-
+                    //console.log(data);
+                      //  return false;
+                       
                     $('#val_quantity').val(null);
                     $('#val_description').val(null);
                     $('#val_model_no').val(null);

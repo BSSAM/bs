@@ -87,7 +87,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
     <div class="col-md-12">
-        <?php echo $this->Form->input('val_instrument_type', array('class'=>'form-control','type'=>'text',
+        <?php echo $this->Form->input('Salesorder.instrument_type_id', array('class'=>'form-control','type'=>'text',
                                                 'label'=>false,'value'=>$instrument_type,'readonly'=>'readonly')); ?>
     </div>
 </div>

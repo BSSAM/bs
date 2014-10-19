@@ -116,6 +116,38 @@ App::uses('Controller', 'Controller');
             $this->request->data['Description']['is_approved']          =   0;
             return $this->request->data;
         }
+        public function saleDescription_pending($id=NULL)
+        {
+            $devices    =   $this->Device->find('first',array('conditions'=>array('Device.id'=>$id,'Device.status'=>1)));
+            $this->request->data['Description']['customer_id']          =   $devices['Device']['customer_id'];
+            $this->request->data['Description']['instrument_id']        =   $devices['Device']['instrument_id'];
+            $this->request->data['Description']['brand_id']             =   $devices['Device']['brand_id'];
+            $this->request->data['Description']['sales_quantity']       =   $devices['Device']['quantity'];
+            $this->request->data['Description']['model_no']             =   $devices['Device']['model_no'];
+            $this->request->data['Description']['sales_range']          =   $devices['Device']['range'];
+            $this->request->data['Description']['sales_calllocation']   =   $devices['Device']['call_location'];
+            $this->request->data['Description']['sales_calltype']       =   $devices['Device']['call_type'];
+            $this->request->data['Description']['sales_validity']       =   $devices['Device']['validity'];
+            $this->request->data['Description']['sales_discount']       =   $devices['Device']['discount'];
+            $this->request->data['Description']['department_id']        =   $devices['Device']['department_id'];
+            $this->request->data['Description']['sales_unitprice']      =   $devices['Device']['unit_price'];
+            $this->request->data['Description']['sales_accountservice'] =   $devices['Device']['account_service'];
+            //$this->request->data['Description']['sales_titles']         =   $devices['Device']['title'];
+            $this->request->data['Description']['sales_total']          =   $devices['Device']['total'];
+            $this->request->data['Description']['quotation_id']         =   $devices['Device']['quotation_id'];
+            $this->request->data['Description']['quotationno']          =   $devices['Quotation']['quotationno'];
+            $this->request->data['Description']['title1_val']           =   $devices['Device']['title1_val'];
+            $this->request->data['Description']['title2_val']           =   $devices['Device']['title2_val'];
+            $this->request->data['Description']['title3_val']           =   $devices['Device']['title3_val'];
+            $this->request->data['Description']['title4_val']           =   $devices['Device']['title4_val'];
+            $this->request->data['Description']['title5_val']           =   $devices['Device']['title5_val'];
+            $this->request->data['Description']['title6_val']           =   $devices['Device']['title6_val'];
+            $this->request->data['Description']['title7_val']           =   $devices['Device']['title7_val'];
+            $this->request->data['Description']['title8_val']           =   $devices['Device']['title8_val'];
+            $this->request->data['Description']['status']               =   0;
+            $this->request->data['Description']['is_approved']          =   0;
+            return $this->request->data;
+        }
         public function random($module)
         {
             switch ($module)
