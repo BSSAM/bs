@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <?PHP if(!empty($quotation_list_bybeforedo )):  ?>
+            <?PHP if(!empty($quotation_list_bybeforedo)):  ?>
              <?php foreach($quotation_list_bybeforedo as $quotation_list): ?>
             <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'){$class="error";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
             <tr class=<?PHP echo $class; ?>>

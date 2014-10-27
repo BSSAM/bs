@@ -652,6 +652,8 @@ class ClientposController extends AppController
             $quotation=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id),'recursive'=>2));
            // pr($quotation);exit;
             $updated    =   $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1,'Quotation.po_approval_date'=>date('d-m-y')),array('Quotation.quotationno'=>$id,'Quotation.po_generate_type'=>'Manual'));
+            $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>1,'Deliveryorder.po_approval_date'=>date('d-m-y')),array('Deliveryorder.quotationno'=>$id,'Deliveryorder.po_generate_type'=>'Manual'));
+            $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>1,'Salesorder.po_approval_date'=>date('d-m-y')),array('Salesorder.quotationno'=>$id,'Salesorder.po_generate_type'=>'Manual'));
             //pr($updated);exit;
             //return $updated;
             if($updated)

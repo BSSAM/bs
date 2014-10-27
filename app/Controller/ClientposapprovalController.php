@@ -34,7 +34,8 @@ class ClientposapprovalController extends AppController {
         //pr($data);exit;
         $sales_data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotation_id'=>$q_id,'Salesorder.is_deleted'=>0),'fields'=>array('salesorderno')));
         //pr($sales_data['Salesorder']['is_deliveryorder_created']);exit;
-        $delivery_order =   array();$sales_order =   array();
+        $delivery_order =   array();
+        $sales_order =   array();
         foreach($sales_data as $sale):
             $sales_order['Salesorder'][]=$sale['Salesorder']['id'];
             $delivery_orders    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$sale['Salesorder']['id'],'Deliveryorder.is_deleted'=>0),'fields'=>array('delivery_order_no')));
@@ -209,6 +210,7 @@ class ClientposapprovalController extends AppController {
             {
                 //BSTRA-01-10000009
                 $sales_data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotationno'=>$quotationno,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
+                //pr($sales_data);exit;
                 for($i=0;$i<count($sales_data);$i++)
                 {
                    //pr($sales_data[$i]['Description']);
@@ -218,19 +220,25 @@ class ClientposapprovalController extends AppController {
                       //echo $j;
                    }
                 }
-               // echo $j;
+                //echo $j;exit;
                 if($count == $j):
                     if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
+                        $this->Deliveryorder->updateAll(array('Deliveryorder.ref_no'=>'"'.$ponumbers.'"','Deliveryorder.ref_count'=>'"'.$po_count.'"','Deliveryorder.po_generate_type'=>'"Manual"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.quotationno'=>$quotationno));
                         $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+                    //echo $data['Quotation']['is_poapproved']; exit;
                         if($data['Quotation']['is_poapproved']==0):
                             $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
-                            if($data == ''):
+                       //pr($data);exit;
+                            if(!$data):
                             $this->request->data['Logactivity']['logname'] = 'ClientPO';
                             $this->request->data['Logactivity']['logactivity'] = 'Add';
                             $this->request->data['Logactivity']['logid'] = $quotationno;
                             $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                             $this->request->data['Logactivity']['logapprove'] = 1;
-                            $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                            //pr($this->request->data['Logactivity']);exit;
+                            //$this->Logactivity->create();
+                            $this->Logactivity->save($this->request->data['Logactivity']);
+                            //pr($a);
                             endif;
                             /******************/
                         endif;

@@ -375,6 +375,11 @@ class LabprocessesController extends AppController
                     if($this->Deliveryorder->save($delivery['Deliveryorder']))
                     {
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
+                        //////////////////////////////
+                        /////////////////////////////
+                        //////////////Quotation is_deliveryorder_created////////////////
+                        ///////////////////////////////
+                        ////////////////////////////////
                         $last_id    =   $this->Deliveryorder->getLastInsertId();
                         $devices_1   =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$salesorder_list['Salesorder']['id'],'Description.status'=>1,'Description.processing'=>1,'Description.checking'=>1)));
                           

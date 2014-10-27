@@ -91,7 +91,7 @@
             //pr($deliveryorder);
             $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
             $quo=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quo_no),'recursive'=>2));
-            $posat = $quo['Quotation']['is_pocount_satisfied'];
+            $posat = $quo['Quotation']['is_poapproved'];
             //pr($deliveryorder);exit;
             //pr($deliveryorder['Customer']['Contactpersoninfo']);
             //$this->request->data['Contactpersoninfo
@@ -103,7 +103,7 @@
                 $this->set('approval','manualdo');
                 $this->Session->setFlash(__($quo_no.' - Cannot Approve Deliveryorder without Equal PO Count(Manual) '));
                 $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
-             else:
+            else:
                  $this->set('approval','manualdocount');
             endif;
             $this->set(compact('service','deliveryorder'));

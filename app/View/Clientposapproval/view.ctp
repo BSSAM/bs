@@ -21,6 +21,7 @@ $(".form-horizontal").submit(function(e){
         type: "post",
         data: values,
         success: function(data){
+            //console.log(data);
             window.location.reload();
         }
     });
@@ -292,7 +293,10 @@ $(".form-horizontal").submit(function(e){
                         <!-- END Grids Content Content -->
                     </div>
                     <?php echo $this->element('message');?>
-                    <?php if($data['Quotation']['is_assign_po']!=1 && $data['Quotation']['po_generate_type']!="Manual"): ?>
+                    <?php //pr($data['Quotation']['is_assign_po']);exit; ?>
+                    <?php //if($data['Quotation']['is_assign_po']!=1 && $data['Quotation']['po_generate_type']!="Manual"): 
+                    if($data['Quotation']['is_poapproved']!=1):
+                    ?>
                      <div class="form-group form-actions">
                                 <div class="col-xs-12 text-right">
                                     <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
