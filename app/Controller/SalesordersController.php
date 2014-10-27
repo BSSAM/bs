@@ -1131,62 +1131,206 @@
         
             $this->autoRender = false;
             $salesorder_data = $this->Salesorder->find('first', array('conditions' => array('Salesorder.id' => $id),'recursive'=>3));
+            $quotation_data = $this->Quotation->find('first', array('conditions' => array('Quotation.id' => $salesorder_data['Salesorder']['quotation_id']),'recursive'=>2));
             //pr($salesorder_data);exit;
             $file_type = 'pdf';
             $filename = $salesorder_data['Salesorder']['salesorderno'];
-            $html = '<!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                    <meta charset="utf-8" />
-                    <title>'.$salesorder_data['Salesorder']['salesorderno'].'</title>
-                    <style>
-                    body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
-                    * { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
-                    .group:before, .group:after { content: ""; display: table; }
-                    .group:after { clear: both; }
-                    .group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
-                    .pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 700px; }
-                    .header_id { padding:10px 0; width:100%; display:block; }
-                    .logo { margin-top:10px;display:inline-block;width:50%; }
-                    .address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
-                    .address_details p { float:left; width:100%; }
-                    .address_details a { color: #1bbae1; float:left; width:100%; }
-                    .cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
-                    .address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
-                    .address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
-                    .address_box p { display:inline-block;}
-                    .invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
-                    .invoice_add {  margin:3px 0; display:inline-block;width:100%;}
-                    .invoice_add h5 { display:inline-block; width:30%; }
-                    .invoice_add span { margin-right:15px;display:inline-block; }
-                    .invoice_add abbr { font-style: italic;display:inline-block; }
-                    .services_details { margin-top:20px; width:100%; }
-                    .services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
-                    .services_details h4 abbr { width: 22%; display:inline-block;}
-                    .services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
-                    .invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
-                    .invoice_table table { width:100%; border:1px  solid #ccc !important; border-bottom:none !important; border-left:none !important; }
-                    .invoice_table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc !important; border-top:none !important; border-right:none !important; }
-                    .invoice_table table thead { background-color: #f1f1f1; }
-                    .instrument h4 { font-weight:normal; }
-                    .instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
-                    .address_table{width:50%;display:inline-block;}
-                        .address_table table{width:100%;border:1px solid #ccc;}
-                      .address_table td { padding: 10px; text-align: left !important; text-transform:none; border:none !important; }
-                    </style>
-                    </head>';
+//            $html = '<!DOCTYPE html>
+//                    <html lang="en">
+//                    <head>
+//                    <meta charset="utf-8" />
+//                    <title>'.$salesorder_data['Salesorder']['salesorderno'].'</title>
+//                    <style>
+//                    body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
+//                    * { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
+//                    .group:before, .group:after { content: ""; display: table; }
+//                    .group:after { clear: both; }
+//                    .group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+//                    .pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 700px; }
+//                    .header_id { padding:10px 0; width:100%; display:block; }
+//                    .logo { margin-top:10px;display:inline-block;width:50%; }
+//                    .address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
+//                    .address_details p { float:left; width:100%; }
+//                    .address_details a { color: #1bbae1; float:left; width:100%; }
+//                    .cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
+//                    .address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
+//                    .address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
+//                    .address_box p { display:inline-block;}
+//                    .invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
+//                    .invoice_add {  margin:3px 0; display:inline-block;width:100%;}
+//                    .invoice_add h5 { display:inline-block; width:30%; }
+//                    .invoice_add span { margin-right:15px;display:inline-block; }
+//                    .invoice_add abbr { font-style: italic;display:inline-block; }
+//                    .services_details { margin-top:20px; width:100%; }
+//                    .services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
+//                    .services_details h4 abbr { width: 22%; display:inline-block;}
+//                    .services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
+//                    .invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
+//                    .invoice_table table { width:100%; border:1px  solid #ccc !important; border-bottom:none !important; border-left:none !important; }
+//                    .invoice_table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc !important; border-top:none !important; border-right:none !important; }
+//                    .invoice_table table thead { background-color: #f1f1f1; }
+//                    .instrument h4 { font-weight:normal; }
+//                    .instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
+//                    .address_table{width:50%;display:inline-block;}
+//                        .address_table table{width:100%;border:1px solid #ccc;}
+//                      .address_table td { padding: 10px; text-align: left !important; text-transform:none; border:none !important; }
+//                    </style>
+//                    </head>';
+//            //foreach ($salesorder_data as $salesorder_data_list):
+//                $customername = $salesorder_data['Customer']['customername'];
+//                $billing_address = $salesorder_data['Salesorder']['address'];
+//                $postalcode = $salesorder_data['Customer']['postalcode'];
+//                $contactperson = $salesorder_data['Quotation']['Customer']['Contactpersoninfo'][0]['name'];
+//                $phone = $salesorder_data['Salesorder']['phone'];
+//                $fax = $salesorder_data['Salesorder']['fax'];
+//                $email = $salesorder_data['Salesorder']['email'];
+//                //$our_ref_no = $salesorder_data_list['Quotation']['ref_no'];
+//                $ref_no = $salesorder_data['Salesorder']['ref_no'];
+//                $reg_date = $salesorder_data['Salesorder']['reg_date'];
+//                $payment_term = $salesorder_data['Quotation']['Customer']['Paymentterm']['paymentterm'] . ' ' . $salesorder_data['Quotation']['Customer']['Paymentterm']['paymenttype'];
+//                $salesorderno = $salesorder_data['Salesorder']['salesorderno'];
+//            
+//                foreach($salesorder_data['Description'] as $device):
+//                    $device_name[] = $device;
+//                endforeach;
+//                
+//            //endforeach;
+//            $html .= '<body>
+//                <div class="pdf_container group"> 
+//                     <!-- header part-->
+//                     <div class="header_id">
+//                          <div class="f_left logo"><img src="img/logoBs.png" width="273" height="50" alt="" /></div>
+//                          <div class="address_details f_right">
+//                               <p>41 SENOKO DRIVE</p>
+//                               <p>SINGAPORE</p>
+//                               <p>758249</p>
+//                               <p> 6458 4411</p>
+//                               <a href="#" title="">invoice@bestandards.com</a>
+//                               <div class="cmpny_reg">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
+//                          </div>
+//                     </div>
+//                            <div class="address_table" style="margin-bottom:20px;">
+//                          <table style="height:250px;">
+//                          <tbody>
+//                          <tr><td>'.$customername.'<br>'.$billing_address.'<br>'.$postalcode.'</td></tr>
+//                          <tr><td style="text-transform:uppercase;font-weight:bold;">ATTN:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$contactperson.'</span></td></tr>
+//                          <tr><td style="text-transform:uppercase;font-weight:bold;">TEL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$phone.'</span></td></tr>
+//                          <tr><td style="text-transform:uppercase;font-weight:bold;">FAX:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$fax.'</span></td></tr>
+//                          <tr><td style="text-transform:uppercase;font-weight:bold;">EMAIL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$email.'</span></td></tr>
+//                </tbody>
+//                          </table>
+//
+//                </div>
+//                        <div class="address_table" style="margin-bottom:20px;">
+//                          <table style="height:250px;">
+//                          <tbody>
+//                          <tr><td style="text-align:center;font-weight:bold;font-size:20px;">'.$salesorderno.'</td></tr>
+//                         <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PO NO:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$ref_no.'</span></td></tr>
+//                          
+//                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">DATE:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$reg_date.'</span></td></tr>
+//                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PAYMENT TERM:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$payment_term.'</span></td></tr>
+//                </tbody>
+//                          </table>
+//
+//                </div>
+//                     <div class="services_details f_left">
+//                          <p>Being provided calibration service of the following(s) :</p>
+//                          <h4 class="f_left"><abbr>SALESORDER NO</abbr><span> '.$salesorderno.'</span></h4>
+//                     </div>
+//                     <div class="invoice_table f_left">
+//                          <table cellpadding="0" cellspacing="0">
+//                               <thead>
+//                                    <tr>
+//                                         <th>Instrument</th>
+//                                         <th>Brand</th>
+//                                         <th>Model</th>
+//                                         <th>Serial No</th>
+//                                         <th>Quantity</th>
+//                                         <th>Unit Price $(SGD)</th>
+//                                         <th>Total Price $(SGD)</th>
+//                                    </tr>
+//                               </thead>
+//                               <tbody>';
+//                $subtotal = 0;
+//                foreach($device_name as $device):
+//                    $html .= '
+//                    <tr>
+//                        <td class="instrument"><h4>'.$device['Instrument']['name'].'</h4>
+//                            <span>Faulty</span> <span>'.$device['Range']['range_name'].'</span></td>
+//                        <td>'.$device['Brand']['brandname'].'</td>
+//                        <td>'.$device['model_no'].'</td>
+//                        <td>53254324</td>
+//                        <td>1</td>
+//                        <td> $'.$device['sales_unitprice'].'</td>
+//                        <td> $'.$device['sales_total'].'</td>
+//                    </tr>';
+//                $subtotal = $subtotal + $device['sales_total']; 
+//                endforeach;
+//                
+//                $gst = $subtotal * 0.07;
+//                $total_due = $gst + $subtotal;
+//                App::uses('CakeNumber', 'Utility');$currency = 'USD';
+//                $total_due = CakeNumber::currency($total_due, $currency);
+//                $gst = CakeNumber::currency($gst, $currency);
+//                $subtotal = CakeNumber::currency($subtotal, $currency);
+//                $html .= '<tr>
+//                         <td colspan="6">SUBTOTAL</td>
+//                         <td>'.$subtotal.'</td>
+//                    </tr>
+//                    <tr>
+//                         <td colspan="6">GST ( 7.00% )</td>
+//                         <td>'.$gst.'</td>
+//                    </tr>
+//                    <tr>
+//                         <td colspan="6"><h4>TOTAL DUE</h4></td>
+//                         <td><h4>'.$total_due.'</h4></td>
+//                    </tr>
+//               </tbody>
+//          </table>
+//     </div>
+//</div>
+//</body>
+//</html>';
+
+             $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+ 
+            //pr($titles);
+            //exit;
+ $html = '<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>'.$salesorder_data['Salesorder']['salesorderno'].'</title>
+<style>
+* { margin:0; padding:0; }
+table td { font-size:13px; }
+
+.table_format table { border:1px solid #000; border-bottom:none; border-left:none; }
+.table_format td { border-bottom:1px solid #000; padding:10px; text-align:center; border-left:1px solid #000; }
+</style>
+</head>';
+ $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            //pr($salesorder_data);
             //foreach ($salesorder_data as $salesorder_data_list):
                 $customername = $salesorder_data['Customer']['customername'];
                 $billing_address = $salesorder_data['Salesorder']['address'];
                 $postalcode = $salesorder_data['Customer']['postalcode'];
-                $contactperson = $salesorder_data['Quotation']['Customer']['Contactpersoninfo'][0]['name'];
+                $contactperson = $quotation_data['Customer']['Contactpersoninfo'][0]['name'];
                 $phone = $salesorder_data['Salesorder']['phone'];
                 $fax = $salesorder_data['Salesorder']['fax'];
                 $email = $salesorder_data['Salesorder']['email'];
                 //$our_ref_no = $salesorder_data_list['Quotation']['ref_no'];
                 $ref_no = $salesorder_data['Salesorder']['ref_no'];
                 $reg_date = $salesorder_data['Salesorder']['reg_date'];
-                $payment_term = $salesorder_data['Quotation']['Customer']['Paymentterm']['paymentterm'] . ' ' . $salesorder_data['Quotation']['Customer']['Paymentterm']['paymenttype'];
+                 $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
                 $salesorderno = $salesorder_data['Salesorder']['salesorderno'];
             
                 foreach($salesorder_data['Description'] as $device):
@@ -1194,63 +1338,100 @@
                 endforeach;
                 
             //endforeach;
-            $html .= '<body>
-                <div class="pdf_container group"> 
-                     <!-- header part-->
-                     <div class="header_id">
-                          <div class="f_left logo"><img src="img/logoBs.png" width="273" height="50" alt="" /></div>
-                          <div class="address_details f_right">
-                               <p>41 SENOKO DRIVE</p>
-                               <p>SINGAPORE</p>
-                               <p>758249</p>
-                               <p> 6458 4411</p>
-                               <a href="#" title="">invoice@bestandards.com</a>
-                               <div class="cmpny_reg">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
-                          </div>
-                     </div>
-                            <div class="address_table" style="margin-bottom:20px;">
-                          <table style="height:250px;">
-                          <tbody>
-                          <tr><td>'.$customername.'<br>'.$billing_address.'<br>'.$postalcode.'</td></tr>
-                          <tr><td style="text-transform:uppercase;font-weight:bold;">ATTN:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$contactperson.'</span></td></tr>
-                          <tr><td style="text-transform:uppercase;font-weight:bold;">TEL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$phone.'</span></td></tr>
-                          <tr><td style="text-transform:uppercase;font-weight:bold;">FAX:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$fax.'</span></td></tr>
-                          <tr><td style="text-transform:uppercase;font-weight:bold;">EMAIL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$email.'</span></td></tr>
-                </tbody>
-                          </table>
+            $html .=
+'<body style="font-family:Arial, Helvetica, sans-serif;font-size:13px;padding:10px;margin:0;">
+<div style="float:left;"></div>
+<div style="float:right;text-align:right;">
+     <p>41 Senoko Drive</p>
+     <p>Singapore 758249</p>
+     <p>Tel.+65 6458 4411</p>
+     <p>Fax.+65 64584400</p>
+     <p style="padding-bottom:20px;">www.bestandards.com<</p>
+</div>
+<div style="display:inline-block;font-size:17px;font-weight:bold;width:40%;">SALES ORDER</div>
+<div style="display:inline-block;background:#313854;color:#fff;width:60%;padding:5px;font-size:12px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
+<div style="width:100%;margin-top:30px;float:left;">
+     <table cellpadding="1" cellspacing="1"  style="width:100%;">
+          <tr>
+               <td style="border:1px solid #000;padding:5px;width:50%;"><table cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td>'.$customername.'</td>
+                         </tr>
+                         <tr>
+                              <td>'.$billing_address.'</td>
+                         </tr>
+						 <tr>
+                              <td>'.$postalcode.'</td>
+                         </tr>
+                         <tr  style="padding-top:30px;">
+                              <td>ATTN </td>
+                              <td>:</td>
+                              <td>'.$contactperson.'</td>
+                         </tr>
+                         <tr>
+                              <td>TEL </td>
+                              <td>:</td>
+                              <td> '.$phone.'</td>
+                         </tr>
+                         <tr>
+                              <td>FAX </td>
+                              <td>:</td>
+                              <td> '.$fax.'</td>
+                         </tr>
+                         <tr>
+                              <td>EMAIL</td>
+                              <td> :</td>
+                              <td> '.$email.'</td>
+                         </tr>
+                    </table></td>
+               <td style="border:1px solid #000;padding:5px;width:50%;"><table cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td style="font-size:24px;font-weight:bold;">'.$salesorderno.'</td>
+                         </tr>
+                         <tr  style="padding-top:30px;">
+                              <td>SALES PERSON </td>
+                              <td>:</td>
+                              <td>Mr.Padma</td>
+                         </tr>
+                         <tr>
+                              <td>YOUR REF NO (PO) </td>
+                              <td>:</td>
+                              <td> '.$ref_no.'</td>
+                         </tr>
+                         <tr>
+                              <td>DATE </td>
+                              <td>:</td>
+                              <td> '.$reg_date.'</td>
+                         </tr>
+                         <tr>
+                              <td>PAYMENT TERMS</td>
+                              <td> :</td>
+                              <td>'.$payment_term.'</td>
+                         </tr>
+                    </table></td>
+          </tr>
+     </table>
+</div>
+<div style="padding-top:10px;">Being provided calibration service of the following(s) :</div>
 
-                </div>
-                        <div class="address_table" style="margin-bottom:20px;">
-                          <table style="height:250px;">
-                          <tbody>
-                          <tr><td style="text-align:center;font-weight:bold;font-size:20px;">'.$salesorderno.'</td></tr>
-                         <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PO NO:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$ref_no.'</span></td></tr>
-                          
-                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">DATE:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$reg_date.'</span></td></tr>
-                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PAYMENT TERM:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$payment_term.'</span></td></tr>
-                </tbody>
-                          </table>
-
-                </div>
-                     <div class="services_details f_left">
-                          <p>Being provided calibration service of the following(s) :</p>
-                          <h4 class="f_left"><abbr>SALESORDER NO</abbr><span> '.$salesorderno.'</span></h4>
-                     </div>
-                     <div class="invoice_table f_left">
-                          <table cellpadding="0" cellspacing="0">
-                               <thead>
-                                    <tr>
-                                         <th>Instrument</th>
-                                         <th>Brand</th>
-                                         <th>Model</th>
-                                         <th>Serial No</th>
-                                         <th>Quantity</th>
-                                         <th>Unit Price $(SGD)</th>
-                                         <th>Total Price $(SGD)</th>
-                                    </tr>
-                               </thead>
-                               <tbody>';
-                $subtotal = 0;
+<div style="width:100%;margin-top:20px;display:block;" class="table_format">
+     <table cellpadding="0" cellspacing="0"  style="width:100%;">
+          <tr>
+               <td><strong>Instrument</strong></td>
+               <td><strong>Brand</strong></td>
+               <td><strong>Model</strong></td>
+               
+               <td><strong>Quantity</strong></td>
+               ';
+			   $count = 0;
+           $count = 0;
+for($i=0;$i<=4;$i++):
+     $html .='<td>';
+    $html .= $titles[$i];
+    $html .='</td>';
+endfor;
+$html .='</tr>';
+           
                 foreach($device_name as $device):
                     $html .= '
                     <tr>
@@ -1258,36 +1439,46 @@
                             <span>Faulty</span> <span>'.$device['Range']['range_name'].'</span></td>
                         <td>'.$device['Brand']['brandname'].'</td>
                         <td>'.$device['model_no'].'</td>
-                        <td>53254324</td>
+                        
                         <td>1</td>
-                        <td> $'.$device['sales_unitprice'].'</td>
-                        <td> $'.$device['sales_total'].'</td>
+                        <td>'.$device['title1_val'].'</td>
+                        <td>'.$device['title2_val'].'</td>
+                        <td>'.$device['title3_val'].'</td>
+                        <td>'.$device['title4_val'].'</td>
+                        <td>'.$device['title5_val'].'</td>
+                        
                     </tr>';
-                $subtotal = $subtotal + $device['sales_total']; 
-                endforeach;
                 
-                $gst = $subtotal * 0.07;
-                $total_due = $gst + $subtotal;
-                App::uses('CakeNumber', 'Utility');$currency = 'USD';
-                $total_due = CakeNumber::currency($total_due, $currency);
-                $gst = CakeNumber::currency($gst, $currency);
-                $subtotal = CakeNumber::currency($subtotal, $currency);
-                $html .= '<tr>
-                         <td colspan="6">SUBTOTAL</td>
-                         <td>'.$subtotal.'</td>
-                    </tr>
-                    <tr>
-                         <td colspan="6">GST ( 7.00% )</td>
-                         <td>'.$gst.'</td>
-                    </tr>
-                    <tr>
-                         <td colspan="6"><h4>TOTAL DUE</h4></td>
-                         <td><h4>'.$total_due.'</h4></td>
-                    </tr>
-               </tbody>
-          </table>
-     </div>
+                endforeach;
+ 
+ 
+                
+                $html .= '</table></div>
+
+<div style="font-weight:bold;margin-top:20px;">TERMS AND CONDITIONS :</div>
+<p style="margin-top:5px;font-size:10px;"><strong>1) TURNAROUND TIME :</strong> NORMAL SERVICE 5 - 7 WORKING DAYS EXPRESS SERVICE 2 - 3 WORKING DAYS** 1.5 TIMES NORMAL RATES</p>
+<p style="margin-top:5px;font-size:10px;"><strong>2) COLLECTION & DELIVERY :</strong> TO BE ADVISED BY SALES PERSONNEL</p>
+<p style="margin-top:5px;font-size:10px;">3) VALIDITY OF THIS QUOTE IS 30 DAYS FROM THE DATE OF THIS QUOTATION *PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION* ALL PRICE(S) ABOVE ARE SUBJECTED TO GST CHARGE</p>
+<p style="margin-top:5px;font-size:10px;">4) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME. **PLEASE CONTACT SALES DEPARTMENT FOR MORE QUERIES AT 64584411**</p>
+<p style="margin-top:10px;font-size:10px;"><strong>NOTE :</strong> THIS IS COMPUTER GENERATED QUOTATION. NO SIGNATURE IS REQUIRED.</p>
+<div style="width:100%;margin-top:40px;display:block;">
+     <table cellpadding="0" cellspacing="0"  style="width:100%;">
+          <tr>
+               <td><strong>CONFIRMED AND ACCEPTED BY:</strong></td>
+               <td><strong>COMPANYS STAMP,SIGNATURE AND DATE</strong></td>
+          </tr>
+          <tr>
+               <td style="padding-top:20px;">-----------------------------</td>
+               <td style="padding-top:20px;">DESIGNATION :</td>
+          </tr>
+          <tr>
+               <td></td>
+               <td style="padding-top:20px;">NAME :</td>
+          </tr>
+     </table>
 </div>
+<div style="background:#313854;color:#fff;padding:10px;font-size:12px;margin-top:30px;">BS TECH REFERENCE MEASUREMENT STANDARDS ARE TRACEABLE TO NATIONAL METROLOGY CENTRE (SINGAPORE), NPL (UK), NIST (USA) OR OTHER RECOGNIZED NATIONAL OR INTERNATIONAL STANDARDS</div>
+
 </body>
 </html>';
                 //pr($html);exit;
