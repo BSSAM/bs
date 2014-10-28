@@ -432,17 +432,19 @@
             if($scope.titles.indexOf("7") != "-1")
                 $scope.show_title8 = true;
             
-                $('#val_quantity').val(null).prop("disabled", false);
+                $('#sales_quantity').val(null).prop("disabled", false);
                 $('#val_description').val(null).prop("disabled", false);
                 $('#val_model_no').val(null);
                 $('#val_account_service').val(null);
                 //$('#val_title').attr("itemsselected","");
-                $('#val_call_location').val(null);
+                $('#sales_calllocation').val(null);
                 $('#val_brand').val(null);
-                $('#val_range').val(null);
-//                $('#val_unit_price').val(null);
+                $('#sales_range').val(null);
+                $('#val_instrument').val(null);
+                $('#sales_calltype').val(null);
 //                $('#val_discount1').val(null);
-                $('#val_description').val(null);
+                $('#val_department').val(null);
+                $('#sales_validity').val(null);
        }
        
        $scope.delete_instrument = function(index)

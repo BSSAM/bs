@@ -273,9 +273,10 @@
                             $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
                         }
                         //pr($quotation_details['Quotation']);exit;
+                        
                         $sales_details =  $quotation_details['Quotation'];
                         $sales['Salesorder']   =    $sales_details;
-                        $sales['Description']  =    $quotation_details['Device'];
+                        //$sales['Description']  =    $quotation_details['Device'];
                         $sales['Salesorder']['quotation_id']   =    $sales_details['id'];
                          $this->set('status_id','');
                         $this->set('sale',$sales);
@@ -291,7 +292,12 @@
                         //pr($instrument_type);exit;
                         //echo $instrument_type; exit;
                          $this->set('instrument_type',$instrument_type);
-                         pr($sales['Description']);exit;
+                         //pr($this->request->data['Salesorder']['quotationno']);
+                         //pr($this->request->data['Salesorder']['salesorderno']);
+                         $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>0)));
+                         $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$dmt.'"'),array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>0));
+                        // pr($edit_device_details_check);exit;
+                         //pr($sales['Description']);exit;
 //                         foreach($sales['Description'] as $sale):
 //                            $this->Description->create();
 //                            $description_data  =   $this->saleDescription_pending($sale['id']);
@@ -865,16 +871,46 @@
             
             
             $this->loadModel('Description');
+            $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1)));
+            if(empty($edit_device_details_check)){
             $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id)));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
-            endforeach;
-            
-           //pr($edit_device_val);exit;
-            if(!empty($edit_device_val ))
-            {
-                echo json_encode($edit_device_val);
+            endforeach; 
+            echo json_encode($edit_device_val);
             }
+            else
+            {
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1)));
+            foreach($edit_device_details as $edit_device):
+                $edit_device_val[]=$edit_device;
+            endforeach; 
+            echo json_encode($edit_device_val);
+            }
+           // pr($edit_device_val);
+            //exit;
+//            foreach($edit_device_val as $device):
+//                  if($device['Description']['pending']==1)
+//                  {
+//                      $device_id[] = $device['Description']['id'];
+//                  }
+//            endforeach;
+//           
+//            if(empty($device_id)){
+//           //pr($edit_device_val);exit;
+//            if(!empty($edit_device_val ))
+//            {
+//                echo json_encode($edit_device_val);
+//            }
+//            }
+//            else{echo json_encode($edit_device_val);
+////                foreach($edit_device_val as $loop_dev):
+////                    $loop_dev['Description']['id'];
+////                endforeach;
+////                $e[] = $edit_device_val[0];
+////                echo json_encode($e);
+//               //pr($edit_device_val[0]);exit; 
+//            }
             
         }
         public function delete_instrument($device_id)

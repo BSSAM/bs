@@ -92,10 +92,11 @@
             $http.post(path_url+'Salesorders/instrument_edit/',{
                         sales_id:sales_id,
                     }).success(function(data){
-                        
+                        //console.log(data); 
+                        //return false;
                         $.each(data,function(k,v){
                             //console.log(k);
-                            console.log(v);
+                            //console.log(v);
                             //alert(v.Device.account_service);
                             $new_data = {
                                 serial:v.Description.id,
