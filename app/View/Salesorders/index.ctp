@@ -71,7 +71,7 @@
                             array('id'=>'val_customer_sales','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
                             'autoComplete'=>'off','type'=>'text','name'=>'customername')); ?>
                             <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'customer_id')); ?>
-                            <div id="result"></div>
+                            <div id="result" class="instrument_drop" style="width:100%;"></div>
                                  </div>
                             <div class="input-group col-md-8 pull-right quot_display">
                            
@@ -83,7 +83,7 @@
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary quotation_search" type="button">Proceed</button>
                                 </span> 
-                                <div id="quoat_list">
+                                <div id="quoat_list" class="instrument_drop">
                             </div>
                             </div>
                       </div>

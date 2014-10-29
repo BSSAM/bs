@@ -18,7 +18,7 @@
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
                     'autoComplete'=>'off','type'=>'text','name'=>'customername')); ?>
         <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'customer_id')); ?>
-        <div id="result"></div>
+        <div id="result" class="instrument_drop"></div>
     </div>
     </div>
     <label class="col-md-2 control-label" for="val_address">Customer Address</label>

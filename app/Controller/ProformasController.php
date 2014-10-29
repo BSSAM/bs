@@ -701,7 +701,7 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
             {
                 for($i = 0; $i<$c;$i++)
                 {    
-                    echo "<div class='proforma_show' align='left' id='".$data[$i]['Salesorder']['id']."'>";
+                    echo "<div class='proforma_show instrument_drop_show' align='left' id='".$data[$i]['Salesorder']['id']."'>";
                     echo $data[$i]['Salesorder']['salesorderno'];
                     echo "<br>";
                     echo "</div>";

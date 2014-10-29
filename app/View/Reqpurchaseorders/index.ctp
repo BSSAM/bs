@@ -49,7 +49,7 @@
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary quotation_search" type="submit">Proceed</button>
                                 </span> 
-                                <div id="quoat_list"> </div>
+                                <div id="quoat_list" class="instrument_drop"> </div>
                             </div>
                       </div>
                             

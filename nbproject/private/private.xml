@@ -3,21 +3,38 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Clientposapproval/pobeforedo.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Clientposapproval/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Salesorders/Salesorder_by_quotation/description.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Invoices/sofull.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Invoices/dofull.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/PurchaseordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Proformas/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instruments/add.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Elements/Salesorders/Salesorder_by_quotation/salesorder_info.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/ClientposapprovalController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customers/instrument_map.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/QuotationsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Salesorders/edit/description.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/quotation_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Deliveryorders/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/css/main.css</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/quo_function_js.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/description.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/cus_function.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Quotations/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/customer_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instruments/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/edit/customer_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Deliveryorders/deliveryorder_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Reqpurchaseorders/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/PurchaseRequisitionsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/CustomersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Salesorders/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentsController.php</file>
             <file>file:/D:/wamp/www/bs/app/View/Salesorders/salesorder_by_quotation.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Invoices/pofull.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/InvoicesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/LabprocessesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Clientposapproval/pobeforeinvoice.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Invoices/qofull.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Clientposapproval/view.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/formsValidation.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Subcontractdos/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/edit/description.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Salesorders/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/css/custom.css</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/ReqpurchaseordersController.php</file>
         </group>
     </open-files>
 </project-private>

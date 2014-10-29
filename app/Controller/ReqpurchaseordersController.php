@@ -294,7 +294,7 @@
                 {
                      for($i = 0; $i<$c;$i++)
                      { 
-                         echo "<div class='quotation_single' align='left' id='".$data[$i]['PurchaseRequisition']['id']."'>";
+                         echo "<div class='quotation_single instrument_drop_show' align='left' id='".$data[$i]['PurchaseRequisition']['id']."'>";
                          echo $data[$i]['PurchaseRequisition']['prequistionno'];
                          echo "<br>";
                          echo "</div>";
@@ -302,7 +302,7 @@
                  }
                  else
                  {
-                     echo "<div class='no_result' align='left'>";
+                     echo "<div class='no_result instrument_drop_show' align='left'>";
                      echo "No Results Found";
                      echo "<br>";
                      echo "</div>";

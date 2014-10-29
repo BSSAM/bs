@@ -219,7 +219,7 @@
             {
                 for($i = 0; $i<$c;$i++)
                 { 
-                    echo "<div class='customer_show' align='left' id='".$data[$i]['Customer']['id']."'>";
+                    echo "<div class='customer_show instrument_drop_show' align='left' id='".$data[$i]['Customer']['id']."'>";
                     echo $data[$i]['Customer']['Customertagname'];
                     echo "<br>";
                     echo "</div>";
@@ -227,7 +227,7 @@
             }
             else
             {
-                    echo "<div class='preno_result' align='left'>";
+                    echo "<div class='preno_result instrument_drop_show' align='left'>";
                     echo "No Results Found";
                     echo "<br>";
                     echo "</div>";

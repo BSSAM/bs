@@ -601,7 +601,7 @@
                     if($list['Instrument']['name']!='')
                     {
                     //echo "<br>";
-                    echo "<div class='sales_instrument_id' align='left' id='".$list['Instrument']['id']."'>";
+                    echo "<div class='sales_instrument_id instrument_drop_show' align='left' id='".$list['Instrument']['id']."'>";
                     echo $list['Instrument']['name'];
                     echo "<br>";
                     echo "</div>";
@@ -1146,7 +1146,7 @@
             {
                 for($i = 0; $i<$c;$i++)
                 { 
-                    echo "<div class='customer_show_sales' align='left' id='".$data[$i]['Customer']['id']."'>";
+                    echo "<div class='customer_show_sales instrument_drop_show' align='left' id='".$data[$i]['Customer']['id']."'>";
                     echo $data[$i]['Customer']['Customertagname'];
                     echo "<br>";
                     echo "</div>";

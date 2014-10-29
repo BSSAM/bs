@@ -8,7 +8,7 @@
         $("#sales_list").hide();
         $("#proforma_input_search").keyup(function() 
         { 
-            $(this).css('border','1px solid green')
+            $(this).css('border','none')
             var sales_id = $(this).val();
             var dataString = 'sale_id='+ sales_id;
             if(sales_id!='')
@@ -52,7 +52,7 @@
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
                                     <h2>
-                                        <div class="col-md-4 search_move">
+                                        <div class="col-md-6 search_move">
                                             <div class="input-group">
                                                 <div>
                                                     <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="proforma_input_search"/>
@@ -61,7 +61,7 @@
                                                     <button class="btn btn-primary proforma_search" type="button">Proceed</button>
                                                 </span>
                                             </div>
-                                             <div id="sales_list">
+                                             <div id="sales_list" class="instrument_drop">
                                                 </div>
                                         </div>
                                     </h2>

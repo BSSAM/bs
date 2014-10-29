@@ -837,11 +837,11 @@
                             <a ng-click="edit_instrument($index)" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                    <?php if($con_inv_type != 3): ?>
+                    <?php //if($con_inv_type != 3): ?>
                             <a ng-click="delete_instrument($index)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger">
                                 <i class="fa fa-times"></i>
                             </a>
-                    <?php endif; ?>
+                    <?php //endif; ?>
                 </div>
                 
             </td>

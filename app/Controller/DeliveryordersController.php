@@ -269,7 +269,7 @@
             {
                 for($i = 0; $i<$c;$i++)
                 {    
-                    echo "<div class='delivery_show' align='left' id='".$data[$i]['Salesorder']['id']."'>";
+                    echo "<div class='delivery_show instrument_drop_show' align='left' id='".$data[$i]['Salesorder']['id']."'>";
                     echo $data[$i]['Salesorder']['salesorderno'];
                     echo "<br>";
                     echo "</div>";

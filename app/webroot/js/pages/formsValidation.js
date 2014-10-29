@@ -367,7 +367,7 @@ var FormsValidation = function() {
                     },
                     currencycode: {
                         required: true,
-                        maxlength: 4
+                        maxlength: 5
                     },
                     exchangerate: {
                         required: true,
@@ -385,7 +385,7 @@ var FormsValidation = function() {
                     },
                     currencycode: {
                         required: 'Currency Symbol is Required',
-                        maxlength: 'The Currency Symbol must not be more than 4 characters long'
+                        maxlength: 'The Currency Symbol must not be more than 5 characters long'
                     },
                     exchangerate: {
                         required: 'Exchange Rate is Required',
@@ -419,10 +419,7 @@ var FormsValidation = function() {
                         required: true,
                         maxlength: 100
                     },
-                    phone: {
-                        required: true,
-                        minlength: 9
-                    },
+                    
                     
                    
                    
@@ -436,10 +433,6 @@ var FormsValidation = function() {
                     address: {
                         required: 'Address is Required',
                         maxlength: 'The Address should have only 100 characters'
-                    },
-                    phone: {
-                        required: 'Phone No is Required',
-                        minlength: 'Phone No should have minimum 9 characters'
                     },
                     
                     

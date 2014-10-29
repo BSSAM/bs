@@ -850,7 +850,7 @@ $("#search_cusinstrument").hide();
         <!-- ng-if="quotation_add.desc_quo_model.$viewValue.length>0" -->
         <span class="help-block_login ins_error">Enter the Instrument Name</span>
          <span class="help-block_login inscus_error">Instrument Needs Customer Details</span>
-        <div id="search_instrument">  </div>
+        <div id="search_instrument" class="instrument_drop">  </div>
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
     <div class="col-md-4">
@@ -865,7 +865,7 @@ $("#search_cusinstrument").hide();
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','autoComplete'=>'off')); ?>
-        <div id="search_cusinstrument">  </div>
+        <div id="search_cusinstrument" class="instrument_drop">  </div>
          <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                 //'label'=>false,'name'=>'model_no','type'=>'select','empty'=>'Enter the Model Number')); ?>
         <span class="help-block_login insmo_error">Enter the Instrument Model No</span>

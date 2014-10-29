@@ -301,7 +301,7 @@
             {
                 for($i = 0; $i<$c;$i++)
                 { 
-                    echo "<div class='customer_show' align='left' id='".$data[$i]['Customer']['id']."'>";
+                    echo "<div class='customer_show instrument_drop_show' align='left' id='".$data[$i]['Customer']['id']."'>";
                     echo $data[$i]['Customer']['Customertagname'];
                     echo "<br>";
                     echo "</div>";
@@ -309,7 +309,7 @@
             }
             else
             {
-                    echo "<div class='no_result' align='left'>";
+                    echo "<div class='no_result instrument_drop_show' align='left'>";
                     echo "No Results Found";
                     echo "<br>";
                     echo "</div>";
@@ -371,14 +371,14 @@
                     if($list['Instrument']['name']!='')
                     {
                     //echo "<br>";
-                    echo "<div class='instrument_id' align='left' id='".$list['Instrument']['id']."'>";
+                    echo "<div class='instrument_id instrument_drop_show' align='left' id='".$list['Instrument']['id']."'>";
                     echo $list['Instrument']['name'];
                     echo "<br>";
                     echo "</div>";
                     }
                 }
             else:
-                echo "<div  align='left'>";
+                echo "<div  align='left' class='instrument_drop_show'>";
                 echo 'No Results Found';
                 echo "<br>";
                 echo "</div>"; 
@@ -437,14 +437,14 @@
                     if($list['CustomerInstrument']['model_no']!='')
                     {
                     //echo "<br>";
-                    echo "<div class='customerins_id' align='left' id='".$list['CustomerInstrument']['id']."'>";
+                    echo "<div class='customerins_id' id='".$list['CustomerInstrument']['id']."'>";
                     echo $list['CustomerInstrument']['model_no'];
                     echo "<br>";
                     echo "</div>";
                     }
                 }
             else:
-                echo "<div  align='left'>";
+                echo "<div  align='left' class='instrument_drop_show'>";
                 echo 'No Results Found';
                 echo "<br>";
                 echo "</div>"; 

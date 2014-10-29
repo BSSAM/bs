@@ -599,9 +599,11 @@ class CustomersController extends AppController
        
         $this->loadModel('CustomerInstrument');
         $instrument_id  =   $this->request->data['instrument_id'];
+        $customer_id  =   $this->request->data['customer_id'];
         $range_id       =   $this->request->data['range_id'];
         $model_no       =   $this->request->data['model_no'];
-        $customer_instruments  = $this->CustomerInstrument->find('all',  array('conditions'=>array('model_no'=>$model_no,'range_id'=>$range_id, 'instrument_id'=>$instrument_id,'CustomerInstrument.is_deleted'=>0)));
+        
+        $customer_instruments  = $this->CustomerInstrument->find('all',  array('conditions'=>array('model_no'=>$model_no,'range_id'=>$range_id, 'instrument_id'=>$instrument_id,'CustomerInstrument.is_deleted'=>0,'customer_id'=>$customer_id)));
         if(count($customer_instruments)==0){
         $data = $this->CustomerInstrument->save($this->request->data);
             if($data)

@@ -13,10 +13,10 @@ and open the template in the editor.
 .failure_alert {background-color: #F9FAFC;  border: 1px solid #FF0000;  color: #FF0000;}
 .alert_box {   background-position: 0 0;    background-repeat: repeat;    border-radius: 5px;    font-size: 15px;margin-bottom: 15px;padding: 8px;ext-indent: 8px;}
 
-.instrument_id{padding: 13px 0px; max-width: 303px;min-width: 303px;padding-left: 9px;padding-top: 9px;border-bottom: #000000 1px;font-size: 15px; max-height: 37px; float: top;background:#FFFF;color:#000000;line-height: 20px;border-bottom: 1px #dbe1e8 dotted !important;}
+.instrument_id{border-bottom: 1px dotted #dbe1e8 !important;color: #000000;font-size: 11px !important;line-height: 12px !important;max-height: 37px; max-width: inherit !important; min-width: inherit !important; padding: 5px 0 5px 8px !important;width: 100%;}
 .instrument_id:hover{background:#6ad2eb;color:#FFF;cursor:pointer;}
-#search_instrument{ position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
-#search_instrument{width:100%;max-width:91%;}
+#search_instrument{width: 92%; position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
+#search_instrument{}
 //#search_instrument .customer_show{max-height: 100%;}
 //#search_instrument .no_result:hover{background:#6ad2eb;}
 /*     -webkit-appearance: button;
@@ -85,7 +85,7 @@ and open the template in the editor.
 .quot_display #quoat_list{margin-left:0;top:0;left:0;width:100%;}
 .quot_display #quoat_list .quotation_single{max-width: 100%;}
 .padding_t_b10{padding-top:10px !important;padding-bottom:10px !important;background-color: #ccc !important;position:relative;}
-#result {position: absolute;z-index: 999;width:92%;z-index:10; }
+#result {position: absolute;z-index: 999;width:92%;z-index:10; min-height:25px;}
 #result .no_result{width:100%;max-width:100%;max-height: 100%;}
 #result .customer_show{max-height: 100%;}
 #result .customer_show_sales{max-height: 100%;}
@@ -121,18 +121,22 @@ and open the template in the editor.
 .no_result:hover { background:#4c66a4;color:#FFF; cursor:pointer;}
 
 /* for instrument for Customer Module*/
-.instrument_result{position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
-.customer_instrument_show{padding: 13px 0px; max-width: 230px; min-width: 225px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 13px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 18px; border-bottom: 1px #dbe1e8 dotted !important;}
+.instrument_result{width: 92%;position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
+.customer_instrument_show{border-bottom: 1px dotted #dbe1e8 !important;color: #000000;font-size: 11px ;line-height: 12px;max-height: 37px; max-width: inherit; min-width: inherit; padding: 5px 0 5px 8px;width: 100%;}
 .customer_instrument_show:hover{ background:#6ad2eb; color:#FFF; cursor:pointer;}
 .instrument_result .no_result{width:100%;max-width:100%;max-height: 100%;}
 .instrument_result .customer_instrument_show{max-height: 100%;}
 .instrument_result .customer_instrument_show{max-height: 100%;}
 .instrument_result .no_result:hover{background:#6ad2eb;}
-.customerins_id{padding: 13px 0px; max-width: 303px;min-width: 303px;padding-left: 9px;padding-top: 9px;border-bottom: #000000 1px;font-size: 15px; max-height: 37px; float: top;background:#FFFF;color:#000000;line-height: 20px;border-bottom: 1px #dbe1e8 dotted !important;}
+.customerins_id{border-bottom: 1px dotted #dbe1e8 !important;color: #000000;font-size: 11px !important;line-height: 12px !important;max-height: 37px; max-width: 100% !important; min-width: inherit !important; padding: 5px 0 5px 8px !important;width: 100%;}
 .customerins_id:hover{background:#6ad2eb;color:#FFF;cursor:pointer;}
 #search_cusinstrument{ position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
-#search_cusinstrument{width:100%;max-width:91%;}
+#search_cusinstrument{width:100%;max-width:92%;}
 // Pagination
 .custom_pagination{margin-left:15px;}
 .custom_pagination li:last-child>a{background: #1bbae1;color: #fff;}
 /* #example-datatable_wrapper{overflow-x: auto;} */
+/*dropdown all pages common*/
+.instrument_drop{width: 92% !important;position: absolute;z-index: 999;background-color: #ffffff;text-align: left;max-width:inherit !important; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
+.instrument_drop_show,.instrument_drop .no_result{border-bottom: 1px dotted #dbe1e8 !important;color: #000000;font-size: 11px !important;height:auto !important;line-height: 12px !important;max-height: 37px; max-width: inherit !important; min-width: inherit !important; padding: 5px 0 5px 8px !important;width: 100%;}
+.instrument_drop_show:hover,.instrument_drop .no_result:hover{background-color: #6ad2eb !important;color:#fff;}

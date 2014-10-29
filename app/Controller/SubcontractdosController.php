@@ -85,7 +85,7 @@ class SubcontractdosController extends AppController
             {
                 for($i = 0; $i<$c;$i++)
                 {    
-                    echo "<div class='subcontract_show' align='left' id='".$data[$i]['Description']['salesorder_id']."'>";
+                    echo "<div class='subcontract_show instrument_drop_show' align='left' id='".$data[$i]['Description']['salesorder_id']."'>";
                     echo $data[$i]['Description']['salesorder_id'];
                     echo "<br>";
                     echo "</div>";
@@ -93,7 +93,7 @@ class SubcontractdosController extends AppController
             }
             else
             {
-                echo "<div class='subcontract_no_result' align='left'>";
+                echo "<div class='subcontract_no_result instrument_drop_show' align='left'>";
                 echo "No Results Found";
                 echo "<br>";
                 echo "</div>";
