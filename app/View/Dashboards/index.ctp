@@ -128,7 +128,7 @@
                                 <div class="block full">
                                 <div class="table-responsive">
                                 <!-- Intro Category -->
-                                <table id="dashboard_message_all" class="table table-vcenter table-condensed table-bordered dataTable">
+                                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered dataTable">
                                     <?PHP if (!empty($log_activity_message)): ?>
                                     <thead>
                                         <th>Flag</th>
