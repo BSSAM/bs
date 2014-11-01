@@ -42,13 +42,15 @@ $(document).ready(function(){
                     $('#val_ref_no').val(sales_node.Salesorder.ref_no);
                     $('#val_our_ref_no').val(sales_node.Salesorder.our_ref_no);
                     $('#del_attn').append('<option value="'+sales_node.Contactpersoninfo.id+'">'+sales_node.Contactpersoninfo.name+'</option>');
-                    $.each(sales_node.Description,function(key,value){  
+                    $.each(sales_node.Description,function(key,value){
+                        if(value.checking == 1){
                         if(sales_node.Description.length===0)
                         {
                             $('.delivery_instrument_node').html('No Records Found');
                         }
                         else
                         {
+                            //if(value.Description)
                             $('.delivery_instrument_node .dataTables_empty').hide();
                             $('.delivery_instrument_node').append('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.id+'">\n\\n\
@@ -62,6 +64,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+value.sales_total+'</td>\n\
                                     </tr>');
                         }
+                    }
                         
                     });
                    

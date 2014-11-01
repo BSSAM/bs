@@ -45,7 +45,11 @@
         
             
             if($this->request->is('post'))
-            {
+            {    
+               //pr($this->request->data['Deliveryorder']);
+               $delivery_before = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved_lab'=>0,'Salesorder.is_approved'=>1,'Salesorder.salesorderno'=>$this->request->data['Deliveryorder']['salesorder_id']),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description')));
+               pr($delivery_before);
+               exit;
                
                 if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
                 {
@@ -264,24 +268,53 @@
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
             $data = $this->Salesorder->find('all',array('conditions'=>array('salesorderno LIKE'=>'%'.$sales_id.'%','Salesorder.is_approved'=>1,'Salesorder.is_deliveryorder_created'=>0)));
-            $c = count($data);
-            if(!empty($c))
-            {
-                for($i = 0; $i<$c;$i++)
-                {    
-                    echo "<div class='delivery_show instrument_drop_show' align='left' id='".$data[$i]['Salesorder']['id']."'>";
-                    echo $data[$i]['Salesorder']['salesorderno'];
-                    echo "<br>";
-                    echo "</div>";
-                }   
-            }
-            else
-            {
+            $count = 0;
+            foreach($data as $data_val):
+                //pr($data_val);
+                
+                if($data_val['Customer']['deliveryordertype_id']==2):
+                $count = $count+1;
+                    //echo $count;
+                    foreach($data_val['Description'] as $desc):
+                    
+                        if($desc['checking']==1):
+                            $check = 1;
+                            break;
+                        endif;                           
+                    endforeach;
+                    if($check == 1):
+                        echo "<div class='delivery_show instrument_drop_show' align='left' id='".$data_val['Salesorder']['id']."'>";
+                        echo $data_val['Salesorder']['salesorderno'];
+                        echo "<br>";
+                        echo "</div>";
+                    endif;
+                endif;
+            endforeach;
+            if($count == 0):
                 echo "<div class='delivery_no_result' align='left'>";
                 echo "No Results Found";
                 echo "<br>";
                 echo "</div>";
-            }
+            endif;
+            //exit;
+//            $c = count($data);
+//            if(!empty($c))
+//            {
+//                for($i = 0; $i<$c;$i++)
+//                {    
+//                    echo "<div class='delivery_show instrument_drop_show' align='left' id='".$data[$i]['Salesorder']['id']."'>";
+//                    echo $data[$i]['Salesorder']['salesorderno'];
+//                    echo "<br>";
+//                    echo "</div>";
+//                }   
+//            }
+//            else
+//            {
+//                echo "<div class='delivery_no_result' align='left'>";
+//                echo "No Results Found";
+//                echo "<br>";
+//                echo "</div>";
+//            }
         }
         public function get_sales_details()
         {
@@ -301,7 +334,7 @@
             }
             else
             {
-                echo "failure";
+                echo "Search is Empty";
             }
             
         }

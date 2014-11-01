@@ -35,7 +35,8 @@ App::uses('Controller', 'Controller');
         
         public function beforeFilter()
         {
-                
+            //echo $this->Session->read('Config.time');
+            //$id = $this->Session->read('sess_userrole');
             $sess_username = $this->Session->read('sess_username');
             $sess_userid = $this->Session->read('sess_userid');
             if(isset($sess_username))
@@ -69,6 +70,11 @@ App::uses('Controller', 'Controller');
              $this->default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             // $this->set('branch',$default_branch);
         }
+//        public function afterFilter() {
+//            $var_base =  Router::url(null, true);
+//            echo $var_base;
+//            $this->Session->write('sess_base', $var_base, array('defaults' => 'cake','timeout' => 28800 ));
+//        }
         public function userrole_permission()
         {
             $id = $this->Session->read('sess_userrole');//pr($id);
@@ -422,6 +428,34 @@ App::uses('Controller', 'Controller');
         {
             
             $devices    =   $this->Description->find('first',array('conditions'=>array('Description.id'=>$des_id,'Description.status'=>1,'Description.processing'=>1,'Description.checking'=>1)));
+            
+            if(!empty($devices)):
+                $this->request->data['DelDescription']['deliveryorder_id']          =   $del_id;
+                $this->request->data['DelDescription']['salesorder_id']             =   $devices['Description']['salesorder_id'];
+                $this->request->data['DelDescription']['quotation_id']              =   $devices['Description']['quotation_id'];
+                $this->request->data['DelDescription']['quotationno']               =   $devices['Description']['quotationno'];
+                $this->request->data['DelDescription']['customer_id']               =   $devices['Description']['customer_id'];
+                $this->request->data['DelDescription']['delivery_quantity']         =   $devices['Description']['sales_quantity'];
+                $this->request->data['DelDescription']['instrument_id']             =   $devices['Description']['instrument_id'];
+                $this->request->data['DelDescription']['model_no']                  =   $devices['Description']['model_no'];
+                $this->request->data['DelDescription']['brand_id']                  =   $devices['Description']['brand_id'];
+                $this->request->data['DelDescription']['delivery_range']            =   $devices['Description']['sales_range'];
+                $this->request->data['DelDescription']['delivery_calllocation']     =   $devices['Description']['sales_calllocation'];
+                $this->request->data['DelDescription']['delivery_calltype']         =   $devices['Description']['sales_calltype'];
+                $this->request->data['DelDescription']['delivery_validity']         =   $devices['Description']['sales_validity'];
+                $this->request->data['DelDescription']['delivery_unitprice']        =   $devices['Description']['sales_unitprice'];
+                $this->request->data['DelDescription']['delivery_discount']         =   $devices['Description']['sales_discount'];
+                $this->request->data['DelDescription']['department_id']             =   $devices['Description']['department_id'];
+                $this->request->data['DelDescription']['delivery_accountservice']   =   $devices['Description']['sales_accountservice'];
+                $this->request->data['DelDescription']['delivery_titles']           =   $devices['Description']['sales_titles'];
+                $this->request->data['DelDescription']['delivery_total']           =   $devices['Description']['sales_total'];
+                return $this->request->data;
+            endif;
+        }
+         public function delDescription_partial($des_id=NULL,$del_id=NULL)
+        {
+            
+            $devices    =   $this->Description->find('first',array('conditions'=>array('Description.id'=>$des_id,'Description.status'=>1,'Description.processing'=>1,'Description.checking'=>1,'Description.is_deliveryorder_created'=>0)));
             
             if(!empty($devices)):
                 $this->request->data['DelDescription']['deliveryorder_id']          =   $del_id;

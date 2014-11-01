@@ -20,6 +20,7 @@
                     cache: false,
                     success: function(html)
                     {
+                        //console.log(html);
                         $("#sales_list").html(html).show();
                     }
                 });
