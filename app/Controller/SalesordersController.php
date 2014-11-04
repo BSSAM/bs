@@ -688,7 +688,7 @@
             $this->loadModel('Description');
             $this->request->data = json_decode(file_get_contents("php://input"));
             $data = array();
-            //pr($this->request->data);
+            //pr($this->request->data->instrument_quantity);
             //exit;
             
             $quantity = $this->request->data->instrument_quantity;

@@ -151,7 +151,9 @@ $("#search_cusinstrument").hide();
                 var instrument_quantity =   $('#sales_quantity').val();
                 var instrument_name=$('#val_instrument').val();
                 var instrument_modelno=$('#val_model_no').val();
+                var instrument_brand_text =$('#val_brand option:selected').text();
                 var instrument_brand=$('#val_brand').val();
+                var instrument_range_text =$('#sales_range option:selected').text();
                 var instrument_range=$('#sales_range').val();
                 var instrument_calllocation=$('#sales_calllocation').val();
                 var instrument_calltype=$('#sales_calltype').val();
@@ -174,7 +176,9 @@ $("#search_cusinstrument").hide();
                         instrument_name:instrument_name,
     //                    "instrument_quantity":instrument_quantity,
                         "instrument_brand":instrument_brand,
+                        "instrument_brand_text":instrument_brand_text,
                         "instrument_modelno":instrument_modelno,
+                        "instrument_range_text":instrument_range_text,
                         "instrument_range":instrument_range,
                         "instrument_calllocation":instrument_calllocation,
                         "instrument_calltype":instrument_calltype,
@@ -191,7 +195,7 @@ $("#search_cusinstrument").hide();
                             console.log(k);
                             console.log(v);
                             //,"id":k
-                            $new_data = {serial:v,customer_id:customer_id,salesorder_id:salesorder_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
+                            $new_data = {serial:v,customer_id:customer_id,salesorder_id:salesorder_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,"instrument_brand_text":instrument_brand_text,"instrument_range_text":instrument_range_text,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
                             $scope.instruments.push($new_data);
                             setTimeout(
                                     function(){
@@ -262,6 +266,11 @@ $("#search_cusinstrument").hide();
                                });},50);
                         });
                         $scope.pagination();
+                        $('#sales_quantity').val(null);
+                        $('#val_instrument').val(null);
+                        $('#val_model_no').val(null);
+                        $('#val_brand').empty().append('<option value="">Select Brand</option>');
+                        $('#sales_range').empty().append('<option value="">Select Range</option>');
                     });
 
                 if($scope.titles.indexOf("0") != "-1")
@@ -281,11 +290,12 @@ $("#search_cusinstrument").hide();
                 if($scope.titles.indexOf("7") != "-1")
                     $scope.show_title8 = true;
 
-                    $('#sales_quantity').val(null);
-                    $('#val_instrument').val(null);
-                    $('#val_model_no').val(null);
-                    $('#val_brand').empty().append('<option value="">Select Brand</option>');
-                    $('#sales_range').val(null);
+                    
+//                    $scope.ins_sales_model = null;
+//                    $scope.quan_sales_model = null;
+//                    $scope.model_sales_model = null;
+//                    $scope.brand_sales_model = null;
+//                    $scope.range_sales_model = null;
                     
 //                    $('#val_description').val(null);
 //                    $('#val_description').removeAttr("required");
@@ -332,7 +342,9 @@ $("#search_cusinstrument").hide();
                 var instrument_quantity =   $('#sales_quantity').val();
                 var instrument_name=$('#val_instrument').val();
                 var instrument_modelno=$('#val_model_no').val();
+                var instrument_brand_text =$('#val_brand option:selected').text();
                 var instrument_brand=$('#val_brand').val();
+                var instrument_range_text =$('#sales_range option:selected').text();
                 var instrument_range=$('#sales_range').val();
                 var instrument_calllocation=$('#sales_calllocation').val();
                 var instrument_calltype=$('#sales_calltype').val();
@@ -355,7 +367,9 @@ $("#search_cusinstrument").hide();
                     instrument_name:instrument_name,
                     "instrument_id":instrument_id,
                     "instrument_brand":instrument_brand,
+                    "instrument_brand_text":instrument_brand_text,
                     "instrument_modelno":instrument_modelno,
+                    "instrument_range_text":instrument_range_text,
                     "instrument_range":instrument_range,
                     "instrument_calllocation":instrument_calllocation,
                     "instrument_calltype":instrument_calltype,
@@ -370,7 +384,7 @@ $("#search_cusinstrument").hide();
                             //console.log(data);
                     //return false;
         
-                    $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,salesorder_id:salesorder_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
+                    $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,salesorder_id:salesorder_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,"instrument_brand_text":instrument_brand_text,"instrument_range_text":instrument_range_text,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
                         //res = $scope.instruments[$scope.edit_index];
                         //console.log(res);
                     $scope.pagination();
@@ -607,8 +621,8 @@ $("#search_cusinstrument").hide();
             $('#SalesorderCustomerId').val(res.customer_id);
             $('#SalesorderSalesorderId').val(res.salesorder_id);
             $('#SalesorderInstrumentId').val(res.instrument_id);
-            $('#sales_quantity').val(1).prop("disabled", true);
-            $('#val_instrument').val(res.name).prop("disabled", true);
+            //$('#sales_quantity').val(1).prop("disabled", true);
+            //$('#val_instrument').val(res.name).prop("disabled", true);
             $('#val_model_no').val(res.model);
             /*setTimeout(function(){
                 console.log(res.instrument_brand);
@@ -825,6 +839,8 @@ $("#search_cusinstrument").hide();
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Model No</th>
+            <th class="text-center">Brand Name</th>
+            <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Call Type</th>
             <th class="text-center">Validity</th>
@@ -849,6 +865,8 @@ $("#search_cusinstrument").hide();
             <td>{{$index + 1}}</td>
             <td>{{res.name}}</td>
             <td>{{res.model}}</td>
+            <td>{{res.instrument_brand_text}}</td>
+            <td>{{res.instrument_range_text}}</td>
             <td>{{res.location}}</td>
             <td>{{res.type}}</td>
             <td>{{res.validity}}</td>
