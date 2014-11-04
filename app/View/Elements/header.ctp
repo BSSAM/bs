@@ -320,6 +320,163 @@
                                     </li><?php //} ?>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-vcard sidebar-nav-icon"></i>Department</a>
+                                 <ul>
+                                    <li>
+                                        <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><?php echo 'Dimensional'; ?></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Instrument</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><?php echo 'Electrical'; ?></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Instrument</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Ambient Temperature</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Location</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Other</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Range</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Relative Humidity</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Signal</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Unit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Reference</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">DC Voltage</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">AC Current BS1308</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">AC Voltage BS1308</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Capacitance</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">DC Current BS1308</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Frequency BS2041</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Inductance</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Resistance BS1304</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Resistance BS2041</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Form Datas</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><?php echo 'Pressure'; ?></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Instrument</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Ambient Temperature</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Other</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Range</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Relative Humidity</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Statement Name</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Statement1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Statement2</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Vaccum Sensor</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Uncertainity Data</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Form Datas</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><?php echo 'Temperature'; ?></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Instrument</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Ambient Temperature</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Other</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Range</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Relative Humidity</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Uncertainity Data</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Reading Type</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Channel</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Form Datas</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Template</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Instrument Validity</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Unit Conversion Factor</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Unit</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
 <!--                            <li>
                                 <a href="" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-vcard sidebar-nav-icon"></i>Sales</a>
                                  <ul>
