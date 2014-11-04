@@ -1017,11 +1017,18 @@
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
+            $data1 = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.salesorderno'=>$id)));
+            $data2 = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$data1['Salesorder']['quotationno'])));
+            $appr_id = $data2['Quotation']['is_approved'];
+            if($appr_id == 1):
             $this->Salesorder->updateAll(array('Salesorder.is_approved'=>1),array('Salesorder.salesorderno'=>$id));
             $this->Description->updateAll(array('Description.is_approved'=>1),array('Description.salesorder_id'=>$id));
             //pr($id1);exit;
             $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add SalesOrder'));
+            else:
+                echo "failure";
+            endif;
             
 //            $this->request->data['Logactivity']['logname']   =   'Labprocess';
 //            $this->request->data['Logactivity']['logactivity']   =   'Labprocess Check';

@@ -304,7 +304,15 @@ $(document).ready(function(){
             url: path+'Salesorders/approve/',
             success: function(data)
             {
-                window.location.reload();
+                if(data == "failure")
+                {
+                    alert("Quotation Approval Needed for Salesorder Approval");
+                }
+                else
+                {
+                    alert("Salesorder Approval Successful");
+                    window.location.reload();
+                }
             }
             
         });

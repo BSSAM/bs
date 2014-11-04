@@ -382,6 +382,7 @@ $(document).ready(function(){
             success: function(data)
             {
                 //return false;
+                alert("Quotation Approval Successful");
                window.location.reload();
             }
             

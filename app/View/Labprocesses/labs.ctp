@@ -43,7 +43,7 @@
     </div>
     <?php echo $this->Form->create('Description',array('class'=>'form-horizontal form-bordered','id'=>'form-labs-add')); ?>
     <div class="table-responsive" ng-controller="Controller">
-        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <table id="" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center">Instrument</th>

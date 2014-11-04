@@ -107,7 +107,7 @@
                                 ?>
                                 <?php 
                                 if($user_role['dash_messages']['view'] != 0){ ?>
-                                <li><a href="#messages">Messages <span class="badge animation-floating"><?php echo $log_activity_message_count; ?></span></a></li>
+                                <li><a href="#messages">Messages <span class="badge animation-floating"><?php //echo $log_activity_message_count; ?></span></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -389,7 +389,7 @@
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-do.jpg', array('alt' => 'Delivery Order','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logno'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
                                            <?PHP if($log_activity_deliveryorder_list['Logactivity']['logname'] == 'Deliveryorder'){ ?>

@@ -48,13 +48,89 @@
             {    
                //pr($this->request->data['Deliveryorder']);
                $delivery_before = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved_lab'=>0,'Salesorder.is_approved'=>1,'Salesorder.salesorderno'=>$this->request->data['Deliveryorder']['salesorder_id']),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description')));
-               pr($delivery_before);
-               exit;
+               $delivery_before_quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$delivery_before['Salesorder']['quotationno']),'contain'=>array('Customer','branch','Device')));
+               //pr($delivery_before_quo);
+               //pr($delivery_before['Salesorder']);
+//               pr($this->request->data['Deliveryorder']);
+               //exit;
+                //$this->Description->updateAll(array('Description.is_deliveryorder_created'=>1),array('Quotation.id'=>$delivery_before_quo['Quotation']['id']));
                
-                if($this->Deliveryorder->save($this->request->data['Deliveryorder']))
+               $new_array = array();
+               
+               $new_array['customer_id'] = $delivery_before['Salesorder']['customer_id'];
+                $new_array['branch_id'] = $delivery_before['Salesorder']['branch_id'];
+                $new_array['delivery_address'] = $this->request->data['Deliveryorder']['customer_address'];
+                $new_array['customer_address'] = $this->request->data['Deliveryorder']['customer_address'];
+                $new_array['due_amount'] = $delivery_before_quo['Quotation']['due_amount'];
+                $new_array['attn'] = $this->request->data['Deliveryorder']['attn'];
+                $new_array['track_id'] = $delivery_before_quo['Quotation']['track_id'];
+                $new_array['phone'] = $this->request->data['Deliveryorder']['phone'];
+                $new_array['fax'] = $this->request->data['Deliveryorder']['fax'];
+                $new_array['email'] = $this->request->data['Deliveryorder']['email'];
+                $new_array['delivery_order_no'] = $dmt;
+                $new_array['salesorder_id'] = $this->request->data['Deliveryorder']['salesorder_id'];
+                $new_array['quotationno'] = $delivery_before['Salesorder']['quotationno'];
+                $new_array['delivery_order_date'] = $this->request->data['Deliveryorder']['delivery_order_date'];
+                $new_array['our_reference_no'] = $delivery_before['Salesorder']['track_id'];
+                $new_array['po_reference_no'] = $this->request->data['Deliveryorder']['po_reference_no'];
+                $new_array['ref_no'] = $delivery_before_quo['Quotation']['ref_no'];
+                $new_array['ref_count'] = $delivery_before_quo['Quotation']['ref_count'];
+                $new_array['remarks'] = $this->request->data['Deliveryorder']['remarks'];
+                $new_array['service_id'] = $this->request->data['Deliveryorder']['service_id'];
+                $new_array['is_approved'] = 0;
+                $new_array['instrument_type_id'] = $delivery_before_quo['Quotation']['instrument_type_id'];
+                $new_array['status'] = 1;
+                $new_array['is_invoice_created'] = 0;
+                $new_array['is_invoice_approved'] = 0;
+                $new_array['po_generate_type'] = $delivery_before_quo['Quotation']['po_generate_type'];
+                $new_array['is_assignpo'] = $delivery_before_quo['Quotation']['is_assign_po'];
+                $new_array['is_poapproved'] = $delivery_before_quo['Quotation']['is_poapproved'];
+                $new_array['po_approval_date'] = $delivery_before_quo['Quotation']['po_approval_date'];
+                $new_array['is_pocount_satisfied'] = $delivery_before_quo['Quotation']['is_pocount_satisfied'];
+                $new_array['is_deleted'] = 0;
+                $new_array['job_finished'] = 0;
+                $new_array['is_jobcompleted'] = 0;
+                //pr($new_array);exit;
+                $this->Deliveryorder->create();
+                if($this->Deliveryorder->save($new_array))
                 {
                    
                     $del_last_id    =   $this->Deliveryorder->getLastInsertID();
+                    $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.salesorderno'=>$this->request->data['Deliveryorder']['salesorder_id']));
+                    $this->Description->updateAll(array('Description.is_deliveryorder_created'=>1),array('Description.salesorder_id'=>$this->request->data['Deliveryorder']['salesorder_id'],'Description.checking'=>1));
+                    foreach($delivery_before['Description'] as $desc):
+                        if($desc['checking'] == 1):
+                            $this->request->data['DelDescription']['deliveryorder_id']          =   $del_last_id;
+                            $this->request->data['DelDescription']['salesorder_id']             =   $desc['salesorder_id'];
+                            $this->request->data['DelDescription']['quotation_id']              =   $desc['quotation_id'];
+                            $this->request->data['DelDescription']['quotationno']               =   $desc['quotationno'];
+                            $this->request->data['DelDescription']['customer_id']               =   $desc['customer_id'];
+                            $this->request->data['DelDescription']['delivery_quantity']         =   $desc['sales_quantity'];
+                            $this->request->data['DelDescription']['instrument_id']             =   $desc['instrument_id'];
+                            $this->request->data['DelDescription']['model_no']                  =   $desc['model_no'];
+                            $this->request->data['DelDescription']['brand_id']                  =   $desc['brand_id'];
+                            $this->request->data['DelDescription']['delivery_range']            =   $desc['sales_range'];
+                            $this->request->data['DelDescription']['delivery_calllocation']     =   $desc['sales_calllocation'];
+                            $this->request->data['DelDescription']['delivery_calltype']         =   $desc['sales_calltype'];
+                            $this->request->data['DelDescription']['delivery_validity']         =   $desc['sales_validity'];
+                            $this->request->data['DelDescription']['delivery_unitprice']        =   $desc['sales_unitprice'];
+                            $this->request->data['DelDescription']['delivery_discount']         =   $desc['sales_discount'];
+                            $this->request->data['DelDescription']['department_id']             =   $desc['department_id'];
+                            $this->request->data['DelDescription']['delivery_accountservice']   =   $desc['sales_accountservice'];
+                            $this->request->data['DelDescription']['delivery_titles']           =   $desc['sales_titles'];
+                            $this->request->data['DelDescription']['delivery_total']            =   $desc['sales_total'];
+                            $this->request->data['DelDescription']['title1_val']                =   $desc['title1_val'];
+                            $this->request->data['DelDescription']['title2_val']                =   $desc['title2_val'];
+                            $this->request->data['DelDescription']['title3_val']                =   $desc['title3_val'];
+                            $this->request->data['DelDescription']['title4_val']                =   $desc['title4_val'];
+                            $this->request->data['DelDescription']['title5_val']                =   $desc['title5_val'];
+                            $this->request->data['DelDescription']['title6_val']                =   $desc['title6_val'];
+                            $this->request->data['DelDescription']['title7_val']                =   $desc['title7_val'];
+                            $this->request->data['DelDescription']['title8_val']                =   $desc['title8_val'];
+                            $this->DelDescription->create();
+                            $this->DelDescription->save($this->request->data['DelDescription']);
+                        endif;
+                    endforeach;
                     $this->request->data['Deliveryorder']['is_deliveryorder_created']=1;
                     $document_node    =   $this->DoDocument->find('all',array('conditions'=>array('DoDocument.deliveryorder_no'=>$this->request->data['Deliveryorder']['delivery_order_no'])));
                    
@@ -65,8 +141,9 @@
                     /******************* Data Log*/
                         $this->request->data['Logactivity']['logname']   =   'Deliveryorder';
                         $this->request->data['Logactivity']['logactivity']   =   'Add DeliveryOrder';
-                        $this->request->data['Logactivity']['logid']   =   $dmt;
-                        $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logid']   =   $del_last_id;
+                        $this->request->data['Logactivity']['logno'] = $dmt;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
                         $a = $this->Logactivity->save($this->request->data['Logactivity']);
                         
