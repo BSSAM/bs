@@ -112,14 +112,16 @@ $("#search_cusinstrument").hide();
         $scope.start = 0;
         $scope.end = 0;
         $scope.edit_index = '';
-        $('#val_description').prop('required', true);
-        $('#val_quantity').prop('required', true);
-        $('#val_model_no').prop('required', true);
-        $('#val_brand').prop('required', true);
-        $('#val_range').prop('required', true);
-        $('#val_call_location').prop('required', true);
-        $('#val_call_type').prop('required', true);
-        $('#val_account_service').prop('required', true);
+//        $('#val_description').prop('required', true);
+//        $('#val_quantity').prop('required', true);
+//        $('#val_model_no').prop('required', true);
+//        $('#val_brand').prop('required', true);
+//        $('#val_range').prop('required', true);
+//        $('#val_call_location').prop('required', true);
+//        $('#val_call_type').prop('required', true);
+//        $('#val_account_service').prop('required', true);
+        $('#val_quantity').prop("disabled", false);
+        $('#val_description').prop("disabled", false);
         //$('#val_description').prop('required', true);
         //$('#val_quantity').prop('required', true);
         //$("#val_description").attr("required","required");
@@ -186,7 +188,7 @@ $("#search_cusinstrument").hide();
                 var instrument_account=$('#val_account_service').val();
                 var instrument_title=$('#val_title').val();
 
-
+                
                     $http.post(path_url+'Quotations/add_instrument/',{
                         instrument_quantity:instrument_quantity,
                         "instrument_validity":instrument_validity,
@@ -365,7 +367,7 @@ $("#search_cusinstrument").hide();
             var instrument_modelno=$('#val_model_no').val();
             var instrument_brand_text =$('#val_brand option:selected').text();
             var instrument_brand=$('#val_brand').val();
-            var instrument_range_text =$('#sales_range option:selected').text();
+            var instrument_range_text =$('#val_range option:selected').text();
             var instrument_range=$('#val_range').val();
             var instrument_calllocation=$('#val_call_location').val();
             var instrument_calltype=$('#val_call_type').val();
@@ -496,6 +498,8 @@ $("#search_cusinstrument").hide();
                         },50);
                 $('#val_description').val(null);
                 $('#val_quantity').val(null);
+                $('#val_quantity').prop("disabled", false);
+                $('#val_description').prop("disabled", false);
                 $('#val_model_no').val(null);
                 //$('#val_account_service').val(null);
                 //$('#val_title').attr("itemsselected","");
@@ -579,14 +583,26 @@ $("#search_cusinstrument").hide();
                         $('#val_brand option[value="'+res.instrument_brand+'"]').prop('selected', true);
                      }
                 });
-                $('#val_brand').
+                $.each(data.Instrument.InstrumentRange, function(k, v)
+                {
+                     $('#val_range').append('<option value="'+v.Range.id+'">'+v.Range.range_name+'</option>');
+                     
+                     if(k == (data.Instrument.InstrumentRange).length - 1)
+                     {
+                        //console.log(res.instrument_brand);
+                        $('#val_range').val(res.instrument_range);
+                        $('#val_range option[value="'+res.instrument_range+'"]').prop('selected', true);
+                     }
+                });
                 //$('#val_brand').find('<option value="'+res.instrument_brand+'></option>');
                // alert(res.instrument_brand);
 //                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
 //                {
 //                     $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
 //                });
-                    
+                $('#val_call_location option[value="'+res.location+'"]').prop('selected', true);
+                $('#val_call_type option[value="'+res.type+'"]').prop('selected', true);
+                $('#val_account_service option[value="'+res.service+'"]').prop('selected', true);
                 $('#val_department').val(dept.Department.departmentname);
                 setTimeout(
                                     function(){
@@ -662,8 +678,8 @@ $("#search_cusinstrument").hide();
             $('#QuotationCustomerId').val(res.customer_id);
             $('#QuotationQuotationId').val(res.quotation_id);
             $('#QuotationInstrumentId').val(res.instrument_id);
-//            $('#val_quantity').val(1).prop("disabled", true);
-//            $('#val_description').val(res.name).prop("disabled", true);
+            $('#val_quantity').val(1).prop("disabled", true);
+            $('#val_description').val(res.name).prop("disabled", true);
             $('#val_model_no').val(res.model);
             /*setTimeout(function(){
                 console.log(res.instrument_brand);
