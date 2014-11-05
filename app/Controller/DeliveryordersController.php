@@ -11,25 +11,32 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','DoDocument','PrepareInvoice',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Datalog','Logactivity','Contactpersoninfo');
-        public function index()
+        public function index($id=NULL)
         {
             /*******************************************************
             *  BS V1.0
             *  User Role Permission
             *  Controller : Salesorder
             *  Permission : view 
-           *******************************************************/
-           $user_role = $this->userrole_permission();
-           if($user_role['job_deliveryorder']['view'] == 0){ 
+            *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['job_deliveryorder']['view'] == 0){ 
                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-           }
-
-           $this->set('userrole_cus',$user_role['job_deliveryorder']);
-           /*
+            }
+            if(empty($id)):
+                $this->set('deleted_val',$id=0);
+            endif;
+            $this->set('userrole_cus',$user_role['job_deliveryorder']);
+            /*
             * *****************************************************
             */
             //$this->Quotation->recursive = 1; 
-            $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
+            if($id):
+                $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>$id),'order' => array('Deliveryorder.id' => 'DESC')));
+                $this->set('deleted_val',$id);
+            else:
+                $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
+            endif;
             $this->set('deliveryorders', $delivery_data);
         }
         public function add()

@@ -1,6 +1,15 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
+<script>
+var _ROOT ='<?PHP echo Router::url('/',true); ?>';
+$(function() {
+$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
+       var val = $(this).val();  // val is the drug id
+       window.location = _ROOT + 'Deliveryorders/index/' + val;
+    });    
+});
+</script>
 <h1>
                                 <i class="gi gi-user"></i>Delivery Order
                             </h1>
@@ -33,7 +42,7 @@
                                          <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
-                                        <th class="text-center">Action</th>
+                                        <?php if($deleted_val == 0): ?><th class="text-center">Action</th><?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,6 +56,7 @@
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['email'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['our_reference_no'] ?></td>
+                                        <?php if($deleted_val == 0): ?>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$deliveryorder['Deliveryorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
@@ -56,10 +66,20 @@
                                             <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$deliveryorder['Deliveryorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                             <?php } ?>
                                         </td>
+                                        <?php endif; ?>
                                     </tr>
                                     <?php endforeach; ?>
                                     <?PHP endif; ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="btn-group btn-group-md pull-right">
+                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('0'=>'Active','1'=>'Deleted'),'empty'=>'Select Status')); ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                          <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>

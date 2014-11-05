@@ -6,7 +6,7 @@
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title');
-        public function index()
+        public function index($id=NULL)
         {
         /*******************************************************
          *  BS V1.0
@@ -18,13 +18,22 @@
         if($user_role['job_quotation']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
         
         $this->set('userrole_cus',$user_role['job_quotation']);
         /*
          * *****************************************************
          */
             //$this->Quotation->recursive = 1; 
-            $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));
+        if($id):
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>$id),'order' => array('Quotation.created' => 'ASC')));
+        $this->set('deleted_val',$id);
+        else:
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));    
+        endif;
+            
             $this->set('quotation', $quotation_lists);
         }
         public function add()

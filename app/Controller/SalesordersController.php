@@ -5,7 +5,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog','InstrumentType','Title');
-        public function index()
+        public function index($id=NULL)
         {
         /*******************************************************
          *  BS V1.0
@@ -17,13 +17,20 @@
         if($user_role['job_salesorder']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
-        
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
         $this->set('userrole_cus',$user_role['job_salesorder']);
         /*
          * *****************************************************
          */
-            //$this->Quotation->recursive = 1; 
-            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+            //$this->Quotation->recursive = 1;
+        if($id):
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>$id),'order' => array('Salesorder.id' => 'DESC')));
+            $this->set('deleted_val',$id);
+        else:
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC'))); 
+        endif;
             $this->set('salesorder', $salesorder_list);
         }
         public function add()
