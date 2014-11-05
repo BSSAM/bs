@@ -893,7 +893,7 @@ $("#search_cusinstrument").hide();
                 
             </td>
         </tr>
-        <tr ng-hide="instruments.length"><td colspan="10">No Instruments found</td></tr>
+        <tr ng-hide="instruments.length"><td colspan="12">No Instruments found</td></tr>
     </tbody>
 </table>
 </ng-form>
