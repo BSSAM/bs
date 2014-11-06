@@ -180,6 +180,9 @@
             $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
             $quo=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quo_no),'recursive'=>2));
             $posat = $quo['Quotation']['is_poapproved'];
+            $instrument_type = $quo['InstrumentType']['deliveryorder'];
+            //pr($instrument_type);exit;
+            $this->set('instrument_type',$instrument_type);
             //pr($deliveryorder);exit;
             //pr($deliveryorder['Customer']['Contactpersoninfo']);
             //$this->request->data['Contactpersoninfo
@@ -199,14 +202,14 @@
             //$con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['Quotation']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
             //pr($con);            
             
-            $instrument_type = $deliveryorder['InstrumentType']['deliveryorder'];
+            //$instrument_type = $deliveryorder['InstrumentType']['deliveryorder'];
             $contact = $deliveryorder['Customer']['Contactpersoninfo'];
             foreach($contact as $contactlist)
             {
                 $var = $contactlist['name'];
             }
                         //echo $instrument_type; exit;
-                         $this->set('instrument_type',$instrument_type);
+                         //$this->set('instrument_type',$instrument_type);
                           $this->set('contact',$var);
             
             if($this->request->is(array('post','put')))

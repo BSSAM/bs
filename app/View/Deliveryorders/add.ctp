@@ -53,7 +53,7 @@
                                 <!-- Basic Form Elements Title -->
                                 <div class="block-title">
                                     <h2>
-                                        <div class="col-md-6 search_move">
+                                        <div class="col-md-5 search_move">
                                             <div class="input-group">
                                                 <div>
                                                     <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="delivery_input_search"/>
