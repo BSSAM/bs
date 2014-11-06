@@ -360,14 +360,14 @@ var FormsValidation = function() {
                 rules: {
                     symbol: {
                         required: true,
-                        maxlength: 2
+                        
                     },
                     country_id: {
                         required: true,
                     },
                     currencycode: {
                         required: true,
-                        maxlength: 5
+                        
                     },
                     exchangerate: {
                         required: true,
@@ -378,14 +378,14 @@ var FormsValidation = function() {
                 messages: {
                     symbol: {
                         required: 'Currency Symbol is Required',
-                        maxlength: 'The Currency Symbol should have only 2 character'
+                        
                     },
                     country_id: {
                         required: 'Country is Required',
                     },
                     currencycode: {
-                        required: 'Currency Symbol is Required',
-                        maxlength: 'The Currency Symbol must not be more than 5 characters long'
+                        required: 'Currency Code is Required',
+                        
                     },
                     exchangerate: {
                         required: 'Exchange Rate is Required',
