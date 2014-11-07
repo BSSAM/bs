@@ -23,16 +23,16 @@ class LabprocessesController extends AppController
         $this->set('labprocess', $labprocess);
         
         $dimentional = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>1))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
         $electrical = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>2))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
         $pressure = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>3))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
         //pr($pressure);exit;
         $temperature = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>4))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
         $miscellaneous = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id >='=>5))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
 
         $this->set('dimentional', $dimentional);
         $this->set('electrical', $electrical);
@@ -43,11 +43,11 @@ class LabprocessesController extends AppController
         // Dimensional
         
         $dimensional_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
         $dimensional_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
         $dimensional_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
         $this->set('dimensional_proc', $dimensional_processing);
         $this->set('dimensional_pend', $dimensional_pending);
         $this->set('dimensional_check', $dimensional_checking);
@@ -56,11 +56,11 @@ class LabprocessesController extends AppController
         // Electrical
 
         $electrical_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
         $electrical_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
         $electrical_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
         $this->set('electrical_proc', $electrical_processing);
         $this->set('electrical_pend', $electrical_pending);
         $this->set('electrical_check', $electrical_checking);
@@ -68,12 +68,12 @@ class LabprocessesController extends AppController
         // Pressure
 
         $pressure_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
         $pressure_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
         //pr($pressure_processing);exit;
         $pressure_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
         //pr($pressure_processing);exit;
         $this->set('pressure_proc', $pressure_processing);
         $this->set('pressure_pend', $pressure_pending);
@@ -82,11 +82,11 @@ class LabprocessesController extends AppController
         // Temperature
 
         $temperature_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
         $temperature_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
         $temperature_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
         $this->set('temperature_proc', $temperature_processing);
         $this->set('temperature_pend', $temperature_pending);
         $this->set('temperature_check', $temperature_checking);
@@ -94,11 +94,11 @@ class LabprocessesController extends AppController
         // Miscellaneous
 
         $miscellaneous_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
         $miscellaneous_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
         $miscellaneous_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
         $this->set('miscel_proc', $miscellaneous_processing);
         $this->set('miscel_pend', $miscellaneous_pending);
         $this->set('miscel_check', $miscellaneous_checking);
@@ -110,10 +110,10 @@ class LabprocessesController extends AppController
         
         $this->Description->unbindModel(array('belongsTo' => array('Brand','Customer','Instrument','Department','Salesorder')), true);
         
-        $data_description_count = $this->Description->find('count',array('conditions'=>array('Description.is_approved'=>1,'Description.is_approved_lab'=>0)));
+        $data_description_count = $this->Description->find('count',array('conditions'=>array('Description.is_approved'=>1,'Description.is_approved_lab'=>0,'Description.is_deleted'=>0)));
         
         $this->Description->unbindModel(array('belongsTo' => array('Brand','Customer','Instrument','Department','Salesorder')), true);
-        $data_pending_count = $this->Description->find('count',array('conditions'=>array('AND'=>array('Description.checking'=>0,'Description.processing'=>0,'Description.is_approved_lab'=>0,'Description.is_approved'=>1,'Description.salesorder_id !='=>''))));
+        $data_pending_count = $this->Description->find('count',array('conditions'=>array('AND'=>array('Description.checking'=>0,'Description.processing'=>0,'Description.is_approved_lab'=>0,'Description.is_approved'=>1,'Description.salesorder_id !='=>'','Description.is_deleted'=>0))));
         
         $this->Description->unbindModel(array('belongsTo' => array('Brand','Customer','Instrument','Department','Salesorder')), true);
         
@@ -122,7 +122,7 @@ class LabprocessesController extends AppController
         $count_process1 = 0; 
         foreach($data_processing as $data_processing_list)
         {
-        $count_process = $this->Description->find('count',array('conditions'=>array('Description.processing'=>1,'Description.checking'=>0,'Description.salesorder_id'=>$data_processing_list['Salesorder']['salesorderno'])));
+        $count_process = $this->Description->find('count',array('conditions'=>array('Description.processing'=>1,'Description.checking'=>0,'Description.salesorder_id'=>$data_processing_list['Salesorder']['salesorderno'],'Description.is_deleted'=>0)));
         $count_process1 += $count_process;//echo $count;exit;
         }
         //pr();exit;
@@ -133,7 +133,7 @@ class LabprocessesController extends AppController
         $count_check1 = 0; 
         foreach($data_checking as $data_checking_list)
         {
-            $count_check = $this->Description->find('count',array('conditions'=>array('Description.checking ='=>1,'Description.is_approved_lab'=>1,'Description.salesorder_id'=>$data_processing_list['Salesorder']['salesorderno'])));
+            $count_check = $this->Description->find('count',array('conditions'=>array('Description.checking ='=>1,'Description.is_approved_lab'=>1,'Description.salesorder_id'=>$data_processing_list['Salesorder']['salesorderno'],'Description.is_deleted'=>0)));
             $count_check1 += $count_check;//echo $count;exit;
         }
         //pr();exit;
@@ -197,11 +197,18 @@ class LabprocessesController extends AppController
                         }
                     }
                 }  
-               $device_count = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
-               $lab_approved = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.checking' => 1, 'Description.is_approved_lab' => 1, 'Description.processing' => 1)));
+               $device_count = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_deleted'=>0)));
+               $lab_approved = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.checking' => 1, 'Description.is_approved_lab' => 1, 'Description.processing' => 1,'Description.is_deleted'=>0)));
                if($device_count==$lab_approved)
                {
+                   
                     $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'delivery')));
+                    if(empty($address_list)):
+                        $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'registered')));
+                    endif;
+                    if(empty($address_list)):
+                        $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'billing')));
+                    endif;
                     $dmt=$this->random('deliveryorder');
                     $delivery['Deliverorder']   =  $salesorder_list['Salesorder'];
                     $delivery['Deliverorder']['po_reference_no']   =  $salesorder_list['Salesorder']['ref_no'];
@@ -332,11 +339,17 @@ class LabprocessesController extends AppController
                         }
                     }
                 }  
-               $device_count = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
-               $lab_approved = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.checking' => 1, 'Description.is_approved_lab' => 1, 'Description.processing' => 1)));
+               $device_count = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_deleted'=>0)));
+               $lab_approved = $this->Description->find('count', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id, 'Description.checking' => 1, 'Description.is_approved_lab' => 1, 'Description.processing' => 1,'Description.is_deleted'=>0)));
                if($device_count==$lab_approved)
                {
                     $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'delivery')));
+                    if(empty($address_list)):
+                        $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'registered')));
+                    endif;
+                    if(empty($address_list)):
+                        $address_list    =   $this->Address->find('first',array('conditions'=>array('Address.customer_id'=>$salesorder_list['Customer']['id'],'Address.status'=>1,'Address.type'=>'billing')));
+                    endif;
                     $dmt=$this->random('deliveryorder');
                     $delivery['Deliverorder']   =  $salesorder_list['Salesorder'];
                     $delivery['Deliverorder']['po_reference_no']   =  $salesorder_list['Salesorder']['ref_no'];
@@ -612,15 +625,15 @@ class LabprocessesController extends AppController
                     $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
                         ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description'),'recursive'=>2));
                     $dimentional = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     
                     $this->set('dimentional', $dimentional);
                     $this->set('electrical', $electrical);
@@ -632,11 +645,11 @@ class LabprocessesController extends AppController
                     // Dimentional
                     
                     $dimensional_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('dimensional_proc', $dimensional_processing);
                     $this->set('dimensional_pend', $dimensional_pending);
                     $this->set('dimensional_check', $dimensional_checking);
@@ -645,11 +658,11 @@ class LabprocessesController extends AppController
                     // Electrical
                                            
                     $electrical_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('electrical_proc', $electrical_processing);
                     $this->set('electrical_pend', $electrical_pending);
                     $this->set('electrical_check', $electrical_checking);
@@ -657,12 +670,12 @@ class LabprocessesController extends AppController
                     // Pressure
                        
                     $pressure_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     
                     $pressure_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('pressure_proc', $pressure_processing);
                     $this->set('pressure_pend', $pressure_pending);
                     $this->set('pressure_check', $pressure_checking);
@@ -670,11 +683,11 @@ class LabprocessesController extends AppController
                     // Temperature
                        
                     $temperature_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('temperature_proc', $temperature_processing);
                     $this->set('temperature_pend', $temperature_pending);
                     $this->set('temperature_check', $temperature_checking);
@@ -682,11 +695,11 @@ class LabprocessesController extends AppController
                     // Miscellaneous
                        
                     $miscellaneous_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('miscel_proc', $miscellaneous_processing);
                     $this->set('miscel_pend', $miscellaneous_pending);
                     $this->set('miscel_check', $miscellaneous_checking);
@@ -705,17 +718,17 @@ class LabprocessesController extends AppController
                      */   
             
                     $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                    ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id)))));
+                    ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.is_deleted'=>0)))));
                     $dimentional = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     
                     $this->set('dimentional', $dimentional);
                     $this->set('electrical', $electrical);
@@ -726,11 +739,11 @@ class LabprocessesController extends AppController
                     // Dimentional
                     
                     $dimensional_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('dimensional_proc', $dimensional_processing);
                     $this->set('dimensional_pend', $dimensional_pending);
                     $this->set('dimensional_check', $dimensional_checking);
@@ -739,11 +752,11 @@ class LabprocessesController extends AppController
                     // Electrical
                                            
                     $electrical_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('electrical_proc', $electrical_processing);
                     $this->set('electrical_pend', $electrical_pending);
                     $this->set('electrical_check', $electrical_checking);
@@ -751,11 +764,11 @@ class LabprocessesController extends AppController
                     // Pressure
                        
                     $pressure_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('pressure_proc', $pressure_processing);
                     $this->set('pressure_pend', $pressure_pending);
                     $this->set('pressure_check', $pressure_checking);
@@ -763,11 +776,11 @@ class LabprocessesController extends AppController
                     // Temperature
                        
                     $temperature_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('temperature_proc', $temperature_processing);
                     $this->set('temperature_pend', $temperature_pending);
                     $this->set('temperature_check', $temperature_checking);
@@ -775,11 +788,11 @@ class LabprocessesController extends AppController
                     // Miscellaneous
                        
                     $miscellaneous_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('miscel_proc', $miscellaneous_processing);
                     $this->set('miscel_pend', $miscellaneous_pending);
                     $this->set('miscel_check', $miscellaneous_checking);
@@ -804,15 +817,15 @@ class LabprocessesController extends AppController
                     //pr($labprocess);exit;
                     $this->set('labprocess', $labprocess);
                     $dimentional = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     
                     $this->set('dimentional', $dimentional);
                     $this->set('electrical', $electrical);
@@ -822,11 +835,11 @@ class LabprocessesController extends AppController
                     // Dimentional
                     
                     $dimensional_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('dimensional_proc', $dimensional_processing);
                     $this->set('dimensional_pend', $dimensional_pending);
                     $this->set('dimensional_check', $dimensional_checking);
@@ -835,11 +848,11 @@ class LabprocessesController extends AppController
                     // Electrical
                                            
                     $electrical_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('electrical_proc', $electrical_processing);
                     $this->set('electrical_pend', $electrical_pending);
                     $this->set('electrical_check', $electrical_checking);
@@ -847,12 +860,12 @@ class LabprocessesController extends AppController
                     // Pressure
                        
                     $pressure_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     //pr($pressure_processing);exit;
                     $pressure_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('pressure_proc', $pressure_processing);
                     $this->set('pressure_pend', $pressure_pending);
                     $this->set('pressure_check', $pressure_checking);
@@ -860,11 +873,11 @@ class LabprocessesController extends AppController
                     // Temperature
                        
                     $temperature_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('temperature_proc', $temperature_processing);
                     $this->set('temperature_pend', $temperature_pending);
                     $this->set('temperature_check', $temperature_checking);
@@ -872,11 +885,11 @@ class LabprocessesController extends AppController
                     // Miscellaneous
                        
                     $miscellaneous_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('miscel_proc', $miscellaneous_processing);
                     $this->set('miscel_pend', $miscellaneous_pending);
                     $this->set('miscel_check', $miscellaneous_checking);
@@ -892,20 +905,20 @@ class LabprocessesController extends AppController
                      *  For callocation Specific & Pending 1
                      */
                         $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id)))));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' =>$calllocation_id,'Description.is_deleted'=>0)))));
                         //pr($labprocess);exit;
                         $this->set('labprocess', $labprocess);
                         
                         $dimentional = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                         $electrical = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>2))),'recursive'=>2));
+                            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                         $pressure = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>3))),'recursive'=>2));
+                            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                         $temperature = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>4))),'recursive'=>2));
+                            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                         $miscellaneous = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id >='=>5))),'recursive'=>2));
+                            ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.sales_calllocation' =>$calllocation_id,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
 
                         $this->set('dimentional', $dimentional);
                         $this->set('electrical', $electrical);
@@ -916,11 +929,11 @@ class LabprocessesController extends AppController
                         // Dimentional
                     
                     $dimensional_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('dimensional_proc', $dimensional_processing);
                     $this->set('dimensional_pend', $dimensional_pending);
                     $this->set('dimensional_check', $dimensional_checking);
@@ -929,11 +942,11 @@ class LabprocessesController extends AppController
                     // Electrical
                                            
                     $electrical_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('electrical_proc', $electrical_processing);
                     $this->set('electrical_pend', $electrical_pending);
                     $this->set('electrical_check', $electrical_checking);
@@ -941,11 +954,11 @@ class LabprocessesController extends AppController
                     // Pressure
                        
                     $pressure_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('pressure_proc', $pressure_processing);
                     $this->set('pressure_pend', $pressure_pending);
                     $this->set('pressure_check', $pressure_checking);
@@ -953,11 +966,11 @@ class LabprocessesController extends AppController
                     // Temperature
                        
                     $temperature_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('temperature_proc', $temperature_processing);
                     $this->set('temperature_pend', $temperature_pending);
                     $this->set('temperature_check', $temperature_checking);
@@ -965,11 +978,11 @@ class LabprocessesController extends AppController
                     // Miscellaneous
                        
                     $miscellaneous_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff <=' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('miscel_proc', $miscellaneous_processing);
                     $this->set('miscel_pend', $miscellaneous_pending);
                     $this->set('miscel_check', $miscellaneous_checking);
@@ -990,15 +1003,15 @@ class LabprocessesController extends AppController
                     $this->set('labprocess', $labprocess);
                     
                     $dimentional = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,'Salesorder.solist_diff >' => 0,
-                    ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>1))),'recursive'=>2));
+                    ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
 
                     $this->set('dimentional', $dimentional);
                     $this->set('electrical', $electrical);
@@ -1011,11 +1024,11 @@ class LabprocessesController extends AppController
                     // Dimentional
                     
                     $dimensional_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('dimensional_proc', $dimensional_processing);
                     $this->set('dimensional_pend', $dimensional_pending);
                     $this->set('dimensional_check', $dimensional_checking);
@@ -1024,11 +1037,11 @@ class LabprocessesController extends AppController
                     // Electrical
                                            
                     $electrical_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('electrical_proc', $electrical_processing);
                     $this->set('electrical_pend', $electrical_pending);
                     $this->set('electrical_check', $electrical_checking);
@@ -1036,11 +1049,11 @@ class LabprocessesController extends AppController
                     // Pressure
                        
                     $pressure_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('pressure_proc', $pressure_processing);
                     $this->set('pressure_pend', $pressure_pending);
                     $this->set('pressure_check', $pressure_checking);
@@ -1048,11 +1061,11 @@ class LabprocessesController extends AppController
                     // Temperature
                        
                     $temperature_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('temperature_proc', $temperature_processing);
                     $this->set('temperature_pend', $temperature_pending);
                     $this->set('temperature_check', $temperature_checking);
@@ -1060,11 +1073,11 @@ class LabprocessesController extends AppController
                     // Miscellaneous
                        
                     $miscellaneous_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('miscel_proc', $miscellaneous_processing);
                     $this->set('miscel_pend', $miscellaneous_pending);
                     $this->set('miscel_check', $miscellaneous_checking);
@@ -1072,20 +1085,20 @@ class LabprocessesController extends AppController
                     $this->set('solist', $solist_id);
                 else:
                         $labprocess = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1,'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' => $calllocation_id)))));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array( 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0)))));
                     $this->set('labprocess', $labprocess);
                     
                     
                     $dimentional = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                    ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>1))),'recursive'=>2));
+                    ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>1,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>2))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>2,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>3))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>3,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>4))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id'=>4,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id >='=>5))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.sales_calllocation' =>$calllocation_id,'Description.department_id >='=>5,'Description.is_deleted'=>0))),'recursive'=>2));
 
                     $this->set('dimentional', $dimentional);
                     $this->set('electrical', $electrical);
@@ -1097,11 +1110,11 @@ class LabprocessesController extends AppController
                     // Dimentional
                     
                     $dimensional_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>1, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>1, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>1, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $dimensional_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>1, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('dimensional_proc', $dimensional_processing);
                     $this->set('dimensional_pend', $dimensional_pending);
                     $this->set('dimensional_check', $dimensional_checking);
@@ -1110,11 +1123,11 @@ class LabprocessesController extends AppController
                     // Electrical
                                            
                     $electrical_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>2, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>2, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>2, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $electrical_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>2, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('electrical_proc', $electrical_processing);
                     $this->set('electrical_pend', $electrical_pending);
                     $this->set('electrical_check', $electrical_checking);
@@ -1122,11 +1135,11 @@ class LabprocessesController extends AppController
                     // Pressure
                        
                     $pressure_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>3, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>3, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>3, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $pressure_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>3, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('pressure_proc', $pressure_processing);
                     $this->set('pressure_pend', $pressure_pending);
                     $this->set('pressure_check', $pressure_checking);
@@ -1134,11 +1147,11 @@ class LabprocessesController extends AppController
                     // Temperature
                        
                     $temperature_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>4, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id'=>4, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id'=>4, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $temperature_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id'=>4, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('temperature_proc', $temperature_processing);
                     $this->set('temperature_pend', $temperature_pending);
                     $this->set('temperature_check', $temperature_checking);
@@ -1146,11 +1159,11 @@ class LabprocessesController extends AppController
                     // Miscellaneous
                        
                     $miscellaneous_processing = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id >='=>5, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.department_id >='=>5, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_pending = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 0,'Description.checking' => 0,'Description.department_id >='=>5, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $miscellaneous_checking = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deliveryorder_created'=>0,'Salesorder.is_approved' => 1, 'Salesorder.solist_diff >' => 0,
-                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5, 'Description.sales_calllocation' => $calllocation_id))),'recursive'=>2));
+                        ), 'group' => array('Salesorder.salesorderno'), 'contain' => array('branch','Customer'=>array('Priority'),'Description' => array('conditions' => array('Description.processing' => 1,'Description.checking' => 1,'Description.department_id >='=>5, 'Description.sales_calllocation' => $calllocation_id,'Description.is_deleted'=>0))),'recursive'=>2));
                     $this->set('miscel_proc', $miscellaneous_processing);
                     $this->set('miscel_pend', $miscellaneous_pending);
                     $this->set('miscel_check', $miscellaneous_checking);

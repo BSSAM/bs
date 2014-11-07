@@ -593,30 +593,30 @@ App::uses('Controller', 'Controller');
                 case 'run':
                 //pr($calllocation_id);
                 if($call_location=='all'){
-                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_deleted'=>0)));
                         return $data_description;
                    } else{
-                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                        $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_deleted'=>0)));
                         return $data_description;
                    }
                     break;
                     //pr($labprocess);exit;
                     case 'out':
                     if($call_location=='all'):
-                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_deleted'=>0)));
                             return $data_description;
                             else:
-                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>$call_location)));
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.sales_calllocation'=>$call_location,'Description.is_deleted'=>0)));
                             return $data_description;
                     endif;
                     //pr($labprocess);exit;
                     break;
                     case 'overdue': 
                          if($call_location=='all'):
-                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_deleted'=>0)));
                                 return $data_description;
                         else:
-                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id)));
+                            $data_description = $this->Description->find('all', array('conditions' => array('Description.is_approved' => 1, 'Description.salesorder_id' => $id,'Description.is_deleted'=>0)));
                                 return $data_description;
                     endif;
                     //pr($labprocess);exit;

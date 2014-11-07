@@ -7,8 +7,7 @@ $(function() {
             type      : 'text',
             cancel    : 'Cancel',
             submit    : 'Save',
-            tooltip   : 'Click to edit',
-
+            tooltip   : 'Click to edit'
        });
     $('.edit_title2').editable(path_url+'/Deliveryorders/update_title2', {
             id        : 'device_id',

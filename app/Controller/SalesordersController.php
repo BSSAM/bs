@@ -878,9 +878,9 @@
             
             
             $this->loadModel('Description');
-            $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1)));
+            $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1,'Description.is_deleted'=>0)));
             if(empty($edit_device_details_check)){
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id)));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.is_deleted'=>0)));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach; 
@@ -888,7 +888,7 @@
             }
             else
             {
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1)));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1,'Description.is_deleted'=>0)));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach; 
