@@ -10,7 +10,7 @@
 var _ROOT ='<?PHP echo Router::url('/',true); ?>';
 $(function() {
 $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
-       var val = $(this).val();  // val is the drug id
+       var val = $(this).val();  // val is the id
        window.location = _ROOT + 'Salesorders/index/' + val;
     });    
 });
