@@ -9,8 +9,8 @@
     {
         public $helpers = array('Html','Form','Session','xls','Number');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','DoDocument','PrepareInvoice',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice','DelDescription',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Datalog','Logactivity','Contactpersoninfo','Title');
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice',
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Datalog','Logactivity','Contactpersoninfo');
         public function index($id=NULL)
         {
             /*******************************************************
@@ -183,12 +183,6 @@
             $instrument_type = $quo['InstrumentType']['deliveryorder'];
             //pr($instrument_type);exit;
             $this->set('instrument_type',$instrument_type);
-            $title =   $this->Title->find('all');
-            foreach($title as $title_name)
-            {
-                $titles[] = $title_name['Title']['title_name'];
-            }
-            $this->set('titles',$titles);
             //pr($deliveryorder);exit;
             //pr($deliveryorder['Customer']['Contactpersoninfo']);
             //$this->request->data['Contactpersoninfo
@@ -360,24 +354,11 @@
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
-            
             $data = $this->Salesorder->find('all',array('conditions'=>array('salesorderno LIKE'=>'%'.$sales_id.'%','Salesorder.is_approved'=>1,'Salesorder.is_deliveryorder_created'=>0)));
-            //pr($data['Description']);exit;
             $count = 0;
             foreach($data as $data_val):
                 //pr($data_val);
-                $cou = 0;
-                foreach($data_val['Description'] as $data_desc):
-                if($data_desc['checking'] == 1):
-                    $cou = $cou + 1;
-                endif;
-                endforeach;
-                if($cou == 0):
-                    echo "<div class='delivery_no_result' align='left'>";
-                    echo "No Results Found";
-                    echo "<br>";
-                    echo "</div>";
-                else:
+                
                 if($data_val['Customer']['deliveryordertype_id']==2):
                 $count = $count+1;
                     //echo $count;
@@ -395,7 +376,6 @@
                         echo "</div>";
                     endif;
                 endif;
-                endif;
             endforeach;
             if($count == 0):
                 echo "<div class='delivery_no_result' align='left'>";
@@ -403,7 +383,6 @@
                 echo "<br>";
                 echo "</div>";
             endif;
-            
             //exit;
 //            $c = count($data);
 //            if(!empty($c))
@@ -735,110 +714,6 @@
         }
 
         
-    }
-    public function update_title1()
-    {
-        $this->autoRender   =   false;
-         if ($this->request->data) {
-            App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title1']);
-
-            $this->DelDescription->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->DelDescription->saveField('title1_val', $title);
-            echo $title;
-        }
-    }    
-    public function update_title2()
-    {
-        $this->autoRender   =   false;
-         if ($this->request->data) {
-            App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title2']);
-
-            $this->DelDescription->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->DelDescription->saveField('title2_val', $title);
-            echo $title;
-        }
-    } 
-    public function update_title3()
-    {
-        $this->autoRender   =   false;
-         if ($this->request->data) {
-            App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title3']);
-
-            $this->DelDescription->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->DelDescription->saveField('title3_val', $title);
-            echo $title;
-        }
-    } 
-    public function update_title4()
-    {
-        $this->autoRender   =   false;
-         if ($this->request->data) {
-            App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title4']);
-
-            $this->DelDescription->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->DelDescription->saveField('title4_val', $title);
-            echo $title;
-        }
-    } 
-    public function update_title5()
-    {
-        $this->autoRender   =   false;
-         if ($this->request->data) {
-            App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title5']);
-
-            $this->DelDescription->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->DelDescription->saveField('title5_val', $title);
-            echo $title;
-        }
-    } 
-    public function update_title6()
-    {
-        $this->autoRender   =   false;
-         if ($this->request->data) {
-            App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title6']);
-
-            $this->DelDescription->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->DelDescription->saveField('title6_val', $title);
-            echo $title;
-        }
-    } 
-    public function update_title7()
-    {
-        $this->autoRender   =   false;
-         if ($this->request->data) {
-            App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title7']);
-
-            $this->DelDescription->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->DelDescription->saveField('title7_val', $title);
-            echo $title;
-        }
-    } 
-    public function update_title8()
-    {
-        $this->autoRender   =   false;
-         if ($this->request->data) {
-            App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title8']);
-
-            $this->DelDescription->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->DelDescription->saveField('title8_val', $title);
-            echo $title;
-        }
     }
        
 }
