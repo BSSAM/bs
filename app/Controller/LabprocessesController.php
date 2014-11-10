@@ -238,7 +238,9 @@ class LabprocessesController extends AppController
                         endforeach;   
                         
                     }
-                    
+                        $quotation_for_log = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotation_list['Quotation']['quotationno'])));
+                        $deliveryorder_type = $quotation_for_log['Customer']['acknowledgement_type_id'];
+                        
                         ////////////////////////////////
                         //      Lab Process Logactivity
                         ////////////////////////////////
@@ -248,6 +250,7 @@ class LabprocessesController extends AppController
                         $this->request->data['Logactivity']['logno'] = $dmt;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 2;
+                        $this->Logactivity->create();
                         $this->Logactivity->save($this->request->data['Logactivity']);
                         
                         /******************
@@ -259,20 +262,43 @@ class LabprocessesController extends AppController
                         $this->request->data['Logactivity']['logno'] = $dmt;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
+                        $this->Logactivity->create();
                         $this->Logactivity->save($this->request->data['Logactivity']);
                         /******************/
-                    //pr($delivery['Deliverorder']);exit;
-                         /*
+                        /*
                          * Data Log Activity
                         */
                         $this->request->data['Datalog']['logname'] = 'Deliveryorder';
                         $this->request->data['Datalog']['logactivity'] = 'Add';
                         $this->request->data['Datalog']['logid'] = $dmt;
                         $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
+                        $this->Datalog->create();
                         $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                         /******************/ 
+                        
+                        if($deliveryorder_type == 1):
+                        
+                            /******************
+                            * Data Log - Client PO
+                            */
+                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+                            $this->request->data['Logactivity']['logid'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                            $this->request->data['Logactivity']['logapprove'] = 1;
+                            $this->Logactivity->create();
+                            $this->Logactivity->save($this->request->data['Logactivity']);
+
+                            $this->request->data['Datalog']['logname'] = 'ClientPO';
+                            $this->request->data['Datalog']['logactivity'] = 'Add';
+                            $this->request->data['Datalog']['logid'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                            $this->Datalog->create();
+                            $this->Datalog->save($this->request->data['Datalog']);
+
+                            /******************/ 
+                        endif;
                         
                     $this->Salesorder->updateAll(array('Salesorder.is_approved_lab' => 1),array('Salesorder.id' => $id));
                     $this->Description->updateAll(array('Description.is_approved_lab' => 1),array('Description.salesorder_id' => $id));
@@ -391,6 +417,7 @@ class LabprocessesController extends AppController
                         $this->request->data['Logactivity']['logno'] = $dmt;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 2;
+                        $this->Logactivity->create();
                         $this->Logactivity->save($this->request->data['Logactivity']);
                         
                         /******************
@@ -402,6 +429,7 @@ class LabprocessesController extends AppController
                         $this->request->data['Logactivity']['logno'] = $dmt;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
+                        $this->Logactivity->create();
                         $this->Logactivity->save($this->request->data['Logactivity']);
                         /******************/
                     //pr($delivery['Deliverorder']);exit;
@@ -412,10 +440,33 @@ class LabprocessesController extends AppController
                         $this->request->data['Datalog']['logactivity'] = 'Add';
                         $this->request->data['Datalog']['logid'] = $dmt;
                         $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
+                        $this->Datalog->create();
                         $a = $this->Datalog->save($this->request->data['Datalog']);
                     
-                        /******************/ 
+                        $quotation_for_log = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotation_list['Quotation']['quotationno'])));
+                        $deliveryorder_type = $quotation_for_log['Customer']['acknowledgement_type_id'];
+                        if($deliveryorder_type == 1):
+                        
+                            /******************
+                            * Data Log - Client PO
+                            */
+                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+                            $this->request->data['Logactivity']['logid'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                            $this->request->data['Logactivity']['logapprove'] = 1;
+                            $this->Logactivity->create();
+                            $this->Logactivity->save($this->request->data['Logactivity']);
+
+                            $this->request->data['Datalog']['logname'] = 'ClientPO';
+                            $this->request->data['Datalog']['logactivity'] = 'Add';
+                            $this->request->data['Datalog']['logid'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                            $this->Datalog->create();
+                            $this->Datalog->save($this->request->data['Datalog']);
+
+                            /******************/ 
+                        endif;
                         
                     $this->Salesorder->updateAll(array('Salesorder.is_approved_lab' => 1),array('Salesorder.id' => $id));
                     $this->Description->updateAll(array('Description.is_approved_lab' => 1),array('Description.salesorder_id' => $id));

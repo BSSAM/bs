@@ -29,9 +29,9 @@
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active invoice_active"><a href="#tab1" data-toggle="tab">Invoice</a></li>
-                                                <li class=""><a href="#tab2" data-toggle="tab"> Prepare PO Full Invoice</a></li>
-                                                <li class=""><a href="#tab3" data-toggle="tab"> Prepare QO Full Invoice</a></li>
-                                                <li class=""><a href="#tab4" data-toggle="tab"> Prepare SO Full Invoice</a></li>
+                                                <li class=""><a href="#tab2" data-toggle="tab"> Prepare SO Full Invoice</a></li>
+                                                <li class=""><a href="#tab3" data-toggle="tab"> Prepare PO Full Invoice</a></li>
+                                                <li class=""><a href="#tab4" data-toggle="tab"> Prepare QO Full Invoice</a></li>                                                
                                                 <li class=""><a href="#tab5" data-toggle="tab"> Prepare DO Full Invoice</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
@@ -41,13 +41,13 @@
                                                     <?PHP echo $this->element('Invoices/invoice'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab2">
+                                                    <?PHP echo $this->element('Invoices/sofull'); ?>
+                                                </div>
+                                                <div class="tab-pane" id="tab3">
                                                     <?PHP echo $this->element('Invoices/pofull'); ?>
                                                 </div>
-                                                 <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Invoices/qofull'); ?>
-                                                </div>
                                                 <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Invoices/sofull'); ?>
+                                                    <?PHP echo $this->element('Invoices/qofull'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab5">
                                                     <?PHP echo $this->element('Invoices/dofull'); ?>

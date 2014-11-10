@@ -25,12 +25,20 @@
          * *****************************************************
          */
             //$this->Quotation->recursive = 1;
-        if($id):
-            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>$id),'order' => array('Salesorder.id' => 'DESC')));
+        if($id == '3'):
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>1),'order' => array('Salesorder.id' => 'DESC')));
+            $this->set('deleted_val',$id);
+        elseif($id == '2'):
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>0),'order' => array('Salesorder.id' => 'DESC')));
+            $this->set('deleted_val',$id);
+        elseif($id == '1'):
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'order' => array('Salesorder.id' => 'DESC')));
             $this->set('deleted_val',$id);
         else:
-            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC'))); 
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+            $this->set('deleted_val',$id);
         endif;
+        
             $this->set('salesorder', $salesorder_list);
         }
         public function add()

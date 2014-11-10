@@ -2,10 +2,45 @@
     var path_url='<?PHP echo Router::url('/',true); ?>';
     var path='<?PHP echo Router::url('/',true); ?>';
     
-   $(document).on('click','.approve_clientpo',function(){
-       var val_quotationid = $(this).attr('id');
-       if(window.confirm("Are you sure?")){
-       $.ajax({
+   //$(document).on('click','.approve_clientpo',function(){
+      // alert('sdf');
+//       console.log('Clientposapproval');
+        //window.reload(path+'Clientposapproval');
+//        var val_quotationid = $(this).attr('id');
+//        if(window.confirm("Are you sure?")){
+//        $.ajax({
+//            type: 'POST',
+//            data:"id="+val_quotationid,
+//            url: path_url+'Clientpos/approve/',
+//            success: function(data)
+//            {
+//                console.log(data);
+//                if(data=='success')
+//                    {
+//                        alert('Client PO is Approved');
+//                        window.location.reload();
+//                    }
+//                    else
+//                        {
+//                             alert('Client PO Approval Failed due to unknown Cause');
+//                             window.location.reload();
+//                        }
+//                
+//            }
+//            
+//        });
+//    }
+//    else
+//    {
+//        return false;
+//    }
+//       
+//   });
+$(document).on('click','.approve_invoice',function(){
+       
+        var val_quotationid = $(this).attr('id');
+        if(window.confirm("Are you sure?")){
+        $.ajax({
             type: 'POST',
             data:"id="+val_quotationid,
             url: path_url+'Clientpos/approve/',
@@ -19,7 +54,7 @@
                     }
                     else
                         {
-                             alert('Client PO is Approval Failed due to unknown Cause');
+                             alert('Client PO Approval Failed due to unknown Cause');
                              window.location.reload();
                         }
                 
@@ -214,7 +249,7 @@
                                     <?php //if($user_role['app_prsupervisor']['view'] != 0){ ?>
                                     <li><a href="#prpur">PR Purchase<span class="badge animation-floating"><?php echo $log_activity_prpur_count; ?></span></a></li>
                                     <?php //} ?>
-<!--                                <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php //echo $log_activity_count; ?></span></a></li>-->
+                                    <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php echo $log_activity_invoice_count; ?></span></a></li>
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
@@ -417,6 +452,56 @@
                             </div>
                             
                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------INVOICE----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
+                            <div class="tab-pane" id="invoice">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                <table id="infull-datatable1" class="table table-vcenter table-condensed table-bordered">
+                                    <?PHP if (!empty($log_activity_invoice)): ?>
+                                    <thead>
+                                        <tr>
+                                            <th>Flag</th>
+                                            <th>Name(Details)</th>
+                                            <th>Approval</th>
+                                            <th>Created</th>
+                                        </tr>
+                                    </thead>
+                                        
+                                    <tbody> 
+                                    <?php foreach ($log_activity_invoice as $log_activity_invoice_list) :?>
+                                    <?PHP if($log_activity_invoice_list['Logactivity']['logname'] == 'Invoice'): ?>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-in.jpg', array('alt' => 'Invoice','class'=>'')); ?></td>
+                                            <td>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_invoice_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_invoice_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_invoice_list['Logactivity']['logno'] ?></em></small></h4>
+                                            </td>
+                                            <td class="text-center ">
+                                           <?PHP if($log_activity_invoice_list['Logactivity']['logname'] == 'Invoice'){ ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Invoices','action'=>'edit',$log_activity_invoice_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                           <?php }?>
+                                            </td>
+                                            <td class="">by <?PHP echo $log_activity_invoice_list['User']['username'] ?><br><small><?PHP echo $log_activity_invoice_list['Logactivity']['created'] ?></small></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    </tbody>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <tbody> 
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Invoice Approval Available
+                                            </td>
+                                        </tr>
+                                    
+                                     </tbody>
+                                    <?php endif; ?>
+                                </table>
+                                </div>
+                                </div>
+                            </div>
+                            
+                            <!---------------------------------------------------------------------------------------->
                             <!-------------------------------C & D Info----------------------------------------------->
                             <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="candd">
@@ -492,7 +577,8 @@
                                             </td>
                                             <td class="text-center ">
                                             <?PHP if($log_activity_clientpo_list['Logactivity']['logname'] == 'ClientPO'){ ?>
-                                            <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_clientpo','id'=>$log_activity_clientpo_list['Logactivity']['logid'])) ?>
+                                                <?PHP echo $this->html->link('Approve',array('controller'=>'Clientposapproval','action'=>'index'),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP //echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_clientpo','id'=>$log_activity_clientpo_list['Logactivity']['logid'])) ?>
                                             <?php }?>
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_clientpo_list['User']['username']; ?><br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['created']; ?></small></td>
@@ -1037,8 +1123,8 @@
                             <!-- Widget -->
                             <div class="widget">
                                 <div class="widget-simple min-height165">
-                                    <a> <span class="label label-five custom_float_top animation-floating">0 New</span><h3 class="text-center themed-color-spring animation-stretchRight">In Invoice </h3> </a>
-                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong>0</strong></h3>
+                                    <a> <span class="label label-five custom_float_top animation-floating"><?php echo $total_invoice_count; ?> New</span><h3 class="text-center themed-color-spring animation-stretchRight">In Invoice </h3> </a>
+                                        <h3 class="text-center themed-color-night animation-stretchRight"><strong><?php echo $total_invoice_count; ?></strong></h3>
                                 </div>
                             </div>
                             <!-- END Widget -->

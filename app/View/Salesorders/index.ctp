@@ -56,7 +56,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                         
                         
                         <div class="block-title">
-                            <h2>List Of Sales Order </h2> 
+                            <h2>List Of Sales Order <?php if($deleted_val == '2'): echo "- Pending Approval"; elseif($deleted_val == '3'): echo "- InActive"; elseif($deleted_val == '1'): echo "- Active"; endif;?></h2> 
                             <?php if($userrole_cus['add']==1){ ?>                            
                             <div style="float:right;">
                                 <h2><?php echo $this->Html->link('Add Salesorders', array('controller' => 'Salesorders', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Sales Order')); ?></h2>
@@ -112,13 +112,13 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
-                                        <?php if($deleted_val == 0): ?><th class="text-center">Action</th><?php endif; ?>
+                                        <?php if($deleted_val != 3): ?><th class="text-center">Action</th><?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?PHP if(!empty($salesorder )): ?>
                                      <?php foreach($salesorder as $salesorder_list): ?>
-                                    <tr <?php if($salesorder_list['Salesorder']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                    <tr <?php if($salesorder_list['Salesorder']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['branch']['branchname'] ?></td>
@@ -126,7 +126,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
                                          <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['ref_no'] ?></td>
-                                        <?php if($deleted_val == 0): ?>
+                                        <?php if($deleted_val != 3): ?>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php if($userrole_cus['edit']==1){ ?>
@@ -149,7 +149,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                     <tr>
                                         <td colspan="8">
                                             <div class="btn-group btn-group-md pull-right">
-                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('0'=>'Active','1'=>'Deleted'),'empty'=>'Select Status')); ?>
+                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
                                             </div>
                                         </td>
                                     </tr>

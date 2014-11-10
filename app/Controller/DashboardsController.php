@@ -43,6 +43,8 @@ class DashboardsController extends AppController
         /* Lab Process */
         $data_lab = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.is_approved'=>'1')));
         $this->set('total_labprocess_count', $data_lab);
+        $data_invoice = $this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.is_invoice_created'=>'1')));
+        $this->set('total_invoice_count', $data_invoice);
         $data_lab_view = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.view'=>'0','Salesorder.is_approved'=>'1')));
         $this->set('total_labprocess_view', $data_lab_view);
         /* Delivery Order */
@@ -238,9 +240,12 @@ class DashboardsController extends AppController
         
          /****************** Log Activity - Invoice ********************/
         
-//        $logactivity_invoice = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Invoice")));
-//        //pr($logactivity);exit;
-//        $this->set('log_activity_invoice', $logactivity_invoice);
+        $logactivity_invoice = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Invoice")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_invoice', $logactivity_invoice);
+        $logactivity_invoice_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Invoice")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_invoice_count', $logactivity_invoice_count);
         
         /*****************************************************/
         

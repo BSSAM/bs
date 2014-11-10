@@ -17,7 +17,7 @@ $(document).on('click','.dofull-prepare',function(){
        $.ajax({
             type: 'POST',
             data:"id="+val_quotationid,
-            url: path_url+'Invoices/preparein/',
+            url: path_url+'Invoices/approve/',
             success: function(data)
             {
                  window.location.reload();
@@ -53,7 +53,7 @@ $(document).on('click','.dofull-prepare',function(){
                             <th class="text-center">Customer Name</th>
                             <th class="text-center">Customer Address</th>
                             <th class="text-center">Customer Quotation No</th>
-                            <th class="text-center">Prepare Invoice</th>
+                            <th class="text-center">Approve</th>
 <!--                            <th class="text-center">View</th>-->
 
                         </tr>
@@ -68,7 +68,7 @@ $(document).on('click','.dofull-prepare',function(){
                             <td class="text-center"><?PHP echo $list['Customer']['customername']; ?></td>
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['customer_address']; ?></td>
                             <!-- cust_purchase_order_no --><td class="text-center" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo $list['Deliveryorder']['quotationno']; ?><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
-                            <td class="text-center"><a href="javascript:void(0);" class="dofull-prepare" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo  'Prepare Invoice'; ?></a></td>
+                            <td class="text-center"><a href="javascript:void(0);" class="dofull-prepare btn btn-alt btn-xs btn-success" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo  'Approve'; ?></a></td>
 <!--                            <td class="text-center"> <a href="#modal-regular<?PHP //echo $list['Deliveryorder']['id'] ?>" class="btn btn-primary" data-toggle="modal">View</a></td>-->
                             
                         </tr>

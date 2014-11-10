@@ -47,7 +47,19 @@
                     <div class="btn-group">
                        <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
                                 <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
-                                <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Settings" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Update</a>
+                                <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Update" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Update</a>
+
+                    <?PHP }else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>
+
+                                 <?php echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
+
+                        <?PHP }?>
+                    </div>
+                    <?PHP if(($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual')){?>
+                    <div class="btn-group">
+                       <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
+                                <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
+                                <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_approve" data-placement="bottom" title="Approve" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Approve</a>
 
                     <?PHP }else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>
 
@@ -56,10 +68,10 @@
                         <?PHP }?>
                     </div>
                     <?php if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_poapproved']==1){ ?>
-                    &nbsp;&nbsp; 
+                    <br><br>
                     <span class="label label-info">
                         <?PHP echo "Approved"; ?>
-                    </span> &nbsp;&nbsp;
+                    </span>
                     <?PHP }?>
                  </td>
             </tr>

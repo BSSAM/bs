@@ -27,11 +27,18 @@
          * *****************************************************
          */
             //$this->Quotation->recursive = 1; 
-        if($id):
-        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>$id),'order' => array('Quotation.created' => 'ASC')));
+        if($id == '3'):
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'1'),'order' => array('Quotation.created' => 'ASC')));
+        $this->set('deleted_val',$id);
+        elseif($id == '2'):
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0','Quotation.is_approved'=>0),'order' => array('Quotation.created' => 'ASC')));
+        $this->set('deleted_val',$id);
+        elseif($id == '1'):
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0','Quotation.is_approved'=>1),'order' => array('Quotation.created' => 'ASC')));    
         $this->set('deleted_val',$id);
         else:
         $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));    
+        $this->set('deleted_val',$id);
         endif;
             
             $this->set('quotation', $quotation_lists);

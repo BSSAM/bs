@@ -20,9 +20,9 @@ class ClientposapprovalController extends AppController {
 //        if($user_role['app_clientpo']['view'] == 0){ 
 //         return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
 //        }
-        $quotation_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Quotation.is_approved' =>1,'Quotation.is_deliveryorder_created'=>1), 'order' => array('Quotation.id' => 'DESC')));
+        $quotation_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Quotation.is_approved' =>1,'Quotation.is_deliveryorder_created'=>1,'Quotation.is_poapproved' =>0), 'order' => array('Quotation.id' => 'DESC')));
         //pr($quotation_list_bybeforedo);exit;
-        $quotation_lists_bybeforeinvoice = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>2,'Quotation.is_approved' =>1,'Quotation.is_invoice_created'=>1), 'order' => array('Quotation.id' => 'DESC')));
+        $quotation_lists_bybeforeinvoice = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>2,'Quotation.is_approved' =>1,'Quotation.is_invoice_created'=>1,'Quotation.is_poapproved' =>0), 'order' => array('Quotation.id' => 'DESC')));
         $this->set(compact('quotation_list_bybeforedo','quotation_lists_bybeforeinvoice'));
     }
     public function view($id = NULL) 
@@ -166,14 +166,14 @@ class ClientposapprovalController extends AppController {
                         $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
                         if($data['Quotation']['is_poapproved']==0):
                             $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
-                            if($data == ''):
-                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-                            $this->request->data['Logactivity']['logid'] = $quotationno;
-                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                            $this->request->data['Logactivity']['logapprove'] = 1;
-                            $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                            endif;
+//                            if($data == ''):
+//                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
+//                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+//                            $this->request->data['Logactivity']['logid'] = $quotationno;
+//                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                            $this->request->data['Logactivity']['logapprove'] = 1;
+//                            $a = $this->Logactivity->save($this->request->data['Logactivity']);
+//                            endif;
                             /******************/
                         endif;
                     
@@ -192,14 +192,14 @@ class ClientposapprovalController extends AppController {
                     $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
                     if($data['Quotation']['is_poapproved']==0):
                         $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
-                        if($data == ''):
-                        $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                        $this->request->data['Logactivity']['logactivity'] = 'Add';
-                        $this->request->data['Logactivity']['logid'] = $quotationno;
-                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                        $this->request->data['Logactivity']['logapprove'] = 1;
-                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                        endif;
+//                        if($data == ''):
+//                        $this->request->data['Logactivity']['logname'] = 'ClientPO';
+//                        $this->request->data['Logactivity']['logactivity'] = 'Add';
+//                        $this->request->data['Logactivity']['logid'] = $quotationno;
+//                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                        $this->request->data['Logactivity']['logapprove'] = 1;
+//                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+//                        endif;
                         /******************/
                     endif;
                 endif;
@@ -229,17 +229,17 @@ class ClientposapprovalController extends AppController {
                         if($data['Quotation']['is_poapproved']==0):
                             $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
                        //pr($data);exit;
-                            if(!$data):
-                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-                            $this->request->data['Logactivity']['logid'] = $quotationno;
-                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                            $this->request->data['Logactivity']['logapprove'] = 1;
-                            //pr($this->request->data['Logactivity']);exit;
-                            //$this->Logactivity->create();
-                            $this->Logactivity->save($this->request->data['Logactivity']);
-                            //pr($a);
-                            endif;
+//                            if(!$data):
+//                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
+//                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+//                            $this->request->data['Logactivity']['logid'] = $quotationno;
+//                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                            $this->request->data['Logactivity']['logapprove'] = 1;
+//                            //pr($this->request->data['Logactivity']);exit;
+//                            //$this->Logactivity->create();
+//                            $this->Logactivity->save($this->request->data['Logactivity']);
+//                            pr($a);
+//                            endif;
                             /******************/
                         endif;
                     
@@ -270,14 +270,14 @@ class ClientposapprovalController extends AppController {
                         $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
                         if($data['Quotation']['is_poapproved']==0):
                             $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
-                            if($data == ''):
-                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-                            $this->request->data['Logactivity']['logid'] = $quotationno;
-                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                            $this->request->data['Logactivity']['logapprove'] = 1;
-                            $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                            endif;
+//                            if($data == ''):
+//                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
+//                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+//                            $this->request->data['Logactivity']['logid'] = $quotationno;
+//                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                            $this->request->data['Logactivity']['logapprove'] = 1;
+//                            $a = $this->Logactivity->save($this->request->data['Logactivity']);
+//                            endif;
                             /******************/
                         endif;
                     

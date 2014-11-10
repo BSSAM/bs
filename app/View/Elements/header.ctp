@@ -256,7 +256,11 @@
                                         <?php  $a=($control == 'Deliveryorders')?'active':''; ?>
                                          <?php echo $this->Html->link('Delivery Order',array('controller'=>'Deliveryorders','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li>  <?php } ?>
-                                    
+                                     <?php if($user_role['job_invoice']['view'] == 1){ ?>
+                                    <li>
+                                        <?php  $a=($control == 'Invoices')?'active':''; ?>
+                                          <?php echo $this->Html->link('Invoice',array('controller'=>'Invoices','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li><?php } ?>
                                     <?php if($user_role['job_purchaseorder']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Purchaseorders')?'active':''; ?>
@@ -282,11 +286,7 @@
                                          <?php echo $this->Html->link('Proforma Invoice',array('controller'=>'Proformas','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
 <!--                                          <a href="#"><?php //echo 'Proforma Invoice'; ?></a>-->
                                     </li><?php } ?>
-                                    <?php if($user_role['job_invoice']['view'] == 1){ ?>
-                                    <li>
-                                        <?php  $a=($control == 'Invoices')?'active':''; ?>
-                                          <?php echo $this->Html->link('Invoice',array('controller'=>'Invoices','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
+                                   
                                     <?php if($user_role['job_candd']['view'] == 1){ ?>
                                      <li>
                                           <?php  $a=($control == 'Candds')?'active':''; ?>
