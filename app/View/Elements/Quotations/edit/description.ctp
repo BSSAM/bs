@@ -982,7 +982,9 @@ $("#search_cusinstrument").hide();
         <tr>
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
+            <th class="text-center">Brand</th>
             <th class="text-center">Model No</th>
+            <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Call Type</th>
             <th class="text-center">Validity</th>
@@ -1006,7 +1008,9 @@ $("#search_cusinstrument").hide();
             
             <td>{{$index + 1}}</td>
             <td>{{res.name}}</td>
+            <td>{{res.instrument_brand}}</td>
             <td>{{res.model}}</td>
+            <td>{{res.instrument_range}}</td>
             <td>{{res.location}}</td>
             <td>{{res.type}}</td>
             <td>{{res.validity}}</td>
