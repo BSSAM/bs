@@ -315,31 +315,47 @@
             if($ack_type == 1)
             {
                 //pr($deliveryorder);exit;
-                $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
+                $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
+                $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1,'Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
+                $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1,'Salesorder.is_delivery_approved'=>1),array('Salesorder.id'=>$deliver_salesorder));
                 //return $updated;
-                if($updated==1)
+                
+                $user_id = $this->Session->read('sess_userid');
+                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
+                $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                $this->request->data['Datalog']['logactivity'] = 'Approve';
+                $this->request->data['Datalog']['logid'] = $deliveryorder['Deliveryorder']['id'];
+                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                $this->Datalog->create();
+                $this->Datalog->save($this->request->data['Datalog']);
+                
+                
+                
+                $deliveryorder=$this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
+                $deliveryorder_count=$this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
+                $count_del = 0;
+                foreach($deliveryorder as $del_data):
+                        if($del_data['Deliveryorder']['is_approved'] == 1):
+                            $count_del = $count_del + 1;
+                        endif;
+                endforeach;
+                if($deliveryorder_count == $count_del)
                 {
-                    $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1,'Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
-                    $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1,'Salesorder.is_delivery_approved'=>1),array('Salesorder.id'=>$deliver_salesorder));
+                
+                    
                     //pr($this->request->data['Invoice']);exit;
                     //pr($id1);exit;
                     //$customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
                     //$this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
                     //$this->PrepareInvoice->save($this->request->data);
                     //pr($customer);exit;
-                    $user_id = $this->Session->read('sess_userid');
-                    $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
+                   
 //                    $this->request->data['Invoice']['deliveryorder_id']=$id;
 //                    $this->request->data['Invoice']['customer_purchaseorder_no']='';
 //                    $this->request->data['Invoice']['is_approved']=0;
 //                    $this->request->data['Invoice'] = $customer;
 //                    $this->Invoice->save($this->request->data);
-                    $this->request->data['Datalog']['logname'] = 'Deliveryorder';
-                    $this->request->data['Datalog']['logactivity'] = 'Approve';
-                    $this->request->data['Datalog']['logid'] = $deliveryorder['Deliveryorder']['id'];
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    $this->Datalog->create();
-                    $this->Datalog->save($this->request->data['Datalog']);
+                    
                     
                     /******************
                     * Data Log - Invoice
@@ -362,23 +378,36 @@
 
                     /******************/ 
                 }
-                else
-                {
-                    $this->Session->setFlash(__('Purchase Order Needs to be Given(Manually) to get Approval'));
-                    $text = "Purchase Order Needs to be Given(Manually) to get Approval";
-                    return $text;
-                    
-    //                $this->redirect(array('controller'=>'Deliveryorders','action'=>'index'));
-                }
+                
             }
             else if($ack_type == 2)
             {
                 //pr($deliveryorder);exit;
-                $updated    =   $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Customer.acknowledgement_type_id'=>2));
+                $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Customer.acknowledgement_type_id'=>2));
                 $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1,'Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
                 $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1,'Salesorder.is_delivery_approved'=>1),array('Salesorder.id'=>$deliver_salesorder));
                 //return $updated;
-                if($updated==1)
+                
+                $user_id = $this->Session->read('sess_userid');
+                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
+                $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                $this->request->data['Datalog']['logactivity'] = 'Approve';
+                $this->request->data['Datalog']['logid'] = $deliveryorder['Deliveryorder']['id'];
+                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                $this->Datalog->create();
+                $this->Datalog->save($this->request->data['Datalog']);
+                
+                
+                
+                $deliveryorder=$this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
+                $deliveryorder_count=$this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
+                $count_del = 0;
+                foreach($deliveryorder as $del_data):
+                        if($del_data['Deliveryorder']['is_approved'] == 1):
+                            $count_del = $count_del + 1;
+                        endif;
+                endforeach;
+                if($deliveryorder_count == $count_del)
                 {
                     //pr($this->request->data['Invoice']);exit;
                     //pr($id1);exit;
@@ -386,15 +415,14 @@
                     //$this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
                     //$this->PrepareInvoice->save($this->request->data);
                     //pr($customer);exit;
-                    $user_id = $this->Session->read('sess_userid');
-                    $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
-                    
+                   
                     /******************
                     * Data Log - Client PO
                     */
                     $this->request->data['Logactivity']['logname'] = 'ClientPO';
                     $this->request->data['Logactivity']['logactivity'] = 'Add';
                     $this->request->data['Logactivity']['logid'] = $id;
+                    $this->request->data['Logactivity']['logno'] = $deliver_quotation;
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
                     $this->Logactivity->create();
@@ -402,7 +430,7 @@
 
                     $this->request->data['Datalog']['logname'] = 'ClientPO';
                     $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['logid'] = $deliver_quotation;
                     $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                     $this->Datalog->create();
                     $this->Datalog->save($this->request->data['Datalog']);
@@ -414,6 +442,7 @@
                     $this->request->data['Logactivity']['logname'] = 'Invoice';
                     $this->request->data['Logactivity']['logactivity'] = 'Add';
                     $this->request->data['Logactivity']['logid'] = $id;
+                    $this->request->data['Logactivity']['logno'] = $deliver_quotation;
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
                     $this->Logactivity->create();
@@ -421,21 +450,12 @@
 
                     $this->request->data['Datalog']['logname'] = 'Invoice';
                     $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['logid'] = $deliver_quotation;
                     $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                     $this->Datalog->create();
                     $this->Datalog->save($this->request->data['Datalog']);
 
                     /******************/ 
-                    
-                    
-                    $this->request->data['Datalog']['logname'] = 'Deliveryorder';
-                    $this->request->data['Datalog']['logactivity'] = 'Approve';
-                    $this->request->data['Datalog']['logid'] = $deliveryorder['Deliveryorder']['id'];
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    $this->Datalog->create();
-                    $this->Datalog->save($this->request->data['Datalog']);
-                    
                 }
                 
             }

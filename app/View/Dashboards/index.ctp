@@ -478,7 +478,8 @@ $(document).on('click','.approve_invoice',function(){
                                             </td>
                                             <td class="text-center ">
                                            <?PHP if($log_activity_invoice_list['Logactivity']['logname'] == 'Invoice'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Invoices','action'=>'approve',$log_activity_invoice_list['Logactivity']['logno']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP //echo $this->html->link('Approve',array('controller'=>'Invoices','action'=>'approve',$log_activity_invoice_list['Logactivity']['logno']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Clientposapproval','action'=>'index'),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_invoice_list['User']['username'] ?><br><small><?PHP echo $log_activity_invoice_list['Logactivity']['created'] ?></small></td>

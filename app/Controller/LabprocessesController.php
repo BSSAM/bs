@@ -285,6 +285,7 @@ class LabprocessesController extends AppController
                             $this->request->data['Logactivity']['logname'] = 'ClientPO';
                             $this->request->data['Logactivity']['logactivity'] = 'Add';
                             $this->request->data['Logactivity']['logid'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Logactivity']['logno'] = $quotation_list['Quotation']['quotationno'];
                             $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                             $this->request->data['Logactivity']['logapprove'] = 1;
                             $this->Logactivity->create();

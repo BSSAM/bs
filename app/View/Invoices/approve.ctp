@@ -216,13 +216,10 @@
     
     <div class="form-group form-actions">
         <div class="col-md-9 col-md-offset-10">
-        <?php if($invoices['Salesorder']['is_approved']==0 && $invoices['Salesorder']['is_poapproved']!=1 && $invoices['Customer']['acknowledgement_type_id']==2): ?>
+        <?php //if($invoices['Salesorder']['is_approved']==1 && $invoices['Salesorder']['is_poapproved']==1 ): ?>
         <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false)); ?>
-            <?php endif; ?>
-        <?php if($invoices['Salesorder']['is_approved']==0 && $invoices['Salesorder']['is_poapproved']==0 && $invoices['Salesorder']['acknowledgement_type_id']==2): ?>
-        <?php  echo "PO Approval Needed"; ?>
-        <?php //echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Deliveryorders','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-        <?php endif; ?>
+            <?php //endif; ?>
+       
         </div>
     </div>
 
@@ -450,13 +447,9 @@
     
     <div class="form-group form-actions">
         <div class="col-md-9 col-md-offset-10">
-        <?php if($user_role['app_invoice']['view'] == 1 && $invoices['Salesorder']['is_approved']==0 && $invoices['Salesorder']['is_poapproved']!=1 && $invoices['Salesorder']['acknowledgement_type_id']==2): ?>
+         <?php //if($invoices['Salesorder']['is_approved']==1 && $invoices['Salesorder']['is_poapproved']==1 ): ?>
         <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false)); ?>
-            <?php endif; ?>
-        <?php if($user_role['app_invoice']['view'] == 1 && $invoices['Salesorder']['is_approved']==0 && $invoices['Salesorder']['is_poapproved']==0 && $invoices['Salesorder']['acknowledgement_type_id']==2): ?>
-        <?php  echo "PO Approval Needed"; ?>
-        <?php //echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Deliveryorders','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-        <?php endif; ?>
+            <?php //endif; ?>
         </div>
     </div>
 

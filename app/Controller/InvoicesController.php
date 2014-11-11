@@ -51,144 +51,286 @@ class InvoicesController extends AppController
     }
     public function approve($id = NULL)
     {
-       
+        
         //$quo_id= $this->request->data['id']; 
         $invoice_delivery      =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.quotationno'=>$id),'recursive'=>3));
         $invoice_salesorder    =   $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
         $invoice_quotation    =   $this->Quotation->find('all',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.status'=>1,'Quotation.is_deleted'=>0,'Quotation.quotationno'=>$id),'recursive'=>3));
         //$del_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.quotationno'=>$quo_id),'recursive'=>3));
         //pr($del_list);exit;
-        function imp1($imp)
-        {
-            return implode(",", $imp);
-        }
-        
-        
-        ///////////////////////////
-        //  Delivery Order Func  //
-        ///////////////////////////
-        
-        foreach($invoice_delivery as $del):
-            $del_id[] = $del['Deliveryorder']['id'];
-            $del_no[] = $del['Deliveryorder']['delivery_order_no'];
-        endforeach;
-        $deliveryorder_no = imp1($del_no); 
-        $deliveryorder_id = imp1($del_id);
-        
-        
-        ///////////////////////////
-        //  Quotation Func       //
-        ///////////////////////////
-        
+        $invoice_quotation_count    =   $this->Quotation->find('count',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.status'=>1,'Quotation.is_deleted'=>0,'Quotation.quotationno'=>$id),'recursive'=>3));
+        $count_po = 0;
         foreach($invoice_quotation as $quo):
-            $quo_id[] = $quo['Quotation']['id'];
-            $quo_no[] = $quo['Quotation']['quotationno'];
-        endforeach;
-        $quotation_no = imp1($quo_no); //pr($deliveryorder_no);exit;
-        $quotation_id = imp1($quo_id);
-        
-        
-        /////////////////////////////
-        //  Customer Details       //
-        /////////////////////////////
-        
-        foreach($invoice_quotation as $quotation):
-            $cus_id   = $quotation['Customer']['id'];
-            $cus_name = $quotation['Customer']['customername'];
-            $cus_invoice_type = $quotation['Customer']['invoice_type_id'];
+            if($quo['Quotation']['is_poapproved']!=1 && $quo['Customer']['acknowledgement_type_id']==2):
+                $count_po = $count_po+1;
+            endif;
         endforeach;
         
+        if($invoice_quotation_count==$count_po):
         
-        /*********************************** PO Full Invoice **********************************/
-        
-        if($cus_invoice_type == 1):
-            $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
-            $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
-            $this->set('contactperson',$contact_person['Contactpersoninfo']);
-            $this->set('deliveryorderno',$deliveryorder_no);
-            $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
-            $this->set('servicetype',$service['Service']['servicetype']);
-            $this->set('type','sales');
-            $desc = $invoice_salesorder['Description'];
-            $total = 0;
-            foreach($desc as $desc_total):
-                $total = $total + $desc_total['sales_total'];
+            function imp1($imp)
+            {
+                return implode(",", $imp);
+            }
+
+
+            ///////////////////////////
+            //  Delivery Order Func  //
+            ///////////////////////////
+
+            foreach($invoice_delivery as $del):
+                $del_id[] = $del['Deliveryorder']['id'];
+                $del_no[] = $del['Deliveryorder']['delivery_order_no'];
             endforeach;
-            $this->set('total',$total);
-            $this->set('invoices',$invoice_salesorder);
-            $this->set('desc',$desc);
-        endif;
-        
-        /*********************************** Quotation Full Invoice **********************************/
-        
-        if($cus_invoice_type == 2):
-            $invoice_quotation    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.status'=>1,'Quotation.is_deleted'=>0,'Quotation.quotationno'=>$quotation_no),'recursive'=>3));
-            $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_quotation['Quotation']['attn'])));
-            $this->set('contactperson',$contact_person['Contactpersoninfo']);
-            $this->set('deliveryorderno',$deliveryorder_no);
-            $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
-            $this->set('servicetype',$service['Service']['servicetype']);
-            $this->set('type','quo');
-            $desc = $invoice_quotation['Device'];
-            //$total = 0;
-            foreach($desc as $desc_total):
-                $total = $total + $desc_total['total'];
+            $deliveryorder_no = imp1($del_no); 
+            $deliveryorder_id = imp1($del_id);
+
+
+            ///////////////////////////
+            //  Quotation Func       //
+            ///////////////////////////
+
+            foreach($invoice_quotation as $quo):
+                $quo_id[] = $quo['Quotation']['id'];
+                $quo_no[] = $quo['Quotation']['quotationno'];
             endforeach;
-            $this->set('total',$total);
-            $this->set('invoices',$invoice_quotation);
-            $this->set('desc',$desc);
-        endif;
-        
-        /*********************************** Salesorder Full Invoice **********************************/
-        
-        if($cus_invoice_type == 3):
-            $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
-        //pr($invoice_salesorder);exit;
-            $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
-            $this->set('contactperson',$contact_person['Contactpersoninfo']);
-            $this->set('deliveryorderno',$deliveryorder_no);
-            $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
-            $this->set('servicetype',$service['Service']['servicetype']);
-            $this->set('type','sales');
-            $desc = $invoice_salesorder['Description'];
-            $total = 0;
-            foreach($desc as $desc_total):
-                $total = $total + $desc_total['sales_total'];
+            $quotation_no = imp1($quo_no); //pr($deliveryorder_no);exit;
+            $quotation_id = imp1($quo_id);
+
+
+            /////////////////////////////
+            //  Customer Details       //
+            /////////////////////////////
+
+            foreach($invoice_quotation as $quotation):
+                $cus_id   = $quotation['Customer']['id'];
+                $cus_name = $quotation['Customer']['customername'];
+                $cus_invoice_type = $quotation['Customer']['invoice_type_id'];
             endforeach;
-            $this->set('total',$total);
-            $this->set('invoices',$invoice_salesorder);
-            $this->set('desc',$desc);
-        endif;
-        
-        /*********************************** DO Full Invoice **********************************/
-        
-        if($cus_invoice_type == 4):
-            $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
-            $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
-            $this->set('contactperson',$contact_person['Contactpersoninfo']);
-            $this->set('deliveryorderno',$deliveryorder_no);
-            $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
-            $this->set('servicetype',$service['Service']['servicetype']);
-            $this->set('type','sales');
-            $desc = $invoice_salesorder['Description'];
-            $total = 0;
-            foreach($desc as $desc_total):
-                $total = $total + $desc_total['sales_total'];
+
+
+            /*********************************** PO Full Invoice **********************************/
+
+            if($cus_invoice_type == 1):
+                $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_no);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $this->set('type','sales');
+                $desc = $invoice_salesorder['Description'];
+                $total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['sales_total'];
+                endforeach;
+                $this->set('total',$total);
+                $this->set('invoices',$invoice_salesorder);
+                $this->set('desc',$desc);
+            endif;
+
+            /*********************************** Quotation Full Invoice **********************************/
+
+            if($cus_invoice_type == 2):
+                $invoice_quotation    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.status'=>1,'Quotation.is_deleted'=>0,'Quotation.quotationno'=>$quotation_no),'recursive'=>3));
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_quotation['Quotation']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_no);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $this->set('type','quo');
+                $desc = $invoice_quotation['Device'];
+                //$total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['total'];
+                endforeach;
+                $this->set('total',$total);
+                $this->set('invoices',$invoice_quotation);
+                $this->set('desc',$desc);
+            endif;
+
+            /*********************************** Salesorder Full Invoice **********************************/
+
+            if($cus_invoice_type == 3):
+                $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
+            //pr($invoice_salesorder);exit;
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_no);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $this->set('type','sales');
+                $desc = $invoice_salesorder['Description'];
+                $total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['sales_total'];
+                endforeach;
+                $this->set('total',$total);
+                $this->set('invoices',$invoice_salesorder);
+                $this->set('desc',$desc);
+            endif;
+
+            /*********************************** DO Full Invoice **********************************/
+
+            if($cus_invoice_type == 4):
+                $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_no);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $this->set('type','sales');
+                $desc = $invoice_salesorder['Description'];
+                $total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['sales_total'];
+                endforeach;
+                $this->set('total',$total);
+                $this->set('invoices',$invoice_salesorder);
+                $this->set('desc',$desc);
+            endif;
+         else:
+             $this->Session->setFlash(__($quo['Quotation']['quotationno'].' - Cannot Approve Invoice without PO Number(Manual) Approval '));
+             $this->redirect(array('controller'=>'Invoices','action'=>'index'));
+         endif;
+         
+         
+         /////////////////// For all other Ack Types ///////////////////
+         
+         
+         if($quo['Customer']['acknowledgement_type_id'] != 2):
+             function imp1($imp)
+            {
+                return implode(",", $imp);
+            }
+
+
+            ///////////////////////////
+            //  Delivery Order Func  //
+            ///////////////////////////
+
+            foreach($invoice_delivery as $del):
+                $del_id[] = $del['Deliveryorder']['id'];
+                $del_no[] = $del['Deliveryorder']['delivery_order_no'];
             endforeach;
-            $this->set('total',$total);
-            $this->set('invoices',$invoice_salesorder);
-            $this->set('desc',$desc);
-        endif;
-        
-//        $desc = $invoice['Salesorder']['Description'];
-//        //pr($desc);exit;
-//        $total = 0;
-//        foreach($desc as $desc_total):
-//            $total = $total + $desc_total['sales_total'];
-//        endforeach;
-//        $this->set('total',$total);
-//        $this->set('invoices',$invoice);
-//        $this->set('desc',$desc);
+            $deliveryorder_no = imp1($del_no); 
+            $deliveryorder_id = imp1($del_id);
+
+
+            ///////////////////////////
+            //  Quotation Func       //
+            ///////////////////////////
+
+            foreach($invoice_quotation as $quo):
+                $quo_id[] = $quo['Quotation']['id'];
+                $quo_no[] = $quo['Quotation']['quotationno'];
+            endforeach;
+            $quotation_no = imp1($quo_no); //pr($deliveryorder_no);exit;
+            $quotation_id = imp1($quo_id);
+
+
+            /////////////////////////////
+            //  Customer Details       //
+            /////////////////////////////
+
+            foreach($invoice_quotation as $quotation):
+                $cus_id   = $quotation['Customer']['id'];
+                $cus_name = $quotation['Customer']['customername'];
+                $cus_invoice_type = $quotation['Customer']['invoice_type_id'];
+            endforeach;
+
+
+            /*********************************** PO Full Invoice **********************************/
+
+            if($cus_invoice_type == 1):
+                $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_no);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $this->set('type','sales');
+                $desc = $invoice_salesorder['Description'];
+                $total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['sales_total'];
+                endforeach;
+                $this->set('total',$total);
+                $this->set('invoices',$invoice_salesorder);
+                $this->set('desc',$desc);
+            endif;
+
+            /*********************************** Quotation Full Invoice **********************************/
+
+            if($cus_invoice_type == 2):
+                $invoice_quotation    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.status'=>1,'Quotation.is_deleted'=>0,'Quotation.quotationno'=>$quotation_no),'recursive'=>3));
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_quotation['Quotation']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_no);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $this->set('type','quo');
+                $desc = $invoice_quotation['Device'];
+                //$total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['total'];
+                endforeach;
+                $this->set('total',$total);
+                $this->set('invoices',$invoice_quotation);
+                $this->set('desc',$desc);
+            endif;
+
+            /*********************************** Salesorder Full Invoice **********************************/
+
+            if($cus_invoice_type == 3):
+                $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
+            //pr($invoice_salesorder);exit;
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_no);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $this->set('type','sales');
+                $desc = $invoice_salesorder['Description'];
+                $total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['sales_total'];
+                endforeach;
+                $this->set('total',$total);
+                $this->set('invoices',$invoice_salesorder);
+                $this->set('desc',$desc);
+            endif;
+
+            /*********************************** DO Full Invoice **********************************/
+
+            if($cus_invoice_type == 4):
+                $invoice_salesorder    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.quotationno'=>$id),'recursive'=>3));
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$invoice_salesorder['Salesorder']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_no);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$invoice_salesorder['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $this->set('type','sales');
+                $desc = $invoice_salesorder['Description'];
+                $total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['sales_total'];
+                endforeach;
+                $this->set('total',$total);
+                $this->set('invoices',$invoice_salesorder);
+                $this->set('desc',$desc);
+            endif;
+         endif;
+            
+    //        $desc = $invoice['Salesorder']['Description'];
+    //        //pr($desc);exit;
+    //        $total = 0;
+    //        foreach($desc as $desc_total):
+    //            $total = $total + $desc_total['sales_total'];
+    //        endforeach;
+    //        $this->set('total',$total);
+    //        $this->set('invoices',$invoice);
+    //        $this->set('desc',$desc);
     }
     public function preparein()
     {
