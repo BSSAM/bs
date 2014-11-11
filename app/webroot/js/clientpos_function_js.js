@@ -365,20 +365,40 @@ $(document).ready(function(){
    $(document).on('click','.client_po_quotation_update',function(){
       
         var q_id=$(this).attr('data-id');
+        var q_class=$(this).attr('title');
         $.ajax({
             type: "POST",
             url: path_url+"/Clientposapproval/view",
-            data: 'q_id='+q_id,
+            data: 'q_id='+q_id+'&q_class='+q_class,
             cache: false,
             success: function(data)
             {
+                //console.log(data);
                 $('.quotation_fullview').html(data);
+            }
+            });
+    });
+    
+    $(document).on('click','.client_po_invoice_update',function(){
+      
+        var q_id=$(this).attr('data-id');
+        var q_class=$(this).attr('title');
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Clientposapproval/view",
+            data: 'q_id='+q_id+'&q_class='+q_class,
+            cache: false,
+            success: function(data)
+            {
+                //console.log(data);
+                $('.invoice_fullview').html(data);
             }
             });
     });
     /**************************************Delivery order full invoice form submit validation*********************************/
    $(document).on('click','.deliveryorder_fullinvoice_update',function(){
-        var total_reply=0;var check_count=0;
+        var total_reply=0;
+        var check_count=0;
         var po_total_count = getValues('.po_count_each');
         var do_count    =$('#val_docount').val();
         if(po_total_count!=do_count){ alert('PO Count does not matched with Delivery order Count');  return false;     }

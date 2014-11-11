@@ -19,6 +19,7 @@
                 <th class="text-center">Email</th>
                 <th class="text-center">Reference No</th>
                 <th class="text-center">Action</th>
+                <th class="text-center">Note</th>
             </tr>
         </thead>
         <tbody>
@@ -43,29 +44,57 @@
                 </td>
                 <td class="text-center">
                     <?php //&&$quotation_list['Quotation']['is_poapproved']==0 ?>
-                    <?PHP if(($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual')&&$quotation_list['Quotation']['is_poapproved']==0 ){?>
+                    <?PHP if(($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual')){?>
                     <div class="btn-group">
+                       <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
                                 <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
-                                <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Settings" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Update</a>
-                            </div>
-                    <?PHP }elseif($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_poapproved']==1){ ?>
-                            <div class="btn-group">
-                                 <?php echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
-                            </div>
-                        <?PHP }?>
+                                <a href="#modal-set" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_invoice_update" data-placement="bottom" title="Update" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Update</a>
+
+                    <?PHP }
+                    //else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>
+
+                                 <?php //echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
+
+                        <?PHP //}?>
+                    </div>
+                    <?PHP if(($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual')){?>
+                    <div class="btn-group">
+                       <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
+                                <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
+                                <a href="#modal-set" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_invoice_update" data-placement="bottom" title="Approve" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Approve</a>
+
+                    <?PHP }
+                    //else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>
+
+                                 <?php //echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
+
+                        <?PHP // }?>
+                    </div>
+                    <?php if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_poapproved']==1){ ?>
+                    <br><br>
+                    <span class="label label-info">
+                        <?PHP echo "Approved"; ?>
+                    </span>
+                    <?PHP }?>
                  </td>
+                 <td>
+                    <?php if($quotation_list['Quotation']['po_generate_type']=='Manual'): ?><span class="label label-five">Ma</span> <?php endif; ?>
+                    <?php if($quotation_list['Quotation']['po_generate_type']!='Manual'): ?><span class="label label-six">Au</span> <?php endif; ?>
+                </td>
             </tr>
             <?php endforeach; ?>
             <?PHP endif; ?>
         </tbody>
     </table>
 </div>
-
+<br>
+<span class="label label-six">Au</span> - Automatic PO Generation
+<span class="label label-five">Ma</span> - Manual PO Updated
                     
-    <div id="modal-user-settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="modal-set" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="block quotation_fullview">
+                <div class="block invoice_fullview">
                     <!-- Grids Content Content -->
                     
 

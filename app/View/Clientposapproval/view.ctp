@@ -45,7 +45,9 @@ $(".form-horizontal").submit(function(e){
 });
 </script>
 <?PHP echo $this->Form->create('Clientposapproval',array('url'=>'quotation_po_update','class'=>'form-horizontal')); ?>
-<?PHP echo $this->Form->input('quotationno',array('type'=>'hidden','name'=>'quotationno','value'=>$data['Quotation']['quotationno'])); ?>                   
+<?PHP echo $this->Form->input('quotationno',array('type'=>'hidden','name'=>'quotationno','value'=>$data['Quotation']['quotationno'])); ?>
+<?PHP echo $this->Form->input('title_name',array('type'=>'hidden','name'=>'title_name','value'=>$title_name)); ?>
+
 <h4 class="sub-header text-center">Customer Details - <strong><?PHP echo $data['Customer']['Customertagname']."(" .$data['Customer']['id'].")"; ?> </strong></h4>
 
                     <div class="row">
@@ -171,6 +173,7 @@ $(".form-horizontal").submit(function(e){
                                    <dt>Quotation Order</dt>
                                     <dd class="word_break">
                                         <?PHP echo $data['Quotation']['quotationno']; ?>
+                                        <br><span class="label label-info">Quantity : <?PHP echo count($data['Device']); ?></span>
                                     </dd>
                                 </dl>
                             </div>
@@ -183,6 +186,7 @@ $(".form-horizontal").submit(function(e){
                                     <?PHP foreach($quotation_data['Salesorder'] as $k=>$v): ?>
                                     <dd class="word_break"><?PHP echo  $v; ?></dd>
                                     <?PHP endforeach; ?>
+                                    <dd class="word_break"><span class="label label-info">Quantity : <?PHP echo $count_sales_desc; ?></span></dd>
                                     <?PHP else: ?>
                                       <dd class="word_break"><?PHP echo 'Sales Orders not Found'; ?></dd>
                                     <?PHP endif; ?>
@@ -196,6 +200,7 @@ $(".form-horizontal").submit(function(e){
                                     <?PHP if(!empty($quotation_data['Deliveryorder'])): ?>
                                     <?PHP foreach($quotation_data['Deliveryorder'] as $k=>$v): ?>
                                     <dd class="word_break"><?PHP echo  $v; ?></dd>
+                                    <dd class="word_break"><span class="label label-info">Quantity : <?PHP echo $count_del_desc; ?></span></dd>
                                     <?PHP endforeach; ?>
                                     <?PHP else: ?>
                                       <dd class="word_break"><?PHP echo 'Delivery Orders not Found'; ?></dd>
@@ -204,20 +209,20 @@ $(".form-horizontal").submit(function(e){
                             </div>
                         </div>
                         
-                        <div class="col-sm-3">
+<!--                        <div class="col-sm-3">
                             <div class="block">
                                 <dl>
                                     <dt>Invoice Number</dt>
-                                    <?PHP if(!empty($quotation_data['Deliveryorder'])): ?>
-                                    <?PHP foreach($quotation_data['Deliveryorder'] as $k=>$v): ?>
-                                    <dd class="word_break"><?PHP echo  $v; ?></dd>
-                                    <?PHP endforeach; ?>
-                                    <?PHP else: ?>
-                                      <dd class="word_break"><?PHP echo 'Invoice not yet Generated!!'; ?></dd>
-                                    <?PHP endif; ?>
+                                    <?PHP //if(!empty($quotation_data['Deliveryorder'])): ?>
+                                    <?PHP //foreach($quotation_data['Deliveryorder'] as $k=>$v): ?>
+                                    <dd class="word_break"><?PHP //echo  $v; ?></dd>
+                                    <?PHP //endforeach; ?>
+                                    <?PHP //else: ?>
+                                      <dd class="word_break"><?PHP //echo 'Invoice not yet Generated!!'; ?></dd>
+                                    <?PHP //endif; ?>
                                 </dl>
                             </div>
-                        </div>
+                        </div>-->
                         
                         <div class="col-sm-12">
                             <h4 class="sub-header text-center">Purchase Order Details</h4>
@@ -299,7 +304,11 @@ $(".form-horizontal").submit(function(e){
                     ?>
                      <div class="form-group form-actions">
                                 <div class="col-xs-12 text-right">
+                                    <?php if($title_name == 'Approve'): ?>
+                                    <button type="submit" class="btn btn-sm btn-primary">Approve</button>
+                                    <?php else:  ?>
                                     <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+                                    <?php endif; ?> 
                                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>

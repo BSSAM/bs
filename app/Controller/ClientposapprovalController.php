@@ -9,9 +9,9 @@ class ClientposapprovalController extends AppController {
 
     public $helpers = array('Html', 'Form', 'Session');
     public $uses = array('Priority', 'Paymentterm', 'Quotation', 'Currency', 'Salesorder', 'Deliveryorder','Logactivity',
-        'Qoinvoice','Soinvoice','Doinvoice','Poinvoice',
+        'Qoinvoice','Soinvoice','Doinvoice','Poinvoice', 'Datalog','DelDescription','Description',
         'Country', 'Additionalcharge', 'Service', 'CustomerInstrument', 'Customerspecialneed',
-        'Instrument', 'Brand', 'Customer', 'Device', 'Unit', 'Logactivity', 'InstrumentType','Poinvoice',
+        'Instrument', 'Brand', 'Customer', 'Device', 'Unit', 'InstrumentType','Poinvoice',
         'Contactpersoninfo', 'CusSalesperson', 'Clientpo');
 
     public function index() 
@@ -30,6 +30,9 @@ class ClientposapprovalController extends AppController {
         
         $this->layout   =   'ajax';
         $q_id =  $this->request->data['q_id'];
+        $q_class =  $this->request->data['q_class'];
+        $this->set('title_name',$q_class);
+        //pr($q_class);
         $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$q_id,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
         //pr($data);exit;
         $sales_data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotation_id'=>$q_id,'Salesorder.is_deleted'=>0),'fields'=>array('salesorderno')));
@@ -44,9 +47,41 @@ class ClientposapprovalController extends AppController {
             endforeach;
         endforeach;
         $quotation_data = array_merge($delivery_order,$sales_order);
+        
        
         $this->set('type_id',$data['Customer']['invoice_type_id']);
         $this->set('quotation_data',$quotation_data);
+        
+        // Sales Description Count
+        
+        $sales_data_all = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.id'=>$sale['Salesorder']['id'],'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
+        $count_sales_desc = 0;
+        foreach($sales_data_all as $sales_data):
+            foreach($sales_data['Description'] as $desc_count):
+
+                if($desc_count['is_deleted'] == 0):
+                    $count_sales_desc = $count_sales_desc + 1;
+                endif;
+
+            endforeach;
+        endforeach;
+        $this->set('count_sales_desc',$count_sales_desc);
+        
+        // Delivery Order Description Count
+        
+        $del_data_all = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$sale['Salesorder']['id'],'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1)));
+        $count_del_desc = 0;
+        foreach($del_data_all as $del_data):
+            foreach($del_data['DelDescription'] as $desc_count):
+
+                if($desc_count['is_deleted'] == 0):
+                    $count_del_desc = $count_del_desc + 1;
+                endif;
+
+            endforeach;
+        endforeach;
+        $this->set('count_del_desc',$count_del_desc);
+        
         
         $track_id=$this->random('track');
         $this->set(compact('data','track_id'));
@@ -116,41 +151,43 @@ class ClientposapprovalController extends AppController {
     {
         $this->autoRender=false;
         if($this->request->is('post')){
-            
-//            if(!empty($this->request->data['ponumber'])&&!empty($this->request->data['pocount'])):
-//            $po_array   =   $this->request->data['ponumber'];
-//            $ponumbers  =   implode($this->request->data['ponumber'],',');
-//            $po_count   =   $this->request->data['pocount'];
-//            $po_list_merge    = array_merge($po_array,$po_count);
-//            endif;
+            //pr($this->request->data);
+            $po_full_invoice_ref_no = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['quotationno'],'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1)));
             function sum($carry, $item)
             {
             $carry += $item;
             return $carry;
             }
+            $title_name   =   $this->request->data['title_name'];
+            $po_array   =   $this->request->data['ponumber'];
+            for($i=0;$i<count($po_array);$i++):
+                //$po_array[$i];
+            $check_string[] = strchr($po_array[$i], 'CPO');
+            endfor;
+            if(array_filter($check_string)):
+                $ponumber_check = 0;  // Automatic
+            else:
+                $ponumber_check = 1;  // Manual
+            endif;
+            
             $po_array   =   $this->request->data['ponumber'];
             $ponumbers  =   implode($this->request->data['ponumber'],',');
             
             $po_count  =   implode($this->request->data['pocount'],',');
             $count = array_reduce($this->request->data['pocount'], "sum");
-            //echo join(' and ', array_filter(array_merge(array(join(', ', array_slice($po_count, 0, -1))), array_slice($po_count, -1))));
-            //$count = explode($po_count,',');
-            //$count = $this->request->data['pocount'];
-            //pr($po_count);
-            //$po_count += $po_count;
-            //echo $po_count;
+            
+            
             $quotationno    =   $this->request->data['quotationno'];
             $Find_po_count_satisfied = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
             
             $invoice_type = $Find_po_count_satisfied['Customer']['invoice_type_id'];
-           //pr($invoice_type);
-           //
-           //
-           //
+           
+            
            /////////////////////////   Purchase Order Full Invoice  ////////////////////////////////////////////
             if($invoice_type == 1)
             {
-               $quo_data = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1)));
+                $ref_no_old = $po_full_invoice_ref_no['Quotation']['ref_no'];
+               $quo_data = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$ref_no_old,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1)));
                 for($i=0;$i<count($quo_data);$i++)
                 {
                    //pr($sales_data[$i]['Description']);
@@ -161,94 +198,120 @@ class ClientposapprovalController extends AppController {
                    }
                 }
                // echo $j;
-                if($count == $j):
-                    if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
-                        $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
-                        if($data['Quotation']['is_poapproved']==0):
-                            $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
-//                            if($data == ''):
-//                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-//                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-//                            $this->request->data['Logactivity']['logid'] = $quotationno;
-//                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-//                            $this->request->data['Logactivity']['logapprove'] = 1;
-//                            $a = $this->Logactivity->save($this->request->data['Logactivity']);
-//                            endif;
-                            /******************/
-                        endif;
+                if($count == $j && $ponumber_check == 1):
+                    $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.ref_no'=>$ref_no_old));
+                    $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.ref_count'=>'"'.$po_count.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Salesorder.ref_no'=>$ref_no_old));
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.ref_no'=>'"'.$ponumbers.'"','Deliveryorder.ref_count'=>'"'.$po_count.'"','Deliveryorder.po_generate_type'=>'"Manual"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.ref_no'=>$ref_no_old));
+                    $this->Session->setFlash(__('Purchase Order is Updated as Manual'));
                     
+                    if($title_name == 'Approve'):
+                        
+                        $this->Quotation->updateAll(array('Quotation.is_poapproved'=>'1'),array('Quotation.quotationno'=>$quotationno));
+                        $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>'1'),array('Salesorder.quotationno'=>$quotationno));
+                        $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>'1'),array('Deliveryorder.quotationno'=>$quotationno));
+                        // Log Activity Update
+                        $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2),array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
+                        // Data Log
+                        $this->Datalog->create();
+                        $this->request->data['Datalog']['logname'] = 'ClientPO';
+                        $this->request->data['Datalog']['logactivity'] = 'Approve';
+                        $this->request->data['Datalog']['logid'] = $quotationno;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                        $this->Datalog->save($this->request->data['Datalog']);
+                        
+                        $this->Session->setFlash(__('Purchase Order Approved Successfully'));
                     endif;
                     
-                    $this->Session->setFlash(__('Purchase Order is Updated'));
                 else:
                     //$this->redirect(array('controller'=>'clientposapproval','action'=>'view','1'));
-                    $this->Session->setFlash(__('Purchase Order Needs to match the Salesorder Instrument Count'));
+                    $this->Session->setFlash(__("Purchase Order Needs to match the Salesorder Instrument Count & Should not Contain 'CPO' in it"));
                 endif;
             }
             /////////////////////////   Quotation Full Invoice  ////////////////////////////////////////////
             elseif($invoice_type == 2)
             {
-                if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
-                    $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
-                    if($data['Quotation']['is_poapproved']==0):
-                        $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
-//                        if($data == ''):
-//                        $this->request->data['Logactivity']['logname'] = 'ClientPO';
-//                        $this->request->data['Logactivity']['logactivity'] = 'Add';
-//                        $this->request->data['Logactivity']['logid'] = $quotationno;
-//                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-//                        $this->request->data['Logactivity']['logapprove'] = 1;
-//                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
-//                        endif;
-                        /******************/
-                    endif;
-                endif;
-                $this->Session->setFlash(__('Purchase Order is Updated'));
-            }
-            /////////////////////////   SalesOrder Full Invoice  ////////////////////////////////////////////
-            elseif($invoice_type == 3)
-            {
-                //BSTRA-01-10000009
-                $sales_data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotationno'=>$quotationno,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
-                //pr($sales_data);exit;
-                for($i=0;$i<count($sales_data);$i++)
+                $quo_data = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1)));
+                for($i=0;$i<count($quo_data);$i++)
                 {
                    //pr($sales_data[$i]['Description']);
                    //echo count($sales_data[$i]['Description']);exit;
-                   for($j=0;$j<count($sales_data[$i]['Description']);$j++)
+                   for($j=0;$j<count($quo_data[$i]['Device']);$j++)
                    {
                       //echo $j;
                    }
                 }
-                //echo $j;exit;
-                if($count == $j):
-                    if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
-                        $this->Deliveryorder->updateAll(array('Deliveryorder.ref_no'=>'"'.$ponumbers.'"','Deliveryorder.ref_count'=>'"'.$po_count.'"','Deliveryorder.po_generate_type'=>'"Manual"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.quotationno'=>$quotationno));
-                        $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
-                    //echo $data['Quotation']['is_poapproved']; exit;
-                        if($data['Quotation']['is_poapproved']==0):
-                            $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
-                       //pr($data);exit;
-//                            if(!$data):
-//                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-//                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-//                            $this->request->data['Logactivity']['logid'] = $quotationno;
-//                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-//                            $this->request->data['Logactivity']['logapprove'] = 1;
-//                            //pr($this->request->data['Logactivity']);exit;
-//                            //$this->Logactivity->create();
-//                            $this->Logactivity->save($this->request->data['Logactivity']);
-//                            pr($a);
-//                            endif;
-                            /******************/
-                        endif;
+               // echo $j;
+                if($count == $j && $ponumber_check == 1):
+                    $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
+                    $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.ref_count'=>'"'.$po_count.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Salesorder.quotationno'=>$quotationno));
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.ref_no'=>'"'.$ponumbers.'"','Deliveryorder.ref_count'=>'"'.$po_count.'"','Deliveryorder.po_generate_type'=>'"Manual"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.quotationno'=>$quotationno));
+                    $this->Session->setFlash(__('Purchase Order is Updated as Manual'));
                     
+                    if($title_name == 'Approve'):
+                        $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1),array('Quotation.quotationno'=>$quotationno));
+                        $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>1),array('Salesorder.quotationno'=>$quotationno));
+                        $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>1),array('Deliveryorder.quotationno'=>$quotationno));
+                        // Log Activity Update
+                        $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2),array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
+                        // Data Log
+                        $this->Datalog->create();
+                        $this->request->data['Datalog']['logname'] = 'ClientPO';
+                        $this->request->data['Datalog']['logactivity'] = 'Approve';
+                        $this->request->data['Datalog']['logid'] = $quotationno;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                        $this->Datalog->save($this->request->data['Datalog']);
+                        
+                        $this->Session->setFlash(__('Purchase Order Approved Successfully'));
                     endif;
                     
-                    $this->Session->setFlash(__('Purchase Order is Updated'));
                 else:
                     //$this->redirect(array('controller'=>'clientposapproval','action'=>'view','1'));
-                    $this->Session->setFlash(__('Purchase Order Needs to match the Salesorder Instrument Count'));
+                    $this->Session->setFlash(__("Purchase Order Needs to match the Salesorder Instrument Count & Should not Contain 'CPO' in it"));
+                endif;
+            }
+            /////////////////////////   SalesOrder Full Invoice  ////////////////////////////////////////////
+            elseif($invoice_type == 3)
+            {
+                $sales_data = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$quotationno,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
+                //pr($sales_data);exit;
+//                for($i=0;$i<count($sales_data);$i++)
+//                {
+                   //pr($sales_data[$i]['Description']);
+                   //echo count($sales_data[$i]['Description']);exit;
+                   for($j=0;$j<count($sales_data['Description']);$j++)
+                   {
+                      //echo $j;
+                   }
+//                }
+                //echo $j;exit;
+                if($count == $j && $ponumber_check == 1):
+                    
+                    $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.ref_no'=>'"'.$ponumbers.'"','Deliveryorder.ref_count'=>'"'.$po_count.'"','Deliveryorder.po_generate_type'=>'"Manual"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.quotationno'=>$quotationno));
+                    $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.ref_count'=>'"'.$po_count.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Salesorder.quotationno'=>$quotationno));
+                    
+                    $this->Session->setFlash(__('Purchase Order is Updated as Manual'));
+                     
+                    if($title_name == 'Approve'):
+                        $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1),array('Quotation.quotationno'=>$quotationno));
+                        $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>1),array('Salesorder.quotationno'=>$quotationno));
+                        $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>1),array('Deliveryorder.quotationno'=>$quotationno));
+                        // Log Activity Update
+                        $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2),array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
+                        // Data Log
+                        $this->Datalog->create();
+                        $this->request->data['Datalog']['logname'] = 'ClientPO';
+                        $this->request->data['Datalog']['logactivity'] = 'Approve';
+                        $this->request->data['Datalog']['logid'] = $quotationno;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                        $this->Datalog->save($this->request->data['Datalog']);
+                        
+                        $this->Session->setFlash(__('Purchase Order Approved Successfully'));
+                    endif;
+                    
+                else:
+                    //$this->redirect(array('controller'=>'clientposapproval','action'=>'view','1'));
+                    $this->Session->setFlash(__("Purchase Order Needs to match the Salesorder Instrument Count & Should not Contain 'CPO' in it"));
                 endif;
             }
             /////////////////////////   Delivery Order Full Invoice  ////////////////////////////////////////////
@@ -264,78 +327,36 @@ class ClientposapprovalController extends AppController {
                       //echo $j;
                    }
                 }
-               // echo $j;
-                if($count == $j):
-                    if($this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno))):
-                        $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.po_generate_type'=>'Manual','Quotation.is_assign_po'=>1,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
-                        if($data['Quotation']['is_poapproved']==0):
-                            $data = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add','Logactivity.logapprove'=>1)));
-//                            if($data == ''):
-//                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-//                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-//                            $this->request->data['Logactivity']['logid'] = $quotationno;
-//                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-//                            $this->request->data['Logactivity']['logapprove'] = 1;
-//                            $a = $this->Logactivity->save($this->request->data['Logactivity']);
-//                            endif;
-                            /******************/
-                        endif;
+               if($count == $j && $ponumber_check == 1):
                     
+                    $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.ref_no'=>'"'.$ponumbers.'"','Deliveryorder.ref_count'=>'"'.$po_count.'"','Deliveryorder.po_generate_type'=>'"Manual"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.quotationno'=>$quotationno));
+                    $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.ref_count'=>'"'.$po_count.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Salesorder.quotationno'=>$quotationno));
+                    
+                    $this->Session->setFlash(__('Purchase Order is Updated as Manual'));
+                    
+                    if($title_name == 'Approve'):
+                        $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1),array('Quotation.quotationno'=>$quotationno));
+                        $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>1),array('Salesorder.quotationno'=>$quotationno));
+                        $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>1),array('Deliveryorder.quotationno'=>$quotationno));
+                        // Log Activity Update
+                        $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2),array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
+                        // Data Log
+                        $this->Datalog->create();
+                        $this->request->data['Datalog']['logname'] = 'ClientPO';
+                        $this->request->data['Datalog']['logactivity'] = 'Approve';
+                        $this->request->data['Datalog']['logid'] = $quotationno;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                        $this->Datalog->save($this->request->data['Datalog']);
+                        
+                        $this->Session->setFlash(__('Purchase Order Approved Successfully'));
                     endif;
                     
-                    $this->Session->setFlash(__('Purchase Order is Updated'));
                 else:
                     //$this->redirect(array('controller'=>'clientposapproval','action'=>'view','1'));
-                    $this->Session->setFlash(__('Purchase Order Needs to match the Salesorder Instrument Count'));
+                    $this->Session->setFlash(__("Purchase Order Needs to match the Salesorder Instrument Count & Should not Contain 'CPO' in it"));
                 endif;
             }
-           
-           //exit;
-            
-                
-                //,'Quotation.po_approval_date'=>date('Y-m-d')
-               // $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));
-//                 $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0),'recursive'=>3));
-//                 switch($data['Customer']['invoice_type_id'])
-//                 {
-//                    case 1:
-//                        $po_data_array  = $this->Poinvoice->updateAll(array('Poinvoice.clientpo_number'=>'"'.$po_array[0].'"','Poinvoice.po_count'=>$po_count[0]),array('Poinvoice.track_id'=>$data['Quotation']['track_id']));  
-//                        break;
-//                    case 2:
-//                        $qo_data_array  = $this->Qoinvoice->find('first',array('conditions'=>array('Qoinvoice.track_id'=>$data['Quotation']['track_id'])));  
-//                        $quotation_data =   $qo_data_array['Qoinvoice']['quotation_data'];
-//                        $qos    = unserialize($quotation_data);
-//                        unset( $qos['Clientpo']['Purchaseorder']);
-//                        $qos['Clientpo']['Purchaseorder']   =   $po_list_merge;
-//                        $data_list_for_po   = serialize($qos);
-//                        $this->Qoinvoice->updateAll(array('Qoinvoice.quotation_data'=>'"'.$data_list_for_po."'"),array('Qoinvoice.track_id'=>$data['Quotation']['track_id']));  
-//                        break;
-//                    case 3:
-//                        $po_data_array  = $this->Soinvoice->find('first',array('conditions'=>array('Soinvoice.track_id'=>$data['Quotation']['track_id'])));  
-//                        $so_data =   $po_data_array['Soinvoice']['salesorder_data'];
-//                        $sos    = unserialize($so_data);
-//                        unset( $sos['Clientpo']['Purchaseorder']);
-//                        $sos['Clientpo']['Purchaseorder']   =   $po_list_merge;
-//                        $data_list_for_so   = serialize($sos);
-//                        $this->Soinvoice->updateAll(array('Soinvoice.salesorder_data'=>'"'.$data_list_for_so.'"'),array('Soinvoice.track_id'=>$data['Quotation']['track_id']));  
-//                        break;
-//                    case 4:
-//                        $po_data_array  = $this->Doinvoice->find('first',array('conditions'=>array('Doinvoice.track_id'=>$data['Quotation']['track_id'])));  
-//                        if(!empty($po_data_array)):
-//                        $do_data =   $po_data_array['Doinvoice']['deliveryorder_data'];
-//                        $dos    = unserialize($do_data);
-//                        unset( $dos['Clientpo']['Purchaseorder']);
-//                        $dos['Clientpo']['Purchaseorder']   =   $po_list_merge;
-//                        $data_list_for_do   = serialize($dos);
-//                        $this->Soinvoice->updateAll(array('Soinvoice.salesorder_data'=>'"'.$data_list_for_do.'"'),array('Soinvoice.track_id'=>$data['Quotation']['track_id']));  
-//                        endif;
-//                        break;
-//                    }
-                /******************
-                * Data Log
-                */
-               
-                
         }
     }
     
