@@ -49,10 +49,14 @@ $(document).on('click','.dofull-prepare',function(){
                     <table id="dofull-datatable"  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-center">PO Reference No</th>
+                             <th class="text-center">Customer ID</th>
                             <th class="text-center">Customer Name</th>
                             <th class="text-center">Customer Address</th>
-                            <th class="text-center">Customer Quotation No</th>
+                            <th class="text-center">Purchase Order No</th>
+                            <th class="text-center">Quotation No</th>
+                            <th class="text-center">Salesorder No</th>
+                            <th class="text-center">Delivery Order No</th>
+                            <th class="text-center">Track ID</th>
                             <th class="text-center">Approve</th>
 <!--                            <th class="text-center">View</th>-->
 
@@ -64,10 +68,14 @@ $(document).on('click','.dofull-prepare',function(){
                         <?PHP foreach($prepareinvoice_approved_list as $list): ?>
                         <?php if($list['Customer']['invoice_type_id']==4): ?>
                         <tr class="invoice_<?PHP echo $list['Invoice']['id']; ?>">
-                            <td class="text-center"><?PHP echo $list['Deliveryorder']['po_reference_no']; ?></td>
+                            <td class="text-center"><?PHP echo $list['Customer']['id']; ?></td>
                             <td class="text-center"><?PHP echo $list['Customer']['customername']; ?></td>
                             <td class="text-center"><?PHP echo $list['Deliveryorder']['customer_address']; ?></td>
+                            <td class="text-center"><?PHP echo $list['Deliveryorder']['ref_no']; ?></td>
                             <!-- cust_purchase_order_no --><td class="text-center" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo $list['Deliveryorder']['quotationno']; ?><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
+                            <td class="text-center" id="<?PHP echo $list['Deliveryorder']['salesorder_id']; ?>"><?PHP echo $list['Deliveryorder']['salesorder_id']; ?><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
+                            <td class="text-center" id="<?PHP echo $list['Deliveryorder']['delivery_order_no']; ?>"><?PHP echo $list['Deliveryorder']['delivery_order_no']; ?><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
+                            <td class="text-center" id="<?PHP echo $list['Deliveryorder']['track_id']; ?>"><?PHP echo $list['Deliveryorder']['track_id']; ?><?PHP //echo $list['Invoice']['purchaseorder_id'] ;?></td>
                             <td class="text-center"><a href="javascript:void(0);" class="dofull-prepare btn btn-alt btn-xs btn-success" id="<?PHP echo $list['Deliveryorder']['quotationno']; ?>"><?PHP echo  'Approve'; ?></a></td>
 <!--                            <td class="text-center"> <a href="#modal-regular<?PHP //echo $list['Deliveryorder']['id'] ?>" class="btn btn-primary" data-toggle="modal">View</a></td>-->
                             

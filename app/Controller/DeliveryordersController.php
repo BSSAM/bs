@@ -347,6 +347,7 @@
                     $this->request->data['Logactivity']['logname'] = 'Invoice';
                     $this->request->data['Logactivity']['logactivity'] = 'Add';
                     $this->request->data['Logactivity']['logid'] = $id;
+                    $this->request->data['Logactivity']['logno'] = $deliver_quotation;
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
                     $this->Logactivity->create();
@@ -354,7 +355,7 @@
 
                     $this->request->data['Datalog']['logname'] = 'Invoice';
                     $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['logid'] = $deliver_quotation;
                     $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                     $this->Datalog->create();
                     $this->Datalog->save($this->request->data['Datalog']);

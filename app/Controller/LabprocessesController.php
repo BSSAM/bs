@@ -228,7 +228,7 @@ class LabprocessesController extends AppController
                     {
                         
                        $last_id    =   $this->Deliveryorder->getLastInsertId();
-                        $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$quotation_list['Quotation']['id']));
+                        $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$salesorder_list['Quotation']['id']));
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
                         
                         foreach($salesorder_list['Description'] as $sale):
@@ -238,7 +238,7 @@ class LabprocessesController extends AppController
                         endforeach;   
                         
                     }
-                        $quotation_for_log = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotation_list['Quotation']['quotationno'])));
+                        $quotation_for_log = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_list['Quotation']['quotationno'])));
                         $deliveryorder_type = $quotation_for_log['Customer']['acknowledgement_type_id'];
                         
                         ////////////////////////////////
@@ -395,7 +395,7 @@ class LabprocessesController extends AppController
                     {
                         
                        $last_id    =   $this->Deliveryorder->getLastInsertId();
-                        $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$quotation_list['Quotation']['id']));
+                        $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$salesorder_list['Quotation']['id']));
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
                         
                         foreach($salesorder_list['Description'] as $sale):
@@ -443,28 +443,33 @@ class LabprocessesController extends AppController
                         $this->Datalog->create();
                         $a = $this->Datalog->save($this->request->data['Datalog']);
                     
-                        $quotation_for_log = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotation_list['Quotation']['quotationno'])));
+                        $quotation_for_log = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_list['Quotation']['quotationno'])));
+                        //pr($quotation_for_log);
                         $deliveryorder_type = $quotation_for_log['Customer']['acknowledgement_type_id'];
+                        //pr($deliveryorder_type);
+                        //pr($deliveryorder_type);exit;
                         if($deliveryorder_type == 1):
-                        
+                        //echo "gone into loop";
                             /******************
                             * Data Log - Client PO
                             */
+                            $this->Logactivity->create();
                             $this->request->data['Logactivity']['logname'] = 'ClientPO';
                             $this->request->data['Logactivity']['logactivity'] = 'Add';
                             $this->request->data['Logactivity']['logid'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Logactivity']['logno'] = $quotation_list['Quotation']['quotationno'];
                             $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                             $this->request->data['Logactivity']['logapprove'] = 1;
-                            $this->Logactivity->create();
+                            
                             $this->Logactivity->save($this->request->data['Logactivity']);
-
+                            $this->Datalog->create();
                             $this->request->data['Datalog']['logname'] = 'ClientPO';
                             $this->request->data['Datalog']['logactivity'] = 'Add';
                             $this->request->data['Datalog']['logid'] = $quotation_list['Quotation']['quotationno'];
                             $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                            $this->Datalog->create();
+                            
                             $this->Datalog->save($this->request->data['Datalog']);
-
+                            //echo "gone outof loop";
                             /******************/ 
                         endif;
                         
@@ -482,6 +487,7 @@ class LabprocessesController extends AppController
                             $this->Labprocess->save($this->request->data);  
                         }
                     }
+                    //exit;
                     $this->redirect(array('controller' => 'Labprocesses', 'action' => 'index'));
                 }
                 else
