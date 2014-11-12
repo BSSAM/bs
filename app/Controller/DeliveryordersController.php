@@ -30,13 +30,21 @@
             /*
             * *****************************************************
             */
-            //$this->Quotation->recursive = 1; 
-            if($id):
-                $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>$id),'order' => array('Deliveryorder.id' => 'DESC')));
+                        
+            if($id == '3'):
+                $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>1),'order' => array('Deliveryorder.id' => 'DESC')));
+                $this->set('deleted_val',$id);
+            elseif($id == '2'):
+                $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
+                $this->set('deleted_val',$id);
+            elseif($id == '1'):
+                $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'order' => array('Deliveryorder.id' => 'DESC')));
                 $this->set('deleted_val',$id);
             else:
                 $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
+                $this->set('deleted_val',$id);
             endif;
+            
             $this->set('deliveryorders', $delivery_data);
         }
         public function add()

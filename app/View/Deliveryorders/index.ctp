@@ -24,7 +24,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Delivery Orders </h2>
+                            <h2>List Of Delivery Orders <?php if($deleted_val == '2'): echo "- Pending Approval"; elseif($deleted_val == '3'): echo "- InActive"; elseif($deleted_val == '1'): echo "- Active"; endif;?></h2> 
                             <h2>
                                 <?php echo $this->Html->link('Add Delivery Order',array('controller'=>'Deliveryorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Delivery Order')); ?>
                             </h2>
@@ -42,13 +42,13 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                          <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
-                                        <?php if($deleted_val == 0): ?><th class="text-center">Action</th><?php endif; ?>
+                                        <?php if($deleted_val != 3): ?><th class="text-center">Action</th><?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?PHP if(!empty($deliveryorders )): ?>
                                      <?php foreach($deliveryorders as $deliveryorder): ?>
-                                    <tr <?php if($deliveryorder['Deliveryorder']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                    <tr <?php if($deliveryorder['Deliveryorder']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_no'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_date'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['salesorder_id'] ?></td>
@@ -56,7 +56,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['email'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['our_reference_no'] ?></td>
-                                        <?php if($deleted_val == 0): ?>
+                                        <?php if($deleted_val != 3): ?>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$deliveryorder['Deliveryorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
@@ -75,7 +75,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                     <tr>
                                         <td colspan="8">
                                             <div class="btn-group btn-group-md pull-right">
-                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('0'=>'Active','1'=>'Deleted'),'empty'=>'Select Status')); ?>
+                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
                                             </div>
                                         </td>
                                     </tr>
