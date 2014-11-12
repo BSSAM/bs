@@ -43,6 +43,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
                                         <?php if($deleted_val != 3): ?><th class="text-center">Action</th><?php endif; ?>
+                                        <th class="text-center">Note</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,6 +68,10 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                             <?php } ?>
                                         </td>
                                         <?php endif; ?>
+                                        <td>
+                                            <?php if($deliveryorder['Deliveryorder']['is_poapproved']==1): ?><span class="label label-five">PO#App</span> <?php endif; ?>
+                                            <?php if($deliveryorder['Deliveryorder']['is_poapproved']!=1): ?><span class="label label-six">PO#Not</span> <?php endif; ?>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                     <?PHP endif; ?>
@@ -81,6 +86,9 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                     </tr>
                                 </tfoot>
                             </table>
+                            <br>
+                            <span class="label label-five">PO#App</span> - PO Approved
+                            <span class="label label-six">PO#Not</span> - PO Not Approved
                          <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>
                                 

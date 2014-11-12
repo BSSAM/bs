@@ -177,12 +177,36 @@ class DashboardsController extends AppController
         /****************** Log Activity - Delivery Order ********************/
         
         $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder")));
-        //pr($logactivity);exit;
-        $this->set('log_activity_deliveryorder', $logactivity_deliveryorder);
+        $logactivity_deliveryorder_count1 = 0;
+        $logactivity_deliveryorder_count2 = 0;
         
-        $logactivity_deliveryorder_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder")));
-        //pr($logactivity);exit;
-        $this->set('log_activity_deliveryorder_count', $logactivity_deliveryorder_count);
+        foreach($logactivity_deliveryorder as $delivery_details):
+            
+            $deli_no = $delivery_details['Logactivity']['logno'];
+            $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.delivery_order_no'=>$deli_no),'recursive'=>2));
+            
+            if($deliveryorder['Deliveryorder']['is_poapproved']==1 && $deliveryorder['Customer']['acknowledgement_type_id']==1):
+               
+                $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
+                
+                $logactivity_deliveryorder_count1 = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
+            
+            endif;
+            
+            if($deliveryorder['Customer']['acknowledgement_type_id']!=1): 
+                
+                $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
+                
+                $logactivity_deliveryorder_count2 = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
+            
+            endif;
+            
+        endforeach;
+        
+        $count = $logactivity_deliveryorder_count1 + $logactivity_deliveryorder_count2;
+        
+        $this->set('log_activity_deliveryorder', $logactivity_deliveryorder);
+        $this->set('log_activity_deliveryorder_count', $count);
         
         /*****************************************************/
         

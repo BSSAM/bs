@@ -156,7 +156,7 @@
                     }
                     /******************* Data Log*/
                         $this->request->data['Logactivity']['logname']   =   'Deliveryorder';
-                        $this->request->data['Logactivity']['logactivity']   =   'Add DeliveryOrder';
+                        $this->request->data['Logactivity']['logactivity']   =   'Add Delivery Order';
                         $this->request->data['Logactivity']['logid']   =   $del_last_id;
                         $this->request->data['Logactivity']['logno'] = $dmt;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');

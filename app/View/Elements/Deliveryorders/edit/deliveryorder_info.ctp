@@ -70,7 +70,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.po_reference_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
+        <?php echo $this->Form->input('Deliveryorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
     </div>
 <!--    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
     <div class="col-md-4">
