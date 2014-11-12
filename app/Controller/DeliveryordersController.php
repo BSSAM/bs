@@ -69,7 +69,7 @@
 //               pr($this->request->data['Deliveryorder']);
                //exit;
                 //$this->Description->updateAll(array('Description.is_deliveryorder_created'=>1),array('Quotation.id'=>$delivery_before_quo['Quotation']['id']));
-               
+               //pr($delivery_before_quo);exit;
                $new_array = array();
                
                $new_array['customer_id'] = $delivery_before['Salesorder']['customer_id'];
@@ -210,7 +210,25 @@
         {
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
-            //pr($deliveryorder);
+            
+            ///////////// Delivery Address List //////////////////
+            ////////////////////////////////////////////////////////////// Here//////////////////////////////////////
+            $address_list = $deliveryorder['Customer']['Address'];
+            $count_del_addr = 0;
+            foreach($address_list as $address_delivery):
+                if($address_delivery['type'] == 'delivery'):
+                    echo $count_del_addr = $count_del_addr + 1;
+                endif;
+            endforeach;
+            
+            for($i=1;$i<=$count_del_addr;$i++):
+                $deliveraddress[] = "delivery".$i;
+            endfor;
+            $this->set('val_address',$deliveraddress);
+            //pr($deliveraddress);exit;
+            
+            //----------------------------------------------------
+            
             $quo_no = $deliveryorder['Salesorder']['Quotation']['quotationno'];
             $quo=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quo_no),'recursive'=>2));
             $posat = $quo['Quotation']['is_poapproved'];
@@ -616,7 +634,7 @@
         $this->loadModel('Address');
         $address = $this->request->data['address'];
         $customer_id = $this->request->data['customer_id'];
-        $customer_address_data = $this->Address->find('first', array('conditions' => array('Address.customer_id' => $customer_id,'Address.type' => $address,'Address.status'=>1)));
+        $customer_address_data = $this->Address->find('all', array('conditions' => array('Address.customer_id' => $customer_id,'Address.type' => 'Delivery','Address.status'=>1)));
         if (!empty($customer_address_data)) {
            echo $customer_address_data['Address']['address'];
         }
