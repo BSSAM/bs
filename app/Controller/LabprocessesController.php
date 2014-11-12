@@ -284,8 +284,8 @@ class LabprocessesController extends AppController
                             */
                             $this->request->data['Logactivity']['logname'] = 'ClientPO';
                             $this->request->data['Logactivity']['logactivity'] = 'Add';
-                            $this->request->data['Logactivity']['logid'] = $quotation_list['Quotation']['quotationno'];
-                            $this->request->data['Logactivity']['logno'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
+                            $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['quotationno'];
                             $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                             $this->request->data['Logactivity']['logapprove'] = 1;
                             $this->Logactivity->create();
@@ -293,7 +293,7 @@ class LabprocessesController extends AppController
 
                             $this->request->data['Datalog']['logname'] = 'ClientPO';
                             $this->request->data['Datalog']['logactivity'] = 'Add';
-                            $this->request->data['Datalog']['logid'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Datalog']['logid'] = $salesorder_list['Quotation']['quotationno'];
                             $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                             $this->Datalog->create();
                             $this->Datalog->save($this->request->data['Datalog']);
@@ -457,8 +457,8 @@ class LabprocessesController extends AppController
                             $this->Logactivity->create();
                             $this->request->data['Logactivity']['logname'] = 'ClientPO';
                             $this->request->data['Logactivity']['logactivity'] = 'Add';
-                            $this->request->data['Logactivity']['logid'] = $quotation_list['Quotation']['quotationno'];
-                            $this->request->data['Logactivity']['logno'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
+                            $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['quotationno'];
                             $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                             $this->request->data['Logactivity']['logapprove'] = 1;
                             
@@ -466,7 +466,7 @@ class LabprocessesController extends AppController
                             $this->Datalog->create();
                             $this->request->data['Datalog']['logname'] = 'ClientPO';
                             $this->request->data['Datalog']['logactivity'] = 'Add';
-                            $this->request->data['Datalog']['logid'] = $quotation_list['Quotation']['quotationno'];
+                            $this->request->data['Datalog']['logid'] = $salesorder_list['Quotation']['quotationno'];
                             $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                             
                             $this->Datalog->save($this->request->data['Datalog']);

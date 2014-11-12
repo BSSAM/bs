@@ -614,7 +614,7 @@
        {
            res = $scope.instruments[index];
         
-            $http.get(path_url+'Salesorders/delete_instrument/'+res.serial).success(function(data){
+            $http.get(path_url+'Salesorders/delete_instrument_quo/'+res.serial).success(function(data){
                instrument = [];
                
                 $.each($scope.instruments, function(k,v){

@@ -1,3 +1,4 @@
+
 <script> var path='<?PHP echo Router::url('/',true); ?>';</script>
 <style>
     .sales_instrument_id

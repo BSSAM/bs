@@ -275,18 +275,18 @@
                         //pr($contact_list);exit;
                         $this->set(compact('contact_list'));
                         $this->set('pendin',0);
-                        if($salesorder_details['Customer']['invoice_type_id']!=3)
-                        {
+//                        if($salesorder_details['Customer']['invoice_type_id']!=3)
+//                        {
                             $this->set('sale',$salesorder_details);
                             $this->set('status_id','pending_status');
                             $this->request->data =   $salesorder_details;
                             $this->set('pendin',1);
-                        }
-                        else
-                        {
-                            $this->Session->setFlash('Salesorder full invoice');
-                            $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
-                        }
+                        //}
+                        //else
+                        //{
+                        //    $this->Session->setFlash('Salesorder full invoice');
+                         //   $this->redirect(array('controller'=>'Salesorders','action'=>'index'));
+                       // }
                         //pr($quotation_details['Quotation']);exit;
                         
                         $sales_details =  $quotation_details['Quotation'];
