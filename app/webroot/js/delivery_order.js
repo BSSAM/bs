@@ -202,6 +202,7 @@ $(document).ready(function(){
    $(document).on('change','#val_addr',function(){
        var address =$(this).val();
        var customer_id =$('#DeliveryorderCustomerId').val();
+       //alert(address);
        if(address!=''&&customer_id!='')
        {
            $.ajax({
@@ -211,7 +212,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                
+                //console.log(data);
              $('#DeliveryorderCustomerAddress').val(data);
             }
 	});

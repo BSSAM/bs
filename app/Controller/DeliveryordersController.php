@@ -216,15 +216,26 @@
             $address_list = $deliveryorder['Customer']['Address'];
             $count_del_addr = 0;
             foreach($address_list as $address_delivery):
-                if($address_delivery['type'] == 'delivery'):
-                    echo $count_del_addr = $count_del_addr + 1;
+                if($address_delivery['type'] == 'delivery' && $address_delivery['status'] == 1 && $address_delivery['is_deleted'] == 0):
+                    $count_del_addr = $count_del_addr + 1;
                 endif;
             endforeach;
-            
-            for($i=1;$i<=$count_del_addr;$i++):
-                $deliveraddress[] = "delivery".$i;
-            endfor;
-            $this->set('val_address',$deliveraddress);
+            $this->set('count_del_addr',$count_del_addr);
+            $this->set('address_register',$address_register='');
+            $this->set('val_address',$deliveraddress='');
+            if($count_del_addr != 0):
+                for($i=1;$i<=$count_del_addr;$i++):
+                    $deliveraddress[] = "delivery".$i;
+                endfor;
+                $this->set('val_address',$deliveraddress);
+            else:
+                foreach($address_list as $address_delivery):
+                    if($address_delivery['type'] == 'registered' && $address_delivery['status'] == 1 && $address_delivery['is_deleted'] == 0):
+                        $address_register = $address_delivery['address'];
+                    endif;
+                endforeach;
+                $this->set('address_register',$address_register);
+            endif;
             //pr($deliveraddress);exit;
             
             //----------------------------------------------------
@@ -634,9 +645,12 @@
         $this->loadModel('Address');
         $address = $this->request->data['address'];
         $customer_id = $this->request->data['customer_id'];
-        $customer_address_data = $this->Address->find('all', array('conditions' => array('Address.customer_id' => $customer_id,'Address.type' => 'Delivery','Address.status'=>1)));
-        if (!empty($customer_address_data)) {
-           echo $customer_address_data['Address']['address'];
+        $customer_address_data = $this->Address->find('all', array('conditions' => array('Address.customer_id' => $customer_id,'Address.type' => 'Delivery','Address.status'=>1,'Address.is_deleted'=>0)));
+        //pr($customer_address_data);exit;
+        $customer_address_data_del = $customer_address_data[$address]['Address']['address'];
+        if (!empty($customer_address_data_del))
+        {
+           echo $customer_address_data_del;
         }
         }
          public function file_upload($id=NULL)
