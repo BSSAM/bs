@@ -30,12 +30,39 @@ $(document).ready(function(){
                 if(data!='failure')
                 {
                     sales_node = $.parseJSON(data);
+                    var del_address = '';
+                    var count = 0;
+                    $.each(sales_node.Quotation.Customer.Address,function(key,value){
+                        
+                        if(value.type == 'delivery' && value.status == 1 && value.is_deleted == 0){
+                             del_address = value.address; 
+                        }
+                        if(del_address == ''){
+                            if(value.type == 'registered' && value.status == 1 && value.is_deleted == 0){
+                                del_address = value.address; 
+                            }
+                        }
+                        if(value.type == 'delivery' && value.status == 1 && value.is_deleted == 0){
+                            count++;
+                        }
+                    });
+                                       
+                    var i = 0;
+                    var j = 0;
+                    for(i=0;i<count;i++){
+                        j = i+1;
+                        $('#DeliveryorderDeliveryAddress').append('<option value='+i+'>delivery'+j+'</option>');
+                        $("#DeliveryorderDeliveryAddress").trigger("chosen:updated");
+                        //$('#DeliveryorderDeliveryAddress_chosen').append('<option value='+i+'>delivery'+j+'</option>');
+                    }
+                    
                     $('#DeliveryorderSalesorderId').val(sales_node.Salesorder.id);
                     $('#DeliveryorderCustomerId').val(sales_node.Customer.id);
                     $('#deli_customer').val(sales_node.Customer.customername);
                     $('#del_address_id').append('<option value="'+sales_node.Customer.deliveryaddress+'">'+sales_node.Customer.deliveryaddress+'</option>');
                     $('#del_dueamount').val(sales_node.Salesorder.due_amount);                
                     $('#del_customer_address').val(sales_node.Customer.regaddress);
+                    $('#DeliveryorderCustomerAddress').val(del_address);
                     $('#del_email').val(sales_node.Salesorder.email);
                     $('#del_phone').val(sales_node.Customer.phone);
                     $('#del_fax').val(sales_node.Customer.fax);
@@ -199,7 +226,7 @@ $(document).ready(function(){
        
    });
    
-   $(document).on('change','#val_addr',function(){
+   $(document).on('change','#DeliveryorderDeliveryAddress',function(){
        var address =$(this).val();
        var customer_id =$('#DeliveryorderCustomerId').val();
        //alert(address);

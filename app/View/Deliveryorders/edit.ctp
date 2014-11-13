@@ -70,7 +70,7 @@ if(customer!='')
                                 <!-- Basic Form Elements Content -->
                                  
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Deliveryorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
+                                    <?php echo $this->Form->create('Deliveryorder',array('class'=>'form-horizontal form-bordered','id'=>'form-deliveryorder-edit')); ?>
                                     <?php echo $this->Form->input('Deliveryorder.customer_id', array('type'=>'hidden','value'=>$deliveryorder['Deliveryorder']['customer_id'])); ?>
                                     <?php echo $this->Form->input('Deliveryorder.salesorder_id', array('type'=>'hidden','value'=>$deliveryorder['Deliveryorder']['salesorder_id'])); ?>
                                     <div class="panel-body panel-body-nopadding">

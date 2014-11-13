@@ -12,7 +12,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_addr">Select Address</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.delivery_address', array('id'=>'val_addr','class'=>'form-control select-chosen','label'=>false,'name'=>'addr','type'=>'select','empty'=>'Select Delivery Address','options'=>array('registered'=>'Registered','billing'=>'Billing','delivery'=>'Delivery'))); ?>
+        <?php echo $this->Form->input('Deliveryorder.delivery_address', array('class'=>'form-control select-chosen','label'=>false,'name'=>'addr','type'=>'select','empty'=>'Select Delivery Address')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_address">Delivery Address</label>
     <div class="col-md-4">

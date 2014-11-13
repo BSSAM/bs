@@ -213,28 +213,30 @@
             
             ///////////// Delivery Address List //////////////////
             ////////////////////////////////////////////////////////////// Here//////////////////////////////////////
-            $address_list = $deliveryorder['Customer']['Address'];
-            $count_del_addr = 0;
-            foreach($address_list as $address_delivery):
-                if($address_delivery['type'] == 'delivery' && $address_delivery['status'] == 1 && $address_delivery['is_deleted'] == 0):
-                    $count_del_addr = $count_del_addr + 1;
-                endif;
-            endforeach;
-            $this->set('count_del_addr',$count_del_addr);
-            $this->set('address_register',$address_register='');
-            $this->set('val_address',$deliveraddress='');
-            if($count_del_addr != 0):
-                for($i=1;$i<=$count_del_addr;$i++):
-                    $deliveraddress[] = "delivery".$i;
-                endfor;
-                $this->set('val_address',$deliveraddress);
-            else:
+            if($deliveryorder['Deliveryorder']['customer_address']==''):
+                $address_list = $deliveryorder['Customer']['Address'];
+                $count_del_addr = 0;
                 foreach($address_list as $address_delivery):
-                    if($address_delivery['type'] == 'registered' && $address_delivery['status'] == 1 && $address_delivery['is_deleted'] == 0):
-                        $address_register = $address_delivery['address'];
+                    if($address_delivery['type'] == 'delivery' && $address_delivery['status'] == 1 && $address_delivery['is_deleted'] == 0):
+                        $count_del_addr = $count_del_addr + 1;
                     endif;
                 endforeach;
-                $this->set('address_register',$address_register);
+                $this->set('count_del_addr',$count_del_addr);
+                $this->set('address_register',$address_register='');
+                $this->set('val_address',$deliveraddress='');
+                if($count_del_addr != 0):
+                    for($i=1;$i<=$count_del_addr;$i++):
+                        $deliveraddress[] = "delivery".$i;
+                    endfor;
+                    $this->set('val_address',$deliveraddress);
+                else:
+                    foreach($address_list as $address_delivery):
+                        if($address_delivery['type'] == 'registered' && $address_delivery['status'] == 1 && $address_delivery['is_deleted'] == 0):
+                            $address_register = $address_delivery['address'];
+                        endif;
+                    endforeach;
+                    $this->set('address_register',$address_register);
+                endif;
             endif;
             //pr($deliveraddress);exit;
             
@@ -622,7 +624,7 @@
             $this->loadModel('Salesorder');
             $sales_id =  $this->request->data['sales_id'];
             $this->autoRender = false;
-            $sales_data = $this->Salesorder->find('first',array('conditions'=>array('salesorderno'=>$sales_id,'Salesorder.is_approved'=>'1'),'recursive'=>'2'));
+            $sales_data = $this->Salesorder->find('first',array('conditions'=>array('salesorderno'=>$sales_id,'Salesorder.is_approved'=>'1'),'recursive'=>'3'));
             $contact_list   =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.customer_id'=>$sales_data['Customer']['id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
             //$this->set(compact('contact_list'));
             
