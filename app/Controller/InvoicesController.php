@@ -19,11 +19,18 @@ class InvoicesController extends AppController
         //pr($unapproved_order_list);exit;
         //,array('conditions'=>array('Invoice.is_approved'=>'0')
         
-        $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1),'group' => 'Deliveryorder.quotationno'));
+        //******************* Salesorder Full Invoice *******************//
+        $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_invoice_created'=>1),'order' => array('Salesorder.id' => 'DESC')));
+        pr($salesorder_list);exit;
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0','Quotation.is_approved'=>1),'order' => array('Quotation.created' => 'ASC')));    
+        
+        //////////////////////////////////////////////////////////////////
+        
+        $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1)),array('group' => 'Deliveryorder.quotationno'));
               //pr($prepareinvoice_approved_list);exit;
         $approved_order_list   =    $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
         //pr($approved_order_list);exit;
-        $this->set(compact('unapproved_order_list','prepareinvoice_approved_list','approved_order_list'));
+        $this->set(compact('unapproved_order_list','prepareinvoice_approved_list','approved_order_list','salesorder_list'));
     }
     
 //    public function prepare()

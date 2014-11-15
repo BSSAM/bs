@@ -5,7 +5,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('due_amount', array('id'=>'val_dueamount','class'=>'form-control',
+        <?php echo $this->Form->input('Quotation.due_amount', array('id'=>'val_dueamount','class'=>'form-control',
                                                 'placeholder'=>'Due Amount','label'=>false,'autoComplete'=>'off','disabled'=>'disabled')); ?>
     </div>
 </div>

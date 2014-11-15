@@ -66,8 +66,8 @@ $(document).on('click','.sofull-prepare',function(){
                     </thead>
                     <tbody class="Instrument_info"> 
                         <?PHP //pr($unapproved_order_list);exit; ?>
-                        <?PHP if(!empty($prepareinvoice_approved_list)):?>
-                        <?PHP foreach($prepareinvoice_approved_list as $list): ?>
+                        <?PHP if(!empty($salesorder_list)):?>
+                        <?PHP foreach($salesorder_list as $list): ?>
                         <?php if($list['Customer']['invoice_type_id']==3): ?>
                         <tr class="invoice_<?PHP echo $list['Invoice']['id']; ?>">
                             <td class="text-center"><?PHP echo $list['Customer']['id']; ?></td>

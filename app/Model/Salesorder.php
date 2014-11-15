@@ -44,6 +44,11 @@ class Salesorder extends AppModel
             'foreignKey' => 'salesorder_id',
             'conditions' => array(),
       ),
+        'Deliveryorder' => array(
+            'className' => 'Deliveryorder',
+            'foreignKey' => 'salesorder_id',
+            'conditions' => array(),
+      ),
         );
     public $belongsTo = array(
         'Customer' => array(
