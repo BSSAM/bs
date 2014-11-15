@@ -9,7 +9,7 @@ class CustomertaglistsController extends AppController
 {
     public $helpers = array('Html','Form','Session');
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo',
-                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
+                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby','Random',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
                         'Deliveryordertype','InvoiceType','Priority','AcknowledgementType','Quotation','Logactivity','Datalog');
     public function index($id=NULL)

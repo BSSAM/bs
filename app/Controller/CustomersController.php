@@ -9,7 +9,7 @@ class CustomersController extends AppController
 {
     public $helpers = array('Html','Form','Session');
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo','AcknowledgementType','Quotation',
-                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby',
+                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby','Random',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
                         'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo','Logactivity','Datalog');
     
