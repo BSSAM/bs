@@ -5,7 +5,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title');
+                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random');
         public function index($id=NULL)
         {
         /*******************************************************
@@ -115,7 +115,9 @@
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
+                    
                     $quotationno    =   $this->request->data['Quotation']['quotationno'];
+                    $this->Random->updateAll(array('Random.quotation'=>'"'.$quotationno.'"'),array('Random.id'=>1));  
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
                     
                     $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));

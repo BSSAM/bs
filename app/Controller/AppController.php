@@ -252,7 +252,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.quotation'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.quotation'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 
                 // SalesOrder Random ID
@@ -272,7 +272,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.salesorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.salesorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 
                 // DeliveryOrder Random ID

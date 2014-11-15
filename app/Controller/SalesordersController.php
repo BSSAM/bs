@@ -3,7 +3,7 @@
     {
         public $helpers = array('Html','Form','Session','xls','Number');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Random',
                             'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog','InstrumentType','Title');
         public function index($id=NULL)
         {
@@ -120,6 +120,8 @@
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
                     $sales_orderid  =   $this->Salesorder->getLastInsertID();
+                    $this->Random->updateAll(array('Random.salesorder'=>'"'.$sales_orderid.'"'),array('Random.id'=>1));  
+                    
 //                    echo "SalesLast - ".$sales_orderid;
 //                    echo "<br>";
                     $create_quotation   =   $this->create_automatic_quotation($sales_orderid);
@@ -388,7 +390,7 @@
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
-                        
+                        $this->Random->updateAll(array('Random.salesorder'=>'"'.$sales_orderid.'"'),array('Random.id'=>1));  
                         if(!empty($this->request->data['Salesorder']['device_status']))
                         {
                             $device_node_pending    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.pending'=>1)));
