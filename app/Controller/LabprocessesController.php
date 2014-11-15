@@ -10,7 +10,7 @@ class LabprocessesController extends AppController
 {
     public $helpers =   array('Html','Form','Session');
     public $uses    =   array('Priority','Paymentterm','Quotation','Currency','Deliveryorder','Address','DelDescription','Logactivity',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Random',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Labprocess','branch','Datalog');
     public $components = array('RequestHandler');
      
@@ -228,6 +228,7 @@ class LabprocessesController extends AppController
                     {
                         
                        $last_id    =   $this->Deliveryorder->getLastInsertId();
+                       $this->Random->updateAll(array('Random.deliveryorder'=>'"'.$dmt.'"'),array('Random.id'=>1));  
                         $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$salesorder_list['Quotation']['id']));
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
                         
@@ -396,6 +397,7 @@ class LabprocessesController extends AppController
                     {
                         
                        $last_id    =   $this->Deliveryorder->getLastInsertId();
+                       $this->Random->updateAll(array('Random.deliveryorder'=>'"'.$dmt.'"'),array('Random.id'=>1));  
                         $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.id'=>$salesorder_list['Quotation']['id']));
                         $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.id'=>$salesorder_list['Salesorder']['id']));
                         

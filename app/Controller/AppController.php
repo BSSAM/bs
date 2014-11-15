@@ -175,7 +175,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 //Customer Tag Id
                 case 'tag':
@@ -194,7 +194,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.tag'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.tag'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 //Customer Group Id
                 case 'group':
@@ -213,7 +213,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.group'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.group'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 // Instrument Random ID
                 case 'instrument':
@@ -232,7 +232,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.instrument'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 
                 // Quotation Random ID
@@ -292,7 +292,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.deliveryorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.deliveryorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                  // Invoice Random ID
                 case 'invoice':

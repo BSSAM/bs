@@ -8,7 +8,7 @@
     class DeliveryordersController extends AppController
     {
         public $helpers = array('Html','Form','Session','xls','Number');
-        public $uses =array('Priority','Paymentterm','Quotation','Currency','DoDocument','PrepareInvoice',
+        public $uses =array('Priority','Paymentterm','Quotation','Currency','DoDocument','PrepareInvoice','Random',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice','DelDescription',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Datalog','Logactivity','Contactpersoninfo','Title');
         public function index($id=NULL)
@@ -111,6 +111,7 @@
                 {
                    
                     $del_last_id    =   $this->Deliveryorder->getLastInsertID();
+                    $this->Random->updateAll(array('Random.deliveryorder'=>'"'.$dmt.'"'),array('Random.id'=>1));  
                     $this->Salesorder->updateAll(array('Salesorder.is_deliveryorder_created'=>1),array('Salesorder.salesorderno'=>$this->request->data['Deliveryorder']['salesorder_id']));
                     $this->Quotation->updateAll(array('Quotation.is_deliveryorder_created'=>1),array('Quotation.quotationno'=>$delivery_before['Salesorder']['quotationno']));
                     $this->Description->updateAll(array('Description.is_deliveryorder_created'=>1),array('Description.salesorder_id'=>$this->request->data['Deliveryorder']['salesorder_id'],'Description.checking'=>1));

@@ -21,7 +21,7 @@ class InvoicesController extends AppController
         
         //******************* Salesorder Full Invoice *******************//
         $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_invoice_created'=>1),'order' => array('Salesorder.id' => 'DESC')));
-        pr($salesorder_list);exit;
+        //pr($salesorder_list);exit;
         $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0','Quotation.is_approved'=>1),'order' => array('Quotation.created' => 'ASC')));    
         
         //////////////////////////////////////////////////////////////////
