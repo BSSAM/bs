@@ -25,7 +25,7 @@ class InvoicesController extends AppController
         $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0','Quotation.is_approved'=>1),'order' => array('Quotation.created' => 'ASC')));    
         
         //////////////////////////////////////////////////////////////////
-        
+        //pr($this->Deliveryorder->find('all'));exit;
         $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1)),array('group' => 'Deliveryorder.quotationno'));
               //pr($prepareinvoice_approved_list);exit;
         $approved_order_list   =    $this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
