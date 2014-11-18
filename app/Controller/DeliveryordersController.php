@@ -479,21 +479,21 @@
                      /******************
                     * Data Log - Invoice
                     */
-                    $this->request->data['Logactivity']['logname'] = 'Invoice';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add';
-                    $this->request->data['Logactivity']['logid'] = $id;
-                    $this->request->data['Logactivity']['logno'] = $deliver_quotation;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-                    $this->Logactivity->create();
-                    $this->Logactivity->save($this->request->data['Logactivity']);
-
-                    $this->request->data['Datalog']['logname'] = 'Invoice';
-                    $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $deliver_quotation;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    $this->Datalog->create();
-                    $this->Datalog->save($this->request->data['Datalog']);
+//                    $this->request->data['Logactivity']['logname'] = 'Invoice';
+//                    $this->request->data['Logactivity']['logactivity'] = 'Add';
+//                    $this->request->data['Logactivity']['logid'] = $id;
+//                    $this->request->data['Logactivity']['logno'] = $deliver_quotation;
+//                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                    $this->request->data['Logactivity']['logapprove'] = 1;
+//                    $this->Logactivity->create();
+//                    $this->Logactivity->save($this->request->data['Logactivity']);
+//
+//                    $this->request->data['Datalog']['logname'] = 'Invoice';
+//                    $this->request->data['Datalog']['logactivity'] = 'Add';
+//                    $this->request->data['Datalog']['logid'] = $deliver_quotation;
+//                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+//                    $this->Datalog->create();
+//                    $this->Datalog->save($this->request->data['Datalog']);
 
                     /******************/ 
                 }
@@ -569,10 +569,10 @@
                 endif;
                 endforeach;
                 if($cou == 0):
-                    echo "<div class='delivery_no_result' align='left'>";
-                    echo "No Results Found";
-                    echo "<br>";
-                    echo "</div>";
+//                    echo "<div class='delivery_no_result' align='left'>";
+//                    echo "No Results Found";
+//                    echo "<br>";
+//                    echo "</div>";
                 else:
                 if($data_val['Customer']['deliveryordertype_id']==2):
                 $count = $count+1;

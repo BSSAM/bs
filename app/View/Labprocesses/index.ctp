@@ -325,7 +325,7 @@
             <div class="block text-center"><h4>SO Count</h4><p><code><?php echo $salesordercount; ?></code></p></div>
         </div>
         <div class="col-sm-3 col-lg-13">
-            <div class="block text-center"><h4>Total Qty</h4><p><code><?php echo $data_description_count; ?></code></p></div>
+            <div class="block text-center"><h4>Total Qty</h4><p><code><?php echo  $count_dimensional+$count_electrical+$count_pressure+$count_temperature+$count_miscel; ?></code></p></div>
         </div>
         <div class="col-sm-3 col-lg-13">
             <div class="block text-center"><h4>Pending Qty</h4><p><code><?php echo $data_pending_count; ?></code></p></div>
@@ -334,7 +334,7 @@
             <div class="block text-center"><h4>Processing Qty</h4><p><code><?php echo $data_processing_count; ?></code></p></div>
         </div>
         <div class="col-sm-3 col-lg-13">
-            <div class="block text-center"><h4>Checking Qty</h4><p><code><?php echo $data_checking_count; ?></code></p></div>
+            <div class="block text-center"><h4>Checking Qty</h4><p><code><?php echo $count_check_1+$count_check_2+$count_check_3+$count_check_4+$count_check_5; ?></code></p></div>
         </div>
         
         <div class="">

@@ -9,4 +9,10 @@
 class Logactivity extends AppModel
 {
     public $belongsTo    =array('User');
+//     public $hasOne = array(
+//        'Quotation' => array(
+//            'className' => 'Quotation',
+//            'foreignKey' => 'quotation_id',
+//            'dependent'=> true,
+//        ));
 }

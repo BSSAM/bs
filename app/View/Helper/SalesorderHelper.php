@@ -60,6 +60,7 @@ class SalesorderHelper extends AppHelper
     
     public function query_pending($id = null)
     {
+        APP::import('Model','Description');
         APP::import('Model','Salesorder');
         $this->Salesorder   =   new Salesorder();
         //$data_count_checking = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.checking" => 1))) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
@@ -71,6 +72,7 @@ class SalesorderHelper extends AppHelper
     }
     public function call_query_total($id = null,$call_loc=NULL)
     {
+        APP::import('Model','Description');
         if($call_loc=='all'):
             $conditions =    array('Description.is_deleted'=>0);
             else:
@@ -83,6 +85,7 @@ class SalesorderHelper extends AppHelper
     }
     public function call_query_checking($id = null,$call_loc=NULL)
     {
+        APP::import('Model','Description');
         $call_location  =   ($call_loc=='all')?'':$call_loc;
         APP::import('Model','Salesorder');
         $this->Salesorder   =   new Salesorder();
@@ -93,6 +96,7 @@ class SalesorderHelper extends AppHelper
     
     public function call_query_processing($id = null,$call_loc=NULL)
     {
+        APP::import('Model','Description');
         if($call_loc=='all'):
             $conditions =   array("Description.processing" => 1);
             else:
@@ -109,14 +113,17 @@ class SalesorderHelper extends AppHelper
     
     public function call_query_pending($id = null,$call_loc=NULL)
     {
+        APP::import('Model','Description');
         if($call_loc=='all'):
             $conditions =   array('AND'=>array("Description.processing" => 0,"Description.checking" => 0));
             else:
              $conditions =   array('AND'=>array("Description.processing" => 0,"Description.checking" => 0,"Description.sales_calllocation" =>$call_loc));
         endif;
         APP::import('Model','Salesorder');
+         
         $this->Salesorder   =   new Salesorder();
         $data_count_processing = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => $conditions,'Description.is_deleted'=>0)) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
+        //pr($data_count_processing[0]['Description']);exit;
         $data_count_total = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
         $pending = count($data_count_processing[0]['Description']);
         return $pending;
