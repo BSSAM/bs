@@ -89,7 +89,12 @@ var TablesDatatables = function() {
                 "iDisplayLength": 5,
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
-         
+            
+            $('#customer-contact-add').dataTable({
+//                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
+                "iDisplayLength": 5,
+                "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
+            });
 /***********************************************************************************************************/
             /* Add Bootstrap classes to select and input elements added by datatables above the table */
             $('.dataTables_filter input').addClass('form-control').attr('placeholder', 'Search');

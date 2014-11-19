@@ -33,6 +33,8 @@ class CustomersController extends AppController
         $this->set('customer', $Customer_lists);
         $this->Address->deleteAll(array('Address.status'=>0));
         $this->Projectinfo->deleteAll(array('Projectinfo.project_status'=>0));
+        $this->Contactpersoninfo->deleteAll(array('Contactpersoninfo.status'=>0));
+        
     }
     public function add()
     {

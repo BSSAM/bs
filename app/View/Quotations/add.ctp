@@ -91,6 +91,36 @@
                             <!-- END Basic Form Elements Block -->
                         </div>
     <?php echo $this->Html->script('pages/formsValidation'); ?>
-        <script>$(function(){ FormsValidation.init(); });</script>
+        <script>
+            $(function(){ 
+                FormsValidation.init();
+            });
+            $( "#form-quotation-add" ).submit(function() {
+                //alert('check');
+                var a  = $('#Quo-ins > tbody > tr').length;
+                if(a==1)
+                {
+                    alert('atleast one instrument is needed');
+                    return false;
+                }
+                else{
+                  return true;  
+                }
+                
+//                if ($("#customer-contact-add").dataTable().fnSettings().aoData.length == 0)
+//                {
+//                    alert("Atleast One Contact Person is needed");
+//                    $('#contact_name').focus();
+//                    $('.name_error').addClass('animation-slideDown');
+//                    $('.name_error').css('color','red');
+//                    $('.name_error').show();
+//                    return false;
+//                }
+//                else
+//                {
+//                     return true;
+//                }
+            });   
+        </script>
          
                         

@@ -7,8 +7,10 @@ $(document).ready(function(){
    /******************************Contact Person Submit*************************************/
     $('.name_error').hide();
     $('.email_error').hide();
+    
     $(document).on('click','.contactperson_submit',function()
     {
+        
         if($('#contact_name').val()=='')
         {
             $('.name_error').addClass('animation-slideDown');
@@ -35,7 +37,7 @@ $(document).ready(function(){
             data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile+"&customer_id="+customer_id+"&tag_id="+tag_id+"&serial_id="+serial+"&group_id="+group_id,
             url: path_url+'/customers/contact_person_add/',
             success:function(data){
-             
+                var table_name = $("#customer-contact-add").dataTable();
                  $('.contact_info_row').append('<tr class="contact_remove_'+data+'">\n\\n\
                                     <td class="text-center">'+customer_id+'</td>\n\
                                     <td class="text-center">'+contact_name+'</td>\n\\n\
@@ -51,6 +53,20 @@ $(document).ready(function(){
                                     <i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger contact_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
+                
+                table_name.fnDestroy();
+                table_name.dataTable();
+                
+                var update_size = function() {
+                    $(table_name).css({ width: $(table_name).parent().width() });
+                    table_name.fnAdjustColumnSizing();  
+                }
+
+                $(window).resize(function() {
+                    clearTimeout(window.refresh_size);
+                    window.refresh_size = setTimeout(function() { update_size(); }, 250);
+                });
+                
             }
         });
         $('#contact_email').val(null);
@@ -62,6 +78,7 @@ $(document).ready(function(){
         $('#contact_remark').val(null);
         $('.name_error').hide();
         $('.odd .dataTables_empty').hide();
+        
     });
     /******************************* Customer Contact person  Edit  *************************/
      $(document).on('click','.contactperson_edit',function(){
