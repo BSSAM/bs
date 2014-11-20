@@ -24,7 +24,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="del_attn">ATTN</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.attn', array('id'=>'del_attn','class'=>'form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select the Contact person name','readonly'=>'readonly')); ?>
+        <?php echo $this->Form->input('Deliveryorder.attn', array('id'=>'del_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select the Contact person name')); ?>
     </div>
     <label class="col-md-2 control-label" for="del_email">Email</label>
     <div class="col-md-4">

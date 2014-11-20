@@ -70,7 +70,7 @@
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Deliveryorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add')); ?>
+                                    <?php echo $this->Form->create('Deliveryorder',array('class'=>'form-horizontal form-bordered','id'=>'form-deliveryorder-add')); ?>
                                     <?php echo $this->Form->input('Deliveryorder.customer_id', array('type'=>'hidden','value'=>'')); ?>
                                     <?php echo $this->Form->input('Deliveryorder.salesorder_id', array('type'=>'hidden','value'=>'')); ?>
                                     <?php echo $this->Form->input('Deliveryorder.delivery_order_no', array('type'=>'hidden','value'=>$deliveryorderno)); ?>

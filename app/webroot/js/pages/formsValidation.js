@@ -1646,37 +1646,42 @@ var FormsValidation = function() {
 //                    
 //                }
 //            });
-
-            // Initialize Masked Inputs
-            // a - Represents an alpha character (A-Z,a-z)
-            // 9 - Represents a numeric character (0-9)
-            // * - Represents an alphanumeric character (A-Z,a-z,0-9)
-            $('#masked_date').mask('99/99/9999');
-            $('#masked_date2').mask('99-99-9999');
-            $('#masked_phone').mask('(999) 999-9999');
-            $('#masked_phone_ext').mask('(999) 999-9999? x99999');
-            $('#masked_taxid').mask('99-9999999');
-            $('#masked_ssn').mask('999-99-9999');
-            $('#masked_pkey').mask('a*-999-a999');
-        }
-    };
-    
-}();
-$(document).on('click','#form-poapp-view',function(){
-                var i = $('#ponumber[]').val();
-                alert(i);
-                return false;
-                if(i==='')
-                {
-                    alert('wrong');
-                }
-                else
-                {
-                    alert('right');
+$('#form-deliveryorder-add').validate({
+               errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.col-md-4 > div').append(error);
+                     
+                   // e.parents('.basic-wizard > tab').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.col-md-4').removeClass('has-success has-error');
+                    // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    "data[Deliveryorder][customer_address]": {
+                        required: true,
+                    },
+                   
+                   
+                },
+                messages: {
+                    "data[Deliveryorder][customer_address]": {
+                        required: 'Delivery Address is Required',
+                    }, 
+                    
+                    
+                    
                 }
                 
+                
             });
-            
             $('#form-deliveryorder-edit').validate({
                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
@@ -1713,3 +1718,35 @@ $(document).on('click','#form-poapp-view',function(){
                 
                 
             });
+            // Initialize Masked Inputs
+            // a - Represents an alpha character (A-Z,a-z)
+            // 9 - Represents a numeric character (0-9)
+            // * - Represents an alphanumeric character (A-Z,a-z,0-9)
+            $('#masked_date').mask('99/99/9999');
+            $('#masked_date2').mask('99-99-9999');
+            $('#masked_phone').mask('(999) 999-9999');
+            $('#masked_phone_ext').mask('(999) 999-9999? x99999');
+            $('#masked_taxid').mask('99-9999999');
+            $('#masked_ssn').mask('999-99-9999');
+            $('#masked_pkey').mask('a*-999-a999');
+        }
+    };
+    
+}();
+$(document).on('click','#form-poapp-view',function(){
+                var i = $('#ponumber[]').val();
+                alert(i);
+                return false;
+                if(i==='')
+                {
+                    alert('wrong');
+                }
+                else
+                {
+                    alert('right');
+                }
+                
+            });
+            
+            
+            

@@ -1691,6 +1691,20 @@ $html .='</tr>';
         }
     } 
         
+    public function get_contact_email()
+    {
+        $this->autoRender   =   false;
+        $id =  $this->request->data['cid'];
+        $email  =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.status'=>'1','Contactpersoninfo.id'=>$id),'fields'=>array('email')));
+        if(!empty($email))
+        {
+            echo $email['Contactpersoninfo']['email'];
+        }
+        else {
+            echo "";
+        }
+
+    }
         
 }
 

@@ -12,6 +12,19 @@ $(document).ready(function(){
     $('#delivery_input_search').blur(function(){
          $('#sales_list').fadeOut();
     })
+    $(document).on('change','#del_attn',function(){
+        //alert($(this).val());
+      var con_person =   $(this).val();
+        $.ajax({
+            type: 'POST',
+            data:"cid="+con_person,
+            url: path_url+'/Salesorders/get_contact_email/',
+            success:function(data){
+                
+                $('#del_email').val(data);
+            }
+        });
+   }); 
     $(document).on('click','.delivery_search',function()
     {
         var sales_id=$('#delivery_input_search').val();
@@ -30,6 +43,7 @@ $(document).ready(function(){
                 if(data!='failure')
                 {
                     sales_node = $.parseJSON(data);
+                    console.log(sales_node);
                     var del_address = '';
                     var count = 0;
                     $.each(sales_node.Quotation.Customer.Address,function(key,value){
@@ -68,7 +82,19 @@ $(document).ready(function(){
                     $('#del_fax').val(sales_node.Customer.fax);
                     $('#val_ref_no').val(sales_node.Salesorder.ref_no);
                     $('#val_our_ref_no').val(sales_node.Salesorder.our_ref_no);
-                    $('#del_attn').append('<option value="'+sales_node.Contactpersoninfo.id+'">'+sales_node.Contactpersoninfo.name+'</option>');
+                    
+                    $.each(sales_node.contact,function(key,value){
+                        //alert(sales_node.Salesorder.attn);
+                        $('#del_attn').append('<option value="'+value.Contactpersoninfo.id+'">'+value.Contactpersoninfo.name+'</option>');
+//                        if(key == (sales_node.Salesorder.attn).length - 1)
+//                        {
+                            //console.log(res.instrument_brand);
+                           // $('#val_brand').val(res.instrument_brand);
+                            
+//                        }
+                   
+                    });
+                     $('#del_attn option[value="'+sales_node.Salesorder.attn+'"]').prop('selected', true);
                     $.each(sales_node.Description,function(key,value){
                         if(value.checking == 1){
                         if(sales_node.Description.length===0)

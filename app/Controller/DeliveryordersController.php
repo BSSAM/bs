@@ -626,7 +626,7 @@
             $sales_id =  $this->request->data['sales_id'];
             $this->autoRender = false;
             $sales_data = $this->Salesorder->find('first',array('conditions'=>array('salesorderno'=>$sales_id,'Salesorder.is_approved'=>'1'),'recursive'=>'3'));
-            $contact_list   =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.customer_id'=>$sales_data['Customer']['id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
+            $contact_list['contact']   =   $this->Contactpersoninfo->find('all',array('conditions'=>array('Contactpersoninfo.customer_id'=>$sales_data['Customer']['id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
             //$this->set(compact('contact_list'));
             
             $sales_data= array_merge($sales_data, $contact_list);
