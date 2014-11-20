@@ -23,16 +23,16 @@
 
 
 $(document).ready(function(){
-                $(".controller").each(function(){
-                    vino = ($(this).is(":checked")) ? false : true;
-                    $(this).parents("tr").find(".controlled").prop("disabled", vino);
+    $(".controller").each(function(){
+        vino = ($(this).is(":checked")) ? false : true;
+        $(this).parents("tr").find(".controlled").prop("disabled", vino);
 
-                })
+    })
 
-                $(".controller").click(function(){
-                    vino = ($(this).is(":checked")) ? false : true;
-                    $(this).parents("tr").find(".controlled").prop("disabled", vino);
-                });
+    $(".controller").click(function(){
+        vino = ($(this).is(":checked")) ? false : true;
+        $(this).parents("tr").find(".controlled").prop("disabled", vino);
+    });
 });
 
    
