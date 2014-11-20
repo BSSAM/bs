@@ -1226,13 +1226,31 @@ var FormsValidation = function() {
                     sales_customername: {
                         required: true,
                         minlength: 1
-                }},
+                    },
+                    "data[Salesorder][ref_no]":{
+                        required: true,
+                    },
+                    "data[Salesorder][instrument_type_id]":{
+                        required: true,
+                    },
+                    "data[Salesorder][service_id]":{
+                        required: true,
+                    }
+                },
                 messages: {
                     sales_customername: {
                         required: 'Customer Name is Required',
                         minlength: 'Customer Name Should Aleast be 1 Characters'
+                    },
+                    "data[Salesorder][ref_no]":{
+                        required: 'Purchase Order No is Required',
+                    },
+                    "data[Salesorder][instrument_type_id]":{
+                        required: 'Instrument Type is Required',
+                    },
+                    "data[Salesorder][service_id]":{
+                        required: 'Service Type is Required',
                     }
-                    
                     
                 },
                 

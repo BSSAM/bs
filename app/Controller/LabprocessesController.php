@@ -167,7 +167,7 @@ class LabprocessesController extends AppController
             
             $data_description=  $this->get_solist_calllocation_details($solist,$call_location,$id);
                 //pr($data_description);exit;
-            $this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
+            //$this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
             
             //pr()
             $this->set('labs', $data_description);
@@ -337,7 +337,7 @@ class LabprocessesController extends AppController
         {
             $data_description=  $this->get_solist_calllocation_details($solist,$call_location,$id);
                 //pr($data_description);exit;
-            $this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
+            //$this->Description->updateAll(array('Description.processing' => 1), array('Description.salesorder_id' => $id));
             
             //pr()
             $this->set('labs', $data_description);
