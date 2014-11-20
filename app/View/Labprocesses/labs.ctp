@@ -21,6 +21,20 @@
 //    } );
 });
 
+
+$(document).ready(function(){
+                $(".controller").each(function(){
+                    vino = ($(this).is(":checked")) ? false : true;
+                    $(this).parents("tr").find(".controlled").prop("disabled", vino);
+
+                })
+
+                $(".controller").click(function(){
+                    vino = ($(this).is(":checked")) ? false : true;
+                    $(this).parents("tr").find(".controlled").prop("disabled", vino);
+                });
+});
+
    
 
 </script>                
@@ -54,22 +68,27 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <?php $count = 0;?>
                 <?php foreach ($labs as $labs_list): ?> 
+                <?php $count = $count +1;?>
                 <?PHP $description_id   =   $labs_list['Description']['id']; 
                        $processing=   'data[Description][processing]['.$description_id.']';
                        $checking=   'data[Description][checking]['.$description_id.']';
                       $checked  =   $this->Labprocess->labprocess_checking($labs_list['Description']['id']);
                       $processed =   $this->Labprocess->labprocess_processing($labs_list['Description']['id']);
+//                      echo $processed;
+//                      if($processed=='checked="checked"'):
+//                          $checked = $checked." disabled = ''";
+//                      endif;
                 ?>
                     <?php // pr($labs_list); exit;?>
                 <tr>
                     <td class="text-center"><?PHP echo $labs_list['Instrument']['name']; ?></td>
                     <td class="text-center"><?PHP echo $labs_list['Department']['departmentname']; ?></td>
                     <td class="text-center">
-                            <?PHP echo $this->Form->input('Description.processing', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $labs_list['Description']['salesorder_id'], 'name' => $processing,$processed)); ?></td>
+                            <?PHP echo $this->Form->input('Description.processing', array('label' => false, 'id' => 'processing'.$count, 'type' => 'checkbox', 'class' => 'controller '.$labs_list['Description']['salesorder_id'], 'name' => $processing,$processed)); ?></td>
                     <td class="text-center">
-                            <?PHP echo $this->Form->input('Description.checking', array('label' => false, 'id' => 'checking', 'type' => 'checkbox', 'class' => $labs_list['Description']['salesorder_id'], 'name' => $checking,$checked)); ?></td>
+                            <?PHP echo $this->Form->input('Description.checking', array('label' => false, 'id' => 'checking'.$count, 'type' => 'checkbox', 'class' => 'controlled '.$labs_list['Description']['salesorder_id'], 'name' => $checking,$checked)); ?></td> <!-- ,'disabled'=>'disabled' -->
                     <!--<td class="text-center"><?PHP //echo $this->Form->input('Description.checking',array('label'=>false,'id'=>'checking','type'=>'checkbox','class'=>$labs_list['Description']['salesorder_id']));   ?></td>-->
                     <td class="text-center edit_delay" id="<?PHP echo $labs_list['Description']['id']; ?>"><?PHP echo $labs_list['Description']['delay']; ?></td>
                 </tr>
