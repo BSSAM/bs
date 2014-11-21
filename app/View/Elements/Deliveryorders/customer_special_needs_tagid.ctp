@@ -6,7 +6,7 @@
     </div>
     <label class="col-md-2 control-label" for="del_service_type">Service Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.service_id', array('id'=>'del_service_type','class'=>'form-control','type'=>'select','options'=>$service,'label'=>false)); ?>
+        <?php echo $this->Form->input('Deliveryorder.service_id', array('id'=>'del_service_type','class'=>'form-control','type'=>'select','options'=>$service,'label'=>false,'empty'=>'Select Service Type')); ?>
         <div id="result">
         </div>
     </div>
@@ -19,6 +19,8 @@
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Brand</th>
+            <th class="text-center">Model No</th>
+            <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>

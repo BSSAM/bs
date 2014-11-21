@@ -75,7 +75,7 @@ $(function() {
     </div>
     <label class="col-md-2 control-label" for="del_service_type">Service Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.service_id', array('id'=>'del_service_type','class'=>'form-control','type'=>'select','options'=>$service,'label'=>false)); ?>
+        <?php echo $this->Form->input('Deliveryorder.service_id', array('id'=>'del_service_type','class'=>'form-control','type'=>'select','options'=>$service,'label'=>false,'empty'=>'Select Service Type')); ?>
         <div id="result">
         </div>
     </div>
@@ -112,6 +112,8 @@ $(function() {
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Brand</th>
+            <th class="text-center">Model No</th>
+            <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
@@ -162,6 +164,8 @@ $(function() {
                     <td class="text-center"><?PHP echo $device['id']; ?></td>
                     <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
                     <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
+                    <td class="text-center"><?PHP echo $device['model_no']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Range']['range_name']; ?></td>
                     <td class="text-center"><?PHP echo $device['delivery_calllocation']; ?></td>
                     <td class="text-center"><?PHP echo $device['delivery_calltype']; ?></td>
                     <td class="text-center"><?PHP echo $device['delivery_unitprice']; ?></td>

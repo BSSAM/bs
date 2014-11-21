@@ -61,10 +61,17 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.po_reference_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
     </div>
-<!--    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
+    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
     <div class="col-md-4">
-        <?php //echo $this->Form->input('Deliveryorder.our_reference_no', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
-    </div>-->
+        <?php echo $this->Form->input('Deliveryorder.our_reference_no', array('id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
+    <div class="col-md-12">
+        <?php echo $this->Form->input('Deliveryorder.instrument_type_id', array('id'=>'instrument_type_id','class'=>'form-control','type'=>'text',
+                                                'label'=>false,'readonly'=>'readonly','type'=>'select','empty'=>'Select the Instrument Type')); ?>
+    </div>
 </div>
 
 

@@ -1646,12 +1646,17 @@ var FormsValidation = function() {
 //                    
 //                }
 //            });
-$('#form-deliveryorder-add').validate({
-               errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+            $('#form-deliveryorder-add').validate({
+               ignore: ".ignore",
+                invalidHandler: function(e, validator){
+                    if(validator.errorList.length)
+                    $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+                },
+               
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
                     e.parents('.col-md-4 > div').append(error);
-                     
                    // e.parents('.basic-wizard > tab').append(error);
                 },
                 highlight: function(e) {
@@ -1660,14 +1665,16 @@ $('#form-deliveryorder-add').validate({
                 },
                 success: function(e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.col-md-4').removeClass('has-success has-error');
-                    // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
                     "data[Deliveryorder][customer_address]": {
                         required: true,
                     },
+                    "data[Deliveryorder][service_id]": {
+                        required: true,
+                    }
                    
                    
                 },
@@ -1675,7 +1682,9 @@ $('#form-deliveryorder-add').validate({
                     "data[Deliveryorder][customer_address]": {
                         required: 'Delivery Address is Required',
                     }, 
-                    
+                    "data[Deliveryorder][service_id]": {
+                        required: 'Service Type is Required',
+                    }
                     
                     
                 }

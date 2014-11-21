@@ -78,7 +78,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="8">
+                                        <td colspan="9">
                                             <div class="btn-group btn-group-md pull-right">
                                                 <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
                                             </div>

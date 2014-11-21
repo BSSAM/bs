@@ -81,20 +81,17 @@ $(document).ready(function(){
                     $('#del_phone').val(sales_node.Customer.phone);
                     $('#del_fax').val(sales_node.Customer.fax);
                     $('#val_ref_no').val(sales_node.Salesorder.ref_no);
-                    $('#val_our_ref_no').val(sales_node.Salesorder.our_ref_no);
-                    
+                    $('#val_our_ref_no').val(sales_node.Salesorder.id);
+                    $('#instrument_type_id').append('<option value="'+sales_node.Instrumentforgroup.id+'">'+sales_node.Instrumentforgroup.deliveryorder+'</option>');
+                    $('#instrument_type_id option[value="'+sales_node.Instrumentforgroup.id+'"]').prop('selected', true);
+                   // Instrumentforgroup
+                    // Contact Person Info
                     $.each(sales_node.contact,function(key,value){
-                        //alert(sales_node.Salesorder.attn);
                         $('#del_attn').append('<option value="'+value.Contactpersoninfo.id+'">'+value.Contactpersoninfo.name+'</option>');
-//                        if(key == (sales_node.Salesorder.attn).length - 1)
-//                        {
-                            //console.log(res.instrument_brand);
-                           // $('#val_brand').val(res.instrument_brand);
-                            
-//                        }
-                   
                     });
-                     $('#del_attn option[value="'+sales_node.Salesorder.attn+'"]').prop('selected', true);
+                    $('#del_attn option[value="'+sales_node.Salesorder.attn+'"]').prop('selected', true);
+                    ////////////////////// 
+                    
                     $.each(sales_node.Description,function(key,value){
                         if(value.checking == 1){
                         if(sales_node.Description.length===0)
@@ -108,10 +105,12 @@ $(document).ready(function(){
                             $('.delivery_instrument_node').append('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.id+'">\n\\n\
                                     <td class="text-center">'+value.id+'</td>\n\
-                                    <td class="text-center">'+value.Instrument.name+'</td>\n\\n\
+                                    <td class="text-center">'+value.Instrument.name+'</td>\n\\n\\n\
                                     <td class="text-center">'+value.Brand.brandname+'</td>\n\\n\
+                                    <td class="text-center">'+value.model_no+'</td>\n\\n\\n\
+                                    <td class="text-center">'+value.Range.range_name+'</td>\n\\n\
                                     <td class="text-center">'+value.sales_calllocation+'</td>\n\
-                                     <td class="text-center">'+value.sales_validity+'</td>\n\
+                                    <td class="text-center">'+value.sales_validity+'</td>\n\
                                     <td class="text-center">'+value.sales_unitprice+'</td>\n\\n\
                                     <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\
                                     <td class="text-center">'+value.sales_total+'</td>\n\

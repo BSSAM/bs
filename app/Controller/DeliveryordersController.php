@@ -211,10 +211,12 @@
         {
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$id),'recursive'=>2));
-            
+            $contact_name  =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.status'=>'1','Contactpersoninfo.customer_id'=>$deliveryorder['Deliveryorder']['customer_id']),'fields'=>array('id','name')));
+            //pr($contact_name);exit;
             ///////////// Delivery Address List //////////////////
             ////////////////////////////////////////////////////////////// Here//////////////////////////////////////
-            if($deliveryorder['Deliveryorder']['customer_address']==''):
+            //pr($deliveryorder['Deliveryorder']['customer_address']);exit;
+            //if($deliveryorder['Deliveryorder']['customer_address']==''):
                 $address_list = $deliveryorder['Customer']['Address'];
                 $count_del_addr = 0;
                 foreach($address_list as $address_delivery):
@@ -238,7 +240,8 @@
                     endforeach;
                     $this->set('address_register',$address_register);
                 endif;
-            endif;
+            //endif;
+           
             //pr($deliveraddress);exit;
             
             //----------------------------------------------------
@@ -269,7 +272,9 @@
             else:
                  $this->set('approval','manualdocount');
             endif;
-            $this->set(compact('service','deliveryorder'));
+            
+            //pr($deliveryorder);exit;
+            $this->set(compact('service','deliveryorder','contact_name'));
             
             //$con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['Quotation']['quotationno'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
             //pr($con);            

@@ -35,7 +35,7 @@
     <label class="col-md-2 control-label" for="del_attn">ATTN</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.attn', array('id'=>'del_attn',
-            'class'=>'form-control','label'=>false,'type'=>'select','options'=>array($contact),'selected'=>'selected')); ?>
+            'class'=>'form-control','label'=>false,'type'=>'select','options'=>$contact_name,'selected'=>'selected')); ?>
     </div>
     <label class="col-md-2 control-label" for="del_email">Email</label>
     <div class="col-md-4">
@@ -72,10 +72,10 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
     </div>
-<!--    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
+    <label class="col-md-2 control-label" for="val_our_ref_no">Our Reference Number</label>
     <div class="col-md-4">
-        <?php //echo $this->Form->input('Deliveryorder.our_reference_no', array('id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
-    </div>-->
+        <?php echo $this->Form->input('Deliveryorder.salesorder_id', array('id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly','type'=>'text')); ?>
+    </div>
     
 </div>
 
