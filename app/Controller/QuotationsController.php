@@ -631,19 +631,6 @@
             $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.id'=>$id));
             $user_id = $this->Session->read('sess_userid');
             $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
-            //pr($log);exit;
-            //$details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id)));
-//            $track_id = $details['Quotation']['track_id'];
-//            $customer_id = $details['Quotation']['customer_id'];
-//            $quo_id = $details['Quotation']['id'];
-//            $d=date("d");
-//            $m=date("m");
-//            $y=date("Y");
-//            $t=time();
-//            $dmt='CPO'.($d+$m+$y+$t);
-//            $clientpo_id = $dmt;
-//            $device_node    =   $this->Device->find('count',array('conditions'=>array('Device.quotation_id'=>$quo_id)));
-//            $this->Clientpo->save(array('quotation_no'=>$id,'quotation_id'=> $quo_id,'clientpos_no'=>$clientpo_id,'track_id'=>$track_id,'customer_id'=>$customer_id,'quo_quantity'=>$device_node));
         }
         public function get_contact_email()
         {

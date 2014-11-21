@@ -70,7 +70,19 @@ if(customer!='')
                                                     <?PHP echo $this->element('Quotations/edit/customer_special_needs'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab3" ng-app ng-controller="Quotationcontroller">
-                                                   <?PHP echo $this->element('Quotations/edit/description'); ?>
+                                                    <?PHP echo $this->element('Quotations/edit/description'); ?>
+                                                    <div class="form-group form-actions">
+                                                        <div class="col-md-9 col-md-offset-9">
+                                                            <?php if($user_role['app_quotation']['add'] == 1 && $quotations_list['Quotation']['is_approved']==0): ?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_quotation','escape' => false)); ?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Quotations','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                                            <?php else : ?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Quotations','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane" id="tab4">
                                                      <?PHP echo $this->element('Quotations/edit/file_upload'); ?>
@@ -78,16 +90,7 @@ if(customer!='')
                                             </div><!-- tab-content -->
                                             <!-- #basicWizard -->
                                         </div><!-- panel-body -->
-                                        <div class="form-group form-actions">
-                                            <div class="col-md-9 col-md-offset-10">
-                                                 <?php if($user_role['app_quotation']['add'] == 1 && $quotations_list['Quotation']['is_approved']==0): ?>
-                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_quotation','escape' => false)); ?>
-                                                <?php else : ?>
-                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Quotations','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
+                                        
                                         
                                     </div>
                                     <!-- panel -->

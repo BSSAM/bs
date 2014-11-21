@@ -82,8 +82,8 @@ $(document).ready(function(){
                     $('#del_fax').val(sales_node.Customer.fax);
                     $('#val_ref_no').val(sales_node.Salesorder.ref_no);
                     $('#val_our_ref_no').val(sales_node.Salesorder.id);
-                    $('#instrument_type_id').append('<option value="'+sales_node.Instrumentforgroup.id+'">'+sales_node.Instrumentforgroup.deliveryorder+'</option>');
-                    $('#instrument_type_id option[value="'+sales_node.Instrumentforgroup.id+'"]').prop('selected', true);
+                    $('#instrument_type_id').append('<option value="'+sales_node.Quotation.InstrumentType.id+'">'+sales_node.Quotation.InstrumentType.deliveryorder+'</option>');
+                    $('#instrument_type_id option[value="'+sales_node.Quotation.InstrumentType.id+'"]').prop('selected', true);
                    // Instrumentforgroup
                     // Contact Person Info
                     $.each(sales_node.contact,function(key,value){

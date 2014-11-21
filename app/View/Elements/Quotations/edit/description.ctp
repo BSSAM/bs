@@ -115,14 +115,14 @@ $("#search_cusinstrument").hide();
         $scope.edit_index = '';
         $scope.titles = [];
         //$scope.brand_id = '';
-        $('#val_description').prop('required', true);
-        $('#val_quantity').prop('required', true);
-        $('#val_model_no').prop('required', true);
-        $('#val_brand').prop('required', true);
-        $('#val_range').prop('required', true);
-        $('#val_call_location').prop('required', true);
-        $('#val_call_type').prop('required', true);
-        $('#val_account_service').prop('required', true);
+//        $('#val_description').prop('required', true);
+//        $('#val_quantity').prop('required', true);
+//        $('#val_model_no').prop('required', true);
+//        $('#val_brand').prop('required', true);
+//        $('#val_range').prop('required', true);
+//        $('#val_call_location').prop('required', true);
+//        $('#val_call_type').prop('required', true);
+//        $('#val_account_service').prop('required', true);
         //$('#val_description').prop('required', true);
         //$('#val_quantity').prop('required', true);
         //$("#val_description").attr("required","required");
@@ -1005,7 +1005,6 @@ $("#search_cusinstrument").hide();
     </thead>
     <tbody class="Instrument_info"> 
         <tr ng-repeat="res in instruments | filter:sss" ng-show="start<=$index && $index <= end">
-            
             <td>{{$index + 1}}</td>
             <td>{{res.name}}</td>
             <td>{{res.instrument_brand}}</td>

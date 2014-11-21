@@ -119,20 +119,22 @@ if(customer!='')
                                                  <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Salesorders/edit/customer_special_needs'); ?>
                                                 </div>
-                                                 <div class="tab-pane" id="tab3" ng-app ng-controller="Salesordercontroller">
+                                                <div class="tab-pane" id="tab3" ng-app ng-controller="Salesordercontroller">
                                                     <?PHP echo $this->element('Salesorders/edit/description'); ?>
-                                                     <div class="form-group form-actions">
-                                                         <div class="col-md-9 col-md-offset-10">
-                                                             <?php if ($user_role['app_salesorder']['add'] == 1 && $salesorder['Salesorder']['is_approved'] == 0): ?>
-                                                                 <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve', array('type' => 'button', 'class' => 'btn btn-sm btn-primary approve_salesorder', 'escape' => false)); ?>
-                                                             <?php else : ?>
-                                                                 <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
-                                                                 <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel', array('controller' => 'Salesorders', 'action' => 'index'), array('class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
-                                                             <?php endif; ?>
-                                                         </div>
-                                                     </div>
+                                                    <div class="form-group form-actions">
+                                                        <div class="col-md-9 col-md-offset-9">
+                                                            <?php if ($user_role['app_salesorder']['add'] == 1 && $salesorder['Salesorder']['is_approved'] == 0): ?>
+                                                                <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve', array('type' => 'button', 'class' => 'btn btn-sm btn-danger approve_salesorder', 'escape' => false)); ?>
+                                                                <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+                                                                <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel', array('controller' => 'Salesorders', 'action' => 'index'), array('class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                                                            <?php else : ?>
+                                                                <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+                                                                <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel', array('controller' => 'Salesorders', 'action' => 'index'), array('class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                 <?php echo $this->Form->end(); ?>
+                                                <?php echo $this->Form->end(); ?>
                                                 <div class="tab-pane" id="tab4">
                                                     <?PHP echo $this->element('Salesorders/edit/file_upload'); ?>
                                                 </div>
