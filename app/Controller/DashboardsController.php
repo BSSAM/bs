@@ -179,7 +179,7 @@ class DashboardsController extends AppController
         $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder")));
         $logactivity_deliveryorder_count1 = 0;
         $logactivity_deliveryorder_count2 = 0;
-        
+        $log_del = '';
         foreach($logactivity_deliveryorder as $delivery_details):
             
             $deli_no = $delivery_details['Logactivity']['logno'];
@@ -189,7 +189,7 @@ class DashboardsController extends AppController
                
                 $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
                 
-                $logactivity_deliveryorder_count1 = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
+                $logactivity_deliveryorder_count1 = $logactivity_deliveryorder_count1 + $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
             
             endif;
             
@@ -197,15 +197,15 @@ class DashboardsController extends AppController
                 
                 $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
                 
-                $logactivity_deliveryorder_count2 = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
+                $logactivity_deliveryorder_count2 = $logactivity_deliveryorder_count2 + $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
             
             endif;
-            
+            $log_del[] = $logactivity_deliveryorder;
         endforeach;
         
         $count = $logactivity_deliveryorder_count1 + $logactivity_deliveryorder_count2;
         
-        $this->set('log_activity_deliveryorder', $logactivity_deliveryorder);
+        $this->set('log_activity_deliveryorder', $log_del);
         $this->set('log_activity_deliveryorder_count', $count);
         
         /*****************************************************/

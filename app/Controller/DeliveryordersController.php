@@ -345,17 +345,12 @@
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
-            //pr($id);exit;
+            
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.delivery_order_no'=>$id),'recursive'=>2));
             $deliver_customer = $deliveryorder['Deliveryorder']['customer_id'];
             $deliver_quotation = $deliveryorder['Deliveryorder']['quotationno'];
             $deliver_salesorder = $deliveryorder['Deliveryorder']['salesorder_id'];
-            //pr($deliveryorder);exit;
             $customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
-            //$this->request->data['PrepareInvoice']['deliveryorder_id']=$id;
-            //$this->PrepareInvoice->save($this->request->data);
-            //pr($this->PrepareInvoice->find('all'));
-            //pr($customer);exit;
             $ack_type = $deliveryorder['Customer']['acknowledgement_type_id'];
             if($ack_type == 1)
             {
@@ -444,8 +439,8 @@
                 
                 
                 
-                $deliveryorder=$this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
-                $deliveryorder_count=$this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
+                $deliveryorder=$this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation,'Deliveryorder.is_approved'=>1),'recursive'=>2));
+                $deliveryorder_count=$this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation,'Deliveryorder.is_approved'=>1),'recursive'=>2));
                 $count_del = 0;
                 foreach($deliveryorder as $del_data):
                         if($del_data['Deliveryorder']['is_approved'] == 1):

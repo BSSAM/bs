@@ -181,7 +181,7 @@ class ClientposapprovalController extends AppController {
             $Find_po_count_satisfied = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
             
             $invoice_type = $Find_po_count_satisfied['Customer']['invoice_type_id'];
-           
+            $ack_type = $Find_po_count_satisfied['Customer']['acknowledgement_type_id'];
             
            /////////////////////////   Purchase Order Full Invoice  ////////////////////////////////////////////
             if($invoice_type == 1)
@@ -252,7 +252,7 @@ class ClientposapprovalController extends AppController {
                         $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>1),array('Salesorder.quotationno'=>$quotationno));
                         $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>1),array('Deliveryorder.quotationno'=>$quotationno));
                         // Log Activity Update
-                        $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2),array('Logactivity.logid'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
+                        $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2),array('Logactivity.logno'=>$quotationno,'Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
                         // Data Log
                         $this->Datalog->create();
                         $this->request->data['Datalog']['logname'] = 'ClientPO';
@@ -273,6 +273,7 @@ class ClientposapprovalController extends AppController {
             elseif($invoice_type == 3)
             {
                 $sales_data = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$quotationno,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
+                //$sales_data['Customer']['acknowledgement_type_id']
                 //pr($sales_data);exit;
 //                for($i=0;$i<count($sales_data);$i++)
 //                {
@@ -284,6 +285,7 @@ class ClientposapprovalController extends AppController {
                    }
 //                }
                 //echo $j;exit;
+                   
                 if($count == $j && $ponumber_check == 1):
                     
                     $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.quotationno'=>$quotationno));

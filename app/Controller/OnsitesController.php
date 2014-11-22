@@ -5,7 +5,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','OnsiteDocument','User','OnsiteEngineer','OnsiteInstrument','Onsite',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog');
+                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title');
         public function index()
         {
         /*******************************************************
@@ -46,7 +46,12 @@
             $onsite_no=$this->random('onsites');
             $track_id=$this->random('track');
             $user_list  =   $this->User->find('list',array('conditions'=>array('User.status'=>'1','User.is_deleted'=>0),'fields'=>array('emailid','full_name')));
-            
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             $this->set(compact('onsite_no','track_id','user_list'));
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
@@ -631,5 +636,24 @@
             
         }             
 
+        public function instrument()
+        {
+             $this->autoRender=false;
+            // = json_decode(file_get_contents("php://input"));
+            //pr($this->params['requested']);exit;
+            $this->request->data = json_decode(file_get_contents("php://input"));
+            $quo_id= $this->request->data->quo_id;
+            $this->loadModel('Device');
+            $edit_device_details    =   $this->Device->find('all',array('conditions'=>array('Device.quotationno'=>$quo_id,'Device.call_location'=>'onsite')));
+            foreach($edit_device_details as $edit_device):
+                $edit_device_val[]=$edit_device;
+            endforeach;
+           //pr($edit_device_val);exit;
+            if(!empty($edit_device_val ))
+            {
+                echo json_encode($edit_device_val);
+            }
+            
+        }
         
 }

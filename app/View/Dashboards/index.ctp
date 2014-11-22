@@ -419,7 +419,11 @@ $(document).on('click','.approve_invoice',function(){
                                     </thead>
                                         
                                     <tbody> 
-                                    <?php foreach ($log_activity_deliveryorder as $log_activity_deliveryorder_list) :?>
+                                    <?php 
+                                    //pr($log_activity_deliveryorder);
+                                    foreach ($log_activity_deliveryorder as $log_activity_deliveryorder_list1):
+                                         foreach ($log_activity_deliveryorder_list1 as $log_activity_deliveryorder_list):
+                                        ?>
                                     <?PHP if($log_activity_deliveryorder_list['Logactivity']['logname'] == 'Deliveryorder'): ?>
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-do.jpg', array('alt' => 'Delivery Order','class'=>'')); ?></td>
@@ -435,6 +439,7 @@ $(document).on('click','.approve_invoice',function(){
                                         </tr>
                                     <?php endif; ?>
                                     </tbody>
+                                    <?php endforeach; ?>
                                     <?php endforeach; ?>
                                     <?php else: ?>
                                     <tbody> 

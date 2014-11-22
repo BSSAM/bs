@@ -35,7 +35,7 @@
                     <!-- END Forms General Header -->
 
             <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" ng-app ng-controller="Quotationcontroller">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->
@@ -47,7 +47,7 @@
                                                     <input type="text" class="form-control" autoComplete='off' placeholder="Enter Quotation No" id="onsite_input_search"/>
                                                 </div>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-primary onsite_search" type="button">Proceed</button>
+                                                    <button class="btn btn-primary onsite_search" type="button" ng-click ="show_instrument()">Proceed</button>
                                                 </span>
                                             </div>
                                             <div id="onsite_list"></div>
