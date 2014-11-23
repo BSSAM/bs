@@ -220,6 +220,25 @@ class ClientposapprovalController extends AppController {
                         $this->Datalog->save($this->request->data['Datalog']);
                         
                         $this->Session->setFlash(__('Purchase Order Approved Successfully'));
+                        if($ack_type == 2):
+                            
+                                $this->request->data['Logactivity']['logname'] = 'Invoice';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $id;
+                                $this->request->data['Logactivity']['logno'] = $quotationno;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'Invoice';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $quotationno;
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+                            
+                        endif;
                     endif;
                     
                 else:
@@ -273,7 +292,7 @@ class ClientposapprovalController extends AppController {
             elseif($invoice_type == 3)
             {
                 $sales_data = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.quotationno'=>$quotationno,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
-                //$sales_data['Customer']['acknowledgement_type_id']
+                $ack_type = $sales_data['Customer']['acknowledgement_type_id'];
                 //pr($sales_data);exit;
 //                for($i=0;$i<count($sales_data);$i++)
 //                {
@@ -309,6 +328,25 @@ class ClientposapprovalController extends AppController {
                         $this->Datalog->save($this->request->data['Datalog']);
                         
                         $this->Session->setFlash(__('Purchase Order Approved Successfully'));
+                        if($ack_type == 2):
+                            
+                                $this->request->data['Logactivity']['logname'] = 'Invoice';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $id;
+                                $this->request->data['Logactivity']['logno'] = $quotationno;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'Invoice';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $quotationno;
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+                            
+                        endif;
                     endif;
                     
                 else:

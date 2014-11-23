@@ -130,4 +130,12 @@ class SalesorderHelper extends AppHelper
        
     }
     
+    public function quotation_ret($id = null)
+    {
+        APP::import('Model','Salesorder');
+        $this->Salesorder   =   new Salesorder();
+        $data_count = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
+        return count($data_count[0]['Description']);
+    }
+    
 }

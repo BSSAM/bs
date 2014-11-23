@@ -484,7 +484,7 @@ $(document).on('click','.approve_invoice',function(){
                                             <td class="text-center ">
                                            <?PHP if($log_activity_invoice_list['Logactivity']['logname'] == 'Invoice'){ ?>
                                             <?PHP //echo $this->html->link('Approve',array('controller'=>'Invoices','action'=>'approve',$log_activity_invoice_list['Logactivity']['logno']),array('class'=>'btn btn-xs btn-primary')) ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Invoice','action'=>'index'),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Invoices','action'=>'index'),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_invoice_list['User']['username'] ?><br><small><?PHP echo $log_activity_invoice_list['Logactivity']['created'] ?></small></td>
@@ -578,7 +578,7 @@ $(document).on('click','.approve_invoice',function(){
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-po.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_clientpo_list['Logactivity']['logname']; ?></strong></a> <br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['logactivity']; ?>   -  <em><?PHP echo $log_activity_clientpo_list['Logactivity']['logid']; ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_clientpo_list['Logactivity']['logname']; ?></strong></a> <br><small><?PHP echo $log_activity_clientpo_list['Logactivity']['logactivity']; ?>   -  <em><?PHP echo $log_activity_clientpo_list['Logactivity']['logno']; ?></em></small></h4>
                                             <input type="hidden" id="quo_po_app" value="<?PHP echo $log_activity_clientpo_list['Logactivity']['logid']; ?>">
                                             </td>
                                             <td class="text-center ">

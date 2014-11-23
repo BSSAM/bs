@@ -311,7 +311,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 case 'clientpo':
                   $random = $this->Random->find('first');
