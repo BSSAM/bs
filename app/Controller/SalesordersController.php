@@ -152,25 +152,25 @@
 //                    echo "<br>";
 //                   echo "Quotation - ".$create_quotation;
 //                   echo "<br>";
-                    $this->request->data['Logactivity']['logname']   =   'Salesorder';
-                    $this->request->data['Logactivity']['logactivity']   =   'Add SalesOrder';
-                    $this->request->data['Logactivity']['logid']   =   $this->request->data['Salesorder']['salesorderno'];
-                    $this->request->data['Logactivity']['logno']   =   $this->request->data['Salesorder']['salesorderno'];
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-                    $this->Logactivity->create();
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    //pr($a);exit;
-                    /******************/
-                    /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Salesorder';
-                    $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $this->request->data['Salesorder']['salesorderno'];
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    $this->Datalog->create();
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
+//                    $this->request->data['Logactivity']['logname']   =   'Salesorder';
+//                    $this->request->data['Logactivity']['logactivity']   =   'Add SalesOrder';
+//                    $this->request->data['Logactivity']['logid']   =   $this->request->data['Salesorder']['salesorderno'];
+//                    $this->request->data['Logactivity']['logno']   =   $this->request->data['Salesorder']['salesorderno'];
+//                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                    $this->request->data['Logactivity']['logapprove'] = 1;
+//                    $this->Logactivity->create();
+//                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+//                    //pr($a);exit;
+//                    /******************/
+//                    /******************
+//                    * Data Log Activity
+//                    */
+//                    $this->request->data['Datalog']['logname'] = 'Salesorder';
+//                    $this->request->data['Datalog']['logactivity'] = 'Add';
+//                    $this->request->data['Datalog']['logid'] = $this->request->data['Salesorder']['salesorderno'];
+//                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+//                    $this->Datalog->create();
+//                    $a = $this->Datalog->save($this->request->data['Datalog']);
                     
                     /******************/ 
                     
@@ -183,6 +183,7 @@
                     $this->request->data['Logactivity']['logactivity'] = 'Add Quotation';
                     $this->request->data['Logactivity']['logid'] = $create_quotation;
                     $this->request->data['Logactivity']['logno'] = $quotation_lists['Quotation']['quotationno'];
+                    $this->request->data['Logactivity']['loglink'] = $this->request->data['Salesorder']['salesorderno'];
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
                     $this->Logactivity->create();

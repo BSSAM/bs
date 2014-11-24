@@ -629,8 +629,40 @@
             $this->autoRender=false;
             $id =  $this->request->data['id'];
             $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.id'=>$id));
+            //$qo = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id));
+            
             $user_id = $this->Session->read('sess_userid');
-            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
+            $sales = $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation')));
+            if(!empty($sales['Logactivity']['loglink'])):
+                
+                $this->request->data['Logactivity']['logname']   =   'Salesorder';
+                $this->request->data['Logactivity']['logactivity']   =   'Add SalesOrder';
+                $this->request->data['Logactivity']['logid']   =   $sales['Logactivity']['loglink'];
+                $this->request->data['Logactivity']['logno']   =   $sales['Logactivity']['loglink'];
+                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                $this->request->data['Logactivity']['logapprove'] = 1;
+                $this->Logactivity->create();
+                $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                //pr($a);exit;
+                /******************/
+                /******************
+                * Data Log Activity
+                */
+                $this->request->data['Datalog']['logname'] = 'Salesorder';
+                $this->request->data['Datalog']['logactivity'] = 'Add';
+                $this->request->data['Datalog']['logid'] = $sales['Logactivity']['loglink'];
+                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                $this->Datalog->create();
+                $a = $this->Datalog->save($this->request->data['Datalog']);
+                
+                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
+                
+            else:
+                
+                $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
+            
+            endif;
+            
         }
         public function get_contact_email()
         {

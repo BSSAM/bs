@@ -164,6 +164,7 @@ class InvoicesController extends AppController
                 $ref_no_inv = $this->request->data['Invoice']['po_reference_no'];
                 $invoice_delivery      =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.ref_no'=>$ref_no_inv),'recursive'=>3));
                 $invoice_salesorder    =   $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.ref_no'=>$ref_no_inv),'recursive'=>3));
+                //pr($invoice_salesorder); exit;
                 $invoice_quotation    =   $this->Quotation->find('all',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.status'=>1,'Quotation.is_deleted'=>0,'Quotation.ref_no'=>$ref_no_inv),'recursive'=>3));
                 function imp1($imp)
                 {
@@ -184,10 +185,10 @@ class InvoicesController extends AppController
                 $quotation_id = imp1($quo_id);
 
                 foreach($invoice_salesorder as $sales):
-                    $sales_id[] = $quo['Salesorder']['id'];
+                    $sales_id[] = $sales['Salesorder']['id'];
                 endforeach;
                 $salesorder_no = imp1($sales_id); 
-
+                //pr($salesorder_no);exit;
 
                 foreach($invoice_quotation as $quotation):
                     $cus_id   = $quotation['Customer']['id'];
