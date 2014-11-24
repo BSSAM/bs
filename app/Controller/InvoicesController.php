@@ -42,7 +42,9 @@ class InvoicesController extends AppController
         //******************* Deliveryorder Full Invoice *******************//
         $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>4,'Deliveryorder.is_invoice_approved'=>0)));
         
-        $this->set(compact('prepareinvoice_approved_list','salesorder_list','quotation_lists','po_lists'));
+        $invoice_list =$this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
+        
+        $this->set(compact('prepareinvoice_approved_list','salesorder_list','quotation_lists','po_lists','invoice_list'));
     }
     
 //    public function prepare()
@@ -181,8 +183,9 @@ class InvoicesController extends AppController
                     $cus_id   = $quotation['Customer']['id'];
                     $cus_name = $quotation['Customer']['customername'];
                     $cus_invoice_type = $quotation['Customer']['invoice_type_id'];
+                    $ref_no_invoice[] = $quotation['Quotation']['ref_no'];
                 endforeach;
-
+                $ref_no_invoice_all = imp1($ref_no_invoice); 
 
 
             endif;
@@ -195,7 +198,7 @@ class InvoicesController extends AppController
 
                 $invoice_delivery      =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.salesorder_id'=>$salesorder_inv),'recursive'=>3));
                 //$invoice_salesorder    =   $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.status'=>1,'Salesorder.is_deleted'=>0,'Salesorder.id'=>$salesorder_inv),'recursive'=>3));
-                $invoice_quotation    =   $this->Quotation->find('all',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.status'=>1,'Quotation.is_deleted'=>0,'Quotation.ref_no'=>$this->request->data['Invoice']['track_id']),'recursive'=>3));
+                $invoice_quotation    =   $this->Quotation->find('all',array('conditions'=>array('Quotation.is_approved'=>1,'Quotation.status'=>1,'Quotation.is_deleted'=>0,'Quotation.track_id'=>$this->request->data['Invoice']['track_id']),'recursive'=>3));
                 function imp1($imp)
                 {
                     return implode(",", $imp);
@@ -221,7 +224,10 @@ class InvoicesController extends AppController
                     $cus_id   = $quotation['Customer']['id'];
                     $cus_name = $quotation['Customer']['customername'];
                     $cus_invoice_type = $quotation['Customer']['invoice_type_id'];
+                    $ref_no_invoice[] = $quotation['Quotation']['ref_no'];
                 endforeach;
+                $ref_no_invoice_all = imp1($ref_no_invoice);
+                
 
             endif;
 
@@ -230,17 +236,21 @@ class InvoicesController extends AppController
             $this->request->data['Invoice']['invoice_type_id'] = $this->request->data['Invoice']['full_type'];
             $this->request->data['Invoice']['deliveryorder_id'] = $deliveryorder_no;
             $this->request->data['Invoice']['salesorder_id'] = $salesorder_no;
+            $this->request->data['Invoice']['ref_no'] = $ref_no_invoice_all;
             $this->request->data['Invoice']['quotation_id'] = $quotation_no;
             $this->request->data['Invoice']['customer_id'] = $cus_id;
             $this->request->data['Invoice']['customername'] = $cus_name;
+            $this->request->data['Invoice']['is_approved'] = 1;
+            $this->request->data['Invoice']['approved_date'] = date('d-F-y');
+            
             
                 //pr($this->request->data);exit;
                 if($this->Invoice->save($this->request->data['Invoice']))
                 {
-                    pr($this->request->data['Invoice']);exit;
+                   // pr($this->request->data['Invoice']);exit;
                     //invoiceno
                     $invoice_id  =   $this->Invoice->getLastInsertID();
-                    $this->Random->updateAll(array('Random.invoice'=>'"'.$invoice_id.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.invoice'=>'"'.$dmt.'"'),array('Random.id'=>1));  
 
                     if($this->request->data['Invoice']['full_type'] == 1):
 
