@@ -163,7 +163,7 @@
                                         <th class="text-center">Model No</th>
                                         <th class="text-center">Range</th>
                                         <th class="text-center">Call Location</th>
-                                        <th class="text-center">Validity</th>
+                                        <th class="text-center">Call Type</th>
                                         <th class="text-center">Unit Price</th>
                                         <th class="text-center">Department</th>
                                         <th class="text-center">Total</th>
@@ -173,8 +173,11 @@
                                     <?PHP 
                                     //pr($deliveryorder['DelDescription']);exit;
                                     if(!empty($desc)):
+                                        $total_device = 0;
+                                        
                                         foreach($desc as $device):
                                         //pr($device);exit;
+                                        $total_device = $total_device + $device['sales_total'];
                                     ?>
                                         <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
                                             <td class="text-center"><?PHP echo $device['id']; ?></td>
@@ -195,7 +198,21 @@
                                     else:
                                         echo "<tr><td class='text-center'>No Records Found</td></tr>";
                                     endif;
+                                    $gst_total = ($total_device * $gst)/100;
                                     ?>
+                                        <tr>
+               <td colspan="9" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $total_device; ?></td>
+          </tr>
+          <tr>
+               <td colspan="9" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">GST ( <?php echo $gst; ?>%  )</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $gst_total; ?></td>
+          </tr>
+		   <tr>
+               <td colspan="9" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total; ?></td>
+          </tr>
+          
                                 </tbody>
                             </table>
                         </div>
@@ -395,7 +412,7 @@
                                         <th class="text-center">Model No</th>
                                         <th class="text-center">Range</th>
                                         <th class="text-center">Call Location</th>
-                                        <th class="text-center">Validity</th>
+                                        <th class="text-center">Call Type</th>
                                         <th class="text-center">Unit Price</th>
                                         <th class="text-center">Department</th>
                                         <th class="text-center">Total</th>
@@ -405,9 +422,11 @@
                                     <?PHP 
                                     //pr($deliveryorder['DelDescription']);exit;
                                     if(!empty($desc)):
+                                        $total_device = 0;
                                         foreach($desc as $devic):
                                         foreach($devic as $device):
                                         //pr($device);exit;
+                                        $total_device = $total_device + $device['total'];
                                     ?>
                                         <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
                                             <td class="text-center"><?PHP echo $device['id']; ?></td>
@@ -429,7 +448,21 @@
                                     else:
                                         echo "<tr><td class='text-center'>No Records Found</td></tr>";
                                     endif;
+                                    $gst_total = ($total_device * $gst)/100;
                                     ?>
+                                        <tr>
+               <td colspan="9" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $total_device; ?></td>
+          </tr>
+          <tr>
+               <td colspan="9" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">GST ( <?php echo $gst; ?>%  )</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $gst_total; ?></td>
+          </tr>
+		   <tr>
+               <td colspan="9" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total; ?></td>
+          </tr>
+          
                                 </tbody>
                             </table>
                         </div>

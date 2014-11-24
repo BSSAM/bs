@@ -75,6 +75,10 @@ class InvoicesController extends AppController
         $result_string = substr($id, 0, 3);
         if($result_string == 'BSO'):
             $salesorder_list = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_poapproved'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_invoice_created'=>1),'recursive'=>3));
+            $gst = $salesorder_list['Quotation']['Customerspecialneed']['gst'];
+            $currency = $salesorder_list['Quotation']['Customerspecialneed']['currency_value'];
+            $additional_charge = $salesorder_list['Quotation']['Customerspecialneed']['additional_service_value'];
+            $this->set(compact('gst','currency','additional_charge'));
             $delivery_lis = '';
             foreach($salesorder_list['Deliveryorder'] as $delivery):
                 $delivery_lis[] = $delivery['delivery_order_no'];
@@ -92,6 +96,7 @@ class InvoicesController extends AppController
                 $total = $total + $desc_total['sales_total'];
             endforeach;
             $this->set('total',$total);
+            
             $this->set('desc',$desc);
             
         elseif($result_string == 'BQS' || $result_string == 'BSQ'):
@@ -114,7 +119,12 @@ class InvoicesController extends AppController
             $deliveryorder_in_comma = implode(',',$delivery_lis);
             
             $po_list_first = $this->Quotation->find('first',array('conditions'=>array('Quotation.ref_no'=>$id,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_invoice_created'=>1),'recursive'=>3));
-            //pr($po_list_first);exit;
+            
+            $gst = $po_list_first['Customerspecialneed']['gst'];
+            $currency = $po_list_first['Customerspecialneed']['currency_value'];
+            $additional_charge = $po_list_first['Customerspecialneed']['additional_service_value'];
+            $this->set(compact('gst','currency','additional_charge'));
+            
             $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$po_list_first['Quotation']['attn'])));
             $this->set('contactperson',$contact_person['Contactpersoninfo']);
             $this->set('deliveryorderno',$deliveryorder_in_comma);
