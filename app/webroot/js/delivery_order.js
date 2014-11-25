@@ -238,8 +238,8 @@ $(document).ready(function(){
                // $(location).attr('href',url);
                 alert("Delivery Order Approval Successful");
                 window.location.reload();
-//                 console.log(data);
-//                 return false;
+              //   console.log(data);
+                // return false;
             }
         });
         

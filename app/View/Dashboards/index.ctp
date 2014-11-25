@@ -128,7 +128,7 @@ $(document).on('click','.approve_invoice',function(){
                                 else
                                 {
                                 ?>
-                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_quotation_count)+($log_activity_client_count)+($log_activity_prpur_count)+($log_activity_prman_count)+($log_activity_prsuper_count); ?></span></a></li>
+                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_quotation_count)+($log_activity_client_count)+($log_activity_prpur_count)+($log_activity_prman_count)+($log_activity_prsuper_count)+($log_activity_invoice_count); ?></span></a></li>
                                 <?php } 
                                 if($user_role['app_procedureno']['view'] == 0 && $user_role['app_brand']['view'] == 0 && $user_role['app_instrument']['view'] == 0 && $user_role['app_range']['view'] == 0 && $user_role['app_unit']['view'] == 0 ){ 
                                     //return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));

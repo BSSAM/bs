@@ -456,17 +456,20 @@
                 {
                     $salesorder_inv_type_3 = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$deliver_salesorder)));
                     $count_delivery_all = count($salesorder_inv_type_3['Description']);
+                    
                     $deliveryorder_desc = 0;
                     $del_order = '';
                     foreach($salesorder_inv_type_3['Deliveryorder'] as $del_inv_type_3_details ):
                         $del_order[] = $del_inv_type_3_details['id'];
                     endforeach;
                     foreach($del_order as $del_no_check):
+                        
                         $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$del_no_check,'Deliveryorder.is_approved'=>1),'recursive'=>2));
                         if(!empty($deliveryorder)):   
-                            $deliveryorder_desc = $deliveryorder_desc + $this->DelDescription->find('count',array('conditions'=>array('DelDescription.id'=>$del_no_check),'recursive'=>2));
+                            $deliveryorder_desc = $deliveryorder_desc + $this->DelDescription->find('count',array('conditions'=>array('DelDescription.deliveryorder_id'=>$del_no_check),'recursive'=>2));
                         endif; 
                     endforeach;
+                    
                     //echo $count_del;
                     
                     if($count_delivery_all == $deliveryorder_desc):

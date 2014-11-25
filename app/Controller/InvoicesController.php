@@ -285,7 +285,7 @@ class InvoicesController extends AppController
                     $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logno'=>$quo_no_list,'Logactivity.logactivity'=>'Add','Logactivity.logname' =>'Invoice'));
                     $this->request->data['Datalog']['logname'] = 'Invoice';
                     $this->request->data['Datalog']['logactivity'] = 'Approve';
-                    $this->request->data['Datalog']['logid'] = $quo_no_list;
+                    $this->request->data['Datalog']['logno'] = $quo_no_list;
                     $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                     $this->Datalog->create();
                     $this->Datalog->save($this->request->data['Datalog']);
