@@ -33,7 +33,7 @@
                                     </div>
                                     <label class="col-md-2 control-label" for="customer_instrument">Instrument Name</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name')); ?>
+                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name','empty'=>'Select Instrument Name')); ?>
                                         <?PHP echo $this->Form->input('in_id', array('type' => 'hidden', 'id' => 'in_id')); ?>
                                         <div class="instrument_result" style="display:none;"></div>
                                     </div>

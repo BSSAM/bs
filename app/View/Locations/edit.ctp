@@ -26,7 +26,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_locaionname">Industry Name</label>
+                                        <label class="col-md-2 control-label" for="val_locaionname">Location Name</label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('locationname', array('id'=>'val_locationname','class'=>'form-control','placeholder'=>'Enter the Location Name','label'=>false,'name'=>'locationname')); ?>
                                         </div>

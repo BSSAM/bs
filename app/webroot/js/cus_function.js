@@ -28,13 +28,13 @@ $(document).ready(function(){
     });
     $(document).on('click','.customerinstrument_add',function(){
        
-//        if($('#instrument_name').val()=='')
-//        {
-//            $('.instrument_name').addClass('animation-slideDown');
-//            $('.instrument_name').css('color','red');
-//            $('.instrument_name').show();
-//            return false;
-//        }
+        if($('#customer_instrument').val()=='')
+        {
+            $('.customer_instrument').addClass('animation-slideDown');
+            $('.customer_instrument').css('color','red');
+            $('.customer_instrument').show();
+            return false;
+        }
         var range   =   $('#range_array').val();
         var customer_id =   $('#CustomerInstrumentCustomerId').val();
         var instrument_id   =   $('#in_id').val();
