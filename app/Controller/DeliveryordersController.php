@@ -547,7 +547,9 @@
             }
             else
             {
-                $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y','now')),array('Deliveryorder.delivery_order_no'=>$id,'Customer.acknowledgement_type_id'=>3));
+                $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>'"'.date('d-F-y').'"'),array('Deliveryorder.delivery_order_no'=>$id));
+                
+                //$this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>'"'.date('d-F-y').'"'),array('Deliveryorder.delivery_order_no'=>$id));
                 $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1,'Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
                 $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1,'Salesorder.is_delivery_approved'=>1),array('Salesorder.id'=>$deliver_salesorder));
                 

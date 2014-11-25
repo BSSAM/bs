@@ -184,7 +184,8 @@ class DashboardsController extends AppController
             
             $deli_no = $delivery_details['Logactivity']['logno'];
             $deliveryorder=$this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.delivery_order_no'=>$deli_no),'recursive'=>2));
-            
+            //pr($deli_no); 
+            $logactivity_deliveryorder = '';
             if($deliveryorder['Deliveryorder']['is_poapproved']==1 && $deliveryorder['Customer']['acknowledgement_type_id']==1):
                
                 $logactivity_deliveryorder = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
@@ -200,12 +201,14 @@ class DashboardsController extends AppController
                 $logactivity_deliveryorder_count2 = $logactivity_deliveryorder_count2 + $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Deliveryorder",'Logactivity.logno'=>$deli_no)));
             
             endif;
+            //pr($logactivity_deliveryorder);
             $log_del[] = $logactivity_deliveryorder;
         endforeach;
         
         $count = $logactivity_deliveryorder_count1 + $logactivity_deliveryorder_count2;
-        
-        $this->set('log_activity_deliveryorder', $log_del);
+        //pr($log_del);
+        //exit;
+        $this->set('log_activity_deliveryorder', array_filter($log_del));
         $this->set('log_activity_deliveryorder_count', $count);
         
         /*****************************************************/
