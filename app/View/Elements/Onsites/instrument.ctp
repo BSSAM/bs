@@ -94,7 +94,7 @@ $("#search_cusinstrument").hide();
 //    });
     
 
-    function Quotationcontroller($scope, $timeout, $http)
+    function Onsitecontroller($scope, $timeout, $http)
     {
         $scope.show_title1 = false;
         $scope.show_title2 = false;

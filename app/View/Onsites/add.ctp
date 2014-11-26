@@ -35,7 +35,7 @@
                     <!-- END Forms General Header -->
 
             <div class="row">
-                        <div class="col-md-12" ng-app ng-controller="Quotationcontroller">
+                        <div class="col-md-12" ng-app ng-controller="Onsitecontroller">
                             <!-- Basic Form Elements Block -->
                             <div class="block">
                                 <!-- Basic Form Elements Title -->

@@ -954,12 +954,13 @@
 <head>
 <meta charset="utf-8" />
 <title>'.$quotation_data['Quotation']['quotationno'].'</title>
+<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
 <style>
-* { margin:0; padding:0; }
-table td { font-size:13px; }
-
-.table_format table { border:1px solid #000; border-bottom:none; border-left:none; }
-.table_format td { border-bottom:1px solid #000; padding:10px; text-align:center; border-left:1px solid #000; }
+* { margin:0; padding:0; font-size:11px; color:#333 !important; }
+table td { font-size:11px; line-height:18px; }
+.table_format table { }
+.table_format td { text-align:center; }
 </style>
 </head>';
  $title =   $this->Title->find('all');
@@ -987,77 +988,88 @@ table td { font-size:13px; }
                 endforeach;
                
 $html .=
-'<body style="font-family:Arial, Helvetica, sans-serif;font-size:13px;padding:10px;margin:0;">
-<div style="float:left;"></div>
-<div style="float:right;text-align:right;">
-     <p>41 Senoko Drive</p>
-     <p>Singapore 758249</p>
-     <p>Tel.+65 6458 4411</p>
-     <p>Fax.+65 64584400</p>
-     <p style="padding-bottom:20px;">www.bestandards.com<</p>
-</div>
-<div style="display:inline-block;font-size:17px;font-weight:bold;width:40%;">QUOTATION</div>
-<div style="display:inline-block;background:#313854;color:#fff;width:60%;padding:5px;font-size:12px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
-<div style="width:100%;margin-top:30px;float:left;">
-     <table cellpadding="1" cellspacing="1"  style="width:100%;">
+'<body style="font-family:Oswald, sans-serif;font-size:11px;padding:10px;margin:0;font-weight: 300;">
+<table width="700px">
+     <tr>
+          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="../webroot/img/LOGO.png" width="400;" height="auto" alt="" /></div></td>
+          <td style="padding:0 10px;"><div style="float:left;text-align:right;">
+                    <p>41 Senoko Drive</p>
+                    <p>Singapore 758249</p>
+                    <p>Tel.+65 6458 4411</p>
+                    <p>Fax.+65 64584400</p>
+                    <p>www.bestandards.com</p>
+               </div></td>
+     <tr>
+</table>
+<table width="623" height="56">
+     <tr>
+          <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">QUOTATION</div></td>
+          <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+     </tr>
+</table>
+<div style="width:100%;margin-top:10px;float:left;">
+     <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
           <tr>
-               <td style="border:1px solid #000;padding:5px;width:50%;"><table cellpadding="0" cellspacing="0">
+               <td width="47%" style="border:1px solid #000;padding:5px;"><table width="288" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td>'.$customername.'</td>
+                              <td width="128" colspan="3" height="10px" style="font-size:11px !important;">'.$customername.'</td>
+                         </tr> 
+                        <tr>
+                              <td colspan="3" height="10px" style="font-size:11px !important;">'.$billing_address.'</td>
                          </tr>
-                         <tr>
-                              <td>'.$billing_address.'</td>
-                         </tr>
-						 <tr>
+                        <tr>
                               <td>'.$postalcode.'</td>
                          </tr>
                          <tr  style="padding-top:30px;">
-                              <td>ATTN </td>
-                              <td>:</td>
-                              <td>'.$contactperson.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">ATTN </td>
+                              <td width="29">:</td>
+                              <td width="145" style="line-height:20px !important;font-size:11px !important;">'.$contactperson.'</td>
                          </tr>
                          <tr>
-                              <td>TEL </td>
-                              <td>:</td>
-                              <td> '.$phone.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">TEL </td>
+                              <td width="29">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$phone.'</td>
                          </tr>
                          <tr>
-                              <td>FAX </td>
-                              <td>:</td>
-                              <td> '.$fax.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">FAX </td>
+                              <td width="29">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$fax.'</td>
                          </tr>
                          <tr>
-                              <td>EMAIL</td>
-                              <td> :</td>
-                              <td> '.$email.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">EMAIL </td>
+                              <td width="29">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$email.'</td>
+                         </tr>
+                         
+                    </table></td>
+                    <td width="3%"></td>
+               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$quotationno.'</div></td>
+                         </tr>
+                         <tr>
+                              <td width="139" style="line-height:10px !important;padding-left:5px;font-size:11px !important;">SALES PERSON </td>
+                              <td width="24" style="font-size:11px !important;">:</td>
+                              <td width="109" style="line-height:10px !important;font-size:11px !important;">Mr.Padma</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;padding-left:5px;font-size:11px !important;">YOUR REF NO </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$ref_no.'</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;padding-left:5px;font-size:11px !important;"> DATE </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$reg_date.'</td>
+                         </tr>
+                         <tr>
+                              <td  style="line-height:20px !important;padding-left:5px;font-size:11px !important;">PAYMENT TERMS </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$payment_term.'</td>
                          </tr>
                     </table></td>
-               <td style="border:1px solid #000;padding:5px;width:50%;"><table cellpadding="0" cellspacing="0">
-                         <tr>
-                              <td style="font-size:24px;font-weight:bold;">'.$quotationno.'</td>
-                         </tr>
-                         <tr  style="padding-top:30px;">
-                              <td>SALES PERSON </td>
-                              <td>:</td>
-                              <td>Mr.Padma</td>
-                         </tr>
-                         <tr>
-                              <td>YOUR REF NO (PO) </td>
-                              <td>:</td>
-                              <td> '.$ref_no.'</td>
-                         </tr>
-                         <tr>
-                              <td>DATE </td>
-                              <td>:</td>
-                              <td> '.$reg_date.'</td>
-                         </tr>
-                         <tr>
-                              <td>PAYMENT TERMS</td>
-                              <td> :</td>
-                              <td>'.$payment_term.'</td>
-                         </tr>
-                    </table></td>
-          </tr>
+               <td width="2%"></td>
+            </tr>
      </table>
 </div>
 <div style="padding-top:10px;">Being provided calibration service of the following(s) :</div>

@@ -312,8 +312,8 @@
                          $this->set('instrument_type',$instrument_type);
                          //pr($this->request->data['Salesorder']['quotationno']);
                          //pr($this->request->data['Salesorder']['salesorderno']);
-                         $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>0)));
-                         $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$dmt.'"'),array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>0));
+                         $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>1)));
+                         $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$dmt.'"'),array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>1));
                         // pr($edit_device_details_check);exit;
                          //pr($sales['Description']);exit;
 //                         foreach($sales['Description'] as $sale):
@@ -397,7 +397,7 @@
                             $device_node_pending    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.pending'=>1)));
                             if(!empty($device_node_pending))
                             {
-                                $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1,'Description.pending'=>0),array('Description.customer_id'=>$customer_id,'Description.pending'=>1));
+                                $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>1,'Description.pending'=>0),array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.customer_id'=>$customer_id,'Description.pending'=>1));
                             }
                             $this->Quotation->updateAll(array('Quotation.salesorder_created'=>1),array('Quotation.id'=>$quotation_id));
                         }
@@ -899,7 +899,7 @@
             }
             else
             {
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1,'Description.is_deleted'=>0)));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>0,'Description.is_deleted'=>0)));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach; 

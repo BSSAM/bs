@@ -62,7 +62,12 @@ class RangesController extends AppController
         {
             $unit_id    =   $this->request->data['unit_id'];
             $unit_array =   $this->Unit->find('first',array('conditions'=>array('Unit.id'=>$unit_id,'Unit.status'=>'1','Unit.is_approved'=>'1'),'fields'=>array('id','unit_name')));
-            $range_name =   "(".$this->request->data['from_range']."~".$this->request->data['to_range'].")/".$unit_array['Unit']['unit_name'];
+            if($this->request->data['to_range']!="0"):
+                $range_name =   "(".$this->request->data['from_range']."~".$this->request->data['to_range'].")/".$unit_array['Unit']['unit_name'];
+            else:
+                $range_name =   $this->request->data['from_range']." ".$unit_array['Unit']['unit_name'];             
+            endif;
+            
             $this->request->data['range_name']=$range_name;
             
             if($this->Range->save($this->request->data))

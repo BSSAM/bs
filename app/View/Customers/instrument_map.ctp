@@ -114,7 +114,7 @@
                 </div>
                                 <div class="form-group form-actions">
                                     <div class="col-md-9 col-md-offset-10">
-                                        <?php echo $this->Html->link('Back to Customers', array('controller' => 'Customers', 'action' => 'index'), array('class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+                                        <?php echo $this->Html->link('Submit', array('controller' => 'Customers', 'action' => 'index'), array('class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
                                     </div>
                                 </div>
 <!--    <?php //echo $this->Html->script('pages/instrumentsvalidation'); ?>
