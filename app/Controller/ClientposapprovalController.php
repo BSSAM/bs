@@ -34,6 +34,7 @@ class ClientposapprovalController extends AppController {
         $this->set('title_name',$q_class);
         //pr($q_class);
         $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$q_id,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+        $this->set('total_inst',$data['Quotation']['total_inst']);
         //pr($data);exit;
         $sales_data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotation_id'=>$q_id,'Salesorder.is_deleted'=>0),'fields'=>array('salesorderno')));
         //pr($sales_data['Salesorder']['is_deliveryorder_created']);exit;
@@ -150,9 +151,11 @@ class ClientposapprovalController extends AppController {
     public function quotation_po_update()
     {
         $this->autoRender=false;
+        //pr($this->request->data); exit;
+        
         if($this->request->is('post')){
-            //pr($this->request->data);
             $po_full_invoice_ref_no = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['quotationno'],'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1)));
+            //$this->set('total_inst',$po_full_invoice_ref_no['Quotation']['total_inst']);
             function sum($carry, $item)
             {
             $carry += $item;
@@ -197,6 +200,13 @@ class ClientposapprovalController extends AppController {
                       //echo $j;
                    }
                 }
+                ///////////// Total Instrument //////////////////////
+            
+                $this->Quotation->updateAll(array('Quotation.total_inst'=>$this->request->data['total_inst']),array('Quotation.ref_no'=>$ref_no_old));
+                $this->Salesorder->updateAll(array('Salesorder.total_inst'=>$this->request->data['total_inst']),array('Salesorder.ref_no'=>$ref_no_old));
+                $this->Deliveryorder->updateAll(array('Deliveryorder.total_inst'=>$this->request->data['total_inst']),array('Deliveryorder.ref_no'=>$ref_no_old));
+
+                ////////////////////////////////////////////////////
                // echo $j;
                 if($count == $j && $ponumber_check == 1):
                     $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.ref_no'=>$ref_no_old));
@@ -304,6 +314,11 @@ class ClientposapprovalController extends AppController {
                    }
 //                }
                 //echo $j;exit;
+                $this->Quotation->updateAll(array('Quotation.total_inst'=>$this->request->data['total_inst']),array('Quotation.quotationno'=>$quotationno));
+                $this->Deliveryorder->updateAll(array('Deliveryorder.total_inst'=>$this->request['total_inst']),array('Deliveryorder.quotationno'=>$quotationno));
+                $this->Salesorder->updateAll(array('Salesorder.total_inst'=>$this->request->data['total_inst']),array('Salesorder.quotationno'=>$quotationno));   
+                   
+                   
                    
                 if($count == $j && $ponumber_check == 1):
                     

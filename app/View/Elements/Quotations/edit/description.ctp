@@ -479,6 +479,8 @@ $("#search_cusinstrument").hide();
             var instrument_modelno=$('#val_model_no').val();
             var instrument_brand=$('#val_brand').val();
             var instrument_range=$('#val_range').val();
+            var instrument_br_disp=$('#val_brand option:selected').text();
+            var instrument_ra_disp=$('#val_range option:selected').text();
             var instrument_calllocation=$('#val_call_location').val();
             var instrument_calltype=$('#val_call_type').val();
             var instrument_validity=$('#val_validity').val();
@@ -490,8 +492,8 @@ $("#search_cusinstrument").hide();
             var instrument_department=$('#val_department_id').val();
             var instrument_account=$('#val_account_service').val();
             var instrument_title=$('#val_title').val();
-             
-            
+            //console.log(val_brand);
+            //console.log(val_range);
                 $http.post(path_url+'Quotations/update_instrument/', {
                     device_id:$scope.edit_id,
                     instrument_quantity:instrument_quantity,
@@ -523,9 +525,9 @@ $("#search_cusinstrument").hide();
                         $scope.instruments[$scope.edit_index]['model']=instrument_modelno;
                         $scope.instruments[$scope.edit_index]['location']=instrument_calllocation;
                         $scope.instruments[$scope.edit_index]['type']=instrument_calltype;
-                        $scope.instruments[$scope.edit_index]['instrument_brand']=instrument_brand;
+                        $scope.instruments[$scope.edit_index]['instrument_brand']=instrument_br_disp;
                         $scope.instruments[$scope.edit_index]['validity']=instrument_validity;
-                        $scope.instruments[$scope.edit_index]['instrument_range']=instrument_range;
+                        $scope.instruments[$scope.edit_index]['instrument_range']=instrument_ra_disp;
                         $scope.instruments[$scope.edit_index]['price']=instrument_unitprice;
                         $scope.instruments[$scope.edit_index]['service']=instrument_account;
                         $scope.instruments[$scope.edit_index]['total']=instrument_total;

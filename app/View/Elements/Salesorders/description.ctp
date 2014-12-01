@@ -170,7 +170,7 @@ $("#search_cusinstrument").hide();
                 var instrument_title=$('#val_title').val();
 
 
-                    $http.post(path_url+'Salesorders/sales_add_instrument/',{
+                    $http.post(path_url+'Salesorders/sales_add_instrument_2/',{
                         instrument_quantity:instrument_quantity,
                         "instrument_validity":instrument_validity,
                         "customer_id":customer_id,
@@ -194,8 +194,8 @@ $("#search_cusinstrument").hide();
                     }).success(function(data){
                         //alert(data);
                         $.each(data,function(k,v){
-                            console.log(k);
-                            console.log(v);
+                            //console.log(k);
+                            //console.log(v);
                             //,"id":k
                             $new_data = {serial:v,customer_id:customer_id,salesorder_id:salesorder_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,"instrument_brand_text":instrument_brand_text,"instrument_range_text":instrument_range_text,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
                             $scope.instruments.push($new_data);

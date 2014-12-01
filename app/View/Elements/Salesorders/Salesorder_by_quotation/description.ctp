@@ -105,7 +105,7 @@
             $http.post(path_url+'Salesorders/instrument/',{
                         sales_id:sales_id,quo_id:quo_id,
                     }).success(function(data){
-                        //console.log(data);
+                       // console.log(data);
                         $.each(data,function(k,v){
                             //console.log(k);
                             //console.log(v);
@@ -134,6 +134,8 @@
                                 total:v.Description.total,
                                 "instrument_discount":v.Description.discount,
                                 "instrument_department":v.Department.departmentname,
+                                "department":v.Department.departmentname,
+                                "department_id":v.Department.id,
                                 "title1_val":v.Description.title1_val,
                                 "title2_val":v.Description.title2_val,
                                 "title3_val":v.Description.title3_val,
@@ -270,6 +272,7 @@
                 var customer_id =   $('#SalesorderCustomerId').val();
                 var salesorder_id =   $('#SalesorderSalesorderId').val();
                 var instrument_id   =   $('#SalesorderInstrumentId').val();
+                var device_id = $('#device_id').val();
                 var instrument_quantity =   $('#sales_quantity').val();
                 var instrument_name=$('#val_instrument').val();
                 var instrument_modelno=$('#val_model_no').val();
@@ -295,6 +298,7 @@
                         "instrument_validity":instrument_validity,
                         "customer_id":customer_id,
                         "instrument_id":instrument_id,
+                        "device_id":device_id,
                         instrument_name:instrument_name,
     //                    "instrument_quantity":instrument_quantity,
                         "instrument_brand":instrument_brand,
@@ -312,10 +316,12 @@
                         "instrument_total":instrument_total,
                         "salesorder_id":salesorder_id
                     }).success(function(data){
-                        //alert(data);
+                        alert(data);
+                        //console.log(data);
                         $.each(data,function(k,v){
-                            console.log(k);
-                            console.log(v);
+                           // console.log(k);
+                           // console.log(v);
+                            return false;
                             //,"id":k
                             $new_data = {serial:v,customer_id:customer_id,salesorder_id:salesorder_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,"instrument_brand_text":instrument_brand_text,"instrument_range_text":instrument_range_text,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
                             $scope.instruments.push($new_data);
@@ -503,7 +509,7 @@
                     "instrument_title":instrument_title,
                     "salesorder_id":salesorder_id
                 }).success(function(data){
-                            //console.log(data);
+                    //console.log(data);
                     //return false;
                     
                     $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,salesorder_id:salesorder_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,"instrument_brand_text":instrument_brand_text,"instrument_range_text":instrument_range_text,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
@@ -631,7 +637,7 @@
        $scope.edit_instrument = function(index)
        {
             res = $scope.instruments[index];
-            //console.log(res); return false;
+            //console.log(res); 
             $scope.mode = 'edit';
             var brand = res.instrument_brand;
             $scope.edit_id = res.serial;
@@ -642,19 +648,16 @@
             //alert(customer_id);
             $http.post(path_url+'Salesorders/get_brand_value_edit/',{"instrument_id":instrument_id,"customer_id":customer_id}).success(function(data)
             {
-               // alert(instrument_id);
-                //console.log(data);
-               /// parsedata = $.parseJSON(data);
+               
                 var dept    =   data.Instrument;
                 $('#val_brand').empty().append('<option value="">Select Brand Name</option>');
-//                $('#val_range').empty().append('<option value="">Select Range</option>');
+
                 $.each(data.Instrument.InstrumentBrand, function(k, v)
                 {
                      $('#val_brand').append('<option value="'+v.Brand.id+'">'+v.Brand.brandname+'</option>');
                      
                      if(k == (data.Instrument.InstrumentBrand).length - 1)
                      {
-                        //console.log(res.instrument_brand);
                         $('#val_brand').val(res.instrument_brand);
                         $('#val_brand option[value="'+res.instrument_brand+'"]').prop('selected', true);
                      }
@@ -680,6 +683,7 @@
                 $('#sales_calltype option[value="'+res.type+'"]').prop('selected', true);
                 $('#sales_accountservice option[value="'+res.service+'"]').prop('selected', true);    
                 $('#val_department').val(dept.Department.departmentname);
+                $('#sales_department_id').val(dept.Department.id);
                 setTimeout(
                                     function(){
                             $('.edit_title1').editable(path_url+'/Salesorders/update_title1', {
@@ -751,8 +755,11 @@
                 //$('#QuotationInstrumentId').val(instrument_id);
             });
             var customer_id =   $('#SalesorderCustomerId').val();
-                var salesorder_id =   $('#SalesorderSalesorderId').val();
-                var instrument_id   =   $('#SalesorderInstrumentId').val();
+            var salesorder_id =   $('#val_salesorderno').val();
+            //alert(salesorder_id);
+            //console.log(salesorder_id);
+            //return false;
+            var instrument_id   =   $('#SalesorderInstrumentId').val();
             $('#SalesorderCustomerId').val(res.customer_id);
             $('#SalesorderSalesorderId').val(res.salesorder_id);
             $('#SalesorderInstrumentId').val(res.instrument_id);
@@ -833,6 +840,7 @@
                     'name'=>'instrument','autoComplete'=>'off')); ?>
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
+        <?PHP echo $this->Form->input('salesorder_id_update',array('type'=>'hidden','id'=>'salesorder_id_update')); ?>
          <span class="help-block_login ins_error">Enter the Instrument Name</span>
         <div id="search_instrument"></div>
     </div>
@@ -896,10 +904,10 @@
 
 
         <?php echo $this->Form->input('sales_unitprice', array('id'=>'sales_unitprice','class'=>'form-control','label'=>false,
-            'name'=>'sales_unitprice','placeholder'=>'Enter the Unit Price','type'=>'hidden')); ?>
+            'name'=>'sales_unitprice','placeholder'=>'Enter the Unit Price','type'=>'hidden','ng-model' => 'sales_unitprice')); ?>
     
         <?php echo $this->Form->input('sales_discount', array('id'=>'sales_discount','class'=>'form-control',
-                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'sales_discount','type'=>'hidden')); ?>
+                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'sales_discount','type'=>'hidden','ng-model' => 'sales_discount')); ?>
     
 
 <div class="form-group">
@@ -908,8 +916,8 @@
     <label class="col-md-2 control-label" for="val_department">Department</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('department', array('id'=>'val_department','class'=>'form-control','label'=>false,
-                                      'name'=>'department','placeholder'=>'Enter the Departmnent Name','readonly')); ?>
-        <?PHP echo $this->Form->input('department_id',array('type'=>'hidden','id'=>'sales_department_id')); ?>
+                                      'name'=>'department','placeholder'=>'Enter the Departmnent Name','readonly','ng-model' => 'department')); ?>
+        <?PHP echo $this->Form->input('department_id',array('type'=>'hidden','id'=>'sales_department_id','ng-model' => 'department_id')); ?>
     </div>
      <label class="col-md-2 control-label" for="sales_accountservice">Account Service</label>
     <div class="col-md-4">

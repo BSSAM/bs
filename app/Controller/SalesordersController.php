@@ -38,7 +38,7 @@
             $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
             $this->set('deleted_val',$id);
         endif;
-        
+        //$this->Description->deleteAll(array('Description.quotation_id'=>'','Description.status'=>1));
             $this->set('salesorder', $salesorder_list);
         }
         public function add()
@@ -706,7 +706,7 @@
             $this->loadModel('Description');
             $this->request->data = json_decode(file_get_contents("php://input"));
             $data = array();
-            //pr($this->request->data->instrument_quantity);
+            //echo json_encode($this->request->data);
             //exit;
             
             $quantity = $this->request->data->instrument_quantity;
@@ -718,6 +718,55 @@
                 $data['customer_id']          =   $this->request->data->customer_id;
                 $data['salesorder_id']        =   $this->request->data->salesorder_id;
                 $data['instrument_id']        =   $this->request->data->instrument_id;
+                $data['device_id']            =   $this->request->data->device_id;
+                $data['instrument_name']      =   $this->request->data->instrument_name;
+                $data['brand_id']             =   $this->request->data->instrument_brand;
+                $data['sales_quantity']       =   $this->request->data->instrument_quantity;
+                $data['model_no']             =   $this->request->data->instrument_modelno;
+                $data['sales_range']          =   $this->request->data->instrument_range;
+                $data['sales_calllocation']   =   $this->request->data->instrument_calllocation;
+                $data['sales_calltype']       =   $this->request->data->instrument_calltype;
+                $data['sales_validity']       =   $this->request->data->instrument_validity;
+                $data['sales_discount']       =   $this->request->data->instrument_discount;
+                $data['department_id']        =   $this->request->data->instrument_department;
+                $data['sales_unitprice']      =   $this->request->data->instrument_unitprice;
+                $data['sales_accountservice'] =   $this->request->data->instrument_account;
+//                $data['sales_titles']         =   $this->request->data->instrument_title;
+                $data['sales_total']          =   $this->request->data->instrument_total;
+                $data['status']               =   0;
+                $data['is_approved']          =   0;
+                $this->Description->create();
+                if($this->Description->save($data))
+                {
+                    $instrument_ids[]=$this->Description->getLastInsertID();
+                    $this->Session->setFlash(__('Instruments has been added Successfully'));
+                }
+            }
+            header('Content-Type: application/json');
+            echo json_encode($instrument_ids);
+             
+        }
+        public function sales_add_instrument_2()
+        {
+            $this->autoRender = false;
+            $this->loadModel('Description');
+            $this->request->data = json_decode(file_get_contents("php://input"));
+            $data = array();
+            //echo json_encode($this->request->data);
+            //exit;
+            
+            $quantity = $this->request->data->instrument_quantity;
+            
+            $instrument_ids = array();
+            
+            for($i=0;$i<$quantity;$i++)
+            {
+                $data['customer_id']          =   $this->request->data->customer_id;
+                $data['salesorder_id']        =   $this->request->data->salesorder_id;
+                $data['instrument_id']        =   $this->request->data->instrument_id;
+//                if($this->request->data->device_id):
+//                $data['device_id']            =   $this->request->data->device_id;
+//                endif;
                 $data['instrument_name']      =   $this->request->data->instrument_name;
                 $data['brand_id']             =   $this->request->data->instrument_brand;
                 $data['sales_quantity']       =   $this->request->data->instrument_quantity;
@@ -790,7 +839,7 @@
             $this->loadModel('Description');
             $this->request->data = json_decode(file_get_contents("php://input"));
              $data = array();
-            
+            //pr($this->request->data);exit;
             $this->Description->id    =   $this->request->data->device_id;
             $data['salesorder_id']    =   $this->request->data->salesorder_id;
             $data['customer_id']      =   $this->request->data->customer_id;

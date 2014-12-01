@@ -72,7 +72,7 @@ if(customer!='')
                                 </div>
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" ng-app ng-controller="Salesordercontroller">
                                    
                                     <?php echo $this->Form->create('Salesorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'Salesorder','action'=>'salesorder_by_quotation')); ?>
                                     <?php echo $this->Form->input('Salesorder.customer_id', array('type'=>'hidden')); ?>
@@ -100,7 +100,7 @@ if(customer!='')
                                                 <div class="tab-pane" id="tab2">
                                                     <?PHP echo $this->element('Salesorders/Salesorder_by_quotation/customer_special_needs'); ?>
                                                 </div>
-                                                <div class="tab-pane" id="tab3" ng-app ng-controller="Salesordercontroller">
+                                                <div class="tab-pane" id="tab3">
                                                     <?PHP echo $this->element('Salesorders/Salesorder_by_quotation/description'); ?>
                                                     <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-10">

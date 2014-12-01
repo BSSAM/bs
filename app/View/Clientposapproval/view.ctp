@@ -209,20 +209,15 @@ $(".form-horizontal").submit(function(e){
                             </div>
                         </div>
                         
-<!--                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <div class="block">
                                 <dl>
-                                    <dt>Invoice Number</dt>
-                                    <?PHP //if(!empty($quotation_data['Deliveryorder'])): ?>
-                                    <?PHP //foreach($quotation_data['Deliveryorder'] as $k=>$v): ?>
-                                    <dd class="word_break"><?PHP //echo  $v; ?></dd>
-                                    <?PHP //endforeach; ?>
-                                    <?PHP //else: ?>
-                                      <dd class="word_break"><?PHP //echo 'Invoice not yet Generated!!'; ?></dd>
-                                    <?PHP //endif; ?>
+                                    <dt>Total No. Instruments</dt>
+                                    <dd>
+                                    <?PHP echo $this->Form->input('total_inst',array('type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'No Of Instrument','name'=>'total_inst','id'=>'total_inst','value'=>$total_inst)) ?></dd>
                                 </dl>
                             </div>
-                        </div>-->
+                        </div>
                         
                         <div class="col-sm-12">
                             <h4 class="sub-header text-center">Purchase Order Details</h4>

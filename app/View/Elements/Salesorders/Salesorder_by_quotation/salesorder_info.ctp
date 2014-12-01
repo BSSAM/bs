@@ -1,7 +1,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_quotationno">Sales Order No</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','readonly'=>'readonly','label'=>false,'value'=> $salesorderno)); ?>
+        <?php echo $this->Form->input('Salesorder.salesorderno', array('id'=>'val_salesorderno','class'=>'form-control','readonly'=>'readonly','label'=>false,'value'=> $salesorderno)); ?><!-- ,'ng-model'=>'salesorder_id','ng-init'=>'salesorder_id='."'$salesorderno'" -->
     </div>
     <label class="col-md-2 control-label" for="val_dueamount">Due Amount</label>
     <div class="col-md-4">
