@@ -12,6 +12,7 @@
             <tr>
                 <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                 <th class="text-center">Quotation No</th>
+                <th class="text-center">Salesorder No</th>
                 <th class="text-center">Reg Date</th>
                 <th class="text-center">Branch</th>
                 <th class="text-center">Customer</th>
@@ -24,10 +25,11 @@
         </thead>
         <tbody>
             <?PHP if(!empty($quotation_list_bybeforedo)):  ?>
-             <?php foreach($quotation_list_bybeforedo as $quotation_list): ?>
+            <?php foreach($quotation_list_bybeforedo as $quotation_list): ?>
             <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'){$class="error";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
             <tr class=<?PHP echo $class; ?>>
                 <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
+                <td class="text-center"><?PHP echo $this->find_sales_order($quotation_list['Quotation']['quotationno']); ?></td>
                 <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
                 <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
                 <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
@@ -86,6 +88,152 @@
             </tr>
             <?php endforeach; ?>
             <?PHP endif; ?>
+            
+            
+            <!----  Sales Order Full Invoice   -->
+            
+            
+            <?PHP if(!empty($salesorder_list_bybeforedo)):  ?>
+            <?php foreach($salesorder_list_bybeforedo as $salesorder_list): ?>
+            <?PHP if($salesorder_list['Salesorder']['po_generate_type']=='Automatic'){$class="error";}elseif($salesorder_list['Salesorder']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
+            <tr class=<?PHP echo $class; ?>>
+                <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['quotationno'] ?></td>
+                <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['id'] ?></td>
+                <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
+                <td class="text-center"><?PHP echo $salesorder_list['branch']['branchname'] ?></td>
+                <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['customername'] ?></td>
+                <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
+                <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>
+                <td class="text-center word_break">
+                    <?PHP if($salesorder_list['Salesorder']['po_generate_type']=='Automatic'){$class="danger";}elseif($salesorder_list['Salesorder']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
+                    <?PHP $po_array =  explode(',',$salesorder_list['Salesorder']['ref_no']);  ?>
+                    <?PHP foreach($po_array as $po_key=>$po_value): ?>
+                    <span class="label label-<?PHP echo $class; ?>">
+                        <?PHP echo $po_value; ?>
+                    </span>&nbsp;&nbsp;
+                    <?PHP endforeach; ?>
+                </td>
+                <td class="text-center">
+                    <?php //&&$salesorder_list['Salesorder']['is_poapproved']==0 ?>
+                    <?PHP if(($salesorder_list['Salesorder']['po_generate_type']=='Automatic'||$salesorder_list['Salesorder']['po_generate_type']=='Manual')){?>
+                    <div class="btn-group">
+                       <?php //echo $salesorder_list['Salesorder']['po_generate_type']; ?>
+                                <?PHP $invoice_type = $this->ClientPO->getinvoice_type($salesorder_list['Customer']['id']); ?>
+                                <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Update" data-id="<?PHP echo $salesorder_list['Salesorder']['quotationno'].'/'.$salesorder_list['Salesorder']['id'] ?> ?>">Update</a>
+
+                    <?PHP }
+                    //else if($salesorder_list['Salesorder']['po_generate_type']=='Manual'&&$salesorder_list['Salesorder']['is_jobcompleted']==1){ ?>
+
+                                 <?php //echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
+
+                        <?PHP //}?>
+                    </div>
+                    <?PHP if(($salesorder_list['Salesorder']['po_generate_type']=='Automatic'||$salesorder_list['Salesorder']['po_generate_type']=='Manual')){?>
+                    <div class="btn-group">
+                       <?php //echo $salesorder_list['Salesorder']['po_generate_type']; ?>
+                                <?PHP $invoice_type = $this->ClientPO->getinvoice_type($salesorder_list['Customer']['id']); ?>
+                                <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Approve" data-id="<?PHP echo $salesorder_list['Salesorder']['quotationno'].'/'.$salesorder_list['Salesorder']['id'] ?>">Approve</a>
+
+                    <?PHP }
+                    //else if($salesorder_list['Salesorder']['po_generate_type']=='Manual'&&$salesorder_list['Salesorder']['is_jobcompleted']==1){ ?>
+
+                                 <?php //echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
+
+                        <?PHP // }?>
+                    </div>
+                    <?php if($salesorder_list['Salesorder']['po_generate_type']=='Manual'&&$salesorder_list['Salesorder']['is_poapproved']==1){ ?>
+                    <br><br>
+                    <span class="label label-info">
+                        <?PHP echo "Approved"; ?>
+                    </span>
+                    <span class="label label-info"></span>
+                    <?PHP }?>
+                    
+                 </td>
+                <td>
+                    <?php if($salesorder_list['Salesorder']['po_generate_type']=='Manual'): ?><span class="label label-five">Ma</span> <?php endif; ?>
+                    <?php if($salesorder_list['Salesorder']['po_generate_type']!='Manual'): ?><span class="label label-six">Au</span> <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            <?PHP endif; ?>
+            
+            
+            
+            
+            
+            
+            <?PHP if(!empty($po_list_bybeforedo)):  ?>
+            <?php foreach($po_list_bybeforedo as $quotation_list): ?>
+            <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'){$class="error";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
+            <tr class=<?PHP echo $class; ?>>
+                <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
+                <td class="text-center"><?PHP //echo $this->find_sales_order($quotation_list['Quotation']['quotationno']); ?></td>
+                <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
+                <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
+                <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
+                <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>
+                <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
+                <td class="text-center word_break">
+                    <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'){$class="danger";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
+                    <?PHP $po_array =  explode(',',$quotation_list['Quotation']['ref_no']);  ?>
+                    <?PHP foreach($po_array as $po_key=>$po_value): ?>
+                    <span class="label label-<?PHP echo $class; ?>">
+                        <?PHP echo $po_value; ?>
+                    </span>&nbsp;&nbsp;
+                    <?PHP endforeach; ?>
+                </td>
+                <td class="text-center">
+                    <?php //&&$quotation_list['Quotation']['is_poapproved']==0 ?>
+                    <?PHP if(($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual')){?>
+                    <div class="btn-group">
+                       <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
+                                <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
+                                <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Update" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Update</a>
+
+                    <?PHP }
+                    //else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>
+
+                                 <?php //echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
+
+                        <?PHP //}?>
+                    </div>
+                    <?PHP if(($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual')){?>
+                    <div class="btn-group">
+                       <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
+                                <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
+                                <a href="#modal-user-settings" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update" data-placement="bottom" title="Approve" data-id="<?PHP echo $quotation_list['Quotation']['id'] ?>">Approve</a>
+
+                    <?PHP }
+                    //else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>
+
+                                 <?php //echo $this->Form->button('Finished', array('type'=>'button','data-toggle' => 'tooltip', 'class' => 'btn btn-alt btn-xs btn-success', 'escape' => false,)); ?>
+
+                        <?PHP // }?>
+                    </div>
+                    <?php if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_poapproved']==1){ ?>
+                    <br><br>
+                    <span class="label label-info">
+                        <?PHP echo "Approved"; ?>
+                    </span>
+                    <span class="label label-info"></span>
+                    <?PHP }?>
+                    
+                 </td>
+                <td>
+                    <?php if($quotation_list['Quotation']['po_generate_type']=='Manual'): ?><span class="label label-five">Ma</span> <?php endif; ?>
+                    <?php if($quotation_list['Quotation']['po_generate_type']!='Manual'): ?><span class="label label-six">Au</span> <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            <?PHP endif; ?>
+            
+            
+            
+            
+            
+            
+            
         </tbody>
     </table>
 </div>

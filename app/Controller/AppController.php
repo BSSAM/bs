@@ -678,4 +678,9 @@ App::uses('Controller', 'Controller');
             endforeach;
         endif;
         }
+        public function find_sales_order($quotation_id=NULL)
+        {
+           $quotation = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotation_id,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+           return $quotation;
+        }
 }
