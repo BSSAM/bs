@@ -5,7 +5,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','OnsiteDocument','User','OnsiteEngineer','OnsiteInstrument','Onsite',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title');
+                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random');
         public function index()
         {
         /*******************************************************
@@ -78,7 +78,7 @@
                 if($this->Onsite->save($this->request->data['Onsite']))
                 {
                     $onsite_id   =   $this->Onsite->getLastInsertID();
-                    
+                    $this->Random->updateAll(array('Random.onsites'=>'"'.$onsite_no.'"'),array('Random.id'=>1));  
                     $device_node    =   $this->OnsiteInstrument->find('all',array('conditions'=>array('OnsiteInstrument.quotationno'=>$quotationno)));
                     if(!empty($device_node))
                     {  

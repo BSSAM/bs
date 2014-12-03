@@ -420,7 +420,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] += $i;
                     }
                     $str1 = implode('-', $parts);
-                    $this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
             }
             return $str1;
@@ -678,9 +678,5 @@ App::uses('Controller', 'Controller');
             endforeach;
         endif;
         }
-        public function find_sales_order($quotation_id=NULL)
-        {
-           $quotation = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotation_id,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
-           return $quotation;
-        }
+        
 }

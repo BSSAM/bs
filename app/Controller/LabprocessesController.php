@@ -241,6 +241,7 @@ class LabprocessesController extends AppController
                     }
                         $quotation_for_log = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_list['Quotation']['quotationno'])));
                         $deliveryorder_type = $quotation_for_log['Customer']['acknowledgement_type_id'];
+                        $invoice_type = $quotation_for_log['Customer']['invoice_type_id'];
                         
                         ////////////////////////////////
                         //      Lab Process Logactivity
@@ -279,27 +280,49 @@ class LabprocessesController extends AppController
                         /******************/ 
                         
                         if($deliveryorder_type == 1):
-                        
-                            /******************
-                            * Data Log - Client PO
-                            */
-                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-                            $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
-                            $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['quotationno'];
-                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                            $this->request->data['Logactivity']['logapprove'] = 1;
-                            $this->Logactivity->create();
-                            $this->Logactivity->save($this->request->data['Logactivity']);
+                            if($invoice_type == 3):
+                                /******************
+                                * Data Log - Client PO
+                                */
+                                $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
+                                $this->request->data['Logactivity']['logno'] = $id;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
 
-                            $this->request->data['Datalog']['logname'] = 'ClientPO';
-                            $this->request->data['Datalog']['logactivity'] = 'Add';
-                            $this->request->data['Datalog']['logid'] = $salesorder_list['Quotation']['quotationno'];
-                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                            $this->Datalog->create();
-                            $this->Datalog->save($this->request->data['Datalog']);
+                                $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $id;
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
 
-                            /******************/ 
+                                /******************/ 
+                            else:
+                                /******************
+                                * Data Log - Client PO
+                                */
+                                $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
+                                $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['quotationno'];
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $salesorder_list['Quotation']['quotationno'];
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+
+                                /******************/ 
+                            endif;
                         endif;
                         
                     $this->Salesorder->updateAll(array('Salesorder.is_approved_lab' => 1),array('Salesorder.id' => $id));

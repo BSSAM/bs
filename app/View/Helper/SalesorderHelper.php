@@ -31,7 +31,7 @@ App::uses('Helper', 'View');
  */
 class SalesorderHelper extends AppHelper 
 {
-    public $uses    =   array('Salesorder','Description');
+    public $uses    =   array('Salesorder','Description','Quotation');
     public function query_total($id = null)
     {
         APP::import('Model','Salesorder');
@@ -137,5 +137,37 @@ class SalesorderHelper extends AppHelper
         $data_count = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
         return count($data_count[0]['Description']);
     }
-    
+    public function find_sales_order($quotation_id=NULL)
+    {
+        APP::import('Model','Salesorder');
+        $this->Salesorder   =   new Salesorder();
+        $quotation = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.quotationno'=>$quotation_id,'Salesorder.is_approved'=>1)));
+        foreach($quotation as $quotation_list):
+            $sales[] = $quotation_list['Salesorder']['id'];
+        endforeach;
+        $sales = implode(',',$sales);
+        return $sales;
+    }
+     public function find_quo($quotation_id=NULL)
+    {
+        APP::import('Model','Quotation');
+        $this->Quotation   =   new Quotation();
+        $quotation = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$quotation_id,'Quotation.is_approved'=>1)));
+        foreach($quotation as $quotation_list):
+            $sales[] = $quotation_list['Quotation']['quotationno'];
+        endforeach;
+        $sales = implode(',',$sales);
+        return $sales;
+    }
+    public function find_sales_order_po($quotation_id=NULL)
+    {
+        APP::import('Model','Salesorder');
+        $this->Salesorder   =   new Salesorder();
+        $quotation = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.ref_no'=>$quotation_id,'Salesorder.is_approved'=>1)));
+        foreach($quotation as $quotation_list):
+            $sales[] = $quotation_list['Salesorder']['id'];
+        endforeach;
+        $sales = implode(',',$sales);
+        return $sales;
+    }
 }

@@ -22,9 +22,10 @@ class ClientposapprovalController extends AppController {
 //        }
         $quotation_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_approved' =>1,'Quotation.is_deliveryorder_created'=>1,'Quotation.is_poapproved' =>0), 'order' => array('Quotation.id' => 'DESC')));
         $salesorder_list_bybeforedo = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_approved' =>1,'Salesorder.is_deliveryorder_created'=>1,'Salesorder.is_poapproved' =>0), 'order' => array('Salesorder.id' => 'DESC')));
-        $po_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_approved' =>1,'Quotation.is_deliveryorder_created'=>1,'Quotation.is_poapproved' =>0), 'group' => array('Quotation.ref_no')));
-        //$do_list_bybeforedo = $this->Deliveryorder->find('all', array('conditions' => array('Deliveryorder.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>4,'Deliveryorder.is_approved' =>1,'Deliveryorder.is_deliveryorder_created'=>1,'Deliveryorder.is_poapproved' =>0), 'order' => array('Deliveryorder.id'=> 'DESC')));
-        //pr($quotation_list_bybeforedo);exit;
+        //$po_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_approved' =>1,'Quotation.is_deliveryorder_created'=>1,'Quotation.is_poapproved' =>0), 'group' => 'Quotation.ref_no','field'=>array('Quotation.quotationno')));
+        $po_list_bybeforedo = $this->Quotation->find('all',array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_approved' =>1,'Quotation.is_deliveryorder_created'=>1,'Quotation.is_poapproved' =>0), 'group' => 'Quotation.ref_no'));
+        $do_list_bybeforedo = $this->Deliveryorder->find('all', array('conditions' => array('Deliveryorder.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>4,'Deliveryorder.is_approved' =>1,'Deliveryorder.is_poapproved' =>0), 'order' => array('Deliveryorder.id'=> 'DESC')));
+        //pr($po_list_bybeforedo);exit;
         $quotation_lists_bybeforeinvoice = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>2,'Customer.invoice_type_id'=>2,'Quotation.is_approved' =>1,'Quotation.is_invoice_created'=>1,'Quotation.is_poapproved' =>0), 'order' => array('Quotation.id' => 'DESC')));
         $salesorder_lists_bybeforeinvoice = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deleted' =>0,'Customer.acknowledgement_type_id'=>2,'Customer.invoice_type_id'=>3,'Salesorder.is_approved' =>1,'Salesorder.is_invoice_created'=>1,'Salesorder.is_poapproved' =>0), 'order' => array('Salesorder.id' => 'DESC')));
         $po_lists_bybeforeinvoice = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>2,'Customer.invoice_type_id'=>1,'Quotation.is_approved' =>1,'Quotation.is_invoice_created'=>1,'Quotation.is_poapproved' =>0), 'group' => array('Quotation.ref_no')));
@@ -37,6 +38,7 @@ class ClientposapprovalController extends AppController {
         $this->layout   =   'ajax';
         //pr($this->request->data);exit;
         $q_id =  $this->request->data['q_id'];
+        //pr($q_id);
         $pos = strpos($q_id, '/');
         if($pos == false):
             $q_id =  $this->request->data['q_id'];
@@ -45,13 +47,13 @@ class ClientposapprovalController extends AppController {
             $q_id = $q_id_array[0];
             $s_id = $q_id_array[1];
         endif;
-        
+        //pr($s_id);
         $q_class =  $this->request->data['q_class'];
         $this->set('title_name',$q_class);
         //pr($q_id);
         $data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$q_id,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
         $data_sal = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$s_id,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'recursive'=>3));
-        //pr($data);exit;
+        //pr($data_sal);exit;
         $this->set('total_inst',$data['Quotation']['total_inst']);
         //pr($data);exit;
         if($data['Customer']['invoice_type_id']==3):
@@ -79,7 +81,7 @@ class ClientposapprovalController extends AppController {
         
         // Sales Description Count
         
-        $sales_data_all = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.id'=>$sale['Salesorder']['id'],'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
+        $sales_data_all = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.id'=>$data_sal['Salesorder']['id'],'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
         $count_sales_desc = 0;
         foreach($sales_data_all as $sales_data):
             foreach($sales_data['Description'] as $desc_count):
