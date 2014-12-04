@@ -20,11 +20,26 @@ $(document).ready(function(){
 		url: path_url+'/customers/get_range/',
                 beforeSend: ni_start(),  
                 success:function(data){
-                    $('#range_array').empty();
+                    $('#range_array').empty().append('<option value="">Select Range</option>');
                     $('#range_array').append(data);
                 },
                 complete: ni_end(),
             });
+    });
+    
+    $('#unit_price').change(function() {
+        var price   =   $(this).val();
+        $.ajax({
+             type: 'POST',
+             data:"price="+price,
+             url: path_url+'/customers/get_price/',
+             beforeSend: ni_start(),  
+             success:function(data){
+                 $('#total_price').val(data);
+                 
+             },
+             complete: ni_end(),
+         });
     });
     $(document).on('click','.customerinstrument_add',function(){
        
@@ -41,7 +56,7 @@ $(document).ready(function(){
         //alert(instrument_id); return false;
         var instrument_name =    $('#customer_instrument').val();
         var model_no =   $('#model_no').val();
-        var unit_price=$('#unit_price').val();
+        var unit_price=$('#total_price').val();
         //var status  =   $('#status').val();
         if ($('#status').is(":checked")){ var status = 1;} else { var status = 0; }
       // return false;
@@ -75,6 +90,7 @@ $(document).ready(function(){
                     $('#customer_instrument').val(null);
                     $('#model_no').val(null);
                     $('#unit_price').val(null);
+                    $('#total_price').val(null);
                     $('#range_array').empty().append('<option value="">Select Range</option>');
                     $('#status').val(null);
                     }

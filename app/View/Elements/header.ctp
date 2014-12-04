@@ -68,8 +68,8 @@
                                 <a href="../Dashboards"><i class="gi gi-stopwatch sidebar-nav-icon"></i>Dashboard</a>
                             </li>-->
                             <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-user sidebar-nav-icon"></i>Users</a>
-                                 <ul <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches')?'style=display:block':''; ?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches'||$control == 'Autos'||$control == 'InsPercents')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-user sidebar-nav-icon"></i>Users</a>
+                                 <ul <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches'||$control == 'Autos'||$control == 'InsPercents')?'style=display:block':''; ?>>
                                     <?php if($user_role['other_user']['view'] == 1){ ?>
                                      <li>
                                          <?php $a=($control == 'Users')?'active':''; ?>
@@ -120,6 +120,16 @@
                                         <?php $a=($control == 'Tallyledgers')?'active':''; ?>
                                         <?php echo $this->Html->link('Tally Ledger Account',array('controller'=>'Tallyledgers','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
+                                    <?php //if($user_role['other_auto']['view'] == 1){ ?>
+                                    <li>
+                                        <?php $a=($control == 'Autos')?'active':''; ?>
+                                        <?php echo $this->Html->link('Random No',array('controller'=>'Autos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li><?php //} ?>
+                                    <?php //if($user_role['other_auto']['view'] == 1){ ?>
+                                    <li>
+                                        <?php $a=($control == 'InsPercents')?'active':''; ?>
+                                        <?php echo $this->Html->link('Instrument Discount',array('controller'=>'InsPercents','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li><?php //} ?>
                                 </ul>
                             </li>
                             <li>

@@ -11,7 +11,7 @@ class CustomersController extends AppController
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo','AcknowledgementType','Quotation',
                         'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby','Random',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
-                        'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo','Logactivity','Datalog');
+                        'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo','Logactivity','Datalog','InsPercent');
     
     public function index()
     {
@@ -597,6 +597,14 @@ class CustomersController extends AppController
         $instrument_range    =    $this->InstrumentRange->find('all',array('conditions'=>array('InstrumentRange.instrument_id'=>$instrument_id),'order'=>'InstrumentRange.id desc','contain'=>array('Range'=>array('fields'=>array('id','range_name')))));
         $this->set('ranges',$instrument_range);
         
+    }
+    public function get_price()
+    {
+        $this->autoRender=false;
+        $price  =   $this->request->data['price'];
+        $instrument_range    =    $this->InsPercent->find('first');
+        $percent = $instrument_range['InsPercent']['percent'];
+        return $price*$percent/100 + $price;
     }
     public function add_customer_instrument()
     {

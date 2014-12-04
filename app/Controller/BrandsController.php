@@ -83,7 +83,7 @@ class BrandsController extends AppController
                 $this->Session->setFlash(__('Brand is Added'));
                 $this->redirect(array('controller'=>'Brands','action'=>'index'));
             }
-            $this->Session->setFlash(__('Department Could Not be Added'));
+            $this->Session->setFlash(__('Brand Could Not be Added'));
         }
     }
     public function edit($id = null)

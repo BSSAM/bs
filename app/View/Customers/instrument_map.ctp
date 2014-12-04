@@ -46,7 +46,9 @@
                                     </div>
                                     <label class="col-md-2 control-label" for="range">Range</label>
                                     <div class="col-md-4">
-                                        <select id="range_array" name="range" class="form-control" data-placeholder="Select Range Name" style="width: 250px;"></select>
+                                        <select id="range_array" name="range" class="form-control" data-placeholder="Select Range" style="width: 250px;">
+                                            <option value="">Select Range Name</option>
+                                        </select>
                                         <?php //echo $this->Form->input('range', array('id'=>'range','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                             
                                     </div>
@@ -55,16 +57,26 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="unit_price">Unit Price</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','data-placeholder'=>'Select Unit Price','name'=>'unit_price')); ?>
+                                        <?php //$disable_unit = "disabled = 'disabled'";
+                                        $disable_unit = "";
+                                        ?>
+                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','data-placeholder'=>'Select Unit Price','name'=>'unit_price',$disable_unit)); ?>
                                         
                                     </div>
-                                    <div class="form-group">
+                                    <label class="col-md-2 control-label" for="total_price">Total Price</label>
+                                    <div class="col-md-4">
+                                        <?php $disable_total = "disabled = 'disabled'"; ?>
+                                        <?php echo $this->Form->input('total_price', array('id'=>'total_price','class'=>'form-control','label'=>false,'type'=>'text','data-placeholder'=>'Select Total Price','name'=>'total_price',$disable_total)); ?>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
                                     
                                     <label class="col-md-2 control-label" for="status">Active</label>
                                     <div class="col-md-4">
                                             <?php echo $this->Form->checkbox('status', array('id'=>'status','class'=>'','label'=>false,'name'=>'status')); ?>
                                     </div>
-                                </div>
                                 </div>
                 <div class="form-group form-actions">
                     <div class="col-md-9 col-md-offset-10 update_device">

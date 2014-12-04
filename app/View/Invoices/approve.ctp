@@ -471,7 +471,7 @@
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
                         <?php //if($invoices['Salesorder']['is_approved']==1 && $invoices['Salesorder']['is_poapproved']==1 ): ?>
-                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'submit','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false,'onsubmit'=>'return confirm("are you sure?")')); ?>
+                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'submit','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false,'confirm'=>'Are you Sure?')); ?>
                             <?php //endif; ?>
 
                         </div>
