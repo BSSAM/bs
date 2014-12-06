@@ -24,7 +24,13 @@ $(document).ready(function(){
             url: path_url+'Candds/add_candds/',
             success: function(data)
             {
-               var candd_data_node    =   $.parseJSON(data);
+				 try {
+    var candd_data_node    =   $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+               
                var contact_person   =   candd_data_node.Contactpersoninfo;
                if(candd_data_node.Candd.purpose=='Collection')
                {
@@ -112,7 +118,13 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                data1 = $.parseJSON(data);
+				 try {
+    data1 = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                
                 address_node = data1.Address;
                 //alert(data);
                 //alert(address_node.);
@@ -189,7 +201,13 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                var deliver_data_node = $.parseJSON(data);
+				 try {
+   var deliver_data_node = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                
                 var contact_person      =  deliver_data_node.Customer;
                 $('.deliveries_info').empty();
                 $.each(deliver_data_node,function(k,v){
@@ -224,7 +242,13 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                var deliver_data_node = $.parseJSON(data);
+				try {
+   var deliver_data_node = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                
                 var contact_person      =  deliver_data_node.Customer;
                // alert(contact_person);
                 //console.log(data);
@@ -316,7 +340,13 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-               var checked_node =   $.parseJSON(data);
+				try {
+   var checked_node =   $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+               
                $.each(checked_node,function(k,v){
                   $('.move_'+v).fadeOut('slow',function(){
                       $(this).remove();

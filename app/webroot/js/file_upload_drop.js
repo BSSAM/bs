@@ -152,7 +152,14 @@
                     init: function () {
                         thisDropzone = this;
                         $.get(path_url,function(data) {
-                           var data_node    =   $.parseJSON(data);
+								try {
+ var data_node    =   $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                    
+                           
                             $.each(data_node, function(key,value){
                                 var mockFile = { name: value.name, size: value.size };
                                 thisDropzone.options.addedfile.call(thisDropzone, mockFile);
