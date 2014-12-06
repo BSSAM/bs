@@ -16,13 +16,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-				 try {
-    data1 = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
+                data1 = $.parseJSON(data);
                 $('#pur_customer_address').val(data1.Customer.regaddress);
                 $('#PurchaseorderCustomerId').val(data1.Customer.id);
                 $('#pur_phone').val(data1.Customer.phone);                

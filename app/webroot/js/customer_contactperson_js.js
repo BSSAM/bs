@@ -89,14 +89,8 @@ $(document).ready(function(){
             data:"edit_con_id="+ edit_con_id,
             url: path_url+'/customers/contact_person_edit/',
             success:function(data){
-				try {
-  edit_node=$.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-               
-               //console.log(edit_node);
+               edit_node=$.parseJSON(data);
+               console.log(edit_node);
               $('#contact_name').val(edit_node.Contactpersoninfo.name);
                 $('#contact_email').val(edit_node.Contactpersoninfo.email);
                 $('#contact_department').val(edit_node.Contactpersoninfo.department);

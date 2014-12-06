@@ -94,13 +94,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-				 try {
-    data1 = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
+                data1 = $.parseJSON(data);
                 address_node    =   data1.Address;
                 contact_person_info =   data1.Contactpersoninfo;
                 salesperson_node =   data1.CusSalesperson;

@@ -180,8 +180,7 @@ $("#search_cusinstrument").hide();
                 var instrument_calltype=$('#val_call_type').val();
                 var instrument_validity=$('#val_validity').val();
                 var instrument_unitprice=$('#val_unit_price').val();
-                var instrument_discount=$('#val_discount1').val();
-                //alert(instrument_discount);
+                var instrument_discount=$('#val_discount').val();
                 var instrument_cal=instrument_unitprice*instrument_discount/100;
                 var instrument_total= instrument_unitprice - instrument_cal;
 
@@ -214,7 +213,7 @@ $("#search_cusinstrument").hide();
                          $.each(data,function(k,v){
                             //console.log(k);
                             //console.log(v);
-                            //return false;
+                            //,"id":k
                             $new_data = {
                                 serial:v,
                                 customer_id:customer_id,
@@ -319,7 +318,7 @@ $("#search_cusinstrument").hide();
                 $('#val_discount1').val(null);
                 $('#val_description').val(null);
                     });
-                $scope.titles = '';
+
                 if($scope.titles.indexOf("0") != "-1")
                     $scope.show_title1 = true;
                 if($scope.titles.indexOf("1") != "-1")
@@ -844,7 +843,7 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_discount1">Discount </label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control','ng-model' => 'type_quo_discount',
+        <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
