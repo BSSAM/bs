@@ -346,34 +346,86 @@
             }
            
         }
+        public function get_range_value()
+        {
+            $this->autoRender = false;
+            $instrument_id =  $this->request->data['instrument_id'];
+            $customer_id =  $this->request->data['customer_id'];
+            $range_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id),'recursive'=>'3'));
+            
+            if(!empty($range_details))
+            {
+                return json_encode($range_details);
+            }
+           
+        }
         public function add_instrument()
         {
             $this->autoRender = false;
             $this->loadModel('OnsiteInstrument');
-            $this->request->data['OnsiteInstrument']['quotation_id']    = $this->request->data['quotationid'];
-            $this->request->data['OnsiteInstrument']['quotationno']     = $this->request->data['quotationno'];
-            $this->request->data['OnsiteInstrument']['customer_id']     = $this->request->data['customer_id'];
-            $this->request->data['OnsiteInstrument']['onsite_quantity'] = $this->request->data['instrument_quantity'];
-            $this->request->data['OnsiteInstrument']['instrument_id']   = $this->request->data['instrument_id'];
-            $this->request->data['OnsiteInstrument']['model_no']        = $this->request->data['instrument_modelno'];
-            $this->request->data['OnsiteInstrument']['brand_id']        =  $this->request->data['instrument_brand'];
-            $this->request->data['OnsiteInstrument']['onsite_range']    = $this->request->data['instrument_range'];
-            $this->request->data['OnsiteInstrument']['onsite_calllocation'] = $this->request->data['instrument_calllocation'];
-            $this->request->data['OnsiteInstrument']['onsite_calltype']     = $this->request->data['instrument_calltype'];
-            $this->request->data['OnsiteInstrument']['onsite_validity']     = $this->request->data['instrument_validity'];
-            $this->request->data['OnsiteInstrument']['onsite_discount']     = $this->request->data['instrument_discount'];
-            $this->request->data['OnsiteInstrument']['department']       =$this->request->data['instrument_department'];
-            $this->request->data['OnsiteInstrument']['onsite_accountservice'] = $this->request->data['instrument_account'];
-            $this->request->data['OnsiteInstrument']['onsite_unitprice']      = $this->request->data['instrument_unitprice'];
-            $this->request->data['OnsiteInstrument']['onsite_titles']         = $this->request->data['instrument_title'];
-            $this->request->data['OnsiteInstrument']['onsite_total']          = $this->request->data['instrument_total'];
-            $this->request->data['OnsiteInstrument']['status']                = 0;
-         
-            if($this->OnsiteInstrument->save($this->request->data))
+            $this->request->data = json_decode(file_get_contents("php://input"));
+            $data = array();
+            //pr($this->request->data);
+            //exit;
+            
+            $quantity = $this->request->data->instrument_quantity;
+            //pr($quantity);exit;
+            $instrument_ids = array();
+            
+            for($i=0;$i<$quantity;$i++)
             {
-                $device_id=$this->OnsiteInstrument->getLastInsertID();
-                echo $device_id;
+                $data['quotationno']   =   $this->request->data->quotationno;
+                $data['customer_id']   =   $this->request->data->customer_id;
+                $data['instrument_id'] =   $this->request->data->instrument_id;
+                $data['brand_id']      =   $this->request->data->instrument_brand;
+                $data['quantity']      =   $this->request->data->instrument_quantity;
+                $data['model_no']      =   $this->request->data->instrument_modelno;
+                $data['range']         =   $this->request->data->instrument_range;
+                $data['call_location'] =   $this->request->data->instrument_calllocation;
+                $data['call_type']     =   $this->request->data->instrument_calltype;
+                $data['validity']      =   $this->request->data->instrument_validity;
+                $data['discount']      =   $this->request->data->instrument_discount;
+                $data['department_id'] =   $this->request->data->instrument_department;
+                $data['unit_price']    =   $this->request->data->instrument_unitprice;
+                $data['account_service']=  $this->request->data->instrument_account;
+                $data['total']         =   $this->request->data->instrument_total;
+                $data['title']         =   $this->request->data->instrument_title;
+                $data['status']        =   0;
+                //pr($data);//exit;
+                $this->Device->create();
+                if($this->Device->save($data))
+                {
+                    $instrument_ids[]=$this->Device->getLastInsertID();
+                    $this->Session->setFlash(__('Instruments has been added Successfully'));
+                }   
             }
+            
+            header('Content-Type: application/json');
+            echo json_encode($instrument_ids);
+//            $this->request->data['OnsiteInstrument']['quotation_id']    = $this->request->data['quotationid'];
+//            $this->request->data['OnsiteInstrument']['quotationno']     = $this->request->data['quotationno'];
+//            $this->request->data['OnsiteInstrument']['customer_id']     = $this->request->data['customer_id'];
+//            $this->request->data['OnsiteInstrument']['onsite_quantity'] = $this->request->data['instrument_quantity'];
+//            $this->request->data['OnsiteInstrument']['instrument_id']   = $this->request->data['instrument_id'];
+//            $this->request->data['OnsiteInstrument']['model_no']        = $this->request->data['instrument_modelno'];
+//            $this->request->data['OnsiteInstrument']['brand_id']        =  $this->request->data['instrument_brand'];
+//            $this->request->data['OnsiteInstrument']['onsite_range']    = $this->request->data['instrument_range'];
+//            $this->request->data['OnsiteInstrument']['onsite_calllocation'] = $this->request->data['instrument_calllocation'];
+//            $this->request->data['OnsiteInstrument']['onsite_calltype']     = $this->request->data['instrument_calltype'];
+//            $this->request->data['OnsiteInstrument']['onsite_validity']     = $this->request->data['instrument_validity'];
+//            $this->request->data['OnsiteInstrument']['onsite_discount']     = $this->request->data['instrument_discount'];
+//            $this->request->data['OnsiteInstrument']['department']       =$this->request->data['instrument_department'];
+//            $this->request->data['OnsiteInstrument']['onsite_accountservice'] = $this->request->data['instrument_account'];
+//            $this->request->data['OnsiteInstrument']['onsite_unitprice']      = $this->request->data['instrument_unitprice'];
+//            $this->request->data['OnsiteInstrument']['onsite_titles']         = $this->request->data['instrument_title'];
+//            $this->request->data['OnsiteInstrument']['onsite_total']          = $this->request->data['instrument_total'];
+//            $this->request->data['OnsiteInstrument']['status']                = 0;
+//         
+//            if($this->OnsiteInstrument->save($this->request->data))
+//            {
+//                $device_id=$this->OnsiteInstrument->getLastInsertID();
+//                echo $device_id;
+//            }
      
         }
         public function delete_instrument()
@@ -654,6 +706,32 @@
                 echo json_encode($edit_device_val);
             }
             
+        }
+        public function model_search()
+        {
+            $this->autoRender = false;
+            $model_no =  $this->request->data['model_no'];
+            $device_id =  $this->request->data['device_id'];
+            $customer_id =  $this->request->data['customer_id'];
+
+            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id,'CustomerInstrument.model_no LIKE'=>'%'.$model_no.'%','CustomerInstrument.instrument_id'=>$device_id)));
+            if(count($instrument_details)!=''):
+                foreach($instrument_details as $list)
+                {
+                    if($list['CustomerInstrument']['model_no']!='')
+                    {
+                    echo "<div class='customerins1_id' id='".$list['CustomerInstrument']['id']."'>";
+                    echo $list['CustomerInstrument']['model_no'];
+                    echo "<br>";
+                    echo "</div>";
+                    }
+                }
+            else:
+                echo "<div  align='left' class='instrument_drop_show'>";
+                echo 'No Results Found';
+                echo "<br>";
+                echo "</div>"; 
+            endif;
         }
         
 }

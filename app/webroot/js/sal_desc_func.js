@@ -5,7 +5,7 @@
  */
 $(document).ready(function(){
     $('#sales_quantity').keypress(function(){
-         $('#sales_quantity').css('border','1px solid #DBE1E8');
+        $('#sales_quantity').css('border','1px solid #DBE1E8');
     });
     $(document).on('click','.sales_instrument_id',function(){
         var instrument_id=$(this).attr('id');
@@ -21,32 +21,31 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-					try {
-parsedata = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
+                try {
+                    parsedata = $.parseJSON(data);
+                } catch (e) {
+                // error
+                return;
+                }
+
                 //console.log(parsedata);
                 var dept    =   parsedata.Instrument;
                 $('#val_brand').empty().append('<option value="">Select Brand Name</option>');
-//                $('#sales_range').empty().append('<option value="">Select Range</option>');
+    //                $('#sales_range').empty().append('<option value="">Select Range</option>');
                 $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
                 {
                      $('#val_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
                 });
-                
-//                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
-//                {
-//                     $('#sales_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
-//                });
+
+    //                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
+    //                {
+    //                     $('#sales_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+    //                });
                 $('#sales_department_id').val(dept.Department.id);
                 $('#val_department').val(dept.Department.departmentname);
-//                $('#val_model_no').val(parsedata.CustomerInstrument.model_no);
+    //                $('#val_model_no').val(parsedata.CustomerInstrument.model_no);
                 $('#SalesorderInstrumentId').val(instrument_id);
                 $('#sales_unitprice').val(parsedata.CustomerInstrument.unit_price);
-                        
             }
         });
     });

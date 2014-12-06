@@ -3,7 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 $(document).ready(function(){
+    
+    /**********************Customer Search For Quotation Module*****************************************************************************/
+    $("#result").hide();
+    $("#val_customer").keyup(function() 
+    { 
+        var customer = $(this).val();
+        var dataString = 'name='+ customer;
+        if(customer!='')
+        {
+            $.ajax({
+            type: "POST",
+            url: path_url+"/Onsites/search",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                $("#result").html(html).show();
+            }
+            });
+        }
+    });
+    
     $(document).on('click','.onsite_qo_single',function(){
         var qo_id=$(this).text();
         $('#onsite_input_search').val(qo_id);
@@ -31,12 +54,13 @@ $(document).ready(function(){
             {
                 if(data!='failure')
                 {
-						try {
-var onsite_node = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
+                    try {
+                        var onsite_node = $.parseJSON(data);
+                    } 
+                    catch (e) {
+                    // error
+                    return;
+                    }
                     
                     var customer_address_node   =   onsite_node.Customer.Address;
                     var contact_person_node   =   onsite_node.Contactpersoninfo;
@@ -291,12 +315,12 @@ var onsite_node = $.parseJSON(data);
         var instrument_id=$(this).attr('id');
         var customer_id =   $('#customer_id').val();
         var ins_text=$(this).text();
-        $('#onsite_description').val(ins_text);
+        $('#val_description').val(ins_text);
         $('.ins_error').hide();
         $('#search_instrument').fadeOut();
         $.ajax({
             type: "POST",
-            url: path+"Quotations/get_brand_value",
+            url: path_url+"Onsites/get_brand_value",
             data: 'instrument_id='+instrument_id+'&customer_id='+customer_id,
             beforeSend: ni_start(),  
             complete: ni_end(),
@@ -304,32 +328,88 @@ var onsite_node = $.parseJSON(data);
             
             success: function(data)
             {
-                	try {
-parsedata = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
+                try {
+                    parsedata = $.parseJSON(data);
+                } catch (e) {
+                // error
+                    return;
+                }
                 var dept    =   parsedata.Instrument;
-                $('#onsite_brand').empty().append('<option value="">Select Brand Name</option>');
-                $('#onsite_range').empty().append('<option value="">Select Range</option>');
+                $('#val_brand').empty().append('<option value="">Select Brand Name</option>');
+//                $('#val_range').empty().append('<option value="">Select Range</option>');
                 $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
                 {
-                     $('#onsite_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
+                     $('#val_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
                 });
-                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
-                {
-                     $('#onsite_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
-                });
+                
+//                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
+//                {
+//                     $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+//                });
                     
-                $('#onsite_department').val(dept.Department.departmentname);
-                $('#onsite_department_id').val(dept.Department.id);
-                $('#onsite_model_no').val(parsedata.CustomerInstrument.model_no);
+                $('#val_department').val(dept.Department.departmentname);
+                
+                $('#val_department_id').val(dept.Department.id);
+                //$('#val_model_no').val(parsedata.CustomerInstrument.model_no);
                 $('#OnsiteInstrumentId').val(instrument_id);
-                $('#onsite_unit_price').val(parsedata.CustomerInstrument.unit_price);
+//                var dept    =   parsedata.Instrument;
+//                $('#onsite_brand').empty().append('<option value="">Select Brand Name</option>');
+//                $('#onsite_range').empty().append('<option value="">Select Range</option>');
+//                $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
+//                {
+//                     $('#onsite_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
+//                });
+//                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
+//                {
+//                     $('#onsite_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+//                });
+//                    
+//                $('#onsite_department').val(dept.Department.departmentname);
+//                $('#onsite_department_id').val(dept.Department.id);
+//                $('#onsite_model_no').val(parsedata.CustomerInstrument.model_no);
+//                $('#OnsiteInstrumentId').val(instrument_id);
+//                $('#onsite_unit_price').val(parsedata.CustomerInstrument.unit_price);
             }
         });
+    });
+    ////////////// Model No Quick Search(Auto Complete)//////////////////// 
+    $(document).on('click','.customerins1_id',function(){
+        var instrument_id=$(this).attr('id');
+        var customer_id =   $('#customer_id').val();
+        var model_no=$(this).text();
+        $('#val_model_no').val(model_no);
+        $('.ins_error').hide();
+        $('#search_cusinstrument').fadeOut();
+        $.ajax({
+            type: "POST",
+            url: path_url+"Onsites/get_range_value",
+            data: 'instrument_id='+instrument_id+'&customer_id='+customer_id,
+            cache: false,
+            
+            success: function(data)
+            {
+		try {
+                    parsedata = $.parseJSON(data);
+                }   
+                catch (e) {
+                    // error
+                     return;
+                }
+                 //alert(parsedata.range_name);
+                //console.log(parsedata);
+                //return false;
+                //var dept    =   parsedata.CustomerInstrument;
+                
+                $('#val_range').empty().append('<option value="">Select Range</option>');
+                                
+                $.each(parsedata, function(k, v)
+                {
+                     $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+                     $('#val_unit_price').val(v.CustomerInstrument.unit_price);
+                });
+                 
+            }
+    });
     });
     /*******************Onsite Instrument edit************************/
      $(document).on('click','.onsite_instrument_edit',function(){
