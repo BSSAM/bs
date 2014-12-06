@@ -31,7 +31,13 @@ $(document).ready(function(){
             {
                 if(data!='failure')
                 {
-                    var onsite_node = $.parseJSON(data);
+						try {
+var onsite_node = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                    
                     var customer_address_node   =   onsite_node.Customer.Address;
                     var contact_person_node   =   onsite_node.Contactpersoninfo;
                     $('#quotation_id').val(onsite_node.Quotation.id);
@@ -298,8 +304,13 @@ $(document).ready(function(){
             
             success: function(data)
             {
+                	try {
+parsedata = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
                 
-                parsedata = $.parseJSON(data);
                 var dept    =   parsedata.Instrument;
                 $('#onsite_brand').empty().append('<option value="">Select Brand Name</option>');
                 $('#onsite_range').empty().append('<option value="">Select Range</option>');
@@ -332,7 +343,13 @@ $(document).ready(function(){
             url: path_url+'/Onsites/edit_instrument/',
             
             success:function(data){
-               edit_node=$.parseJSON(data);
+				try {
+edit_node=$.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+               
                 $('#onsite_description').attr('readonly','readonly');
                 $('#onsite_quantity').attr('readonly','readonly');
                 $('#device_id').val(edit_node.OnsiteInstrument.id);

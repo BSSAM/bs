@@ -188,8 +188,13 @@ $(document).ready(function(){
             
             success: function(data)
             {
+                try {
+parsedata = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
                 
-                parsedata = $.parseJSON(data);
                 var dept    =   parsedata.Instrument;
                 $('#val_brand').empty().append('<option value="">Select Brand Name</option>');
 //                $('#val_range').empty().append('<option value="">Select Range</option>');
@@ -229,9 +234,13 @@ $(document).ready(function(){
             
             success: function(data)
             {
-                
-                parsedata = $.parseJSON(data);
-                //alert(parsedata.range_name);
+				 try {
+parsedata = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                 //alert(parsedata.range_name);
                 //console.log(parsedata);
                 //return false;
                 //var dept    =   parsedata.CustomerInstrument;
@@ -340,7 +349,13 @@ $(document).ready(function(){
             data:"edit_device_id="+ edit_device_id,
             url: path_url+'/Quotations/edit_instrument/',
             success:function(data){
-               edit_node=$.parseJSON(data);
+				 try {
+edit_node=$.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+               
               
                $('#device_id').val(edit_node.Device.id);
                $('#val_quantity').val(edit_node.Device.quantity);
@@ -405,7 +420,13 @@ $(document).ready(function(){
             url: path+'Quotations/get_document_files/',
             success: function(data)
             {
-               var document_data_node   =   $.parseJSON(data);
+				try {
+var document_data_node   =   $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+               
                $('.file_upload_created').empty();
                $.each(document_data_node,function(k,v){
                    alert(v.Document.document_name.split('_'));
