@@ -190,7 +190,13 @@ $(document).ready(function(){
             data:"edit_device_id="+ edit_device_id,
             url: path_url+'/PurchaseRequisitions/edit_instrument/',
             success:function(data){
-               edit_node=$.parseJSON(data);
+				 try {
+    edit_node=$.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+               
                $('#val_quantity').attr('readonly','readonly');
                $('#val_quantity').val(edit_node.PreqDevice.quantity);
                 $('#val_description').val(edit_node.PreqDevice.instrument_name);
@@ -222,7 +228,13 @@ $(document).ready(function(){
             url: path+'Quotations/get_document_files/',
             success: function(data)
             {
-               var document_data_node   =   $.parseJSON(data);
+					try {
+var document_data_node   =   $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+               
                $('.file_upload_created').empty();
                $.each(document_data_node,function(k,v){
                    alert(v.Document.document_name.split('_'));

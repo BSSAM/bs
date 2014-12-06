@@ -21,8 +21,14 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-                parsedata = $.parseJSON(data);
-                console.log(parsedata);
+					try {
+parsedata = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                
+                //console.log(parsedata);
                 var dept    =   parsedata.Instrument;
                 $('#val_brand').empty().append('<option value="">Select Brand Name</option>');
 //                $('#sales_range').empty().append('<option value="">Select Range</option>');
@@ -59,8 +65,13 @@ $(document).ready(function(){
             
             success: function(data)
             {
+                try {
+parsedata = $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
                 
-                parsedata = $.parseJSON(data);
                 //alert(parsedata.range_name);
                 //console.log(parsedata);
                 //return false;
@@ -142,7 +153,13 @@ $(document).ready(function(){
             url: path+'Salesorders/sales_add_instrument/',
             success: function(data)
             {
-                data_edit_node  =   $.parseJSON(data);
+				 try {
+data_edit_node  =   $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                
                 
                $('.sales_Instrument_info').append('<tr class="tr_color sales_instrument_remove_'+data_edit_node.Description.id+'">\n\\n\
                                     <td class="text-center">'+data_edit_node.Description.id+'</td>\n\

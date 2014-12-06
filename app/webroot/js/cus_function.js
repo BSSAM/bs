@@ -70,7 +70,14 @@ $(document).ready(function(){
             success: function(data)
             {
                 if(data!=0){
-                    var node_data   =   $.parseJSON(data);
+					try {
+  var node_data   =   $.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                
+                   
                     if (node_data.CustomerInstrument.status == "1"){  var status    =   "Active";                 
                     }else{    var status    =   "Inactive";               
                     }
@@ -136,8 +143,14 @@ $(document).ready(function(){
             data:"edit_device_id="+ edit_device_id,
             url: path_url+'/Customers/edit_instrument/',
             success:function(data){
-                console.log(data);
-                edit_node=$.parseJSON(data);
+                //console.log(data);
+				try {
+  edit_node=$.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+                
                 $('#ins_id').val(edit_node.Instrument.id);
                 $('#in_id').val(edit_node.Instrument.id);
                 $('#ins_name').val(edit_node.Instrument.name);
@@ -190,7 +203,13 @@ $(document).ready(function(){
             url: path_url+'Customers/update_instrument/',
             success: function(data)
             {
-               node_data=$.parseJSON(data);
+				try {
+  node_data=$.parseJSON(data);
+  } catch (e) {
+    // error
+    return;
+  }
+               
                $('.cus_instrument_remove_'+device_id).remove();
                $('.customer_instrument_info').append('<tr class="cus_instrument_remove_'+node_data.CustomerInstrument.id+'">\n\\n\
                                     <td class="text-center">'+node_data.CustomerInstrument.id+'</td>\n\
