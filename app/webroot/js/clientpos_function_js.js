@@ -49,13 +49,7 @@ $(document).ready(function(){
 //                      $('#val_quotationcount').val($response.filter('#device_length').val());
 //                      //$('#track_id').val(data_node.Quotation.track_id);
                     //for salesorder render
-					try {
-   var parse_node  =   $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                    
+                    var parse_node  =   $.parseJSON(data);
                     $('#val_quotationcount').val(parse_node.Quotation.quo_count);
                     if($.isEmptyObject(parse_node.Salesorder)){
                         $('.qo_based_salesorder').append('<p class="themed-color-fire  pull-left">Sales order not yet created for '+quotation_selected+'</p>'); }
@@ -111,13 +105,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-				try {
-   var parse_node  =   $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
+                var parse_node  =   $.parseJSON(data);
                 if($.isEmptyObject(parse_node.Salesorder)){
                     $('.salesorder_by_quotation').append('<p class="themed-color-fire  pull-left">Sales order not yet created for '+quotation_selected+'</p>'); }
                 else{$('.salesorder_by_quotation').empty();
@@ -230,13 +218,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-				try {
-   var data_node   =$.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
+                var data_node   =$.parseJSON(data);
                 var description_length  =   data_node.Description.length;
                 $('#val_socount').val(description_length);
                 $('.sales_po_update').empty();
@@ -315,14 +297,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-				try {
-  var delivery_data_node  =   $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
-               
+                var delivery_data_node  =   $.parseJSON(data);
                 
                 /*******for Salesorder count*********/
                 $('.do_based_salesorder').html(' <div class="form-group col-md-8"><div class="input text"><input type="text" placeholder="Salesorder No" readonly="readonly" value="'+delivery_data_node.Salesorder.salesorderno+'" class="form-control"  name="salesorder_id[]"></div></div><div class="form-group col-md-3 row"><div class="input text"><input type="text" maxlength="20" placeholder="So Count" value="'+delivery_data_node.Salesorder.Description_count+'" readonly="readonly" class="form-control" name="salesorder_quantity[]"></div> </div>');

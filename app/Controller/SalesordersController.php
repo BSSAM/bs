@@ -252,7 +252,7 @@
             if($this->request->is('post'))
             {
                 
-               //pr($this->request->data);exit;
+              // pr($this->request->data);exit;
                 
             
             //endforeach;
@@ -330,14 +330,6 @@
                    }
                    else
                    {
-                       
-                        // Status '0' will be deleted
-                        $device_node_nonstatus    =   $this->Description->find('all',array('conditions'=>array('Description.status'=>0)));
-                        if(!empty($device_node_nonstatus))
-                        {
-                            $this->Description->deleteAll(array('Description.status'=>0));
-                        }
-                                               
                         $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         //pr($con);
                         $con_inv_type = $con['Customer']['invoice_type_id']; 

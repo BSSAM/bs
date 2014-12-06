@@ -42,14 +42,8 @@ $(document).ready(function(){
             {
                 if(data!='failure')
                 {
-					try {
-  sales_node = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                   
-                    //console.log(sales_node);
+                    sales_node = $.parseJSON(data);
+                    console.log(sales_node);
                     var del_address = '';
                     var count = 0;
                     $.each(sales_node.Quotation.Customer.Address,function(key,value){
@@ -170,13 +164,7 @@ $(document).ready(function(){
                 $('#tab-content').append(data);
                 if(data!='failure')
                 {
-					try {
- sales_node = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                    
+                    sales_node = $.parseJSON(data);
                     
                     $('#val_id').val(sales_node.BPI.id);
                     $('#val_salesorderno').val(sales_node.Salesorder.salesorderno);
