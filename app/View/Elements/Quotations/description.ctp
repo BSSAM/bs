@@ -112,6 +112,7 @@ $("#search_cusinstrument").hide();
         $scope.start = 0;
         $scope.end = 0;
         $scope.edit_index = '';
+        $scope.titles = '';
 //        $('#val_description').prop('required', true);
 //        $('#val_quantity').prop('required', true);
 //        $('#val_model_no').prop('required', true);
@@ -181,6 +182,12 @@ $("#search_cusinstrument").hide();
                 var instrument_validity=$('#val_validity').val();
                 var instrument_unitprice=$('#val_unit_price').val();
                 var instrument_discount=$('#val_discount1').val();
+                var overall_discount=$('#val_discount').val();
+                if(overall_discount!==''){
+                    instrument_unitprice1 = instrument_unitprice*overall_discount/100;
+                    instrument_unitprice = instrument_unitprice-instrument_unitprice1;
+                }
+                
                 //alert(instrument_discount);
                 var instrument_cal=instrument_unitprice*instrument_discount/100;
                 var instrument_total= instrument_unitprice - instrument_cal;
@@ -319,7 +326,7 @@ $("#search_cusinstrument").hide();
                 $('#val_discount1').val(null);
                 $('#val_description').val(null);
                     });
-                $scope.titles = '';
+                
                 if($scope.titles.indexOf("0") != "-1")
                     $scope.show_title1 = true;
                 if($scope.titles.indexOf("1") != "-1")
@@ -374,7 +381,12 @@ $("#search_cusinstrument").hide();
             var instrument_calltype=$('#val_call_type').val();
             var instrument_validity=$('#val_validity').val();
             var instrument_unitprice=$('#val_unit_price').val();
-            var instrument_discount=$('#val_discount').val();
+            var instrument_discount=$('#val_discount1').val();
+            //var overall_discount=$('#val_discount').val();
+//            if(overall_discount!==''){
+//                instrument_unitprice1 = instrument_unitprice*overall_discount/100;
+//                instrument_unitprice = instrument_unitprice-instrument_unitprice1;
+//            }
             var instrument_cal=instrument_unitprice*instrument_discount/100;
             var instrument_total= instrument_unitprice - instrument_cal;
 
@@ -409,24 +421,24 @@ $("#search_cusinstrument").hide();
         
                    // $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
                     $scope.instruments[$scope.edit_index]['serial']=$scope.edit_id;
-                        $scope.instruments[$scope.edit_index]['customer_id']=customer_id;
-                        $scope.instruments[$scope.edit_index]['quotation_id']=quotation_id;
-                        $scope.instruments[$scope.edit_index]['instrument_id']=instrument_id;
-                        $scope.instruments[$scope.edit_index]['name']=instrument_name;
-                        $scope.instruments[$scope.edit_index]['model']=instrument_modelno;
-                        $scope.instruments[$scope.edit_index]['instrument_brand_text']=instrument_brand_text;
-                        $scope.instruments[$scope.edit_index]['instrument_range_text']=instrument_range_text;
-                        $scope.instruments[$scope.edit_index]['location']=instrument_calllocation;
-                        $scope.instruments[$scope.edit_index]['type']=instrument_calltype;
-                        $scope.instruments[$scope.edit_index]['instrument_brand']=instrument_brand;
-                        $scope.instruments[$scope.edit_index]['validity']=instrument_validity;
-                        $scope.instruments[$scope.edit_index]['instrument_range']=instrument_range;
-                        $scope.instruments[$scope.edit_index]['price']=instrument_unitprice;
-                        $scope.instruments[$scope.edit_index]['service']=instrument_account;
-                        $scope.instruments[$scope.edit_index]['total']=instrument_total;
-                        $scope.instruments[$scope.edit_index]['instrument_discount']=instrument_discount;
-                        $scope.instruments[$scope.edit_index]['instrument_title']=instrument_title;
-                        $scope.instruments[$scope.edit_index]['instrument_department']=instrument_department;
+                    $scope.instruments[$scope.edit_index]['customer_id']=customer_id;
+                    $scope.instruments[$scope.edit_index]['quotation_id']=quotation_id;
+                    $scope.instruments[$scope.edit_index]['instrument_id']=instrument_id;
+                    $scope.instruments[$scope.edit_index]['name']=instrument_name;
+                    $scope.instruments[$scope.edit_index]['model']=instrument_modelno;
+                    $scope.instruments[$scope.edit_index]['instrument_brand_text']=instrument_brand_text;
+                    $scope.instruments[$scope.edit_index]['instrument_range_text']=instrument_range_text;
+                    $scope.instruments[$scope.edit_index]['location']=instrument_calllocation;
+                    $scope.instruments[$scope.edit_index]['type']=instrument_calltype;
+                    $scope.instruments[$scope.edit_index]['instrument_brand']=instrument_brand;
+                    $scope.instruments[$scope.edit_index]['validity']=instrument_validity;
+                    $scope.instruments[$scope.edit_index]['instrument_range']=instrument_range;
+                    $scope.instruments[$scope.edit_index]['price']=instrument_unitprice;
+                    $scope.instruments[$scope.edit_index]['service']=instrument_account;
+                    $scope.instruments[$scope.edit_index]['total']=instrument_total;
+                    $scope.instruments[$scope.edit_index]['instrument_discount']=instrument_discount;
+                    $scope.instruments[$scope.edit_index]['instrument_title']=instrument_title;
+                    $scope.instruments[$scope.edit_index]['instrument_department']=instrument_department;
                         //res = $scope.instruments[$scope.edit_index];
                         //console.log(res);
                     $scope.pagination();
@@ -567,8 +579,8 @@ $("#search_cusinstrument").hide();
             $http.post(path_url+'Quotations/get_brand_value_edit/',{"instrument_id":instrument_id,"customer_id":customer_id}).success(function(data)
             {
                // alert(instrument_id);
-                console.log(data);
-                console.log(res);
+                //console.log(data);
+                //console.log(res);
                /// parsedata = $.parseJSON(data);
                 var dept    =   data.Instrument;
                 $('#val_brand').empty().append('<option value="">Select Brand Name</option>');
@@ -701,7 +713,7 @@ $("#search_cusinstrument").hide();
             $('#val_call_type').val(res.type);
             $('#val_validity').val(res.validity);
             $('#val_unit_price').val(res.price);
-            $('#val_discount').val(res.instrument_discount);
+            $('#val_discount1').val(res.instrument_discount);
             
 
             $('#val_department_id').val(res.instrument_department);
@@ -845,7 +857,7 @@ $("#search_cusinstrument").hide();
     <label class="col-md-2 control-label" for="val_discount1">Discount </label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control','ng-model' => 'type_quo_discount',
-                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text')); ?>
+                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text','max'=>20)); ?>
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
     <div class="col-md-4">

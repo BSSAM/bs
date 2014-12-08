@@ -105,87 +105,87 @@ parsedata = $.parseJSON(data);
     
     /**************************For Sales order Description add*************************************/
     
-    $(document).on('click','.sales_description_add',function(){
-        if($('#val_instrument').val()=='0')
-        {
-            $('.ins_error').addClass('animation-slideDown');
-            $('.ins_error').css('color','red');
-            $('.ins_error').show();
-            return false;
-        }
-        if($('#val_brand').val()=='')
-        {
-            $('.brand_error').addClass('animation-slideDown');
-            $('.brand_error').css('color','red');
-            $('.brand_error').show();
-            return false;
-        }
-        if($('#sales_quantity').val()=='')
-        {
-            $('#sales_quantity').css('border','1px solid red');
-            return false;
-        }
-        var salesorder_no   =   $('#val_salesorderno').val();
-        var instrument_quantity =  $('#sales_quantity').val();
-        var customer_id         =   $('#SalesorderCustomerId').val();
-        var instrument_id       =   $('#SalesorderInstrumentId').val();
-       
-        var instrument_name=$('#val_instrument').val();
-        var instrument_modelno=$('#val_model_no').val();
-        var instrument_brand=$('#val_brand').val();
-        var instrument_range=$('#sales_range').val();
-        var instrument_calllocation=$('#sales_calllocation').val();
-        var instrument_calltype=$('#sales_calltype').val();
-        var instrument_validity=$('#sales_validity').val();
-        var instrument_unitprice=$('#sales_unitprice').val();
-        var instrument_discount=$('#sales_discount').val();
-        var instrument_department=$('#sales_department_id').val();
-        var instrument_account=$('#sales_accountservice').val();
-        var instrument_title=$('#sales_titles').val();
-        var instrument_cal=instrument_unitprice*instrument_discount/100;
-        var instrument_total=instrument_unitprice - instrument_cal ;
-        
-        for ( var i = 1; i <= instrument_quantity; i++ ){
-        $.ajax({
-            type: 'POST',
-            data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total+"&salesorder_id="+salesorder_no,
-            url: path+'Salesorders/sales_add_instrument/',
-            success: function(data)
-            {
-				 try {
-data_edit_node  =   $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
-                
-               $('.sales_Instrument_info').append('<tr class="tr_color sales_instrument_remove_'+data_edit_node.Description.id+'">\n\\n\
-                                    <td class="text-center">'+data_edit_node.Description.id+'</td>\n\
-                                    <td class="text-center">'+data_edit_node.Instrument.name+'</td>\n\\n\
-                                    <td class="text-center">'+data_edit_node.Brand.brandname+'</td>\n\\n\
-                                    <td class="text-center">'+data_edit_node.Description.sales_calllocation+'</td>\n\
-                                     <td class="text-center">'+data_edit_node.Description.sales_validity+'</td>\n\
-                                    <td class="text-center">'+data_edit_node.Description.sales_unitprice+'</td>\n\\n\
-                                    <td class="text-center">'+data_edit_node.Department.departmentname+'</td>\n\\n\
-                                    <td class="text-center">'+data_edit_node.Description.sales_total+'</td>\n\
-                                    <td class="text-center"><div class="btn-group">\n\
-                                    <a data-edit="'+data_edit_node.Description.id+'"class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
-                                    <a data-delete="'+data_edit_node.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
-                
-                $('#sales_quantity').val(null);
-                $('#val_instrument').val(null);
-                $('#val_model_no').val(null);
-                $('#val_brand').empty().append('<option value="">Select Brand</option>');
-                $('#sales_range').val(null);
-                $('#sales_unitprice').val(null);
-                $('#sales_discount').val(null);
-                $('#val_description').val(null);
-                }
-        });
-    }
-   });
+//    $(document).on('click','.sales_description_add',function(){
+//        if($('#val_instrument').val()=='0')
+//        {
+//            $('.ins_error').addClass('animation-slideDown');
+//            $('.ins_error').css('color','red');
+//            $('.ins_error').show();
+//            return false;
+//        }
+//        if($('#val_brand').val()=='')
+//        {
+//            $('.brand_error').addClass('animation-slideDown');
+//            $('.brand_error').css('color','red');
+//            $('.brand_error').show();
+//            return false;
+//        }
+//        if($('#sales_quantity').val()=='')
+//        {
+//            $('#sales_quantity').css('border','1px solid red');
+//            return false;
+//        }
+//        var salesorder_no   =   $('#val_salesorderno').val();
+//        var instrument_quantity =  $('#sales_quantity').val();
+//        var customer_id         =   $('#SalesorderCustomerId').val();
+//        var instrument_id       =   $('#SalesorderInstrumentId').val();
+//       
+//        var instrument_name=$('#val_instrument').val();
+//        var instrument_modelno=$('#val_model_no').val();
+//        var instrument_brand=$('#val_brand').val();
+//        var instrument_range=$('#sales_range').val();
+//        var instrument_calllocation=$('#sales_calllocation').val();
+//        var instrument_calltype=$('#sales_calltype').val();
+//        var instrument_validity=$('#sales_validity').val();
+//        var instrument_unitprice=$('#sales_unitprice').val();
+//        var instrument_discount=$('#sales_discount').val();
+//        var instrument_department=$('#sales_department_id').val();
+//        var instrument_account=$('#sales_accountservice').val();
+//        var instrument_title=$('#sales_titles').val();
+//        var instrument_cal=instrument_unitprice*instrument_discount/100;
+//        var instrument_total=instrument_unitprice - instrument_cal ;
+//        
+//        for ( var i = 1; i <= instrument_quantity; i++ ){
+//        $.ajax({
+//            type: 'POST',
+//            data:"instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total+"&salesorder_id="+salesorder_no,
+//            url: path+'Salesorders/sales_add_instrument/',
+//            success: function(data)
+//            {
+//				 try {
+//data_edit_node  =   $.parseJSON(data);
+//  } catch (e) {
+//    // error
+//    return;
+//  }
+//                
+//                
+//               $('.sales_Instrument_info').append('<tr class="tr_color sales_instrument_remove_'+data_edit_node.Description.id+'">\n\\n\
+//                                    <td class="text-center">'+data_edit_node.Description.id+'</td>\n\
+//                                    <td class="text-center">'+data_edit_node.Instrument.name+'</td>\n\\n\
+//                                    <td class="text-center">'+data_edit_node.Brand.brandname+'</td>\n\\n\
+//                                    <td class="text-center">'+data_edit_node.Description.sales_calllocation+'</td>\n\
+//                                     <td class="text-center">'+data_edit_node.Description.sales_validity+'</td>\n\
+//                                    <td class="text-center">'+data_edit_node.Description.sales_unitprice+'</td>\n\\n\
+//                                    <td class="text-center">'+data_edit_node.Department.departmentname+'</td>\n\\n\
+//                                    <td class="text-center">'+data_edit_node.Description.sales_total+'</td>\n\
+//                                    <td class="text-center"><div class="btn-group">\n\
+//                                    <a data-edit="'+data_edit_node.Description.id+'"class="btn btn-xs btn-default sales_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
+//                                    <a data-delete="'+data_edit_node.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger sales_instrument_delete">\n\
+//                                    <i class="fa fa-times"></i></a></div></td></tr>');
+//                
+//                $('#sales_quantity').val(null);
+//                $('#val_instrument').val(null);
+//                $('#val_model_no').val(null);
+//                $('#val_brand').empty().append('<option value="">Select Brand</option>');
+//                $('#sales_range').val(null);
+//                $('#sales_unitprice').val(null);
+//                $('#sales_discount').val(null);
+//                $('#val_description').val(null);
+//                }
+//        });
+//    }
+//   });
    
    
    /***************************For Instrument Delete script on Salesorder***********************/

@@ -24,6 +24,10 @@
         /*
          * *****************************************************
          */
+        
+        $this->Description->deleteAll(array('Description.status'=>0));
+        
+        
             //$this->Quotation->recursive = 1;
         if($id == '3'):
             $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>1),'order' => array('Salesorder.id' => 'DESC')));
@@ -38,7 +42,7 @@
             $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
             $this->set('deleted_val',$id);
         endif;
-        //$this->Description->deleteAll(array('Description.quotation_id'=>'','Description.status'=>1));
+        
             $this->set('salesorder', $salesorder_list);
         }
         public function add()
@@ -725,6 +729,8 @@
             {
                 $data['customer_id']          =   $this->request->data->customer_id;
                 $data['salesorder_id']        =   $this->request->data->salesorder_id;
+                $data['quotation_id']        =   $this->request->data->quotation_id;
+                $data['quotationno']        =   $this->request->data->quotationno;
                 $data['instrument_id']        =   $this->request->data->instrument_id;
                 $data['device_id']            =   $this->request->data->device_id;
                 $data['instrument_name']      =   $this->request->data->instrument_name;

@@ -121,6 +121,7 @@ class ClientposapprovalController extends AppController {
                 $this->set('pos',$data['Quotation']['ref_no']);
                 $this->set('pos_count',$data['Quotation']['ref_count']);
                 $this->set('salesorderfullinvoice',0);
+                $this->set('invoicetype',1);
                 //pr($data['Quotation']['ref_count']);
                 //pr($data['Quotation']['ref_no']);
                 //$this->set('pos',$data['Quotation']['ref_no']);
@@ -141,6 +142,7 @@ class ClientposapprovalController extends AppController {
                 $this->set('pos',$data['Quotation']['ref_no']);
                 $this->set('pos_count',$data['Quotation']['ref_count']);
                 $this->set('salesorderfullinvoice',0);
+                $this->set('invoicetype',2);
                 //pr($data['Quotation']['ref_count']);
                 //pr($data['Quotation']['ref_no']);
 //                $qo_data_array  = $this->Qoinvoice->find('first',array('conditions'=>array('Qoinvoice.track_id'=>$data['Quotation']['track_id'])));  
@@ -153,6 +155,7 @@ class ClientposapprovalController extends AppController {
                 $this->set('pos',$data['Quotation']['ref_no']);
                 $this->set('pos_count',$data['Quotation']['ref_count']);
                 $this->set('salesorderfullinvoice',1);
+                $this->set('invoicetype',3);
                 //pr($data['Quotation']['ref_count']);
                 //pr($data['Quotation']['ref_no']);
 //                $po_data_array  = $this->Soinvoice->find('first',array('conditions'=>array('Soinvoice.track_id'=>$data['Quotation']['track_id'])));  
@@ -165,6 +168,7 @@ class ClientposapprovalController extends AppController {
                 $this->set('pos',$data['Quotation']['ref_no']);
                 $this->set('pos_count',$data['Quotation']['ref_count']);
                 $this->set('salesorderfullinvoice',0);
+                $this->set('invoicetype',4);
                 //pr($data['Quotation']['ref_count']);
                 //pr($data['Quotation']['ref_no']);
 //                $po_data_array  = $this->Doinvoice->find('first',array('conditions'=>array('Doinvoice.track_id'=>$data['Quotation']['track_id'])));  
@@ -182,7 +186,13 @@ class ClientposapprovalController extends AppController {
     public function quotation_po_update()
     {
         $this->autoRender=false;
-        pr($this->request->data['salesorderid']); exit;
+        pr($this->request->data);
+        foreach($this->request->data['ponumber'] as $ponumber[]):
+            //$ponumber[];
+        endforeach;
+        pr($ponumber);
+        pr($this->request->data['invoice_type']);
+        exit;
         
         if($this->request->is('post')){
             $po_full_invoice_ref_no = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['quotationno'],'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1)));

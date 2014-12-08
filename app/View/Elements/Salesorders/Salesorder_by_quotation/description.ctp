@@ -50,7 +50,61 @@
                 element.setAttribute("itemsSelected",itemsSelected.toString());	
         }
     }
+    $(function(){
+    $("#val_instrument").keyup(function() 
+    { 
+        var instrument = $(this).val();
+        var customer_id = $('#SalesorderCustomerId').val();
+        var dataString = 'customer_id='+ customer_id+'&instrument='+instrument;
+        
+        if(customer_id!='')
+        {
+            $.ajax({
+            type: "POST",
+            url: path_url+"salesorders/instrument_search",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                $("#search_instrument").html(html).show();
+            }
+            });
+        }return false;    
+    });
     
+    });
+    $(function(){
+$("#search_cusinstrument").hide();
+    $("#val_model_no").keyup(function() 
+    { 
+       
+        var model_no = $(this).val(); //alert(model_no);
+        var customer_id = $('#SalesorderCustomerId').val();
+        //alert(instrument);
+        var device_id = $('#SalesorderInstrumentId').val();
+        //alert(customer_id);
+        var dataString = 'device_id='+ device_id+'&model_no='+model_no+'&customer_id='+customer_id;
+        if(device_id!='')
+        {
+            $.ajax({
+            type: "POST",
+            url: path_url+"Salesorders/model_search",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                //console.log(html);
+                //return false;
+                $("#search_cusinstrument").html(html).show();
+            }
+            });
+        }
+        return false;    
+    });});
+    $('#val_instrument').blur(function(){
+         $(this).val('');
+         $('#search_instrument').fadeOut();
+    });
     function Salesordercontroller($scope, $timeout, $http)
     {
         $scope.show_title1 = false;
@@ -268,9 +322,11 @@
                 //$("#val_description").attr("required","required");
                 //$("#val_quantity").attr("required","required");
                  
-                
+                //alert("asd");
                 var customer_id =   $('#SalesorderCustomerId').val();
-                var salesorder_id =   $('#SalesorderSalesorderId').val();
+                var salesorder_id =   $('#val_salesorderno').val();
+                var quotation_id =   $('#SalesorderQuotationId').val();
+                var quotationno =   $('#SalesorderQuotationno').val();
                 var instrument_id   =   $('#SalesorderInstrumentId').val();
                 var device_id = $('#device_id').val();
                 var instrument_quantity =   $('#sales_quantity').val();
@@ -314,14 +370,17 @@
                         "instrument_account":instrument_account,
                         "instrument_title":instrument_title,
                         "instrument_total":instrument_total,
-                        "salesorder_id":salesorder_id
+                        "salesorder_id":salesorder_id,
+                        "quotation_id":quotation_id,
+                        "quotationno":quotationno
                     }).success(function(data){
-                        alert(data);
-                        //console.log(data);
+                        //alert(data);
+                        
+                        //console.log(data);return false;
                         $.each(data,function(k,v){
                            // console.log(k);
                            // console.log(v);
-                            return false;
+                            
                             //,"id":k
                             $new_data = {serial:v,customer_id:customer_id,salesorder_id:salesorder_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,"instrument_brand_text":instrument_brand_text,"instrument_range_text":instrument_range_text,validity:instrument_validity,"instrument_range":instrument_range,service:instrument_account,"instrument_title":instrument_title,"instrument_department":instrument_department,total:instrument_total,"instrument_discount":instrument_discount,price:instrument_unitprice};
                             $scope.instruments.push($new_data);

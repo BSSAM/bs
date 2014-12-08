@@ -678,5 +678,25 @@ App::uses('Controller', 'Controller');
             endforeach;
         endif;
         }
-        
+         
+        public function device_id_session($data)
+        {
+            $sess_dev = $this->Session->read($data);
+            if(isset($sess_dev)):
+                $data1 = 0;
+                //if(isset($sess_dev)):
+                $data1 = $sess_dev + 1;
+                //endif
+                $ses_dev = $this->Session->write($data, $data1, array('defaults' => 'cake','timeout' => 14400 ));
+            endif;
+            if(!isset($sess_dev)):
+                $data1 = 1;
+                $ses_dev = $this->Session->write($data, $data1, array('defaults' => 'cake','timeout' => 14400 ));
+            endif;
+            return $data1;
+        }
+        public function device_id_session_logout($data)
+        {
+            $this->Session->delete($data);
+        }
 }

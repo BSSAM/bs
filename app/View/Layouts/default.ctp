@@ -82,16 +82,19 @@
     <?php echo $this->Html->script('vendor/bootstrap.min'); ?>
     <?php echo $this->Html->script('plugins'); ?>
     <?php echo $this->Html->script('app'); ?>
-   
+   <?php //echo $this->Html->script('pages/widgetsStats'); ?>
+<!--    <script>$(function(){ WidgetsStats.init(); });</script>-->
     <?php echo $this->Html->script('pages/tablesDatatables'); ?>
     <script>$(function(){ TablesDatatables.init(); });</script>
     <script>$(function(){ UiProgress.init(); });</script>
     <?php echo $this->Html->script('pages/login'); ?>
     <script>$(function(){ Login.init(); });</script>
+    
 <!--    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
     <?php //echo $this->Html->script('helpers/gmaps.min'); ?>
     <?php echo $this->Html->script('pages/index'); ?>
     <script>$(function(){ Index.init(); });</script>
+    
     <script>
     function ni_start(){
        NProgress.start();

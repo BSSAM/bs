@@ -1391,7 +1391,7 @@ $(document).on('click','.approve_invoice',function(){
         
         //$('.quote_calendar').function(){
         
-        CompCalendar.init();  });
+    CompCalendar.init();  });
                 
     var CompCalendar = function() {
     var calendarEvents  = $('.calendar-events');
@@ -1533,9 +1533,9 @@ $(document).on('click','.approve_invoice',function(){
         
         <!-- END User Settings -->
         
-       <!--        <?php //echo $this->Html->script('pages/widgetsStats'); ?>
-        <script>$(function(){ WidgetsStats.init(); });</script>
-        -->
+        <?php //echo $this->Html->script('pages/widgetsStats'); ?>
+<!-- <script>$(function(){ WidgetsStats.init(); });</script>-->
+        
         <?php //echo $this->Html->script('pages/compCalendar'); ?>
 <!--      <script>$(function(){ CompCalendar.init(); });</script>-->
       

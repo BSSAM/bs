@@ -23,6 +23,12 @@
         endif;
         
         $this->set('userrole_cus',$user_role['job_quotation']);
+        
+        // Delete Device when Status '0'
+        
+        $this->Device->deleteAll(array('Device.status'=>0));
+        
+        //
         /*
          * *****************************************************
          */
@@ -41,7 +47,7 @@
         $this->set('deleted_val',$id);
         endif;
             
-            $this->set('quotation', $quotation_lists);
+        $this->set('quotation', $quotation_lists);
         }
         public function add()
         {
@@ -56,6 +62,7 @@
         if($user_role['job_quotation']['add'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+        $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
         /*
          * *****************************************************
          */
@@ -63,6 +70,10 @@
             $track_id=$this->random('track');
             $this->set('quotationno', $dmt);
             $this->set('our_ref_no', $track_id);
+            
+            // Session Device Id Order Clear
+            $this->device_id_session_logout($dmt);
+            
             
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
@@ -117,6 +128,11 @@
                     $quotation_id   =   $this->Quotation->getLastInsertID();
                     
                     $quotationno    =   $this->request->data['Quotation']['quotationno'];
+                    
+                    // Session Device Id Order Clear
+                    $this->device_id_session_logout($quotationno);
+                    
+                    
                     $this->Random->updateAll(array('Random.quotation'=>'"'.$quotationno.'"'),array('Random.id'=>1));  
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
                     
@@ -178,6 +194,7 @@
         if($user_role['job_quotation']['edit'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+        
         /*
          * *****************************************************
          */
@@ -205,7 +222,7 @@
             }
             $person_list    =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$customer_id),'fields'=>array('id','name')));
             if(empty($quotation_details)){
-                $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id),'recursive'=>2));
+                $quotation_details=$this->Quotation->find('first',array('conditions'=>array('Quotation.id'=>$id),'recursive'=>2));
             }
             //pr($quotation_details);exit;
             $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','quotation')));
@@ -225,6 +242,13 @@
                 $titles[] = $title_name['Title']['title_name'];
             }
             $this->set('titles',$titles);
+            
+            // Order Last Device
+            $device_last_insert_no = $this->Device->find('first',array('conditions'=>array('Device.quotation_id'=>$id),'order'=>'order_by DESC')); 
+            //pr($device_last_insert_no['Device']['order_by']);
+            
+            
+            
             if($this->request->is(array('post','put')))
             {
                 //to update quotation po generate type
@@ -518,13 +542,14 @@
             $data = array();
             //pr($this->request->data);
             //exit;
-            
+            //$order = 1;
             $quantity = $this->request->data->instrument_quantity;
             //pr($quantity);exit;
             $instrument_ids = array();
             
             for($i=0;$i<$quantity;$i++)
             {
+                $order_by = $this->device_id_session($this->request->data->quotationno);
                 $data['quotationno']   =   $this->request->data->quotationno;
                 $data['customer_id']   =   $this->request->data->customer_id;
                 $data['instrument_id'] =   $this->request->data->instrument_id;
@@ -541,6 +566,7 @@
                 $data['account_service']=  $this->request->data->instrument_account;
                 $data['total']         =   $this->request->data->instrument_total;
                 $data['title']         =   $this->request->data->instrument_title;
+                $data['order_by']      =   $order_by;
                 $data['status']        =   0;
                 //pr($data);//exit;
                 $this->Device->create();
@@ -550,7 +576,7 @@
                     $this->Session->setFlash(__('Instruments has been added Successfully'));
                 }   
             }
-            
+            //exit;
             header('Content-Type: application/json');
             echo json_encode($instrument_ids);
             //exit;

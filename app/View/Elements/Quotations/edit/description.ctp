@@ -320,7 +320,15 @@ $("#search_cusinstrument").hide();
                 var instrument_calltype=$('#val_call_type').val();
                 var instrument_validity=$('#val_validity').val();
                 var instrument_unitprice=$('#val_unit_price').val();
-                var instrument_discount=$('#val_discount').val();
+                var instrument_unitprice=$('#val_unit_price').val();
+                var instrument_discount=$('#val_discount1').val();
+                var overall_discount=$('#val_discount').val();
+                if(overall_discount!==''){
+                    instrument_unitprice1 = instrument_unitprice*overall_discount/100;
+                    instrument_unitprice = instrument_unitprice-instrument_unitprice1;
+                }
+                
+                //alert(instrument_discount);
                 var instrument_cal=instrument_unitprice*instrument_discount/100;
                 var instrument_total= instrument_unitprice - instrument_cal;
 
@@ -348,7 +356,7 @@ $("#search_cusinstrument").hide();
                         "instrument_total":instrument_total,
                         "quotationno":quotation_id
                     }).success(function(data){
-                        //alert(data);
+                        //alert(data);return false;
                         $.each(data,function(k,v){
                             //console.log(k);
                             //console.log(v);
@@ -485,7 +493,12 @@ $("#search_cusinstrument").hide();
             var instrument_calltype=$('#val_call_type').val();
             var instrument_validity=$('#val_validity').val();
             var instrument_unitprice=$('#val_unit_price').val();
-            var instrument_discount=$('#val_discount').val();
+            var instrument_discount=$('#val_discount1').val();
+            //var overall_discount=$('#val_discount').val();
+//            if(overall_discount!==''){
+//                instrument_unitprice1 = instrument_unitprice*overall_discount/100;
+//                instrument_unitprice = instrument_unitprice-instrument_unitprice1;
+//            }
             var instrument_cal=instrument_unitprice*instrument_discount/100;
             var instrument_total= instrument_unitprice - instrument_cal;
 
@@ -803,7 +816,7 @@ $("#search_cusinstrument").hide();
             $('#val_call_type').val(res.type);
             $('#val_validity').val(res.validity);
             $('#val_unit_price').val(res.price);
-            $('#val_discount').val(res.instrument_discount);
+            $('#val_discount1').val(res.instrument_discount);
             
 
             $('#val_department_id').val(res.instrument_department);

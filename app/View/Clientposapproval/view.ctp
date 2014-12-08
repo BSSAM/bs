@@ -17,8 +17,8 @@
 
         /* Get some values from elements on the page: */
         var values = $(this).serialize();
-        alert(values);
-        return false;
+        //alert(values);
+        //return false;
 
         /* Send the data using post and put the results in a div */
         $.ajax({
@@ -53,6 +53,7 @@
 <?PHP echo $this->Form->input('quotationno', array('type' => 'hidden', 'name' => 'quotationno', 'value' => $data['Quotation']['quotationno'])); ?>
 <?PHP echo $this->Form->input('salesorderid', array('type' => 'hidden', 'name' => 'salesorderid', 'value' => $data_sal['Salesorder']['id'])); ?>
 <?PHP echo $this->Form->input('title_name', array('type' => 'hidden', 'name' => 'title_name', 'value' => $title_name)); ?>
+<?php echo $this->Form->input('invoice_type',array('type'=>'hidden', 'name'=>'invoice_type','value'=>$invoicetype)); ?>
 
 <h4 class="sub-header text-center">Customer Details - <strong><?PHP echo $data['Customer']['Customertagname'] . "(" . $data['Customer']['id'] . ")"; ?> </strong></h4>
 
