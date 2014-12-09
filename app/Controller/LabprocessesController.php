@@ -280,14 +280,15 @@ class LabprocessesController extends AppController
                         /******************/ 
                         
                         if($deliveryorder_type == 1):
-                            if($invoice_type == 3):
+                            if($invoice_type == 1):    
                                 /******************
                                 * Data Log - Client PO
                                 */
                                 $this->request->data['Logactivity']['logname'] = 'ClientPO';
                                 $this->request->data['Logactivity']['logactivity'] = 'Add';
-                                $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
-                                $this->request->data['Logactivity']['logno'] = $id;
+                                $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['ref_no'];
+                                $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['ref_no'];
+                                $this->request->data['Logactivity']['invoice_type_id'] = $invoice_type;
                                 $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                                 $this->request->data['Logactivity']['logapprove'] = 1;
                                 $this->Logactivity->create();
@@ -295,13 +296,14 @@ class LabprocessesController extends AppController
 
                                 $this->request->data['Datalog']['logname'] = 'ClientPO';
                                 $this->request->data['Datalog']['logactivity'] = 'Add';
-                                $this->request->data['Datalog']['logid'] = $id;
+                                $this->request->data['Datalog']['logid'] = $salesorder_list['Quotation']['ref_no'];
                                 $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                                 $this->Datalog->create();
                                 $this->Datalog->save($this->request->data['Datalog']);
 
                                 /******************/ 
-                            else:
+                            endif;
+                            if($invoice_type == 2):    
                                 /******************
                                 * Data Log - Client PO
                                 */
@@ -309,6 +311,7 @@ class LabprocessesController extends AppController
                                 $this->request->data['Logactivity']['logactivity'] = 'Add';
                                 $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
                                 $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['quotationno'];
+                                $this->request->data['Logactivity']['invoice_type_id'] = $invoice_type;
                                 $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                                 $this->request->data['Logactivity']['logapprove'] = 1;
                                 $this->Logactivity->create();
@@ -323,7 +326,55 @@ class LabprocessesController extends AppController
 
                                 /******************/ 
                             endif;
+                            if($invoice_type == 3):
+                                /******************
+                                * Data Log - Client PO
+                                */
+                                $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $salesorder_list['Salesorder']['id'];
+                                $this->request->data['Logactivity']['logno'] = $salesorder_list['Salesorder']['id'];
+                                $this->request->data['Logactivity']['invoice_type_id'] = $invoice_type;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $salesorder_list['Salesorder']['id'];
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+
+                                /******************/ 
+                            endif;
+                            if($invoice_type == 4):    
+                                /******************
+                                * Data Log - Client PO
+                                */
+                                $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $last_id;
+                                $this->request->data['Logactivity']['logno'] = $last_id;
+                                $this->request->data['Logactivity']['invoice_type_id'] = $invoice_type;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $last_id;
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+
+                                /******************/ 
+                            endif;
+                            
                         endif;
+                        
                         
                     $this->Salesorder->updateAll(array('Salesorder.is_approved_lab' => 1),array('Salesorder.id' => $id));
                     $this->Description->updateAll(array('Description.is_approved_lab' => 1),array('Description.salesorder_id' => $id));
@@ -472,31 +523,104 @@ class LabprocessesController extends AppController
                         $quotation_for_log = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_list['Quotation']['quotationno'])));
                         //pr($quotation_for_log);
                         $deliveryorder_type = $quotation_for_log['Customer']['acknowledgement_type_id'];
+                        $invoice_type = $quotation_for_log['Customer']['invoice_type_id'];
                         //pr($deliveryorder_type);
                         //pr($deliveryorder_type);exit;
                         if($deliveryorder_type == 1):
-                        //echo "gone into loop";
-                            /******************
-                            * Data Log - Client PO
-                            */
-                            $this->Logactivity->create();
-                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-                            $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
-                            $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['quotationno'];
-                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                            $this->request->data['Logactivity']['logapprove'] = 1;
+                            if($invoice_type == 1):    
+                                /******************
+                                * Data Log - Client PO
+                                */
+                                $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['ref_no'];
+                                $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['ref_no'];
+                                $this->request->data['Logactivity']['invoice_type_id'] = $invoice_type;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $salesorder_list['Quotation']['ref_no'];
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+
+                                /******************/ 
+                            endif;
+                            if($invoice_type == 2):    
+                                /******************
+                                * Data Log - Client PO
+                                */
+                                $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $salesorder_list['Quotation']['quotationno'];
+                                $this->request->data['Logactivity']['logno'] = $salesorder_list['Quotation']['quotationno'];
+                                $this->request->data['Logactivity']['invoice_type_id'] = $invoice_type;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $salesorder_list['Quotation']['quotationno'];
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+
+                                /******************/ 
+                            endif;
+                            if($invoice_type == 3):
+                                /******************
+                                * Data Log - Client PO
+                                */
+                                $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $salesorder_list['Salesorder']['id'];
+                                $this->request->data['Logactivity']['logno'] = $salesorder_list['Salesorder']['id'];
+                                $this->request->data['Logactivity']['invoice_type_id'] = $invoice_type;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $salesorder_list['Salesorder']['id'];
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+
+                                /******************/ 
+                            endif;
+                            if($invoice_type == 4):    
+                                /******************
+                                * Data Log - Client PO
+                                */
+                                $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                $this->request->data['Logactivity']['logid'] = $last_id;
+                                $this->request->data['Logactivity']['logno'] = $last_id;
+                                $this->request->data['Logactivity']['invoice_type_id'] = $invoice_type;
+                                $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                $this->request->data['Logactivity']['logapprove'] = 1;
+                                $this->Logactivity->create();
+                                $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                $this->request->data['Datalog']['logactivity'] = 'Add';
+                                $this->request->data['Datalog']['logid'] = $last_id;
+                                $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                $this->Datalog->create();
+                                $this->Datalog->save($this->request->data['Datalog']);
+
+                                /******************/ 
+                            endif;
                             
-                            $this->Logactivity->save($this->request->data['Logactivity']);
-                            $this->Datalog->create();
-                            $this->request->data['Datalog']['logname'] = 'ClientPO';
-                            $this->request->data['Datalog']['logactivity'] = 'Add';
-                            $this->request->data['Datalog']['logid'] = $salesorder_list['Quotation']['quotationno'];
-                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                             
-                            $this->Datalog->save($this->request->data['Datalog']);
-                            //echo "gone outof loop";
-                            /******************/ 
                         endif;
                         
                     $this->Salesorder->updateAll(array('Salesorder.is_approved_lab' => 1),array('Salesorder.id' => $id));

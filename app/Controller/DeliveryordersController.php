@@ -61,18 +61,18 @@
             
             if($this->request->is('post'))
             {    
-               //pr($this->request->data['Deliveryorder']);
-               $delivery_before = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved_lab'=>0,'Salesorder.is_approved'=>1,'Salesorder.salesorderno'=>$this->request->data['Deliveryorder']['salesorder_id']),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description')));
-               $delivery_before_quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$delivery_before['Salesorder']['quotationno']),'contain'=>array('Customer','branch','Device')));
-               //pr($delivery_before_quo);
-               //pr($delivery_before['Salesorder']);
-//               pr($this->request->data['Deliveryorder']);
-               //exit;
-                //$this->Description->updateAll(array('Description.is_deliveryorder_created'=>1),array('Quotation.id'=>$delivery_before_quo['Quotation']['id']));
-               //pr($delivery_before_quo);exit;
-               $new_array = array();
-               
-               $new_array['customer_id'] = $delivery_before['Salesorder']['customer_id'];
+                //pr($this->request->data['Deliveryorder']);
+                $delivery_before = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.is_approved_lab'=>0,'Salesorder.is_approved'=>1,'Salesorder.salesorderno'=>$this->request->data['Deliveryorder']['salesorder_id']),'group' => array('Salesorder.salesorderno'),'contain'=>array('Customer','branch','Description')));
+                $delivery_before_quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$delivery_before['Salesorder']['quotationno']),'contain'=>array('Customer','branch','Device')));
+                //pr($delivery_before_quo);
+                //pr($delivery_before['Salesorder']);
+ //               pr($this->request->data['Deliveryorder']);
+                //exit;
+                 //$this->Description->updateAll(array('Description.is_deliveryorder_created'=>1),array('Quotation.id'=>$delivery_before_quo['Quotation']['id']));
+                //pr($delivery_before_quo);exit;
+                $new_array = array();
+
+                $new_array['customer_id'] = $delivery_before['Salesorder']['customer_id'];
                 $new_array['branch_id'] = $delivery_before['Salesorder']['branch_id'];
                 $new_array['delivery_address'] = $this->request->data['Deliveryorder']['customer_address'];
                 $new_array['customer_address'] = $this->request->data['Deliveryorder']['customer_address'];
@@ -119,6 +119,7 @@
                         if($desc['checking'] == 1):
                             $this->request->data['DelDescription']['deliveryorder_id']          =   $del_last_id;
                             $this->request->data['DelDescription']['salesorder_id']             =   $desc['salesorder_id'];
+                            $this->request->data['DelDescription']['order_by']                  =   $desc['order_by'];
                             $this->request->data['DelDescription']['quotation_id']              =   $desc['quotation_id'];
                             $this->request->data['DelDescription']['quotationno']               =   $desc['quotationno'];
                             $this->request->data['DelDescription']['customer_id']               =   $desc['customer_id'];
