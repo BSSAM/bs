@@ -94,6 +94,7 @@ App::uses('Controller', 'Controller');
         {
             $devices    =   $this->Device->find('first',array('conditions'=>array('Device.id'=>$id,'Device.status'=>1)));
             $this->request->data['Description']['device_id']            =   $devices['Device']['id'];
+            $this->request->data['Description']['order_by']            =   $devices['Device']['order_by'];
             $this->request->data['Description']['customer_id']          =   $devices['Device']['customer_id'];
             $this->request->data['Description']['instrument_id']        =   $devices['Device']['instrument_id'];
             $this->request->data['Description']['brand_id']             =   $devices['Device']['brand_id'];
@@ -553,6 +554,7 @@ App::uses('Controller', 'Controller');
                     $this->request->data['Device']['instrument_id'] =   $description['instrument_id'];
                     $this->request->data['Device']['brand_id']      =   $description['brand_id'];
                     $this->request->data['Device']['description_id']=   $description['id'];
+                    $this->request->data['Device']['order_by']      =   $description['order_by'];
                     $this->request->data['Device']['quantity']      =   $description['sales_quantity'];
                     $this->request->data['Device']['model_no']      =   $description['model_no'];
                     $this->request->data['Device']['range']         =   $description['sales_range'];
@@ -575,6 +577,9 @@ App::uses('Controller', 'Controller');
                     $this->request->data['Device']['title8_val']    =   $description['title8_val'];
                     $this->request->data['Device']['status']        =  1;
                     $this->Device->save($this->request->data['Device']);
+                    $last_device_id  =   $this->Device->getLastInsertID();
+                    $this->Description->updateAll(array('Description.device_id'=>$last_device_id),array('Description.id'=>$description['id']));
+                    
                   endforeach;
               endif;
               

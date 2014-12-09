@@ -161,7 +161,7 @@ $(function() {
                     if($device['title8_val']!=''): $device8 +=1; endif;
                 ?>
                 <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
-                    <td class="text-center"><?PHP echo $device['id']; ?></td>
+                    <td class="text-center"><?PHP echo $device['order_by']; ?></td>
                     <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
                     <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
                     <td class="text-center"><?PHP echo $device['model_no']; ?></td>

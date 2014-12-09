@@ -125,7 +125,7 @@
                 {
                     $sales_orderid  =   $this->Salesorder->getLastInsertID();
                     $this->Random->updateAll(array('Random.salesorder'=>'"'.$sales_orderid.'"'),array('Random.id'=>1));  
-                    
+                    $this->device_id_session_logout($sales_orderid);
 //                    echo "SalesLast - ".$sales_orderid;
 //                    echo "<br>";
                     $create_quotation   =   $this->create_automatic_quotation($sales_orderid);
@@ -337,6 +337,7 @@
                        
                         // Status '0' will be deleted
                         $device_node_nonstatus    =   $this->Description->find('all',array('conditions'=>array('Description.status'=>0)));
+                        
                         if(!empty($device_node_nonstatus))
                         {
                             $this->Description->deleteAll(array('Description.status'=>0));
@@ -716,6 +717,7 @@
         {
             $this->autoRender = false;
             $this->loadModel('Description');
+            $this->loadModel('Device');
             $this->request->data = json_decode(file_get_contents("php://input"));
             $data = array();
             //echo json_encode($this->request->data);
@@ -727,6 +729,9 @@
             
             for($i=0;$i<$quantity;$i++)
             {
+                $device_last_insert_no = $this->Description->find('first',array('conditions'=>array('Description.salesorder_id'=>$this->request->data->salesorder_id),'order'=>'order_by DESC')); 
+                $order_by_count = $device_last_insert_no['Description']['order_by'];
+                //$order_by = $this->device_id_session($this->request->data->salesorder_id);
                 $data['customer_id']          =   $this->request->data->customer_id;
                 $data['salesorder_id']        =   $this->request->data->salesorder_id;
                 $data['quotation_id']        =   $this->request->data->quotation_id;
@@ -747,15 +752,62 @@
                 $data['sales_accountservice'] =   $this->request->data->instrument_account;
 //                $data['sales_titles']         =   $this->request->data->instrument_title;
                 $data['sales_total']          =   $this->request->data->instrument_total;
+                $data['order_by']             =   $order_by_count+1;
                 $data['status']               =   0;
                 $data['is_approved']          =   0;
                 $this->Description->create();
                 if($this->Description->save($data))
                 {
                     $instrument_ids[]=$this->Description->getLastInsertID();
+                   
+                    // Quotation Insert 
+                    
+                    // Order By Count
+                    $device_last_insert_no = $this->Device->find('first',array('conditions'=>array('Device.quotationno'=>$this->request->data->quotationno),'order'=>'order_by DESC')); 
+                    $order_by_count = $device_last_insert_no['Device']['order_by'];
+                    
+                    $data_quo['quotationno']   =   $this->request->data->quotationno;
+                    $data_quo['quotation_id']   =   $this->request->data->quotation_id;
+                    $data_quo['customer_id']   =   $this->request->data->customer_id;
+                    $data_quo['instrument_id'] =   $this->request->data->instrument_id;
+                    $data_quo['description_id']=   $this->Description->getLastInsertID();
+                    $data_quo['brand_id']      =   $this->request->data->instrument_brand;
+                    $data_quo['quantity']      =   $this->request->data->instrument_quantity;
+                    $data_quo['model_no']      =   $this->request->data->instrument_modelno;
+                    $data_quo['range']         =   $this->request->data->instrument_range;
+                    $data_quo['call_location'] =   $this->request->data->instrument_calllocation;
+                    $data_quo['call_type']     =   $this->request->data->instrument_calltype;
+                    $data_quo['validity']      =   $this->request->data->instrument_validity;
+                    $data_quo['discount']      =   $this->request->data->instrument_discount;
+                    $data_quo['department_id'] =   $this->request->data->instrument_department;
+                    $data_quo['unit_price']    =   $this->request->data->instrument_unitprice;
+                    $data_quo['account_service']=  $this->request->data->instrument_account;
+                    $data_quo['total']         =   $this->request->data->instrument_total;
+                    //$data_quo['title']         =   $this->request->data->instrument_title;
+                    $data_quo['order_by']      =   $order_by_count+1;
+                    $data_quo['status']        =   0;
+                    $des_id = $this->Description->getLastInsertID();
+                    //pr($data_quo);//exit;
+                    $this->Device->create();
+                    if($this->Device->save($data_quo))
+                    {
+                        $instrument_id_dev=$this->Device->getLastInsertID();
+                        $this->Description->updateAll(array('Description.device_id'=>$instrument_id_dev),array('Description.id'=>$des_id));
+                    }
+                    
+                   
+                    
                     $this->Session->setFlash(__('Instruments has been added Successfully'));
                 }
+                 $desc_make_all = $this->Description->find('all'); 
+                    
+                foreach($desc_make_all as $desc_quo):
+                    $this->Device->updateAll(array('Device.description_id'=>$desc_quo['Description']['id']),array('Device.id'=>$desc_quo['Description']['device_id']));
+                    //$desc_quo['Description']['device_id'];
+                endforeach;
             }
+            
+            
             header('Content-Type: application/json');
             echo json_encode($instrument_ids);
              
@@ -775,6 +827,7 @@
             
             for($i=0;$i<$quantity;$i++)
             {
+                $order_by = $this->device_id_session($this->request->data->salesorder_id);
                 $data['customer_id']          =   $this->request->data->customer_id;
                 $data['salesorder_id']        =   $this->request->data->salesorder_id;
                 $data['instrument_id']        =   $this->request->data->instrument_id;
@@ -797,6 +850,7 @@
                 $data['sales_total']          =   $this->request->data->instrument_total;
                 $data['status']               =   0;
                 $data['is_approved']          =   0;
+                $data['order_by']             =   $order_by;
                 $this->Description->create();
                 if($this->Description->save($data))
                 {

@@ -110,7 +110,7 @@ $(document).ready(function(){
                             $('.delivery_instrument_node .dataTables_empty').hide();
                             $('.delivery_instrument_node').append('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.id+'">\n\\n\
-                                    <td class="text-center">'+value.id+'</td>\n\
+                                    <td class="text-center">'+value.order_by+'</td>\n\
                                     <td class="text-center">'+value.Instrument.name+'</td>\n\\n\\n\
                                     <td class="text-center">'+value.Brand.brandname+'</td>\n\\n\
                                     <td class="text-center">'+value.model_no+'</td>\n\\n\\n\

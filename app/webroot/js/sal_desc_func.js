@@ -634,7 +634,8 @@ if(pending == 1)
      /**********************************************Generate Po for Salesorder*****************************/
    $(document).on('click','.sal_generate_po',function()
    {
-       
+       var val_ref = $('#val_ref_no').val();
+       if(val_ref===''){
        var po_id    =   $(this).attr('id');
        var confirm   =window.confirm('I dont have Po number.Need to generate temporary po');  
        if(confirm==true)
@@ -649,6 +650,10 @@ if(pending == 1)
                     
                 }
             });
+        }
+        }
+        else{
+            return false;
         }
    });
    
