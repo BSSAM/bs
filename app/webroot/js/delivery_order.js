@@ -238,11 +238,11 @@ $(document).ready(function(){
     
     /************************For Delivery order Approval Script*********************************/
    $(document).on('click','.approve_deliveryorder',function(){
-       var val_salesorderno=$('#del_order_no').val();
+       var val_de_no=$('#del_order_no').val();
        if(window.confirm("Are you sure?")){
        $.ajax({
             type: 'POST',
-            data:"id="+val_salesorderno,
+            data:"id="+val_de_no,
             url: path_url+'Deliveryorders/approve/',
             success: function js(data)
             {

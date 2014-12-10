@@ -461,6 +461,7 @@ App::uses('Controller', 'Controller');
             
             if(!empty($devices)):
                 $this->request->data['DelDescription']['deliveryorder_id']          =   $del_id;
+                $this->request->data['DelDescription']['order_by']                  =   $devices['Description']['order_by'];
                 $this->request->data['DelDescription']['salesorder_id']             =   $devices['Description']['salesorder_id'];
                 $this->request->data['DelDescription']['quotation_id']              =   $devices['Description']['quotation_id'];
                 $this->request->data['DelDescription']['quotationno']               =   $devices['Description']['quotationno'];

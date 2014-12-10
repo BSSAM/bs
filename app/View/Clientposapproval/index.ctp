@@ -63,7 +63,32 @@
                             </div>
                             
                             <div class="tab-pane" id="tab2">
-                                <?PHP echo $this->element('Clientposapproval/pobeforeinvoice'); ?>
+                            
+                            <div class="tabbable tabs-left">
+                                <ul class="nav nav-tabs nav-pills-border-color nav-justified">
+                                    <li class="active"><a href="#tab7" data-toggle="tab">Salesorder Full Invoice</a></li>
+                                    <li><a href="#tab8" data-toggle="tab">PO Full Invoice</a></li>
+                                    <li><a href="#tab9" data-toggle="tab">Quotation Full Invoice</a></li>
+                                    <li><a href="#tab10" data-toggle="tab">DO Full Invoice</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab7"><br><br>
+                                       <?PHP echo $this->element('Clientposapproval/pobeforein-sales'); ?>
+                                    </div>
+                                    <div class="tab-pane" id="tab8"><br><br>
+                                      <?PHP echo $this->element('Clientposapproval/pobeforein-po'); ?>
+                                    </div>
+                                     <div class="tab-pane" id="tab9"><br><br>
+                                      <?PHP echo $this->element('Clientposapproval/pobeforein-quo'); ?>
+                                    </div>
+                                     <div class="tab-pane" id="tab10"><br><br>
+                                      <?PHP echo $this->element('Clientposapproval/pobeforein-do'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                                
+                                <?PHP //echo $this->element('Clientposapproval/pobeforeinvoice'); ?>
                             </div>
                             
                         </div><!-- panel-body -->

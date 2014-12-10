@@ -785,7 +785,7 @@
                     $data_quo['total']         =   $this->request->data->instrument_total;
                     //$data_quo['title']         =   $this->request->data->instrument_title;
                     $data_quo['order_by']      =   $order_by_count+1;
-                    $data_quo['status']        =   0;
+                    $data_quo['status']        =   1;
                     $des_id = $this->Description->getLastInsertID();
                     //pr($data_quo);//exit;
                     $this->Device->create();

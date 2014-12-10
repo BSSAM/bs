@@ -8,7 +8,7 @@
 </script>
 
 <div class="table-responsive">
-    <table id="pofull-datatable" class="table table-vcenter table-condensed table-bordered">
+    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
         <thead>
             <tr>
                 <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
@@ -26,8 +26,8 @@
             </tr>
         </thead>
         <tbody>
-              <?PHP if(!empty($po_list_bybeforedo)):  ?>
-            <?php foreach($po_list_bybeforedo as $quotation_list): ?>
+              <?PHP if(!empty($po_lists_bybeforeinvoice)):  ?>
+            <?php foreach($po_lists_bybeforeinvoice as $quotation_list): ?>
             <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'){$class="danger";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
             <tr class=<?PHP echo $class; ?>>
                 <td class="text-center"><span class="label label-<?PHP echo $class; ?>"><?PHP echo $quotation_list['Quotation']['ref_no'] ?></span>&nbsp;&nbsp;</td>
@@ -53,7 +53,7 @@
                     <div class="btn-group">
                        <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
                                 <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
-                                <a href="#modal-user-settings-po" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update_po" data-placement="bottom" title="Update" data-id="<?PHP echo $quotation_list['Quotation']['ref_no'].'/'.$quotation_list['Customer']['invoice_type_id'] ?>">Update</a>
+                                <a href="#modal-user-settings-po" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update_in_po" data-placement="bottom" title="Update" data-id="<?PHP echo $quotation_list['Quotation']['ref_no'].'/'.$quotation_list['Customer']['invoice_type_id'] ?>">Update</a>
 
                     <?PHP }
                     //else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>
@@ -66,7 +66,7 @@
                     <div class="btn-group">
                        <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
                                 <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
-                                <a href="#modal-user-settings-po" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update_po" data-placement="bottom" title="Approve" data-id="<?PHP echo $quotation_list['Quotation']['ref_no'].'/'.$quotation_list['Customer']['invoice_type_id'] ?>">Approve</a>
+                                <a href="#modal-user-settings-in-po" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update_in_po" data-placement="bottom" title="Approve" data-id="<?PHP echo $quotation_list['Quotation']['ref_no'].'/'.$quotation_list['Customer']['invoice_type_id'] ?>">Approve</a>
 
                     <?PHP }
                     //else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>
@@ -98,10 +98,10 @@
 <span class="label label-six">Au</span> - Automatic PO Generation
 <span class="label label-five">Ma</span> - Manual PO Updated
                     
-   <div id="modal-user-settings-po" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+   <div id="modal-user-settings-in-po" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="block quotation_fullview">
+                <div class="block po_in_fullview">
                     <!-- Grids Content Content -->
                     
 

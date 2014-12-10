@@ -403,6 +403,22 @@ $(document).ready(function(){
             }
             });
     });
+    $(document).on('click','.client_po_quotation_update_po',function(){
+      
+        var q_id=$(this).attr('data-id');
+        var q_class=$(this).attr('title');
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Clientposapproval/view",
+            data: 'q_id='+q_id+'&q_class='+q_class,
+            cache: false,
+            success: function(data)
+            {
+                //console.log(data);
+                $('.quotation_fullview').html(data);
+            }
+            });
+    });
     
     $(document).on('click','.client_po_invoice_update',function(){
       
@@ -417,6 +433,38 @@ $(document).ready(function(){
             {
                 //console.log(data);
                 $('.invoice_fullview').html(data);
+            }
+            });
+    });
+    $(document).on('click','.client_po_quotation_update_in_po',function(){
+      
+        var q_id=$(this).attr('data-id');
+        var q_class=$(this).attr('title');
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Clientposapproval/view",
+            data: 'q_id='+q_id+'&q_class='+q_class,
+            cache: false,
+            success: function(data)
+            {
+                //console.log(data);
+                $('.po_in_fullview').html(data);
+            }
+            });
+    });
+    $(document).on('click','.client_po_quotation_update_in_sales',function(){
+      
+        var q_id=$(this).attr('data-id');
+        var q_class=$(this).attr('title');
+        $.ajax({
+            type: "POST",
+            url: path_url+"/Clientposapproval/view",
+            data: 'q_id='+q_id+'&q_class='+q_class,
+            cache: false,
+            success: function(data)
+            {
+                //console.log(data);
+                $('.sales_in_fullview').html(data);
             }
             });
     });
