@@ -1,10 +1,82 @@
 <script>$(function(){
     $('#inv_date').datepicker("setDate", new Date());
-});</script>
+});
+$(document).ready(function() {
+    $('.approve_invoice').click(function() {
+          return confirm('You sure you want to continue?');
+    });
+});
+</script>
 
 <?PHP if(!empty($salesorder_list)):?>
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
+//$(function() {
+//    $('.edit_title1').editable(path_url+'/Salesorders/update_title1', {
+//            id        : 'device_id',
+//            name      : 'title1',
+//            type      : 'text',
+//            cancel    : 'Cancel',
+//            submit    : 'Save',
+//            tooltip   : 'Click to edit'
+//       });
+//    $('.edit_title2').editable(path_url+'/Salesorders/update_title2', {
+//            id        : 'device_id',
+//            name      : 'title2',
+//            type      : 'text',
+//            cancel    : 'Cancel',
+//            submit    : 'Save',
+//            tooltip   : 'Click to edit'
+//       });
+//    $('.edit_title3').editable(path_url+'/Salesorders/update_title3', {
+//            id        : 'device_id',
+//            name      : 'title3',
+//            type      : 'text',
+//            cancel    : 'Cancel',
+//            submit    : 'Save',
+//            tooltip   : 'Click to edit'
+//       });
+//    $('.edit_title4').editable(path_url+'/Salesorders/update_title4', {
+//            id        : 'device_id',
+//            name      : 'title4',
+//            type      : 'text',
+//            cancel    : 'Cancel',
+//            submit    : 'Save',
+//            tooltip   : 'Click to edit'
+//       });
+//    $('.edit_title5').editable(path_url+'/Salesorders/update_title5', {
+//            id        : 'device_id',
+//            name      : 'title5',
+//            type      : 'text',
+//            cancel    : 'Cancel',
+//            submit    : 'Save',
+//            tooltip   : 'Click to edit'
+//       });
+//    $('.edit_title6').editable(path_url+'/Salesorders/update_title6', {
+//            id        : 'device_id',
+//            name      : 'title6',
+//            type      : 'text',
+//            cancel    : 'Cancel',
+//            submit    : 'Save',
+//            tooltip   : 'Click to edit'
+//       });
+//    $('.edit_title7').editable(path_url+'/Salesorders/update_title7', {
+//            id        : 'device_id',
+//            name      : 'title7',
+//            type      : 'text',
+//            cancel    : 'Cancel',
+//            submit    : 'Save',
+//            tooltip   : 'Click to edit'
+//       });
+//    $('.edit_title8').editable(path_url+'/Salesorders/update_title8', {
+//            id        : 'device_id',
+//            name      : 'title8',
+//            type      : 'text',
+//            cancel    : 'Cancel',
+//            submit    : 'Save',
+//            tooltip   : 'Click to edit'
+//       });
+//});
 </script>
 <style>
     .show{
@@ -152,6 +224,29 @@
                                                                     'label'=>false,'value'=>$salesorder_list['Quotation']['InstrumentType']['invoice'],'readonly'=>'readonly')); ?>
                         </div>
                     </div>
+                    <?PHP 
+        //pr($deliveryorder['DelDescription']);exit;
+        $device1 = 0;
+        $device2 = 0;
+        $device3 = 0;
+        $device4 = 0;
+        $device5 = 0;
+        $device6 = 0;
+        $device7 = 0;
+        $device8 = 0;
+            if(!empty($desc)):
+                foreach($desc as $device):
+                    if($device['title1_val']!=''): $device1 +=1; endif;
+                    if($device['title2_val']!=''): $device2 +=1; endif;
+                    if($device['title3_val']!=''): $device3 +=1; endif;
+                    if($device['title4_val']!=''): $device4 +=1; endif;
+                    if($device['title5_val']!=''): $device5 +=1; endif;
+                    if($device['title6_val']!=''): $device6 +=1; endif;
+                    if($device['title7_val']!=''): $device7 +=1; endif;
+                    if($device['title8_val']!=''): $device8 +=1; endif;
+                endforeach;
+            endif;
+        ?>
                     <div class="col-sm-3 col-lg-12">
                         <div class="table-responsive">
                             <table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -167,6 +262,30 @@
                                         <th class="text-center">Unit Price</th>
                                         <th class="text-center">Department</th>
                                         <th class="text-center">Total</th>
+                                        <?php if($device1 != 0): ?> 
+            <th class="text-center edit_title1"><?php echo $titles[0]; ?></th>
+            <?php endif; ?>
+             <?php if($device2 != 0): ?> 
+            <th class="text-center edit_title2"><?php echo $titles[1]; ?></th>
+            <?php endif; ?>
+             <?php if($device3 != 0): ?> 
+            <th class="text-center edit_title3"><?php echo $titles[2]; ?></th>
+            <?php endif; ?>
+             <?php if($device4 != 0): ?> 
+            <th class="text-center edit_title4"><?php echo $titles[3]; ?></th>
+            <?php endif; ?>
+             <?php if($device5 != 0): ?> 
+            <th class="text-center edit_title5"><?php echo $titles[4]; ?></th>
+            <?php endif; ?>
+             <?php if($device6 != 0): ?> 
+            <th class="text-center edit_title6"><?php echo $titles[5]; ?></th>
+            <?php endif; ?>
+             <?php if($device7 != 0): ?> 
+            <th class="text-center edit_title7"><?php echo $titles[6]; ?></th>
+            <?php endif; ?>
+             <?php if($device8 != 0): ?> 
+            <th class="text-center edit_title8"><?php echo $titles[7]; ?></th>
+            <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody class="sales_Instrument_info"> 
@@ -177,10 +296,18 @@
                                         
                                         foreach($desc as $device):
                                         //pr($device);exit;
+                                            if($device['title1_val']!=''): $device1 +=1; endif;
+                                            if($device['title2_val']!=''): $device2 +=1; endif;
+                                            if($device['title3_val']!=''): $device3 +=1; endif;
+                                            if($device['title4_val']!=''): $device4 +=1; endif;
+                                            if($device['title5_val']!=''): $device5 +=1; endif;
+                                            if($device['title6_val']!=''): $device6 +=1; endif;
+                                            if($device['title7_val']!=''): $device7 +=1; endif;
+                                            if($device['title8_val']!=''): $device8 +=1; endif;
                                         $total_device = $total_device + $device['sales_total'];
                                     ?>
                                         <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
-                                            <td class="text-center"><?PHP echo $device['id']; ?></td>
+                                            <td class="text-center"><?PHP echo $device['order_by']; ?></td>
                                             <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
                                             <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
                                             <td class="text-center"><?PHP echo $device['model_no']; ?></td>
@@ -190,6 +317,30 @@
                                             <td class="text-center"><?PHP echo $device['sales_unitprice']; ?></td>
                                             <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
                                             <td class="text-center"><?PHP echo $device['sales_total']; ?></td>
+                                            <?php if($device1 != 0): ?> 
+                                            <td class="text-center edit_title1" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title1_val']; ?></td>
+                                            <?php endif; ?>
+                                            <?php if($device2 != 0): ?> 
+                                            <td class="text-center edit_title2" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title2_val']; ?></td>
+                                            <?php endif; ?>
+                                            <?php if($device3 != 0): ?> 
+                                            <td class="text-center edit_title3" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title3_val']; ?></td>
+                                            <?php endif; ?>
+                                            <?php if($device4 != 0): ?> 
+                                            <td class="text-center edit_title4" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title4_val']; ?></td>
+                                            <?php endif; ?>
+                                            <?php if($device5 != 0): ?> 
+                                            <td class="text-center edit_title5" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title5_val']; ?></td>
+                                            <?php endif; ?>
+                                            <?php if($device6 != 0): ?> 
+                                            <td class="text-center edit_title6" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title6_val']; ?></td>
+                                            <?php endif; ?>
+                                            <?php if($device7 != 0): ?> 
+                                            <td class="text-center edit_title7" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title7_val']; ?></td>
+                                            <?php endif; ?>
+                                            <?php if($device8 != 0): ?> 
+                                            <td class="text-center edit_title8" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title8_val']; ?></td>
+                                            <?php endif; ?>
                                         </tr>
                                     <?PHP 
                                         endforeach; 
@@ -217,11 +368,11 @@
                             </table>
                         </div>
                     </div>
-    
+                    
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
                         <?php //if($invoices['Salesorder']['is_approved']==1 && $invoices['Salesorder']['is_poapproved']==1 ): ?>
-                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'submit','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false,'onsubmit'=>'return confirm("are you sure?")')); ?>
+                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'submit','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false,'confirm'=>'Are you Sure?')); ?>
                             <?php //endif; ?>
 
                         </div>
@@ -467,7 +618,7 @@
                             </table>
                         </div>
                     </div>
-    
+                    
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
                         <?php //if($invoices['Salesorder']['is_approved']==1 && $invoices['Salesorder']['is_poapproved']==1 ): ?>

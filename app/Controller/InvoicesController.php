@@ -12,7 +12,7 @@ class InvoicesController extends AppController
     public $helpers = array('Html','Form','Session');
     public $components = array('RequestHandler');
     public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Random',
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Random','Title',
                             'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog','InstrumentType','Title','Invoice','DelDescription','Deliveryorder');
     public function index()
     {
@@ -98,6 +98,13 @@ class InvoicesController extends AppController
             $this->set('total',$total);
             
             $this->set('desc',$desc);
+            
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             
         elseif($result_string == 'BQS' || $result_string == 'BSQ'):
             $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$id,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_invoice_created'=>1)));    

@@ -53,7 +53,7 @@
                     <div class="btn-group">
                        <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>
                                 <?PHP $invoice_type = $this->ClientPO->getinvoice_type($quotation_list['Customer']['id']); ?>
-                                <a href="#modal-user-settings-po" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update_in_po" data-placement="bottom" title="Update" data-id="<?PHP echo $quotation_list['Quotation']['ref_no'].'/'.$quotation_list['Customer']['invoice_type_id'] ?>">Update</a>
+                                <a href="#modal-user-settings-in-po" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update_in_po" data-placement="bottom" title="Update" data-id="<?PHP echo $quotation_list['Quotation']['ref_no'].'/'.$quotation_list['Customer']['invoice_type_id'] ?>">Update</a>
 
                     <?PHP }
                     //else if($quotation_list['Quotation']['po_generate_type']=='Manual'&&$quotation_list['Quotation']['is_jobcompleted']==1){ ?>

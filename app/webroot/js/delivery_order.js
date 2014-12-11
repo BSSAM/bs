@@ -247,9 +247,10 @@ $(document).ready(function(){
                 //var url = path_url+"Deliveryorders/";    
                // $(location).attr('href',url);
                 alert("Delivery Order Approval Successful");
+                 //console.log(data);
+                 //return false;
                 window.location.reload();
-              //   console.log(data);
-                // return false;
+                
             }
         });
         

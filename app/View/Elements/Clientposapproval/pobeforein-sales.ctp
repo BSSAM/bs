@@ -69,7 +69,7 @@
                     <div class="btn-group">
                        <?php //echo $salesorder_list['Salesorder']['po_generate_type']; ?>
                                 <?PHP $invoice_type = $this->ClientPO->getinvoice_type($salesorder_list['Customer']['id']); ?>
-                                <a href="#modal-user-settings-sales" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update_in_sales" data-placement="bottom" title="Approve" data-id="<?PHP echo $salesorder_list['Salesorder']['id'].'/'.$salesorder_list['Customer']['invoice_type_id'] ?>">Approve</a>
+                                <a href="#modal-user-settings-in-sales" data-toggle="modal" class="btn btn-alt btn-xs btn-success client_po_quotation_update_in_sales" data-placement="bottom" title="Approve" data-id="<?PHP echo $salesorder_list['Salesorder']['id'].'/'.$salesorder_list['Customer']['invoice_type_id'] ?>">Approve</a>
 
                     <?PHP }
                     //else if($salesorder_list['Salesorder']['po_generate_type']=='Manual'&&$salesorder_list['Salesorder']['is_jobcompleted']==1){ ?>

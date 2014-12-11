@@ -351,6 +351,7 @@
             $deliver_customer = $deliveryorder['Deliveryorder']['customer_id'];
             $deliver_quotation = $deliveryorder['Deliveryorder']['quotationno'];
             $deliver_salesorder = $deliveryorder['Deliveryorder']['salesorder_id'];
+            //pr($deliver_salesorder);
             $deliver_ref_no = $deliveryorder['Deliveryorder']['ref_no'];
             //$deliver_ref_no = $deliveryorder['Deliveryorder']['ref_no'];
             $customer=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$deliver_customer),'recursive'=>2));
@@ -376,8 +377,9 @@
                     $this->Datalog->save($this->request->data['Datalog']);
                     
                     $data_quo = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$deliver_quotation,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+                    $quotation_instrument_count = 0;
                     foreach($data_quo as $quo_data):
-                        $quotation_instrument_count = 0;
+                        
                         $quotation_no[] = $quo_data['Quotation']['quotationno']; 
                         foreach($quo_data['Device'] as $instrument_count):
                             if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
@@ -390,8 +392,9 @@
                     
                     $data_quo_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
                     $count_quo_del = 0;
+                    $deliveryorder_instrument_count = 0;
                     foreach($data_quo_del as $del_quo_data):
-                        $deliveryorder_instrument_count = 0;
+                        
                         $count_quo_del = $count_quo_del + 1;
                         foreach($del_quo_data['DelDescription'] as $instrument_count):
                             if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
@@ -406,7 +409,10 @@
                     foreach($data_quo_del_app as $del_quo_data_app):
                         $count_quo_del_app = $count_quo_del_app + 1;
                     endforeach;
-                    
+                    /////////////////////////////////
+                    /////////////////////////////////  Check This
+                    /////////////////////////////////
+                    /////////////////////////////////
                     if($deliveryorder_instrument_count == $quotation_instrument_count)
                     {
                         if($count_quo_del == $count_quo_del_app)
@@ -495,25 +501,26 @@
                         //$this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.quotationno'=>$deliver_quotation));
                     }
                     
-                    $data_sal = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.ref_no'=>$deliver_salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'recursive'=>3));
+                    $data_sal = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.id'=>$deliver_salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'recursive'=>3));
+                    //pr($data_sal);
                             // Salesorder Details
+                    $salesorder_instrument_count = 0;
                     foreach($data_sal as $sal_data):
-                        $salesorder_instrument_count = 0;
-                        
                         foreach($sal_data['Description'] as $instrument_count):
                             if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
                                 $salesorder_instrument_count = $salesorder_instrument_count + 1;
+                            //pr($salesorder_instrument_count);
                             endif;
                         endforeach;
-                        
                     endforeach;
                     
                     // Salesorder Delivery Approval Check for Updating 
                     
                     $data_sales_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
                     $count_sales_del = 0;
+                    $deliveryorder_instrument_count = 0;
                     foreach($data_sales_del as $del_sales_data):
-                        $deliveryorder_instrument_count = 0;
+                        
                         $count_sales_del = $count_sales_del + 1;
                         foreach($del_sales_data['DelDescription'] as $instrument_count):
                             if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
@@ -521,7 +528,8 @@
                             endif;
                         endforeach;
                     endforeach;
-                    
+                    //pr($salesorder_instrument_count);
+                   // pr($deliveryorder_instrument_count);
                     if($salesorder_instrument_count == $deliveryorder_instrument_count)
                     {
                         $data_sales_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
@@ -552,7 +560,9 @@
                             $delivery_order_no_app[] = $del_data_app['Deliveryorder']['delivery_order_no'];
                             $count_del_app = $count_del_app + 1;
                         endforeach;
-
+                        //pr($count_del);
+                        //pr($count_del_app);
+                        //exit;
                         if($count_del == $count_del_app)
                         {
                             $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1),array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1));
@@ -724,7 +734,7 @@
                         //$this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.quotationno'=>$deliver_quotation));
                     }
                     
-                    $data_sal = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.ref_no'=>$deliver_salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'recursive'=>3));
+                    $data_sal = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.id'=>$deliver_salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'recursive'=>3));
                             // Salesorder Details
                     foreach($data_sal as $sal_data):
                         $salesorder_instrument_count = 0;
@@ -741,8 +751,9 @@
                     
                     $data_sales_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
                     $count_sales_del = 0;
+                    $deliveryorder_instrument_count = 0;
                     foreach($data_sales_del as $del_sales_data):
-                        $deliveryorder_instrument_count = 0;
+                        
                         $count_sales_del = $count_sales_del + 1;
                         foreach($del_sales_data['DelDescription'] as $instrument_count):
                             if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
@@ -750,7 +761,9 @@
                             endif;
                         endforeach;
                     endforeach;
-                    
+                    //pr($salesorder_instrument_count);
+                    //pr($deliveryorder_instrument_count);
+                    //exit;
                     if($salesorder_instrument_count == $deliveryorder_instrument_count)
                     {
                         $data_sales_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
