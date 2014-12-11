@@ -116,9 +116,9 @@ $(function() {
             <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Validity</th>
-            <th class="text-center">Unit Price</th>
+<!--            <th class="text-center">Unit Price</th>-->
             <th class="text-center">Department</th>
-            <th class="text-center">Total</th>
+<!--            <th class="text-center">Total</th>-->
             <?php if($device1 != 0): ?> 
             <th class="text-center edit_title1"><?php echo $titles[0]; ?></th>
             <?php endif; ?>
@@ -168,9 +168,9 @@ $(function() {
                     <td class="text-center"><?PHP echo $device['Range']['range_name']; ?></td>
                     <td class="text-center"><?PHP echo $device['delivery_calllocation']; ?></td>
                     <td class="text-center"><?PHP echo $device['delivery_calltype']; ?></td>
-                    <td class="text-center"><?PHP echo $device['delivery_unitprice']; ?></td>
+<!--                    <td class="text-center"><?PHP //echo $device['delivery_unitprice']; ?></td>-->
                     <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
-                    <td class="text-center"><?PHP echo $device['delivery_total']; ?></td>
+<!--                    <td class="text-center"><?PHP //echo $device['delivery_total']; ?></td>-->
                     <?php if($device1 != 0): ?> 
                     <td class="text-center edit_title1" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['title1_val']; ?></td>
                     <?php endif; ?>

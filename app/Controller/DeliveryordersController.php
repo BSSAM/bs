@@ -118,7 +118,7 @@
                     foreach($delivery_before['Description'] as $desc):
                         if($desc['checking'] == 1):
                             $this->request->data['DelDescription']['deliveryorder_id']          =   $del_last_id;
-                            $this->request->data['DelDescription']['salesorder_id']             =   $desc['salesorder_id'];
+                            $this->request->data['DelDescription']['salesorder_id']             =   $desc['id'];
                             $this->request->data['DelDescription']['order_by']                  =   $desc['order_by'];
                             $this->request->data['DelDescription']['quotation_id']              =   $desc['quotation_id'];
                             $this->request->data['DelDescription']['quotationno']               =   $desc['quotationno'];
@@ -375,12 +375,29 @@
                     $this->Datalog->create();
                     $this->Datalog->save($this->request->data['Datalog']);
                     
+                    $data_quo = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$deliver_quotation,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+                    foreach($data_quo as $quo_data):
+                        $quotation_instrument_count = 0;
+                        $quotation_no[] = $quo_data['Quotation']['quotationno']; 
+                        foreach($quo_data['Device'] as $instrument_count):
+                            if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
+                                $quotation_instrument_count = $quotation_instrument_count + 1;
+                            endif;
+                        endforeach;
+                       // $count_quo[] = $quotation_instrument_count;    
+                    endforeach;
                     // Quotation Delivery Approval Check for Updating 
                     
                     $data_quo_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
                     $count_quo_del = 0;
                     foreach($data_quo_del as $del_quo_data):
+                        $deliveryorder_instrument_count = 0;
                         $count_quo_del = $count_quo_del + 1;
+                        foreach($del_quo_data['DelDescription'] as $instrument_count):
+                            if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
+                                $deliveryorder_instrument_count = $deliveryorder_instrument_count + 1;
+                            endif;
+                        endforeach;
                     endforeach;
                     
                     
@@ -390,54 +407,57 @@
                         $count_quo_del_app = $count_quo_del_app + 1;
                     endforeach;
                     
-                    if($count_quo_del == $count_quo_del_app)
+                    if($deliveryorder_instrument_count == $quotation_instrument_count)
                     {
-                        $this->Quotation->updateAll(array('Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
-                        $this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.quotationno'=>$deliver_quotation));
-                    }
-                    
-                    /////////////////////////////////////////
-                    // Check All Deliveryorders are Approved
-                    
-                    $data_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
-                    $count_del = 0;
-                    foreach($data_del as $del_data):
-                        $delivery_order_no[] = $del_data['Deliveryorder']['delivery_order_no'];
-                        $count_del = $count_del + 1;
-                    endforeach;
-                    
-                    
-                    $data_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
-                    $count_del_app = 0;
-                    foreach($data_del_app as $del_data_app):
-                        $delivery_order_no_app[] = $del_data_app['Deliveryorder']['delivery_order_no'];
-                        $count_del_app = $count_del_app + 1;
-                    endforeach;
-                    
-                    if($count_del == $count_del_app)
-                    {
-                        $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1),array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1));
-                        $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1),array('Quotation.ref_no'=>$deliver_ref_no,'Quotation.po_generate_type'=>'Manual','Quotation.is_poapproved'=>1));
-                        $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1),array('Salesorder.ref_no'=>$deliver_ref_no,'Salesorder.po_generate_type'=>'Manual','Salesorder.is_poapproved'=>1));
-                        
-                        $this->request->data['Logactivity']['logname'] = 'Invoice';
-                        $this->request->data['Logactivity']['logactivity'] = 'Add';
-                        $this->request->data['Logactivity']['logid'] = $deliver_ref_no;
-                        $this->request->data['Logactivity']['logno'] = $deliver_ref_no;
-                        $this->request->data['Logactivity']['invoice_type_id'] = $inv_type;
-                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                        $this->request->data['Logactivity']['logapprove'] = 1;
-                        $this->Logactivity->create();
-                        $this->Logactivity->save($this->request->data['Logactivity']);
+                        if($count_quo_del == $count_quo_del_app)
+                        {
+                            $this->Quotation->updateAll(array('Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
+                            $this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.quotationno'=>$deliver_quotation));
+                        }
 
-                        $this->request->data['Datalog']['logname'] = 'Invoice';
-                        $this->request->data['Datalog']['logactivity'] = 'Add';
-                        $this->request->data['Datalog']['logid'] = $deliver_ref_no;
-                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                        $this->Datalog->create();
-                        $this->Datalog->save($this->request->data['Datalog']);
-                        
-                        $this->Session->setFlash(__("Invoice has been Created after the DO Approval"));
+                        /////////////////////////////////////////
+                        // Check All Deliveryorders are Approved
+
+                        $data_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
+                        $count_del = 0;
+                        foreach($data_del as $del_data):
+                            $delivery_order_no[] = $del_data['Deliveryorder']['delivery_order_no'];
+                            $count_del = $count_del + 1;
+                        endforeach;
+
+
+                        $data_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
+                        $count_del_app = 0;
+                        foreach($data_del_app as $del_data_app):
+                            $delivery_order_no_app[] = $del_data_app['Deliveryorder']['delivery_order_no'];
+                            $count_del_app = $count_del_app + 1;
+                        endforeach;
+
+                        if($count_del == $count_del_app)
+                        {
+                            $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1),array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1));
+                            $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1),array('Quotation.ref_no'=>$deliver_ref_no,'Quotation.po_generate_type'=>'Manual','Quotation.is_poapproved'=>1));
+                            $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1),array('Salesorder.ref_no'=>$deliver_ref_no,'Salesorder.po_generate_type'=>'Manual','Salesorder.is_poapproved'=>1));
+
+                            $this->request->data['Logactivity']['logname'] = 'Invoice';
+                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+                            $this->request->data['Logactivity']['logid'] = $deliver_ref_no;
+                            $this->request->data['Logactivity']['logno'] = $deliver_ref_no;
+                            $this->request->data['Logactivity']['invoice_type_id'] = $inv_type;
+                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                            $this->request->data['Logactivity']['logapprove'] = 1;
+                            $this->Logactivity->create();
+                            $this->Logactivity->save($this->request->data['Logactivity']);
+
+                            $this->request->data['Datalog']['logname'] = 'Invoice';
+                            $this->request->data['Datalog']['logactivity'] = 'Add';
+                            $this->request->data['Datalog']['logid'] = $deliver_ref_no;
+                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                            $this->Datalog->create();
+                            $this->Datalog->save($this->request->data['Datalog']);
+
+                            $this->Session->setFlash(__("Invoice has been Created after the DO Approval"));
+                        }
                     }
                 }
                 if($inv_type == 3)
@@ -475,54 +495,161 @@
                         //$this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.quotationno'=>$deliver_quotation));
                     }
                     
+                    $data_sal = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.ref_no'=>$deliver_salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'recursive'=>3));
+                            // Salesorder Details
+                    foreach($data_sal as $sal_data):
+                        $salesorder_instrument_count = 0;
+                        
+                        foreach($sal_data['Description'] as $instrument_count):
+                            if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
+                                $salesorder_instrument_count = $salesorder_instrument_count + 1;
+                            endif;
+                        endforeach;
+                        
+                    endforeach;
+                    
                     // Salesorder Delivery Approval Check for Updating 
                     
                     $data_sales_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
                     $count_sales_del = 0;
                     foreach($data_sales_del as $del_sales_data):
+                        $deliveryorder_instrument_count = 0;
                         $count_sales_del = $count_sales_del + 1;
+                        foreach($del_sales_data['DelDescription'] as $instrument_count):
+                            if($instrument_count['is_deleted'] == 0 && $instrument_count['status'] == 1):
+                                $deliveryorder_instrument_count = $deliveryorder_instrument_count + 1;
+                            endif;
+                        endforeach;
                     endforeach;
                     
-                    
-                    $data_sales_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
-                    $count_sales_del_app = 0;
-                    foreach($data_sales_del_app as $del_sales_data_app):
-                        $count_sales_del_app = $count_sales_del_app + 1;
-                    endforeach;
-                    
-                    if($count_sales_del == $count_sales_del_app)
+                    if($salesorder_instrument_count == $deliveryorder_instrument_count)
                     {
-                        $this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.salesorder_id'=>$deliver_salesorder));
+                        $data_sales_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
+                        $count_sales_del_app = 0;
+                        foreach($data_sales_del_app as $del_sales_data_app):
+                            $count_sales_del_app = $count_sales_del_app + 1;
+                        endforeach;
+
+                        if($count_sales_del == $count_sales_del_app)
+                        {
+                            $this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.id'=>$deliver_salesorder));
+                        }
+
+                        /////////////////////////////////////////
+                        // Check All Deliveryorders are Approved
+
+                        $data_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
+                        $count_del = 0;
+                        foreach($data_del as $del_data):
+                            $delivery_order_no[] = $del_data['Deliveryorder']['delivery_order_no'];
+                            $count_del = $count_del + 1;
+                        endforeach;
+
+
+                        $data_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
+                        $count_del_app = 0;
+                        foreach($data_del_app as $del_data_app):
+                            $delivery_order_no_app[] = $del_data_app['Deliveryorder']['delivery_order_no'];
+                            $count_del_app = $count_del_app + 1;
+                        endforeach;
+
+                        if($count_del == $count_del_app)
+                        {
+                            $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1),array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1));
+                            //$this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1),array('Quotation.ref_no'=>$deliver_ref_no,'Quotation.po_generate_type'=>'Manual','Quotation.is_poapproved'=>1));
+                            $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1),array('Salesorder.id'=>$deliver_salesorder,'Salesorder.po_generate_type'=>'Manual','Salesorder.is_poapproved'=>1));
+
+                            $this->request->data['Logactivity']['logname'] = 'Invoice';
+                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+                            $this->request->data['Logactivity']['logid'] = $deliver_salesorder;
+                            $this->request->data['Logactivity']['logno'] = $deliver_salesorder;
+                            $this->request->data['Logactivity']['invoice_type_id'] = $inv_type;
+                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                            $this->request->data['Logactivity']['logapprove'] = 1;
+                            $this->Logactivity->create();
+                            $this->Logactivity->save($this->request->data['Logactivity']);
+
+                            $this->request->data['Datalog']['logname'] = 'Invoice';
+                            $this->request->data['Datalog']['logactivity'] = 'Add';
+                            $this->request->data['Datalog']['logid'] = $deliver_salesorder;
+                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                            $this->Datalog->create();
+                            $this->Datalog->save($this->request->data['Datalog']);
+                            $this->Session->setFlash(__("Invoice has been Created after the DO Approval"));
+                        }
+                    }
+                }
+            }
+            
+            /////// PO Before Invoice ///////////
+            
+            else if($ack_type == 2)
+            {
+                if($inv_type == 1)
+                {
+                    
+                // Deliveryorder Approve
+                    
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id));
+                    $user_id = $this->Session->read('sess_userid');
+                    $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
+                    $this->request->data['Datalog']['logname'] = 'Deliveryorder';
+                    $this->request->data['Datalog']['logactivity'] = 'Approve';
+                    $this->request->data['Datalog']['logid'] = $deliveryorder['Deliveryorder']['id'];
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    $this->Datalog->create();
+                    $this->Datalog->save($this->request->data['Datalog']);
+                    
+                    // Quotation Delivery Approval Check for Updating 
+                    
+                    $data_quo_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
+                    $count_quo_del = 0;
+                    foreach($data_quo_del as $del_quo_data):
+                        $count_quo_del = $count_quo_del + 1;
+                    endforeach;
+                    
+                    
+                    $data_quo_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
+                    $count_quo_del_app = 0;
+                    foreach($data_quo_del_app as $del_quo_data_app):
+                        $count_quo_del_app = $count_quo_del_app + 1;
+                    endforeach;
+                    
+                    if($count_quo_del == $count_quo_del_app)
+                    {
+                        $this->Quotation->updateAll(array('Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
+                        $this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.quotationno'=>$deliver_quotation));
                     }
                     
                     /////////////////////////////////////////
                     // Check All Deliveryorders are Approved
-                    
-                    $data_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
-                    $count_del = 0;
-                    foreach($data_del as $del_data):
-                        $delivery_order_no[] = $del_data['Deliveryorder']['delivery_order_no'];
-                        $count_del = $count_del + 1;
-                    endforeach;
-                    
-                    
-                    $data_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
-                    $count_del_app = 0;
-                    foreach($data_del_app as $del_data_app):
-                        $delivery_order_no_app[] = $del_data_app['Deliveryorder']['delivery_order_no'];
-                        $count_del_app = $count_del_app + 1;
-                    endforeach;
-                    
-                    if($count_del == $count_del_app)
-                    {
-                        $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1),array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1));
-                        //$this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1),array('Quotation.ref_no'=>$deliver_ref_no,'Quotation.po_generate_type'=>'Manual','Quotation.is_poapproved'=>1));
-                        $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1),array('Salesorder.id'=>$deliver_salesorder,'Salesorder.po_generate_type'=>'Manual','Salesorder.is_poapproved'=>1));
+                    //$deliver_total_inst = $deliveryorder['Deliveryorder']['total_inst'];
+                     
+//                    $data_del = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.is_deleted'=>0),'recursive'=>3));
+//                    $count_del = 0;
+//                    foreach($data_del as $del_data):
+//                        $delivery_order_no[] = $del_data['Deliveryorder']['delivery_order_no'];
+//                        $count_del = $count_del + 1;
+//                    endforeach;
+//                    
+//                    
+//                    $data_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
+//                    $count_del_app = 0;
+//                    foreach($data_del_app as $del_data_app):
+//                        $delivery_order_no_app[] = $del_data_app['Deliveryorder']['delivery_order_no'];
+//                        $count_del_app = $count_del_app + 1;
+//                    endforeach;
+//                    
+//                    if($count_del == $count_del_app)
+//                    {
+                        $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1),array('Deliveryorder.ref_no'=>$deliver_ref_no,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1));
+                        $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1),array('Quotation.ref_no'=>$deliver_ref_no,'Quotation.po_generate_type'=>'Manual','Quotation.is_poapproved'=>1));
+                        $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1),array('Salesorder.ref_no'=>$deliver_ref_no,'Salesorder.po_generate_type'=>'Manual','Salesorder.is_poapproved'=>1));
                         
                         $this->request->data['Logactivity']['logname'] = 'Invoice';
                         $this->request->data['Logactivity']['logactivity'] = 'Add';
-                        $this->request->data['Logactivity']['logid'] = $deliver_salesorder;
-                        $this->request->data['Logactivity']['logno'] = $deliver_salesorder;
+                        $this->request->data['Logactivity']['logid'] = $deliver_ref_no;
+                        $this->request->data['Logactivity']['logno'] = $deliver_ref_no;
                         $this->request->data['Logactivity']['invoice_type_id'] = $inv_type;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
@@ -531,151 +658,17 @@
 
                         $this->request->data['Datalog']['logname'] = 'Invoice';
                         $this->request->data['Datalog']['logactivity'] = 'Add';
-                        $this->request->data['Datalog']['logid'] = $deliver_salesorder;
+                        $this->request->data['Datalog']['logid'] = $deliver_ref_no;
                         $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
                         $this->Datalog->create();
                         $this->Datalog->save($this->request->data['Datalog']);
                         
-                        //$this->Session->setFlash(__("Invoice has been Created after the DO Approval"));
-                    }
+                        $this->Session->setFlash(__("Invoice has been Created after the DO Approval"));
+                    }    
                     
                     
+                 //////////////////////////////////////////////////////////////////   
                     
-//                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
-//                    $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1,'Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
-//                    $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1,'Salesorder.is_delivery_approved'=>1),array('Salesorder.id'=>$deliver_salesorder));
-//                    //return $updated;
-//
-//                    $user_id = $this->Session->read('sess_userid');
-//                    $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
-//                    $this->request->data['Datalog']['logname'] = 'Deliveryorder';
-//                    $this->request->data['Datalog']['logactivity'] = 'Approve';
-//                    $this->request->data['Datalog']['logid'] = $deliveryorder['Deliveryorder']['id'];
-//                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-//                    $this->Datalog->create();
-//                    $this->Datalog->save($this->request->data['Datalog']);
-//    //                $deliveryorder=$this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
-//    //                $deliveryorder_count=$this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
-//    //                $count_del = 0;
-//    //                foreach($deliveryorder as $del_data):
-//    //                        if($del_data['Deliveryorder']['is_approved'] == 1):
-//    //                            $count_del = $count_del + 1;
-//    //                        endif;
-//    //                endforeach;
-//    //                if($deliveryorder_count == $count_del)
-//    //                {
-//                    $po_quo_count = $this->Device->find('count',array('conditions'=>array('Device.quotationno'=>$deliver_quotation)));
-//                    $po_inv_type_1 = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation,'Deliveryorder.is_approved'=>1)));
-//                    $count_po_inv = 0;
-//                    foreach($po_inv_type_1 as $po_inv):
-//                        $deliveryorder_po_desc = $po_inv['DelDescription'];
-//                        $count_po_inv = $count_po_inv + count($deliveryorder_po_desc);
-//                    endforeach;
-//
-//                    if($po_quo_count == $count_po_inv)
-//                    {
-//                        /******************
-//                        * Data Log - Invoice
-//                        */
-//    //                    if($inv_type == 3)
-//    //                    {
-//    //                        $this->request->data['Logactivity']['logname'] = 'Invoice';
-//    //                        $this->request->data['Logactivity']['logactivity'] = 'Add';
-//    //                        $this->request->data['Logactivity']['logid'] = $id;
-//    //                        $this->request->data['Logactivity']['logno'] = $deliver_salesorder;
-//    //                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-//    //                        $this->request->data['Logactivity']['logapprove'] = 1;
-//    //                        $this->Logactivity->create();
-//    //                        $this->Logactivity->save($this->request->data['Logactivity']);
-//    //
-//    //                        $this->request->data['Datalog']['logname'] = 'Invoice';
-//    //                        $this->request->data['Datalog']['logactivity'] = 'Add';
-//    //                        $this->request->data['Datalog']['logid'] = $deliver_salesorder;
-//    //                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-//    //                        $this->Datalog->create();
-//    //                        $this->Datalog->save($this->request->data['Datalog']);
-//    //                    }
-//    //                    else
-//    //                    {
-//                            $this->request->data['Logactivity']['logname'] = 'Invoice';
-//                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-//                            $this->request->data['Logactivity']['logid'] = $id;
-//                            $this->request->data['Logactivity']['logno'] = $deliver_quotation;
-//                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-//                            $this->request->data['Logactivity']['logapprove'] = 1;
-//                            $this->Logactivity->create();
-//                            $this->Logactivity->save($this->request->data['Logactivity']);
-//
-//                            $this->request->data['Datalog']['logname'] = 'Invoice';
-//                            $this->request->data['Datalog']['logactivity'] = 'Add';
-//                            $this->request->data['Datalog']['logid'] = $deliver_quotation;
-//                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-//                            $this->Datalog->create();
-//                            $this->Datalog->save($this->request->data['Datalog']);
-//                        //}
-//                        /******************/ 
-//                    }
-                }
-                    //'Deliveryorder.is_invoice_created'=>1,'Quotation.is_invoice_created'=>1,'Salesorder.is_invoice_created'=>1,
-                    
-                    //$this->Quotation->updateAll(array('Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
-                    //$this->Salesorder->updateAll(array('Salesorder.is_delivery_approved'=>1),array('Salesorder.id'=>$deliver_salesorder));
-                    //return $updated;
-
-                    
-    //                $deliveryorder=$this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
-    //                $deliveryorder_count=$this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation),'recursive'=>2));
-    //                $count_del = 0;
-    //                foreach($deliveryorder as $del_data):
-    //                        if($del_data['Deliveryorder']['is_approved'] == 1):
-    //                            $count_del = $count_del + 1;
-    //                        endif;
-    //                endforeach;
-    //                if($deliveryorder_count == $count_del)
-    //                {
-//                    $po_quo_count = $this->Device->find('count',array('conditions'=>array('Device.quotationno'=>$deliver_quotation)));
-//                    $po_inv_type_1 = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$deliver_quotation,'Deliveryorder.is_approved'=>1)));
-//                    $count_po_inv = 0;
-//                    foreach($po_inv_type_1 as $po_inv):
-//                        $deliveryorder_po_desc = $po_inv['DelDescription'];
-//                        $count_po_inv = $count_po_inv + count($deliveryorder_po_desc);
-//                    endforeach;
-//
-//                    if($po_quo_count == $count_po_inv)
-//                    {
-                        /******************
-                        * Data Log - Invoice
-                        */
-    //                    if($inv_type == 3)
-    //                    {
-    //                        $this->request->data['Logactivity']['logname'] = 'Invoice';
-    //                        $this->request->data['Logactivity']['logactivity'] = 'Add';
-    //                        $this->request->data['Logactivity']['logid'] = $id;
-    //                        $this->request->data['Logactivity']['logno'] = $deliver_salesorder;
-    //                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-    //                        $this->request->data['Logactivity']['logapprove'] = 1;
-    //                        $this->Logactivity->create();
-    //                        $this->Logactivity->save($this->request->data['Logactivity']);
-    //
-    //                        $this->request->data['Datalog']['logname'] = 'Invoice';
-    //                        $this->request->data['Datalog']['logactivity'] = 'Add';
-    //                        $this->request->data['Datalog']['logid'] = $deliver_salesorder;
-    //                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-    //                        $this->Datalog->create();
-    //                        $this->Datalog->save($this->request->data['Datalog']);
-    //                    }
-    //                    else
-    //                    {
-                          
-                        //}
-                        /******************/ 
-                
-            }
-            
-            /////// PO Before Invoice ///////////
-            
-            else if($ack_type == 2)
-            {
                 $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Customer.acknowledgement_type_id'=>2));
                 $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1,'Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));
                 $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1,'Salesorder.is_delivery_approved'=>1),array('Salesorder.id'=>$deliver_salesorder));
@@ -730,7 +723,7 @@
                         $this->Datalog->create();
                         $this->Datalog->save($this->request->data['Datalog']);
                     endif;
-
+                }
                 }
                 // Purchase Order Full Invoice
                 if($inv_type != 3)

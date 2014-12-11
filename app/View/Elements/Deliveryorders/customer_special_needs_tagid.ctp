@@ -23,9 +23,9 @@
             <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Validity</th>
-            <th class="text-center">Unit Price</th>
+<!--            <th class="text-center">Unit Price</th>-->
             <th class="text-center">Department</th>
-            <th class="text-center">Total</th>
+<!--            <th class="text-center">Total</th>-->
            
         </tr>
     </thead>

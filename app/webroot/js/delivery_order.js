@@ -117,13 +117,11 @@ $(document).ready(function(){
                                     <td class="text-center">'+value.Range.range_name+'</td>\n\\n\
                                     <td class="text-center">'+value.sales_calllocation+'</td>\n\
                                     <td class="text-center">'+value.sales_validity+'</td>\n\
-                                    <td class="text-center">'+value.sales_unitprice+'</td>\n\\n\
-                                    <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\
-                                    <td class="text-center">'+value.sales_total+'</td>\n\
+                                    <td class="text-center">'+value.Department.departmentname+'</td>\n\
                                     </tr>');
                         }
                     }
-                        
+                      //  <td class="text-center">'+value.sales_total+'</td>\n\<td class="text-center">'+value.sales_unitprice+'</td>\n\\n\
                     });
                    
                 }
