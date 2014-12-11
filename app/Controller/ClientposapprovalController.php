@@ -483,6 +483,10 @@ class ClientposapprovalController extends AppController {
 
                             $this->Session->setFlash(__('Purchase Order Approved Successfully'));
                             if($ack_type == 2):
+                                
+                                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1),array('Deliveryorder.ref_no'=>$ref_no_old,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1));
+                                    $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1),array('Quotation.ref_no'=>$ref_no_old,'Quotation.po_generate_type'=>'Manual','Quotation.is_poapproved'=>1));
+                                    $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1),array('Salesorder.ref_no'=>$ref_no_old,'Salesorder.po_generate_type'=>'Manual','Salesorder.is_poapproved'=>1));
 
                                     $this->request->data['Logactivity']['logname'] = 'Invoice';
                                     $this->request->data['Logactivity']['logactivity'] = 'Add';
@@ -574,6 +578,10 @@ class ClientposapprovalController extends AppController {
                         $this->Session->setFlash(__('Purchase Order Approved Successfully'));
                         if($ack_type == 2):
                             
+                                $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1),array('Deliveryorder.salesorder_id'=>$salesorder_id_from_view,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1));
+                                //$this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1),array('Quotation.ref_no'=>$ref_no_old,'Quotation.po_generate_type'=>'Manual','Quotation.is_poapproved'=>1));
+                                $this->Salesorder->updateAll(array('Salesorder.is_invoice_created'=>1),array('Salesorder.id'=>$salesorder_id_from_view,'Salesorder.po_generate_type'=>'Manual','Salesorder.is_poapproved'=>1));
+                                    
                                 $this->request->data['Logactivity']['logname'] = 'Invoice';
                                 $this->request->data['Logactivity']['logactivity'] = 'Add';
                                 $this->request->data['Logactivity']['logid'] = $salesorder_id_from_view;
