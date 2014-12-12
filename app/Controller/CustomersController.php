@@ -604,7 +604,7 @@ class CustomersController extends AppController
         $price  =   $this->request->data['price'];
         $instrument_range    =    $this->InsPercent->find('first');
         $percent = $instrument_range['InsPercent']['percent'];
-        return $price*$percent/100 + $price;
+        return $price-$price*$percent/100;
     }
     public function add_customer_instrument()
     {

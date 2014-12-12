@@ -413,6 +413,8 @@
                     /////////////////////////////////  Check This
                     /////////////////////////////////
                     /////////////////////////////////
+                    pr($deliveryorder_instrument_count);
+                    pr($quotation_instrument_count);
                     if($deliveryorder_instrument_count == $quotation_instrument_count)
                     {
                         if($count_quo_del == $count_quo_del_app)

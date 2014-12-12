@@ -55,10 +55,9 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
                                         <td class="text-center">
                                             <?PHP if($quotation_list['Quotation']['po_generate_type']=='Auotmatic'){$class="danger";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
-                                            <span class="label label-<?PHP echo $class; ?>">
+                                            
                                                 <?PHP echo $quotation_list['Quotation']['ref_no'] ?>
-                                            </span>
-                                        </td>
+                                                                                   </td>
                                         <?php if($deleted_val != 3): ?>
                                         <td class="text-center">
                                             <div class="btn-group">

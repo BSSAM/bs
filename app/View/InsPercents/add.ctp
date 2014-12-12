@@ -1,13 +1,13 @@
 <script> var path='<?PHP echo Router::url('/',true); ?>'; </script>
 <h1>
-                                <i class="gi gi-user"></i>Add Percent
+                                <i class="gi gi-user"></i>Add Mark Up
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Discount Percentage',array('controller'=>'InsPercents','action'=>'index')); ?></li>
-                        <li>Add Percent</li>
+                        <li><?php echo $this->Html->link('Mark Up',array('controller'=>'InsPercents','action'=>'index')); ?></li>
+                        <li>Add Mark Up</li>
                     </ul>
                     <!-- END Forms General Header -->
 
@@ -25,9 +25,9 @@
             <!-- Basic Form Elements Content -->
             <?php echo $this->Form->create('InsPercent',array('class'=>'form-horizontal form-bordered','id'=>'form-percent-add')); ?>
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="percent">Discount Percent</label>
+                    <label class="col-md-2 control-label" for="percent">Mark Up</label>
                     <div class="col-md-4">
-                        <?php echo $this->Form->input('percent', array('id'=>'percent','class'=>'form-control','placeholder'=>'Enter the Percent','label'=>false,'name'=>'percent')); ?>
+                        <?php echo $this->Form->input('percent', array('id'=>'percent','class'=>'form-control','placeholder'=>'Enter the Mark Up','label'=>false,'name'=>'percent')); ?>
                     </div>
                     <label class="col-md-2 control-label" for="status">Active</label>
                     <div class="col-md-4 form-control-static">

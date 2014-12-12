@@ -460,9 +460,12 @@ class ClientposapprovalController extends AppController {
                     if($ponumber_check == 1)://no_to_tackle
                         $lo_ac_list =  $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logid'=>'"'.$ponumbers.'"','Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add')));
                         if($lo_ac_list>1):
-                        $this->Logactivity->deleteAll(array('Logactivity.logid'=>'"'.$ponumbers.'"','Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
+                        $this->Logactivity->deleteAll(array('Logactivity.logid ='=>'"'.$ponumbers.'"','Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
                         endif;
-                        $this->Logactivity->updateAll(array('Logactivity.logid'=>'"'.$ponumbers.'"','Logactivity.logno'=>'"'.$ponumbers.'"'),array('Logactivity.logid'=>'"'.$ref_no_old.'"','Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
+                        pr($ponumbers);
+                        pr($ref_no_old);
+                        $oo = $this->Logactivity->updateAll(array('Logactivity.logid'=>'"'.$ponumbers.'"','Logactivity.logno'=>'"'.$ponumbers.'"'),array('Logactivity.logid'=>'"'.$ref_no_old.'"','Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add'));
+                         pr($oo);
                         $this->Quotation->updateAll(array('Quotation.ref_no'=>'"'.$ponumbers.'"','Quotation.ref_count'=>'"'.$po_count.'"','Quotation.po_generate_type'=>'"Manual"','Quotation.is_assign_po'=>1),array('Quotation.ref_no'=>$ref_no_old));
                         $this->Salesorder->updateAll(array('Salesorder.ref_no'=>'"'.$ponumbers.'"','Salesorder.ref_count'=>'"'.$po_count.'"','Salesorder.po_generate_type'=>'"Manual"','Salesorder.is_assign_po'=>1),array('Salesorder.ref_no'=>$ref_no_old));
                         $this->Deliveryorder->updateAll(array('Deliveryorder.ref_no'=>'"'.$ponumbers.'"','Deliveryorder.ref_count'=>'"'.$po_count.'"','Deliveryorder.po_generate_type'=>'"Manual"','Deliveryorder.is_assignpo'=>1),array('Deliveryorder.ref_no'=>$ref_no_old));

@@ -15,7 +15,7 @@
                 <th class="text-center">PO No</th>
                 <th class="text-center">Quotation No</th>
                 <th class="text-center">Salesorder No</th>
-                <th class="text-center">Reg Date</th>
+<!--                <th class="text-center">Reg Date</th>-->
                 <th class="text-center">Branch</th>
                 <th class="text-center">Customer</th>
                 <th class="text-center">Phone</th>
@@ -33,7 +33,7 @@
                 <td class="text-center"><span class="label label-<?PHP echo $class; ?>"><?PHP echo $quotation_list['Quotation']['ref_no'] ?></span>&nbsp;&nbsp;</td>
                 <td class="text-center"><?PHP echo $this->Salesorder->find_quo($quotation_list['Quotation']['ref_no']); ?><?PHP //echo $quotation_list['Quotation']['quotationno'] ?></td>
                 <td class="text-center"><?PHP echo $this->Salesorder->find_sales_order_po($quotation_list['Quotation']['ref_no']); ?></td>
-                <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
+<!--                <td class="text-center"><?PHP //echo $quotation_list['Quotation']['reg_date'] ?></td>-->
                 <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
                 <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
                 <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>

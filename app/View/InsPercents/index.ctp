@@ -1,18 +1,18 @@
                             <h1>
-                                <i class="fa fa-table"></i>Instrument Discount Percentage
+                                <i class="fa fa-table"></i>Mark Up
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Discount Percentage',array('controller'=>'InsPercents','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Mark Up',array('controller'=>'InsPercents','action'=>'index')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
                      <?php echo $this->element('message');?>
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Discount Percentage</h2>
+                            <h2>List Of Mark Up</h2>
                             <?php //if($userrole_cus['add']==1){ ?>
                             <h2 style="float:right;"><?php //echo $this->Html->link('Add Percentage',array('controller'=>'InsPercents','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Discount %')); ?></h2>
                             <?php //} ?>
@@ -25,7 +25,7 @@
                                     <tr>
                                         <th class="text-center">ID</th>
                                         <th class="text-center">Created</th>
-                                        <th class="text-center">Discount Percent</th>
+                                        <th class="text-center">Mark Up</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -76,7 +76,7 @@
                                         
                                         var growlType = $(this).data('growl');
                                         
-                                        $.bootstrapGrowl('Brand is Added Successfully!', {
+                                        $.bootstrapGrowl('Mark Up is Added Successfully!', {
                                             type: growlType,
                                             allow_dismiss: true
                                         });
