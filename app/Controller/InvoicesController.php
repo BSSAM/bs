@@ -107,7 +107,56 @@ class InvoicesController extends AppController
             $this->set('titles',$titles);
             
         elseif($result_string == 'BQS' || $result_string == 'BSQ'):
-            $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$id,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_invoice_created'=>1)));    
+            $quotation_list = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$id,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_invoice_created'=>1)));    
+            foreach($quotation_list as $polist):
+                $quono[] = $polist['Device'];
+            endforeach;
+            //pr($polist);exit;
+            $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$id,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>2)));
+            //pr($delivery_lists);exit;
+            $delivery_lis = '';
+            foreach($delivery_lists as $delivery):
+                //pr($delivery);
+                $delivery_lis[] = $delivery['Deliveryorder']['delivery_order_no'];
+            endforeach;
+            $deliveryorder_in_comma = implode(',',$delivery_lis);
+            
+            $quotation_list = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_invoice_created'=>1),'recursive'=>3));
+            
+            $gst = $quotation_list['Customerspecialneed']['gst'];
+            $currency = $quotation_list['Customerspecialneed']['currency_value'];
+            $additional_charge = $quotation_list['Customerspecialneed']['additional_service_value'];
+            $this->set(compact('gst','currency','additional_charge'));
+            
+            $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$quotation_list['Quotation']['attn'])));
+            $this->set('contactperson',$contact_person['Contactpersoninfo']);
+            $this->set('deliveryorderno',$deliveryorder_in_comma);
+            $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$quotation_list['Customerspecialneed']['service_id'])));
+            if(empty($service)):
+                $this->set('servicetype',$service='');
+            else:
+                $this->set('servicetype',$service['Service']['servicetype']);
+            endif;
+            
+            //$desc = $po_list_first['Device'];
+            $total = 0;
+            foreach($po_lists as $desc):
+                //pr($desc['Device']);
+                foreach($desc['Device'] as $desc_total):
+                   // pr($desc_total['total']);
+                    $total = $total + $desc_total['total'];
+                endforeach;
+            endforeach;
+            //exit;
+            //pr($quono);exit;
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
+            $this->set('total',$total);
+            $this->set('desc',$quono);
         elseif($result_string == 'BDO'):
             $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>4)));
         else:
@@ -153,6 +202,12 @@ class InvoicesController extends AppController
             endforeach;
             //exit;
             //pr($quono);exit;
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             $this->set('total',$total);
             $this->set('desc',$quono);
         endif;

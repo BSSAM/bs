@@ -110,6 +110,6 @@
   ),
   'oswald' => 
   array (
-    'normal' => DOMPDF_FONT_DIR . 'font1',
+    'normal' => DOMPDF_FONT_DIR . '56d89aa29ad4b97a7b3e53cc327a4970',
   ),
 ) ?>

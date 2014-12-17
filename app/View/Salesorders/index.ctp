@@ -139,6 +139,9 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                             <?php if($userrole_cus['view']==1 && $salesorder_list['Salesorder']['is_approved'] == 1){ ?>
                                             <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                             <?php } ?>
+                                            <?php if($userrole_cus['view']==1 && $salesorder_list['Salesorder']['is_approved'] == 1){ ?>
+                                            <?php echo $this->Form->postLink('<i class="fa fa-tags"></i>',array('action'=>'pdf_tag',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Tags','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                            <?php } ?>
                                         </td>
                                         <?php endif; ?>
                                     </tr>

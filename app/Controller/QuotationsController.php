@@ -989,6 +989,7 @@ table td { font-size:11px; line-height:18px; }
 
 </style>
 </head>';
+           
  $title =   $this->Title->find('all');
             foreach($title as $title_name)
             {
@@ -1014,7 +1015,7 @@ table td { font-size:11px; line-height:18px; }
                 endforeach;
                
 $html .=
-'<body style="font-family:Oswald, sans-serif;font-size:11px;padding:10px;margin:0;font-weight: 300;">
+'<body style="font-family:"Oswald";font-size:11px;padding:10px;margin:0;font-weight: 300;">
 <table width="700px">
      <tr>
           <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
@@ -1339,4 +1340,121 @@ $html .= '<td><strong>Total Price $(SGD)</strong></td></tr>';
         }
     } 
         
+    public function inv_title1()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title1']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title1_val', $title);
+            echo $title;
+        }
+    }    
+    public function inv_title2()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title2']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title2_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title3()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title3']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title3_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title4()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title4']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title4_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title5()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title5']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title5_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title6()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title6']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title6_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title7()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title7']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title7_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title8()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title8']);
+
+            $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('title8_val', $title);
+            echo $title;
+        }
+    }
+     public function price_change()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $unit_price = Sanitize::clean($this->request->data['unit_price']);
+
+             $this->Device->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('unit_price', $unit_price);
+            echo $unit_price;
+        }
+    }
 }

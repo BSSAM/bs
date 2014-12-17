@@ -974,14 +974,14 @@
             $sales_id= $this->request->data->sales_id;
             $quo_id = $this->request->data->quo_id;
             $this->loadModel('Description');
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id)));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id),'order'=>'Description.order_by asc'));
             //pr($edit_device_details);
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach;
             //pr($edit_device_val);exit;
             if(empty($edit_device_details)):
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$quo_id,'Description.pending'=>1)));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$quo_id,'Description.pending'=>1),'order'=>'Description.order_by asc'));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach;
@@ -1006,9 +1006,9 @@
             
             
             $this->loadModel('Description');
-            $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1,'Description.is_deleted'=>0)));
+            $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1,'Description.is_deleted'=>0),'order'=>'Description.order_by asc'));
             if(empty($edit_device_details_check)){
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.is_deleted'=>0)));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.is_deleted'=>0),'order'=>'Description.order_by asc'));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach; 
@@ -1016,7 +1016,7 @@
             }
             else
             {
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1,'Description.is_deleted'=>0)));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1,'Description.is_deleted'=>0),'order'=>'Description.order_by asc'));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach; 
@@ -1661,6 +1661,231 @@ $html .='</tr>';
                 //pr($html);exit;
         $this->export_report_all_format($file_type, $filename, $html);
     }
+    function pdf_tag($id = NULL) 
+    {
+
+        $this->autoRender = false;
+        $salesorder_data = $this->Salesorder->find('first', array('conditions' => array('Salesorder.id' => $id),'recursive'=>3));
+        $quotation_data = $this->Quotation->find('first', array('conditions' => array('Quotation.id' => $salesorder_data['Salesorder']['quotation_id']),'recursive'=>2));
+        //pr($salesorder_data);exit;
+        $file_type = 'pdf';
+        $filename = $salesorder_data['Salesorder']['salesorderno'];
+
+
+             $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+                $customername = $salesorder_data['Customer']['customername'];
+                $billing_address = $salesorder_data['Salesorder']['address'];
+                $postalcode = $salesorder_data['Customer']['postalcode'];
+                $contactperson = $quotation_data['Customer']['Contactpersoninfo'][0]['name'];
+                $phone = $salesorder_data['Salesorder']['phone'];
+                $fax = $salesorder_data['Salesorder']['fax'];
+                $email = $salesorder_data['Salesorder']['email'];
+                //$our_ref_no = $salesorder_data_list['Quotation']['ref_no'];
+                $ref_no = $salesorder_data['Salesorder']['ref_no'];
+                $reg_date = $salesorder_data['Salesorder']['reg_date'];
+                 $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
+                $salesorderno = $salesorder_data['Salesorder']['salesorderno'];
+            
+                foreach($salesorder_data['Description'] as $device):
+                    $device_name[] = $device;
+                endforeach;
+                
+            //pr($titles);
+            //exit;
+ $html = '<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title></title>
+<link href="http://fonts.googleapis.com/css?family=Nova+Square" rel="stylesheet" type="text/css">
+<style>
+* { margin:0; padding:0; font-size:13px; color:#333 !important; }
+table td { font-size:13px; line-height:18px; }
+.table_format table { }
+.table_format td { text-align:center; }
+</style>
+</head>
+<body style="font-family:Nova Square,cursive;font-size:13px;padding:10px;margin:0;">
+<div style="width:100%;margin-top:30px;float:left;">
+     <table width="680" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
+          <tr>
+               <td style="text-align:center;">TAG</td>
+               <td style="text-align:center">TAG 
+               <td></td>
+          </tr>
+     </table>
+</div>
+<div style="width:100%;margin-top:10px;float:left;">
+     <table width="680" cellpadding="1" cellspacing="1"  style="width:100%;">
+          <tr>
+               <td width="44%" style="border:1px solid #000;"><table width="272" cellpadding="0" cellspacing="0">
+                         <tr  style="padding-top:30px;">
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important; text-align:center !important;border-bottom:1px solid #000 !important;border-right:1px solid #000 !important;">1 </td>
+                              <td  width="40" style="font-size:12px !important;border-bottom:1px solid #000 !important;text-align:center !important;border-right:1px solid #000 !important;">REGISTRATION TAG</td>
+                              <td width="68"  style="line-height:10px !important;font-size:11px !important;border-bottom:1px solid #000 !important;text-align:center !important;">28-Oct-2014</td>
+                         </tr>
+                         <tr  style="padding-top:30px;">
+                              <td width="81" style="line-height:10px !important;font-size:11px !important;padding:5px;">JOB NO. </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">BSO-14-005802</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">CUSTOMER </td>
+                              <td width="9">:</td>
+                              <td colspan="4" style="line-height:10px !important;font-size:11px !important;padding:5px;">Commodore Trading Singapore Co Pte Ltd</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">INSTRUMENT </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> INSULATION TESTER</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">MODEL NO </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> 321345</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">BRAND </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">YOKOGAWA</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">RANGE </td>
+                              <td width="9">:</td>
+                              <td width="110" style="line-height:10px !important;font-size:11px !important;padding:5px;">(-)/-</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERIAL NO </td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">83DE0369</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">REMARKS </td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">C/W PROBES</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERVICE </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">Calibration, Non-Singlas</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">DEPARTMENT </td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">Electrical</td>
+                         </tr>
+                         <tr>
+                              <td colspan="4" style="text-align:center;color:#777 !important;padding:5px 0;border-top:1px solid #000;">BS TECH PTE LTD</td>
+                         </tr>
+                    </table></td>
+               <td width="1%"></td>
+               <td width="3%"></td>
+               <td width="0%"></td>
+               <td width="0%"></td>
+               <td width="44%" style="border:1px solid #000;width:50%;"><table width="272" height="161" cellpadding="0" cellspacing="0">
+                         <tr  style="padding-top:30px;">
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important; text-align:center !important;border-bottom:1px solid #000 !important;border-right:1px solid #000 !important;">2 </td>
+                              <td  width="40" style="font-size:12px !important;border-bottom:1px solid #000 !important;text-align:center !important;border-right:1px solid #000 !important;">REGISTRATION TAG</td>
+                              <td width="68"  style="line-height:10px !important;font-size:11px !important;border-bottom:1px solid #000 !important;text-align:center !important;">28-Oct-2014</td>
+                         </tr>
+                         <tr  style="padding-top:30px;">
+                              <td width="81" style="line-height:10px !important;font-size:11px !important;padding:5px;">JOB NO. </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">BSO-14-005802</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">CUSTOMER </td>
+                              <td width="9">:</td>
+                              <td colspan="4" style="line-height:10px !important;font-size:11px !important;padding:5px;">Commodore Trading Singapore Co Pte Ltd</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">INSTRUMENT </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> INSULATION TESTER</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">MODEL NO </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> 321345</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">BRAND </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">YOKOGAWA</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">RANGE </td>
+                              <td width="9">:</td>
+                              <td width="110" style="line-height:10px !important;font-size:11px !important;padding:5px;">(-)/-</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERIAL NO </td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">83DE0369</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">REMARKS </td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">C/W PROBES</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERVICE </td>
+                              <td width="9">:</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">Calibration, Non-Singlas</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">DEPARTMENT </td>
+                              <td width="9">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">Electrical</td>
+                         </tr>
+                         <tr>
+                              <td colspan="4" style="text-align:center;color:#777 !important;padding:5px 0;border-top:1px solid #000;">BS TECH PTE LTD</td>
+                         </tr>
+                    </table></td>
+               <td width="7%"></td>
+          </tr>
+     </table>
+</div>
+
+
+</body>
+</html>';
+                //pr($html);exit;
+        $this->export_report_all_format($file_type, $filename, $html);
+    }
     function export_report_all_format($file_type, $filename, $html)
     {    
         
@@ -1807,6 +2032,124 @@ $html .='</tr>';
             echo $title;
         }
     } 
+    
+    public function inv_title1()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title1']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title1_val', $title);
+            echo $title;
+        }
+    }    
+    public function inv_title2()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title2']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title2_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title3()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title3']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title3_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title4()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title4']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title4_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title5()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title5']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title5_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title6()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title6']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title6_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title7()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title7']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title7_val', $title);
+            echo $title;
+        }
+    } 
+    public function inv_title8()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title8']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title8_val', $title);
+            echo $title;
+        }
+    } 
+    public function price_change()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['title8']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Description->saveField('title8_val', $title);
+            echo $title;
+        }
+    }
         
     public function get_contact_email()
     {
