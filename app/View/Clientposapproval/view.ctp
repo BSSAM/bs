@@ -26,8 +26,8 @@
             type: "post",
             data: values,
             success: function(data) {
-                console.log(data);
-                //window.location.reload();
+                //console.log(data);
+                window.location.reload();
             }
         });
 //    var isFormValid = true;

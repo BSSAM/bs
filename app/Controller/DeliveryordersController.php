@@ -376,7 +376,8 @@
                     $this->Datalog->create();
                     $this->Datalog->save($this->request->data['Datalog']);
                     
-                    $data_quo = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$deliver_quotation,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+                    $data_quo = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$deliver_quotation,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1),'recursive'=>3));
+                    //pr($data_quo);
                     $quotation_instrument_count = 0;
                     foreach($data_quo as $quo_data):
                         
@@ -413,8 +414,8 @@
                     /////////////////////////////////  Check This
                     /////////////////////////////////
                     /////////////////////////////////
-                    pr($deliveryorder_instrument_count);
-                    pr($quotation_instrument_count);
+                    //pr($deliveryorder_instrument_count);
+                    //pr($quotation_instrument_count);
                     if($deliveryorder_instrument_count == $quotation_instrument_count)
                     {
                         if($count_quo_del == $count_quo_del_app)

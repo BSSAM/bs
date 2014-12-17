@@ -980,13 +980,13 @@
 <head>
 <meta charset="utf-8" />
 <title>'.$quotation_data['Quotation']['quotationno'].'</title>
-<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
 <style>
+
 * { margin:0; padding:0; font-size:11px; color:#333 !important; }
 table td { font-size:11px; line-height:18px; }
 .table_format table { }
 .table_format td { text-align:center; }
+
 </style>
 </head>';
  $title =   $this->Title->find('all');
@@ -1017,7 +1017,7 @@ $html .=
 '<body style="font-family:Oswald, sans-serif;font-size:11px;padding:10px;margin:0;font-weight: 300;">
 <table width="700px">
      <tr>
-          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="../webroot/img/LOGO.png" width="400;" height="auto" alt="" /></div></td>
+          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
           <td style="padding:0 10px;"><div style="float:left;text-align:right;">
                     <p>41 Senoko Drive</p>
                     <p>Singapore 758249</p>
@@ -1148,15 +1148,15 @@ $html .= '<td><strong>Total Price $(SGD)</strong></td></tr>';
                 $gst = CakeNumber::currency($gst, $currency);
                 $subtotal = CakeNumber::currency($subtotal, $currency);
                 $html .= '<tr>
-                         <td colspan="10">SUBTOTAL</td>
+                         <td colspan="9">SUBTOTAL</td>
                          <td>'.$subtotal.'</td>
                     </tr>
                     <tr>
-                         <td colspan="10">GST ( 7.00% )</td>
+                         <td colspan="9">GST ( 7.00% )</td>
                          <td>'.$gst.'</td>
                     </tr>
                     <tr>
-                         <td colspan="10"><h4>TOTAL DUE</h4></td>
+                         <td colspan="9"><h4>TOTAL DUE</h4></td>
                          <td><h4>'.$total_due.'</h4></td>
                     </tr>
      </table>

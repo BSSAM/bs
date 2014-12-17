@@ -208,9 +208,13 @@ class DashboardsController extends AppController
         $count = $logactivity_deliveryorder_count1 + $logactivity_deliveryorder_count2;
         //pr($log_del);
         //exit;
-        $this->set('log_activity_deliveryorder', array_filter($log_del));
-        $this->set('log_activity_deliveryorder_count', $count);
-        
+        if(is_array($log_del)):
+            $this->set('log_activity_deliveryorder', array_filter($log_del));
+            $this->set('log_activity_deliveryorder_count', $count);
+        else:
+            $this->set('log_activity_deliveryorder', $log_del);
+            $this->set('log_activity_deliveryorder_count', $count);
+        endif;
         /*****************************************************/
         
          /****************** Log Activity - C & D Info ********************/
