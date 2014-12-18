@@ -478,6 +478,7 @@
         /*
          * *****************************************************
          */
+        
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
@@ -1469,27 +1470,22 @@
 //</body>
 //</html>';
 
-             $title =   $this->Title->find('all');
-            foreach($title as $title_name)
-            {
-                $titles[] = $title_name['Title']['title_name'];
-            }
- 
-            //pr($titles);
-            //exit;
+            
  $html = '<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <title>'.$salesorder_data['Salesorder']['salesorderno'].'</title>
+<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
 <style>
-* { margin:0; padding:0; }
-table td { font-size:13px; }
-
-.table_format table { border:1px solid #000; border-bottom:none; border-left:none; }
-.table_format td { border-bottom:1px solid #000; padding:10px; text-align:center; border-left:1px solid #000; }
+* { margin:0; padding:0; font-size:11px; color:#333 !important; }
+table td { font-size:11px; line-height:18px; }
+.table_format table { }
+.table_format td { text-align:center; }
 </style>
 </head>';
+ 
  $title =   $this->Title->find('all');
             foreach($title as $title_name)
             {
@@ -1509,155 +1505,178 @@ table td { font-size:13px; }
                 $reg_date = $salesorder_data['Salesorder']['reg_date'];
                  $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
                 $salesorderno = $salesorder_data['Salesorder']['salesorderno'];
-            
+                $quotationno = $salesorder_data['Salesorder']['quotationno'];
                 foreach($salesorder_data['Description'] as $device):
                     $device_name[] = $device;
                 endforeach;
+                $ins_type = $salesorder_data['Quotation']['InstrumentType']['salesorder'];
                 
-            //endforeach;
-            $html .=
-'<body style="font-family:Arial, Helvetica, sans-serif;font-size:13px;padding:10px;margin:0;">
-<div style="float:left;"></div>
-<div style="float:right;text-align:right;">
-     <p>41 Senoko Drive</p>
-     <p>Singapore 758249</p>
-     <p>Tel.+65 6458 4411</p>
-     <p>Fax.+65 64584400</p>
-     <p style="padding-bottom:20px;">www.bestandards.com<</p>
-</div>
-<div style="display:inline-block;font-size:17px;font-weight:bold;width:40%;">SALES ORDER</div>
-<div style="display:inline-block;background:#313854;color:#fff;width:60%;padding:5px;font-size:12px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
-<div style="width:100%;margin-top:30px;float:left;">
-     <table cellpadding="1" cellspacing="1"  style="width:100%;">
+
+ $html .='<body style="font-family:Oswald;font-size:11px;padding:10px;margin:0;font-weight:300;">
+<table width="700px">
+     <tr>
+          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
+          <td style="padding:0 10px;"><div style="float:left;text-align:right;">
+                    <p>41 Senoko Drive</p>
+                    <p>Singapore 758249</p>
+                    <p>Tel.+65 6458 4411</p>
+                    <p>Fax.+65 64584400</p>
+                    <p>www.bestandards.com</p>
+               </div></td>
+     <tr>
+</table>
+<table width="623" height="56">
+     <tr>
+          <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:27px;font-weight:bold; font-style:italic;color:#00005b !important">SALES ORDER</div></td>
+          <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">COMPANY REG NO. 200510697M</div></td>
+     </tr>
+</table>
+<div style="width:100%;margin-top:10px;float:left;min-height:800px"">
+     <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
           <tr>
-               <td style="border:1px solid #000;padding:5px;width:50%;"><table cellpadding="0" cellspacing="0">
+               <td width="47%" style="border:1px solid #000;padding:5px;"><table width="288" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td>'.$customername.'</td>
+                              <td width="128" colspan="3" height="10px" style="font-size:11px !important;">'.$customername.'</td>
                          </tr>
                          <tr>
-                              <td>'.$billing_address.'</td>
-                         </tr>
-						 <tr>
-                              <td>'.$postalcode.'</td>
+                              <td colspan="3" height="10px" style="font-size:11px !important;">'.$billing_address.'</td>
                          </tr>
                          <tr  style="padding-top:30px;">
-                              <td>ATTN </td>
-                              <td>:</td>
-                              <td>'.$contactperson.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">ATTN </td>
+                              <td width="29">:</td>
+                              <td width="145" style="line-height:20px !important;font-size:11px !important;">'.$contactperson.'</td>
                          </tr>
                          <tr>
-                              <td>TEL </td>
-                              <td>:</td>
-                              <td> '.$phone.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">TEL </td>
+                              <td width="29">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$phone.'</td>
                          </tr>
                          <tr>
-                              <td>FAX </td>
-                              <td>:</td>
-                              <td> '.$fax.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">FAX </td>
+                              <td width="29">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$fax.'</td>
                          </tr>
                          <tr>
-                              <td>EMAIL</td>
-                              <td> :</td>
-                              <td> '.$email.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">EMAIL </td>
+                              <td width="29">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$email.'</td>
                          </tr>
                     </table></td>
-               <td style="border:1px solid #000;padding:5px;width:50%;"><table cellpadding="0" cellspacing="0">
+               <td width="3%"></td>
+               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td style="font-size:24px;font-weight:bold;">'.$salesorderno.'</td>
-                         </tr>
-                         <tr  style="padding-top:30px;">
-                              <td>SALES PERSON </td>
-                              <td>:</td>
-                              <td>Mr.Padma</td>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$quotationno.'</div></td>
                          </tr>
                          <tr>
-                              <td>YOUR REF NO (PO) </td>
-                              <td>:</td>
-                              <td> '.$ref_no.'</td>
+                              <td width="139" style="line-height:10px !important;padding-left:5px;font-size:11px !important;">OUR REF NO </td>
+                              <td width="24" style="font-size:11px !important;">:</td>
+                              <td width="109" style="line-height:10px !important;font-size:11px !important;">'.$salesorderno.'</td>
                          </tr>
                          <tr>
-                              <td>DATE </td>
-                              <td>:</td>
-                              <td> '.$reg_date.'</td>
+                              <td style="line-height:10px !important;padding-left:5px;font-size:11px !important;">YOUR REF NO </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;"> '.$ref_no.'</td>
                          </tr>
                          <tr>
-                              <td>PAYMENT TERMS</td>
-                              <td> :</td>
-                              <td>'.$payment_term.'</td>
+                              <td style="line-height:10px !important;padding-left:5px;font-size:11px !important;"> DATE </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;"> '.$reg_date.'</td>
+                         </tr>
+                         <tr>
+                              <td  style="line-height:20px !important;padding-left:5px;font-size:11px !important;">PAYMENT TERMS </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:10px !important;font-size:11px !important;">'.$payment_term.'</td>
                          </tr>
                     </table></td>
+               <td width="2%"></td>
           </tr>
      </table>
 </div>
-<div style="padding-top:10px;">Being provided calibration service of the following(s) :</div>
-
-<div style="width:100%;margin-top:20px;display:block;" class="table_format">
-     <table cellpadding="0" cellspacing="0"  style="width:100%;">
+<div style="padding-top:10px;">'.$ins_type.':</div>
+<div style="width:100%;display:block;margin-top:20px;height="400px;" class="table_format">
+     <table cellpadding="0" cellspacing="0"  style="width:100%;min-height:400px;">
           <tr>
-               <td><strong>Instrument</strong></td>
-               <td><strong>Brand</strong></td>
-               <td><strong>Model</strong></td>
-               
-               <td><strong>Quantity</strong></td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">ITEM</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">QTY</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">BRAND</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">MODEL NO</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">RANGE</td>
                ';
-			   $count = 0;
+			
            $count = 0;
 for($i=0;$i<=4;$i++):
-     $html .='<td>';
+     $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">';
     $html .= $titles[$i];
     $html .='</td>';
 endfor;
 $html .='</tr>';
-           
-                foreach($device_name as $device):
+           foreach($device_name as $device):
                     $html .= '
                     <tr>
-                        <td class="instrument"><h4>'.$device['Instrument']['name'].'</h4>
-                            <span>Faulty</span> <span>'.$device['Range']['range_name'].'</span></td>
-                        <td>'.$device['Brand']['brandname'].'</td>
-                        <td>'.$device['model_no'].'</td>
-                        
-                        <td>1</td>
-                        <td>'.$device['title1_val'].'</td>
-                        <td>'.$device['title2_val'].'</td>
-                        <td>'.$device['title3_val'].'</td>
-                        <td>'.$device['title4_val'].'</td>
-                        <td>'.$device['title5_val'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;"><h4>'.$device['Instrument']['name'].'</h4></td>
+                        <td style="padding:3px 10px;font-size:11px !important;">1</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Brand']['brandname'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['model_no'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Range']['range_name'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title1_val'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title2_val'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title3_val'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title4_val'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title5_val'].'</td>
                         
                     </tr>';
                 
                 endforeach;
  
- 
-                
-                $html .= '</table></div>
-
-<div style="font-weight:bold;margin-top:20px;">TERMS AND CONDITIONS :</div>
-<p style="margin-top:5px;font-size:10px;"><strong>1) TURNAROUND TIME :</strong> NORMAL SERVICE 5 - 7 WORKING DAYS EXPRESS SERVICE 2 - 3 WORKING DAYS** 1.5 TIMES NORMAL RATES</p>
-<p style="margin-top:5px;font-size:10px;"><strong>2) COLLECTION & DELIVERY :</strong> TO BE ADVISED BY SALES PERSONNEL</p>
-<p style="margin-top:5px;font-size:10px;">3) VALIDITY OF THIS QUOTE IS 30 DAYS FROM THE DATE OF THIS QUOTATION *PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION* ALL PRICE(S) ABOVE ARE SUBJECTED TO GST CHARGE</p>
-<p style="margin-top:5px;font-size:10px;">4) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME. **PLEASE CONTACT SALES DEPARTMENT FOR MORE QUERIES AT 64584411**</p>
-<p style="margin-top:10px;font-size:10px;"><strong>NOTE :</strong> THIS IS COMPUTER GENERATED QUOTATION. NO SIGNATURE IS REQUIRED.</p>
-<div style="width:100%;margin-top:40px;display:block;">
-     <table cellpadding="0" cellspacing="0"  style="width:100%;">
-          <tr>
-               <td><strong>CONFIRMED AND ACCEPTED BY:</strong></td>
-               <td><strong>COMPANYS STAMP,SIGNATURE AND DATE</strong></td>
-          </tr>
-          <tr>
-               <td style="padding-top:20px;">-----------------------------</td>
-               <td style="padding-top:20px;">DESIGNATION :</td>
-          </tr>
-          <tr>
-               <td></td>
-               <td style="padding-top:20px;">NAME :</td>
+         
+           $html .= '<tr>
+               <td colspan="3" style="border:1px  dashed #000;text-align:right;padding:3px 10px;color: #000 !important;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
+               <td  colspan="8" style="border:1px dashed #000; text-align:left;padding:3px 10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td>
           </tr>
      </table>
 </div>
-<div style="background:#313854;color:#fff;padding:10px;font-size:12px;margin-top:30px;">BS TECH REFERENCE MEASUREMENT STANDARDS ARE TRACEABLE TO NATIONAL METROLOGY CENTRE (SINGAPORE), NPL (UK), NIST (USA) OR OTHER RECOGNIZED NATIONAL OR INTERNATIONAL STANDARDS</div>
-
+<div style="width:100%;margin-top:20px;float:left;">
+     <table cellpadding="1" cellspacing="1"  style="width:100%;">
+          <tr>
+               <td style="padding:5px;width:50%;border:1px solid #000;"><table cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td>CONFIRMED AND ACCEPTED BY:</td>
+                         </tr>
+                         
+                         <tr>
+                              <td style="padding-top:30px;"><div style="border-top:1px solid #000;width:100%;">COMPANYS STAMP,SIGNATURE AND DATE</div></td>
+                         </tr>
+                         <tr>
+                              <td style="padding-top:10px;">DESIGNATION :</td>
+                         </tr>
+                         <tr>
+                              <td style="padding-top:10px;">NAME :</td>
+                         </tr>
+                    </table></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td style="border:1px dashed #000;padding:5px;width:50%;"><table width="270" cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td width="214" style="text-align:center;padding-bottom:50px;">FOR BS TECH PTE LTD</td>
+                         </tr>
+                         <tr>
+                              <td style="font-size:9px !important;color:#777 !important; text-align:center;"> Authorized Signature</td>
+                         </tr>
+                    </table></td>
+          </tr>
+     </table>
+</div>
+<div style="position:fixed;bottom:10px;left:10px;right:10px;height:130px;width:100%;">
+<div style="font-size:9px !important;width:100%;margin-top:10px;">1) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME.</div>
+<div style="font-size:9px !important;width:100%;">2) ANY DISCREPANCY NOTED HEREIN MUST BE BROUGHT TO THE NOTICE OF THE COMPANY WITHIN 24 HOURS; OTHERWISE ALL DOCUMENTATIONS WILL BE DEEMED TO BE CORRECT.</div>
+<div style="font-size:9px !important;width:100%;">3) PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION. YOU MAY CONTACT SALES PERSONNEL IF THERE ARE ANY QUERIES AT 6458 4411.</div>
+<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:10px;font-size:12px;margin-top:10px;text-align:center;">E. & O . E</div>
+</div>
 </body>
 </html>';
+
                 //pr($html);exit;
         $this->export_report_all_format($file_type, $filename, $html);
     }
@@ -1700,7 +1719,7 @@ $html .='</tr>';
 <head>
 <meta charset="utf-8" />
 <title></title>
-<link href="http://fonts.googleapis.com/css?family=Nova+Square" rel="stylesheet" type="text/css">
+
 <style>
 * { margin:0; padding:0; font-size:13px; color:#333 !important; }
 table td { font-size:13px; line-height:18px; }
@@ -1708,178 +1727,88 @@ table td { font-size:13px; line-height:18px; }
 .table_format td { text-align:center; }
 </style>
 </head>
-<body style="font-family:Nova Square,cursive;font-size:13px;padding:10px;margin:0;">
-<div style="width:100%;margin-top:30px;float:left;">
-     <table width="680" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
-          <tr>
-               <td style="text-align:center;">TAG</td>
-               <td style="text-align:center">TAG 
-               <td></td>
-          </tr>
-     </table>
-</div>
-<div style="width:100%;margin-top:10px;float:left;">
-     <table width="680" cellpadding="1" cellspacing="1"  style="width:100%;">
-          <tr>
-               <td width="44%" style="border:1px solid #000;"><table width="272" cellpadding="0" cellspacing="0">
+<body style="font-size:11px;padding:10px;margin:0;font-weight:300;">
+          ';
+ $n = 0;
+ foreach($device_name as $device):
+      if(!($n%2)):
+     $html .=' <div style="width:100%;">';
+      endif;
+      $count = 0;
+
+                   $html .='
+                     
+<div style="width:50%;margin-top:10px;display:inline-block;">
+     <table width="100%" cellpadding="1" cellspacing="1"  style="border:1px solid #333;">
+                        
                          <tr  style="padding-top:30px;">
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important; text-align:center !important;border-bottom:1px solid #000 !important;border-right:1px solid #000 !important;">1 </td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important; text-align:center !important;border-bottom:1px solid #000 !important;border-right:1px solid #000 !important;">'.$device['order_by'].' </td>
                               <td  width="40" style="font-size:12px !important;border-bottom:1px solid #000 !important;text-align:center !important;border-right:1px solid #000 !important;">REGISTRATION TAG</td>
-                              <td width="68"  style="line-height:10px !important;font-size:11px !important;border-bottom:1px solid #000 !important;text-align:center !important;">28-Oct-2014</td>
+                              <td width="68"  style="line-height:10px !important;font-size:11px !important;border-bottom:1px solid #000 !important;text-align:center !important;">'.$reg_date.'</td>
                          </tr>
                          <tr  style="padding-top:30px;">
                               <td width="81" style="line-height:10px !important;font-size:11px !important;padding:5px;">JOB NO. </td>
                               <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">BSO-14-005802</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$salesorderno.'</td>
                          </tr>
                          <tr>
                               <td style="line-height:10px !important;font-size:11px !important;padding:5px;">CUSTOMER </td>
                               <td width="9">:</td>
-                              <td colspan="4" style="line-height:10px !important;font-size:11px !important;padding:5px;">Commodore Trading Singapore Co Pte Ltd</td>
+                              <td colspan="4" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$customername.'</td>
                          </tr>
                          <tr>
                               <td style="line-height:10px !important;font-size:11px !important;padding:5px;">INSTRUMENT </td>
                               <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> INSULATION TESTER</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> '.$device['Instrument']['name'].'</td>
                          </tr>
                          <tr>
                               <td style="line-height:10px !important;font-size:11px !important;padding:5px;">MODEL NO </td>
                               <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> 321345</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> '.$device['model_no'].'</td>
                          </tr>
                          <tr>
                               <td style="line-height:10px !important;font-size:11px !important;padding:5px;">BRAND </td>
                               <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">YOKOGAWA</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['Brand']['brandname'].'</td>
                          </tr>
                          <tr>
                               <td style="line-height:10px !important;font-size:11px !important;padding:5px;">RANGE </td>
                               <td width="9">:</td>
-                              <td width="110" style="line-height:10px !important;font-size:11px !important;padding:5px;">(-)/-</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERIAL NO </td>
+                              <td width="110" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['Range']['range_name'].'</td>
+                         </tr>';
+                         for($i=0;$i<=4;$i++):
+                        $html .='<tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$titles[$i].'</td>
                               <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">83DE0369</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">REMARKS </td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">C/W PROBES</td>
-                         </tr>
-                         <tr>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['title'.($i+1).'_val'].'</td>
+                         </tr>';
+                         endfor;
+                         $html .='<tr>
                               <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERVICE </td>
                               <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">Calibration, Non-Singlas</td>
+                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['sales_accountservice'].'</td>
                          </tr>
                          <tr>
                               <td style="line-height:10px !important;font-size:11px !important;padding:5px;">DEPARTMENT </td>
                               <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">Electrical</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['Instrument']['Department']['departmentname'].'</td>
                          </tr>
                          <tr>
                               <td colspan="4" style="text-align:center;color:#777 !important;padding:5px 0;border-top:1px solid #000;">BS TECH PTE LTD</td>
                          </tr>
-                    </table></td>
-               <td width="1%"></td>
-               <td width="3%"></td>
-               <td width="0%"></td>
-               <td width="0%"></td>
-               <td width="44%" style="border:1px solid #000;width:50%;"><table width="272" height="161" cellpadding="0" cellspacing="0">
-                         <tr  style="padding-top:30px;">
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important; text-align:center !important;border-bottom:1px solid #000 !important;border-right:1px solid #000 !important;">2 </td>
-                              <td  width="40" style="font-size:12px !important;border-bottom:1px solid #000 !important;text-align:center !important;border-right:1px solid #000 !important;">REGISTRATION TAG</td>
-                              <td width="68"  style="line-height:10px !important;font-size:11px !important;border-bottom:1px solid #000 !important;text-align:center !important;">28-Oct-2014</td>
-                         </tr>
-                         <tr  style="padding-top:30px;">
-                              <td width="81" style="line-height:10px !important;font-size:11px !important;padding:5px;">JOB NO. </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">BSO-14-005802</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">CUSTOMER </td>
-                              <td width="9">:</td>
-                              <td colspan="4" style="line-height:10px !important;font-size:11px !important;padding:5px;">Commodore Trading Singapore Co Pte Ltd</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">INSTRUMENT </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> INSULATION TESTER</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">MODEL NO </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> 321345</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">BRAND </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">YOKOGAWA</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">RANGE </td>
-                              <td width="9">:</td>
-                              <td width="110" style="line-height:10px !important;font-size:11px !important;padding:5px;">(-)/-</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERIAL NO </td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">83DE0369</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;"></td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">REMARKS </td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">C/W PROBES</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERVICE </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">Calibration, Non-Singlas</td>
-                         </tr>
-                         <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">DEPARTMENT </td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">Electrical</td>
-                         </tr>
-                         <tr>
-                              <td colspan="4" style="text-align:center;color:#777 !important;padding:5px 0;border-top:1px solid #000;">BS TECH PTE LTD</td>
-                         </tr>
-                    </table></td>
-               <td width="7%"></td>
-          </tr>
+                   
+               
+              
      </table>
 </div>
 
+ ';if(($n%2)):
+                   $html .='</div>';
+ endif;
+ 
+ $n=$n+1;
+                    endforeach;
+               $html .='
 
 </body>
 </html>';

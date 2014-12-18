@@ -631,7 +631,7 @@
             $this->request->data = json_decode(file_get_contents("php://input"));
             $quo_id= $this->request->data->quo_id;
             $this->loadModel('Device');
-            $edit_device_details    =   $this->Device->find('all',array('conditions'=>array('Device.quotation_id'=>$quo_id)));
+            $edit_device_details    =   $this->Device->find('all',array('conditions'=>array('Device.quotation_id'=>$quo_id),'order'=>'Device.order_by ASC'));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach;

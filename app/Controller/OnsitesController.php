@@ -611,21 +611,33 @@
               
                 if($c!=0)
                 {
-                     for($i = 0; $i<$c;$i++)
-                     { 
-                         echo "<div class='onsite_qo_single' align='left' id='".$data[$i]['Device']['quotation_id']."'>";
-                         echo $data[$i]['Device']['quotationno'];
-                         echo "<br>";
-                         echo "</div>";
-                     }
-                 }
-                 else
-                 {
-                     echo "<div class='no_result' align='left'>";
-                     echo "No Results Found";
-                     echo "<br>";
-                     echo "</div>";
-                 }  
+                    for($i = 0; $i<$c;$i++)
+                    { 
+                        //echo $i;
+                        $qo_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$data[$i]['Device']['quotationno'],'Quotation.is_approved'=>1,'Quotation.is_deleted'=>0),'recursive'=>'2'));
+                        if($qo_data)
+                        {
+                        echo "<div class='onsite_qo_single' align='left' id='".$data[$i]['Device']['quotation_id']."'>";
+                        echo $data[$i]['Device']['quotationno'];
+                        echo "<br>";
+                        echo "</div>";
+                        }
+                        else
+                        {
+                            echo "<div class='no_result' align='left'>";
+                            echo "No Results Found";
+                            echo "<br>";
+                            echo "</div>"; 
+                        }
+                    }
+                }
+                else
+                {
+                    echo "<div class='no_result' align='left'>";
+                    echo "No Results Found";
+                    echo "<br>";
+                    echo "</div>";
+                }  
             }
         }
         
@@ -659,12 +671,13 @@
         {
             $this->loadModel('Quotation');
             $qo_id =  $this->request->data['qo_id'];
+            //pr($qo_id);exit;
 //            $qo_id  =   'BSQ-01-10000602';
             $this->autoRender = false;
-            $qo_data = $this->Quotation->find('first',array('conditions'=>array('quotationno'=>$qo_id,'Quotation.is_approved'=>'1','Quotation.is_deleted'=>0),'recursive'=>'2'));
-           
+            $qo_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$qo_id,'Quotation.is_approved'=>1,'Quotation.is_deleted'=>0),'recursive'=>'2'));
+            //pr($qo_data);exit;
             unset($qo_data['Device']);
-            $qo_device['Device']   =   $this->Device->find('all',array('conditions'=>array('Device.quotationno'=>$qo_id,'Device.is_deleted'=>0,'Device.call_location'=>'Onsite'),'recursive'=>'1'));
+            $qo_device['Device']   =   $this->Device->find('all',array('conditions'=>array('Device.quotationno'=>$qo_id,'Device.is_deleted'=>0,'Device.call_location'=>'Onsite'),'order'=>'Device.order_by ASC'));
 //            pr($qo_device);exit;
             // for Onsite instruments add
             $this->add_onsite_instruments($qo_device['Device'],$qo_id);
@@ -695,6 +708,9 @@
             //pr($this->params['requested']);exit;
             $this->request->data = json_decode(file_get_contents("php://input"));
             $quo_id= $this->request->data->quo_id;
+            $qo_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quo_id,'Quotation.is_approved'=>1,'Quotation.is_deleted'=>0),'recursive'=>'2'));
+            if($qo_data)
+            {
             $this->loadModel('Device');
             $edit_device_details    =   $this->Device->find('all',array('conditions'=>array('Device.quotationno'=>$quo_id,'Device.call_location'=>'onsite')));
             foreach($edit_device_details as $edit_device):
@@ -704,6 +720,7 @@
             if(!empty($edit_device_val ))
             {
                 echo json_encode($edit_device_val);
+            }
             }
             
         }
