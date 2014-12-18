@@ -5,7 +5,7 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random');
+                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent');
         public function index($id=NULL)
         {
         /*******************************************************
@@ -59,6 +59,28 @@
          *  Description   :   add Quotation Details page
          *******************************************************/
         $user_role = $this->userrole_permission();
+        
+        
+        $this->set(compact('ins_cost_user','ins_cost_super','ins_cost_man'));
+        $percents =  $this->InsPercent->findById(1);
+        
+        if($user_role['instr_costing']['edit'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['user']);
+        }
+        elseif($user_role['instr_costing']['view'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['supervisor']);
+        }
+        elseif($user_role['instr_costing']['delete'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['manager']);
+        }
+        else 
+        {
+            $this->set('ins_cost_user',0);
+        }
+        
         if($user_role['job_quotation']['add'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }

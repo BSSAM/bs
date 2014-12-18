@@ -1,8 +1,8 @@
 <script>
-        //$(document).ready(function(){
-           // $("input:checkbox").attr('checked','unchecked');
+        $(document).ready(function(){
+          //$("input:checkbox").attr('checked','unchecked');
             //$("input:checkbox").removeAttr('checked');
-        //});
+        });
 </script>
 
 <h1>
@@ -116,6 +116,13 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_country.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_country.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_country.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 150px;"><h5>Instrument Costing</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.add',array('id'=>'add')); ?><label for="remember">Edit Instrument Costing</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.edit',array('id'=>'edit')); ?><label for="remember">User</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.view',array('id'=>'view')); ?><label for="remember">Supervisor</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.delete',array('id'=>'delete')); ?><label for="remember">Manager</label> </div></td>
                                         </tr>
                                     </tbody>
                                 </table>

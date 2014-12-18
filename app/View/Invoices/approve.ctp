@@ -792,15 +792,15 @@ $(function() {
                                     $gst_total = ($total_device * $gst)/100;
                                     ?>
                                         <tr>
-               <td colspan="11" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
+               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $total_device; ?></td>
           </tr>
           <tr>
-               <td colspan="11" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">GST ( <?php echo $gst; ?>%  )</td>
+               <td colspan="10" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">GST ( <?php echo $gst; ?>%  )</td>
                <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $gst_total; ?></td>
           </tr>
 		   <tr>
-               <td colspan="11" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
+               <td colspan="10" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
                <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total; ?></td>
           </tr>
           

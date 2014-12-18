@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
+    
     $("#instrument_result",window.parent.document).hide();
     $(document).on('click','.customer_instrument_show',function(){
         
@@ -56,14 +57,15 @@ $(document).ready(function(){
         //alert(instrument_id); return false;
         var instrument_name =    $('#customer_instrument').val();
         var model_no =   $('#model_no').val();
-        var unit_price=$('#total_price').val();
+        var cost=$('#unit_price').val();
+        var total_price=$('#total_price').val();
         //var status  =   $('#status').val();
         if ($('#status').is(":checked")){ var status = 1;} else { var status = 0; }
       // return false;
         
         $.ajax({
             type: 'POST',
-            data:"customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&unit_price="+unit_price+"&status="+status+"&range_id="+range,
+            data:"customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&cost="+cost+"&total_price="+total_price+"&status="+status+"&range_id="+range,
             url: path_url+'Customers/add_customer_instrument/',
             beforeSend: ni_start(),  
             complete: ni_end(),
@@ -158,7 +160,8 @@ $(document).ready(function(){
                 $('#customer_instrument').val(edit_node.Instrument.name);
                 $('#customer_instrument').prop('disabled', 'disabled');
                 $('#model_no').val(edit_node.CustomerInstrument.model_no);
-                $('#unit_price').val(edit_node.CustomerInstrument.unit_price);
+                $('#unit_price').val(edit_node.CustomerInstrument.cost);
+                $('#total_price').val(edit_node.CustomerInstrument.unit_price);
                 //$('#status').val(edit_node.CustomerInstrument.status);
                 $('#range_array').empty().append('<option value="">Select Range</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
                 $('#instrument_name_chosen span').text(edit_node.Instrument.name);
@@ -187,7 +190,8 @@ $(document).ready(function(){
         
         var model_no =   $('#model_no').val();
         var device_id   =   $('#device_id').val();
-        var unit_price=$('#unit_price').val();
+        var cost=$('#unit_price').val();
+        var total_price=$('#total_price').val();
         if ($('#status').is(":checked"))
         {
             var status = 1;
@@ -199,7 +203,7 @@ $(document).ready(function(){
         var check=(status==1)?'Active':'In Active';
         $.ajax({
             type: 'POST',
-            data:"instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&unit_price="+unit_price+"&status="+status+"&range_id="+range+"&device_id="+device_id,
+            data:"instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&cost="+cost+"&total_price="+total_price+"&status="+status+"&range_id="+range+"&device_id="+device_id,
             url: path_url+'Customers/update_instrument/',
             success: function(data)
             {
@@ -226,6 +230,7 @@ $(document).ready(function(){
                 $('#range_array').append('<option value="" selected="selected">Select Brand</option>');
                 $('#model_no').val(null);
                 $('#unit_price').val(null);
+                $('#total_price').val(null);
                 $('#status').prop('checked',false);
                 $('#instrument_name_chosen span').text('Select Instrument Name');
                 }

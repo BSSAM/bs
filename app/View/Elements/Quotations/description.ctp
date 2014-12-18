@@ -857,7 +857,7 @@ $("#search_cusinstrument").hide();
     <label class="col-md-2 control-label" for="val_discount1">Discount </label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control','ng-model' => 'type_quo_discount',
-                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text','max'=>20)); ?>
+                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text','max'=>$ins_cost_user)); ?>
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
     <div class="col-md-4">

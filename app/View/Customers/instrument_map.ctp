@@ -55,7 +55,7 @@
                                    
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="unit_price">Unit Price</label>
+                                    <label class="col-md-2 control-label" for="unit_price">Cost</label>
                                     <div class="col-md-4">
                                         <?php //$disable_unit = "disabled = 'disabled'";
                                         $disable_unit = "";
@@ -63,7 +63,7 @@
                                         <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','data-placeholder'=>'Select Unit Price','name'=>'unit_price',$disable_unit)); ?>
                                         
                                     </div>
-                                    <label class="col-md-2 control-label" for="total_price">Total Price</label>
+                                    <label class="col-md-2 control-label" for="total_price">Price</label>
                                     <div class="col-md-4">
                                         <?php $disable_total = "disabled = 'disabled'"; ?>
                                         <?php echo $this->Form->input('total_price', array('id'=>'total_price','class'=>'form-control','label'=>false,'type'=>'text','data-placeholder'=>'Select Total Price','name'=>'total_price',$disable_total)); ?>

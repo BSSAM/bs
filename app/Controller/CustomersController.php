@@ -604,7 +604,7 @@ class CustomersController extends AppController
         $price  =   $this->request->data['price'];
         $instrument_range    =    $this->InsPercent->find('first');
         $percent = $instrument_range['InsPercent']['percent'];
-        return $price-$price*$percent/100;
+        return $price+$price*$percent/100;
     }
     public function add_customer_instrument()
     {
@@ -615,8 +615,11 @@ class CustomersController extends AppController
         $customer_id  =   $this->request->data['customer_id'];
         $range_id       =   $this->request->data['range_id'];
         $model_no       =   $this->request->data['model_no'];
-        
-        $customer_instruments  = $this->CustomerInstrument->find('all',  array('conditions'=>array('model_no'=>$model_no,'range_id'=>$range_id, 'instrument_id'=>$instrument_id,'CustomerInstrument.is_deleted'=>0,'customer_id'=>$customer_id)));
+        $cost       =   $this->request->data['cost'];
+        $total_price       =   $this->request->data['total_price'];
+         
+       
+        $customer_instruments  = $this->CustomerInstrument->find('all',  array('conditions'=>array('model_no'=>$model_no,'range_id'=>$range_id,'cost'=>$cost,'unit_price'=>$total_price, 'instrument_id'=>$instrument_id,'CustomerInstrument.is_deleted'=>0,'customer_id'=>$customer_id)));
         if(count($customer_instruments)==0){
         $data = $this->CustomerInstrument->save($this->request->data);
             if($data)
@@ -862,7 +865,8 @@ class CustomersController extends AppController
         $this->request->data['CustomerInstrument']['instrument_name'] = $this->request->data['instrument_name'];
         $this->request->data['CustomerInstrument']['model_no'] = $this->request->data['model_no'];
         $this->request->data['CustomerInstrument']['range_id'] = $this->request->data['range_id'];
-        $this->request->data['CustomerInstrument']['unit_price'] = $this->request->data['unit_price'];
+        $this->request->data['CustomerInstrument']['cost'] = $this->request->data['cost'];
+        $this->request->data['CustomerInstrument']['unit_price'] = $this->request->data['total_price'];
         $this->request->data['CustomerInstrument']['status'] = $this->request->data['status'];
         if ($this->CustomerInstrument->save($this->request->data)) 
         {

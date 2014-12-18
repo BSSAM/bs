@@ -7,7 +7,7 @@
 <ul class="breadcrumb breadcrumb-top">
       <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
     <li><?php echo $this->Html->link('Mark Up',array('controller'=>'InsPercents','action'=>'index')); ?></li>
-    <li>Edit Discount Percent</li>
+    <li>Edit Mark Up</li>
 </ul>
 <!-- END Forms General Header -->
 
@@ -27,18 +27,42 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="percent">Mark Up</label>
+                                        <label class="col-md-2 control-label" for="percent">Mark Up (in %)</label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('percent', array('id'=>'percent','class'=>'form-control','placeholder'=>'Enter the Mark Up Percent','label'=>false,'name'=>'percent')); ?>
+                                            <?php echo $this->Form->input('InsPercent.percent', array('id'=>'percent','class'=>'form-control','placeholder'=>'Enter the Mark Up Percent','label'=>false,'name'=>'percent')); ?>
                                         </div>
                                         <label class="col-md-2 control-label" for="status">Active</label>
                                         <div class="col-md-4 form-control-static">
-                                            <?php echo $this->Form->checkbox('status', array('id'=>'status','label'=>false,'name'=>'status')); ?>
+                                            <?php echo $this->Form->checkbox('InsPercent.status', array('id'=>'status','label'=>false,'name'=>'status')); ?>
                                         </div>
                                    
                                     </div>
-                                    
-                                    
+                                    <div class="form-group">
+                                       
+                                        <label class="col-md-2 control-label">Discount Limit (in %)</label>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                       
+                                        <label class="col-md-2 control-label" for="user">User</label>
+                                        <div class="col-md-4">
+                                            <?php echo $this->Form->input('InsPercent.user', array('id'=>'user','class'=>'form-control','placeholder'=>'Enter the User Percent','label'=>false,'name'=>'user')); ?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                       
+                                        <label class="col-md-2 control-label" for="supervisor">Supervisor</label>
+                                        <div class="col-md-4">
+                                            <?php echo $this->Form->input('InsPercent.supervisor', array('id'=>'supervisor','class'=>'form-control','placeholder'=>'Enter the Supervisor Percent','label'=>false,'name'=>'supervisor')); ?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                       
+                                        <label class="col-md-2 control-label" for="manager">Manager</label>
+                                        <div class="col-md-4">
+                                            <?php echo $this->Form->input('InsPercent.manager', array('id'=>'manager','class'=>'form-control','placeholder'=>'Enter the Manager Percent','label'=>false,'name'=>'manager')); ?>
+                                        </div>
+                                    </div>
                                      <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
                                             

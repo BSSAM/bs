@@ -80,6 +80,7 @@ class InsPercentsController extends AppController
          * *****************************************************
          */
         $percent_dat = $this->InsPercent->find('first',array('conditions'=>array('InsPercent.id'=>$id),'recursive'=>'2'));
+        
         $this->set('percent_dat',$percent_dat);
         if(empty($id))
         {
@@ -94,6 +95,7 @@ class InsPercentsController extends AppController
         }
         if($this->request->is(array('post','put')))
         {
+            
             $this->InsPercent->id = $id;
             if($this->InsPercent->save($this->request->data))
             {

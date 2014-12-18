@@ -125,11 +125,11 @@
                                         <?php $a=($control == 'Autos')?'active':''; ?>
                                         <?php echo $this->Html->link('Random No',array('controller'=>'Autos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php //} ?>
-                                    <?php //if($user_role['other_auto']['view'] == 1){ ?>
+                                    <?php if($user_role['instr_costing']['add'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'InsPercents')?'active':''; ?>
-                                        <?php echo $this->Html->link('Instrument Discount',array('controller'=>'InsPercents','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php //} ?>
+                                        <?php echo $this->Html->link('Instrument Costing',array('controller'=>'InsPercents','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li><?php } ?>
                                 </ul>
                             </li>
                             <li>
