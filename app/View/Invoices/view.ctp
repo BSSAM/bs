@@ -1,12 +1,15 @@
-<script>$(function(){
+<script>
+    var path_url='<?PHP echo Router::url('/',true); ?>';
+    $(function(){
     $('#inv_date').datepicker("setDate", new Date());
 });
 $(document).ready(function() {
     $('.approve_invoice').click(function() {
-          return confirm('You sure you want to continue?');
+        window.location.href = path_url+"Invoices/";
+        
     });
 });
-var path_url='<?PHP echo Router::url('/',true); ?>';
+
 $(function() {
     $('.edit_sales_unit').editable(path_url+'/Salesorders/price_change', {
          id        : 'device_id',
@@ -135,14 +138,14 @@ $(function() {
  </style>
 
     <h1>
-        <i class="gi gi-user"></i>Edit Invoice
+        <i class="gi gi-user"></i>View Invoice
     </h1>
     </div>
 </div>
     <ul class="breadcrumb breadcrumb-top">
         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
         <li><?php echo $this->Html->link('Invoice',array('controller'=>'Invoices','action'=>'index')); ?></li>
-        <li>Approve Invoice</li>
+        <li>View Invoice</li>
     </ul>
                     
 <div class="row">
@@ -161,6 +164,12 @@ $(function() {
                 <?php //echo $this->Form->input('Salesorder.salesorder_id', array('type'=>'hidden','value'=>$salesorderno)); ?>
                 
                 <div class="panel-body panel-body-nopadding">
+                    <div class="form-group"> 
+                    <label class="col-md-2 control-label" for="invoiceno">Invoice No</label>
+                        <div class="col-md-4">
+                            <?php echo $this->Form->input('invoiceno', array('id'=>'invoiceno','class'=>'form-control','readonly'=>'readonly','label'=>false,'name'=>'invoiceno','value'=>$invoice_no)); ?>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="inv_customer">Customer Name</label>
                         <div class="col-md-4">
@@ -411,7 +420,7 @@ $(function() {
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
                         <?php //if($invoices['Salesorder']['is_approved']==1 && $invoices['Salesorder']['is_poapproved']==1 ): ?>
-                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'submit','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false,'confirm'=>'Are you Sure?')); ?>
+                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false)); ?>
                             <?php //endif; ?>
 
                         </div>
@@ -812,7 +821,7 @@ $(function() {
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
                         <?php //if($invoices['Salesorder']['is_approved']==1 && $invoices['Salesorder']['is_poapproved']==1 ): ?>
-                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'submit','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false,'confirm'=>'Are you Sure?')); ?>
+                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false)); ?>
                             <?php //endif; ?>
 
                         </div>
@@ -1210,7 +1219,7 @@ $(function() {
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
                         <?php //if($invoices['Salesorder']['is_approved']==1 && $invoices['Salesorder']['is_poapproved']==1 ): ?>
-                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'submit','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false,'confirm'=>'Are you Sure?')); ?>
+                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'button','class'=>'btn btn-sm btn-primary approve_invoice','escape' => false)); ?>
                             <?php //endif; ?>
 
                         </div>

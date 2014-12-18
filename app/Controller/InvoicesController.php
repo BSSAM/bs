@@ -610,6 +610,157 @@ class InvoicesController extends AppController
     //        $this->set('invoices',$invoice);
     //        $this->set('desc',$desc);
     }
+    
+    public function view($id = NULL)
+    {
+        $inv = $this->Invoice->find('first',array('conditions'=>array('Invoice.invoiceno'=>$id)));
+        $this->set('invoice_no',$id);
+        $inv_type = $inv['Invoice']['invoice_type_id'];
+        $salesorder = $inv['Invoice']['salesorder_id'];
+        $quotationno = $inv['Invoice']['quotation_id'];
+        $refno = $inv['Invoice']['ref_no'];
+        if($inv_type == 3):
+            $salesorder_list = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_poapproved'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_invoice_created'=>1),'recursive'=>3));
+            $gst = $salesorder_list['Quotation']['Customerspecialneed']['gst'];
+            $currency = $salesorder_list['Quotation']['Customerspecialneed']['currency_value'];
+            $additional_charge = $salesorder_list['Quotation']['Customerspecialneed']['additional_service_value'];
+            $this->set(compact('gst','currency','additional_charge'));
+            $delivery_lis = '';
+            foreach($salesorder_list['Deliveryorder'] as $delivery):
+                $delivery_lis[] = $delivery['delivery_order_no'];
+            endforeach;
+            $deliveryorder_in_comma = implode(',',$delivery_lis);
+            $salesorder_list_first = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_poapproved'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_invoice_created'=>1),'recursive'=>3));
+            $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$salesorder_list_first['Salesorder']['attn'])));
+            $this->set('contactperson',$contact_person['Contactpersoninfo']);
+            $this->set('deliveryorderno',$deliveryorder_in_comma);
+            $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$salesorder_list_first['Salesorder']['service_id'])));
+            $this->set('servicetype',$service['Service']['servicetype']);
+            $desc = $salesorder_list_first['Description'];
+            $total = 0;
+            foreach($desc as $desc_total):
+                $total = $total + $desc_total['sales_total'];
+            endforeach;
+            $this->set('total',$total);
+            
+            $this->set('desc',$desc);
+            
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
+            
+        elseif($inv_type == 2):
+            $quotation_list = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_invoice_created'=>1)));    
+            foreach($quotation_list as $polist):
+                $quono[] = $polist['Device'];
+            endforeach;
+            //pr($polist);exit;
+            $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$quotationno,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>2)));
+            //pr($delivery_lists);exit;
+            $delivery_lis = '';
+            foreach($delivery_lists as $delivery):
+                //pr($delivery);
+                $delivery_lis[] = $delivery['Deliveryorder']['delivery_order_no'];
+            endforeach;
+            $deliveryorder_in_comma = implode(',',$delivery_lis);
+            
+            $quotation_list = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_invoice_created'=>1),'recursive'=>3));
+            
+            $gst = $quotation_list['Customerspecialneed']['gst'];
+            $currency = $quotation_list['Customerspecialneed']['currency_value'];
+            $additional_charge = $quotation_list['Customerspecialneed']['additional_service_value'];
+            $this->set(compact('gst','currency','additional_charge'));
+            
+            $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$quotation_list['Quotation']['attn'])));
+            $this->set('contactperson',$contact_person['Contactpersoninfo']);
+            $this->set('deliveryorderno',$deliveryorder_in_comma);
+            $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$quotation_list['Customerspecialneed']['service_id'])));
+            if(empty($service)):
+                $this->set('servicetype',$service='');
+            else:
+                $this->set('servicetype',$service['Service']['servicetype']);
+            endif;
+            
+            //$desc = $po_list_first['Device'];
+            $total = 0;
+            foreach($po_lists as $desc):
+                //pr($desc['Device']);
+                foreach($desc['Device'] as $desc_total):
+                   // pr($desc_total['total']);
+                    $total = $total + $desc_total['total'];
+                endforeach;
+            endforeach;
+            //exit;
+            //pr($quono);exit;
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
+            $this->set('total',$total);
+            $this->set('desc',$quono);
+        elseif($inv_type == 4):
+            $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>4)));
+        else:
+            $po_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$refno,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_invoice_created'=>1),'recursive'=>3));    
+            foreach($po_lists as $polist):
+                $quono[] = $polist['Device'];
+            endforeach;
+            //pr($polist);exit;
+            $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ref_no'=>$refno,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>1)));
+            //pr($delivery_lists);exit;
+            $delivery_lis = '';
+            foreach($delivery_lists as $delivery):
+                //pr($delivery);
+                $delivery_lis[] = $delivery['Deliveryorder']['delivery_order_no'];
+            endforeach;
+            $deliveryorder_in_comma = implode(',',$delivery_lis);
+            
+            $po_list_first = $this->Quotation->find('first',array('conditions'=>array('Quotation.ref_no'=>$refno,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_invoice_created'=>1),'recursive'=>3));
+            
+            $gst = $po_list_first['Customerspecialneed']['gst'];
+            $currency = $po_list_first['Customerspecialneed']['currency_value'];
+            $additional_charge = $po_list_first['Customerspecialneed']['additional_service_value'];
+            $this->set(compact('gst','currency','additional_charge'));
+            
+            $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$po_list_first['Quotation']['attn'])));
+            $this->set('contactperson',$contact_person['Contactpersoninfo']);
+            $this->set('deliveryorderno',$deliveryorder_in_comma);
+            $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$po_list_first['Customerspecialneed']['service_id'])));
+            if(empty($service)):
+                $this->set('servicetype',$service='');
+            else:
+                $this->set('servicetype',$service['Service']['servicetype']);
+            endif;
+            
+            //$desc = $po_list_first['Device'];
+            $total = 0;
+            foreach($po_lists as $desc):
+                //pr($desc['Device']);
+                foreach($desc['Device'] as $desc_total):
+                   // pr($desc_total['total']);
+                    $total = $total + $desc_total['total'];
+                endforeach;
+            endforeach;
+            //exit;
+            //pr($quono);exit;
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
+            $this->set('total',$total);
+            $this->set('desc',$quono);
+        endif;
+        
+        $this->set(compact('salesorder_list','quotation_lists','delivery_lists','po_list_first'));
+        
+    }
     public function preparein()
     {
         $this->autoRender   =   false;

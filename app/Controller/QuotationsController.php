@@ -1444,17 +1444,35 @@ $html .= '<td><strong>Total Price $(SGD)</strong></td></tr>';
             echo $title;
         }
     }
-     public function price_change()
+    public function price_change()
     {
         $this->autoRender   =   false;
          if ($this->request->data) {
             App::uses('Sanitize', 'Utility');
             $unit_price = Sanitize::clean($this->request->data['unit_price']);
-
+            
              $this->Device->id = $this->request->data['device_id'];
             //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
             $this->Device->saveField('unit_price', $unit_price);
+            $this->Device->saveField('total', $unit_price);
             echo $unit_price;
+        }
+    }
+    public function price_change_discount()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $discount = Sanitize::clean($this->request->data['discount']);
+            
+             $this->Device->id = $this->request->data['device_id'];
+            $dev = $this->Device->find('first',array('conditions'=>array('Device.id'=>$this->request->data['device_id'])));
+            $total = $dev['Device']['total'];
+            $total_total = $total - ($total * $discount/100);
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Device->saveField('discount', $discount);
+            $this->Device->saveField('total', $total_total);
+            echo $discount;
         }
     }
 }

@@ -2142,14 +2142,34 @@ table td { font-size:13px; line-height:18px; }
         $this->autoRender   =   false;
          if ($this->request->data) {
             App::uses('Sanitize', 'Utility');
-            $title = Sanitize::clean($this->request->data['title8']);
+            $sales_unitprice = Sanitize::clean($this->request->data['sales_unitprice']);
 
             $this->Description->id = $this->request->data['device_id'];
-            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
-            $this->Description->saveField('title8_val', $title);
-            echo $title;
+            $dev = $this->Description->find('first',array('conditions'=>array('Description.id'=>$this->request->data['device_id'])));
+            $this->Device->updateAll(array('Device.unit_price'=>$sales_unitprice,'Device.total'=>$sales_unitprice),array('Device.id'=>$dev['Description']['device_id']));
+            $this->Description->saveField('sales_unitprice', $sales_unitprice);
+            $this->Description->saveField('sales_total', $sales_unitprice);
+            echo $sales_unitprice;
         }
     }
+    public function price_change_discount()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $sales_discount = Sanitize::clean($this->request->data['sales_discount']);
+
+            $this->Description->id = $this->request->data['device_id'];
+            $dev = $this->Description->find('first',array('conditions'=>array('Description.id'=>$this->request->data['device_id'])));
+            $sales_total = $dev['Description']['sales_total'];
+            $sales_total_total = $sales_total - ($sales_total * $sales_discount/100);
+            $this->Device->updateAll(array('Device.discount'=>$sales_discount,'Device.total'=>$sales_total_total),array('Device.id'=>$dev['Description']['device_id']));
+            $this->Description->saveField('sales_total', $sales_total_total);
+            $this->Description->saveField('sales_discount', $sales_discount);
+            echo $sales_discount;
+        }
+    }
+    
         
     public function get_contact_email()
     {

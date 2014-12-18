@@ -36,10 +36,10 @@
                             <td class="text-center"><?PHP echo $invoice['Invoice']['ref_no'] ?></td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                   
                                     <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'view',$invoice['Invoice']['invoiceno']),array('data-toggle'=>'tooltip','title'=>'View','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                </div>
+                                <div class="btn-group">
                                     <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$invoice['Invoice']['invoiceno']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                   
                                 </div>
                             </td>
                         </tr>
