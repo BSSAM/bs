@@ -1613,7 +1613,7 @@ $html .='</tr>';
            foreach($device_name as $device):
                     $html .= '
                     <tr>
-                        <td style="padding:3px 10px;font-size:11px !important;"><h4>'.$device['Instrument']['name'].'</h4></td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Instrument']['name'].'</td>
                         <td style="padding:3px 10px;font-size:11px !important;">1</td>
                         <td style="padding:3px 10px;font-size:11px !important;">'.$device['Brand']['brandname'].'</td>
                         <td style="padding:3px 10px;font-size:11px !important;">'.$device['model_no'].'</td>
@@ -1719,15 +1719,17 @@ $html .='</tr>';
 <head>
 <meta charset="utf-8" />
 <title></title>
-
+<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
 <style>
-* { margin:0; padding:0; font-size:13px; color:#333 !important; }
+* { margin:0; padding:0; font-size:13px; color:#333 !important;line-height:1; }
 table td { font-size:13px; line-height:18px; }
 .table_format table { }
 .table_format td { text-align:center; }
 </style>
 </head>
-<body style="font-size:11px;padding:10px;margin:0;font-weight:300;">
+<body style="font-family:Oswald;font-size:11px;padding:10px;margin:0;font-weight:300;">
+<div style="margin-top:20px;">
           ';
  $n = 0;
  foreach($device_name as $device):
@@ -1738,63 +1740,73 @@ table td { font-size:13px; line-height:18px; }
 
                    $html .='
                      
-<div style="width:50%;margin-top:10px;display:inline-block;">
-     <table width="100%" cellpadding="1" cellspacing="1"  style="border:1px solid #333;">
+<div style="width:50%;display:inline-block;margin-bottom: 5px;height:171.5px;">
+     <table width="100%" cellpadding="0" cellspacing="1"  style="border:1px solid #333;">
                         
                          <tr  style="padding-top:30px;">
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important; text-align:center !important;border-bottom:1px solid #000 !important;border-right:1px solid #000 !important;">'.$device['order_by'].' </td>
-                              <td  width="40" style="font-size:12px !important;border-bottom:1px solid #000 !important;text-align:center !important;border-right:1px solid #000 !important;">REGISTRATION TAG</td>
-                              <td width="68"  style="line-height:10px !important;font-size:11px !important;border-bottom:1px solid #000 !important;text-align:center !important;">'.$reg_date.'</td>
+                              <td  style="line-height:10px !important;font-size:11px !important; text-align:center !important;border-bottom:1px solid #000 !important;border-right:1px solid #000 !important;">'.$device['order_by'].' </td>
+                              <td   style="font-size:12px !important;border-bottom:1px solid #000 !important;text-align:center !important;border-right:1px solid #000 !important;">REGISTRATION TAG</td>
+                              <td   style="line-height:10px !important;font-size:11px !important;border-bottom:1px solid #000 !important;text-align:center !important;">'.$reg_date.'</td>
                          </tr>
                          <tr  style="padding-top:30px;">
-                              <td width="81" style="line-height:10px !important;font-size:11px !important;padding:5px;">JOB NO. </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$salesorderno.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">JOB NO. </td>
+                              
+                              <td  style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$salesorderno.'</td>
+                                  <td></td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">CUSTOMER </td>
-                              <td width="9">:</td>
-                              <td colspan="4" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$customername.'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">CUSTOMER </td>
+                              
+                              <td  style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$customername.'</td>
+                                  <td></td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">INSTRUMENT </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> '.$device['Instrument']['name'].'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">INSTRUMENT </td>
+                             
+                              <td  style="line-height:10px !important;font-size:11px !important;padding:0 5px;"> '.$device['Instrument']['name'].'</td>
+                                  <td></td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">MODEL NO </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;"> '.$device['model_no'].'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">MODEL NO </td>
+                            
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;"> '.$device['model_no'].'</td>
+                                  <td></td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">BRAND </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['Brand']['brandname'].'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">BRAND </td>
+                             
+                              <td  style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$device['Brand']['brandname'].'</td>
+                                  <td></td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">RANGE </td>
-                              <td width="9">:</td>
-                              <td width="110" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['Range']['range_name'].'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">RANGE </td>
+                              
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$device['Range']['range_name'].'</td>
+                                  <td></td>
                          </tr>';
                          for($i=0;$i<=4;$i++):
                         $html .='<tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$titles[$i].'</td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['title'.($i+1).'_val'].'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">Title1</td>
+                             
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$device['title'.($i+1).'_val'].'</td>
+                                  <td></td>
                          </tr>';
                          endfor;
                          $html .='<tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">SERVICE </td>
-                              <td width="9">:</td>
-                              <td colspan="2" style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['sales_accountservice'].'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">SERVICE </td>
+                              
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$device['sales_accountservice'].'</td>
+                                  <td></td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">DEPARTMENT </td>
-                              <td width="9">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:5px;">'.$device['Instrument']['Department']['departmentname'].'</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">DEPARTMENT </td>
+                              
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$device['Instrument']['Department']['departmentname'].'</td>
+                                  <td></td>
                          </tr>
+                         
                          <tr>
-                              <td colspan="4" style="text-align:center;color:#777 !important;padding:5px 0;border-top:1px solid #000;">BS TECH PTE LTD</td>
+                            <td colspan="3" style="line-height:10px !important;font-size:11px !important;padding:3px; text-align: center;border-top:1px solid #000">BS TECH PTE LTD </td>
                          </tr>
                    
                
@@ -1809,10 +1821,10 @@ table td { font-size:13px; line-height:18px; }
  $n=$n+1;
                     endforeach;
                $html .='
-
+</div>
 </body>
 </html>';
-                //pr($html);exit;
+               //print($html);exit;
         $this->export_report_all_format($file_type, $filename, $html);
     }
     function export_report_all_format($file_type, $filename, $html)

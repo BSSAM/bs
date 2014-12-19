@@ -1037,7 +1037,7 @@ table td { font-size:11px; line-height:18px; }
                 endforeach;
                
 $html .=
-'<body style="font-family:"Oswald";font-size:11px;padding:10px;margin:0;font-weight: 300;">
+'<body style="font-family:Oswald;font-size:11px;padding:10px;margin:0;font-weight: 300;">
 <table width="700px">
      <tr>
           <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
