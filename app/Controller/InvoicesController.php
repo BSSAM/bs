@@ -920,4 +920,389 @@ class InvoicesController extends AppController
         $this->set($params);
     }
     
+    
+    function pdf($id = NULL) 
+        {
+        
+            $this->autoRender = false;
+                      
+            $inv = $this->Invoice->find('first',array('conditions'=>array('Invoice.invoiceno'=>$id)));
+            $file_type = 'pdf';
+            $filename = $id;
+        
+            $inv_type = $inv['Invoice']['invoice_type_id'];
+            $salesorder = $inv['Invoice']['salesorder_id'];
+            $quotationno = $inv['Invoice']['quotation_id'];
+            $refno = $inv['Invoice']['ref_no'];
+            if($inv_type == 3):
+                $salesorder_list = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_poapproved'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_invoice_created'=>1),'recursive'=>3));
+                $gst = $salesorder_list['Quotation']['Customerspecialneed']['gst'];
+                $currency = $salesorder_list['Quotation']['Customerspecialneed']['currency_value'];
+                $additional_charge = $salesorder_list['Quotation']['Customerspecialneed']['additional_service_value'];
+                $this->set(compact('gst','currency','additional_charge'));
+                $delivery_lis = '';
+                foreach($salesorder_list['Deliveryorder'] as $delivery):
+                    $delivery_lis[] = $delivery['delivery_order_no'];
+                endforeach;
+                $deliveryorder_in_comma = implode(',',$delivery_lis);
+                $salesorder_list_first = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_poapproved'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_invoice_created'=>1),'recursive'=>3));
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$salesorder_list_first['Salesorder']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_in_comma);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$salesorder_list_first['Salesorder']['service_id'])));
+                $this->set('servicetype',$service['Service']['servicetype']);
+                $desc = $salesorder_list_first['Description'];
+                $total = 0;
+                foreach($desc as $desc_total):
+                    $total = $total + $desc_total['sales_total'];
+                endforeach;
+                $this->set('total',$total);
+
+                $this->set('desc',$desc);
+
+                $title =   $this->Title->find('all');
+                foreach($title as $title_name)
+                {
+                    $titles[] = $title_name['Title']['title_name'];
+                }
+                $this->set('titles',$titles);
+
+            
+           
+$html .='<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title></title>
+<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
+<style>
+* { margin:0; padding:0; font-size:11px; color:#333 !important; }
+table td { font-size:11px; line-height:18px; }
+.table_format table { }
+.table_format td { text-align:center; }
+</style>
+</head>
+<body style="font-family:Oswald;font-size:11px;padding:10px;margin:0;font-weight:300;">
+<table width="700px">
+     <tr>
+          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
+          <td style="padding:0 10px;"><div style="float:left;text-align:right;">
+                    <p>41 Senoko Drive</p>
+                    <p>Singapore 758249</p>
+                    <p>Tel.+65 6458 4411</p>
+                    <p>Fax.+65 64584400</p>
+                    <p>www.bestandards.com</p>
+               </div></td>
+     <tr>
+</table>
+<table width="623" height="56">
+     <tr>
+          <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:16px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
+          <td width="389" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+     </tr>
+</table>
+<div style="width:100%;margin-top:10px;float:left;">
+     <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:10px;">
+          <tr>
+              <td width="47%" style="border:1px solid #000;padding:5px;"><table width="288" cellpadding="0" cellspacing="0">
+                        <tr>
+                              <td width="128" colspan="3" height="10px" style="font-size:11px !important;">'.$salesorder_list['Customer']['customername'].'</td>
+                         </tr>
+                         <tr>
+                              <td colspan="3" height="10px" style="font-size:11px !important;">'.$salesorder_list['Salesorder']['address'].'</td>
+							  
+                         </tr>
+                        
+                         <tr  style="padding-top:30px;">
+                              <td style="line-height:20px !important;font-size:11px !important;">ATTN </td>
+                              <td width="29">:</td>
+                              <td width="145" style="line-height:30px !important;font-size:11px !important;">'.$contactperson['name'].'</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:20px !important;font-size:11px !important;">TEL </td>
+                              <td width="29">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">'.$contactperson['phone'].'</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:20px !important;font-size:11px !important;">FAX </td>
+                              <td width="29">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">'.$salesorder_list['Salesorder']['fax'].'</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:20px !important;font-size:11px !important;">EMAIL </td>
+                              <td width="29">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">'.$contactperson['email'].'</td>
+                         </tr>
+                    </table></td>
+               <td width="3%"></td>
+               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" height="161" cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$salesorder_list['Quotation']['quotationno'].'</div></td>
+						
+                         </tr>
+                         <tr>
+                              <td width="139" style="line-height:20px !important;padding-left:5px;font-size:11px !important;">OUR REF NO </td>
+                              <td width="24" style="font-size:11px !important;">:</td>
+                              <td width="109" style="line-height:20px !important;font-size:11px !important;">'.$salesorder_list['Salesorder']['id'].'</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:20px !important;padding-left:5px;font-size:11px !important;"> YOUR REF NO </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;"> '.$salesorder_list['Salesorder']['ref_no'].'</td>
+                         </tr>
+                         <tr>
+                              <td style="line-height:20px !important;padding-left:5px;font-size:11px !important;"> DATE </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;"> '.$inv['Invoice']['invoice_date'].'</td>
+                         </tr>
+                         <tr>
+                              <td  style="line-height:20px !important;padding-left:5px;font-size:11px !important;">PAYMENT TERMS </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">30 Days</td>
+                         </tr>
+                    </table></td>
+               <td width="2%"></td>
+          </tr>
+     </table>
+</div>
+<div style="padding-top:10px;">Being provided on-site calibration service of the following(s) :</div>
+<div style="color:#000 !important;"> SALES ORDER NO : <span style="font-size:18px !important;">BSO-14-005635</span></div>
+<div style="color:#000 !important;"> DELIVERY ORDER NO : <span style="font-size:18px !important;">BDO-14-005920</span></div>
+<div style="width:100%;display:block;margin-top:10px; class="table_format">
+     <table cellpadding="0" cellspacing="0"  style="width:100%;min-height:400px;">
+          <tr>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">ITEM</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">QTY</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">DESCRIPTION</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">MODEL NO</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">SERIAL NO</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">RANGE</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">REMARKS</td>
+			   <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">UNIT PRICE $(SGD)</td>
+			   <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">TOTAL PRICE $(SGD)</td>
+          </tr>
+          <tr>
+               <td style="padding:3px 10px;font-size:11px !important;">1</td>
+               <td style="padding:3px 10px;font-size:11px !important;">1</td>
+               <td style="padding:3px 10px;font-size:11px !important;">MAGNEHELIC</td>
+               <td style="padding:3px 10px;font-size:11px !important;">-</td>
+               <td style="padding:3px 10px;font-size:11px !important;">2000-6</td>
+               <td style="padding:3px 10px;font-size:11px !important;">ME-0240</td>
+               <td style="padding:3px 10px;font-size:11px !important;">(-)/-</td>
+			   <td style="padding:3px 10px;font-size:11px !important;">40</td>
+			   <td style="padding:3px 10px;font-size:11px !important;">40</td>
+          </tr>
+       <tr>
+               <td colspan="8" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">40</td>
+          </tr>
+          <tr>
+               <td colspan="8" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">GST ( 7.00% )</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">2.80</td>
+          </tr>
+		   <tr>
+               <td colspan="8" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;">42.80</td>
+          </tr>
+          <tr>
+               <td colspan="3" style="border:1px  dashed #000;text-align:right;padding:3px 10px;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
+               <td  colspan="8" style="border:1px  dashed #000;text-align:left;padding:3px 10px;font-size:15px !important;">Self Collect & Self Delivery
+                    
+                    Non-Singlas</td>
+          </tr>
+     </table>
+</div>
+<div style="width:100%;margin-top:10px;float:left;">
+     <table cellpadding="1" cellspacing="1"  style="width:100%;">
+          <tr>
+               <td style="padding:5px;width:50%;border:1px solid #000;"><table cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td>CONFIRMED AND ACCEPTED BY:</td>
+                         </tr>
+                         
+                         <tr>
+                              <td style="padding-top:20px;"><div style="border-top:1px solid #000;width:100%;">COMPANYS STAMP,SIGNATURE AND DATE</div></td>
+                         </tr>
+                         <tr>
+                              <td style="padding-top:5px;">DESIGNATION :</td>
+                         </tr>
+                         <tr>
+                              <td style="padding-top:5px;">NAME :</td>
+                         </tr>
+                    </table></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td style="border:1px dashed #000;padding:5px;width:50%;"><table width="270" cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td width="214" style="text-align:center;padding-bottom:30px;">FOR BS TECH PTE LTD</td>
+                         </tr>
+                         <tr>
+                              <td style="font-size:9px !important;color:#777 !important; text-align:center;"> Authorized Signature</td>
+                         </tr>
+                    </table></td>
+          </tr>
+     </table>
+</div>
+<div style="position:fixed;bottom:10px;left:10px;right:10px;height:130px;width:100%;">
+<div style="font-size:9px !important;width:100%;margin-top:10px;">1) Payment must be made either by Crossed Cheque to the Order of BS TECH PTE LTD or by electronic transfer to OCBC Bank (Bank Code: 7339 /Branch Code: 581/Account No: 814589001/SWIFT: OCBCSGSG). Any discrepancy noted herein must be brought to the notice of the company within 7 days in writing from the date of this statement. Otherwise all charges will be deemed to be correct.</div>
+<div style="font-size:9px !important;width:100%;">2) Prompt payment settlement would be appreciated. Otherwise, interest charge of 2% per month or part thereof will be levied on any amount outstanding.</div>
+<div style="font-size:9px !important;width:100%;">3) All business is transacted in strict compliance of the Standard Terms & Conditions of BS Tech Pte Ltd; a copy of which can be made available on request.</div>
+<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:10px;font-size:12px;margin-top:10px;text-align:center;">E. & O . E</div>
+</div>
+</body>
+</html>';
+
+elseif($inv_type == 2):
+                $quotation_list = $this->Quotation->find('all',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_invoice_created'=>1)));    
+                foreach($quotation_list as $polist):
+                    $quono[] = $polist['Device'];
+                endforeach;
+                //pr($polist);exit;
+                $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.quotationno'=>$quotationno,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>2)));
+                //pr($delivery_lists);exit;
+                $delivery_lis = '';
+                foreach($delivery_lists as $delivery):
+                    //pr($delivery);
+                    $delivery_lis[] = $delivery['Deliveryorder']['delivery_order_no'];
+                endforeach;
+                $deliveryorder_in_comma = implode(',',$delivery_lis);
+
+                $quotation_list = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$quotationno,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_invoice_created'=>1),'recursive'=>3));
+
+                $gst = $quotation_list['Customerspecialneed']['gst'];
+                $currency = $quotation_list['Customerspecialneed']['currency_value'];
+                $additional_charge = $quotation_list['Customerspecialneed']['additional_service_value'];
+                $this->set(compact('gst','currency','additional_charge'));
+
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$quotation_list['Quotation']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_in_comma);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$quotation_list['Customerspecialneed']['service_id'])));
+                if(empty($service)):
+                    $this->set('servicetype',$service='');
+                else:
+                    $this->set('servicetype',$service['Service']['servicetype']);
+                endif;
+
+                //$desc = $po_list_first['Device'];
+                $total = 0;
+                foreach($po_lists as $desc):
+                    //pr($desc['Device']);
+                    foreach($desc['Device'] as $desc_total):
+                       // pr($desc_total['total']);
+                        $total = $total + $desc_total['total'];
+                    endforeach;
+                endforeach;
+                //exit;
+                //pr($quono);exit;
+                $title =   $this->Title->find('all');
+                foreach($title as $title_name)
+                {
+                    $titles[] = $title_name['Title']['title_name'];
+                }
+                $this->set('titles',$titles);
+                $this->set('total',$total);
+                $this->set('desc',$quono);
+            elseif($inv_type == 4):
+                $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>4)));
+            else:
+                $po_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$refno,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_invoice_created'=>1),'recursive'=>3));    
+                foreach($po_lists as $polist):
+                    $quono[] = $polist['Device'];
+                endforeach;
+                //pr($polist);exit;
+                $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.ref_no'=>$refno,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>1)));
+                //pr($delivery_lists);exit;
+                $delivery_lis = '';
+                foreach($delivery_lists as $delivery):
+                    //pr($delivery);
+                    $delivery_lis[] = $delivery['Deliveryorder']['delivery_order_no'];
+                endforeach;
+                $deliveryorder_in_comma = implode(',',$delivery_lis);
+
+                $po_list_first = $this->Quotation->find('first',array('conditions'=>array('Quotation.ref_no'=>$refno,'Quotation.is_deleted'=>0,'Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_invoice_created'=>1),'recursive'=>3));
+
+                $gst = $po_list_first['Customerspecialneed']['gst'];
+                $currency = $po_list_first['Customerspecialneed']['currency_value'];
+                $additional_charge = $po_list_first['Customerspecialneed']['additional_service_value'];
+                $this->set(compact('gst','currency','additional_charge'));
+
+                $contact_person = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$po_list_first['Quotation']['attn'])));
+                $this->set('contactperson',$contact_person['Contactpersoninfo']);
+                $this->set('deliveryorderno',$deliveryorder_in_comma);
+                $service = $this->Service->find('first',array('conditions'=>array('Service.id'=>$po_list_first['Customerspecialneed']['service_id'])));
+                if(empty($service)):
+                    $this->set('servicetype',$service='');
+                else:
+                    $this->set('servicetype',$service['Service']['servicetype']);
+                endif;
+
+                //$desc = $po_list_first['Device'];
+                $total = 0;
+                foreach($po_lists as $desc):
+                    //pr($desc['Device']);
+                    foreach($desc['Device'] as $desc_total):
+                       // pr($desc_total['total']);
+                        $total = $total + $desc_total['total'];
+                    endforeach;
+                endforeach;
+                //exit;
+                //pr($quono);exit;
+                $title =   $this->Title->find('all');
+                foreach($title as $title_name)
+                {
+                    $titles[] = $title_name['Title']['title_name'];
+                }
+                $this->set('titles',$titles);
+                $this->set('total',$total);
+                $this->set('desc',$quono);
+            endif;
+        
+                //pr($html);exit;
+        $this->export_report_all_format($file_type, $filename, $html);
+    }
+    function export_report_all_format($file_type, $filename, $html)
+    {    
+        
+        if($file_type == 'pdf')
+        {
+    
+            App::import('Vendor', 'dompdf', array('file' => 'dompdf' . DS . 'dompdf_config.inc.php'));
+            $this->dompdf = new DOMPDF();        
+            $papersize = "a4";
+            $orientation = 'portrait';        
+            $this->dompdf->load_html($html);
+            $this->dompdf->set_paper($papersize, $orientation);        
+            $this->dompdf->render();
+            $this->dompdf->stream("Quotation-".$filename.".pdf");
+            echo $this->dompdf->output();
+           // $output = $this->dompdf->output();
+            //file_put_contents($filename.'.pdf', $output);
+            die();
+            
+        
+        }    
+        else if($file_type == 'xls')
+        {    
+            $file = $filename.".xls";
+            header('Content-Type: text/html');
+            header("Content-type: application/x-msexcel"); //tried adding  charset='utf-8' into header
+            header("Content-Disposition: attachment; filename=$file");
+            echo $html;
+            
+        }
+        else if($file_type == 'doc')
+        {                
+            $file = $filename.".doc";
+            header("Content-type: application/vnd.ms-word");
+            header("Content-Disposition: attachment;Filename=$file");
+            echo $html;
+            
+        }
+
+        
+    }
 }
