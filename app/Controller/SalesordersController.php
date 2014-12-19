@@ -1486,7 +1486,7 @@ table td { font-size:11px; line-height:18px; }
 </style>
 </head>';
  
- $title =   $this->Title->find('all');
+            $title =   $this->Title->find('all');
             foreach($title as $title_name)
             {
                 $titles[] = $title_name['Title']['title_name'];
@@ -1598,6 +1598,7 @@ table td { font-size:11px; line-height:18px; }
           <tr>
                <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">ITEM</td>
                <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">QTY</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">DESCRIPTION</td>
                <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">BRAND</td>
                <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">MODEL NO</td>
                <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">RANGE</td>
@@ -1605,26 +1606,29 @@ table td { font-size:11px; line-height:18px; }
 			
            $count = 0;
 for($i=0;$i<=4;$i++):
+    if(isset($titles[$i])):
      $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">';
     $html .= $titles[$i];
     $html .='</td>';
+    endif;
 endfor;
 $html .='</tr>';
            foreach($device_name as $device):
                     $html .= '
                     <tr>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['order_by'].'</td>
                         <td style="padding:3px 10px;font-size:11px !important;">'.$device['Instrument']['name'].'</td>
                         <td style="padding:3px 10px;font-size:11px !important;">1</td>
                         <td style="padding:3px 10px;font-size:11px !important;">'.$device['Brand']['brandname'].'</td>
                         <td style="padding:3px 10px;font-size:11px !important;">'.$device['model_no'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Range']['range_name'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title1_val'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title2_val'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title3_val'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title4_val'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['title5_val'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Range']['range_name'].'</td>';
+                        for($i=0;$i<=4;$i++):
+                        if(isset($titles[$i])):
+                        $html .='<td style="padding:3px 10px;font-size:11px !important;">'.$device['title'.($i+1).'_val'].'</td>';
+                        endif;
+                        endfor;
                         
-                    </tr>';
+                    $html .='</tr>';
                 
                 endforeach;
  
@@ -1785,12 +1789,14 @@ table td { font-size:13px; line-height:18px; }
                                   <td></td>
                          </tr>';
                          for($i=0;$i<=4;$i++):
+                             if(isset($titles[$i])):
                         $html .='<tr>
-                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">Title1</td>
+                              <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$titles[$i].'</td>
                              
                               <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">'.$device['title'.($i+1).'_val'].'</td>
                                   <td></td>
                          </tr>';
+                             endif;
                          endfor;
                          $html .='<tr>
                               <td style="line-height:10px !important;font-size:11px !important;padding:0 5px;">SERVICE </td>

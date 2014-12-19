@@ -16,7 +16,7 @@ class Quotation extends AppModel
             'conditions' => array('is_deleted'=>0),
             'dependent'=> true,
             'fields' => '',
-            'order' => '',
+            'order' => array('order_by ASC'),
             'limit' => '',
             'offset' => '',
             'exclusive' => '',

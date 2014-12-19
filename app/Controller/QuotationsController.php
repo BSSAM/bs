@@ -833,182 +833,19 @@
             //pr($quotation_data);exit;
             $file_type = 'pdf';
             $filename = $quotation_data['Quotation']['quotationno'];
-//            $html = '<!DOCTYPE html>
-//                    <html lang="en">
-//                    <head>
-//                    <meta charset="utf-8" />
-//                    <title>'.$quotation_data['Quotation']['quotationno'].'</title>
-//                    <style>
-//                    body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
-//                    * { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
-//                    .group:before, .group:after { content: ""; display: table; }
-//                    .group:after { clear: both; }
-//                    .group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
-//                    .pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 700px; }
-//                    .header_id { padding:10px 0; width:100%; display:block; }
-//                    .logo { margin-top:10px;display:inline-block;width:50%; }
-//                    .address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
-//                    .address_details p { float:left; width:100%; }
-//                    .address_details a { color: #1bbae1; float:left; width:100%; }
-//                    .cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
-//                    .address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
-//                    .address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
-//                    .address_box p { display:inline-block;}
-//                    .invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
-//                    .invoice_add {  margin:3px 0; display:inline-block;width:100%;}
-//                    .invoice_add h5 { display:inline-block; width:30%; }
-//                    .invoice_add span { margin-right:15px;display:inline-block; }
-//                    .invoice_add abbr { font-style: italic;display:inline-block; }
-//                    .services_details { margin-top:20px; width:100%; }
-//                    .services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
-//                    .services_details h4 abbr { width: 22%; display:inline-block;}
-//                    .services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
-//                    .invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
-//                    .invoice_table table { width:100%; border:1px  solid #ccc !important; border-bottom:none !important; border-left:none !important; }
-//                    .invoice_table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc !important; border-top:none !important; border-right:none !important; }
-//                    .invoice_table table thead { background-color: #f1f1f1; }
-//                    .instrument h4 { font-weight:normal; }
-//                    .instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
-//                    .address_table{width:50%;display:inline-block;}
-//                        .address_table table{width:100%;border:1px solid #ccc;}
-//                      .address_table td { padding: 10px; text-align: left !important; text-transform:none; border:none !important; }
-//                    </style>
-//                    </head>';
-//            //foreach ($quotation_data as $quotation_data_list):
-//                $customername = $quotation_data['Customer']['customername'];
-//                $billing_address = $quotation_data['Customer']['Address'][0]['address'];
-//                $postalcode = $quotation_data['Customer']['postalcode'];
-//                $contactperson = $quotation_data['Customer']['Contactpersoninfo'][0]['name'];
-//                $phone = $quotation_data['Customer']['phone'];
-//                $fax = $quotation_data['Customer']['fax'];
-//                $email = $quotation_data['Quotation']['email'];
-//                //$our_ref_no = $quotation_data_list['Quotation']['ref_no'];
-//                $ref_no = $quotation_data['Quotation']['ref_no'];
-//                $reg_date = $quotation_data['Quotation']['reg_date'];
-//                $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
-//                $quotationno = $quotation_data['Quotation']['quotationno'];
-//            
-//                foreach($quotation_data['Device'] as $device):
-//                    $device_name[] = $device;
-//                endforeach;
-//                
-//            //endforeach;
-//            $html .= '<body>
-//                <div class="pdf_container group"> 
-//                     <!-- header part-->
-//                     <div class="header_id">
-//                          <div class="f_left logo"><img src="img/logoBs.png" width="273" height="50" alt="" /></div>
-//                          <div class="address_details f_right">
-//                               <p>41 SENOKO DRIVE</p>
-//                               <p>SINGAPORE</p>
-//                               <p>758249</p>
-//                               <p> 6458 4411</p>
-//                               <a href="#" title="">invoice@bestandards.com</a>
-//                               <div class="cmpny_reg">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
-//                          </div>
-//                     </div>
-//                            <div class="address_table" style="margin-bottom:20px;">
-//                          <table style="height:250px;">
-//                          <tbody>
-//                          <tr><td>'.$customername.'<br>'.$billing_address.'<br>'.$postalcode.'</td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;">ATTN:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$contactperson.'</span></td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;">TEL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$phone.'</span></td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;">FAX:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$fax.'</span></td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;">EMAIL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$email.'</span></td></tr>
-//                </tbody>
-//                          </table>
-//
-//                </div>
-//                        <div class="address_table" style="margin-bottom:20px;">
-//                          <table style="height:250px;">
-//                          <tbody>
-//                          <tr><td style="text-align:center;font-weight:bold;font-size:20px;">'.$quotationno.'</td></tr>
-//                         <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PO NO:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$ref_no.'</span></td></tr>
-//                          
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">DATE:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$reg_date.'</span></td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PAYMENT TERM:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$payment_term.'</span></td></tr>
-//                </tbody>
-//                          </table>
-//
-//                </div>
-//                     <div class="services_details f_left">
-//                          <p>Being provided calibration service of the following(s) :</p>
-//                          <h4 class="f_left"><abbr>QUOTATION NO</abbr><span> '.$quotationno.'</span></h4>
-//                     </div>
-//                     <div class="invoice_table f_left">
-//                          <table cellpadding="0" cellspacing="0">
-//                               <thead>
-//                                    <tr>
-//                                         <th>Instrument</th>
-//                                         <th>Brand</th>
-//                                         <th>Model</th>
-//                                         <th>Serial No</th>
-//                                         <th>Quantity</th>
-//                                         <th>Unit Price $(SGD)</th>
-//                                         <th>Total Price $(SGD)</th>
-//                                    </tr>
-//                               </thead>
-//                               <tbody>';
-//                $subtotal = 0;
-//                foreach($device_name as $device):
-//                    $html .= '
-//                    <tr>
-//                        <td class="instrument"><h4>'.$device['Instrument']['name'].'</h4>
-//                            <span>Faulty</span> <span>'.$device['Range']['range_name'].'</span></td>
-//                        <td>'.$device['Brand']['brandname'].'</td>
-//                        <td>'.$device['model_no'].'</td>
-//                        <td>53254324</td>
-//                        <td>1</td>
-//                        <td> $'.$device['unit_price'].'</td>
-//                        <td> $'.$device['unit_price'].'</td>
-//                    </tr>';
-//                $subtotal = $subtotal + $device['unit_price']; 
-//                endforeach;
-//                
-//                $gst = $subtotal * 0.07;
-//                $total_due = $gst + $subtotal;
-//                App::uses('CakeNumber', 'Utility');$currency = 'USD';
-//                $total_due = CakeNumber::currency($total_due, $currency);
-//                $gst = CakeNumber::currency($gst, $currency);
-//                $subtotal = CakeNumber::currency($subtotal, $currency);
-//                $html .= '<tr>
-//                         <td colspan="6">SUBTOTAL</td>
-//                         <td>'.$subtotal.'</td>
-//                    </tr>
-//                    <tr>
-//                         <td colspan="6">GST ( 7.00% )</td>
-//                         <td>'.$gst.'</td>
-//                    </tr>
-//                    <tr>
-//                         <td colspan="6"><h4>TOTAL DUE</h4></td>
-//                         <td><h4>'.$total_due.'</h4></td>
-//                    </tr>
-//               </tbody>
-//          </table>
-//     </div>
-//</div>
-//</body>
-//</html>';
-            $title =   $this->Title->find('all');
-            foreach($title as $title_name)
-            {
-                $titles[] = $title_name['Title']['title_name'];
-            }
- 
-            //pr($titles);
-            //exit;
+
            $html = '<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <title>'.$quotation_data['Quotation']['quotationno'].'</title>
+<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
 <style>
-
 * { margin:0; padding:0; font-size:11px; color:#333 !important; }
 table td { font-size:11px; line-height:18px; }
 .table_format table { }
 .table_format td { text-align:center; }
-
 </style>
 </head>';
            
@@ -1035,6 +872,7 @@ table td { font-size:11px; line-height:18px; }
                 foreach($quotation_data['Device'] as $device):
                     $device_name[] = $device;
                 endforeach;
+               // pr($device_name);exit;
                
 $html .=
 '<body style="font-family:Oswald;font-size:11px;padding:10px;margin:0;font-weight: 300;">
@@ -1126,89 +964,127 @@ $html .=
 <div style="width:100%;margin-top:20px;display:block;" class="table_format">
      <table cellpadding="0" cellspacing="0"  style="width:100%;">
           <tr>
-               <td><strong>Instrument</strong></td>
-               <td><strong>Brand</strong></td>
-               <td><strong>Model</strong></td>
-               
-               <td><strong>Quantity</strong></td>
-               ';
-
-$count = 0;
-           $count = 0;
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Instrument</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+$count1 = 0;
 for($i=0;$i<=4;$i++):
-     $html .='<td>';
-    $html .= $titles[$i];
-    $html .='</td>';
+    if(isset($titles[$i])):
+        $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
+        $html .= $titles[$i];
+        $html .='</td>';
+    endif;
+    $count1 = $count1+1;
 endfor;
 
 
-$html .= '<td><strong>Total Price $(SGD)</strong></td></tr>';
+$html .= '<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td></tr>';
 		  $subtotal = 0;
                 foreach($device_name as $device):
                     $html .= '
                     <tr>
-                        <td class="instrument"><h4>'.$device['Instrument']['name'].'</h4>
-                            <span>Faulty</span> <span>'.$device['Range']['range_name'].'</span></td>
-                        <td>'.$device['Brand']['brandname'].'</td>
-                        <td>'.$device['model_no'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['order_by'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">1</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Instrument']['name'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Brand']['brandname'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['model_no'].'</td>
+                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Range']['range_name'].'</td>';
+                        for($i=0;$i<=4;$i++):
+                        if(isset($titles[$i])):
+                        $html .='<td style="padding:3px 10px;font-size:11px !important;">'.$device['title'.($i+1).'_val'].'</td>';
+                        endif;
+                        endfor;
                         
-                        <td>1</td>
-                        <td>'.$device['title1_val'].'</td>
-                        <td>'.$device['title2_val'].'</td>
-                        <td>'.$device['title3_val'].'</td>
-                        <td>'.$device['title4_val'].'</td>
-                        <td>'.$device['title5_val'].'</td>
-                        <td> $'.$device['unit_price'].'</td>
-                    </tr>';
+                    $html .='<td style="padding:3px 10px;font-size:11px !important;">'.number_format($device['unit_price'], 2, '.', '').'</td></tr>';
                 $subtotal = $subtotal + $device['unit_price']; 
                 endforeach;
                 
                 
          $gst = $subtotal * 0.07;
                 $total_due = $gst + $subtotal;
-                App::uses('CakeNumber', 'Utility');$currency = 'USD';
-                $total_due = CakeNumber::currency($total_due, $currency);
-                $gst = CakeNumber::currency($gst, $currency);
-                $subtotal = CakeNumber::currency($subtotal, $currency);
+               
                 $html .= '<tr>
-                         <td colspan="9">SUBTOTAL</td>
-                         <td>'.$subtotal.'</td>
+                         <td colspan="'.($count1+5).'" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">SUBTOTAL $(SGD)</td>
+                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;">'.number_format($subtotal, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="9">GST ( 7.00% )</td>
-                         <td>'.$gst.'</td>
+                         <td colspan="'.($count1+5).'" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GST ( 7.00% )</td>
+                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;">'.number_format($gst, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="9"><h4>TOTAL DUE</h4></td>
-                         <td><h4>'.$total_due.'</h4></td>
+                         <td colspan="'.($count1+5).'" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">TOTAL DUE $(SGD)</td>
+                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;">'.number_format($total_due, 2, '.', '').'</td>
                     </tr>
+                     <tr>
+               <td colspan="3" style="border:1px  dashed #000;text-align:right;padding:3px 10px;color: #000 !important;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
+               <td  colspan="8" style="border:1px dashed #000; text-align:left;padding:3px 10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td>
+          </tr>
      </table>
 </div>
 
-<div style="font-weight:bold;margin-top:20px;">TERMS AND CONDITIONS :</div>
-<p style="margin-top:5px;font-size:10px;"><strong>1) TURNAROUND TIME :</strong> NORMAL SERVICE 5 - 7 WORKING DAYS EXPRESS SERVICE 2 - 3 WORKING DAYS** 1.5 TIMES NORMAL RATES</p>
-<p style="margin-top:5px;font-size:10px;"><strong>2) COLLECTION & DELIVERY :</strong> TO BE ADVISED BY SALES PERSONNEL</p>
-<p style="margin-top:5px;font-size:10px;">3) VALIDITY OF THIS QUOTE IS 30 DAYS FROM THE DATE OF THIS QUOTATION *PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION* ALL PRICE(S) ABOVE ARE SUBJECTED TO GST CHARGE</p>
-<p style="margin-top:5px;font-size:10px;">4) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME. **PLEASE CONTACT SALES DEPARTMENT FOR MORE QUERIES AT 64584411**</p>
-<p style="margin-top:10px;font-size:10px;"><strong>NOTE :</strong> THIS IS COMPUTER GENERATED QUOTATION. NO SIGNATURE IS REQUIRED.</p>
-<div style="width:100%;margin-top:40px;display:block;">
-     <table cellpadding="0" cellspacing="0"  style="width:100%;">
+<div style="width:100%;margin-top:30px;">
+     <table width="93%" cellpadding="1" cellspacing="1"  style="width:100%;">
           <tr>
-               <td><strong>CONFIRMED AND ACCEPTED BY:</strong></td>
-               <td><strong>COMPANYS STAMP,SIGNATURE AND DATE</strong></td>
-          </tr>
-          <tr>
-               <td style="padding-top:20px;">-----------------------------</td>
-               <td style="padding-top:20px;">DESIGNATION :</td>
-          </tr>
-          <tr>
-               <td></td>
-               <td style="padding-top:20px;">NAME :</td>
+               <td width="55%" style="padding:5px;width:50%;"><table cellpadding="0" cellspacing="0" width="300" height="150">
+                         <tr>
+                              <td style="font-size:9px !important;padding:0px 5px;"><p style="color: #000 !important;">
+                                   
+                                   <div style="color: #000 !important;margin-top:10px;font-size:14px !important;">TERMS AND CONDITIONS :</div></td>
+                         </tr>
+                         <tr  style="padding-top:30px;">
+                              <td style="font-size:9px !important;padding:0px 5px;"><p style="color: #000 !important;">1) TURNAROUND TIME :</p>
+                                   <p style="text-transform:lowercase;line-height:12px !important;">NORMAL SERVICE 5 - 7 WORKING DAYS</p>
+                                   <p style="text-transform:lowercase;line-height:12px !important;"> EXPRESS SERVICE 2 - 3 WORKING DAYS** 1.5 TIMES NORMAL RATES</p>
+                                   <p style="text-transform:lowercase;line-height:12px !important;">PLATINUM SERVICE 1 WORKING DAY** 2 TIMES NORMAL RATES</p></td>
+                         </tr>
+                         <tr>
+                              <td style="font-size:9px !important;padding:0px 5px;"><p style="color: #000 !important;">2) COLLECTION & DELIVERY :</p>
+                                   <p style="text-transform:lowercase;line-height:12px !important;"> TO BE ADVISED BY SALES PERSONNEL</p></td>
+                         </tr>
+                         <tr>
+                              <td style="font-size:9px !important;padding:0px 5px;"><p style="text-transform:lowercase;line-height:12px !important;">3) VALIDITY OF THIS QUOTE IS 30 DAYS FROM THE DATE OF THIS QUOTATION</p>
+                                   <p style="text-transform:lowercase;line-height:12px !important;"> *PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION*</p>
+                                   <p style="text-transform:lowercase;line-height:12px !important;"> ALL PRICE(S) ABOVE ARE SUBJECTED TO GST CHARGE</p></td>
+                         </tr>
+                         <tr>
+                              <td style="font-size:9px !important;padding:0px 5px;"><p style="text-transform:lowercase;line-height:12px !important;">4) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME.</p></td>
+                         </tr>
+                         <tr>
+                              <td style="font-size:9px !important;padding:0px 5px;"> **PLEASE CONTACT SALES DEPARTMENT FOR MORE QUERIES AT 64584411**</td>
+                         </tr>
+                    </table></td>
+               <td width="45%" height="150" style="border:1px dashed #000;padding:5px;"><table width="269" cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td width="269"  style="color: #000 !important;">CONFIRMED AND ACCEPTED BY:</td>
+                         </tr>
+                         <tr>
+                              <td width="269"  height="30"  style="color: #000 !important;"></td>
+                         </tr>
+                         <tr>
+                              <td style="padding-top:5px;color: #000 !important;"><div style="border-top:1px solid #000;width:100%;">COMPANYS STAMP,SIGNATURE AND DATE</div></td>
+                         </tr>
+                         <tr>
+                              <td style="padding-top:5px;color: #000 !important;">DESIGNATION :</td>
+                         </tr>
+                         <tr>
+                              <td style="padding-top:5px; color: #000 !important;">NAME :</td>
+                         </tr>
+                    </table></td>
           </tr>
      </table>
+     <table width="639">
+          <tr>
+               <td width="456" style="font-size:9px !important;"><p style="color: #000 !important;">NOTE :</p>
+                    THIS IS COMPUTER GENERATED QUOTATION. NO SIGNATURE IS REQUIRED.
+                    </p></td>
+               <td width="171"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
+          </tr>
+     </table>
+     <div style="background:#313854;color:#fff !important;padding:10px;font-size:12px;margin-top:30px;">BS TECH REFERENCE MEASUREMENT STANDARDS ARE TRACEABLE TO NATIONAL METROLOGY CENTRE (SINGAPORE), NPL (UK), NIST (USA) OR OTHER RECOGNIZED NATIONAL OR INTERNATIONAL STANDARDS</div>
 </div>
-<div style="background:#313854;color:#fff;padding:10px;font-size:12px;margin-top:30px;">BS TECH REFERENCE MEASUREMENT STANDARDS ARE TRACEABLE TO NATIONAL METROLOGY CENTRE (SINGAPORE), NPL (UK), NIST (USA) OR OTHER RECOGNIZED NATIONAL OR INTERNATIONAL STANDARDS</div>
-
 </body>
 </html>';
 
