@@ -117,3 +117,24 @@
                                 
                                 </div>  
                                 <?php echo $this->Form->end(); ?>
+                                <script>
+                                $(document).ready(function(){
+                                    var minDate = new Date(); 
+                                    $('#cd_date').datepicker().on('changeDate', function(ev) {
+                                        if (ev.date.valueOf() < minDate.valueOf())
+                                        {
+                                            alert('Nope');
+                                            $(".candds_add").prop('disabled', true);
+                                            $("#val_assigned_move").prop('disabled', true).trigger('chosen:updated');;
+                                            
+                                        }
+                                        else
+                                        {
+                                            alert('Yep');
+                                            $(".candds_add").prop('disabled', false);
+                                            $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');;
+                                            
+                                        }
+                                    }).data('datepicker');    
+                                });
+                                </script>

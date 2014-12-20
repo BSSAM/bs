@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
+    
+    
    
     /*************************For Cand D Customer Details Add**********************************/
     $(document).on('click','.candds_add',function(){

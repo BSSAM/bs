@@ -28,7 +28,7 @@ class CanddsController extends AppController
         $this->set(compact('assignto','ready_to_deliver_items','collection_items'));
         if($this->request->is('post'))
         {
-            echo date('Y-m-d',$this->request->data['Candd']['col_an_del_date']);
+            //echo date('Y-m-d',$this->request->data['Candd']['col_an_del_date']);
             //exit;
             if(date('Y-m-d',$this->request->data['Candd']['col_an_del_date'])>=date('Y-m-d'))
             {
