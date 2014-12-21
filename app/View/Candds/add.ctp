@@ -28,6 +28,9 @@
 
                                     <?php echo $this->Form->create('Candd',array('class'=>'form-horizontal form-bordered','id'=>'')); ?>
                                     <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'candd_customer_id')) ?> 
+                                    <?PHP echo $this->Form->input('deliveryorder_id',array('type'=>'hidden','id'=>'deliveryorder_id')) ?> 
+                                    <?PHP echo $this->Form->input('branch_id',array('type'=>'hidden','id'=>'branch_id')) ?> 
+                                
                                     <?PHP echo $this->Form->input('col_an_del_date',array('type'=>'hidden','id'=>'col_an_del_date')) ?> 
                                 <div class="form-group">
                                         <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
@@ -120,19 +123,21 @@
                                 <script>
                                 $(document).ready(function(){
                                     var minDate = new Date(); 
+                                    $(".candds_add").prop('disabled', false);
+                                    $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
                                     $('#cd_date').datepicker().on('changeDate', function(ev) {
                                         if (ev.date.valueOf() < minDate.valueOf())
                                         {
-                                            alert('Nope');
+                                            //alert('Nope');
                                             $(".candds_add").prop('disabled', true);
-                                            $("#val_assigned_move").prop('disabled', true).trigger('chosen:updated');;
+                                            $("#val_assigned_move").prop('disabled', true).trigger('chosen:updated');
                                             
                                         }
                                         else
                                         {
-                                            alert('Yep');
+                                            //alert('Yep');
                                             $(".candds_add").prop('disabled', false);
-                                            $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');;
+                                            $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
                                             
                                         }
                                     }).data('datepicker');    

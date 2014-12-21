@@ -5,6 +5,8 @@
  */
 $(document).ready(function(){
     
+    // Candd Edit function
+    
     
    
     /*************************For Cand D Customer Details Add**********************************/
@@ -18,62 +20,119 @@ $(document).ready(function(){
         var attn_id   =   $('#val_attn_candd option:selected').val();
         var phone   =   $('#val_phone').val();
         var assigned  =  $('#val_assigned option:selected').val();
+        var deliveryorder_id  =  $('#deliveryorder_id').val();
         var remark  =  $('#val_remarks').val();
         var cd_date =   $('.cd_date').val();
-        $.ajax({
-            type: 'POST',
-            data:"customer_name="+customer_name+"&customer_id="+customer_id+"&purpose="+purpose+"&address_id="+address_id+"&customer_address="+customer_address+"&attn_id="+attn_id+"&phone="+phone+"&assigned="+assigned+"&remark="+remark+"&cd_date="+cd_date,
-            url: path_url+'Candds/add_candds/',
-            success: function(data)
-            {
-				 try {
-    var candd_data_node    =   $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-               
-               var contact_person   =   candd_data_node.Contactpersoninfo;
-               if(candd_data_node.Candd.purpose=='Collection')
-               {
-                 
-                $('.collections_info').append('<tr class="colletion_'+candd_data_node.Candd.id+'">\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.id+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.customername+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.customer_address+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Contactpersoninfo.name+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.phone+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.assign.assignedto+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.branch.branchname+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
-                                    <td class="text-center"><div class="btn-group">\n\
-                                    <a data-delete="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger candd_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
-                
-            }
-            else if(candd_data_node.Candd.purpose=='Delivery')
-            {
-                $('.deliveries_info').append('<tr class="instrument_remove_'+candd_data_node.Candd.id+'">\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.id+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.customername+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.customer_address+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Contactpersoninfo.name+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.phone+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.assign.assignedto+'</td>\n\\n\
-                                     <td class="text-center">'+candd_data_node.branch.branchname+'</td>\n\\n\
-                                    <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
-                                    <td class="text-center"><div class="btn-group">\n\
-                                    <a data-delete="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger candd_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
-            }
-            var customer_name = $("#val_customer_candd").val('');
-            var customer_id =$('#candd_customer_id').val('');
-            var customer_address   =   $('#val_address').val('');
-            var phone   =   $('#val_phone').val('');
-            var assigned  =  $('#val_assigned option:selected').val();
-            var remark  =  $('#val_remarks').val('');
-            }
-        });
+        if(!deliveryorder_id)
+        {
+            $.ajax({
+                type: 'POST',
+                data:"customer_name="+customer_name+"&customer_id="+customer_id+"&purpose="+purpose+"&address_id="+address_id+"&customer_address="+customer_address+"&attn_id="+attn_id+"&phone="+phone+"&assigned="+assigned+"&remark="+remark+"&cd_date="+cd_date,
+                url: path_url+'Candds/add_candds/',
+                success: function(data)
+                {
+                    try {
+                        var candd_data_node    =   $.parseJSON(data);
+                    } catch(e) {
+                        return;
+                    }
+
+                    var contact_person   =   candd_data_node.Contactpersoninfo;
+                    if(candd_data_node.Candd.purpose=='Collection')
+                    {
+
+                    $('.collections_info').append('<tr class="colletion_'+candd_data_node.Candd.id+'">\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.id+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.customername+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.customer_address+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Contactpersoninfo.name+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.phone+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.assign.assignedto+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.branch.branchname+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
+                                        <td class="text-center"><div class="btn-group"><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
+
+                }
+                else if(candd_data_node.Candd.purpose=='Delivery')
+                {
+                    $('.deliveries_info').append('<tr class="instrument_remove_'+candd_data_node.Candd.id+'">\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.id+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.customername+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.customer_address+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Contactpersoninfo.name+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.phone+'</td>\n\\n\
+                                        <td class="text-center">-</td>\n\\n\
+                                        <td class="text-center">-</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.assign.assignedto+'</td>\n\\n\
+                                         <td class="text-center">'+candd_data_node.branch.branchname+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
+                                        <td class="text-center"><div class="btn-group"><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
+                }
+                var customer_name = $("#val_customer_candd").val('');
+                var customer_id =$('#candd_customer_id').val('');
+                var customer_address   =   $('#val_address').val('');
+                var phone   =   $('#val_phone').val('');
+                var assigned  =  $('#val_assigned option:selected').val();
+                var remark  =  $('#val_remarks').val('');
+                }
+            });
+        }
+        else 
+        {
+            $.ajax({
+                type: 'POST',
+                data:"customer_name="+customer_name+"&customer_id="+customer_id+"&purpose="+purpose+"&address_id="+address_id+"&customer_address="+customer_address+"&attn_id="+attn_id+"&phone="+phone+"&assigned="+assigned+"&remark="+remark+"&cd_date="+cd_date+"&del_id="+deliveryorder_id,
+                url: path_url+'Candds/add_candds/',
+                success: function(data)
+                {
+                    try {
+                        var candd_data_node    =   $.parseJSON(data);
+                    } catch(e) {
+                        return;
+                    }
+
+                    var contact_person   =   candd_data_node.Contactpersoninfo;
+                    if(candd_data_node.Candd.purpose=='Collection')
+                    {
+
+                    $('.collections_info').append('<tr class="colletion_'+candd_data_node.Candd.id+'">\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.id+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.customername+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.customer_address+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Contactpersoninfo.name+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.phone+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.assign.assignedto+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.branch.branchname+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
+                                        <td class="text-center"><div class="btn-group"><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
+
+                }
+                else if(candd_data_node.Candd.purpose=='Delivery')
+                {
+                    $('.deliveries_info').append('<tr class="instrument_remove_'+candd_data_node.Candd.id+'">\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.id+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.customername+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.customer_address+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Contactpersoninfo.name+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.phone+'</td>\n\\n\
+                                        <td class="text-center">-</td>\n\\n\
+                                        <td class="text-center">-</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.assign.assignedto+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.branch.branchname+'</td>\n\\n\
+                                        <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
+                                        <td class="text-center"><div class="btn-group"><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
+                }
+                var customer_name = $("#val_customer_candd").val('');
+                var customer_id =$('#candd_customer_id').val('');
+                var customer_address   =   $('#val_address').val('');
+                var phone   =   $('#val_phone').val('');
+                var assigned  =  $('#val_assigned option:selected').val();
+                var remark  =  $('#val_remarks').val('');
+                }
+            });
+            
+        }
+        
         
    });
    /**********************For Autocomplete Customer  Name search in  Candd Module****************************/
@@ -190,8 +249,11 @@ $(document).ready(function(){
        $('#col_an_del_date').val($('.cd_date').val());
     });
     /*****************************C and D collection record delete script**************/
+    $(document).on('click','#candd_edit',function(){
+        //alert('sdf');
+    });
     $(document).on('click','#candd_delete',function(){
-        alert('sdf');
+        //alert('sdf');
     });
     /*****************************************************************************/
     $(document).on('click','.candd_delivery_add',function(){
@@ -203,36 +265,47 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-				 try {
-   var deliver_data_node = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
+                var sal_no = '-';
+                var del_no = '-';
+		var deliver_data_node = $.parseJSON(data);
+                //console.log(deliver_data_node);
                 var contact_person      =  deliver_data_node.Customer;
                 $('.deliveries_info').empty();
                 $.each(deliver_data_node,function(k,v){
-                    $('.deliveries_info').append('<tr class="colletion_'+v.ReadytodeliverItem.id+'">\n\\n\
-                                    <td class="text-center">'+v.ReadytodeliverItem.id+'</td>\n\\n\
+                    if(v.ReadytodeliverItem.salesorderno == null)
+                    {
+                        var sal_no = '-';
+                    }
+                    else{
+                        var sal_no = v.ReadytodeliverItem.salesorderno;
+                    }
+                    if(v.ReadytodeliverItem.deliveryorderno == null)
+                    {
+                        var del_no = '-';
+                    }
+                    else{
+                        var del_no = v.ReadytodeliverItem.deliveryorderno;
+                    }
+                    
+                    $('.deliveries_info').append('<tr class="colletion_'+v.Candd.id+'">\n\\n\
+                                    <td class="text-center">'+v.Candd.id+'</td>\n\\n\
                                     <td class="text-center">'+v.Customer.customername+'</td>\n\\n\
-                                    <td class="text-center">'+v.Deliveryorder.customer_address+'</td>\n\\n\
-                                    <td class="text-center">attn</td>\n\\n\
-                                    <td class="text-center">phone</td>\n\\n\\n\
-                                    <td class="text-center">'+v.ReadytodeliverItem.salesorderno+'</td>\n\\n\
-                                    <td class="text-center">'+v.ReadytodeliverItem.deliveryorderno+'</td>\n\\n\
-                                    <td class="text-center">'+v.ReadytodeliverItem.assign_to+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.customer_address+'</td>\n\\n\
+                                    <td class="text-center">'+v.Contactpersoninfo.name+'</td>\n\\n\
+                                    <td class="text-center">'+v.Contactpersoninfo.phone+'</td>\n\\n\\n\
+                                    <td class="text-center">'+sal_no+'</td>\n\\n\
+                                    <td class="text-center">'+del_no+'</td>\n\\n\
+                                    <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
                                     <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
-                                    <td class="text-center">'+v.Deliveryorder.remarks+'</td>\n\\n\
-                                    <td class="text-center"><div class="btn-group">\n\
-                                    <a data-delete="'+v.ReadytodeliverItem.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_deliver_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
+                                    <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
+                                    <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
             }
 	});
     });
     
     /**************************** Candd Collection Tab *********************************/
+    /////////////////////////////////////////////////////////////////////////////////////
     $(document).on('click','.candd_collection_add',function(){
         var cd_date1 =   $('.cd_date').val();
         if($('.cd_date').val()!==''){
@@ -244,18 +317,14 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
-				try {
-   var deliver_data_node = $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-                
+		var deliver_data_node = $.parseJSON(data);
                 var contact_person      =  deliver_data_node.Customer;
+                //console.log(deliver_data_node);
                // alert(contact_person);
                 //console.log(data);
                 $.each(deliver_data_node,function(k,v){
                     //alert(v);
+                    
                     $('.collections_info').append('<tr class="colletion_'+v.Candd.id+'">\n\\n\
                                     <td class="text-center">'+v.Candd.id+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.customername+'</td>\n\\n\
@@ -263,11 +332,9 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.Contactpersoninfo.name+'</td>\n\\n\
                                     <td class="text-center">'+v.Contactpersoninfo.phone+'</td>\n\\n\\n\
                                     <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
-                                    <td class="text-center">'+v.Candd.deliveryorderno+'</td>\n\\n\
+                                    <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
-                                    <td class="text-center">'+v.Candd.remarks+'</td><td class="text-center"><div class="btn-group">\n\
-                                    <a data-delete="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_collection_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
+                                    <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
             }
 	});}else
@@ -276,88 +343,126 @@ $(document).ready(function(){
     }
     });
     
-     /**************************** Candd Delivery Tab *********************************/
-    $(document).on('click','.candd_delivery_add',function(){
-        var cd_date1 =   $('.cd_date').val();
-        if($('.cd_date').val()!==''){
-            $('.deliveries_info').empty();
-        $.ajax({
+    
+    
+    $(document).on('click','.ready_to_edit',function(){
+        var ready_to_edit = $(this).attr('id');
+       // alert(ready_to_edit);
+         $.ajax({
             type: "POST",
-            data:"cd_date="+cd_date1,
-            url: path_url+"/Candds/get_delivery_tab_info",
+            data:"ready_to_edit="+ready_to_edit,
+            url: path_url+"/Candds/edit_candds",
             cache: false,
-            success: function(data_delivery)
+            success: function(data)
             {
-                if(!data_delivery)
-                {
-                    var deliver_data_node_delivery = $.parseJSON(data_delivery);
-                    var contact_person      =  deliver_data_node_delivery.Customer;
-                   // alert(contact_person);
-                    //console.log(data);
-                    $.each(deliver_data_node_delivery,function(k,v){
-                        //alert(v);
-                        $('#pofull-datatable').dataTable();
-                        $('.deliveries_info').append('<tr class="delivery_'+v.Candd.id+'">\n\\n\
-                                        <td class="text-center">'+v.Candd.id+'</td>\n\\n\
-                                        <td class="text-center">'+v.Candd.customername+'</td>\n\\n\
-                                        <td class="text-center">'+v.Candd.customer_address+'</td>\n\\n\
-                                        <td class="text-center">'+v.Contactpersoninfo.name+'</td>\n\\n\
-                                        <td class="text-center">'+v.Contactpersoninfo.phone+'</td>\n\\n\\n\
-                                        <td class="text-center">-</td>\n\\n\\n\
-                                        <td class="text-center">-</td>\n\\n\\n\
-                                        <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
-                                        <td class="text-center">'+v.Candd.deliveryorderno+'</td>\n\\n\
-                                        <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
-                                        <td class="text-center"><div class="btn-group">\n\
-                                        <a data-delete="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delivery_delete">\n\
-                                        <i class="fa fa-times"></i></a></div></td></tr>');
-
-                    });
-                }
+                var edit_data_node = $.parseJSON(data);
+                
+//                console.log(edit_data_node);
+//                $('.candds_add').text('<i class="fa fa-plus fa-fw"></i>add');
+////                $('#val_range').empty().append('<option value="">Select Range</option>');
+//                $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
+//                {
+//                     $('#val_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
+//                });
+//                
+////                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
+////                {
+////                     $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+////                });
+//                    
+//                $('#val_department').val(dept.Department.departmentname);
+//                
+//                $('#val_department_id').val(dept.Department.id);
+//                //$('#val_model_no').val(parsedata.CustomerInstrument.model_no);
+//                $('#QuotationInstrumentId').val(instrument_id);
             }
-	});}else
-    {
-        alert("Please select the date");
-    }
+         });
     });
+    
+     /**************************** Candd Delivery Tab *********************************/
+//    $(document).on('click','.candd_delivery_add',function(){
+//        var cd_date1 =   $('.cd_date').val();
+//        if($('.cd_date').val()!==''){
+//            $('.deliveries_info').empty();
+//        $.ajax({
+//            type: "POST",
+//            data:"cd_date="+cd_date1,
+//            url: path_url+"/Candds/get_delivery_tab_info",
+//            cache: false,
+//            success: function(data_delivery)
+//            {
+//                if(!data_delivery)
+//                {
+//                    var deliver_data_node_delivery = $.parseJSON(data_delivery);
+//                    var contact_person      =  deliver_data_node_delivery.Customer;
+//                   // alert(contact_person);
+//                    //console.log(data);
+//                    $.each(deliver_data_node_delivery,function(k,v){
+//                        //alert(v);
+//                        //$('#pofull-datatable').dataTable();
+//                        $('.deliveries_info').append('<tr class="delivery_'+v.Candd.id+'">\n\\n\
+//                                        <td class="text-center">'+v.Candd.id+'</td>\n\\n\
+//                                        <td class="text-center">'+v.Candd.customername+'</td>\n\\n\
+//                                        <td class="text-center">'+v.Candd.customer_address+'</td>\n\\n\
+//                                        <td class="text-center">'+v.Contactpersoninfo.name+'</td>\n\\n\
+//                                        <td class="text-center">'+v.Contactpersoninfo.phone+'</td>\n\\n\\n\
+//                                        <td class="text-center">-</td>\n\\n\\n\
+//                                        <td class="text-center">-</td>\n\\n\\n\
+//                                        <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
+//                                        <td class="text-center">'+v.Candd.deliveryorderno+'</td>\n\\n\
+//                                        <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
+//                                        <td class="text-center"><div class="btn-group">\n\
+//                                        <a data-delete="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delivery_delete">\n\
+//                                        <i class="fa fa-times"></i></a></div></td></tr>');
+//
+//                    });
+//                }
+//            }
+//	});}else
+//    {
+//        alert("Please select the date");
+//    }
+//    });
     
     
     
    /********************For Description Move to deliver Script********************+v.branch.branchname+*/
    $('.move_to_deliver').click(function(){
-      var assign_text  =   $('#val_assigned_move option:selected').text();
-      var assign_value  =   $('#val_assigned_move option:selected').val();
-      var cd_date  =   $('.cd_date').val();
-      var checked   =$('.description_move_delivery_check:checked').length;
-      var description_move_checked = [];
+       
+        var assign_text  =   $('#val_assigned_move option:selected').text();
+        var assign_value  =   $('#val_assigned_move option:selected').val();
+        var cd_date  =   $('.cd_date').val();
+        var checked   =$('.description_move_delivery_check:checked').length;
+        var description_move_checked = [];
+        
         $('.description_move_delivery_check:checked').each(function(i){
           description_move_checked[i] = $(this).val();
         });
-        var conformation  =   window.confirm('Confirm to move '+checked+' delivery order');  
-        if(conformation==true&& assign_value!=''){
-        $.ajax({
-            type: "POST",
-            url: path_url+"/Candds/move_deliveryorder",
-            data:'assign_to='+assign_text+'&description_move='+description_move_checked+"&cd_date="+cd_date,
-            cache: false,
-            success: function(data)
-            {
-				try {
-   var checked_node =   $.parseJSON(data);
-  } catch (e) {
-    // error
-    return;
-  }
-               
-               $.each(checked_node,function(k,v){
-                  $('.move_'+v).fadeOut('slow',function(){
-                      $(this).remove();
-                  }) 
-               });
-             
-                
+        
+        if(assign_value!=''){
+            var conformation  =   window.confirm('Confirm to move '+checked+' delivery order');  
+            if(conformation==true){
+                $.ajax({
+                    type: "POST",
+                    url: path_url+"/Candds/move_deliveryorder",
+                    data:'assign_to='+assign_text+'&description_move='+description_move_checked+"&cd_date="+cd_date+"&assign_value="+assign_value,
+                    cache: false,
+                    success: function(data)
+                    {
+                        console.log(data); //return false;
+                        var checked_node =   $.parseJSON(data);
+                        $.each(checked_node,function(k,v){
+                            $('.move_'+v).fadeOut('slow',function(){
+                            $(this).remove();
+                            }); 
+                        });
+                    }
+                });
             }
-	});
+        }
+        else{
+            alert('Please Select Assign To Person');
+            return false;
         }
    });
    

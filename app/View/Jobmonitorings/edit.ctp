@@ -107,15 +107,28 @@
                    
                     <td class="text-center">
                          <?php 
-                            if ($deliver_order != NULL):
-                                foreach ($deliver_order as $deliver_list):
-                                    if ($deliver_list['Deliveryorder']['job_finished'] == 1):
+//                            if ($deliver_order != NULL):
+//                                foreach ($deliver_order as $deliver_list):
+//                                    if ($deliver_list['Deliveryorder']['job_finished'] == 1):
+//                                        $job_finished = true;
+//                                    elseif ($deliver_list['Deliveryorder']['job_finished'] != '' && $deliver_list['Deliveryorder']['job_finished'] != 1):
+//                                        $job_finished = false;
+//                                    endif;
+//
+//                                endforeach;
+//                            else:
+//                                $job_finished = false;
+//                            endif;
+                         //$description['Description']['shipping']
+                                  if ($description['Description']['shipping'] == 1):
+//                                foreach ($deliver_order as $deliver_list):
+//                                    if ($deliver_list['Deliveryorder']['job_finished'] == 1):
                                         $job_finished = true;
-                                    elseif ($deliver_list['Deliveryorder']['job_finished'] != '' && $deliver_list['Deliveryorder']['job_finished'] != 1):
-                                        $job_finished = false;
-                                    endif;
+//                                    elseif ($deliver_list['Deliveryorder']['job_finished'] != '' && $deliver_list['Deliveryorder']['job_finished'] != 1):
+//                                        $job_finished = false;
+//                                    endif;
 
-                                endforeach;
+                               // endforeach;
                             else:
                                 $job_finished = false;
                             endif;

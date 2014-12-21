@@ -220,7 +220,7 @@ class DashboardsController extends AppController
          /****************** Log Activity - C & D Info ********************/
         
         $logactivity_cdinfo = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"C&Dinfo")));
-        //pr($logactivity);exit;
+        //pr($logactivity_cdinfo);exit;
         $this->set('log_activity_cdinfo', $logactivity_cdinfo);
         
         $logactivity_cdinfo_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"C&Dinfo")));

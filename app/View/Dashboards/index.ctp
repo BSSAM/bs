@@ -36,6 +36,40 @@
 //    }
 //       
 //   });
+$(document).on('click','.approve_candd',function(){
+       //alert('sdf');
+       //console.log('Clientposapproval');
+        //window.reload(path+'Clientposapproval');
+        var val_candd_id = $(this).attr('id');
+        if(window.confirm("Are you sure?")){
+        $.ajax({
+            type: 'POST',
+            data:"id="+val_candd_id,
+            url: path_url+'Candds/approve/',
+            success: function(data)
+            {
+                //console.log(data); return false;
+                if(data=='success')
+                    {
+                        alert('C & D is Approved');
+                        window.location.reload();
+                    }
+                    else
+                        {
+                             alert('C & D Approval Failed due to unknown Cause');
+                             window.location.reload();
+                        }
+                
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
 $(document).on('click','.approve_invoice',function(){
        
         var val_quotationid = $(this).attr('id');
@@ -514,7 +548,8 @@ $(document).on('click','.approve_invoice',function(){
                                 <div class="block full">
                                 <div class="table-responsive">
                                 <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
-                                    <?PHP if (!empty($log_activity_cdinfo)): ?>
+                                   
+                                    <?PHP if(!empty($log_activity_cdinfo)):  ?>
                                     <thead>
                                         <tr>
                                             <th>Flag</th>
@@ -524,16 +559,23 @@ $(document).on('click','.approve_invoice',function(){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($log_activity_cdinfo as $log_activity_cdinfo_list) :?>
+                                    <?php 
+                                    
+                                    foreach ($log_activity_cdinfo as $log_activity_cdinfo_list) :
+                                        //pr($log_activity_cdinfo_list['Logactivity']['logid']);
+                                        ?>
+                                        
                                     <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'): ?>
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-c&d.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_cdinfo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_cdinfo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['logid'] ?></em> | <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['loglink'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
                                             <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'){ ?>
-                                            <?PHP echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_cdinfo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
+                                            <?PHP //echo $this->html->link('Approve',array('controller'=>'Candds','action'=>'approve',$log_activity_invoice_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary approve_candd')) ?>
+                                                <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_candd','id'=>$log_activity_cdinfo_list['Logactivity']['logid'])) ?>
+                                            <?PHP //echo $this->html->link('Approve',array('controller'=>'Salesorders','action'=>'edit',$log_activity_cdinfo_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                             <?php }?>
                                             </td>
                                             <td class="">by <?PHP echo $log_activity_cdinfo_list['User']['username'] ?><br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['created'] ?></small></td>

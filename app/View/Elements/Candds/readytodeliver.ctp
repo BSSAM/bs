@@ -34,8 +34,16 @@
             <td class="text-center"><?PHP echo $ready_to_deliver['Salesorder']['due_date'] ?></td>
             <td class="text-center"><?PHP echo $ready_to_deliver['Deliveryorder']['delivery_order_no'] ?></td>
             <td class="text-center"><?PHP echo $ready_to_deliver['Deliveryorder']['delivery_order_date'] ?></td>
-            <td class="text-center">Assign</td>
-            <td class="text-center"><input type="checkbox" value="<?PHP echo $ready_to_deliver['Deliveryorder']['id'] ?>" class="description_move_delivery_check" multiple="multiple"/></td>
+            <td class="text-center"></td>
+            <td class="text-center">
+            <div class="btn-group">
+                <input type="checkbox" value="<?PHP echo $ready_to_deliver['Deliveryorder']['id'] ?>" class="description_move_delivery_check" multiple="multiple"/>
+            </div>
+            <div class="btn-group">
+<!--                <button id="<?php //echo $ready_to_deliver['Deliveryorder']['id'] ?>" onClick="return reply_click_ready_edit(this.id)" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></button>-->
+                <?php //echo $this->Form->button('<i class="fa fa-pencil"></i>',array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false,'data-id'=>$ready_to_deliver['Deliveryorder']['id'])); ?>
+            </div>
+            </td>
         </tr>
         <?PHP endforeach; ?>
         <?PHP endif; ?>
@@ -46,3 +54,38 @@
     </div>                                       
 </div>
 </div>
+<script type="text/javascript">
+function reply_click_ready_edit(clicked_id)
+{
+    alert(clicked_id);
+    $.ajax({
+        
+        type: 'POST',
+        data:"del_id="+clicked_id,
+        url: path_url+'Candds/edit_candds/',
+        success: function(data)
+        {
+            var candd_edit_j    =   $.parseJSON(data);
+            var deliveryorder = candd_edit_j.Deliveryorder;
+            
+            var customer = candd_edit_j.Customer;
+            console.log(customer);
+            console.log(deliveryorder);
+            console.log(candd_edit_j);
+            
+            $('#val_customer_candd').val(customer.Customertagname);
+            $('#val_customer_candd').prop('disabled', true);
+            $('#candd_customer_id').val(customer.id);
+            $('#deliveryorder_id').val(deliveryorder.id);
+            $('#col_an_del_date').val(deliveryorder.delivery_order_date);
+            $('#branch_id').val(deliveryorder.branch_id);
+            $('#val_attn_candd').empty().append('<option value="">Select Contact Person</option>');
+            $.each(customer.Contactpersoninfo,function(k,v){
+                $('#val_attn_candd').append('<option value="'+v.id+'">'+v.name+'</option>');
+            });
+        }
+        
+    });
+    return false;
+}
+</script>

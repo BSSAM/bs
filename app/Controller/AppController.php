@@ -483,7 +483,7 @@ App::uses('Controller', 'Controller');
                 return $this->request->data;
             endif;
         }
-        public function ready_to_deliver($delivery_order_id=NULL,$assign_to=NULL,$cd_date=NULL)
+        public function ready_to_deliver($delivery_order_id=NULL,$assign_to=NULL,$cd_date=NULL,$assign_value=NULL)
         {
             $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             $order_data     =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$delivery_order_id,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0)));
@@ -496,27 +496,30 @@ App::uses('Controller', 'Controller');
             $this->request->data['ReadytodeliverItem']['salesorderno']     =   $order_data['Salesorder']['salesorderno'];
             $this->request->data['ReadytodeliverItem']['deliveryorder_id'] =   $order_data['Deliveryorder']['id'];
             $this->request->data['ReadytodeliverItem']['deliveryorderno']  =   $order_data['Deliveryorder']['delivery_order_no'];
-            $this->request->data['ReadytodeliverItem']['assign_to']        =   $assign_to;
-            $this->request->data['ReadytodeliverItem']['status']           =   0;
+            $this->request->data['ReadytodeliverItem']['assign_to']        =   $assign_value;
+            $this->request->data['ReadytodeliverItem']['status']           =   1;
+            $this->request->data['ReadytodeliverItem']['is_deleted']       =   0;
             return $this->request->data;
         }
-         public function ready_to_deliver_tag($delivery_order_id=NULL,$assign_to=NULL,$cd_date=NULL)
+         public function ready_to_deliver_tag($delivery_order_id=NULL,$assign_to=NULL,$cd_date=NULL,$assign_value=NULL)
         {
             $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             $order_data     =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$delivery_order_id,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0)));
             $cus = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$order_data['Deliveryorder']['customer_id'],'Customer.status'=>1,'Customer.is_deleted'=>0,'Customer.is_approved'=>1)));
             //$order_data['Deliveryorder']['customer_id'];
             $this->request->data['Candd']['purpose']                    =   'Delivery';
+            $this->request->data['Candd']['branch_id']                  =   $default_branch['branch']['id'];
             $this->request->data['Candd']['customer_id']                =   $order_data['Deliveryorder']['customer_id'];
-            $this->request->data['Candd']['customername']               =   $cd_date;
-            $this->request->data['Candd']['Contactpersoninfo_id']       =   $cd_date;
-            $this->request->data['Candd']['assign_id']                  =   $cd_date;
-            $this->request->data['Candd']['customer_address']           =   $cd_date;
-            $this->request->data['Candd']['address_id']                 =   $cd_date;
-            $this->request->data['Candd']['phone']                      =   $cd_date;
-            $this->request->data['Candd']['remarks']                    =   $cd_date;
+            $this->request->data['Candd']['customername']               =   $cus['Customer']['customername'];
+            $this->request->data['Candd']['Contactpersoninfo_id']       =   $order_data['Deliveryorder']['attn'];
+            $this->request->data['Candd']['assign_id']                  =   $assign_value;
+            $this->request->data['Candd']['customer_address']           =   $order_data['Deliveryorder']['customer_address'];
+            //$this->request->data['Candd']['address_id']                 =   $cd_date;
+            $this->request->data['Candd']['phone']                      =   $order_data['Deliveryorder']['phone'];
+            $this->request->data['Candd']['remarks']                    =   '';
             $this->request->data['Candd']['cd_date']                    =   $cd_date;
-            $this->request->data['Candd']['status']                     =   0;
+            $this->request->data['Candd']['status']                     =   1;
+            $this->request->data['Candd']['is_deleted']                 =   0;
             return $this->request->data;
         }
         public function  description_update_shipping($deliveryorder_id  =NULL)
