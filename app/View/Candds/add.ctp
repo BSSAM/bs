@@ -126,7 +126,7 @@
                                     $(".candds_add").prop('disabled', false);
                                     $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
                                     $('#cd_date').datepicker().on('changeDate', function(ev) {
-                                        if (ev.date.valueOf() < minDate.valueOf())
+                                        if ((ev.date.valueOf()+100000000) < minDate.valueOf())
                                         {
                                             //alert('Nope');
                                             $(".candds_add").prop('disabled', true);

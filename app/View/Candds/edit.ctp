@@ -1,19 +1,63 @@
 <script>var path_url='<?PHP echo Router::url('/',true); ?>';
  $(document).ready(function(){
-                                    var minDate = new Date(); 
+                                   
                                     //$(".candds_add").prop('disabled', false);
                                     var cd_date_first = $('#cd_date').val();
                                     var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-                                    var day = currentDate.getDate()
+                                    var day = currentDate.getDate()-1
                                     var month = currentDate.getMonth() + 1
-                                    var year = currentDate.getYear()
-                                    alert("<b>" + day + "/" + month + "/" + year + "</b>")
-                                    alert(cd_date_first);
-                                    
-                                    if(cd_date_first < minDate.valueOf())
+                                    switch(month)
                                     {
-                                        alert(minDate);
-                                        alert($('#cd_date').val());
+                                        case 1:
+                                        month = 'January';
+                                        break;
+                                        case 2:
+                                        month = 'February';
+                                        break;
+                                        case 3:
+                                        month = 'March';
+                                        break;
+                                        case 4:
+                                        month = 'April';
+                                        break;
+                                        case 5:
+                                        month = 'May';
+                                        break;
+                                        case 6:
+                                        month = 'June';
+                                        break;
+                                        case 7:
+                                        month = 'July';
+                                        break;
+                                        case 8:
+                                        month = 'August';
+                                        break;
+                                        case 9:
+                                        month = 'September';
+                                        break;
+                                        case 10:
+                                        month = 'October';
+                                        break;
+                                        case 11:
+                                        month = 'November';
+                                        break;
+                                        case 12:
+                                        month = 'December';
+                                        break;
+                                        
+                                    }
+                                    var year = currentDate.getFullYear();
+                                    var a = day + "-" + month + "-" + year.toString().substring(2);
+                                    var b = a.toString();
+//                                    alert(b);
+//                                    console.log(cd_date_first);
+//                                    console.log(b);
+                                    var delay=2000;//1 seconds
+                                    setTimeout(function(){
+
+                                    //your code to be executed after 1 seconds
+                                    if(cd_date_first < b)
+                                    {
                                         $(".candds_add").prop('disabled', true);
                                         $("#val_assigned_move").prop('disabled', true).trigger('chosen:updated');
                                     }
@@ -22,6 +66,8 @@
                                         $(".candds_add").prop('disabled', false);
                                         $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
                                     }
+                                    },delay); 
+                     
                                 });
 
 </script>
@@ -166,7 +212,9 @@
                                     
                                     $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
                                     $('#cd_date').datepicker().on('changeDate', function(ev) {
-                                        if (ev.date.valueOf() < minDate.valueOf())
+                                        //console.log(ev.date.valueOf());
+                                        //console.log(minDate.valueOf());
+                                        if ((ev.date.valueOf()+100000000) < minDate.valueOf())
                                         {
                                             //alert('Nope');
                                             $(".candds_add").prop('disabled', true);

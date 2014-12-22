@@ -47,7 +47,7 @@
 </div>
 </div>-->
 <div class="col-sm-3 col-lg-12">
-    <label class="col-md-2 control-label" for="val_assigned">Assigned To</label>
+    <label class="col-md-2 control-label" for="val_assigned_move">Assigned To</label>
         <div class="col-md-4">
             <?php echo $this->Form->input('assigned', array('id'=>'val_assigned_move','class'=>'select-chosen form-control','label'=>false,'type'=>'select','options'=>$assignto,'empty'=>'Please select the person to carry','data-placeholder'=>'Select Assigned To')); ?>
         </div>

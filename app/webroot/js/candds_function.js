@@ -31,11 +31,9 @@ $(document).ready(function(){
                 url: path_url+'Candds/add_candds/',
                 success: function(data)
                 {
-                    try {
+                   
                         var candd_data_node    =   $.parseJSON(data);
-                    } catch(e) {
-                        return;
-                    }
+                   
 
                     var contact_person   =   candd_data_node.Contactpersoninfo;
                     if(candd_data_node.Candd.purpose=='Collection')
@@ -85,11 +83,9 @@ $(document).ready(function(){
                 url: path_url+'Candds/add_candds/',
                 success: function(data)
                 {
-                    try {
+                   
                         var candd_data_node    =   $.parseJSON(data);
-                    } catch(e) {
-                        return;
-                    }
+                    
 
                     var contact_person   =   candd_data_node.Contactpersoninfo;
                     if(candd_data_node.Candd.purpose=='Collection')
@@ -256,6 +252,11 @@ $(document).ready(function(){
         //alert('sdf');
     });
     /*****************************************************************************/
+    
+    
+    ///////////////////////// Ajax
+    
+    
     $(document).on('click','.candd_delivery_add',function(){
         var cd_date =   $('.cd_date').val();
         $.ajax({
@@ -265,6 +266,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
+                //alert(data);
                 var sal_no = '-';
                 var del_no = '-';
 		var deliver_data_node = $.parseJSON(data);
@@ -301,7 +303,14 @@ $(document).ready(function(){
                                     <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
             }
+            
 	});
+        
+//        $("#pofull-datatable").on("change", function () {
+//        oTable.fnReloadAjax(); // In your case this would be 'tblOrders.fnReloadAjax();'
+//        });
+        //var g = $('#pofull-datatable').DataTable();
+               // g.reload();
     });
     
     /**************************** Candd Collection Tab *********************************/
@@ -317,11 +326,13 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
+                //alert(data);
 		var deliver_data_node = $.parseJSON(data);
                 var contact_person      =  deliver_data_node.Customer;
                 //console.log(deliver_data_node);
                // alert(contact_person);
                 //console.log(data);
+                $('.collections_info').empty();
                 $.each(deliver_data_node,function(k,v){
                     //alert(v);
                     
@@ -336,11 +347,16 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
                                     <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
+                
             }
 	});}else
     {
         alert("Please select the date");
     }
+//    $("#beforedo-datatable").on("change", function () {
+//        oTable.fnReloadAjax(); // In your case this would be 'tblOrders.fnReloadAjax();'
+//        });
+    
     });
     
     

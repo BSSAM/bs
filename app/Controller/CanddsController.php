@@ -13,7 +13,7 @@ class CanddsController extends AppController
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','Branch','Logactivity','Datalog');
     public function index()
     {
-        $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.status'=>1,'Candd.is_deleted'=>0),'group'=>'Candd.cd_date','recursive'=>2));
+        $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.is_deleted'=>0),'group'=>'Candd.cd_date','recursive'=>2));
         //pr($cd_statistics);exit;
         $this->set(compact('cd_statistics'));
         //echo date('Y-m-d', strtotime('0 days'));
@@ -22,7 +22,7 @@ class CanddsController extends AppController
     {   
         $assignto =   $this->Assign->find('list',array('conditions'=>array('Assign.status'=>1),'fields'=>array('id','assignedto')));
         $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver'=>0,'Deliveryorder.ready_to_deliver'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
-        $collection_items   =   $this->Candd->find('all',array('conditions'=>array('Candd.status'=>1,'Candd.is_deleted'=>0)));
+        $collection_items   =   $this->Candd->find('all',array('conditions'=>array('Candd.is_deleted'=>0)));
         //pr($collection_items);exit;
         $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
         $this->set(compact('assignto','ready_to_deliver_items','collection_items'));
@@ -63,7 +63,7 @@ class CanddsController extends AppController
     {
         $assignto =   $this->Assign->find('list',array('conditions'=>array('Assign.status'=>1),'fields'=>array('id','assignedto')));
         $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver'=>0,'Deliveryorder.ready_to_deliver'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
-        $collection_delivery_data   =   $this->Candd->find('first',array('conditions'=>array('Candd.status'=>1,'Candd.is_deleted'=>0),'recursive'=>2));
+        $collection_delivery_data   =   $this->Candd->find('first',array('conditions'=>array('Candd.is_deleted'=>0,'Candd.id'=>$id),'recursive'=>2));
         $this->set(compact('assignto','collection_delivery_data','ready_to_deliver_items'));
     }
     public function search() 
