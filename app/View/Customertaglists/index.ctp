@@ -6,7 +6,7 @@
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
     <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
-    <li><?php echo $this->Html->link('Customers Tag list',array('controller'=>'Customerstaglists','action'=>'index')); ?></li>
+    <li><?php echo $this->Html->link('Customers Tag list',array('controller'=>'Customertaglists','action'=>'index',$customer_id)); ?></li>
 </ul>
 <!-- END Datatables Header -->
             <?PHP echo $this->element('message');?>            

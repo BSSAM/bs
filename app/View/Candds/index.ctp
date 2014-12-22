@@ -30,17 +30,17 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach($cd_statistics as $candd_list): ?>
-                                    <tr <?php if($candd_list['CollectionDelivery']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                    <tr <?php if($candd_list['Candd']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $candd_list['branch']['branchname'];?></td>
-                                        <td class="text-center"><?php echo $candd_list['CollectionDelivery']['collection_delivery_date'];?></td>
-                                        <td class="text-center"><?php echo $candd_list['CollectionDelivery']['tasks'];?></td>
-                                        <td class="text-center"><?php echo $candd_list['CollectionDelivery']['venues'];?></td>
-                                        <td class="text-center"><?php echo $candd_list['CollectionDelivery']['collections'];?></td>
-                                        <td class="text-center"><?php echo $candd_list['CollectionDelivery']['deliveries'];?></td>
+                                        <td class="text-center"><?php echo $candd_list['Candd']['cd_date'];?></td>
+                                        <td class="text-center"><?php echo $this->Candd->get_task($candd_list['Candd']['cd_date']);?></td>
+                                        <td class="text-center"><?php //echo $candd_list['Candd']['venues'];?></td>
+                                        <td class="text-center"><?php echo $this->Candd->get_collection_count($candd_list['Candd']['cd_date']);?></td>
+                                        <td class="text-center"><?php echo $this->Candd->get_delivery_count($candd_list['Candd']['cd_date']);?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$candd_list['CollectionDelivery']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$candd_list['CollectionDelivery']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$candd_list['Candd']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$candd_list['Candd']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                             </div>
                                         </td>
                                     </tr>

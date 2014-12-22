@@ -71,7 +71,7 @@
     <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label> 
      <div class="col-md-4">
             <?PHP //if(!empty($this->request->data['Clientpo'])){$pos =$po_list ;$readonly    ="readonly";}else{$pos =$this->request->data['Quotation']['ref_no'];$readonly    ="";}?>
-            <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number')); ?>
+            <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','readonly'=>'readonly')); ?>
      </div>
      <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">

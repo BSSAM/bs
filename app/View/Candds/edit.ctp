@@ -1,4 +1,30 @@
-<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';
+ $(document).ready(function(){
+                                    var minDate = new Date(); 
+                                    //$(".candds_add").prop('disabled', false);
+                                    var cd_date_first = $('#cd_date').val();
+                                    var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+                                    var day = currentDate.getDate()
+                                    var month = currentDate.getMonth() + 1
+                                    var year = currentDate.getYear()
+                                    alert("<b>" + day + "/" + month + "/" + year + "</b>")
+                                    alert(cd_date_first);
+                                    
+                                    if(cd_date_first < minDate.valueOf())
+                                    {
+                                        alert(minDate);
+                                        alert($('#cd_date').val());
+                                        $(".candds_add").prop('disabled', true);
+                                        $("#val_assigned_move").prop('disabled', true).trigger('chosen:updated');
+                                    }
+                                    else
+                                    {
+                                        $(".candds_add").prop('disabled', false);
+                                        $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
+                                    }
+                                });
+
+</script>
 <h1><i class="gi gi-user"></i>Edit Collection & Delivery Info</h1></div></div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
@@ -15,7 +41,7 @@
                                         <div class="form-group">
                                         <label class="col-md-5 control-label" for="cd_date">C and D Date</label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control input-datepicker-close cd_date" data-date-format="dd-MM-yy" name="cd_date" value="<?PHP echo $collection_delivery_data['CollectionDelivery']['collection_delivery_date']; ?>" />
+                                            <input type="text" class="form-control input-datepicker-close cd_date" data-date-format="dd-MM-yy" id='cd_date' name="cd_date" value="<?PHP echo $collection_delivery_data['Candd']['cd_date']; ?>" />
                                         </div>
                                     </div>
                                        
@@ -89,8 +115,8 @@
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Ready To Delivery Items</a></li>
-                                                <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Collections Info</a></li>
-                                                <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Deliveries Info</a></li>
+                                                <li class="candd_collection_add"><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Collections Info</a></li>
+                                                <li class="candd_delivery_add"><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Deliveries Info</a></li>
                                             </ul>
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
@@ -120,3 +146,41 @@
                                     </div>
                                 </div>  
                                 <?php echo $this->Form->end(); ?>
+                                <script>
+                                $(document).ready(function(){
+                                    var minDate = new Date(); 
+                                    //$(".candds_add").prop('disabled', false);
+                                    
+//                                    if($('#cd_date').val()< minDate)
+//                                    {
+//                                        alert(minDate);
+//                                        alert($('#cd_date').val());
+//                                        $(".candds_add").prop('disabled', true);
+//                                        $("#val_assigned_move").prop('disabled', true).trigger('chosen:updated');
+//                                    }
+//                                    else
+//                                    {
+//                                        $(".candds_add").prop('disabled', false);
+//                                        $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
+//                                    }
+                                    
+                                    $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
+                                    $('#cd_date').datepicker().on('changeDate', function(ev) {
+                                        if (ev.date.valueOf() < minDate.valueOf())
+                                        {
+                                            //alert('Nope');
+                                            $(".candds_add").prop('disabled', true);
+                                            $("#val_assigned_move").prop('disabled', true).trigger('chosen:updated');
+                                            
+                                        }
+                                        else
+                                        {
+                                            //alert('Yep');
+                                            $(".candds_add").prop('disabled', false);
+                                            $("#val_assigned_move").prop('disabled', false).trigger('chosen:updated');
+                                            
+                                        }
+                                    }).data('datepicker');
+                                    
+                                });
+                                </script>

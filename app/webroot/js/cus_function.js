@@ -42,6 +42,20 @@ $(document).ready(function(){
              complete: ni_end(),
          });
     });
+    $('#unit_price').on('keypress',function() {
+        var price   =   $(this).val();
+        $.ajax({
+             type: 'POST',
+             data:"price="+price,
+             url: path_url+'/customers/get_price/',
+             beforeSend: ni_start(),  
+             success:function(data){
+                 $('#total_price').val(data);
+                 
+             },
+             complete: ni_end(),
+         });
+    });
     $(document).on('click','.customerinstrument_add',function(){
        
         if($('#customer_instrument').val()=='')

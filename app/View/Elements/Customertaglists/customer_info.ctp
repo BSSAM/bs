@@ -210,6 +210,9 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('requirements', array('id' => 'var_requirements', 'class' => 'form-control', 'placeholder' => 'Enter the Requirement', 'label' => false, 'name' => 'requirements')); ?>
     </div>
-   
+    <label class="col-md-2 control-label" for="var_techrequirements">Technical Requirements</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('techrequirements', array('id' => 'var_techrequirements', 'class' => 'form-control', 'placeholder' => 'Enter the Technical Requirement', 'label' => false, 'name' => 'techrequirements')); ?>
+    </div>
 
 </div>

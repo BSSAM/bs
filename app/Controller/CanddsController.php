@@ -13,7 +13,7 @@ class CanddsController extends AppController
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','Branch','Logactivity','Datalog');
     public function index()
     {
-        $cd_statistics =    $this->CollectionDelivery->find('all',array('conditions'=>array('CollectionDelivery.status'=>1,'CollectionDelivery.is_deleted'=>0),'group'=>'CollectionDelivery.collection_delivery_date','recursive'=>2));
+        $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.status'=>1,'Candd.is_deleted'=>0),'group'=>'Candd.cd_date','recursive'=>2));
         //pr($cd_statistics);exit;
         $this->set(compact('cd_statistics'));
         //echo date('Y-m-d', strtotime('0 days'));
@@ -63,22 +63,21 @@ class CanddsController extends AppController
     {
         $assignto =   $this->Assign->find('list',array('conditions'=>array('Assign.status'=>1),'fields'=>array('id','assignedto')));
         $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver'=>0,'Deliveryorder.ready_to_deliver'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
-        $collection_delivery_data   =   $this->CollectionDelivery->find('first',array('conditions'=>array('CollectionDelivery.status'=>1,'CollectionDelivery.is_deleted'=>0),'recursive'=>2));
+        $collection_delivery_data   =   $this->Candd->find('first',array('conditions'=>array('Candd.status'=>1,'Candd.is_deleted'=>0),'recursive'=>2));
         $this->set(compact('assignto','collection_delivery_data','ready_to_deliver_items'));
-        
     }
     public function search() 
     {
         $this->loadModel('Customer');
         $name = $this->request->data['name'];
         $this->autoRender = false;
-        $data = $this->Customer->find('all', array('conditions' => array('customername LIKE' => '%' . $name . '%','Customer.is_deleted'=>0)));
+        $data = $this->Customer->find('all', array('conditions' => array('customername LIKE' => '%'.$name.'%','Customer.is_deleted'=>0)));
         $c = count($data);
         if (!empty($c)) 
         {
             for ($i = 0; $i < $c; $i++) 
             {
-                echo "<div class='candd_single' align='left' id='" . $data[$i]['Customer']['id'] . "'>";
+                echo "<div class='candd_single' align='left' id='".$data[$i]['Customer']['id']."'>";
                 echo $data[$i]['Customer']['Customertagname'];
                 echo "<br>";
                 echo "</div>";
