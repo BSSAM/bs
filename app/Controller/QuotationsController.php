@@ -867,6 +867,7 @@ margin: 180px 50px;
                 $phone = $quotation_data['Customer']['phone'];
                 $fax = $quotation_data['Customer']['fax'];
                 $email = $quotation_data['Quotation']['email'];
+                $InstrumentType = $quotation_data['InstrumentType']['quotation'];
                 //$our_ref_no = $quotation_data_list['Quotation']['ref_no'];
                 $ref_no = $quotation_data['Quotation']['ref_no'];
                 $reg_date = $quotation_data['Quotation']['reg_date'];
@@ -961,7 +962,7 @@ $html .=
                <td width="2%"></td>
           </tr>
      </table>
-<div style="padding-top:10px;">Being provided calibration service of the following(s) :</div>
+<div style="padding-top:10px;">'.$InstrumentType.' :</div>
 
 <div style="width:100%;margin-top:20px;display:block;" class="table_format">
           <table cellpadding="0" cellspacing="0"  style="width:100%;">
@@ -981,12 +982,12 @@ for($i=0;$i<=4;$i++):
     endif;
     $count1 = $count1+1;
 endfor;
-
+$html .= '<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
 
 $html .= '</tr>
           </table>
      </div>
-</div>';
+</div></div>';
 $html .='<div id="footer">
      <div style="width:100%;" class="page">
           <table width="100%">

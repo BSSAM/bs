@@ -338,6 +338,7 @@ class InvoicesController extends AppController
                         $this->Quotation->updateAll(array('Quotation.is_invoice_approved'=>1),array('Quotation.track_id'=>$this->request->data['Invoice']['track_id']));
                         $this->Salesorder->updateAll(array('Salesorder.is_invoice_approved'=>1),array('Salesorder.id'=>$salesorder_inv));
                         $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_approved'=>1),array('Deliveryorder.salesorder_id'=>$salesorder_inv));
+                        $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logno'=>$salesorder_inv,'Logactivity.logactivity'=>'Add','Logactivity.logname' =>'Invoice'));
                     endif;
                     
                         

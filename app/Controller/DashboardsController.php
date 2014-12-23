@@ -11,7 +11,7 @@ class DashboardsController extends AppController
     public $helpers = array('Html','Form','Session');
     public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Deliveryorder','Logactivity','Datalog');
+                            'Instrument','Brand','Customer','Device','Salesorder','Deliveryorder','Logactivity','Datalog','Invoice');
     public function index()
     {
         /*  
@@ -43,7 +43,7 @@ class DashboardsController extends AppController
         /* Lab Process */
         $data_lab = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.is_approved'=>'1')));
         $this->set('total_labprocess_count', $data_lab);
-        $data_invoice = $this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.is_invoice_created'=>'1')));
+        $data_invoice = $this->Invoice->find('count',array('conditions'=>array('Invoice.is_approved'=>'1')));
         $this->set('total_invoice_count', $data_invoice);
         $data_lab_view = $this->Salesorder->find('count',array('conditions'=>array('Salesorder.view'=>'0','Salesorder.is_approved'=>'1')));
         $this->set('total_labprocess_view', $data_lab_view);
