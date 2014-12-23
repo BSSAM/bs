@@ -967,8 +967,162 @@ class InvoicesController extends AppController
                     $titles[] = $title_name['Title']['title_name'];
                 }
                 $this->set('titles',$titles);
-
+                
+                $customername = 
             
+                 $html = '<html>
+<head>
+<meta charset="utf-8" />
+<title>'.$quotation_data['Quotation']['quotationno'].'</title>
+<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
+<style>
+table td { font-size:11px; line-height:11px; }
+.table_format table { }
+.table_format td { text-align:center; padding:5px; }
+@page {
+margin: 180px 50px;
+}
+#header { position: fixed; left: 0px; top: -180px; right: 0px; height: 350px; }
+#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 480px; }
+#footer .page:after { content: counter(page); }
+</style>
+</head>';
+                 
+$html .=
+'<body style="font-family:Oswald, sans-serif;font-size:10px;padding:0;margin:0;font-weight: 300; color:#333 !important;">
+<div id="header">
+     <table width="700px">
+          <tr>
+               <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
+               <td style="padding:0 10px;"><div style="float:left;text-align:right;">
+                         <p>41 Senoko Drive</p>
+                         <p>Singapore 758249</p>
+                         <p>Tel.+65 6458 4411</p>
+                         <p>Fax.+65 64584400</p>
+                         <p>www.bestandards.com</p>
+                    </div></td>
+          <tr>
+     </table>
+     <table width="623" height="56">
+          <tr>
+               <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
+               <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+          </tr>
+     </table>
+     <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
+          <tr>
+               <td width="47%" style="border:1px solid #000;padding:5px;"><table width="288" cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td width="128" colspan="3" height="10px" style="font-size:11px !important;">'.$customername.'</td>
+                         </tr>
+                         <tr>
+                              <td colspan="3" height="10px" style="font-size:11px !important;">'.$billing_address.'</td>
+                         </tr>
+                         <tr>
+                              <td>'.$postalcode.'</td>
+                         </tr>
+                         <tr  style="padding-top:30px;">
+                              <td>ATTN </td>
+                              <td width="29">:</td>
+                              <td width="145">'.$contactperson.'</td>
+                         </tr>
+                         <tr>
+                              <td>TEL </td>
+                              <td width="29">:</td>
+                              <td>'.$phone.'</td>
+                         </tr>
+                         <tr>
+                              <td>FAX </td>
+                              <td width="29">:</td>
+                              <td>'.$fax.'</td>
+                         </tr>
+                         <tr>
+                              <td>EMAIL </td>
+                              <td width="29">:</td>
+                              <td>'.$email.'</td>
+                         </tr>
+                    </table></td>
+               <td width="3%"></td>
+               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" cellpadding="0" cellspacing="0">
+                         <tr>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:97%;padding:10px 0;">'.$quotationno.'</div></td>
+                         </tr>
+                         <tr>
+                              <td width="139" style="padding-left:5px;font-size:11px !important;">SALES PERSON </td>
+                              <td width="24" style="font-size:11px !important;">:</td>
+                              <td width="109" style="font-size:11px !important;">Mr.Padma</td>
+                         </tr>
+                         <tr>
+                              <td style="padding-left:5px;">YOUR REF NO </td>
+                              <td>:</td>
+                              <td>'.$ref_no.'</td>
+                         </tr>
+                         <tr>
+                              <td style="padding-left:5px;"> DATE </td>
+                              <td>:</td>
+                              <td>'.$reg_date.'</td>
+                         </tr>
+                         <tr>
+                              <td  style="padding-left:5px;">PAYMENT TERMS </td>
+                              <td>:</td>
+                              <td>'.$payment_term.'</td>
+                         </tr>
+                    </table></td>
+               <td width="2%"></td>
+          </tr>
+     </table>
+<div style="padding-top:10px;">'.$InstrumentType.' :</div>
+
+</div></div>';
+$html .='<div id="footer">
+     <div style="width:100%;" class="page">
+          <table width="100%">
+               <tr>
+                    <td  style="width:50%;"><div style="color: #000 !important;font-size:14px !important;">TERMS AND CONDITIONS :</div>
+                         <div style="color: #000 !important;font-size:9px !important;">1) TURNAROUND TIME :</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;">NORMAL SERVICE 5 - 7 WORKING DAYS</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;"> EXPRESS SERVICE 2 - 3 WORKING DAYS** 1.5 TIMES NORMAL RATES</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;">PLATINUM SERVICE 1 WORKING DAY** 2 TIMES NORMAL RATES</div>
+                         <div style="color: #000 !important;font-size:9px !important;">2) COLLECTION & DELIVERY :</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;"> TO BE ADVISED BY SALES PERSONNEL</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;">3) VALIDITY OF THIS QUOTE IS 30 DAYS FROM THE DATE OF THIS QUOTATION</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;"> *PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION*</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;"> ALL PRICE(S) ABOVE ARE SUBJECTED TO GST CHARGE</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;">4) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME.</div>
+                         <div style="font-size:9px !important;padding:0px 5px;"> **PLEASE CONTACT SALES DEPARTMENT FOR MORE QUERIES AT 64584411**</div></td>
+                    <td  style="width:50%;"><div  style="color: #000 !important;">CONFIRMED AND ACCEPTED BY:</div>
+                         <div style="border-top:1px solid #000;width:100%;margin-top:20px;">COMPANYS STAMP,SIGNATURE AND DATE</div>
+                         <div style="color: #000 !important;margin-top:10px;">DESIGNATION :</div>
+                         <div style="color: #000 !important;margin-top:10px;">NAME :</div></td>
+               </tr>
+          </table>
+          <table width="100%">
+               <tr>
+                    <td style="font-size:9px !important;"><p style="color: #000 !important;width:80%;">NOTE :</p>
+                         THIS IS COMPUTER GENERATED QUOTATION. NO SIGNATURE IS REQUIRED.
+                         </p></td>
+                    <td style="width:20%;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
+               </tr>
+          </table>
+          <div style="background:#313854;color:#fff !important;padding:10px;font-size:12px;">BS TECH REFERENCE MEASUREMENT STANDARDS ARE TRACEABLE TO NATIONAL METROLOGY CENTRE (SINGAPORE), NPL (UK), NIST (USA) OR OTHER RECOGNIZED NATIONAL OR INTERNATIONAL STANDARDS</div>
+     </div>
+</div>';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
            
 $html .='<!DOCTYPE html>
 <html lang="en">

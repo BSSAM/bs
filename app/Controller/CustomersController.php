@@ -625,6 +625,31 @@ class CustomersController extends AppController
             if($data)
             {
               $last_id  =    $this->CustomerInstrument->getLastInsertId();
+              
+              /******************
+                    * Log Activity For Approval Customer Instrument
+                    */
+                    $this->request->data['Logactivity']['logname'] = 'Costing';
+                    $this->request->data['Logactivity']['logactivity'] = 'Add Costing';
+                    $this->request->data['Logactivity']['logid'] = $last_id;
+                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                    $this->request->data['Logactivity']['logapprove'] = 1;
+
+                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                    
+                /******************/
+                    
+                /******************
+                    * Data Log Activity Customer Instrument
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Costing';
+                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                    $this->request->data['Datalog']['logid'] = $last_id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+                /******************/ 
               if($last_id!='')
               {
                   $last_data = $this->CustomerInstrument->find('first', array('conditions' => array('CustomerInstrument.id' => $last_id)));
@@ -1054,6 +1079,12 @@ class CustomersController extends AppController
                     echo "<br>";
                     echo "</div>";
             }
+    }
+    
+    public function approve_cus_ins()
+    {
+        $this->autoRender = false;
+        $name =  $this->request->data['id'];
     }
 
 }

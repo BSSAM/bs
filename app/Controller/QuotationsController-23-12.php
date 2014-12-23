@@ -841,14 +841,14 @@
 <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
 <style>
-table td { font-size:9px; line-height:11px; }
+table td { font-size:11px; line-height:11px; }
 .table_format table { }
 .table_format td { text-align:center; padding:5px; }
 @page {
 margin: 180px 50px;
 }
 #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 350px; }
-#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 330px; }
+#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 480px; }
 #footer .page:after { content: counter(page); }
 </style>
 </head>';
@@ -880,17 +880,17 @@ margin: 180px 50px;
                // pr($device_name);exit;
                
 $html .=
-'<body style="font-family:Oswald, sans-serif;font-size:9px;padding:0;margin:0;font-weight: 300; color:#444 !important;">
+'<body style="font-family:Oswald, sans-serif;font-size:10px;padding:0;margin:0;font-weight: 300; color:#333 !important;">
 <div id="header">
      <table width="700px">
           <tr>
-               <td width="335" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logo.jpg" width="450" height="80" alt="" /></div></td>
-               <td  style="padding:0 10px;"><div style="float:left;text-align:right;">
-                         <p style="line-height:7px;">41 Senoko Drive</p>
-                         <p style="line-height:7px;">Singapore 758249</p>
-                         <p style="line-height:7px;">Tel.+65 6458 4411</p>
-                         <p style="line-height:7px;">Fax.+65 64584400</p>
-                         <p style="line-height:7px;">www.bestandards.com</p>
+               <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
+               <td style="padding:0 10px;"><div style="float:left;text-align:right;">
+                         <p>41 Senoko Drive</p>
+                         <p>Singapore 758249</p>
+                         <p>Tel.+65 6458 4411</p>
+                         <p>Fax.+65 64584400</p>
+                         <p>www.bestandards.com</p>
                     </div></td>
           <tr>
      </table>
@@ -902,7 +902,7 @@ $html .=
      </table>
      <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
           <tr>
-               <td width="47%" style="border:1px solid #000;padding:5px;"><table width="100%" cellpadding="0" cellspacing="0">
+               <td width="47%" style="border:1px solid #000;padding:5px;"><table width="288" cellpadding="0" cellspacing="0">
                          <tr>
                               <td width="128" colspan="3" height="10px" style="font-size:11px !important;">'.$customername.'</td>
                          </tr>
@@ -914,49 +914,49 @@ $html .=
                          </tr>
                          <tr  style="padding-top:30px;">
                               <td style="padding:5px;">ATTN </td>
-                              <td width="29" style="padding:5px;">:</td>
-                              <td width="145" style="padding:5px;">'.$contactperson.'</td>
+                              <td width="29">:</td>
+                              <td width="145">'.$contactperson.'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;">TEL </td>
-                              <td width="29" style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$phone.'</td>
+                              <td>TEL </td>
+                              <td width="29">:</td>
+                              <td>'.$phone.'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;">FAX </td>
-                              <td width="29" style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$fax.'</td>
+                              <td>FAX </td>
+                              <td width="29">:</td>
+                              <td>'.$fax.'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;">EMAIL </td>
-                              <td width="29" style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$email.'</td>
+                              <td>EMAIL </td>
+                              <td width="29">:</td>
+                              <td>'.$email.'</td>
                          </tr>
                     </table></td>
                <td width="3%"></td>
-               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
+               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="250" colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:100%;padding:10px 0;">'.$quotationno.'</div></td>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:97%;padding:10px 0;">'.$quotationno.'</div></td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;font-size:11px !important;">SALES PERSON </td>
-                              <td width="24" style="padding:5px;font-size:11px !important;">:</td>
-                              <td style="padding:5px;font-size:11px !important;">Mr.Padma</td>
+                              <td width="139" style="padding-left:5px;font-size:11px !important;">SALES PERSON </td>
+                              <td width="24" style="font-size:11px !important;">:</td>
+                              <td width="109" style="font-size:11px !important;">Mr.Padma</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;">YOUR REF NO </td>
-                              <td style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$ref_no.'</td>
+                              <td style="padding-left:5px;">YOUR REF NO </td>
+                              <td>:</td>
+                              <td>'.$ref_no.'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;"> DATE </td>
-                              <td style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$reg_date.'</td>
+                              <td style="padding-left:5px;"> DATE </td>
+                              <td>:</td>
+                              <td>'.$reg_date.'</td>
                          </tr>
                          <tr>
-                              <td  style="padding:5px;">PAYMENT TERMS </td>
-                              <td style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$payment_term.'</td>
+                              <td  style="padding-left:5px;">PAYMENT TERMS </td>
+                              <td>:</td>
+                              <td>'.$payment_term.'</td>
                          </tr>
                     </table></td>
                <td width="2%"></td>
@@ -971,18 +971,18 @@ $html .='<div id="footer">
                <tr>
                     <td  style="width:50%;"><div style="color: #000 !important;font-size:14px !important;">TERMS AND CONDITIONS :</div>
                          <div style="color: #000 !important;font-size:9px !important;">1) TURNAROUND TIME :</div>
-                         <div style="line-height:7px !important;font-size:9px !important;">NORMAL SERVICE 5 - 7 WORKING DAYS</div>
-                         <div style="line-height:7px !important;font-size:9px !important;"> EXPRESS SERVICE 2 - 3 WORKING DAYS** 1.5 TIMES NORMAL RATES</div>
-                         <div style="line-height:7px !important;font-size:9px !important;">PLATINUM SERVICE 1 WORKING DAY** 2 TIMES NORMAL RATES</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;">NORMAL SERVICE 5 - 7 WORKING DAYS</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;"> EXPRESS SERVICE 2 - 3 WORKING DAYS** 1.5 TIMES NORMAL RATES</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;">PLATINUM SERVICE 1 WORKING DAY** 2 TIMES NORMAL RATES</div>
                          <div style="color: #000 !important;font-size:9px !important;">2) COLLECTION & DELIVERY :</div>
-                         <div style="line-height:7px !important;font-size:9px !important;"> TO BE ADVISED BY SALES PERSONNEL</div>
-                         <div style="line-height:7px !important;font-size:9px !important;">3) VALIDITY OF THIS QUOTE IS 30 DAYS FROM THE DATE OF THIS QUOTATION</div>
-                         <div style="line-height:7px !important;font-size:9px !important;"> *PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION*</div>
-                         <div style="line-height:7px !important;font-size:9px !important;"> ALL PRICE(S) ABOVE ARE SUBJECTED TO GST CHARGE</div>
-                         <div style="line-height:7px !important;font-size:9px !important;">4) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME.</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;"> TO BE ADVISED BY SALES PERSONNEL</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;">3) VALIDITY OF THIS QUOTE IS 30 DAYS FROM THE DATE OF THIS QUOTATION</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;"> *PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION*</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;"> ALL PRICE(S) ABOVE ARE SUBJECTED TO GST CHARGE</div>
+                         <div style="text-transform:lowercase;line-height:12px !important;font-size:9px !important;">4) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME.</div>
                          <div style="font-size:9px !important;padding:0px 5px;"> **PLEASE CONTACT SALES DEPARTMENT FOR MORE QUERIES AT 64584411**</div></td>
-                    <td  style="width:50%;border:1px solid #333;padding:5px;"><div  style="color: #000 !important;">CONFIRMED AND ACCEPTED BY:</div>
-                         <div style="border-top:1px solid #000;width:100%;margin-top:30px;color: #000 !important;padding-top:10px;">COMPANYS STAMP,SIGNATURE AND DATE</div>
+                    <td  style="width:50%;"><div  style="color: #000 !important;">CONFIRMED AND ACCEPTED BY:</div>
+                         <div style="border-top:1px solid #000;width:100%;margin-top:20px;">COMPANYS STAMP,SIGNATURE AND DATE</div>
                          <div style="color: #000 !important;margin-top:10px;">DESIGNATION :</div>
                          <div style="color: #000 !important;margin-top:10px;">NAME :</div></td>
                </tr>
@@ -995,7 +995,7 @@ $html .='<div id="footer">
                     <td style="width:20%;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
                </tr>
           </table>
-          <div style="background:#313854;color:#fff !important;padding:3px 10px;font-size:8px;">BS TECH REFERENCE MEASUREMENT STANDARDS ARE TRACEABLE TO NATIONAL METROLOGY CENTRE (SINGAPORE), NPL (UK), NIST (USA) OR OTHER RECOGNIZED NATIONAL OR INTERNATIONAL STANDARDS</div>
+          <div style="background:#313854;color:#fff !important;padding:10px;font-size:12px;">BS TECH REFERENCE MEASUREMENT STANDARDS ARE TRACEABLE TO NATIONAL METROLOGY CENTRE (SINGAPORE), NPL (UK), NIST (USA) OR OTHER RECOGNIZED NATIONAL OR INTERNATIONAL STANDARDS</div>
      </div>
 </div>';
 $subtotal = 0;
@@ -1003,13 +1003,13 @@ $html .= '<div id="content" style="">';
                 foreach($device_name as $k=>$device):
                     if($k == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:230px;">      <tr>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:200px;">      <tr>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Instrument</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
@@ -1025,24 +1025,24 @@ $html .= '</tr>';
                     }
                     elseif($k%5 == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:230px;">      <tr>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:200px;">      <tr>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Instrument</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        $html .='<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
+        $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
         $html .= $titles[$i];
         $html .='</td>';
     endif;
     $count1 = $count1+1;
 endfor;
 $count1 = $count1+1;
-$html .= '<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
+$html .= '<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
 
 $html .= '</tr>';
                     }
@@ -1053,7 +1053,7 @@ $html .= '</tr>';
                     <tr>
                         <td style="padding:3px 10px;">'.$device['order_by'].'</td>
                         <td style="padding:3px 10px;">1</td>
-                        <td style="padding:3px 10px;width:20%;">'.$device['Instrument']['name'].'</td>
+                        <td style="padding:3px 10px;">'.$device['Instrument']['name'].'</td>
                         <td style="padding:3px 10px;">'.$device['Brand']['brandname'].'</td>
                         <td style="padding:3px 10px;">'.$device['model_no'].'</td>
                         <td style="padding:3px 10px;">'.$device['Range']['range_name'].'</td>';
@@ -1072,20 +1072,20 @@ $html .= '</tr>';
                 $total_due = $gst + $subtotal;
                
                 $html .= '<tr>
-                         <td colspan="'.($count1+5).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">SUBTOTAL $(SGD)</td>
+                         <td colspan="'.($count1+4).'" style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">SUBTOTAL $(SGD)</td>
                          <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($subtotal, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="'.($count1+5).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">GST ( 7.00% )</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($gst, 2, '.', '').'</td>
+                         <td colspan="'.($count1+4).'" style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">GST ( 7.00% )</td>
+                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($gst, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="'.($count1+5).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">TOTAL DUE $(SGD)</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($total_due, 2, '.', '').'</td>
+                         <td colspan="'.($count1+4).'" style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">TOTAL DUE $(SGD)</td>
+                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($total_due, 2, '.', '').'</td>
                     </tr>
                      <tr>
                <td colspan="3" style="border:1px  dashed #000;text-align:right;padding:3px 10px;color: #000 !important;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #000; text-align:left;padding:3px 10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td>
+               <td  colspan="7" style="border:1px dashed #000; text-align:left;padding:3px 10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td>
           </tr>';
          }
                 if($k%5 == 4 || $k+1 == count($device_name)){

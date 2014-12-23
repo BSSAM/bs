@@ -25,6 +25,7 @@ class BranchesController extends AppController
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         $this->set('userrole',$user_role['other_branch']);
+       // pr($user_role['other_branch']['view']);exit;
         /*
          * ---------------  Functionality of Users -----------------------------------
          */

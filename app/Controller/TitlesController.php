@@ -122,7 +122,7 @@ class TitlesController extends AppController
         {
             throw new MethodNotAllowedException();
         }
-        if($this->Title->updateAll(array('Title.is_deleted'=>1,'Title.status'=>0),array('Title.id'=>$id)))
+        if($this->Title->deleteAll(array('Title.id'=>$id)))
         {
             $this->Session->setFlash(__('The Title has been deleted',h($id)));
             return $this->redirect(array('controller'=>'Titles','action'=>'index'));

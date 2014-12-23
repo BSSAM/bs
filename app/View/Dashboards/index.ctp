@@ -1103,7 +1103,49 @@ $(document).on('click','.approve_invoice',function(){
                                 </div>
                                 </div>
                             </div>
-                         
+                            
+                            <div class="tab-pane" id="instrumentcustomer">
+                                <div class="block full">
+                                <div class="table-responsive">
+                                    <table id="example-datatable"  class="table table-vcenter table-condensed table-bordered">
+                                            <?PHP if (!empty($logactivity_instrument_customer)): ?>
+                                            <thead>
+                                                <tr>
+                                                <th>Flag</th>
+                                                <th>Name(Details)</th>
+                                                <th>Approval</th>
+                                                <th>Created</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach ($logactivity_instrument_customer as $logactivity_instrument_customer_list) :?>
+                                            <tr>
+                                                <td class="text-center" style="width: 80px;"> <?php echo $this->Html->image('letters/letters-in.jpg', array('alt' => 'Instrument','class'=>'')); ?></td>
+                                                <td>
+                                                    <h4><a href="javascript:void(0)"><strong><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logid'] ?></em></small></h4>
+                                                </td>
+                                                <td class="text-center ">
+                                                    <?PHP if($logactivity_instrument_customer_list['Logactivity']['logname'] == 'Instrument'){ ?>
+                                                    <?PHP echo $this->html->link('Approve',array('controller'=>'Instruments','action'=>'edit',$logactivity_instrument_customer_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                                    <?php }?>
+                                                </td>
+                                                <td class="">by <?PHP echo $logactivity_instrument_customer_list['User']['username'] ?><br><small><?PHP echo $logactivity_instrument_customer_list['Logactivity']['created'] ?></small></td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                            </tbody>
+                                        <?php else: ?>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <i class="gi gi-keys"></i> Oops... No Instrument Customer Approval Available
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <?php endif; ?>
+                                    </table>
+                                </div>
+                                </div>
+                            </div>
                             
                             </div>
                             
