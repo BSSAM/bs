@@ -704,6 +704,10 @@ App::uses('Controller', 'Controller');
             endif;
             return $data1;
         }
+        
+        
+        
+        
         public function device_id_session_logout($data)
         {
             $this->Session->delete($data);

@@ -70,6 +70,43 @@ $(document).on('click','.approve_candd',function(){
     }
        
    });
+   
+   $(document).on('click','.approve_ins_cus',function(){
+       //alert('sdf');
+       //console.log('Clientposapproval');
+        //window.reload(path+'Clientposapproval');
+        var val_ins_cus_id = $(this).attr('id');
+        if(window.confirm("Are you sure?")){
+        $.ajax({
+            type: 'POST',
+            data:"id="+val_ins_cus_id,
+            url: path_url+'Customers/approve_ins_cus/',
+            success: function(data)
+            {
+                //console.log(data); return false;
+                if(data=='success')
+                {
+                    alert('Customer Instrument is Approved');
+                    window.location.reload();
+                }
+                else
+                {
+                    alert('Customer Instrument Failed due to unknown Cause');
+                    window.location.reload();
+                }
+                
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+   
+   
 $(document).on('click','.approve_invoice',function(){
        
         var val_quotationid = $(this).attr('id');
@@ -170,7 +207,7 @@ $(document).on('click','.approve_invoice',function(){
                                 else
                                 {
                                 ?>
-                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($log_activity_instrument_count)+($log_activity_procedure_count)+($log_activity_unit_count)+($log_activity_range_count)+($log_activity_brand_count)+($log_activity_group_count); ?></span></a></li>
+                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($log_activity_instrument_count)+($log_activity_procedure_count)+($log_activity_unit_count)+($log_activity_range_count)+($log_activity_brand_count)+($log_activity_group_count)+($logactivity_instrument_customer_count); ?></span></a></li>
                                 <?php 
                                 }
                                 ?>
@@ -818,6 +855,10 @@ $(document).on('click','.approve_invoice',function(){
                                     <?php if($user_role['app_instrumentgroup']['view'] != 0){ ?>
                                     <li><a href="#group">Instruments for Group <span class="badge animation-floating"><?php echo $log_activity_group_count; ?></span></a></li>
                                     <?php } ?>
+                                    <?php //if($user_role['app_instrumentgroup']['view'] != 0){ ?>
+                                    <li><a href="#instrumentcustomer">Customer Instrument <span class="badge animation-floating"><?php echo $logactivity_instrument_customer_count; ?></span></a></li>
+                                    <?php //} ?>
+                                    
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
@@ -1103,7 +1144,9 @@ $(document).on('click','.approve_invoice',function(){
                                 </div>
                                 </div>
                             </div>
-                            
+                             <!---------------------------------------------------------------------------------------->
+                            <!-------------------------------Instrument For Customer----------------------------------------------->
+                            <!---------------------------------------------------------------------------------------->
                             <div class="tab-pane" id="instrumentcustomer">
                                 <div class="block full">
                                 <div class="table-responsive">
@@ -1126,7 +1169,8 @@ $(document).on('click','.approve_invoice',function(){
                                                 </td>
                                                 <td class="text-center ">
                                                     <?PHP if($logactivity_instrument_customer_list['Logactivity']['logname'] == 'Instrument'){ ?>
-                                                    <?PHP echo $this->html->link('Approve',array('controller'=>'Instruments','action'=>'edit',$logactivity_instrument_customer_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                                    <?PHP //echo $this->html->link('Approve',array('controller'=>'Instruments','action'=>'edit',$logactivity_instrument_customer_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                                    <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_ins_cus','id'=>$logactivity_instrument_customer_list['Logactivity']['logid'])) ?>
                                                     <?php }?>
                                                 </td>
                                                 <td class="">by <?PHP echo $logactivity_instrument_customer_list['User']['username'] ?><br><small><?PHP echo $logactivity_instrument_customer_list['Logactivity']['created'] ?></small></td>

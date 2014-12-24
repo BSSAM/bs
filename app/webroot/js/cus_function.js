@@ -13,6 +13,7 @@ $(document).ready(function(){
         $(".instrument_result").fadeOut();
         var ins_text=$(this).text();
         $('#customer_instrument').val(ins_text);
+        
         //alert(instrument_id);
 //        alert(instrument_id);
         $.ajax({
@@ -42,20 +43,20 @@ $(document).ready(function(){
              complete: ni_end(),
          });
     });
-    $('#unit_price').on('keypress',function() {
-        var price   =   $(this).val();
-        $.ajax({
-             type: 'POST',
-             data:"price="+price,
-             url: path_url+'/customers/get_price/',
-             beforeSend: ni_start(),  
-             success:function(data){
-                 $('#total_price').val(data);
-                 
-             },
-             complete: ni_end(),
-         });
-    });
+//    $('#unit_price').on('keypress',function() {
+//        var price   =   $(this).val();
+//        $.ajax({
+//             type: 'POST',
+//             data:"price="+price,
+//             url: path_url+'/customers/get_price/',
+//             beforeSend: ni_start(),  
+//             success:function(data){
+//                 $('#total_price').val(data);
+//                 
+//             },
+//             complete: ni_end(),
+//         });
+//    });
     $(document).on('click','.customerinstrument_add',function(){
        
         if($('#customer_instrument').val()=='')
@@ -85,6 +86,7 @@ $(document).ready(function(){
             complete: ni_end(),
             success: function(data)
             {
+                //alert(data); return false;
                 if(data!=0){
 					try {
   var node_data   =   $.parseJSON(data);
@@ -99,12 +101,12 @@ $(document).ready(function(){
                     }
                     $('.customer_instrument_info .dataTables_empty').hide();
                     $('.customer_instrument_info').append('<tr class="cus_instrument_remove_'+node_data.CustomerInstrument.id+'">\n\\n\
-                                        <td class="text-center">'+node_data.CustomerInstrument.id+'</td>\n\
+                                        <td class="text-center">'+node_data.CustomerInstrument.order_by+'</td>\n\
                                         <td class="text-center">'+instrument_name+'</td>\n\\n\
                                         <td class="text-center">'+node_data.CustomerInstrument.model_no+'</td>\n\
                                         <td class="text-center">'+node_data.Range.range_name+'</td>\n\\n\
-                                        <td class="text-center">'+node_data.CustomerInstrument.unit_price+'</td>\n\\n\\n\\n\
-                                        <td class="text-center">'+status+'</td>\n\\n\\n\
+                                        <td class="text-center">'+node_data.CustomerInstrument.cost+'</td>\n\\n\\n\\n\
+                                        <td class="text-center">'+node_data.CustomerInstrument.unit_price+'</td>\n\\n\\n\
                                         <td class="text-center"><div class="btn-group">\n\
                                         <a data-edit="'+node_data.CustomerInstrument.id+'"class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                         <a data-delete="'+node_data.CustomerInstrument.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">\n\
@@ -230,23 +232,24 @@ $(document).ready(function(){
                
                $('.cus_instrument_remove_'+device_id).remove();
                $('.customer_instrument_info').append('<tr class="cus_instrument_remove_'+node_data.CustomerInstrument.id+'">\n\\n\
-                                    <td class="text-center">'+node_data.CustomerInstrument.id+'</td>\n\
+                                    <td class="text-center">'+node_data.CustomerInstrument.order_by+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
                                     <td class="text-center">'+node_data.CustomerInstrument.model_no+'</td>\n\
                                     <td class="text-center">'+node_data.Range.range_name+'</td>\n\\n\
-                                    <td class="text-center">'+node_data.CustomerInstrument.unit_price+'</td>\n\\n\\n\\n\
-                                    <td class="text-center">'+check+'</td>\n\\n\\n\
+                                    <td class="text-center">'+node_data.CustomerInstrument.cost+'</td>\n\\n\\n\\n\
+                                    <td class="text-center">'+node_data.CustomerInstrument.unit_price+'</td>\n\\n\\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+node_data.CustomerInstrument.id+'"class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+node_data.CustomerInstrument.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">\n\
                                     <i class="fa fa-times"></i></a></div></td></tr>');
                 $('#customer_instrument').val(null);
-                $('#range_array').append('<option value="" selected="selected">Select Brand</option>');
+                $('#range_array').append('<option value="" selected="selected">Select Range</option>');
                 $('#model_no').val(null);
                 $('#unit_price').val(null);
                 $('#total_price').val(null);
                 $('#status').prop('checked',false);
                 $('#instrument_name_chosen span').text('Select Instrument Name');
+                $('#customer_instrument').prop('disabled',false);
                 }
         });
         
@@ -548,17 +551,22 @@ $(document).ready(function(){
         var dataString = 'name='+ instrument;
         if(instrument!='')
         {
+            
             $.ajax({
             type: "POST",
             url: path_url+"Customers/instrument_search",
             data: dataString,
             cache: false,
+            beforeSend: ni_start(),  
             success: function(html)
             {
                 $(".instrument_result").html(html).show();
-            }
+            },
+            complete: ni_end(),  
             });
-        }return false;    
+        }
+        $('.customer_instrument_show').fadeOut();
+        return false;    
     });
 });
 

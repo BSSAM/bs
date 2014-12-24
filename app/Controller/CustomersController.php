@@ -609,7 +609,6 @@ class CustomersController extends AppController
     public function add_customer_instrument()
     {
         $this->autoRender=false;
-       
         $this->loadModel('CustomerInstrument');
         $instrument_id  =   $this->request->data['instrument_id'];
         $customer_id  =   $this->request->data['customer_id'];
@@ -617,50 +616,120 @@ class CustomersController extends AppController
         $model_no       =   $this->request->data['model_no'];
         $cost       =   $this->request->data['cost'];
         $total_price       =   $this->request->data['total_price'];
-         
-       
-        $customer_instruments  = $this->CustomerInstrument->find('all',  array('conditions'=>array('model_no'=>$model_no,'range_id'=>$range_id,'cost'=>$cost,'unit_price'=>$total_price, 'instrument_id'=>$instrument_id,'CustomerInstrument.is_deleted'=>0,'customer_id'=>$customer_id)));
-        if(count($customer_instruments)==0){
-        $data = $this->CustomerInstrument->save($this->request->data);
-            if($data)
-            {
-              $last_id  =    $this->CustomerInstrument->getLastInsertId();
-              
-              /******************
-                    * Log Activity For Approval Customer Instrument
-                    */
-                    $this->request->data['Logactivity']['logname'] = 'Costing';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Costing';
-                    $this->request->data['Logactivity']['logid'] = $last_id;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
+        
+        $customer_instruments_count  = $this->CustomerInstrument->find('count',  array('conditions'=>array('CustomerInstrument.is_deleted'=>0,'CustomerInstrument.customer_id'=>$customer_id),'order'=>'CustomerInstrument.order_by DESC'));
+        //pr($customer_instruments_count);exit;
+        // When Order By is above '0'
+        if($customer_instruments_count)
+        {
+            $customer_instruments_max  = $this->CustomerInstrument->find('first',  array('conditions'=>array('CustomerInstrument.is_deleted'=>0,'CustomerInstrument.customer_id'=>$customer_id),'order'=>'CustomerInstrument.order_by DESC'));    
+            $order_by = $customer_instruments_max['CustomerInstrument']['order_by'];
+            $customer_instruments  = $this->CustomerInstrument->find('all',  array('conditions'=>array('model_no'=>$model_no,'range_id'=>$range_id,'cost'=>$cost,'unit_price'=>$total_price, 'instrument_id'=>$instrument_id,'CustomerInstrument.is_deleted'=>0,'customer_id'=>$customer_id)));
+        
+            if(count($customer_instruments)==0){
+            // Order By    
+            $this->request->data['order_by'] = $order_by+1;
+            //$this->request->data['CustomerInstrument']['cost'] = $this->request->data['cost'];
+            $this->request->data['unit_price'] = $total_price;
+            //pr($this->request->data);exit;
+            $data = $this->CustomerInstrument->save($this->request->data);
+                if($data)
+                {
+                  $last_id  =    $this->CustomerInstrument->getLastInsertId();
 
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
-                /******************/
-                    
-                /******************
-                    * Data Log Activity Customer Instrument
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Costing';
-                    $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $last_id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                /******************/ 
-              if($last_id!='')
-              {
-                  $last_data = $this->CustomerInstrument->find('first', array('conditions' => array('CustomerInstrument.id' => $last_id)));
-                   if(!empty($last_data))
-                   {
-                      echo json_encode($last_data);
-                   }
+                  /******************
+                        * Log Activity For Approval Customer Instrument
+                        */
+                        $this->request->data['Logactivity']['logname'] = 'Costing';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Costing';
+                        $this->request->data['Logactivity']['logid'] = $last_id;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
+
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+
+                    /******************/
+
+                    /******************
+                        * Data Log Activity Customer Instrument
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Costing';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $last_id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/ 
+                  if($last_id!='')
+                  {
+                      $last_data = $this->CustomerInstrument->find('first', array('conditions' => array('CustomerInstrument.id' => $last_id)));
+                       if(!empty($last_data))
+                       {
+                          echo json_encode($last_data);
+                       }
+                    }
                 }
             }
-        }else{
-            return 0;
+            else
+            {
+                return 0;
+            }
+        }
+        // When Order By is '0'
+        else
+        {
+            $customer_instruments  = $this->CustomerInstrument->find('all',  array('conditions'=>array('model_no'=>$model_no,'range_id'=>$range_id,'cost'=>$cost,'unit_price'=>$total_price, 'instrument_id'=>$instrument_id,'CustomerInstrument.is_deleted'=>0,'customer_id'=>$customer_id)));
+            
+            if(count($customer_instruments)==0)
+            {
+            // Order By    
+            $this->request->data['order_by'] = 1;
+            $this->request->data['unit_price'] = $total_price;
+            //pr($this->request->data);exit;
+            $data = $this->CustomerInstrument->save($this->request->data);
+                if($data)
+                {
+                  $last_id  =    $this->CustomerInstrument->getLastInsertId();
+
+                  /******************
+                        * Log Activity For Approval Customer Instrument
+                        */
+                        $this->request->data['Logactivity']['logname'] = 'Costing';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Costing';
+                        $this->request->data['Logactivity']['logid'] = $last_id;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
+
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+
+                    /******************/
+
+                    /******************
+                        * Data Log Activity Customer Instrument
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Costing';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $last_id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/ 
+                  if($last_id!='')
+                  {
+                      $last_data = $this->CustomerInstrument->find('first', array('conditions' => array('CustomerInstrument.id' => $last_id)));
+                       if(!empty($last_data))
+                       {
+                          echo json_encode($last_data);
+                       }
+                    }
+                }
+            }
+            else
+            {
+                return 0;
+            } 
         }
     }
     public function delete_cusinstrument()

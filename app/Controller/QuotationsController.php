@@ -607,7 +607,7 @@
         {
             $this->autoRender=false;
             //$device_id= $this->request->data['device_id'];
-            if($this->Device->updateAll(array('Device.is_deleted'=>1),array('Device.id'=>$device_id)))
+            if($this->Device->deleteAll(array('Device.id'=>$device_id)))
             {
                 $this->Session->setFlash(__('Instrument has been deleted Successfully'));
             }

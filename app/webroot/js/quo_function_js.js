@@ -21,6 +21,8 @@ $(document).ready(function(){
             url: path_url+"/Quotations/search",
             data: dataString,
             cache: false,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success: function(html)
             {
                 $("#result").html(html).show();
@@ -35,6 +37,8 @@ $(document).ready(function(){
             type: 'POST',
             data:"cid="+con_person,
             url: path_url+'/Quotations/get_contact_email/',
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success:function(data){
                 $('#val_email').val(data);
             }
@@ -180,9 +184,12 @@ $(document).ready(function(){
         $('#val_description').val(ins_text);
         $('.ins_error').hide();
         $('#search_instrument').fadeOut();
+        
         $.ajax({
             type: "POST",
             url: path+"Quotations/get_brand_value",
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             data: 'instrument_id='+instrument_id+'&customer_id='+customer_id,
             cache: false,
             
@@ -231,7 +238,8 @@ parsedata = $.parseJSON(data);
             url: path+"Quotations/get_range_value",
             data: 'instrument_id='+instrument_id+'&customer_id='+customer_id,
             cache: false,
-            
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success: function(data)
             {
 				 try {
@@ -265,6 +273,8 @@ parsedata = $.parseJSON(data);
        $.ajax({
             type: 'POST',
             data:"device_id="+ device_id,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             url: path_url+'/Quotations/delete_instrument/',
             success:function(data){
                 $('.instrument_remove_'+device_id).fadeOut();
@@ -307,6 +317,8 @@ parsedata = $.parseJSON(data);
         $.ajax({
             type: 'POST',
             data:"device_id="+device_id+"&instrument_validity="+instrument_validity+"&customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_quantity="+instrument_quantity+"&instrument_brand="+instrument_brand+"&instrument_modelno="+instrument_modelno+"&instrument_range="+instrument_range+"&instrument_calllocation="+instrument_calllocation+"&instrument_calltype="+instrument_calltype+"&instrument_unitprice="+instrument_unitprice+"&instrument_discount="+instrument_discount+"&instrument_department="+instrument_department+"&instrument_account="+instrument_account+"&instrument_title="+instrument_title+"&instrument_total="+instrument_total,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             url: path+'Quotations/update_instrument/',
             success: function(data)
             {
@@ -347,6 +359,8 @@ parsedata = $.parseJSON(data);
        $.ajax({
             type: 'POST',
             data:"edit_device_id="+ edit_device_id,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             url: path_url+'/Quotations/edit_instrument/',
             success:function(data){
 				 try {
@@ -393,6 +407,8 @@ edit_node=$.parseJSON(data);
        $.ajax({
             type: 'POST',
             data:"id="+val_quotationno,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             url: path+'Quotations/approve/',
             success: function(data)
             {
@@ -417,6 +433,8 @@ edit_node=$.parseJSON(data);
        $.ajax({
             type: 'POST',
             data:"id="+qid,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             url: path+'Quotations/get_document_files/',
             success: function(data)
             {
@@ -455,6 +473,8 @@ var document_data_node   =   $.parseJSON(data);
        {
             $.ajax({
             type:'POST',
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             url:path_url+'/Clientpos/get_random_ponumber/',
             success:function(data){
                   $('#val_ref_no').val(data);

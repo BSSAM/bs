@@ -1,4 +1,16 @@
-<script>var path_url = '<?PHP echo Router::url('/', true); ?>';</script>
+<script>
+    var path_url = '<?PHP echo Router::url('/', true); ?>';
+    $(document).ready(function(){
+        
+        $('#range_array').val('');
+        $('#in_id').val('');
+        $('#customer_instrument').val('');
+        $('#model_no').val('');
+        $('#unit_price').val('');
+        $('#total_price').val('');
+        
+    });
+</script>
 <h1><i class="gi gi-user"></i>Instrument Pricing</h1>
 </div>
 </div>
@@ -33,7 +45,7 @@
                                     </div>
                                     <label class="col-md-2 control-label" for="customer_instrument">Instrument Name</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name','empty'=>'Select Instrument Name')); ?>
+                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name','placeholder'=>'Select Instrument Name')); ?>
                                         <?PHP echo $this->Form->input('in_id', array('type' => 'hidden', 'id' => 'in_id')); ?>
                                         <div class="instrument_result" style="display:none;"></div>
                                     </div>
@@ -41,13 +53,13 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="model_no">Model No</label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('model_no', array('id' => 'model_no', 'class' => 'form-control', 'label' => false, 'data-placeholder' => 'Enter Model No', 'name' => 'model_no')); ?>
+                                        <?php echo $this->Form->input('model_no', array('id' => 'model_no', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter Model No', 'name' => 'model_no')); ?>
                                             
                                     </div>
                                     <label class="col-md-2 control-label" for="range">Range</label>
                                     <div class="col-md-4">
                                         <select id="range_array" name="range" class="form-control" data-placeholder="Select Range" style="width: 250px;">
-                                            <option value="">Select Range Name</option>
+                                            <option value="">Select Range</option>
                                         </select>
                                         <?php //echo $this->Form->input('range', array('id'=>'range','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                             
@@ -60,12 +72,12 @@
                                         <?php //$disable_unit = "disabled = 'disabled'";
                                         $disable_unit = "";
                                         ?>
-                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','data-placeholder'=>'Select Unit Price','name'=>'unit_price',$disable_unit)); ?>
-                                        
+                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter Cost of the Instrument','name'=>'unit_price',$disable_unit)); ?>
+                                        <label class="control-label help-block themed-color-autumn">Press 'TAB' or 'Click' after entering the Cost, To Get Price!!</label>
                                     </div>
                                     <label class="col-md-2 control-label" for="total_price">Price</label>
                                     <div class="col-md-4">
-                                        <?php $disable_total = "disabled = 'disabled'"; ?>
+                                        <?php $disable_total = "readonly = 'readonly'"; ?>
                                         <?php echo $this->Form->input('total_price', array('id'=>'total_price','class'=>'form-control','label'=>false,'type'=>'text','data-placeholder'=>'Select Total Price','name'=>'total_price',$disable_total)); ?>
                                         
                                     </div>
@@ -92,8 +104,8 @@
                             <th class="text-center">Instrument Name</th>
                             <th class="text-center">Model No</th>
                             <th class="text-center">Range</th>
-                            <th class="text-center">Unit Price</th>
-                            <th class="text-center">Status</th>
+                            <th class="text-center">Cost</th>
+                            <th class="text-center">Price</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -101,12 +113,12 @@
                            <?PHP if(!empty($customer_instruments)):?> 
                              <?PHP foreach($customer_instruments as $cusins):?>  
                             <tr class="cus_instrument_remove_<?PHP echo $cusins['CustomerInstrument']['id']; ?>">
-                            <td class="text-center"><?PHP echo $cusins['CustomerInstrument']['id']; ?></td>
+                            <td class="text-center"><?PHP echo $cusins['CustomerInstrument']['order_by']; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['Instrument']['name']; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['model_no']; ?></td>
                             <td class="text-center"> <?PHP echo $cusins['Range']['range_name']; ?></td>
-                            <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['unit_price']; ?></td>
-                            <td  class="text-center"><?PHP echo $status = ($cusins['CustomerInstrument']['status'] == 1) ? 'Active' : 'In active'; ?></td>
+                            <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['cost']; ?></td>
+                            <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['unit_price']; ?><?PHP //echo $status = ($cusins['CustomerInstrument']['status'] == 1) ? 'Active' : 'In active'; ?></td>
                             <td class="text-center">
                                 <div class="btn-group">
                                     <a data-edit="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit">
