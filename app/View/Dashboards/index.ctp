@@ -49,17 +49,9 @@ $(document).on('click','.approve_candd',function(){
             success: function(data)
             {
                 //console.log(data); return false;
-                if(data=='success')
-                    {
-                        alert('C & D is Approved');
-                        window.location.reload();
-                    }
-                    else
-                        {
-                             alert('C & D Approval Failed due to unknown Cause');
-                             window.location.reload();
-                        }
-                
+                alert('C & D is Approved');
+                window.location.reload();
+                    
             }
             
         });
@@ -1168,7 +1160,7 @@ $(document).on('click','.approve_invoice',function(){
                                                     <h4><a href="javascript:void(0)"><strong><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logid'] ?></em></small></h4>
                                                 </td>
                                                 <td class="text-center ">
-                                                    <?PHP if($logactivity_instrument_customer_list['Logactivity']['logname'] == 'Instrument'){ ?>
+                                                    <?PHP if($logactivity_instrument_customer_list['Logactivity']['logname'] == 'Costing'){ ?>
                                                     <?PHP //echo $this->html->link('Approve',array('controller'=>'Instruments','action'=>'edit',$logactivity_instrument_customer_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
                                                     <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_ins_cus','id'=>$logactivity_instrument_customer_list['Logactivity']['logid'])) ?>
                                                     <?php }?>

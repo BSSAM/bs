@@ -120,6 +120,7 @@
                             <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['cost']; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['unit_price']; ?><?PHP //echo $status = ($cusins['CustomerInstrument']['status'] == 1) ? 'Active' : 'In active'; ?></td>
                             <td class="text-center">
+                                <?PHP if($cusins['CustomerInstrument']['is_approved'] == 1): ?>
                                 <div class="btn-group">
                                     <a data-edit="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit">
                                         <i class="fa fa-pencil"></i>
@@ -128,6 +129,12 @@
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
+                                <?php endif; ?>
+                                <?PHP if($cusins['CustomerInstrument']['is_approved'] == 0): ?>
+                                <div class="btn-group">
+                                    <label class="label label-danger">Not Approved</label>
+                                </div>
+                                <?php endif; ?>
                             </td>
                         </tr>
                              <?PHP endforeach; ?>  
