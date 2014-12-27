@@ -423,7 +423,7 @@
              $customer_id =  $this->request->data['customer_id'];
             //$instrument =  'a';
             //$customer_id =  'CUS-01-10000003';
-            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id),'group'=>array('Instrument.id'),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
+            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id,'CustomerInstrument.is_approved'=>1),'group'=>array('Instrument.id'),'contain'=>array('Instrument'=>array('conditions'=>array('Instrument.name LIKE'=>'%'.$instrument.'%')))));
             //pr($instrument_details);
             //pr(count($instrument_details));
             //// echo json_encode($instrument_details);
@@ -490,7 +490,7 @@
              $customer_id =  $this->request->data['customer_id'];
             //$instrument =  'a';
             //$customer_id =  'CUS-01-10000003';
-            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id,'CustomerInstrument.model_no LIKE'=>'%'.$model_no.'%','CustomerInstrument.instrument_id'=>$device_id)));
+            $instrument_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$customer_id,'CustomerInstrument.model_no LIKE'=>'%'.$model_no.'%','CustomerInstrument.instrument_id'=>$device_id,'CustomerInstrument.is_approved'=>1)));
             //pr($instrument_details);
             //exit;
             //pr(count($instrument_details));
@@ -520,7 +520,7 @@
             $this->autoRender = false;
             $instrument_id =  $this->request->data['instrument_id'];
             $customer_id =  $this->request->data['customer_id'];
-            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id),'recursive'=>'3'));
+            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id,'CustomerInstrument.is_approved'=>1),'recursive'=>'3'));
             
             if(!empty($brand_details))
             {
@@ -534,7 +534,7 @@
             $this->request->data = json_decode(file_get_contents("php://input"));
             $instrument_id =  $this->request->data->instrument_id;
             $customer_id =  $this->request->data->customer_id;
-            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id),'recursive'=>'3'));
+            $brand_details=$this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.instrument_id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id,'CustomerInstrument.is_approved'=>1),'recursive'=>'3'));
             
             if(!empty($brand_details))
             {
@@ -547,7 +547,7 @@
             $this->autoRender = false;
             $instrument_id =  $this->request->data['instrument_id'];
             $customer_id =  $this->request->data['customer_id'];
-            $range_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id),'recursive'=>'3'));
+            $range_details=$this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.id'=>$instrument_id,'CustomerInstrument.customer_id'=>$customer_id,'CustomerInstrument.is_approved'=>1),'recursive'=>'3'));
             
             if(!empty($range_details))
             {

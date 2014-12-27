@@ -68,7 +68,7 @@ $(document).on('click','.approve_candd',function(){
        //console.log('Clientposapproval');
         //window.reload(path+'Clientposapproval');
         var val_ins_cus_id = $(this).attr('id');
-        if(window.confirm("Are you sure?")){
+        if(window.confirm("Are you sure about the Approval?")){
         $.ajax({
             type: 'POST',
             data:"id="+val_ins_cus_id,
@@ -76,17 +76,7 @@ $(document).on('click','.approve_candd',function(){
             success: function(data)
             {
                 //console.log(data); return false;
-                if(data=='success')
-                {
-                    alert('Customer Instrument is Approved');
-                    window.location.reload();
-                }
-                else
-                {
-                    alert('Customer Instrument Failed due to unknown Cause');
-                    window.location.reload();
-                }
-                
+                alert('Customer Instrument is Approved');
             }
             
         });
@@ -102,7 +92,7 @@ $(document).on('click','.approve_candd',function(){
 $(document).on('click','.approve_invoice',function(){
        
         var val_quotationid = $(this).attr('id');
-        if(window.confirm("Are you sure?")){
+        if(window.confirm("Are you sure about the Approval?")){
         $.ajax({
             type: 'POST',
             data:"id="+val_quotationid,
@@ -140,7 +130,7 @@ $(document).on('click','.approve_invoice',function(){
             url: path_url+'PurchaseRequisitions/approve_superviser/',
             success: function(data)
             {
-                console.log(data);
+                //console.log(data);
                 if(data=='success')
                 {
                     alert('Purchase Requisition is Approved & Forwarded to Manager');

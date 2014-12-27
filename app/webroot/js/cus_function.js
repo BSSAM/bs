@@ -107,10 +107,7 @@ $(document).ready(function(){
                                         <td class="text-center">'+node_data.Range.range_name+'</td>\n\\n\
                                         <td class="text-center">'+node_data.CustomerInstrument.cost+'</td>\n\\n\\n\\n\
                                         <td class="text-center">'+node_data.CustomerInstrument.unit_price+'</td>\n\\n\\n\
-                                        <td class="text-center"><div class="btn-group">\n\
-                                        <a data-edit="'+node_data.CustomerInstrument.id+'"class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
-                                        <a data-delete="'+node_data.CustomerInstrument.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">\n\
-                                        <i class="fa fa-times"></i></a></div></td></tr>');
+                                        <td class="text-center"><div class="btn-group"><label class="label label-danger">Not Approved</label></div></td></tr>');
                     $('ul.chosen-results li:first-child').addClass('result-selected');
                     $('#customer_instrument').val(null);
                     $('#model_no').val(null);
@@ -129,6 +126,7 @@ $(document).ready(function(){
         });
         
     });
+    ////<a data-edit="'+node_data.CustomerInstrument.id+'"class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\<a data-delete="'+node_data.CustomerInstrument.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">\n\
     $(document).on('click','.cus_instrument_delete',function(){
         var result = confirm("Are your sure want to delete?");
         if (result==true) {

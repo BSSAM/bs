@@ -975,7 +975,7 @@ class CustomersController extends AppController
         $this->autoRender=false;
         $id =  $this->request->data['id'];
         $user_id = $this->Session->read('sess_userid');
-        $this->Customer->updateAll(array('Customer.is_approved'=>1,'Customer.is_approved_date'=>date('Y-m-d'),'Customer.is_approved_by'=>$user_id),array('Customer.id'=>$id));
+        $this->Customer->updateAll(array('Customer.is_approved'=>1,'Customer.is_approved_date'=>'"'.date('Y-m-d').'"','Customer.is_approved_by'=>$user_id),array('Customer.id'=>$id));
         $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Customer'));
         $details=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id)));
         $this->xml_tally($id);
@@ -1155,7 +1155,7 @@ class CustomersController extends AppController
         $this->autoRender = false;
         $id =  $this->request->data['id'];
         $user_id = $this->Session->read('sess_userid');
-        $this->CustomerInstrument->updateAll(array('CustomerInstrument.is_approved'=>1,'CustomerInstrument.is_approved_date'=>date('Y-m-d'),'CustomerInstrument.is_approved_by'=>$user_id),array('CustomerInstrument.id'=>$id));
+        $this->CustomerInstrument->updateAll(array('CustomerInstrument.is_approved'=>1,'CustomerInstrument.is_approved_date'=>'"'.date('d-F-y').'"','CustomerInstrument.is_approved_by'=>$user_id),array('CustomerInstrument.id'=>$id));
         $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Costing','Logactivity.logname'=>'Costing'));
     }
     
