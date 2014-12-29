@@ -290,6 +290,16 @@ class DashboardsController extends AppController
         $this->set('log_activity_invoice_count', $logactivity_invoice_count);
         
         /*****************************************************/
+         /****************** Log Activity - Sub Con ********************/
+        
+        $logactivity_subcon = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"SubCon")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_subcon', $logactivity_subcon);
+        $logactivity_subcon_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"SubCon")));
+        //pr($logactivity_subcon);exit;
+        $this->set('log_activity_subcon_count', $logactivity_subcon_count);
+        
+        /*****************************************************/
         
         
         /****************** DataLog ********************/

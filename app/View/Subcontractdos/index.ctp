@@ -18,21 +18,21 @@
                             
                      
     <div class="table-responsive">
-        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <table id="sofull-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center">Sub-Contract DO No</th>
                     <th class="text-center">Date</th>
                     <th class="text-center">Due Date</th>
-                    <th class="text-center">Branch</th>
                     <th class="text-center">Customer Name</th>
                     <th class="text-center">Sub Contract Name</th>
-                    <th class="text-center">Sub Contract Address</th>
-                    <th class="text-center">ATTN</th>
+<!--                    <th class="text-center">Sub Contract Address</th>-->
+                   
                     <th class="text-center">Phone</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Sales Order No</th>
                     <th class="text-center">Your Ref No</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,10 +42,10 @@
                     <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_dono']; ?></td>
                     <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_date']; ?></td>
                     <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_duedate']; ?></td>
-                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_dono']; ?></td>
+                    <td class="text-center"><?PHP echo $this->Salesorder->find_sales_order_customer($subcontract['Subcontractdo']['salesorder_id']); ?></td>
                     <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_name']; ?></td>
-                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_address']; ?></td>
-                    <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_attn']; ?></td>
+<!--                    <td class="text-center"><?PHP //echo $subcontract['Subcontractdo']['subcontract_address']; ?></td>-->
+                    
                     <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_phone']; ?></td>
                     <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['subcontract_email']; ?></td>
                     <td class="text-center"><?PHP echo $subcontract['Subcontractdo']['salesorder_id']; ?></td>
@@ -64,7 +64,7 @@
                 <?PHP endif; ?>
             </tbody>
         </table>
-    </div>
+    </div></div>
        
         
         

@@ -1388,6 +1388,58 @@ var FormsValidation = function() {
                 }
             });
             
+            $('#subcontractdo-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    "data[Subcontractdo][subcontract_name]": {
+                        required: true,
+                      
+                    },
+                    "sub-sales-no" : {
+                        required: true,
+                    },
+                    "data[Subcontractdo][subcontract_attn]": {
+                        required: true,
+                      
+                    },
+                    val_remarks: {
+                        required: true,
+                      
+                    },
+                    
+                },
+                messages: {
+                    "data[Subcontractdo][subcontract_name]": {
+                        required: 'Please enter the SubContractor Name',
+                       
+                    },
+                    "sub-sales-no" : {
+                        required: 'Please enter the Salesorder No',
+                    },
+                    "data[Subcontractdo][subcontract_attn]": {
+                        required: 'Please enter the Contact Person',
+                      
+                    },
+                    val_remarks: {
+                        required: 'Please enter the remarks',
+                      
+                    },
+                }
+            });
+            
             $('#form-group-add').validate({
               
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page

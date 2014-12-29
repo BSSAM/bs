@@ -937,7 +937,7 @@ class InvoicesController extends AppController
             $refno = $inv['Invoice']['ref_no'];
             if($inv_type == 3):
                 $salesorder_list = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_poapproved'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_invoice_created'=>1),'recursive'=>3));
-                pr($salesorder_list['Customer']);exit;
+                //pr($salesorder_list['Customer']);exit;
                 $customer = $salesorder_list['Customer'];
                 $gst = $salesorder_list['Quotation']['Customerspecialneed']['gst'];
                 $currency = $salesorder_list['Quotation']['Customerspecialneed']['currency_value'];
@@ -1372,9 +1372,9 @@ elseif($inv_type == 2):
             /*                                                              */
             else:
                 $po_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$refno,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_invoice_created'=>1),'recursive'=>3));    
-                echo 'po';
+                //echo 'po';
                 
-                pr($po_lists[0]['Customer']);exit;
+                //pr($po_lists[0]['Customer']);exit;
                 foreach($po_lists as $polist):
                     $quono[] = $polist['Device'];
                 endforeach;

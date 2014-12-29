@@ -71,14 +71,12 @@ $(function(){
         <!-- Basic Form Elements Block -->
         <div class="block">
             <!-- Basic Form Elements Title -->
-            <?php echo $this->Form->create('Subcontractdo', array('class' => 'form-horizontal form-bordered', 'id' => 'subcontractdo-add', 'enctype' => 'multipart/form-data')); ?>
             <div class="block-title">
                 <h2>
-                    <div class="form-group">
-                    <div class="col-md-4 search_move">
+                    <div class="col-md-6 search_move">
                         <div class="input-group">
                             <div>
-                                <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="subcontract_input_search" name="sub-sales-no"/>
+                                <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="subcontract_input_search"/>
                             </div>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary subcontract_search" type="button">Proceed</button>
@@ -87,7 +85,6 @@ $(function(){
                         <div id="subcontract_list" class="instrument_drop">
                         </div>
                     </div>
-                    </div>
                 </h2>
             </div>
             <!-- END Form Elements Title -->
@@ -95,7 +92,7 @@ $(function(){
             <!-- Basic Form Elements Content -->
 
 
-            <?php //echo $this->Form->create('Subcontractdo', array('class' => 'form-horizontal form-bordered', 'id' => 'subcontractdo-add', 'enctype' => 'multipart/form-data')); ?>
+            <?php echo $this->Form->create('Subcontractdo', array('class' => 'form-horizontal form-bordered', 'id' => 'fileupload', 'enctype' => 'multipart/form-data')); ?>
             <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
             <?PHP echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
             <div class="description_list">
@@ -166,7 +163,7 @@ $(function(){
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_trackid">Track ID</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_track_id', array('id'=>'val_trackid','type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Track Id','readonly'=>true)); ?>
+                    <?php echo $this->Form->input('subcontract_track_id', array('id'=>'val_trackid','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Track Id')); ?>
                 </div>
             </div>
 
@@ -217,13 +214,13 @@ $(function(){
                             <th class="text-center">Call Type</th>
                             <th class="text-center">Validity</th>
                             <th class="text-center">Department</th>
-<!--                            <th class="text-center">Action</th>-->
+                            <th class="text-center">Action</th>
 
                         </tr>
                     </thead>
                     <tbody class="subcontract_instrument_info"> 
                         <tr class="text-center">    
-                            <td class="" colspan="9">
+                            <td class="" colspan="10">
                         No Records Found</td>
                        
                         </tr>
@@ -233,7 +230,7 @@ $(function(){
             <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-10">
                     <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?> &nbsp;
-                    <?php //echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                    <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                 </div>
             </div>
 

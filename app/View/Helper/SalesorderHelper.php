@@ -170,4 +170,17 @@ class SalesorderHelper extends AppHelper
         $sales = implode(',',$sales);
         return $sales;
     }
+    
+    public function find_sales_order_customer($sales_id=NULL)
+    {
+        APP::import('Model','Salesorder');
+        APP::import('Model','Customer');
+        $this->Salesorder   =   new Salesorder();
+        $this->Customer   =   new Customer();
+        $salesorder = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$sales_id,'Salesorder.is_approved'=>1)));
+        $sales_customer = $salesorder['Salesorder']['customer_id'];
+        $customer = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$sales_customer,'Customer.is_approved'=>1)));
+        $customer_name = $customer['Customer']['customername'];
+        return $customer_name;
+    }
 }

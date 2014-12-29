@@ -1,61 +1,6 @@
-<script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
-</script>
 
-<script type="text/javascript">
-    $(function(){
-        $("#subcontract_list").hide();
-        $("#subcontract_input_search").keyup(function() 
-        { 
-            $(this).css('border','none')
-            var sales_id = $(this).val();
-            var dataString = 'sale_id='+ sales_id;
-            if(sales_id!='')
-            {
-                $.ajax({
-                    type: "POST",
-                    url: "<?PHP echo Router::url('/',true); ?>Subcontractdos/salesorder_id_search",
-                    data: dataString,
-                    cache: false,
-                    success: function(html)
-                    {
-                        $("#subcontract_list").html(html).show();
-                    }
-                });
-            }return false;    
-        });
-        
-    });
-</script>
- 
-<script type="text/javascript">
-
-$(function(){
-    $("#subcontract_result").hide();
-    $("#val_customername").keyup(function() 
-    { 
-    //alert();    
-    var customer = $(this).val();
-    var dataString = 'name='+ customer;
-    if(customer!='')
-    {
-            $.ajax({
-            type: "POST",
-            url: "<?PHP echo Router::url('/',true); ?>/Subcontractdos/search",
-            data: dataString,
-            cache: false,
-            success: function(html)
-            {
-                $("#subcontract_result").html(html).show();
-
-            }
-            });
-    }
-    });
-    });
-</script>           
 <h1>
-    <i class="gi gi-user"></i>Add Sub Contract Delivery Order
+    <i class="gi gi-user"></i>Edit Sub Contract Delivery Order
 </h1>
 </div>
 </div>
@@ -78,14 +23,14 @@ $(function(){
                     <div class="col-md-4 search_move">
                         <div class="input-group">
                             <div>
-                                <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="subcontract_input_search" name="sub-sales-no"/>
+                                <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="subcontract_input_search" name="sub-sales-no" value ="<?php echo $subcondo['Subcontractdo']['salesorder_id']; ?>" readonly="readonly"/>
                             </div>
-                            <span class="input-group-btn">
+<!--                            <span class="input-group-btn">
                                 <button class="btn btn-primary subcontract_search" type="button">Proceed</button>
-                            </span>
+                            </span>-->
                         </div>
-                        <div id="subcontract_list" class="instrument_drop">
-                        </div>
+<!--                        <div id="subcontract_list" class="instrument_drop">
+                        </div>-->
                     </div>
                     </div>
                 </h2>
@@ -104,49 +49,49 @@ $(function(){
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_customername">Sub Contract Name</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off')); ?>
-                <div id="subcontract_result">
-                </div>
+                    <?php echo $this->Form->input('subcontract_name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off','value'=>$subcondo['Subcontractdo']['subcontract_name'], 'readonly' => true)); ?>
+<!--                <div id="subcontract_result">
+                </div>-->
                 </div>
                 <label class="col-md-2 control-label" for="val_regaddress">Sub Contract Address</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_address', array('id' => 'val_regaddress', 'class' => 'form-control', 'placeholder' => 'Enter Sub Contract Address', 'label' => false,'readonly' => true)); ?>
+                    <?php echo $this->Form->input('subcontract_address', array('id' => 'val_regaddress', 'class' => 'form-control', 'placeholder' => 'Enter Sub Contract Address', 'label' => false,'readonly' => true,'value'=>$subcondo['Subcontractdo']['subcontract_address'])); ?>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_attn">ATTN</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => 'Select Contact person Name')); ?>
+                    <?php echo $this->Form->input('subcontract_attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'text', 'empty' => 'Select Contact person Name','value'=>$contact_list['Contactpersoninfo']['name'], 'readonly' => true)); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_phone">Phone</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_phone', array('id' => 'val_phone', 'class' => 'form-control',
-                        'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true));
+                        'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true,'value'=>$contact_list['Contactpersoninfo']['phone']));
                     ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_fax">Fax</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_fax', array('id' => 'val_fax', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter the Fax Number', 'readonly' => true)); ?>
+                    <?php echo $this->Form->input('subcontract_fax', array('id' => 'val_fax', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter the Fax Number', 'readonly' => true,'value'=>$subcondo['Subcontractdo']['subcontract_fax'])); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_email">Email</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_email', array('id' => 'val_email', 'class' => 'form-control',
-                        'placeholder' => 'Enter the Email Id', 'label' => false, 'autoComplete' => 'off', 'readonly' => true));
+                        'placeholder' => 'Enter the Email Id', 'label' => false, 'autoComplete' => 'off', 'readonly' => true,'value'=>$contact_list['Contactpersoninfo']['email']));
                     ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_subcontractdono">Sub Contract DO No </label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_dono', array('id'=>'val_subcontractdono','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Sub Contract DO No','value'=>$subcontract_do_id,'readonly'=>true)); ?>
+                    <?php echo $this->Form->input('subcontract_dono', array('id'=>'val_subcontractdono','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Sub Contract DO No','value'=>$subcondo['Subcontractdo']['subcontract_dono'],'readonly'=>true)); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_date">Date</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
-                                                'placeholder'=>'Enter the Registration Date','label'=>false)); ?>
+                                                'placeholder'=>'Enter the Registration Date','label'=>false,'value'=>$subcondo['Subcontractdo']['subcontract_date'],'readonly'=>true)); ?>
                 </div>
             </div>
 
@@ -154,19 +99,19 @@ $(function(){
                 <label class="col-md-2 control-label" for="val_duedate">Due Date </label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_duedate', array('id' => 'val_duedate', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy',
-                        'placeholder' => 'Enter the Due Date', 'label' => false));
+                        'placeholder' => 'Enter the Due Date', 'label' => false,'value'=>$subcondo['Subcontractdo']['subcontract_duedate'],'readonly'=>true));
                     ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_ref_no">Your Ref No</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_ref_no', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter the Reference Number','readonly'=>true)); ?>
+                    <?php echo $this->Form->input('subcontract_ref_no', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter the Reference Number','readonly'=>true,'value'=>$subcondo['Subcontractdo']['subcontract_ref_no'])); ?>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_trackid">Track ID</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_track_id', array('id'=>'val_trackid','type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Track Id','readonly'=>true)); ?>
+                    <?php echo $this->Form->input('subcontract_track_id', array('id'=>'val_trackid','type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Track Id','readonly'=>true,'value'=>$subcondo['Subcontractdo']['subcontract_track_id'])); ?>
                 </div>
             </div>
 
@@ -179,15 +124,15 @@ $(function(){
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('subcontract_salesperson', array('id' => 'val_salesperson', 'class' => 'form-control',
-                            'placeholder' => 'Sales Person Name', 'label' => false,'readonly'));
+                            'placeholder' => 'Sales Person Name', 'label' => false,'readonly','value'=>$subcondo['Subcontractdo']['subcontract_salesperson']));
                 ?>
                 </div>  
                 
                 <label class="col-md-2 control-label" for="val_service_id">Service Type</label>
                 <div class="col-md-4">
                 <?php
-                    echo $this->Form->input('service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
-                     'label' => false, 'options' =>$services,'empty'=>'Select Service Type'));
+                    echo $this->Form->input('service_id', array('id' => 'val_service_id', 'class' => 'form-control', 'type' => 'text',
+                     'label' => false, 'empty'=>'Select Service Type','value'=>$service['Service']['servicetype']));
                 ?>
                 </div> 
             </div>
@@ -196,7 +141,7 @@ $(function(){
             <div class="col-md-4">
             <?php
                 echo $this->Form->input('subcontract_remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea'));
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea','value'=>$subcondo['Subcontractdo']['subcontract_remarks']));
             ?>    
             </div>
             </div>
@@ -204,32 +149,51 @@ $(function(){
             <div class="col-lg-12">
                 <h4 class="sub-header"><small><b>Instruments List </b</small></h4>
             </div>
-            <div class="col-sm-3 col-lg-12 subcontract_linear">
-                <table  class="table table-vcenter table-condensed table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="text-center">S.No</th>
-                            <th class="text-center">Instrument</th>
-                            <th class="text-center">Model No</th>
-                            <th class="text-center">Brand</th>
-                            <th class="text-center">Range</th>
-                            <th class="text-center">Call Location</th>
-                            <th class="text-center">Call Type</th>
-                            <th class="text-center">Validity</th>
-                            <th class="text-center">Department</th>
-<!--                            <th class="text-center">Action</th>-->
-
-                        </tr>
-                    </thead>
-                    <tbody class="subcontract_instrument_info"> 
-                        <tr class="text-center">    
-                            <td class="" colspan="9">
-                        No Records Found</td>
-                       
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div class="col-sm-3 col-lg-12">
+    <div class="table-responsive">
+<table  class="table table-vcenter table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">S.No</th>
+            <th class="text-center">Instrument</th>
+            <th class="text-center">Brand</th>
+            <th class="text-center">Range</th>
+            <th class="text-center">Model No</th>
+            <th class="text-center">Call Location</th>
+            <th class="text-center">Validity</th>
+            
+            <th class="text-center">Department</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody class="sales_Instrument_info"> 
+    <?PHP 
+       
+            if(!empty($salesorder['Description'])):
+               
+                foreach($salesorder['Description'] as $device):?>
+              
+                <tr class="sales_instrument_remove_<?PHP echo $device['id']; ?>">
+                    <td class="text-center"><?PHP echo $device['order_by']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Brand']['brandname']; ?></td>
+                    <td class="text-center"><?PHP echo $device['Range']['range_name']; ?></td>
+                    <td class="text-center"><?PHP echo $device['model_no']; ?></td>
+                    <td class="text-center"><?PHP echo $device['sales_calllocation']; ?></td>
+                    <td class="text-center"><?PHP echo $device['sales_validity']; ?></td>
+                    
+                    <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
+                    
+                    
+                </tr>
+        <?PHP   endforeach;
+                   endif; 
+        ?>
+    </tbody>
+</table>
+</div>
+</div>
             <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-10">
                     <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?> &nbsp;

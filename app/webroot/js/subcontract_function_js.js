@@ -28,25 +28,41 @@ $(document).ready(function(){
             url: path_url+"/Subcontractdos/get_sales_details",
             data: 'sales_id='+sales_id,
             cache: false,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success: function(data)
             {
                 if(data!='failure')
                 {
                     
                     sales_node = $.parseJSON(data);
+                    console.log(sales_node);
+                    $('#SubcontractdoSalesorderId').val(sales_node.Salesorder.id);
+                    $('#val_date').val(sales_node.Salesorder.in_date);
+                    $('#val_duedate').val(sales_node.Salesorder.due_date);
+                    $('#val_duedate').val(sales_node.Salesorder.due_date);
+                    $('#val_ref_no').val(sales_node.Salesorder.quotationno);
+                    $('#val_trackid').val(sales_node.Salesorder.track_id);
+                    $('#val_salesperson').val(sales_node.Customerspecialneed.salesperson_name);
                     
-                    $.each(sales_node,function(key,value){  
+                    $.each(sales_node,function(key,value){ 
+                        if(key==0){
+                            $('.subcontract_instrument_info').empty();
+                        }
+                        console.log(value);
                         if(sales_node.length===0)
                         {
                             $('.subcontract_instrument_info').html(' <tr class="text-center">No Records Found</tr>');
                         }
                         else
                         {
+                            //alert(value.Range.range_name);
                             $('#SubcontractdoSalesorderId').val(sales_id);
-                            $('.description_list').append('<input type="hidden" value="'+value.Description.id+'" name="description_list[]"/>');
-                            $('.subcontract_instrument_info').html('\n\
+                            //$('#SubcontractdoSalesorderId').val(sales_id);
+                            //$('.description_list').append('<input type="hidden" value="'+value.Description.id+'" name="description_list[]"/>');
+                            $('.subcontract_instrument_info').append('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.Description.id+'">\n\\n\
-                                    <td class="text-center">'+value.Description.id+'</td>\n\
+                                    <td class="text-center">'+value.Description.order_by+'</td>\n\
                                     <td class="text-center">'+value.Instrument.name+'</td>\n\\n\\n\
                                     <td class="text-center">'+value.Description.model_no+'</td>\n\\n\\n\
                                     <td class="text-center">'+value.Brand.brandname+'</td>\n\\n\\n\
@@ -55,9 +71,13 @@ $(document).ready(function(){
                                     <td class="text-center">'+value.Description.sales_calltype+'</td>\n\
                                     <td class="text-center">'+value.Description.sales_validity+'</td>\n\
                                     <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\\n\
-                                    <td class="text-center"><div class="btn-group">\n\
-                                    <a data-delete="'+value.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger subcontract_instrument_delete">\n\
-                                    <i class="fa fa-times"></i></a></div></td></tr>');
+                                    </tr>');
+                            
+                            //<td class="text-center"><div class="btn-group">\n\
+                                 //   <a data-delete="'+value.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger subcontract_instrument_delete">\n\
+                                 //   <i class="fa fa-times"></i></a></div></td>
+                            
+                            
                         }
                         $('body, html').animate({scrollTop : ($('.subcontract_linear').offset().top)-500}, 'slow', 'linear');
                     });
@@ -92,6 +112,8 @@ $(document).ready(function(){
             url: path_url+"/Subcontractdos/get_customer_value",
             data: 'cust_id='+customer_id,
             cache: false,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success: function(data)
             {
 				 try {
