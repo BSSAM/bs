@@ -482,7 +482,18 @@ $(document).on('click','.approve_invoice',function(){
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-do.jpg', array('alt' => 'Delivery Order','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logno'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_deliveryorder_list['Logactivity']['logno'] ?></em>
+                                                    <em>
+                                                    <?php if($log_activity_deliveryorder_list['Logactivity']['loglink']==1):
+                                                        echo "PO Ack before DO";
+                                                        elseif($log_activity_deliveryorder_list['Logactivity']['loglink']==2):
+                                                        echo "PO Ack before Invoice";
+                                                        else:
+                                                        echo "PO Not Needed";    
+                                                        endif;
+                                                    ?>
+                                                    </em>
+                                                    </small></h4>
                                             </td>
                                             <td class="text-center ">
                                            <?PHP if($log_activity_deliveryorder_list['Logactivity']['logname'] == 'Deliveryorder'){ ?>
