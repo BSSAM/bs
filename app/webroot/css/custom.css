@@ -140,3 +140,21 @@ and open the template in the editor.
 .instrument_drop{width: 92% !important;position: absolute;z-index: 999;background-color: #ffffff;text-align: left;max-width:inherit !important; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
 .instrument_drop_show,.instrument_drop .no_result{border-bottom: 1px dotted #dbe1e8 !important;color: #000000;font-size: 11px !important;height:auto !important;line-height: 12px !important;max-height: 37px; max-width: inherit !important; min-width: inherit !important; padding: 5px 0 5px 8px !important;width: 100%;}
 .instrument_drop_show:hover,.instrument_drop .no_result:hover{background-color: #6ad2eb !important;color:#fff;}
+
+/* BS V2.0 */
+
+/////////////////////////////////////////////
+// Phase 2 - Certificate Styles - Uncertainty
+//-------------------------------------------
+
+.uncertainty_view .form-control{padding: 1px 7px; height: 25px;}
+.uncertainty_view .form-group{padding: 2px;}
+.uncertainty_view textarea.form-control{height:auto;}
+.uncertainty_view input{margin: 10px 0 0;height: 25px;}
+.uncertainty_view label{margin: 7px 0 0 !important;}
+.uncertainty_view select{margin: 10px 0 0;height: 30px;}
+.uncertainty_view .padding_l_7{padding-left: 7px;}
+.uncertainly_table{margin-bottom: 20px;min-height: 190px;overflow-x: auto;}
+.uncertainly_table th,.uncertainly_table td{font-size: 11px !important; padding: 4px !important;}
+.action_un_btn{width:55px;}
+.action_un_btn a{margin-right:5px;}
