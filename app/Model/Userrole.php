@@ -10,7 +10,7 @@ class Userrole extends AppModel
 {
    
     //var $displayField = 'user_role';
-    public $hasOne = array( 'User' );
+    public $hasMany = array('User');
      
 }
 

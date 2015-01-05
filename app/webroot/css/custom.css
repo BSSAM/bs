@@ -140,21 +140,50 @@ and open the template in the editor.
 .instrument_drop{width: 92% !important;position: absolute;z-index: 999;background-color: #ffffff;text-align: left;max-width:inherit !important; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
 .instrument_drop_show,.instrument_drop .no_result{border-bottom: 1px dotted #dbe1e8 !important;color: #000000;font-size: 11px !important;height:auto !important;line-height: 12px !important;max-height: 37px; max-width: inherit !important; min-width: inherit !important; padding: 5px 0 5px 8px !important;width: 100%;}
 .instrument_drop_show:hover,.instrument_drop .no_result:hover{background-color: #6ad2eb !important;color:#fff;}
-
-/* BS V2.0 */
-
-/////////////////////////////////////////////
-// Phase 2 - Certificate Styles - Uncertainty
-//-------------------------------------------
-
+/*uncertainty style phase2*/
 .uncertainty_view .form-control{padding: 1px 7px; height: 25px;}
-.uncertainty_view .form-group{padding: 2px;}
+.uncertainty_view .form-group{padding: 5px;}
 .uncertainty_view textarea.form-control{height:auto;}
-.uncertainty_view input{margin: 10px 0 0;height: 25px;}
-.uncertainty_view label{margin: 7px 0 0 !important;}
-.uncertainty_view select{margin: 10px 0 0;height: 30px;}
+.uncertainty_view input[type="checkbox"]{margin: 10px 0 0;}
 .uncertainty_view .padding_l_7{padding-left: 7px;}
 .uncertainly_table{margin-bottom: 20px;min-height: 190px;overflow-x: auto;}
 .uncertainly_table th,.uncertainly_table td{font-size: 11px !important; padding: 4px !important;}
 .action_un_btn{width:55px;}
 .action_un_btn a{margin-right:5px;}
+
+/*certificate form table*/
+.certificate_table { margin-bottom: 20px;}
+.certificate_table th,.certificate_table td{font-size: 11px !important; padding: 2px !important;width:65px;}
+.certificate_table table{width: 90%;margin-bottom:10px;}
+.certificate_table td input,.certificate_table td select{ width:100%;}
+.c_dark_bg{background:#666;color:#fff;}
+.c_light_bg{background:#f1f1f1;height:35px;}
+.c_dark_bg th,.c_light_bg td{font-weight:bold !important}
+/*.certificate_tab{height: 438px;overflow-x: auto;}*/
+.pos_relative{position:relative; display:inline-block;width:100%;}
+.c_refress_blog{border: 1px solid #eee;position: absolute;right: 0;top: 0;}
+.c_refress_blog_input{font-size: 10px; padding: 0 5px;}
+.c_ref_btn{height: 38px;padding: 7px; background:#f1f1f1;}
+.c_ref_btn button{font-size: 10px;padding: 2px;width: 100%;}
+.c_overflow{height: 100px;overflow: auto; width:100px;float:left;}
+.c_ref_btn i{margin-right:8px;}
+.c_refress_blog_input label { bottom: 2px;margin-bottom: 0; position: relative;}
+.pref_ref{background: #666;color: #fff;font-weight: bold; padding: 10px 5px;text-transform: uppercase;}
+.c_form1{}
+.c_form1 .form-group { display: inline-block;margin-bottom: 5px; padding: 5px;    width: 100%;}
+.c_form1 label{text-align:right;line-height: 25px;}
+.c_form1 .form-control {padding: 1px 7px; height:25px;}
+.c_form1 textarea.form-control { height: auto;}
+.c_form2 .form-control{margin-bottom:10px;}
+.uncertainly_tab{}
+.certificate_top_search{margin-top:15px;}
+.uncertainly_tab h4{text-align: center;}
+.certificate_top_search table{float: left;margin-left: 20px;margin-right: 10px; position: relative;    width: 43%;}
+.certificate_top_search table th,.certificate_top_search table td{font-size:11px !important;padding:3px !important;}
+.certificate_top_search1 .c_light_bg{height:20px;}
+.certificate_top_search .certificate_top_search1 {float: right;margin-left: 20px;margin-right: 10px;position: relative;width: 30%; background:#fff;}
+.certificate_top_search .certificate_top_search1 td{font-weight:bold;text-align:left !important;}
+.c_top_search{float: right;width: 40%;}
+.c_top_search label{float: left;margin-right: 10px;margin-top: 5px;}
+.c_top_search select{ float: left;height: 25px;padding: 2px;width: 81%;}
+
