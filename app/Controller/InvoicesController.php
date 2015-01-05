@@ -1062,7 +1062,7 @@ margin: 180px 50px;
                          </tr>
                     </table></td>
                <td width="3%"></td>
-               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" height="161" cellpadding="0" cellspacing="0">
+               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="280" height="161" cellpadding="0" cellspacing="0">
                          <tr>
                               <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$inv['Invoice']['invoiceno'].'</div></td>
 						
@@ -1128,27 +1128,30 @@ margin: 180px 50px;
                     </table></td>
           </tr>
      </table>
-</div>
+
 <table width="100%">
                <tr>
-                    <td style="font-size:9px !important;">1) Payment must be made either by Crossed Cheque to the Order of BS TECH PTE LTD or by electronic transfer to OCBC Bank (Bank Code: 7339 /Branch Code: 581/Account No: 814589001/SWIFT: OCBCSGSG). Any discrepancy noted herein must be brought to the notice of the company within 7 days in writing from the date of this statement. Otherwise all charges will be deemed to be correct.</td>
-                    <td style="font-size:9px !important;">2) Prompt payment settlement would be appreciated. Otherwise, interest charge of 2% per month or part thereof will be levied on any amount outstanding.</td>
-                    <td style="font-size:9px !important;">3) All business is transacted in strict compliance of the Standard Terms & Conditions of BS Tech Pte Ltd; a copy of which can be made available on request.</td>
-                    <td style="width:20%;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
+                    <td style="width:80%;padding-right:10px;"><div style="font-size:9px !important;">1) Payment must be made either by Crossed Cheque to the Order of BS TECH PTE LTD or by electronic transfer to OCBC Bank (Bank Code: 7339 /Branch Code: 581/Account No: 814589001/SWIFT: OCBCSGSG). Any discrepancy noted herein must be brought to the notice of the company within 7 days in writing from the date of this statement. Otherwise all charges will be deemed to be correct.</div>
+                    <div style="font-size:9px !important;">2) Prompt payment settlement would be appreciated. Otherwise, interest charge of 2% per month or part thereof will be levied on any amount outstanding.</div>
+                    <div style="font-size:9px !important;">3) All business is transacted in strict compliance of the Standard Terms & Conditions of BS Tech Pte Ltd; a copy of which can be made available on request.</div></td>
+                    <td style="width:20%; text-align:right;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
                </tr>
           </table>
 
-<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:10px;font-size:12px;margin-top:10px;text-align:center;">E. & O . E</div>
+<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:5px;font-size:12px;margin-top:20px;text-align:center;">E. & O . E</div>
+</div>
 </div>
 </div>';
 $subtotal = 0;
-$html .= '<div style="color:#000 !important;"> SALES ORDER NO : <span style="font-size:18px !important;">BSO-14-005635</span></div>
-<div style="color:#000 !important;"> DELIVERY ORDER NO : <span style="font-size:18px !important;">BDO-14-005920</span></div><div id="content" style="">'; 
+$html .= '<div id="content">'; 
+
 
                 foreach($device_name as $k=>$device):
                     if($k == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:230px;">      <tr>
+					$html .='<div style="color:#000 !important;line-height:12px;font-size:11px;display:block;margin-top:260px;"> SALES ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['salesorder_id'].'</span></div>
+<div style="color:#000 !important;line-height:12px;font-size:11px;"> DELIVERY ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['deliveryorder_id'].'</span></div>';
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;">      <tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
@@ -1237,7 +1240,9 @@ $html .= '</tr>';
                 $html .='</table>';
                 }
                 endforeach;
-$html .= '</div>'; 
+$html .= '</div>';
+//pr($html);
+//exit; 
 $this->export_report_all_format($file_type, $filename, $html);
 //<div style="color:#000 !important;"> SALES ORDER NO : <span style="font-size:18px !important;">BSO-14-005635</span></div>
 //<div style="color:#000 !important;"> DELIVERY ORDER NO : <span style="font-size:18px !important;">BDO-14-005920</span></div>
@@ -1459,10 +1464,11 @@ else:
                 $file_type = 'pdf';
             $filename = $po_list_first['Quotation']['quotationno'];
 
-           $html = '<html>
+           $html = '<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>'.$po_list_first['Quotation']['quotationno'].'</title>
+<title></title>
 <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
 <style>
@@ -1491,88 +1497,89 @@ margin: 180px 50px;
 $html .=
 '<body style="font-family:Oswald, sans-serif;font-size:9px;padding:0;margin:0;font-weight: 300; color:#444 !important;">
 <div id="header">
-     <table width="700px">
+<table width="700px">
+     <tr>
+          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
+          <td style="padding:0 10px;"><div style="float:left;text-align:right;">
+                    <p>41 Senoko Drive</p>
+                    <p>Singapore 758249</p>
+                    <p>Tel.+65 6458 4411</p>
+                    <p>Fax.+65 64584400</p>
+                    <p>www.bestandards.com</p>
+               </div></td>
+     <tr>
+</table>
+<table width="623" height="56">
+     <tr>
+          <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:16px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
+          <td width="389" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+     </tr>
+</table>
+<div style="width:100%;margin-top:10px;float:left;">
+     <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:10px;">
           <tr>
-               <td width="335" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logo.jpg" width="450" height="80" alt="" /></div></td>
-               <td  style="padding:0 10px;"><div style="float:left;text-align:right;">
-                         <p style="line-height:7px;">41 Senoko Drive</p>
-                         <p style="line-height:7px;">Singapore 758249</p>
-                         <p style="line-height:7px;">Tel.+65 6458 4411</p>
-                         <p style="line-height:7px;">Fax.+65 64584400</p>
-                         <p style="line-height:7px;">www.bestandards.com</p>
-                    </div></td>
-          <tr>
-     </table>
-     <table width="623" height="56">
-          <tr>
-               <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">QUOTATION</div></td>
-               <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
-          </tr>
-     </table>
-     <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
-          <tr>
-               <td width="47%" style="border:1px solid #000;padding:5px;"><table width="100%" cellpadding="0" cellspacing="0">
-                         <tr>
+              <td width="47%" style="border:1px solid #000;padding:5px;"><table width="288" cellpadding="0" cellspacing="0">
+                        <tr>
                               <td width="128" colspan="3" height="10px" style="font-size:11px !important;">'.$customername.'</td>
                          </tr>
                          <tr>
                               <td colspan="3" height="10px" style="font-size:11px !important;">'.$billing_address.'</td>
+							  
                          </tr>
-                         <tr>
-                              <td>'.$postalcode.'</td>
-                         </tr>
+                        
                          <tr  style="padding-top:30px;">
-                              <td style="padding:5px;">ATTN </td>
-                              <td width="29" style="padding:5px;">:</td>
-                              <td width="145" style="padding:5px;">'.$contactperson.'</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">ATTN </td>
+                              <td width="29">:</td>
+                              <td width="145" style="line-height:30px !important;font-size:11px !important;">'.$contactperson.'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;">TEL </td>
-                              <td width="29" style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$phone.'</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">TEL </td>
+                              <td width="29">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">'.$phone.'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;">FAX </td>
-                              <td width="29" style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$fax.'</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">FAX </td>
+                              <td width="29">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">'.$fax.'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;">EMAIL </td>
-                              <td width="29" style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$email.'</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">EMAIL </td>
+                              <td width="29">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">'.$email.'</td>
                          </tr>
                     </table></td>
                <td width="3%"></td>
-               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
+               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="280" height="161" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="250" colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:100%;padding:10px 0;">'.$quotationno.'</div></td>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$inv['Invoice']['invoiceno'].'</div></td>
+						
                          </tr>
                          <tr>
-                              <td style="padding:5px;font-size:11px !important;">SALES PERSON </td>
-                              <td width="24" style="padding:5px;font-size:11px !important;">:</td>
-                              <td style="padding:5px;font-size:11px !important;">Mr.Padma</td>
+                              <td width="139" style="line-height:20px !important;padding-left:5px;font-size:11px !important;">OUR REF NO </td>
+                              <td width="24" style="font-size:11px !important;">:</td>
+                              <td width="109" style="line-height:20px !important;font-size:11px !important;">'.$inv['Invoice']['quotation_id'].'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;">YOUR REF NO </td>
-                              <td style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$ref_no.'</td>
+                              <td style="line-height:20px !important;padding-left:5px;font-size:11px !important;"> YOUR REF NO </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;"> '.$ref_no.'</td>
                          </tr>
                          <tr>
-                              <td style="padding:5px;"> DATE </td>
-                              <td style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$reg_date.'</td>
+                              <td style="line-height:20px !important;padding-left:5px;font-size:11px !important;"> DATE </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;"> '.$inv['Invoice']['invoice_date'].'</td>
                          </tr>
                          <tr>
-                              <td  style="padding:5px;">PAYMENT TERMS </td>
-                              <td style="padding:5px;">:</td>
-                              <td style="padding:5px;">'.$payment_term.'</td>
+                              <td  style="line-height:20px !important;padding-left:5px;font-size:11px !important;">PAYMENT TERMS </td>
+                              <td style="font-size:11px !important;">:</td>
+                              <td style="line-height:20px !important;font-size:11px !important;">'.$payment_term.'</td>
                          </tr>
                     </table></td>
                <td width="2%"></td>
           </tr>
      </table>
-<div style="padding-top:10px;">'.$InstrumentType.' :</div>
-
+</div>
+<div style="padding-top:10px;">'.$InstrumentType.'</div>
 </div></div>';
 $html .='<div id="footer">
      <div style="width:100%;" class="page">
@@ -1608,27 +1615,30 @@ $html .='<div id="footer">
                     </table></td>
           </tr>
      </table>
-</div>
+
 <table width="100%">
                <tr>
-                    <td style="font-size:9px !important;">1) Payment must be made either by Crossed Cheque to the Order of BS TECH PTE LTD or by electronic transfer to OCBC Bank (Bank Code: 7339 /Branch Code: 581/Account No: 814589001/SWIFT: OCBCSGSG). Any discrepancy noted herein must be brought to the notice of the company within 7 days in writing from the date of this statement. Otherwise all charges will be deemed to be correct.</td>
-                    <td style="font-size:9px !important;">2) Prompt payment settlement would be appreciated. Otherwise, interest charge of 2% per month or part thereof will be levied on any amount outstanding.</td>
-                    <td style="font-size:9px !important;">3) All business is transacted in strict compliance of the Standard Terms & Conditions of BS Tech Pte Ltd; a copy of which can be made available on request.</td>
-                    <td style="width:20%;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
+                    <td style="width:80%;padding-right:10px;"><div style="font-size:9px !important;">1) Payment must be made either by Crossed Cheque to the Order of BS TECH PTE LTD or by electronic transfer to OCBC Bank (Bank Code: 7339 /Branch Code: 581/Account No: 814589001/SWIFT: OCBCSGSG). Any discrepancy noted herein must be brought to the notice of the company within 7 days in writing from the date of this statement. Otherwise all charges will be deemed to be correct.</div>
+                    <div style="font-size:9px !important;">2) Prompt payment settlement would be appreciated. Otherwise, interest charge of 2% per month or part thereof will be levied on any amount outstanding.</div>
+                    <div style="font-size:9px !important;">3) All business is transacted in strict compliance of the Standard Terms & Conditions of BS Tech Pte Ltd; a copy of which can be made available on request.</div></td>
+                    <td style="width:20%; text-align:right;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
                </tr>
           </table>
 
-<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:10px;font-size:12px;margin-top:10px;text-align:center;">E. & O . E</div>
+<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:5px;font-size:12px;margin-top:20px;text-align:center;">E. & O . E</div>
+</div>
 </div>
 </div>';
 $subtotal = 0;
-$html .= '<div style="color:#000 !important;"> SALES ORDER NO : <span style="font-size:18px !important;">BSO-14-005635</span></div>
-<div style="color:#000 !important;"> DELIVERY ORDER NO : <span style="font-size:18px !important;">BDO-14-005920</span></div><div id="content" style="">'; 
+$html .= '<div id="content">'; 
+
 
                 foreach($device_name as $k=>$device):
                     if($k == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:230px;">      <tr>
+					$html .='<div style="color:#000 !important;line-height:12px;font-size:11px;display:block;margin-top:260px;"> SALES ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['salesorder_id'].'</span></div>
+<div style="color:#000 !important;line-height:12px;font-size:11px;"> DELIVERY ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['deliveryorder_id'].'</span></div>';
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;">      <tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
@@ -1717,7 +1727,7 @@ $html .= '</tr>';
                 $html .='</table>';
                 }
                 endforeach;
-$html .= '</div>'; 
+$html .= '</div>';
                 //pr($html);exit;
         $this->export_report_all_format_po($file_type, $filename, $html);
                 
@@ -1781,7 +1791,7 @@ $html .= '</div>';
             $this->dompdf->load_html($html);
             $this->dompdf->set_paper($papersize, $orientation);        
             $this->dompdf->render();
-            $this->dompdf->stream("Quotation-".$filename.".pdf");
+            $this->dompdf->stream("Invoice-".$filename.".pdf");
             echo $this->dompdf->output();
            // $output = $this->dompdf->output();
             //file_put_contents($filename.'.pdf', $output);
