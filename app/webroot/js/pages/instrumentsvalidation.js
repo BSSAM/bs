@@ -114,10 +114,7 @@ var InstrumentValidation = function() {
                         required: true,
                         minlength: 1
                     },
-                    to_range: {
-                        required: true,
-                        minlength: 1
-                    },
+                    
                     unit_id: {
                         required: true
                     }
@@ -130,10 +127,7 @@ var InstrumentValidation = function() {
                         required: 'Please enter the Starting Range',
                         minlength: 'Starting Range must consist of at least 1 character'
                     },
-                    to_range: {
-                        required: 'Please enter the To Range',
-                        minlength: 'To Range must consist of at least 1 character'
-                    },
+                    
                     unit_id: {
                         required: 'Please Select The Unit',
                     },

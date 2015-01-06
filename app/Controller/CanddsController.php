@@ -335,5 +335,63 @@ class CanddsController extends AppController
         //echo "success";
         //pr($candd_edit);
     }
+    
+    function pdf($id = NULL) 
+        {
+        
+            $this->autoRender = false;
+           // $quotation_data = $this->Quotation->find('first', array('conditions' => array('Quotation.id' => $id),'recursive'=>2));
+            //pr($quotation_data);exit;
+            $file_type = 'pdf';
+            $filename = $id;
+
+           $html = 'aa'; 
+                //pr($html);exit;
+        $this->export_report_all_format($file_type, $filename, $html);
+    }
+    function export_report_all_format($file_type, $filename, $html)
+    {    
+        
+        if($file_type == 'pdf')
+        {
+    
+            App::import('Vendor', 'dompdf', array('file' => 'dompdf' . DS . 'dompdf_config.inc.php'));
+            $this->dompdf = new DOMPDF();        
+            $papersize = "a4";
+            $orientation = 'landscape';        
+            $this->dompdf->load_html($html);
+            $this->dompdf->set_paper($papersize, $orientation);        
+            $this->dompdf->render();
+            $this->dompdf->stream("CandD-".$filename.".pdf");
+            echo $this->dompdf->output();
+           // $output = $this->dompdf->output();
+            //file_put_contents($filename.'.pdf', $output);
+            die();
+            
+        
+        }    
+        else if($file_type == 'xls')
+        {    
+            $file = $filename.".xls";
+            header('Content-Type: text/html');
+            header("Content-type: application/x-msexcel"); //tried adding  charset='utf-8' into header
+            header("Content-Disposition: attachment; filename=$file");
+            echo $html;
+            
+        }
+        else if($file_type == 'doc')
+        {                
+            $file = $filename.".doc";
+            header("Content-type: application/vnd.ms-word");
+            header("Content-Disposition: attachment;Filename=$file");
+            echo $html;
+            
+        }
+
+        
+    }
+    
+    
+    
 }
 ?>
