@@ -10,7 +10,7 @@
 class Currency extends AppModel
 {
   var $belongsTo = array('Country');
-  var $hasOne = array('Branch');
+  var $hasMany = array('Branch');
 //     var $hasOne = array('Country' => array(
 //        'fields' => '*',
 //        'foreignKey' => 'country_id',
