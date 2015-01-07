@@ -45,6 +45,30 @@ $(function() {
          submit    : 'Save',
          tooltip   : 'Click to edit the price'
     });
+//    $('.edit_gst').editable(path_url+'/Customers/edit_gst', {
+//         id        : 'device_id',
+//         name      : 'discount',
+//         type      : 'text',
+//         cancel    : 'Cancel',
+//         submit    : 'Save',
+//         tooltip   : 'Click to edit the price'
+//    });
+    $('.edit_gst_percent').editable(path_url+'/Quotations/edit_gst_percent', {
+         id        : 'sales_id',
+         name      : 'percent',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Edit GST'
+    });
+    $('.edit_additional_service').editable(path_url+'/Quotations/edit_additional_service', {
+         id        : 'sales_id',
+         name      : 'additional',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Edit Additional Charge'
+    });
     });
 </script>
 
@@ -404,16 +428,18 @@ $(function() {
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $total_device; ?></td>
           </tr>
          <tr>
-               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <?php echo $gst; ?>%  )</td>
+             <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <span class="edit_gst_percent" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%  )</td>
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $gst_total; ?></td>
           </tr>
+          <?php if($additional_charge!=''){ ?>
           <tr>
                <td colspan="10" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Additional Charges</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $v = $additional_charge; if($v == ''){echo '0.0';} ?></td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><span class="edit_additional_service" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $additional_charge; ?></td>
           </tr>
+          <?php } ?>
 		   <tr>
                <td colspan="10" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
-               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total +$v; ?></td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total +$additional_charge; ?></td>
           </tr>
           
                                 </tbody>
@@ -1214,9 +1240,13 @@ $(function() {
                <td colspan="9" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">GST ( <?php echo $gst; ?>%  )</td>
                <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $gst_total; ?></td>
           </tr>
+           <tr>
+               <td colspan="10" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Additional Charges</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $v = $additional_charge; if($v == ''){echo '0.0';} ?></td>
+          </tr>
 		   <tr>
-               <td colspan="9" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
-               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total; ?></td>
+               <td colspan="10" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total +$v; ?></td>
           </tr>
           
                                 </tbody>

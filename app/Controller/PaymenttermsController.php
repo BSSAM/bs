@@ -11,7 +11,7 @@ class PaymenttermsController extends AppController
     
     public $helpers = array('Html','Form','Session');
     
-    public function index()
+    public function index($id=NULL)
     {
         /*******************************************************
          *  BS V1.0
@@ -28,7 +28,18 @@ class PaymenttermsController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Paymentterm->find('all',array('conditions'=>array('Paymentterm.is_deleted'=>0)),array('order' => array('Paymentterm.id' => 'DESC')));
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
+        
+        if($id == '1'):
+        $data = $this->Paymentterm->find('all',array('conditions'=>array('Paymentterm.is_deleted'=>1)),array('order' => array('Paymentterm.id' => 'ASC')));
+        $this->set('deleted_val',$id);
+        else:
+        $data = $this->Paymentterm->find('all',array('conditions'=>array('Paymentterm.is_deleted'=>0)),array('order' => array('Paymentterm.id' => 'ASC')));
+        $this->set('deleted_val',$id);
+        endif;
+        
         $this->set('paymentterm', $data);
         //pr($data);
     }

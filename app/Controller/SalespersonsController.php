@@ -11,7 +11,7 @@ class SalespersonsController extends AppController
     
     public $helpers = array('Html','Form','Session');
     
-    public function index()
+    public function index($id=NULL)
     {
         /*******************************************************
          *  BS V1.0
@@ -24,11 +24,24 @@ class SalespersonsController extends AppController
         if($user_role['cus_salesperson']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
         $this->set('userrole_cus',$user_role['cus_salesperson']);
         /*
          * ---------------  Functionality of Sales Persons -----------------------------------
          */
-        $data = $this->Salesperson->find('all',array('conditions'=>array('Salesperson.is_deleted'=>0)),array('order' => array('Salesperson.id' => 'DESC')));
+        
+        if($id == '1'):
+        $data = $this->Salesperson->find('all',array('conditions'=>array('Salesperson.is_deleted'=>1)),array('order' => array('Salesperson.id' => 'ASC')));
+        $this->set('deleted_val',$id);
+        
+        else:
+        $data = $this->Salesperson->find('all',array('conditions'=>array('Salesperson.is_deleted'=>0)),array('order' => array('Salesperson.id' => 'ASC')));
+        $this->set('deleted_val',$id);
+        endif;
+        
+        
         $this->set('salesperson', $data);
         //pr($data);
     }

@@ -1103,7 +1103,8 @@
                 $payment_term = $deliveryorder_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $deliveryorder_data['Customer']['Paymentterm']['paymenttype'];
                 $deliveryorderno = $deliveryorder_data['Deliveryorder']['delivery_order_no'];
                 $quo_no = $deliveryorder_data['Deliveryorder']['quotationno'];
-                $sal_no = $deliveryorder_data['Deliveryorder']['salesorder_id'];;
+                $sal_no = $deliveryorder_data['Deliveryorder']['salesorder_id'];
+                $instrument_type = $deliveryorder_data['Salesorder']['Quotation']['Customer']['InstrumentType']['deliveryorder'];
                 foreach($deliveryorder_data['Salesorder']['Description'] as $device):
                     $device_name[] = $device;
                 endforeach;
@@ -1182,7 +1183,7 @@ table td { font-size:11px; line-height:18px; }
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" height="161" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$quo_no.'</div></td>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$deliveryorder_data['Deliveryorder']['delivery_order_no'].'</div></td>
 						
                          </tr>
 						 
@@ -1212,7 +1213,7 @@ table td { font-size:11px; line-height:18px; }
           </tr>
      </table>
 </div>
-<div style="padding-top:10px;">Being provided on-site calibration service of the following(s) :</div>
+<div style="padding-top:10px;">'.$instrument_type.':</div>
 
 <div style="width:100%;display:block;margin-top:20px;" class="table_format">
      <table cellpadding="0" cellspacing="0"  style="width:100%;">

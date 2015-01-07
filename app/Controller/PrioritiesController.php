@@ -11,7 +11,7 @@ class PrioritiesController extends AppController
     
     public $helpers = array('Html','Form','Session');
     
-    public function index()
+    public function index($id=NULL)
     {
         /*******************************************************
          *  BS V1.0
@@ -28,7 +28,19 @@ class PrioritiesController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $data = $this->Priority->find('all',array('conditions'=>array('Priority.is_deleted'=>0)),array('order' => array('Priority.id' => 'DESC')));
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
+                
+        if($id == '1'):
+        $data = $this->Priority->find('all',array('conditions'=>array('Priority.is_deleted'=>1)),array('order' => array('Priority.id' => 'ASC')));
+        $this->set('deleted_val',$id);
+        
+        else:
+        $data = $this->Priority->find('all',array('conditions'=>array('Priority.is_deleted'=>0)),array('order' => array('Priority.id' => 'ASC')));
+        $this->set('deleted_val',$id);
+        endif;
+        
         $this->set('priority', $data);
         //pr($data);
     }

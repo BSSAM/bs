@@ -1378,4 +1378,15 @@ $html .= '</div>';
             echo $discount;
         }
     }
+    public function edit_gst_percent()
+    {
+        $this->autoRender   =   false;
+        App::uses('Sanitize', 'Utility');
+        $percent = Sanitize::clean($this->request->data['percent']);
+        $sales_id = Sanitize::clean($this->request->data['sales_id']);
+        $this->Salesorder   =   new Salesorder();
+        $salesorder = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$sales_id,'Salesorder.is_approved'=>1)));
+        //$salesorder['Salesorder']['']
+        
+    }
 }
