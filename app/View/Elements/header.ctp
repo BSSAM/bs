@@ -331,8 +331,8 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-vcard sidebar-nav-icon"></i>Department</a>
-                                 <ul>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Temperatures')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Department</a>
+                                <ul <?php echo $a=($control == 'Temperatures')?'style=display:block':'';?>>
                                     <li>
                                         <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><?php echo 'Dimensional'; ?></a>
                                         <ul>
@@ -442,13 +442,16 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i><?php echo 'Temperature'; ?></a>
-                                        <ul>
+                                        <a href="" class="sidebar-nav-submenu <?php echo $a=($control == 'Temperatures')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i>Temperature</a>
+                                        <ul <?php echo $a=($control == 'Temperatures')?'style=display:block':'';?>>
+                                        
                                             <li>
-                                                <a href="#">Instrument</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'instrument')?'active':''; ?>
+                                                <?php echo $this->Html->link('Instrument',array('controller'=>'Temperatures','action'=>'instrument'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
-                                                <a href="#">Ambient Temperature</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'ambient')?'active':''; ?>
+                                                <?php echo $this->Html->link('Ambient Temperature',array('controller'=>'Temperatures','action'=>'ambient'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
                                                 <a href="#">Other</a>

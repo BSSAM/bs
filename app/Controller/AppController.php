@@ -52,6 +52,7 @@ App::uses('Controller', 'Controller');
                 }
             }
             $this->set('control',$this->params['controller']);
+            $this->set('actions',$this->params['action']);
             /************************************** User Role ****************************************************/
              $id = $this->Session->read('sess_userrole');//pr($id);
              $this->loadModel('Userrole');
