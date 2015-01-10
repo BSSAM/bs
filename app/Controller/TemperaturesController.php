@@ -1117,6 +1117,88 @@
         }
         
     
+        /////////////////// Template  ////////////////////
+        
+        public function template($file=null,$id=null)
+        {
+            //pr($file);exit;
+            //pr('Instrument/'.$file.'/'.$id);exit;
+            if($file!='' && $id!='')
+            {
+                if($file == 'edittemplate'):
+                $this->edittemplate($file, $id);
+                elseif($file == 'deletetemplate'):
+                $this->deletetemplate($file, $id);
+                else:
+                $this->addtemplate($file); 
+                endif;
+            }
+            elseif($file!='' && $id=='')
+            {
+                if($file == 'addtemplate'):
+                $this->addtemplate($file);
+                endif;
+                //$this->render('Instrument/'.$file);
+            }
+            else
+            {
+                $this->template_list();
+                //$this->render('Instrument/index'.$file);
+            }
+        }
+        public function template_list()
+        {
+           
+            $template_data = $this->Temptemplate->find('all',array('conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
+            $this->set('template', $template_data);
+            $this->render('template/index');
+        }
+        public function addtemplate($file)
+        {
+            if($this->request->is('post'))
+            {
+                $instrumentname = $this->request->data['instrumentname'];
+                $tagno = $this->request->data['tagno'];
+                $description = $this->request->data['description'];
+                $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.instrumentname ='=>$this->request->data['instrumentname']),'recursive'=>'2'));
+                if(!$template_data){
+                if($this->Temptemplate->save($this->request->data))
+                {
+                    $last_insert_id =   $this->Temptemplate->getLastInsertID();
+                    $this->Session->setFlash(__('Template is Added Successfully'));
+                }
+                    
+                }
+                else{
+                    $this->Session->setFlash(__('Template Already Exists!'));
+                }
+            
+            $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
+            }
+            $this->render('template/'.$file);
+        }
+        public function edittemplate($file, $id = null)
+        {
+            $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.id'=>$id),'recursive'=>'2'));
+            if($this->request->is(array('post','put')))
+            {
+                $instrumentname = $this->request->data['instrumentname'];
+                $tagno = $this->request->data['tagno'];
+                $description = $this->request->data['description'];
+                $this->Temptemplate->id   =  $id; 
+                if($this->Temptemplate->save($this->request->data))
+                {
+                    $this->Session->setFlash(__('Template is Updated Successfully'));
+                }
+                $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
+            }
+            else
+            {
+                $this->request->data = $template_data;
+            }
+            $this->render('template/'.$file);
+        }
+    
     }
     
 ?>
