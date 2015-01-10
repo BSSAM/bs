@@ -70,16 +70,7 @@
                 <div class="col-md-4">
                     <?php echo $this->Form->input('range', array('id' => 'val_range', 'class' => 'form-control', 'placeholder' => 'Enter Range', 'label' => false)); ?>
                 </div>
-                <label class="col-md-2 control-label" for="val_attn">ATTN</label>
-                <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => 'Select Contact person Name')); ?>
-                </div>
-                <label class="col-md-2 control-label" for="val_phone">Phone</label>
-                <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_phone', array('id' => 'val_phone', 'class' => 'form-control',
-                        'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true));
-                    ?>
-                </div>
+                
             </div>
             
 
@@ -131,41 +122,42 @@
                 </div>  
                 <label class="col-md-2 control-label" for="val_prefref">Pref Reference</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('prefref', array('id'=>'val_prefref','type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Pref Reference')); ?>
+                    <?php echo $this->Form->input('prefref', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple')); ?>
                 </div>
                 
             </div>
             <div class="form-group">
-            <label class="col-md-2 control-label" for="val_remarks">Remarks</label>
-            <div class="col-md-4">
-            <?php
-                echo $this->Form->input('subcontract_remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea'));
-            ?>    
+                <label class="col-md-2 control-label" for="val_resolution">Accuracy</label>
+                <div class="col-md-4">
+                <?php
+                    echo $this->Form->input('accuracy', array('id' => 'val_accuracy', 'class' => 'form-control',
+                             'label' => false,'type' => 'text', 'placeholder' => 'Select Accuracy')); ?>
+               
+                </div>  
+                
+                
             </div>
-            </div>
+            
            
             <div class="col-lg-12">
-                <h4 class="sub-header"><small><b>Instruments List </b</small></h4>
+                <h4 class="sub-header"><small><b>Datas </b</small></h4>
             </div>
-            <div class="col-sm-3 col-lg-12 subcontract_linear">
+            <div class="col-sm-3 col-lg-12 template_detail">
                 <table  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">S.No</th>
-                            <th class="text-center">Instrument</th>
-                            <th class="text-center">Model No</th>
-                            <th class="text-center">Brand</th>
-                            <th class="text-center">Range</th>
-                            <th class="text-center">Call Location</th>
-                            <th class="text-center">Call Type</th>
-                            <th class="text-center">Validity</th>
-                            <th class="text-center">Department</th>
-<!--                            <th class="text-center">Action</th>-->
-
+                            <th class="text-center">Set Point</th>
+                            <th class="text-center">Unit</th>
+                            <th class="text-center">Reading Type</th>
+                            <th class="text-center">Resolution</th>
+                            <th class="text-center">Accuracy</th>
+                            <th class="text-center">Count</th>
+                            <th class="text-center">Pref Reference(Master Instrument-Tagno-Range)</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="subcontract_instrument_info"> 
+                    <tbody class="template_detail_info"> 
                         <tr class="text-center">    
                             <td class="" colspan="9">
                         No Records Found</td>
