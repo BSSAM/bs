@@ -31,6 +31,12 @@ App::uses('Helper', 'View');
  */
 class AppHelper extends Helper 
 {
-
+    public function unit_name($id = null)
+    {
+        APP::import('Model','Tempunit');
+        $this->Tempunit   =   new Tempunit();
+        $unit_data = $this->Tempunit->find('first',array('conditions'=>array('Tempunit.id'=>$id)));
+        return $unit_data['Tempunit']['unitname'];
+    }
     
 }

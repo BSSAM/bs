@@ -1,20 +1,20 @@
                             <h1>
-                                <i class="fa fa-table"></i>Uncertainty Data
+                                <i class="fa fa-table"></i>Template
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Uncertainty Data',array('controller'=>'Uncertainties','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Template',array('controller'=>'Temperatures','action'=>'template')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
                      <?php echo $this->element('message');?>
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Uncertainty Data</h2>
+                            <h2>List Of Template</h2>
                             <?php //if($userrole['add']==1){ ?>
-                            <h2 style="float:right;"><?php echo $this->Html->link('Add Uncertainty Data',array('controller'=>'Uncertainties','action'=>'adduncertainty'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Uncertainty Data')); ?></h2>
+                            <h2 style="float:right;"><?php echo $this->Html->link('Add Template',array('controller'=>'Temperatures','action'=>'template/addtemplate'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Template')); ?></h2>
                             <?php //} ?>
                         </div>
                         
@@ -25,34 +25,32 @@
                                     <tr>
                                         <th class="text-center">ID</th>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
-                                        <th class="text-center">Tag No</th>
-                                        <th class="text-center">Serial No</th>
-                                        <th class="text-center">Cal Date</th>
-                                        <th class="text-center">Due Date</th>
-                                        <th class="text-center">Procedure No</th>
                                         <th class="text-center">Instrument</th>
+                                        <th class="text-center">Brand</th>
+                                        <th class="text-center">Model</th>
+                                        <th class="text-center">Range</th>
+                                        <th class="text-center">Customer</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($uncertainty as $uncertainty_list): ?>
+                                    <?php foreach($template as $template_list): ?>
                                        
-                                    <tr <?php if($uncertainty_list['Tempuncertainty']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['id'];?></td>
+                                    <tr <?php if($template_list['Temptemplate']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['id'];?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['tagno'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['serialno'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['caldate'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['duedate'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['procedureno'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['instrument'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['instrument'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['brand'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['model'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['range'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['customer'];?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php //if($userrole['edit']==1){ ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edituncertainty',$uncertainty_list['Tempuncertainty']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'template/edittemplate',$template_list['Temptemplate']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php //} ?>
                                                 <?php //if($userrole['delete']==1){ ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'deleteuncertainty',$uncertainty_list['Tempuncertainty']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'template/deletetemplate',$template_list['Temptemplate']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 <?php //} ?>
                                             </div>
                                         </td>

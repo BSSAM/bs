@@ -1,20 +1,20 @@
                             <h1>
-                                <i class="fa fa-table"></i>Uncertainty Data
+                                <i class="fa fa-table"></i>Units(Temperature)
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Uncertainty Data',array('controller'=>'Uncertainties','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Unit',array('controller'=>'Temperatures','action'=>'unit')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
                      <?php echo $this->element('message');?>
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Uncertainty Data</h2>
+                            <h2>List Of Units(Temperature)</h2>
                             <?php //if($userrole['add']==1){ ?>
-                            <h2 style="float:right;"><?php echo $this->Html->link('Add Uncertainty Data',array('controller'=>'Uncertainties','action'=>'adduncertainty'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Uncertainty Data')); ?></h2>
+                            <h2 style="float:right;"><?php echo $this->Html->link('Add unit',array('controller'=>'Temperatures','action'=>'unit/addunit'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add unit')); ?></h2>
                             <?php //} ?>
                         </div>
                         
@@ -25,34 +25,27 @@
                                     <tr>
                                         <th class="text-center">ID</th>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
-                                        <th class="text-center">Tag No</th>
-                                        <th class="text-center">Serial No</th>
-                                        <th class="text-center">Cal Date</th>
-                                        <th class="text-center">Due Date</th>
-                                        <th class="text-center">Procedure No</th>
-                                        <th class="text-center">Instrument</th>
+                                        <th class="text-center">unit Name</th>
+                                        <th class="text-center">Description</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($uncertainty as $uncertainty_list): ?>
+                                    <?php foreach($unit as $unit_list): ?>
                                        
-                                    <tr <?php if($uncertainty_list['Tempuncertainty']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['id'];?></td>
+                                    <tr <?php if($unit_list['Tempunit']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                        <td class="text-center"><?php echo $unit_list['Tempunit']['id'];?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['tagno'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['serialno'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['caldate'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['duedate'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['procedureno'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['instrument'];?></td>
+                                        <td class="text-center"><?php echo $unit_list['Tempunit']['unitname'];?></td>
+  
+                                        <td class="text-center"><?php echo $unit_list['Tempunit']['description'];?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php //if($userrole['edit']==1){ ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edituncertainty',$uncertainty_list['Tempuncertainty']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'unit/editunit',$unit_list['Tempunit']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php //} ?>
                                                 <?php //if($userrole['delete']==1){ ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'deleteuncertainty',$uncertainty_list['Tempuncertainty']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'unit/deleteunit',$unit_list['Tempunit']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 <?php //} ?>
                                             </div>
                                         </td>
@@ -81,7 +74,7 @@
                                         
                                         var growlType = $(this).data('growl');
                                         
-                                        $.bootstrapGrowl('Uncertainty Data is Added Successfully!', {
+                                        $.bootstrapGrowl('unit is Added Successfully!', {
                                             type: growlType,
                                             allow_dismiss: true
                                         });
