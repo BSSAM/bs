@@ -8,10 +8,11 @@
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
-							    'Tempformdata');
+							    'Tempformdata','Tempuncertainty','Tempuncertaintydata');
         public function uncertainty()
         {
-            
+            $uncertainty_data = $this->Tempuncertainty->find('all',array('conditions'=>array('Tempuncertainty.is_deleted'=>0)),array('order'=>'Tempuncertainty.id Desc','recursive'=>'2'));
+            $this->set('uncertainty', $uncertainty_data);
             
         }
         public function adduncertainty()
@@ -19,17 +20,59 @@
             $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
 			$this->set('instruments_list',$instruments_list);
 			
+			$ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
+			$this->set('ranges_list',$ranges_list);
+			
 			if($this->request->is('post'))
-            {
-				pr($this->request->data);exit;
+            { 
+				$uncertainty_data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.temp_instruments_id'=>$this->request->data['Uncertainty']['temp_instruments_id'],'Tempuncertainty.duedate'=>$this->request->data['Uncertainty']['duedate']),'recursive'=>'2'));
+				if(!$uncertainty_data){
+					if($this->Tempuncertainty->save($this->request->data['Uncertainty']))
+					{
+						 $this->Session->setFlash(__('Uncertainty is added Successfully'));
+						 $this->redirect(array('controller'=>'Temperatures','action'=>'uncertainty'));
+					}
+				}
 			}
             
         }
-        public function edituncertainty()
+        public function edituncertainty($id=NULL)
         {
             $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
 			$this->set('instruments_list',$instruments_list);
+			
+			$ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
+			$this->set('ranges_list',$ranges_list);
+			
+			$uncertainty_data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=> $id)));
+          
+            if($this->request->is(array('post','put')))
+            {
+             // pr($this->request->data); exit;
+                $this->Tempuncertainty->id   =  $id; 
+                if($this->Tempuncertainty->save($this->request->data['Uncertainty']))
+                {
+                    $this->Session->setFlash(__('Uncertainty is Updated Successfully'));
+                }
+                $this->redirect(array('controller'=>'Temperatures','action'=>'uncertainty'));
+            }
+            else
+            {
+                $this->request->data = $uncertainty_data;
+				$this->set('uncertainty', $uncertainty_data);
+            }
             
+        }
+		
+		 public function deleteuncertainty($id = null)
+        {
+        
+            if($this->Tempuncertainty->updateAll(array('Tempuncertainty.is_deleted'=>1,'Tempuncertainty.status'=>0),array('Tempuncertainty.id'=>$id)))
+            {
+                 
+                $this->Session->setFlash(__('The Uncertainty has been deleted',h($id)));
+                return  $this->redirect(array('controller'=>'Temperatures','action'=>'Uncertainty'));
+            }
         }
 		
 		public function getinstrumentinfo()
@@ -40,6 +83,32 @@
 			echo $instruments_daetail['Tempinstrument']['tagno'];
 			exit;
 		}
+		
+		 public function addbulkfields()
+        {
+			$this->layout = 'ajax';
+            $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
+			$this->set('instruments_list',$instruments_list);
+			
+			$ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
+			$this->set('ranges_list',$ranges_list);
+			
+			if($this->request->is('post'))
+            {
+			
+			    $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'] = 0;
+			    $this->request->data['Tempuncertaintydata']['status'] = 0;
+
+					if($this->Tempuncertaintydata->save($this->request->data['Tempuncertaintydata']))
+					{ 
+						 $this->Session->setFlash(__('Uncertainty bulk datas  added Successfully'));
+						 $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => 0)));
+						 $this->set('tempuncertaintydata_list',$tempuncertaintydata_list);
+					}
+
+			} 
+            
+        }
         
         
         public function instrument($file=null,$id=null)

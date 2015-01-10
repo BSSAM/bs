@@ -1,43 +1,16 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
-	$(document).ready(function(e) {
-        $('.instrumentid').change(function()
-		{
-			 var instrumentid = $(this).val(); 
-			 $('.instrumentname').val($('.instrumentid option:selected').text()); 
-		 
-		    $.ajax({ 
-						url: path_url+'Temperatures/getinstrumentinfo/',
-						type:'POST',
-						beforeSend: ni_start(),  
-                        complete: ni_end(),
-						data:
-						{
-							instrumentid:instrumentid,
-						},
-						success: function(msg)
-						{	
-						   $('.tagno').val(msg);								
-						}               
-    				});
-		});
-		
-		$('.submitUncertaintyForm').click(function(e) {
-			 $('.UncertaintyForm').submit();
-            
-        });
-    });
 </script>
         
 <h1>
-    <i class="gi gi-user"></i>Add Uncertainty Data
+    <i class="gi gi-user"></i>Edit Uncertainty Data
 </h1>
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home', array('controller' => 'Dashboards', 'action' => 'index')); ?></li>
     <li><?php echo $this->Html->link('Uncertainty Data', array('controller' => 'Uncertainty', 'action' => 'index')); ?></li>
-    <li>Add Uncertainty Data</li>
+    <li>Edit Uncertainty Data</li>
 </ul>
 <!-- END Forms General Header -->
 
@@ -56,7 +29,7 @@
             <!-- Basic Form Elements Content -->
 
 
-            <?php echo $this->Form->create('Uncertainty', array('class' => 'form-horizontal form-bordered UncertaintyForm', 'id' => 'fileupload', 'enctype' => 'multipart/form-data')); ?>
+            <?php echo $this->Form->create('Uncertainty', array('class' => 'form-horizontal form-bordered', 'id' => 'fileupload', 'enctype' => 'multipart/form-data')); ?>
             
             <div class="description_list">
                 
@@ -64,33 +37,32 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_instrument">Instrument</label>
                 <div class="col-md-2">
-                    <?php echo $this->Form->input('temp_instruments_id', array('id' => 'val_instrument', 'class' => 'form-control instrumentid', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument --','options' => $instruments_list,'default' => $uncertainty['Tempuncertainty']['temp_instruments_id'])); ?>
-                    <input type="hidden" name="data[Uncertainty][instrumentname]" class="instrumentname" value="<?php echo $uncertainty['Tempuncertainty']['instrumentname'];?>" />
+                    <?php echo $this->Form->input('instrumentname', array('id' => 'val_instrument', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument --')); ?>
                 </div>
               <label class="col-md-2 control-label" for="val_duedate">Due Date </label>
                 <div class="col-md-2">
                     <?php echo $this->Form->input('duedate', array('id' => 'val_duedate', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy',
-                        'placeholder' => 'Enter the Due Date', 'label' => false,'value'=> $uncertainty['Tempuncertainty']['duedate']));
+                        'placeholder' => 'Enter the Due Date', 'label' => false));
                     ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_tagno">Tag No</label>
                  <div class="col-md-2">
-                    <?php echo $this->Form->input('tagno', array('id' => 'val_tagno', 'class' => 'form-control tagno', 'placeholder' => 'Enter the TAG No', 'label' => false,'autoComplete'=>'off','value'=> $uncertainty['Tempuncertainty']['tagno'])); ?>
+                    <?php echo $this->Form->input('tagno', array('id' => 'val_tagno', 'class' => 'form-control', 'placeholder' => 'Enter the TAG No', 'label' => false,'autoComplete'=>'off')); ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_procno">Procedure No</label>
                 <div class="col-md-2">
-                    <?php echo $this->Form->input('procedureno', array('id' => 'val_procno', 'class' => 'form-control', 'placeholder' => 'Enter the Procedure No', 'label' => false,'autoComplete'=>'off','value'=> $uncertainty['Tempuncertainty']['procedureno'])); ?>
+                    <?php echo $this->Form->input('procno', array('id' => 'val_procno', 'class' => 'form-control', 'placeholder' => 'Enter the Procedure No', 'label' => false,'autoComplete'=>'off')); ?>
                 </div>
                  <label class="col-md-2 control-label" for="val_serialno">Serial No </label>
                 <div class="col-md-2">
-                    <?php echo $this->Form->input('serialno', array('id' => 'val_serialno', 'class' => 'form-control', 'placeholder' => 'Enter the Serial No', 'label' => false,'autoComplete'=>'off','value'=> $uncertainty['Tempuncertainty']['serialno'])); ?>
+                    <?php echo $this->Form->input('serialno', array('id' => 'val_serialno', 'class' => 'form-control', 'placeholder' => 'Enter the Serial No', 'label' => false,'autoComplete'=>'off')); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_caldate">Cal Date</label>
                 <div class="col-md-2">
                     <?php echo $this->Form->input('caldate', array('id' => 'val_caldate', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy',
-                        'placeholder' => 'Enter Calibration Date', 'label' => false,'value'=> $uncertainty['Tempuncertainty']['caldate']));
+                        'placeholder' => 'Enter Calibration Date', 'label' => false));
                     ?>
                 </div>
             </div>
@@ -98,25 +70,23 @@
                 <label class="col-md-2 control-label" for="val_duedate">Remarks  </label>
                  <div class="col-md-2">
             <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'3','value'=> $uncertainty['Tempuncertainty']['remarks']));
+                echo $this->Form->input('subcontract_remarks', array('id' => 'val_remarks', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'3'));
             ?>    
             </div>
              <div class="col-md-4">
 						<label class="col-md-6 control-label" for="val_ref_no">Active</label>
 						<div class="col-md-2">
-							<input  class="" type="checkbox" value="" name="" <?php if($uncertainty['Tempuncertainty']['status'] == 1) { echo 'checked="checked"'; }?> />
+							<input  class="" type="checkbox" value="" name="">
 						</div>
 					</div>
                     <div class="col-md-4">
 						<label class="col-md-6 control-label" for="val_ref_no">Is Visible In Report</label>
 						<div class="col-md-2 padding_l_7">
-							<input  class="" type="checkbox" value="" name="" <?php if($uncertainty['Tempuncertainty']['is_visible'] == 1) { echo 'checked="checked"'; }?> />
+							<input  class="" type="checkbox" value="" name="">
 						</div>
 					</div>
             </div>
-            
-            <?php echo $this->Form->end(); ?>
             <div class="col-lg-12">
                 <h4 class="sub-header"><small>Uncertainty</small></h4>
             </div>
@@ -886,23 +856,11 @@
                 </table>
             </div>
             <div class="form-group form-actions">
-              
             </div>
             <!-- panel -->
 <?php echo $this->Form->end(); ?>
-           
             <!-- END Basic Form Elements Content -->
         </div>
-        <div class="col-lg-12">
-          <div class="form-group form-actions">
-                                        <div class="col-md-9 col-md-offset-3">
-                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary submitUncertaintyForm','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
-<!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
-                                            <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
-                                      </div>
-         </div>
-       </div>  
         <!-- END Basic Form Elements Block -->
     </div>
 <?php echo $this->Html->script('pages/formsValidation'); ?>

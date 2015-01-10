@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Tempuncertainty extends AppModel
+class Tempuncertaintydata extends AppModel
 {
-    public $useTable    =   'temp_uncertainty';
+    public $useTable    =   'temp_uncertainty_data';
 }

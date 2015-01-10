@@ -45,7 +45,7 @@
                                         <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['caldate'];?></td>
                                         <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['duedate'];?></td>
                                         <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['procedureno'];?></td>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['instrument'];?></td>
+                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['instrumentname'];?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php //if($userrole['edit']==1){ ?>

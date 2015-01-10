@@ -65,7 +65,7 @@
                 ?>
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
                 <?php 
-                echo $this->Html->script('vendor/modernizr-2.7.1-respond-1.4.2.min');
+                echo $this->Html->script(array('vendor/modernizr-2.7.1-respond-1.4.2.min','vendor/ajaxform'));
                 echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
