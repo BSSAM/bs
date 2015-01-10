@@ -454,38 +454,50 @@
                                                 <?php echo $this->Html->link('Ambient Temperature',array('controller'=>'Temperatures','action'=>'ambient'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
-                                                <a href="#">Other</a>
+                                                 <?php $a=($control == 'Temperatures' && $actions == 'other')?'active':''; ?>
+                                                <?php echo $this->Html->link('Other',array('controller'=>'Temperatures','action'=>'other'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
-                                                <a href="#">Range</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'range')?'active':''; ?>
+                                                <?php echo $this->Html->link('Range',array('controller'=>'Temperatures','action'=>'range'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                             <li>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'relativehumidity')?'active':''; ?>
+                                                <?php echo $this->Html->link('Relative Humidity',array('controller'=>'Temperatures','action'=>'relativehumidity'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
-                                                <a href="#">Relative Humidity</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'uncertainty')?'active':''; ?>
+                                                <?php echo $this->Html->link('Uncertainty Data',array('controller'=>'Temperatures','action'=>'uncertainty'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                      
+                                             <li>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'readingtype')?'active':''; ?>
+                                                <?php echo $this->Html->link('Reading Type',array('controller'=>'Temperatures','action'=>'readingtype'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
-                                                <a href="#">Uncertainity Data</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'channel')?'active':''; ?>
+                                                <?php echo $this->Html->link('Channel',array('controller'=>'Temperatures','action'=>'channel'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
-                                                <a href="#">Reading Type</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Channel</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Form Datas</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'formdatas')?'active':''; ?>
+                                                <?php echo $this->Html->link('Form Datas',array('controller'=>'Temperatures','action'=>'formdatas'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
                                                 <a href="#">Template</a>
                                             </li>
                                             <li>
-                                                <a href="#">Instrument Validity</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'instrumentvalidity')?'active':''; ?>
+                                                <?php echo $this->Html->link('Instrument Validity',array('controller'=>'Temperatures','action'=>'instrumentvalidity'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                             <li>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'unit')?'active':''; ?>
+                                                <?php echo $this->Html->link('Unit',array('controller'=>'Temperatures','action'=>'unit'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
-                                                <a href="#">Unit Conversion Factor</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'unitconvert')?'active':''; ?>
+                                                <?php echo $this->Html->link('Unit Conversion Factor',array('controller'=>'Temperatures','action'=>'unitconvert'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
-                                            <li>
-                                                <a href="#">Unit</a>
-                                            </li>
+                            
                                         </ul>
                                     </li>
                                 </ul>
