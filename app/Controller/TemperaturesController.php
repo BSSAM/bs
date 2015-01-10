@@ -6,7 +6,8 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
-                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient','Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
+                            'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient'
+							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
 							    'Tempformdata');
         public function uncertainty()
         {
@@ -15,76 +16,31 @@
         }
         public function adduncertainty()
         {
-            
+            $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
+			$this->set('instruments_list',$instruments_list);
+			
+			if($this->request->is('post'))
+            {
+				pr($this->request->data);exit;
+			}
             
         }
         public function edituncertainty()
         {
+            $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
+			$this->set('instruments_list',$instruments_list);
             
-            
         }
-        ///////////////////////////////////////
-        ///////////////////////////////////////
-        public function template($file=null,$id=null)
-        {
-            //pr($file);exit;
-            //pr('Instrument/'.$file.'/'.$id);exit;
-            if($file!='' && $id!='')
-            {
-                if($file == 'edittemplate'):
-                $this->editinstrument($file, $id);
-                elseif($file == 'deletetemplate'):
-                $this->deletetemplate($file, $id);
-                else:
-                $this->addtemplate($file); 
-                endif;
-            }
-            elseif($file!='' && $id=='')
-            {
-                if($file == 'addtemplate'):
-                $this->addtemplate($file);
-                endif;
-                //$this->render('Instrument/'.$file);
-            }
-            else
-            {
-                $this->template_list();
-                //$this->render('Instrument/index'.$file);
-            }
-        }
-        public function template_list()
-        {
-            $template_data = $this->Temptemplate->find('all',array('conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
-            $this->set('template', $template_data);
-            $this->render('template/index');
-        }
-        public function addtemplate($file)
-        {
-            if($this->request->is('post'))
-            {
-                $instrumentname = $this->request->data['instrumentname'];
-                $tagno = $this->request->data['tagno'];
-                $description = $this->request->data['description'];
-                $instrument_data = $this->Tempinstrument->find('first',array('conditions'=>array('Tempinstrument.instrumentname ='=>$this->request->data['instrumentname']),'recursive'=>'2'));
-                if(!$instrument_data){
-                if($this->Tempinstrument->save($this->request->data))
-                {
-                    $last_insert_id =   $this->Tempinstrument->getLastInsertID();
-                    $this->Session->setFlash(__('Instrument is Added Successfully'));
-                }
-                    
-                }
-                else{
-                    $this->Session->setFlash(__('Instrument Name Already Exists!'));
-                }
-            
-            $this->redirect(array('controller'=>'Temperatures','action'=>'instrument'));
-            }
-            $this->render('template/'.$file);
-        }
-        ////////////////////////////////////
-        ////////////////////////////////////
-        ////////////////////////////////////
+		
+		public function getinstrumentinfo()
+		{
+			$this->layout = "ajax";
+			
+			$instruments_daetail = $this->Tempinstrument->find('first',array('conditions' => array('Tempinstrument.id' => $this->request->data['instrumentid'])));
+			echo $instruments_daetail['Tempinstrument']['tagno'];
+			exit;
+		}
+        
         
         public function instrument($file=null,$id=null)
         {
@@ -279,7 +235,7 @@
             }
         }
         
-       ///////////////////////////////////
+        ///////////////////////////////////
         ////////////////Other/////////////
         ////////////////////////////////////
         

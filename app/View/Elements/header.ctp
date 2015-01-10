@@ -467,8 +467,10 @@
                                             </li>
                       
                                             <li>
-                                                <a href="#">Uncertainity Data</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'uncertainty')?'active':''; ?>
+                                                <?php echo $this->Html->link('Uncertainty Data',array('controller'=>'Temperatures','action'=>'uncertainty'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
+                                      
                                              <li>
                                                 <?php $a=($control == 'Temperatures' && $actions == 'readingtype')?'active':''; ?>
                                                 <?php echo $this->Html->link('Reading Type',array('controller'=>'Temperatures','action'=>'readingtype'),array('class'=>$a,'escape'=>false)); ?>

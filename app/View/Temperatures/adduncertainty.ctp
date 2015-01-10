@@ -1,5 +1,26 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
+	$(document).ready(function(e) {
+        $('.instrumentid').change(function()
+		{
+			 var instrumentid = $(this).val(); 
+		 
+		    $.ajax({ 
+						url: path_url+'Temperatures/getinstrumentinfo/',
+						type:'POST',
+						beforeSend: ni_start(),  
+                        complete: ni_end(),
+						data:
+						{
+							instrumentid:instrumentid,
+						},
+						success: function(msg)
+						{	
+						   $('.tagno').val(msg);								
+						}               
+    				});
+		});
+    });
 </script>
         
 <h1>
@@ -37,7 +58,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_instrument">Instrument</label>
                 <div class="col-md-2">
-                    <?php echo $this->Form->input('instrumentname', array('id' => 'val_instrument', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument --')); ?>
+                    <?php echo $this->Form->input('instrument', array('id' => 'val_instrument', 'class' => 'form-control instrumentid', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument --','options' => $instruments_list)); ?>
                 </div>
               <label class="col-md-2 control-label" for="val_duedate">Due Date </label>
                 <div class="col-md-2">
@@ -47,7 +68,7 @@
                 </div>
                 <label class="col-md-2 control-label" for="val_tagno">Tag No</label>
                  <div class="col-md-2">
-                    <?php echo $this->Form->input('tagno', array('id' => 'val_tagno', 'class' => 'form-control', 'placeholder' => 'Enter the TAG No', 'label' => false,'autoComplete'=>'off')); ?>
+                    <?php echo $this->Form->input('tagno', array('id' => 'val_tagno', 'class' => 'form-control tagno', 'placeholder' => 'Enter the TAG No', 'label' => false,'autoComplete'=>'off')); ?>
                 </div>
             </div>
             <div class="form-group">
@@ -87,6 +108,8 @@
 						</div>
 					</div>
             </div>
+            
+            <?php echo $this->Form->end(); ?>
             <div class="col-lg-12">
                 <h4 class="sub-header"><small>Uncertainty</small></h4>
             </div>

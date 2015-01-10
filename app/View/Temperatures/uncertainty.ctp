@@ -5,7 +5,7 @@
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Uncertainty Data',array('controller'=>'Uncertainties','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Uncertainty Data',array('controller'=>'Temperatures','action'=>'uncertainty')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
                      <?php echo $this->element('message');?>
@@ -14,7 +14,7 @@
                         <div class="block-title">
                             <h2>List Of Uncertainty Data</h2>
                             <?php //if($userrole['add']==1){ ?>
-                            <h2 style="float:right;"><?php echo $this->Html->link('Add Uncertainty Data',array('controller'=>'Uncertainties','action'=>'adduncertainty'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Uncertainty Data')); ?></h2>
+                            <h2 style="float:right;"><?php echo $this->Html->link('Add Uncertainty Data',array('controller'=>'Temperatures','action'=>'adduncertainty'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Uncertainty Data')); ?></h2>
                             <?php //} ?>
                         </div>
                         
