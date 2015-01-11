@@ -1,5 +1,55 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
+    $(document).ready(function(){
+        $("#instrument_result",window.parent.document).hide();
+    
+        $("#val_tempinstrumentname").keyup(function() 
+        { 
+            var instrument = $(this).val();
+            var dataString = 'name='+ instrument;
+            if(instrument!='')
+            {
+
+                $.ajax({
+                type: "POST",
+                url: path_url+"Temperatures/search_template_ins",
+                data: dataString,
+                cache: false,
+                beforeSend: ni_start(),  
+                success: function(html)
+                {
+                    alert(html);
+                    //$(".instrument_result").html(html).show();
+                },
+                complete: ni_end(),  
+                });
+            }
+            $('.customer_instrument_show').fadeOut();
+            return false;    
+        });
+        $(document).on('click','.customer_instrument_show',function(){
+        
+        var instrument_id   =   $(this).attr('id');
+        $('#in_id').val(instrument_id);
+        $(".instrument_result").fadeOut();
+        var ins_text=$(this).text();
+        $('#customer_instrument').val(ins_text);
+        
+        //alert(instrument_id);
+//        alert(instrument_id);
+        $.ajax({
+		type: 'POST',
+                data:"instrument_id="+instrument_id,
+		url: path_url+'/Temperatures/get_range/',
+                beforeSend: ni_start(),  
+                success:function(data){
+                    $('#range_array').empty().append('<option value="">Select Range</option>');
+                    $('#range_array').append(data);
+                },
+                complete: ni_end(),
+            });
+    });
+    });
 </script>
 <h1>
     <i class="gi gi-user"></i>Add Template
@@ -52,8 +102,7 @@
                 <label class="col-md-2 control-label" for="val_tempinstrumentname">Instrument</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('instrumentname', array('id' => 'val_tempinstrumentname', 'class' => 'form-control', 'placeholder' => 'Enter the Instrument Name', 'label' => false,'autoComplete'=>'off')); ?>
-                <div id="instrument_result">
-                </div>
+                    <div class="instrument_result" style="display:none;"></div>
                 </div>
                 <label class="col-md-2 control-label" for="val_model">Model</label>
                 <div class="col-md-4">
@@ -94,7 +143,7 @@
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('readingtype', array('id' => 'val_readingtype', 'class' => 'form-control',
-                             'label' => false,'type' => 'select', 'empty' => 'Select Reading Type')); ?>
+                             'label' => false,'type' => 'select', 'options'=>array('1'=>'Temperature'),'readonly')); ?>
                
                 </div>  
             </div>
@@ -103,7 +152,7 @@
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('unit', array('id' => 'val_unit', 'class' => 'form-control',
-                             'label' => false,'type' => 'select', 'empty' => 'Select Unit')); ?>
+                             'label' => false,'type' => 'select', 'empty' => 'Select Unit','options'=>$unit_list)); ?>
                
                 </div>  
                 <label class="col-md-2 control-label" for="val_count">Count</label>
@@ -120,13 +169,6 @@
                              'label' => false,'type' => 'text', 'placeholder' => 'Select Resolution')); ?>
                
                 </div>  
-                <label class="col-md-2 control-label" for="val_prefref">Pref Reference</label>
-                <div class="col-md-4">
-                    <?php echo $this->Form->input('prefref', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple')); ?>
-                </div>
-                
-            </div>
-            <div class="form-group">
                 <label class="col-md-2 control-label" for="val_resolution">Accuracy</label>
                 <div class="col-md-4">
                 <?php
@@ -135,6 +177,13 @@
                
                 </div>  
                 
+            </div>
+            <div class="form-group">
+                
+                <label class="col-md-2 control-label" for="val_prefref">Pref Reference</label>
+                <div class="col-md-8">
+                    <?php echo $this->Form->input('prefref', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
+                </div>
                 
             </div>
             

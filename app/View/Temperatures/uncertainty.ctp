@@ -35,10 +35,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($uncertainty as $uncertainty_list): ?>
+                                    <?php foreach($uncertainty as $k=>$uncertainty_list): ?>
                                        
                                     <tr <?php if($uncertainty_list['Tempuncertainty']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                                        <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['id'];?></td>
+                                        <td class="text-center"><?php echo $k+1;?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
                                         <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['tagno'];?></td>
                                         <td class="text-center"><?php echo $uncertainty_list['Tempuncertainty']['serialno'];?></td>

@@ -1,60 +1,168 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
-	$(document).ready(function(e) {
+    $(document).ready(function(e) 
+    {
+        // Initial Properties of All the Input Fields
+        
+        $("#val_duedate").datepicker("setDate", new Date());
+        $("#val_caldate").datepicker("setDate", new Date());
+        $("#val_instrument").val('');
+        $("#val_visible").prop('checked',true);
+        $("#val_active").prop('checked',true);
+        $("#search_instrument").hide();
+        
+        //Trigger
+        
+             
+        
+        // Instrument Value From Instrument Entered
+        
         $('.instrumentid').change(function()
-		{
-			 var instrumentid = $(this).val(); 
-			 $('.instrumentname').val($('.instrumentid option:selected').text()); 
-		 
-		    $.ajax({ 
-						url: path_url+'Temperatures/getinstrumentinfo/',
-						type:'POST',
-						beforeSend: ni_start(),  
-                        complete: ni_end(),
-						data:
-						{
-							instrumentid:instrumentid,
-						},
-						success: function(msg)
-						{	
-						   $('.tagno').val(msg);								
-						}               
-    				});
-		});
-		
-		$('.submitUncertaintyForm').click(function(e) {
-			 $('.UncertaintyForm').submit();
-            
+        {
+            var instrumentid = $(this).val(); 
+            $('.instrumentname').val($('.instrumentid option:selected').text()); 
+
+            $.ajax({ 
+                url: path_url+'Temperatures/getinstrumentinfo/',
+                type:'POST',
+                beforeSend: ni_start(),  
+                complete: ni_end(),
+                data:
+                {
+                        instrumentid:instrumentid,
+                },
+                success: function(msg)
+                {	
+                   $('.tagno').val(msg);								
+                }               
+            });
         });
-	
-		$('.add_all_fields').click(function(e) { 
-		   alert("before");
-		   $('.ajaxform').submit(); alert("after");
-		   
-		});
-			 $('.ajaxform').ajaxForm({ 
-			    url: path_url+'Temperatures/addbulkfields/',
-				type: 'post',
-				success : function(recievedData)
-				{
-					//alert('ll');
-					//alert(recievedData);
-					$('.uncertainty_results').html(recievedData);
-					return false;
-				},
-			});
-	
-		
-		$('.uref_drpdwn').change(function(e) {
+        
+        // Dropdown change of Instrument
+
+        $('.uref_drpdwn').change(function(e) {
             if($(this).val() > 1)
-			{  
-				$(this).parent().parent().next('div').find('.drpdwn_value').removeAttr('readonly');
-			}
-			else
-			{
-				$(this).parent().parent().next('div').find('.drpdwn_value').addAttr('readonly');
-			}
+            {  
+                $(this).parent().parent().next('div').find('.drpdwn_value').removeAttr('readonly');
+            }
+            else
+            {
+                $(this).parent().parent().next('div').find('.drpdwn_value').addAttr('readonly');
+            }
         });
+        
+        // Submit Externally the Form
+        
+        $('.submitUncertaintyForm').click(function(e) {
+            $('.UncertaintyForm').submit();
+        });
+
+        $('.add_all_fields').click(function(e) { 
+           //alert("before");
+           $('.ajaxform').submit(); //alert("after");
+
+        });
+        
+        $('.ajaxform').ajaxForm({ 
+            url: path_url+'Temperatures/addbulkfields/',
+                type: 'post',
+                success : function(recievedData)
+                {
+                    //console.log(recievedData);
+                        //alert('ll');
+                        //alert(recievedData);
+                        $('.uncertainty_results').html(recievedData);
+                        return false;
+                       // $(this).closest('form').find("input[type=text], input[type=select]").val("");
+                },
+        });
+        
+        $("#val_range").keyup(function() 
+        { 
+            var val_range = $(this).val();
+            var dataString = 'range='+ val_range;
+            if(val_range!='')
+            {
+                $.ajax({
+                type: "POST",
+                url: path_url+"/Temperatures/search_range",
+                data: dataString,
+                cache: false,
+                beforeSend: ni_start(),  
+                complete: ni_end(),
+                success: function(html)
+                {
+                    $("#search_instrument").html(html).show();
+                }
+                });
+            }
+        });
+        $(document).on('click','.instrument_show',function(){
+            var range_name=$(this).text();
+            var range_id=$(this).attr('id');
+            //alert(range_id);
+            $('#val_range').val(range_name);
+            $('#val_range_hid').val(range_id);
+            $('#search_instrument').fadeOut();
+        });
+       /************************For Sales order Approval End*********************************/
+
+        $('#val_range').blur(function(){
+            $(this).val('');
+            $('#search_instrument').fadeOut();
+        });
+        
+        
+        $(document).on('click','.edit_datauncertain',function(){
+            var data_id = $(this).attr('id');
+               
+            $.ajax({
+                type: "POST",
+                url: path_url+"Temperatures/edit_datauncertain",
+                data: "data_id="+ data_id,
+                cache: false,
+                beforeSend: ni_start(),  
+                complete: ni_end(),
+                success: function(data1)
+                {
+                    edit_node=$.parseJSON(data1);
+                    $('#val_range').val(edit_node.Tempuncertaintydata.rangename);
+                    $('#val_range_hid').val(edit_node.Tempuncertaintydata.range_id);
+                    $('#val_uref1_data1').val(edit_node.Tempuncertaintydata.uref1_data1);
+                    // Uref
+                    $('#val_uref1_data2 :selected').val(edit_node.Tempuncertaintydata.uref1_data2);
+                    $('#val_uref1_data3').val(edit_node.Tempuncertaintydata.uref1_data3);
+                    $('#val_uref2_data1').val(edit_node.Tempuncertaintydata.uref2_data1);
+                    $('#val_uref2_data2 :selected').val(edit_node.Tempuncertaintydata.uref2_data2);
+                    $('#val_uref2_data3').val(edit_node.Tempuncertaintydata.uref2_data3);
+                    $('#val_uref3_data1').val(edit_node.Tempuncertaintydata.uref3_data1);
+                    $('#val_uref3_data2 :selected').val(edit_node.Tempuncertaintydata.uref3_data2);
+                    $('#val_uref3_data3').val(edit_node.Tempuncertaintydata.uref3_data3);
+                    // Uacc
+                    $('#val_uacc1_data1').val(edit_node.Tempuncertaintydata.uacc1_data1);
+                    $('#val_uacc1_data2 :selected').val(edit_node.Tempuncertaintydata.uacc1_data2);
+                    $('#val_uacc1_data3').val(edit_node.Tempuncertaintydata.uacc1_data3);
+                    $('#val_uacc2_data1').val(edit_node.Tempuncertaintydata.uacc2_data1);
+                    $('#val_uacc2_data2 :selected').val(edit_node.Tempuncertaintydata.uacc2_data2);
+                    $('#val_uacc2_data3').val(edit_node.Tempuncertaintydata.uacc2_data3);
+                    $('#val_uacc3_data1').val(edit_node.Tempuncertaintydata.uacc3_data1);
+                    $('#val_uacc3_data2 :selected').val(edit_node.Tempuncertaintydata.uacc3_data2);
+                    $('#val_uacc3_data3').val(edit_node.Tempuncertaintydata.uacc3_data3);
+                    // Others
+                    $('#val_urefdivisor').val(edit_node.Tempuncertaintydata.urefdivisor);
+                    $('#val_urepdivisor').val(edit_node.Tempuncertaintydata.urepdivisor);
+                    $('#val_uresdivisoranalog').val(edit_node.Tempuncertaintydata.uresdivisoranalog);
+                    $('#val_uresdivisordigital').val(edit_node.Tempuncertaintydata.uresdivisordigital);
+                    $('#val_divisor').val(edit_node.Tempuncertaintydata.divisor);
+                    
+                    
+                    $('.add_all_fields').text('Edit');
+                    $('.add_all_fields').attr('id',edit_node.Tempuncertaintydata.id);
+                    console.log(edit_node);
+                }
+            });
+        });
+        
     });
 </script>
         
@@ -65,7 +173,7 @@
 </div>
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home', array('controller' => 'Dashboards', 'action' => 'index')); ?></li>
-    <li><?php echo $this->Html->link('Uncertainty Data', array('controller' => 'Temperatures', 'action' => 'index')); ?></li>
+    <li><?php echo $this->Html->link('Uncertainty Data', array('controller' => 'Temperatures', 'action' => 'uncertainty')); ?></li>
     <li>Add Uncertainty Data</li>
 </ul>
 <!-- END Forms General Header -->
@@ -131,23 +239,24 @@
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'3'));
             ?>    
             </div>
-             <div class="col-md-4">
-						<label class="col-md-6 control-label" for="val_ref_no">Active</label>
-						<div class="col-md-2">
-							<input  class="" type="checkbox" value="" name="">
-						</div>
-					</div>
-                    <div class="col-md-4">
-						<label class="col-md-6 control-label" for="val_ref_no">Is Visible In Report</label>
-						<div class="col-md-2 padding_l_7">
-							<input  class="" type="checkbox" value="" name="">
-						</div>
-					</div>
+            <div class="col-md-4">
+                <label class="col-md-6 control-label" for="val_active">Active</label>
+                <div class="col-md-2">
+                        <input  class="" type="checkbox" value="" name="active" id="val_active">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="col-md-6 control-label" for="val_visible">Is Visible In Report</label>
+                <div class="col-md-2 padding_l_7">
+                        <input  class="" type="checkbox" value="" name="visible" id="val_visible">
+                </div>
+            </div>
             </div>
             
             <?php 	echo $this->Form->end(); ?>
             <?php echo $this->Form->create('Tempuncertaintydata', array('class' => 'form-horizontal form-bordered ajaxform', 'id' => 'fileupload', 'enctype' => 'multipart/form-data')); ?>
-
+            <?php echo $this->Form->input('Tempuncertaintydata.temp_uncertainty_id', array('type'=>'hidden','value'=>'')); ?>
+            <?php echo $this->Form->input('Tempuncertaintydata.sendtype', array('type'=>'hidden','value'=>'add')); ?>
             <div class="col-lg-12">
                 <h4 class="sub-header"><small>Uncertainty</small></h4>
             </div>
@@ -157,21 +266,24 @@
                       <div class="form-group pull-right col-md-12">
                         <label class="col-md-5 control-label row" for="val_range">Range </label>
                         <div class="col-md-7">
-                            <?php echo $this->Form->input('range_id', array('id' => 'val_range', 'class' => 'form-control', 'placeholder' => 'Enter the Range', 'label' => false,'autoComplete'=>'off')); ?>
+                            <?php echo $this->Form->input('range_id', array('id' => 'val_range', 'class' => 'form-control', 'placeholder' => 'Enter the Range', 'label' => false,'autoComplete'=>'off','type'=>'text')); ?>
+                            <?php echo $this->Form->input('range_id_hid', array('id' => 'val_range_hid', 'class' => 'form-control', 'label' => false,'autoComplete'=>'off','type'=>'hidden')); ?>
+                            <div id="search_instrument" class="instrument_drop">  </div>
                         </div>
+                        
                        </div>
                     </div>
                     <div class="form-group col-md-12">
                       <div class="col-md-12">
                         <label class="col-md-1 control-label" for="val_uref1">Uref1 </label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('uref1_data1', array('id' => 'val_uref1', 'class' => 'form-control', 'placeholder' => 'Enter the Uref1', 'label' => false,'autoComplete'=>'off')); ?>
+                            <?php echo $this->Form->input('uref1_data1', array('id' => 'val_uref1_data1', 'class' => 'form-control', 'placeholder' => 'Enter the Uref1', 'label' => false,'autoComplete'=>'off')); ?>
                         </div>
                         <div class="col-md-4">
-                           <?php echo $this->Form->input('uref1_data2', array('id' => 'val_attn', 'class' => 'form-control uref_drpdwn', 'label' => false, 'type' => 'select', 'options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
+                           <?php echo $this->Form->input('uref1_data2', array('id' => 'val_uref1_data2', 'class' => 'form-control uref_drpdwn', 'label' => false, 'type' => 'select', 'options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
                         </div>
                         <div class="col-md-3">
-                            <?php echo $this->Form->input('uref1_data3', array('id' => 'val_ref_no', 'class' => 'form-control drpdwn_value', 'label' => false, 'placeholder' => '')); ?>
+                            <?php echo $this->Form->input('uref1_data3', array('id' => 'val_uref1_data3', 'class' => 'form-control drpdwn_value', 'label' => false, 'placeholder' => '')); ?>
                         </div>             
                    </div>
                 </div>
@@ -179,15 +291,15 @@
                       <div class="col-md-12">
                         <label class="col-md-1 control-label" for="val_duedate">Uref2 </label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('uref2_data1', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
+                            <?php echo $this->Form->input('uref2_data1', array('id' => 'val_uref2_data1', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
                         
                         </div>
                         <div class="col-md-4">
-                           <?php echo $this->Form->input('uref2_data2', array('id' => 'val_attn', 'class' => 'form-control uref_drpdwn', 'label' => false, 'type' => 'select', 'options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
+                           <?php echo $this->Form->input('uref2_data2', array('id' => 'val_uref2_data2', 'class' => 'form-control uref_drpdwn', 'label' => false, 'type' => 'select', 'options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
                         
                         </div>
                         <div class="col-md-3">
-                            <?php echo $this->Form->input('uref2_data3', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
+                            <?php echo $this->Form->input('uref2_data3', array('id' => 'val_uref2_data3', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
                         </div>             
                    </div>
                 </div>
@@ -195,15 +307,15 @@
                       <div class="col-md-12">
                         <label class="col-md-1 control-label" for="val_duedate">Uref3 </label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('uref3_data1', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
+                            <?php echo $this->Form->input('uref3_data1', array('id' => 'val_uref3_data1', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
                         
                         </div>
                         <div class="col-md-4">
-                           <?php echo $this->Form->input('uref3_data2', array('id' => 'val_attn', 'class' => 'form-control uref_drpdwn', 'label' => false, 'type' => 'select','options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
+                           <?php echo $this->Form->input('uref3_data2', array('id' => 'val_uref3_data2', 'class' => 'form-control uref_drpdwn', 'label' => false, 'type' => 'select','options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
                         
                         </div>
                         <div class="col-md-3">
-                            <?php echo $this->Form->input('uref3_data3', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
+                            <?php echo $this->Form->input('uref3_data3', array('id' => 'val_uref3_data3', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
                         </div>             
                    </div>
                 </div>
@@ -211,15 +323,15 @@
                       <div class="col-md-12">
                         <label class="col-md-1 control-label" for="val_duedate">Uacc1 </label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('uacc1_data1', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
+                            <?php echo $this->Form->input('uacc1_data1', array('id' => 'val_uacc1_data1', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
                         
                         </div>
                         <div class="col-md-4">
-                           <?php echo $this->Form->input('uacc1_data2', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select','options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
+                           <?php echo $this->Form->input('uacc1_data2', array('id' => 'val_uacc1_data2', 'class' => 'form-control', 'label' => false, 'type' => 'select','options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
                         
                         </div>
                         <div class="col-md-3">
-                            <?php echo $this->Form->input('uacc1_data3', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
+                            <?php echo $this->Form->input('uacc1_data3', array('id' => 'val_uacc1_data3', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
                         </div>             
                    </div>
                 </div>
@@ -227,15 +339,15 @@
                       <div class="col-md-12">
                         <label class="col-md-1 control-label" for="val_duedate">Uacc2 </label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('uacc2_data1', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
+                            <?php echo $this->Form->input('uacc2_data1', array('id' => 'val_uacc2_data1', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
                         
                         </div>
                         <div class="col-md-4">
-                           <?php echo $this->Form->input('uacc2_data2', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
+                           <?php echo $this->Form->input('uacc2_data2', array('id' => 'val_uacc2_data2', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
                         
                         </div>
                         <div class="col-md-3">
-                            <?php echo $this->Form->input('uacc2_data3', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
+                            <?php echo $this->Form->input('uacc2_data3', array('id' => 'val_uacc2_data3', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
                         </div>             
                    </div>
                 </div>
@@ -243,46 +355,46 @@
                       <div class="col-md-12">
                         <label class="col-md-1 control-label" for="val_duedate">Uacc3 </label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('uacc3_data1', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
+                            <?php echo $this->Form->input('uacc3_data1', array('id' => 'val_uacc3_data1', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
                         
                         </div>
                         <div class="col-md-4">
-                           <?php echo $this->Form->input('uacc3_data2', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
+                           <?php echo $this->Form->input('uacc3_data2', array('id' => 'val_uacc3_data2', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
                         
                         </div>
                         <div class="col-md-3">
-                            <?php echo $this->Form->input('uacc3_data3', array('id' => 'val_ref_no', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
+                            <?php echo $this->Form->input('uacc3_data3', array('id' => 'val_uacc3_data3', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
                         </div>             
                    </div>
                 </div>
                 <div class="form-group pull-right col-md-12">
                         <label class="col-md-5 control-label row" for="val_duedate">Urefdivisor </label>
                         <div class="col-md-7">
-                            <?php echo $this->Form->input('urefdivisor', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
+                            <?php echo $this->Form->input('urefdivisor', array('id' => 'val_urefdivisor', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
                         </div>
                        </div>
                        <div class="form-group pull-right col-md-12">
                         <label class="col-md-5 control-label row" for="val_duedate">Uresdivisoranalog </label>
                         <div class="col-md-7">
-                            <?php echo $this->Form->input('uresdivisoranalog', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
+                            <?php echo $this->Form->input('uresdivisoranalog', array('id' => 'val_uresdivisoranalog', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
                         </div>
                        </div>
                        <div class="form-group pull-right col-md-12">
                         <label class="col-md-5 control-label row" for="val_duedate">Uresdivisordigital </label>
                         <div class="col-md-7">
-                            <?php echo $this->Form->input('uresdivisordigital', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
+                            <?php echo $this->Form->input('uresdivisordigital', array('id' => 'val_uresdivisordigital', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
                         </div>
                        </div>
                        <div class="form-group pull-right col-md-12">
                         <label class="col-md-5 control-label row" for="val_duedate">Urepdivisor </label>
                         <div class="col-md-7">
-                            <?php echo $this->Form->input('urepdivisor', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
+                            <?php echo $this->Form->input('urepdivisor', array('id' => 'val_urepdivisor', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
                         </div>
                        </div>
                        <div class="form-group pull-right col-md-12">
                         <label class="col-md-5 control-label row" for="val_duedate">Divisor </label>
                         <div class="col-md-7">
-                            <?php echo $this->Form->input('divisor', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
+                            <?php echo $this->Form->input('divisor', array('id' => 'val_divisor', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off','value'=>'0')); ?>
                         </div>
                        </div>
                         <div class="form-group col-md-12">
@@ -713,8 +825,8 @@
                 <div class="form-group form-actions">
                 <div class="col-md-2 pull-right row">
                
-                    <?php echo $this->Form->button('<i class="fa fa-plus"></i> Add', array('type' => 'button', 'class' => 'btn btn-sm btn-primary add_all_fields', 'escape' => false)); ?> &nbsp;
-                    <?php echo $this->Form->button('<i class="fa fa-times-circle"></i> Cancel', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                    <?php echo $this->Form->button('<i class="fa fa-plus"></i> Add', array('type' => 'button', 'class' => 'btn btn-sm btn-primary add_all_fields','id'=>'','escape' => false)); ?> &nbsp;
+                    
                 </div>
             </div>
             </div>
@@ -754,166 +866,14 @@
                             <th class="text-center">Uother10</th>
                             <th class="text-center">Uother11</th>
                             <th class="text-center">Uother12</th>
+                            <th class="text-center">Uother13</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody class="subcontract_instrument_info"> 
-                        <tr class="text-center">    
-                            <td class="text-center">1</td>
-                            <td class="text-center">-75.00 ~ -30.0001/°C</td>
-                            <td class="text-center">0.04</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">0.01</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">2</td>
-                            <td class="text-center">1.732</td>
-                            <td class="text-center">3.464</td>
-                            <td class="text-center">1</td>
-                            <td class="text-center">1.732</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">0.027</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">
-                            <div class="btn-group action_un_btn"><a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="#" data-original-title="Edit">
-                            <i class="fa fa-pencil"></i></a>
-                            <a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="#" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
-                            </td>
-                        </tr>
-                        <tr class="text-center">    
-                            <td class="text-center">2</td>
-                            <td class="text-center">-75.00 ~ -30.0001/°C</td>
-                            <td class="text-center">0.04</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">0.01</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">2</td>
-                            <td class="text-center">1.732</td>
-                            <td class="text-center">3.464</td>
-                            <td class="text-center">1</td>
-                            <td class="text-center">1.732</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">0.027</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">
-                            <div class="btn-group action_un_btn"><a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="#" data-original-title="Edit">
-                            <i class="fa fa-pencil"></i></a>
-                            <a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="#" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
-                            </td>
-                        </tr>
-                        <tr class="text-center">    
-                            <td class="text-center">3</td>
-                            <td class="text-center">-75.00 ~ -30.0001/°C</td>
-                            <td class="text-center">0.04</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">0.01</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">2</td>
-                            <td class="text-center">1.732</td>
-                            <td class="text-center">3.464</td>
-                            <td class="text-center">1</td>
-                            <td class="text-center">1.732</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">0.027</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">
-                            <div class="btn-group action_un_btn"><a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="#" data-original-title="Edit">
-                            <i class="fa fa-pencil"></i></a>
-                            <a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="#" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
-                            </td>
-                        </tr>
-                        <tr class="text-center">    
-                            <td class="text-center">4</td>
-                            <td class="text-center">-75.00 ~ -30.0001/°C</td>
-                            <td class="text-center">0.04</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">0.01</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">2</td>
-                            <td class="text-center">1.732</td>
-                            <td class="text-center">3.464</td>
-                            <td class="text-center">1</td>
-                            <td class="text-center">1.732</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">0.027</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center">
-                            <div class="btn-group action_un_btn"><a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="#" data-original-title="Edit">
-                            <i class="fa fa-pencil"></i></a>
-                            <a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="#" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
-                            </td>
-                        </tr>
+                        
+                        
+                        
                     </tbody>
                 </table>
             </div>

@@ -1,5 +1,4 @@
 <?php ?>
-<?php if($trigger == 'rangein'){ ?><div >Range Already Exists</div> <?php } ?>
 <table  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>

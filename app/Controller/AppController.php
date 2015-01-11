@@ -765,4 +765,11 @@ App::uses('Controller', 'Controller');
         {
             $this->Session->delete($data);
         }
+        public function unit_symbol($id = null)
+        {
+            APP::import('Model','Tempunit');
+            $this->Tempunit   =   new Tempunit();
+            $unit_data = $this->Tempunit->find('first',array('conditions'=>array('Tempunit.id'=>$id)));
+            return $unit_data['Tempunit']['unitname'];
+        }
 }

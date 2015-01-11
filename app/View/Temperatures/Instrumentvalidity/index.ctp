@@ -1,5 +1,5 @@
                             <h1>
-                                <i class="fa fa-table"></i>Relative humidity(Temperature)
+                                <i class="fa fa-table"></i>Instrument validity(Temperature)
                             </h1>
                         </div>
                     </div>
