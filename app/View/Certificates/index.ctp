@@ -40,13 +40,19 @@
                                                 <option value="10">TS 0001-15</option>
                                               </select></td>
                                             <td><select>
-                                                <option value="1" selected="selected">TEMPERATURE</option>
-                                                <option value="2">HUMIDITY</option>
+                                               
+                                                <option value="" selected="selected">Select</option>
+                                                <?php foreach($readingtype_data as $k=>$v)
+												      {   ?> 
+                                                			<option value="<?php echo $k;?>"><?php echo $v;?></option>
+                                                <?php }   ?>            
                                               </select></td>
                                             <td><select>
-                                                <option value="1" selected="selected">CHANNEL-1</option>
-                                                <option value="2">CHANNEL-2</option>
-                                                <option value="3">CHANNEL-3</option>
+                                                <option value="" selected="selected">Select</option>
+                                                <?php foreach($channel_data as $k=>$v)
+												      {   ?> 
+                                                			<option value="<?php echo $k;?>"><?php echo $v;?></option>
+                                                <?php }   ?> 
                                               </select></td>
                                           </tr>
                                         </tbody>
