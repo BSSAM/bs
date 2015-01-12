@@ -48,13 +48,13 @@
                     }
                     else
                     {
-                        $this->Session->setFlash(__('Tag No Alreasy Exists'));
+                        $this->Session->setFlash(__('Tag No Already Exists'));
                         $this->redirect(array('controller'=>'Temperatures','action'=>'uncertainty'));
                     }
                 }
                 else
                 {
-                    $this->Session->setFlash(__('Instrument Alreasy Exists'));
+                    $this->Session->setFlash(__('Instrument Already Exists'));
                     $this->redirect(array('controller'=>'Temperatures','action'=>'uncertainty'));
                 }
             }
@@ -1351,9 +1351,8 @@
                     {
                         $arr[] = $val;
                         //pr($arr);
-                        echo "<div class='customer_instrument_show' align='left' id='".$data[$i]['Instrument']['id']."'>";
-
-                        echo $data[$i]['Instrument']['name'].'-'.$data[$i]['Range']['range_name'].'-'.$data[$i]['Description']['model_no'];
+                        echo "<div class='instrument_show' align='left' id='".$data[$i]['Instrument']['id']."$".$data[$i]['Range']['id']."$".$data[$i]['Description']['model_no']."$".$data[$i]['Description']['brand_id']."'>";
+                        echo $data[$i]['Instrument']['name'].'-'.$data[$i]['Range']['range_name'].'-'.$data[$i]['Description']['model_no'].'-'.$data[$i]['Brand']['brandname'];
                         echo "<br>";
                         echo "</div>";
                     }
@@ -1368,13 +1367,44 @@
             }
         }
         
-        public function get_range()
+        public function get_instrument_details()
         {
-            $this->layout   =   'ajax';
-            $instrument_id  =   $this->request->data['instrument_id'];
-            $instrument_range    =    $this->InstrumentRange->find('all',array('conditions'=>array('InstrumentRange.instrument_id'=>$instrument_id),'order'=>'InstrumentRange.id desc','contain'=>array('Range'=>array('fields'=>array('id','range_name')))));
-            $this->set('ranges',$instrument_range);
-
+            $this->autoRender = false;
+            $instrument_details =  $this->request->data['instrument_details'];
+            $spli = explode('$',$instrument_details);
+            $ins_id = $spli[0];
+            $range_id = $spli[1];
+            $model_no = $spli[2];
+            $brand_id = $spli[3];
+            $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$ins_id,'Description.sales_range'=>$range_id,'Description.model_no'=>$model_no,'Description.brand_id'=>$brand_id)));
+            //pr($data);exit;
+           echo json_encode($data);
+        }
+        public function customer_search()
+        {
+            $this->loadModel('Customer');
+            $name =  $this->request->data['name'];
+            $this->autoRender = false;
+            $data = $this->Customer->find('all',array('conditions'=>array('Customertagname LIKE'=>'%'.$name.'%','Customer.is_deleted'=>0,'Customer.is_approved'=>1,'Customer.status'=>1)));
+            $c = count($data);
+            if($c>0)
+            {
+                for($i = 0; $i<$c;$i++)
+                { 
+                    echo "<div class='customer_show instrument_drop_show' align='left' id='".$data[$i]['Customer']['id']."'>";
+                    echo $data[$i]['Customer']['Customertagname'];
+                    echo "<br>";
+                    echo "</div>";
+                }
+            }
+            else
+            {
+                    echo "<div class='no_result instrument_drop_show' align='left'>";
+                    echo "No Results Found";
+                    echo "<br>";
+                    echo "</div>";
+            }
+            
         }
         
     

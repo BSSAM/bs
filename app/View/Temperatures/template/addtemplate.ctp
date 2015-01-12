@@ -1,7 +1,17 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
+    
     $(document).ready(function(){
-        $("#instrument_result",window.parent.document).hide();
+        
+        $('#val_tempinstrumentname').val('');
+        $('#val_model').val('').attr('readonly','readonly');
+        $('#val_brand').val('').attr('readonly','readonly');
+        $('#val_range').val('').attr('readonly','readonly');
+        $('#val_customer').val('');
+        $("#instrument_details").val('');
+        $('#customer_id').val('');
+        
+        $("#search_instrument",window.parent.document).hide();
     
         $("#val_tempinstrumentname").keyup(function() 
         { 
@@ -20,36 +30,85 @@
                 {
                     //alert(html);
                     //console.log(html);
-                    $(".instrument_result").html(html).show();
+                    $("#search_instrument").html(html).show();
                 },
                 complete: ni_end(),  
                 });
             }
-            $('.customer_instrument_show').fadeOut();
+            $('.instrument_show').fadeOut();
             return false;    
         });
-        $(document).on('click','.customer_instrument_show',function(){
+        $(document).on('click','.instrument_show',function(){
         
-        var instrument_id   =   $(this).attr('id');
-        $('#in_id').val(instrument_id);
-        $(".instrument_result").fadeOut();
-        var ins_text=$(this).text();
-        $('#customer_instrument').val(ins_text);
+            //alert($(this).attr('id'));
+            var instrument_details   =   $(this).attr('id');
+            //$('#in_id').val(instrument_id);
+            $("#search_instrument").fadeOut();
+            $("#instrument_details").val($(this).attr('id'));
+            var ins_text=$(this).text();
+           // $('#customer_instrument').val(ins_text);
+
+
+            $.ajax({
+                    type: 'POST',
+                    data:"instrument_details="+instrument_details,
+                    url: path_url+'/Temperatures/get_instrument_details/',
+                    beforeSend: ni_start(),  
+                    success:function(data){
+                        parsedata = $.parseJSON(data);
+
+                        $('#val_tempinstrumentname').val(parsedata.Instrument.name);
+                        $('#val_model').val(parsedata.Description.model_no);
+                        $('#val_brand').val(parsedata.Brand.brandname);
+                        $('#val_range').val(parsedata.Range.range_name);
+
+                    },
+                    complete: ni_end(),
+                });
+        });
         
-        //alert(instrument_id);
-//        alert(instrument_id);
-        $.ajax({
-		type: 'POST',
-                data:"instrument_id="+instrument_id,
-		url: path_url+'/Temperatures/get_range/',
+        $('.check_unit').on('click',function(){
+            var val_u = $('#val_unit').val();
+            if(val_u == '')
+            {
+                alert('Please Select Unit First');
+                $('#val_prefref').val('');
+                return false;
+            }
+        });
+        
+        
+        $("#result").hide();
+        $("#val_customer").keyup(function() 
+        { 
+
+            var customer = $(this).val();
+            var dataString = 'name='+ customer;
+            if(customer!='')
+            {
+                $.ajax({
+                type: "POST",
+                url: path_url+"/Temperatures/customer_search",
+                data: dataString,
+                cache: false,
                 beforeSend: ni_start(),  
-                success:function(data){
-                    $('#range_array').empty().append('<option value="">Select Range</option>');
-                    $('#range_array').append(data);
-                },
                 complete: ni_end(),
-            });
-    });
+                success: function(html)
+                {
+                    $("#result").html(html).show();
+                }
+                });
+            }
+        });
+        $(document).on('click','.customer_show',function(){
+            var customer_name=$(this).text();
+            $('#result').fadeOut();
+            var customer_id=$(this).attr('id');
+            //alert(customer_name);
+            //alert(customer_id);
+            $('#val_customer').val(customer_name);
+            $('#customer_id').val(customer_id);
+        });
     });
 </script>
 <h1>
@@ -94,8 +153,10 @@
 
 
             <?php //echo $this->Form->create('Subcontractdo', array('class' => 'form-horizontal form-bordered', 'id' => 'subcontractdo-add', 'enctype' => 'multipart/form-data')); ?>
-            <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
-            <?PHP echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
+            <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
+            <?PHP //echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
+            <?PHP echo $this->Form->input('instrument_details',array('id'=>'instrument_details','type'=>'hidden')); ?>
+            <?PHP echo $this->Form->input('customer_id',array('id'=>'customer_id','type'=>'hidden')); ?>
 <!--            <div class="description_list">
                 
             </div>-->
@@ -103,7 +164,7 @@
                 <label class="col-md-2 control-label" for="val_tempinstrumentname">Instrument</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('instrumentname', array('id' => 'val_tempinstrumentname', 'class' => 'form-control', 'placeholder' => 'Enter the Instrument Name', 'label' => false,'autoComplete'=>'off')); ?>
-                    <div class="instrument_result" style="display:none;"></div>
+                    <div class="instrument_drop" id="search_instrument"></div>
                 </div>
                 <label class="col-md-2 control-label" for="val_model">Model</label>
                 <div class="col-md-4">
@@ -128,6 +189,7 @@
                 <label class="col-md-2 control-label" for="val_customer">Customer</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('customer', array('id'=>'val_customer','type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Customer')); ?>
+                    <div id="result" class="instrument_drop"></div>
                 </div>
             </div>
 
@@ -167,19 +229,19 @@
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('resolution', array('id' => 'val_resolution', 'class' => 'form-control',
-                             'label' => false,'type' => 'text', 'placeholder' => 'Select Resolution')); ?>
+                             'label' => false,'type' => 'text', 'placeholder' => 'Enter Resolution','value'=>'0.00')); ?>
                
                 </div>  
                 <label class="col-md-2 control-label" for="val_resolution">Accuracy</label>
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('accuracy', array('id' => 'val_accuracy', 'class' => 'form-control',
-                             'label' => false,'type' => 'text', 'placeholder' => 'Select Accuracy')); ?>
+                             'label' => false,'type' => 'text', 'placeholder' => 'Select Accuracy','value'=>'0')); ?>
                
                 </div>  
                 
             </div>
-            <div class="form-group">
+            <div class="form-group check_unit">
                 
                 <label class="col-md-2 control-label" for="val_prefref">Pref Reference</label>
                 <div class="col-md-8">
