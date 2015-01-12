@@ -8,7 +8,7 @@
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
-							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange');
+							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate');
         public function uncertainty()
         {
             $uncertainty_data = $this->Tempuncertainty->find('all',array('conditions'=>array('Tempuncertainty.is_deleted'=>0)),array('order'=>'Tempuncertainty.id Desc','recursive'=>'2'));
@@ -1254,36 +1254,44 @@
             $this->set('template', $template_data);
             $this->render('template/index');
         }
-        public function addtemplate($file)
-        {
-            $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
-            $this->set('uncer_tag',$uncer_tag);
-            
-            $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
-            $this->set('unit_list',$unit_list);
-            
-            if($this->request->is('post'))
-            {
-                $instrumentname = $this->request->data['instrumentname'];
-                $tagno = $this->request->data['tagno'];
-                $description = $this->request->data['description'];
-                $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.instrumentname ='=>$this->request->data['instrumentname']),'recursive'=>'2'));
-                if(!$template_data){
-                if($this->Temptemplate->save($this->request->data))
-                {
-                    $last_insert_id =   $this->Temptemplate->getLastInsertID();
-                    $this->Session->setFlash(__('Template is Added Successfully'));
-                }
-                    
-                }
-                else{
-                    $this->Session->setFlash(__('Template Already Exists!'));
-                }
-            
-            $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
-            }
-            $this->render('template/'.$file);
-        }
+       public function addtemplate($file)
+{
+$uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
+$this->set('uncer_tag',$uncer_tag);
+
+$unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
+$this->set('unit_list',$unit_list);
+
+if($this->request->is('post'))
+{
+//pr($this->request->data);exit;
+$ids = array();
+$ids = explode("$", $this->request->data['template/addtemplate']['instrument_details']);
+$this->request->data['Temptemplate']['temp_instruments_id'] = $ids[0];
+$this->request->data['Temptemplate']['model'] = $ids[2];
+$this->request->data['Temptemplate']['brand_id'] = $ids[3];
+$this->request->data['Temptemplate']['range_id'] = $ids[1];
+$this->request->data['Temptemplate']['customer_id'] = $this->request->data['template/addtemplate']['customer_id'];
+
+
+$template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id ='=>$this->request->data['Temptemplate']['temp_instruments_id']),'recursive'=>'2'));
+if(!$template_data){
+if($this->Temptemplate->save($this->request->data['Temptemplate']))
+{
+$last_insert_id = $this->Temptemplate->getLastInsertID();
+$this->Session->setFlash(__('Template is Added Successfully'));
+}
+
+}
+else{
+$this->Session->setFlash(__('Template Already Exists!'));
+}
+
+$this->redirect(array('controller'=>'Temperatures','action'=>'template'));
+}
+$this->render('template/'.$file);
+}
+
         public function edittemplate($file, $id = null)
         {
             $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.id'=>$id),'recursive'=>'2'));
@@ -1342,7 +1350,7 @@
         //echo $c; 
             if($c>0)
             {
-                $arr = [];
+                $arr = array();
                 for($i = 0; $i<$c;$i++)
                 { 
                     $val = $data[$i]['Instrument']['name'].'-'.$data[$i]['Range']['range_name'].'-'.$data[$i]['Description']['model_no'];
@@ -1366,6 +1374,39 @@
                     echo "</div>";
             }
         }
+        
+        public function addtemplatedata()
+        {
+            $this->layout = 'ajax';
+
+            $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
+            $this->set('uncer_tag',$uncer_tag);
+
+            $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
+            $this->set('unit_list',$unit_list);
+
+            if($this->request->is('post'))
+            {
+            //pr($this->request->data);exit;
+
+                if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
+                {
+
+                $temptemplatedata = $this->Temptemplatedata->find('all');
+                $this->set('temptemplatedata',$temptemplatedata);
+
+                }
+
+
+                else{
+
+                }
+
+
+            }
+
+        }
+
         
         public function get_instrument_details()
         {
