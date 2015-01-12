@@ -38,6 +38,37 @@
             $('.instrument_show').fadeOut();
             return false;    
         });
+		
+		$('.templateFormSubmit').click(function(e) {  
+			
+			    $('#temp-template-add').submit();
+            
+        });
+		
+		$('.readingtype').change(function(e) {
+            $('.readingtypename').val($('.readingtype option:selected').text());
+        });
+		
+		$('.temp_unit_id').change(function(e) {
+            $('.unitname').val($('.temp_unit_id option:selected').text());
+        });
+		
+		$('.templatedataFormSubmit').click(function(e) {
+			
+               $('.ajaxform').submit(); 
+			   
+        });
+		
+        $('.ajaxform').ajaxForm({ 
+            url: path_url+'Temperatures/addtemplatedata/',
+                type: 'post',
+                success : function(recievedData)
+                {
+					$('.template_data_table').html(recievedData);
+					 return false;
+				}
+		});
+		
         $(document).on('click','.instrument_show',function(){
         
             //alert($(this).attr('id'));
@@ -128,7 +159,7 @@
         <!-- Basic Form Elements Block -->
         <div class="block">
             <!-- Basic Form Elements Title -->
-            <?php echo $this->Form->create('template/addtemplate', array('class' => 'form-horizontal form-bordered', 'id' => 'temp-template-add', 'enctype' => 'multipart/form-data')); ?>
+           
 <!--            <div class="block-title">
                 <h2>
                     <div class="form-group">
@@ -152,7 +183,7 @@
             <!-- Basic Form Elements Content -->
 
 
-            <?php //echo $this->Form->create('Subcontractdo', array('class' => 'form-horizontal form-bordered', 'id' => 'subcontractdo-add', 'enctype' => 'multipart/form-data')); ?>
+            <?php echo $this->Form->create('template/addtemplate', array('class' => 'form-horizontal form-bordered', 'id' => 'temp-template-add', 'enctype' => 'multipart/form-data')); ?>
             <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
             <?PHP //echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
             <?PHP echo $this->Form->input('instrument_details',array('id'=>'instrument_details','type'=>'hidden')); ?>
@@ -192,6 +223,8 @@
                     <div id="result" class="instrument_drop"></div>
                 </div>
             </div>
+             <?php 	echo $this->Form->end(); ?>
+            <?php echo $this->Form->create('Temptemplatedata', array('class' => 'form-horizontal form-bordered templatedataForm ajaxform', 'id' => 'fileupload', 'enctype' => 'multipart/form-data')); ?>
 
             <div class="col-lg-12">
                 <h4 class="sub-header"><small>Template Detail</small></h4>
@@ -205,19 +238,21 @@
                 <label class="col-md-2 control-label" for="val_readingtype">Reading Type</label>
                 <div class="col-md-4">
                 <?php
-                    echo $this->Form->input('readingtype', array('id' => 'val_readingtype', 'class' => 'form-control',
+                    echo $this->Form->input('temp_readingtype_id', array('id' => 'val_readingtype', 'class' => 'form-control readingtype',
                              'label' => false,'type' => 'select', 'options'=>array('1'=>'Temperature'),'readonly')); ?>
                
                 </div>  
+                <input type="hidden" name="data[Temptemplatedata][readingtypename]" class="readingtypename" />
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_unit">Unit</label>
                 <div class="col-md-4">
                 <?php
-                    echo $this->Form->input('unit', array('id' => 'val_unit', 'class' => 'form-control',
+                    echo $this->Form->input('temp_unit_id', array('id' => 'val_unit', 'class' => 'form-control temp_unit_id',
                              'label' => false,'type' => 'select', 'empty' => 'Select Unit','options'=>$unit_list)); ?>
                
-                </div>  
+                </div>
+                 <input type="hidden" name="data[Temptemplatedata][unitname]" class="unitname" />  
                 <label class="col-md-2 control-label" for="val_count">Count</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('count', array('id'=>'val_count','type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Count')); ?>
@@ -245,17 +280,24 @@
                 
                 <label class="col-md-2 control-label" for="val_prefref">Pref Reference</label>
                 <div class="col-md-8">
-                    <?php echo $this->Form->input('prefref', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
+                    <?php echo $this->Form->input('temp_uncertainty_id', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
                 </div>
                 
             </div>
+            
+             <div class="form-group form-actions">
+                <div class="col-md-9 col-md-offset-10">
+                <a class="btn btn-sm btn-primary templatedataFormSubmit"><i class="fa fa-angle-right"> </i> Add</a>
+                </div>
+            </div>
+                
             
            
             <div class="col-lg-12">
                 <h4 class="sub-header"><small><b>Datas </b</small></h4>
             </div>
             <div class="col-sm-3 col-lg-12 template_detail">
-                <table  class="table table-vcenter table-condensed table-bordered">
+                <table  class="table table-vcenter table-condensed table-bordered template_data_table">
                     <thead>
                         <tr>
                             <th class="text-center">S.No</th>
@@ -278,16 +320,18 @@
                     </tbody>
                 </table>
             </div>
+            <?php echo $this->Form->end(); ?>
             <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-10">
-                    <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?> &nbsp;
+                <a class="btn btn-sm btn-primary templateFormSubmit"><i class="fa fa-angle-right"> </i> Submit</a>
+                    <?php //echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?> &nbsp;
                     <?php //echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                 </div>
             </div>
 
 
             <!-- panel -->
-<?php echo $this->Form->end(); ?>
+
             <!-- END Basic Form Elements Content -->
         </div>
         <!-- END Basic Form Elements Block -->

@@ -39,11 +39,11 @@
                                     <tr <?php if($template_list['Temptemplate']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?php echo $template_list['Temptemplate']['id'];?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['instrument'];?></td>
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['brand'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['temp_instruments_id'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['brand_id'];?></td>
                                         <td class="text-center"><?php echo $template_list['Temptemplate']['model'];?></td>
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['range'];?></td>
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['customer'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['range_id'];?></td>
+                                        <td class="text-center"><?php echo $template_list['Temptemplate']['customer_id'];?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php //if($userrole['edit']==1){ ?>
