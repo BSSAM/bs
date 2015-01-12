@@ -18,8 +18,9 @@
                 beforeSend: ni_start(),  
                 success: function(html)
                 {
-                    alert(html);
-                    //$(".instrument_result").html(html).show();
+                    //alert(html);
+                    //console.log(html);
+                    $(".instrument_result").html(html).show();
                 },
                 complete: ni_end(),  
                 });

@@ -1336,18 +1336,27 @@
         {
         $this->autoRender = false;
         $name =  $this->request->data['name'];
-        $data = $this->Description->find('all',array('conditions'=>array('Instrument.name LIKE'=>'%'.$name.'%','Instrument.is_deleted'=>0,'Instrument.is_approved'=>1),'fields'=>array('Instrument.name', 'DISTINCT Brand.brandname','DISTINCT Instrument.name', 'DISTINCT Brand.brandname')));
+        $data = $this->Description->find('all',array('conditions'=>array('Instrument.name LIKE'=>'%'.$name.'%','Instrument.is_deleted'=>0,'Instrument.is_approved'=>1)));
         //pr($data);exit;
         $c = count($data);
         //echo $c; 
             if($c>0)
             {
+                $arr = [];
                 for($i = 0; $i<$c;$i++)
                 { 
-                    echo "<div class='customer_instrument_show' align='left' id='".$data[$i]['Instrument']['id']."'>";
-                    echo $data[$i]['Instrument']['name'].''.$data[$i]['Range']['range_name'].''.$data[$i]['CustomerInstrument']['model_no'];
-                    echo "<br>";
-                    echo "</div>";
+                    $val = $data[$i]['Instrument']['name'].'-'.$data[$i]['Range']['range_name'].'-'.$data[$i]['Description']['model_no'];
+                    
+                    if(!in_array($val, $arr))
+                    {
+                        $arr[] = $val;
+                        //pr($arr);
+                        echo "<div class='customer_instrument_show' align='left' id='".$data[$i]['Instrument']['id']."'>";
+
+                        echo $data[$i]['Instrument']['name'].'-'.$data[$i]['Range']['range_name'].'-'.$data[$i]['Description']['model_no'];
+                        echo "<br>";
+                        echo "</div>";
+                    }
                 }
             }
             else
