@@ -68,10 +68,103 @@
                 type: 'post',
                 success : function(recievedData)
                 {
-                    //console.log(recievedData);
-                        //alert('ll');
-                        //alert(recievedData);
+                    
                         $('.uncertainty_results').html(recievedData);
+						
+						/***Make fields Empty ***/
+						$('#val_range').val(' ');
+                        $('#val_range_hid').val(' ');
+                        $('#val_uref1_data1').val(' ');
+                        // Uref
+                        $('#val_uref1_data2 :selected').val(' ');
+                        $('#val_uref1_data3').val(' ');
+                        $('#val_uref2_data1').val(' ');
+                        $('#val_uref2_data2 :selected').val(' ');
+                        $('#val_uref2_data3').val(' ');
+                        $('#val_uref3_data1').val(' ');
+                        $('#val_uref3_data2 :selected').val(' ');
+                        $('#val_uref3_data3').val(' ');
+                        // Uacc
+                        $('#val_uacc1_data1').val(' ');
+                        $('#val_uacc1_data2 :selected').val(' ');
+                        $('#val_uacc1_data3').val(' ');
+                        $('#val_uacc2_data1').val(' ');
+                        $('#val_uacc2_data2 :selected').val(' ');
+                        $('#val_uacc2_data3').val(' ');
+                        $('#val_uacc3_data1').val(' ');
+                        $('#val_uacc3_data2 :selected').val(' ');
+                        $('#val_uacc3_data3').val(' ');
+                        // Others
+                        $('#val_urefdivisor').val(' ');
+                        $('#val_urepdivisor').val(' ');
+                        $('#val_uresdivisoranalog').val(' ');
+                        $('#val_uresdivisordigital').val(' ');
+                        $('#val_divisor').val(' ');
+						// Select
+                        $('#val_u1_data1').val(' ');
+                        $('#val_u1_data2').val(' ');
+                        $('#val_u1_data3').val(' ');
+						$('#val_u2_data1').val(' ');
+                        $('#val_u2_data2').val(' ');
+                        $('#val_u2_data3').val(' ');
+						$('#val_u3_data1').val(' ');
+                        $('#val_u3_data2').val(' ');
+                        $('#val_u3_data3').val(' ');
+						$('#val_u4_data1').val(' ');
+                        $('#val_u4_data2').val(' ');
+                        $('#val_u4_data3').val(' ');
+						$('#val_u5_data1').val(' ');
+                        $('#val_u5_data2').val(' ');
+                        $('#val_u5_data3').val(' ');
+						$('#val_u6_data1').val(' ');
+                        $('#val_u6_data2').val(' ');
+                        $('#val_u6_data3').val(' ');
+						$('#val_u7_data1').val(' ');
+                        $('#val_u7_data2').val(' ');
+                        $('#val_u7_data3').val(' ');
+						$('#val_u8_data1').val(' ');
+                        $('#val_u8_data2').val(' ');
+                        $('#val_u8_data3').val(' ');
+						$('#val_u9_data1').val(' ');
+                        $('#val_u9_data2').val(' ');
+                        $('#val_u9_data3').val(' ');
+						$('#val_u10_data1').val(' ');
+                        $('#val_u10_data2').val(' ');
+                        $('#val_u10_data3').val(' ');
+						$('#val_u11_data1').val(' ');
+                        $('#val_u11_data2').val(' ');
+                        $('#val_u11_data3').val(' ');
+						$('#val_u12_data1').val(' ');
+                        $('#val_u12_data2').val(' ');
+                        $('#val_u12_data3').val(' ');
+						$('#val_u13_data1').val(' ');
+                        $('#val_u13_data2').val(' ');
+                        $('#val_u13_data3').val(' ');
+						$('#val_u14_data1').val(' ');
+                        $('#val_u14_data2').val(' ');
+                        $('#val_u14_data3').val(' ');
+						$('#val_u15_data1').val(' ');
+                        $('#val_u15_data2').val(' ');
+                        $('#val_u15_data3').val(' ');
+						$('#val_u16_data1').val(' ');
+                        $('#val_u16_data2').val(' ');
+                        $('#val_u16_data3').val(' ');
+						$('#val_u17_data1').val(' ');
+                        $('#val_u17_data2').val(' ');
+                        $('#val_u17_data3').val(' ');
+						$('#val_u18_data1').val(' ');
+                        $('#val_u18_data2').val(' ');
+                        $('#val_u18_data3').val(' ');
+						$('#val_u19_data1').val(' ');
+                        $('#val_u19_data2').val(' ');
+                        $('#val_u19_data3').val(' ');
+						$('#val_u20_data1').val(' ');
+                        $('#val_u20_data2').val(' ');
+                        $('#val_u20_data3').val(' ');
+
+
+                        $('.add_all_fields').text('Add');
+						$('.edit_uncertainty_bulk_id').val(' ');
                         return false;
                        // $(this).closest('form').find("input[type=text], input[type=select]").val("");
                 },
@@ -154,11 +247,73 @@
                     $('#val_uresdivisoranalog').val(edit_node.Tempuncertaintydata.uresdivisoranalog);
                     $('#val_uresdivisordigital').val(edit_node.Tempuncertaintydata.uresdivisordigital);
                     $('#val_divisor').val(edit_node.Tempuncertaintydata.divisor);
-                    
-                    
-                    $('.add_all_fields').text('Edit');
-                    $('.add_all_fields').attr('id',edit_node.Tempuncertaintydata.id);
-                    console.log(edit_node);
+                    // Select
+                        $('#val_u1_data1').val(edit_node.Tempuncertaintydata.u1_data1);
+                        $('#val_u1_data2').val(edit_node.Tempuncertaintydata.u1_data2);
+                        $('#val_u1_data3').val(edit_node.Tempuncertaintydata.u1_data3);
+						$('#val_u2_data1').val(edit_node.Tempuncertaintydata.u2_data1);
+                        $('#val_u2_data2').val(edit_node.Tempuncertaintydata.u2_data2);
+                        $('#val_u2_data3').val(edit_node.Tempuncertaintydata.u2_data3);
+						$('#val_u3_data1').val(edit_node.Tempuncertaintydata.u3_data1);
+                        $('#val_u3_data2').val(edit_node.Tempuncertaintydata.u3_data2);
+                        $('#val_u3_data3').val(edit_node.Tempuncertaintydata.u3_data3);
+						$('#val_u4_data1').val(edit_node.Tempuncertaintydata.u4_data1);
+                        $('#val_u4_data2').val(edit_node.Tempuncertaintydata.u4_data2);
+                        $('#val_u4_data3').val(edit_node.Tempuncertaintydata.u4_data3);
+						$('#val_u5_data1').val(edit_node.Tempuncertaintydata.u5_data1);
+                        $('#val_u5_data2').val(edit_node.Tempuncertaintydata.u5_data2);
+                        $('#val_u5_data3').val(edit_node.Tempuncertaintydata.u5_data3);
+						$('#val_u6_data1').val(edit_node.Tempuncertaintydata.u6_data1);
+                        $('#val_u6_data2').val(edit_node.Tempuncertaintydata.u6_data2);
+                        $('#val_u6_data3').val(edit_node.Tempuncertaintydata.u6_data3);
+						$('#val_u7_data1').val(edit_node.Tempuncertaintydata.u7_data1);
+                        $('#val_u7_data2').val(edit_node.Tempuncertaintydata.u7_data2);
+                        $('#val_u7_data3').val(edit_node.Tempuncertaintydata.u7_data3);
+						$('#val_u8_data1').val(edit_node.Tempuncertaintydata.u8_data1);
+                        $('#val_u8_data2').val(edit_node.Tempuncertaintydata.u8_data2);
+                        $('#val_u8_data3').val(edit_node.Tempuncertaintydata.u8_data3);
+						$('#val_u9_data1').val(edit_node.Tempuncertaintydata.u9_data1);
+                        $('#val_u9_data2').val(edit_node.Tempuncertaintydata.u9_data2);
+                        $('#val_u9_data3').val(edit_node.Tempuncertaintydata.u9_data3);
+						$('#val_u10_data1').val(edit_node.Tempuncertaintydata.u10_data1);
+                        $('#val_u10_data2').val(edit_node.Tempuncertaintydata.u10_data2);
+                        $('#val_u10_data3').val(edit_node.Tempuncertaintydata.u10_data3);
+						$('#val_u11_data1').val(edit_node.Tempuncertaintydata.u11_data1);
+                        $('#val_u11_data2').val(edit_node.Tempuncertaintydata.u11_data2);
+                        $('#val_u11_data3').val(edit_node.Tempuncertaintydata.u11_data3);
+						$('#val_u12_data1').val(edit_node.Tempuncertaintydata.u12_data1);
+                        $('#val_u12_data2').val(edit_node.Tempuncertaintydata.u12_data2);
+                        $('#val_u12_data3').val(edit_node.Tempuncertaintydata.u12_data3);
+						$('#val_u13_data1').val(edit_node.Tempuncertaintydata.u13_data1);
+                        $('#val_u13_data2').val(edit_node.Tempuncertaintydata.u13_data2);
+                        $('#val_u13_data3').val(edit_node.Tempuncertaintydata.u13_data3);
+						$('#val_u14_data1').val(edit_node.Tempuncertaintydata.u14_data1);
+                        $('#val_u14_data2').val(edit_node.Tempuncertaintydata.u14_data2);
+                        $('#val_u14_data3').val(edit_node.Tempuncertaintydata.u14_data3);
+						$('#val_u15_data1').val(edit_node.Tempuncertaintydata.u15_data1);
+                        $('#val_u15_data2').val(edit_node.Tempuncertaintydata.u15_data2);
+                        $('#val_u15_data3').val(edit_node.Tempuncertaintydata.u15_data3);
+						$('#val_u16_data1').val(edit_node.Tempuncertaintydata.u16_data1);
+                        $('#val_u16_data2').val(edit_node.Tempuncertaintydata.u16_data2);
+                        $('#val_u16_data3').val(edit_node.Tempuncertaintydata.u16_data3);
+						$('#val_u17_data1').val(edit_node.Tempuncertaintydata.u17_data1);
+                        $('#val_u17_data2').val(edit_node.Tempuncertaintydata.u17_data2);
+                        $('#val_u17_data3').val(edit_node.Tempuncertaintydata.u17_data3);
+						$('#val_u18_data1').val(edit_node.Tempuncertaintydata.u18_data1);
+                        $('#val_u18_data2').val(edit_node.Tempuncertaintydata.u18_data2);
+                        $('#val_u18_data3').val(edit_node.Tempuncertaintydata.u18_data3);
+						$('#val_u19_data1').val(edit_node.Tempuncertaintydata.u19_data1);
+                        $('#val_u19_data2').val(edit_node.Tempuncertaintydata.u19_data2);
+                        $('#val_u19_data3').val(edit_node.Tempuncertaintydata.u19_data3);
+						$('#val_u20_data1').val(edit_node.Tempuncertaintydata.u20_data1);
+                        $('#val_u20_data2').val(edit_node.Tempuncertaintydata.u20_data2);
+                        $('#val_u20_data3').val(edit_node.Tempuncertaintydata.u20_data3);
+
+
+                        $('.add_all_fields').text('Edit');
+                        $('.add_all_fields').attr('id',edit_node.Tempuncertaintydata.id);
+						$('.edit_uncertainty_bulk_id').val(edit_node.Tempuncertaintydata.id);
+                        console.log(edit_node);
                 }
             });
         });
@@ -820,6 +975,7 @@
                             </div>
                         </div>
                      </div>
+                     <input type="hidden" name="data[Tempuncertaintydata][edit_uncertainty_bulk_id]" class="edit_uncertainty_bulk_id" />
             </div>
             <div class="col-lg-12">
                 <div class="form-group form-actions">

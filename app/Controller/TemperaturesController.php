@@ -58,6 +58,10 @@
                     $this->redirect(array('controller'=>'Temperatures','action'=>'uncertainty'));
                 }
             }
+			else
+			{
+				     $this->Tempuncertaintydata->deleteAll(array('Tempuncertaintydata.temp_uncertainty_id' => 0));
+			}
             
         }
         public function edituncertainty($id=NULL)
@@ -120,9 +124,9 @@
             $this->set('ranges_list',$ranges_list);
             $this->set('trigger','');
             if($this->request->is('post'))
-            {
-                if($this->request->data['Tempuncertaintydata']['sendtype']=='add')
-                {
+            {  
+                if($this->request->data['Tempuncertaintydata']['edit_uncertainty_bulk_id'] == '')
+                { //pr($this->request->data);exit;
                     $check_range_is_there = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.range_id' => $this->request->data['Tempuncertaintydata']['range_id_hid'],'Tempuncertaintydata.temp_uncertainty_id' => 0)));
                     if(!$check_range_is_there)
                     {
@@ -151,14 +155,15 @@
                 else
                 {
                     $check_range_is_there = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.range_id' => $this->request->data['Tempuncertaintydata']['range_id_hid'],'Tempuncertaintydata.temp_uncertainty_id' => $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'],'Tempuncertaintydata.status'=>1)));
-                    if(!$check_range_is_there)
-                    {
-                        //pr($this->request->data['Tempuncertaintydata']['range_id']);
+                   // if(!$check_range_is_there)
+                   // {
+                        //pr($this->request->data['Tempuncertaintydata']); exit;
+						$this->request->data['Tempuncertaintydata']['id'] = $this->request->data['Tempuncertaintydata']['edit_uncertainty_bulk_id'];
                         $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'] = $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'];
                         $this->request->data['Tempuncertaintydata']['status'] = 1;
                         $this->request->data['Tempuncertaintydata']['rangename'] = $this->request->data['Tempuncertaintydata']['range_id'];
                         $this->request->data['Tempuncertaintydata']['range_id'] = $this->request->data['Tempuncertaintydata']['range_id_hid'];
-
+//pr($this->request->data['Tempuncertaintydata']); exit;
                         if($this->Tempuncertaintydata->save($this->request->data['Tempuncertaintydata']))
                         { 
                             $last_insert_id =   $this->Tempuncertaintydata->getLastInsertID();
@@ -167,14 +172,14 @@
                             $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'])));
                             $this->set('tempuncertaintydata_list',$tempuncertaintydata_list);
                         }
-                    }
-                    else
+                   // }
+                  /*  else
                     {
                         $this->set('trigger','rangein');
                         $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'] = $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'];
                         $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'])));
                         $this->set('tempuncertaintydata_list',$tempuncertaintydata_list);
-                    }
+                    }*/
                 }
 
             } 
