@@ -1384,9 +1384,54 @@ $html .= '</div>';
         App::uses('Sanitize', 'Utility');
         $percent = Sanitize::clean($this->request->data['percent']);
         $sales_id = Sanitize::clean($this->request->data['sales_id']);
-        $this->Salesorder   =   new Salesorder();
+		 $this->loadModel('Salesorder');
+        //$this->Salesorder   =   new Salesorder();
         $salesorder = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$sales_id,'Salesorder.is_approved'=>1)));
-        //$salesorder['Salesorder']['']
+        $quotation_id = $salesorder['Salesorder']['quotation_id'];
+		$this->Customerspecialneed->updateAll(array('gst' => $percent),array('quotation_id' => $quotation_id));
+		echo $percent;
+        
+    }
+  public function edit_additional_service()
+    {
+        $this->autoRender   =   false;
+        App::uses('Sanitize', 'Utility');
+        $additional = Sanitize::clean($this->request->data['additional']);
+        $sales_id = Sanitize::clean($this->request->data['sales_id']);
+		 $this->loadModel('Salesorder');
+        //$this->Salesorder   =   new Salesorder();
+        $salesorder = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$sales_id,'Salesorder.is_approved'=>1)));
+        $quotation_id = $salesorder['Salesorder']['quotation_id'];
+		$this->Customerspecialneed->updateAll(array('additional_service_value' => $additional),array('quotation_id' => $quotation_id));
+		echo $additional;
+        
+    }
+    public function edit_gst_percent_po()
+    {
+        $this->autoRender   =   false;
+        App::uses('Sanitize', 'Utility');
+        $percent = Sanitize::clean($this->request->data['percent']);
+        $ref_no = Sanitize::clean($this->request->data['ref_no']);
+        $quotaion = $this->Quotation->find('all',array('fields' => array('Quotation.id'),'conditions' => array('Quotation.ref_no' => $ref_no)));
+		foreach($quotaion as $quote){
+			$quotation_id = $quote['Quotation']['id'];
+		    $this->Customerspecialneed->updateAll(array('gst' => $percent),array('quotation_id' => $quotation_id));
+		}
+		echo $percent;
+        
+    }
+  public function edit_additional_service_po()
+    {
+        $this->autoRender   =   false;
+        App::uses('Sanitize', 'Utility');
+        $additional = Sanitize::clean($this->request->data['additional']);
+        $ref_no = Sanitize::clean($this->request->data['ref_no']);
+        $quotaion = $this->Quotation->find('all',array('fields' => array('Quotation.id'),'conditions' => array('Quotation.ref_no' => $ref_no)));
+		foreach($quotaion as $quote){
+			$quotation_id = $quote['Quotation']['id'];
+		    $this->Customerspecialneed->updateAll(array('additional_service_value' => $additional),array('quotation_id' => $quotation_id));
+		}
+		echo $additional;
         
     }
 }

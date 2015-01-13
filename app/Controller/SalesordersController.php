@@ -2110,7 +2110,7 @@ table td { font-size:13px; line-height:18px; }
             $dev = $this->Description->find('first',array('conditions'=>array('Description.id'=>$this->request->data['device_id'])));
             $sales_total = $dev['Description']['sales_total'];
             $sales_total_total = $sales_total - ($sales_total * $sales_discount/100);
-            $this->Device->updateAll(array('Device.discount'=>$sales_discount,'Device.total'=>$sales_total_total),array('Device.id'=>$dev['Description']['device_id']));
+            $this->Device->updateAll(array('Device.discount' => $sales_discount,'Device.total' => $sales_total_total),array('Device.id' => $dev['Description']['device_id']));
             $this->Description->saveField('sales_total', $sales_total_total);
             $this->Description->saveField('sales_discount', $sales_discount);
             echo $sales_discount;

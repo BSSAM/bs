@@ -620,6 +620,7 @@ class InvoicesController extends AppController
         $salesorder = $inv['Invoice']['salesorder_id'];
         $quotationno = $inv['Invoice']['quotation_id'];
         $refno = $inv['Invoice']['ref_no'];
+		// Salesorder
         if($inv_type == 3):
             $salesorder_list = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$salesorder,'Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_poapproved'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_invoice_created'=>1),'recursive'=>3));
             $gst = $salesorder_list['Quotation']['Customerspecialneed']['gst'];
@@ -706,6 +707,10 @@ class InvoicesController extends AppController
             $this->set('desc',$quono);
         elseif($inv_type == 4):
             $delivery_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>4)));
+			
+			//////////////// PO 
+			
+			
         else:
             $po_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.ref_no'=>$refno,'Quotation.is_deleted'=>'0','Quotation.is_approved'=>1,'Quotation.is_poapproved'=>1,'Customer.invoice_type_id'=>1,'Quotation.is_invoice_created'=>1),'recursive'=>3));    
             foreach($po_lists as $polist):

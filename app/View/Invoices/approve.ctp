@@ -8,6 +8,165 @@ $(document).ready(function() {
 });
 var path_url='<?PHP echo Router::url('/',true); ?>';
 $(function() {
+	
+	$(".edit_gst_percent").on('click', "button[type='submit']", function() {
+		  gst_percent = $(this).parent().find("input[name='percent']").val();
+		  device_total = parseFloat($(".total_device_dyn").text());
+		  //for gst total update
+		  $(".gst_total_dyn").text(parseFloat((gst_percent/100)*device_total).toFixed(2));
+		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+		  additional_charge = parseFloat($(".edit_additional_service").text()).toFixed(2);
+		   //for grand total update
+		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
+		  $(".grand_total_dyn").text(parseFloat(grand_total));
+		  //console.log(device_total);
+		  //return false;
+   });
+   $(".edit_additional_service").on('click', "button[type='submit']", function() {
+		  additional_charge = $(this).parent().find("input[name='additional']").val();
+		 
+		  device_total = parseFloat($(".total_device_dyn").text()).toFixed(2);
+		  //for gst total update
+		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+		   //for grand total update
+		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
+		  $(".grand_total_dyn").text(parseFloat(grand_total));
+		  //return false;
+   });
+ $(".edit_sales_unit").on('click', "button[type='submit']", function() {
+		  sales_unitprice = $(this).parent().find("input[name='sales_unitprice']").val();
+		  dolthis = $(this).parents("tr");
+		  edit_sales_unit_dis = parseInt(dolthis.find(".edit_sales_unit_dis").text());
+		  if(isNaN(edit_sales_unit_dis)) {
+		  edit_sales_unit_dis = 0;
+	       }
+		  sales_unitprice_net = ((sales_unitprice) - (sales_unitprice*(edit_sales_unit_dis/100)));
+		  		   
+		  dolthis.find(".edit_sales_unitprice").text(sales_unitprice_net);
+		  
+		  var total_unit_price = 0;
+			$("#beforedo-datatable .edit_sales_unitprice").each(function(){
+					total_unit_price += parseFloat($(this).text());
+					//alert(total_unit_price);
+				})
+			$(".total_device_dyn").text(parseFloat(total_unit_price).toFixed(2) );
+		 
+		  device_total = parseFloat($(".total_device_dyn").text()).toFixed(2);
+		  //for gst total update
+		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+		  additional_charge = parseFloat($(".edit_additional_service").text()).toFixed(2);
+		   //for grand total update
+		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
+		  $(".grand_total_dyn").text(parseFloat(grand_total));
+		  //return false;
+   });
+ $(".edit_sales_unit_dis").on('click', "button[type='submit']", function() {
+		  po_unitprice_dis = $(this).parent().find("input[name='sales_discount']").val();
+		  dolthis = $(this).parents("tr");
+		  po_unitprice = parseInt(dolthis.find(".edit_sales_unit").text());
+		  if(isNaN(po_unitprice)) {
+		  po_unitprice = 0;
+	       }
+		  po_unitprice_net = ((po_unitprice) - (po_unitprice*(po_unitprice_dis/100)));
+		  		   
+		  dolthis.find(".edit_sales_unitprice").text(po_unitprice_net);
+		  
+		  var total_unit_price = 0;
+			$("#beforedo-datatable .edit_sales_unitprice").each(function(){
+					total_unit_price += parseFloat($(this).text());
+					//alert(total_unit_price);
+				})
+			$(".total_device_dyn").text(parseFloat(total_unit_price).toFixed(2) );
+		 
+		  device_total = parseFloat($(".total_device_dyn").text()).toFixed(2);
+		  //for gst total update
+		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+		  additional_charge = parseFloat($(".edit_additional_service").text()).toFixed(2);
+		   //for grand total update
+		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
+		  $(".grand_total_dyn").text(parseFloat(grand_total));
+		  //return false;
+   });
+   
+   	$(".edit_gst_percent_po").on('click', "button[type='submit']", function() {
+		  gst_percent = $(this).parent().find("input[name='percent']").val();
+		  device_total = parseFloat($(".total_device_dyn").text());
+		  //for gst total update
+		  $(".gst_total_dyn").text(parseFloat((gst_percent/100)*device_total).toFixed(2));
+		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+		  additional_charge = parseFloat($(".edit_additional_service_po").text()).toFixed(2);
+		   //for grand total update
+		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
+		  $(".grand_total_dyn").text(parseFloat(grand_total));
+		  //console.log(device_total);
+		  //return false;
+   });
+   $(".edit_additional_service_po").on('click', "button[type='submit']", function() {
+		  additional_charge = $(this).parent().find("input[name='additional']").val();
+		 
+		  device_total = parseFloat($(".total_device_dyn").text()).toFixed(2);
+		  //for gst total update
+		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+		   //for grand total update
+		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
+		  $(".grand_total_dyn").text(parseFloat(grand_total));
+		  //return false;
+   }); 
+ $(".edit_po_unit").on('click', "button[type='submit']", function() {
+		  sales_unitprice = $(this).parent().find("input[name='unit_price']").val();
+		  dolthis = $(this).parents("tr");
+		  edit_sales_unit_dis = parseInt(dolthis.find(".edit_po_unit_dis").text());
+		  if(isNaN(edit_sales_unit_dis)) {
+		  edit_sales_unit_dis = 0;
+	       }
+		  sales_unitprice_net = ((sales_unitprice) - (sales_unitprice*(edit_sales_unit_dis/100)));
+		  		   
+		  dolthis.find(".edit_po_unit_price").text(sales_unitprice_net);
+		  
+		  var total_unit_price = 0;
+			$("#beforedo-datatable .edit_po_unit_price").each(function(){
+					total_unit_price += parseFloat($(this).text());
+					//alert(total_unit_price);
+				})
+			$(".total_device_dyn").text(parseFloat(total_unit_price).toFixed(2) );
+		 
+		  device_total = parseFloat($(".total_device_dyn").text()).toFixed(2);
+		  //for gst total update
+		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+		  additional_charge = parseFloat($(".edit_additional_service_po").text()).toFixed(2);
+		   //for grand total update
+		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
+		  $(".grand_total_dyn").text(parseFloat(grand_total));
+		  //return false;
+   });
+ $(".edit_po_unit_dis").on('click', "button[type='submit']", function() {
+		  po_unitprice_dis = $(this).parent().find("input[name='discount']").val();
+		  dolthis = $(this).parents("tr");
+		  po_unitprice = parseInt(dolthis.find(".edit_po_unit").text());
+		  if(isNaN(po_unitprice)) {
+		  po_unitprice = 0;
+	       }
+		  po_unitprice_net = ((po_unitprice) - (po_unitprice*(po_unitprice_dis/100)));
+		  		   
+		  dolthis.find(".edit_po_unit_price").text(po_unitprice_net);
+		  
+		  var total_unit_price = 0;
+			$("#beforedo-datatable .edit_po_unit_price").each(function(){
+					total_unit_price += parseFloat($(this).text());
+					//alert(total_unit_price);
+				})
+			$(".total_device_dyn").text(parseFloat(total_unit_price).toFixed(2) );
+		 
+		  device_total = parseFloat($(".total_device_dyn").text()).toFixed(2);
+		  //for gst total update
+		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+		  additional_charge = parseFloat($(".edit_additional_service_po").text()).toFixed(2);
+		   //for grand total update
+		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
+		  $(".grand_total_dyn").text(parseFloat(grand_total));
+		  //return false;
+   });
+   
     $('.edit_sales_unit').editable(path_url+'/Salesorders/price_change', {
          id        : 'device_id',
          name      : 'sales_unitprice',
@@ -392,19 +551,19 @@ $(function() {
                                     ?>
                                         <tr>
                <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
-               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $total_device; ?></td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="total_device_dyn"><?php echo number_format($total_device,2); ?></td>
           </tr>
           <tr>
-               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <?php echo $gst; ?>%  )</td>
-               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $gst_total; ?></td>
+               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST (<span class="edit_gst_percent" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%  )</td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="gst_total_dyn"><?php echo number_format($gst_total,2); ?></td>
           </tr>
           <tr>
                <td colspan="10" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Additional Charges</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $v = $additional_charge; if($v == ''){echo '0.0';} ?></td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo number_format($additional_charge,2); ?></td>
           </tr>
 		   <tr>
                <td colspan="10" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
-               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total + $v; ?></td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo number_format($total_device + $gst_total +$additional_charge,2); ?></td>
           </tr>
           
                                 </tbody>
@@ -797,19 +956,19 @@ $(function() {
                                     ?>
                                         <tr>
                <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
-               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $total_device; ?></td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="total_device_dyn"><?php echo $total_device; ?></td>
           </tr>
           <tr>
-               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <?php echo $gst; ?>%  )</td>
-               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;"><?php echo $gst_total; ?></td>
+               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <span class="edit_gst_percent_po" id="<?PHP echo $po_list_first['Quotation']['ref_no']; ?>"><?php echo $gst; ?></span>%  )</td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="gst_total_dyn"><?php echo $gst_total; ?></td>
           </tr>
           <tr>
                <td colspan="10" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Additional Charges</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $v = $additional_charge; if($v == ''){echo '0.0';} ?></td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><span class="edit_additional_service_po" id="<?PHP echo $po_list_first['Quotation']['ref_no']; ?>"><?php echo $v = $additional_charge; ?></span></td>
           </tr>
 		   <tr>
                <td colspan="10" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
-               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo $total_device + $gst_total +$v; ?></td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;" class="grand_total_dyn"><?php echo $total_device + $gst_total + $v; ?></td>
           </tr>
           
                                 </tbody>
