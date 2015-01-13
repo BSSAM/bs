@@ -484,7 +484,9 @@
                                                 <?php echo $this->Html->link('Form Datas',array('controller'=>'Temperatures','action'=>'formdatas'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
-                                                <a href="#">Template</a>
+                                                <?php $a=($control == 'Temperatures' && $actions == 'template')?'active':''; ?>
+                                                <?php echo $this->Html->link('Template',array('controller'=>'Temperatures','action'=>'template'),array('class'=>$a,'escape'=>false)); ?>
+<!--                                                <a href="#">Template</a>-->
                                             </li>
                                             <li>
                                                 <?php $a=($control == 'Temperatures' && $actions == 'instrumentvalidity')?'active':''; ?>
@@ -497,6 +499,10 @@
                                             <li>
                                                 <?php $a=($control == 'Temperatures' && $actions == 'unitconvert')?'active':''; ?>
                                                 <?php echo $this->Html->link('Unit Conversion Factor',array('controller'=>'Temperatures','action'=>'unitconvert'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                             <li>
+                                                <?php $a=($control == 'Certificates' && $actions == 'temperature')?'active':''; ?>
+                                                <?php echo $this->Html->link('Dashboard',array('controller'=>'Certificates','action'=>'temperature'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                             
                                         </ul>

@@ -34,16 +34,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($template as $template_list): ?>
+                                    <?php foreach($template as $k=>$template_list): ?>
                                        
                                     <tr <?php if($template_list['Temptemplate']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['id'];?></td>
+                                        <td class="text-center"><?php echo $k+1;?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['temp_instruments_id'];?></td>
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['brand_id'];?></td>
+                                        <td class="text-center"><?php echo $this->Temp->get_instrument_name($template_list['Temptemplate']['temp_instruments_id']);?></td>
+                                        <td class="text-center"><?php echo $this->Temp->get_brand_name($template_list['Temptemplate']['brand_id']);?></td>
                                         <td class="text-center"><?php echo $template_list['Temptemplate']['model'];?></td>
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['range_id'];?></td>
-                                        <td class="text-center"><?php echo $template_list['Temptemplate']['customer_id'];?></td>
+                                        <td class="text-center"><?php echo $this->Temp->get_range_name($template_list['Temptemplate']['range_id']);?></td>
+                                        <td class="text-center"><?php echo $this->Temp->get_customer_name($template_list['Temptemplate']['customer_id']);?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php //if($userrole['edit']==1){ ?>

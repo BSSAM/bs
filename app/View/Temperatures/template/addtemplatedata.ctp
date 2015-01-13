@@ -17,29 +17,34 @@
 					         {   ?>
                                 <tr class="text-center">  
                                 <td>
+                                    <?php echo $k; ?>
                                 </td>  
                                     <td class="" >
-                                     <?php echo $v['Temptemplatedata']['setpoint'];?>
+                                        <?php echo $v['Temptemplatedata']['setpoint'];?>
                                     </td>
                                     <td class="" >
-                                     <?php echo $v['Temptemplatedata']['readingtypename'];?>
+                                        <?php echo $v['Temptemplatedata']['unitname'];?>
                                     </td>
                                     <td class="" >
-                                     <?php echo $v['Temptemplatedata']['unitname'];?>
-                                    </td><td class="" >
-                                     <?php echo $v['Temptemplatedata']['count'];?>
+                                        <?php echo $v['Temptemplatedata']['readingtypename'];?>
                                     </td>
                                     <td class="" >
-                                     <?php echo $v['Temptemplatedata']['resolution'];?>
+                                        <?php echo $v['Temptemplatedata']['resolution'];?>
                                     </td>
                                     <td class="" >
-                                     <?php echo $v['Temptemplatedata']['accuracy'];?>
+                                        <?php echo $v['Temptemplatedata']['accuracy'];?>
                                     </td>
                                     <td class="" >
-                                     <?php echo $v['Temptemplatedata']['temp_uncertainty_id'];?>
+                                        <?php echo $v['Temptemplatedata']['count'];?>
                                     </td>
                                     <td class="" >
-                                  
+                                        <?php echo $this->Temp->uncertainity_name($v['Temptemplatedata']['temp_uncertainty_id']); ?>
+                                        <?php //echo $v['Temptemplatedata']['temp_uncertainty_id'];?>
+                                    </td>
+                                    <td class="text-center">
+                                    <div class="btn-group action_un_btn"><a class="btn btn-xs btn-default edit_datatemplate" title="" data-toggle="tooltip" href="#" data-original-title="Edit" id ="<?php echo $v['Temptemplatedata']['id']; ?>">
+                                    <i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-xs btn-danger delete_datatemplate" title="" data-toggle="tooltip" href="#" data-original-title="Delete" id ="<?php echo $v['Temptemplatedata']['id']; ?>"><i class="fa fa-times"></i></a></div>
                                     </td>
                                
                                 </tr>

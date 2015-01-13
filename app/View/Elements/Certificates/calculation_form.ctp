@@ -127,22 +127,13 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-		<div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1341</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -226,18 +217,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -325,18 +310,12 @@ $(document).ready(function(e) {
           <input type="checkbox">
           <label>BS 1328</label>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-		<div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1344</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -420,18 +399,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -515,18 +488,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -610,18 +577,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -705,18 +666,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -800,18 +755,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -895,18 +844,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -990,18 +933,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -1085,18 +1022,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -1180,18 +1111,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -1275,18 +1200,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+       <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -1370,18 +1289,12 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
       </div>
     </div>
   </div>
@@ -1465,18 +1378,13 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
+          <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1328</label>
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>BS 1340</label>
-        </div>
-        <div class="c_refress_blog_input">
-          <input type="checkbox">
-          <label>TYPE</label>
-        </div>
+          <?php } ?>
+        
       </div>
     </div>
   </div>

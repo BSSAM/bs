@@ -13,15 +13,17 @@ class CertificatesController extends AppController
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
 							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate');
-    public function index()
+    public function index($id=NULL)
     {
         
-        if(Temptemplate)
+        //if(Temptemplate)
+        $uncertainty = $this->Tempuncertainty->find('all');
+        $this->set('uncertainty',$uncertainty);
         $readingtype_data = $this->Tempreadingtype->find('list',array('fields' => array('Tempreadingtype.id','Tempreadingtype.readingtypename'),'conditions'=>array('Tempreadingtype.is_deleted'=>0,'Tempreadingtype.status'=>1)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
-		$this->set('readingtype_data',$readingtype_data);
-		
-		$channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
-		$this->set('channel_data',$channel_data);
+        $this->set('readingtype_data',$readingtype_data);
+
+        $channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
+        $this->set('channel_data',$channel_data);
 		
     }
     public function temperature()

@@ -8,7 +8,7 @@
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
-							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate');
+							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate','Temptemplatedata');
         public function uncertainty()
         {
             $uncertainty_data = $this->Tempuncertainty->find('all',array('conditions'=>array('Tempuncertainty.is_deleted'=>0)),array('order'=>'Tempuncertainty.id Desc','recursive'=>'2'));
