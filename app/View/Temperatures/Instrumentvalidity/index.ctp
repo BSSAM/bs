@@ -23,33 +23,33 @@
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Tag No</th>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">Instrument</th>
                                         <th class="text-center">Duedate</th>
                                         <th class="text-center">validdays</th>
-                                        <th class="text-center">Actions</th>
+<!--                                        <th class="text-center">Actions</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($instrumentvalidity as $instrumentvalidity_list): ?>
                                        
-                                    <tr <?php if($instrumentvalidity_list['Tempinstrumentvalid']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                                        <td class="text-center"><?php echo $instrumentvalidity_list['Tempinstrumentvalid']['id'];?></td>
+                                    <tr <?php if($instrumentvalidity_list['Tempuncertainty']['status'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                        <td class="text-center"><?php echo $instrumentvalidity_list['Tempuncertainty']['tagno'];?></td>
                                         <!--<td class="text-center"><img src="img/placeholders/avatars/avatar4.gif" alt="avatar" class="img-circle"></td>-->
-                                        <td class="text-center"><?php echo $instrumentvalidity_list['Tempinstrument']['instrumentname'];?></td>
-                                        <td class="text-center"><?php echo $instrumentvalidity_list['Tempinstrumentvalid']['duedate'];?></td>
-                                        <td class="text-center"><?php echo $instrumentvalidity_list['Tempinstrumentvalid']['validdays'];?></td>
-                                        <td class="text-center">
+                                        <td class="text-center"><?php echo $instrumentvalidity_list['Tempuncertainty']['instrumentname'];?></td>
+                                        <td class="text-center"><?php echo $instrumentvalidity_list['Tempuncertainty']['duedate'];?></td>
+                                        <td class="text-center"><?php echo $this->Temp->inst_valid($instrumentvalidity_list['Tempuncertainty']['id']);?></td>
+<!--                                        <td class="text-center">
                                             <div class="btn-group">
                                                 <?php //if($userrole['edit']==1){ ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'instrumentvalidity/editinstrumentvalidity',$instrumentvalidity_list['Tempinstrumentvalid']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php //echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'instrumentvalidity/editinstrumentvalidity',$instrumentvalidity_list['Tempinstrumentvalid']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php //} ?>
                                                 <?php //if($userrole['delete']==1){ ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'instrumentvalidity/deleteinstrumentvalidity',$instrumentvalidity_list['Tempinstrumentvalid']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php //echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'instrumentvalidity/deleteinstrumentvalidity',$instrumentvalidity_list['Tempinstrumentvalid']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 <?php //} ?>
                                             </div>
-                                        </td>
+                                        </td>-->
                                     </tr>
                                     
                                     <?php endforeach; ?>

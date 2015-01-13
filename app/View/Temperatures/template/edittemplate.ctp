@@ -1,16 +1,37 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
-    
+    var temp_id = '<?PHP echo $temp_templates_id; ?>';
     $(document).ready(function(){
-        
-        $('#val_tempinstrumentname').val('');
-        $('#val_model').val('').attr('readonly','readonly');
-        $('#val_brand').val('').attr('readonly','readonly');
-        $('#val_range').val('').attr('readonly','readonly');
-        $('#val_customer').val('');
-        $("#instrument_details").val('');
-        $('#customer_id').val('');
-        
+            $.ajax({
+            type: "POST",
+            url: path_url+'Temperatures/viewtemplatedata/',
+            data: "id="+temp_id,
+            cache: false,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
+            success : function(recievedData)
+            {
+                //console.log(recievedData);
+                    //alert('ll');
+                    //alert(recievedData);
+                    $('.template_detail').html(recievedData);
+                    return false;
+                   // $(this).closest('form').find("input[type=text], input[type=select]").val("");
+            }
+            });
+//        $('#val_tempinstrumentname').val('');
+//        $('#val_model').val('').attr('readonly','readonly');
+//        $('#val_brand').val('').attr('readonly','readonly');
+//        $('#val_range').val('').attr('readonly','readonly');
+//        $('#val_customer').val('');
+//        $("#instrument_details").val('');
+        $('#edit_template_bulk_id').val('');
+        $('#val_setpoint').val('');
+        $('#val_unit :selected').val('');
+        $('#val_count').val('');
+        $('#val_resolution').val('');
+        $('#val_accuracy').val('');
+        $('#val_prefref').val('').trigger("chosen:updated");
         $("#search_instrument",window.parent.document).hide();
     
         $("#val_tempinstrumentname").keyup(function() 
@@ -115,10 +136,61 @@
             $('#val_customer').val(customer_name);
             $('#customer_id').val(customer_id);
         });
+        
+        
+        $('.edit_all_fields').click(function(e) {
+            $('.ajaxform').submit(); 
+	});
+		
+        $('.ajaxform').ajaxForm({ 
+            url: path_url+'Temperatures/addtemplatedata/',
+            type: 'post',
+            success : function(recievedData)
+            {
+                //console.log(recievedData);return false;
+                $('.template_detail').html(recievedData);
+                $('.edit_all_fields').text('Add');
+                $('.edit_template_bulk_id').val('');
+                $('#val_setpoint').val('');
+                $('#val_unit :selected').val('');
+                $('#val_count').val('');
+                $('#val_resolution').val('');
+                $('#val_accuracy').val('');
+                $('#val_prefref').val('').trigger("chosen:updated");
+                //return false;
+            }
+	});
+        
+        $(document).on('click','.edit_datatemplate',function(){
+            var data_id = $(this).attr('id');
+            $.ajax({
+                type: "POST",
+                url: path_url+"Temperatures/edittemplatedata",
+                data: "data_id="+ data_id,
+                cache: false,
+                beforeSend: ni_start(),  
+                complete: ni_end(),
+                success: function(data)
+                {
+                    edit_node=$.parseJSON(data);
+                    console.log(edit_node);
+                    $('#val_setpoint').val(edit_node.Temptemplatedata.setpoint);
+                    $('#val_unit').val(edit_node.Temptemplatedata.temp_unit_id);
+                    $('#val_count').val(edit_node.Temptemplatedata.setpoint);
+                    $('#val_resolution').val(edit_node.Temptemplatedata.resolution);
+                    $('#val_accuracy').val(edit_node.Temptemplatedata.accuracy);
+                    $('#val_prefref').val(edit_node.Temptemplatedata.temp_uncertainty_id).trigger("chosen:updated");
+                    $('.edit_all_fields').text('Edit');
+                    $('.edit_all_fields').attr('id',edit_node.Temptemplatedata.id);
+                    $('.edit_template_bulk_id').val(edit_node.Temptemplatedata.id);
+                }
+            });
+        });
+        
     });
 </script>
 <h1>
-    <i class="gi gi-user"></i>Add Template
+    <i class="gi gi-user"></i>Edit Template
 </h1>
 </div>
 </div>
@@ -169,23 +241,23 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_tempinstrumentname">Instrument</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('instrumentname', array('id' => 'val_tempinstrumentname', 'class' => 'form-control', 'placeholder' => 'Enter the Instrument Name', 'label' => false,'autoComplete'=>'off','default' => $template_data['Temptemplate']['temp_instruments_id'])); ?>
+                    <?php echo $this->Form->input('instrumentname', array('id' => 'val_tempinstrumentname', 'class' => 'form-control', 'placeholder' => 'Enter the Instrument Name', 'label' => false,'autoComplete'=>'off','value'=>$desc_data['Instrument']['name'],'readonly')); ?>
                     <div class="instrument_drop" id="search_instrument"></div>
                 </div>
                 <label class="col-md-2 control-label" for="val_model">Model</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('model', array('id' => 'val_model', 'class' => 'form-control', 'placeholder' => 'Enter Model', 'label' => false)); ?>
+                    <?php echo $this->Form->input('model', array('id' => 'val_model', 'class' => 'form-control', 'placeholder' => 'Enter Model', 'label' => false,'value'=>$desc_data['Description']['model_no'])); ?>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_brand">Brand</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('brand', array('id' => 'val_brand', 'class' => 'form-control', 'placeholder' => 'Enter Brand', 'label' => false)); ?>
+                    <?php echo $this->Form->input('brand', array('id' => 'val_brand', 'class' => 'form-control', 'placeholder' => 'Enter Brand', 'label' => false,'value'=>$desc_data['Brand']['brandname'])); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_range">Range</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('range', array('id' => 'val_range', 'class' => 'form-control', 'placeholder' => 'Enter Range', 'label' => false)); ?>
+                    <?php echo $this->Form->input('range', array('id' => 'val_range', 'class' => 'form-control', 'placeholder' => 'Enter Range', 'label' => false,'value'=>$desc_data['Range']['range_name'])); ?>
                 </div>
                 
             </div>
@@ -199,7 +271,10 @@
                 </div>
             </div>
              <?php 	echo $this->Form->end(); ?>
-            <?php echo $this->Form->create('Temptempdata', array('class' => 'form-horizontal form-bordered templateForm', 'id' => 'fileupload', 'enctype' => 'multipart/form-data')); ?>
+
+            <?php echo $this->Form->create('Temptemplatedata', array('class' => 'form-horizontal form-bordered templateForm ajaxform', 'id' => 'fileupload', 'enctype' => 'multipart/form-data')); ?>
+            <?php echo $this->Form->input('Temptemplatedata.temp_templates_id', array('type'=>'hidden','value'=>$temp_templates_main_id)); ?>
+            <?php echo $this->Form->input('Temptemplatedata.sendtype', array('type'=>'hidden','value'=>'edit')); ?>
 
             <div class="col-lg-12">
                 <h4 class="sub-header"><small>Template Detail</small></h4>
@@ -253,14 +328,15 @@
                 
                 <label class="col-md-2 control-label" for="val_prefref">Pref Reference</label>
                 <div class="col-md-8">
-                    <?php echo $this->Form->input('prefref', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
+                    <?php echo $this->Form->input('temp_uncertainty_id', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
                 </div>
                 
             </div>
-            
+<input type="hidden" name="data[Temptemplatedata][edit_template_bulk_id]" class="edit_template_bulk_id" />
+<!--            <input type="hidden" name="data[Tempuncertaintydata][edit_uncertainty_bulk_id]" class="edit_uncertainty_bulk_id" />-->
              <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-10">
-                <a class="btn btn-sm btn-primary"><i class="fa fa-angle-right"> </i> Add</a>
+                <a class="btn btn-sm btn-primary edit_all_fields"><i class="fa fa-angle-right"> </i> Add</a>
                 </div>
             </div>
                 

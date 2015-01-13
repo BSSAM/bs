@@ -33,7 +33,7 @@ class TempHelper extends AppHelper
 {
     public $uses    =   array('Salesorder','Description','Quotation','Temptemplate','Temptemplatedata','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
-							    'Tempformdata','Tempuncertainty','Tempuncertaintydata',);
+							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','Customer');
     
     public function uncertainity_name($id = null)
     {
@@ -68,7 +68,17 @@ class TempHelper extends AppHelper
         APP::import('Model','Customer');
         $this->Customer   =   new Customer();
         $data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id)));
-        return $data['Customer']['customername'];
+        return $data['customer']['customername'];
+    }
+    public function inst_valid($id = null)
+    {
+        APP::import('Model','Tempuncertainty');
+        $this->Tempuncertainty   =   new Tempuncertainty();
+        $data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=>$id)));
+        $date1 = new DateTime($data['Tempuncertainty']['duedate']);
+        $date2 = new DateTime($data['Tempuncertainty']['caldate']);
+        $interval = $date1->diff($date2);
+        return $interval->days;;
     }
 }
 

@@ -58,10 +58,10 @@
                     $this->redirect(array('controller'=>'Temperatures','action'=>'uncertainty'));
                 }
             }
-			else
-			{
-				     $this->Tempuncertaintydata->deleteAll(array('Tempuncertaintydata.temp_uncertainty_id' => 0));
-			}
+            else
+            {
+                $this->Tempuncertaintydata->deleteAll(array('Tempuncertaintydata.temp_uncertainty_id' => 0));
+            }
             
         }
         public function edituncertainty($id=NULL)
@@ -94,9 +94,8 @@
             
         }
 		
-	 public function deleteuncertainty($id = null)
+	public function deleteuncertainty($id = null)
         {
-        
             if($this->Tempuncertainty->updateAll(array('Tempuncertainty.is_deleted'=>1,'Tempuncertainty.status'=>0),array('Tempuncertainty.id'=>$id)))
             {
                  
@@ -105,14 +104,14 @@
             }
         }
 		
-		public function getinstrumentinfo()
-		{
-			$this->layout = "ajax";
-			
-			$instruments_daetail = $this->Tempinstrument->find('first',array('conditions' => array('Tempinstrument.id' => $this->request->data['instrumentid'])));
-			echo $instruments_daetail['Tempinstrument']['tagno'];
-			exit;
-		}
+        public function getinstrumentinfo()
+        {
+            $this->layout = "ajax";
+
+            $instruments_daetail = $this->Tempinstrument->find('first',array('conditions' => array('Tempinstrument.id' => $this->request->data['instrumentid'])));
+            echo $instruments_daetail['Tempinstrument']['tagno'];
+            exit;
+        }
 		
         public function addbulkfields()
         {
@@ -158,7 +157,7 @@
                    // if(!$check_range_is_there)
                    // {
                         //pr($this->request->data['Tempuncertaintydata']); exit;
-						$this->request->data['Tempuncertaintydata']['id'] = $this->request->data['Tempuncertaintydata']['edit_uncertainty_bulk_id'];
+			$this->request->data['Tempuncertaintydata']['id'] = $this->request->data['Tempuncertaintydata']['edit_uncertainty_bulk_id'];
                         $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'] = $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'];
                         $this->request->data['Tempuncertaintydata']['status'] = 1;
                         $this->request->data['Tempuncertaintydata']['rangename'] = $this->request->data['Tempuncertaintydata']['range_id'];
@@ -934,9 +933,9 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+            $uncertainty_data = $this->Tempuncertainty->find('all',array('conditions'=>array('Tempuncertainty.is_deleted'=>0)),array('order'=>'Tempuncertainty.id Desc','recursive'=>'2'));
             $instrumentvalidity_data = $this->Tempinstrumentvalid->find('all',array('conditions'=>array('Tempinstrumentvalid.is_deleted'=>0)),array('order'=>'Tempinstrumentvalid.id Desc','recursive'=>'2'));
-            $this->set('instrumentvalidity', $instrumentvalidity_data);
+            $this->set('instrumentvalidity', $uncertainty_data);
 			//pr($instrumentvalidity_data);exit;
             $this->render('instrumentvalidity/index');
         }
@@ -1254,47 +1253,65 @@
             $this->set('template', $template_data);
             $this->render('template/index');
         }
-       public function addtemplate($file)
-{
-$uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
-$this->set('uncer_tag',$uncer_tag);
+        
+        public function addtemplate($file)
+        {
+            $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
+            $this->set('uncer_tag',$uncer_tag);
 
-$unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
-$this->set('unit_list',$unit_list);
+            $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
+            $this->set('unit_list',$unit_list);
 
-if($this->request->is('post'))
-{
-//pr($this->request->data);exit;
-$ids = array();
-$ids = explode("$", $this->request->data['template/addtemplate']['instrument_details']);
-$this->request->data['Temptemplate']['temp_instruments_id'] = $ids[0];
-$this->request->data['Temptemplate']['model'] = $ids[2];
-$this->request->data['Temptemplate']['brand_id'] = $ids[3];
-$this->request->data['Temptemplate']['range_id'] = $ids[1];
-$this->request->data['Temptemplate']['customer_id'] = $this->request->data['template/addtemplate']['customer_id'];
+            if($this->request->is('post'))
+            {
+                //pr($this->request->data);exit;
+                $ids = array();
+                $ids = explode("$", $this->request->data['template/addtemplate']['instrument_details']);
+                $this->request->data['Temptemplate']['temp_instruments_id'] = $ids[0];
+                $this->request->data['Temptemplate']['model'] = $ids[2];
+                $this->request->data['Temptemplate']['brand_id'] = $ids[3];
+                $this->request->data['Temptemplate']['range_id'] = $ids[1];
+                $this->request->data['Temptemplate']['customer_id'] = $this->request->data['template/addtemplate']['customer_id'];
+                $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id ='=>$this->request->data['Temptemplate']['temp_instruments_id']),'recursive'=>'2'));
+                if(!$template_data)
+                {
+                    if($this->Temptemplate->save($this->request->data['Temptemplate']))
+                    {
+                        $last_insert_id = $this->Temptemplate->getLastInsertID();
+                        $this->Session->setFlash(__('Template is Added Successfully'));
+                    }
+                }
+                else
+                {
+                    $this->Session->setFlash(__('Template Already Exists!'));
+                }
 
-
-$template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id ='=>$this->request->data['Temptemplate']['temp_instruments_id']),'recursive'=>'2'));
-if(!$template_data){
-if($this->Temptemplate->save($this->request->data['Temptemplate']))
-{
-$last_insert_id = $this->Temptemplate->getLastInsertID();
-$this->Session->setFlash(__('Template is Added Successfully'));
-}
-
-}
-else{
-$this->Session->setFlash(__('Template Already Exists!'));
-}
-
-$this->redirect(array('controller'=>'Temperatures','action'=>'template'));
-}
-$this->render('template/'.$file);
-}
+                $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
+            }
+            $this->render('template/'.$file);
+        }
 
         public function edittemplate($file, $id = null)
         {
-            $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.id'=>$id),'recursive'=>'2'));
+            $details = explode('$',$id);
+            $this->set('temp_templates_id',$id);
+            $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id'=>$details[0],'Temptemplate.range_id'=>$details[1],'Temptemplate.model'=>$details[2],'Temptemplate.brand_id'=>$details[3]),'recursive'=>'2'));
+            $this->set('temp_templates_main_id',$template_data['Temptemplate']['id']);
+            $ins_id = $details[0];
+            $range_id = $details[1];
+            $model_no = $details[2];
+            $brand_id = $details[3];
+            $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$ins_id,'Description.sales_range'=>$range_id,'Description.model_no'=>$model_no,'Description.brand_id'=>$brand_id)));
+            
+            $this->set('desc_data',$data);
+            
+            $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
+            $this->set('unit_list',$unit_list);
+            
+            $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
+            $this->set('uncer_tag',$uncer_tag);
+            
+            //pr($data);exit;
             if($this->request->is(array('post','put')))
             {
                 $instrumentname = $this->request->data['instrumentname'];
@@ -1312,6 +1329,25 @@ $this->render('template/'.$file);
                 $this->request->data = $template_data;
             }
             $this->render('template/'.$file);
+        }
+        
+        public function viewtemplate($file, $id = null)
+        {
+            $this->layout = 'ajax';
+            $id = $this->request->data['id'];
+            
+            $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
+            $this->set('instruments_list',$instruments_list);
+
+            $ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
+            $this->set('ranges_list',$ranges_list);
+
+            
+                   $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $id)));
+                   $this->set('tempuncertaintydata_list',$tempuncertaintydata_list);
+                
+            //} 
+            
         }
         
         public function search_range()
@@ -1387,24 +1423,60 @@ $this->render('template/'.$file);
 
             if($this->request->is('post'))
             {
-            //pr($this->request->data);exit;
+               // pr($this->request->data);exit;
+                if($this->request->data['Temptemplatedata']['edit_template_bulk_id'] =='')
+                {
+                    //
+                    if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
+                    {
+                        $temptemplatedata = $this->Temptemplatedata->find('all');
+                        $this->set('temptemplatedata',$temptemplatedata);
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+                    
+                }
+            }
+            else
+            {
+                $this->request->data['Temptemplatedata']['id'] = $this->request->data['Temptemplatedata']['edit_template_bulk_id'];
+                $this->request->data['Temptemplatedata']['status'] = 1;
 
                 if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
-                {
-
-                $temptemplatedata = $this->Temptemplatedata->find('all');
-                $this->set('temptemplatedata',$temptemplatedata);
-
+                { 
+                    //$last_insert_id =   $this->Temptemplatedata->getLastInsertID();
+                    //$this->set('insert_id',$last_insert_id);
+                    $this->Session->setFlash(__('Template datas Edited Successfully'));
+                    $temptemplatedata = $this->Temptemplatedata->find('all', array('conditions' => array('Temptemplatedata.temp_templates_id' => $this->request->data['Temptemplatedata']['temp_templates_id'])));
+                    $this->set('temptemplatedata',$temptemplatedata);
                 }
-
-
-                else{
-
-                }
-
-
             }
+        }
+        
+        public function viewtemplatedata()
+        {
+            $this->layout = 'ajax';
+            
+            $id = $this->request->data['id'];
+            
+            $temptemplatedata_list = $this->Temptemplatedata->find('all',array('conditions' => array('Temptemplatedata.temp_templates_id'=>$id)));
+            $this->set('temptemplatedata',$temptemplatedata_list);
 
+            $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
+            $this->set('unit_list',$unit_list);
+        }
+        
+        public function edittemplatedata()
+        {
+            $this->autoRender   =   false;
+            $id = $this->request->data['data_id'];
+            $edituncertain_data = $this->Temptemplatedata->find('first',array('conditions'=>array('Temptemplatedata.id'=>$id)));
+            echo json_encode($edituncertain_data);
         }
 
         

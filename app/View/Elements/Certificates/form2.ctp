@@ -9,12 +9,12 @@
     <label for="val_customername" class="col-md-2 control-label">METHOD OF CALIBRATION</label>
     <div class="col-md-10">
       <?php
-                echo $this->Form->input('method_calibration', array('id' => 'val_method_calibration', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The calibration certificate was produced in accordance to the instrument was calibrated for the points specified in the   relevant in-House Technical Procedure,BST 01-H,as defined for the instrument.'));
+                echo $this->Form->input('Tempformdata.methodofcal1', array('id' => 'val_method_calibration', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['methodofcal1']));
             ?>
       <?php
-                echo $this->Form->input('method_calibration', array('id' => 'val_method_calibration', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The described instrument has been calibrated at BS Laboratory under the ambient conditions stated in the first page.'));
+                echo $this->Form->input('Tempformdata.methodofcal2', array('id' => 'val_method_calibration', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['methodofcal2']));
             ?>
     </div>
   </div>
@@ -23,12 +23,12 @@
     <label for="val_customername" class="col-md-2 control-label">RESULTS OF CALIBRATION</label>
     <div class="col-md-10">
       <?php
-                echo $this->Form->input('result_calibration', array('id' => 'val_result_calibration', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The expanded uncertainty of measurement associated with the calibration is estimated at a confidence  level of approximately 95% with a coverage factor of k=2.'));
+                echo $this->Form->input('Tempformdata.resultofcal1', array('id' => 'val_resultofcal1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['resultofcal1']));
             ?>
       <?php
-                echo $this->Form->input('result_calibration', array('id' => 'val_result_calibration', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The results reported herein have been performed in accordance with the laboratory´s terms of accreditation under the Singapore Accreditation Council-Singapore Laboratory Accreditation Scheme.'));
+                echo $this->Form->input('Tempformdata.resultofcal2', array('id' => 'val_resultofcal2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['resultofcal2']));
             ?>
     </div>
   </div>
@@ -37,46 +37,43 @@
     <label for="val_customername" class="col-md-2 control-label">REMARKS</label>
     <div class="col-md-10">
       <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The results of the calibration are given on the attached following pages.'));
+                echo $this->Form->input('Tempformdata.remark1', array('id' => 'val_remark1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark1']));
             ?>
       <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The results and their associated uncertainities are applicable at the time of calibration.'));
+                echo $this->Form->input('Tempformdata.remark2', array('id' => 'val_remark2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark2']));
             ?>
             
             <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'No adjusment was done unless otherwise stated.'));
+                echo $this->Form->input('Tempformdata.remark3', array('id' => 'val_remark3', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark3']));
             ?>
             
             <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The results and their associated uncertainities are applicable at the time of calibration.'));
+                echo $this->Form->input('Tempformdata.remark4', array('id' => 'val_remark4', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark4']));
             ?>
             
             <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The reports shall not be reproduced except in full, unless the management representative of BS TECH PTE LTD has given approval in writing and comply with the requirements specified in ISO/IEC 17025.'));
+                echo $this->Form->input('Tempformdata.remark5', array('id' => 'val_remark5', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark5']));
             ?>
             
             <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>'The user should determine the suitability of the instrument for its intended use.'));
+                echo $this->Form->input('Tempformdata.remark6', array('id' => 'val_remark6', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark6']));
             ?>
             
             <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>''));
+                echo $this->Form->input('Tempformdata.remark7', array('id' => 'val_remark7', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark7']));
             ?>
              <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>''));
+                echo $this->Form->input('Tempformdata.remark8', array('id' => 'val_remark8', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark8']));
             ?>
-             <?php
-                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>''));
-            ?>
+             
             
     </div>
   </div>

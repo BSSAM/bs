@@ -61,16 +61,20 @@ Singapore 619115'));
   <div class="form-group">
     <div class="col-md-12">
       <?php
-                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
-             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>'BS Tech´s organisation and practices have been duly accredited and are compliant to the requirements of ISO/IEC 17025;  the laboratory accreditation standard. Our Quality Management System ensures its compatibility with the requirements of   ISO 9001'));
+      echo $this->Form->input('Tempformdata.formdata1', array('id' => 'val_formdata1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['formdata1']));
+//                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
+//             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>'BS Tech´s organisation and practices have been duly accredited and are compliant to the requirements of ISO/IEC 17025;  the laboratory accreditation standard. Our Quality Management System ensures its compatibility with the requirements of   ISO 9001'));
             ?>
     </div>
   </div>
   <div class="form-group">
     <div class="col-md-12">
       <?php
-                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
-             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>'The reference measurement standards used are traceable to National Metrology Centre,(NMC,SINGAPORE)  and/or other National standards.'));
+        echo $this->Form->input('Tempformdata.formdata2', array('id' => 'val_formdata2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['formdata2']));
+//                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
+//             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>'The reference measurement standards used are traceable to National Metrology Centre,(NMC,SINGAPORE)  and/or other National standards.'));
             ?>
     </div>
   </div>
@@ -78,7 +82,7 @@ Singapore 619115'));
     <div class="form-group">
     <div class="col-md-12">
       <label for="val_duedate" class="col-md-6 control-label">Instrument Cal Status </label>
-      <div class="col-md-6"> <?php echo $this->Form->input('instrument_cal_status', array('id' => 'val_instrument_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --')); ?> </div>
+      <div class="col-md-6"> <?php echo $this->Form->input('instrument_cal_status', array('id' => 'val_instrument_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>$instrument_cal_status)); ?> </div>
       </div>
       <div class="col-md-12">
         <label for="val_duedate" class="col-md-6 control-label">Instrument Cal Status Description </label>
@@ -100,11 +104,11 @@ Singapore 619115'));
       </div>
       <div class="col-md-12">
         <label for="val_duedate" class="col-md-6 control-label">Calibrated Status</label>
-      <div class="col-md-6"> <?php echo $this->Form->input('cal_status', array('id' => 'val_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --')); ?> </div>
+      <div class="col-md-6"> <?php echo $this->Form->input('cal_status', array('id' => 'val_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>array('1'=>'Rejected','2'=>'Approved'))); ?> </div>
       </div>
       <div class="col-md-12">
         <label for="val_duedate" class="col-md-6 control-label">Approved Status</label>
-      <div class="col-md-6"> <?php echo $this->Form->input('approved_status', array('id' => 'val_approved_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Approved --')); ?> </div>
+      <div class="col-md-6"> <?php echo $this->Form->input('approved_status', array('id' => 'val_approved_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Approval Status --','options'=>array('1'=>'Rejected','2'=>'Approved'))); ?> </div>
       </div>
     </div>
   </div>

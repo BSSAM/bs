@@ -28,7 +28,7 @@
                                         <tbody class="subcontract_instrument_info">
                                           <tr class="text-center">
                                             <td class="text-center"><select>
-                                                <option value="1">TS 0001-13</option>
+<!--                                                <option value="1">TS 0001-13</option>
                                                 <option value="2">TS 0002-13</option>
                                                 <option value="3">TS 0003-13</option>
                                                 <option value="4" selected="selected">TS 0004-13</option>
@@ -37,7 +37,7 @@
                                                 <option value="7">TS 0001-14</option>
                                                 <option value="8">TS 0002-14</option>
                                                 <option value="9">TS 0003-14</option>
-                                                <option value="10">TS 0001-15</option>
+                                                <option value="10">TS 0001-15</option>-->
                                               </select></td>
                                             <td><select>
                                                

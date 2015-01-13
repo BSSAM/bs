@@ -317,7 +317,7 @@
                         $('.add_all_fields').text('Edit');
                         $('.add_all_fields').attr('id',edit_node.Tempuncertaintydata.id);
 						$('.edit_uncertainty_bulk_id').val(edit_node.Tempuncertaintydata.id);
-                        console.log(edit_node);
+                        //console.log(edit_node);
                     }
                 });
             });

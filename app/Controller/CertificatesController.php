@@ -25,6 +25,11 @@ class CertificatesController extends AppController
         $channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
         $this->set('channel_data',$channel_data);
 		
+        $tempform_data = $this->Tempformdata->find('first');
+        $this->set('formdata',$tempform_data);
+        
+        $instrument_cal_status = array('1'=>'Faulty','2'=>'Non Capability','3'=>'No Capability','4'=>'Return without cal','5'=>'Out of tolerance');
+        $this->set('instrument_cal_status',$instrument_cal_status);
     }
     public function temperature()
     {
@@ -58,6 +63,17 @@ class CertificatesController extends AppController
         
         $this->set('description_sup',$description_sup);
         $this->set('description_eng',$description_eng);
+        
+        
+        
+        
+        
+        ////////////// Form 2 /////////////////
+        
+            
+            
+        
+        
         //exit;
         //pr($description);exit;
         //$this->set('description',$description);
