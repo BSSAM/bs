@@ -30,6 +30,7 @@ class CertificatesController extends AppController
         
         $instrument_cal_status = array('1'=>'Faulty','2'=>'Non Capability','3'=>'No Capability','4'=>'Return without cal','5'=>'Out of tolerance');
         $this->set('instrument_cal_status',$instrument_cal_status);
+        
     }
     public function temperature()
     {
@@ -64,21 +65,16 @@ class CertificatesController extends AppController
         $this->set('description_sup',$description_sup);
         $this->set('description_eng',$description_eng);
         
-        
-        
-        
-        
         ////////////// Form 2 /////////////////
         
-            
-            
-        
-        
-        //exit;
-        //pr($description);exit;
-        //$this->set('description',$description);
+    }
+    
+    public function template()
+    {
         
     }
+    
+    
 }
 
 ?>
