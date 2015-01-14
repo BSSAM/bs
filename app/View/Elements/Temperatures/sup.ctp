@@ -26,8 +26,11 @@
                   <td class="text-center"><?php echo $description_list['Salesorder']['due_date']; ?></td>
                   <td class="text-center">
                         <div class="btn-group">
-                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$description_list['Description']['salesorder_id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                            <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$description_list['Description']['salesorder_id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                            <?php // echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$description_list['Description']['salesorder_id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                            <?php // echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$description_list['Description']['salesorder_id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Temperatures','action'=>'template/edittemplate',$description_list['Instrument']['id'].'$'.$description_list['Range']['id'].'$'.$description_list['Description']['model_no'].'$'.$description_list['Brand']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                            <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$description_list['Instrument']['id'].'$'.$description_list['Range']['id'].'$'.$description_list['Description']['model_no'].'$'.$description_list['Brand']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                        
                         </div>
                     </td>
                 </tr>
@@ -68,8 +71,8 @@
                   <td class="text-center"></td>
                   <td class="text-center">
                         <div class="btn-group">
-                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$department_list['Department']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                            <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$department_list['Department']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                            <?php //echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$department_list['Department']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                            <?php //echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$department_list['Department']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                         </div>
                     </td>
                 </tr>

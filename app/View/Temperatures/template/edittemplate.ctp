@@ -197,7 +197,7 @@
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home', array('controller' => 'Dashboards', 'action' => 'index')); ?></li>
     <li><?php echo $this->Html->link('Template',array('controller'=>'Temperatures','action'=>'template')); ?></li>
-    <li>Add Template</li>
+    <li>Edit Template</li>
 </ul>
 <!-- END Forms General Header -->
 
