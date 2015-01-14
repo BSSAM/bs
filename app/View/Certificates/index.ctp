@@ -72,7 +72,7 @@
                                           </tr>
                                           <tr>
                                             
-                                            <td><input type="checkbox" /></td>
+                                              <td><input type="checkbox" class="after_adjustment" /></td>
                                             <td>If After Adjustment</td>
                                           </tr>
                                         </tbody>
