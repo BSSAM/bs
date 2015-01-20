@@ -16,6 +16,16 @@ class CertificatesController extends AppController
     public function index($id=NULL)
     {
         
+        $ids = array();
+        $ids = explode("$", $id);
+        $instrument_id = $ids[0];
+        $range_id = $ids[1];
+        $model_no = $ids[2];
+        $brand_id = $ids[3];
+        $salesorder_id = $ids[4];
+        $description_id = $ids[5];
+        
+       // pr($ids);exit;
         //if(Temptemplate)
         $uncertainty = $this->Tempuncertainty->find('all');
         $this->set('uncertainty',$uncertainty);
@@ -36,7 +46,8 @@ class CertificatesController extends AppController
     {
         $template_data = $this->Temptemplate->find('all',array('conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
         
-        $description = $this->Description->find('all',array('conditions'=>array('Description.processing'=>1,'Description.status'=>1,'Description.department_id'=>2)));
+        $description = $this->Description->find('all',array('conditions'=>array('Description.status'=>1,'Description.processing'=>1,'Description.department_id'=>2)));
+        //pr($description);exit;
         $description_sup = $description_eng = $arr1 = $arr2 = array();
         foreach($template_data as $temp1)
         {

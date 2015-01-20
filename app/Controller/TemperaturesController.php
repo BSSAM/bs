@@ -13,19 +13,19 @@
         {
             $uncertainty_data = $this->Tempuncertainty->find('all',array('conditions'=>array('Tempuncertainty.is_deleted'=>0)),array('order'=>'Tempuncertainty.id Desc','recursive'=>'2'));
             $this->set('uncertainty', $uncertainty_data);
-            
+                
         }
         public function adduncertainty()
         {
             //$this->Tempuncertaintydata->deleteAll(array('Tempuncertaintydata.temp_uncertainty_id'=>0,'Tempuncertaintydata.status'=>0));
-            
+                
             $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
             $this->set('instruments_list',$instruments_list);
-
+                
             $ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
             $this->set('ranges_list',$ranges_list);
             $this->set('trigger','');
-            
+                
             if($this->request->is('post'))
             { 
                 $temp_data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.temp_instruments_id ='=>$this->request->data['Uncertainty']['temp_instruments_id']),'recursive'=>'2'));
@@ -62,20 +62,20 @@
             {
                 $this->Tempuncertaintydata->deleteAll(array('Tempuncertaintydata.temp_uncertainty_id' => 0));
             }
-            
+                
         }
         public function edituncertainty($id=NULL)
         {
             $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
             $this->set('instruments_list',$instruments_list);
-            
+                
             $ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
             $this->set('ranges_list',$ranges_list);
-
+                
             $uncertainty_data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=> $id)));
             $this->set('trigger','');
             $this->set('temp_ins_id',$id);
-            
+                
             if($this->request->is(array('post','put')))
             {
              // pr($this->request->data); exit;
@@ -91,34 +91,34 @@
                 $this->request->data = $uncertainty_data;
 				$this->set('uncertainty', $uncertainty_data);
             }
-            
+                
         }
-		
+            
 	public function deleteuncertainty($id = null)
         {
             if($this->Tempuncertainty->updateAll(array('Tempuncertainty.is_deleted'=>1,'Tempuncertainty.status'=>0),array('Tempuncertainty.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The Uncertainty has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'Uncertainty'));
             }
         }
-		
+            
         public function getinstrumentinfo()
         {
             $this->layout = "ajax";
-
+                
             $instruments_daetail = $this->Tempinstrument->find('first',array('conditions' => array('Tempinstrument.id' => $this->request->data['instrumentid'])));
             echo $instruments_daetail['Tempinstrument']['tagno'];
             exit;
         }
-		
+            
         public function addbulkfields()
         {
             $this->layout = 'ajax';
             $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
             $this->set('instruments_list',$instruments_list);
-
+                
             $ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
             $this->set('ranges_list',$ranges_list);
             $this->set('trigger','');
@@ -134,7 +134,7 @@
                         $this->request->data['Tempuncertaintydata']['status'] = 0;
                         $this->request->data['Tempuncertaintydata']['rangename'] = $this->request->data['Tempuncertaintydata']['range_id'];
                         $this->request->data['Tempuncertaintydata']['range_id'] = $this->request->data['Tempuncertaintydata']['range_id_hid'];
-
+                            
                         if($this->Tempuncertaintydata->save($this->request->data['Tempuncertaintydata']))
                         { 
                             $last_insert_id =   $this->Tempuncertaintydata->getLastInsertID();
@@ -180,9 +180,9 @@
                         $this->set('tempuncertaintydata_list',$tempuncertaintydata_list);
                     }*/
                 }
-
+                    
             } 
-            
+                
         }
         public function viewbulkfields()
         {
@@ -190,18 +190,18 @@
             $id = $this->request->data['id'];
             $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
             $this->set('instruments_list',$instruments_list);
-
+                
             $ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
             $this->set('ranges_list',$ranges_list);
-
-            
+                
+                
                    $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $id)));
                    $this->set('tempuncertaintydata_list',$tempuncertaintydata_list);
-                
+                       
             //} 
-            
+                
         }
-        
+            
         public function edit_datauncertain()
         {
             $this->autoRender   =   false;
@@ -209,8 +209,8 @@
             $edituncertain_data = $this->Tempuncertaintydata->find('first',array('conditions'=>array('Tempuncertaintydata.id'=>$id)));
             echo json_encode($edituncertain_data);
         }
-        
-        
+            
+            
         public function instrument($file=null,$id=null)
         {
             //pr($file);exit;
@@ -240,14 +240,14 @@
         }
         public function instrument_list()
         {
-           
+            
             
             $user_role = $this->userrole_permission();
             if($user_role['ins_instrument']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+                
             $instrument_data = $this->Tempinstrument->find('all',array('conditions'=>array('Tempinstrument.is_deleted'=>0)),array('order'=>'Tempinstrument.id Desc','recursive'=>'2'));
             $this->set('instrument', $instrument_data);
             $this->render('Instrument/index');
@@ -271,7 +271,7 @@
                 else{
                     $this->Session->setFlash(__('Instrument Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'instrument'));
             }
             $this->render('Instrument/'.$file);
@@ -299,20 +299,20 @@
         }
         public function deleteinstrument($file, $id = null)
         {
-        
+            
             if($this->Tempinstrument->updateAll(array('Tempinstrument.is_deleted'=>1,'Tempinstrument.status'=>0),array('Tempinstrument.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The Instrument has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'instrument'));
             }
         }
-        
-        
+            
+            
         ///////////////////////////////////
         //////////Ambient Temp/////////////
         ///////////////////////////////////
-        
+            
         public function ambient($file=null,$id=null)
         {
             //pr($file);exit;
@@ -340,10 +340,10 @@
                 //$this->render('Instrument/index'.$file);
             }
         }
-        
+            
         public function ambient_list()
         {
-           
+            
             $ambient_data = $this->Tempambient->find('all',array('conditions'=>array('Tempambient.is_deleted'=>0)),array('order'=>'Tempambient.id Desc','recursive'=>'2'));
             $this->set('ambient', $ambient_data);
             $this->render('Ambient/index');
@@ -367,7 +367,7 @@
                 else{
                     $this->Session->setFlash(__('Ambient Temperature Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'ambient'));
             }
             $this->render('Ambient/'.$file);
@@ -395,19 +395,19 @@
         }
         public function deleteambient($file, $id = null)
         {
-        
+            
             if($this->Tempambient->updateAll(array('Tempambient.is_deleted'=>1,'Tempambient.status'=>0),array('Tempambient.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('Ambient Temperature has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'ambient'));
             }
         }
-        
+            
         ///////////////////////////////////
         ////////////////Other/////////////
         ////////////////////////////////////
-        
+            
         public function other($file=null,$id=null)
         {
             if($file!='' && $id!='')
@@ -440,7 +440,7 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+                
             $other_data = $this->Tempother->find('all',array('conditions'=>array('Tempother.is_deleted'=>0)),array('order'=>'Tempother.id Desc','recursive'=>'2'));
             $this->set('other', $other_data);
             $this->render('Other/index');
@@ -463,7 +463,7 @@
                 else{
                     $this->Session->setFlash(__('Other Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'other'));
             }
             $this->render('Other/'.$file);
@@ -490,19 +490,19 @@
         }
         public function deleteother($file, $id = null)
         {
-        
+            
             if($this->Tempother->updateAll(array('Tempother.is_deleted'=>1,'Tempother.status'=>0),array('Tempother.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The Other has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'other'));
             }
         }
-		
+            
 		 ///////////////////////////////////
         ////////////////Range/////////////
         ////////////////////////////////////
-        
+            
         public function range($file=null,$id=null)
         {
             if($file!='' && $id!='')
@@ -535,7 +535,7 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+                
             $range_data = $this->Temprange->find('all',array('conditions'=>array('Temprange.is_deleted'=>0)),array('order'=>'Temprange.id Desc','recursive'=>'2'));
             $this->set('range', $range_data);
             $this->render('Range/index');
@@ -544,7 +544,7 @@
         {   
 		    $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
 			$this->set('unit_list',$unit_list);
-			 
+                            
             if($this->request->is('post'))
             {
                 $fromrange = $this->request->data['fromrange'];
@@ -564,7 +564,7 @@
                 else{
                     $this->Session->setFlash(__('Range Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'range'));
             }
             $this->render('Range/'.$file);
@@ -573,7 +573,7 @@
         {
 			 $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
 			$this->set('unit_list',$unit_list);
-			
+                            
             $range_data = $this->Temprange->find('first',array('conditions'=>array('Temprange.id'=>$id),'recursive'=>'2'));
 			//pr($range_data);exit;
             if($this->request->is(array('post','put')))
@@ -583,7 +583,7 @@
 				$temp_unit_id = $this->request->data['temp_unit_id'];
 				$this->request->data['rangename'] =  "(".$fromrange.' ~ '.$torange.")/".$this->unit_symbol($temp_unit_id);
                 $description = $this->request->data['description'];
-				
+                    
                 $this->Temprange->id   =  $id; 
                 if($this->Temprange->save($this->request->data))
                 {  
@@ -600,19 +600,19 @@
         }
         public function deleterange($file, $id = null)
         {
-        
+            
             if($this->Temprange->updateAll(array('Temprange.is_deleted'=>1,'Temprange.status'=>0),array('Temprange.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The Range has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'range'));
             }
         }
-		
+            
 		///////////////////////////////////
         ////////////////relativehumidity/////////////
         ////////////////////////////////////
-        
+            
         public function relativehumidity($file=null,$id=null)
         {
             if($file!='' && $id!='')
@@ -645,7 +645,7 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+                
             $relativehumidity_data = $this->Temprelativehumidity->find('all',array('conditions'=>array('Temprelativehumidity.is_deleted'=>0)),array('order'=>'Temprelativehumidity.id Desc','recursive'=>'2'));
             $this->set('relativehumidity', $relativehumidity_data);
             $this->render('Relativehumidity/index');
@@ -668,7 +668,7 @@
                 else{
                     $this->Session->setFlash(__('Relativehumidity Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'relativehumidity'));
             }
             $this->render('Relativehumidity/'.$file);
@@ -695,19 +695,19 @@
         }
         public function deleterelativehumidity($file, $id = null)
         {
-        
+            
             if($this->Temprelativehumidity->updateAll(array('Temprelativehumidity.is_deleted'=>1,'Temprelativehumidity.status'=>0),array('Temprelativehumidity.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The Relativehumidity has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'relativehumidity'));
             }
         }
-		
+            
 		///////////////////////////////////
         ////////////////readingtype/////////////
         ////////////////////////////////////
-        
+            
         public function readingtype($file=null,$id=null)
         {
             if($file!='' && $id!='')
@@ -740,7 +740,7 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+                
             $readingtype_data = $this->Tempreadingtype->find('all',array('conditions'=>array('Tempreadingtype.is_deleted'=>0)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
             $this->set('readingtype', $readingtype_data);
             $this->render('readingtype/index');
@@ -763,7 +763,7 @@
                 else{
                     $this->Session->setFlash(__('Readingtype Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'readingtype'));
             }
             $this->render('readingtype/'.$file);
@@ -790,19 +790,19 @@
         }
         public function deletereadingtype($file, $id = null)
         {
-        
+            
             if($this->Tempreadingtype->updateAll(array('Tempreadingtype.is_deleted'=>1,'Tempreadingtype.status'=>0),array('Tempreadingtype.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The Readingtype has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'readingtype'));
             }
         }
-		
+            
 		///////////////////////////////////
         ////////////////channel/////////////
         ////////////////////////////////////
-        
+            
         public function channel($file=null,$id=null)
         {
             if($file!='' && $id!='')
@@ -835,7 +835,7 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+                
             $channel_data = $this->Tempchannel->find('all',array('conditions'=>array('Tempchannel.is_deleted'=>0)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
             $this->set('channel', $channel_data);
             $this->render('channel/index');
@@ -844,7 +844,7 @@
         {    //exit;
             if($this->request->is('post'))
             {
-				
+                
                 $channel = $this->request->data['channelname'];
                 $description = $this->request->data['description'];
                 $channel_data = $this->Tempchannel->find('first',array('conditions'=>array('Tempchannel.channelname ='=>$this->request->data['channelname']),'recursive'=>'2'));
@@ -859,7 +859,7 @@
                 else{
                     $this->Session->setFlash(__('channel Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'channel'));
             }
             $this->render('channel/'.$file);
@@ -871,8 +871,8 @@
             { //pr($this->request->data);
                 $channel = $this->request->data['Tempchannel']['channelname'];
                 $description = $this->request->data['Tempchannel']['description'];
-				
-				
+                    
+                    
                 $this->Tempchannel->id   =  $id; 
                 if($this->Tempchannel->save($this->request->data))
                 {  
@@ -888,19 +888,19 @@
         }
         public function deletechannel($file, $id = null)
         {
-        
+            
             if($this->Tempchannel->updateAll(array('Tempchannel.is_deleted'=>1,'Tempchannel.status'=>0),array('Tempchannel.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The channel has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'channel'));
             }
         }
-		
+            
 		///////////////////////////////////
         ////////////////Instrument validity/////////////
         ////////////////////////////////////
-        
+            
         public function instrumentvalidity($file=null,$id=null)
         {
             if($file!='' && $id!='')
@@ -943,10 +943,10 @@
         {    
 		    $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
 			$this->set('instruments_list',$instruments_list);
-			
+                            
             if($this->request->is('post'))
             {
-
+                
                 $instrumentvalidity_data = $this->Tempinstrumentvalid->find('first',array('conditions'=>array('Tempinstrumentvalid.temp_instruments_id'=>$this->request->data['Tempinstrumentvalid']['temp_instruments_id'],'Tempinstrumentvalid.duedate'=>$this->request->data['Tempinstrumentvalid']['duedate'],'Tempinstrumentvalid.validdays'=>$this->request->data['Tempinstrumentvalid']['validdays']),'recursive'=>'2'));
                 if(!$instrumentvalidity_data){
                 if($this->Tempinstrumentvalid->save($this->request->data))
@@ -959,7 +959,7 @@
                 else{
                     $this->Session->setFlash(__('Instrumentvalidity Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'instrumentvalidity'));
             }
             $this->render('instrumentvalidity/'.$file);
@@ -968,7 +968,7 @@
         {
 			$instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
 			$this->set('instruments_list',$instruments_list);
-			
+                            
             $instrumentvalidity_data = $this->Tempinstrumentvalid->find('first',array('conditions'=>array('Tempinstrumentvalid.id'=>$id),'recursive'=>'2'));
             if($this->request->is(array('post','put')))
             { 
@@ -988,19 +988,19 @@
         }
         public function deleteinstrumentvalidity($file, $id = null)
         {
-        
+            
             if($this->Tempinstrumentvalid->updateAll(array('Tempinstrumentvalid.is_deleted'=>1,'Tempinstrumentvalid.status'=>0),array('Tempinstrumentvalid.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The Instrument validity has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'instrumentvalidity'));
             }
         }
-		
+            
 		 ///////////////////////////////////
         ////////////////unit/////////////
         ////////////////////////////////////
-        
+            
         public function unit($file=null,$id=null)
         {
             if($file!='' && $id!='')
@@ -1033,7 +1033,7 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+                
             $unit_data = $this->Tempunit->find('all',array('conditions'=>array('Tempunit.is_deleted'=>0)),array('order'=>'Tempunit.id Desc','recursive'=>'2'));
             $this->set('unit', $unit_data);
             $this->render('unit/index');
@@ -1056,7 +1056,7 @@
                 else{
                     $this->Session->setFlash(__('unit Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'unit'));
             }
             $this->render('unit/'.$file);
@@ -1083,19 +1083,19 @@
         }
         public function deleteunit($file, $id = null)
         {
-        
+            
             if($this->Tempunit->updateAll(array('Tempunit.is_deleted'=>1,'Tempunit.status'=>0),array('Tempunit.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The unit has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'unit'));
             }
         }
-		
+            
 		  ///////////////////////////////////
         ////////////////unitconvert/////////////
         ////////////////////////////////////
-        
+            
         public function unitconvert($file=null,$id=null)
         {
             if($file!='' && $id!='')
@@ -1128,7 +1128,7 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             $this->set('userrole_cus',$user_role['ins_instrument']);
-        
+                
             $unitconvert_data = $this->Tempunitconvert->find('all',array('conditions'=>array('Tempunitconvert.is_deleted'=>0)),array('order'=>'Tempunitconvert.id Desc','recursive'=>'2'));
             $this->set('unitconvert', $unitconvert_data);
             $this->render('unitconvert/index');
@@ -1137,10 +1137,10 @@
         {    
 		    $tempunit_list = $this->Tempunit->find('list',array('fields' => array('id','unitname'),'conditions' => array('Tempunit.is_deleted'=>0,'Tempunit.status' => 1)));
 			$this->set('tempunit_list',$tempunit_list);
-			
+                            
             if($this->request->is('post'))
             {
-
+                
                 $unitconvert_data = $this->Tempunitconvert->find('first',array('conditions'=>array('Tempunitconvert.fromunit'=>$this->request->data['Tempunitconvert']['fromunit'],'Tempunitconvert.tounit ='=>$this->request->data['Tempunitconvert']['tounit'],'Tempunitconvert.factor ='=>$this->request->data['Tempunitconvert']['factor']),'recursive'=>'2'));
                 if(!$unitconvert_data){
                 if($this->Tempunitconvert->save($this->request->data))
@@ -1153,7 +1153,7 @@
                 else{
                     $this->Session->setFlash(__('unitconvert Name Already Exists!'));
                 }
-            
+                    
             $this->redirect(array('controller'=>'Temperatures','action'=>'unitconvert'));
             }
             $this->render('unitconvert/'.$file);
@@ -1162,7 +1162,7 @@
         {
 			$tempunit_list = $this->Tempunit->find('list',array('fields' => array('id','unitname'),'conditions' => array('Tempunit.is_deleted'=>0,'Tempunit.status' => 1)));
 			$this->set('tempunit_list',$tempunit_list);
-			
+                            
             $unitconvert_data = $this->Tempunitconvert->find('first',array('conditions'=>array('Tempunitconvert.id'=>$id),'recursive'=>'2'));
             if($this->request->is(array('post','put')))
             {
@@ -1182,22 +1182,22 @@
         }
         public function deleteunitconvert($file, $id = null)
         {
-        
+            
             if($this->Tempunitconvert->updateAll(array('Tempunitconvert.is_deleted'=>1,'Tempunitconvert.status'=>0),array('Tempunitconvert.id'=>$id)))
             {
-                 
+                
                 $this->Session->setFlash(__('The unitconvert has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'unitconvert'));
             }
         }
-        
+            
 		  ///////////////////////////////////
         ////////////////Form Data/////////////
         ////////////////////////////////////
-        
+            
         public function formdatas()
         {
-			
+            
             $tempform_data = $this->Tempformdata->find('first');
             if($this->request->is(array('post','put')))
             {
@@ -1210,15 +1210,15 @@
             }
             else
             {
-                 
+                
 				$this->set('formdata',$tempform_data);
             }
-           
+                
         }
-        
-    
+            
+            
         /////////////////// Template  ////////////////////
-        
+            
         public function template($file=null,$id=null)
         {
             //pr($file);exit;
@@ -1248,20 +1248,20 @@
         }
         public function template_list()
         {
-           
+            
             $template_data = $this->Temptemplate->find('all',array('conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
             $this->set('template', $template_data);
             $this->render('template/index');
         }
-        
+            
         public function addtemplate($file)
         {
             $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
             $this->set('uncer_tag',$uncer_tag);
-
+                
             $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
             $this->set('unit_list',$unit_list);
-
+                
             if($this->request->is('post'))
             {
                 //pr($this->request->data);exit;
@@ -1285,12 +1285,12 @@
                 {
                     $this->Session->setFlash(__('Template Already Exists!'));
                 }
-
+                    
                 $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
             }
             $this->render('template/'.$file);
         }
-
+            
         public function edittemplate($file, $id = null)
         {
             $details = explode('$',$id);
@@ -1302,15 +1302,15 @@
             $model_no = $details[2];
             $brand_id = $details[3];
             $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$ins_id,'Description.sales_range'=>$range_id,'Description.model_no'=>$model_no,'Description.brand_id'=>$brand_id)));
-            
+                
             $this->set('desc_data',$data);
-            
+                
             $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
             $this->set('unit_list',$unit_list);
-            
+                
             $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
             $this->set('uncer_tag',$uncer_tag);
-            
+                
             //pr($data);exit;
             if($this->request->is(array('post','put')))
             {
@@ -1330,26 +1330,26 @@
             }
             $this->render('template/'.$file);
         }
-        
+            
         public function viewtemplate($file, $id = null)
         {
             $this->layout = 'ajax';
             $id = $this->request->data['id'];
-            
+                
             $instruments_list = $this->Tempinstrument->find('list',array('fields' => array('id','instrumentname'),'conditions' => array('Tempinstrument.is_deleted'=>0,'Tempinstrument.status' => 1)));
             $this->set('instruments_list',$instruments_list);
-
+                
             $ranges_list = $this->Temprange->find('list',array('fields' => array('id','rangename'),'conditions' => array('Temprange.is_deleted'=>0,'Temprange.status' => 1)));
             $this->set('ranges_list',$ranges_list);
-
-            
+                
+                
                    $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $id)));
                    $this->set('tempuncertaintydata_list',$tempuncertaintydata_list);
-                
+                       
             //} 
-            
+                
         }
-        
+            
         public function search_range()
         {
             $this->loadModel('Temprange');
@@ -1374,7 +1374,7 @@
                     echo "<br>";
                     echo "</div>";
             }
-            
+                
         }
         public function search_template_ins()
         {
@@ -1390,7 +1390,7 @@
                 for($i = 0; $i<$c;$i++)
                 { 
                     $val = $data[$i]['Instrument']['name'].'-'.$data[$i]['Range']['range_name'].'-'.$data[$i]['Description']['model_no'];
-                    
+                        
                     if(!in_array($val, $arr))
                     {
                         $arr[] = $val;
@@ -1410,21 +1410,21 @@
                     echo "</div>";
             }
         }
-        
+            
         public function addtemplatedata()
         {
             $this->layout = 'ajax';
-
+                
             $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
             $this->set('uncer_tag',$uncer_tag);
-
+                
             $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
             $this->set('unit_list',$unit_list);
-
+                
             if($this->request->is('post'))
             {
                // pr($this->request->data);exit;
-                if($this->request->data['Temptemplatedata']['edit_template_bulk_id'] =='')
+                if(!isset($this->request->data['Temptemplatedata']['edit_template_bulk_id']))
                 {
                     //
                     if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
@@ -1434,7 +1434,7 @@
                     }
                     else
                     {
-
+                        
                     }
                 }
                 else
@@ -1446,7 +1446,7 @@
             {
                 $this->request->data['Temptemplatedata']['id'] = $this->request->data['Temptemplatedata']['edit_template_bulk_id'];
                 $this->request->data['Temptemplatedata']['status'] = 1;
-
+                    
                 if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
                 { 
                     //$last_insert_id =   $this->Temptemplatedata->getLastInsertID();
@@ -1457,20 +1457,20 @@
                 }
             }
         }
-        
+            
         public function viewtemplatedata()
         {
             $this->layout = 'ajax';
-            
+                
             $id = $this->request->data['id'];
-            
+                
             $temptemplatedata_list = $this->Temptemplatedata->find('all',array('conditions' => array('Temptemplatedata.temp_templates_id'=>$id)));
             $this->set('temptemplatedata',$temptemplatedata_list);
-
+                
             $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
             $this->set('unit_list',$unit_list);
         }
-        
+            
         public function edittemplatedata()
         {
             $this->autoRender   =   false;
@@ -1478,8 +1478,8 @@
             $edituncertain_data = $this->Temptemplatedata->find('first',array('conditions'=>array('Temptemplatedata.id'=>$id)));
             echo json_encode($edituncertain_data);
         }
-
-        
+            
+            
         public function get_instrument_details()
         {
             $this->autoRender = false;
@@ -1517,10 +1517,10 @@
                     echo "<br>";
                     echo "</div>";
             }
-            
+                
         }
-        
-    
+            
+            
     }
-    
+        
 ?>

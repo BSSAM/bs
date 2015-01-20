@@ -63,15 +63,15 @@ $(document).ready(function(e) {
           <th class="text-center">STDDEV OF MEAN </th>
         </tr>
       </thead>
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set1_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">1</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp1" class="temp1"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit1" class="unit1">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -80,13 +80,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res1" class="res1"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc1" class="acc1"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count1" class="count1"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert1" class="uncert1"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -105,33 +105,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_1" class="b1_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_2" class="b1_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_3" class="b1_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_4" class="b1_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_5" class="b1_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_6" class="b1_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_7" class="b1_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_8" class="b1_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_9" class="b1_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_10" class="b1_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_11" class="b1_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b1_12" class="b1_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_1" class="b1_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_2" class="b1_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_3" class="b1_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b1_4" class="b1_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_5" class="b1_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_6" class="b1_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_7" class="b1_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b1_8" class="b1_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_9" class="b1_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_10" class="b1_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_11" class="b1_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b1_12" class="b1_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a1_1" class="a1_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_2" class="a1_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_3" class="a1_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a1_4" class="a1_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_5" class="a1_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_6" class="a1_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_7" class="a1_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a1_8" class="a1_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_9" class="a1_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_10" class="a1_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_11" class="a1_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a1_12" class="a1_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_1" class="a1_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_2" class="a1_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_3" class="a1_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a1_4" class="a1_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_5" class="a1_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_6" class="a1_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_7" class="a1_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a1_8" class="a1_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_9" class="a1_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_10" class="a1_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_11" class="a1_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a1_12" class="a1_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -144,7 +144,7 @@ $(document).ready(function(e) {
         
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty1_val" class="uncertainty1_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
@@ -154,15 +154,15 @@ $(document).ready(function(e) {
   <!-- table2-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set2_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">2</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp2" class="temp2"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit2" class="unit2">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -171,13 +171,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res2" class="res2"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc2" class="acc2"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count2" class="count2"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert2" class="uncert2"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -196,33 +196,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_1" class="b2_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_2" class="b2_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_3" class="b2_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_4" class="b2_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_5" class="b2_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_6" class="b2_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_7" class="b2_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_8" class="b2_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_9" class="b2_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_10" class="b2_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_11" class="b2_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b2_12" class="b2_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_1" class="b2_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_2" class="b2_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_3" class="b2_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b2_4" class="b2_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_5" class="b2_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_6" class="b2_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_7" class="b2_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b2_8" class="b2_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_9" class="b2_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_10" class="b2_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_11" class="b2_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b2_12" class="b2_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a2_1" class="a2_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_2" class="a2_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_3" class="a2_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a2_4" class="a2_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_5" class="a2_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_6" class="a2_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_7" class="a2_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a2_8" class="a2_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_9" class="a2_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_10" class="a2_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_11" class="a2_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a2_12" class="a2_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_1" class="a2_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_2" class="a2_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_3" class="a2_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a2_4" class="a2_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_5" class="a2_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_6" class="a2_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_7" class="a2_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a2_8" class="a2_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_9" class="a2_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_10" class="a2_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_11" class="a2_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a2_12" class="a2_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -233,7 +233,7 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty2_val" class="uncertainty2_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
@@ -243,15 +243,15 @@ $(document).ready(function(e) {
   <!-- table3-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set3_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">3</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp3" class="temp3"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit3" class="unit3">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -260,13 +260,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res3" class="res3"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc3" class="acc3"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count3" class="count3"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert3" class="uncert3"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -285,33 +285,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_1" class="b3_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_2" class="b3_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_3" class="b3_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_4" class="b3_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_5" class="b3_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_6" class="b3_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_7" class="b3_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_8" class="b3_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_9" class="b3_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_10" class="b3_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_11" class="b3_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b3_12" class="b3_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_1" class="b3_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_2" class="b3_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_3" class="b3_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b3_4" class="b3_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_5" class="b3_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_6" class="b3_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_7" class="b3_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b3_8" class="b3_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_9" class="b3_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_10" class="b3_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_11" class="b3_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b3_12" class="b3_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a3_1" class="a3_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_2" class="a3_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_3" class="a3_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a3_4" class="a3_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_5" class="a3_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_6" class="a3_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_7" class="a3_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a3_8" class="a3_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_9" class="a3_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_10" class="a3_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_11" class="a3_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a3_12" class="a3_12" ></td
+          <td class="text-center"><input type="text" value="0" name="a3_1" class="a3_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_2" class="a3_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_3" class="a3_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a3_4" class="a3_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_5" class="a3_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_6" class="a3_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_7" class="a3_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a3_8" class="a3_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_9" class="a3_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_10" class="a3_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_11" class="a3_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a3_12" class="a3_12" ></td
         </tr>
       </tbody>
     </table>
@@ -322,25 +322,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty3_val" class="uncertainty3_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table4-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set4_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">4</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp4" class="temp4"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit4" class="unit4">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -349,13 +350,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res4" class="res4"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc4" class="acc4"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count4" class="count4"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert4" class="uncert4"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -374,33 +375,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-         <td class="text-center"><input type="text" value="0" nabe="b4_1" class="b4_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_2" class="b4_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_3" class="b4_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_4" class="b4_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_5" class="b4_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_6" class="b4_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_7" class="b4_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_8" class="b4_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_9" class="b4_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_10" class="b4_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_11" class="b4_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b4_12" class="b4_12" ></t
+         <td class="text-center"><input type="text" value="0" name="b4_1" class="b4_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_2" class="b4_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_3" class="b4_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b4_4" class="b4_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_5" class="b4_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_6" class="b4_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_7" class="b4_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b4_8" class="b4_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_9" class="b4_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_10" class="b4_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_11" class="b4_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b4_12" class="b4_12" ></t
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a4_1" class="a4_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_2" class="a4_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_3" class="a4_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a4_4" class="a4_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_5" class="a4_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_6" class="a4_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_7" class="a4_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a4_8" class="a4_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_9" class="a4_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_10" class="a4_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_11" class="a4_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a4_12" class="a4_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_1" class="a4_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_2" class="a4_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_3" class="a4_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a4_4" class="a4_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_5" class="a4_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_6" class="a4_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_7" class="a4_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a4_8" class="a4_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_9" class="a4_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_10" class="a4_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_11" class="a4_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a4_12" class="a4_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -411,25 +412,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty4_val" class="uncertainty4_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table5-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set5_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">5</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp5" class="temp5"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit5" class="unit5">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -438,13 +440,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res5" class="res5"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc5" class="acc5"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count5" class="count5"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert5" class="uncert5"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -463,33 +465,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_1" class="b5_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_2" class="b5_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_3" class="b5_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_4" class="b5_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_5" class="b5_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_6" class="b5_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_7" class="b5_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_8" class="b5_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_9" class="b5_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_10" class="b5_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_11" class="b5_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b5_12" class="b5_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_1" class="b5_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_2" class="b5_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_3" class="b5_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b5_4" class="b5_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_5" class="b5_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_6" class="b5_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_7" class="b5_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b5_8" class="b5_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_9" class="b5_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_10" class="b5_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_11" class="b5_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b5_12" class="b5_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a5_1" class="a5_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_2" class="a5_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_3" class="a5_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a5_4" class="a5_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_5" class="a5_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_6" class="a5_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_7" class="a5_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a5_8" class="a5_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_9" class="a5_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_10" class="a5_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_11" class="a5_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a5_12" class="a5_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_1" class="a5_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_2" class="a5_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_3" class="a5_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a5_4" class="a5_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_5" class="a5_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_6" class="a5_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_7" class="a5_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a5_8" class="a5_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_9" class="a5_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_10" class="a5_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_11" class="a5_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a5_12" class="a5_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -500,25 +502,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty5_val" class="uncertainty5_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table6-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set6_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">6</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp6" class="temp6"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit6" class="unit6">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -527,17 +530,17 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res6" class="res6"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc6" class="acc6"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count6" class="count6"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert6" class="uncert6"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-         <td class="text-center"><input type="text" value="0" name="m6_1" class="m6_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="m6_1" class="m6_1" ></td>
           <td class="text-center"><input type="text" value="0" name="m6_2" class="m6_2" ></td>
           <td class="text-center"><input type="text" value="0" name="m6_3" class="m6_3" > </td>
           <td class="text-center"><input type="text" value="0" name="m6_4" class="m6_4" ></td>
@@ -567,18 +570,18 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a6_1" class="a6_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_2" class="a6_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_3" class="a6_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a6_4" class="a6_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_5" class="a6_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_6" class="a6_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_7" class="a6_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a6_8" class="a6_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_9" class="a6_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_10" class="a6_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_11" class="a6_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a6_12" class="a6_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_1" class="a6_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_2" class="a6_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_3" class="a6_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a6_4" class="a6_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_5" class="a6_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_6" class="a6_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_7" class="a6_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a6_8" class="a6_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_9" class="a6_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_10" class="a6_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_11" class="a6_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a6_12" class="a6_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -589,25 +592,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty6_val" class="uncertainty6_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table7-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set7_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">7</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp7" class="temp7"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit7" class="unit7">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -616,13 +620,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res7" class="res7"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc7" class="acc7"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count7" class="count7"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert7" class="uncert7"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -641,33 +645,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_1" class="b7_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_2" class="b7_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_3" class="b7_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_4" class="b7_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_5" class="b7_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_6" class="b7_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_7" class="b7_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_8" class="b7_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_9" class="b7_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_10" class="b7_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_11" class="b7_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b7_12" class="b7_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_1" class="b7_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_2" class="b7_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_3" class="b7_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b7_4" class="b7_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_5" class="b7_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_6" class="b7_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_7" class="b7_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b7_8" class="b7_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_9" class="b7_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_10" class="b7_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_11" class="b7_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b7_12" class="b7_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-         <td class="text-center"><input type="text" value="0" naae="a7_1" class="a7_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_2" class="a7_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_3" class="a7_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a7_4" class="a7_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_5" class="a7_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_6" class="a7_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_7" class="a7_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a7_8" class="a7_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_9" class="a7_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_10" class="a7_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_11" class="a7_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a7_12" class="a7_12" ></td
+         <td class="text-center"><input type="text" value="0" name="a7_1" class="a7_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_2" class="a7_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_3" class="a7_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a7_4" class="a7_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_5" class="a7_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_6" class="a7_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_7" class="a7_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a7_8" class="a7_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_9" class="a7_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_10" class="a7_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_11" class="a7_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a7_12" class="a7_12" ></td
         </tr>
       </tbody>
     </table>
@@ -678,25 +682,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty7_val" class="uncertainty7_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table8-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set8_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">8</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp8" class="temp8"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit8" class="unit8">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -705,13 +710,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res8" class="res8"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc8" class="acc8"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count8" class="count8"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert8" class="uncert8"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -730,33 +735,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_1" class="b8_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_2" class="b8_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_3" class="b8_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_4" class="b8_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_5" class="b8_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_6" class="b8_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_7" class="b8_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_8" class="b8_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_9" class="b8_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_10" class="b8_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_11" class="b8_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b8_12" class="b8_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_1" class="b8_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_2" class="b8_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_3" class="b8_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b8_4" class="b8_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_5" class="b8_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_6" class="b8_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_7" class="b8_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b8_8" class="b8_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_9" class="b8_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_10" class="b8_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_11" class="b8_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b8_12" class="b8_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a8_1" class="a8_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_2" class="a8_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_3" class="a8_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a8_4" class="a8_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_5" class="a8_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_6" class="a8_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_7" class="a8_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a8_8" class="a8_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_9" class="a8_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_10" class="a8_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_11" class="a8_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a8_12" class="a8_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_1" class="a8_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_2" class="a8_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_3" class="a8_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a8_4" class="a8_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_5" class="a8_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_6" class="a8_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_7" class="a8_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a8_8" class="a8_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_9" class="a8_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_10" class="a8_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_11" class="a8_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a8_12" class="a8_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -767,25 +772,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty8_val" class="uncertainty8_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table9-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set9_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">9</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp9" class="temp9"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit9" class="unit9">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -794,13 +800,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res9" class="res9"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc9" class="acc9"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count9" class="count9"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert9" class="uncert9"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -819,33 +825,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_1" class="b9_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_2" class="b9_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_3" class="b9_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_4" class="b9_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_5" class="b9_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_6" class="b9_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_7" class="b9_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_8" class="b9_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_9" class="b9_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_10" class="b9_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_11" class="b9_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b9_12" class="b9_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_1" class="b9_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_2" class="b9_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_3" class="b9_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b9_4" class="b9_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_5" class="b9_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_6" class="b9_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_7" class="b9_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b9_8" class="b9_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_9" class="b9_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_10" class="b9_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_11" class="b9_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b9_12" class="b9_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a9_1" class="a9_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_2" class="a9_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_3" class="a9_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a9_4" class="a9_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_5" class="a9_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_6" class="a9_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_7" class="a9_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a9_8" class="a9_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_9" class="a9_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_10" class="a9_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_11" class="a9_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a9_12" class="a9_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_1" class="a9_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_2" class="a9_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_3" class="a9_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a9_4" class="a9_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_5" class="a9_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_6" class="a9_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_7" class="a9_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a9_8" class="a9_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_9" class="a9_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_10" class="a9_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_11" class="a9_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a9_12" class="a9_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -856,25 +862,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty9_val" class="uncertainty9_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table10-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set10_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">10</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp10" class="temp10"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit10" class="unit10">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -883,13 +890,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res10" class="res10"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc10" class="acc10"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count10" class="count10"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert10" class="uncert10"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -908,33 +915,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_1" class="b10_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_2" class="b10_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_3" class="b10_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_4" class="b10_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_5" class="b10_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_6" class="b10_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_7" class="b10_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_8" class="b10_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_9" class="b10_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_10" class="b10_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_11" class="b10_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b10_12" class="b10_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_1" class="b10_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_2" class="b10_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_3" class="b10_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b10_4" class="b10_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_5" class="b10_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_6" class="b10_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_7" class="b10_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b10_8" class="b10_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_9" class="b10_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_10" class="b10_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_11" class="b10_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b10_12" class="b10_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a10_1" class="a10_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_2" class="a10_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_3" class="a10_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a10_4" class="a10_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_5" class="a10_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_6" class="a10_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_7" class="a10_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a10_8" class="a10_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_9" class="a10_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_10" class="a10_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_11" class="a10_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a10_12" class="a10_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_1" class="a10_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_2" class="a10_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_3" class="a10_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a10_4" class="a10_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_5" class="a10_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_6" class="a10_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_7" class="a10_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a10_8" class="a10_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_9" class="a10_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_10" class="a10_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_11" class="a10_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a10_12" class="a10_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -945,25 +952,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty10_val" class="uncertainty10_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table11-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set11_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">11</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp11" class="temp11"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit11" class="unit11">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -972,13 +980,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res11" class="res11"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc11" class="acc11"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count11" class="count11"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert11" class="uncert11"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -997,33 +1005,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_1" class="b11_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_2" class="b11_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_3" class="b11_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_4" class="b11_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_5" class="b11_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_6" class="b11_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_7" class="b11_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_8" class="b11_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_9" class="b11_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_10" class="b11_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_11" class="b11_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b11_12" class="b11_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_1" class="b11_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_2" class="b11_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_3" class="b11_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b11_4" class="b11_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_5" class="b11_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_6" class="b11_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_7" class="b11_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b11_8" class="b11_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_9" class="b11_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_10" class="b11_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_11" class="b11_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b11_12" class="b11_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a11_1" class="a11_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_2" class="a11_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_3" class="a11_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a11_4" class="a11_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_5" class="a11_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_6" class="a11_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_7" class="a11_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a11_8" class="a11_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_9" class="a11_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_10" class="a11_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_11" class="a11_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a11_12" class="a11_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_1" class="a11_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_2" class="a11_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_3" class="a11_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a11_4" class="a11_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_5" class="a11_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_6" class="a11_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_7" class="a11_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a11_8" class="a11_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_9" class="a11_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_10" class="a11_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_11" class="a11_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a11_12" class="a11_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1034,25 +1042,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty11_val" class="uncertainty11_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table12-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set12_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">12</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp12" class="temp12"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit12" class="unit12">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -1061,13 +1070,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res12" class="res12"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc12" class="acc12"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count12" class="count12"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert12" class="uncert12"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -1086,33 +1095,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_1" class="b12_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_2" class="b12_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_3" class="b12_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_4" class="b12_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_5" class="b12_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_6" class="b12_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_7" class="b12_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_8" class="b12_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_9" class="b12_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_10" class="b12_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_11" class="b12_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b12_12" class="b12_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_1" class="b12_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_2" class="b12_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_3" class="b12_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b12_4" class="b12_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_5" class="b12_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_6" class="b12_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_7" class="b12_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b12_8" class="b12_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_9" class="b12_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_10" class="b12_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_11" class="b12_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b12_12" class="b12_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a12_1" class="a12_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_2" class="a12_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_3" class="a12_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a12_4" class="a12_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_5" class="a12_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_6" class="a12_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_7" class="a12_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a12_8" class="a12_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_9" class="a12_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_10" class="a12_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_11" class="a12_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a12_12" class="a12_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_1" class="a12_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_2" class="a12_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_3" class="a12_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a12_4" class="a12_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_5" class="a12_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_6" class="a12_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_7" class="a12_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a12_8" class="a12_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_9" class="a12_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_10" class="a12_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_11" class="a12_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a12_12" class="a12_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1123,25 +1132,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty12_val" class="uncertainty12_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table13-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set13_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">13</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp13" class="temp13"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit13" class="unit13">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -1150,13 +1160,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res13" class="res13"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc13" class="acc13"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count13" class="count13"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert13" class="uncert13"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -1175,33 +1185,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_1" class="b13_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_2" class="b13_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_3" class="b13_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_4" class="b13_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_5" class="b13_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_6" class="b13_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_7" class="b13_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_8" class="b13_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_9" class="b13_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_10" class="b13_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_11" class="b13_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b13_12" class="b13_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_1" class="b13_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_2" class="b13_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_3" class="b13_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b13_4" class="b13_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_5" class="b13_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_6" class="b13_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_7" class="b13_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b13_8" class="b13_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_9" class="b13_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_10" class="b13_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_11" class="b13_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b13_12" class="b13_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-         <td class="text-center"><input type="text" value="0" naae="a13_1" class="a13_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_2" class="a13_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_3" class="a13_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a13_4" class="a13_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_5" class="a13_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_6" class="a13_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_7" class="a13_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a13_8" class="a13_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_9" class="a13_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_10" class="a13_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_11" class="a13_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a13_12" class="a13_12" ></td>
+         <td class="text-center"><input type="text" value="0" name="a13_1" class="a13_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_2" class="a13_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_3" class="a13_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a13_4" class="a13_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_5" class="a13_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_6" class="a13_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_7" class="a13_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a13_8" class="a13_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_9" class="a13_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_10" class="a13_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_11" class="a13_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a13_12" class="a13_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1210,27 +1220,28 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
-       <?php foreach($uncertainty as $uncertainty_data){ ?>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty13_val" class="uncertainty13_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table14-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set14_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">14</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp14" class="temp14"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit14" class="unit14">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -1239,13 +1250,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res14" class="res14"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc14" class="acc14"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count14" class="count14"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert14" class="uncert14"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -1264,33 +1275,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_1" class="b14_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_2" class="b14_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_3" class="b14_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_4" class="b14_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_5" class="b14_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_6" class="b14_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_7" class="b14_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_8" class="b14_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_9" class="b14_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_10" class="b14_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_11" class="b14_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b14_12" class="b14_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_1" class="b14_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_2" class="b14_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_3" class="b14_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b14_4" class="b14_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_5" class="b14_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_6" class="b14_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_7" class="b14_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b14_8" class="b14_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_9" class="b14_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_10" class="b14_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_11" class="b14_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b14_12" class="b14_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a14_1" class="a14_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_2" class="a14_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_3" class="a14_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a14_4" class="a14_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_5" class="a14_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_6" class="a14_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_7" class="a14_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a14_8" class="a14_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_9" class="a14_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_10" class="a14_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_11" class="a14_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a14_12" class="a14_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_1" class="a14_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_2" class="a14_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_3" class="a14_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a14_4" class="a14_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_5" class="a14_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_6" class="a14_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_7" class="a14_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a14_8" class="a14_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_9" class="a14_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_10" class="a14_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_11" class="a14_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a14_12" class="a14_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1301,25 +1312,26 @@ $(document).ready(function(e) {
         </div>
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty14_val" class="uncertainty14_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
       </div>
     </div>
   </div>
+  
   <!-- table15-->
   <div class="pos_relative">
     <table  class="table table-vcenter table-condensed table-bordered">
-      <tbody class="subcontract_instrument_info">
+      <tbody class="set15_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">15</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="temp15" class="temp15"></td>
           <td class="text-center">Unit </td>
-          <td class="text-center"><select>
+          <td class="text-center"><select name="unit15" class="unit15">
               <option value="">-- Select Unit --</option>
-              <option value="1" selected="selected">°C</option>
+              <option value="1" selected="selected" >°C</option>
               <option value="2">°F</option>
               <option value="3">°C</option>
               <option value="4">°F</option>
@@ -1328,13 +1340,13 @@ $(document).ready(function(e) {
               <option value="7">% rh</option>
             </select></td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="res15" class="res15"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="acc15" class="acc15"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="count15" class="count15"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0"></td>
+          <td class="text-center"><input type="text" value="0" name="uncert15" class="uncert15"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -1353,33 +1365,33 @@ $(document).ready(function(e) {
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_1" class="b15_1" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_2" class="b15_2" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_3" class="b15_3" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_4" class="b15_4" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_5" class="b15_5" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_6" class="b15_6" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_7" class="b15_7" > </td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_8" class="b15_8" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_9" class="b15_9" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_10" class="b15_10" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_11" class="b15_11" ></td>
-          <td class="text-center"><input type="text" value="0" nabe="b15_12" class="b15_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_1" class="b15_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_2" class="b15_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_3" class="b15_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="b15_4" class="b15_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_5" class="b15_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_6" class="b15_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_7" class="b15_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="b15_8" class="b15_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_9" class="b15_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_10" class="b15_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_11" class="b15_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="b15_12" class="b15_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" naae="a15_1" class="a15_1" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_2" class="a15_2" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_3" class="a15_3" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a15_4" class="a15_4" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_5" class="a15_5" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_6" class="a15_6" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_7" class="a15_7" > </td>
-          <td class="text-center"><input type="text" value="0" naae="a15_8" class="a15_8" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_9" class="a15_9" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_10" class="a15_10" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_11" class="a15_11" ></td>
-          <td class="text-center"><input type="text" value="0" naae="a15_12" class="a15_12" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_1" class="a15_1" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_2" class="a15_2" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_3" class="a15_3" > </td>
+          <td class="text-center"><input type="text" value="0" name="a15_4" class="a15_4" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_5" class="a15_5" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_6" class="a15_6" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_7" class="a15_7" > </td>
+          <td class="text-center"><input type="text" value="0" name="a15_8" class="a15_8" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_9" class="a15_9" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_10" class="a15_10" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_11" class="a15_11" ></td>
+          <td class="text-center"><input type="text" value="0" name="a15_12" class="a15_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1388,14 +1400,14 @@ $(document).ready(function(e) {
         <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>
-          <?php foreach($uncertainty as $uncertainty_data){ ?>
+        <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="uncertainty15_val" class="uncertainty15_val">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
-        
       </div>
     </div>
   </div>
+  
 </div>
