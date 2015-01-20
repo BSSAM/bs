@@ -476,6 +476,25 @@ App::uses('Controller', 'Controller');
                     $str1 = implode('-', $parts);
                     //$this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
+                case 'purchaseorders':
+                  $random = $this->Random->find('first');
+                    $str = $random['Random']['purchaseorders'];
+                    $i = 1;
+                    $parts = explode('-', $str);
+                    if($parts[2]==99999999)
+                    {
+                        $parts[2]=10000000;
+                        $parts[1] += $parts[1];
+                        $parts[1] = sprintf("%02d", $parts[1]);
+                    }
+                    else
+                    {
+                        $parts[2] += $i;
+                        $parts[2] = sprintf("%08d", $parts[2]);
+                    }
+                    $str1 = implode('-', $parts);
+                    //$this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                break;
             }
             return $str1;
         }

@@ -1565,12 +1565,12 @@ table td { font-size:11px; line-height:18px; }
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$quotationno.'</div></td>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$salesorderno.'</div></td>
                          </tr>
                          <tr>
                               <td width="139" style="line-height:10px !important;padding-left:5px;font-size:11px !important;">OUR REF NO </td>
                               <td width="24" style="font-size:11px !important;">:</td>
-                              <td width="109" style="line-height:10px !important;font-size:11px !important;">'.$salesorderno.'</td>
+                              <td width="109" style="line-height:10px !important;font-size:11px !important;">'.$quotationno.'</td>
                          </tr>
                          <tr>
                               <td style="line-height:10px !important;padding-left:5px;font-size:11px !important;">YOUR REF NO </td>

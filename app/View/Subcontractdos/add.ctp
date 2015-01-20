@@ -217,7 +217,7 @@ $(function(){
                             <th class="text-center">Call Type</th>
                             <th class="text-center">Validity</th>
                             <th class="text-center">Department</th>
-<!--                            <th class="text-center">Action</th>-->
+                            <th class="text-center">Action</th>
 
                         </tr>
                     </thead>

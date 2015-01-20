@@ -1,4 +1,6 @@
-
+<script>
+    var path_url='<?PHP echo Router::url('/',true); ?>';
+</script>
 <h1>
     <i class="gi gi-user"></i>Edit Sub Contract Delivery Order
 </h1>
@@ -7,7 +9,7 @@
 <ul class="breadcrumb breadcrumb-top">
     <li><?php echo $this->Html->link('Home', array('controller' => 'Dashboards', 'action' => 'index')); ?></li>
     <li><?php echo $this->Html->link('Sub Contract DO', array('controller' => 'Subcontractdos', 'action' => 'index')); ?></li>
-    <li>Add Sub Contract DO</li>
+    <li>Edit Sub Contract DO</li>
 </ul>
 <!-- END Forms General Header -->
 
@@ -196,8 +198,13 @@
 </div>
             <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-10">
-                    <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?> &nbsp;
-                    <?php //echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+                    <?php //echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?> &nbsp;
+                    <?php  if($subcondo['Subcontractdo']['is_approved']==0): ?>
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_subcon','escape' => false,'id'=>$subcondo['Subcontractdo']['id'])); ?>
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                    <?php else : ?>
+                    <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
+                    <?php endif; ?>
                 </div>
             </div>
 

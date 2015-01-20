@@ -70,7 +70,8 @@ $(document).ready(function(){
                                     <td class="text-center">'+value.Description.sales_calllocation+'</td>\n\\n\
                                     <td class="text-center">'+value.Description.sales_calltype+'</td>\n\
                                     <td class="text-center">'+value.Description.sales_validity+'</td>\n\
-                                    <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\\n\
+                                    <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\\n\\n\
+                                    <td class="text-center"><div class="btn-group"><a data-delete="'+value.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger subcontract_instrument_delete"><i class="fa fa-times"></i></a></div></td>\n\\n\\n\\n\
                                     </tr>');
                             
                             //<td class="text-center"><div class="btn-group">\n\
@@ -98,8 +99,21 @@ $(document).ready(function(){
     });
     $(document).on('click','.subcontract_instrument_delete',function(){
       var device_id=$(this).attr('data-delete');
+      var result    =   confirm('Are you sure want to delete?');
+      if(result==true){
+       $.ajax({
+            type: 'POST',
+            data:"device_id="+ device_id,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
+            url: path_url+'/Subcontractdos/delete_instrument/',
+            success:function(data){
+                $('.sales_instrument_remove_'+device_id).fadeOut();
+            }
+        });
+        
         $('.sales_instrument_remove_'+device_id).fadeOut();
-       
+      } 
    }); 
   
    $(document).on('click','.subcontract_customer_show',function(){
@@ -148,8 +162,33 @@ $(document).ready(function(){
             }
 	});
     });
-    
-})
+    $(document).on('click','.approve_subcon',function(){
+       var approve_subcon=$(this).attr('id');
+       //alert(val_quotationno);
+       
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+approve_subcon,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
+            url: path_url+'Subcontractdos/approve/',
+            success: function(data)
+            {
+                //return false;
+                alert("Sub Contract Approval Successful");
+               window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+
 
 //$(document).ready(function() {
 //	//catch the right-click context menu
@@ -161,3 +200,7 @@ $(document).ready(function(){
 //		return false;
 //	});
 //});
+
+
+
+    });
