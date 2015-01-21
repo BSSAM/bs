@@ -1,6 +1,7 @@
+<?PHP //echo $temp_templates_main_id; ?>
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
-    var temp_id = '<?PHP echo $temp_templates_id; ?>';
+    var temp_id = '<?PHP echo $temp_templates_main_id; ?>';
     $(document).ready(function(){
             $.ajax({
             type: "POST",

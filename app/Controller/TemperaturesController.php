@@ -1278,7 +1278,8 @@
                     if($this->Temptemplate->save($this->request->data['Temptemplate']))
                     {
                         $last_insert_id = $this->Temptemplate->getLastInsertID();
-                        $this->Session->setFlash(__('Template is Added Successfully'));
+                        $this->Temptemplatedata->updateAll(array('Temptemplatedata.status'=>1,'Temptemplatedata.temp_templates_id'=>$last_insert_id),array('Temptemplatedata.status'=>0));
+                        $this->Session->setFlash(__('Template & Template Data are Added Successfully'));
                     }
                 }
                 else
@@ -1295,38 +1296,82 @@
         {
             $details = explode('$',$id);
             $this->set('temp_templates_id',$id);
-            $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id'=>$details[0],'Temptemplate.range_id'=>$details[1],'Temptemplate.model'=>$details[2],'Temptemplate.brand_id'=>$details[3]),'recursive'=>'2'));
-            $this->set('temp_templates_main_id',$template_data['Temptemplate']['id']);
+            
             $ins_id = $details[0];
             $range_id = $details[1];
             $model_no = $details[2];
             $brand_id = $details[3];
-            $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$ins_id,'Description.sales_range'=>$range_id,'Description.model_no'=>$model_no,'Description.brand_id'=>$brand_id)));
-                
-            $this->set('desc_data',$data);
-                
-            $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
-            $this->set('unit_list',$unit_list);
-                
-            $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
-            $this->set('uncer_tag',$uncer_tag);
-                
-            //pr($data);exit;
-            if($this->request->is(array('post','put')))
+            
+            
+            if(isset($details[4]))
             {
-                $instrumentname = $this->request->data['instrumentname'];
-                $tagno = $this->request->data['tagno'];
-                $description = $this->request->data['description'];
-                $this->Temptemplate->id   =  $id; 
-                if($this->Temptemplate->save($this->request->data))
+                $salesno = $details[4];
+                $description_id = $details[5];
+                $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id'=>$details[0],'Temptemplate.range_id'=>$details[1],'Temptemplate.model'=>$details[2],'Temptemplate.brand_id'=>$details[3]),'recursive'=>'2'));
+                //pr($template_data);exit;
+                $this->set('temp_templates_main_id',$template_data['Temptemplate']['id']);
+
+                $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$ins_id,'Description.sales_range'=>$range_id,'Description.model_no'=>$model_no,'Description.brand_id'=>$brand_id)));
+
+                $this->set('desc_data',$data);
+
+                $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
+                $this->set('unit_list',$unit_list);
+
+                $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
+                $this->set('uncer_tag',$uncer_tag);
+
+                //pr($data);exit;
+                if($this->request->is(array('post','put')))
                 {
-                    $this->Session->setFlash(__('Template is Updated Successfully'));
+                    $instrumentname = $this->request->data['instrumentname'];
+                    $tagno = $this->request->data['tagno'];
+                    $description = $this->request->data['description'];
+                    $this->Temptemplate->id   =  $id; 
+                    if($this->Temptemplate->save($this->request->data))
+                    {
+                        $this->Session->setFlash(__('Template is Updated Successfully'));
+                    }
+                    $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
                 }
-                $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
+                else
+                {
+                    $this->request->data = $template_data;
+                }
             }
             else
             {
-                $this->request->data = $template_data;
+                $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id'=>$details[0],'Temptemplate.range_id'=>$details[1],'Temptemplate.model'=>$details[2],'Temptemplate.brand_id'=>$details[3]),'recursive'=>'2'));
+                //pr($template_data);exit;
+                $this->set('temp_templates_main_id',$template_data['Temptemplate']['id']);
+
+                $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$ins_id,'Description.sales_range'=>$range_id,'Description.model_no'=>$model_no,'Description.brand_id'=>$brand_id)));
+
+                $this->set('desc_data',$data);
+
+                $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));
+                $this->set('unit_list',$unit_list);
+
+                $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
+                $this->set('uncer_tag',$uncer_tag);
+
+                //pr($data);exit;
+                if($this->request->is(array('post','put')))
+                {
+                    $instrumentname = $this->request->data['instrumentname'];
+                    $tagno = $this->request->data['tagno'];
+                    $description = $this->request->data['description'];
+                    $this->Temptemplate->id   =  $id; 
+                    if($this->Temptemplate->save($this->request->data))
+                    {
+                        $this->Session->setFlash(__('Template is Updated Successfully'));
+                    }
+                    $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
+                }
+                else
+                {
+                    $this->request->data = $template_data;
+                }
             }
             $this->render('template/'.$file);
         }
