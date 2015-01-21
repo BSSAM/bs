@@ -326,7 +326,7 @@
             $this->request->data['PreqDevice']['account_service']=  $this->request->data['instrument_account'];
             $this->request->data['PreqDevice']['total']         =   $this->request->data['instrument_total'];
             $this->request->data['PreqDevice']['title']         =   $this->request->data['instrument_title'];
-            $this->request->data['PreqDevice']['status']        =   0;
+            $this->request->data['PreqDevice']['status']        =   1;
             if($this->PreqDevice->save($this->request->data))
             {
                 $device_id=$this->PreqDevice->getLastInsertID();
@@ -370,7 +370,7 @@
             $this->request->data['PreqDevice']['account_service']=  $this->request->data['instrument_account'];
             $this->request->data['PreqDevice']['total']         =   $this->request->data['instrument_total'];
             $this->request->data['PreqDevice']['title']         =   $this->request->data['instrument_title'];
-            $this->request->data['PreqDevice']['status']        =   0;
+            $this->request->data['PreqDevice']['status']        =   1;
             if($this->PreqDevice->save($this->request->data))
             {
                echo "Updated";

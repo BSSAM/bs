@@ -37,7 +37,7 @@
                                 <tbody>
                                     <?PHP if(!empty($prequistion)):  ?>
                                      <?php foreach($prequistion as $preq): ?>
-                                    <tr <?php if($preq['PurchaseRequisition']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                    <tr <?php if($preq['PurchaseRequisition']['is_manager_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $preq['PurchaseRequisition']['prequistionno'] ?></td>
                                         <td class="text-center"><?PHP echo $preq['PurchaseRequisition']['reg_date'] ?></td>
                                         <td class="text-center"><?PHP echo $preq['branch']['branchname'] ?></td>

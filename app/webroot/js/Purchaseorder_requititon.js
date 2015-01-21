@@ -82,11 +82,11 @@ $(document).ready(function(){
                $('.Instrument_info').append('<tr class="pre_instrument_remove_'+data+'">\n\\n\
                                     <td class="text-center">'+data+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_modelno+'</td>\n\
+                                    <td class="text-center">'+instrument_modelno+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_brand+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_range+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
                                     <td class="text-center">'+instrument_account+'</td>\n\
-                                    <td class="text-center">'+instrument_total+'</td>\n\\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+data+'"class="btn btn-xs btn-default pre_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger pre_instrument_delete">\n\
@@ -159,11 +159,11 @@ $(document).ready(function(){
                $('.Instrument_info').append('<tr class="pre_instrument_remove_'+device_id+'">\n\\n\
                                     <td class="text-center">'+device_id+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_modelno+'</td>\n\
+                                    <td class="text-center">'+instrument_modelno+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_brand+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_range+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_unitprice+'</td>\n\\n\
                                     <td class="text-center">'+instrument_account+'</td>\n\\n\
-                                    <td class="text-center">'+instrument_total+'</td>\n\\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+device_id+'"class="btn btn-xs btn-default pre_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+device_id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger pre_instrument_delete">\n\

@@ -29,8 +29,8 @@
                                         <th class="text-center">ID</th>
                                         <th class="text-center">Sales Orders No</th>
                                         <th class="text-center">Reg Date</th>
-                                        <th class="text-center">Branch</th>
-                                        <th class="text-center">Customer</th>
+<!--                                        <th class="text-center">Branch</th>
+                                        <th class="text-center">Customer</th>-->
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
@@ -44,14 +44,14 @@
                                         <td class="text-center"><?PHP echo $salesorder_list['Proforma']['id'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Proforma']['salesorderno'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Proforma']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['branchname'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Proforma']['customername'] ?></td>
+<!--                                        <td class="text-center"><?PHP //echo $salesorder_list['Proforma']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP //echo $salesorder_list['Proforma']['customername'] ?></td>-->
                                         <td class="text-center"><?PHP echo $salesorder_list['Proforma']['phone'] ?></td>
                                          <td class="text-center"><?PHP echo $salesorder_list['Proforma']['email'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Proforma']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php //echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 
                                                 
                                             </div>

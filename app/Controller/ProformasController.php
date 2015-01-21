@@ -10,8 +10,8 @@ class ProformasController extends AppController
 
     public $helpers = array('Html', 'Form', 'Session','xls','Number');
     public $uses =array('Priority','Paymentterm','Quotation','Currency',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Proforma','Logactivity');
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Invoice','Contactpersoninfo',
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Deliveryorder','Proforma','Logactivity','Salesorder','Quotation');
 
     public function index() {
         $delivery_data = $this->Proforma->find('all', array('order' => array('Proforma.id' => 'DESC')));
@@ -658,6 +658,68 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
                          $customer_id    =   $this->request->data['Proforma']['customer_id'];
                     $this->request->data['Proforma']['customername']=$this->request->data['Proforma']['customername'];
                     $this->request->data['Proforma']['salesorderno']=$this->request->data['Proforma']['salesorderno'];
+                    $this->Description->updateAll(array('Description.proforma'=>1),array('Description.salesorder_id'=>$this->request->data['Proforma']['salesorderno']));
+                        //pr($this->request->data);exit;
+                        $sales_orderid  =   $this->Proforma->getLastInsertID();
+                        
+//                        $device_node    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id)));
+//                        if(!empty($device_node))
+//                        {
+//                            $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$sales_orderid.'"','Description.status'=>'1'),array('Description.customer_id'=>$customer_id));
+//                        }
+                        /******************
+                        * Data Log
+                        */
+                        $this->request->data['Logactivity']['logname']   =   'Proforma Invoice';
+                        $this->request->data['Logactivity']['logactivity']   =   'Add Proforma';
+                        $this->request->data['Logactivity']['logid']   =   $sales_orderid;
+                        $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                        //pr($a);exit;
+                        /******************/
+                        $this->Session->setFlash(__('Proforma Invoice has been Added Successfully '));
+                        $this->redirect(array('action'=>'index'));
+                   // }
+               }
+            }
+           
+        }    
+        public function edit($id=NULL)
+        {
+            $this->redirect(array('action'=>'index'));
+            $str=NULL;
+            
+            
+            $proforma=$this->Proforma->find('first',array('conditions'=>array('Proforma.id'=>$id),'recursive'=>'2'));
+            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$proforma['Proforma']['salesorderno']),'recursive'=>'2','contain'=>array('Description'=>array('Instrument','Brand','Range','Department'))));
+            //pr($salesorder_details);exit;
+            //pr($salesorder_details);exit;
+            $this->set('proforma',$proforma);
+            $this->set('salesorder',$salesorder_details);
+            $quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Salesorder']['quotationno'],'Quotation.status'=>1)));
+                    $instrument_type = $quo['InstrumentType']['salesorder'];
+                    //pr($instrument_type);
+                    $this->set('instrument_type',$instrument_type);
+            
+            $contact_list   =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$proforma['Proforma']['attn'],'Contactpersoninfo.status'=>1)));
+            $service=$this->Service->find('first',array('conditions'=>array('Service.id'=>$proforma['Proforma']['service_id'])));
+            $this->set(compact('contact_list','service'));
+            
+            if($this->request->is('post'))
+            {
+               $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
+            $this->set('priority',$priority);
+            $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
+            $this->set('payment',$payment);
+            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $this->set('service',$services);
+               if($this->Proforma->save($this->request->data))
+                    {
+                         $customer_id    =   $this->request->data['Proforma']['customer_id'];
+                    $this->request->data['Proforma']['customername']=$this->request->data['Proforma']['customername'];
+                    $this->request->data['Proforma']['salesorderno']=$this->request->data['Proforma']['salesorderno'];
+                    $this->Description->updateAll(array('Description.proforma'=>1),array('Description.salesorder_id'=>$this->request->data['Proforma']['salesorderno']));
                         //pr($this->request->data);exit;
                         $sales_orderid  =   $this->Proforma->getLastInsertID();
                         
@@ -694,7 +756,8 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
             $sales_id =  $this->request->data['sale_id'];
             $this->autoRender = false;
            // $data1 = $this->Proforma->find('all',array('conditions'=>array('Proforma.salesorderno LIKE'=>'%'.$sales_id.'%','Proforma.is_approved'=>'1')));
-            $data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.salesorderno LIKE'=>'%'.$sales_id.'%','Salesorder.is_approved'=>'1')));
+             $data = $this->Description->find('all',array('conditions'=>array('salesorder_id LIKE'=>'%'.$sales_id.'%','Description.is_approved'=>'1','Description.proforma'=>0),'group'=>'Description.salesorder_id'));
+            //$data = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.salesorderno LIKE'=>'%'.$sales_id.'%','Salesorder.is_approved'=>'1')));
             $c = count($data);
             //$d = count($data1);&&!empty($d)
             if(!empty($c))

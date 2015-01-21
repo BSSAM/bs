@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
     class AppController extends Controller 
     {
         public $components = array('Session');
-        public $uses    =   array('Description','Random','branch','Device','Customerspecialneed','PreqDevice','OnsiteInstrument','DelDescription');
+        public $uses    =   array('Description','Random','branch','Device','Customerspecialneed','PreqDevice','OnsiteInstrument','DelDescription','PreqDevice');
         
         public function beforeFilter()
         {
@@ -709,10 +709,14 @@ App::uses('Controller', 'Controller');
         //For Purchase order requistion based data creation
         public function preq_devices($id=NULL)
         {
+            if($id){
+                //echo $id; 
             $devices    =   $this->PreqDevice->find('first',array('conditions'=>array('PreqDevice.id'=>$id,'PreqDevice.status'=>1)));
+            //pr($devices);exit;
+            
             $this->request->data['ReqDevice']['customer_id']        =   $devices['PreqDevice']['customer_id'];
             $this->request->data['ReqDevice']['instrument_name']    =   $devices['PreqDevice']['instrument_name'];
-            $this->request->data['ReqDevice']['brand_id']           =   $devices['PreqDevice']['prequistionno'];
+            //$this->request->data['ReqDevice']['brand_id']           =   $devices['PreqDevice']['prequistionno'];
             $this->request->data['ReqDevice']['prequistionno']      =   $devices['PreqDevice']['prequistionno'];
             
             $this->request->data['ReqDevice']['brand_name']           =   $devices['PreqDevice']['brand_name'];
@@ -726,9 +730,10 @@ App::uses('Controller', 'Controller');
             $this->request->data['ReqDevice']['account_service']    =   $devices['PreqDevice']['account_service'];
             $this->request->data['ReqDevice']['title']              =   $devices['PreqDevice']['title'];
             $this->request->data['ReqDevice']['total']              =   $devices['PreqDevice']['total'];
-            $this->request->data['ReqDevice']['status']             =   0;
+            $this->request->data['ReqDevice']['status']             =   1;
             $this->request->data['ReqDevice']['is_approved']        =   0;
             return $this->request->data;
+            }
         }
          public function add_onsite_instruments($data=NULL,$quotation_id=NULL)
         {

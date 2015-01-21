@@ -86,10 +86,10 @@
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Model No</th>
+            <th class="text-center">Brand Name</th>
+            <th class="text-center">Range</th>
             <th class="text-center">Validity</th>
-            <th class="text-center">Unit Price</th>
             <th class="text-center">Account Service</th>
-            <th class="text-center">Total</th>
             <th class="text-center">Action</th>
         </tr>
     </thead>
@@ -97,16 +97,15 @@
         <?PHP 
            
             if(!empty($purchase_requistion_list['PreqDevice'])):
-                foreach($purchase_requistion_list['PreqDevice'] as $device):?>
+                foreach($purchase_requistion_list['PreqDevice'] as $k=>$device):?>
                 <tr class="pre_instrument_remove_<?PHP echo $device['id']; ?>">
-                    <td class="text-center"><?PHP echo $device['id']; ?></td>
+                    <td class="text-center"><?PHP echo $k+1; ?></td>
                     <td class="text-center"><?PHP echo $device['instrument_name']; ?></td>
                     <td class="text-center"><?PHP echo $device['model_no']; ?></td>
+                    <td class="text-center"><?PHP echo $device['brand_name']; ?></td>
+                    <td class="text-center"><?PHP echo $device['range']; ?></td>
                     <td class="text-center"><?PHP echo $device['validity']; ?></td>
-                    <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
                     <td class="text-center"><?PHP echo $device['account_service']; ?></td>
-                    <td class="text-center"><?PHP echo $device['total']; ?></td>
-                   
                     <td class="text-center">
                         <div class="btn-group">
                             <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default pre_instrument_edit" data-toggle="tooltip" title="Edit">

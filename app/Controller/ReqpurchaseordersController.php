@@ -112,6 +112,7 @@
             
             if($this->request->is('post'))
             {
+                
                 $req_purchaseorderid  =   $this->Reqpurchaseorder->getLastInsertID();       
                 $this->ReqDevice->deleteAll(array('ReqDevice.reqpurchaseorder_id'=>$id,'ReqDevice.status'=>0));
                 $requistion_id  =   $this->request->data['Reqpurchaseorder']['prequistion_id'];
@@ -133,23 +134,37 @@
                 $this->set('requistion_details',$req_pur);
                 
                 foreach($req_pur['ReqDevice'] as $sale):
+                    //pr($sale);
                     $this->ReqDevice->create();
                     $this->request->data['ReqDevice']['is_approved']    =   0;
+                    //pr($req_purchaseorderid);exit;
+                    $this->request->data['ReqDevice']['reqpurchaseorder_id'] = $this->request->data['ReqDevice']['prequistion_id'];
+                    //$this->request->data['req_purchaseorderid'] = $req_purchaseorderid;
                     $description_data  =   $this->preq_devices($sale['id']);
+                    
                     $this->ReqDevice->save($description_data);
-                endforeach;   
+                endforeach;
+                //exit;
                 $this->request->data =   $req_pur;
+                //pr($req_pur);exit;
                  /******************
                      * Data Log
-                    */
+                    */ 
+                if($this->request->data)
+                {
+                    $reqpurchaseorder_id   =   $this->Reqpurchaseorder->getLastInsertID();
+                    $this->Logactivity->create();
                     $this->request->data['Logactivity']['logname']   =   'Reqpurchaseorder';
                     $this->request->data['Logactivity']['logactivity']   =   'Add Reqpurchaseorder';
-                    $this->request->data['Logactivity']['logid']   =   $req_purchaseorderid;
+                    $this->request->data['Logactivity']['logid']   =   $reqpurchaseorder_id;
+                    $this->request->data['Logactivity']['logno']   =   $dmt;
                     $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
+                   
                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
                     //pr($a);exit;
                     /******************/
+                }
             }
             else
             {
@@ -181,6 +196,7 @@
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
             
             $reqpurchaseorder_details=$this->Reqpurchaseorder->find('first',array('conditions'=>array('Reqpurchaseorder.id'=>$id),'recursive'=>'2'));
+            //pr($reqpurchaseorder_details);exit;
             $this->set('requistion_details',$reqpurchaseorder_details);
             $this->set(compact('priority','payment','service','country','additional'));
             if($this->request->is(array('post','put')))
@@ -332,6 +348,15 @@
             }
             return json_encode($event_array);
 
+        }
+        public function delete_instrument()
+        {
+            $this->autoRender=false;
+            $device_id= $this->request->data['device_id'];
+            if($this->ReqDevice->updateAll(array('ReqDevice.is_deleted'=>1),array('ReqDevice.id'=>$device_id)))
+            {
+                echo "deleted";
+            }
         }
         
 }

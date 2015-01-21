@@ -698,7 +698,7 @@ $(document).on('click','.approve_invoice',function(){
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-pr.jpg', array('alt' => 'PR-Manager','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prman_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prman_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prman_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prman_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prman_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prman_list['Logactivity']['logno'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
                                            <?PHP if($log_activity_prman_list['Logactivity']['logactivity'] == 'Add Manager'){ ?>
@@ -746,7 +746,7 @@ $(document).on('click','.approve_invoice',function(){
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-pr.jpg', array('alt' => 'PR-Super','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prsuper_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prsuper_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prsuper_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prsuper_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prsuper_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prsuper_list['Logactivity']['logno'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
                                            <?PHP if($log_activity_prsuper_list['Logactivity']['logactivity'] == 'Add Supervisor'){ ?>
@@ -794,10 +794,10 @@ $(document).on('click','.approve_invoice',function(){
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-pr.jpg', array('alt' => 'PR-Purchase','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prpur_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prpur_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prpur_list['Logactivity']['logid'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_prpur_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_prpur_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_prpur_list['Logactivity']['logno'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
-                                           <?PHP if($log_activity_prpur_list['Logactivity']['logname'] == 'PRPurchase'){ ?>
+                                           <?PHP if($log_activity_prpur_list['Logactivity']['logname'] == 'Reqpurchaseorder'){ ?>
                                             <?PHP  echo $this->html->link('Approve',array('controller'=>'Reqpurchaseorders','action'=>'edit',$log_activity_prpur_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                                 
                                            <?php }?>

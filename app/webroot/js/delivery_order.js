@@ -206,7 +206,7 @@ $(document).ready(function(){
                         {
                             $('.proforma_instrument_node').append('\n\
                                     <tr class="tr_color sales_instrument_remove_'+value.id+'">\n\\n\
-                                    <td class="text-center">'+value.id+'</td>\n\
+                                    <td class="text-center">'+(key+1)+'</td>\n\
                                     <td class="text-center">'+value.Instrument.name+'</td>\n\\n\
                                     <td class="text-center">'+value.Brand.brandname+'</td>\n\\n\
                                     <td class="text-center">'+value.sales_calllocation+'</td>\n\
