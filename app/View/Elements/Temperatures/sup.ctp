@@ -17,7 +17,7 @@
             <tbody>
                 <?php foreach($description_sup as $description_list): ?>
                 <tr >
-                  <td class="text-center"><?php echo $description_list['Description']['salesorder_id']; ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['salesorder_id'].'-'.$description_list['Description']['id'] ?></td>
                   <td class="text-center"><?php echo $description_list['Instrument']['name']; ?></td>
                   <td class="text-center"><?php echo $description_list['Brand']['brandname']; ?></td>
                   <td class="text-center"><?php echo $description_list['Description']['model_no']; ?></td>

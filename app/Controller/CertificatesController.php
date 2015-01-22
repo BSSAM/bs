@@ -12,7 +12,7 @@ class CertificatesController extends AppController
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Tempcertificatedata',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
-							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate');
+							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate','Tempcertificate');
     public function index($id=NULL)
     {
         if($this->request->data){
@@ -85,9 +85,92 @@ class CertificatesController extends AppController
         //
         $description = $this->Description->find('all',array('conditions'=>array('Description.status'=>1,'Description.checking'=>0,'Description.processing'=>0,'Description.department_id'=>2)));
         //pr($template_data);exit;
+        
+        //$template_data = $this->Temptemplate->find('all',array('joins' => array('table' => 'sal_description', 'type' => 'INNER', 'alias' => 'Description','conditions' => 'Description.instrument_id=Temptemplate.temp_instruments_id,Description.model_no=Temptemplate.model,Description.brand_id=Temptemplate.brand_id,Description.sales_range=Temptemplate.range_id'), 'conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
+        $eng_data = $this->Description->query('SELECT *
+                        FROM sal_description AS Description
+                        LEFT JOIN `best`.`temp_templates` AS `Temptemplate` ON Description.instrument_id = Temptemplate.temp_instruments_id
+                        WHERE Description.model_no = Temptemplate.model
+                        AND Description.brand_id = Temptemplate.brand_id
+                        AND Description.sales_range = Temptemplate.range_id
+                        AND Temptemplate.is_deleted =0
+                        AND Description.checking =0
+                        GROUP BY Description.id ASC');
+        $this->set('eng_data',$eng_data);
+        foreach($template_data as $data_arr)
+        {
+            //$data_arr_val[] = $data_arr['Description']['id'];
+            //Tempcertificate
+                $get_cert_list = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.description_id'=>$data_arr['Description']['id']),'recursive'=>'2'));
+                if(!$get_cert_list)
+                {
+                    
+                    
+                    // Heard http://8tracks.com/evansmusic/99-songs-to-make-your-homework-awesome Awesome u know
+                    
+                    $this->request->data['Tempcertificate']['certificate_no'] = '';
+                    $this->request->data['Tempcertificate']['template_id'] = '';
+                    $this->request->data['Tempcertificate']['salesorder_id'] = '';
+                    $this->request->data['Tempcertificate']['description_id'] = '';
+                    $this->request->data['Tempcertificate']['instrument_id'] = '';
+                    $this->request->data['Tempcertificate']['brand_id'] = '';
+                    $this->request->data['Tempcertificate']['model'] = '';
+                    $this->request->data['Tempcertificate']['range_id'] = '';
+                    $this->request->data['Tempcertificate']['is_template_created'] = 1;
+                    
+                    if($this->Tempcertificate->save($this->request->data['Tempcertificate']))
+                    {
+                        $last_insert_id = $this->Temptemplate->getLastInsertID();
+                        $this->Temptemplatedata->updateAll(array('Temptemplatedata.status'=>1,'Temptemplatedata.temp_templates_id'=>$last_insert_id),array('Temptemplatedata.status'=>0));
+                        $this->Session->setFlash(__('Template & Template Data are Added Successfully'));
+                    }
+                }
+                else
+                {
+                    $this->Session->setFlash(__('Certificate Already Exists!'));
+                }
+        }
+        
+        $description = $this->Description->find('all',array('conditions'=>array('NOT' => array('Description.id'=>$data_arr_val),'Description.status'=>1,'Description.checking'=>0,'Description.processing'=>0,'Description.department_id'=>2)));
+        
+        foreach($description as $data_arr)
+        {
+            $description1[] = $data_arr['Description']['id'];
+        }
+        
+//        $description = $this->Description->query('SELECT *
+//                        FROM sal_description AS Description
+//                        LEFT JOIN `best`.`temp_templates` AS `Temptemplate` ON Description.instrument_id != Temptemplate.temp_instruments_id
+//                        WHERE Description.model_no != Temptemplate.model
+//                        AND Description.brand_id != Temptemplate.brand_id
+//                        AND Description.sales_range != Temptemplate.range_id
+//                        AND Temptemplate.is_deleted =0
+//                        AND Description.checking =0
+//                        AND Description.processing =0
+//                        GROUP BY Description.id ASC');
+//        //$template_data_arr = 
+//        foreach($description as $data_arr1)
+//        {
+//            $data_arr_val1[] = $data_arr1['Description']['id'];
+//        }
+        pr($eng_data);
+        pr($description1);
+        //pr($data_arr_val1);
+        exit;
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
         if($template_data)
         {
-            $description_sup = $description_eng = $arr1 = $arr2 = array();
+            $description_sup = $description_eng = $arr1 = array();
             foreach($template_data as $temp1)
             {
                 foreach($description as $temp2)
@@ -95,34 +178,37 @@ class CertificatesController extends AppController
                     //pr($temp2);exit;
                     if($temp1['Temptemplate']['temp_instruments_id'] == $temp2['Description']['instrument_id'] && $temp1['Temptemplate']['model'] == $temp2['Description']['model_no'] && $temp1['Temptemplate']['brand_id'] == $temp2['Description']['brand_id'] && $temp1['Temptemplate']['range_id'] == $temp2['Description']['sales_range'])
                     {
-                        if(!in_array($temp2['Description']['instrument_id'], $arr1))
+                        
+                        if(!in_array($temp2['Description']['id'], $arr1))
                         {
-                            $arr1[] = $temp2['Description']['instrument_id'];
+                            $arr1[] = $temp2['Description']['id'];
                             $description_eng[] = $temp2;
-                            //pr($description_sup);exit;
+                            
                         }
 
                     }
-                    else
-                    {
-                        if(!in_array($temp2['Description']['instrument_id'], $arr2))
-                        {
-                            $arr2[] = $temp2['Description']['instrument_id'];
-                            $description_sup[] = $temp2;
-                        }
-                    }
+//                    else
+//                    {
+//                        if(!in_array($temp2['Description']['id'], $arr1))
+//                        {
+//                            $arr1[] = $temp2['Description']['id'];
+//                            $description_sup[] = $temp2;
+//                            //pr($arr2);
+//                        }
+//                    }
                 }
+                //exit;
             }
         }
         else
         {
-            $description_sup = $description_eng = $arr1 = $arr2 = array();
+            $description_sup = $description_eng = $arr1 = array();
             foreach($description as $temp2)
             {
                 //pr($temp2);exit;
-                if(!in_array($temp2['Description']['instrument_id'], $arr2))
+                if(!in_array($temp2['Description']['id'], $arr1))
                 {
-                    $arr2[] = $temp2['Description']['instrument_id'];
+                    $arr1[] = $temp2['Description']['id'];
                     $description_sup[] = $temp2;
                     //$description_eng[] = '';
                 }

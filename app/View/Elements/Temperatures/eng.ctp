@@ -17,17 +17,17 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($description_eng as $description_list): ?>
+                <?php foreach($eng_data as $description_list): ?>
                 <tr >
-                  <td class="text-center"><?php echo $description_list['Description']['salesorder_id']; ?></td>
-                  <td class="text-center"><?php echo $description_list['Instrument']['name']; ?></td>
-                  <td class="text-center"><?php echo $description_list['Brand']['brandname']; ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['salesorder_id'].'-'.$description_list['Description']['id'] ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['instrument_id']; ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['brand_id']; ?></td>
                   <td class="text-center"><?php echo $description_list['Description']['model_no']; ?></td>
-                  <td class="text-center"><?php echo $description_list['Range']['range_name']; ?></td>
-                  <td class="text-center"><?php echo $description_list['Salesorder']['in_date']; ?></td>
-                  <td class="text-center"><?php echo $description_list['Salesorder']['due_date']; ?></td>
-                  <td class="text-center"><?php echo $description_list['Customer']['customername']; ?></td>
-                  <td class="text-center"><?php echo $description_list['Customer']['customername']; ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['sales_range']; ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['in_date']; ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['due_date']; ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['customername']; ?></td>
+                  <td class="text-center"><?php echo $description_list['Description']['customername']; ?></td>
                   <td class="text-center">
                         <div class="btn-group">
                             <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'index',$description_list['Instrument']['id'].'$'.$description_list['Range']['id'].'$'.$description_list['Description']['model_no'].'$'.$description_list['Brand']['id'].'$'.$description_list['Description']['salesorder_id'].'$'.$description_list['Description']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

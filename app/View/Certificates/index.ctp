@@ -236,8 +236,8 @@
              <style>.content-header{display:none;}</style>      
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Certificates',array('controller'=>'Certificates','action'=>'index')); ?></li>
-                        <li>Add Certificate</li>
+                        <li><?php echo $this->Html->link('Temperatures-Dashboard',array('controller'=>'Certificates','action'=>'temperature')); ?></li>
+                        <li>Certificate</li>
                     </ul>
                     <!-- END Forms General Header -->
                 

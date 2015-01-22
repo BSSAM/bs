@@ -8,7 +8,7 @@
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
-							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate','Temptemplatedata');
+							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate','Temptemplatedata','Tempcertificate');
         public function uncertainty()
         {
             $uncertainty_data = $this->Tempuncertainty->find('all',array('conditions'=>array('Tempuncertainty.is_deleted'=>0)),array('order'=>'Tempuncertainty.id Desc','recursive'=>'2'));
@@ -1272,7 +1272,7 @@
                 $this->request->data['Temptemplate']['brand_id'] = $ids[3];
                 $this->request->data['Temptemplate']['range_id'] = $ids[1];
                 $this->request->data['Temptemplate']['customer_id'] = $this->request->data['template/addtemplate']['customer_id'];
-                $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id ='=>$this->request->data['Temptemplate']['temp_instruments_id']),'recursive'=>'2'));
+                $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id ='=>$this->request->data['Temptemplate']['temp_instruments_id'],'Temptemplate.model'=>$this->request->data['Temptemplate']['model'],'Temptemplate.brand_id'=>$this->request->data['Temptemplate']['brand_id'],'Temptemplate.range_id'=>$this->request->data['Temptemplate']['range_id']),'recursive'=>'2'));
                 if(!$template_data)
                 {
                     if($this->Temptemplate->save($this->request->data['Temptemplate']))
