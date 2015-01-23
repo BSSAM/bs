@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($description_sup as $description_list): ?>
+                <?php foreach($sup_data as $description_list): ?>
                 <tr >
                   <td class="text-center"><?php echo $description_list['Description']['salesorder_id'].'-'.$description_list['Description']['id'] ?></td>
                   <td class="text-center"><?php echo $description_list['Instrument']['name']; ?></td>
