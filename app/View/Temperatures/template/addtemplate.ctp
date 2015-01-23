@@ -140,6 +140,57 @@
             $('#val_customer').val(customer_name);
             $('#customer_id').val(customer_id);
         });
+		
+		$('.edit_all_fields').click(function(e) {
+            $('.ajaxform').submit(); 
+	});
+		
+        $('.ajaxform').ajaxForm({ 
+            url: path_url+'Temperatures/addtemplatedata/',
+            type: 'post',
+            success : function(recievedData)
+            {
+                //console.log(recievedData);return false;
+                $('.template_detail').html(recievedData);
+                $('.edit_all_fields').text('Add');
+                $('.edit_template_bulk_id').val('');
+                $('#val_setpoint').val('');
+                $('#val_unit :selected').val('');
+                $('#val_count').val('');
+                $('#val_resolution').val('');
+                $('#val_accuracy').val('');
+                $('#val_prefref').val('').trigger("chosen:updated");
+                //return false;
+            }
+	});
+        
+        $(document).on('click','.edit_datatemplate',function(){
+            var data_id = $(this).attr('id');
+            $.ajax({
+                type: "POST",
+                url: path_url+"Temperatures/edittemplatedata",
+                data: "data_id="+ data_id,
+                cache: false,
+                beforeSend: ni_start(),  
+                complete: ni_end(),
+                success: function(data)
+                {
+                    edit_node=$.parseJSON(data);
+                    console.log(edit_node);
+                    $('#val_setpoint').val(edit_node.Temptemplatedata.setpoint);
+                    $('#val_unit').val(edit_node.Temptemplatedata.temp_unit_id);
+                    $('#val_count').val(edit_node.Temptemplatedata.setpoint);
+                    $('#val_resolution').val(edit_node.Temptemplatedata.resolution);
+                    $('#val_accuracy').val(edit_node.Temptemplatedata.accuracy);
+					$('.readingtypename').val(edit_node.Temptemplatedata.readingtypename);
+					$('.unitname').val(edit_node.Temptemplatedata.unitname);
+                    $('#val_prefref').val(edit_node.Temptemplatedata.temp_uncertainty_id).trigger("chosen:updated");
+                    $('.edit_all_fields').text('Edit');
+                    $('.edit_all_fields').attr('id',edit_node.Temptemplatedata.id);
+                    $('.edit_template_bulk_id').val(edit_node.Temptemplatedata.id);
+                }
+            });
+        });
     });
 </script>
 <h1>
@@ -230,7 +281,7 @@
                 <h4 class="sub-header"><small>Template Detail</small></h4>
             </div>
             
-            <div class="form-group">
+              <div class="form-group">
                 <label class="col-md-2 control-label" for="val_setpoint">Set Point</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('setpoint', array('id'=>'val_setpoint','type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Set Point')); ?>
@@ -238,11 +289,10 @@
                 <label class="col-md-2 control-label" for="val_readingtype">Reading Type</label>
                 <div class="col-md-4">
                 <?php
-                    echo $this->Form->input('temp_readingtype_id', array('id' => 'val_readingtype', 'class' => 'form-control readingtype',
+                    echo $this->Form->input('temp_readingtype_id', array('id' => 'val_readingtype', 'class' => 'form-control temp_readingtype_id',
                              'label' => false,'type' => 'select', 'options'=>array('1'=>'Temperature'),'readonly')); ?>
-                    
+               
                 </div>  
-                <input type="hidden" name="data[Temptemplatedata][readingtypename]" class="readingtypename" />
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_unit">Unit</label>
@@ -250,9 +300,8 @@
                 <?php
                     echo $this->Form->input('temp_unit_id', array('id' => 'val_unit', 'class' => 'form-control temp_unit_id',
                              'label' => false,'type' => 'select', 'empty' => 'Select Unit','options'=>$unit_list)); ?>
-                    
-                </div>
-                <input type="hidden" name="data[Temptemplatedata][unitname]" class="unitname" />  
+               
+                </div>  
                 <label class="col-md-2 control-label" for="val_count">Count</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('count', array('id'=>'val_count','type'=>'text','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Count')); ?>
@@ -265,14 +314,14 @@
                 <?php
                     echo $this->Form->input('resolution', array('id' => 'val_resolution', 'class' => 'form-control',
                              'label' => false,'type' => 'text', 'placeholder' => 'Enter Resolution','value'=>'0.00')); ?>
-                    
+               
                 </div>  
                 <label class="col-md-2 control-label" for="val_resolution">Accuracy</label>
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('accuracy', array('id' => 'val_accuracy', 'class' => 'form-control',
                              'label' => false,'type' => 'text', 'placeholder' => 'Select Accuracy','value'=>'0')); ?>
-                    
+               
                 </div>  
                 
             </div>
@@ -284,10 +333,19 @@
                 </div>
                 
             </div>
-            
-            <div class="form-group form-actions">
+          <!-- <input type="hidden" name="data[Temptemplatedata][instrument_id]" value="<?php echo $ins_id;?>" />
+           <input type="hidden" name="data[Temptemplatedata][range_id]" value="<?php echo $range_id;?>" />
+           <input type="hidden" name="data[Temptemplatedata][model_no]" value="<?php echo $model_no;?>" />
+           <input type="hidden" name="data[Temptemplatedata][brand_id]" value="<?php echo $brand_id;?>" /> -->
+           <input type="hidden" name="data[Temptemplatedata][unitname]" class="unitname"/>
+              <input type="hidden" name="data[Temptemplatedata][readingtypename]" class="readingtypename"/>
+           
+           <input type="hidden" name="data[Temptemplatedata][template_data_id]" />
+           <input type="hidden" name="data[Temptemplatedata][edit_template_bulk_id]" class="edit_template_bulk_id" />
+<!--            <input type="hidden" name="data[Tempuncertaintydata][edit_uncertainty_bulk_id]" class="edit_uncertainty_bulk_id" />-->
+             <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-10">
-                    <a class="btn btn-sm btn-primary templatedataFormSubmit"><i class="fa fa-angle-right"> </i> Add</a>
+                <a class="btn btn-sm btn-primary edit_all_fields"><i class="fa fa-angle-right"> </i> Add</a>
                 </div>
             </div>
             

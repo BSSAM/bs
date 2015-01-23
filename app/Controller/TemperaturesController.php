@@ -1264,7 +1264,7 @@
                 
             if($this->request->is('post'))
             {
-                //pr($this->request->data);exit;
+              //  pr($this->request->data);
                 $ids = array();
                 $ids = explode("$", $this->request->data['template/addtemplate']['instrument_details']);
                 $this->request->data['Temptemplate']['temp_instruments_id'] = $ids[0];
@@ -1273,8 +1273,9 @@
                 $this->request->data['Temptemplate']['range_id'] = $ids[1];
                 $this->request->data['Temptemplate']['customer_id'] = $this->request->data['template/addtemplate']['customer_id'];
                 $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id ='=>$this->request->data['Temptemplate']['temp_instruments_id'],'Temptemplate.model'=>$this->request->data['Temptemplate']['model'],'Temptemplate.brand_id'=>$this->request->data['Temptemplate']['brand_id'],'Temptemplate.range_id'=>$this->request->data['Temptemplate']['range_id']),'recursive'=>'2'));
-                if(!$template_data)
-                {
+             // pr($template_data);
+			    if(!$template_data)
+                {  //pr( $this->request->data['Temptemplate']['brand_id']);  pr( $this->request->data['Temptemplate']['range_id']); 
                     if($this->Temptemplate->save($this->request->data['Temptemplate']))
                     {
                         $last_insert_id = $this->Temptemplate->getLastInsertID();
@@ -1286,7 +1287,7 @@
                 {
                     $this->Session->setFlash(__('Template Already Exists!'));
                 }
-                    
+                  //  exit;
                 $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
             }
             $this->render('template/'.$file);
@@ -1298,11 +1299,16 @@
             $this->set('temp_templates_id',$id);
             
             $ins_id = $details[0];
+			$this->set('ins_id',$ins_id);
             $range_id = $details[1];
+			$this->set('range_id',$range_id);
             $model_no = $details[2];
+			$this->set('model_no',$model_no);
             $brand_id = $details[3];
-            
-            
+			$this->set('brand_id',$brand_id);
+           // $temp_id =  $ins_id.'$'.$range_id.'$'.$model_no.'$'.$brand_id;
+			//$this->set('temp_id',$temp_id);
+          //  pr($details); exit;
             if(isset($details[4]))
             {
                 $salesno = $details[4];
@@ -1467,14 +1473,17 @@
             $this->set('unit_list',$unit_list);
                 
             if($this->request->is('post'))
-            {
+            { //echo "hi";
                // pr($this->request->data);exit;
                 if(!isset($this->request->data['Temptemplatedata']['edit_template_bulk_id']))
                 {
                     //
                     if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
                     {
-                        $temptemplatedata = $this->Temptemplatedata->find('all');
+                        $temptemplatedata = $this->Temptemplatedata->find('all',array('conditions' => array('Temptemplatedata.instrument_id' => $this->request->data['Temptemplatedata']['ins_id'],
+						                                                                                        'Temptemplatedata.range_id' => $this->request->data['Temptemplatedata']['range_id'],
+																												  'Temptemplatedata.model_no' => $this->request->data['Temptemplatedata']['model_no'],
+																												     'Temptemplatedata.brand_id' => $this->request->data['Temptemplatedata']['brand_id'])));
                         $this->set('temptemplatedata',$temptemplatedata);
                     }
                     else
@@ -1484,12 +1493,39 @@
                 }
                 else
                 {
-                    
+                     $this->request->data['Temptemplatedata']['id'] = $this->request->data['Temptemplatedata']['edit_template_bulk_id'];
+					 if(isset($this->request->data['Temptemplatedata']['temp_templates_id']))
+					 {
+						 $this->request->data['Temptemplatedata']['status'] = 1;
+						
+						 if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
+						 { 
+							//$last_insert_id =   $this->Temptemplatedata->getLastInsertID();
+							//$this->set('insert_id',$last_insert_id);
+							$this->Session->setFlash(__('Template datas Edited Successfully'));
+							$temptemplatedata = $this->Temptemplatedata->find('all', array('conditions' => array('Temptemplatedata.temp_templates_id' => $this->request->data['Temptemplatedata']['temp_templates_id'])));
+							$this->set('temptemplatedata',$temptemplatedata);
+						 }
+					 }
+					 else
+					 {
+						 $this->request->data['Temptemplatedata']['status'] = 0;
+						  $this->request->data['Temptemplatedata']['temp_templates_id'] = 0;
+						
+						 if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
+						 { 
+							//$last_insert_id =   $this->Temptemplatedata->getLastInsertID();
+							//$this->set('insert_id',$last_insert_id);
+							$this->Session->setFlash(__('Template datas Edited Successfully'));
+							$temptemplatedata = $this->Temptemplatedata->find('all', array('conditions' => array('Temptemplatedata.temp_templates_id' => 0)));
+							$this->set('temptemplatedata',$temptemplatedata);
+						 }
+					 }
                 }
             }
             else
             {
-                $this->request->data['Temptemplatedata']['id'] = $this->request->data['Temptemplatedata']['edit_template_bulk_id'];
+                /*$this->request->data['Temptemplatedata']['id'] = $this->request->data['Temptemplatedata']['edit_template_bulk_id'];
                 $this->request->data['Temptemplatedata']['status'] = 1;
                     
                 if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
@@ -1499,7 +1535,7 @@
                     $this->Session->setFlash(__('Template datas Edited Successfully'));
                     $temptemplatedata = $this->Temptemplatedata->find('all', array('conditions' => array('Temptemplatedata.temp_templates_id' => $this->request->data['Temptemplatedata']['temp_templates_id'])));
                     $this->set('temptemplatedata',$temptemplatedata);
-                }
+                }*/
             }
         }
             
@@ -1563,6 +1599,28 @@
                     echo "</div>";
             }
                 
+        }
+		
+		public function deletetemplatedata($id = null)
+        { //pr($id); exit;
+            if($this->Temptemplatedata->updateAll(array('Temptemplatedata.is_deleted'=>1,'Temptemplatedata.status'=>0),array('Temptemplatedata.id'=>$id)))
+            {
+                
+                $this->Session->setFlash(__('The Template data has been deleted',h($id)));
+               // return  $this->redirect(array('controller'=>'Temperatures','action'=>'template/addtemplate'));
+            }
+        }
+		
+		public function deletetemplate($id = null)
+        {
+			$this->autoRender = false;
+			//pr($id); exit;
+            if($this->Temptemplate->updateAll(array('Temptemplate.is_deleted'=>1,'Temptemplate.status'=>0),array('Temptemplate.id'=>$id)))
+            {
+                
+                $this->Session->setFlash(__('The Template has been deleted',h($id)));
+                return  $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
+            }
         }
             
             

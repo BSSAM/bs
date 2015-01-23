@@ -44,7 +44,7 @@
                                     <td class="text-center">
                                     <div class="btn-group action_un_btn"><a class="btn btn-xs btn-default edit_datatemplate" title="" data-toggle="tooltip" href="#" data-original-title="Edit" id ="<?php echo $v['Temptemplatedata']['id']; ?>">
                                     <i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-xs btn-danger delete_datatemplate" title="" data-toggle="tooltip" href="#" data-original-title="Delete" id ="<?php echo $v['Temptemplatedata']['id']; ?>"><i class="fa fa-times"></i></a></div>
+                                    <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'deletetemplatedata',$v['Temptemplatedata']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?></div>
                                     </td>
                                
                                 </tr>

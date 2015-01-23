@@ -50,7 +50,7 @@
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'template/edittemplate',$template_list['Temptemplate']['temp_instruments_id'].'$'.$template_list['Temptemplate']['range_id'].'$'.$template_list['Temptemplate']['model'].'$'.$template_list['Temptemplate']['brand_id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php //} ?>
                                                 <?php //if($userrole['delete']==1){ ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'template/deletetemplate',$template_list['Temptemplate']['temp_instruments_id'].'$'.$template_list['Temptemplate']['range_id'].'$'.$template_list['Temptemplate']['model'].'$'.$template_list['Temptemplate']['brand_id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'deletetemplate',$template_list['Temptemplate']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 <?php //} ?>
                                             </div>
                                         </td>

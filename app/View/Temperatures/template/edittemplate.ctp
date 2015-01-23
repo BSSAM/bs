@@ -94,6 +94,14 @@
                     complete: ni_end(),
                 });
         });
+		
+		$('.temp_unit_id').change(function(e) {
+           $('.unitname').val($('.temp_unit_id option:selected').text());
+        });
+		
+		$('.temp_readingtype_id').change(function(e) {
+           $('.readingtypename').val($('.temp_readingtype_id option:selected').text());
+        });
         
         $('.check_unit').on('click',function(){
             var val_u = $('#val_unit').val();
@@ -180,6 +188,8 @@
                     $('#val_count').val(edit_node.Temptemplatedata.setpoint);
                     $('#val_resolution').val(edit_node.Temptemplatedata.resolution);
                     $('#val_accuracy').val(edit_node.Temptemplatedata.accuracy);
+					$('.readingtypename').val(edit_node.Temptemplatedata.readingtypename);
+					$('.unitname').val(edit_node.Temptemplatedata.unitname);
                     $('#val_prefref').val(edit_node.Temptemplatedata.temp_uncertainty_id).trigger("chosen:updated");
                     $('.edit_all_fields').text('Edit');
                     $('.edit_all_fields').attr('id',edit_node.Temptemplatedata.id);
@@ -289,7 +299,7 @@
                 <label class="col-md-2 control-label" for="val_readingtype">Reading Type</label>
                 <div class="col-md-4">
                 <?php
-                    echo $this->Form->input('readingtype', array('id' => 'val_readingtype', 'class' => 'form-control',
+                    echo $this->Form->input('temp_readingtype_id', array('id' => 'val_readingtype', 'class' => 'form-control temp_readingtype_id',
                              'label' => false,'type' => 'select', 'options'=>array('1'=>'Temperature'),'readonly')); ?>
                
                 </div>  
@@ -298,7 +308,7 @@
                 <label class="col-md-2 control-label" for="val_unit">Unit</label>
                 <div class="col-md-4">
                 <?php
-                    echo $this->Form->input('unit', array('id' => 'val_unit', 'class' => 'form-control',
+                    echo $this->Form->input('temp_unit_id', array('id' => 'val_unit', 'class' => 'form-control temp_unit_id',
                              'label' => false,'type' => 'select', 'empty' => 'Select Unit','options'=>$unit_list)); ?>
                
                 </div>  
@@ -333,7 +343,15 @@
                 </div>
                 
             </div>
-<input type="hidden" name="data[Temptemplatedata][edit_template_bulk_id]" class="edit_template_bulk_id" />
+           <input type="hidden" name="data[Temptemplatedata][instrument_id]" value="<?php echo $ins_id;?>" />
+           <input type="hidden" name="data[Temptemplatedata][range_id]" value="<?php echo $range_id;?>" />
+           <input type="hidden" name="data[Temptemplatedata][model_no]" value="<?php echo $model_no;?>" />
+           <input type="hidden" name="data[Temptemplatedata][brand_id]" value="<?php echo $brand_id;?>" />
+           <input type="hidden" name="data[Temptemplatedata][unitname]" class="unitname"/>
+              <input type="hidden" name="data[Temptemplatedata][readingtypename]" class="readingtypename"/>
+           
+           <input type="hidden" name="data[Temptemplatedata][template_data_id]" />
+           <input type="hidden" name="data[Temptemplatedata][edit_template_bulk_id]" class="edit_template_bulk_id" />
 <!--            <input type="hidden" name="data[Tempuncertaintydata][edit_uncertainty_bulk_id]" class="edit_uncertainty_bulk_id" />-->
              <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-10">
