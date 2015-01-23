@@ -3,7 +3,7 @@
 <div class="c_form1">
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">Certificate No</label>
-    <div class="col-md-2"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'TS 0004-13')); ?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>$get_cert_sales['Tempcertificate']['certificate_no'])); ?> </div>
     <label for="val_duedate" class="col-md-2 control-label">Manufacturer </label>
     <div class="col-md-2">
       <?php

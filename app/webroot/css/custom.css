@@ -162,10 +162,10 @@ and open the template in the editor.
 /*.certificate_tab{height: 438px;overflow-x: auto;}*/
 .pos_relative{position:relative; display:inline-block;width:100%;}
 .c_refress_blog{border: 1px solid #eee;position: absolute;right: 0;top: 0;}
-.c_refress_blog_input{font-size: 10px; padding: 0 5px;}
+.c_refress_blog_input{font-size: 10px; padding: 0 5px; }
 .c_ref_btn{height: 38px;padding: 7px; background:#f1f1f1;}
 .c_ref_btn button{font-size: 10px;padding: 2px;width: 100%;}
-.c_overflow{height: 100px;overflow: auto; width:100px;float:left;}
+.c_overflow{height: 100px;overflow: auto; width:100px;float:left; overflow-y: scroll;}
 .c_ref_btn i{margin-right:8px;}
 .c_refress_blog_input label { bottom: 2px;margin-bottom: 0; position: relative;}
 .pref_ref{background: #666;color: #fff;font-weight: bold; padding: 10px 5px;text-transform: uppercase;}

@@ -12,15 +12,21 @@ class CertificatesController extends AppController
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Tempcertificatedata',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
-							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate','Tempcertificate');
+							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','InstrumentRange','Temptemplate','Tempcertificate','Temptemplatedata');
     public function index($id=NULL)
     {
-        if($this->request->data){
+        
+        if($this->request->data)
+        {
+            
             $certificateno = $this->request->data['step1']['certificateno'];
             $readingtype_id = $this->request->data['step1']['readingtype_id'];
             $channel_id = $this->request->data['step1']['channel_id'];
             $temp1= $this->request->data['step1']['temp1'];
-            $uncertainty1_val = $this->request->data['step1']['uncertainty1_val'];
+            
+            $uncertainty1_val1 = $this->request->data['step1']['uncertainty1_val'];
+            $uncertainty1_val = implode(',',$uncertainty1_val1);
+            
             $find_cert = $this->Tempcertificatedata->find('first',array('conditions'=>array('Tempcertificatedata.certificate_no'=>$certificateno,'Tempcertificatedata.temp_readingtype_id'=>$readingtype_id,'Tempcertificatedata.temp_channel_id'=>$channel_id)));
             //pr($find_cert);exit;
             if(count($find_cert))
@@ -31,7 +37,7 @@ class CertificatesController extends AppController
                 $this->request->data['Tempcertificatedata']['temp_readingtype_id'] = $readingtype_id;
                 $this->request->data['Tempcertificatedata']['temp_channel_id'] = $channel_id;
                 //$this->request->data['Tempcertificatedata']['temp1'] = $temp1;
-                //$this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty1_val;
+                $this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty1_val;
                 $this->request->data['Tempcertificatedata']['id']= $find_cert['Tempcertificatedata']['id'];
                 $this->Tempcertificatedata->save($this->request->data['Tempcertificatedata']);
             }
@@ -42,7 +48,8 @@ class CertificatesController extends AppController
                 $this->request->data['Tempcertificatedata']['temp_readingtype_id'] = $readingtype_id;
                 $this->request->data['Tempcertificatedata']['temp_channel_id'] = $channel_id;
                 //$this->request->data['Tempcertificatedata']['temp1'] = $temp1;
-                //$this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty1_val;
+                 
+                $this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty1_val;
                 $this->Tempcertificatedata->create();
                 $this->Tempcertificatedata->save($this->request->data['Tempcertificatedata']);
             }
@@ -52,38 +59,49 @@ class CertificatesController extends AppController
         }
         else
         {
-        $ids = array();
-        $ids = explode("$", $id);
-        $instrument_id = $ids[0];
-        $range_id = $ids[1];
-        $model_no = $ids[2];
-        $brand_id = $ids[3];
-        //$salesorder_id = $ids[4];
-        //$description_id = $ids[5];
-        
-       // pr($ids);exit;
-        //if(Temptemplate)
-        $uncertainty = $this->Tempuncertainty->find('all');
-        $this->set('uncertainty',$uncertainty);
-        $readingtype_data = $this->Tempreadingtype->find('list',array('fields' => array('Tempreadingtype.id','Tempreadingtype.readingtypename'),'conditions'=>array('Tempreadingtype.is_deleted'=>0,'Tempreadingtype.status'=>1)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
-        $this->set('readingtype_data',$readingtype_data);
+            $ids = array();
+            $ids = explode("$", $id);
+            $instrument_id = $ids[0];
+            $range_id = $ids[1];
+            $model_no = $ids[2];
+            $brand_id = $ids[3];
+            $salesorder_id = $ids[4];
+            $description_id = $ids[5];
 
-        $channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
-        $this->set('channel_data',$channel_data);
-		
-        $tempform_data = $this->Tempformdata->find('first');
-        $this->set('formdata',$tempform_data);
-        
-        $instrument_cal_status = array('1'=>'Faulty','2'=>'Non Capability','3'=>'No Capability','4'=>'Return without cal','5'=>'Out of tolerance');
-        $this->set('instrument_cal_status',$instrument_cal_status);
+            $find_cert_main_data = $this->Description->find('first',array('conditions'=>array('Description.id'=>$description_id),'recursive'=>'2'));
+            //pr($find_cert_main_data);exit;
+            $this->set('get_cert_main',$find_cert_main_data);
+
+            $get_cert_sales = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.description_id'=>$description_id),'recursive'=>'2'));
+            //pr($get_cert_sales);exit;
+            $get_cert_certno = $this->Tempcertificate->find('list',array('fields' => array('certificate_no','certificate_no')),array('recursive'=>'2'));
+            $this->set('get_cert_sales',$get_cert_sales);
+            $this->set('get_cert_certno',$get_cert_certno);
+
+
+    // pr($ids);exit;
+            //if(Temptemplate)
+            $uncertainty = $this->Tempuncertainty->find('all');
+            $this->set('uncertainty',$uncertainty);
+            $readingtype_data = $this->Tempreadingtype->find('list',array('fields' => array('Tempreadingtype.id','Tempreadingtype.readingtypename'),'conditions'=>array('Tempreadingtype.is_deleted'=>0,'Tempreadingtype.status'=>1)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
+            $this->set('readingtype_data',$readingtype_data);
+
+            $channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
+            $this->set('channel_data',$channel_data);
+
+            $tempform_data = $this->Tempformdata->find('first');
+            $this->set('formdata',$tempform_data);
+
+            $instrument_cal_status = array('1'=>'Faulty','2'=>'Non Capability','3'=>'No Capability','4'=>'Return without cal','5'=>'Out of tolerance');
+            $this->set('instrument_cal_status',$instrument_cal_status);
         }
         
     }
     public function temperature()
     {
-        $template_data = $this->Temptemplate->find('all',array('conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
+        //$template_data = $this->Temptemplate->find('all',array('conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
         //
-        $description = $this->Description->find('all',array('conditions'=>array('Description.status'=>1,'Description.checking'=>0,'Description.processing'=>0,'Description.department_id'=>2)));
+        //$description = $this->Description->find('all',array('conditions'=>array('Description.status'=>1,'Description.checking'=>0,'Description.processing'=>0,'Description.department_id'=>2)));
         //pr($template_data);exit;
         
         //$template_data = $this->Temptemplate->find('all',array('joins' => array('table' => 'sal_description', 'type' => 'INNER', 'alias' => 'Description','conditions' => 'Description.instrument_id=Temptemplate.temp_instruments_id,Description.model_no=Temptemplate.model,Description.brand_id=Temptemplate.brand_id,Description.sales_range=Temptemplate.range_id'), 'conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
@@ -104,6 +122,10 @@ class CertificatesController extends AppController
                 $get_cert_list = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.description_id'=>$data_arr['Description']['id']),'recursive'=>'2'));
                 if(!$get_cert_list)
                 {
+                    $get_cert_sales = $this->Tempcertificate->find('all',array('conditions'=>array('Tempcertificate.description_id'=>$data_arr['Description']['salesorder_id']),'recursive'=>'2'));
+                    {
+                        pr($get_cert_sales);exit;
+                    }
                     
                     // Heard http://8tracks.com/evansmusic/99-songs-to-make-your-homework-awesome Awesome u know
                     
@@ -120,7 +142,7 @@ class CertificatesController extends AppController
                     $this->request->data['Tempcertificate']['model'] = $data_arr['Description']['model_no'];
                     $this->request->data['Tempcertificate']['range_id'] = $data_arr['Description']['sales_range'];
                     $this->request->data['Tempcertificate']['is_template_created'] = 1;
-                    
+                    $this->request->data['Tempcertificate']['is_template_match'] = 1;
                     if($this->Tempcertificate->save($this->request->data['Tempcertificate']))
                     {
                         $last_insert_id = $this->Tempcertificate->getLastInsertID();
@@ -132,7 +154,9 @@ class CertificatesController extends AppController
                 }
                 else
                 {
-                    $this->Session->setFlash(__('Certificate Already Exists!'));
+                    
+                    
+                    //$this->Session->setFlash(__('Certificate Already Exists!'));
                 }
         }
         
@@ -248,10 +272,39 @@ class CertificatesController extends AppController
         //$temp1= $this->request->data['step1']['temp1'];
         //pr($this->request->data);exit;
         $find_cert = $this->Tempcertificatedata->find('first',array('conditions'=>array('Tempcertificatedata.certificate_no'=>$certificateno,'Tempcertificatedata.temp_readingtype_id'=>$readingtype_id,'Tempcertificatedata.temp_channel_id'=>$channel_id)));
-        
+        //$this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty_val1;
+        //$find_cert['Tempcertificatedata']['uncertainty1_val']
         $this->set('cert',$find_cert);
         //pr($find_cert['Tempcertificatedata']);exit;
         //pr($find_cert);exit;
+        
+        
+        $get_cert_sales = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.certificate_no'=>$certificateno),'recursive'=>'2'));
+        $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.id'=>$get_cert_sales['Tempcertificate']['template_id']),'recursive'=>'2'));
+        
+////Continue from here
+
+
+
+//pr($template_data);exit;
+        $get_cert_certno = $this->Tempcertificate->find('list',array('fields' => array('certificate_no','certificate_no')),array('recursive'=>'2'));
+        $this->set('get_cert_sales',$get_cert_sales);
+        $this->set('get_cert_certno',$get_cert_certno);
+
+        
+            $uncertainty = $this->Tempuncertainty->find('all');
+            $this->set('uncertainty',$uncertainty);
+            $readingtype_data = $this->Tempreadingtype->find('list',array('fields' => array('Tempreadingtype.id','Tempreadingtype.readingtypename'),'conditions'=>array('Tempreadingtype.is_deleted'=>0,'Tempreadingtype.status'=>1)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
+            $this->set('readingtype_data',$readingtype_data);
+
+            $channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
+            $this->set('channel_data',$channel_data);
+
+            $tempform_data = $this->Tempformdata->find('first');
+            $this->set('formdata',$tempform_data);
+
+            $instrument_cal_status = array('1'=>'Faulty','2'=>'Non Capability','3'=>'No Capability','4'=>'Return without cal','5'=>'Out of tolerance');
+            $this->set('instrument_cal_status',$instrument_cal_status);
     }
     
     

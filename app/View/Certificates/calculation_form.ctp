@@ -1,5 +1,25 @@
 <!--<div class="col-sm-3 col-lg-12 subcontract_linear certificate_table certificate_tab"> -->
   <!-- table1-->
+ <div class="panel panel-default">
+                                    
+<div class="panel-body panel-body-nopadding">
+    <!-- BASIC WIZARD -->
+    <div id="basicWizard" class="basic-wizard">
+        <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
+            <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Calculation Form</a></li>
+            <li class=""><a href="#tab2" data-toggle="tab"><span>Step 2:</span> Form1</a></li>
+            <li class=""><a href="#tab3" data-toggle="tab"><span>Step 3:</span> Form2 </a></li>
+            <li class=""><a href="#tab4" data-toggle="tab"><span>Step 4:</span> Uncertainty</a></li>
+            <li class=""><a href="#tab5" data-toggle="tab"><span>Step 5:</span> Specification of clients (For technical)</a></li>
+        </ul>
+
+        <br>
+
+        <div class="tab-content" >
+            <div class="tab-pane active" id="tab1">
+                <div class="col-sm-3 col-lg-12 subcontract_linear certificate_table certificate_tab">
+                    
+                    
   <div class="form-group c_top_search">
     <label for="val_customername" class=" control-label">No.of Runs</label>
    <?php  $numbers = array('1' => 1,'2' => 2,'3' => 3,'4' => 4,'5' => 5,'6' => 6,'7' => 7,'8' => 8,'9' => 9,'10' => 10,'11' => 11, '12' => 12); ?> 
@@ -102,13 +122,17 @@
     <div class="c_refress_blog">
       <div class="pref_ref">Pref Reference </div>
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-            <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty1_val]" class="uncertainty1_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+            <?php $selected = isset($cert['Tempcertificatedata']['uncertainty1_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty1_val']) : array();
+                $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty1_val][]" class="uncertainty1_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
@@ -144,7 +168,7 @@
           <td class="text-center">Count </td>
           <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['count2']; ?>" name="step1[count2]" class="count2"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert2']; ?>" name="step1[uncert2]" class="uncert2"></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert2']; ?>" name="step1[uncert2]" class="uncert2" readonly="readonly"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -195,9 +219,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty2_val]" class="uncertainty2_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -287,9 +311,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty3_val]" class="uncertainty3_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -380,9 +404,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty4_val]" class="uncertainty4_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -473,9 +497,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty5_val]" class="uncertainty5_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -566,9 +590,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty6_val]" class="uncertainty6_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -659,9 +683,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty7_val]" class="uncertainty7_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -752,9 +776,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty8_val]" class="uncertainty8_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -845,9 +869,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty9_val]" class="uncertainty9_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -938,9 +962,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty10_val]" class="uncertainty10_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -1031,9 +1055,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty11_val]" class="uncertainty11_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -1124,9 +1148,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty12_val]" class="uncertainty12_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -1217,9 +1241,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty13_val]" class="uncertainty13_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -1310,9 +1334,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty14_val]" class="uncertainty14_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -1403,9 +1427,9 @@
     </table>
     <div class="c_refress_blog">
       <div class="c_overflow">
-        <div class="c_ref_btn">
+<!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
-        </div>
+        </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
           <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty15_val]" class="uncertainty15_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -1415,5 +1439,596 @@
       </div>
     </div>
   </div>
-  
+  </div>
 <!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--------------------------------    Form 1     ------------------------------------->
+
+</div>
+<div class="tab-pane" id="tab2">
+    <?php ?>
+
+<div class="c_form1">
+  <div class="form-group">
+    <label for="val_customername" class="col-md-2 control-label">Certificate No</label>
+    <div class="col-md-2"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>$get_cert_sales['Tempcertificate']['certificate_no'])); ?> </div>
+    <label for="val_duedate" class="col-md-2 control-label">Manufacturer </label>
+    <div class="col-md-2">
+      <?php
+                echo $this->Form->input('manufacturer', array('id' => 'val_manufacturer', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true, 'value'=>'LINE SEIKI'));
+            ?>
+    </div>
+    <label for="val_attn" class="col-md-2 control-label">Date Calibrated</label>
+    <div class="col-md-2"> <?php echo $this->Form->input('date_calibrated', array('id' => 'val_date_calibrated', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>'12-jul-2013'));?> </div>
+  </div>
+  <div class="form-group">
+    <label for="val_customername" class="col-md-2 control-label">SalesOrderID</label>
+    <div class="col-md-2"> <?php echo $this->Form->input('salesorderid', array('id' => 'val_salesorderid','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'BSO-13-000990')); ?> </div>
+    <label for="val_duedate" class="col-md-2 control-label">Model No </label>
+    <div class="col-md-2"> <?php echo $this->Form->input('modelno ', array('id' => 'val_modelno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'TS 0004-13')); ?> </div>
+    <label for="val_attn" class="col-md-2 control-label">Due Date</label>
+    <div class="col-md-2"> <?php echo $this->Form->input('due_date', array('id' => 'val_due_date', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>'12-jul-2013'));?> </div>
+  </div>
+  <div class="form-group">
+    <label for="val_customername" class="col-md-2 control-label">Customer</label>
+    <div class="col-md-2">
+      <?php
+                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true,'value'=>'31 Jurong Port Road
+#1m1-17m/18m Jurong Logistic Hub
+Singapore 619115'));
+            ?>
+    </div>
+    <label for="val_duedate" class="col-md-2 control-label">Model No </label>
+    <div class="col-md-2"> <?php echo $this->Form->input('modelno', array('id' => 'val_modelno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'TC-950')); ?> </div>
+    <label for="val_attn" class="col-md-2 control-label">Range</label>
+    <div class="col-md-2">
+      <?php
+                echo $this->Form->input('range', array('id' => 'val_range', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true, 'value'=>'(_)/-'));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="val_customername" class="col-md-2 control-label">Instrument</label>
+    <div class="col-md-2">
+      <?php
+                echo $this->Form->input('instrument', array('id' => 'val_instrument', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true,'value'=>'THERMOMETER C/W PROBE'));
+            ?>
+    </div>
+    <label for="val_duedate" class="col-md-2 control-label">Temperature </label>
+    <div class="col-md-2"> <?php echo $this->Form->input('temperature', array('id' => 'val_temperature', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Temperature --')); ?> </div>
+    <label for="val_attn" class="col-md-2 control-label">Humidity</label>
+    <div class="col-md-2"> <?php echo $this->Form->input('humidity', array('id' => 'val_humidity', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Humidity --')); ?> </div>
+  </div>
+  <div class="col-lg-12">
+    <h4 class="sub-header"><small>The unit under test have been calibrated as per TECHNICAL PROCEDURE,</small></h4>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <?php
+      echo $this->Form->input('Tempformdata.formdata1', array('id' => 'val_formdata1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['formdata1']));
+//                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
+//             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>'BS Tech´s organisation and practices have been duly accredited and are compliant to the requirements of ISO/IEC 17025;  the laboratory accreditation standard. Our Quality Management System ensures its compatibility with the requirements of   ISO 9001'));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <?php
+        echo $this->Form->input('Tempformdata.formdata2', array('id' => 'val_formdata2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['formdata2']));
+//                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
+//             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>'The reference measurement standards used are traceable to National Metrology Centre,(NMC,SINGAPORE)  and/or other National standards.'));
+            ?>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+    <div class="col-md-12">
+      <label for="val_duedate" class="col-md-6 control-label">Instrument Cal Status </label>
+      <div class="col-md-6"> <?php echo $this->Form->input('instrument_cal_status', array('id' => 'val_instrument_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>$instrument_cal_status)); ?> </div>
+      </div>
+      <div class="col-md-12">
+        <label for="val_duedate" class="col-md-6 control-label">Instrument Cal Status Description </label>
+        <div class="col-md-6">
+          <?php
+                echo $this->Form->input('instrument_description', array('id' => 'val_instrument_description', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>''));
+            ?>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+   <div class="form-group">
+  <div class="col-md-12">
+   
+      <label for="val_duedate" class="col-md-6 control-label">Calibration Type</label>
+      <div class="col-md-6"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'Non-Singlas')); ?> </div>
+      </div>
+      <div class="col-md-12">
+        <label for="val_duedate" class="col-md-6 control-label">Calibrated Status</label>
+      <div class="col-md-6"> <?php echo $this->Form->input('cal_status', array('id' => 'val_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>array('1'=>'Rejected','2'=>'Approved'))); ?> </div>
+      </div>
+      <div class="col-md-12">
+        <label for="val_duedate" class="col-md-6 control-label">Approved Status</label>
+      <div class="col-md-6"> <?php echo $this->Form->input('approved_status', array('id' => 'val_approved_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Approval Status --','options'=>array('1'=>'Rejected','2'=>'Approved'))); ?> </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<!----------------------------------------------        Form2  --------------------------------->
+</div>
+                                                <div class="tab-pane" id="tab3">
+                                                    <?php ?>
+
+<div class="c_form1 c_form2">
+  <div class="form-group">
+    <label for="val_customername" class="col-md-2 control-label">Certificateno</label>
+    <div class="col-md-10"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'TS 0004-13')); ?> </div>
+  </div>
+  <div class="form-group">
+    <label for="val_customername" class="col-md-2 control-label">METHOD OF CALIBRATION</label>
+    <div class="col-md-10">
+      <?php
+                echo $this->Form->input('Tempformdata.methodofcal1', array('id' => 'val_method_calibration', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['methodofcal1']));
+            ?>
+      <?php
+                echo $this->Form->input('Tempformdata.methodofcal2', array('id' => 'val_method_calibration', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['methodofcal2']));
+            ?>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="val_customername" class="col-md-2 control-label">RESULTS OF CALIBRATION</label>
+    <div class="col-md-10">
+      <?php
+                echo $this->Form->input('Tempformdata.resultofcal1', array('id' => 'val_resultofcal1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['resultofcal1']));
+            ?>
+      <?php
+                echo $this->Form->input('Tempformdata.resultofcal2', array('id' => 'val_resultofcal2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['resultofcal2']));
+            ?>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="val_customername" class="col-md-2 control-label">REMARKS</label>
+    <div class="col-md-10">
+      <?php
+                echo $this->Form->input('Tempformdata.remark1', array('id' => 'val_remark1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark1']));
+            ?>
+      <?php
+                echo $this->Form->input('Tempformdata.remark2', array('id' => 'val_remark2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark2']));
+            ?>
+            
+            <?php
+                echo $this->Form->input('Tempformdata.remark3', array('id' => 'val_remark3', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark3']));
+            ?>
+            
+            <?php
+                echo $this->Form->input('Tempformdata.remark4', array('id' => 'val_remark4', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark4']));
+            ?>
+            
+            <?php
+                echo $this->Form->input('Tempformdata.remark5', array('id' => 'val_remark5', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark5']));
+            ?>
+            
+            <?php
+                echo $this->Form->input('Tempformdata.remark6', array('id' => 'val_remark6', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark6']));
+            ?>
+            
+            <?php
+                echo $this->Form->input('Tempformdata.remark7', array('id' => 'val_remark7', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark7']));
+            ?>
+             <?php
+                echo $this->Form->input('Tempformdata.remark8', array('id' => 'val_remark8', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark8']));
+            ?>
+             
+            
+    </div>
+  </div>
+</div>
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+<!----------------------------------------- Uncertainty ------------------------------------------>
+
+</div>
+                                               
+<?php //echo $this->Form->end(); ?>
+<div class="tab-pane" id="tab4">
+    
+    <?php ?>
+
+<div class="uncertainly_tab">
+  <div class="col-sm-3 col-lg-12 subcontract_linear uncertainly_table">
+    <h4>SOURCES OF UNCERTAINTY</h4>
+    <!--SOURCES OF UNCERTAINTY TABLE-->
+    <table  class="table table-vcenter table-condensed table-bordered">
+      <thead>
+        <tr class="c_dark_bg">
+          <th class="text-center">R.No</th>
+          <th class="text-center">RNo</th>
+          <th class="text-center">SetTemp</th>
+          <th class="text-center">R1</th>
+          <th class="text-center">R2</th>
+          <th class="text-center">R3</th>
+          <th class="text-center">R4</th>
+          <th class="text-center">R5</th>
+          <th class="text-center">R6</th>
+          <th class="text-center">R7</th>
+          <th class="text-center">R8</th>
+          <th class="text-center">R9</th>
+          <th class="text-center">R10</th>
+          <th class="text-center">AVG1</th>
+          <th class="text-center">AVG2</th>
+          <th class="text-center">AVG3</th>
+          <th class="text-center">URep1</th>
+          <th class="text-center">URep2</th>
+          <th class="text-center">URep3</th>
+          <th class="text-center">URes</th>
+          <th class="text-center">UnCert</th>
+          <th class="text-center">Count</th>
+          <th class="text-center">Accuracy</th>
+          <th class="text-center">IsAnalog</th>
+          <th class="text-center">IsAfterAd</th>
+        </tr>
+      </thead>
+      <tbody class="subcontract_instrument_info">
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-3 col-lg-12 subcontract_linear uncertainly_table">
+    <h4>EXPANDED UNCERTAINTY</h4>
+    <!--EXPANDED UNCERTAINTY TABLE-->
+    <table  class="table table-vcenter table-condensed table-bordered">
+      <thead>
+        <tr class="c_dark_bg">
+          <th class="text-center">Tag no</th>
+          <th class="text-center">Name</th>
+          <th class="text-center">TempInstrumentDataID</th>
+          <th class="text-center">SNo</th>
+          <th class="text-center">Range</th>
+          <th class="text-center">uref1</th>
+          <th class="text-center">uref2</th>
+          <th class="text-center">uref3</th>
+          <th class="text-center">uacc1</th>
+          <th class="text-center">uacc2</th>
+          <th class="text-center">uacc3</th>
+          <th class="text-center">urefdivisor</th>
+          <th class="text-center">uresdivisoranalog</th>
+          <th class="text-center">uresdivisordigital</th>
+          <th class="text-center">urepdivisor</th>
+          <th class="text-center">divisor</th>
+          <th class="text-center">uicestability</th>
+          <th class="text-center">ustability</th>
+          <th class="text-center">uuniformity</th>
+          <th class="text-center">udrift</th>
+          <th class="text-center">uimm</th>
+          <th class="text-center">uheateffect</th>
+          <th class="text-center">ugravity</th>
+          <th class="text-center">uother1</th>
+          <th class="text-center">uother2</th>
+          <th class="text-center">uother3</th>
+          <th class="text-center">uother4</th>
+          <th class="text-center">uother5</th>
+          <th class="text-center">uother6</th>
+          <th class="text-center">uother7</th>
+          <th class="text-center">uother8</th>
+          <th class="text-center">uother9</th>
+          <th class="text-center">uother10</th>
+          <th class="text-center">uother11</th>
+          <th class="text-center">uother12</th>
+          <th class="text-center">uother13</th>
+        </tr>
+      </thead>
+      <tbody class="subcontract_instrument_info">
+        
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-3 col-lg-12 subcontract_linear uncertainly_table">
+    <h4>UNCERTAINTY DATA</h4>
+    <!--UNCERTAINTY DATA-->
+    <table  class="table table-vcenter table-condensed table-bordered">
+      <thead>
+        <tr class="c_dark_bg">
+          <th class="text-center">uc</th>
+          <th class="text-center">dof</th>
+          <th class="text-center">cf</th>
+          <th class="text-center">uncert</th>
+        </tr>
+      </thead>
+      <tbody class="subcontract_instrument_info">
+        <tr class="text-center">
+          <td class="text-center">0.038845849199110064</td>
+          <td class="text-center">101</td>
+          <td class="text-center">2</td>
+          <td class="text-center">0.07769169839822013</td>
+        </tr>
+        <tr class="text-center">
+          <td class="text-center">0.038845849199110064</td>
+          <td class="text-center">101</td>
+          <td class="text-center">2</td>
+          <td class="text-center">0.07769169839822013</td>
+        </tr>
+        <tr class="text-center">
+          <td class="text-center">0.038845849199110064</td>
+          <td class="text-center">101</td>
+          <td class="text-center">2</td>
+          <td class="text-center">0.07769169839822013</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<!---------------------------------------------- Specification ---------------------->
+
+</div>
+                                                 <div class="tab-pane" id="tab5">
+<?php ?>
+
+<div class="c_form1 c_form2">
+  <div class="form-group">
+    <label for="val_duedate" class="col-md-1 control-label">Title1 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('title1', array('id' => 'val_title1', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+    <label for="val_duedate" class="col-md-1 control-label">Description1 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('description1', array('id' => 'val_description1', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="val_duedate" class="col-md-1 control-label">Title2 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('title2', array('id' => 'val_title2', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+    <label for="val_duedate" class="col-md-1 control-label">Description2 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('description2', array('id' => 'val_description2', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="val_duedate" class="col-md-1 control-label">Title3 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('title3', array('id' => 'val_title3', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+    <label for="val_duedate" class="col-md-1 control-label">Description3 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('description3', array('id' => 'val_description3', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="val_duedate" class="col-md-1 control-label">Title4 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('title4', array('id' => 'val_title4', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+    <label for="val_duedate" class="col-md-1 control-label">Description4 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('description4', array('id' => 'val_description4', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="val_duedate" class="col-md-1 control-label">Title5 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('title5', array('id' => 'val_title5', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+    <label for="val_duedate" class="col-md-1 control-label">Description5 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('description5', array('id' => 'val_description5', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="val_duedate" class="col-md-1 control-label">Title6 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('title6', array('id' => 'val_title6', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+    <label for="val_duedate" class="col-md-1 control-label">Description6 </label>
+    <div class="col-md-5">
+      <?php
+                echo $this->Form->input('description6', array('id' => 'val_description6', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="val_duedate" class="col-md-2 control-label">Remarks </label>
+    <div class="col-md-10">
+      <?php
+                echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>''));
+            ?>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="val_duedate" class="col-md-2 control-label">Sub Con Report Type </label>
+    <div class="col-md-10">
+      <?php
+                echo $this->Form->input('sub_conreport', array('id' => 'val_sub_conreport', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea','readonly'=>true, 'rows'=>'2','value'=>'Standard'));
+            ?>
+    </div>
+  </div>
+  
+  <div class="col-md-9 col-md-offset-10">
+                                                            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-angle-right"></i> Submit</button>                                                            <button class="btn btn-sm btn-warning" type="reset"><i class="fa fa-repeat"></i> Reset</button>                                                        </div>
+</div>
+</div>
+            
+             </div><!-- tab-content -->
+                                            <!-- #basicWizard -->
+                                        </div><!-- panel-body -->
+                                    </div>
+                                    <!-- panel -->
+                                </div>

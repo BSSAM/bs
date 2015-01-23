@@ -220,9 +220,11 @@
         $('.ajaxform').ajaxForm({ 
             url: path_url+'Certificates/index/',
             type: 'post',
+            beforeSend: ni_start(),  
+            complete: ni_end(),
             success : function(recievedData)
             {
-                
+                alert('Updated');
                 //$('.template_data_table').html(recievedData);
                 //return false;
             }
@@ -264,22 +266,28 @@
                                         </thead>
                                         <tbody class="subcontract_instrument_info">
                                           <tr class="text-center">
-                                              <td class="text-center"><select id="certificateno" name="step1[certificateno]" class="certificateno">
+                                              <td class="text-center">
+                                                  <?php
+                    echo $this->Form->input('step1.certificateno', array('id' => 'certificateno', 'class' => 'certificateno',
+                             'label' => false,'type' => 'select', 'options'=>$get_cert_certno,'value'=>$get_cert_sales['Tempcertificate']['certificate_no'])); ?>
+                                                  
+<!--                                                  <select id="certificateno" name="step1[certificateno]" class="certificateno" value="<?php //echo $get_cert_sales ?>">
                                                 <option value="1">TS 0001-13</option>
                                                 <option value="2">TS 0002-13</option>
-                                           <!--     <option value="3">TS 0003-13</option>
+                                                <option value="3">TS 0003-13</option>
                                                 <option value="4" selected="selected">TS 0004-13</option>
                                                 <option value="5">TS 0005-13</option>
                                                 <option value="6">TS 0006-13</option>
                                                 <option value="7">TS 0001-14</option>
                                                 <option value="8">TS 0002-14</option>
                                                 <option value="9">TS 0003-14</option>
-                                                <option value="10">TS 0001-15</option>-->
-                                              </select></td>
+                                                <option value="10">TS 0001-15</option>
+                                              </select>-->
+                                              </td>
                                             <td>
                                                 <?php
                     echo $this->Form->input('step1.readingtype_id', array('id' => 'readingtype_id', 'class' => 'form-control readingtype_id',
-                             'label' => false,'type' => 'select', 'options'=>$readingtype_data)); ?>
+                             'label' => false,'type' => 'select', 'options'=>$readingtype_data,'value'=>$get_cert_sales['Tempcertificate']['certificate_no'])); ?>
                                                 
 <!--                                                <select id="readingtype_id" name="readingtype_id" class="readingtype_id">
                                                
@@ -329,10 +337,11 @@
                                 </div>
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
-                                <div class="panel panel-default">
+                                <div class="certificate_tab">
+<!--                                <div class="panel panel-default">
                                     
                                     <div class="panel-body panel-body-nopadding">
-                                        <!-- BASIC WIZARD -->
+                                         BASIC WIZARD 
                                         <div id="basicWizard" class="basic-wizard">
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active"><a href="#tab1" data-toggle="tab"><span>Step 1:</span> Calculation Form</a></li>
@@ -352,31 +361,32 @@
                                                     <?PHP //echo $this->element('Certificates/calculation_form'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab2">
-                                                    <?PHP echo $this->element('Certificates/form1'); ?>
+                                                    <?PHP //echo $this->element('Certificates/form1'); ?>
                                                 </div>
                                                 <div class="tab-pane" id="tab3">
-                                                    <?PHP echo $this->element('Certificates/form2'); ?>
-<!--                                                    <div class="form-group form-actions">
+                                                    <?PHP //echo $this->element('Certificates/form2'); ?>
+                                                    <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-10">
                                                             <?php //echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
                                                             <?php //echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                                                         </div>
-                                                    </div>-->
+                                                    </div>
                                                 </div>
                                                
                                                  <?php //echo $this->Form->end(); ?>
                                                 <div class="tab-pane" id="tab4">
-                                                    <?PHP echo $this->element('Certificates/uncertainty'); ?>
+                                                    <?PHP //echo $this->element('Certificates/uncertainty'); ?>
                                                 </div>
                                                  <div class="tab-pane" id="tab5">
-                                                    <?PHP echo $this->element('Certificates/specification'); ?>
+                                                    <?PHP //echo $this->element('Certificates/specification'); ?>
                                                 </div>
                                                 
-                                            </div><!-- tab-content -->
-                                            <!-- #basicWizard -->
-                                        </div><!-- panel-body -->
+                                            </div> tab-content 
+                                             #basicWizard 
+                                        </div> panel-body 
                                     </div>
-                                    <!-- panel -->
+                                     panel 
+                                </div>-->
                                 </div>
                                 <!-- END Basic Form Elements Content -->
                             </div>

@@ -35,7 +35,7 @@
                         //pr($this->request->data);
                         $uncertainty_data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.temp_instruments_id'=>$this->request->data['Uncertainty']['temp_instruments_id'],'Tempuncertainty.duedate'=>$this->request->data['Uncertainty']['duedate']),'recursive'=>'2'));
                         if(!$uncertainty_data){
-                            $this->request->data['Tempuncertainty']['totalname'] = $this->request->data['Uncertainty']['instrumentname'].'-'.$this->request->data['Uncertainty']['instrumentname'];
+                            $this->request->data['Tempuncertainty']['totalname'] = $this->request->data['Uncertainty']['instrumentname'].'-'.$this->request->data['Uncertainty']['tagno'];
                             if($this->Tempuncertainty->save($this->request->data['Uncertainty']))
                             {
                                 
@@ -75,7 +75,7 @@
             $uncertainty_data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=> $id)));
             $this->set('trigger','');
             $this->set('temp_ins_id',$id);
-                
+            $this->request->data['Tempuncertainty']['totalname'] = $this->request->data['Uncertainty']['instrumentname'].'-'.$this->request->data['Uncertainty']['tagno'];
             if($this->request->is(array('post','put')))
             {
              // pr($this->request->data); exit;
@@ -1257,6 +1257,7 @@
         public function addtemplate($file)
         {
             $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
+            //pr($uncer_tag);exit;
             $this->set('uncer_tag',$uncer_tag);
                 
             $unit_list = $this->Tempunit->find('list', array('conditions' => array('Tempunit.status' => 1),'fields' => array('Tempunit.id','unitname')));

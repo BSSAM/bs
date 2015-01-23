@@ -9,4 +9,18 @@
 class Temptemplate extends AppModel
 {
     public $useTable    =   'temp_templates';
+    public $hasMany = array(
+        'Temptemplatedata' => array(
+            'className' => 'Temptemplatedata',
+            'foreignKey' => 'temp_templates_id',
+            'conditions' => '',
+            'dependent'=> true,
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => '',
+        ));
 }
