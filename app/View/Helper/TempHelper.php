@@ -68,7 +68,7 @@ class TempHelper extends AppHelper
         APP::import('Model','Customer');
         $this->Customer   =   new Customer();
         $data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id)));
-        return $data['customer']['customername'];
+        return $data['Customer']['customername'];
     }
     public function inst_valid($id = null)
     {

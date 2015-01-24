@@ -1230,13 +1230,13 @@
                 elseif($file == 'deletetemplate'):
                 $this->deletetemplate($file, $id);
                 else:
-                $this->addtemplate($file); 
+                $this->addtemplate($file, $id); 
                 endif;
             }
             elseif($file!='' && $id=='')
             {
                 if($file == 'addtemplate'):
-                $this->addtemplate($file);
+                $this->addtemplate($file, $id);
                 endif;
                 //$this->render('Instrument/'.$file);
             }
@@ -1255,8 +1255,30 @@
             $this->render('template/index');
         }
             
-        public function addtemplate($file)
+        public function addtemplate($file,$id = null)
         {
+            if(isset($id))
+            {
+            $details = explode('$',$id);
+            $this->set('temp_templates_id',$id);
+            
+            $ins_id = $details[0];
+			$this->set('ins_id',$ins_id);
+            $range_id = $details[1];
+			$this->set('range_id',$range_id);
+            $model_no = $details[2];
+			$this->set('model_no',$model_no);
+            $brand_id = $details[3];
+			$this->set('brand_id',$brand_id);
+            $instrument_details = $ins_id.'$'.$brand_id.'$'.$model_no.'$'.$range_id;       
+            //pr($instrument_details);exit;
+            $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$ins_id,'Description.sales_range'=>$range_id,'Description.model_no'=>$model_no,'Description.brand_id'=>$brand_id)));
+            $ins_name = $data['Instrument']['name'];
+            $brand_name = $data['Brand']['brandname'];
+            $model_no = $data['Description']['model_no'];
+            $range_name = $data['Range']['range_name'];
+            $this->set(compact('instrument_details','ins_name','brand_name','model_no','range_name'));
+            }            
             $uncer_tag = $this->Tempuncertainty->find('list',array('fields' => array('id','totalname')));
             //pr($uncer_tag);exit;
             $this->set('uncer_tag',$uncer_tag);
@@ -1271,12 +1293,13 @@
                 $ids = explode("$", $this->request->data['template/addtemplate']['instrument_details']);
                 $this->request->data['Temptemplate']['temp_instruments_id'] = $ids[0];
                 $this->request->data['Temptemplate']['model'] = $ids[2];
-                $this->request->data['Temptemplate']['brand_id'] = $ids[3];
-                $this->request->data['Temptemplate']['range_id'] = $ids[1];
+                $this->request->data['Temptemplate']['brand_id'] = $ids[1];
+                $this->request->data['Temptemplate']['range_id'] = $ids[3];
                 $this->request->data['Temptemplate']['customer_id'] = $this->request->data['template/addtemplate']['customer_id'];
+                //pr($this->request->data['Temptemplate']);exit;
                 $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.temp_instruments_id ='=>$this->request->data['Temptemplate']['temp_instruments_id'],'Temptemplate.model'=>$this->request->data['Temptemplate']['model'],'Temptemplate.brand_id'=>$this->request->data['Temptemplate']['brand_id'],'Temptemplate.range_id'=>$this->request->data['Temptemplate']['range_id']),'recursive'=>'2'));
              // pr($template_data);
-			    if(!$template_data)
+		if(!$template_data)
                 {  //pr( $this->request->data['Temptemplate']['brand_id']);  pr( $this->request->data['Temptemplate']['range_id']); 
                     if($this->Temptemplate->save($this->request->data['Temptemplate']))
                     {
@@ -1297,6 +1320,7 @@
             
         public function edittemplate($file, $id = null)
         {
+            
             $details = explode('$',$id);
             $this->set('temp_templates_id',$id);
             
@@ -1448,8 +1472,8 @@
                     {
                         $arr[] = $val;
                         //pr($arr);
-                        echo "<div class='instrument_show' align='left' id='".$data[$i]['Instrument']['id']."$".$data[$i]['Range']['id']."$".$data[$i]['Description']['model_no']."$".$data[$i]['Description']['brand_id']."'>";
-                        echo $data[$i]['Instrument']['name'].'-'.$data[$i]['Range']['range_name'].'-'.$data[$i]['Description']['model_no'].'-'.$data[$i]['Brand']['brandname'];
+                        echo "<div class='instrument_show' align='left' id='".$data[$i]['Instrument']['id']."$".$data[$i]['Description']['brand_id']."$".$data[$i]['Description']['model_no']."$".$data[$i]['Range']['id']."'>";
+                        echo $data[$i]['Instrument']['name'].'-'.$data[$i]['Brand']['brandname'].'-'.$data[$i]['Description']['model_no'].'-'.$data[$i]['Range']['range_name'];
                         echo "<br>";
                         echo "</div>";
                     }

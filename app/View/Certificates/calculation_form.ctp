@@ -1,32 +1,4 @@
-<!--<div class="col-sm-3 col-lg-12 subcontract_linear certificate_table certificate_tab"> -->
-  <!-- table1-->
-  <?php //pr($tempdata_all); 
-//  foreach($tempdata_all as $template_one)
-//  {
-//      $n = 1;
-//      $n_val = $template_one;
- 
-  //pr($n_val);
-  ?>
-  <script>
-      
-            
-    $(document).ready(function(e) {
-       // for (i = 1; i <= 2; ++i)
-         //   {
-                alert('hg');
-//                    $('.m'+i+'_'+m).prop("disabled", true);
-//                    $('.m'+i+'_'+m).css("background-color", "#ccc");
-//                    $('.b'+i+'_'+m).prop("disabled", true);
-//                    $('.b'+i+'_'+m).css("background-color", "#ccc");
-//                    $('.a'+i+'_'+m).prop("disabled", true);
-//                    $('.a'+i+'_'+m).css("background-color", "#ccc");
-                
-      //      }
-    });
-      </script>
-      
-     <?php //} ?> 
+
  <div class="panel panel-default">
                                     
 <div class="panel-body panel-body-nopadding">
@@ -74,8 +46,8 @@
       <tbody class="set1_info">
         <tr class="text-center c_light_bg">
           <td class="text-center">1</td>
-          <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['temp1']; ?>" name="step1[temp1]" class="temp1"></td>
+          <td class="text-center">Set Temperature </td>
+          <td class="text-center"><input type="text" name="step1[temp1]" class="temp1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--            <select name="unit1]" class="unit1">
@@ -88,14 +60,15 @@
               <option value="6">mV</option>
               <option value="7">% rh</option>
             </select>-->
+              
           <?php  echo $this->Form->input('step1.unit1', array('id' => 'unit1', 'class' => 'unit1','label' => false,'type' => 'select', 'options'=>$unit_list,'value'=>$cert['Tempcertificatedata']['unit1'])); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['res1']; ?>" name="step1[res1]" class="res1"></td>
+          <td class="text-center"><input type="text" name="step1[res1]" class="res1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['acc1']; ?>" name="step1[acc1]" class="acc1"></td>
+          <td class="text-center"><input type="text" name="step1[acc1]" class="acc1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['count1']; ?>" name="step1[count1]" class="count1"></td>
+          <td class="text-center"><input type="text" name="step1[count1]" class="count1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert1']; ?>" name="step1[uncert1]" class="uncert1"></td>
         </tr>
@@ -155,8 +128,18 @@
         
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-            <?php $selected = isset($cert['Tempcertificatedata']['uncertainty1_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty1_val']) : array();
-                $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+            <?php 
+                if(isset($tempdata[0])) 
+                { 
+                    echo "ads";
+                    $selected = isset($tempdata[0]['temp_uncertainty_id']) ? explode(',',$tempdata[0]['temp_uncertainty_id']) : array();
+                    $sel = in_array($tempdata[0]['temp_uncertainty_id'], $selected) ? 'checked' : '';
+                } 
+                else 
+                { 
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty1_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty1_val']) : array();
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
             ?>
             
             <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty1_val][]" class="uncertainty1_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
@@ -173,7 +156,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">2</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['temp2']; ?>" name="step1[temp2]" class="temp2"></td>
+          <td class="text-center"><input type="text" name="step1[temp2]" class="temp2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--            <select name="unit2" class="unit2">
@@ -189,11 +172,11 @@
               <?php  echo $this->Form->input('step1.unit2', array('id' => 'unit2', 'class' => 'unit2','label' => false,'type' => 'select', 'options'=>$unit_list, 'value'=>$cert['Tempcertificatedata']['unit2'])); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['res2']; ?>" name="step1[res2]" class="res2"></td>
+          <td class="text-center"><input type="text" name="step1[res2]" class="res2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['acc2']; ?>" name="step1[acc2]" class="acc2"></td>
+          <td class="text-center"><input type="text" name="step1[acc2]" class="acc2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['count2']; ?>" name="step1[count2]" class="count2"></td>
+          <td class="text-center"><input type="text" name="step1[count2]" class="count2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert2']; ?>" name="step1[uncert2]" class="uncert2" readonly="readonly"></td>
         </tr>
@@ -265,7 +248,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">3</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp3]" class="temp3"></td>
+          <td class="text-center"><input type="text" name="step1[temp3]" class="temp3" value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit3]" class="unit3">
@@ -281,11 +264,11 @@
               <?php  echo $this->Form->input('step1.unit3', array('id' => 'unit3', 'class' => 'unit3','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res3]" class="res3"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[res3]" class="res3"  value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc3]" class="acc3"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[acc3]" class="acc3"  value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count3]" class="count3"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[count3]" class="count3" value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="0" name="step1[uncert3]" class="uncert3"></td>
         </tr>
@@ -358,7 +341,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">4</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp4]" class="temp4"></td>
+          <td class="text-center"><input type="text" name="step1[temp4]" class="temp4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit4]" class="unit4">
@@ -374,11 +357,11 @@
               <?php  echo $this->Form->input('step1.unit4', array('id' => 'unit4', 'class' => 'unit4','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res4]" class="res4"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[res4]" class="res4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc4]" class="acc4"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[acc4]" class="acc4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count4]" class="count4"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[count4]" class="count4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="0" name="step1[uncert4]" class="uncert4"></td>
         </tr>
@@ -451,7 +434,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">5</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp5]" class="temp5"></td>
+          <td class="text-center"><input type="text" name="step1[temp5]" class="temp5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit5]" class="unit5">
@@ -467,11 +450,11 @@
               <?php  echo $this->Form->input('step1.unit5', array('id' => 'unit5', 'class' => 'unit5','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res5]" class="res5"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[res5]" class="res5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc5]" class="acc5"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[acc5]" class="acc5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count5]" class="count5"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[count5]" class="count5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="0" name="step1[uncert5]" class="uncert5"></td>
         </tr>
@@ -544,7 +527,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">6</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp6]" class="temp6"></td>
+          <td class="text-center"><input type="text" name="step1[temp6]" class="temp6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit6]" class="unit6">
@@ -560,11 +543,11 @@
               <?php  echo $this->Form->input('step1.unit6', array('id' => 'unit6', 'class' => 'unit6','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res6]" class="res6"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[res6]" class="res6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc6]" class="acc6"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[acc6]" class="acc6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count6]" class="count6"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[count6]" class="count6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="0" name="step1[uncert6]" class="uncert6"></td>
         </tr>
@@ -637,7 +620,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">7</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp7]" class="temp7"></td>
+          <td class="text-center"><input type="text" name="step1[temp7]" class="temp7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit7]" class="unit7">
@@ -653,11 +636,11 @@
               <?php  echo $this->Form->input('step1.unit7', array('id' => 'unit7', 'class' => 'unit7','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res7]" class="res7"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[res7]" class="res7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc7]" class="acc7"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[acc7]" class="acc7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count7]" class="count7"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[count7]" class="count7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="0" name="step1[uncert7]" class="uncert7"></td>
         </tr>
@@ -730,7 +713,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">8</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp8]" class="temp8"></td>
+          <td class="text-center"><input type="text" name="step1[temp8]" class="temp8"  value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit8]" class="unit8">
@@ -746,11 +729,11 @@
               <?php  echo $this->Form->input('step1.unit8', array('id' => 'unit8', 'class' => 'unit8','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res8]" class="res8"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[res8]" class="res8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc8]" class="acc8"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[acc8]" class="acc8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count8]" class="count8"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[count8]" class="count8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="0" name="step1[uncert8]" class="uncert8"></td>
         </tr>
@@ -823,7 +806,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">9</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp9]" class="temp9"></td>
+          <td class="text-center"><input type="text" name="step1[temp9]" class="temp9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit9]" class="unit9">
@@ -839,11 +822,11 @@
               <?php  echo $this->Form->input('step1.unit9', array('id' => 'unit9', 'class' => 'unit9','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res9]" class="res9"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[res9]" class="res9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc9]" class="acc9"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[acc9]" class="acc9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count9]" class="count9"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[count9]" class="count9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="0" name="step1[uncert9]" class="uncert9"></td>
         </tr>
@@ -916,7 +899,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">10</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp10]" class="temp10"></td>
+          <td class="text-center"><input type="text" name="step1[temp10]" class="temp10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit10]" class="unit10">
@@ -932,11 +915,11 @@
               <?php  echo $this->Form->input('step1.unit10', array('id' => 'unit10', 'class' => 'unit10','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res10]" class="res10"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[res10]" class="res10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc10]" class="acc10"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[acc10]" class="acc10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count10]" class="count10"></td>
+          <td class="text-center"><input type="text" value="0" name="step1[count10]" class="count10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="0" name="step1[uncert10]" class="uncert10"></td>
         </tr>
@@ -1009,7 +992,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">11</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp11]" class="temp11"></td>
+          <td class="text-center"><input type="text" name="step1[temp11]" class="temp11" value="<?php if(isset($tempdata[10])){ echo $tempdata[10]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit11]" class="unit11">
@@ -1102,7 +1085,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">12</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp12]" class="temp12"></td>
+          <td class="text-center"><input type="text" name="step1[temp12]" class="temp12" value="<?php if(isset($tempdata[11])){ echo $tempdata[11]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit12]" class="unit12">
@@ -1195,7 +1178,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">13</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp13]" class="temp13"></td>
+          <td class="text-center"><input type="text" name="step1[temp13]" class="temp13" value="<?php if(isset($tempdata[12])){ echo $tempdata[12]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit13]" class="unit13">
@@ -1288,7 +1271,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">14</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp14]" class="temp14"></td>
+          <td class="text-center"><input type="text" name="step1[temp14]" class="temp14" value="<?php if(isset($tempdata[13])){ echo $tempdata[13]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit14]" class="unit14">
@@ -1381,7 +1364,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">15</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" value="0" name="step1[temp15]" class="temp15"></td>
+          <td class="text-center"><input type="text" name="step1[temp15]" class="temp15"  value="<?php if(isset($tempdata[14])){ echo $tempdata[14]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit15]" class="unit15">

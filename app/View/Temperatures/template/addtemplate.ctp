@@ -3,12 +3,15 @@
     
     $(document).ready(function(){
         
+        
+        <?php if(!isset($instrument_details)){ ?>
         $('#val_tempinstrumentname').val('');
         $('#val_model').val('').attr('readonly','readonly');
         $('#val_brand').val('').attr('readonly','readonly');
         $('#val_range').val('').attr('readonly','readonly');
-        $('#val_customer').val('');
         $("#instrument_details").val('');
+        <?php } ?>
+        $('#val_customer').val('');
         $('#customer_id').val('');
         
         $("#search_instrument",window.parent.document).hide();
@@ -98,15 +101,15 @@
             });
         });
         
-        $('.check_unit').on('click',function(){
-            var val_u = $('#val_unit').val();
-            if(val_u == '')
-            {
-                alert('Please Select Unit First');
-                $('#val_prefref').val('');
-                return false;
-            }
-        });
+//        $('.check_unit').on('click',function(){
+//            var val_u = $('#val_unit').val();
+//            if(val_u == '')
+//            {
+//                alert('Please Select Unit First');
+//                $('#val_prefref').val('');
+//                return false;
+//            }
+//        });
         
         
         $("#result").hide();
@@ -182,8 +185,8 @@
                     $('#val_count').val(edit_node.Temptemplatedata.setpoint);
                     $('#val_resolution').val(edit_node.Temptemplatedata.resolution);
                     $('#val_accuracy').val(edit_node.Temptemplatedata.accuracy);
-					$('.readingtypename').val(edit_node.Temptemplatedata.readingtypename);
-					$('.unitname').val(edit_node.Temptemplatedata.unitname);
+                    $('.readingtypename').val(edit_node.Temptemplatedata.readingtypename);
+                    $('.unitname').val(edit_node.Temptemplatedata.unitname);
                     $('#val_prefref').val(edit_node.Temptemplatedata.temp_uncertainty_id).trigger("chosen:updated");
                     $('.edit_all_fields').text('Edit');
                     $('.edit_all_fields').attr('id',edit_node.Temptemplatedata.id);
@@ -237,7 +240,11 @@
             <?php echo $this->Form->create('template/addtemplate', array('class' => 'form-horizontal form-bordered', 'id' => 'temp-template-add', 'enctype' => 'multipart/form-data')); ?>
             <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
             <?PHP //echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
+            <?php if(isset($instrument_details)){ ?>
+            <?PHP echo $this->Form->input('instrument_details',array('id'=>'instrument_details','type'=>'hidden','value'=>$instrument_details)); ?>
+            <?php }else { ?>
             <?PHP echo $this->Form->input('instrument_details',array('id'=>'instrument_details','type'=>'hidden')); ?>
+            <?php } ?>
             <?PHP echo $this->Form->input('customer_id',array('id'=>'customer_id','type'=>'hidden')); ?>
             <!--            <div class="description_list">
                             
@@ -245,23 +252,39 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_tempinstrumentname">Instrument</label>
                 <div class="col-md-4">
+                    <?php if(isset($ins_name)){ ?>
+                    <?php echo $this->Form->input('instrumentname', array('id' => 'val_tempinstrumentname', 'class' => 'form-control', 'placeholder' => 'Enter the Instrument Name', 'label' => false,'autoComplete'=>'off','value'=>$ins_name)); ?>
+                    <?php }else { ?>
                     <?php echo $this->Form->input('instrumentname', array('id' => 'val_tempinstrumentname', 'class' => 'form-control', 'placeholder' => 'Enter the Instrument Name', 'label' => false,'autoComplete'=>'off')); ?>
+                    <?php } ?>
                     <div class="instrument_drop" id="search_instrument"></div>
                 </div>
                 <label class="col-md-2 control-label" for="val_model">Model</label>
                 <div class="col-md-4">
+                    <?php if(isset($model_no)){ ?>
+                    <?php echo $this->Form->input('model', array('id' => 'val_model', 'class' => 'form-control', 'placeholder' => 'Enter Model', 'label' => false,'value'=>$model_no)); ?>
+                    <?php }else { ?>
                     <?php echo $this->Form->input('model', array('id' => 'val_model', 'class' => 'form-control', 'placeholder' => 'Enter Model', 'label' => false)); ?>
+                    <?php } ?>
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_brand">Brand</label>
                 <div class="col-md-4">
+                    <?php if(isset($brand_name)){ ?>
+                    <?php echo $this->Form->input('brand', array('id' => 'val_brand', 'class' => 'form-control', 'placeholder' => 'Enter Brand', 'label' => false,'value'=>$brand_name)); ?>
+                    <?php }else { ?>
                     <?php echo $this->Form->input('brand', array('id' => 'val_brand', 'class' => 'form-control', 'placeholder' => 'Enter Brand', 'label' => false)); ?>
+                    <?php } ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_range">Range</label>
                 <div class="col-md-4">
+                    <?php if(isset($range_name)){  ?>
+                    <?php echo $this->Form->input('range', array('id' => 'val_range', 'class' => 'form-control', 'placeholder' => 'Enter Range', 'label' => false,'value'=>$range_name)); ?>
+                    <?php }else { ?>
                     <?php echo $this->Form->input('range', array('id' => 'val_range', 'class' => 'form-control', 'placeholder' => 'Enter Range', 'label' => false)); ?>
+                    <?php } ?>
                 </div>
                 
             </div>

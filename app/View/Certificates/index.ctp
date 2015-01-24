@@ -2,24 +2,24 @@
     var path_url='<?PHP echo Router::url('/',true); ?>';
     $(document).ready(function(e) {
         
-        var certificateno = $('#certificateno').val();
-            var readingtype = $('#readingtype_id').val();
-            var channel = $('#channel_id').val();
-            //alert(certificateno);
-            //alert(readingtype);
-           //alert(channel);
-            $.ajax({
-                type: 'POST',
-                data:"certificateno="+certificateno+"&readingtype="+readingtype+"&channel="+channel,
-                url: path_url+'/Certificates/calculation_form/',
-                beforeSend: ni_start(),  
-                success:function(data){
-                    
-                    $('.certificate_tab').html(data);
-                    $('.no_of_runs').trigger('change');
-                },
-                complete: ni_end(),
-            });
+//            var certificateno = $('#certificateno').val();
+//            var readingtype = $('#readingtype_id').val();
+//            var channel = $('#channel_id').val();
+//            //alert(certificateno);
+//            //alert(readingtype);
+//           //alert(channel);
+//            $.ajax({
+//                type: 'POST',
+//                data:"certificateno="+certificateno+"&readingtype="+readingtype+"&channel="+channel,
+//                url: path_url+'/Certificates/calculation_form/',
+//                beforeSend: ni_start(),  
+//                success:function(data){
+//                    
+//                    $('.certificate_tab').html(data);
+//                    $('.no_of_runs').trigger('change');
+//                },
+//                complete: ni_end(),
+//            });
             
         $('#channel_submit').click(function(e) {
             var certificateno = $('#certificateno').val();
@@ -62,6 +62,7 @@
             {
                 for(m = 15; m > run; m--)
                 {
+                    //alert(i+'sad');
                     $('.m'+i+'_'+m).prop("disabled", true);
                     $('.m'+i+'_'+m).css("background-color", "#ccc");
                     $('.b'+i+'_'+m).prop("disabled", true);
@@ -85,12 +86,16 @@
             {
                 for(m = 15; m > run; m--)
                 {
-                    $('.m'+i+'_'+m).prop("disabled", true);
-                    $('.m'+i+'_'+m).css("background-color", "#ccc");
-                    $('.b'+i+'_'+m).prop("disabled", true);
-                    $('.b'+i+'_'+m).css("background-color", "#ccc");
-                    $('.a'+i+'_'+m).prop("disabled", true);
-                    $('.a'+i+'_'+m).css("background-color", "#ccc");
+                    //alert(i);
+//                    if($('.step'+i).val()=='')
+//                    {
+                        $('.m'+i+'_'+m).prop("disabled", true);
+                        $('.m'+i+'_'+m).css("background-color", "#ccc");
+                        $('.b'+i+'_'+m).prop("disabled", true);
+                        $('.b'+i+'_'+m).css("background-color", "#ccc");
+                        $('.a'+i+'_'+m).prop("disabled", true);
+                        $('.a'+i+'_'+m).css("background-color", "#ccc");
+                    //}
                 }
             }
         }
@@ -117,14 +122,18 @@
                 }
                 for (i = 1; i <= 15; ++i)
                 {
+                    //alert(i);
                     for(m = 15; m > run; m--)
                     {
+//                        if($('.step'+i).val()=='')
+//                        {
                         $('.m'+i+'_'+m).prop("disabled", true);
                         $('.m'+i+'_'+m).css("background-color", "#ccc");
                         $('.b'+i+'_'+m).prop("disabled", true);
                         $('.b'+i+'_'+m).css("background-color", "#ccc");
                         $('.a'+i+'_'+m).prop("disabled", true);
                         $('.a'+i+'_'+m).css("background-color", "#ccc");
+//                        }
                     }
                 }
             }

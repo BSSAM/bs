@@ -28,7 +28,9 @@
                         <div class="btn-group">
                             <?php // echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$description_list['Description']['salesorder_id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                             <?php // echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$description_list['Description']['salesorder_id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Temperatures','action'=>'template/edittemplate',$description_list['Instrument']['id'].'$'.$description_list['Range']['id'].'$'.$description_list['Description']['model_no'].'$'.$description_list['Brand']['id'].'$'.$description_list['Description']['salesorder_id'].'$'.$description_list['Description']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                            <?php //echo $this->Html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Temperatures','action'=>'template/addtemplate',$description_list['Instrument']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                            <?php // pr($description_list);exit ?>
+                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('controller'=>'Temperatures','action'=>'template/addtemplate',$description_list['Instrument']['id'].'$'.$description_list['Range']['id'].'$'.$description_list['Description']['model_no'].'$'.$description_list['Brand']['id'].'$'.$description_list['Description']['salesorder_id'].'$'.$description_list['Description']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                             <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$description_list['Instrument']['id'].'$'.$description_list['Range']['id'].'$'.$description_list['Description']['model_no'].'$'.$description_list['Brand']['id'].'$'.$description_list['Description']['salesorder_id'].'$'.$description_list['Description']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                         
                         </div>
@@ -39,6 +41,12 @@
         </table>
     </div>
 </div>
+
+<?php //echo $this->Form->create('Template', array('url' => array('controller' => 'Temperatures', 'action' => 'template/addtemplate' ),'class' => 'templateId'));
+      //echo $this->Form->input('id',array('class' => 'id'));
+      //echo $this->Form->end();
+?>      
+        
 
 <div class="block full">
     <div class="table-responsive">
