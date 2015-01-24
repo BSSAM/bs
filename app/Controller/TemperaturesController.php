@@ -1250,6 +1250,7 @@
         {
             
             $template_data = $this->Temptemplate->find('all',array('conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
+            //pr($template_data);exit;
             $this->set('template', $template_data);
             $this->render('template/index');
         }

@@ -277,18 +277,25 @@ class CertificatesController extends AppController
         $this->set('cert',$find_cert);
         //pr($find_cert['Tempcertificatedata']);exit;
         //pr($find_cert);exit;
-        
+         
         
         $get_cert_sales = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.certificate_no'=>$certificateno),'recursive'=>'2'));
+        //$get_cert_sales_data = $this->Tempcertificatedata->find('first',array('conditions'=>array('Tempcertificatedata.certificate_no'=>$certificateno),'recursive'=>'2'));
+        //$get_cert_sales['Tempcertificate']['template_id']
+        $this->set('get_cert_sales',$get_cert_sales);
+        $find_cert_main_data = $this->Description->find('first',array('conditions'=>array('Description.id'=>$get_cert_sales['Tempcertificate']['description_id']),'recursive'=>'2'));
+        $this->set('cert1_main_data',$find_cert_main_data);
+        //pr($find_cert_main_data);exit;
         $template_data = $this->Temptemplate->find('first',array('conditions'=>array('Temptemplate.id'=>$get_cert_sales['Tempcertificate']['template_id']),'recursive'=>'2'));
-        
+        $this->set('tempdata_all',$template_data['Temptemplatedata']);
+        //pr($template_data['Temptemplatedata']);exit;
 ////Continue from here
 
 
 
 //pr($template_data);exit;
         $get_cert_certno = $this->Tempcertificate->find('list',array('fields' => array('certificate_no','certificate_no')),array('recursive'=>'2'));
-        $this->set('get_cert_sales',$get_cert_sales);
+        
         $this->set('get_cert_certno',$get_cert_certno);
 
         
@@ -299,6 +306,12 @@ class CertificatesController extends AppController
 
             $channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
             $this->set('channel_data',$channel_data);
+            
+             $temp_temperature = $this->Tempambient->find('list',array('fields' => array('Tempambient.id','Tempambient.ambientname'),'conditions'=>array('Tempambient.is_deleted'=>0,'Tempambient.status'=>1,'Tempambient.default'=>1)),array('order'=>'Tempambient.id Desc','recursive'=>'2'));
+            $this->set('temp_temperature',$temp_temperature);
+            
+             $rel_humidity = $this->Temprelativehumidity->find('list',array('fields' => array('Temprelativehumidity.id','Temprelativehumidity.relativehumidity'),'conditions'=>array('Temprelativehumidity.is_deleted'=>0,'Temprelativehumidity.status'=>1)),array('order'=>'Temprelativehumidity.id Desc','recursive'=>'2'));
+            $this->set('rel_humidity',$rel_humidity);
 
             $tempform_data = $this->Tempformdata->find('first');
             $this->set('formdata',$tempform_data);

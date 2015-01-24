@@ -1,5 +1,32 @@
 <!--<div class="col-sm-3 col-lg-12 subcontract_linear certificate_table certificate_tab"> -->
   <!-- table1-->
+  <?php //pr($tempdata_all); 
+//  foreach($tempdata_all as $template_one)
+//  {
+//      $n = 1;
+//      $n_val = $template_one;
+ 
+  //pr($n_val);
+  ?>
+  <script>
+      
+            
+    $(document).ready(function(e) {
+       // for (i = 1; i <= 2; ++i)
+         //   {
+                alert('hg');
+//                    $('.m'+i+'_'+m).prop("disabled", true);
+//                    $('.m'+i+'_'+m).css("background-color", "#ccc");
+//                    $('.b'+i+'_'+m).prop("disabled", true);
+//                    $('.b'+i+'_'+m).css("background-color", "#ccc");
+//                    $('.a'+i+'_'+m).prop("disabled", true);
+//                    $('.a'+i+'_'+m).css("background-color", "#ccc");
+                
+      //      }
+    });
+      </script>
+      
+     <?php //} ?> 
  <div class="panel panel-default">
                                     
 <div class="panel-body panel-body-nopadding">
@@ -1479,39 +1506,37 @@
     <div class="col-md-2"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>$get_cert_sales['Tempcertificate']['certificate_no'])); ?> </div>
     <label for="val_duedate" class="col-md-2 control-label">Manufacturer </label>
     <div class="col-md-2">
-      <?php
+      <?php 
                 echo $this->Form->input('manufacturer', array('id' => 'val_manufacturer', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true, 'value'=>'LINE SEIKI'));
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true, 'value'=>$cert1_main_data['Brand']['brandname']));
             ?>
     </div>
     <label for="val_attn" class="col-md-2 control-label">Date Calibrated</label>
-    <div class="col-md-2"> <?php echo $this->Form->input('date_calibrated', array('id' => 'val_date_calibrated', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>'12-jul-2013'));?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('date_calibrated', array('id' => 'val_date_calibrated', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>$cert1_main_data['Salesorder']['in_date']));?> </div>
   </div>
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">SalesOrderID</label>
-    <div class="col-md-2"> <?php echo $this->Form->input('salesorderid', array('id' => 'val_salesorderid','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'BSO-13-000990')); ?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('salesorderid', array('id' => 'val_salesorderid','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>$cert1_main_data['Description']['salesorder_id'])); ?> </div>
     <label for="val_duedate" class="col-md-2 control-label">Model No </label>
-    <div class="col-md-2"> <?php echo $this->Form->input('modelno ', array('id' => 'val_modelno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'TS 0004-13')); ?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('modelno ', array('id' => 'val_modelno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>$cert1_main_data['Description']['model_no'])); ?> </div>
     <label for="val_attn" class="col-md-2 control-label">Due Date</label>
-    <div class="col-md-2"> <?php echo $this->Form->input('due_date', array('id' => 'val_due_date', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>'12-jul-2013'));?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('due_date', array('id' => 'val_due_date', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>$cert1_main_data['Salesorder']['due_date']));?> </div>
   </div>
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">Customer</label>
     <div class="col-md-2">
       <?php
                 echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
-             'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true,'value'=>'31 Jurong Port Road
-#1m1-17m/18m Jurong Logistic Hub
-Singapore 619115'));
+             'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true,'value'=>$cert1_main_data['Salesorder']['customername']));
             ?>
     </div>
-    <label for="val_duedate" class="col-md-2 control-label">Model No </label>
-    <div class="col-md-2"> <?php echo $this->Form->input('modelno', array('id' => 'val_modelno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'TC-950')); ?> </div>
+    <label for="val_duedate" class="col-md-2 control-label">Serial No </label>
+    <div class="col-md-2"> <?php echo $this->Form->input('serialno', array('id' => 'val_serialno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'TC-950')); ?> </div>
     <label for="val_attn" class="col-md-2 control-label">Range</label>
     <div class="col-md-2">
       <?php
                 echo $this->Form->input('range', array('id' => 'val_range', 'class' => 'form-control',
-            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true, 'value'=>'(_)/-'));
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true, 'value'=>$cert1_main_data['Range']['range_name']));
             ?>
     </div>
   </div>
@@ -1520,13 +1545,13 @@ Singapore 619115'));
     <div class="col-md-2">
       <?php
                 echo $this->Form->input('instrument', array('id' => 'val_instrument', 'class' => 'form-control',
-             'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true,'value'=>'THERMOMETER C/W PROBE'));
+             'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true,'value'=>$cert1_main_data['Instrument']['name']));
             ?>
     </div>
     <label for="val_duedate" class="col-md-2 control-label">Temperature </label>
-    <div class="col-md-2"> <?php echo $this->Form->input('temperature', array('id' => 'val_temperature', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Temperature --')); ?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('temperature', array('id' => 'val_temperature', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => $temp_temperature)); ?> </div>
     <label for="val_attn" class="col-md-2 control-label">Humidity</label>
-    <div class="col-md-2"> <?php echo $this->Form->input('humidity', array('id' => 'val_humidity', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Humidity --')); ?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('humidity', array('id' => 'val_humidity', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => $rel_humidity)); ?> </div>
   </div>
   <div class="col-lg-12">
     <h4 class="sub-header"><small>The unit under test have been calibrated as per TECHNICAL PROCEDURE,</small></h4>
@@ -1562,7 +1587,7 @@ Singapore 619115'));
         <div class="col-md-6">
           <?php
                 echo $this->Form->input('instrument_description', array('id' => 'val_instrument_description', 'class' => 'form-control',
-             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>''));
+             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>$cert1_main_data['Instrument']['description']));
             ?>
         </div>
       </div>
@@ -1573,7 +1598,7 @@ Singapore 619115'));
   <div class="col-md-12">
    
       <label for="val_duedate" class="col-md-6 control-label">Calibration Type</label>
-      <div class="col-md-6"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'Non-Singlas')); ?> </div>
+      <div class="col-md-6"> <?php echo $this->Form->input('calibrationtype', array('id' => 'val_calibrationtype','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'Non-Singlas')); ?> </div>
       </div>
       <div class="col-md-12">
         <label for="val_duedate" class="col-md-6 control-label">Calibrated Status</label>
@@ -1619,7 +1644,7 @@ Singapore 619115'));
 <div class="c_form1 c_form2">
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">Certificateno</label>
-    <div class="col-md-10"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'TS 0004-13')); ?> </div>
+    <div class="col-md-10"> <?php echo $this->Form->input('certificateno', array('id' => 'val_certificateno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>$get_cert_sales['Tempcertificate']['certificate_no'])); ?> </div>
   </div>
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">METHOD OF CALIBRATION</label>
