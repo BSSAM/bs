@@ -331,12 +331,12 @@
                                         <tbody class="subcontract_instrument_info">
                                           <tr>
                                             
-                                            <td><input type="checkbox" /></td>
+                                            <td><input type="checkbox" name="total[is_analog]"/></td>
                                             <td>If Analog(Default:Digital)</td>
                                           </tr>
                                           <tr>
                                             
-                                              <td><input type="checkbox" class="after_adjustment" /></td>
+                                              <td><input type="checkbox" class="after_adjustment" name="total[is_afteradjust]"/></td>
                                             <td>If After Adjustment</td>
                                           </tr>
                                         </tbody>

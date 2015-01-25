@@ -129,20 +129,20 @@
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
             <?php 
-                if(isset($tempdata[0])) 
-                { 
-                    echo "ads";
-                    $selected = isset($tempdata[0]['temp_uncertainty_id']) ? explode(',',$tempdata[0]['temp_uncertainty_id']) : array();
-                    $sel = in_array($tempdata[0]['temp_uncertainty_id'], $selected) ? 'checked' : '';
-                } 
-                else 
-                { 
+//                if(isset($tempdata[0])) 
+//                { 
+//                    //echo "ads";
+//                    $selected = isset($tempdata[0]['temp_uncertainty_id']) ? explode(',',$tempdata[0]['temp_uncertainty_id']) : array();
+//                    $sel = in_array($tempdata[0]['temp_uncertainty_id'], $selected) ? 'checked' : '';
+//                } 
+//                else 
+//                { 
                     $selected = isset($cert['Tempcertificatedata']['uncertainty1_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty1_val']) : array();
                     $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
-                }
+                //}
             ?>
             
-            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty1_val][]" class="uncertainty1_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty1_val]" class="uncertainty1_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
@@ -1784,7 +1784,34 @@
           <th class="text-center">IsAfterAd</th>
         </tr>
       </thead>
-      <tbody class="subcontract_instrument_info">
+      <tbody class="calcul1_instrument_info">
+          <tr class="text-center">
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          </tr>
       </tbody>
     </table>
   </div>
@@ -1832,8 +1859,45 @@
           <th class="text-center">uother13</th>
         </tr>
       </thead>
-      <tbody class="subcontract_instrument_info">
-        
+      <tbody class="calcul2_instrument_info">
+          <tr class="text-center">
+          <td class="text-center">Tag no</td>
+          <td class="text-center">Name</td>
+          <td class="text-center">TempInstrumentDataID</td>
+          <td class="text-center">SNo</td>
+          <td class="text-center">Range</td>
+          <td class="text-center">uref1</td>
+          <td class="text-center">uref2</td>
+          <td class="text-center">uref3</td>
+          <td class="text-center">uacc1</td>
+          <td class="text-center">uacc2</td>
+          <td class="text-center">uacc3</td>
+          <td class="text-center">urefdivisor</td>
+          <td class="text-center">uresdivisoranalog</td>
+          <td class="text-center">uresdivisordigital</td>
+          <td class="text-center">urepdivisor</td>
+          <td class="text-center">divisor</td>
+          <td class="text-center">uicestability</td>
+          <td class="text-center">ustability</td>
+          <td class="text-center">uuniformity</td>
+          <td class="text-center">udrift</td>
+          <td class="text-center">uimm</td>
+          <td class="text-center">uheateffect</td>
+          <td class="text-center">ugravity</td>
+          <td class="text-center">uother1</td>
+          <td class="text-center">uother2</td>
+          <td class="text-center">uother3</td>
+          <td class="text-center">uother4</td>
+          <td class="text-center">uother5</td>
+          <td class="text-center">uother6</td>
+          <td class="text-center">uother7</td>
+          <td class="text-center">uother8</td>
+          <td class="text-center">uother9</td>
+          <td class="text-center">uother10</td>
+          <td class="text-center">uother11</td>
+          <td class="text-center">uother12</td>
+          <td class="text-center">uother13</td>
+          </tr>
       </tbody>
     </table>
   </div>
@@ -1851,6 +1915,12 @@
       </thead>
       <tbody class="subcontract_instrument_info">
         <tr class="text-center">
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+        </tr>
+<!--        <tr class="text-center">
           <td class="text-center">0.038845849199110064</td>
           <td class="text-center">101</td>
           <td class="text-center">2</td>
@@ -1861,13 +1931,7 @@
           <td class="text-center">101</td>
           <td class="text-center">2</td>
           <td class="text-center">0.07769169839822013</td>
-        </tr>
-        <tr class="text-center">
-          <td class="text-center">0.038845849199110064</td>
-          <td class="text-center">101</td>
-          <td class="text-center">2</td>
-          <td class="text-center">0.07769169839822013</td>
-        </tr>
+        </tr>-->
       </tbody>
     </table>
   </div>

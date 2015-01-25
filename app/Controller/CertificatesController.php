@@ -29,27 +29,123 @@ class CertificatesController extends AppController
             //pr($find_cert);exit;
             if($find_cert)
             {
-                if(isset($this->request->data['step1']['uncertainty1_val'])){
-                $uncertainty1_val1 = $this->request->data['step1']['uncertainty1_val'];
-                $uncertainty1_val = implode(',',$uncertainty1_val1);
-                $this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty1_val;
+//                if(isset($this->request->data['step1']['uncertainty1_val'])){
+//                $uncertainty1_val1 = $this->request->data['step1']['uncertainty1_val'];
+//                
+//                $uncertainty1_val = implode(',',$uncertainty1_val1);
+//                //pr($uncertainty1_val);exit;
+//                
+//                }
+                //$this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty1_val;
+                
+                if(isset($this->request->data['step1']['no_runs']))
+                {
+                    // Twin FOR
+                    for($j=1;$j<=10;$j++)
+                    {
+                        $summed_val_m = 0;
+                        for($i=1;$i<=10;$i++)
+                        {
+                            if(isset($this->request->data['step1']['m'.$j.'_'.$i.'']))
+                            {
+                                $summed_val_m = $summed_val_m + $this->request->data['step1']['m'.$j.'_'.$i.''];
+                            }
+
+                        }
+                        $this->request->data['step1']['m'.$j.'_11'] = $mean_m = $summed_val_m/$this->request->data['step1']['no_runs'];
+                        
+                        $summed_val_b = 0;
+                        for($i=1;$i<=10;$i++)
+                        {
+                            if(isset($this->request->data['step1']['b'.$j.'_'.$i.'']))
+                            {
+                                $summed_val_b = $summed_val_b + $this->request->data['step1']['b'.$j.'_'.$i.''];
+                            }
+
+                        }
+                        $this->request->data['step1']['b'.$j.'_11'] = $mean_b = $summed_val_b/$this->request->data['step1']['no_runs']; 
+                        
+                        if(isset($this->request->data['total']['is_afteradjust']))
+                        {
+                        
+                            $summed_val_a = 0;
+                            for($i=1;$i<=10;$i++)
+                            {
+                                if(isset($this->request->data['step1']['a'.$j.'_'.$i.'']))
+                                {
+                                    $summed_val_a = $summed_val_a + $this->request->data['step1']['a'.$j.'_'.$i.''];
+                                }
+
+                            }
+                            $this->request->data['step1']['a'.$j.'_11'] = $mean_a = $summed_val_a/$this->request->data['step1']['no_runs']; 
+                        
+                        }
+                    }
                 }
+                
                 $this->request->data['Tempcertificatedata'] = $this->request->data['step1'];
                 $this->request->data['Tempcertificatedata']['certificate_no'] = $certificateno;
                 $this->request->data['Tempcertificatedata']['temp_readingtype_id'] = $readingtype_id;
                 $this->request->data['Tempcertificatedata']['temp_channel_id'] = $channel_id;
                 //$this->request->data['Tempcertificatedata']['temp1'] = $temp1;
+                //pr($this->request->data);exit;
                 
                 $this->request->data['Tempcertificatedata']['id']= $find_cert['Tempcertificatedata']['id'];
                 $this->Tempcertificatedata->save($this->request->data['Tempcertificatedata']);
             }
             else
             {
-                if(isset($this->request->data['step1']['uncertainty1_val'])){
-                $uncertainty1_val1 = $this->request->data['step1']['uncertainty1_val'];
-                $uncertainty1_val = implode(',',$uncertainty1_val1);
-                $this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty1_val;
+//                if(isset($this->request->data['step1']['uncertainty1_val'])){
+//                $uncertainty1_val1 = $this->request->data['step1']['uncertainty1_val'];
+//                $uncertainty1_val = implode(',',$uncertainty1_val1);
+//                $this->request->data['Tempcertificatedata']['uncertainty1_val'] = $uncertainty1_val;
+//                }
+                $this->request->data['Tempcertificatedata']['uncertainty1_val'] = 1;//$uncertainty1_val;
+                if(isset($this->request->data['step1']['no_runs']))
+                {
+                    // Twin FOR
+                    for($j=1;$j<=10;$j++)
+                    {
+                        $summed_val_m = 0;
+                        for($i=1;$i<=10;$i++)
+                        {
+                            if(isset($this->request->data['step1']['m'.$j.'_'.$i.'']))
+                            {
+                                $summed_val_m = $summed_val_m + $this->request->data['step1']['m'.$j.'_'.$i.''];
+                            }
+
+                        }
+                        $this->request->data['step1']['m'.$j.'_11'] = $mean_m = $summed_val_m/$this->request->data['step1']['no_runs'];
+                        
+                        $summed_val_b = 0;
+                        for($i=1;$i<=10;$i++)
+                        {
+                            if(isset($this->request->data['step1']['b'.$j.'_'.$i.'']))
+                            {
+                                $summed_val_b = $summed_val_b + $this->request->data['step1']['b'.$j.'_'.$i.''];
+                            }
+
+                        }
+                        $this->request->data['step1']['b'.$j.'_11'] = $mean_b = $summed_val_b/$this->request->data['step1']['no_runs']; 
+                        
+                        if(isset($this->request->data['total']['is_afteradjust']))
+                        {
+                        
+                            $summed_val_a = 0;
+                            for($i=1;$i<=10;$i++)
+                            {
+                                if(isset($this->request->data['step1']['a'.$j.'_'.$i.'']))
+                                {
+                                    $summed_val_a = $summed_val_a + $this->request->data['step1']['a'.$j.'_'.$i.''];
+                                }
+
+                            }
+                            $this->request->data['step1']['a'.$j.'_11'] = $mean_a = $summed_val_a/$this->request->data['step1']['no_runs']; 
+                        
+                        }
+                    }
                 }
+                
                 $this->request->data['Tempcertificatedata'] = $this->request->data['step1'];
                 $this->request->data['Tempcertificatedata']['certificate_no'] = $certificateno;
                 $this->request->data['Tempcertificatedata']['temp_readingtype_id'] = $readingtype_id;
