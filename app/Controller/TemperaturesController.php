@@ -75,12 +75,12 @@
             $uncertainty_data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=> $id)));
             $this->set('trigger','');
             $this->set('temp_ins_id',$id);
-            $this->request->data['Tempuncertainty']['totalname'] = $this->request->data['Uncertainty']['instrumentname'].'-'.$this->request->data['Uncertainty']['tagno'];
+            $this->request->data['Tempuncertainty']['totalname'] = $uncertainty_data['Tempuncertainty']['instrumentname'].'-'.$uncertainty_data['Tempuncertainty']['tagno'];
             if($this->request->is(array('post','put')))
             {
              // pr($this->request->data); exit;
                 $this->Tempuncertainty->id   =  $id; 
-                if($this->Tempuncertainty->save($this->request->data['Uncertainty']))
+                if($this->Tempuncertainty->save($this->request->data['Tempuncertainty']))
                 {
                     $this->Session->setFlash(__('Uncertainty is Updated Successfully'));
                 }
@@ -1593,9 +1593,9 @@
             $instrument_details =  $this->request->data['instrument_details'];
             $spli = explode('$',$instrument_details);
             $ins_id = $spli[0];
-            $range_id = $spli[1];
+            $range_id = $spli[3];
             $model_no = $spli[2];
-            $brand_id = $spli[3];
+            $brand_id = $spli[1];
             $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$ins_id,'Description.sales_range'=>$range_id,'Description.model_no'=>$model_no,'Description.brand_id'=>$brand_id)));
             //pr($data);exit;
            echo json_encode($data);
@@ -1637,7 +1637,7 @@
             }
         }
 		
-		public function deletetemplate($id = null)
+	public function deletetemplate($id = null)
         {
 			$this->autoRender = false;
 			//pr($id); exit;
@@ -1647,6 +1647,23 @@
                 $this->Session->setFlash(__('The Template has been deleted',h($id)));
                 return  $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
             }
+        }
+        
+        public function deleteuncertain($id = null)
+        {
+            $this->autoRender = false;
+            //$this->Tempuncertaintydata->delete($id);
+            $this->Tempuncertaintydata->deleteAll(array('Tempuncertaintydata.id' => $id));
+            
+			//pr($id); exit;
+//            if()
+//            {
+//                
+//                $this->Session->setFlash(__('The Uncertainty Data has been deleted',h($id)));
+//                //return $id;
+//                //return  $this->redirect(array('controller'=>'Temperatures/uncertainty','action'=>'index'));
+//            }
+            
         }
             
             

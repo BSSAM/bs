@@ -2,24 +2,21 @@
     var path_url='<?PHP echo Router::url('/',true); ?>';
     $(document).ready(function(e) {
         
-//            var certificateno = $('#certificateno').val();
-//            var readingtype = $('#readingtype_id').val();
-//            var channel = $('#channel_id').val();
-//            //alert(certificateno);
-//            //alert(readingtype);
-//           //alert(channel);
-//            $.ajax({
-//                type: 'POST',
-//                data:"certificateno="+certificateno+"&readingtype="+readingtype+"&channel="+channel,
-//                url: path_url+'/Certificates/calculation_form/',
-//                beforeSend: ni_start(),  
-//                success:function(data){
-//                    
-//                    $('.certificate_tab').html(data);
-//                    $('.no_of_runs').trigger('change');
-//                },
-//                complete: ni_end(),
-//            });
+        $('.get_approval').click(function(){
+            var id = $(this).attr('id');
+            
+            $.ajax({
+                type: 'POST',
+                data:"id="+id,
+                url: path_url+'/Certificates/dummy_sup_approval/',
+                beforeSend: ni_start(),  
+                success:function(){
+                   alert('The Certificate Moved for Supervisor Approval');
+                   location.href = path_url+'/Certificates/temperature';
+                },
+                complete: ni_end(),
+            });
+        });
             
         $('#channel_submit').click(function(e) {
             var certificateno = $('#certificateno').val();
@@ -37,7 +34,7 @@
                 },
                 complete: ni_end(),
             });
-           
+         return false;
         });
 
         
@@ -219,9 +216,8 @@
                 }
             }
         });
-        
         $('.certificatedataFormSubmit').click(function(e) {
-
+        
             $('.ajaxform').submit(); 
 			   
         });
@@ -233,6 +229,21 @@
             complete: ni_end(),
             success : function(recievedData)
             {
+//                var certificateno = $('#certificateno').val();
+//                var readingtype = $('#readingtype_id').val();
+//                var channel = $('#channel_id').val();
+//                $.ajax({
+//                    type: 'POST',
+//                    data:"certificateno="+certificateno+"&readingtype="+readingtype+"&channel="+channel,             
+//                    url: path_url+'/Certificates/calculation_form/',
+//                    beforeSend: ni_start(),  
+//                    success:function(data){
+//
+//                        $('.certificate_tab').html(data);
+//                        $('.no_of_runs').trigger('change');
+//                    },
+//                    complete: ni_end(),
+//                });
                 alert('Updated');
                 //$('.template_data_table').html(recievedData);
                 //return false;
@@ -262,6 +273,10 @@
                                     <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-10">
                                             <a class="btn btn-sm btn-primary certificatedataFormSubmit"><i class="fa fa-angle-right"> </i> Add</a>
+                                            <?php if($get_cert_main['Description']['engineer']!=1) {?>
+                                            &nbsp;&nbsp;
+                                            <a class="btn btn-sm btn-primary get_approval" id="<?php echo $get_cert_sales['Tempcertificate']['certificate_no']; ?>"><i class="fa fa-angle-right"> </i> Get Approval</a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                      <div class="pos_relative certificate_top_search">
@@ -331,12 +346,12 @@
                                         <tbody class="subcontract_instrument_info">
                                           <tr>
                                             
-                                            <td><input type="checkbox" name="total[is_analog]"/></td>
+                                            <td><input type="checkbox" class="analog" name="step1[is_analog]"/></td>
                                             <td>If Analog(Default:Digital)</td>
                                           </tr>
                                           <tr>
                                             
-                                              <td><input type="checkbox" class="after_adjustment" name="total[is_afteradjust]"/></td>
+                                              <td><input type="checkbox" class="after_adjustment" name="step1[is_afteradjust]"/></td>
                                             <td>If After Adjustment</td>
                                           </tr>
                                         </tbody>

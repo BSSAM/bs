@@ -33,7 +33,7 @@ class TempHelper extends AppHelper
 {
     public $uses    =   array('Salesorder','Description','Quotation','Temptemplate','Temptemplatedata','Tempinstrument','Tempambient'
 							 ,'Tempother','Temprange','Temprelativehumidity','Tempreadingtype','Tempchannel','Tempinstrumentvalid','Tempunit','Tempunitconvert',
-							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','Customer');
+							    'Tempformdata','Tempuncertainty','Tempuncertaintydata','Customer','Instrument','Range','Brand');
     
     public function uncertainity_name($id = null)
     {
@@ -47,6 +47,7 @@ class TempHelper extends AppHelper
         APP::import('Model','Description');
         $this->Description   =   new Description();
         $data = $this->Description->find('first',array('conditions'=>array('Description.instrument_id'=>$id)));
+        //pr($data);
         return $data['Instrument']['name'];
     }
     public function get_range_name($id = null)

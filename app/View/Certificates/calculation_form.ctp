@@ -20,8 +20,8 @@
                     
                     
   <div class="form-group c_top_search">
-    <label for="val_customername" class=" control-label">No.of Runs</label>
-   <?php  $numbers = array('1' => 1,'2' => 2,'3' => 3,'4' => 4,'5' => 5,'6' => 6,'7' => 7,'8' => 8,'9' => 9,'10' => 10,'11' => 11, '12' => 12); ?> 
+    <label for="val_no_runs" class=" control-label">No.of Runs</label>
+   <?php  $numbers = array('1' => 1,'2' => 2,'3' => 3,'4' => 4,'5' => 5,'6' => 6,'7' => 7,'8' => 8,'9' => 9,'10' => 10); ?> 
    <?php echo $this->Form->input('step1.no_runs', array('id' => 'val_no_runs', 'class' => 'form-control no_of_runs', 'label' => false, 'type' => 'select', 'empty' => 'Please select the Run','options' => $numbers,'value'=>$cert['Tempcertificatedata']['no_runs'])); ?>
   </div>
   <div class="pos_relative">
@@ -47,7 +47,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">1</td>
           <td class="text-center">Set Temperature </td>
-          <td class="text-center"><input type="text" name="step1[temp1]" class="temp1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp1]" class="temp1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['setpoint'];} ?>" <?php if(isset($tempdata[0])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--            <select name="unit1]" class="unit1">
@@ -64,13 +64,13 @@
           <?php  echo $this->Form->input('step1.unit1', array('id' => 'unit1', 'class' => 'unit1','label' => false,'type' => 'select', 'options'=>$unit_list,'value'=>$cert['Tempcertificatedata']['unit1'])); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res1]" class="res1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res1]" class="res1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['resolution'];} ?>"<?php if(isset($tempdata[0])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc1]" class="acc1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc1]" class="acc1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['accuracy'];} ?>"<?php if(isset($tempdata[0])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count1]" class="count1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count1]" class="count1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['count'];} ?>"<?php if(isset($tempdata[0])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert1']; ?>" name="step1[uncert1]" class="uncert1"></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert1']; ?>" name="step1[uncert1]" class="uncert1" readonly="readonly" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -126,23 +126,22 @@
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>-->
         
-        <?php foreach($uncertainty as $uncertainty_data){ ?>
+        <?php foreach($uncertainty as $k=>$uncertainty_data){ ?>
         <div class="c_refress_blog_input">
             <?php 
-//                if(isset($tempdata[0])) 
-//                { 
-//                    //echo "ads";
-//                    $selected = isset($tempdata[0]['temp_uncertainty_id']) ? explode(',',$tempdata[0]['temp_uncertainty_id']) : array();
-//                    $sel = in_array($tempdata[0]['temp_uncertainty_id'], $selected) ? 'checked' : '';
-//                } 
-//                else 
-//                { 
+                    if(isset($tempdata[0]))
+                    {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty1_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty1_val']) : explode(',',$tempdata[0]['temp_uncertainty_id']);
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                    }
+                    else
+                    {
                     $selected = isset($cert['Tempcertificatedata']['uncertainty1_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty1_val']) : array();
                     $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
-                //}
+                    }
             ?>
             
-            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty1_val]" class="uncertainty1_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty1_val][<?php echo $k;?>]" class="uncertainty1_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
         </div>
           <?php } ?>
@@ -156,7 +155,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">2</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp2]" class="temp2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp2]" class="temp2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['setpoint'];} ?>"<?php if(isset($tempdata[1])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--            <select name="unit2" class="unit2">
@@ -172,11 +171,11 @@
               <?php  echo $this->Form->input('step1.unit2', array('id' => 'unit2', 'class' => 'unit2','label' => false,'type' => 'select', 'options'=>$unit_list, 'value'=>$cert['Tempcertificatedata']['unit2'])); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res2]" class="res2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res2]" class="res2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['resolution'];} ?>"<?php if(isset($tempdata[1])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc2]" class="acc2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc2]" class="acc2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['accuracy'];} ?>"<?php if(isset($tempdata[1])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count2]" class="count2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count2]" class="count2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['count'];} ?>"<?php if(isset($tempdata[1])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Uncertainty </td>
           <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert2']; ?>" name="step1[uncert2]" class="uncert2" readonly="readonly"></td>
         </tr>
@@ -233,9 +232,35 @@
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
-        <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty2_val]" class="uncertainty2_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+<div class="c_refress_blog_input">
+<?php 
+//                if(isset($tempdata[0])) 
+//                { 
+//                    //echo "ads";
+//                    $selected = isset($tempdata[0]['temp_uncertainty_id']) ? explode(',',$tempdata[0]['temp_uncertainty_id']) : array();
+//                    $sel = in_array($tempdata[0]['temp_uncertainty_id'], $selected) ? 'checked' : '';
+//                } 
+//                else 
+//                { 
+                    //echo $tempdata[0]['temp_uncertainty_id'];
+                    if(isset($tempdata[1]))
+                    {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty2_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty2_val']) : explode(',',$tempdata[1]['temp_uncertainty_id']);
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                    }
+                    else
+                    {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty2_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty2_val']) : array();
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                    }
+                //}
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty2_val][]" class="uncertainty2_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
+<!--        <div class="c_refress_blog_input">
+          <input type="checkbox" id="<?php //echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty2_val]" class="uncertainty2_val" value="<?php //echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php //echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>-->
         </div>
           <?php } ?>
       </div>
@@ -248,7 +273,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">3</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp3]" class="temp3" value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp3]" class="temp3" value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['setpoint'];} ?>"<?php if(isset($tempdata[2])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit3]" class="unit3">
@@ -264,58 +289,58 @@
               <?php  echo $this->Form->input('step1.unit3', array('id' => 'unit3', 'class' => 'unit3','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res3]" class="res3"  value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res3]" class="res3"  value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['resolution'];} ?>"<?php if(isset($tempdata[2])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc3]" class="acc3"  value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc3]" class="acc3"  value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['accuracy'];} ?>"<?php if(isset($tempdata[2])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count3]" class="count3" value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count3]" class="count3" value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['count'];} ?>"<?php if(isset($tempdata[2])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert3]" class="uncert3"></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert3']; ?>" name="step1[uncert3]" class="uncert3" readonly="readonly"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_1]" class="m3_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_2]" class="m3_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_3]" class="m3_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_4]" class="m3_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_5]" class="m3_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_6]" class="m3_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_7]" class="m3_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_8]" class="m3_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_9]" class="m3_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_10]" class="m3_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_11]" class="m3_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m3_12]" class="m3_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_1']; ?>" name="step1[m3_1]" class="m3_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_2']; ?>" name="step1[m3_2]" class="m3_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_3']; ?>" name="step1[m3_3]" class="m3_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_4']; ?>" name="step1[m3_4]" class="m3_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_5']; ?>" name="step1[m3_5]" class="m3_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_6']; ?>" name="step1[m3_6]" class="m3_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_7']; ?>" name="step1[m3_7]" class="m3_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_8']; ?>" name="step1[m3_8]" class="m3_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_9']; ?>" name="step1[m3_9]" class="m3_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_10']; ?>" name="step1[m3_10]" class="m3_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_11']; ?>" name="step1[m3_11]" class="m3_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m3_12']; ?>" name="step1[m3_12]" class="m3_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_1]" class="b3_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_2]" class="b3_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_3]" class="b3_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_4]" class="b3_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_5]" class="b3_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_6]" class="b3_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_7]" class="b3_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_8]" class="b3_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_9]" class="b3_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_10]" class="b3_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_11]" class="b3_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b3_12]" class="b3_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_1']; ?>" name="step1[b3_1]" class="b3_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_2']; ?>" name="step1[b3_2]" class="b3_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_3']; ?>" name="step1[b3_3]" class="b3_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_4']; ?>" name="step1[b3_4]" class="b3_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_5']; ?>" name="step1[b3_5]" class="b3_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_6']; ?>" name="step1[b3_6]" class="b3_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_7']; ?>" name="step1[b3_7]" class="b3_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_8']; ?>" name="step1[b3_8]" class="b3_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_9']; ?>" name="step1[b3_9]" class="b3_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_10']; ?>" name="step1[b3_10]" class="b3_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_11']; ?>" name="step1[b3_11]" class="b3_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b3_12']; ?>" name="step1[b3_12]" class="b3_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_1]" class="a3_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_2]" class="a3_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_3]" class="a3_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_4]" class="a3_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_5]" class="a3_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_6]" class="a3_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_7]" class="a3_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_8]" class="a3_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_9]" class="a3_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_10]" class="a3_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_11]" class="a3_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a3_12]" class="a3_12" ></td
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_1']; ?>" name="step1[a3_1]" class="a3_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_2']; ?>" name="step1[a3_2]" class="a3_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_3']; ?>" name="step1[a3_3]" class="a3_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_4']; ?>" name="step1[a3_4]" class="a3_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_5']; ?>" name="step1[a3_5]" class="a3_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_6']; ?>" name="step1[a3_6]" class="a3_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_7']; ?>" name="step1[a3_7]" class="a3_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_8']; ?>" name="step1[a3_8]" class="a3_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_9']; ?>" name="step1[a3_9]" class="a3_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_10']; ?>" name="step1[a3_10]" class="a3_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_11']; ?>" name="step1[a3_11]" class="a3_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a3_12']; ?>" name="step1[a3_12]" class="a3_12" ></td
         </tr>
       </tbody>
     </table>
@@ -326,8 +351,24 @@
         </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty3_val]" class="uncertainty3_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+            <?php
+                    if(isset($tempdata[2]))
+                    {
+                        $selected = isset($cert['Tempcertificatedata']['uncertainty3_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty3_val']) : explode(',',$tempdata[2]['temp_uncertainty_id']);
+                        $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                    }
+                    else
+                    {
+                        $selected = isset($cert['Tempcertificatedata']['uncertainty3_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty3_val']) : array();
+                        $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                    }
+                //}
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty3_val][]" class="uncertainty3_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
+<!--          <input type="checkbox" id="<?php //echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty3_val]" class="uncertainty3_val" value="<?php //echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php //echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>-->
         </div>
           <?php } ?>
       </div>
@@ -341,7 +382,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">4</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp4]" class="temp4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp4]" class="temp4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['setpoint'];} ?>"<?php if(isset($tempdata[3])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit4]" class="unit4">
@@ -357,58 +398,58 @@
               <?php  echo $this->Form->input('step1.unit4', array('id' => 'unit4', 'class' => 'unit4','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res4]" class="res4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res4]" class="res4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['resolution'];} ?>"<?php if(isset($tempdata[3])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc4]" class="acc4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc4]" class="acc4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['accuracy'];} ?>"<?php if(isset($tempdata[3])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count4]" class="count4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count4]" class="count4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['count'];} ?>"<?php if(isset($tempdata[3])){ ?> disabled<?php } ?>></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert4]" class="uncert4"></td>
+          <td class="text-center"><input type="text" name="step1[uncert4]" value="<?php echo $cert['Tempcertificatedata']['uncert4']; ?>" class="uncert4" readonly="readonly"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_1]" class="m4_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_2]" class="m4_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_3]" class="m4_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_4]" class="m4_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_5]" class="m4_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_6]" class="m4_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_7]" class="m4_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_8]" class="m4_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_9]" class="m4_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_10]" class="m4_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_11]" class="m4_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m4_12]" class="m4_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_1']; ?>" name="step1[m4_1]" class="m4_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_2']; ?>" name="step1[m4_2]" class="m4_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_3']; ?>" name="step1[m4_3]" class="m4_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_4']; ?>" name="step1[m4_4]" class="m4_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_5']; ?>" name="step1[m4_5]" class="m4_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_6']; ?>" name="step1[m4_6]" class="m4_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_7']; ?>" name="step1[m4_7]" class="m4_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_8']; ?>" name="step1[m4_8]" class="m4_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_9']; ?>" name="step1[m4_9]" class="m4_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_10']; ?>" name="step1[m4_10]" class="m4_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_11']; ?>" name="step1[m4_11]" class="m4_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m4_12']; ?>" name="step1[m4_12]" class="m4_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-         <td class="text-center"><input type="text" value="0" name="step1[b4_1]" class="b4_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_2]" class="b4_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_3]" class="b4_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_4]" class="b4_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_5]" class="b4_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_6]" class="b4_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_7]" class="b4_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_8]" class="b4_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_9]" class="b4_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_10]" class="b4_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_11]" class="b4_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b4_12]" class="b4_12" ></t
+         <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_1']; ?>" name="step1[b4_1]" class="b4_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_2']; ?>" name="step1[b4_2]" class="b4_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_3']; ?>" name="step1[b4_3]" class="b4_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_4']; ?>" name="step1[b4_4]" class="b4_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_5']; ?>" name="step1[b4_5]" class="b4_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_6']; ?>" name="step1[b4_6]" class="b4_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_7']; ?>" name="step1[b4_7]" class="b4_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_8']; ?>" name="step1[b4_8]" class="b4_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_9']; ?>" name="step1[b4_9]" class="b4_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_10']; ?>" name="step1[b4_10]" class="b4_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_11']; ?>" name="step1[b4_11]" class="b4_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b4_12']; ?>" name="step1[b4_12]" class="b4_12" ></t
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_1]" class="a4_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_2]" class="a4_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_3]" class="a4_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_4]" class="a4_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_5]" class="a4_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_6]" class="a4_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_7]" class="a4_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_8]" class="a4_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_9]" class="a4_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_10]" class="a4_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_11]" class="a4_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a4_12]" class="a4_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_1']; ?>" name="step1[a4_1]" class="a4_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_2']; ?>" name="step1[a4_2]" class="a4_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_3']; ?>" name="step1[a4_3]" class="a4_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_4']; ?>" name="step1[a4_4]" class="a4_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_5']; ?>" name="step1[a4_5]" class="a4_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_6']; ?>" name="step1[a4_6]" class="a4_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_7']; ?>" name="step1[a4_7]" class="a4_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_8']; ?>" name="step1[a4_8]" class="a4_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_9']; ?>" name="step1[a4_9]" class="a4_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_10']; ?>" name="step1[a4_10]" class="a4_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_11']; ?>" name="step1[a4_11]" class="a4_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a4_12']; ?>" name="step1[a4_12]" class="a4_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -417,12 +458,29 @@
 <!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>-->
-        <?php foreach($uncertainty as $uncertainty_data){ ?>
+    <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty4_val]" class="uncertainty4_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+            <?php
+                if(isset($tempdata[3]))
+                {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty4_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty4_val']) : explode(',',$tempdata[3]['temp_uncertainty_id']);
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                else
+                {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty4_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty4_val']) : array();
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                //}
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty4_val][]" class="uncertainty4_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
+<!--          <input type="checkbox" id="<?php //echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty3_val]" class="uncertainty3_val" value="<?php //echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php //echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>-->
         </div>
           <?php } ?>
+        
       </div>
     </div>
   </div>
@@ -450,58 +508,58 @@
               <?php  echo $this->Form->input('step1.unit5', array('id' => 'unit5', 'class' => 'unit5','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res5]" class="res5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res5]" class="res5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc5]" class="acc5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc5]" class="acc5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count5]" class="count5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count5]" class="count5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert5]" class="uncert5"></td>
+          <td class="text-center"><input type="text" name="step1[uncert5]" value="<?php echo $cert['Tempcertificatedata']['uncert5']; ?>" class="uncert5"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-         <td class="text-center"><input type="text" value="0" name="step1[m5_1]" class="m5_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_2]" class="m5_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_3]" class="m5_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_4]" class="m5_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_5]" class="m5_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_6]" class="m5_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_7]" class="m5_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_8]" class="m5_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_9]" class="m5_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_10]" class="m5_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_11]" class="m5_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m5_12]" class="m5_12" ></td>
+         <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_1']; ?>" name="step1[m5_1]" class="m5_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_2']; ?>" name="step1[m5_2]" class="m5_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_3']; ?>" name="step1[m5_3]" class="m5_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_4']; ?>" name="step1[m5_4]" class="m5_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_5']; ?>" name="step1[m5_5]" class="m5_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_6']; ?>" name="step1[m5_6]" class="m5_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_7']; ?>" name="step1[m5_7]" class="m5_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_8']; ?>" name="step1[m5_8]" class="m5_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_9']; ?>" name="step1[m5_9]" class="m5_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_10']; ?>" name="step1[m5_10]" class="m5_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_11']; ?>" name="step1[m5_11]" class="m5_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m5_12']; ?>" name="step1[m5_12]" class="m5_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_1]" class="b5_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_2]" class="b5_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_3]" class="b5_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_4]" class="b5_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_5]" class="b5_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_6]" class="b5_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_7]" class="b5_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_8]" class="b5_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_9]" class="b5_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_10]" class="b5_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_11]" class="b5_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b5_12]" class="b5_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_1']; ?>" name="step1[b5_1]" class="b5_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_2']; ?>" name="step1[b5_2]" class="b5_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_3']; ?>" name="step1[b5_3]" class="b5_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_4']; ?>" name="step1[b5_4]" class="b5_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_5']; ?>" name="step1[b5_5]" class="b5_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_6']; ?>" name="step1[b5_6]" class="b5_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_7']; ?>" name="step1[b5_7]" class="b5_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_8']; ?>" name="step1[b5_8]" class="b5_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_9']; ?>" name="step1[b5_9]" class="b5_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_10']; ?>" name="step1[b5_10]" class="b5_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_11']; ?>" name="step1[b5_11]" class="b5_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b5_12']; ?>" name="step1[b5_12]" class="b5_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_1]" class="a5_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_2]" class="a5_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_3]" class="a5_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_4]" class="a5_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_5]" class="a5_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_6]" class="a5_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_7]" class="a5_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_8]" class="a5_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_9]" class="a5_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_10]" class="a5_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_11]" class="a5_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a5_12]" class="a5_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_1']; ?>" name="step1[a5_1]" class="a5_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_2']; ?>" name="step1[a5_2]" class="a5_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_3']; ?>" name="step1[a5_3]" class="a5_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_4']; ?>" name="step1[a5_4]" class="a5_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_5']; ?>" name="step1[a5_5]" class="a5_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_6']; ?>" name="step1[a5_6]" class="a5_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_7']; ?>" name="step1[a5_7]" class="a5_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_8']; ?>" name="step1[a5_8]" class="a5_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_9']; ?>" name="step1[a5_9]" class="a5_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_10']; ?>" name="step1[a5_10]" class="a5_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_11']; ?>" name="step1[a5_11]" class="a5_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a5_12']; ?>" name="step1[a5_12]" class="a5_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -510,12 +568,30 @@
 <!--        <div class="c_ref_btn">
           <button class="btn btn-sm btn-success" type="reset"><i class="fa fa-repeat"></i>Refresh</button>
         </div>-->
-        <?php foreach($uncertainty as $uncertainty_data){ ?>
+<?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty5_val]" class="uncertainty5_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+            <?php
+             if(isset($tempdata[4]))
+                {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty5_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty5_val']) : explode(',',$tempdata[4]['temp_uncertainty_id']);
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                else
+                {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty5_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty5_val']) : array();
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                //}
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty5_val][]" class="uncertainty4_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
+<!--          <input type="checkbox" id="<?php //echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty3_val]" class="uncertainty3_val" value="<?php //echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <label><?php //echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>-->
         </div>
           <?php } ?>
+        
+        
       </div>
     </div>
   </div>
@@ -543,58 +619,58 @@
               <?php  echo $this->Form->input('step1.unit6', array('id' => 'unit6', 'class' => 'unit6','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res6]" class="res6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res6]" class="res6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc6]" class="acc6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc6]" class="acc6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count6]" class="count6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count6]" class="count6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert6]" class="uncert6"></td>
+          <td class="text-center"><input type="text" name="step1[uncert6]" value="<?php echo $cert['Tempcertificatedata']['uncert6']; ?>" class="uncert6"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_1]" class="m6_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_2]" class="m6_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_3]" class="m6_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_4]" class="m6_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_5]" class="m6_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_6]" class="m6_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_7]" class="m6_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_8]" class="m6_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_9]" class="m6_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_10]" class="m6_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_11]" class="m6_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_12]" class="m6_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_1']; ?>" name="step1[m6_1]" class="m6_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_2']; ?>" name="step1[m6_2]" class="m6_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_3']; ?>" name="step1[m6_3]" class="m6_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_4']; ?>" name="step1[m6_4]" class="m6_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_5']; ?>" name="step1[m6_5]" class="m6_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_6']; ?>" name="step1[m6_6]" class="m6_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_7']; ?>" name="step1[m6_7]" class="m6_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_8']; ?>" name="step1[m6_8]" class="m6_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_9']; ?>" name="step1[m6_9]" class="m6_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_10']; ?>" name="step1[m6_10]" class="m6_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_11']; ?>" name="step1[m6_11]" class="m6_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m6_12']; ?>" name="step1[m6_12]" class="m6_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-         <td class="text-center"><input type="text" value="0" name="step1[m6_1]" class="m6_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_2]" class="m6_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_3]" class="m6_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_4]" class="m6_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_5]" class="m6_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_6]" class="m6_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_7]" class="m6_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_8]" class="m6_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_9]" class="m6_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_10]" class="m6_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_11]" class="m6_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m6_12]" class="m6_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_1']; ?>" name="step1[b6_1]" class="b6_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_2']; ?>" name="step1[b6_2]" class="b6_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_3']; ?>" name="step1[b6_3]" class="b6_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_4']; ?>" name="step1[b6_4]" class="b6_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_5']; ?>" name="step1[b6_5]" class="b6_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_6']; ?>" name="step1[b6_6]" class="b6_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_7']; ?>" name="step1[b6_7]" class="b6_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_8']; ?>" name="step1[b6_8]" class="b6_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_9']; ?>" name="step1[b6_9]" class="b6_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_10']; ?>" name="step1[b6_10]" class="b6_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_11']; ?>" name="step1[b6_11]" class="b6_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b6_12']; ?>" name="step1[b6_12]" class="b6_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_1]" class="a6_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_2]" class="a6_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_3]" class="a6_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_4]" class="a6_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_5]" class="a6_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_6]" class="a6_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_7]" class="a6_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_8]" class="a6_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_9]" class="a6_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_10]" class="a6_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_11]" class="a6_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a6_12]" class="a6_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_1']; ?>" name="step1[a6_1]" class="a6_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_2']; ?>" name="step1[a6_2]" class="a6_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_3']; ?>" name="step1[a6_3]" class="a6_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_4']; ?>" name="step1[a6_4]" class="a6_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_5']; ?>" name="step1[a6_5]" class="a6_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_6']; ?>" name="step1[a6_6]" class="a6_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_7']; ?>" name="step1[a6_7]" class="a6_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_8']; ?>" name="step1[a6_8]" class="a6_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_9']; ?>" name="step1[a6_9]" class="a6_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_10']; ?>" name="step1[a6_10]" class="a6_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_11']; ?>" name="step1[a6_11]" class="a6_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a6_12']; ?>" name="step1[a6_12]" class="a6_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -605,8 +681,23 @@
         </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty6_val]" class="uncertainty6_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+             <?php
+             if(isset($tempdata[5]))
+                {
+                   $selected = isset($cert['Tempcertificatedata']['uncertainty6_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty6_val']) : explode(',',$tempdata[5]['temp_uncertainty_id']);
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                else
+                {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty6_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty6_val']) : array();
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                //}
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty6_val][]" class="uncertainty6_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
+          
         </div>
           <?php } ?>
       </div>
@@ -636,58 +727,58 @@
               <?php  echo $this->Form->input('step1.unit7', array('id' => 'unit7', 'class' => 'unit7','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res7]" class="res7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res7]" class="res7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc7]" class="acc7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc7]" class="acc7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count7]" class="count7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count7]" class="count7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert7]" class="uncert7"></td>
+          <td class="text-center"><input type="text" name="step1[uncert7]" class="uncert7" value="<?php echo $cert['Tempcertificatedata']['uncert7']; ?>"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_1]" class="m7_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_2]" class="m7_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_3]" class="m7_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_4]" class="m7_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_5]" class="m7_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_6]" class="m7_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_7]" class="m7_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_8]" class="m7_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_9]" class="m7_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_10]" class="m7_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_11]" class="m7_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m7_12]" class="m7_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_1']; ?>" name="step1[m7_1]" class="m7_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_2']; ?>" name="step1[m7_2]" class="m7_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_3']; ?>" name="step1[m7_3]" class="m7_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_4']; ?>" name="step1[m7_4]" class="m7_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_5']; ?>" name="step1[m7_5]" class="m7_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_6']; ?>" name="step1[m7_6]" class="m7_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_7']; ?>" name="step1[m7_7]" class="m7_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_8']; ?>" name="step1[m7_8]" class="m7_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_9']; ?>" name="step1[m7_9]" class="m7_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_10']; ?>" name="step1[m7_10]" class="m7_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_11']; ?>" name="step1[m7_11]" class="m7_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m7_12']; ?>" name="step1[m7_12]" class="m7_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_1]" class="b7_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_2]" class="b7_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_3]" class="b7_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_4]" class="b7_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_5]" class="b7_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_6]" class="b7_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_7]" class="b7_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_8]" class="b7_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_9]" class="b7_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_10]" class="b7_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_11]" class="b7_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b7_12]" class="b7_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_1']; ?>" name="step1[b7_1]" class="b7_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_2']; ?>" name="step1[b7_2]" class="b7_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_3']; ?>" name="step1[b7_3]" class="b7_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_4']; ?>" name="step1[b7_4]" class="b7_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_5']; ?>" name="step1[b7_5]" class="b7_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_6']; ?>" name="step1[b7_6]" class="b7_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_7']; ?>" name="step1[b7_7]" class="b7_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_8']; ?>" name="step1[b7_8]" class="b7_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_9']; ?>" name="step1[b7_9]" class="b7_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_10']; ?>" name="step1[b7_10]" class="b7_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_11']; ?>" name="step1[b7_11]" class="b7_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b7_12']; ?>" name="step1[b7_12]" class="b7_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-         <td class="text-center"><input type="text" value="0" name="step1[a7_1]" class="a7_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_2]" class="a7_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_3]" class="a7_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_4]" class="a7_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_5]" class="a7_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_6]" class="a7_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_7]" class="a7_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_8]" class="a7_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_9]" class="a7_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_10]" class="a7_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_11]" class="a7_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a7_12]" class="a7_12" ></td
+         <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_1']; ?>" name="step1[a7_1]" class="a7_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_2']; ?>" name="step1[a7_2]" class="a7_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_3']; ?>" name="step1[a7_3]" class="a7_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_4']; ?>" name="step1[a7_4]" class="a7_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_5']; ?>" name="step1[a7_5]" class="a7_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_6']; ?>" name="step1[a7_6]" class="a7_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_7']; ?>" name="step1[a7_7]" class="a7_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_8']; ?>" name="step1[a7_8]" class="a7_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_9']; ?>" name="step1[a7_9]" class="a7_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_10']; ?>" name="step1[a7_10]" class="a7_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_11']; ?>" name="step1[a7_11]" class="a7_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a7_12']; ?>" name="step1[a7_12]" class="a7_12" ></td
         </tr>
       </tbody>
     </table>
@@ -698,8 +789,24 @@
         </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty7_val]" class="uncertainty7_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+             <?php
+             if(isset($tempdata[6]))
+                {
+                   $selected = isset($cert['Tempcertificatedata']['uncertainty7_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty7_val']) : explode(',',$tempdata[6]['temp_uncertainty_id']);
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                else
+                {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty7_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty7_val']) : array();
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                //}
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty7_val][]" class="uncertainty7_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
+          
+         
         </div>
           <?php } ?>
       </div>
@@ -729,58 +836,58 @@
               <?php  echo $this->Form->input('step1.unit8', array('id' => 'unit8', 'class' => 'unit8','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res8]" class="res8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res8]" class="res8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc8]" class="acc8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc8]" class="acc8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count8]" class="count8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count8]" class="count8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert8]" class="uncert8"></td>
+          <td class="text-center"><input type="text" name="step1[uncert8]" class="uncert8" value="<?php echo $cert['Tempcertificatedata']['uncert8']; ?>"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_1]" class="m8_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_2]" class="m8_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_3]" class="m8_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_4]" class="m8_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_5]" class="m8_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_6]" class="m8_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_7]" class="m8_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_8]" class="m8_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_9]" class="m8_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_10]" class="m8_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_11]" class="m8_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m8_12]" class="m8_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_1']; ?>" name="step1[m8_1]" class="m8_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_2']; ?>" name="step1[m8_2]" class="m8_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_3']; ?>" name="step1[m8_3]" class="m8_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_4']; ?>" name="step1[m8_4]" class="m8_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_5']; ?>" name="step1[m8_5]" class="m8_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_6']; ?>" name="step1[m8_6]" class="m8_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_7']; ?>" name="step1[m8_7]" class="m8_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_8']; ?>" name="step1[m8_8]" class="m8_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_9']; ?>" name="step1[m8_9]" class="m8_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_10']; ?>" name="step1[m8_10]" class="m8_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_11']; ?>" name="step1[m8_11]" class="m8_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m8_12']; ?>" name="step1[m8_12]" class="m8_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_1]" class="b8_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_2]" class="b8_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_3]" class="b8_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_4]" class="b8_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_5]" class="b8_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_6]" class="b8_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_7]" class="b8_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_8]" class="b8_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_9]" class="b8_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_10]" class="b8_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_11]" class="b8_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b8_12]" class="b8_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_1']; ?>" name="step1[b8_1]" class="b8_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_2']; ?>" name="step1[b8_2]" class="b8_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_3']; ?>" name="step1[b8_3]" class="b8_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_4']; ?>" name="step1[b8_4]" class="b8_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_5']; ?>" name="step1[b8_5]" class="b8_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_6']; ?>" name="step1[b8_6]" class="b8_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_7']; ?>" name="step1[b8_7]" class="b8_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_8']; ?>" name="step1[b8_8]" class="b8_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_9']; ?>" name="step1[b8_9]" class="b8_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_10']; ?>" name="step1[b8_10]" class="b8_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_11']; ?>" name="step1[b8_11]" class="b8_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b8_12']; ?>" name="step1[b8_12]" class="b8_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_1]" class="a8_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_2]" class="a8_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_3]" class="a8_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_4]" class="a8_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_5]" class="a8_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_6]" class="a8_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_7]" class="a8_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_8]" class="a8_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_9]" class="a8_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_10]" class="a8_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_11]" class="a8_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a8_12]" class="a8_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_1']; ?>" name="step1[a8_1]" class="a8_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_2']; ?>" name="step1[a8_2]" class="a8_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_3']; ?>" name="step1[a8_3]" class="a8_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_4']; ?>" name="step1[a8_4]" class="a8_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_5']; ?>" name="step1[a8_5]" class="a8_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_6']; ?>" name="step1[a8_6]" class="a8_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_7']; ?>" name="step1[a8_7]" class="a8_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_8']; ?>" name="step1[a8_8]" class="a8_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_9']; ?>" name="step1[a8_9]" class="a8_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_10']; ?>" name="step1[a8_10]" class="a8_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_11']; ?>" name="step1[a8_11]" class="a8_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a8_12']; ?>" name="step1[a8_12]" class="a8_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -791,8 +898,23 @@
         </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty8_val]" class="uncertainty8_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+          <?php
+             if(isset($tempdata[7]))
+                {
+                   $selected = isset($cert['Tempcertificatedata']['uncertainty8_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty8_val']) : explode(',',$tempdata[7]['temp_uncertainty_id']);
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                else
+                {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty8_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty8_val']) : array();
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                //}
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty8_val][]" class="uncertainty8_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
+          
         </div>
           <?php } ?>
       </div>
@@ -822,58 +944,58 @@
               <?php  echo $this->Form->input('step1.unit9', array('id' => 'unit9', 'class' => 'unit9','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res9]" class="res9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res9]" class="res9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc9]" class="acc9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc9]" class="acc9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count9]" class="count9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count9]" class="count9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert9]" class="uncert9"></td>
+          <td class="text-center"><input type="text" name="step1[uncert9]" class="uncert9" value="<?php echo $cert['Tempcertificatedata']['uncert9']; ?>"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_1]" class="m9_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_2]" class="m9_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_3]" class="m9_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_4]" class="m9_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_5]" class="m9_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_6]" class="m9_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_7]" class="m9_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_8]" class="m9_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_9]" class="m9_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_10]" class="m9_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_11]" class="m9_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m9_12]" class="m9_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_1']; ?>" name="step1[m9_1]" class="m9_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_2']; ?>" name="step1[m9_2]" class="m9_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_3']; ?>" name="step1[m9_3]" class="m9_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_4']; ?>" name="step1[m9_4]" class="m9_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_5']; ?>" name="step1[m9_5]" class="m9_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_6']; ?>" name="step1[m9_6]" class="m9_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_7']; ?>" name="step1[m9_7]" class="m9_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_8']; ?>" name="step1[m9_8]" class="m9_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_9']; ?>" name="step1[m9_9]" class="m9_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_10']; ?>" name="step1[m9_10]" class="m9_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_11']; ?>" name="step1[m9_11]" class="m9_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m9_12']; ?>" name="step1[m9_12]" class="m9_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_1]" class="b9_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_2]" class="b9_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_3]" class="b9_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_4]" class="b9_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_5]" class="b9_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_6]" class="b9_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_7]" class="b9_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_8]" class="b9_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_9]" class="b9_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_10]" class="b9_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_11]" class="b9_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b9_12]" class="b9_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_1']; ?>" name="step1[b9_1]" class="b9_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_2']; ?>" name="step1[b9_2]" class="b9_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_3']; ?>" name="step1[b9_3]" class="b9_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_4']; ?>" name="step1[b9_4]" class="b9_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_5']; ?>" name="step1[b9_5]" class="b9_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_6']; ?>" name="step1[b9_6]" class="b9_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_7']; ?>" name="step1[b9_7]" class="b9_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_8']; ?>" name="step1[b9_8]" class="b9_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_9']; ?>" name="step1[b9_9]" class="b9_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_10']; ?>" name="step1[b9_10]" class="b9_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_11']; ?>" name="step1[b9_11]" class="b9_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b9_12']; ?>" name="step1[b9_12]" class="b9_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_1]" class="a9_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_2]" class="a9_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_3]" class="a9_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_4]" class="a9_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_5]" class="a9_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_6]" class="a9_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_7]" class="a9_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_8]" class="a9_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_9]" class="a9_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_10]" class="a9_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_11]" class="a9_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a9_12]" class="a9_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_1']; ?>" name="step1[a9_1]" class="a9_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_2']; ?>" name="step1[a9_2]" class="a9_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_3']; ?>" name="step1[a9_3]" class="a9_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_4']; ?>" name="step1[a9_4]" class="a9_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_5']; ?>" name="step1[a9_5]" class="a9_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_6']; ?>" name="step1[a9_6]" class="a9_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_7']; ?>" name="step1[a9_7]" class="a9_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_8']; ?>" name="step1[a9_8]" class="a9_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_9']; ?>" name="step1[a9_9]" class="a9_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_10']; ?>" name="step1[a9_10]" class="a9_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_11']; ?>" name="step1[a9_11]" class="a9_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a9_12']; ?>" name="step1[a9_12]" class="a9_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -884,8 +1006,24 @@
         </div>-->
         <?php foreach($uncertainty as $uncertainty_data){ ?>
         <div class="c_refress_blog_input">
-          <input type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty9_val]" class="uncertainty9_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>">
+            <?php
+             if(isset($tempdata[8]))
+                {
+                    $selected = isset($cert['Tempcertificatedata']['uncertainty9_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty9_val']) : explode(',',$tempdata[8]['temp_uncertainty_id']);
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                else
+                {
+                   $selected = isset($cert['Tempcertificatedata']['uncertainty9_val']) ? explode(',',$cert['Tempcertificatedata']['uncertainty9_val']) : array();
+                    $sel = in_array($uncertainty_data['Tempuncertainty']['id'], $selected) ? 'checked' : '';
+                }
+                //}
+            ?>
+            
+            <input <?php echo $sel; ?> type="checkbox" id="<?php echo $uncertainty_data['Tempuncertainty']['id'] ;?>" name="step1[uncertainty9_val][]" class="uncertainty9_val" value="<?php echo $uncertainty_data['Tempuncertainty']['id'];?>">
           <label><?php echo $uncertainty_data['Tempuncertainty']['tagno']; ?></label>
+          
+          
         </div>
           <?php } ?>
       </div>
@@ -915,58 +1053,58 @@
               <?php  echo $this->Form->input('step1.unit10', array('id' => 'unit10', 'class' => 'unit10','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res10]" class="res10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res10]" class="res10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['resolution'];} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc10]" class="acc10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc10]" class="acc10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['accuracy'];} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count10]" class="count10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count10]" class="count10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['count'];} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert10]" class="uncert10"></td>
+          <td class="text-center"><input type="text" name="step1[uncert10]" class="uncert10" value="<?php echo $cert['Tempcertificatedata']['uncert10']; ?>"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_1]" class="m10_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_2]" class="m10_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_3]" class="m10_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_4]" class="m10_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_5]" class="m10_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_6]" class="m10_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_7]" class="m10_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_8]" class="m10_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_9]" class="m10_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_10]" class="m10_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_11]" class="m10_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m10_12]" class="m10_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_1']; ?>" name="step1[m10_1]" class="m10_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_2']; ?>" name="step1[m10_2]" class="m10_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_3']; ?>" name="step1[m10_3]" class="m10_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_4']; ?>" name="step1[m10_4]" class="m10_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_5']; ?>" name="step1[m10_5]" class="m10_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_6']; ?>" name="step1[m10_6]" class="m10_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_7']; ?>" name="step1[m10_7]" class="m10_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_8']; ?>" name="step1[m10_8]" class="m10_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_9']; ?>" name="step1[m10_9]" class="m10_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_10']; ?>" name="step1[m10_10]" class="m10_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_11']; ?>" name="step1[m10_11]" class="m10_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m10_12']; ?>" name="step1[m10_12]" class="m10_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_1]" class="b10_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_2]" class="b10_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_3]" class="b10_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_4]" class="b10_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_5]" class="b10_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_6]" class="b10_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_7]" class="b10_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_8]" class="b10_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_9]" class="b10_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_10]" class="b10_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_11]" class="b10_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b10_12]" class="b10_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_1']; ?>" name="step1[b10_1]" class="b10_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_2']; ?>" name="step1[b10_2]" class="b10_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_3']; ?>" name="step1[b10_3]" class="b10_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_4']; ?>" name="step1[b10_4]" class="b10_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_5']; ?>" name="step1[b10_5]" class="b10_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_6']; ?>" name="step1[b10_6]" class="b10_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_7']; ?>" name="step1[b10_7]" class="b10_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_8']; ?>" name="step1[b10_8]" class="b10_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_9']; ?>" name="step1[b10_9]" class="b10_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_10']; ?>" name="step1[b10_10]" class="b10_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_11']; ?>" name="step1[b10_11]" class="b10_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b10_12']; ?>" name="step1[b10_12]" class="b10_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_1]" class="a10_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_2]" class="a10_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_3]" class="a10_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_4]" class="a10_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_5]" class="a10_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_6]" class="a10_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_7]" class="a10_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_8]" class="a10_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_9]" class="a10_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_10]" class="a10_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_11]" class="a10_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a10_12]" class="a10_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_1']; ?>" name="step1[a10_1]" class="a10_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_2']; ?>" name="step1[a10_2]" class="a10_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_3']; ?>" name="step1[a10_3]" class="a10_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_4']; ?>" name="step1[a10_4]" class="a10_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_5']; ?>" name="step1[a10_5]" class="a10_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_6']; ?>" name="step1[a10_6]" class="a10_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_7']; ?>" name="step1[a10_7]" class="a10_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_8']; ?>" name="step1[a10_8]" class="a10_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_9']; ?>" name="step1[a10_9]" class="a10_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_10']; ?>" name="step1[a10_10]" class="a10_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_11']; ?>" name="step1[a10_11]" class="a10_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a10_12']; ?>" name="step1[a10_12]" class="a10_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1008,58 +1146,58 @@
               <?php  echo $this->Form->input('step1.unit11', array('id' => 'unit11', 'class' => 'unit11','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res11]" class="res11"></td>
+          <td class="text-center"><input type="text" name="step1[res11]" class="res11"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc11]" class="acc11"></td>
+          <td class="text-center"><input type="text" name="step1[acc11]" class="acc11"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count11]" class="count11"></td>
+          <td class="text-center"><input type="text" name="step1[count11]" class="count11"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert11]" class="uncert11"></td>
+          <td class="text-center"><input type="text" name="step1[uncert11]" class="uncert11" value="<?php echo $cert['Tempcertificatedata']['uncert11']; ?>"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_1]" class="m11_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_2]" class="m11_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_3]" class="m11_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_4]" class="m11_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_5]" class="m11_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_6]" class="m11_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_7]" class="m11_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_8]" class="m11_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_9]" class="m11_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_10]" class="m11_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_11]" class="m11_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m11_12]" class="m11_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_1']; ?>" name="step1[m11_1]" class="m11_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_2']; ?>" name="step1[m11_2]" class="m11_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_3']; ?>" name="step1[m11_3]" class="m11_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_4']; ?>" name="step1[m11_4]" class="m11_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_5']; ?>" name="step1[m11_5]" class="m11_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_6']; ?>" name="step1[m11_6]" class="m11_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_7']; ?>" name="step1[m11_7]" class="m11_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_8']; ?>" name="step1[m11_8]" class="m11_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_9']; ?>" name="step1[m11_9]" class="m11_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_10']; ?>" name="step1[m11_10]" class="m11_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_11']; ?>" name="step1[m11_11]" class="m11_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m11_12']; ?>" name="step1[m11_12]" class="m11_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_1]" class="b11_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_2]" class="b11_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_3]" class="b11_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_4]" class="b11_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_5]" class="b11_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_6]" class="b11_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_7]" class="b11_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_8]" class="b11_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_9]" class="b11_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_10]" class="b11_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_11]" class="b11_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b11_12]" class="b11_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_1']; ?>" name="step1[b11_1]" class="b11_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_2']; ?>" name="step1[b11_2]" class="b11_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_3']; ?>" name="step1[b11_3]" class="b11_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_4']; ?>" name="step1[b11_4]" class="b11_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_5']; ?>" name="step1[b11_5]" class="b11_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_6']; ?>" name="step1[b11_6]" class="b11_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_7']; ?>" name="step1[b11_7]" class="b11_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_8']; ?>" name="step1[b11_8]" class="b11_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_9']; ?>" name="step1[b11_9]" class="b11_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_10']; ?>" name="step1[b11_10]" class="b11_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_11']; ?>" name="step1[b11_11]" class="b11_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b11_12']; ?>" name="step1[b11_12]" class="b11_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_1]" class="a11_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_2]" class="a11_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_3]" class="a11_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_4]" class="a11_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_5]" class="a11_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_6]" class="a11_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_7]" class="a11_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_8]" class="a11_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_9]" class="a11_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_10]" class="a11_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_11]" class="a11_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a11_12]" class="a11_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_1']; ?>" name="step1[a11_1]" class="a11_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_2']; ?>" name="step1[a11_2]" class="a11_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_3']; ?>" name="step1[a11_3]" class="a11_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_4']; ?>" name="step1[a11_4]" class="a11_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_5']; ?>" name="step1[a11_5]" class="a11_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_6']; ?>" name="step1[a11_6]" class="a11_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_7']; ?>" name="step1[a11_7]" class="a11_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_8']; ?>" name="step1[a11_8]" class="a11_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_9']; ?>" name="step1[a11_9]" class="a11_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_10']; ?>" name="step1[a11_10]" class="a11_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_11']; ?>" name="step1[a11_11]" class="a11_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a11_12']; ?>" name="step1[a11_12]" class="a11_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1101,58 +1239,58 @@
               <?php  echo $this->Form->input('step1.unit12', array('id' => 'unit12', 'class' => 'unit12','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res12]" class="res12"></td>
+          <td class="text-center"><input type="text" name="step1[res12]" class="res12"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc12]" class="acc12"></td>
+          <td class="text-center"><input type="text" name="step1[acc12]" class="acc12"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count12]" class="count12"></td>
+          <td class="text-center"><input type="text" name="step1[count12]" class="count12"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert12]" class="uncert12"></td>
+          <td class="text-center"><input type="text" name="step1[uncert12]" class="uncert12"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_1]" class="m12_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_2]" class="m12_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_3]" class="m12_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_4]" class="m12_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_5]" class="m12_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_6]" class="m12_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_7]" class="m12_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_8]" class="m12_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_9]" class="m12_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_10]" class="m12_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_11]" class="m12_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m12_12]" class="m12_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_1']; ?>" name="step1[m12_1]" class="m12_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_2']; ?>" name="step1[m12_2]" class="m12_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_3']; ?>" name="step1[m12_3]" class="m12_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_4']; ?>" name="step1[m12_4]" class="m12_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_5']; ?>" name="step1[m12_5]" class="m12_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_6']; ?>" name="step1[m12_6]" class="m12_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_7']; ?>" name="step1[m12_7]" class="m12_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_8']; ?>" name="step1[m12_8]" class="m12_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_9']; ?>" name="step1[m12_9]" class="m12_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_10']; ?>" name="step1[m12_10]" class="m12_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_11']; ?>" name="step1[m12_11]" class="m12_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m12_12']; ?>" name="step1[m12_12]" class="m12_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_1]" class="b12_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_2]" class="b12_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_3]" class="b12_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_4]" class="b12_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_5]" class="b12_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_6]" class="b12_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_7]" class="b12_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_8]" class="b12_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_9]" class="b12_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_10]" class="b12_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_11]" class="b12_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b12_12]" class="b12_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_1']; ?>" name="step1[b12_1]" class="b12_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_2']; ?>" name="step1[b12_2]" class="b12_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_3']; ?>" name="step1[b12_3]" class="b12_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_4']; ?>" name="step1[b12_4]" class="b12_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_5']; ?>" name="step1[b12_5]" class="b12_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_6']; ?>" name="step1[b12_6]" class="b12_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_7']; ?>" name="step1[b12_7]" class="b12_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_8']; ?>" name="step1[b12_8]" class="b12_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_9']; ?>" name="step1[b12_9]" class="b12_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_10']; ?>" name="step1[b12_10]" class="b12_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_11']; ?>" name="step1[b12_11]" class="b12_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b12_12']; ?>" name="step1[b12_12]" class="b12_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_1]" class="a12_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_2]" class="a12_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_3]" class="a12_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_4]" class="a12_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_5]" class="a12_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_6]" class="a12_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_7]" class="a12_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_8]" class="a12_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_9]" class="a12_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_10]" class="a12_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_11]" class="a12_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a12_12]" class="a12_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_1']; ?>" name="step1[a12_1]" class="a12_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_2']; ?>" name="step1[a12_2]" class="a12_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_3']; ?>" name="step1[a12_3]" class="a12_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_4']; ?>" name="step1[a12_4]" class="a12_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_5']; ?>" name="step1[a12_5]" class="a12_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_6']; ?>" name="step1[a12_6]" class="a12_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_7']; ?>" name="step1[a12_7]" class="a12_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_8']; ?>" name="step1[a12_8]" class="a12_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_9']; ?>" name="step1[a12_9]" class="a12_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_10']; ?>" name="step1[a12_10]" class="a12_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_11']; ?>" name="step1[a12_11]" class="a12_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a12_12']; ?>" name="step1[a12_12]" class="a12_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1194,58 +1332,58 @@
               <?php  echo $this->Form->input('step1.unit13', array('id' => 'unit13', 'class' => 'unit13','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res13]" class="res13"></td>
+          <td class="text-center"><input type="text" name="step1[res13]" class="res13"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc13]" class="acc13"></td>
+          <td class="text-center"><input type="text" name="step1[acc13]" class="acc13"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count13]" class="count13"></td>
+          <td class="text-center"><input type="text" name="step1[count13]" class="count13"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert13]" class="uncert13"></td>
+          <td class="text-center"><input type="text" name="step1[uncert13]" class="uncert13"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_1]" class="m13_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_2]" class="m13_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_3]" class="m13_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_4]" class="m13_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_5]" class="m13_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_6]" class="m13_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_7]" class="m13_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_8]" class="m13_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_9]" class="m13_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_10]" class="m13_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_11]" class="m13_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m13_12]" class="m13_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_1']; ?>" name="step1[m13_1]" class="m13_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_2']; ?>" name="step1[m13_2]" class="m13_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_3']; ?>" name="step1[m13_3]" class="m13_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_4']; ?>" name="step1[m13_4]" class="m13_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_5']; ?>" name="step1[m13_5]" class="m13_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_6']; ?>" name="step1[m13_6]" class="m13_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_7']; ?>" name="step1[m13_7]" class="m13_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_8']; ?>" name="step1[m13_8]" class="m13_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_9']; ?>" name="step1[m13_9]" class="m13_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_10']; ?>" name="step1[m13_10]" class="m13_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_11']; ?>" name="step1[m13_11]" class="m13_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m13_12']; ?>" name="step1[m13_12]" class="m13_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_1]" class="b13_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_2]" class="b13_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_3]" class="b13_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_4]" class="b13_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_5]" class="b13_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_6]" class="b13_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_7]" class="b13_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_8]" class="b13_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_9]" class="b13_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_10]" class="b13_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_11]" class="b13_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b13_12]" class="b13_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_1']; ?>" name="step1[b13_1]" class="b13_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_2']; ?>" name="step1[b13_2]" class="b13_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_3']; ?>" name="step1[b13_3]" class="b13_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_4']; ?>" name="step1[b13_4]" class="b13_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_5']; ?>" name="step1[b13_5]" class="b13_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_6']; ?>" name="step1[b13_6]" class="b13_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_7']; ?>" name="step1[b13_7]" class="b13_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_8']; ?>" name="step1[b13_8]" class="b13_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_9']; ?>" name="step1[b13_9]" class="b13_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_10']; ?>" name="step1[b13_10]" class="b13_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_11']; ?>" name="step1[b13_11]" class="b13_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b13_12']; ?>" name="step1[b13_12]" class="b13_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-         <td class="text-center"><input type="text" value="0" name="step1[a13_1]" class="a13_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_2]" class="a13_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_3]" class="a13_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_4]" class="a13_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_5]" class="a13_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_6]" class="a13_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_7]" class="a13_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_8]" class="a13_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_9]" class="a13_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_10]" class="a13_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_11]" class="a13_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a13_12]" class="a13_12" ></td>
+         <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_1']; ?>" name="step1[a13_1]" class="a13_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_2']; ?>" name="step1[a13_2]" class="a13_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_3']; ?>" name="step1[a13_3]" class="a13_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_4']; ?>" name="step1[a13_4]" class="a13_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_5']; ?>" name="step1[a13_5]" class="a13_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_6']; ?>" name="step1[a13_6]" class="a13_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_7']; ?>" name="step1[a13_7]" class="a13_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_8']; ?>" name="step1[a13_8]" class="a13_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_9']; ?>" name="step1[a13_9]" class="a13_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_10']; ?>" name="step1[a13_10]" class="a13_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_11']; ?>" name="step1[a13_11]" class="a13_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a13_12']; ?>" name="step1[a13_12]" class="a13_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1287,58 +1425,58 @@
               <?php  echo $this->Form->input('step1.unit14', array('id' => 'unit14', 'class' => 'unit14','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res14]" class="res14"></td>
+          <td class="text-center"><input type="text" name="step1[res14]" class="res14"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc14]" class="acc14"></td>
+          <td class="text-center"><input type="text" name="step1[acc14]" class="acc14"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count14]" class="count14"></td>
+          <td class="text-center"><input type="text" name="step1[count14]" class="count14"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert14]" class="uncert14"></td>
+          <td class="text-center"><input type="text" name="step1[uncert14]" class="uncert14"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_1]" class="m14_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_2]" class="m14_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_3]" class="m14_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_4]" class="m14_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_5]" class="m14_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_6]" class="m14_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_7]" class="m14_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_8]" class="m14_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_9]" class="m14_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_10]" class="m14_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_11]" class="m14_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m14_12]" class="m14_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_1']; ?>" name="step1[m14_1]" class="m14_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_2']; ?>" name="step1[m14_2]" class="m14_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_3']; ?>" name="step1[m14_3]" class="m14_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_4']; ?>" name="step1[m14_4]" class="m14_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_5']; ?>" name="step1[m14_5]" class="m14_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_6']; ?>" name="step1[m14_6]" class="m14_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_7']; ?>" name="step1[m14_7]" class="m14_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_8']; ?>" name="step1[m14_8]" class="m14_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_9']; ?>" name="step1[m14_9]" class="m14_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_10']; ?>" name="step1[m14_10]" class="m14_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_11']; ?>" name="step1[m14_11]" class="m14_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m14_12']; ?>" name="step1[m14_12]" class="m14_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_1]" class="b14_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_2]" class="b14_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_3]" class="b14_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_4]" class="b14_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_5]" class="b14_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_6]" class="b14_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_7]" class="b14_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_8]" class="b14_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_9]" class="b14_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_10]" class="b14_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_11]" class="b14_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b14_12]" class="b14_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_1']; ?>" name="step1[b14_1]" class="b14_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_2']; ?>" name="step1[b14_2]" class="b14_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_3']; ?>" name="step1[b14_3]" class="b14_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_4']; ?>" name="step1[b14_4]" class="b14_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_5']; ?>" name="step1[b14_5]" class="b14_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_6']; ?>" name="step1[b14_6]" class="b14_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_7']; ?>" name="step1[b14_7]" class="b14_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_8']; ?>" name="step1[b14_8]" class="b14_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_9']; ?>" name="step1[b14_9]" class="b14_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_10']; ?>" name="step1[b14_10]" class="b14_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_11']; ?>" name="step1[b14_11]" class="b14_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b14_12']; ?>" name="step1[b14_12]" class="b14_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_1]" class="a14_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_2]" class="a14_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_3]" class="a14_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_4]" class="a14_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_5]" class="a14_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_6]" class="a14_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_7]" class="a14_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_8]" class="a14_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_9]" class="a14_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_10]" class="a14_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_11]" class="a14_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a14_12]" class="a14_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_1']; ?>" name="step1[a14_1]" class="a14_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_2']; ?>" name="step1[a14_2]" class="a14_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_3']; ?>" name="step1[a14_3]" class="a14_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_4']; ?>" name="step1[a14_4]" class="a14_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_5']; ?>" name="step1[a14_5]" class="a14_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_6']; ?>" name="step1[a14_6]" class="a14_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_7']; ?>" name="step1[a14_7]" class="a14_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_8']; ?>" name="step1[a14_8]" class="a14_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_9']; ?>" name="step1[a14_9]" class="a14_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_10']; ?>" name="step1[a14_10]" class="a14_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_11']; ?>" name="step1[a14_11]" class="a14_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a14_12']; ?>" name="step1[a14_12]" class="a14_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1380,58 +1518,58 @@
               <?php  echo $this->Form->input('step1.unit15', array('id' => 'unit15', 'class' => 'unit15','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" value="0" name="step1[res15]" class="res15"></td>
+          <td class="text-center"><input type="text" name="step1[res15]" class="res15"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" value="0" name="step1[acc15]" class="acc15"></td>
+          <td class="text-center"><input type="text" name="step1[acc15]" class="acc15"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" value="0" name="step1[count15]" class="count15"></td>
+          <td class="text-center"><input type="text" name="step1[count15]" class="count15"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="0" name="step1[uncert15]" class="uncert15"></td>
+          <td class="text-center"><input type="text" name="step1[uncert15]" class="uncert15"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_1]" class="m15_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_2]" class="m15_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_3]" class="m15_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_4]" class="m15_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_5]" class="m15_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_6]" class="m15_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_7]" class="m15_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_8]" class="m15_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_9]" class="m15_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_10]" class="m15_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_11]" class="m15_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[m15_12]" class="m15_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_1']; ?>" name="step1[m15_1]" class="m15_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_2']; ?>" name="step1[m15_2]" class="m15_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_3']; ?>" name="step1[m15_3]" class="m15_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_4']; ?>" name="step1[m15_4]" class="m15_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_5']; ?>" name="step1[m15_5]" class="m15_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_6']; ?>" name="step1[m15_6]" class="m15_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_7']; ?>" name="step1[m15_7]" class="m15_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_8']; ?>" name="step1[m15_8]" class="m15_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_9']; ?>" name="step1[m15_9]" class="m15_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_10']; ?>" name="step1[m15_10]" class="m15_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_11']; ?>" name="step1[m15_11]" class="m15_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['m15_12']; ?>" name="step1[m15_12]" class="m15_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> B.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_1]" class="b15_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_2]" class="b15_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_3]" class="b15_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_4]" class="b15_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_5]" class="b15_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_6]" class="b15_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_7]" class="b15_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_8]" class="b15_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_9]" class="b15_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_10]" class="b15_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_11]" class="b15_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[b15_12]" class="b15_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_1']; ?>" name="step1[b15_1]" class="b15_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_2']; ?>" name="step1[b15_2]" class="b15_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_3']; ?>" name="step1[b15_3]" class="b15_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_4']; ?>" name="step1[b15_4]" class="b15_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_5']; ?>" name="step1[b15_5]" class="b15_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_6']; ?>" name="step1[b15_6]" class="b15_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_7']; ?>" name="step1[b15_7]" class="b15_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_8']; ?>" name="step1[b15_8]" class="b15_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_9']; ?>" name="step1[b15_9]" class="b15_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_10']; ?>" name="step1[b15_10]" class="b15_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_11']; ?>" name="step1[b15_11]" class="b15_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['b15_12']; ?>" name="step1[b15_12]" class="b15_12" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> A.Set </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_1]" class="a15_1" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_2]" class="a15_2" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_3]" class="a15_3" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_4]" class="a15_4" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_5]" class="a15_5" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_6]" class="a15_6" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_7]" class="a15_7" > </td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_8]" class="a15_8" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_9]" class="a15_9" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_10]" class="a15_10" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_11]" class="a15_11" ></td>
-          <td class="text-center"><input type="text" value="0" name="step1[a15_12]" class="a15_12" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_1']; ?>" name="step1[a15_1]" class="a15_1" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_2']; ?>" name="step1[a15_2]" class="a15_2" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_3']; ?>" name="step1[a15_3]" class="a15_3" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_4']; ?>" name="step1[a15_4]" class="a15_4" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_5']; ?>" name="step1[a15_5]" class="a15_5" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_6']; ?>" name="step1[a15_6]" class="a15_6" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_7']; ?>" name="step1[a15_7]" class="a15_7" > </td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_8']; ?>" name="step1[a15_8]" class="a15_8" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_9']; ?>" name="step1[a15_9]" class="a15_9" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_10']; ?>" name="step1[a15_10]" class="a15_10" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_11']; ?>" name="step1[a15_11]" class="a15_11" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['a15_12']; ?>" name="step1[a15_12]" class="a15_12" ></td>
         </tr>
       </tbody>
     </table>
@@ -1495,7 +1633,11 @@
             ?>
     </div>
     <label for="val_attn" class="col-md-2 control-label">Date Calibrated</label>
-    <div class="col-md-2"> <?php echo $this->Form->input('date_calibrated', array('id' => 'val_date_calibrated', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>$cert1_main_data['Salesorder']['in_date']));?> </div>
+    <?php if(isset($get_cert_sales['Tempcertificate']['date_calibrated'])) { ?>
+    <div class="col-md-2"> <?php echo $this->Form->input('Tempformdata.date_calibrated', array('id' => 'val_date_calibrated', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>$get_cert_sales['Tempcertificate']['date_calibrated']));?> </div>
+    <?php } else { ?>
+    <div class="col-md-2"> <?php echo $this->Form->input('Tempformdata.date_calibrated', array('id' => 'val_date_calibrated', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>$cert1_main_data['Salesorder']['in_date']));?> </div>
+    <?php } ?>
   </div>
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">SalesOrderID</label>
@@ -1503,7 +1645,11 @@
     <label for="val_duedate" class="col-md-2 control-label">Model No </label>
     <div class="col-md-2"> <?php echo $this->Form->input('modelno ', array('id' => 'val_modelno','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>$cert1_main_data['Description']['model_no'])); ?> </div>
     <label for="val_attn" class="col-md-2 control-label">Due Date</label>
-    <div class="col-md-2"> <?php echo $this->Form->input('due_date', array('id' => 'val_due_date', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>$cert1_main_data['Salesorder']['due_date']));?> </div>
+    <?php if(isset($get_cert_sales['Tempcertificate']['due_date'])) { ?>
+    <div class="col-md-2"> <?php echo $this->Form->input('Tempformdata.due_date', array('id' => 'val_due_date', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>$get_cert_sales['Tempcertificate']['due_date']));?> </div>
+    <?php } else { ?>
+    <div class="col-md-2"> <?php echo $this->Form->input('Tempformdata.due_date', array('id' => 'val_due_date', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy', 'label' => false,'value'=>$cert1_main_data['Salesorder']['due_date']));?> </div>
+    <?php } ?>
   </div>
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">Customer</label>
@@ -1531,46 +1677,53 @@
              'label' => false,'type'=>'textarea', 'rows'=>'2','readonly'=>true,'value'=>$cert1_main_data['Instrument']['name']));
             ?>
     </div>
+    
     <label for="val_duedate" class="col-md-2 control-label">Temperature </label>
-    <div class="col-md-2"> <?php echo $this->Form->input('temperature', array('id' => 'val_temperature', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => $temp_temperature)); ?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('Tempformdata.temperature', array('id' => 'val_temperature', 'class' => 'form-control', 'label' => false, 'type' => 'select','empty'=>'Select Temperature', 'options' => $temp_temperature ,'value'=>$get_cert_sales['Tempcertificate']['temperature'])); ?> </div>
     <label for="val_attn" class="col-md-2 control-label">Humidity</label>
-    <div class="col-md-2"> <?php echo $this->Form->input('humidity', array('id' => 'val_humidity', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => $rel_humidity)); ?> </div>
+    <div class="col-md-2"> <?php echo $this->Form->input('Tempformdata.humidity', array('id' => 'val_humidity', 'class' => 'form-control', 'label' => false, 'type' => 'select','empty'=>'Select Humidity', 'options' => $rel_humidity,'value'=>$get_cert_sales['Tempcertificate']['humidity'])); ?> </div>
   </div>
   <div class="col-lg-12">
     <h4 class="sub-header"><small>The unit under test have been calibrated as per TECHNICAL PROCEDURE,</small></h4>
   </div>
   <div class="form-group">
     <div class="col-md-12">
+        <?php if(isset($get_cert_sales['Tempcertificate']['formdata1'])) { 
+    echo $this->Form->input('Tempformdata.formdata1', array('id' => 'val_formdata1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['formdata1']));
+    } else { ?>
       <?php
       echo $this->Form->input('Tempformdata.formdata1', array('id' => 'val_formdata1', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['formdata1']));
-//                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
-//             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>'BS Tech´s organisation and practices have been duly accredited and are compliant to the requirements of ISO/IEC 17025;  the laboratory accreditation standard. Our Quality Management System ensures its compatibility with the requirements of   ISO 9001'));
-            ?>
+    }?>
     </div>
   </div>
   <div class="form-group">
     <div class="col-md-12">
+      <?php if(isset($get_cert_sales['Tempcertificate']['formdata2'])) { 
+    echo $this->Form->input('Tempformdata.formdata2', array('id' => 'val_formdata2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['formdata2']));
+    } else { ?>
       <?php
         echo $this->Form->input('Tempformdata.formdata2', array('id' => 'val_formdata2', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['formdata2']));
 //                echo $this->Form->input('customer', array('id' => 'val_customer', 'class' => 'form-control',
 //             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>'The reference measurement standards used are traceable to National Metrology Centre,(NMC,SINGAPORE)  and/or other National standards.'));
-            ?>
+    }  ?>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
     <div class="col-md-12">
       <label for="val_duedate" class="col-md-6 control-label">Instrument Cal Status </label>
-      <div class="col-md-6"> <?php echo $this->Form->input('instrument_cal_status', array('id' => 'val_instrument_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>$instrument_cal_status)); ?> </div>
+      <div class="col-md-6"> <?php echo $this->Form->input('Tempformdata.instrument_cal_status', array('id' => 'val_instrument_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>$instrument_cal_status,'value'=>$get_cert_sales['Tempcertificate']['instrument_cal_status'])); ?> </div>
       </div>
       <div class="col-md-12">
         <label for="val_duedate" class="col-md-6 control-label">Instrument Cal Status Description </label>
         <div class="col-md-6">
           <?php
-                echo $this->Form->input('instrument_description', array('id' => 'val_instrument_description', 'class' => 'form-control',
-             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>$cert1_main_data['Instrument']['description']));
+                echo $this->Form->input('Tempformdata.instrument_cal_description', array('id' => 'val_instrument_description', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>$get_cert_sales['Tempcertificate']['instrument_cal_description']));
             ?>
         </div>
       </div>
@@ -1581,15 +1734,24 @@
   <div class="col-md-12">
    
       <label for="val_duedate" class="col-md-6 control-label">Calibration Type</label>
-      <div class="col-md-6"> <?php echo $this->Form->input('calibrationtype', array('id' => 'val_calibrationtype','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'Non-Singlas')); ?> </div>
+      <div class="col-md-6"> <?php echo $this->Form->input('Tempformdata.calibrationtype', array('id' => 'val_calibrationtype','class' => 'form-control', 'label' => false, 'placeholder' => '','readonly'=>true, 'value'=>'Non-Singlas')); ?> </div>
       </div>
       <div class="col-md-12">
         <label for="val_duedate" class="col-md-6 control-label">Calibrated Status</label>
-      <div class="col-md-6"> <?php echo $this->Form->input('cal_status', array('id' => 'val_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>array('1'=>'Rejected','2'=>'Approved'))); ?> </div>
+      <div class="col-md-6"> <?php echo $this->Form->input('Tempformdata.cal_status', array('id' => 'val_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>array('1'=>'Rejected','2'=>'Approved'),'value'=>$get_cert_sales['Tempcertificate']['cal_status'])); ?> </div>
+      </div>
+       <div class="col-md-12">
+        <label for="val_duedate" class="col-md-6 control-label">Calibrated Status Description </label>
+        <div class="col-md-6">
+          <?php
+                echo $this->Form->input('Tempformdata.cal_status_description', array('id' => 'val_cal_status_description', 'class' => 'form-control',
+             'label' => false,'type'=>'textarea', 'rows'=>'2','value'=>$get_cert_sales['Tempcertificate']['cal_status_description']));
+            ?>
+        </div>
       </div>
       <div class="col-md-12">
         <label for="val_duedate" class="col-md-6 control-label">Approved Status</label>
-      <div class="col-md-6"> <?php echo $this->Form->input('approved_status', array('id' => 'val_approved_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Approval Status --','options'=>array('1'=>'Rejected','2'=>'Approved'))); ?> </div>
+      <div class="col-md-6"> <?php echo $this->Form->input('Tempformdata.approved_status', array('id' => 'val_approved_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Approval Status --','options'=>array('1'=>'Rejected','2'=>'Approved'),'value'=>$get_cert_sales['Tempcertificate']['approved_status'])); ?> </div>
       </div>
     </div>
   </div>
@@ -1632,71 +1794,130 @@
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">METHOD OF CALIBRATION</label>
     <div class="col-md-10">
+       <?php if(isset($get_cert_sales['Tempcertificate']['methodofcal1'])) { 
+    
+                echo $this->Form->input('Tempformdata.methodofcal1', array('id' => 'val_method_calibration', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['methodofcal1']));
+    } else { ?>
       <?php
                 echo $this->Form->input('Tempformdata.methodofcal1', array('id' => 'val_method_calibration', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['methodofcal1']));
-            ?>
+    }  ?>
+       <?php if(isset($get_cert_sales['Tempcertificate']['methodofcal2'])) { 
+    
+                 echo $this->Form->input('Tempformdata.methodofcal2', array('id' => 'val_method_calibration', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['methodofcal2']));
+    } else { ?>
       <?php
                 echo $this->Form->input('Tempformdata.methodofcal2', array('id' => 'val_method_calibration', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['methodofcal2']));
-            ?>
+            } ?>
     </div>
   </div>
   
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">RESULTS OF CALIBRATION</label>
     <div class="col-md-10">
+      <?php if(isset($get_cert_sales['Tempcertificate']['resultofcal1'])) { 
+    
+                 echo $this->Form->input('Tempformdata.resultofcal1', array('id' => 'val_resultofcal1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['resultofcal1']));
+    } else { ?>
       <?php
                 echo $this->Form->input('Tempformdata.resultofcal1', array('id' => 'val_resultofcal1', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['resultofcal1']));
-            ?>
+    }    ?>
+      <?php if(isset($get_cert_sales['Tempcertificate']['resultofcal2'])) { 
+    
+                 echo $this->Form->input('Tempformdata.resultofcal2', array('id' => 'val_resultofcal2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['resultofcal2']));
+    } else { ?>
       <?php
                 echo $this->Form->input('Tempformdata.resultofcal2', array('id' => 'val_resultofcal2', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['resultofcal2']));
-            ?>
+    } ?>
     </div>
   </div>
   
   <div class="form-group">
     <label for="val_customername" class="col-md-2 control-label">REMARKS</label>
     <div class="col-md-10">
+       <?php if(isset($get_cert_sales['Tempcertificate']['remark1'])) { 
+    
+                 echo $this->Form->input('Tempformdata.remark1', array('id' => 'val_remark1', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['remark1']));
+    } else { ?>
       <?php
                 echo $this->Form->input('Tempformdata.remark1', array('id' => 'val_remark1', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark1']));
-            ?>
+    } ?>
+       <?php if(isset($get_cert_sales['Tempcertificate']['remark2'])) { 
+    
+                 echo $this->Form->input('Tempformdata.remark2', array('id' => 'val_remark2', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['remark2']));
+    } else { ?>
       <?php
                 echo $this->Form->input('Tempformdata.remark2', array('id' => 'val_remark2', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark2']));
-            ?>
+    } ?>
             
-            <?php
+            <?php if(isset($get_cert_sales['Tempcertificate']['remark3'])) { 
+    
+                 echo $this->Form->input('Tempformdata.remark3', array('id' => 'val_remark3', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['remark3']));
+    } else { ?>
+      <?php
                 echo $this->Form->input('Tempformdata.remark3', array('id' => 'val_remark3', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark3']));
-            ?>
+    }  ?>
             
-            <?php
+            <?php if(isset($get_cert_sales['Tempcertificate']['remark4'])) { 
+    
+                     echo $this->Form->input('Tempformdata.remark4', array('id' => 'val_remark4', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['remark4']));
+    } else { ?>
+      <?php
                 echo $this->Form->input('Tempformdata.remark4', array('id' => 'val_remark4', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark4']));
-            ?>
-            
-            <?php
+    } ?>
+           <?php if(isset($get_cert_sales['Tempcertificate']['remark5'])) { 
+    
+                 echo $this->Form->input('Tempformdata.remark5', array('id' => 'val_remark5', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['remark5']));
+    } else { ?>
+      <?php
                 echo $this->Form->input('Tempformdata.remark5', array('id' => 'val_remark5', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark5']));
-            ?>
+    }  ?>
             
-            <?php
+            <?php if(isset($get_cert_sales['Tempcertificate']['remark6'])) { 
+    
+                echo $this->Form->input('Tempformdata.remark6', array('id' => 'val_remark6', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['remark6']));
+    } else { ?>
+      <?php
                 echo $this->Form->input('Tempformdata.remark6', array('id' => 'val_remark6', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark6']));
-            ?>
+    }  ?>
             
-            <?php
+            <?php if(isset($get_cert_sales['Tempcertificate']['remark7'])) { 
+    
+                echo $this->Form->input('Tempformdata.remark7', array('id' => 'val_remark7', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['remark7']));
+    } else { ?>
+      <?php
                 echo $this->Form->input('Tempformdata.remark7', array('id' => 'val_remark7', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark7']));
-            ?>
-             <?php
+    }  ?>
+             <?php if(isset($get_cert_sales['Tempcertificate']['remark8'])) { 
+    
+                  echo $this->Form->input('Tempformdata.remark8', array('id' => 'val_remark8', 'class' => 'form-control',
+            'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$get_cert_sales['Tempcertificate']['remark8']));
+    } else { ?>
+      <?php
                 echo $this->Form->input('Tempformdata.remark8', array('id' => 'val_remark8', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'2', 'value'=>$formdata['Tempformdata']['remark8']));
-            ?>
+    }  ?>
              
             
     </div>
@@ -1785,33 +2006,43 @@
         </tr>
       </thead>
       <tbody class="calcul1_instrument_info">
+          <?php //foreach($cert as $k=>$cert_all) { ?>
+          <?php for($j = 1; $j<=15; $j++){
+          if(isset($cert['Tempcertificatedata']['temp'.$j]))
+          {
+          for($i=1;$i<=3;$i++)
+          { ?>
           <tr class="text-center">
+          <td class="text-center"><?php echo $j ?></td>
+          <td class="text-center"><?php echo $i; ?></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['temp'.$j];?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_1'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_1'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_1'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_2'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_2'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_2'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_3'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_3'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_3'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_4'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_4'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_4'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_5'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_5'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_5'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_6'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_6'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_6'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_7'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_7'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_7'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_8'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_8'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_8'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_9'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_9'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_9'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_10'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_10'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_10'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_11'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_11'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_11'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.($j+1).'_11'];}if($i==2){echo $cert['Tempcertificatedata']['b'.($j+1).'_11'];}else{echo $cert['Tempcertificatedata']['a'.($j+1).'_11'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.($j+2).'_11'];}if($i==2){echo $cert['Tempcertificatedata']['b'.($j+2).'_11'];}else{echo $cert['Tempcertificatedata']['a'.($j+2).'_11'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.$j.'_13'];}if($i==2){echo $cert['Tempcertificatedata']['b'.$j.'_13'];}else{echo $cert['Tempcertificatedata']['a'.$j.'_13'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.($j+1).'_13'];}if($i==2){echo $cert['Tempcertificatedata']['b'.($j+1).'_13'];}else{echo $cert['Tempcertificatedata']['a'.($j+1).'_13'];} ?></td>
+          <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.($j+2).'_13'];}if($i==2){echo $cert['Tempcertificatedata']['b'.($j+2).'_13'];}else{echo $cert['Tempcertificatedata']['a'.($j+2).'_13'];} ?></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['res'.$j]; ?></td> 
           <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['count'.$j]; ?></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['acc'.$j]; ?></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['is_analog']; ?></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['is_afteradjust']; ?></td>
           </tr>
+          <?php } 
+          
+          }
+          }?>
       </tbody>
     </table>
   </div>
@@ -1860,44 +2091,45 @@
         </tr>
       </thead>
       <tbody class="calcul2_instrument_info">
+          <?php if(isset($uncertaintyda)) { foreach($uncertaintyda as $uncertainty){ ?>
           <tr class="text-center">
-          <td class="text-center">Tag no</td>
-          <td class="text-center">Name</td>
-          <td class="text-center">TempInstrumentDataID</td>
-          <td class="text-center">SNo</td>
-          <td class="text-center">Range</td>
-          <td class="text-center">uref1</td>
-          <td class="text-center">uref2</td>
-          <td class="text-center">uref3</td>
-          <td class="text-center">uacc1</td>
-          <td class="text-center">uacc2</td>
-          <td class="text-center">uacc3</td>
-          <td class="text-center">urefdivisor</td>
-          <td class="text-center">uresdivisoranalog</td>
-          <td class="text-center">uresdivisordigital</td>
-          <td class="text-center">urepdivisor</td>
-          <td class="text-center">divisor</td>
-          <td class="text-center">uicestability</td>
-          <td class="text-center">ustability</td>
-          <td class="text-center">uuniformity</td>
-          <td class="text-center">udrift</td>
-          <td class="text-center">uimm</td>
-          <td class="text-center">uheateffect</td>
-          <td class="text-center">ugravity</td>
-          <td class="text-center">uother1</td>
-          <td class="text-center">uother2</td>
-          <td class="text-center">uother3</td>
-          <td class="text-center">uother4</td>
-          <td class="text-center">uother5</td>
-          <td class="text-center">uother6</td>
-          <td class="text-center">uother7</td>
-          <td class="text-center">uother8</td>
-          <td class="text-center">uother9</td>
-          <td class="text-center">uother10</td>
-          <td class="text-center">uother11</td>
-          <td class="text-center">uother12</td>
-          <td class="text-center">uother13</td>
+          <td class="text-center"><?php echo $uncertainty['Tempuncertaintydata']['count']; ?></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"><?php echo $uncertainty['Tempuncertaintydata']['rangename']; ?></td>
+          <td class="text-center"><?php echo $uncertainty['Tempuncertaintydata']['uref1_data1']; ?></td>
+          <td class="text-center"><?php echo $uncertainty['Tempuncertaintydata']['uref1_data2']; ?></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
           </tr>
+          <?php } } ?>
       </tbody>
     </table>
   </div>
@@ -1914,12 +2146,16 @@
         </tr>
       </thead>
       <tbody class="subcontract_instrument_info">
+           <?php for($j = 1; $j<=15; $j++){
+          if(isset($cert['Tempcertificatedata']['temp'.$j]))
+          { ?>
         <tr class="text-center">
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
-          <td class="text-center"></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['uc'.$j]; ?></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['dof'.$j]; ?></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['kfac'.$j]; ?></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['uncert'.$j]; ?></td>
         </tr>
+           <?php } }?>
 <!--        <tr class="text-center">
           <td class="text-center">0.038845849199110064</td>
           <td class="text-center">101</td>
@@ -2093,8 +2329,8 @@
     </div>
   </div>
   
-  <div class="col-md-9 col-md-offset-10">
-                                                            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-angle-right"></i> Submit</button>                                                            <button class="btn btn-sm btn-warning" type="reset"><i class="fa fa-repeat"></i> Reset</button>                                                        </div>
+<!--  <div class="col-md-9 col-md-offset-10">
+                                                            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-angle-right"></i> Submit</button>                                                            <button class="btn btn-sm btn-warning" type="reset"><i class="fa fa-repeat"></i> Reset</button>                                                        </div>-->
 </div>
 </div>
             

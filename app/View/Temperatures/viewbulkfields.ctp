@@ -42,7 +42,7 @@
                      
                     <?php   foreach($tempuncertaintydata_list as $k=>$v)
                             {   ?>
-                        <tr class="text-center">    
+                        <tr class="text-center delete_datauncertain_tr_<?php echo $v['Tempuncertaintydata']['id']; ?>">    
                             <td class="text-center"><?php echo $k+1;?></td>
                             <td class="text-center"><?php echo $v['Tempuncertaintydata']['rangename']; ?></td>
                             <td class="text-center"><?php echo $v['Tempuncertaintydata']['uref1_data1']; ?></td>

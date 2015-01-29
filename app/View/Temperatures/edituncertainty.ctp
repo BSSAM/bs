@@ -54,6 +54,8 @@
                     }               
                 });
             });
+            
+            
 
             $('.submitUncertaintyForm').click(function(e) {
                 $('.UncertaintyForm').submit();
@@ -321,6 +323,27 @@
                     }
                 });
             });
+            $('body').on('click', '.delete_datauncertain', function(e) {
+               // var a = $(this);
+            //$('.delete_datauncertain').click(function(e) {
+                var datauncertain = $(this).attr('id'); 
+//                $('.instrumentname').val($('.instrumentid option:selected').text()); 
+
+                $.ajax({ 
+                    url: path_url+'Temperatures/deleteuncertain/'+datauncertain,
+                    type:'POST',
+                    beforeSend: ni_start(),  
+                    complete: ni_end(),
+                    data:
+                    {
+                        id:datauncertain,
+                    },
+                    success: function(msg)
+                    {	
+                       $('.delete_datauncertain_tr_'+datauncertain).fadeOut('slow');								
+                    }               
+                });
+            });
 			
     });
 </script>
@@ -560,42 +583,42 @@
                         <div class="form-group col-md-12">
                             <div class="col-md-12">
                                 <div class="col-md-3">
-                                   <?php echo $this->Form->input('u1_data1', array('id' => 'val_uncertaintyid1', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Uncertainty --','options' => array('1' => 'uicestability','2' => 'ustability','3' => 'uuniformity','4' => 'udrift',
+                                   <?php echo $this->Form->input('u1_data1', array('id' => 'val_u1_data1', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Uncertainty --','options' => array('1' => 'uicestability','2' => 'ustability','3' => 'uuniformity','4' => 'udrift',
                                            '5' => 'uimm','6' => 'uheateffect','7' => 'ugravity','8' => 'uother1','9' => 'uother2','10' => 'uother3','11' => 'uother4','12' => 'uother5','13' => 'uother6','14' => 'uother7','15' => 'uother8','16' => 'uother9','17' => 'uother10','18' => 'uother11','19' => 'uother12',
                                            '20' => 'uother13',), )); ?>
                                 
                                 </div>
                                 <div class="col-md-3">
-                                    <?php echo $this->Form->input('u1_data2', array('id' => 'val_uncertaintydata1', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
+                                    <?php echo $this->Form->input('u1_data2', array('id' => 'val_u1_data2', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
                                 
                                 </div>
                                 <div class="col-md-3">
-                                   <?php echo $this->Form->input('u1_data3', array('id' => 'val_uncertaintyid1percenttype', 'class' => 'form-control', 'label' => false, 'type' => 'select','options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
+                                   <?php echo $this->Form->input('u1_data3', array('id' => 'val_u1_data3', 'class' => 'form-control', 'label' => false, 'type' => 'select','options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
                                 
                                 </div>
                                 <div class="col-md-3">
-                                    <?php echo $this->Form->input('u1_data4', array('id' => 'val_uncertaintyid1percent', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
+                                    <?php echo $this->Form->input('u1_data4', array('id' => 'val_u1_data4', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
                                 </div>             
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <div class="col-md-12">
                                 <div class="col-md-3">
-                                   <?php echo $this->Form->input('u2_data1', array('id' => 'val_uncertaintyid2', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Uncertainty --','options' => array('1' => 'uicestability','2' => 'ustability','3' => 'uuniformity','4' => 'udrift',
+                                   <?php echo $this->Form->input('u2_data1', array('id' => 'val_u2_data1', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Uncertainty --','options' => array('1' => 'uicestability','2' => 'ustability','3' => 'uuniformity','4' => 'udrift',
                                            '5' => 'uimm','6' => 'uheateffect','7' => 'ugravity','8' => 'uother1','9' => 'uother2','10' => 'uother3','11' => 'uother4','12' => 'uother5','13' => 'uother6','14' => 'uother7','15' => 'uother8','16' => 'uother9','17' => 'uother10','18' => 'uother11','19' => 'uother12',
                                            '20' => 'uother13',), )); ?>
                                 
                                 </div>
                                 <div class="col-md-3">
-                                    <?php echo $this->Form->input('u2_data2', array('id' => 'val_uncertaintydata2', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
+                                    <?php echo $this->Form->input('u2_data2', array('id' => 'val_u2_data2', 'class' => 'form-control', 'placeholder' => '', 'label' => false,'autoComplete'=>'off')); ?>
                                 
                                 </div>
                                 <div class="col-md-3">
-                                   <?php echo $this->Form->input('u2_data3', array('id' => 'val_uncertaintyid2percenttype', 'class' => 'form-control', 'label' => false, 'type' => 'select','options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
+                                   <?php echo $this->Form->input('u2_data3', array('id' => 'val_u2_data3', 'class' => 'form-control', 'label' => false, 'type' => 'select','options'=>array('1'=>'Value','2'=>'% on Reading','3'=>'% on Fullscale'))); ?>
                                 
                                 </div>
                                 <div class="col-md-3">
-                                    <?php echo $this->Form->input('u2_data4', array('id' => 'val_uncertaintyid2percent', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
+                                    <?php echo $this->Form->input('u2_data4', array('id' => 'val_u2_data4', 'class' => 'form-control', 'label' => false, 'placeholder' => '')); ?>
                                 </div>             
                             </div>
                         </div>
