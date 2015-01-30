@@ -81,6 +81,27 @@ class TempHelper extends AppHelper
         $interval = $date1->diff($date2);
         return $interval->days;;
     }
+    public function get_certificate_no($id = null)
+    {
+        APP::import('Model','Customer');
+        $this->Tempcertificate   =   new Tempcertificate();
+        $data = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.description_id'=>$id)));
+        return $data['Tempcertificate']['certificate_no'];
+    }
+    public function get_calibrated_date($id = null)
+    {
+        APP::import('Model','Customer');
+        $this->Tempcertificate   =   new Tempcertificate();
+        $data = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.description_id'=>$id)));
+        return $data['Tempcertificate']['date_calibrated'];
+    }
+    public function get_due_date($id = null)
+    {
+        APP::import('Model','Customer');
+        $this->Tempcertificate   =   new Tempcertificate();
+        $data = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.description_id'=>$id)));
+        return $data['Tempcertificate']['due_date'];
+    }
 }
 
 

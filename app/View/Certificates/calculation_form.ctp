@@ -47,7 +47,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">1</td>
           <td class="text-center">Set Temperature </td>
-          <td class="text-center"><input type="text" name="step1[temp1]" class="temp1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['setpoint'];} ?>" <?php if(isset($tempdata[0])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[temp1]" class="temp1" value="<?php if(isset($cert['Tempcertificatedata']['temp1'])){echo $cert['Tempcertificatedata']['temp1']; } else { if(isset($tempdata[0])){echo $tempdata[0]['setpoint'];}} ?>" ></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--            <select name="unit1]" class="unit1">
@@ -64,13 +64,13 @@
           <?php  echo $this->Form->input('step1.unit1', array('id' => 'unit1', 'class' => 'unit1','label' => false,'type' => 'select', 'options'=>$unit_list,'value'=>$cert['Tempcertificatedata']['unit1'])); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res1]" class="res1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['resolution'];} ?>"<?php if(isset($tempdata[0])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[res1]" class="res1" value="<?php if(isset($cert['Tempcertificatedata']['res1'])){echo $cert['Tempcertificatedata']['res1']; } else { if(isset($tempdata[0])){ echo $tempdata[0]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc1]" class="acc1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['accuracy'];} ?>"<?php if(isset($tempdata[0])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[acc1]" class="acc1" value="<?php if(isset($cert['Tempcertificatedata']['acc1'])){echo $cert['Tempcertificatedata']['acc1']; } else { if(isset($tempdata[0])){ echo $tempdata[0]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count1]" class="count1" value="<?php if(isset($tempdata[0])){ echo $tempdata[0]['count'];} ?>"<?php if(isset($tempdata[0])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[count1]" class="count1" value="<?php if(isset($cert['Tempcertificatedata']['count1'])){echo $cert['Tempcertificatedata']['count1']; } else { if(isset($tempdata[0])){ echo $tempdata[0]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert1']; ?>" name="step1[uncert1]" class="uncert1" readonly="readonly" ></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert1']; ?>" name="step1[uncert1]" class="uncert1" disabled="disabled" ></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -155,7 +155,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">2</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp2]" class="temp2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['setpoint'];} ?>"<?php if(isset($tempdata[1])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[temp2]" class="temp2" value="<?php if(isset($cert['Tempcertificatedata']['temp2'])){echo $cert['Tempcertificatedata']['temp2']; } else { if(isset($tempdata[1])){ echo $tempdata[1]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--            <select name="unit2" class="unit2">
@@ -171,13 +171,13 @@
               <?php  echo $this->Form->input('step1.unit2', array('id' => 'unit2', 'class' => 'unit2','label' => false,'type' => 'select', 'options'=>$unit_list, 'value'=>$cert['Tempcertificatedata']['unit2'])); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res2]" class="res2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['resolution'];} ?>"<?php if(isset($tempdata[1])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[res2]" class="res2" value="<?php if(isset($cert['Tempcertificatedata']['res2'])){echo $cert['Tempcertificatedata']['res2']; } else { if(isset($tempdata[1])){ echo $tempdata[1]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc2]" class="acc2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['accuracy'];} ?>"<?php if(isset($tempdata[1])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[acc2]" class="acc2" value="<?php if(isset($cert['Tempcertificatedata']['acc2'])){echo $cert['Tempcertificatedata']['acc2']; } else { if(isset($tempdata[1])){ echo $tempdata[1]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count2]" class="count2" value="<?php if(isset($tempdata[1])){ echo $tempdata[1]['count'];} ?>"<?php if(isset($tempdata[1])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[count2]" class="count2" value="<?php if(isset($cert['Tempcertificatedata']['count2'])){echo $cert['Tempcertificatedata']['count2']; } else { if(isset($tempdata[1])){ echo $tempdata[1]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert2']; ?>" name="step1[uncert2]" class="uncert2" readonly="readonly"></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert2']; ?>" name="step1[uncert2]" class="uncert2" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -273,7 +273,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">3</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp3]" class="temp3" value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['setpoint'];} ?>"<?php if(isset($tempdata[2])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[temp3]" class="temp3" value="<?php if(isset($cert['Tempcertificatedata']['temp3'])){echo $cert['Tempcertificatedata']['temp3']; } else { if(isset($tempdata[2])){ echo $tempdata[2]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit3]" class="unit3">
@@ -289,13 +289,13 @@
               <?php  echo $this->Form->input('step1.unit3', array('id' => 'unit3', 'class' => 'unit3','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res3]" class="res3"  value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['resolution'];} ?>"<?php if(isset($tempdata[2])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[res3]" class="res3"  value="<?php if(isset($cert['Tempcertificatedata']['res3'])){echo $cert['Tempcertificatedata']['res3']; } else { if(isset($tempdata[2])){ echo $tempdata[2]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc3]" class="acc3"  value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['accuracy'];} ?>"<?php if(isset($tempdata[2])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[acc3]" class="acc3"  value="<?php if(isset($cert['Tempcertificatedata']['acc3'])){echo $cert['Tempcertificatedata']['acc3']; } else { if(isset($tempdata[2])){ echo $tempdata[2]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count3]" class="count3" value="<?php if(isset($tempdata[2])){ echo $tempdata[2]['count'];} ?>"<?php if(isset($tempdata[2])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[count3]" class="count3" value="<?php if(isset($cert['Tempcertificatedata']['count3'])){echo $cert['Tempcertificatedata']['count3']; } else { if(isset($tempdata[2])){ $tempdata[2]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert3']; ?>" name="step1[uncert3]" class="uncert3" readonly="readonly"></td>
+          <td class="text-center"><input type="text" value="<?php echo $cert['Tempcertificatedata']['uncert3']; ?>" name="step1[uncert3]" class="uncert3" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -382,7 +382,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">4</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp4]" class="temp4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['setpoint'];} ?>"<?php if(isset($tempdata[3])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[temp4]" class="temp4" value="<?php if(isset($cert['Tempcertificatedata']['temp4'])){echo $cert['Tempcertificatedata']['temp4']; } else { if(isset($tempdata[3])){ echo $tempdata[3]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit4]" class="unit4">
@@ -398,13 +398,13 @@
               <?php  echo $this->Form->input('step1.unit4', array('id' => 'unit4', 'class' => 'unit4','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res4]" class="res4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['resolution'];} ?>"<?php if(isset($tempdata[3])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[res4]" class="res4" value="<?php if(isset($cert['Tempcertificatedata']['res4'])){echo $cert['Tempcertificatedata']['res4']; } else { if(isset($tempdata[3])){ echo $tempdata[3]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc4]" class="acc4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['accuracy'];} ?>"<?php if(isset($tempdata[3])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[acc4]" class="acc4" value="<?php if(isset($cert['Tempcertificatedata']['acc4'])){echo $cert['Tempcertificatedata']['acc4']; } else { if(isset($tempdata[3])){ echo $tempdata[3]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count4]" class="count4" value="<?php if(isset($tempdata[3])){ echo $tempdata[3]['count'];} ?>"<?php if(isset($tempdata[3])){ ?> disabled<?php } ?>></td>
+          <td class="text-center"><input type="text" name="step1[count4]" class="count4" value="<?php if(isset($cert['Tempcertificatedata']['count4'])){echo $cert['Tempcertificatedata']['count4']; } else { if(isset($tempdata[3])){ echo $tempdata[3]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" name="step1[uncert4]" value="<?php echo $cert['Tempcertificatedata']['uncert4']; ?>" class="uncert4" readonly="readonly"></td>
+          <td class="text-center"><input type="text" name="step1[uncert4]" value="<?php echo $cert['Tempcertificatedata']['uncert4']; ?>" class="uncert4" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -492,7 +492,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">5</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp5]" class="temp5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp5]" class="temp5" value="<?php if(isset($cert['Tempcertificatedata']['temp5'])){echo $cert['Tempcertificatedata']['temp5']; } else { if(isset($tempdata[4])){ echo $tempdata[4]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit5]" class="unit5">
@@ -508,13 +508,13 @@
               <?php  echo $this->Form->input('step1.unit5', array('id' => 'unit5', 'class' => 'unit5','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res5]" class="res5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res5]" class="res5" value="<?php if(isset($cert['Tempcertificatedata']['res5'])){echo $cert['Tempcertificatedata']['res5']; } else { if(isset($tempdata[4])){ echo $tempdata[4]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc5]" class="acc5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc5]" class="acc5" value="<?php if(isset($cert['Tempcertificatedata']['acc5'])){echo $cert['Tempcertificatedata']['acc5']; } else { if(isset($tempdata[4])){ echo $tempdata[4]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count5]" class="count5" value="<?php if(isset($tempdata[4])){ echo $tempdata[4]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count5]" class="count5" value="<?php if(isset($cert['Tempcertificatedata']['count5'])){echo $cert['Tempcertificatedata']['count5']; } else { if(isset($tempdata[4])){ echo $tempdata[4]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" name="step1[uncert5]" value="<?php echo $cert['Tempcertificatedata']['uncert5']; ?>" class="uncert5"></td>
+          <td class="text-center"><input type="text" name="step1[uncert5]" value="<?php echo $cert['Tempcertificatedata']['uncert5']; ?>" class="uncert5" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -603,7 +603,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">6</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp6]" class="temp6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp6]" class="temp6" value="<?php if(isset($cert['Tempcertificatedata']['temp6'])){echo $cert['Tempcertificatedata']['temp6']; } else { if(isset($tempdata[5])){ echo $tempdata[5]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit6]" class="unit6">
@@ -619,13 +619,13 @@
               <?php  echo $this->Form->input('step1.unit6', array('id' => 'unit6', 'class' => 'unit6','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res6]" class="res6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res6]" class="res6" value="<?php if(isset($cert['Tempcertificatedata']['res6'])){echo $cert['Tempcertificatedata']['res6']; } else { if(isset($tempdata[5])){ echo $tempdata[5]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc6]" class="acc6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc6]" class="acc6" value="<?php if(isset($cert['Tempcertificatedata']['acc6'])){echo $cert['Tempcertificatedata']['acc6']; } else { if(isset($tempdata[5])){ echo $tempdata[5]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count6]" class="count6" value="<?php if(isset($tempdata[5])){ echo $tempdata[5]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count6]" class="count6" value="<?php if(isset($cert['Tempcertificatedata']['count6'])){echo $cert['Tempcertificatedata']['count6']; } else { if(isset($tempdata[5])){ echo $tempdata[5]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" name="step1[uncert6]" value="<?php echo $cert['Tempcertificatedata']['uncert6']; ?>" class="uncert6"></td>
+          <td class="text-center"><input type="text" name="step1[uncert6]" value="<?php echo $cert['Tempcertificatedata']['uncert6']; ?>" class="uncert6" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -711,7 +711,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">7</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp7]" class="temp7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp7]" class="temp7" value="<?php if(isset($cert['Tempcertificatedata']['temp7'])){echo $cert['Tempcertificatedata']['temp7']; } else { if(isset($tempdata[6])){ echo $tempdata[6]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit7]" class="unit7">
@@ -727,13 +727,13 @@
               <?php  echo $this->Form->input('step1.unit7', array('id' => 'unit7', 'class' => 'unit7','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res7]" class="res7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res7]" class="res7" value="<?php if(isset($cert['Tempcertificatedata']['res7'])){echo $cert['Tempcertificatedata']['res7']; } else { if(isset($tempdata[6])){ echo $tempdata[6]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc7]" class="acc7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc7]" class="acc7" value="<?php if(isset($cert['Tempcertificatedata']['acc7'])){echo $cert['Tempcertificatedata']['acc7']; } else { if(isset($tempdata[6])){ echo $tempdata[6]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count7]" class="count7" value="<?php if(isset($tempdata[6])){ echo $tempdata[6]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count7]" class="count7" value="<?php if(isset($cert['Tempcertificatedata']['count7'])){echo $cert['Tempcertificatedata']['count7']; } else { if(isset($tempdata[6])){ echo $tempdata[6]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" name="step1[uncert7]" class="uncert7" value="<?php echo $cert['Tempcertificatedata']['uncert7']; ?>"></td>
+          <td class="text-center"><input type="text" name="step1[uncert7]" class="uncert7" value="<?php echo $cert['Tempcertificatedata']['uncert7']; ?>" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -820,7 +820,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">8</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp8]" class="temp8"  value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp8]" class="temp8"  value="<?php if(isset($cert['Tempcertificatedata']['temp8'])){echo $cert['Tempcertificatedata']['temp8']; } else { if(isset($tempdata[7])){ echo $tempdata[7]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit8]" class="unit8">
@@ -836,13 +836,13 @@
               <?php  echo $this->Form->input('step1.unit8', array('id' => 'unit8', 'class' => 'unit8','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res8]" class="res8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res8]" class="res8" value="<?php if(isset($cert['Tempcertificatedata']['res8'])){echo $cert['Tempcertificatedata']['res8']; } else { if(isset($tempdata[7])){ echo $tempdata[7]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc8]" class="acc8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc8]" class="acc8" value="<?php if(isset($cert['Tempcertificatedata']['acc8'])){echo $cert['Tempcertificatedata']['acc8']; } else { if(isset($tempdata[7])){ echo $tempdata[7]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count8]" class="count8" value="<?php if(isset($tempdata[7])){ echo $tempdata[7]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count8]" class="count8" value="<?php if(isset($cert['Tempcertificatedata']['count8'])){echo $cert['Tempcertificatedata']['count8']; } else { if(isset($tempdata[7])){ echo $tempdata[7]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" name="step1[uncert8]" class="uncert8" value="<?php echo $cert['Tempcertificatedata']['uncert8']; ?>"></td>
+          <td class="text-center"><input type="text" name="step1[uncert8]" class="uncert8" value="<?php echo $cert['Tempcertificatedata']['uncert8']; ?>" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -928,7 +928,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">9</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp9]" class="temp9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp9]" class="temp9" value="<?php if(isset($cert['Tempcertificatedata']['temp9'])){echo $cert['Tempcertificatedata']['temp9']; } else { if(isset($tempdata[8])){ echo $tempdata[8]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit9]" class="unit9">
@@ -944,13 +944,13 @@
               <?php  echo $this->Form->input('step1.unit9', array('id' => 'unit9', 'class' => 'unit9','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res9]" class="res9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res9]" class="res9" value="<?php if(isset($cert['Tempcertificatedata']['res9'])){echo $cert['Tempcertificatedata']['res9']; } else { if(isset($tempdata[8])){ echo $tempdata[8]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc9]" class="acc9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc9]" class="acc9" value="<?php if(isset($cert['Tempcertificatedata']['acc9'])){echo $cert['Tempcertificatedata']['acc9']; } else { if(isset($tempdata[8])){ echo $tempdata[8]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count9]" class="count9" value="<?php if(isset($tempdata[8])){ echo $tempdata[8]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count9]" class="count9" value="<?php if(isset($cert['Tempcertificatedata']['count9'])){echo $cert['Tempcertificatedata']['count9']; } else { if(isset($tempdata[8])){ echo $tempdata[8]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" name="step1[uncert9]" class="uncert9" value="<?php echo $cert['Tempcertificatedata']['uncert9']; ?>"></td>
+          <td class="text-center"><input type="text" name="step1[uncert9]" class="uncert9" value="<?php echo $cert['Tempcertificatedata']['uncert9']; ?>" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -1037,7 +1037,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">10</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp10]" class="temp10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp10]" class="temp10" value="<?php if(isset($cert['Tempcertificatedata']['temp10'])){echo $cert['Tempcertificatedata']['temp10']; } else { if(isset($tempdata[9])){ echo $tempdata[9]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit10]" class="unit10">
@@ -1053,13 +1053,13 @@
               <?php  echo $this->Form->input('step1.unit10', array('id' => 'unit10', 'class' => 'unit10','label' => false,'type' => 'select', 'options'=>$unit_list)); ?>
           </td>
           <td class="text-center">Resolution </td>
-          <td class="text-center"><input type="text" name="step1[res10]" class="res10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['resolution'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[res10]" class="res10" value="<?php if(isset($cert['Tempcertificatedata']['res10'])){echo $cert['Tempcertificatedata']['res10']; } else { if(isset($tempdata[9])){ echo $tempdata[9]['resolution'];}} ?>"></td>
           <td class="text-center">Accuracy </td>
-          <td class="text-center"><input type="text" name="step1[acc10]" class="acc10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['accuracy'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[acc10]" class="acc10" value="<?php if(isset($cert['Tempcertificatedata']['acc10'])){echo $cert['Tempcertificatedata']['acc10']; } else { if(isset($tempdata[9])){ echo $tempdata[9]['accuracy'];}} ?>"></td>
           <td class="text-center">Count </td>
-          <td class="text-center"><input type="text" name="step1[count10]" class="count10" value="<?php if(isset($tempdata[9])){ echo $tempdata[9]['count'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[count10]" class="count10" value="<?php if(isset($cert['Tempcertificatedata']['count10'])){echo $cert['Tempcertificatedata']['count10']; } else { if(isset($tempdata[9])){ echo $tempdata[9]['count'];}} ?>"></td>
           <td class="text-center">Uncertainty </td>
-          <td class="text-center"><input type="text" name="step1[uncert10]" class="uncert10" value="<?php echo $cert['Tempcertificatedata']['uncert10']; ?>"></td>
+          <td class="text-center"><input type="text" name="step1[uncert10]" class="uncert10" value="<?php echo $cert['Tempcertificatedata']['uncert10']; ?>" disabled="disabled"></td>
         </tr>
         <tr class="text-center">
           <td class="text-center"> Master </td>
@@ -1130,7 +1130,7 @@
         <tr class="text-center c_light_bg">
           <td class="text-center">11</td>
           <td class="text-center">Set Temperature</td>
-          <td class="text-center"><input type="text" name="step1[temp11]" class="temp11" value="<?php if(isset($tempdata[10])){ echo $tempdata[10]['setpoint'];} ?>"></td>
+          <td class="text-center"><input type="text" name="step1[temp11]" class="temp11" value="<?php if(isset($cert['Tempcertificatedata']['temp11'])){echo $cert['Tempcertificatedata']['temp11']; } else { if(isset($tempdata[10])){ echo $tempdata[10]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
           <td class="text-center">
 <!--              <select name="unit11]" class="unit11">

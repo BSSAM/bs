@@ -18,6 +18,7 @@ class CertificatesController extends AppController
         //pr($this->request->data);
         if($this->request->data)
         {
+            
             //echo "if";
             //pr($_REQUEST);
             //pr($this->request->data);exit;
@@ -149,6 +150,15 @@ class CertificatesController extends AppController
                 function t1($val, $min, $max) {
                                 return ($val >= $min && $val <= $max);
                             }
+                            
+                            function powfn($para)
+                            {
+                                return $para*$para;
+                            }
+                            function powfn4($para)
+                            {
+                                return $para*$para*$para*$para;
+                            }
                 if(isset($this->request->data['step1']['no_runs']))
                 {
                     //$aaaaaa = array();
@@ -221,6 +231,8 @@ class CertificatesController extends AppController
                                // pr($sd);exit;
                         $uncertainty[] = array();
 						//pr($comparable_uncert);exit;
+                        //$count_al = $this->request->data['step1']['count'.$j];
+
                         foreach($comparable_uncert as $comcert)
                         {
                             //pr($comcert);
@@ -237,20 +249,57 @@ class CertificatesController extends AppController
                             $uresdivisoranalog = $step1infor['Tempuncertaintydata']['uresdivisoranalog'];
                             $uresdivisordigital = $step1infor['Tempuncertaintydata']['uresdivisordigital'];
                             $urepdivisor = $step1infor['Tempuncertaintydata']['urepdivisor'];
+                            
+                            ///// Others
+                            
+                            $u1_data2 = $step1infor['Tempuncertaintydata']['u1_data2'];
+                            $u2_data2 = $step1infor['Tempuncertaintydata']['u2_data2'];
+                            $u3_data2 = $step1infor['Tempuncertaintydata']['u3_data2'];
+                            $u4_data2 = $step1infor['Tempuncertaintydata']['u4_data2'];
+                            $u5_data2 = $step1infor['Tempuncertaintydata']['u5_data2'];
+                            $u6_data2 = $step1infor['Tempuncertaintydata']['u6_data2'];
+                            $u7_data2 = $step1infor['Tempuncertaintydata']['u7_data2'];
+                            $u8_data2 = $step1infor['Tempuncertaintydata']['u8_data2'];
+                            $u9_data2 = $step1infor['Tempuncertaintydata']['u9_data2'];
+                            $u10_data2 = $step1infor['Tempuncertaintydata']['u10_data2'];
+                            $u11_data2 = $step1infor['Tempuncertaintydata']['u11_data2'];
+                            $u12_data2 = $step1infor['Tempuncertaintydata']['u12_data2'];
+                            $u13_data2 = $step1infor['Tempuncertaintydata']['u13_data2'];
+                            $u14_data2 = $step1infor['Tempuncertaintydata']['u14_data2'];
+                            $u15_data2 = $step1infor['Tempuncertaintydata']['u15_data2'];
+                            $u16_data2 = $step1infor['Tempuncertaintydata']['u16_data2'];
+                            $u17_data2 = $step1infor['Tempuncertaintydata']['u17_data2'];
+                            $u18_data2 = $step1infor['Tempuncertaintydata']['u18_data2'];
+                            $u19_data2 = $step1infor['Tempuncertaintydata']['u19_data2'];
+                            $u20_data2 = $step1infor['Tempuncertaintydata']['u20_data2'];
+                            
+                            
+                            
                             $res1 = $this->request->data['step1']['res1'];
-                            $vc = sqrt(pow(2,($uref1/$urefdivisor))+pow(2,($uref2/$urefdivisor))+pow(2,($uref3/$urefdivisor))+
-                                    pow(2,($uacc1/$divisor))+pow(2,($uacc1/$divisor))+pow(2,($uacc1/$divisor))+pow(2,($this->request->data['step1']['m'.$j.'_13']/$urepdivisor))+
-                                    pow(2,($uacc1/$uresdivisoranalog))+pow(2,($res1/$uresdivisoranalog)));
+                            //$first = powfn($uref1/$urefdivisor);
+                            $vc = sqrt(powfn($uref1/$urefdivisor)+powfn($uref2/$urefdivisor)+powfn($uref3/$urefdivisor)+
+                                    powfn($uacc1/$divisor)+powfn($uacc2/$divisor)+powfn($uacc3/$divisor)+powfn($this->request->data['step1']['m'.$j.'_13']/$urepdivisor)+
+                                    powfn($res1/$uresdivisordigital)+powfn($u1_data2/$divisor)+powfn($u2_data2/$divisor)+
+                                    powfn($u3_data2/$divisor)+powfn($u4_data2/$divisor)+powfn($u5_data2/$divisor)+powfn($u6_data2/$divisor)+powfn($u7_data2/$divisor)+powfn($u8_data2/$divisor)+
+                                    powfn($u9_data2/$divisor)+powfn($u10_data2/$divisor)+powfn($u11_data2/$divisor)+powfn($u12_data2/$divisor)+powfn($u13_data2/$divisor)+powfn($u14_data2/$divisor)+
+                                    powfn($u15_data2/$divisor)+powfn($u16_data2/$divisor)+powfn($u17_data2/$divisor)+powfn($u18_data2/$divisor)+powfn($u19_data2/$divisor)+powfn($u20_data2/$divisor));
+                            
+                            //pr($uref1);
+                            //pr($urefdivisor);
+                            //pr($first);
+                            //pr($this->request->data['step1']['m'.$j.'_13']);
+                            //pr($vc);exit;
                             $kfactor = 2;
                             $urep = $this->request->data['step1']['m'.$j.'_13'];
-                            $dof = (pow(4,$vc)/(pow(4,$urep)/($this->request->data['step1']['no_runs']-1)));
+                            $po_val = (powfn4($urep)/($this->request->data['step1']['no_runs']-1));
+                            $dof = (powfn4($vc)/$po_val);
                             //pr($dof);
                             $uncertainty[] = $kfactor * $vc;
 							//exit;
                             
                         }
                         //pr($dof);
-                        //pr($uncertainty); 
+                        //pr($uncertainty);exit; 
                         
                         //exit;
                         //exit;
@@ -1633,7 +1682,7 @@ $html .= '</div>';
             $this->dompdf->load_html($html);
             $this->dompdf->set_paper($papersize, $orientation);        
             $this->dompdf->render();
-            $this->dompdf->stream("Quotation-".$filename.".pdf");
+            $this->dompdf->stream("Certificate-".$filename.".pdf");
             echo $this->dompdf->output();
            // $output = $this->dompdf->output();
             //file_put_contents($filename.'.pdf', $output);
