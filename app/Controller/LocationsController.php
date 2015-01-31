@@ -11,7 +11,7 @@ class LocationsController extends AppController
     
     public $helpers = array('Html','Form','Session');
     
-    public function index()
+    public function index($id = NULL)
     {
         /*******************************************************
          *  BS V1.0
@@ -28,7 +28,18 @@ class LocationsController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
+        
+        //$data = $this->Location->find('all',array('conditions'=>array('Location.is_deleted'=>0)),array('order' => array('Location.id' => 'DESC')));
+        if($id == '1'):
+        $data = $this->Location->find('all',array('conditions'=>array('Location.is_deleted'=>1)),array('order' => array('Location.id' => 'DESC')));
+        $this->set('deleted_val',$id);
+        else:
         $data = $this->Location->find('all',array('conditions'=>array('Location.is_deleted'=>0)),array('order' => array('Location.id' => 'DESC')));
+        $this->set('deleted_val',$id);
+        endif;
         $this->set('location', $data);
         //pr($data);
     }
@@ -135,6 +146,34 @@ class LocationsController extends AppController
             if($this->Location->updateAll(array('Location.is_deleted'=>1),array('Location.id'=>$id)))
             {
             $this->Session->setFlash(__('The Location has been deleted'));
+            return $this->redirect(array('action'=>'index'));
+            }
+        }
+    }
+    
+    public function retrieve($id)
+    {
+        /* 
+         * ---------------  Location Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_location']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Location -----------------------------------
+         */
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($id!='')
+        {
+            if($this->Location->updateAll(array('Location.is_deleted'=>0),array('Location.id'=>$id)))
+            {
+            $this->Session->setFlash(__('The Location has been Retrieved'));
             return $this->redirect(array('action'=>'index'));
             }
         }

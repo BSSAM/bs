@@ -38,7 +38,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <th class="text-center">Description</th>
                                         <th class="text-center">No of Days</th>
                                         <th class="text-center">Multiply By</th>
-                                        <?php if($deleted_val != 1): ?><th class="text-center">Action</th><?php endif; ?>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +64,18 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                                 <?PHP echo $this->Form->postlink('<i class="fa fa-times"></i>',array('controller'=>'Priorities',
                                                     'action'=>'delete',$priority_list['Priority']['id']),array('title'=>'Delete',
                                                         'class'=>'btn btn-xs btn-danger','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to delete?')); ?>
+                                                <?php } ?>
+                                                </div>
+                                        </td>
+                                        <?php endif; ?>
+                                        <?php if($deleted_val == 1): ?>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                
+                                                <?php if($userrole_cus['delete']==1){ ?>
+                                                <?PHP echo $this->Form->postlink('<i class="fa fa-undo"></i>',array('controller'=>'Priorities',
+                                                    'action'=>'retrieve',$priority_list['Priority']['id']),array('title'=>'Retrieve',
+                                                        'class'=>'btn btn-xs btn-warning','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to Retrieve?')); ?>
                                                 <?php } ?>
                                                 </div>
                                         </td>

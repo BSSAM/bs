@@ -11,7 +11,7 @@ class ReferedbysController extends AppController
     
     public $helpers = array('Html','Form','Session');
     
-    public function index()
+    public function index($id=NULL)
     {
         /*******************************************************
          *  BS V1.0
@@ -24,11 +24,23 @@ class ReferedbysController extends AppController
         if($user_role['cus_referredby']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
         $this->set('userrole_cus',$user_role['cus_referredby']);
         /*
          * ---------------  Functionality of Referred By -----------------------------------
          */
+        //$data = $this->Referedby->find('all',array('conditions'=>array('Referedby.is_deleted'=>0)),array('order' => array('Referedby.id' => 'DESC')));
+        if($id == '1'):
+        $data = $this->Referedby->find('all',array('conditions'=>array('Referedby.is_deleted'=>1)),array('order' => array('Referedby.id' => 'DESC')));
+        $this->set('deleted_val',$id);
+        
+        else:
         $data = $this->Referedby->find('all',array('conditions'=>array('Referedby.is_deleted'=>0)),array('order' => array('Referedby.id' => 'DESC')));
+        $this->set('deleted_val',$id);
+        endif;
+        
         $this->set('referedby', $data);
         //pr($data);
     }
@@ -135,6 +147,33 @@ class ReferedbysController extends AppController
             if($this->Referedby->updateAll(array('Referedby.is_deleted'=>1),array('Referedby.id'=>$id)))
             {
             $this->Session->setFlash(__('Referred By has been deleted'));
+            return $this->redirect(array('action'=>'index'));
+            }
+        }
+    }
+    public function retrieve($id)
+    {
+        /* 
+         * ---------------  Referred By Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_referredby']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Referred By -----------------------------------
+         */
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($id!='')
+        {
+            if($this->Referedby->updateAll(array('Referedby.is_deleted'=>0),array('Referedby.id'=>$id)))
+            {
+            $this->Session->setFlash(__('Referred By has been Retrieved'));
             return $this->redirect(array('action'=>'index'));
             }
         }

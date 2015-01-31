@@ -11,7 +11,7 @@ class BranchesController extends AppController
     
     public $helpers = array('Html','Form','Session');
     public $uses    =   array('branch');   
-    public function index()
+    public function index($id=NULL)
     {
         /*******************************************************
          *  BS V1.0
@@ -29,7 +29,20 @@ class BranchesController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
+        
+        if($id == '1'):
+        $data = $this->branch->find('all',array('conditions'=>array('branch.is_deleted'=>1)),array('order' => array('branch.id' => 'DESC')));
+        $this->set('deleted_val',$id);
+        
+        else:
         $data = $this->branch->find('all',array('conditions'=>array('branch.is_deleted'=>0)),array('order' => array('branch.id' => 'DESC')));
+        $this->set('deleted_val',$id);
+        endif;
+        
+        
         $this->set('branch', $data);
        // pr($data);exit;
     }
@@ -160,6 +173,33 @@ class BranchesController extends AppController
             if($this->branch->updateAll(array('branch.is_deleted'=>1),array('branch.id'=>$id)))
             {
             $this->Session->setFlash(__('The Branch has been deleted',h($id)));
+            return $this->redirect(array('action'=>'index'));
+            }
+        }
+    }
+    
+    public function retrieve($id)
+    {
+        /* 
+         * ---------------  User Branch Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['other_branch']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Users -----------------------------------
+         */
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+         if($id!='')
+        {
+            if($this->branch->updateAll(array('branch.is_deleted'=>0),array('branch.id'=>$id)))
+            {
+            $this->Session->setFlash(__('The Branch has been Retrieved',h($id)));
             return $this->redirect(array('action'=>'index'));
             }
         }

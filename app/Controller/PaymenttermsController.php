@@ -153,4 +153,32 @@ class PaymenttermsController extends AppController
             }
         }
     }
+    
+    public function retrieve($id)
+    {
+        /* 
+         * ---------------  Payment Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_paymentterms']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Payment -----------------------------------
+         */
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($id!='')
+        {
+            if($this->Paymentterm->updateAll(array('Paymentterm.is_deleted'=>0),array('Paymentterm.id'=>$id)))
+            {
+            $this->Session->setFlash(__('The Payment Term has been Retrieved'));
+            return $this->redirect(array('action'=>'index'));
+            }
+        }
+    }
 }

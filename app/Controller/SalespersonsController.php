@@ -222,7 +222,35 @@ exit;
         {
             if($this->Salesperson->updateAll(array('Salesperson.is_deleted'=>1),array('Salesperson.id'=>$id)))
             {
-            $this->Session->setFlash(__('Sales Person Cant be Updated'));
+            $this->Session->setFlash(__('Sales Person is Deleted'));
+            return $this->redirect(array('action'=>'index'));
+            }
+        }
+    }
+    public function retrieve($id)
+    {
+        /* 
+         * ---------------  Sales Persons Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_salesperson']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Sales Persons -----------------------------------
+         */
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        
+        if($id!='')
+        {
+            if($this->Salesperson->updateAll(array('Salesperson.is_deleted'=>0),array('Salesperson.id'=>$id)))
+            {
+            $this->Session->setFlash(__('Sales Person is Retrieved'));
             return $this->redirect(array('action'=>'index'));
             }
         }

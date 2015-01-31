@@ -649,9 +649,11 @@
             if(count($length)==0):
                 $name =  $this->request->data['engineer_name'];
                 $email =  $this->request->data['engineer_email'];
+                $user_list  =   $this->User->find('first',array('conditions'=>array('User.status'=>'1','User.is_deleted'=>0,'User.emailid'=>$email)));
                 $this->request->data['OnsiteEngineer']['onsiteschedule_no']=$this->request->data['onsiteschedule_no'];
                 $this->request->data['OnsiteEngineer']['engineer_name']=$this->request->data['engineer_name'];
                 $this->request->data['OnsiteEngineer']['engineer_email_id']=$this->request->data['engineer_email'];
+                $this->request->data['OnsiteEngineer']['user_id']=$user_list['User']['id'];
                 if($this->OnsiteEngineer->save($this->request->data['OnsiteEngineer']))
                 {
                    return $this->OnsiteEngineer->getLastInsertID();

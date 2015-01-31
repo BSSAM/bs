@@ -1,4 +1,13 @@
-                 <h1><script>
+<script>
+var _ROOT ='<?PHP echo Router::url('/',true); ?>';
+$(function() {
+$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
+       var val = $(this).val();  // val is the drug id
+       window.location = _ROOT + 'Procedures/index/' + val;
+    });    
+});
+</script>
+<h1><script>
     var path='<?PHP echo Router::url('/',true); ?>';
 </script>
                                 <i class="fa fa-table"></i>Procedures
@@ -14,7 +23,7 @@
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Procedures</h2>
+                            <h2>List Of Procedures  <?php if($deleted_val == '2'): echo "- Pending Approval"; elseif($deleted_val == '3'): echo "- InActive"; elseif($deleted_val == '1'): echo "- Active"; endif;?></h2>
                             <?php if($userrole_cus['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Procedures',array('controller'=>'Procedures','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Procedures')); ?></h2>
                             <?php } ?>
@@ -36,7 +45,7 @@
                                 <tbody>
                                     <?php foreach($procedures as $procedure): ?>
                                        
-                                    <tr <?php if($procedure['Procedure']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                    <tr <?php if($procedure['Procedure']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?php echo $procedure['Procedure']['id'];?></td>
                                         
                                         <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$procedure['Procedure']['created']);?></td>
@@ -45,6 +54,7 @@
                                         <td class="text-center"><?php echo $procedure['Procedure']['description'];?></td>
                                         <?php $status   =   ($procedure['Procedure']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
                                         <td class="text-center"><?PHP echo $status; ?></td>
+                                        <?php if($deleted_val != 3): ?>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php if($userrole_cus['edit']==1){ ?>
@@ -55,11 +65,30 @@
                                                 <?php } ?>
                                             </div>
                                         </td>
+                                        <?php endif; ?>
+                                        <?php if($deleted_val == 3): ?>
+                                             <td class="text-center">
+                                                <div class="btn-group ">
+
+                                                    <?PHP echo $this->Form->postlink('<i class="fa fa-undo"></i>',array('action'=>'retrieve',$procedure['Procedure']['id']),array('title'=>'Retrieve',
+                                                            'class'=>'btn btn-xs btn-warning','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to Retrieve?')); ?>
+                                                </div>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
                                     
                                     <?php endforeach; ?>
                                     
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="btn-group btn-group-md pull-right">
+                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                             
                             <?php echo $this->Html->script('pages/uiProgress'); ?>

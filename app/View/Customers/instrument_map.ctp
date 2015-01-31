@@ -111,25 +111,27 @@
                     </thead>
                     <tbody class="customer_instrument_info"> 
                            <?PHP if(!empty($customer_instruments)):?> 
-                             <?PHP foreach($customer_instruments as $cusins):?>  
+                             <?PHP foreach($customer_instruments as $k=>$cusins):?>  
                             <tr class="cus_instrument_remove_<?PHP echo $cusins['CustomerInstrument']['id']; ?>">
-                            <td class="text-center"><?PHP echo $cusins['CustomerInstrument']['order_by']; ?></td>
+                            <td class="text-center"><?PHP echo $k+1; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['Instrument']['name']; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['model_no']; ?></td>
                             <td class="text-center"> <?PHP echo $cusins['Range']['range_name']; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['cost']; ?></td>
                             <td  class="text-center"><?PHP echo $cusins['CustomerInstrument']['unit_price']; ?><?PHP //echo $status = ($cusins['CustomerInstrument']['status'] == 1) ? 'Active' : 'In active'; ?></td>
                             <td class="text-center">
-                                <?PHP if($cusins['CustomerInstrument']['is_approved'] == 1): ?>
+                                
                                 <div class="btn-group">
                                     <a data-edit="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
+                                    <?PHP if($cusins['CustomerInstrument']['is_approved'] == 1): ?>
                                     <a data-delete="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">
                                         <i class="fa fa-times"></i>
                                     </a>
+                                    <?php endif; ?>
                                 </div>
-                                <?php endif; ?>
+                                
                                 <?PHP if($cusins['CustomerInstrument']['is_approved'] == 0): ?>
                                 <div class="btn-group">
                                     <label class="label label-danger">Not Approved</label>

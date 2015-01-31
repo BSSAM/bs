@@ -153,4 +153,33 @@ class PrioritiesController extends AppController
             }
         }
     }
+    
+    public function retrieve($id)
+    {
+        /* 
+         * ---------------  Priority Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['cus_priority']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * ---------------  Functionality of Priority -----------------------------------
+         */
+        $this->autoRender=false;
+        if($id=='')
+        {
+            throw new MethodNotAllowedException();
+        }
+        if($id!='')
+        {
+            if($this->Priority->updateAll(array('Priority.is_deleted'=>0),array('Priority.id'=>$id)))
+            {
+            $this->Session->setFlash(__('Priority has been Retieved'));
+            return $this->redirect(array('action'=>'index'));
+            }
+        }
+    }
+    
 }

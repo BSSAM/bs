@@ -1,4 +1,13 @@
-                            <h1>
+<script>
+var _ROOT ='<?PHP echo Router::url('/',true); ?>';
+$(function() {
+$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
+       var val = $(this).val();  // val is the drug id
+       window.location = _ROOT + 'Instruments/index/' + val;
+    });    
+});
+</script>
+<h1>
                                 <i class="fa fa-table"></i>Instruments
                             </h1>
                         </div>
@@ -12,13 +21,13 @@
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Instruments</h2>
+                            <h2>List Of Instruments <?php if($deleted_val == '2'): echo "- Pending Approval"; elseif($deleted_val == '3'): echo "- InActive"; elseif($deleted_val == '1'): echo "- Active"; endif;?></h2>
                             <?php if($userrole_cus['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Instrument',array('controller'=>'Instruments','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Instrument')); ?></h2>
                             <?php } ?>
                         </div>
                         <div class="table-responsive">
-                            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                            <table id="dofull-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
                                         <th class="text-center">ID</th>
@@ -33,7 +42,7 @@
                                 <tbody>
                                     <?php foreach($instruments as $instrument): ?>
                                        
-                                    <tr <?php if($instrument['Instrument']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                    <tr <?php if($instrument['Instrument']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?php echo $instrument['Instrument']['id'];?></td>
                                         
                                         <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$instrument['Instrument']['created']);?></td>
@@ -42,6 +51,7 @@
                                         <td class="text-center"><?php echo $instrument['Department']['departmentname'];?></td>
                                         <?php $status   =   ($instrument['Instrument']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
                                         <td class="text-center"><?PHP echo $status; ?></td>
+                                        <?php if($deleted_val != 3): ?>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <?php if($userrole_cus['edit']==1){ ?>
@@ -52,11 +62,30 @@
                                                 <?php } ?>
                                             </div>
                                         </td>
+                                        <?php endif; ?>
+                                        <?php if($deleted_val == 3): ?>
+                                             <td class="text-center">
+                                                <div class="btn-group ">
+
+                                                    <?PHP echo $this->Form->postlink('<i class="fa fa-undo"></i>',array('action'=>'retrieve',$instrument['Instrument']['id']),array('title'=>'Retrieve',
+                                                            'class'=>'btn btn-xs btn-warning','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to Retrieve?')); ?>
+                                                </div>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
                                     
                                     <?php endforeach; ?>
                                     
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="btn-group btn-group-md pull-right">
+                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                             
                             <?php echo $this->Html->script('pages/uiProgress'); ?>

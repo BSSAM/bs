@@ -53,8 +53,8 @@ class CustomersController extends AppController
         $this->set('tag_id',$this->random('tag'));
         $this->set('group_id',$this->random('group'));
         
-        $salesperson = $this->Salesperson->find('list', array('fields' => 'salesperson'));
-        $referedby = $this->Referedby->find('list', array('fields' => 'referedby'));
+        $salesperson = $this->Salesperson->find('list', array('conditions'=>array('Salesperson.is_deleted'=>0),'fields' => 'salesperson'));
+        $referedby = $this->Referedby->find('list', array('conditions'=>array('Referedby.is_deleted'=>0),'fields' => 'referedby'));
         
         $data10 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'registered')));
         $data10_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'registered')));
@@ -65,13 +65,13 @@ class CustomersController extends AppController
         $data12 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'delivery')));
         $data12_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'delivery')));
        
-        $industry = $this->Industry->find('list', array('fields' => 'industryname'));
+        $industry = $this->Industry->find('list', array('conditions'=>array('Industry.is_deleted'=>0),'fields' => 'industryname'));
         $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
         $invoice_types = $this->InvoiceType->find('list', array('fields' => array('id','type_invoice')));
-        $location = $this->Location->find('list', array('fields' => 'locationname'));
+        $location = $this->Location->find('list', array('conditions'=>array('Location.is_deleted'=>0),'fields' => 'locationname'));
         
-        $paymentterm = $this->Paymentterm->find('list', array('fields' => array('id','pay')));
-        $priority= $this->Priority->find('list', array('fields' => 'priority'));
+        $paymentterm = $this->Paymentterm->find('list', array('conditions'=>array('Paymentterm.is_deleted'=>0),'fields' => array('id','pay')));
+        $priority= $this->Priority->find('list', array('conditions'=>array('Priority.is_deleted'=>0),'fields' => 'priority'));
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
         $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
        
@@ -192,8 +192,8 @@ class CustomersController extends AppController
         if($this->Session->read('customer_id')==''){ $this->Session->write('customer_id',$id);  }
         $this->set('customer_id',$id);
         
-        $salesperson = $this->Salesperson->find('list', array('fields' => 'salesperson'));
-        $referedby = $this->Referedby->find('list', array('fields' => 'referedby'));
+        $salesperson = $this->Salesperson->find('list', array('conditions'=>array('Salesperson.is_deleted'=>0),'fields' => 'salesperson'));
+        $referedby = $this->Referedby->find('list', array('conditions'=>array('Referedby.is_deleted'=>0),'fields' => 'referedby'));
         
         $data10 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$id,'status'=>1,'type'=>'registered')));
         $data10_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$id,'status'=>1,'type'=>'registered')));
@@ -205,13 +205,13 @@ class CustomersController extends AppController
         $data12_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$id,'status'=>1,'type'=>'delivery')));
        
         $invoice_types = $this->InvoiceType->find('list', array('fields' => array('id','type_invoice')));
-        $industry = $this->Industry->find('list', array('fields' => 'industryname'));
+        $industry = $this->Industry->find('list', array('conditions'=>array('Industry.is_deleted'=>0),'fields' => 'industryname'));
         
-        $location = $this->Location->find('list', array('fields' => 'locationname'));
+        $location = $this->Location->find('list', array('conditions'=>array('Location.is_deleted'=>0),'fields' => 'locationname'));
         $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
-        $paymentterm = $this->Paymentterm->find('list', array('fields' => array('id','pay')));;
+        $paymentterm = $this->Paymentterm->find('list', array('conditions'=>array('Paymentterm.is_deleted'=>0),'fields' => array('id','pay')));;
         
-        $priority = $this->Priority->find('list', array('fields' => 'priority'));
+        $priority = $this->Priority->find('list', array('conditions'=>array('Priority.is_deleted'=>0),'fields' => 'priority'));
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
         $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
         // Model For the Tab Edit Contact Info
@@ -576,7 +576,7 @@ class CustomersController extends AppController
         {
            $customer_entry  =    $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id),'recursive'=>'3'));
            $instruments   =   $this->Instrument->find('list',array('conditions'=>array('Instrument.status'=>'1'),'order'=>'Instrument.id desc','fields'=>array('id','name')));
-           $customer_instruments   =   $this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$id),'order'=>'CustomerInstrument.id desc'));
+           $customer_instruments   =   $this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$id),'order'=>'CustomerInstrument.id ASC'));
            $this->set(compact('customer_entry','instruments','customer_instruments'));
         }
     }
@@ -643,6 +643,7 @@ class CustomersController extends AppController
                         $this->request->data['Logactivity']['logname'] = 'Costing';
                         $this->request->data['Logactivity']['logactivity'] = 'Add Costing';
                         $this->request->data['Logactivity']['logid'] = $last_id;
+                        $this->request->data['Logactivity']['logno'] = $customer_id;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
 

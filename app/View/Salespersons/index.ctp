@@ -37,7 +37,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <th class="text-center">Sales Person</th>
                                         <th class="text-center">Sales Person Code</th>
                                         <th class="text-center">Description</th>
-                                        <?php if($deleted_val != 1): ?><th class="text-center">Action</th><?php endif; ?>
+                                        <th class="text-center">Action</th>
                                         
                                     </tr>
                                 </thead>
@@ -62,7 +62,18 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                                     'action'=>'delete',$salesperson_list['Salesperson']['id']),array('title'=>'Delete',
                                                         'class'=>'btn btn-xs btn-danger','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to delete?')); ?>
                                                 <?php } ?>
+                                                
                                                </div>
+                                        </td>
+                                    <?php endif; ?>
+                                    <?php if($deleted_val == 1): ?>
+                                         <td class="text-center" style="width: 250px;">
+                                            <div class="btn-group ">
+                                                
+                                                <?PHP echo $this->Form->postlink('<i class="fa fa-undo"></i>',array('controller'=>'Salespersons',
+                                                    'action'=>'retrieve',$salesperson_list['Salesperson']['id']),array('title'=>'Retrieve',
+                                                        'class'=>'btn btn-xs btn-warning','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to Retrieve?')); ?>
+                                            </div>
                                         </td>
                                     <?php endif; ?>
                                     </tr>

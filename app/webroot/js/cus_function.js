@@ -107,7 +107,9 @@ $(document).ready(function(){
                                         <td class="text-center">'+node_data.Range.range_name+'</td>\n\\n\
                                         <td class="text-center">'+node_data.CustomerInstrument.cost+'</td>\n\\n\\n\\n\
                                         <td class="text-center">'+node_data.CustomerInstrument.unit_price+'</td>\n\\n\\n\
-                                        <td class="text-center"><div class="btn-group"><label class="label label-danger">Not Approved</label></div></td></tr>');
+                                        <td class="text-center"><div class="btn-group"><label class="label label-danger">Not Approved</label><a data-edit='+node_data.CustomerInstrument.id+' class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></div></td>\n\\n\\n\\n\
+                                        </tr>');
+                                        
                     $('ul.chosen-results li:first-child').addClass('result-selected');
                     $('#customer_instrument').val(null);
                     $('#model_no').val(null);

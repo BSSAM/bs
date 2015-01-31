@@ -10,7 +10,7 @@ class InstrumentsController extends AppController
     public $helpers = array('Html', 'Form', 'Session');
     public $uses = array('Procedure','Department','Country','Range','Service', 'CustomerInstrument', 'Customerspecialneed',
         'Instrument', 'Brand', 'Customer', 'Device', 'Salesorder', 'Description', 'Deliveryorder','InstrumentBrand','InstrumentRange','InstrumentProcedure','Logactivity','Datalog');
-    public function index()
+    public function index($id=NULL)
     {
         /*******************************************************
          *  BS V1.0
@@ -26,8 +26,25 @@ class InstrumentsController extends AppController
         /*
          * *****************************************************
          */
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
+        if($id == '3'):
+        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>1)),array('order'=>'Instrument.id Desc','recursive'=>'2'));
+        $this->set('deleted_val',$id);
+        elseif($id == '2'):
+        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0,'Instrument.is_approved'=>0)),array('order'=>'Instrument.id Desc','recursive'=>'2'));
+        $this->set('deleted_val',$id);
+        elseif($id == '1'):
+        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0,'Instrument.is_approved'=>1)),array('order'=>'Instrument.id Desc','recursive'=>'2'));
+        $this->set('deleted_val',$id);
+        else:
+        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0)),array('order'=>'Instrument.id Desc','recursive'=>'2'));   
+        $this->set('deleted_val',$id);
+        endif;
+        
         //$instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_approved'=>1),'order'=>'Instrument.id Desc','recursive'=>'2'));
-        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0)),array('order'=>'Instrument.id Desc','recursive'=>'2'));
+        //$instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0)),array('order'=>'Instrument.id Desc','recursive'=>'2'));
         //pr($instrument_data);exit;
         $this->set('instruments', $instrument_data);
         
@@ -255,7 +272,7 @@ class InstrumentsController extends AppController
             * Log Activity For Delete
             */
             
-            $this->Logactivity->deleteAll(array('Logactivity.logname'=>'Instrument','logactivity.logactivity'=>'Add Instrument'),array('Logactivity.logid'=>$id));
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2),array('Logactivity.logid'=>$id,'Logactivity.logname'=>'Instrument','logactivity.logactivity'=>'Add Instrument'));
                     
             /******************/
             /******************
@@ -270,6 +287,51 @@ class InstrumentsController extends AppController
                     
             /******************/    
             $this->Session->setFlash(__('The Instrument has been deleted',h($id)));
+            return $this->redirect(array('controller'=>'Instruments','action'=>'index'));
+        }
+    }
+    public function retrieve($id)
+    {
+        /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Instrument
+         *  Permission : Delete 
+         *  Description   :   Delete Instrument Details page
+         *******************************************************/
+        $user_role = $this->userrole_permission();
+        if($user_role['ins_instrument']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        /*
+         * *****************************************************
+         */
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+        //pr($id);exit;
+        if($this->Instrument->updateAll(array('Instrument.is_deleted'=>0,'Instrument.status'=>1),array('Instrument.id'=>$id)))
+        {
+            /******************
+            * Log Activity For Delete
+            */
+            
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>1),array('Logactivity.logid'=>$id,'Logactivity.logname'=>'Instrument','logactivity.logactivity'=>'Add Instrument'));
+                    
+            /******************/
+            /******************
+                    * Data Log Activity
+                    */
+                    $this->request->data['Datalog']['logname'] = 'Instrument';
+                    $this->request->data['Datalog']['logactivity'] = 'Retrieve';
+                    $this->request->data['Datalog']['logid'] = $id;
+                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                    
+                    $a = $this->Datalog->save($this->request->data['Datalog']);
+                    
+            /******************/    
+            $this->Session->setFlash(__('The Instrument has been Retrieved',h($id)));
             return $this->redirect(array('controller'=>'Instruments','action'=>'index'));
         }
     }

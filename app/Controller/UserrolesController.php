@@ -11,7 +11,7 @@ class UserrolesController extends AppController
     
     public $helpers = array('Html','Form','Session');
     
-    public function index()
+    public function index($id=NULL)
     {
         /*******************************************************
          *  BS V1.0
@@ -29,7 +29,21 @@ class UserrolesController extends AppController
          * ---------------  Functionality of Users -----------------------------------
          */
         $this->loadModel('User');
+        
+        if(empty($id)):
+            $this->set('deleted_val',$id=0);
+        endif;
+        
+        if($id == '1'):
+        $data = $this->Userrole->find('all',array('conditions'=>array('Userrole.is_deleted'=>1)),array('order' => array('Userrole.id' => 'DESC')));
+        $this->set('deleted_val',$id);
+        
+        else:
         $data = $this->Userrole->find('all',array('conditions'=>array('Userrole.is_deleted'=>0)),array('order' => array('Userrole.id' => 'DESC')));
+        $this->set('deleted_val',$id);
+        endif;
+        
+        
         $this->set('userrole', $data);
         //pr($data);
     }
@@ -206,7 +220,46 @@ class UserrolesController extends AppController
             }
         }
     }
-    
+     public function retrieve($id)
+    {
+         
+         /*******************************************************
+         *  BS V1.0
+         *  User Role Permission
+         *  Controller : Userroles
+         *  Permission : delete 
+         *******************************************************/
+        
+        $user_role = $this->userrole_permission();
+        if($user_role['other_role']['delete'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+        
+        /*
+         * *****************************************************
+         */
+        
+        $userrole =  $this->Userrole->findById($id);
+        $user_role_id = $userrole['Userrole']['user_role_id'];
+         if($user_role_id == 1 || $user_role_id == 2)
+        {
+             
+             return $this->redirect(array('action'=>'index'));
+          
+        }
+        if($this->request->is('get'))
+        {
+            throw new MethodNotAllowedException();
+        }
+       if($id!='')
+        {
+            if($this->Userrole->updateAll(array('Userrole.is_deleted'=>0),array('Userrole.id'=>$id)))
+            {
+            $this->Session->setFlash(__('The Userrole has been Retrieved',h($id)));
+            return $this->redirect(array('action'=>'index'));
+            }
+        }
+    }
     public function roles($ids = null)
     {
         /*******************************************************

@@ -139,7 +139,7 @@
                                                      
                                                 <?php else : ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Instrument','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                                <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Instruments','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
                                                 <?php endif; ?>
                                                 <!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->

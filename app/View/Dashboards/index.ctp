@@ -1208,11 +1208,11 @@ $(document).on('click','.approve_invoice',function(){
                                             <tr>
                                                 <td class="text-center" style="width: 80px;"> <?php echo $this->Html->image('letters/letters-in.jpg', array('alt' => 'Instrument','class'=>'')); ?></td>
                                                 <td>
-                                                    <h4><a href="javascript:void(0)"><strong><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logid'] ?></em></small></h4>
+                                                    <h4><a href="javascript:void(0)"><strong><?PHP echo $logactivity_instrument_customer_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP //echo $logactivity_instrument_customer_list['Logactivity']['logactivity'] - ?>    <em><?PHP echo $this->Dash->customerinstrument($logactivity_instrument_customer_list['Logactivity']['logid']); ?></em></small></h4>
                                                 </td>
                                                 <td class="text-center ">
                                                     <?PHP if($logactivity_instrument_customer_list['Logactivity']['logname'] == 'Costing'){ ?>
-                                                    <?PHP //echo $this->html->link('Approve',array('controller'=>'Instruments','action'=>'edit',$logactivity_instrument_customer_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                                    <?PHP echo $this->html->link('Edit',array('controller'=>'Customers','action'=>'instrument_map',$logactivity_instrument_customer_list['Logactivity']['logno']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
                                                     <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_ins_cus','id'=>$logactivity_instrument_customer_list['Logactivity']['logid'])) ?>
                                                     <?php }?>
                                                 </td>
