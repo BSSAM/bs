@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
+                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Title',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','PurchaseRequisition','PreqDevice','PreqCustomerSpecialNeed');
         public function index()
         {
@@ -58,7 +58,12 @@
             
             $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             $this->set(compact('service','additional','instrument_types','country','priority','payment'));
-           
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             if($this->request->is('post'))
             {
                 
@@ -144,7 +149,12 @@
                 $salespeople.=$salesper['Salesperson']['salesperson'].' , ';
             }
             $person_list    =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$customer_id),'fields'=>array('id','name')));
-            
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             //pr($quotation_details);exit;
             $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','quotation')));
             $our_ref_no=$purchase_requistion_list['PurchaseRequisition']['track_id'];
@@ -155,7 +165,7 @@
             $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            
+            pr($purchase_requistion_list);exit;
             $this->set(compact('purchase_requistion_list','instrument_types','person_list','our_ref_no','country','priority','payment','additional','service','quotations_list','salespeople'));
             if($this->request->is(array('post','put')))
             {

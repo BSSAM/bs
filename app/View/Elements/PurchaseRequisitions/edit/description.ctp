@@ -70,7 +70,7 @@
     <label class="col-md-2 control-label" for="val_title">Titles</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('title', array('id'=>'val_title','class'=>'form-control','label'=>false,'name'=>'title','type'=>'select',
-            'options'=>array('1'=>'title'))); ?>
+            'options'=>$titles)); ?>
     </div>
 </div>
 <div class="form-group form-actions">
