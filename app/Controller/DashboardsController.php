@@ -301,6 +301,17 @@ class DashboardsController extends AppController
         
         /*****************************************************/
         
+         /****************** Log Activity - Onsite ********************/
+        
+        $logactivity_onsite = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Onsite")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_onsite', $logactivity_onsite);
+        $logactivity_onsite_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Onsite")));
+        //pr($logactivity_subcon);exit;
+        $this->set('log_activity_onsite_count', $logactivity_onsite_count);
+        
+        /*****************************************************/
+        
         
         /****************** DataLog ********************/
         

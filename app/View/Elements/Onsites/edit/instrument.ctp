@@ -140,7 +140,7 @@
     <label class="col-md-2 control-label" for="val_title">Titles</label>
     <div class="col-md-4">
 <?php echo $this->Form->input('title', array('id' => 'onsite_title', 'class' => 'form-control', 'label' => false, 'name' => 'title', 'type' => 'select',
-    'options' => array('1' => 'title')));
+    'options' => $titles));
 ?>
     </div>
 </div>
@@ -168,10 +168,10 @@
         <tbody class="onsite_instrument_node"> 
             <?PHP
             if (!empty($onsite_list['OnsiteInstrument'])):
-                foreach ($onsite_list['OnsiteInstrument'] as $device):
+                foreach ($onsite_list['OnsiteInstrument'] as $k=>$device):
                     ?>
                     <tr class="onsite_instrument_remove_<?PHP echo $device['id']; ?>">
-                        <td class="text-center"><?PHP echo $device['id']; ?></td>
+                        <td class="text-center"><?PHP echo $k+1; ?></td>
                         <td class="text-center"><?PHP echo $device['Instrument']['name']; ?></td>
                         <td class="text-center"><?PHP echo $device['model_no']; ?></td>
                         <td class="text-center"><?PHP echo $device['onsite_calllocation']; ?></td>

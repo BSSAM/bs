@@ -136,7 +136,7 @@ $(document).ready(function(){
             url: path_url+"/Onsites/add_engineers",
             beforeSend: ni_start(),  
             complete: ni_end(),
-            data: 'engineer_name='+engineer_name+'&user_id='+id+'&onsiteschedule_no='+onsiteschedule_no,
+            data: 'engineer_name='+engineer_name+'&engineer_email='+engineer_email+'&onsiteschedule_no='+onsiteschedule_no,
             cache: false,
             success: function(data)
             {

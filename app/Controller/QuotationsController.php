@@ -807,7 +807,9 @@
                 $event_array[$cal_list]['title'] = $v[0]['title'];
                 $event_array[$cal_list]['start'] = $v['Quotation']['start'];
             }
-            return json_encode($event_array);
+            header('Content-Type: application/json');
+            echo json_encode($event_array);
+            exit;
 
         }
         public function calendar_clientpo()

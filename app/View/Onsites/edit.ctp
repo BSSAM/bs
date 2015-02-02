@@ -19,7 +19,37 @@
                     }
                 });
             }return false;    
-        });});
+        });
+        
+        /**************************Invoice Approval in Invoice Module*************************************/
+    $(document).on('click','.approve_invoice',function(){
+       var val_onsiteno=$('#onsiteschedule_no').val();
+       //alert(val_onsiteno); return false;
+       
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_onsiteno,
+            beforeSend: ni_start(),  
+            complete: ni_end(),
+            url: path+'Onsites/approve/',
+            success: function(data)
+            {
+                //return false;
+                alert("Onsite Approval Successful");
+               window.location.reload();
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
+        
+        });
 </script>     
 
                     <h1>
@@ -84,9 +114,17 @@
                                                  <div class="tab-pane" id="tab3">
                                                     <?PHP echo $this->element('Onsites/edit/engineer'); ?>
                                                      <div class="form-group form-actions">
-                                                         <div class="col-md-9 col-md-offset-10">
-                                                             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary onsite_submit', 'escape' => false)); ?>
-                                                             <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel', array('controller'=>'Onsites','action'=>'index'),array('class' => 'btn btn-sm btn-warning','escape' => false)); ?>
+                                                         <div class="col-md-5 col-md-offset-9">
+                                                             <?php //echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary onsite_submit', 'escape' => false)); ?>
+                                                             <?php //echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel', array('controller'=>'Onsites','action'=>'index'),array('class' => 'btn btn-sm btn-warning','escape' => false)); ?>
+                                                             <?php if($onsite_list['Onsite']['is_approved']==0): ?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_invoice','escape' => false)); ?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary onsite_submit','escape' => false)); ?>
+                                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Onsites','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                                            <?php else : ?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary onsite_submit','escape' => false)); ?>
+                                                            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Onsites','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                                            <?php endif; ?>
                                                       </div>
                                                      </div>
                                                 </div>

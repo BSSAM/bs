@@ -375,8 +375,9 @@ class InstrumentsController extends AppController
             $event_array[$cal_list]['title'] = $v[0]['title'];
             $event_array[$cal_list]['start'] = $v['Instrument']['start'];
         }
-        return json_encode($event_array);
-
+        header('Content-Type: application/json');
+            echo json_encode($event_array);
+            exit;
     }
     public function temp($id=NULL)
     {
@@ -388,7 +389,9 @@ class InstrumentsController extends AppController
             $event_array[$cal_list]['title'] = $v[0]['title'];
             $event_array[$cal_list]['start'] = $v['Instrument']['start'];
         }
-        return json_encode($event_array);
+        header('Content-Type: application/json');
+            echo json_encode($event_array);
+            exit;
 
     }
     public function pre($id=NULL)
@@ -401,7 +404,9 @@ class InstrumentsController extends AppController
             $event_array[$cal_list]['title'] = $v[0]['title'];
             $event_array[$cal_list]['start'] = $v['Instrument']['start'];
         }
-        return json_encode($event_array);
+        header('Content-Type: application/json');
+            echo json_encode($event_array);
+            exit;
 
     }
     public function ele($id=NULL)
@@ -414,7 +419,9 @@ class InstrumentsController extends AppController
             $event_array[$cal_list]['title'] = $v[0]['title'];
             $event_array[$cal_list]['start'] = $v['Instrument']['start'];
         }
-        return json_encode($event_array);
+        header('Content-Type: application/json');
+            echo json_encode($event_array);
+            exit;
 
     }
     public function dim($id=NULL)
@@ -427,7 +434,9 @@ class InstrumentsController extends AppController
             $event_array[$cal_list]['title'] = $v[0]['title'];
             $event_array[$cal_list]['start'] = $v['Instrument']['start'];
         }
-        return json_encode($event_array);
+        header('Content-Type: application/json');
+            echo json_encode($event_array);
+            exit;
 
     }
     public function tech($id=NULL)
@@ -440,7 +449,10 @@ class InstrumentsController extends AppController
             $event_array[$cal_list]['title'] = $v[0]['title'];
             $event_array[$cal_list]['start'] = $v['Instrument']['start'];
         }
-        return json_encode($event_array);
+        header('Content-Type: application/json');
+            echo json_encode($event_array);
+            exit;
+        
 
     }
 }

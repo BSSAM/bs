@@ -3,25 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/bs/app/Model/CusSalesperson.php</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/delivery_order.js</file>
-            <file>file:/D:/wamp/www/bs/app/View/Clientposapproval/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Clientposapproval/pobeforedo-po.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Onsite.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/createschedule.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/OnsitesController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Quotations/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/edit/createschedule.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Onsites/edit.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/instrument.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/AppController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Clientposapproval/pobeforein-po.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/clientpos_function_js.js</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/ClientposapprovalController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Model/Contactpersoninfo.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Clientposapproval/pobeforedo-sales.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Invoices/approve.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Salesorders/edit/description.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Deliveryorders/edit/customer_special_needs_tagid.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/LabprocessesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/InvoicesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Clientposapproval/pobeforein-sales.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/DeliveryordersController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Clientposapproval/view.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/edit/instrument.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/engineer.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/DashboardsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Onsites/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/onsite_schedule.js</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/QuotationsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/quotation_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/edit/description.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/quo_function_js.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Layouts/default.ctp</file>
         </group>
     </open-files>
 </project-private>

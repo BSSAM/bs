@@ -64,7 +64,7 @@
     </div>
      <label class="col-md-2 control-label" for="val_date">Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('schedule_date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
+        <?php echo $this->Form->input('schedule_date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd',
                                                 'placeholder'=>'Enter the Date','label'=>false)); ?>
     </div>
 </div>

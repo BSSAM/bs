@@ -393,6 +393,7 @@ $("#search_cusinstrument").hide();
                         "instrument_total":instrument_total,
                         "quotationno":quotationno
                     }).success(function(data){
+                        console.log(data);exit;
                          $.each(data,function(k,v){
                             //console.log(k);
                             //console.log(v);
@@ -561,9 +562,15 @@ $("#search_cusinstrument").hide();
             var instrument_validity=$('#val_validity').val();
             var instrument_unitprice=$('#val_unit_price').val();
             var instrument_discount=$('#val_discount').val();
+            if(!instrument_discount)
+            {
             var instrument_cal=instrument_unitprice*instrument_discount/100;
             var instrument_total= instrument_unitprice - instrument_cal;
-
+            }
+            else
+            {
+                var instrument_total= instrument_unitprice;
+            }
             var instrument_department=$('#val_department_id').val();
             var instrument_account=$('#val_account_service').val();
             var instrument_title=$('#val_title').val();
@@ -590,7 +597,7 @@ $("#search_cusinstrument").hide();
                     "instrument_total":instrument_total,
                     "quotationno":quotation_id
                 }).success(function(data){
-                    //console.log(data);
+                    console.log(data);
                     //return false;
         
                    // $scope.instruments[$scope.edit_index] = {serial:$scope.edit_id,customer_id:customer_id,quotation_id:quotation_id,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};

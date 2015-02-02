@@ -24,8 +24,8 @@
          * *****************************************************
          */
             //$this->Quotation->recursive = 1; 
-            $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.id' => 'DESC')));
-            $this->set('quotation', $quotation_lists);
+            //$quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.id' => 'DESC')));
+            //$this->set('quotation', $quotation_lists);
         }
         public function add()
         {
@@ -79,6 +79,9 @@
                 {
                     $onsite_id   =   $this->Onsite->getLastInsertID();
                     $this->Random->updateAll(array('Random.onsites'=>'"'.$onsite_no.'"'),array('Random.id'=>1));  
+                    // Quo Device Update
+                    $this->Device->updateAll(array('Device.onsite'=>1,'Device.onsite_id'=>$onsite_id),array('Device.quotationno'=>$quotationno));  
+                    
                     $device_node    =   $this->OnsiteInstrument->find('all',array('conditions'=>array('OnsiteInstrument.quotationno'=>$quotationno)));
                     if(!empty($device_node))
                     {  
@@ -142,10 +145,15 @@
                 * *****************************************************
                 */
             $onsite_list=$this->Onsite->find('first',array('conditions'=>array('Onsite.id'=>$id,'Onsite.is_deleted'=>0),'recursive'=>2));
-           
+            //pr($onsite_list);exit;
             $onsite_no  =   $onsite_list['Onsite']['onsiteschedule_no'];
             $user_list  =   $this->User->find('list',array('conditions'=>array('User.status'=>'1','User.is_deleted'=>0),'fields'=>array('emailid','full_name')));
-            
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
@@ -371,7 +379,7 @@
             $quantity = $this->request->data->instrument_quantity;
             //pr($quantity);exit;
             $instrument_ids = array();
-            
+            //pr($this->request->data);exit;
             for($i=0;$i<$quantity;$i++)
             {
                 $data['quotationno']   =   $this->request->data->quotationno;
@@ -483,9 +491,9 @@
         {
             $this->autoRender=false;
             $id =  $this->request->data['id'];
-            $this->Quotation->updateAll(array('Quotation.is_approved'=>1),array('Quotation.id'=>$id));
+            $this->Onsite->updateAll(array('Onsite.is_approved'=>1),array('Onsite.onsiteschedule_no'=>$id));
             $user_id = $this->Session->read('sess_userid');
-            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Quotation'));
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logno'=>$id,'Logactivity.logactivity'=>'Add Onsite'));
             //pr($log);exit;
             //$details=$this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id)));
 //            $track_id = $details['Quotation']['track_id'];
@@ -587,15 +595,21 @@
         public function calendar()
         {
             $this->autoRender = false;
-            $cal = $this->Quotation->find('all', array('conditions' => array('Quotation.status' => 1, 'Quotation.is_approved' => 1), 'group' => 'reg_date', 'fields' => array('count(Quotation.reg_date) as title', 'reg_date as start'), 'recursive' => '-1'));
+            $cal = $this->Onsite->find('all', array( 'group' => 'schedule_date', 'fields' => array('Onsite.onsiteschedule_no as title', 'schedule_date as start','id as url'), 'recursive' => '-1'));
 
             $event_array = array();
             foreach ($cal as $cal_list => $v) {
-
-                $event_array[$cal_list]['title'] = $v[0]['title'];
-                $event_array[$cal_list]['start'] = $v['Quotation']['start'];
+                //echo date('yyyy-mm-dd',$v['Onsite']['start']);
+                //pr(Router::url('/Onsites/edit/'.$v['Onsite']['url'],true));
+                //exit;
+                $event_array[$cal_list]['title'] = $v['Onsite']['title'];
+                $event_array[$cal_list]['start'] = $v['Onsite']['start'];
+                $event_array[$cal_list]['url'] = Router::url('/Onsites/edit/'.$v['Onsite']['url'],true);
             }
-            return json_encode($event_array);
+            //2015-02-09
+            header('Content-Type: application/json');
+            echo json_encode($event_array);
+            exit;
 
         }
         public function quotation_search()
@@ -606,7 +620,7 @@
             //$device_status =  $this->request->data['device_status'];
             if($name!='')
             {
-                $data = $this->Device->find('all',array('conditions'=>array('Device.call_location'=>'Onsite','Device.is_deleted'=>0),'group' => array('Device.quotationno')));
+                $data = $this->Device->find('all',array('conditions'=>array('Device.call_location'=>'Onsite','Device.is_deleted'=>0,'Device.onsite'=>0),'group' => array('Device.quotationno')));
                 $c = count($data);
               
                 if($c!=0)
@@ -682,6 +696,7 @@
             $qo_device['Device']   =   $this->Device->find('all',array('conditions'=>array('Device.quotationno'=>$qo_id,'Device.is_deleted'=>0,'Device.call_location'=>'Onsite'),'order'=>'Device.order_by ASC'));
 //            pr($qo_device);exit;
             // for Onsite instruments add
+            $this->OnsiteInstrument->deleteAll(array('OnsiteInstrument.quotationno'=>$qo_id,'OnsiteInstrument.status'=>0,'OnsiteInstrument.onsite_id'=>''));
             $this->add_onsite_instruments($qo_device['Device'],$qo_id);
             $onsite_device['OnsiteInstrument']  =   $this->OnsiteInstrument->find('all',array('conditions'=>array('OnsiteInstrument.quotationno'=>$qo_id,'OnsiteInstrument.is_deleted'=>0,'OnsiteInstrument.onsite_calllocation'=>'Onsite'),'recursive'=>'1'));
             $contact_list   =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$qo_data['Quotation']['attn'],'Contactpersoninfo.status'=>1),'fields'=>array('name','email')));

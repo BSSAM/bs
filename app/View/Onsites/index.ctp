@@ -1,4 +1,8 @@
-  <h1>
+<script>
+    var path='<?PHP echo Router::url('/Onsites',true); ?>';
+</script>            
+            
+            <h1>
                                 <i class="fa fa-calendar"></i>On Site Schedule
                             </h1>
                         </div>
@@ -139,7 +143,8 @@
                     // remove the element from the "Draggable Events" list
                     $(this).remove();
                 },
-                events: [
+                events: path+'/calendar/'
+//                 [
                    
 //                    {
 //                        title: 'Live Conference',
@@ -164,13 +169,13 @@
 //                        allDay: false,
 //                        color: '#d35400'
 //                    },
-                    {
-                        title: 'Invoice',
-                        start: '2014-06-09T12:30:00',
-                        end: '2014-06-10T12:30:00',
-                        allDay: false
-                    }
-                ]
+//                    {
+//                        title: 'Invoice',
+//                        start: '2015-02-09',
+//                        end: '2015-02-10',
+//                        allDay: false
+//                    }
+//                ]
             });
         }
     };
@@ -178,4 +183,5 @@
                 
                 
               </script>
-       
+       <?php //echo $this->Html->script('pages/compCalendar'); ?>
+<!--     <script>$(function(){ CompCalendar.init(); });</script>-->

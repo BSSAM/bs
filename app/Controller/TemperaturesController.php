@@ -743,7 +743,7 @@
                 
             $readingtype_data = $this->Tempreadingtype->find('all',array('conditions'=>array('Tempreadingtype.is_deleted'=>0)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
             $this->set('readingtype', $readingtype_data);
-            $this->render('readingtype/index');
+            $this->render('Readingtype/index');
         }
         public function addreadingtype($file)
         {    //exit;
@@ -766,7 +766,7 @@
                     
             $this->redirect(array('controller'=>'Temperatures','action'=>'readingtype'));
             }
-            $this->render('readingtype/'.$file);
+            $this->render('Readingtype/'.$file);
         }
         public function editreadingtype($file, $id = null)
         {
@@ -786,7 +786,7 @@
             {
                 $this->request->data = $readingtype_data;
             }
-            $this->render('readingtype/'.$file);
+            $this->render('Readingtype/'.$file);
         }
         public function deletereadingtype($file, $id = null)
         {
@@ -838,7 +838,7 @@
                 
             $channel_data = $this->Tempchannel->find('all',array('conditions'=>array('Tempchannel.is_deleted'=>0)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
             $this->set('channel', $channel_data);
-            $this->render('channel/index');
+            $this->render('Channel/index');
         }
         public function addchannel($file)
         {    //exit;
@@ -862,7 +862,7 @@
                     
             $this->redirect(array('controller'=>'Temperatures','action'=>'channel'));
             }
-            $this->render('channel/'.$file);
+            $this->render('Channel/'.$file);
         }
         public function editchannel($file, $id = null)
         {
@@ -884,7 +884,7 @@
             {
                 $this->request->data = $channel_data;
             }
-            $this->render('channel/'.$file);
+            $this->render('Channel/'.$file);
         }
         public function deletechannel($file, $id = null)
         {
@@ -937,7 +937,7 @@
             $instrumentvalidity_data = $this->Tempinstrumentvalid->find('all',array('conditions'=>array('Tempinstrumentvalid.is_deleted'=>0)),array('order'=>'Tempinstrumentvalid.id Desc','recursive'=>'2'));
             $this->set('instrumentvalidity', $uncertainty_data);
 			//pr($instrumentvalidity_data);exit;
-            $this->render('instrumentvalidity/index');
+            $this->render('Instrumentvalidity/index');
         }
         public function addinstrumentvalidity($file)
         {    
@@ -962,7 +962,7 @@
                     
             $this->redirect(array('controller'=>'Temperatures','action'=>'instrumentvalidity'));
             }
-            $this->render('instrumentvalidity/'.$file);
+            $this->render('Instrumentvalidity/'.$file);
         }
         public function editinstrumentvalidity($file, $id = null)
         {
@@ -984,7 +984,7 @@
                 $this->request->data = $instrumentvalidity_data;
 				$this->set('instrumentvalidity_data',$instrumentvalidity_data);
             }
-            $this->render('instrumentvalidity/'.$file);
+            $this->render('Instrumentvalidity/'.$file);
         }
         public function deleteinstrumentvalidity($file, $id = null)
         {
@@ -1036,7 +1036,7 @@
                 
             $unit_data = $this->Tempunit->find('all',array('conditions'=>array('Tempunit.is_deleted'=>0)),array('order'=>'Tempunit.id Desc','recursive'=>'2'));
             $this->set('unit', $unit_data);
-            $this->render('unit/index');
+            $this->render('Unit/index');
         }
         public function addunit($file)
         {    //exit;
@@ -1059,7 +1059,7 @@
                     
             $this->redirect(array('controller'=>'Temperatures','action'=>'unit'));
             }
-            $this->render('unit/'.$file);
+            $this->render('Unit/'.$file);
         }
         public function editunit($file, $id = null)
         {
@@ -1079,7 +1079,7 @@
             {
                 $this->request->data = $unit_data;
             }
-            $this->render('unit/'.$file);
+            $this->render('Unit/'.$file);
         }
         public function deleteunit($file, $id = null)
         {
@@ -1131,7 +1131,7 @@
                 
             $unitconvert_data = $this->Tempunitconvert->find('all',array('conditions'=>array('Tempunitconvert.is_deleted'=>0)),array('order'=>'Tempunitconvert.id Desc','recursive'=>'2'));
             $this->set('unitconvert', $unitconvert_data);
-            $this->render('unitconvert/index');
+            $this->render('Unitconvert/index');
         }
         public function addunitconvert($file)
         {    
@@ -1156,7 +1156,7 @@
                     
             $this->redirect(array('controller'=>'Temperatures','action'=>'unitconvert'));
             }
-            $this->render('unitconvert/'.$file);
+            $this->render('Unitconvert/'.$file);
         }
         public function editunitconvert($file, $id = null)
         {
@@ -1178,7 +1178,7 @@
                 $this->request->data = $unitconvert_data;
 				$this->set('unitconvert_data',$unitconvert_data);
             }
-            $this->render('unitconvert/'.$file);
+            $this->render('Unitconvert/'.$file);
         }
         public function deleteunitconvert($file, $id = null)
         {
@@ -1252,7 +1252,7 @@
             $template_data = $this->Temptemplate->find('all',array('conditions'=>array('Temptemplate.is_deleted'=>0)),array('order'=>'Temptemplate.id Desc','recursive'=>'2'));
             //pr($template_data);exit;
             $this->set('template', $template_data);
-            $this->render('template/index');
+            $this->render('Template/index');
         }
             
         public function addtemplate($file,$id = null)
@@ -1315,7 +1315,7 @@
                   //  exit;
                 $this->redirect(array('controller'=>'Temperatures','action'=>'template'));
             }
-            $this->render('template/'.$file);
+            $this->render('Template/'.$file);
         }
             
         public function edittemplate($file, $id = null)
@@ -1405,7 +1405,7 @@
                     $this->request->data = $template_data;
                 }
             }
-            $this->render('template/'.$file);
+            $this->render('Template/'.$file);
         }
             
         public function viewtemplate($file, $id = null)
