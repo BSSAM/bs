@@ -644,15 +644,17 @@ body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helveti
     public function add()
         {
             $str=NULL;
-          
-            if($this->request->is('post'))
-            {
-               $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
+            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $this->set('service',$services);
+            $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             $this->set('priority',$priority);
             $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
             $this->set('payment',$payment);
-            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $this->set('service',$services);
+            if($this->request->is('post'))
+            {
+               
+            
+            
                if($this->Proforma->save($this->request->data))
                     {
                          $customer_id    =   $this->request->data['Proforma']['customer_id'];

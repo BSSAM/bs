@@ -6,7 +6,7 @@
     </div>
     <label class="col-md-2 control-label" for="val_service_type">Service Type</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Proforma.service_id', array('id'=>'val_service_type','class'=>'form-control','type'=>'select','label'=>false,'readonly'=>'readonly')); ?>
+        <?php echo $this->Form->input('Proforma.service_id', array('id'=>'val_service_type','class'=>'form-control','type'=>'select','label'=>false,'readonly'=>'readonly','options'=>$service)); ?>
        
     </div>
 </div>
@@ -17,6 +17,8 @@
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Brand</th>
+            <th class="text-center">Model</th>
+            <th class="text-center">Range</th>
             <th class="text-center">Call Location</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>

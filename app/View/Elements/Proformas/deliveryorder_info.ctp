@@ -13,7 +13,7 @@
         <label class="col-md-2 control-label" for="val_priority">Priority</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Proforma.priority', array('id'=>'val_priority','class'=>'form-control',
-            'label'=>false,'readonly'=>'readonly','type'=>'text')); ?>
+            'label'=>false,'readonly'=>'readonly','type'=>'select','options'=>$priority)); ?>
     </div>
 </div>
     

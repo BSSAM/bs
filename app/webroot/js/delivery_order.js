@@ -178,7 +178,7 @@ $(document).ready(function(){
                     
                     $('#val_id').val(sales_node.BPI.id);
                     $('#val_salesorderno').val(sales_node.Salesorder.salesorderno);
-                    $('#val_priority').val(sales_node.Salesorder.priority);
+                    $('#val_priority').val(sales_node.Customer.priority_id);
                     $('#val_customer_id').val(sales_node.Salesorder.customer_id);
                     $('#val_customer').val(sales_node.Customer.customername);
                     $('#val_address').val(sales_node.Salesorder.address);
@@ -208,7 +208,9 @@ $(document).ready(function(){
                                     <tr class="tr_color sales_instrument_remove_'+value.id+'">\n\\n\
                                     <td class="text-center">'+(key+1)+'</td>\n\
                                     <td class="text-center">'+value.Instrument.name+'</td>\n\\n\
-                                    <td class="text-center">'+value.Brand.brandname+'</td>\n\\n\
+                                    <td class="text-center">'+value.Brand.brandname+'</td>\n\\n\\n\
+                                    <td class="text-center">'+value.model_no+'</td>\n\\n\
+                                    <td class="text-center">'+value.Range.range_name+'</td>\n\\n\
                                     <td class="text-center">'+value.sales_calllocation+'</td>\n\
                                      <td class="text-center">'+value.sales_validity+'</td>\n\
                                     <td class="text-center">'+value.sales_unitprice+'</td>\n\\n\

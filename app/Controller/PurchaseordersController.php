@@ -9,7 +9,7 @@ class PurchaseordersController extends AppController
 {
     public $helpers = array('Html', 'Form', 'Session');
     public $uses = array('Priority', 'Paymentterm', 'Quotation', 'Currency',
-        'Country', 'Additionalcharge', 'Service', 'CustomerInstrument', 'Customerspecialneed',
+        'Country', 'Additionalcharge', 'Service', 'CustomerInstrument', 'Customerspecialneed','Datalog','Logactivity',
         'Instrument', 'Brand', 'Customer', 'Device','Purchaseorder','PurchaseCustomerspecialneed','Salesorder','Description');
         public function index()
         {
@@ -81,8 +81,9 @@ class PurchaseordersController extends AppController
         }
         public function edit($id=NULL)
         {
+            //pr($id);exit;
             $purchase_edit_data = $this->Purchaseorder->find('first',array('conditions'=>array('Purchaseorder.id'=>$id),'recursive'=>3));
-           
+           //pr($purchase_edit_data);exit;
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$purchase_edit_data['Purchaseorder']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_po_id'=>$id),'Instrument','Brand','Range','Department'))));
             //pr($salesorder_details);exit;
             //pr($salesorder_details);exit;
