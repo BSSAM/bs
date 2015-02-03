@@ -402,18 +402,13 @@
                 <div class="col-md-2">
                     <?php echo $this->Form->input('procedureno', array('id' => 'val_procno', 'class' => 'form-control', 'placeholder' => 'Enter the Procedure No', 'label' => false,'autoComplete'=>'off','value'=> $uncertainty['Tempuncertainty']['procedureno'])); ?>
                 </div>
-                 <label class="col-md-2 control-label" for="val_serialno">Serial No </label>
-                <div class="col-md-2">
-                    <?php echo $this->Form->input('serialno', array('id' => 'val_serialno', 'class' => 'form-control', 'placeholder' => 'Enter the Serial No', 'label' => false,'autoComplete'=>'off','value'=> $uncertainty['Tempuncertainty']['serialno'])); ?>
-                </div>
+                 
                 <label class="col-md-2 control-label" for="val_caldate">Cal Date</label>
                 <div class="col-md-2">
                     <?php echo $this->Form->input('caldate', array('id' => 'val_caldate', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy',
                         'placeholder' => 'Enter Calibration Date', 'label' => false,'value'=> $uncertainty['Tempuncertainty']['caldate']));
                     ?>
                 </div>
-            </div>
-            <div class="form-group">
                 <label class="col-md-2 control-label" for="val_duedate">Remarks  </label>
                  <div class="col-md-2">
             <?php
@@ -421,6 +416,12 @@
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea', 'rows'=>'3','value'=> $uncertainty['Tempuncertainty']['remarks']));
             ?>    
             </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val_serialno">Serial No </label>
+                <div class="col-md-2">
+                    <?php echo $this->Form->input('serialno', array('id' => 'val_serialno', 'class' => 'form-control', 'placeholder' => 'Enter the Serial No', 'label' => false,'autoComplete'=>'off','value'=> $uncertainty['Tempuncertainty']['serialno'])); ?>
+                </div>
              <div class="col-md-4">
 						<label class="col-md-6 control-label" for="val_ref_no">Active</label>
 						<div class="col-md-2">
