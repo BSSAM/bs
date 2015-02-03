@@ -312,6 +312,16 @@ class DashboardsController extends AppController
         
         /*****************************************************/
         
+        /****************** Log Activity - Purchase Order ********************/
+        
+        $logactivity_pur = $this->Logactivity->find('all',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Purchaseorders")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_pur', $logactivity_pur);
+        
+        $logactivity_pur_count = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logapprove'=>1,'Logactivity.logname'=>"Purchaseorders")));
+        //pr($logactivity);exit;
+        $this->set('log_activity_pur_count', $logactivity_pur_count);
+        /*****************************************************/
         
         /****************** DataLog ********************/
         

@@ -8,9 +8,9 @@
 class PurchaseordersController extends AppController
 {
     public $helpers = array('Html', 'Form', 'Session');
-    public $uses = array('Priority', 'Paymentterm', 'Quotation', 'Currency',
+    public $uses = array('Priority', 'Paymentterm', 'Quotation', 'Currency','InstrumentType',
         'Country', 'Additionalcharge', 'Service', 'CustomerInstrument', 'Customerspecialneed','Datalog','Logactivity',
-        'Instrument', 'Brand', 'Customer', 'Device','Purchaseorder','PurchaseCustomerspecialneed','Salesorder','Description');
+        'Instrument', 'Brand', 'Customer', 'Device','Purchaseorder','PurchaseCustomerspecialneed','Salesorder','Description','Contactpersoninfo');
         public function index()
         {
             //$this->Quotation->recursive = 1; 
@@ -84,7 +84,8 @@ class PurchaseordersController extends AppController
             //pr($id);exit;
             $purchase_edit_data = $this->Purchaseorder->find('first',array('conditions'=>array('Purchaseorder.id'=>$id),'recursive'=>3));
            //pr($purchase_edit_data);exit;
-            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$purchase_edit_data['Purchaseorder']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_po_id'=>$id),'Instrument','Brand','Range','Department'))));
+            
+            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id' => $purchase_edit_data['Purchaseorder']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('Instrument','Brand','Range','Department','conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_po_id'=>$id)))));
             //pr($salesorder_details);exit;
             //pr($salesorder_details);exit;
             $this->set('purchase',$purchase_edit_data);

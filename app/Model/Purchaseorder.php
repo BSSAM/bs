@@ -10,8 +10,8 @@ class Purchaseorder extends AppModel
     var $name = 'Purchaseorder';
     public $hasMany = array(
         'Description' => array(
-            'className' => 'PurchaseCustomerspecialneed',
-            'foreignKey' => 'purchaseorder_id',
+            'className' => 'Description',
+            'foreignKey' => 'sales_po_id',
             'conditions' => array(),
             'fields' => '',
             'order' => '',
