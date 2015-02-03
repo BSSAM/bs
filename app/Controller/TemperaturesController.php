@@ -1500,16 +1500,17 @@
                 
             if($this->request->is('post'))
             { //echo "hi";
-               // pr($this->request->data);exit;
+                $this->request->data['Temptemplatedata']['temp_uncertainty_id'] = implode(',',$this->request->data['Temptemplatedata']['temp_uncertainty_id']);
+               // pr($this->request->data['Temptemplatedata']);exit;
                 if(!isset($this->request->data['Temptemplatedata']['edit_template_bulk_id']))
                 {
                     //
                     if($this->Temptemplatedata->save($this->request->data['Temptemplatedata']))
                     {
                         $temptemplatedata = $this->Temptemplatedata->find('all',array('conditions' => array('Temptemplatedata.instrument_id' => $this->request->data['Temptemplatedata']['ins_id'],
-						                                                                                        'Temptemplatedata.range_id' => $this->request->data['Temptemplatedata']['range_id'],
-																												  'Temptemplatedata.model_no' => $this->request->data['Temptemplatedata']['model_no'],
-																												     'Temptemplatedata.brand_id' => $this->request->data['Temptemplatedata']['brand_id'])));
+			'Temptemplatedata.range_id' => $this->request->data['Temptemplatedata']['range_id'],
+			'Temptemplatedata.model_no' => $this->request->data['Temptemplatedata']['model_no'],
+			'Temptemplatedata.brand_id' => $this->request->data['Temptemplatedata']['brand_id'])));
                         $this->set('temptemplatedata',$temptemplatedata);
                     }
                     else

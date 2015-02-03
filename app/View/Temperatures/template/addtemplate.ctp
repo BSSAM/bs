@@ -352,7 +352,7 @@
                 
                 <label class="col-md-2 control-label" for="val_prefref">Pref Reference</label>
                 <div class="col-md-8">
-                    <?php echo $this->Form->input('temp_uncertainty_id', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
+                    <?php echo $this->Form->input('temp_uncertainty_id.', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
                 </div>
                 
             </div>

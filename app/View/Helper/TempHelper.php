@@ -39,8 +39,16 @@ class TempHelper extends AppHelper
     {
         APP::import('Model','Tempuncertainty');
         $this->Tempuncertainty   =   new Tempuncertainty();
-        $data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=>$id)));
-        return $data['Tempuncertainty']['totalname'];
+        $id1 = array();
+        $id1 = explode(',',$id);
+        $data1 = array();
+        foreach($id1 as $ids)
+        {
+            $data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=>$ids)));
+            $data1[] = $data['Tempuncertainty']['totalname'];
+        }
+        $data2 = implode(',',$data1);
+        return $data2;
     }
     public function get_instrument_name($id = null)
     {

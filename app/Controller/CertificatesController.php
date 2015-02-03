@@ -193,19 +193,24 @@ class CertificatesController extends AppController
                         {
                         $uncer_va  = explode(',',$this->request->data['step1']['uncertainty'.$j.'_val']);
                         }
-                        
+                        //pr()
                         foreach($uncer_va as $u)
                         {
                             $tempuncertaintydata1 = $this->Tempuncertaintydata->find('first', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $u)));
                             $rangeid = $tempuncertaintydata1['Tempuncertaintydata']['range_id'];
                             $range_dat = $this->Range->find('first',array('conditions'=>array('Range.id'=>$rangeid),'recursive'=>'2'));
                             $temp_val = $this->request->data['step1']['temp'.$j];
-                            
-                            $yesorno = t1($temp_val, $range_dat['Range']['from_range'], $range_dat['Range']['to_range']);
+                            if($range_dat){
+                            if($range_dat['Range']['from_range']!='' || $range_dat['Range']['to_range']!=''){
+                            $yesorno = t1($temp_val, $range_dat['Range']['from_range'], $range_dat['Range']['to_range']);}
+                            else{
+                                $yesorno = false;
+                            }
                             
 
                             if($yesorno == true){
                                $aaaaaa[] = $arr1[]  = $tempuncertaintydata1['Tempuncertaintydata']['id'];
+                            }
                             }
                         }
                         
@@ -237,7 +242,7 @@ class CertificatesController extends AppController
                         {
                             //pr($comcert);
                             $step1infor = $this->Tempuncertaintydata->find('first', array('conditions' => array('Tempuncertaintydata.id' => $comcert)));
-                            //pr($step1infor);
+                           // pr($step1infor);
                             $uref1 = $step1infor['Tempuncertaintydata']['uref1_data1'];
                             $uref2 = $step1infor['Tempuncertaintydata']['uref2_data1'];
                             $uref3 = $step1infor['Tempuncertaintydata']['uref3_data1'];
@@ -291,7 +296,9 @@ class CertificatesController extends AppController
                             //pr($vc);exit;
                             $kfactor = 2;
                             $urep = $this->request->data['step1']['m'.$j.'_13'];
+                            //pr($urep);
                             $po_val = (powfn4($urep)/($this->request->data['step1']['no_runs']-1));
+                            pr($po_val);
                             $dof = (powfn4($vc)/$po_val);
                             //pr($dof);
                             $uncertainty[] = $kfactor * $vc;
@@ -299,7 +306,7 @@ class CertificatesController extends AppController
                             
                         }
                         //pr($dof);
-                        //pr($uncertainty);exit; 
+                        
                         
                         //exit;
                         //exit;
@@ -356,6 +363,8 @@ class CertificatesController extends AppController
                         //}
                         
                     }
+                    //pr($uncertainty);
+                    exit; 
                     //$unique = array();
                     //$unique[] = ;
                     

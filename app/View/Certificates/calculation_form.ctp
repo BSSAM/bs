@@ -2091,7 +2091,7 @@
         </tr>
       </thead>
       <tbody class="calcul2_instrument_info">
-          <?php if(isset($uncertaintyda)) { foreach($uncertaintyda as $uncertainty){ ?>
+          <?php if(isset($uncertaintyda)) { foreach($uncertaintyda as $uncertainty){  ?>
           <tr class="text-center">
           <td class="text-center"><?php echo $uncertainty['Tempuncertaintydata']['count']; ?></td>
           <td class="text-center"></td>

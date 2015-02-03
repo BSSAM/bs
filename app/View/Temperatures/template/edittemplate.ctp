@@ -190,7 +190,7 @@
                     $('#val_accuracy').val(edit_node.Temptemplatedata.accuracy);
 					$('.readingtypename').val(edit_node.Temptemplatedata.readingtypename);
 					$('.unitname').val(edit_node.Temptemplatedata.unitname);
-                    $('#val_prefref').val(edit_node.Temptemplatedata.temp_uncertainty_id).trigger("chosen:updated");
+                    $('#val_prefref').val(edit_node.Temptemplatedata.temp_uncertainty_id.split(',')).trigger("chosen:updated");
                     $('.edit_all_fields').text('Edit');
                     $('.edit_all_fields').attr('id',edit_node.Temptemplatedata.id);
                     $('.edit_template_bulk_id').val(edit_node.Temptemplatedata.id);
@@ -339,7 +339,7 @@
                 
                 <label class="col-md-2 control-label" for="val_prefref">Pref Reference</label>
                 <div class="col-md-8">
-                    <?php echo $this->Form->input('temp_uncertainty_id', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
+                    <?php echo $this->Form->input('temp_uncertainty_id.', array('id'=>'val_prefref','type'=>'select','class'=>'form-control select-chosen','label'=>false,'data-placeholder'=>'Enter the Pref Reference','multiple','options'=>$uncer_tag)); ?>
                 </div>
                 
             </div>
