@@ -103,15 +103,15 @@
            $('.readingtypename').val($('.temp_readingtype_id option:selected').text());
         });
         
-        $('.check_unit').on('click',function(){
-            var val_u = $('#val_unit').val();
-            if(val_u == '')
-            {
-                alert('Please Select Unit First');
-                $('#val_prefref').val('');
-                return false;
-            }
-        });
+//        $('.check_unit').on('click',function(){
+//            var val_u = $('#val_unit').val();
+//            if(val_u == '')
+//            {
+//                alert('Please Select Unit First');
+//                $('#val_prefref').val('');
+//                return false;
+//            }
+//        });
         
         
         $("#result").hide();
