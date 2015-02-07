@@ -2008,7 +2008,7 @@
       <tbody class="calcul1_instrument_info">
           <?php //foreach($cert as $k=>$cert_all) { ?>
           <?php for($j = 1; $j<=15; $j++){
-          if(isset($cert['Tempcertificatedata']['temp'.$j]))
+          if(isset($cert['Tempcertificatedata']['temp'.$j]) && isset($cert['Tempcertificatedata']['uncert'.$j]))
           {
           for($i=1;$i<=3;$i++)
           { ?>
@@ -2033,7 +2033,7 @@
           <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.($j+1).'_13'];}if($i==2){echo $cert['Tempcertificatedata']['b'.($j+1).'_13'];}else{echo $cert['Tempcertificatedata']['a'.($j+1).'_13'];} ?></td>
           <td class="text-center"><?php if($i==1){echo $cert['Tempcertificatedata']['m'.($j+2).'_13'];}if($i==2){echo $cert['Tempcertificatedata']['b'.($j+2).'_13'];}else{echo $cert['Tempcertificatedata']['a'.($j+2).'_13'];} ?></td>
           <td class="text-center"><?php echo $cert['Tempcertificatedata']['res'.$j]; ?></td> 
-          <td class="text-center"></td>
+          <td class="text-center"><?php echo $cert['Tempcertificatedata']['uncert'.$j]; ?></td>
           <td class="text-center"><?php echo $cert['Tempcertificatedata']['count'.$j]; ?></td>
           <td class="text-center"><?php echo $cert['Tempcertificatedata']['acc'.$j]; ?></td>
           <td class="text-center"><?php echo $cert['Tempcertificatedata']['is_analog']; ?></td>
@@ -2147,7 +2147,7 @@
       </thead>
       <tbody class="subcontract_instrument_info">
            <?php for($j = 1; $j<=15; $j++){
-          if(isset($cert['Tempcertificatedata']['temp'.$j]))
+          if(isset($cert['Tempcertificatedata']['temp'.$j]) && isset($cert['Tempcertificatedata']['uncert'.$j]))
           { ?>
         <tr class="text-center">
           <td class="text-center"><?php echo $cert['Tempcertificatedata']['uc'.$j]; ?></td>

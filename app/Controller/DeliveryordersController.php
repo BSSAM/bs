@@ -1447,5 +1447,13 @@ Singlas</td>
             echo $title;
         }
     }
+    
+    public function datalog($id=NULL)
+    {
+        
+            $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
+        
+        $this->set('deliveryorders', $delivery_data);
+    }
        
 }

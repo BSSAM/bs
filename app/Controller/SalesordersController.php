@@ -2133,6 +2133,20 @@ table td { font-size:13px; line-height:18px; }
 
     }
         
+    public function datalog()
+        {
+        
+        
+        $this->Description->deleteAll(array('Description.status'=>0));
+        
+        
+            //$this->Quotation->recursive = 1;
+        
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+        
+        
+            $this->set('salesorder', $salesorder_list);
+        }
 }
 
 ?>

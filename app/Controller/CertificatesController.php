@@ -236,7 +236,7 @@ class CertificatesController extends AppController
 //                        {
                             $comparable_uncert = $arr1;
                         //}
-                                //pr($comparable_uncert);
+                                pr($comparable_uncert);exit;
                         //$uncertainty[] = array();
 						//pr($comparable_uncert);exit;
                         //$count_al = $this->request->data['step1']['count'.$j];
@@ -285,7 +285,7 @@ class CertificatesController extends AppController
                             
                             
                             
-                            $res1 = $this->request->data['step1']['res1'];
+                            $res = $this->request->data['step1']['res'.$j];
                             //$first = powfn($uref1/$urefdivisor);
                             $vc = array();
                             
@@ -301,12 +301,12 @@ class CertificatesController extends AppController
                             
                             $vc_digital = 0;
                             if($uresdivisordigital != 0)  { 
-                            $vc_digital = powfn($res1/$uresdivisordigital);
+                            $vc_digital = powfn($res/$uresdivisordigital);
                             } //pr("udigital = ".$vc_digital);
                             
                             $vc_div = 0;
                             if($divisor != 0)  { 
-                            $vc_div = powfn($uacc1/$divisor)+powfn($uacc2/$divisor)+powfn($uacc3/$divisor)+powfn($u1_data2/$divisor)+powfn($u2_data2/$divisor)+
+                            $vc_div = powfn($this->request->data['step1']['acc'.$j]/$divisor) + powfn($this->request->data['step1']['count'.$j]/$divisor) + powfn($uacc1/$divisor)+powfn($uacc2/$divisor)+powfn($uacc3/$divisor)+powfn($u1_data2/$divisor)+powfn($u2_data2/$divisor)+
                                     powfn($u3_data2/$divisor)+powfn($u4_data2/$divisor)+powfn($u5_data2/$divisor)+powfn($u6_data2/$divisor)+powfn($u7_data2/$divisor)+powfn($u8_data2/$divisor)+
                                     powfn($u9_data2/$divisor)+powfn($u10_data2/$divisor)+powfn($u11_data2/$divisor)+powfn($u12_data2/$divisor)+powfn($u13_data2/$divisor)+powfn($u14_data2/$divisor)+
                                  powfn($u15_data2/$divisor)+powfn($u16_data2/$divisor)+powfn($u17_data2/$divisor)+powfn($u18_data2/$divisor)+powfn($u19_data2/$divisor)+powfn($u20_data2/$divisor);
@@ -346,7 +346,7 @@ class CertificatesController extends AppController
 //                        {
 //                        $uncer_sum = array_sum($uncertainty);
 //                        $uncertainty = array();
-                        if($this->request->data['step1']['temp'.$j]!=NULL)
+                        if($this->request->data['step1']['m'.$j.'_1']!=NULL && $this->request->data['step1']['temp'.$j]!=NULL)
                         {
                             $this->request->data['step1']['uncert'.$j] = $uncertainty;
                         }

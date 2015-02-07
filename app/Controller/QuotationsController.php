@@ -1436,4 +1436,12 @@ $html .= '</div>';
 		echo $additional;
         
     }
+    
+    public function datalog()
+    {
+        pr($this->request->data);
+
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));    
+        $this->set('quotation', $quotation_lists);
+    }
 }
