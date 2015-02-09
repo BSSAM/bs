@@ -196,23 +196,31 @@ class CertificatesController extends AppController
                         //pr($uncer_va);
                         foreach($uncer_va as $u)
                         {
-                            $tempuncertaintydata1 = $this->Tempuncertaintydata->find('first', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $u)));
-                            $rangeid = $tempuncertaintydata1['Tempuncertaintydata']['range_id'];
-                            $range_dat = $this->Temprange->find('first',array('conditions'=>array('Temprange.id'=>$rangeid),'recursive'=>'2'));
-                            //pr($range_dat);
-                            $temp_val = $this->request->data['step1']['temp'.$j];
-                            //pr($temp_val);
-                            if($range_dat){
-                            if($range_dat['Temprange']['fromrange']!='' || $range_dat['Temprange']['torange']!=''){
-                            $yesorno = t1($temp_val, $range_dat['Temprange']['fromrange'], $range_dat['Temprange']['torange']);}
-                            else{
-                                $yesorno = false;
-                            }
-                            
+                            $tempuncertaintydata1 = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $u)));
+                            //pr($tempuncertaintydata1);
+                            foreach($tempuncertaintydata1 as $tempuncertaintydata2)
+                            {
+                                $rangeid = $tempuncertaintydata2['Tempuncertaintydata']['range_id'];
+                                $range_dat = $this->Temprange->find('first',array('conditions'=>array('Temprange.id'=>$rangeid),'recursive'=>'2'));
+                                //pr($range_dat);
+                                $temp_val = $this->request->data['step1']['temp'.$j];
+                                //pr($temp_val);
+                                if($range_dat){
+                                if($range_dat['Temprange']['fromrange']!='' || $range_dat['Temprange']['torange']!=''){
+                                   // pr($range_dat['Temprange']['fromrange']);pr($range_dat['Temprange']['torange']);
 
-                            if($yesorno == true){
-                               $aaaaaa[] = $arr1[]  = $tempuncertaintydata1['Tempuncertaintydata']['id'];
-                            }
+
+                                $yesorno = t1($temp_val, $range_dat['Temprange']['fromrange'], $range_dat['Temprange']['torange']);}
+
+                                else{
+                                    $yesorno = false;
+                                }
+                                //pr($yesorno);
+
+                                if($yesorno == true){
+                                   $aaaaaa[] = $arr1[]  = $tempuncertaintydata2['Tempuncertaintydata']['id'];
+                                }
+                                }  
                             }
                         }
                         //pr($arr1);
@@ -293,7 +301,7 @@ class CertificatesController extends AppController
                             if($urefdivisor != 0){
                             $vc_uref = powfn($uref1/$urefdivisor)+powfn($uref2/$urefdivisor)+powfn($uref3/$urefdivisor);
                             } //pr("uref = ".$vc_uref);
-                            
+                            //pr($vc_uref);
                             $vc_urep = 0;
                             if($urepdivisor != 0)  { 
                             $vc_urep = powfn($this->request->data['step1']['m'.$j.'_13']/$urepdivisor);
@@ -306,7 +314,8 @@ class CertificatesController extends AppController
                             
                             $vc_div = 0;
                             if($divisor != 0)  { 
-                            $vc_div = powfn($this->request->data['step1']['acc'.$j]/$divisor) + powfn($this->request->data['step1']['count'.$j]/$divisor) + powfn($uacc1/$divisor)+powfn($uacc2/$divisor)+powfn($uacc3/$divisor)+powfn($u1_data2/$divisor)+powfn($u2_data2/$divisor)+
+                                //powfn($this->request->data['step1']['acc'.$j]/$divisor) + powfn($this->request->data['step1']['count'.$j]/$divisor) + 
+                            $vc_div = powfn($uacc1/$divisor)+powfn($uacc2/$divisor)+powfn($uacc3/$divisor)+powfn($u1_data2/$divisor)+powfn($u2_data2/$divisor)+
                                     powfn($u3_data2/$divisor)+powfn($u4_data2/$divisor)+powfn($u5_data2/$divisor)+powfn($u6_data2/$divisor)+powfn($u7_data2/$divisor)+powfn($u8_data2/$divisor)+
                                     powfn($u9_data2/$divisor)+powfn($u10_data2/$divisor)+powfn($u11_data2/$divisor)+powfn($u12_data2/$divisor)+powfn($u13_data2/$divisor)+powfn($u14_data2/$divisor)+
                                  powfn($u15_data2/$divisor)+powfn($u16_data2/$divisor)+powfn($u17_data2/$divisor)+powfn($u18_data2/$divisor)+powfn($u19_data2/$divisor)+powfn($u20_data2/$divisor);
@@ -314,10 +323,6 @@ class CertificatesController extends AppController
                                  
                             $vc[] = $vc_uref + $vc_div + $vc_digital +$vc_urep;     
                             //pr($vc);
-                            
-
-							
-                            
                         }
                         $vc2=0;
                         foreach($vc as $vc1)
@@ -410,10 +415,11 @@ class CertificatesController extends AppController
                     //$unique = array();
                     //$unique[] = ;
                     
+                    //$this->request->data['step1']['uc_data_arr'] = '1,2,7,8,10';
                     $this->request->data['step1']['uc_data_arr'] = implode(',',array_unique($aaaaaa));
                    // exit;
                 }
-                
+                //pr($aaaaaa);
                 $this->request->data['Tempcertificatedata'] = $this->request->data['step1'];
                 $this->request->data['Tempcertificatedata']['certificate_no'] = $certificateno;
                 $this->request->data['Tempcertificatedata']['temp_readingtype_id'] = $readingtype_id;
@@ -1335,6 +1341,17 @@ class CertificatesController extends AppController
         $tempcert = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.certificate_no'=>$certificateno),'recursive'=>'2'));
         $tempcertdata = $this->Tempcertificatedata->find('first',array('conditions'=>array('Tempcertificatedata.certificate_no'=>$certificateno,'Tempcertificatedata.temp_readingtype_id'=>$readingtype_id,'Tempcertificatedata.temp_channel_id'=>$channel_id)));
         
+        //pr($tempcertdata['Tempcertificatedata']['uc_data_arr']);exit;
+        $val_un_data = explode(',',$tempcertdata['Tempcertificatedata']['uc_data_arr']);
+        $uncertaintydata = array();
+        foreach($val_un_data as $val)
+        {
+            $uncertaintydata[] = $this->Tempuncertaintydata->find('first',array('conditions'=>array('Tempuncertaintydata.id'=>$val)));
+        }
+        //pr($uncertaintydata);exit;
+        
+        $this->set('uncertaintydata',$uncertaintydata);
+        
         $instrument_id = $tempcert['Tempcertificate']['instrument_id'];
         $range_id = $tempcert['Tempcertificate']['range_id'];
         $model_no = $tempcert['Tempcertificate']['model'];
@@ -1371,8 +1388,8 @@ class CertificatesController extends AppController
         $this->set('get_cert_certno',$get_cert_certno);
 
         
-        $uncertainty = $this->Tempuncertainty->find('all');
-        $this->set('uncertainty',$uncertainty);
+//        $uncertainty = $this->Tempuncertainty->find('all');
+//        $this->set('uncertainty',$uncertainty);
         $readingtype_data = $this->Tempreadingtype->find('list',array('fields' => array('Tempreadingtype.id','Tempreadingtype.readingtypename'),'conditions'=>array('Tempreadingtype.is_deleted'=>0,'Tempreadingtype.status'=>1)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
         $this->set('readingtype_data',$readingtype_data);
 

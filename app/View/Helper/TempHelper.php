@@ -110,6 +110,36 @@ class TempHelper extends AppHelper
         $data = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.description_id'=>$id)));
         return $data['Tempcertificate']['due_date'];
     }
+    public function tagno($id = null)
+    {
+        APP::import('Model','Tempuncertainty');
+        $this->Tempuncertainty   =   new Tempuncertainty();
+//        $id1 = array();
+//        $id1 = explode(',',$id);
+//        $data1 = array();
+//        foreach($id1 as $ids)
+//        {
+            $data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=>$id)));
+            $data1 = $data['Tempuncertainty']['tagno'];
+//        }
+//        $data2 = implode(',',$data1);
+        return $data1;
+    }
+    public function instrumentname($id = null)
+    {
+        APP::import('Model','Tempuncertainty');
+        $this->Tempuncertainty   =   new Tempuncertainty();
+//        $id1 = array();
+//        $id1 = explode(',',$id);
+//        $data1 = array();
+//        foreach($id1 as $ids)
+//        {
+            $data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.id'=>$id)));
+            $data1 = $data['Tempuncertainty']['instrumentname'];
+//        }
+//        $data2 = implode(',',$data1);
+        return $data1;
+    }
 }
 
 
