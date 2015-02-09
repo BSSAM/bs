@@ -35,7 +35,8 @@
                         //pr($this->request->data);
                         $uncertainty_data = $this->Tempuncertainty->find('first',array('conditions'=>array('Tempuncertainty.temp_instruments_id'=>$this->request->data['Uncertainty']['temp_instruments_id'],'Tempuncertainty.duedate'=>$this->request->data['Uncertainty']['duedate']),'recursive'=>'2'));
                         if(!$uncertainty_data){
-                            $this->request->data['Tempuncertainty']['totalname'] = $this->request->data['Uncertainty']['instrumentname'].'-'.$this->request->data['Uncertainty']['tagno'];
+                            $this->request->data['Uncertainty']['totalname'] = $this->request->data['Uncertainty']['instrumentname'].'-'.$this->request->data['Uncertainty']['tagno'];
+                            
                             if($this->Tempuncertainty->save($this->request->data['Uncertainty']))
                             {
                                 

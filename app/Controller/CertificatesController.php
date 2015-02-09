@@ -236,7 +236,7 @@ class CertificatesController extends AppController
 //                        {
                             $comparable_uncert = $arr1;
                         //}
-                                pr($comparable_uncert);exit;
+                                //pr($comparable_uncert);exit;
                         //$uncertainty[] = array();
 						//pr($comparable_uncert);exit;
                         //$count_al = $this->request->data['step1']['count'.$j];
@@ -1350,19 +1350,9 @@ class CertificatesController extends AppController
         //pr($temptemplate['Temptemplatedata']);exit;
         $temptemplatedata = $this->Temptemplatedata->find('all', array('conditions' => array('Temptemplatedata.temp_templates_id' =>$tempcert['Tempcertificate']['template_id'])));
 
-            
-            
-            
-        
-        
-        
-        
-        
         $find_cert = $this->Tempcertificatedata->find('first',array('conditions'=>array('Tempcertificatedata.certificate_no'=>$certificateno,'Tempcertificatedata.temp_readingtype_id'=>$readingtype_id,'Tempcertificatedata.temp_channel_id'=>$channel_id)));
         
         $this->set('cert',$find_cert);
-        
-         
         
         $get_cert_sales = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.certificate_no'=>$certificateno),'recursive'=>'2'));
         $this->set('get_cert_sales',$get_cert_sales);
@@ -1381,25 +1371,25 @@ class CertificatesController extends AppController
         $this->set('get_cert_certno',$get_cert_certno);
 
         
-            $uncertainty = $this->Tempuncertainty->find('all');
-            $this->set('uncertainty',$uncertainty);
-            $readingtype_data = $this->Tempreadingtype->find('list',array('fields' => array('Tempreadingtype.id','Tempreadingtype.readingtypename'),'conditions'=>array('Tempreadingtype.is_deleted'=>0,'Tempreadingtype.status'=>1)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
-            $this->set('readingtype_data',$readingtype_data);
+        $uncertainty = $this->Tempuncertainty->find('all');
+        $this->set('uncertainty',$uncertainty);
+        $readingtype_data = $this->Tempreadingtype->find('list',array('fields' => array('Tempreadingtype.id','Tempreadingtype.readingtypename'),'conditions'=>array('Tempreadingtype.is_deleted'=>0,'Tempreadingtype.status'=>1)),array('order'=>'Tempreadingtype.id Desc','recursive'=>'2'));
+        $this->set('readingtype_data',$readingtype_data);
 
-            $channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
-            $this->set('channel_data',$channel_data);
-            
-             $temp_temperature = $this->Tempambient->find('list',array('fields' => array('Tempambient.id','Tempambient.ambientname'),'conditions'=>array('Tempambient.is_deleted'=>0,'Tempambient.status'=>1,'Tempambient.default'=>1)),array('order'=>'Tempambient.id Desc','recursive'=>'2'));
-            $this->set('temp_temperature',$temp_temperature);
-            
-             $rel_humidity = $this->Temprelativehumidity->find('list',array('fields' => array('Temprelativehumidity.id','Temprelativehumidity.relativehumidity'),'conditions'=>array('Temprelativehumidity.is_deleted'=>0,'Temprelativehumidity.status'=>1)),array('order'=>'Temprelativehumidity.id Desc','recursive'=>'2'));
-            $this->set('rel_humidity',$rel_humidity);
+        $channel_data = $this->Tempchannel->find('list',array('fields' => array('Tempchannel.id','Tempchannel.channelname'),'conditions'=>array('Tempchannel.is_deleted'=>0,'Tempchannel.status'=>1)),array('order'=>'Tempchannel.id Desc','recursive'=>'2'));
+        $this->set('channel_data',$channel_data);
 
-            $tempform_data = $this->Tempformdata->find('first');
-            $this->set('formdata',$tempform_data);
+         $temp_temperature = $this->Tempambient->find('list',array('fields' => array('Tempambient.id','Tempambient.ambientname'),'conditions'=>array('Tempambient.is_deleted'=>0,'Tempambient.status'=>1,'Tempambient.default'=>1)),array('order'=>'Tempambient.id Desc','recursive'=>'2'));
+        $this->set('temp_temperature',$temp_temperature);
 
-            $instrument_cal_status = array('1'=>'Faulty','2'=>'Calibration','3'=>'No Capability','4'=>'Return without cal','5'=>'Out of tolerance');
-            $this->set('instrument_cal_status',$instrument_cal_status);
+         $rel_humidity = $this->Temprelativehumidity->find('list',array('fields' => array('Temprelativehumidity.id','Temprelativehumidity.relativehumidity'),'conditions'=>array('Temprelativehumidity.is_deleted'=>0,'Temprelativehumidity.status'=>1)),array('order'=>'Temprelativehumidity.id Desc','recursive'=>'2'));
+        $this->set('rel_humidity',$rel_humidity);
+
+        $tempform_data = $this->Tempformdata->find('first');
+        $this->set('formdata',$tempform_data);
+
+        $instrument_cal_status = array('1'=>'Faulty','2'=>'Calibration','3'=>'No Capability','4'=>'Return without cal','5'=>'Out of tolerance');
+        $this->set('instrument_cal_status',$instrument_cal_status);
     }
     
     public function dummy_sup_approval()
