@@ -186,6 +186,48 @@ class CertificatesController extends AppController
                         $this->request->data['step1']['m'.$j.'_13'] = $sd_m/sqrt($this->request->data['step1']['no_runs']);
                         $this->request->data['step1']['m'.$j.'_11'] = $mean_m = $summed_val_m/$this->request->data['step1']['no_runs'];
                         
+                        
+                        $summed_val_b = 0;
+                        $array_sd_b = array();
+                        $sd_b = 0;
+                        $mean_b = 0;
+                        for($i=1;$i<=15;$i++)
+                        {
+                            if(isset($this->request->data['step1']['b'.$j.'_'.$i.'']))
+                            {
+                                $summed_val_b = $summed_val_b + $this->request->data['step1']['b'.$j.'_'.$i.''];
+                                $array_sd_b[] = $this->request->data['step1']['b'.$j.'_'.$i.''];
+                            }
+                        }
+                        $this->request->data['step1']['b'.$j.'_12'] = $sd_b = stddev1($array_sd_b);
+                        $this->request->data['step1']['b'.$j.'_13'] = $sd_b/sqrt($this->request->data['step1']['no_runs']);
+                        $this->request->data['step1']['b'.$j.'_11'] = $mean_b = $summed_val_b/$this->request->data['step1']['no_runs']; 
+                        //pr($sd_b);
+                        if(isset($this->request->data['total']['is_afteradjust']))
+                        {
+                        
+                            
+                            $summed_val_a = 0;
+                            $array_sd_a = array();
+                            $sd_a = 0;
+                            $mean_a = 0;
+                            for($i=1;$i<=15;$i++)
+                            {
+                                if(isset($this->request->data['step1']['a'.$j.'_'.$i.'']))
+                                {
+                                    $summed_val_a = $summed_val_a + $this->request->data['step1']['a'.$j.'_'.$i.''];
+                                    $array_sd_a[] = $this->request->data['step1']['a'.$j.'_'.$i.''];
+                                }
+
+                            }
+                            $this->request->data['step1']['a'.$j.'_12'] = $sd_a = stddev2($array_sd_a);
+                            $this->request->data['step1']['a'.$j.'_13'] = $sd_a/sqrt($this->request->data['step1']['no_runs']);
+                            //pr($sd_a);
+                            $this->request->data['step1']['a'.$j.'_11'] = $mean_a = $summed_val_a/$this->request->data['step1']['no_runs']; 
+                        
+                        }
+                        
+                        
                         $uncer_va = array();
                         $arr1 = array();
                         static $aaaaaa = array();
@@ -248,7 +290,7 @@ class CertificatesController extends AppController
                         //$uncertainty[] = array();
 						//pr($comparable_uncert);exit;
                         //$count_al = $this->request->data['step1']['count'.$j];
-//                        
+                        $vc = array();
                         foreach($comparable_uncert as $comcert)
                         {
                             //pr($comcert);
@@ -295,40 +337,55 @@ class CertificatesController extends AppController
                             
                             $res = $this->request->data['step1']['res'.$j];
                             //$first = powfn($uref1/$urefdivisor);
-                            $vc = array();
+                            
                             
                             $vc_uref = 0;
                             if($urefdivisor != 0){
                             $vc_uref = powfn($uref1/$urefdivisor)+powfn($uref2/$urefdivisor)+powfn($uref3/$urefdivisor);
-                            } //pr("uref = ".$vc_uref);
+                            } pr("uref = ".$vc_uref);
                             //pr($vc_uref);
-                            $vc_urep = 0;
+                            $vc_urep1 = 0;
+                            $vc_urep2 = 0;
+                            $vc_urep3 = 0;
                             if($urepdivisor != 0)  { 
-                            $vc_urep = powfn($this->request->data['step1']['m'.$j.'_13']/$urepdivisor);
-                            } //pr("urep = ".$vc_urep);
+                            $vc_urep1 = powfn($this->request->data['step1']['m'.$j.'_13']/$urepdivisor);
+                            $vc_urep2 = powfn($this->request->data['step1']['b'.$j.'_13']/$urepdivisor);
+                                if(isset($this->request->data['total']['is_afteradjust']))
+                                {
+
+                                    $vc_urep3 = powfn($this->request->data['step1']['a'.$j.'_13']/$urepdivisor);
+
+                                }
+                            } pr("urep = ".($vc_urep1+$vc_urep2));
                             
                             $vc_digital = 0;
                             if($uresdivisordigital != 0)  { 
                             $vc_digital = powfn($res/$uresdivisordigital);
-                            } //pr("udigital = ".$vc_digital);
+                            } pr("ures = ".$vc_digital);
                             
                             $vc_div = 0;
+                            $vc_acc = 0;
                             if($divisor != 0)  { 
                                 //powfn($this->request->data['step1']['acc'.$j]/$divisor) + powfn($this->request->data['step1']['count'.$j]/$divisor) + 
-                            $vc_div = powfn($uacc1/$divisor)+powfn($uacc2/$divisor)+powfn($uacc3/$divisor)+powfn($u1_data2/$divisor)+powfn($u2_data2/$divisor)+
+                            $vc_acc = powfn($uacc1/$divisor)+powfn($uacc2/$divisor)+powfn($uacc3/$divisor);
+                            $vc_div = powfn($u1_data2/$divisor)+powfn($u2_data2/$divisor)+
                                     powfn($u3_data2/$divisor)+powfn($u4_data2/$divisor)+powfn($u5_data2/$divisor)+powfn($u6_data2/$divisor)+powfn($u7_data2/$divisor)+powfn($u8_data2/$divisor)+
                                     powfn($u9_data2/$divisor)+powfn($u10_data2/$divisor)+powfn($u11_data2/$divisor)+powfn($u12_data2/$divisor)+powfn($u13_data2/$divisor)+powfn($u14_data2/$divisor)+
                                  powfn($u15_data2/$divisor)+powfn($u16_data2/$divisor)+powfn($u17_data2/$divisor)+powfn($u18_data2/$divisor)+powfn($u19_data2/$divisor)+powfn($u20_data2/$divisor);
-                            } //pr("divisor = ".$divisor);
+                            } 
+                            pr("uacc = ".$vc_acc);
+                            pr("uothers = ".$vc_div);
                                  
-                            $vc[] = $vc_uref + $vc_div + $vc_digital +$vc_urep;     
+                            $vc[] = $vc_uref + $vc_div + $vc_digital + $vc_urep1 + $vc_urep2 + $vc_urep3 + $vc_acc;     
                             //pr($vc);
                         }
+                        //pr($vc);
                         $vc2=0;
                         foreach($vc as $vc1)
                         {
                             $vc2 = $vc2+$vc1;
                         }
+                        //pr($vc2);
                         $vc_final = sqrt($vc2);
                         //pr("vc_final = ".$vc_final);
                         $kfactor = 2;
@@ -367,45 +424,7 @@ class CertificatesController extends AppController
 //                        
 //                        }
 //                        
-                        $summed_val_b = 0;
-                        $array_sd_b = array();
-                        $sd_b = 0;
-                        $mean_b = 0;
-                        for($i=1;$i<=15;$i++)
-                        {
-                            if(isset($this->request->data['step1']['b'.$j.'_'.$i.'']))
-                            {
-                                $summed_val_b = $summed_val_b + $this->request->data['step1']['b'.$j.'_'.$i.''];
-                                $array_sd_b[] = $this->request->data['step1']['b'.$j.'_'.$i.''];
-                            }
-                        }
-                        $this->request->data['step1']['b'.$j.'_12'] = $sd_b = stddev1($array_sd_b);
-                        $this->request->data['step1']['b'.$j.'_13'] = $sd_b/sqrt($this->request->data['step1']['no_runs']);
-                        $this->request->data['step1']['b'.$j.'_11'] = $mean_b = $summed_val_b/$this->request->data['step1']['no_runs']; 
-                        //pr($sd_b);
-                        if(isset($this->request->data['total']['is_afteradjust']))
-                        {
                         
-                            
-                            $summed_val_a = 0;
-                            $array_sd_a = array();
-                            $sd_a = 0;
-                            $mean_a = 0;
-                            for($i=1;$i<=15;$i++)
-                            {
-                                if(isset($this->request->data['step1']['a'.$j.'_'.$i.'']))
-                                {
-                                    $summed_val_a = $summed_val_a + $this->request->data['step1']['a'.$j.'_'.$i.''];
-                                    $array_sd_a[] = $this->request->data['step1']['a'.$j.'_'.$i.''];
-                                }
-
-                            }
-                            $this->request->data['step1']['a'.$j.'_12'] = $sd_a = stddev2($array_sd_a);
-                            $this->request->data['step1']['a'.$j.'_13'] = $sd_a/sqrt($this->request->data['step1']['no_runs']);
-                            //pr($sd_a);
-                            $this->request->data['step1']['a'.$j.'_11'] = $mean_a = $summed_val_a/$this->request->data['step1']['no_runs']; 
-                        
-                        }
                     //}
                         
                     }
