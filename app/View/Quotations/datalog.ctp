@@ -25,11 +25,28 @@ var _ROOT ='<?PHP echo Router::url('/',true); ?>';
 //        });
 //    });
 //    });
-
+$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="col-md-12 list_quotation"><select name="query_input[]" class="form-control"><option value="Quotation.quotationno">Quotation No</option><option value="Quotation.reg_date">Quotation Date</option><option value="Customer.customername">Customer Name</option></select><select name="equal_input[]" class="form-control"><option value="=">Equal</option><option value="!=">Not Equal</option><option value="<=">Start With</option><option value=">=">End With</option><option value="LIKE">Contains</option></select><input type="text" name="val[]" class="form-control"/><button class="remove_field">-</button></div>'); 
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
 </script>
 
 <h1>
-                                <i class="gi gi-user"></i>Quotations Datalog
+                                <i class="gi gi-user "></i>Quotations Datalog
                             </h1>
                         </div>
                     </div>
@@ -44,16 +61,30 @@ var _ROOT ='<?PHP echo Router::url('/',true); ?>';
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Quotations Datalog</h2>
-                            
-                        </div>
+                            <br>
+                        </div>    
+                        
                         <?PHP echo $this->Form->create('Quotation', array('action' => 'datalog', 'class' => 'form-horizontal form-bordered')); ?>
-                        <?php echo $this->Form->input('gate', array('id'=>'gate','label'=>false,'name'=>'gate','type'=>'select','options'=>array('1'=>'AND','2'=>'OR'))); ?>
-                        <?php echo $this->Form->input('query_input', array('id'=>'query_input','label'=>false,'name'=>'query_input','type'=>'select','options'=>array('quotationno'=>'Quotation no','reg_date'=>'Date','branch_id'=>'Branch','customername'=>'Customer name','address'=>'Customer address','attn'=>'ATTN','phone'=>'Phone','email'=>'Email','salesperson_id'=>'Sales person','refno'=>'Your ref no','is_approved'=>'Approval','fax'=>'Fax','paymentterm_id'=>'Payment terms','instrumentname'=>'InstrumentForName'))); ?>
-<!--                        <select name="query_input"><option selected="selected" value="quotationno">Quotation no</option><option value="QuotationDate">Date</option><option value="BranchName">Branch</option><option value="CustomerName">Customer name</option><option value="CustomerAddress">Customer address</option><option value="ContactPersonName">ATTN</option><option value="Phone">Phone</option><option value="Email">Email</option><option value="SalesPersonName">Sales person</option><option value="YourRefNo">Your ref no</option><option value="IsApproved">Approval</option><option value="Fax">Fax</option><option value="PaymentTerms">Payment terms</option><option value="InstrumentForName">InstrumentForName</option><option value="ProjectName">Project name</option><option value="GST">GST</option><option value="GSTType">GST type</option><option value="TitleIdValue1">Title value1</option><option value="TitleIdValue2">Title value2</option><option value="TitleIdValue3">Title value3</option><option value="Remarks">Remarks</option><option value="ServiceTypeName">ServiceTypeName</option><option value="IsActive">Active</option><option value="InstrumentName">Description</option><option value="ModelNo">Model no</option><option value="BrandName">Brand</option><option value="RangeName">Range</option><option value="LocationName">Cal location</option><option value="CalibrationTypeName">Cal type</option><option value="Validity">Validity</option><option value="UnitPrice">Unit price</option><option value="Discount">Disc.</option><option value="DepartmentName">Department</option><option value="LedgerAccountName">Account service</option><option value="SerialNo">Serial no</option><option value="TagNo">Tag no</option><option value="PartNo">Part no</option><option value="ControlNo">Control no</option><option value="Location">Location</option><option value="Remarks1">Remarks</option><option value="TitleValue1">Title Value1</option><option value="TitleValue2">Title Value2</option><option value="TitleValue3">Title Value3</option><option value="TitleValue4">Title Value4</option><option value="TitleValue5">Title Value5</option><option value="TitleValue6">Title Value6</option><option value="TitleValue7">Title Value7</option><option value="TitleValue8">Title Value8</option><option value="TitleValue9">Title Value9</option></select>-->
-                        <select name="equal_input" class="selectopts"><option selected="selected" value="eq">equal</option><option value="ne">not equal</option><option value="bw">begins with</option><option value="ew">ends with</option><option value="cn">contains</option></select>
-                        <?php echo $this->Form->input('val', array('id'=>'val','label'=>false,'name'=>'val','type'=>'text')); ?>
-                        <button class="btn btn-primary" type="submit">Proceed</button>
+                        
+                        <div class="col-md-12 custom_calculate">
+                        <?php echo $this->Form->input('gate', array('id'=>'gate','class'=>'form-control','label'=>false,'name'=>'gate','type'=>'select','options'=>array('AND'=>'AND','OR'=>'OR'))); ?>
+                        <?php //echo $this->Form->input('plus', array('id'=>'submit','class'=>'btn btn-primary','label'=>false,'name'=>'submit','type'=>'submit')); ?>
+                        <?php //echo $this->Form->input('query_input', array('id'=>'query_input','label'=>false,'name'=>'query_input','type'=>'select','options'=>array('quotationno'=>'Quotation no','reg_date'=>'Date','branch'=>'Branch','customername'=>'Customer name','address'=>'Customer address','attn'=>'ATTN','phone'=>'Phone','email'=>'Email','salesperson'=>'Sales person','refno'=>'Your ref no','is_approved'=>'Approval','fax'=>'Fax','paymentterm'=>'Payment terms','instrumentname'=>'Instrument Name','projectname'=>'Project Name',
+                            //'gst'=>'GST','gsttype'=>'GST Type','brand'=>'Brand','modelno'=>'Model No','range'=>'Range','unitprice'=>'Price','calibration'=>'Calibration Type','department'=>'Department Name'))); ?>
+                        <button class="add_field_button pull-right">+</button></div>
+                        <div class="input_fields_wrap">
+                            
+<!--                            <div><input type="text" name="mytext[]"></div>-->
+                        </div>
+                        <?php //echo $this->Form->input('equal_input', array('id'=>'equal_input','label'=>false,'name'=>'equal_input','type'=>'select','options'=>array('eq'=>'equal','ne'=>'not equal','bw'=>'begins with','ew'=>'ends with','cn'=>'contains'))); ?>
+                        <?php //echo $this->Form->input('val', array('id'=>'val','label'=>false,'name'=>'val','type'=>'text')); ?>
+                        <div class="input submit col-md-12 ">
+                            <div class="submit pull-right">
+                                <?php echo $this->Form->input('Proceed', array('id'=>'submit','class'=>'btn btn-primary','label'=>false,'name'=>'submit','type'=>'submit')); ?>
+                            </div>
+                        </div>
                         <?PHP $this->Form->end(); ?>
+                        
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>

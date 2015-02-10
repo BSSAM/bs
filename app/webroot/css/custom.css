@@ -186,4 +186,9 @@ and open the template in the editor.
 .c_top_search{float: right;width: 40%;}
 .c_top_search label{float: left;margin-right: 10px;margin-top: 5px;}
 .c_top_search select{ float: left;height: 25px;padding: 2px;width: 81%;}
-
+.list_quotation{ margin-top: 10px;}
+.list_quotation select{float: left; margin-bottom: 15px; margin-right: 15px; width: 31%;}
+.list_quotation input{  float: left; margin-right: 25px; width: 30%;}
+.list_quotation .remove_field{}
+.custom_calculate .input{width:31%;float:left;}
+.custom_calculate .add_field_button{margin-right: 10px;}

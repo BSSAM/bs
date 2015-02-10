@@ -43,6 +43,23 @@ $(document).ready(function(){
              complete: ni_end(),
          });
     });
+    
+    $('#contract_disc').change(function() {
+        //alert('contract_disc');
+        var disc   =   $(this).val();
+        var total   =   $('#total_price').val();
+        $.ajax({
+             type: 'POST',
+             data:"disc="+disc+"&total="+total,
+             url: path_url+'/customers/get_disc/',
+             beforeSend: ni_start(),  
+             success:function(data){
+                 $('#total_price').val(data);
+                 
+             },
+             complete: ni_end(),
+         });
+    });
 //    $('#unit_price').on('keypress',function() {
 //        var price   =   $(this).val();
 //        $.ajax({
@@ -73,6 +90,7 @@ $(document).ready(function(){
         var instrument_name =    $('#customer_instrument').val();
         var model_no =   $('#model_no').val();
         var cost=$('#unit_price').val();
+        var disc=$('#contract_disc').val();
         var total_price=$('#total_price').val();
         //var status  =   $('#status').val();
         if ($('#status').is(":checked")){ var status = 1;} else { var status = 0; }
@@ -80,7 +98,7 @@ $(document).ready(function(){
         
         $.ajax({
             type: 'POST',
-            data:"customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&cost="+cost+"&total_price="+total_price+"&status="+status+"&range_id="+range,
+            data:"customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&cost="+cost+"&disc="+disc+"&total_price="+total_price+"&status="+status+"&range_id="+range,
             url: path_url+'Customers/add_customer_instrument/',
             beforeSend: ni_start(),  
             complete: ni_end(),
@@ -178,6 +196,7 @@ $(document).ready(function(){
                 $('#model_no').val(edit_node.CustomerInstrument.model_no);
                 $('#unit_price').val(edit_node.CustomerInstrument.cost);
                 $('#total_price').val(edit_node.CustomerInstrument.unit_price);
+                $('#contract_disc').val(edit_node.CustomerInstrument.contract_disc);
                 //$('#status').val(edit_node.CustomerInstrument.status);
                 $('#range_array').empty().append('<option value="">Select Range</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
                 $('#instrument_name_chosen span').text(edit_node.Instrument.name);
@@ -207,6 +226,7 @@ $(document).ready(function(){
         var model_no =   $('#model_no').val();
         var device_id   =   $('#device_id').val();
         var cost=$('#unit_price').val();
+        var disc=$('#contract_disc').val();
         var total_price=$('#total_price').val();
         if ($('#status').is(":checked"))
         {
@@ -219,7 +239,7 @@ $(document).ready(function(){
         var check=(status==1)?'Active':'In Active';
         $.ajax({
             type: 'POST',
-            data:"instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&cost="+cost+"&total_price="+total_price+"&status="+status+"&range_id="+range+"&device_id="+device_id,
+            data:"instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&cost="+cost+"&disc="+disc+"&total_price="+total_price+"&status="+status+"&range_id="+range+"&device_id="+device_id,
             url: path_url+'Customers/update_instrument/',
             success: function(data)
             {

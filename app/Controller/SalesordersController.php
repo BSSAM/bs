@@ -2134,19 +2134,36 @@ table td { font-size:13px; line-height:18px; }
     }
         
     public function datalog()
+    {
+        if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) && isset($this->request->data['val']))
         {
+        $andor = $this->request->data['gate'];
         
+        $condition = $this->request->data['query_input'];
+        $conditiontype = $this->request->data['equal_input'];
+        $value = $this->request->data['val'];
+        $conditions = $ccres = array();
         
-        $this->Description->deleteAll(array('Description.status'=>0));
+        $conditions['Salesorder.is_deleted'] = 0;
         
-        
-            //$this->Quotation->recursive = 1;
-        
-            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
-        
-        
-            $this->set('salesorder', $salesorder_list);
+        foreach($condition as $k => $con)
+        {
+            if($conditiontype[$k]!='LIKE')
+            $ccres[$con.' '.$conditiontype[$k]]  = $value[$k];       
+//            else    
+//            $ccres[$con.' LIKE "%'.$value[$k].'%"']  = ''; 
         }
+        
+        $conditions[$andor] = $ccres;
+        $salesorder_list = $this->Salesorder->find('all',array('conditions'=>$conditions,'order' => array('Salesorder.id' => 'DESC')));
+        $this->set('salesorder', $salesorder_list);
+        }
+        else
+        {
+        $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+        $this->set('salesorder', $salesorder_list);
+        }
+    }
 }
 
 ?>

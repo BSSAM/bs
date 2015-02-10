@@ -606,6 +606,14 @@ class CustomersController extends AppController
         $percent = $instrument_range['InsPercent']['percent'];
         return $price+$price*$percent/100;
     }
+    
+    public function get_disc()
+    {
+        $this->autoRender=false;
+        $disc  =   $this->request->data['disc'];
+        $total  =   $this->request->data['total'];
+        return $total-$disc;
+    }
     public function add_customer_instrument()
     {
         $this->autoRender=false;
@@ -615,6 +623,7 @@ class CustomersController extends AppController
         $range_id       =   $this->request->data['range_id'];
         $model_no       =   $this->request->data['model_no'];
         $cost       =   $this->request->data['cost'];
+        $disc       =   $this->request->data['disc'];
         $total_price       =   $this->request->data['total_price'];
         
         $customer_instruments_count  = $this->CustomerInstrument->find('count',  array('conditions'=>array('CustomerInstrument.is_deleted'=>0,'CustomerInstrument.customer_id'=>$customer_id),'order'=>'CustomerInstrument.order_by DESC'));
@@ -631,6 +640,7 @@ class CustomersController extends AppController
             $this->request->data['order_by'] = $order_by+1;
             //$this->request->data['CustomerInstrument']['cost'] = $this->request->data['cost'];
             $this->request->data['unit_price'] = $total_price;
+            $this->request->data['contract_disc'] = $disc;
             //pr($this->request->data);exit;
             $data = $this->CustomerInstrument->save($this->request->data);
                 if($data)
@@ -686,6 +696,7 @@ class CustomersController extends AppController
             {
             // Order By    
             $this->request->data['order_by'] = 1;
+            $this->request->data['contract_disc'] = $disc;
             $this->request->data['unit_price'] = $total_price;
             //pr($this->request->data);exit;
             $data = $this->CustomerInstrument->save($this->request->data);
@@ -962,6 +973,7 @@ class CustomersController extends AppController
         $this->request->data['CustomerInstrument']['range_id'] = $this->request->data['range_id'];
         $this->request->data['CustomerInstrument']['cost'] = $this->request->data['cost'];
         $this->request->data['CustomerInstrument']['unit_price'] = $this->request->data['total_price'];
+         $this->request->data['CustomerInstrument']['contract_disc'] = $this->request->data['disc'];
         $this->request->data['CustomerInstrument']['status'] = $this->request->data['status'];
         if ($this->CustomerInstrument->save($this->request->data)) 
         {

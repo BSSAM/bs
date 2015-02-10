@@ -68,20 +68,27 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="unit_price">Cost</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <?php //$disable_unit = "disabled = 'disabled'";
                                         $disable_unit = "";
                                         ?>
                                         <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter Cost of the Instrument','name'=>'unit_price',$disable_unit)); ?>
-                                        <label class="control-label help-block themed-color-autumn">Press 'TAB' or 'Click' after entering the Cost, To Get Price!!</label>
                                     </div>
-                                    <label class="col-md-2 control-label" for="total_price">Price</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-1 control-label" for="contract_disc">Contract Disc</label>
+                                    <div class="col-md-1">   
+                                        <?php echo $this->Form->input('contract_disc', array('id'=>'contract_disc','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter the Contract Discount','name'=>'contract_disc')); ?>
+                                        
+                                    </div>
+                                    <label class="col-md-1 control-label" for="total_price">Price</label>
+                                    <div class="col-md-3">
                                         <?php $disable_total = "readonly = 'readonly'"; ?>
                                         <?php echo $this->Form->input('total_price', array('id'=>'total_price','class'=>'form-control','label'=>false,'type'=>'text','data-placeholder'=>'Select Total Price','name'=>'total_price',$disable_total)); ?>
                                         
                                     </div>
-                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label"></label>
+                                <label class="control-label help-block themed-color-autumn pull-left ">Press 'TAB' or 'Click' after entering the Cost or Contract Discount, To Get Price!!</label>
                                 </div>
                                 <div class="form-group">
                                     

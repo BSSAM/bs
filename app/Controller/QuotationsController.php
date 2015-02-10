@@ -1439,9 +1439,37 @@ $html .= '</div>';
     
     public function datalog()
     {
-        pr($this->request->data);
-
+        if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) && isset($this->request->data['val']))
+        {
+        $andor = $this->request->data['gate'];
+        
+        $condition = $this->request->data['query_input'];
+        $conditiontype = $this->request->data['equal_input'];
+        $value = $this->request->data['val'];
+        $conditions = $ccres = array();
+        
+        $conditions['Quotation.is_deleted'] = 0;
+        $conditions1['Device.quotationno'] = 'BSQ-05-000002';
+        foreach($condition as $k => $con)
+        {
+            if($conditiontype[$k]!='LIKE')
+            $ccres[$con.' '.$conditiontype[$k]]  = $value[$k];       
+//            else    
+//            $ccres[$con.' LIKE "%'.$value[$k].'%"']  = ''; 
+        }
+        
+        $conditions[$andor] = $ccres;
+        
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC'),'contain'=>array('Device'=>array('conditions'=>array($conditions1)))));    
+        $this->set('quotation', $quotation_lists);
+        //$log = $this->Quotation->getDataSource()->getLog(false, false);
+        //debug($log);
+        //exit;
+        }
+        else
+        {
         $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));    
         $this->set('quotation', $quotation_lists);
+        }
     }
 }
