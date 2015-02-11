@@ -1449,7 +1449,7 @@ $html .= '</div>';
         $conditions = $ccres = array();
         
         $conditions['Quotation.is_deleted'] = 0;
-        $conditions1['Device.quotationno'] = 'BSQ-05-000002';
+        ///$conditions1['Device.quotationno'] = 'BSQ-05-000002';
         foreach($condition as $k => $con)
         {
             if($conditiontype[$k]!='LIKE')
@@ -1460,10 +1460,11 @@ $html .= '</div>';
         
         $conditions[$andor] = $ccres;
         
-        $quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC'),'contain'=>array('Device'=>array('conditions'=>array($conditions1)))));    
+        $quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));    
+        pr($quotation_lists);
         $this->set('quotation', $quotation_lists);
-        //$log = $this->Quotation->getDataSource()->getLog(false, false);
-        //debug($log);
+        $log = $this->Quotation->getDataSource()->getLog(false, false);
+        debug($log);
         //exit;
         }
         else
