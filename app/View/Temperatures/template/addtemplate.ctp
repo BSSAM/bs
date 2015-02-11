@@ -356,10 +356,10 @@
                 </div>
                 
             </div>
-          <!-- <input type="hidden" name="data[Temptemplatedata][instrument_id]" value="<?php echo $ins_id;?>" />
-           <input type="hidden" name="data[Temptemplatedata][range_id]" value="<?php echo $range_id;?>" />
-           <input type="hidden" name="data[Temptemplatedata][model_no]" value="<?php echo $model_no;?>" />
-           <input type="hidden" name="data[Temptemplatedata][brand_id]" value="<?php echo $brand_id;?>" /> -->
+          <!-- <input type="hidden" name="data[Temptemplatedata][instrument_id]" value="<?php //echo $ins_id;?>" />
+           <input type="hidden" name="data[Temptemplatedata][range_id]" value="<?php //echo $range_id;?>" />
+           <input type="hidden" name="data[Temptemplatedata][model_no]" value="<?php //echo $model_no;?>" />
+           <input type="hidden" name="data[Temptemplatedata][brand_id]" value="<?php //echo $brand_id;?>" /> -->
            <input type="hidden" name="data[Temptemplatedata][unitname]" class="unitname"/>
               <input type="hidden" name="data[Temptemplatedata][readingtypename]" class="readingtypename"/>
            

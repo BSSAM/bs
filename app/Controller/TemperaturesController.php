@@ -131,8 +131,18 @@
                     if(!$check_range_is_there)
                     {
                         //pr($this->request->data['Tempuncertaintydata']['range_id']);
-                        $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'] = 0;
-                        $this->request->data['Tempuncertaintydata']['status'] = 0;
+                        if(isset($this->request->data['Tempuncertaintydata']['temp_uncertainty_id']))
+                        {
+                            $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'] = $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'];
+                            $this->request->data['Tempuncertaintydata']['status'] = 1;
+                        }
+                        else
+                        {
+                            $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'] = 0;
+                            $this->request->data['Tempuncertaintydata']['status'] = 0;
+                        }
+                       
+                        
                         $this->request->data['Tempuncertaintydata']['rangename'] = $this->request->data['Tempuncertaintydata']['range_id'];
                         $this->request->data['Tempuncertaintydata']['range_id'] = $this->request->data['Tempuncertaintydata']['range_id_hid'];
                             
@@ -141,7 +151,14 @@
                             $last_insert_id =   $this->Tempuncertaintydata->getLastInsertID();
                             $this->set('insert_id',$last_insert_id);
                             $this->Session->setFlash(__('Uncertainty bulk datas  added Successfully'));
-                            $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => 0)));
+                            if(isset($this->request->data['Tempuncertaintydata']['temp_uncertainty_id']))
+                            {
+                                $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => $this->request->data['Tempuncertaintydata']['temp_uncertainty_id'])));
+                            }
+                            else
+                            {
+                                $tempuncertaintydata_list = $this->Tempuncertaintydata->find('all', array('conditions' => array('Tempuncertaintydata.temp_uncertainty_id' => 0)));
+                            }
                             $this->set('tempuncertaintydata_list',$tempuncertaintydata_list);
                         }
                     }

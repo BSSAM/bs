@@ -169,7 +169,7 @@
 
 
                         $('.add_all_fields').text('Add');
-						$('.edit_uncertainty_bulk_id').val(' ');
+						$('.edit_uncertainty_bulk_id').val('');
 						
                             return false;
                            // $(this).closest('form').find("input[type=text], input[type=select]").val("");
@@ -1004,7 +1004,8 @@
                             </div>
                         </div>
                      </div>
-                      <input type="hidden" name="data[Tempuncertaintydata][edit_uncertainty_bulk_id]" class="edit_uncertainty_bulk_id" />
+                
+                <input type="hidden" name="data[Tempuncertaintydata][edit_uncertainty_bulk_id]" class="edit_uncertainty_bulk_id" value="<?php //echo $temp_ins_id; ?>"/>
             </div>
             <div class="col-lg-12">
                 <div class="form-group form-actions">
