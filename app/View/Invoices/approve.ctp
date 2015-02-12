@@ -7,8 +7,9 @@ $(document).ready(function() {
     });
 });
 var path_url='<?PHP echo Router::url('/',true); ?>';
+
 $(function() {
-	
+
 	$(".edit_gst_percent").on('click', "button[type='submit']", function() {
 		  gst_percent = $(this).parent().find("input[name='percent']").val();
 		  device_total = parseFloat($(".total_device_dyn").text());
@@ -166,7 +167,7 @@ $(function() {
 		  $(".grand_total_dyn").text(parseFloat(grand_total));
 		  //return false;
    });
-   
+
     $('.edit_sales_unit').editable(path_url+'/Salesorders/price_change', {
          id        : 'device_id',
          name      : 'sales_unitprice',
@@ -200,6 +201,46 @@ $(function() {
          cancel    : 'Cancel',
          submit    : 'Save',
          tooltip   : 'Click to edit the price'
+    });
+//    $('.edit_gst').editable(path_url+'/Customers/edit_gst', {
+//         id        : 'device_id',
+//         name      : 'discount',
+//         type      : 'text',
+//         cancel    : 'Cancel',
+//         submit    : 'Save',
+//         tooltip   : 'Click to edit the price'
+//    });
+    $('.edit_gst_percent').editable(path_url+'/Quotations/edit_gst_percent', {
+         id        : 'sales_id',
+         name      : 'percent',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Edit GST'
+    });
+    $('.edit_additional_service').editable(path_url+'/Quotations/edit_additional_service', {
+         id        : 'sales_id',
+         name      : 'additional',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Edit Additional Charge'
+    });
+    $('.edit_gst_percent_po').editable(path_url+'/Quotations/edit_gst_percent_po', {
+         id        : 'ref_no',
+         name      : 'percent',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Edit GST'
+    });
+    $('.edit_additional_service_po').editable(path_url+'/Quotations/edit_additional_service_po', {
+         id        : 'ref_no',
+         name      : 'additional',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Edit Additional Charge'
     });
     });
 </script>
@@ -549,21 +590,40 @@ $(function() {
                                     endif;
                                     $gst_total = ($total_device * $gst)/100;
                                     ?>
+<!--                                        <tr>
+               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="total_device_dyn"><?php //echo number_format($total_device,2); ?></td>
+          </tr>
+          <tr>
+               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST (<span class="edit_gst_percent" id="<?PHP //echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%  )</td>
+               <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="gst_total_dyn"><?php //echo number_format($gst_total,2); ?></td>
+          </tr>
+          <tr>
+               <td colspan="10" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Additional Charges</td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php //echo number_format($additional_charge,2); ?></td>
+          </tr>
+		   <tr>
+               <td colspan="10" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php //echo number_format($total_device + $gst_total +$additional_charge,2); ?></td>
+          </tr>-->
+                                        
                                         <tr>
                <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">SUB TOTAL $(SGD)</td>
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="total_device_dyn"><?php echo number_format($total_device,2); ?></td>
           </tr>
-          <tr>
-               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST (<span class="edit_gst_percent" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%  )</td>
+         <tr>
+             <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <span class="edit_gst_percent" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%  )</td>
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="gst_total_dyn"><?php echo number_format($gst_total,2); ?></td>
           </tr>
+          <?php if($additional_charge!=''){ ?>
           <tr>
                <td colspan="10" style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Additional Charges</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo number_format($additional_charge,2); ?></td>
+               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;"><span class="edit_additional_service" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo number_format($additional_charge,2); ?></td>
           </tr>
+          <?php } ?>
 		   <tr>
                <td colspan="10" style="padding:3px 10px;font-size:11px !important;color: #000 !important;">GRAND TOTAL $(SGD)</td>
-               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;"><?php echo number_format($total_device + $gst_total +$additional_charge,2); ?></td>
+               <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;" class="grand_total_dyn"><?php echo number_format($total_device + $gst_total +$additional_charge,2); ?></td>
           </tr>
           
                                 </tbody>

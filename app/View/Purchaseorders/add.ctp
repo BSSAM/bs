@@ -1,5 +1,72 @@
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
+function editab() {
+    
+    $('.edit_title1').editable(path_url+'/Salesorders/update_title1', {
+            id        : 'device_id',
+            name      : 'title1',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title2').editable(path_url+'/Salesorders/update_title2', {
+            id        : 'device_id',
+            name      : 'title2',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title3').editable(path_url+'/Salesorders/update_title3', {
+            id        : 'device_id',
+            name      : 'title3',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title4').editable(path_url+'/Salesorders/update_title4', {
+            id        : 'device_id',
+            name      : 'title4',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title5').editable(path_url+'/Salesorders/update_title5', {
+            id        : 'device_id',
+            name      : 'title5',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title6').editable(path_url+'/Salesorders/update_title6', {
+            id        : 'device_id',
+            name      : 'title6',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title7').editable(path_url+'/Salesorders/update_title7', {
+            id        : 'device_id',
+            name      : 'title7',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title8').editable(path_url+'/Salesorders/update_title8', {
+            id        : 'device_id',
+            name      : 'title8',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+}
 </script>
 
 <script type="text/javascript">
@@ -82,12 +149,17 @@ $(function(){
                     $('#val_ref_no').val(sales_node.Salesorder.quotationno);
                     $('#val_trackid').val(sales_node.Salesorder.track_id);
                     $('#val_salesperson').val(sales_node.Customerspecialneed.salesperson_name);
-                    
-                    $.each(sales_node,function(key,value){ 
+                    //if(value.Description.title1_val)
+                    var html = '';
+                    var arr = [];
+                    arr[1] = arr[2] = arr[3] = arr[4] = arr[5] = arr[6] = arr[7] = arr[8] = 0;
+                    $.each(sales_node,function(key,value){
+                        if($.isNumeric(key))
+                        {
                         if(key==0){
                             $('.po_instrument_info').empty();
                         }
-                        console.log(value);
+                        //console.log(value);
                         if(sales_node.length===0)
                         {
                             $('.po_instrument_info').html(' <tr class="text-center">No Records Found</tr>');
@@ -98,8 +170,17 @@ $(function(){
                             $('#salesorder_id').val(sales_id);
                             //$('#SubcontractdoSalesorderId').val(sales_id);
                             //$('.description_list').append('<input type="hidden" value="'+value.Description.id+'" name="description_list[]"/>');
-                            $('.po_instrument_info').append('\n\
-                                    <tr class="tr_color sales_instrument_remove_'+value.Description.id+'">\n\\n\
+                            console.log(value['Description']); //return false;
+                            tt1 = (value.Description.title1_val) ? value.Description.title1_val : '';
+                            tt2 = (value.Description.title2_val) ? value.Description.title2_val : '';
+                            tt3 = (value.Description.title3_val) ? value.Description.title3_val : '';
+                            tt4 = (value.Description.title4_val) ? value.Description.title4_val : '';
+                            tt5 = (value.Description.title5_val) ? value.Description.title5_val : '';
+                            tt6 = (value.Description.title6_val) ? value.Description.title6_val : '';
+                            tt7 = (value.Description.title7_val) ? value.Description.title7_val : '';
+                            tt8 = (value.Description.title8_val) ? value.Description.title8_val : '';
+                            
+                            html += '<tr class="tr_color sales_instrument_remove_'+value.Description.id+'">\n\\n\
                                     <td class="text-center">'+value.Description.order_by+'</td>\n\
                                     <td class="text-center">'+value.Instrument.name+'</td>\n\\n\\n\
                                     <td class="text-center">'+value.Description.model_no+'</td>\n\\n\\n\
@@ -107,10 +188,30 @@ $(function(){
                                     <td class="text-center">'+value.Range.range_name+'</td>\n\\n\
                                     <td class="text-center">'+value.Description.sales_calllocation+'</td>\n\\n\
                                     <td class="text-center">'+value.Description.sales_calltype+'</td>\n\
-                                    <td class="text-center">'+value.Description.sales_validity+'</td>\n\
-                                    <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\\n\\n\
+                                    <td class="text-center">'+value.Description.sales_validity+'</td>\n\\n\
+                                    <td class="text-center">'+value.Description.sales_unitprice+'</td>\n\
+                                    <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\\n\\n\\n\\n\
+                                    <td class="text-center">'+value.Description.sales_total+'</td>\n\
+                                    <td class="text-center title_val title_val1 edit_title1" id = "'+value.Description.id+'">'+tt1+'</td>\n\\n\\n\\n\\n\
+                                    <td class="text-center title_val title_val2 edit_title2" id = "'+value.Description.id+'">'+tt2+'</td>\n\\n\\n\\n\\n\
+                                    <td class="text-center title_val title_val3 edit_title3" id = "'+value.Description.id+'">'+tt3+'</td>\n\\n\\n\\n\\n\
+                                    <td class="text-center title_val title_val4 edit_title4" id = "'+value.Description.id+'">'+tt4+'</td>\n\\n\\n\\n\\n\
+                                    <td class="text-center title_val title_val5 edit_title5" id = "'+value.Description.id+'">'+tt5+'</td>\n\\n\\n\\n\\n\
+                                    <td class="text-center title_val title_val6 edit_title6" id = "'+value.Description.id+'">'+tt6+'</td>\n\\n\\n\\n\\n\
+                                    <td class="text-center title_val title_val7 edit_title7" id = "'+value.Description.id+'">'+tt7+'</td>\n\\n\\n\\n\\n\
+                                    <td class="text-center title_val title_val8 edit_title8" id = "'+value.Description.id+'">'+tt8+'</td>\n\\n\\n\\n\
                                     <td class="text-center"><div class="btn-group"><a data-delete="'+value.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger purchase_instrument_delete"><i class="fa fa-times"></i></a></div></td>\n\\n\\n\\n\
-                                    </tr>');
+                                    </tr>';
+                                        
+                            
+                            arr[1] = (value.Description.title1_val || arr[1]) ? 1 : 0;
+                            arr[2] = (value.Description.title2_val || arr[2]) ? 1 : 0;
+                            arr[3] = (value.Description.title3_val || arr[3]) ? 1 : 0;
+                            arr[4] = (value.Description.title4_val || arr[4]) ? 1 : 0;
+                            arr[5] = (value.Description.title5_val || arr[5]) ? 1 : 0;
+                            arr[6] = (value.Description.title6_val || arr[6]) ? 1 : 0;
+                            arr[7] = (value.Description.title7_val || arr[7]) ? 1 : 0;
+                            arr[8] = (value.Description.title8_val || arr[8]) ? 1 : 0;
                             
                             //<td class="text-center"><div class="btn-group">\n\
                                  //   <a data-delete="'+value.Description.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger subcontract_instrument_delete">\n\
@@ -119,6 +220,18 @@ $(function(){
                             
                         }
                         $('body, html').animate({scrollTop : ($('.subcontract_linear').offset().top)-500}, 'slow', 'linear');
+                        }
+                    });
+                    console.log(arr);
+                    //console.log(arr);
+                    
+                    $('.po_instrument_info').append(html);
+                    editab();
+                    $.each(arr, function(k,v){
+                        if(k!=0){
+                            if(v)
+                                $(".title_val"+k).show();
+                        }
                     });
                    
                 }
@@ -357,14 +470,19 @@ $(function(){
                             <th class="text-center">Call Location</th>
                             <th class="text-center">Call Type</th>
                             <th class="text-center">Validity</th>
+                            <th class="text-center">Unit Price</th>
                             <th class="text-center">Department</th>
-<!--                            <th class="text-center">Action</th>-->
-
+                            <th class="text-center">Total Price</th>
+                            <?php foreach($titles as $k=>$title): ?>
+                            <th class="text-center title_val title_val<?php echo $k+1; ?> "><?php echo $title; ?></th>
+                            
+                            <?php endforeach; ?>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody class="po_instrument_info"> 
                         <tr class="text-center">    
-                            <td class="" colspan="9">
+                            <td class="" colspan="<?php echo 12+($k+1); ?>">
                         No Records Found</td>
                        
                         </tr>

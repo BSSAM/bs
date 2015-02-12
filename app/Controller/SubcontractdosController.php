@@ -25,6 +25,12 @@ class SubcontractdosController extends AppController
         $this->set('subcontract_do_id',$dmt);
         $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
         $this->set(compact('services'));
+        $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
         if($this->request->is('post'))
         {
             //pr($this->request->data);exit;
@@ -112,7 +118,12 @@ class SubcontractdosController extends AppController
         
             //$priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
             //$payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
-            
+            $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+            $this->set('titles',$titles);
             $subcontractdo_details=$this->Subcontractdo->find('first',array('conditions'=>array('Subcontractdo.id'=>$id),'recursive'=>'2'));
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$subcontractdo_details['Subcontractdo']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_sub_con_id'=>$id),'Instrument','Brand','Range','Department'))));
             //pr($salesorder_details);exit;

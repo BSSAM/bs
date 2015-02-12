@@ -1,5 +1,72 @@
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
+function editab() {
+    
+    $('.edit_title1').editable(path_url+'/Salesorders/update_title1', {
+            id        : 'device_id',
+            name      : 'title1',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title2').editable(path_url+'/Salesorders/update_title2', {
+            id        : 'device_id',
+            name      : 'title2',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title3').editable(path_url+'/Salesorders/update_title3', {
+            id        : 'device_id',
+            name      : 'title3',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title4').editable(path_url+'/Salesorders/update_title4', {
+            id        : 'device_id',
+            name      : 'title4',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title5').editable(path_url+'/Salesorders/update_title5', {
+            id        : 'device_id',
+            name      : 'title5',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title6').editable(path_url+'/Salesorders/update_title6', {
+            id        : 'device_id',
+            name      : 'title6',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title7').editable(path_url+'/Salesorders/update_title7', {
+            id        : 'device_id',
+            name      : 'title7',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+    $('.edit_title8').editable(path_url+'/Salesorders/update_title8', {
+            id        : 'device_id',
+            name      : 'title8',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
+}
 </script>
 
 <script type="text/javascript">
@@ -217,13 +284,17 @@ $(function(){
                             <th class="text-center">Call Type</th>
                             <th class="text-center">Validity</th>
                             <th class="text-center">Department</th>
+                            <?php foreach($titles as $k=>$title): ?>
+                            <th class="text-center title_val title_val<?php echo $k+1; ?> "><?php echo $title; ?></th>
+                            
+                            <?php endforeach; ?>
                             <th class="text-center">Action</th>
 
                         </tr>
                     </thead>
                     <tbody class="subcontract_instrument_info"> 
                         <tr class="text-center">    
-                            <td class="" colspan="9">
+                            <td class="" colspan="<?php echo 10+($k+1); ?>">
                         No Records Found</td>
                        
                         </tr>

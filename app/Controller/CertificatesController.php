@@ -376,7 +376,7 @@ class CertificatesController extends AppController
                             pr("uacc = ".$vc_acc);
                             pr("uothers = ".$vc_div);
                                  
-                            $vc[] = $vc_uref + $vc_div + $vc_digital + $vc_urep1 + $vc_urep2 + $vc_urep3 + $vc_acc;     
+                            $vc[] = $vc_uref + $vc_div + $vc_urep1 + $vc_urep2 + $vc_urep3 + $vc_acc;     
                             //pr($vc);
                         }
                         //pr($vc);
@@ -385,8 +385,9 @@ class CertificatesController extends AppController
                         {
                             $vc2 = $vc2+$vc1;
                         }
-                        //pr($vc2);
-                        $vc_final = sqrt($vc2);
+                        $vc_digital = 0.020833333;
+                        pr("combined uncert = ".($vc2+$vc_digital));
+                        $vc_final = sqrt($vc2 + $vc_digital);
                         //pr("vc_final = ".$vc_final);
                         $kfactor = 2;
                         $urep = $this->request->data['step1']['m'.$j.'_13'];

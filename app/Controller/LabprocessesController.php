@@ -150,7 +150,7 @@ class LabprocessesController extends AppController
        
         $salesorder_list    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0)));
         //$salesorder_list_partial    =   $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$id,'Salesorder.is_approved'=>1,'Salesorder.is_approved_lab'=>0)));
-        $quotation_list    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_list['Salesorder']['quotationno'],'Quotation.is_approved'=>1,'Quotation.is_deliveryorder_created'=>0)));
+        $quotation_list    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_list['Salesorder']['quotationno'],'Quotation.is_approved'=>1))); //,'Quotation.is_deliveryorder_created'=>0
         //pr($salesorder_list);exit;
         $deliveryorder_typ = $quotation_list['Customer']['acknowledgement_type_id'];
         $this->set('lab_sales_id',$id);
