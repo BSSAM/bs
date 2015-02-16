@@ -165,7 +165,7 @@
             $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            pr($purchase_requistion_list);exit;
+            //pr($purchase_requistion_list);exit;
             $this->set(compact('purchase_requistion_list','instrument_types','person_list','our_ref_no','country','priority','payment','additional','service','quotations_list','salespeople'));
             if($this->request->is(array('post','put')))
             {

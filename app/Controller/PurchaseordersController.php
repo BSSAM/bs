@@ -39,13 +39,20 @@ class PurchaseordersController extends AppController
             {
                 //pr($this->request->data);exit;
                 $salesorder_id = $this->request->data['Purchaseorder']['salesorder_id'];
+                $this->request->data['Purchaseorder']['purchase_name'] = $this->request->data['Purchaseorder']['name'];
+                $this->request->data['Purchaseorder']['salesperson'] = $this->request->data['Purchaseorder']['salesperson'];
+                $this->request->data['Purchaseorder']['ref_no'] = $this->request->data['Purchaseorder']['ref_no'];
+                $this->request->data['Purchaseorder']['service_id'] = $this->request->data['Purchaseorder']['service_id'];
+                $this->request->data['Purchaseorder']['remarks'] = $this->request->data['Purchaseorder']['remarks'];
+                $this->request->data['Purchaseorder']['track_id'] = $this->request->data['Purchaseorder']['track_id'];
+                
                 if(!empty($this->request->data['Purchaseorder']))
                 {
                     $this->Description->updateAll(array('Description.sales_po'=>1),array('Description.salesorder_id'=>$salesorder_id,'Description.sales_po_del'=>0));
                     if($this->Purchaseorder->save($this->request->data['Purchaseorder']))
                     {
                         $purchase_id   =   $this->Purchaseorder->getLastInsertID();
-                       $this->Description->updateAll(array('Description.sales_po_id'=>$last_id_subcontract),array('Description.salesorder_id'=>$salesorder_id,'Description.sales_po_del'=>0,'Description.sales_po_id'=>''));
+                       $this->Description->updateAll(array('Description.sales_po_id'=>$purchase_id),array('Description.salesorder_id'=>$salesorder_id,'Description.sales_po_del'=>0,'Description.sales_po_id'=>''));
                        $this->Description->updateAll(array('Description.sales_po_del'=>0),array('Description.salesorder_id'=>$salesorder_id,'Description.sales_po_del'=>1));
                        $this->Random->updateAll(array('Random.purchaseorders'=>'"'.$dmt.'"'),array('Random.id'=>1));  
                         

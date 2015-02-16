@@ -144,9 +144,9 @@ $(function() {
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_customername">Customer Name</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off','value'=>$purchase['Purchaseorder']['name'],'readonly' => true)); ?>
-                <div id="subcontract_result">
-                </div>
+                    <?php echo $this->Form->input('purchase_name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off','value'=>$purchase['Purchaseorder']['purchase_name'],'readonly' => true)); ?>
+<!--                <div id="subcontract_result">
+                </div>-->
                 </div>
                 <label class="col-md-2 control-label" for="val_regaddress">Customer Address</label>
                 <div class="col-md-4">
@@ -218,7 +218,7 @@ $(function() {
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
-                     'label' => false, 'options' =>$services,'empty'=>'Select Service Type','value'=>$service['Service']['servicetype']));
+                     'label' => false, 'options' =>$services,'empty'=>'Select Service Type','value'=>$service['Service']['service_id']));
                 ?>
                 </div> 
             </div>

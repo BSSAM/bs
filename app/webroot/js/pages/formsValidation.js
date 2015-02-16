@@ -1369,10 +1369,7 @@ var FormsValidation = function() {
                         required: true,
                       
                     },
-                    branddescription: {
-                        required: true,
-                       
-                    },
+                    
                     
                     
                 },
@@ -1381,10 +1378,7 @@ var FormsValidation = function() {
                         required: 'Please enter the Brand Name',
                        
                     },
-                    branddescription: {
-                        required: 'Please enter the Brand Description',
-                        
-                    },
+                    
                 }
             });
             
@@ -1612,10 +1606,7 @@ var FormsValidation = function() {
                         required: true,
                         minlength: 1
                     },
-                    unit_description: {
-                        required: true,
-                        minlength: 1
-                    },
+                    
                     
                     
                 },
@@ -1624,10 +1615,7 @@ var FormsValidation = function() {
                         required: 'Please enter the Unit Name',
                         minlength: 'Unit Name must consist of at least 1 characters'
                     },
-                    unit_description: {
-                        required: 'Please enter the Unit Description',
-                        minlength: 'Description must consist of at least 1 characters'
-                    },
+                    
                 }
             });
             

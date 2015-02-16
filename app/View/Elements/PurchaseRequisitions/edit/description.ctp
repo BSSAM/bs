@@ -1,3 +1,22 @@
+<script type="text/javascript">
+    function setMaximumSelected(amount,element) {
+        var itemsSelected = [];
+        for (var i=0;i<element.options.length;i++) {
+                if (element.options[i].selected) itemsSelected[itemsSelected.length]=i;
+        }
+        if (itemsSelected.length>5) {
+                itemsSelected = element.getAttribute("itemsSelected").split(",");
+                for (i=0;i<element.options.length;i++) {
+                        element.options[i].selected = false;
+                }
+                for (i=0;i<itemsSelected.length;i++) {
+                        element.options[itemsSelected[i]].selected = true;
+                }			
+        } else {
+                element.setAttribute("itemsSelected",itemsSelected.toString());	
+        }
+    }
+</script>
 <div class="form-group">
      <label class="col-md-2 control-label" for="val_description">Instrument</label>
     <div class="col-md-4">
@@ -70,7 +89,7 @@
     <label class="col-md-2 control-label" for="val_title">Titles</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('title', array('id'=>'val_title','class'=>'form-control','label'=>false,'name'=>'title','type'=>'select',
-            'options'=>$titles)); ?>
+            'options'=>$titles,'multiple','onclick'=>'setMaximumSelected(5,this)')); ?>
     </div>
 </div>
 <div class="form-group form-actions">

@@ -139,7 +139,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress')); ?>
+                        <?php echo $this->Form->input('regaddress', array('id'=>'val_regaddress','class'=>'form-control','placeholder'=>'Enter the Registered Address','label'=>false,'name'=>'regaddress','type'=>'textarea')); ?>
                     <span class="help-block_login project_name_error">Enter the Registered Address</span>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress')); ?>
+                        <?php echo $this->Form->input('billaddress', array('id'=>'val_billaddress','class'=>'form-control','placeholder'=>'Enter the Billing Address','label'=>false,'name'=>'billaddress','type'=>'textarea')); ?>
                     <span class="help-block_login project_name_error">Enter the Billing Address</span>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <?php echo $this->Form->input('deliveryaddress', array('id'=>'val_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress')); ?>
+                        <?php echo $this->Form->input('deliveryaddress', array('id'=>'val_deliveryaddress','class'=>'form-control','placeholder'=>'Enter the Delivery Address','label'=>false,'name'=>'deliveryaddress','type'=>'textarea')); ?>
                     <span class="help-block_login project_name_error">Enter the Delivery Address</span>
                     </div>
                 </div>

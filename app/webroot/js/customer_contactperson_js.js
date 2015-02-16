@@ -18,6 +18,13 @@ $(document).ready(function(){
             $('.name_error').show();
             return false;
         }
+        if($('#contact_email').val()=='')
+        {
+            $('.email_error').addClass('animation-slideDown');
+            $('.email_error').css('color','red');
+            $('.email_error').show();
+            return false;
+        }
         var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
         var contact_name=$('#contact_name').val();
         var contact_email=$('#contact_email').val();
