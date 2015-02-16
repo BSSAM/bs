@@ -56,7 +56,7 @@
                                  <div class="form-group">
                                         <label class="col-md-2 control-label" for="status">Active</label>
                                         <div class="col-md-4 form-control-static">
-                                            <?php echo $this->Form->checkbox('status', array('id'=>'status','class'=>'','label'=>false,'name'=>'status')); ?>
+                                            <?php echo $this->Form->checkbox('status', array('id'=>'status','class'=>'','label'=>false,'name'=>'status','checked')); ?>
                                         </div>
                                     </div>
                                     
