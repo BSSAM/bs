@@ -31,10 +31,6 @@ var InstrumentValidation = function() {
                         required: true,
                         minlength: 3
                     },
-                    branddescription: {
-                        required: true,
-                        minlength: 6
-                    },
                     
                     
                 },
@@ -43,10 +39,7 @@ var InstrumentValidation = function() {
                         required: 'Please enter the Brand Name',
                         minlength: 'Brand Name must consist of at least 3 characters'
                     },
-                    branddescription: {
-                        required: 'Please enter the Brand Description',
-                        minlength: 'Description must consist of at least 6 characters'
-                    },
+                   
                 }
             });
             
@@ -72,10 +65,6 @@ var InstrumentValidation = function() {
                         required: true,
                         minlength: 1
                     },
-                    unit_description: {
-                        required: true,
-                        minlength: 6
-                    },
                     
                     
                 },
@@ -84,10 +73,7 @@ var InstrumentValidation = function() {
                         required: 'Please enter the Unit Name',
                         minlength: 'Unit Name must consist of at least 1 characters'
                     },
-                    unit_description: {
-                        required: 'Please enter the Unit Description',
-                        minlength: 'Description must consist of at least 6 characters'
-                    },
+                   
                 }
             });
             

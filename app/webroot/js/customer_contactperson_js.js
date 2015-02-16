@@ -11,20 +11,25 @@ $(document).ready(function(){
     $(document).on('click','.contactperson_submit',function()
     {
         
-        if($('#contact_name').val()=='')
+        if($('#contact_name').val()=='' && $('#contact_email').val()=='')
         {
-            $('.name_error').addClass('animation-slideDown');
-            $('.name_error').css('color','red');
-            $('.name_error').show();
+            if($('#contact_name').val()=='')
+            {
+                $('.name_error').addClass('animation-slideDown');
+                $('.name_error').css('color','red');
+                $('.name_error').show();
+                
+            }
+            if($('#contact_email').val()=='')
+            {
+                $('.email_error').addClass('animation-slideDown');
+                $('.email_error').css('color','red');
+                $('.email_error').show();
+                
+            }
             return false;
         }
-        if($('#contact_email').val()=='')
-        {
-            $('.email_error').addClass('animation-slideDown');
-            $('.email_error').css('color','red');
-            $('.email_error').show();
-            return false;
-        }
+        
         var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
         var contact_name=$('#contact_name').val();
         var contact_email=$('#contact_email').val();
@@ -76,14 +81,16 @@ $(document).ready(function(){
                 
             }
         });
-        $('#contact_email').val(null);
-        $('#contact_department').val(null);
-        $('#contact_phone').val(null);
-        $('#contact_position').val(null);
-        $('#contact_mobile').val(null);
-        $('#contact_purpose').val(null);
-        $('#contact_remark').val(null);
+         $('#contact_name').val('');
+        $('#contact_email').val('');
+        $('#contact_department').val('');
+        $('#contact_phone').val('');
+        $('#contact_position').val('');
+        $('#contact_mobile').val('');
+        $('#contact_purpose').val('');
+        $('#contact_remark').val('');
         $('.name_error').hide();
+        $('.email_error').hide();
         $('.odd .dataTables_empty').hide();
         
     });
@@ -127,11 +134,22 @@ $(document).ready(function(){
         var customer_id =$('#customer_id').val();
         //alert(customer_id);return false;
         var id= $(this).attr('id');
-        if($('#contact_name').val()=='')
+        if($('#contact_name').val()=='' && $('#contact_email').val()=='')
         {
-            $('.name_error').addClass('animation-slideDown');
-            $('.name_error').css('color','red');
-            $('.name_error').show();
+            if($('#contact_name').val()=='')
+            {
+                $('.name_error').addClass('animation-slideDown');
+                $('.name_error').css('color','red');
+                $('.name_error').show();
+                
+            }
+            if($('#contact_email').val()=='')
+            {
+                $('.email_error').addClass('animation-slideDown');
+                $('.email_error').css('color','red');
+                $('.email_error').show();
+                
+            }
             return false;
         }
        $('.update_button_for_contactperson').html('<button class="btn btn-sm btn-primary contactperson_submit" type="button"><i class="fa fa-plus fa-fw"></i> add</button>');
@@ -170,15 +188,16 @@ $(document).ready(function(){
                                     <i class="fa fa-times"></i></a></div></td></tr>');
             }
         });
-        $('#contact_name').val(null);
-        $('#contact_email').val(null);
-        $('#contact_department').val(null);
-        $('#contact_phone').val(null);
-        $('#contact_position').val(null);
-        $('#contact_mobile').val(null);
-        $('#contact_purpose').val(null);
-        $('#contact_remark').val(null);
+        $('#contact_name').val('');
+        $('#contact_email').val('');
+        $('#contact_department').val('');
+        $('#contact_phone').val('');
+        $('#contact_position').val('');
+        $('#contact_mobile').val('');
+        $('#contact_purpose').val('');
+        $('#contact_remark').val('');
         $('.name_error').hide();
+        $('.email_error').hide();
         $('.odd .dataTables_empty').hide();
     });
     /**********************Contact person Delete (Customer Module)*************************/

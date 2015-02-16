@@ -208,9 +208,15 @@
             {
                 alert("Atleast One Contact Person is needed");
                 $('#contact_name').focus();
+
                 $('.name_error').addClass('animation-slideDown');
                 $('.name_error').css('color','red');
                 $('.name_error').show();
+                
+//                $('.email_error').addClass('animation-slideDown');
+//                $('.email_error').css('color','red');
+//                $('.email_error').show();
+                
                 return false;
             }
             else
