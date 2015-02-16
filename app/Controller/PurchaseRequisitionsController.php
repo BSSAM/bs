@@ -78,13 +78,14 @@
                     $purchaserequisitions_id   =   $this->PurchaseRequisition->getLastInsertID();
                     $requistion_no  =   $this->request->data['PurchaseRequisition']['prequistionno'];
                     $device_node    =   $this->PreqDevice->find('all',array('conditions'=>array('PreqDevice.prequistionno'=>$requistion_no)));
-                    $this->PreqDevice->deleteAll(array('PreqDevice.prequistionno'=>'','PreqDevice.status'=>0));
+                    //
                     if(!empty($device_node))
                     {  
-                        $this->PreqDevice->updateAll(array('PreqDevice.customer_id'=>'"'.$customer_id.'"','PreqDevice.prequistion_id'=>$purchaserequisitions_id,'PreqDevice.status'=>1),array('PreqDevice.prequistionno'=>$requistion_no,'PreqDevice.status'=>0));
+                        $this->PreqDevice->updateAll(array('PreqDevice.customer_id'=>'"'.$customer_id.'"','PreqDevice.prequistion_id'=>$purchaserequisitions_id,'PreqDevice.status'=>1),array('PreqDevice.prequistionno'=>$requistion_no,'PreqDevice.status'=>1));
                     }
                     $this->request->data['PreqCustomerSpecialNeed']['prequistion_id']=$purchaserequisitions_id;
                     $this->PreqCustomerSpecialNeed->save($this->request->data['PreqCustomerSpecialNeed']); 
+                    $this->PreqDevice->deleteAll(array('PreqDevice.prequistionno'=>'','PreqDevice.status'=>0));
                     /************
                     * Log Activities - Prequisition Approval
                     */
