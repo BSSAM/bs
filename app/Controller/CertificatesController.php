@@ -358,9 +358,9 @@ class CertificatesController extends AppController
                                 }
                             } pr("urep = ".($vc_urep1+$vc_urep2));
                             
-                            $vc_digital = 0;
-                            if($uresdivisordigital != 0)  { 
-                            $vc_digital = powfn($res/$uresdivisordigital);
+                            $vc_digital = array();
+                            if($uresdivisordigital != 0 && $res !=0)  { 
+                            $vc_digital[] = powfn($res/$uresdivisordigital);
                             } pr("ures = ".$vc_digital);
                             
                             $vc_div = 0;
@@ -385,9 +385,9 @@ class CertificatesController extends AppController
                         {
                             $vc2 = $vc2+$vc1;
                         }
-                        $vc_digital = 0.020833333;
-                        pr("combined uncert = ".($vc2+$vc_digital));
-                        $vc_final = sqrt($vc2 + $vc_digital);
+                        //$vc_digital = 0.020833333;
+                        pr("combined uncert = ".($vc2+$vc_digital[0]));
+                        $vc_final = sqrt($vc2 + $vc_digital[0]);
                         //pr("vc_final = ".$vc_final);
                         $kfactor = 2;
                         $urep = $this->request->data['step1']['m'.$j.'_13'];
