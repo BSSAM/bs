@@ -30,16 +30,16 @@ class InstrumentsController extends AppController
             $this->set('deleted_val',$id=0);
         endif;
         if($id == '3'):
-        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>1)),array('order'=>'Instrument.id Desc','recursive'=>'2'));
+        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>1),array('order'=>'Instrument.id Desc'),'limit' => 200));
         $this->set('deleted_val',$id);
         elseif($id == '2'):
-        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0,'Instrument.is_approved'=>0)),array('order'=>'Instrument.id Desc','recursive'=>'2'));
+        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0,'Instrument.is_approved'=>0),array('order'=>'Instrument.id Desc'),'limit' => 200));
         $this->set('deleted_val',$id);
         elseif($id == '1'):
-        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0,'Instrument.is_approved'=>1)),array('order'=>'Instrument.id Desc','recursive'=>'2'));
+        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0,'Instrument.is_approved'=>1),array('order'=>'Instrument.id Desc'),'limit' => 200));
         $this->set('deleted_val',$id);
         else:
-        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0)),array('order'=>'Instrument.id Desc','recursive'=>'2'));   
+        $instrument_data = $this->Instrument->find('all',array('conditions'=>array('Instrument.is_deleted'=>0),array('order'=>'Instrument.id Desc'),'limit' => 200));   
         $this->set('deleted_val',$id);
         endif;
         
