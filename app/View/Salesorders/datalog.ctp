@@ -37,6 +37,19 @@ $(document).ready(function() {
                             <h2>List Of Sales Order </h2> 
                             
                         </div>
+                        
+                        <div class="input submit col-md-10">
+                            <div class="submit pull-right">
+                                
+                                <?php echo $this->Form->input('Full List', array('id'=>'fulllist','class'=>'','label'=>false,'name'=>'fulllist','type'=>'checkbox')); ?>
+                            </div>
+                        </div>
+                        <div class="input submit col-md-2">
+                            <div class="submit pull-right">
+                                <?php echo $this->Form->input('Generate Report', array('id'=>'reportfinal','class'=>'btn btn-primary','label'=>false,'name'=>'reportfinal','type'=>'button')); ?>
+                            </div>
+                        </div>
+                        
                         <?PHP echo $this->Form->create('Saleorder', array('action' => 'datalog', 'class' => 'form-horizontal form-bordered')); ?>
                         
                         <div class="col-md-12 custom_calculate">

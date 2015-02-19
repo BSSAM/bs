@@ -18,6 +18,23 @@
             });
         });
             
+            var certificateno = $('#certificateno').val();
+            var readingtype = $('#readingtype_id').val();
+            var channel = $('#channel_id').val();
+            $.ajax({
+                type: 'POST',
+                data:"certificateno="+certificateno+"&readingtype="+readingtype+"&channel="+channel,
+                url: path_url+'/Certificates/calculation_form/',
+                beforeSend: ni_start(),  
+                success:function(data){
+                    
+                    $('.certificate_tab').html(data);
+                    $('.no_of_runs').trigger('change');
+                },
+                complete: ni_end(),
+            });
+            
+            
         $('#channel_submit').click(function(e) {
             var certificateno = $('#certificateno').val();
             var readingtype = $('#readingtype_id').val();
@@ -244,7 +261,7 @@
 //                    },
 //                    complete: ni_end(),
 //                });
-                alert('Updated');
+                alert('Certificate Datas are Updated');
                 //$('.template_data_table').html(recievedData);
                 //return false;
             }

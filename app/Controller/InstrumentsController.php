@@ -72,6 +72,7 @@ class InstrumentsController extends AppController
         //$procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1'),'fields'=>array('id','procedure_no')));
         //pr($procedure_array);exit;
         $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1','Range.is_approved'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
+        //pr($range_array);exit;
         $this->set(compact('brand_array','range_array','department_array'));
         if($this->request->is('post'))
         {
@@ -174,6 +175,7 @@ class InstrumentsController extends AppController
         $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
         $procedure_array =   $this->Procedure->find('list',array('conditions'=>array('Procedure.status'=>'1','Procedure.department_id'=>$instrument_dat['Instrument']['department_id'],'Procedure.is_approved'=>'1'),'fields'=>array('id','procedure_no')));
         $range_array =   $this->Range->find('list',array('conditions'=>array('Range.status'=>'1','Range.is_approved'=>'1'),'fields'=>array('id','range_name'),'contain' => array('Unit')));
+        //pr($range_array);exit;
         $this->set(compact('brand_array','range_array','procedure_array','department_array'));
         
         

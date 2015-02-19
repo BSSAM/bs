@@ -63,7 +63,17 @@ $(document).ready(function() {
                             <h2>List Of Quotations Datalog</h2>
                             <br>
                         </div>    
-                        
+                        <div class="input submit col-md-10">
+                            <div class="submit pull-right">
+                                
+                                <?php echo $this->Form->input('Full List', array('id'=>'fulllist','class'=>'','label'=>false,'name'=>'fulllist','type'=>'checkbox')); ?>
+                            </div>
+                        </div>
+                        <div class="input submit col-md-2">
+                            <div class="submit pull-right">
+                                <?php echo $this->Form->input('Generate Report', array('id'=>'reportfinal','class'=>'btn btn-primary','label'=>false,'name'=>'reportfinal','type'=>'button')); ?>
+                            </div>
+                        </div>
                         <?PHP echo $this->Form->create('Quotation', array('action' => 'datalog', 'class' => 'form-horizontal form-bordered')); ?>
                         
                         <div class="col-md-12 custom_calculate">
@@ -84,7 +94,7 @@ $(document).ready(function() {
                             </div>
                         </div>
                         <?PHP $this->Form->end(); ?>
-                        
+                       
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>

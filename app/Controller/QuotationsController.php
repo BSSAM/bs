@@ -1498,4 +1498,37 @@ $html .= '</div>';
         $this->set('quotation', $quotation_lists);
         }
     }
+    
+    public function reportdata()
+    {
+        $ourFileName = "Outsourced-Projects-List.csv";
+               
+        $connection = fopen( APP.'webroot'.DS.'files/'.$ourFileName, 'w') or die("can't open file");
+
+        $head_content= "AIASIA OUTSOURCED PROJECT REPORT";
+        $write = fwrite($connection, $head_content);
+
+
+        $head_content= "\r\n PROJECT NAME, CLIENT NAME , COST ,TIME LIMIT , CREATED , STATUS";
+        $write = fwrite($connection, $head_content);
+
+        foreach($data as $k=>$v)
+        {
+                        $res = $v['Projectallocation'];
+                        $project_name = $this->get_project_name($res['project_id']);
+                        $vendor_name = $this->get_vendor_name($res['vendor_id']);
+                        $created_date = date('d/m/Y',strtotime($res['created']));
+
+                   $head_content= "\r\n".$project_name.','.$vendor_name.','.$res['currency'].' '.$res['cost'].','.$res['days'].' '.$res['duration']
+                   .' ,'.$created_date.','.$res['status'];
+                   $write = fwrite($connection, $head_content);
+        }
+        fclose($connection);
+        header('Content-type: csv/plain');
+        header('Content-Disposition: attachment; filename="'.$ourFileName.'"');
+        readfile(APP.'webroot'.DS.'files/'.$ourFileName) or die('Errors');
+        unlink(APP.'webroot'.DS.'files/'.$ourFileName);
+
+        exit;
+    }
 }
