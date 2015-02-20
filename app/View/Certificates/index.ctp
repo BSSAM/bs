@@ -1,6 +1,65 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
     $(document).ready(function(e) {
+        for (i = 1; i <= 15; i++)
+        {
+            //var j = i;
+            //alert(i);
+            $('body').on('click', '.clickable'+i, function(e) {
+                
+                var c = $(this).attr("class");
+                //alert(c);
+                
+                var regex = /(\d+)/g;
+                var j = c.match(regex);
+                
+               // alert('clickable');
+                var run = $('.no_of_runs').val();
+                //alert(run);
+                for(m = 2; m <= run; m++)
+                {
+                    //alert(m);
+                    var n = $('.m'+j+'_'+1).val();
+                    var o = $('.b'+j+'_'+1).val();
+                    var p = $('.a'+j+'_'+1).val();
+                    if(m!=run)
+                    {
+                        if(n)
+                        {
+                            $('.m'+j+'_'+m).val(n);
+                        }
+                        if(o)
+                        {
+                            $('.b'+j+'_'+m).val(o);
+                        }
+                        if(p)
+                        {
+                            $('.a'+j+'_'+m).val(p);
+                        }
+                    }
+                    if(m==run)
+                    {
+                        var v = 0.000001;
+                        if(n)
+                        {
+                            $('.m'+j+'_'+m).val((+n + +v));
+                        }
+                        if(o)
+                        {
+                            $('.b'+j+'_'+m).val((+o + +v));
+                        }
+                        if(p)
+                        {
+                            $('.a'+j+'_'+m).val((+p + +v));
+                        }
+                    }
+                    //alert(n);
+                }
+            });
+
+        }
+        
+        
         
         $('.get_approval').click(function(){
             var id = $(this).attr('id');
@@ -262,6 +321,7 @@
 //                    complete: ni_end(),
 //                });
                 alert('Certificate Datas are Updated');
+                location.href = path_url+'/Certificates/temperature';
                 //$('.template_data_table').html(recievedData);
                 //return false;
             }

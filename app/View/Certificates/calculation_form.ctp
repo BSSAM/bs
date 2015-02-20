@@ -45,7 +45,7 @@
       </thead>
       <tbody class="set1_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">1</td>
+            <td class="text-center"><span class="clickable1">1</span></td>
           <td class="text-center">Set Temperature </td>
           <td class="text-center"><input type="text" name="step1[temp1]" class="temp1" value="<?php if(isset($cert['Tempcertificatedata']['temp1'])){echo $cert['Tempcertificatedata']['temp1']; } else { if(isset($tempdata[0])){echo $tempdata[0]['setpoint'];}} ?>" ></td>
           <td class="text-center">Unit </td>
@@ -153,7 +153,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set2_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">2</td>
+            <td class="text-center"><span class="clickable2">2</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp2]" class="temp2" value="<?php if(isset($cert['Tempcertificatedata']['temp2'])){echo $cert['Tempcertificatedata']['temp2']; } else { if(isset($tempdata[1])){ echo $tempdata[1]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -271,7 +271,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set3_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">3</td>
+          <td class="text-center"><span class="clickable3">3</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp3]" class="temp3" value="<?php if(isset($cert['Tempcertificatedata']['temp3'])){echo $cert['Tempcertificatedata']['temp3']; } else { if(isset($tempdata[2])){ echo $tempdata[2]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -380,7 +380,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set4_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">4</td>
+          <td class="text-center"><span class="clickable4">4</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp4]" class="temp4" value="<?php if(isset($cert['Tempcertificatedata']['temp4'])){echo $cert['Tempcertificatedata']['temp4']; } else { if(isset($tempdata[3])){ echo $tempdata[3]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -490,7 +490,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set5_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">5</td>
+          <td class="text-center"><span class="clickable5">5</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp5]" class="temp5" value="<?php if(isset($cert['Tempcertificatedata']['temp5'])){echo $cert['Tempcertificatedata']['temp5']; } else { if(isset($tempdata[4])){ echo $tempdata[4]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -601,7 +601,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set6_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">6</td>
+          <td class="text-center"><span class="clickable6">6</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp6]" class="temp6" value="<?php if(isset($cert['Tempcertificatedata']['temp6'])){echo $cert['Tempcertificatedata']['temp6']; } else { if(isset($tempdata[5])){ echo $tempdata[5]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -709,7 +709,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set7_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">7</td>
+          <td class="text-center"><span class="clickable7">7</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp7]" class="temp7" value="<?php if(isset($cert['Tempcertificatedata']['temp7'])){echo $cert['Tempcertificatedata']['temp7']; } else { if(isset($tempdata[6])){ echo $tempdata[6]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -818,7 +818,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set8_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">8</td>
+          <td class="text-center"><span class="clickable8">8</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp8]" class="temp8"  value="<?php if(isset($cert['Tempcertificatedata']['temp8'])){echo $cert['Tempcertificatedata']['temp8']; } else { if(isset($tempdata[7])){ echo $tempdata[7]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -926,7 +926,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set9_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">9</td>
+          <td class="text-center"><span class="clickable9">9</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp9]" class="temp9" value="<?php if(isset($cert['Tempcertificatedata']['temp9'])){echo $cert['Tempcertificatedata']['temp9']; } else { if(isset($tempdata[8])){ echo $tempdata[8]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -1035,7 +1035,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set10_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">10</td>
+          <td class="text-center"><span class="clickable10">10</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp10]" class="temp10" value="<?php if(isset($cert['Tempcertificatedata']['temp10'])){echo $cert['Tempcertificatedata']['temp10']; } else { if(isset($tempdata[9])){ echo $tempdata[9]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -1128,7 +1128,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set11_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">11</td>
+          <td class="text-center"><span class="clickable11">11</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp11]" class="temp11" value="<?php if(isset($cert['Tempcertificatedata']['temp11'])){echo $cert['Tempcertificatedata']['temp11']; } else { if(isset($tempdata[10])){ echo $tempdata[10]['setpoint'];}} ?>"></td>
           <td class="text-center">Unit </td>
@@ -1221,7 +1221,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set12_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">12</td>
+          <td class="text-center"><span class="clickable12">12</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp12]" class="temp12" value="<?php if(isset($tempdata[11])){ echo $tempdata[11]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
@@ -1314,7 +1314,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set13_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">13</td>
+          <td class="text-center"><span class="clickable13">13</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp13]" class="temp13" value="<?php if(isset($tempdata[12])){ echo $tempdata[12]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
@@ -1407,7 +1407,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set14_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">14</td>
+          <td class="text-center"><span class="clickable14">14</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp14]" class="temp14" value="<?php if(isset($tempdata[13])){ echo $tempdata[13]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
@@ -1500,7 +1500,7 @@
     <table  class="table table-vcenter table-condensed table-bordered">
       <tbody class="set15_info">
         <tr class="text-center c_light_bg">
-          <td class="text-center">15</td>
+          <td class="text-center"><span class="clickable15">15</span></td>
           <td class="text-center">Set Temperature</td>
           <td class="text-center"><input type="text" name="step1[temp15]" class="temp15"  value="<?php if(isset($tempdata[14])){ echo $tempdata[14]['setpoint'];} ?>"></td>
           <td class="text-center">Unit </td>
@@ -1716,7 +1716,8 @@
     <div class="form-group">
     <div class="col-md-12">
       <label for="val_duedate" class="col-md-6 control-label">Instrument Cal Status </label>
-      <div class="col-md-6"> <?php echo $this->Form->input('Tempformdata.instrument_cal_status', array('id' => 'val_instrument_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>$instrument_cal_status,'value'=>$get_cert_sales['Tempcertificate']['instrument_cal_status'])); ?> </div>
+      <div class="col-md-6"> 
+          <?php echo $this->Form->input('Tempformdata.instrument_cal_status', array('id' => 'val_instrument_cal_status', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => '-- Select Instrument Cal Status --','options'=>$instrument_cal_status,'value'=>$get_cert_sales['Tempcertificate']['instrument_cal_status'])); ?> </div>
       </div>
       <div class="col-md-12">
         <label for="val_duedate" class="col-md-6 control-label">Instrument Cal Status Description </label>

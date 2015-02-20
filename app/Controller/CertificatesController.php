@@ -359,9 +359,11 @@ class CertificatesController extends AppController
                             } pr("urep = ".($vc_urep1+$vc_urep2));
                             
                             $vc_digital = array();
+                            pr("uresdivisordigital".$uresdivisordigital);
+                            pr("res".$res);
                             if($uresdivisordigital != 0 && $res !=0)  { 
                             $vc_digital[] = powfn($res/$uresdivisordigital);
-                            } pr("ures = ".$vc_digital);
+                            } //pr("ures = ".$vc_digital);
                             
                             $vc_div = 0;
                             $vc_acc = 0;
@@ -385,9 +387,18 @@ class CertificatesController extends AppController
                         {
                             $vc2 = $vc2+$vc1;
                         }
+                        //pr($vc_digital);
                         //$vc_digital = 0.020833333;
-                        pr("combined uncert = ".($vc2+$vc_digital[0]));
-                        $vc_final = sqrt($vc2 + $vc_digital[0]);
+                        if($vc_digital)
+                        {
+                            pr("combined uncert = ".($vc2+$vc_digital[0]));
+                            $vc_final = sqrt($vc2 + $vc_digital[0]);
+                        }
+                        else
+                        {
+                            pr("combined uncert = ".($vc2));
+                            $vc_final = sqrt($vc2);
+                        }
                         //pr("vc_final = ".$vc_final);
                         $kfactor = 2;
                         $urep = $this->request->data['step1']['m'.$j.'_13'];
@@ -454,6 +465,7 @@ class CertificatesController extends AppController
                 
                 if($this->request->data['Tempformdata']['cal_status']==1) // Rejected
                 {
+                    echo "calstatus = rejected";
                     $get_desc = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.certificate_no'=>$this->request->data['certificateno']),'recursive'=>'2'));
                     $desc_id = $get_desc['Tempcertificate']['description_id'];
                     //$data = $this->Description->find('first',array('conditions'=>array('Description.id'=>$desc_id)));
@@ -461,6 +473,7 @@ class CertificatesController extends AppController
                 }
                 if($this->request->data['Tempformdata']['cal_status']==2)
                 {
+                    echo "calstatus = approved";
                     $get_desc = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.certificate_no'=>$this->request->data['certificateno']),'recursive'=>'2'));
                     $desc_id = $get_desc['Tempcertificate']['description_id'];
                     //$data = $this->Description->find('first',array('conditions'=>array('Description.id'=>$desc_id)));
@@ -469,6 +482,7 @@ class CertificatesController extends AppController
                 
                 if($this->request->data['Tempformdata']['approved_status']==1) // Rejected
                 {
+                    echo "appstatus = rejected";
                     $get_desc = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.certificate_no'=>$this->request->data['certificateno']),'recursive'=>'2'));
                     $desc_id = $get_desc['Tempcertificate']['description_id'];
                     //$data = $this->Description->find('first',array('conditions'=>array('Description.id'=>$desc_id)));
@@ -476,6 +490,7 @@ class CertificatesController extends AppController
                 }
                 if($this->request->data['Tempformdata']['approved_status']==2)
                 {
+                    echo "appstatus = approved";
                     $get_desc = $this->Tempcertificate->find('first',array('conditions'=>array('Tempcertificate.certificate_no'=>$this->request->data['certificateno']),'recursive'=>'2'));
                     $desc_id = $get_desc['Tempcertificate']['description_id'];
                     //$data = $this->Description->find('first',array('conditions'=>array('Description.id'=>$desc_id)));
@@ -751,7 +766,7 @@ class CertificatesController extends AppController
                         AND Description.department_id =2
                         AND Description.engineer =0
                         GROUP BY Description.id DESC');
-
+        //if($eng_data){echo "eng_data";}
         $this->set('eng_data',$eng_data);
         
         $sup_app_data = $this->Description->query('SELECT *
@@ -766,6 +781,7 @@ class CertificatesController extends AppController
                         AND Description.engineer =1
                         AND Description.supervisor =0
                         GROUP BY Description.id DESC');
+        //if($sup_app_data){echo "sup_app_data";}
         $this->set('sup_app_data',$sup_app_data);
         
         $man_app_data = $this->Description->query('SELECT *
@@ -781,6 +797,7 @@ class CertificatesController extends AppController
                         AND Description.supervisor =1
                         AND Description.manager =0
                         GROUP BY Description.id DESC');
+        //if($man_app_data){echo "man_app_data";}
         $this->set('man_app_data',$man_app_data);
         
         $cer_total_data = $this->Description->query('SELECT *
@@ -796,6 +813,7 @@ class CertificatesController extends AppController
                         AND Description.supervisor =1
                         AND Description.manager =1
                         GROUP BY Description.id DESC');
+        //if($cer_total_data){echo "cer_total_data";}
         $this->set('cer_total_data',$cer_total_data);
         //pr($eng_data);exit;
         foreach($eng_data as $data_arr)
@@ -1452,10 +1470,21 @@ class CertificatesController extends AppController
             $desc_id = $tempcer_data['Tempcertificate']['description_id'];
             $temperature = $tempcer_data['Tempcertificate']['temperature'];
             $relhum = $tempcer_data['Tempcertificate']['humidity'];
-            $find_cert = $this->Tempcertificatedata->find('first',array('conditions'=>array('Tempcertificatedata.certificate_no'=>$tempcer_data['Tempcertificate']['certificate_no'])));
+            $find_cert = $this->Tempcertificatedata->find('all',array('conditions'=>array('Tempcertificatedata.certificate_no'=>$tempcer_data['Tempcertificate']['certificate_no'])));
+            //pr($find_cert);exit;
             //$this->set('cert',$find_cert);
             $ambient_data = $this->Tempambient->find('first', array('conditions' => array('Tempambient.id' => $temperature),'recursive'=>2));
+            $ambient = '';
+            if($ambient_data)
+            {
+                $ambient = $ambient_data['Tempambient']['ambientname'];
+            }
+            $rel = '';
             $relhum_data = $this->Temprelativehumidity->find('first', array('conditions' => array('Temprelativehumidity.id' => $relhum),'recursive'=>2));
+            if($relhum_data)
+            {
+                $rel = $relhum_data['Temprelativehumidity']['relativehumidity'];
+            }
             $desc_data = $this->Description->find('first', array('conditions' => array('Description.id' => $desc_id),'recursive'=>2));
             //pr($quotation_data);exit;
             $file_type = 'pdf';
@@ -1563,13 +1592,13 @@ $html .= '<div id="content" style="">';
 				<tr>
 				 <td width="30%" style="font-size:11px;color:#000 !important;padding:5px;">AMBIENT TEMPERATURE</td>
 				 <td width="10%" style="font-size:11px;color:#000 !important;padding:5px;">:</td>
-				 <td width="60%" style="font-size:11px;padding:5px;">'.$ambient_data['Tempambient']['ambientname'].'</td>
+				 <td width="60%" style="font-size:11px;padding:5px;">'.$ambient.'</td>
 				</tr>
 				
 				<tr>
 				 <td width="30%" style="font-size:11px;color:#000 !important;padding:5px;">RELATIVE HUMIDITY</td>
 				 <td width="10%" style="font-size:11px;color:#000 !important;padding:5px;">:</td>
-				 <td width="60%" style="font-size:11px;padding:5px;">'.$relhum_data['Temprelativehumidity']['relativehumidity'].'</td>
+				 <td width="60%" style="font-size:11px;padding:5px;">'.$rel.'</td>
 				</tr>
 				
 		  
@@ -1603,8 +1632,8 @@ THERMOMETER</td>
                         <td style="color:#000 !important;padding:5px;">APPROVED BY :</td>
                     </tr>
                     <tr>
-                        <td style="padding:5px;text-align:center;">Krishnan</td>
-                        <td style="padding:5px;text-align:center;">Krishnan</td>
+                        <td style="padding:5px;text-align:center;"><img src="img/signature/1_Krishnan_07192013111843328_Krish_eSign1.jpg" width="150" height="80" alt="" />Krishnan</td>
+                        <td style="padding:5px;text-align:center;"><img src="img/signature/1_Krishnan_07192013111843328_Krish_eSign1.jpg" width="150" height="80" alt="" />Krishnan</td>
                     </tr>
 		   
 		   </table>
@@ -1663,82 +1692,31 @@ THERMOMETER</td>
      <tr style="background:#f1f1f1;">
           <td colspan="5" style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;">°C</td>
      </tr>';
-     $html .= '
-     <tr>
-          <td colspan="5" style="color:#000 !important;padding:5px;border-right:1px solid #000; text-align:left;">CHANNEL-1</td>
-     </tr>
-     <tr>
-          <td style="padding:5px;">0.00</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.10</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-     <tr>
-          <td style="padding:5px;">100.10</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.10</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-	  <tr>
-          <td style="padding:5px;">200.30</td>
-          <td style="padding:5px;">200.50</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.20</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-	 
-	    <tr>
-          <td colspan="5" style="color:#000 !important;padding:5px;border-right:1px solid #000; text-align:left;">CHANNEL-2</td>
-     </tr>
-     <tr>
-          <td style="padding:5px;">0.00</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.10</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-     <tr>
-          <td style="padding:5px;">100.10</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.10</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-	  <tr>
-          <td style="padding:5px;">200.30</td>
-          <td style="padding:5px;">200.50</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.20</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-	 
-	    <tr>
-          <td colspan="5" style="color:#000 !important;padding:5px;border-right:1px solid #000; text-align:left;">CHANNEL-3</td>
-     </tr>
-     <tr>
-          <td style="padding:5px;">0.00</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.10</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-     <tr>
-          <td style="padding:5px;">100.10</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.10</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-	  <tr>
-          <td style="padding:5px;">200.30</td>
-          <td style="padding:5px;">200.50</td>
-          <td style="padding:5px;">-</td>
-          <td style="padding:5px;">-0.20</td>
-          <td style="padding:5px;border-right:1px solid #000;">0.08</td>
-     </tr>
-</table>
+          //echo $find_cert[''][''];
+        foreach($find_cert as $k=>$find_cert_single)
+        {
+            if($k==0)
+            {
+            $html .= '
+            <tr>
+                 <td colspan="5" style="color:#000 !important;padding:5px;border-right:1px solid #000; text-align:left;">CHANNEL-'.($k+1).'</td>
+            </tr>';
+            }
+            for($i=1;$i<=15;$i++)
+            {
+                if($find_cert_single['Tempcertificatedata']['temp'.$i] != '')
+                {
+                    $html .= '<tr><td style="padding:5px;">'.$find_cert_single['Tempcertificatedata']['m'.$i.'_11'].'</td>
+                         <td style="padding:5px;">'.$find_cert_single['Tempcertificatedata']['b'.$i.'_11'].'</td>
+                         <td style="padding:5px;">'.$find_cert_single['Tempcertificatedata']['a'.$i.'_11'].'</td>
+                         <td style="padding:5px;">'.($find_cert_single['Tempcertificatedata']['b'.$i.'_11']-$find_cert_single['Tempcertificatedata']['m'.$i.'_11']).'</td>
+                         <td style="padding:5px;border-right:1px solid #000;">'.$find_cert_single['Tempcertificatedata']['uncert'.$i].'</td>
+                    </tr>';
+                }
+            }
+        }
+	    
+$html .= '</table>
 
 		   </div>
 		   ';       
