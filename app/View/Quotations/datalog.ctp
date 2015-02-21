@@ -59,22 +59,24 @@ $(document).ready(function() {
                     <!-- Datatables Content -->
                     
                     <div class="block full">
+                        <?PHP echo $this->Form->create('Quotation', array('action' => 'datalog', 'class' => 'form-horizontal form-bordered')); ?>
                         <div class="block-title">
                             <h2>List Of Quotations Datalog</h2>
+                            <h2 style="float:right;"><div class="col-md-4"><?php echo $this->Form->input('Full List',array('type'=>'checkbox','id'=>'fulllist','name'=>'fulllist')) ?></div><?php echo $this->Html->link('Generate Report',array('controller' => 'Quotations','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></h2>
                             <br>
                         </div>    
-                        <div class="input submit col-md-10">
+<!--                        <div class="input submit col-md-10">
                             <div class="submit pull-right">
                                 
-                                <?php echo $this->Form->input('Full List', array('id'=>'fulllist','class'=>'','label'=>false,'name'=>'fulllist','type'=>'checkbox')); ?>
+                                <?php //echo $this->Form->input('Full List', array('id'=>'fulllist','class'=>'','label'=>false,'name'=>'fulllist','type'=>'checkbox')); ?>
                             </div>
                         </div>
                         <div class="input submit col-md-2">
                             <div class="submit pull-right">
-                                <?php echo $this->Form->input('Generate Report', array('id'=>'reportfinal','class'=>'btn btn-primary','label'=>false,'name'=>'reportfinal','type'=>'button')); ?>
+                                <?php //echo $this->Form->input('Generate Report', array('id'=>'reportfinal','class'=>'btn btn-primary','label'=>false,'name'=>'reportfinal','type'=>'button')); ?>
                             </div>
-                        </div>
-                        <?PHP echo $this->Form->create('Quotation', array('action' => 'datalog', 'class' => 'form-horizontal form-bordered')); ?>
+                        </div>-->
+                        
                         
                         <div class="col-md-12 custom_calculate">
                         <?php echo $this->Form->input('gate', array('id'=>'gate','class'=>'form-control','label'=>false,'name'=>'gate','type'=>'select','options'=>array('AND'=>'AND','OR'=>'OR'))); ?>
@@ -107,6 +109,7 @@ $(document).ready(function() {
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
+                                        <th class="text-center">Device Name</th>
                                         
                                     </tr>
                                 </thead>
@@ -116,7 +119,7 @@ $(document).ready(function() {
                                     <tr <?php if($quotation_list['Quotation']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['branch_id'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
@@ -125,6 +128,7 @@ $(document).ready(function() {
                                             
                                                 <?PHP echo $quotation_list['Quotation']['ref_no'] ?>
                                                                                    </td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Instrument']['name'] ?></td>
                                         
                                     </tr>
                                     <?php endforeach; ?>

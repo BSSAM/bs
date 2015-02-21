@@ -1464,8 +1464,10 @@ $html .= '</div>';
     
     public function datalog()
     {
+        
         if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) && isset($this->request->data['val']))
         {
+            //pr($this->request->data['fulllist']);exit;
         $andor = $this->request->data['gate'];
         
         $condition = $this->request->data['query_input'];
@@ -1473,8 +1475,8 @@ $html .= '</div>';
         $value = $this->request->data['val'];
         $conditions = $ccres = array();
         
-        $conditions['Quotation.is_deleted'] = 0;
-        ///$conditions1['Device.quotationno'] = 'BSQ-05-000002';
+//        $conditions['Quotation.is_deleted'] = 0;
+//        $conditions['Device.quotationno'] = 'BSQ-05-000002';
         foreach($condition as $k => $con)
         {
             if($conditiontype[$k]!='LIKE')
@@ -1485,8 +1487,18 @@ $html .= '</div>';
         
         $conditions[$andor] = $ccres;
         
-        $quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));    
-        pr($quotation_lists);
+        if($this->request->data['fulllist'] == 1)
+        {
+            $quotation_lists = $this->Device->find('all',array('conditions'=>$conditions));
+        }
+        else
+        {
+            $quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));    
+        }
+        //$quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));
+        
+        //pr($quotation_dev_lists);exit;
+        //pr($quotation_lists);
         $this->set('quotation', $quotation_lists);
         $log = $this->Quotation->getDataSource()->getLog(false, false);
         debug($log);
@@ -1494,7 +1506,14 @@ $html .= '</div>';
         }
         else
         {
-        $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));    
+            //pr($this->request->data['fulllist']);exit;
+        if($this->request->data['fulllist'] == 1){
+         $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));    
+        }
+        else
+        {
+         $quotation_lists = $this->Device->find('all',array('conditions'=>array('Quotation.is_deleted'=>0)));   
+        }
         $this->set('quotation', $quotation_lists);
         }
     }

@@ -193,3 +193,4 @@ and open the template in the editor.
 .custom_calculate .input{width:31%;float:left;}
 .custom_calculate .add_field_button{margin-right: 10px;}
 .title_val{ display:none;}
+.table-responsive-scroll table{display:block;overflow:auto;}

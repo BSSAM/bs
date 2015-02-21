@@ -148,7 +148,7 @@ class SalesorderHelper extends AppHelper
         $sales = implode(',',$sales);
         return $sales;
     }
-     public function find_quo($quotation_id=NULL)
+    public function find_quo($quotation_id=NULL)
     {
         APP::import('Model','Quotation');
         $this->Quotation   =   new Quotation();
@@ -182,5 +182,74 @@ class SalesorderHelper extends AppHelper
         $customer = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$sales_customer,'Customer.is_approved'=>1)));
         $customer_name = $customer['Customer']['customername'];
         return $customer_name;
+    }
+    public function find_deliveryorder_nos($sales_id=NULL)
+    {
+        APP::import('Model','Deliveryorder');
+        $this->Deliveryorder   =   new Deliveryorder();
+        //$id1 = implode(',',$id);
+        $sales = $this->Deliveryorder->find('count',array('conditions'=>array('Deliveryorder.salesorder_id'=>$sales_id)));
+        return $sales;
+    }
+    
+    public function find_deliveryorder_no($sales_id = null)
+    {
+       APP::import('Model','Deliveryorder');
+        $this->Deliveryorder   =   new Deliveryorder();
+        //$id1 = implode(',',$id);
+        $sales = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$sales_id)));
+        $sa = array();
+        foreach($sales as $sales1):
+            $sa[] = $sales1['Deliveryorder']['delivery_order_no'];
+        endforeach;
+        $id1 = implode(',',$sa);
+        return $id1;
+    }
+    public function find_deliveryorder_date($sales_id = null)
+    {
+       APP::import('Model','Deliveryorder');
+        $this->Deliveryorder   =   new Deliveryorder();
+        //$id1 = implode(',',$id);
+        $sales = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$sales_id)));
+        $sa = array();
+        foreach($sales as $sales1):
+            $sa[] = $sales1['Deliveryorder']['delivery_order_date'];
+        endforeach;
+        $id1 = implode(',',$sa);
+        return $id1;
+    }
+    public function find_invoice_no($sales_id = null)
+    {
+       APP::import('Model','Invoice');
+        $this->Invoice   =   new Invoice();
+        //$id1 = implode(',',$id);
+        $sales = $this->Invoice->find('all',array('conditions'=>array('Invoice.salesorder_id'=>$sales_id)));
+        $sa = array();
+        foreach($sales as $sales1):
+            $sa[] = $sales1['Invoice']['invoiceno'];
+        endforeach;
+        $id1 = implode(',',$sa);
+        return $id1;
+    }
+    public function find_invoice_date($sales_id = null)
+    {
+       APP::import('Model','Invoice');
+        $this->Invoice   =   new Invoice();
+        //$id1 = implode(',',$id);
+        $sales = $this->Invoice->find('all',array('conditions'=>array('Invoice.salesorder_id'=>$sales_id)));
+        $sa = array();
+        foreach($sales as $sales1):
+            $sa[] = $sales1['Invoice']['invoice_date'];
+        endforeach;
+        $id1 = implode(',',$sa);
+        return $id1;
+    }
+    
+    public function salesperson($attn=NULL)
+    {
+        APP::import('Model','Contactpersoninfo');
+        $this->Contactpersoninfo  =   new Contactpersoninfo();
+        $sales_person  =    $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$attn)));
+        return $sales_person['Contactpersoninfo']['name'];
     }
 }
