@@ -2016,8 +2016,12 @@
             }
 
             function Ca(a) {
+//                var b = l.createElement("div");
+//                 b.className = a.oClasses.sInfo;
+//                a.nTable.setAttribute("class=overflow");
                 var b = l.createElement("div");
                 b.className = a.oClasses.sInfo;
+                alert(a.oClasses.sInfo);
                 a.aanFeatures.i || (a.aoDrawCallback.push({
                     fn: Ka,
                     sName: "information"
@@ -2058,6 +2062,7 @@
             }
 
             function ba(a) {
+                //console.log(a);
                 var b, c, d = a.iInitDisplayStart;
                 if (!1 === a.bInitialised) setTimeout(function () {
                     ba(a)

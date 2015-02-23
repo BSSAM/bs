@@ -60,9 +60,9 @@ $(document).ready(function() {
                     
                     <div class="block full">
                         <?PHP echo $this->Form->create('Quotation', array('action' => 'datalog', 'class' => 'form-horizontal form-bordered')); ?>
-                        <div class="block-title">
-                            <h2>List Of Quotations Datalog</h2>
-                            <h2 style="float:right;"><div class="col-md-4"><?php echo $this->Form->input('Full List',array('type'=>'checkbox','id'=>'fulllist','name'=>'fulllist')) ?></div><?php echo $this->Html->link('Generate Report',array('controller' => 'Quotations','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></h2>
+                        <div class="col-md-12">
+                            <h2  class="pull-left">List Of Quotations Datalog</h2>
+                            <div class="pull-right" style="margin-top: 30px;"><div class="pull-left" style="margin-right: 20px; line-height: 20px;"><?php echo $this->Form->input('Full List',array('type'=>'checkbox','id'=>'fulllist','name'=>'fulllist')) ?></div><?php echo $this->Html->link('Generate Report',array('controller' => 'Quotations','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></div>
                             <br>
                         </div>    
 <!--                        <div class="input submit col-md-10">
@@ -77,7 +77,7 @@ $(document).ready(function() {
                             </div>
                         </div>-->
                         
-                        
+<div class="datalog">
                         <div class="col-md-12 custom_calculate">
                         <?php echo $this->Form->input('gate', array('id'=>'gate','class'=>'form-control','label'=>false,'name'=>'gate','type'=>'select','options'=>array('AND'=>'AND','OR'=>'OR'))); ?>
                         <?php //echo $this->Form->input('plus', array('id'=>'submit','class'=>'btn btn-primary','label'=>false,'name'=>'submit','type'=>'submit')); ?>
@@ -96,8 +96,9 @@ $(document).ready(function() {
                             </div>
                         </div>
                         <?PHP $this->Form->end(); ?>
-                       
+</div>
                         <div class="table-responsive table-responsive-scroll">
+
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
@@ -217,6 +218,7 @@ endfor;
                 ?>
                                 </tbody>
                             </table>
+                            </div>
 <!--                            <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

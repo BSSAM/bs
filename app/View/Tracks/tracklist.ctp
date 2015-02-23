@@ -34,24 +34,26 @@
             <?PHP echo $this->element('message');?>            
 <!-- Datatables Content -->
 <div class="block full">
-    <div class="block-title">
-        <h2>Tracking System</h2>
-        <h2 style="float:right;"><?php echo $this->Html->link('Generate Report',array('controller' => 'Tracks','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></h2>
+    <div class="col-md-12">
+        <h2 class="pull-left">Tracking System</h2>
+        
+            <div class="pull-right" style="margin-top: 30px;"><?php echo $this->Html->link('Generate Report',array('controller' => 'Quotations','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></div>
+<!--        <h2 style="float:right;"><?php //echo $this->Html->link('Generate Report',array('controller' => 'Tracks','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></h2>-->
     </div>
     
-    <div class="input submit col-md-10">
+<!--    <div class="input submit col-md-10">
         <div class="submit pull-right">
-            <?php echo $this->Form->input('Full List', array('id'=>'fulllist','class'=>'','label'=>false,'name'=>'fulllist','type'=>'checkbox')); ?>
+            <?php //echo $this->Form->input('Full List', array('id'=>'fulllist','class'=>'','label'=>false,'name'=>'fulllist','type'=>'checkbox')); ?>
         </div>
-    </div>
-    <div class="input submit col-md-2">
+    </div>-->
+<!--    <div class="input submit col-md-2">
         <div class="submit pull-right">
             
             <?php //echo $this->Form->input('Generate Report', array('id'=>'reportfinal','class'=>'btn btn-primary','label'=>false,'name'=>'reportfinal','type'=>'button')); ?>
         </div>
-    </div>
+    </div>-->
     <?PHP echo $this->Form->create('Tracks', array('action' => 'tracklist', 'class' => 'form-horizontal form-bordered')); ?>
-
+<div class="datalog">
     <div class="col-md-12 custom_calculate">
     <?php echo $this->Form->input('gate', array('id'=>'gate','class'=>'form-control','label'=>false,'name'=>'gate','type'=>'select','options'=>array('AND'=>'AND','OR'=>'OR'))); ?>
    <button class="add_field_button pull-right">+</button></div>
@@ -66,9 +68,11 @@
             <?php echo $this->Form->input('Proceed', array('id'=>'submit','class'=>'btn btn-primary','label'=>false,'name'=>'submit','type'=>'submit')); ?>
         </div>
     </div>
+</div>
     <?PHP $this->Form->end(); ?>
                      
     <div class="table-responsive table-responsive-scroll">
+<!--        <div class="auto_overflow">-->
         <table id="sofull-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
@@ -138,6 +142,7 @@
                 ?>
             </tbody>
         </table>
+<!--        </div>-->
     </div></div>
        
         
