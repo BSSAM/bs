@@ -97,7 +97,7 @@ $(document).ready(function() {
                         </div>
                         <?PHP $this->Form->end(); ?>
                        
-                        <div class="table-responsive">
+                        <div class="table-responsive table-responsive-scroll">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
@@ -109,13 +109,50 @@ $(document).ready(function() {
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
+                                        <?php 
+                                        if($fulllist == 1)
+                                        {
+                                        ?>
                                         <th class="text-center">Device Name</th>
-                                        
+                                        <th class="text-center">Brand Name</th>
+                                        <th class="text-center">Model No</th>
+                                        <th class="text-center">Range</th>
+                                        <th class="text-center">Call Location</th>
+                                        <th class="text-center">Call Type</th>
+                                        <th class="text-center">Unit Price</th>
+                                        <?php $count1 = 0; for($i=0;$i<=4;$i++):
+    if(isset($titles[$i])):
+        ?>
+        <th class="text-center"><?php 
+        
+        echo $titles[$i]; ?></th>
+        <?php
+    endif;
+    $count1 = $count1+1;
+endfor; ?>
+                                        <?php 
+                                        }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?PHP if(!empty($quotation )):  ?>
-                                     <?php foreach($quotation as $quotation_list): ?>
+                                    <?PHP 
+                                    
+                                    $excel = array();
+                                    $excel[] = array();
+                                    if($fulllist == 0)
+                                    {
+                                    $excel[] = array('ID','QuotationNo','QuotationDate','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Discount','GST','Remarks','TotalPrice','GSTType','CustomerId','CustomerName','PaymentTermsId','ServiceTypeId','DepartmentName','IsApproved');   
+                                    }
+                                    else
+                                    {
+                                        //ID,CompanyId	CreatedDate	QuotationNo	QuotationDate	CustomerAddress	ContactPersonName	Phone	Fax	Email	YourRefNo	Discount	GST	Remarks	TotalPrice	GSTType	CurrencyConversionRate	SOItemsAppBy	GSTTypeId	CustomerId	CurrencyId	SalesPersonId	BranchId	InstrumentForId	PaymentTermsId	ServiceTypeId	ProjectName	TitleIdValue1	TitleIdValue2	TitleIdValue3	Title1	Title2	Title3	CompanyName	CustomerName	CurrencyCode	SalesPersonName	BranchName	InstrumentForName	PaymentTerms	ServiceTypeName	RangeName	InstrumentName	BrandName	SNo	Quantity	Validity	SerialNo	ModelNo	PartNo	UnitPrice	QD_Discount	QD_Remarks	QD_TotalPrice	QDSNO	TagNo	Location	ControlNo	TitleValue1	TitleValue2	TitleValue3	TitleValue4	TitleValue5	TitleValue6	TitleValue7	TitleValue8	TitleValue9	InstrumentId	LedgerAccountId	CalibrationLocationID	CalibrationTypeId	LedgerAccountName	DepartmentName	LocationName	QDTitle1	QDTitle2	QDTitle3	QDTitle4	QDTitle5	QDTitle6	QDTitle7	QDTitle8	QDTitle9	IsActive													
+
+                                     $excel[] = array('ID','QuotationNo','QuotationDate','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Discount','GST','Remarks','TotalPrice','GSTType','CustomerId','CustomerName','PaymentTermsId','ServiceTypeId','DepartmentName','IsApproved','Instrumentname','Brand','Model No','Range','Call Location','Call Type','Unit Price','Title1','Title2','Title3','Title4','Title5');   
+                                    }
+                                    
+                                    if(!empty($quotation )):  ?>
+                                     <?php foreach($quotation as $k=>$quotation_list): ?>
                                     <tr <?php if($quotation_list['Quotation']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
@@ -128,12 +165,56 @@ $(document).ready(function() {
                                             
                                                 <?PHP echo $quotation_list['Quotation']['ref_no'] ?>
                                                                                    </td>
+                                        <?php 
+                                        if($fulllist == 1)
+                                        {
+                                        ?>
                                         <td class="text-center"><?PHP echo $quotation_list['Instrument']['name'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Brand']['brandname'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Device']['model_no'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Range']['range_name'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Device']['call_location'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Device']['call_type'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Device']['unit_price'] ?></td>
+                                     <?php  $count1 = 0;
+for($i=0;$i<=4;$i++):
+    if(isset($titles[$i])): ?>
+                                        <td class="text-center"><?php echo $quotation_list['Device']['title'.($i+1).'_val'] ?></td>
+       <?php 
+       
+    endif;
+    $count1 = $count1+1;
+endfor;
+?>
+                                        <?php 
+                                        }
+                                        ?>
                                         
                                     </tr>
-                                    <?php endforeach; ?>
+                                    <?php 
+                                    if($fulllist == 0)
+                                    {
+//                                    $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['due_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
+//                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
+//                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
+//                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);
+                                    }
+                                    else
+                                    {
+//                                     $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['due_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
+//                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
+//                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
+//                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);   
+                                    }
+                                    endforeach; ?>
                                     <?PHP endif; ?>
-                                   
+                                   <?php 
+                $foldername = APP."webroot/excel";
+                $file = fopen($foldername.'/quotationdatas.csv', 'w');
+                foreach($excel as $row) {
+                fputcsv($file, $row);
+                } 
+                ?>
                                 </tbody>
                             </table>
 <!--                            <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

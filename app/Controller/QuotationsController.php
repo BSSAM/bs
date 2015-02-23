@@ -1464,7 +1464,12 @@ $html .= '</div>';
     
     public function datalog()
     {
-        
+        $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+        $this->set('titles', $titles);
         if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) && isset($this->request->data['val']))
         {
             //pr($this->request->data['fulllist']);exit;
@@ -1500,54 +1505,36 @@ $html .= '</div>';
         //pr($quotation_dev_lists);exit;
         //pr($quotation_lists);
         $this->set('quotation', $quotation_lists);
-        $log = $this->Quotation->getDataSource()->getLog(false, false);
-        debug($log);
+        //$log = $this->Quotation->getDataSource()->getLog(false, false);
+        //debug($log);
         //exit;
         }
         else
         {
             //pr($this->request->data['fulllist']);exit;
-        if($this->request->data['fulllist'] == 1){
+        if(!isset($this->request->data['fulllist'])){
          $quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));    
+         $this->set('fulllist', 0);
         }
         else
         {
-         $quotation_lists = $this->Device->find('all',array('conditions'=>array('Quotation.is_deleted'=>0)));   
+         $quotation_lists = $this->Device->find('all',array('conditions'=>array('Quotation.is_deleted'=>0)));  
+         $this->set('fulllist', 1);
         }
         $this->set('quotation', $quotation_lists);
         }
     }
     
-    public function reportdata()
-    {
-        $ourFileName = "Outsourced-Projects-List.csv";
-               
-        $connection = fopen( APP.'webroot'.DS.'files/'.$ourFileName, 'w') or die("can't open file");
-
-        $head_content= "AIASIA OUTSOURCED PROJECT REPORT";
-        $write = fwrite($connection, $head_content);
-
-
-        $head_content= "\r\n PROJECT NAME, CLIENT NAME , COST ,TIME LIMIT , CREATED , STATUS";
-        $write = fwrite($connection, $head_content);
-
-        foreach($data as $k=>$v)
-        {
-                        $res = $v['Projectallocation'];
-                        $project_name = $this->get_project_name($res['project_id']);
-                        $vendor_name = $this->get_vendor_name($res['vendor_id']);
-                        $created_date = date('d/m/Y',strtotime($res['created']));
-
-                   $head_content= "\r\n".$project_name.','.$vendor_name.','.$res['currency'].' '.$res['cost'].','.$res['days'].' '.$res['duration']
-                   .' ,'.$created_date.','.$res['status'];
-                   $write = fwrite($connection, $head_content);
+    public function reportfinal() {
+            $this->viewClass = 'Media';
+            // Download app/webroot/files/example.csv
+            $params = array(
+               'id'        => 'quotationdatas.csv',
+               'name'      => 'quotationdatas',
+               'extension' => 'csv',
+               'download'  => true,
+               'path'      => APP . 'webroot' . DS. 'excel'. DS  // file path
+           );
+           $this->set($params);
         }
-        fclose($connection);
-        header('Content-type: csv/plain');
-        header('Content-Disposition: attachment; filename="'.$ourFileName.'"');
-        readfile(APP.'webroot'.DS.'files/'.$ourFileName) or die('Errors');
-        unlink(APP.'webroot'.DS.'files/'.$ourFileName);
-
-        exit;
-    }
 }

@@ -1313,176 +1313,25 @@
             //pr($salesorder_data);exit;
             $file_type = 'pdf';
             $filename = $salesorder_data['Salesorder']['salesorderno'];
-//            $html = '<!DOCTYPE html>
-//                    <html lang="en">
-//                    <head>
-//                    <meta charset="utf-8" />
-//                    <title>'.$salesorder_data['Salesorder']['salesorderno'].'</title>
-//                    <style>
-//                    body { background-color:#fff; font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color:#394263; font-size:14px; }
-//                    * { text-decoration: none; font-size: 1em; outline: none; padding: 0; margin: 0; }
-//                    .group:before, .group:after { content: ""; display: table; }
-//                    .group:after { clear: both; }
-//                    .group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
-//                    .pdf_container { margin: 0 auto; min-height: 800px; padding: 10px; width: 700px; }
-//                    .header_id { padding:10px 0; width:100%; display:block; }
-//                    .logo { margin-top:10px;display:inline-block;width:50%; }
-//                    .address_details { width:46%; line-height:20px; text-align:right;display:inline-block; }
-//                    .address_details p { float:left; width:100%; }
-//                    .address_details a { color: #1bbae1; float:left; width:100%; }
-//                    .cmpny_reg { background:#FF8E00; padding:5px; color:#fff; text-transform:uppercase; width:100%; float:left; margin:10px 0 0 -8px; }
-//                    .address_box { border: 1px solid #ccc; margin-top: 20px; padding: 10px; width: 47%; min-height: 185px;display:inline-block; }
-//                    .address_box h2 { width:100%; padding:5px 0; font-size:23px; font-weight:bold; text-align:center; display:inline-block;}
-//                    .address_box p { display:inline-block;}
-//                    .invoice_address_blog { margin-top:20px; display:inline-block;width:100%;}
-//                    .invoice_add {  margin:3px 0; display:inline-block;width:100%;}
-//                    .invoice_add h5 { display:inline-block; width:30%; }
-//                    .invoice_add span { margin-right:15px;display:inline-block; }
-//                    .invoice_add abbr { font-style: italic;display:inline-block; }
-//                    .services_details { margin-top:20px; width:100%; }
-//                    .services_details h4 { width:100%; margin-top:20px; font-size:15px; font-weight:bold; }
-//                    .services_details h4 abbr { width: 22%; display:inline-block;}
-//                    .services_details h4 span { color:#fff; background-color:#1BBAE1; padding: 0 10px; }
-//                    .invoice_table { width:100%; margin-top:20px;margin-bottom:30px; }
-//                    .invoice_table table { width:100%; border:1px  solid #ccc !important; border-bottom:none !important; border-left:none !important; }
-//                    .invoice_table th, td { padding: 10px; text-align: center; text-transform:uppercase; border:1px solid #ccc !important; border-top:none !important; border-right:none !important; }
-//                    .invoice_table table thead { background-color: #f1f1f1; }
-//                    .instrument h4 { font-weight:normal; }
-//                    .instrument span { font-size: 13px; color: #2980b9; font-style: italic; margin: 0 10px; }
-//                    .address_table{width:50%;display:inline-block;}
-//                        .address_table table{width:100%;border:1px solid #ccc;}
-//                      .address_table td { padding: 10px; text-align: left !important; text-transform:none; border:none !important; }
-//                    </style>
-//                    </head>';
-//            //foreach ($salesorder_data as $salesorder_data_list):
-//                $customername = $salesorder_data['Customer']['customername'];
-//                $billing_address = $salesorder_data['Salesorder']['address'];
-//                $postalcode = $salesorder_data['Customer']['postalcode'];
-//                $contactperson = $salesorder_data['Quotation']['Customer']['Contactpersoninfo'][0]['name'];
-//                $phone = $salesorder_data['Salesorder']['phone'];
-//                $fax = $salesorder_data['Salesorder']['fax'];
-//                $email = $salesorder_data['Salesorder']['email'];
-//                //$our_ref_no = $salesorder_data_list['Quotation']['ref_no'];
-//                $ref_no = $salesorder_data['Salesorder']['ref_no'];
-//                $reg_date = $salesorder_data['Salesorder']['reg_date'];
-//                $payment_term = $salesorder_data['Quotation']['Customer']['Paymentterm']['paymentterm'] . ' ' . $salesorder_data['Quotation']['Customer']['Paymentterm']['paymenttype'];
-//                $salesorderno = $salesorder_data['Salesorder']['salesorderno'];
-//            
-//                foreach($salesorder_data['Description'] as $device):
-//                    $device_name[] = $device;
-//                endforeach;
-//                
-//            //endforeach;
-//            $html .= '<body>
-//                <div class="pdf_container group"> 
-//                     <!-- header part-->
-//                     <div class="header_id">
-//                          <div class="f_left logo"><img src="img/logoBs.png" width="273" height="50" alt="" /></div>
-//                          <div class="address_details f_right">
-//                               <p>41 SENOKO DRIVE</p>
-//                               <p>SINGAPORE</p>
-//                               <p>758249</p>
-//                               <p> 6458 4411</p>
-//                               <a href="#" title="">invoice@bestandards.com</a>
-//                               <div class="cmpny_reg">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div>
-//                          </div>
-//                     </div>
-//                            <div class="address_table" style="margin-bottom:20px;">
-//                          <table style="height:250px;">
-//                          <tbody>
-//                          <tr><td>'.$customername.'<br>'.$billing_address.'<br>'.$postalcode.'</td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;">ATTN:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$contactperson.'</span></td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;">TEL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$phone.'</span></td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;">FAX:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$fax.'</span></td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;">EMAIL:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$email.'</span></td></tr>
-//                </tbody>
-//                          </table>
-//
-//                </div>
-//                        <div class="address_table" style="margin-bottom:20px;">
-//                          <table style="height:250px;">
-//                          <tbody>
-//                          <tr><td style="text-align:center;font-weight:bold;font-size:20px;">'.$salesorderno.'</td></tr>
-//                         <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PO NO:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$ref_no.'</span></td></tr>
-//                          
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">DATE:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$reg_date.'</span></td></tr>
-//                          <tr><td style="text-transform:uppercase;font-weight:bold;width:36%;">PAYMENT TERM:<span style="font-weight:normal;text-transform:none;margin-left:20px;font-style:italic;">'.$payment_term.'</span></td></tr>
-//                </tbody>
-//                          </table>
-//
-//                </div>
-//                     <div class="services_details f_left">
-//                          <p>Being provided calibration service of the following(s) :</p>
-//                          <h4 class="f_left"><abbr>SALESORDER NO</abbr><span> '.$salesorderno.'</span></h4>
-//                     </div>
-//                     <div class="invoice_table f_left">
-//                          <table cellpadding="0" cellspacing="0">
-//                               <thead>
-//                                    <tr>
-//                                         <th>Instrument</th>
-//                                         <th>Brand</th>
-//                                         <th>Model</th>
-//                                         <th>Serial No</th>
-//                                         <th>Quantity</th>
-//                                         <th>Unit Price $(SGD)</th>
-//                                         <th>Total Price $(SGD)</th>
-//                                    </tr>
-//                               </thead>
-//                               <tbody>';
-//                $subtotal = 0;
-//                foreach($device_name as $device):
-//                    $html .= '
-//                    <tr>
-//                        <td class="instrument"><h4>'.$device['Instrument']['name'].'</h4>
-//                            <span>Faulty</span> <span>'.$device['Range']['range_name'].'</span></td>
-//                        <td>'.$device['Brand']['brandname'].'</td>
-//                        <td>'.$device['model_no'].'</td>
-//                        <td>53254324</td>
-//                        <td>1</td>
-//                        <td> $'.$device['sales_unitprice'].'</td>
-//                        <td> $'.$device['sales_total'].'</td>
-//                    </tr>';
-//                $subtotal = $subtotal + $device['sales_total']; 
-//                endforeach;
-//                
-//                $gst = $subtotal * 0.07;
-//                $total_due = $gst + $subtotal;
-//                App::uses('CakeNumber', 'Utility');$currency = 'USD';
-//                $total_due = CakeNumber::currency($total_due, $currency);
-//                $gst = CakeNumber::currency($gst, $currency);
-//                $subtotal = CakeNumber::currency($subtotal, $currency);
-//                $html .= '<tr>
-//                         <td colspan="6">SUBTOTAL</td>
-//                         <td>'.$subtotal.'</td>
-//                    </tr>
-//                    <tr>
-//                         <td colspan="6">GST ( 7.00% )</td>
-//                         <td>'.$gst.'</td>
-//                    </tr>
-//                    <tr>
-//                         <td colspan="6"><h4>TOTAL DUE</h4></td>
-//                         <td><h4>'.$total_due.'</h4></td>
-//                    </tr>
-//               </tbody>
-//          </table>
-//     </div>
-//</div>
-//</body>
-//</html>';
+
 
             
- $html = '<!DOCTYPE html>
-<html lang="en">
+ $html = '<html>
 <head>
 <meta charset="utf-8" />
 <title>'.$salesorder_data['Salesorder']['salesorderno'].'</title>
 <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
 <style>
-* { margin:0; padding:0; font-size:11px; color:#333 !important; }
-table td { font-size:11px; line-height:18px; }
+table td { font-size:9px; line-height:11px; }
 .table_format table { }
-.table_format td { text-align:center; }
+.table_format td { text-align:center; padding:5px; }
+@page {
+margin: 180px 50px;
+}
+#header { position: fixed; left: 0px; top: -180px; right: 0px; height: 350px; }
+#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 330px; }
+#footer .page:after { content: counter(page); }
 </style>
 </head>';
  
@@ -1512,135 +1361,117 @@ table td { font-size:11px; line-height:18px; }
                 $ins_type = $salesorder_data['Quotation']['InstrumentType']['salesorder'];
                 
 
- $html .='<body style="font-family:Oswald;font-size:11px;padding:10px;margin:0;font-weight:300;">
-<table width="700px">
-     <tr>
-          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
-          <td style="padding:0 10px;"><div style="float:left;text-align:right;">
-                    <p>41 Senoko Drive</p>
-                    <p>Singapore 758249</p>
-                    <p>Tel.+65 6458 4411</p>
-                    <p>Fax.+65 64584400</p>
-                    <p>www.bestandards.com</p>
-               </div></td>
-     <tr>
-</table>
-<table width="623" height="56">
-     <tr>
-          <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:27px;font-weight:bold; font-style:italic;color:#00005b !important">SALES ORDER</div></td>
-          <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">COMPANY REG NO. 200510697M</div></td>
-     </tr>
-</table>
-<div style="width:100%;margin-top:10px;float:left;min-height:800px"">
+  
+
+$html .=
+'<body style="font-family:Oswald, sans-serif;font-size:9px;padding:0;margin:0;font-weight: 300; color:#444 !important;">
+<div id="header">
+     <table width="700px" style="margin-top:20px;">
+          <tr>
+               <td width="335" ><div style="float:left; "><img src="img/logo.jpg" width="450" height="80" alt="" /></div></td>
+               <td><div style="float:left;text-align:right;float:right;line-height:7px !important;font-size:8px !important;">
+                     41 Senoko Drive<br />
+                      Singapore 758249<br />
+                        Tel.+65 6458 4411<br />
+                         Fax.+65 64584400<br />
+                         www.bestandards.com
+                    </div>
+					</td>
+          <tr>
+     </table>
+     <table width="623" height="56">
+          <tr>
+               <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">SALESORDER</div></td>
+               <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+          </tr>
+     </table>
      <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
           <tr>
-               <td width="47%" style="border:1px solid #000;padding:5px;"><table width="288" cellpadding="0" cellspacing="0">
+               <td width="47%" style="border:1px solid #000;padding:5px;"><table width="100%" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td width="128" colspan="3" height="10px" style="font-size:11px !important;">'.$customername.'</td>
+                              <td width="128" colspan="3" height="10px" style="font-size:9px !important;">'.$customername.'</td>
                          </tr>
                          <tr>
-                              <td colspan="3" height="10px" style="font-size:11px !important;">'.$billing_address.'</td>
-                         </tr>
-                         <tr  style="padding-top:30px;">
-                              <td style="line-height:10px !important;font-size:11px !important;">ATTN </td>
-                              <td width="29">:</td>
-                              <td width="145" style="line-height:20px !important;font-size:11px !important;">'.$contactperson.'</td>
+                              <td colspan="3" height="10px" style="font-size:9px !important;">'.$billing_address.'</td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;">TEL </td>
-                              <td width="29">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;">'.$phone.'</td>
+                              <td style="font-size:9px !important;">'.$postalcode.'</td>
+                         </tr>
+						 <tr>
+						 <td><br /></td>
+						 <td><br /></td>
+						 <td><br /></td>
+						 </tr>
+						 
+                         <tr  style="padding-top:30px;width:50px;" width="50">
+                              <td>ATTN </td>
+                            
+                              <td>: &nbsp;&nbsp;&nbsp; '.$contactperson.'</td>
+							  <td></td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;">FAX </td>
-                              <td width="29">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;">'.$fax.'</td>
+                              <td>TEL </td>
+                              
+                              <td>: &nbsp;&nbsp;&nbsp;'.$phone.'</td>
+							  <td></td>
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;font-size:11px !important;">EMAIL </td>
-                              <td width="29">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;">'.$email.'</td>
+                              <td>FAX </td>
+                            
+                              <td>: &nbsp;&nbsp;&nbsp;'.$fax.'</td>
+							  <td></td>
+                         </tr>
+                         <tr>
+                              <td>EMAIL </td>
+                             
+                              <td>: &nbsp;&nbsp;&nbsp;'.$email.'</td>
+							  <td></td>
                          </tr>
                     </table></td>
                <td width="3%"></td>
-               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="285" cellpadding="0" cellspacing="0">
+               <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:18px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$salesorderno.'</div></td>
+                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-10px;">'.$salesorderno.'</div></td>
                          </tr>
                          <tr>
-                              <td width="139" style="line-height:10px !important;padding-left:5px;font-size:11px !important;">OUR REF NO </td>
-                              <td width="24" style="font-size:11px !important;">:</td>
-                              <td width="109" style="line-height:10px !important;font-size:11px !important;">'.$quotationno.'</td>
+						     
+                              <td style="padding-left:5px;width:50px;" width="50">OUR REF NO </td>
+                              
+                              <td style="padding-right:10px;">: &nbsp;&nbsp;&nbsp;'.$quotationno.'</td>
+							  <td></td>
+						
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;padding-left:5px;font-size:11px !important;">YOUR REF NO </td>
-                              <td style="font-size:11px !important;">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;"> '.$ref_no.'</td>
+                              <td style="padding-left:5px;">YOUR REF NO </td>
+                              
+                              <td colspan="2" style="padding-right:10px;">: &nbsp;&nbsp;&nbsp;'.$ref_no.'</td>
+							   
+							 
                          </tr>
                          <tr>
-                              <td style="line-height:10px !important;padding-left:5px;font-size:11px !important;"> DATE </td>
-                              <td style="font-size:11px !important;">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;"> '.$reg_date.'</td>
+                              <td style="padding-left:5px;"> DATE </td>
+                             
+                              <td style="padding-right:10px;">: &nbsp;&nbsp;&nbsp;'.$reg_date.'</td>
+							   <td></td>
+							 
                          </tr>
                          <tr>
-                              <td  style="line-height:20px !important;padding-left:5px;font-size:11px !important;">PAYMENT TERMS </td>
-                              <td style="font-size:11px !important;">:</td>
-                              <td style="line-height:10px !important;font-size:11px !important;">'.$payment_term.'</td>
+                              <td style="padding-left:5px;">PAYMENT TERMS </td>
+                             
+                              <td style="padding-right:10px;">: &nbsp;&nbsp;&nbsp;'.$payment_term.'</td>
+							   <td></td>
+							  
                          </tr>
                     </table></td>
-               <td width="2%"></td>
+               
           </tr>
      </table>
-</div>
-<div style="padding-top:10px;">'.$ins_type.':</div>
-<div style="width:100%;display:block;margin-top:20px;height="400px;" class="table_format">
-     <table cellpadding="0" cellspacing="0"  style="width:100%;min-height:400px;">
-          <tr>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">ITEM</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">QTY</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">DESCRIPTION</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">BRAND</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">MODEL NO</td>
-               <td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">RANGE</td>
-               ';
-			
-           $count = 0;
-for($i=0;$i<=4;$i++):
-    if(isset($titles[$i])):
-     $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;">';
-    $html .= $titles[$i];
-    $html .='</td>';
-    endif;
-endfor;
-$html .='</tr>';
-           foreach($device_name as $device):
-                    $html .= '
-                    <tr>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['order_by'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Instrument']['name'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">1</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Brand']['brandname'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['model_no'].'</td>
-                        <td style="padding:3px 10px;font-size:11px !important;">'.$device['Range']['range_name'].'</td>';
-                        for($i=0;$i<=4;$i++):
-                        if(isset($titles[$i])):
-                        $html .='<td style="padding:3px 10px;font-size:11px !important;">'.$device['title'.($i+1).'_val'].'</td>';
-                        endif;
-                        endfor;
-                        
-                    $html .='</tr>';
-                
-                endforeach;
- 
-         
-           $html .= '<tr>
-               <td colspan="3" style="border:1px  dashed #000;text-align:right;padding:3px 10px;color: #000 !important;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #000; text-align:left;padding:3px 10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td>
-          </tr>
-     </table>
-</div>
-<div style="width:100%;margin-top:20px;float:left;">
-     <table cellpadding="1" cellspacing="1"  style="width:100%;">
+<div style="padding-top:10px;">'.$ins_type.' :</div>
+
+</div></div>';
+$html .='<div id="footer">
+     <div style="width:100%;" class="page">
+          <table cellpadding="1" cellspacing="1"  style="width:100%;">
           <tr>
                <td style="padding:5px;width:50%;border:1px solid #000;"><table cellpadding="0" cellspacing="0">
                          <tr>
@@ -1671,15 +1502,84 @@ $html .='</tr>';
                     </table></td>
           </tr>
      </table>
-</div>
-<div style="position:fixed;bottom:10px;left:10px;right:10px;height:130px;width:100%;">
+     
+
 <div style="font-size:9px !important;width:100%;margin-top:10px;">1) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME.</div>
 <div style="font-size:9px !important;width:100%;">2) ANY DISCREPANCY NOTED HEREIN MUST BE BROUGHT TO THE NOTICE OF THE COMPANY WITHIN 24 HOURS; OTHERWISE ALL DOCUMENTATIONS WILL BE DEEMED TO BE CORRECT.</div>
 <div style="font-size:9px !important;width:100%;">3) PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION. YOU MAY CONTACT SALES PERSONNEL IF THERE ARE ANY QUERIES AT 6458 4411.</div>
 <div style="background:#313854;float:left;width:100%;color:#fff !important;padding:10px;font-size:12px;margin-top:10px;text-align:center;">E. & O . E</div>
-</div>
-</body>
-</html>';
+
+       </div>   
+</div>';
+$subtotal = 0;
+$html .= '<div id="content" style="">'; 
+                foreach($device_name as $k=>$device):
+                    if($k == 0)
+                    {
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:150px;">      <tr>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+$count1 = 0;
+for($i=0;$i<=4;$i++):
+    if(isset($titles[$i])):
+        $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
+        $html .= $titles[$i];
+        $html .='</td>';
+    endif;
+    $count1 = $count1+1;
+endfor;
+
+
+$html .= '</tr>';
+                    }
+                    elseif($k%5 == 0)
+                    {
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:230px;">      <tr>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+$count1 = 0;
+for($i=0;$i<=4;$i++):
+    if(isset($titles[$i])):
+        $html .='<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
+        $html .= $titles[$i];
+        $html .='</td>';
+    endif;
+    $count1 = $count1+1;
+endfor;
+$count1 = $count1+1;
+
+$html .= '</tr>';
+                    }
+                      
+                      
+                    //foreach($device_name as $device):
+                    $html .= '
+                    <tr>
+                        <td style="padding:3px 10px;">'.$device['order_by'].'</td>
+                        <td style="padding:3px 10px;">1</td>
+                        <td style="padding:3px 10px;width:20%;">'.$device['Instrument']['name'].'</td>
+                        <td style="padding:3px 10px;">'.$device['Brand']['brandname'].'</td>
+                        <td style="padding:3px 10px;">'.$device['model_no'].'</td>
+                        <td style="padding:3px 10px;">'.$device['Range']['range_name'].'</td>';
+                        for($i=0;$i<=4;$i++):
+                        if(isset($titles[$i])):
+                        $html .='<td style="padding:3px 10px;">'.$device['title'.($i+1).'_val'].'</td>';
+                        endif;
+                        endfor;
+                        
+                    $html .='</tr><tr><td colspan="4" style="border:1px  dashed #000;text-align:right;padding:10px;color: #000 !important;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
+               <td  colspan="8" style="border:1px dashed #000; text-align:left;padding: 10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td></tr></table>';
+                
+                endforeach;
+$html .= '</div>'; 
 
                 //pr($html);exit;
         $this->export_report_all_format($file_type, $filename, $html);
@@ -2135,8 +2035,16 @@ table td { font-size:13px; line-height:18px; }
         
     public function datalog()
     {
+        
+        $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+        $this->set('titles', $titles);
         if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) && isset($this->request->data['val']))
         {
+            //pr($this->request->data['fulllist']);exit;
         $andor = $this->request->data['gate'];
         
         $condition = $this->request->data['query_input'];
@@ -2144,8 +2052,8 @@ table td { font-size:13px; line-height:18px; }
         $value = $this->request->data['val'];
         $conditions = $ccres = array();
         
-        $conditions['Salesorder.is_deleted'] = 0;
-        
+//        $conditions['Quotation.is_deleted'] = 0;
+//        $conditions['Device.quotationno'] = 'BSQ-05-000002';
         foreach($condition as $k => $con)
         {
             if($conditiontype[$k]!='LIKE')
@@ -2155,15 +2063,58 @@ table td { font-size:13px; line-height:18px; }
         }
         
         $conditions[$andor] = $ccres;
-        $salesorder_list = $this->Salesorder->find('all',array('conditions'=>$conditions,'order' => array('Salesorder.id' => 'DESC')));
-        $this->set('salesorder', $salesorder_list);
+        
+        if($this->request->data['fulllist'] == 1)
+        {
+            $salesorder_list = $this->Description->find('all',array('conditions'=>$conditions));
+            //$quotation_lists = $this->Device->find('all',array('conditions'=>$conditions));
         }
         else
         {
-        $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>$conditions,'order' => array('Salesorder.id' => 'DESC')));
+            //$quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));    
+        }
+        //$quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));
+        
+        //pr($quotation_dev_lists);exit;
+        //pr($quotation_lists);
+        $this->set('salesorder', $salesorder_list);
+        //$log = $this->Quotation->getDataSource()->getLog(false, false);
+        //debug($log);
+        //exit;
+        }
+        else
+        {
+            //pr($this->request->data['fulllist']);exit;
+        if(!isset($this->request->data['fulllist'])){
+         $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+         $this->set('fulllist', 0);
+        }
+        else
+        {
+         $salesorder_list = $this->Description->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0)));  
+         $this->set('fulllist', 1);
+        }
         $this->set('salesorder', $salesorder_list);
         }
+        
+        
+        
+        
+        
     }
+    public function reportfinal() {
+            $this->viewClass = 'Media';
+            // Download app/webroot/files/example.csv
+            $params = array(
+               'id'        => 'salesorderdatas.csv',
+               'name'      => 'salesorderdatas',
+               'extension' => 'csv',
+               'download'  => true,
+               'path'      => APP . 'webroot' . DS. 'excel'. DS  // file path
+           );
+           $this->set($params);
+        }
 }
 
 ?>

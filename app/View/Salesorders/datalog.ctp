@@ -31,26 +31,12 @@ $(document).ready(function() {
                     <?PHP echo $this->element('message'); ?>
                     <!-- Datatables Content -->
                     <div class="block full">
-                        
+                        <?PHP echo $this->Form->create('Salesorder', array('action' => 'datalog', 'class' => 'form-horizontal form-bordered')); ?>
                         
                         <div class="block-title">
                             <h2>List Of Sales Order </h2> 
-                            
+                            <h2 style="float:right;"><div class="col-md-4"><?php echo $this->Form->input('Full List',array('type'=>'checkbox','id'=>'fulllist','name'=>'fulllist')) ?></div><?php echo $this->Html->link('Generate Report',array('controller' => 'Salesorders','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></h2>
                         </div>
-                        
-                        <div class="input submit col-md-10">
-                            <div class="submit pull-right">
-                                
-                                <?php echo $this->Form->input('Full List', array('id'=>'fulllist','class'=>'','label'=>false,'name'=>'fulllist','type'=>'checkbox')); ?>
-                            </div>
-                        </div>
-                        <div class="input submit col-md-2">
-                            <div class="submit pull-right">
-                                <?php echo $this->Form->input('Generate Report', array('id'=>'reportfinal','class'=>'btn btn-primary','label'=>false,'name'=>'reportfinal','type'=>'button')); ?>
-                            </div>
-                        </div>
-                        
-                        <?PHP echo $this->Form->create('Saleorder', array('action' => 'datalog', 'class' => 'form-horizontal form-bordered')); ?>
                         
                         <div class="col-md-12 custom_calculate">
                         <?php echo $this->Form->input('gate', array('id'=>'gate','class'=>'form-control','label'=>false,'name'=>'gate','type'=>'select','options'=>array('AND'=>'AND','OR'=>'OR'))); ?>
@@ -72,7 +58,7 @@ $(document).ready(function() {
                         <?PHP $this->Form->end(); ?>
                         
                        
-                        <div class="table-responsive">
+                        <div class="table-responsive table-responsive-scroll">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
@@ -84,26 +70,110 @@ $(document).ready(function() {
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Reference No</th>
+                                        <?php 
+                                        if($fulllist == 1)
+                                        {
+                                        ?>
+                                        <th class="text-center">Device Name</th>
+                                        <th class="text-center">Brand Name</th>
+                                        <th class="text-center">Model No</th>
+                                        <th class="text-center">Range</th>
+                                        <th class="text-center">Call Location</th>
+                                        <th class="text-center">Call Type</th>
                                         
+                                        <?php $count1 = 0; for($i=0;$i<=4;$i++):
+    if(isset($titles[$i])):
+        ?><th class="text-center"><?php 
+        
+        echo $titles[$i]; ?></th>
+        <?php
+    endif;
+    $count1 = $count1+1;
+endfor; ?>
+                                        <?php 
+                                        }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?PHP if(!empty($salesorder )): ?>
+                                    <?PHP 
+                                    
+                                     $excel = array();
+                                    $excel[] = array();
+                                    if($fulllist == 0)
+                                    {
+                                    $excel[] = array('ID','SalesorderNo','RegDate','Due Date','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Discount','GST','Remarks','GSTType','CustomerId','CustomerName','PaymentTermsId','ServiceTypeId','DepartmentName','IsApproved');   
+                                    }
+                                    else
+                                    {
+                                        //ID,CompanyId	CreatedDate	QuotationNo	QuotationDate	CustomerAddress	ContactPersonName	Phone	Fax	Email	YourRefNo	Discount	GST	Remarks	TotalPrice	GSTType	CurrencyConversionRate	SOItemsAppBy	GSTTypeId	CustomerId	CurrencyId	SalesPersonId	BranchId	InstrumentForId	PaymentTermsId	ServiceTypeId	ProjectName	TitleIdValue1	TitleIdValue2	TitleIdValue3	Title1	Title2	Title3	CompanyName	CustomerName	CurrencyCode	SalesPersonName	BranchName	InstrumentForName	PaymentTerms	ServiceTypeName	RangeName	InstrumentName	BrandName	SNo	Quantity	Validity	SerialNo	ModelNo	PartNo	UnitPrice	QD_Discount	QD_Remarks	QD_TotalPrice	QDSNO	TagNo	Location	ControlNo	TitleValue1	TitleValue2	TitleValue3	TitleValue4	TitleValue5	TitleValue6	TitleValue7	TitleValue8	TitleValue9	InstrumentId	LedgerAccountId	CalibrationLocationID	CalibrationTypeId	LedgerAccountName	DepartmentName	LocationName	QDTitle1	QDTitle2	QDTitle3	QDTitle4	QDTitle5	QDTitle6	QDTitle7	QDTitle8	QDTitle9	IsActive													
+
+                                     $excel[] = array('ID','SalesorderNo','RegDate','Due Date','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Discount','GST','Remarks','GSTType','CustomerId','CustomerName','PaymentTermsId','ServiceTypeId','DepartmentName','IsApproved','Instrumentname','Brand','Model No','Range','Call Location','Call Type','Title1','Title2','Title3','Title4','Title5');   
+                                    }
+                                    
+                                    
+                                    
+                                    if(!empty($salesorder )): ?>
                                      <?php foreach($salesorder as $salesorder_list): ?>
                                     <tr <?php if($salesorder_list['Salesorder']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['branch']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['branch_id'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Customer']['Customertagname'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
                                          <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['ref_no'] ?></td>
+                                         <?php 
+                                        if($fulllist == 1)
+                                        {
+                                        ?>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Instrument']['name'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Brand']['brandname'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Description']['model_no'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Range']['range_name'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Description']['sales_calllocation'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Description']['sales_calltype'] ?></td>
+                                        
+                                     <?php  $count1 = 0;
+for($i=0;$i<=4;$i++):
+    if(isset($titles[$i])): ?>
+                                        <td class="text-center"><?php echo $salesorder_list['Description']['title'.($i+1).'_val'] ?></td>
+       <?php 
+       
+    endif;
+    $count1 = $count1+1;
+endfor;
+?>
+                                        <?php 
+                                        }
+                                        ?>
                                         
                                     </tr>
-                                    <?php endforeach; ?>
+                                    <?php 
+                                    if($fulllist == 0)
+                                    {
+//                                    $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['due_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
+//                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
+//                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
+//                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);
+                                    }
+                                    else
+                                    {
+//                                     $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['due_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
+//                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
+//                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
+//                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);   
+                                    }
+                                    endforeach; ?>
                                     <?PHP endif; ?>
+                                   <?php 
+                $foldername = APP."webroot/excel";
+                $file = fopen($foldername.'/salesorderdatas.csv', 'w');
+                foreach($excel as $row) {
+                fputcsv($file, $row);
+                } 
+                ?>
                                 </tbody>
-                                
                             </table>
                             <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>

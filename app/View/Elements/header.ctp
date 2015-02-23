@@ -323,6 +323,48 @@
                                         <?php  $a=($control == 'Onsites')?'active':''; ?>
                                         <?php echo $this->Html->link('OnSite Schedule',array('controller'=>'Onsites','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
+                                    <li>
+                                        <?php $a=($control == 'Tracks' && $actions == 'tracklist')?'active':''; ?>
+                                        <?php echo $this->Html->link('Tracking System',array('controller'=>'Tracks','action'=>'tracklist'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li>
+                                    <li>
+                                        <a href="" class="sidebar-nav-submenu <?php echo $a=($control == 'Datalog')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i>Datalog</a>
+                                        <ul <?php echo $a=($control == 'Datalog')?'style=display:block':'';?>>
+                                            <li>
+                                                <?php $a=($control == 'Quotations' && $actions == 'datalog')?'active':''; ?>
+                                                <?php echo $this->Html->link('Quotation Datalog',array('controller'=>'Quotations','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                            <li>
+                                                <?php $a=($control == 'Salesorders' && $actions == 'datalog')?'active':''; ?>
+                                                <?php echo $this->Html->link('Salesorder Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                            <li>
+                                                <?php $a=($control == 'Deliveryorders' && $actions == 'datalog')?'active':''; ?>
+                                                <?php echo $this->Html->link('Deliveryorder Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                            <li>
+                                                <?php $a=($control == 'Invoices' && $actions == 'datalog')?'active':''; ?>
+                                                <?php echo $this->Html->link('Invoice Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                            <li>
+                                                <?php $a=($control == 'Invoices' && $actions == 'datalog')?'active':''; ?>
+                                                <?php echo $this->Html->link('Purchaseorder Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                            <li>
+                                                <?php $a=($control == 'Invoices' && $actions == 'datalog')?'active':''; ?>
+                                                <?php echo $this->Html->link('Proforma Invoice Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                            <li>
+                                                <?php $a=($control == 'Invoices' && $actions == 'datalog')?'active':''; ?>
+                                                <?php echo $this->Html->link('Sub Contract Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                            <li>
+                                                <?php $a=($control == 'Invoices' && $actions == 'datalog')?'active':''; ?>
+                                                <?php echo $this->Html->link('C & D Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            
                                     <?php //if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>
                                         <?php  //$a=($control == 'Recallservices')?'active':''; ?>
