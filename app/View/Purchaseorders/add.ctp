@@ -1,5 +1,6 @@
 <script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script>
+    
 function editab() {
     
     $('.edit_title1').editable(path_url+'/Salesorders/update_title1', {
@@ -92,6 +93,7 @@ function editab() {
             }return false;    
         });
         
+        
     });
 </script>
  
@@ -145,8 +147,8 @@ $(function(){
                     $('#salesorder_id').val(sales_node.Salesorder.id);
                     $('#val_date').val(sales_node.Salesorder.in_date);
                     $('#val_duedate').val(sales_node.Salesorder.due_date);
-                    $('#val_duedate').val(sales_node.Salesorder.due_date);
-                    $('#val_ref_no').val(sales_node.Salesorder.quotationno);
+                    //$('#val_duedate').val(sales_node.Salesorder.due_date);
+                    $('#val_ref_no').val(sales_node.Salesorder.ref_no);
                     $('#val_trackid').val(sales_node.Salesorder.track_id);
                     $('#val_salesperson').val(sales_node.Customerspecialneed.salesperson_name);
                     //if(value.Description.title1_val)
@@ -233,6 +235,7 @@ $(function(){
                                 $(".title_val"+k).show();
                         }
                     });
+                    //$('.odd .dataTables_empty').hide();
                    
                 }
                 if(data=='failure')
@@ -459,7 +462,8 @@ $(function(){
                 <h4 class="sub-header"><small><b>Instruments List </b</small></h4>
             </div>
             <div class="col-sm-3 col-lg-12 subcontract_linear">
-                <table  class="table table-vcenter table-condensed table-bordered">
+                <div class="table-responsive">
+                    <table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">S.No</th>
@@ -481,13 +485,14 @@ $(function(){
                         </tr>
                     </thead>
                     <tbody class="po_instrument_info"> 
-                        <tr class="text-center">    
-                            <td class="" colspan="<?php echo 12+($k+1); ?>">
-                        No Records Found</td>
+<!--                        <tr class="text-center">    -->
+<!--                            <td class="" colspan="<?php //echo 12+($k+1); ?>">
+                        </td>-->
                        
-                        </tr>
+<!--                        </tr>-->
                     </tbody>
                 </table>
+                </div>
             </div>
             <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-10">
@@ -504,7 +509,37 @@ $(function(){
         <!-- END Basic Form Elements Block -->
     </div>
 <?php echo $this->Html->script('pages/formsValidation'); ?>
-    <script>$(function() { FormsValidation.init(); });</script>
+    <script>$(function() { 
+        
+        FormsValidation.init(); 
+    
+        $( "#purchase-add" ).submit(function() {
+        
+            if ($("#subcontract_input_search").val() == '')
+            {
+                alert("Salesorder Needed to be selected");
+                $('#subcontract_input_search').focus();
+                return false;
+            }
+            if ($("#val_customername").val() == '')
+            {
+                alert("SubContract Needed to be selected");
+                $('#val_customername').focus();
+                return false;
+            }
+//            if ($("#beforedo-datatable").dataTable().fnSettings().aoData.length == 0)
+//            {
+//                alert("Atleast One Instrument is needed");
+//                return false;
+//            }
+//            
+            //return true;
+        });
+    
+    });
+    
+    
+    </script>
 
 
 

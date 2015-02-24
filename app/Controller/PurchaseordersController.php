@@ -111,20 +111,20 @@ class PurchaseordersController extends AppController
                     $instrument_type = $quo['InstrumentType']['salesorder'];
                     //pr($instrument_type);
                     $this->set('instrument_type',$instrument_type);
-            
+            //pr($purchase_edit_data['Purchaseorder']['attn']);exit;
             $contact_list   =   $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$purchase_edit_data['Purchaseorder']['attn'],'Contactpersoninfo.status'=>1)));
             $country=$this->Country->find('list',array('fields'=>array('id','country')));
             $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
-            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $services=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $purchaseorderno    =  $purchase_edit_data['Purchaseorder']['purchaseorder_no'];
-            $this->set(compact('purchaseorderno','country','additional','service','contact_list'));
+            $this->set(compact('purchaseorderno','country','additional','services','contact_list'));
             
-            
+             //pr($contact_list);exit;
             if($this->request->is(array('post','put')))
             {
-                 //pr($this->request->data);exit;
+                
                 $this->Purchaseorder->id=$id;
-                if($this->Purchaseorder->save($this->request->data['Quotation']))
+                if($this->Purchaseorder->save($this->request->data['Purchaseorders']))
                 {
                     $this->PurchaseCustomerspecialneed->id=$purchase_id;
                     $this->PurchaseCustomerspecialneed->save($this->request->data['PurchaseCustomerspecialneed']);
@@ -657,7 +657,7 @@ $html .='</tr>';
             $this->dompdf->load_html($html);
             $this->dompdf->set_paper($papersize, $orientation);        
             $this->dompdf->render();
-            $this->dompdf->stream("Saleorder-".$filename.".pdf");
+            $this->dompdf->stream("Purchaseorder-".$filename.".pdf");
             echo $this->dompdf->output();
            // $output = $this->dompdf->output();
             //file_put_contents($filename.'.pdf', $output);

@@ -2021,7 +2021,7 @@
 //                a.nTable.setAttribute("class=overflow");
                 var b = l.createElement("div");
                 b.className = a.oClasses.sInfo;
-                alert(a.oClasses.sInfo);
+                //alert(a.oClasses.sInfo);
                 a.aanFeatures.i || (a.aoDrawCallback.push({
                     fn: Ka,
                     sName: "information"

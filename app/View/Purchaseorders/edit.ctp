@@ -121,7 +121,7 @@ $(function() {
                     <div class="col-md-4 search_move">
                         <div class="input-group">
                             <div>
-                                <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="subcontract_input_search" name="sub-sales-no" value ="<?php echo $purchase['Purchaseorder']['salesorder_id']; ?>" readonly="readonly"/>
+                                <input type="text" class="form-control" autoComplete='off' placeholder="Enter Sales Order No" id="subcontract_input_search" name="Purchaseorders[salesorder_id]" value ="<?php echo $purchase['Purchaseorder']['salesorder_id']; ?>" readonly="readonly"/>
                             </div>
 <!--                            <span class="input-group-btn">
                                 <button class="btn btn-primary subcontract_search" type="button">Proceed</button>
@@ -139,8 +139,8 @@ $(function() {
 
 
             <?php //echo $this->Form->create('Subcontractdo', array('class' => 'form-horizontal form-bordered', 'id' => 'subcontractdo-add', 'enctype' => 'multipart/form-data')); ?>
-            <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
-            <?PHP echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
+            <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
+            <?PHP //echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_customername">Customer Name</label>
                 <div class="col-md-4">
@@ -157,12 +157,13 @@ $(function() {
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_attn">ATTN</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => 'Select Contact person Name','value'=>$contact_list['Contactpersoninfo']['name'], 'readonly' => true)); ?>
+                    <?php if($contact_list==''){ $answer = $contact_list['Contactpersoninfo']['name'];} else{$answer = '';} ?>
+                    <?php echo $this->Form->input('attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => 'Select Contact person Name','value'=>$answer, 'readonly' => true)); ?>
                 </div>
                 <label class="col-md-2 control-label" for="val_phone">Phone</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('phone', array('id' => 'val_phone', 'class' => 'form-control',
-                        'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true,'value'=>$contact_list['Contactpersoninfo']['phone']));
+                        'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true,'value'=>$purchase['Purchaseorder']['phone']));
                     ?>
                 </div>
             </div>
@@ -174,18 +175,18 @@ $(function() {
                 <label class="col-md-2 control-label" for="val_email">Email</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('email', array('id' => 'val_email', 'class' => 'form-control',
-                        'placeholder' => 'Enter the Email Id', 'label' => false, 'autoComplete' => 'off', 'readonly' => true,'value'=>$contact_list['Contactpersoninfo']['email']));
+                        'placeholder' => 'Enter the Email Id', 'label' => false, 'autoComplete' => 'off', 'readonly' => true,'value'=>$purchase['Purchaseorder']['email']));
                     ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="pur_order_no">Purchase Order No</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('Purchaseorder.purchaseorder_no', array('id'=>'pur_order_no','class'=>'form-control','label'=>false,'value'=>$purchase['Purchaseorder']['purchaseorder_no'],'readonly'=>true)); ?>
+                    <?php echo $this->Form->input('purchaseorder_no', array('id'=>'pur_order_no','class'=>'form-control','label'=>false,'value'=>$purchase['Purchaseorder']['purchaseorder_no'],'readonly'=>true)); ?>
                 </div>
                 <label class="col-md-2 control-label" for="pur_order_date">Purchase Order Date</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('Purchaseorder.purchaseorder_date', array('id'=>'pur_order_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy','label'=>false,'value'=>$purchase['Purchaseorder']['purchaseorder_date'],'readonly'=>true)); ?>
+                    <?php echo $this->Form->input('purchaseorder_date', array('id'=>'pur_order_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy','label'=>false,'value'=>$purchase['Purchaseorder']['purchaseorder_date'],'readonly'=>true)); ?>
                 </div>
             </div>
 
@@ -218,7 +219,7 @@ $(function() {
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
-                     'label' => false, 'options' =>$services,'empty'=>'Select Service Type','value'=>$service['Service']['service_id']));
+                     'label' => false, 'options' =>$services,'empty'=>'Select Service Type','value'=>$purchase['Purchaseorder']['service_id']));
                 ?>
                 </div> 
             </div>

@@ -81,7 +81,7 @@ App::uses('Controller', 'Controller');
             $id = $this->Session->read('sess_userrole');//pr($id);
             $this->loadModel('Userrole');
             //$userrole = 0;
-            $userrole =  $this->Userrole->findByUserRoleId($id); 
+            $userrole =  $this->Userrole->findById($id); 
             if(!empty($userrole))
             {
                 //pr($userrole['Userrole']['js_enc']);
