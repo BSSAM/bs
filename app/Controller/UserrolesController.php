@@ -285,10 +285,10 @@ class UserrolesController extends AppController
             $user_role_name = $userrole['Userrole']['user_role'];
             $this->set('user_name',$user_role_name);
             $user_role_id = $userrole['Userrole']['user_role_id'];
-            if($user_role_id == 1 || $user_role_id == 2)
-            {
-                return $this->redirect(array('action'=>'index'));
-            }
+            //if($user_role_id == 1 || $user_role_id == 2) hidden by michael
+            //{
+             //   return $this->redirect(array('action'=>'index'));
+            //}
             
         }
         else 

@@ -82,6 +82,17 @@ class InsPercentsController extends AppController
         $percent_dat = $this->InsPercent->find('first',array('conditions'=>array('InsPercent.id'=>$id),'recursive'=>'2'));
         
         $this->set('percent_dat',$percent_dat);
+		
+		/* 
+         * ---------------  User Permission Condition  -------------------------------------
+         */
+        $user_role = $this->userrole_permission();
+        if($user_role['instr_costing']['edit'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
+		$this->set('user_role',$user_role);
+		
+		
         if(empty($id))
         {
              $this->Session->setFlash(__('Invalid Entry'));

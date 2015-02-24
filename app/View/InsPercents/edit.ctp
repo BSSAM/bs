@@ -42,27 +42,37 @@
                                         <label class="col-md-2 control-label">Discount Limit (in %)</label>
                                         
                                     </div>
-                                    <div class="form-group">
-                                       
-                                        <label class="col-md-2 control-label" for="user">User</label>
-                                        <div class="col-md-4">
-                                            <?php echo $this->Form->input('InsPercent.user', array('id'=>'user','class'=>'form-control','placeholder'=>'Enter the User Percent','label'=>false,'name'=>'user')); ?>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                       
-                                        <label class="col-md-2 control-label" for="supervisor">Supervisor</label>
-                                        <div class="col-md-4">
-                                            <?php echo $this->Form->input('InsPercent.supervisor', array('id'=>'supervisor','class'=>'form-control','placeholder'=>'Enter the Supervisor Percent','label'=>false,'name'=>'supervisor')); ?>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                       
-                                        <label class="col-md-2 control-label" for="manager">Manager</label>
-                                        <div class="col-md-4">
-                                            <?php echo $this->Form->input('InsPercent.manager', array('id'=>'manager','class'=>'form-control','placeholder'=>'Enter the Manager Percent','label'=>false,'name'=>'manager')); ?>
-                                        </div>
-                                    </div>
+                                    
+                                    <?php if($user_role['instr_costing']['user'] == 1)
+									      { ?>
+                                                <div class="form-group">
+                                                   
+                                                    <label class="col-md-2 control-label" for="user">User</label>
+                                                    <div class="col-md-4">
+                                                        <?php echo $this->Form->input('InsPercent.user', array('id'=>'user','class'=>'form-control','placeholder'=>'Enter the User Percent','label'=>false,'name'=>'user')); ?>
+                                                    </div>
+                                                </div>
+                                    <?php  } 
+									       if($user_role['instr_costing']['supervisor'] == 1)    
+										   { ?>     
+												<div class="form-group">
+												   
+													<label class="col-md-2 control-label" for="supervisor">Supervisor</label>
+													<div class="col-md-4">
+														<?php echo $this->Form->input('InsPercent.supervisor', array('id'=>'supervisor','class'=>'form-control','placeholder'=>'Enter the Supervisor Percent','label'=>false,'name'=>'supervisor')); ?>
+													</div>
+												</div>
+                                     <?php  } 
+									         if($user_role['instr_costing']['manager'] == 1) 
+											 {  ?>      
+												<div class="form-group">
+												   
+													<label class="col-md-2 control-label" for="manager">Manager</label>
+													<div class="col-md-4">
+														<?php echo $this->Form->input('InsPercent.manager', array('id'=>'manager','class'=>'form-control','placeholder'=>'Enter the Manager Percent','label'=>false,'name'=>'manager')); ?>
+													</div>
+												</div>
+                                     <?php    }  ?>           
                                      <div class="form-group form-actions">
                                         <div class="col-md-9 col-md-offset-3">
                                             
