@@ -131,12 +131,12 @@ class CurrenciesController extends AppController
              $match1 = $this->request->data['country_id'];
              $data1 = $this->Currency->findByCountryId($match1);
              
-            if(!empty($data1))
-            {
-                $this->Session->setFlash(__('Country Entered is Already Exist'));
-               
-                return $this->redirect(array('action'=>'index'));
-            }
+//            if(!empty($data1))
+//            {
+//                $this->Session->setFlash(__('Country Entered is Already Exist'));
+//               
+//                return $this->redirect(array('action'=>'index'));
+//            }
               $this->Currency->id = $id;
              
           

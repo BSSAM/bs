@@ -15,27 +15,32 @@ var TablesDatatables = function() {
             $('#example-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
 /************************************************************************************************************************/
             $('#pofull-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             $('#qofull-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             $('#sofull-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             $('#dofull-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
 /***********************************************************************************************************/
@@ -43,37 +48,44 @@ var TablesDatatables = function() {
             $('#collection_candd').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             $('#deliver_cannd').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
              $('#readyto_deliver_candd').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
              $('#ready_add_candd').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
              $('#dashboard_message_all').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
 /***********************************************************************************************************/
             $('#solistvariation-datatable').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
              $('#qofull-datatable1').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
 
@@ -82,17 +94,20 @@ var TablesDatatables = function() {
              $('#beforedo-datatable').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
               $('#engineer-datatable').dataTable({
              // "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             
             $('#customer-contact-add').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
+                "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
 /***********************************************************************************************************/

@@ -202,3 +202,11 @@ and open the template in the editor.
 #subcontract_result .po_customer_show{padding:10px;}
 #subcontract_result:hover .po_customer_show{color:#fff; background: #6ad2eb;}
 #subcontract_result .subcontract_customer_show{ min-width: inherit; max-width: inherit;}
+.table-responsive-scroll table *{-webkit-box-sizing: content-box !important;
+-moz-box-sizing: content-box !important;
+box-sizing: content-box !important;}
+.dataTables_scrollHeadInner{width:100% !important;}
+.datatable-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+}

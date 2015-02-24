@@ -1,2 +1,2 @@
 
-ID,QuotationNo,QuotationDate,CustomerAddress,ContactPersonName,Phone,Fax,Email,RefNo,Discount,GST,Remarks,TotalPrice,GSTType,CustomerId,CustomerName,PaymentTermsId,ServiceTypeId,DepartmentName,IsApproved
+ID,QuotationNo,QuotationDate,CustomerAddress,ContactPersonName,Phone,Fax,Email,RefNo,Discount,GST,Remarks,TotalPrice,GSTType,CustomerId,CustomerName,PaymentTermsId,ServiceTypeId,DepartmentName,IsApproved,Instrumentname,Brand,"Model No",Range,"Call Location","Call Type","Unit Price",Title1,Title2,Title3,Title4,Title5
