@@ -37,9 +37,13 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <th class="text-center">Reg Date</th>
                                         <th class="text-center">Branch</th>
                                         <th class="text-center">Customer</th>
+                                        <th class="text-center">Customer Address</th>
+                                        <th class="text-center">Attn</th>
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
+                                        <th class="text-center">Salesperson</th>
                                         <th class="text-center">Reference No</th>
+                                        <th class="text-center">Total Price</th>
                                         <?php if($deleted_val != 3): ?><th class="text-center">Action</th><?php endif; ?>
                                     </tr>
                                 </thead>
@@ -49,15 +53,19 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                     <tr <?php if($quotation_list['Quotation']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->branchname($quotation_list['Quotation']['branch_id']); ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
+                                        <td class="text-center"><?PHP echo $quotation_list['Quotation']['address'] ?></td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->contactname($quotation_list['Quotation']['attn']); ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $quotation_list['Quotation']['email'] ?></td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->salespersonname($quotation_list['Quotation']['id']); ?></td>
                                         <td class="text-center">
                                             <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'){$class="danger";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
                                             
                                                 <?PHP echo $quotation_list['Quotation']['ref_no'] ?>
                                                                                    </td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->quotationtotal($quotation_list['Quotation']['quotationno']); ?></td>
                                         <?php if($deleted_val != 3): ?>
                                         <td class="text-center">
                                             <div class="btn-group">
