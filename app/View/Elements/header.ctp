@@ -70,66 +70,66 @@
                             <li>
                                 <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches'||$control == 'Autos'||$control == 'InsPercents')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-user sidebar-nav-icon"></i>Users</a>
                                  <ul <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches'||$control == 'Autos'||$control == 'InsPercents')?'style=display:block':''; ?>>
-                                    <?php if($user_role['other_user']['view'] == 1){ ?>
+                                    <?php if(isset($user_role['other_user']['view'])){if($user_role['other_user']['view'] == 1){ ?>
                                      <li>
                                          <?php $a=($control == 'Users')?'active':''; ?>
                                          <?php echo $this->Html->link('Users',array('controller'=>'Users','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_role']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['other_role']['view'])){if($user_role['other_role']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'Userroles')?'active':''; ?>
                                          <?php echo $this->Html->link('User Roles',array('controller'=>'Userroles','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_branch']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['other_branch']['view'])){if($user_role['other_branch']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Branches')?'active':''; ?>
                                         <?php echo $this->Html->link('Branch',array('controller'=>'Branches','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_department']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['other_department']['view'])){if($user_role['other_department']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'Departments')?'active':''; ?>
                                         <?php echo $this->Html->link('Department',array('controller'=>'Departments','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_country']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['other_country']['view'])){if($user_role['other_country']['view'] == 1){ ?>
                                     <li >
                                         <?php $a=($control == 'Countries')?'active':''; ?>
                                         <?php echo $this->Html->link('Country',array('controller'=>'Countries','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                     <?php if($user_role['other_currency']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                     <?php if(isset($user_role['other_currency']['view'])){if($user_role['other_currency']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Currencies')?'active':''; ?>
                                         <?php echo $this->Html->link('Currency',array('controller'=>'Currencies','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_assignedto']['view'] == 1){ ?>
+                                     </li><?php }} ?>
+                                    <?php if(isset($user_role['other_assignedto']['view'])){if($user_role['other_assignedto']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Assigns')?'active':''; ?>
                                         <?php echo $this->Html->link('Assigned To',array('controller'=>'Assigns','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_servicetype']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['other_servicetype']['view'])){if($user_role['other_servicetype']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'Services')?'active':''; ?>
                                         <?php echo $this->Html->link('Service Type',array('controller'=>'Services','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_additional']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['other_additional']['view'])){if($user_role['other_additional']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Additionalcharges')?'active':''; ?>
                                         <?php echo $this->Html->link('Additional Charges',array('controller'=>'Additionalcharges','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_tallyledger']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['other_tallyledger']['view'])){if($user_role['other_tallyledger']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'Tallyledgers')?'active':''; ?>
                                         <?php echo $this->Html->link('Tally Ledger Account',array('controller'=>'Tallyledgers','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['other_auto']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['other_auto']['view'])){if($user_role['other_auto']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'Autos')?'active':''; ?>
                                         <?php echo $this->Html->link('Random No',array('controller'=>'Autos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                    <?php if($user_role['instr_costing']['view'] == 1){ ?>
+                                    </li><?php }} ?>
+                                    <?php if(isset($user_role['instr_costing']['view'])){if($user_role['instr_costing']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'InsPercents')?'active':''; ?>
                                         <?php echo $this->Html->link('Instrument Costing',array('controller'=>'InsPercents','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
+                                    </li><?php }} ?>
                                 </ul>
                             </li>
                             <li>
