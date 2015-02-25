@@ -875,7 +875,7 @@ class InvoicesController extends AppController
         $this->autoRender   =   false;
         $invoice_id= $this->request->data['invoice_id'];
         if($this->Invoice->updateAll(array('Invoice.is_approved'=>1,'Invoice.approved_date'=>'"'.date('Y-m-d H:i:s').'"'),array('Invoice.id'=>$invoice_id)))
-        {date('Y-m-d')
+        {
            $updated_invoice =   $this->Invoice->find('first',array('conditions'=>array('Invoice.id'=>$invoice_id,'Invoice.is_approved'=>1),'recursive'=>4));
            $this->set('updated_invoice',$updated_invoice);
         }
