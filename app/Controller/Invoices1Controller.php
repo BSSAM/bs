@@ -314,7 +314,7 @@ class InvoicesController extends AppController
             $this->request->data['Invoice']['customer_id'] = $cus_id;
             $this->request->data['Invoice']['customername'] = $cus_name;
             $this->request->data['Invoice']['is_approved'] = 1;
-            $this->request->data['Invoice']['approved_date'] = date('d-F-y');
+            $this->request->data['Invoice']['approved_date'] = date('Y-m-d');
             
             
                 //pr($this->request->data);exit;

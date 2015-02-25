@@ -9,7 +9,7 @@ class Salesorder extends AppModel
 {
     public $actsAs  =   array('Containable');
     public $virtualFields = array(
-    'solist_diff' => 'DATEDIFF(CURDATE(),STR_TO_DATE(Salesorder.due_date,"%d-%M-%y"))'
+    'solist_diff' => 'DATEDIFF(CURDATE(),STR_TO_DATE(Salesorder.due_date,"%Y-%m-%d"))'
 );
     public $primaryKey   =   'id' ;
     public $hasMany = array(

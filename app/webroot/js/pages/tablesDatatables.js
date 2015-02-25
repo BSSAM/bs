@@ -22,25 +22,25 @@ var TablesDatatables = function() {
             $('#pofull-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
-                "sScrollX": "100%",
+                "scrollCollapse": true,
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             $('#qofull-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
-                "sScrollX": "100%",
+                "scrollCollapse": true,
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             $('#sofull-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
-                "sScrollX": "100%",
+                "scrollCollapse": true,
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             $('#dofull-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
-                "sScrollX": "100%",
+                "scrollCollapse": true,
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
 /***********************************************************************************************************/

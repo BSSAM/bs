@@ -72,7 +72,7 @@
                                         <?php //$disable_unit = "disabled = 'disabled'";
                                         $disable_unit = "";
                                         ?>
-                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter Cost of the Instrument','name'=>'unit_price',$disable_unit)); ?>
+                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter Cost of the Instrument','name'=>'unit_price','value'=>'0',$disable_unit)); ?>
                                     </div>
                                     <label class="col-md-1 control-label" for="contract_disc">Contract Disc</label>
                                     <div class="col-md-1">   

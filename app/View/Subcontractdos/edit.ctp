@@ -158,7 +158,7 @@ $(function() {
                 </div>
                 <label class="col-md-2 control-label" for="val_date">Date</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
+                    <?php echo $this->Form->input('subcontract_date', array('id'=>'val_date','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd',
                                                 'placeholder'=>'Enter the Registration Date','label'=>false,'value'=>$subcondo['Subcontractdo']['subcontract_date'],'readonly'=>true)); ?>
                 </div>
             </div>
@@ -166,7 +166,7 @@ $(function() {
             <div class="form-group">
                 <label class="col-md-2 control-label" for="val_duedate">Due Date </label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('subcontract_duedate', array('id' => 'val_duedate', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'dd-MM-yy',
+                    <?php echo $this->Form->input('subcontract_duedate', array('id' => 'val_duedate', 'class' => 'form-control input-datepicker-close', 'data-date-format' => 'yyyy-mm-dd',
                         'placeholder' => 'Enter the Due Date', 'label' => false,'value'=>$subcondo['Subcontractdo']['subcontract_duedate'],'readonly'=>true));
                     ?>
                 </div>

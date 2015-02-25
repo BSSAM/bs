@@ -106,12 +106,16 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">Sales Orders No</th>
-                                        <th class="text-center">Reg Date</th>
+                                        <th class="text-center">In Date</th>
+                                        <th class="text-center">Due Date</th>
                                         <th class="text-center">Branch</th>
                                         <th class="text-center">Customer</th>
+                                        <th class="text-center">ATTN</th>
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
+                                        <th class="text-center">Our Ref No</th>
                                         <th class="text-center">Reference No</th>
+                                        <th class="text-center">Salesperson</th>
                                         <?php if($deleted_val != 3): ?><th class="text-center">Action</th><?php endif; ?>
                                     </tr>
                                 </thead>
@@ -120,12 +124,16 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                      <?php foreach($salesorder as $salesorder_list): ?>
                                     <tr <?php if($salesorder_list['Salesorder']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['branch']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['in_date'] ?></td>
+                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['due_date'] ?></td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->branchname($salesorder_list['Salesorder']['branch_id']); ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Customer']['Customertagname'] ?></td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->contactname($salesorder_list['Salesorder']['attn']); ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
                                          <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>
+                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['quotationno'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['ref_no'] ?></td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->salespersonname($salesorder_list['Salesorder']['quotation_id']); ?></td>
                                         <?php if($deleted_val != 3): ?>
                                         <td class="text-center">
                                             <div class="btn-group">

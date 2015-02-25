@@ -205,7 +205,7 @@ and open the template in the editor.
 .table-responsive-scroll table *{-webkit-box-sizing: content-box !important;
 -moz-box-sizing: content-box !important;
 box-sizing: content-box !important;}
-.dataTables_scrollHeadInner{width:100% !important;}
+.dataTables_scrollHeadInner{width:100% !important;white-space: nowrap;}
 .datatable-scroll {
     overflow-x: auto;
     overflow-y: visible;

@@ -78,6 +78,13 @@ class DeliveryHelper extends AppHelper
       
              return $id1;
     }
+    public function find_customer($id = null)
+    {
+       APP::import('Model','Customer');
+        $this->Customer   =   new Customer();
+        $cus = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id)));
+        return $cus['Customer']['customername'].'('.$cus['Customer']['tag_name'].')';
+    }
     
     
     

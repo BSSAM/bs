@@ -217,7 +217,7 @@ class LabprocessesController extends AppController
                     $delivery['Deliverorder']['salesorder_id']  = $id; 
                     $delivery['Deliverorder']['delivery_address']  = $address_list['Address']['address']; 
                     $delivery['Deliverorder']['customer_address']  = $salesorder_list['Salesorder']['address']; 
-                    $delivery['Deliverorder']['delivery_order_date']  = date('d-F-y');
+                    $delivery['Deliverorder']['delivery_order_date']  = date('Y-m-d');
                     $delivery['Deliverorder']['instrument_type_id']  = $salesorder_list['Salesorder']['instrument_type_id']; 
                     $delivery['Deliverorder']['our_reference_no']  = $salesorder_list['Salesorder']['track_id']; 
                     $delivery['Deliverorder']['your_reference_no']  = $salesorder_list['Salesorder']['ref_no']; 
@@ -461,7 +461,7 @@ class LabprocessesController extends AppController
                     $delivery['Deliverorder']['salesorder_id']  = $id; 
                     $delivery['Deliverorder']['delivery_address']  = $address_list['Address']['address']; 
                     $delivery['Deliverorder']['customer_address']  = $salesorder_list['Salesorder']['address']; 
-                    $delivery['Deliverorder']['delivery_order_date']  = date('d-F-y');
+                    $delivery['Deliverorder']['delivery_order_date']  = date('Y-m-d');
                     $delivery['Deliverorder']['instrument_type_id']  = $salesorder_list['Salesorder']['instrument_type_id']; 
                     $delivery['Deliverorder']['our_reference_no']  = $salesorder_list['Salesorder']['track_id']; 
                     $delivery['Deliverorder']['your_reference_no']  = $salesorder_list['Salesorder']['ref_no']; 

@@ -411,7 +411,7 @@ $(function(){
                 </div>
                 <label class="col-md-2 control-label" for="pur_order_date">Purchase Order Date</label>
                 <div class="col-md-4">
-                    <?php echo $this->Form->input('Purchaseorder.purchaseorder_date', array('id'=>'pur_order_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy','label'=>false,'value'=>date('d-M-y'))); ?>
+                    <?php echo $this->Form->input('Purchaseorder.purchaseorder_date', array('id'=>'pur_order_date','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false,'value'=>date('Y-m-d'))); ?>
                 </div>
             </div>
 

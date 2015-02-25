@@ -64,7 +64,7 @@
     </div>
     <label class="col-md-2 control-label" for="del_order_date">Delivery Order Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Deliveryorder.delivery_order_date', array('id'=>'del_order_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy','label'=>false)); ?>
+        <?php echo $this->Form->input('Deliveryorder.delivery_order_date', array('id'=>'del_order_date','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
     </div>
 </div>
 <div class="form-group">

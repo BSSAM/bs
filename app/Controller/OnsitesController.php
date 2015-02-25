@@ -67,7 +67,7 @@
             if($this->request->is('post'))
             {
                 
-                $date = date('m/d/Y h:i:s a', time());
+                $date = date('Y-m-d h:i:s a', time());
                 $this->request->data['Onsite']['schedule_created'] = $date;
                 $customer_id=$this->request->data['Onsite']['customer_id'];
                

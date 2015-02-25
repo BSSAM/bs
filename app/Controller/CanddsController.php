@@ -9,7 +9,7 @@ class CanddsController extends AppController
 {
     public $helpers =   array('Html','Form','Session');
     public $uses    =   array('Priority','Paymentterm','Quotation','Currency','Deliveryorder','ReadytodeliverItem','CollectionDelivery',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Contactpersoninfo',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','Branch','Logactivity','Datalog');
     public function index()
     {
@@ -343,9 +343,115 @@ class CanddsController extends AppController
            // $quotation_data = $this->Quotation->find('first', array('conditions' => array('Quotation.id' => $id),'recursive'=>2));
             //pr($quotation_data);exit;
             $file_type = 'pdf';
+            $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id),'recursive'=>2));
+            
+        //pr($cd_statistics);exit;
+        //$this->set(compact('cd_statistics'));
             $filename = $id;
 
-           $html = 'aa'; 
+           $html = '<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Oswald:300,700" rel="stylesheet" type="text/css">
+<style>
+table td { font-size:9px; line-height:11px; }
+.table_format table { }
+.table_format td { text-align:center; padding:5px; }
+@page {
+margin: 180px 50px;
+}
+#header { position: fixed; left: 0px; top: -180px; right: 0px; height: 50px; }
+#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 100px; }
+#footer .page:after { content: counter(page); }
+</style>
+</head>
+<body style="font-family:Oswald, sans-serif;font-size:9px;padding:0;margin:0;font-weight: 300; color:#444;">
+<div id="header">
+     <h3 style="text-align:center;margin:10px 0;color:#000;font-size:28px;">BS TECH PTE LTD</h3>
+     <div style="font-size:10px;color:#666;margin-top:20px;">DATE :<span style="margin-left:10px;"> '.$id.'</span></div>
+     <div style="font-size:11px;color:#333;margin-top:10px;">BS TECH PTE LTD</div>
+</div>
+<div id="footer">
+     <div style="width:100%;" class="page">
+          <div style="font-size:10px;color:#666;margin-top:20px;">'.date('Y-m-d H:i:s').'</div>
+     </div>
+</div>';
+           foreach($cd_statistics as $k=>$cd):
+           
+               $cd_contact_id = $cd['Candd']['Contactpersoninfo_id'];
+               $data = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$cd_contact_id)));
+               $cd_contact_name ='';
+               if($data)
+               {
+               $cd_contact_name = $data['Contactpersoninfo']['name'];
+               }
+               $cd_readytodeliver_id = $cd['Candd']['readytodeliver_items_id'];
+               $data_r = $this->ReadytodeliverItem->find('first',array('conditions'=>array('ReadytodeliverItem.id'=>$cd_readytodeliver_id)));
+               $sales = '';
+               $delivery = '';
+               if($data_r)
+               {
+               $sales = $data_r['ReadytodeliverItem']['salesorderno'];
+               $delivery = $data_r['ReadytodeliverItem']['deliveryorderno'];
+               }
+             if($k == 0)
+                    {  
+           
+$html .= '<div id="content">';
+ $html .='<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:-50px;text-align:center;border-left:1px solid #333;border-top:1px solid #333;">
+          <tr style="background:#333;">
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">S NO.</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">PURPOSE TO</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">REQUESTED BY</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">CUSTOMER</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">ADDRESS OF LOCATION</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">PERSON TO CONTACT</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">PHONE NO.</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">SALES ORDER NO.</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">DELIVERY ORDER NO.</th>
+               <th  width="200" style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">REMARKS</th>
+          </tr>';
+ }
+                    elseif($k%5 == 0)
+                    {
+    $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:-50px;text-align:center;border-left:1px solid #333;page-break-before: always;border-top:1px solid #333;">
+          <tr style="background:#333;">
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">S NO.</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">PURPOSE TO</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">REQUESTED BY</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">CUSTOMER</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">ADDRESS OF LOCATION</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">PERSON TO CONTACT</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">PHONE NO.</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">SALES ORDER NO.</th>
+               <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">DELIVERY ORDER NO.</th>
+               <th  width="200" style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">REMARKS</th>
+          </tr>';
+                    }
+                    
+                    $html .='<tr>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.($k+1).'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$cd['Candd']['purpose'].'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$cd['Candd']['purpose'].'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$cd['Candd']['customername'].'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$cd['Candd']['customer_address'].'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$cd_contact_name.'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$cd['Candd']['phone'].'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$sales.'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$delivery.'</td>
+               <td style="font-size:11px;text-transform:uppercase;color:#666;border-right:1px solid #333;border-bottom:1px solid #333;padding:3px;">'.$cd['Candd']['remarks'].'</td>
+          </tr>';
+                    
+          if($k%5 == 4 || $k+1 == count($cd_statistics)){
+                $html .='</table>';
+                }
+                endforeach;
+     $html .= '
+</div>
+</body>
+</html>'; 
                 //pr($html);exit;
         $this->export_report_all_format($file_type, $filename, $html);
     }

@@ -12,6 +12,7 @@ class InstrumentsController extends AppController
         'Instrument', 'Brand', 'Customer', 'Device', 'Salesorder', 'Description', 'Deliveryorder','InstrumentBrand','InstrumentRange','InstrumentProcedure','Logactivity','Datalog');
     public function index($id=NULL)
     {
+        //$this->layout = 'ajax';
         /*******************************************************
          *  BS V1.0
          *  User Role Permission

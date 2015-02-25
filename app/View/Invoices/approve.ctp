@@ -427,7 +427,7 @@ $(function() {
                         </div>
                         <label class="col-md-2 control-label" for="inv_date">Invoice Date</label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy','label'=>false)); ?>
+                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -846,7 +846,7 @@ $(function() {
                         </div>
                         <label class="col-md-2 control-label" for="inv_date">Invoice Date</label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy','label'=>false)); ?>
+                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -1251,7 +1251,7 @@ $(function() {
                         </div>
                         <label class="col-md-2 control-label" for="inv_date">Invoice Date</label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy','label'=>false)); ?>
+                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">

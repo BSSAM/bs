@@ -115,7 +115,7 @@
             $this->set('titles',$titles);
             if($this->request->is('post'))
             {
-                $date = date('m/d/Y h:i:s a', time());
+                $date = date('Y-m-d h:i:s a', time());
                 $this->request->data['Quotation']['created_by'] = $date;
                 $customer_id=$this->request->data['Quotation']['customer_id'];
                 $this->request->data['Quotation']['customername']=$this->request->data['customername'];
@@ -145,6 +145,7 @@
 //                endif;
                 $this->request->data['Quotation']['po_generate_type']=$po_type;
                 $this->request->data['Quotation']['ref_count']=$p_count_string;
+                //pr($this->request->data['Quotation']);exit;
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
@@ -280,6 +281,7 @@
                 }
                 $this->Quotation->id=$id;
                 $quotationno = $quotations_list['Quotation']['quotationno'];
+                
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $customer_id=$quotations_list['Quotation']['customer_id'];

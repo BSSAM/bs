@@ -366,7 +366,7 @@
                 {
                     // Deliveryorder Approve
                     
-                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('Y-m-d')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
                     $user_id = $this->Session->read('sess_userid');
                     $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
                     $this->request->data['Datalog']['logname'] = 'Deliveryorder';
@@ -473,7 +473,7 @@
                 {
                     // Deliveryorder Approve
                     
-                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('Y-m-d')),array('Deliveryorder.delivery_order_no'=>$id,'Deliveryorder.po_generate_type'=>'Manual','Deliveryorder.is_poapproved'=>1,'Customer.acknowledgement_type_id'=>1));
                     $user_id = $this->Session->read('sess_userid');
                     $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
                     $this->request->data['Datalog']['logname'] = 'Deliveryorder';
@@ -603,7 +603,7 @@
                     
                 // Deliveryorder Approve
                     
-                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id));
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('Y-m-d')),array('Deliveryorder.delivery_order_no'=>$id));
                     $user_id = $this->Session->read('sess_userid');
                     $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
                     $this->request->data['Datalog']['logname'] = 'Deliveryorder';
@@ -706,7 +706,7 @@
                 // Salesorder Full Invoice
                 if($inv_type == 3)
                 {
-                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('d-m-y')),array('Deliveryorder.delivery_order_no'=>$id));
+                    $this->Deliveryorder->updateAll(array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>date('Y-m-d')),array('Deliveryorder.delivery_order_no'=>$id));
                     $user_id = $this->Session->read('sess_userid');
                     $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$deliveryorder['Deliveryorder']['id'],'Logactivity.logactivity'=>'Add Delivery order'));
                     $this->request->data['Datalog']['logname'] = 'Deliveryorder';
@@ -826,7 +826,7 @@
                 
             else
             {
-                $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>'"'.date('d-F-y').'"'),array('Deliveryorder.delivery_order_no'=>$id));
+                $this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>'"'.date('Y-m-d').'"'),array('Deliveryorder.delivery_order_no'=>$id));
                 
                 //$this->Deliveryorder->updateAll(array('Deliveryorder.is_invoice_created'=>1,'Deliveryorder.is_approved'=>1,'Deliveryorder.is_approved_date'=>'"'.date('d-F-y').'"'),array('Deliveryorder.delivery_order_no'=>$id));
                 $this->Quotation->updateAll(array('Quotation.is_invoice_created'=>1,'Quotation.is_delivery_approved'=>1),array('Quotation.quotationno'=>$deliver_quotation));

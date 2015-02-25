@@ -477,7 +477,7 @@ class ClientposapprovalController extends AppController {
 
                         if($title_name == 'Approve'):
 
-                            $this->Quotation->updateAll(array('Quotation.is_poapproved'=>'1'),array('Quotation.ref_no'=>$ref_no_old));
+                            $this->Quotation->updateAll(array('Quotation.is_poapproved'=>'1','Quotation.po_approval_date'=>date('Y-m-d')),array('Quotation.ref_no'=>$ref_no_old));
                             $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>'1'),array('Salesorder.ref_no'=>$ref_no_old));
                             $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>'1'),array('Deliveryorder.ref_no'=>$ref_no_old));
                             // Log Activity Update
@@ -595,7 +595,7 @@ class ClientposapprovalController extends AppController {
                      
                     if($title_name == 'Approve'):
                         foreach($quotation_no as $quo_no):
-                            $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1),array('Quotation.quotationno'=>$quo_no));
+                            $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1,'Quotation.po_approval_date'=>date('Y-m-d')),array('Quotation.quotationno'=>$quo_no));
                         endforeach;
                         $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>1),array('Salesorder.id'=>$salesorder_id_from_view));
                         $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>1),array('Deliveryorder.salesorder_id'=>$salesorder_id_from_view));
@@ -665,7 +665,7 @@ class ClientposapprovalController extends AppController {
                     $this->Session->setFlash(__('Purchase Order is Updated as Manual'));
                     
                     if($title_name == 'Approve'):
-                        $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1),array('Quotation.quotationno'=>$quotationno));
+                        $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1,'Quotation.po_approval_date'=>date('Y-m-d')),array('Quotation.quotationno'=>$quotationno));
                         $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>1),array('Salesorder.quotationno'=>$quotationno));
                         $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>1),array('Deliveryorder.quotationno'=>$quotationno));
                         // Log Activity Update
@@ -784,7 +784,7 @@ class ClientposapprovalController extends AppController {
                     $this->Session->setFlash(__('Purchase Order is Updated as Manual'));
                     
                     if($title_name == 'Approve'):
-                        $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1),array('Quotation.quotationno'=>$quotationno));
+                        $this->Quotation->updateAll(array('Quotation.is_poapproved'=>1,'Quotation.po_approval_date'=>date('Y-m-d')),array('Quotation.quotationno'=>$quotationno));
                         $this->Salesorder->updateAll(array('Salesorder.is_poapproved'=>1),array('Salesorder.quotationno'=>$quotationno));
                         $this->Deliveryorder->updateAll(array('Deliveryorder.is_poapproved'=>1),array('Deliveryorder.quotationno'=>$quotationno));
                         // Log Activity Update

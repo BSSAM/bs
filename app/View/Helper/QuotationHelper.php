@@ -69,4 +69,76 @@ class QuotationHelper extends AppHelper
         $data = $this->Branch->find('first',array('conditions'=>array('Branch.id'=>$id)));
         return $data['Branch']['branchname'];
     }
+    public function branchname_quotation($id = null)
+    {
+        APP::import('Model','Branch');
+        APP::import('Model','Quotation');
+        $this->Branch   =   new Branch();
+        $this->Quotation   =   new Quotation();
+        $id1 = array();
+        $id1 = explode(',',$id);
+        $data_quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id1[0])));
+        $data = $this->Branch->find('first',array('conditions'=>array('Branch.id'=>$data_quo['Quotation']['branch_id'])));
+        return $data['Branch']['branchname'];
+    }
+    public function get_customer_reg_address($customer_id=NULL)
+    {
+        APP::import('Model','Quotation');
+        $this->Quotation   =   new Quotation();
+        $id1 = array();
+        $id1 = explode(',',$customer_id);
+        $data_quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id1[0])));
+        return $data_quo['Quotation']['address'];
+    }
+    //paymentterm_id
+    public function paymentterm_quotation($id = null)
+    {
+        APP::import('Model','Paymentterm');
+        APP::import('Model','Quotation');
+        $this->Paymentterm   =   new Paymentterm();
+        $this->Quotation   =   new Quotation();
+        $id1 = array();
+        $id1 = explode(',',$id);
+        $data_quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id1[0])));
+        $data = $this->Paymentterm->find('first',array('conditions'=>array('Paymentterm.id'=>$data_quo['Quotation']['paymentterm_id'])));
+        if($data)
+        {
+            return $data['Paymentterm']['paymentterm'].' '.$data['Paymentterm']['paymenttype'];
+        }
+        else
+        {
+            return '';
+        }
+    }
+    public function quotationtotal_all($id = null)
+    {
+        APP::import('Model','Device');
+        $this->Device   =   new Device();
+        $id1 = array();
+        $id1 = explode(',',$id);
+        $arr_total = 0;
+        foreach($id1 as $id2)
+        {
+            $data = $this->Device->find('all',array('conditions'=>array('Device.quotationno'=>$id2)));
+            $arr = array();
+
+            foreach($data as $data1)
+            {
+                $arr = $data1['Device']['total'];
+                $arr_total = $arr_total + $data1['Device']['total'];
+            }
+        }
+        //$id1 = implode(',',$arr);
+        //$arra = array_sum($arr);
+        return '$'.$arr_total;
+    }
+    public function getphone($customer_id=NULL)
+    {
+        APP::import('Model','Quotation');
+        $this->Quotation   =   new Quotation();
+        $id1 = array();
+        $id1 = explode(',',$customer_id);
+        $data_quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id1[0])));
+        return $data_quo['Quotation']['phone'];
+    }
 }

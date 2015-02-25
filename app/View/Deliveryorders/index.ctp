@@ -37,10 +37,15 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">Delivery Order No</th>
                                         <th class="text-center">Delivery Order Date</th>
-                                        <th class="text-center">Sales order No</th>
+                                        <th class="text-center">Branch</th>
                                         <th class="text-center">Customer Name</th>
+                                        <th class="text-center">Delivery Address</th>
+                                        <th class="text-center">Customer Address</th>
+                                        <th class="text-center">ATTN</th>
                                          <th class="text-center">Phone</th>
                                         <th class="text-center">Email</th>
+                                        <th class="text-center">Sales order No</th>
+                                        <th class="text-center">Our Ref No</th>
                                         <th class="text-center">Reference No</th>
                                         <?php if($deleted_val != 3): ?><th class="text-center">Action</th><?php endif; ?>
                                         <th class="text-center">Note</th>
@@ -52,11 +57,16 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                     <tr <?php if($deliveryorder['Deliveryorder']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_no'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_order_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['salesorder_id'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Customer']['Customertagname'] ?></td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->branchname($deliveryorder['Deliveryorder']['branch_id']); ?></td>
+                                        <td class="text-center"><?PHP echo $this->Delivery->find_customer($deliveryorder['Deliveryorder']['customer_id']); ?></td>
+                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['delivery_address'] ?></td>
+                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['customer_address'] ?></td>
+                                        <td class="text-center"><?PHP echo $this->Quotation->contactname($deliveryorder['Deliveryorder']['attn']); ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['phone'] ?></td>
                                         <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['email'] ?></td>
-                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['our_reference_no'] ?></td>
+                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['salesorder_id'] ?></td>
+                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['quotationno'] ?></td>
+                                        <td class="text-center"><?PHP echo $deliveryorder['Deliveryorder']['ref_no'] ?></td>
                                         <?php if($deleted_val != 3): ?>
                                         <td class="text-center">
                                             <div class="btn-group">
