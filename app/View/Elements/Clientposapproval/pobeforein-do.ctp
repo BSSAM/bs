@@ -46,6 +46,7 @@
                     <?PHP endforeach; ?>
                 </td>
                 <td class="text-center">
+                    <?php if($userrole_clientpo['view']==1){ ?>
                     <?php //&&$do_list['Deliveryorder']['is_poapproved']==0 ?>
                     <?PHP if(($do_list['Deliveryorder']['po_generate_type']=='Automatic'||$do_list['Deliveryorder']['po_generate_type']=='Manual')){?>
                     <div class="btn-group">
@@ -60,6 +61,8 @@
 
                         <?PHP //}?>
                     </div>
+                    <?PHP }?>
+                    <?php if($userrole_clientpo['approve']==1){ ?>
                     <?PHP if(($do_list['Deliveryorder']['po_generate_type']=='Automatic'||$do_list['Deliveryorder']['po_generate_type']=='Manual')){?>
                     <div class="btn-group">
                        <?php //echo $do_list['Deliveryorder']['po_generate_type']; ?>
@@ -73,6 +76,7 @@
 
                         <?PHP // }?>
                     </div>
+                    <?PHP }?>
                     <?php if($do_list['Deliveryorder']['po_generate_type']=='Manual'&&$do_list['Deliveryorder']['is_poapproved']==1){ ?>
                     <br><br>
                     <span class="label label-info">

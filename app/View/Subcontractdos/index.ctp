@@ -18,7 +18,7 @@
                             
                      
     <div class="table-responsive">
-        <table id="sofull-datatable" class="table table-vcenter table-condensed table-bordered">
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center">Sub-Contract DO No</th>

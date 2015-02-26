@@ -92,16 +92,11 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                     <?PHP endif; ?>
                                    
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="8">
-                                            <div class="btn-group btn-group-md pull-right">
+                                
+                            </table>
+                             <div class="btn-group btn-group-md">
                                                 <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
                                             </div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
 <!--                            <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

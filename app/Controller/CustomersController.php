@@ -9,7 +9,7 @@ class CustomersController extends AppController
 {
     public $helpers = array('Html','Form','Session');
     public $uses = array('Contactpersoninfo','Billingaddress','Deliveryaddress','Projectinfo','AcknowledgementType','Quotation',
-                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby','Random',
+                        'Customer','Address','Salesperson','Referedby','CusSalesperson','CusReferby','Random','Instrument_copy',
                         'Industry','Location','Paymentterm','Instrument','InstrumentRange','CustomerInstrument',
                         'Deliveryordertype','InvoiceType','Priority','Contactpersoninfo','Logactivity','Datalog','InsPercent');
     
@@ -1141,15 +1141,15 @@ class CustomersController extends AppController
     {
         $this->autoRender = false;
         $name =  $this->request->data['name'];
-        $data = $this->Instrument->find('all',array('conditions'=>array('Instrument.name LIKE'=>'%'.$name.'%','Instrument.is_deleted'=>0,'Instrument.is_approved'=>1)));
+        $data = $this->Instrument_copy->find('all',array('conditions'=>array('Instrument_copy.name LIKE'=>'%'.$name.'%','Instrument_copy.is_deleted'=>0,'Instrument_copy.is_approved'=>1)));
         $c = count($data);
         //echo $c; 
             if($c>0)
             {
                 for($i = 0; $i<$c;$i++)
                 { 
-                    echo "<div class='customer_instrument_show' align='left' id='".$data[$i]['Instrument']['id']."'>";
-                    echo $data[$i]['Instrument']['name'];
+                    echo "<div class='customer_instrument_show' align='left' id='".$data[$i]['Instrument_copy']['id']."'>";
+                    echo $data[$i]['Instrument_copy']['name'];
                     echo "<br>";
                     echo "</div>";
                 }

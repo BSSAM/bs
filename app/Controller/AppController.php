@@ -750,7 +750,7 @@ App::uses('Controller', 'Controller');
             $this->request->data['ReqDevice']['account_service']    =   $devices['PreqDevice']['account_service'];
             $this->request->data['ReqDevice']['title']              =   $devices['PreqDevice']['title'];
             $this->request->data['ReqDevice']['total']              =   $devices['PreqDevice']['total'];
-            $this->request->data['ReqDevice']['status']             =   1;
+            $this->request->data['ReqDevice']['status']             =   0;
             $this->request->data['ReqDevice']['is_approved']        =   0;
             return $this->request->data;
             }

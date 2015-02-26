@@ -210,3 +210,17 @@ box-sizing: content-box !important;}
     overflow-x: auto;
     overflow-y: visible;
 }
+.table {width:100% !important;white-space: nowrap;}
+.dataTables_scroll * {box-sizing: initial !important;}
+.table th,.table  td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .dataTables_scroll{ overflow: auto;}
+    .dataTables_scrollBody{ overflow: hidden !important;}
+   .table table tbody td {
+    min-width: 100px;
+}
+#qofull-datatable_wrapper .dataTables_scrollHead{ overflow: unset !important;}
+#engineer-datatable_wrapper .dataTables_scrollBody{ overflow: auto !important;}

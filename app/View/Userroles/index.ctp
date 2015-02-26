@@ -49,7 +49,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                     <td class="text-center"><?php echo $userrole_list['Userrole']['description'];?></td>
                     <?php if($deleted_val != 1): ?>
                     <td class="text-center">
-                        <div class=""><?php if(($userrole_list['Userrole']['user_role_id']!=1&&$userrole_list['Userrole']['user_role_id']!=2)){?>
+                        <div class=""><?php //if(($userrole_list['Userrole']['user_role_id']!=1&&$userrole_list['Userrole']['user_role_id']!=2)){?>
                              <?php if($userrole_term['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$userrole_list['Userrole']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                              <?php } ?>
@@ -59,7 +59,7 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                              <?php if($userrole_term['edit']==1){ ?>
                                                 <?php echo $this->Html->link('Role',array('action'=>'roles',$userrole_list['Userrole']['user_role_id']),array('data-toggle'=>'tooltip','title'=>'Roles','class'=>'btn btn-alt btn-xs btn-primary','escape'=>false)); ?>
                              <?php } ?>
-                        <?php } ?></div>
+                        <?php //} ?></div>
                     </td>
                     <?php endif; ?>
                     <?php if($deleted_val == 1): ?>

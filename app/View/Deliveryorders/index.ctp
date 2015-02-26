@@ -86,17 +86,13 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                     <?php endforeach; ?>
                                     <?PHP endif; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="9">
-                                            <div class="btn-group btn-group-md pull-right">
-                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
                             <br>
+                            <div class="btn-group btn-group-md">
+                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+                                            </div>
+                            <br><br>
                             <span class="label label-five">PO#App</span> - PO Approved
                             <span class="label label-six">PO#Not</span> - PO Not Approved
                          <?php echo $this->Html->script('pages/uiProgress'); ?>

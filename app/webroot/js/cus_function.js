@@ -191,6 +191,20 @@ $(document).ready(function(){
                 $('#in_id').val(edit_node.Instrument.id);
                 $('#ins_name').val(edit_node.Instrument.name);
                 $('#instrument_id').val(edit_node.Instrument.id);
+                
+                $.ajax({
+		type: 'POST',
+                data:"instrument_id="+edit_node.Instrument.id,
+		url: path_url+'/customers/get_range/',
+                beforeSend: ni_start(),  
+                success:function(data){
+                    $('#range_array').empty().append('<option value="">Select Range</option>');
+                    $('#range_array').append(data);
+                    $('#range_array option[value="'+edit_node.Range.id+'"]').prop('selected', true);
+                },
+                complete: ni_end(),
+                });
+                
                 $('#customer_instrument').val(edit_node.Instrument.name);
                 $('#customer_instrument').prop('disabled', 'disabled');
                 $('#model_no').val(edit_node.CustomerInstrument.model_no);
@@ -198,7 +212,8 @@ $(document).ready(function(){
                 $('#total_price').val(edit_node.CustomerInstrument.unit_price);
                 $('#contract_disc').val(edit_node.CustomerInstrument.contract_disc);
                 //$('#status').val(edit_node.CustomerInstrument.status);
-                $('#range_array').empty().append('<option value="">Select Range</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
+                
+                //$('#range_array').val(edit_node.Range.id).prop("selected", "selected");
                 $('#instrument_name_chosen span').text(edit_node.Instrument.name);
                 var check=(edit_node.CustomerInstrument.status==1)?true:false;
                 //alert(check);
