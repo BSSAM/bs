@@ -77,6 +77,7 @@ $(document).on('click','.approve_candd',function(){
             {
                 //console.log(data); return false;
                 alert('Customer Instrument is Approved');
+                window.location.reload();
             }
             
         });

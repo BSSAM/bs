@@ -1106,7 +1106,7 @@ margin: 180px 50px;
 <div style="padding-top:10px;">'.$InstrumentType.'</div>
 </div></div>';
               $html .='<div id="footer">
-     <div style="width:100%;" class="page">
+     <div style="width:100%;">
           
      <table cellpadding="1" cellspacing="1"  style="width:100%;">
           <tr>
@@ -1152,6 +1152,10 @@ margin: 180px 50px;
 <div style="background:#313854;float:left;width:100%;color:#fff !important;padding:5px;font-size:12px;margin-top:20px;text-align:center;">E. & O . E</div>
 </div>
 </div>
+<table width="100%">
+               <tr>
+                    <td  style="width:80%;">'.date('Y-m-d H:i:s').'</td><td  style="width:7%;">Page: <span class="page"></span></td>
+                        </tr></table>
 </div>';
 $subtotal = 0;
 $html .= '<div id="content">'; 
@@ -1243,8 +1247,8 @@ $html .= '</tr>';
                          <td style="padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($total_due, 2, '.', '').'</td>
                     </tr>
                      <tr>
-               <td colspan="4" style="border:1px  dashed #000;text-align:right;padding:10px;color: #000 !important;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #000; text-align:left;padding:10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td>
+               <td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
+               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td>
           </tr>';
          }
                 if($k%5 == 4 || $k+1 == count($device_name)){

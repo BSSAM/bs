@@ -1234,7 +1234,7 @@ $html .=
 
 </div></div>';
 $html .='<div id="footer">
-     <div style="width:100%;" class="page">
+     <div style="width:100%;">
           <table cellpadding="1" cellspacing="1"  style="width:100%;">
           <tr>
                <td style="padding:5px;width:50%;border:1px solid #000;"><table cellpadding="0" cellspacing="0">
@@ -1264,7 +1264,11 @@ $html .='<div id="footer">
      
 
 <div style="background:#313854;float:left;width:100%;color:#fff !important;padding:10px;font-size:12px;margin-top:30px;text-align:center;">E. & O . E</div>
-       </div>   
+       </div>  
+       <table width="100%">
+               <tr>
+                    <td  style="width:80%;">'.date('Y-m-d H:i:s').'</td><td  style="width:7%;">Page: <span class="page"></span></td>
+                        </tr></table>
 </div>';
 $subtotal = 0;
 $html .= '<div id="content" style="">'; 
@@ -1330,8 +1334,8 @@ $html .= '</tr>';
                         endif;
                         endfor;
                         
-                    $html .='</tr><tr><td colspan="4" style="border:1px  dashed #000;text-align:right;padding:10px;color: #000 !important;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #000; text-align:left;padding: 10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td></tr></table>';
+                    $html .='</tr><tr><td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
+               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td></tr></table>';
                 
                 endforeach;
 $html .= '</div>'; 

@@ -112,9 +112,10 @@
             
             if($this->request->is('post'))
             {
-                
+                //pr($this->request->data);exit;
+                pr($this->ReqDevice->find('all'));
                 $req_purchaseorderid  =   $this->Reqpurchaseorder->getLastInsertID();       
-                $this->ReqDevice->deleteAll(array('ReqDevice.reqpurchaseorder_id'=>$id,'ReqDevice.status'=>0));
+                $this->ReqDevice->deleteAll(array('ReqDevice.reqpurchaseorder_id'=>''));
                 $requistion_id  =   $this->request->data['Reqpurchaseorder']['prequistion_id'];
                 $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
                 $country=$this->Country->find('list',array('fields'=>array('id','country')));
@@ -137,8 +138,8 @@
                     //pr($sale);
                     $this->ReqDevice->create();
                     $this->request->data['ReqDevice']['is_approved']    =   0;
-                    //pr($req_purchaseorderid);exit;
-                    $this->request->data['ReqDevice']['reqpurchaseorder_id'] = $this->request->data['ReqDevice']['prequistion_id'];
+                    pr($req_purchaseorderid);
+                    $this->request->data['ReqDevice']['reqpurchaseorder_id'] = $req_purchaseorderid;
                     //$this->request->data['req_purchaseorderid'] = $req_purchaseorderid;
                     $description_data  =   $this->preq_devices($sale['id']);
                     

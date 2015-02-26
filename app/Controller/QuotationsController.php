@@ -990,7 +990,7 @@ $html .=
 
 </div></div>';
 $html .='<div id="footer">
-     <div style="width:100%;" class="page">
+     <div style="width:100%;">
           <table width="100%">
                <tr>
                     <td  style="width:50%;"><div style="color: #000 !important;font-size:14px !important;">TERMS AND CONDITIONS :</div>
@@ -1026,6 +1026,10 @@ $html .='<div id="footer">
           </table>
           <div style="background:#00005b;color:#fff !important;padding:3px 10px;font-size:8px;">BS TECH REFERENCE MEASUREMENT STANDARDS ARE TRACEABLE TO NATIONAL METROLOGY CENTRE (SINGAPORE), NPL (UK), NIST (USA) OR OTHER RECOGNIZED NATIONAL OR INTERNATIONAL STANDARDS</div>
      </div>
+     <table width="100%">
+               <tr>
+                    <td  style="width:80%;">'.date('Y-m-d H:i:s').'</td><td  style="width:7%;">Page: <span class="page"></span></td>
+                        </tr></table>
 </div>';
 $subtotal = 0;
 $html .= '<div id="content" style="">'; 

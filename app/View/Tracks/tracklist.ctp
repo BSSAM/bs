@@ -37,7 +37,7 @@
     <div class="col-md-12">
         <h2 class="pull-left">Tracking System</h2>
         
-            <div class="pull-right" style="margin-top: 30px;"><?php echo $this->Html->link('Generate Report',array('controller' => 'Quotations','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></div>
+            <div class="pull-right" style="margin-top: 30px;"><?php echo $this->Html->link('Generate Report',array('controller' => 'Tracks','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></div>
 <!--        <h2 style="float:right;"><?php //echo $this->Html->link('Generate Report',array('controller' => 'Tracks','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></h2>-->
     </div>
     
@@ -71,9 +71,9 @@
 </div>
     <?PHP $this->Form->end(); ?>
                      
-    <div class="table-responsive table-responsive-scroll">
+    <div class="table-responsive">
 <!--        <div class="auto_overflow">-->
-        <table id="sofull-datatable" class="table table-vcenter table-condensed table-bordered">
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center">ID</th>
