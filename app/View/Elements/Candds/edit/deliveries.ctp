@@ -1,6 +1,6 @@
 <!--<div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-    <table  class="table table-vcenter table-condensed table-bordered" id="deliver_cannd">
+    <table  class="table table-vcenter table-condensed table-bordered" id="customer-contact-add">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -39,7 +39,7 @@
 </div>-->
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-<table id="pofull-datatable" class="table table-vcenter table-condensed table-bordered">
+<table id="customer-contact-add" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">S.No</th>

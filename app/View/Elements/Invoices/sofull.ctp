@@ -49,7 +49,7 @@ $(document).on('click','.sofull-prepare',function(){
 
 <div class="table-responsive">
 <div class="col-sm-3 col-lg-12">
-                    <table id="sofull-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="engineer-datatable"  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">Salesorder No</th>

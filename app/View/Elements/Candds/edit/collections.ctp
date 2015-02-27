@@ -1,6 +1,6 @@
 <!--<div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-    <table  class="table table-vcenter table-condensed table-bordered" id="collection_candd">
+    <table  class="table table-vcenter table-condensed table-bordered" id="engineer-datatable">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -36,7 +36,7 @@
 </div>-->
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-    <table id="qofull-datatable" class="table table-vcenter table-condensed table-bordered" >
+    <table id="engineer-datatable" class="table table-vcenter table-condensed table-bordered" >
     <thead>
         <tr>
             <th class="text-center">S.No</th>

@@ -282,11 +282,12 @@ class SubcontractdosController extends AppController
         
             $this->autoRender = false;
             $subcontractdo_details=$this->Subcontractdo->find('first',array('conditions'=>array('Subcontractdo.id'=>$id),'recursive'=>'2'));
-            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$subcontractdo_details['Subcontractdo']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_sub_con_id'=>$id),'Instrument','Brand','Range','Department'))));
-            $quotation_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Salesorder']['quotationno'],'Quotation.status'=>1)));
+            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$subcontractdo_details['Subcontractdo']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_sub_con_id'=>$id),'Instrument','Brand','Range','Department'),'Customer'=>array('Contactpersoninfo','Paymentterm'))));
+			//pr($salesorder_details);exit;
+            $quotation_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Salesorder']['quotationno'],'Quotation.status'=>1),'recursive'=>'3'));
 //            $salesorder_data = $this->Salesorder->find('first', array('conditions' => array('Salesorder.id' => $id),'recursive'=>3));
 //            $quotation_data = $this->Quotation->find('first', array('conditions' => array('Quotation.id' => $salesorder_data['Salesorder']['quotation_id']),'recursive'=>2));
-//            //pr($salesorder_data);exit;
+            //pr($quotation_data);exit;
             $file_type = 'pdf';
             $filename = $subcontractdo_details['Subcontractdo']['subcontract_dono'];
       
@@ -333,7 +334,7 @@ margin: 180px 50px;
                 foreach($salesorder_details['Description'] as $device):
                     $device_name[] = $device;
                 endforeach;
-                $ins_type = $salesorder_details['Quotation']['InstrumentType']['salesorder'];
+                $ins_type = $quotation_data['InstrumentType']['salesorder'];
                 
 
 $html .=
@@ -477,14 +478,14 @@ $html .='<div id="footer">
        </div> 
        <table width="100%">
                <tr>
-                    <td  style="width:80%;">'.date('Y-m-d H:i:s').'</td><td  style="width:7%;">Page: <span class="page"></span></td>
+                    <td  style="width:80%;">'.date('Y-m-d H:i:s').'</td><td  style="width:20%;">Page: <span class="page"></span></td>
                         </tr></table>
 </div>';
 $html .= '<div id="content" style="">'; 
                 foreach($device_name as $k=>$device):
                     if($k == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:150px;">      <tr>
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:150px;"><tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
@@ -506,7 +507,7 @@ $html .= '</tr>';
                     }
                     elseif($k%5 == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:230px;">      <tr>
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:230px;"><tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
