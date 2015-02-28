@@ -34,7 +34,7 @@
                                         <td class="text-center"><?php echo $this->Quotation->branchname($candd_list['Candd']['branch_id']);?></td>
                                         <td class="text-center"><?php echo $candd_list['Candd']['cd_date'];?></td>
                                         <td class="text-center"><?php echo $this->Candd->get_task($candd_list['Candd']['cd_date']);?></td>
-                                        <td class="text-center"><?php echo $this->Candd->get_task($candd_list['Candd']['cd_date']);?></td>
+                                        <td class="text-center"><?php echo $this->Candd->get_venue($candd_list['Candd']['cd_date']);?></td>
                                         <td class="text-center"><?php echo $this->Candd->get_collection_count($candd_list['Candd']['cd_date']);?></td>
                                         <td class="text-center"><?php echo $this->Candd->get_delivery_count($candd_list['Candd']['cd_date']);?></td>
                                         <td class="text-center">

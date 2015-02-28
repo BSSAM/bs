@@ -94,4 +94,14 @@ class CanddHelper extends AppHelper
             return $delivercount_basedon_date;
         }
     }
+    public function get_venue($cd_date=NULL)
+    {
+        APP::import('Model','Candd');
+        //$this->ReadytodeliverItem  =   new ReadytodeliverItem();
+        $delivercount_basedon_date    =    $this->Candd->find('count',array('conditions'=>array('Candd.cd_date'=>$cd_date,'Candd.purpose'=>'Delivery')));
+        if(!empty($delivercount_basedon_date))
+        {
+            return $delivercount_basedon_date;
+        }
+    }
 }

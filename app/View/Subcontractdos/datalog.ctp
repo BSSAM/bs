@@ -1,19 +1,19 @@
 
 <h1>
-                                <i class="gi gi-user"></i>Invoices Datalog
+                                <i class="gi gi-user"></i>Sub Contract Delivery Order Datalog
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Invoices - Datalog',array('controller'=>'Invoices','action'=>'datalog')); ?></li>
+                        <li><?php echo $this->Html->link('Sub Contract Delivery order - Datalog',array('controller'=>'Subcontractdos','action'=>'datalog')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
                     <?PHP echo  $this->element('message'); ?>
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Invoices </h2> 
+                            <h2>List Of Sub Contract Delivery Orders </h2> 
                             
                         </div>
                         <div class="table-responsive">

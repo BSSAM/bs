@@ -267,6 +267,8 @@ $(document).ready(function(){
             success: function(data)
             {
                 //alert(data);
+                if(data)
+                {
                 var sal_no = '-';
                 var del_no = '-';
 		var deliver_data_node = $.parseJSON(data);
@@ -299,10 +301,11 @@ $(document).ready(function(){
                                     <td class="text-center">'+del_no+'</td>\n\\n\
                                     <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
                                     <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
-                                    <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\\n\
+                                    <td class="text-center"><input type="checkbox" name="shipping"/></td>\n\\n\
                                     <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
-            }
+            }}
             
 	});
         
@@ -326,6 +329,8 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
+                if(data)
+                {
                 //alert(data);
 		var deliver_data_node = $.parseJSON(data);
                 var contact_person      =  deliver_data_node.Customer;
@@ -347,7 +352,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
                                     <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
-                
+            }
             }
 	});}else
     {

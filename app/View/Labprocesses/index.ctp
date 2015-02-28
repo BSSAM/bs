@@ -381,7 +381,7 @@
                                             Electrical
                                         </th>
                                         <th class="text-center">
-                                            Pressure
+                                            Mechanical
                                         </th>
                                         <th class="text-center">
                                             Temperature
