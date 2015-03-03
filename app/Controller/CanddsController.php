@@ -26,7 +26,7 @@ class CanddsController extends AppController
         //pr($collection_items);exit;
         $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
         $this->set(compact('assignto','ready_to_deliver_items','collection_items'));
-        pr($this->request->data);exit;
+        //pr($this->request->data);exit;
         if($this->request->is('post'))
         {
             //echo date('Y-m-d',$this->request->data['Candd']['col_an_del_date']);
@@ -295,6 +295,25 @@ class CanddsController extends AppController
         }
        echo  json_encode($export);
     }
+    
+    public function shipped_check()
+    {
+        $this->autoRender = false;
+        //pr($this->request->data);exit;
+        $shipped_check =$this->request->data['shipped_check'];
+        //$assign_to =$this->request->data['assign_to'];
+        $cd_date =$this->request->data['cd_date'];
+        //pr($this->request->data);exit;
+        //$assign_value =$this->request->data['assign_value'];
+        $export = explode(',', $shipped_check);
+        foreach ($export as $ex=>$val)
+        {
+            $shipped_data  =   $this->is_shipped($val,$cd_date);
+            
+        }
+    }
+    
+    
     
     public function edit_candds()
     {

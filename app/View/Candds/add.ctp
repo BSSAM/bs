@@ -116,7 +116,7 @@
                                        
                                     </div>
                                     <!-- panel -->
-                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'submit','class'=>'btn btn-sm btn-primary pull-right cd_save','escape' => false)); ?>
+                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'button','class'=>'btn btn-sm btn-primary pull-right cd_save','escape' => false)); ?>
                                 
                                 </div>  
                                 <?php echo $this->Form->end(); ?>

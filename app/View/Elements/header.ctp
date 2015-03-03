@@ -68,8 +68,8 @@
                                 <a href="../Dashboards"><i class="gi gi-stopwatch sidebar-nav-icon"></i>Dashboard</a>
                             </li>-->
                             <li>
-                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches'||$control == 'Autos'||$control == 'InsPercents')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-user sidebar-nav-icon"></i>Users</a>
-                                 <ul <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches'||$control == 'Autos'||$control == 'InsPercents')?'style=display:block':''; ?>>
+                                <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches'||$control == 'Autos'||$control == 'InsPercents'||$control == 'Canddsettings')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-user sidebar-nav-icon"></i>Users</a>
+                                 <ul <?php echo $a=($control == 'Users'||$control == 'Userroles'||$control == 'Countries'||$control == 'Departments'||$control == 'Assigns'||$control == 'Services'||$control == 'Additionalcharges'||$control == 'Tallyledgers'||$control == 'Currencies'||$control == 'Branches'||$control == 'Autos'||$control == 'InsPercents'||$control == 'Canddsettings')?'style=display:block':''; ?>>
                                     <?php if(isset($user_role['other_user']['view'])){if($user_role['other_user']['view'] == 1){ ?>
                                      <li>
                                          <?php $a=($control == 'Users')?'active':''; ?>
@@ -130,6 +130,10 @@
                                         <?php $a=($control == 'InsPercents')?'active':''; ?>
                                         <?php echo $this->Html->link('Instrument Costing',array('controller'=>'InsPercents','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php }} ?>
+                                    <li>
+                                        <?php $a=($control == 'Canddsettings')?'active':''; ?>
+                                        <?php echo $this->Html->link('Candd Settings',array('controller'=>'Canddsettings','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

@@ -55,7 +55,7 @@ $(function() {
                 $('#instrument-table-1 thead tr:first input:eq('+colIdx+')').on( 'keyup change', function () {
                     
                     console.log($(this).val());
-                    table.column( colIdx ).search('sdSD').draw();
+                    table.column( colIdx ).search($(this).val()).draw();
                 });
             }
         });

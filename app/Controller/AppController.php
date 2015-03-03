@@ -593,6 +593,31 @@ App::uses('Controller', 'Controller');
             $this->request->data['ReadytodeliverItem']['is_deleted']       =   0;
             return $this->request->data;
         }
+        public function is_shipped($delivery_order_id=NULL,$cd_date=NULL)
+        {
+            //pr($cd_date);exit;
+            $ready = $this->ReadytodeliverItem->find('first',array('conditions'=>array('ReadytodeliverItem.id'=>$delivery_order_id)));
+            $del_id = $ready['ReadytodeliverItem']['deliveryorder_id'];
+            $sal_id = $ready['ReadytodeliverItem']['salesorderno'];
+            $del_order_desc_data     =   $this->DelDescription->find('all',array('conditions'=>array('DelDescription.deliveryorder_id'=>$del_id,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0)));
+            //pr($del_order_desc_data);exit;
+            $arr = array();
+            foreach($del_order_desc_data as $del_order_desc)
+            {
+                $arr[] = $del_order_desc['DelDescription']['order_by'];
+            }
+            //pr($arr);exit;
+            if($arr != '')
+            {
+                //$import = implode(',', $arr);
+                //pr($import);exit;
+                foreach($arr as $import_order_by)
+                {
+                    $this->Description->updateAll(array('Description.shipping'=>1),array('Description.order_by'=>$import_order_by,'Description.salesorder_id'=>$sal_id,'Description.status'=>1));
+                }
+                $this->ReadytodeliverItem->updateAll(array('ReadytodeliverItem.is_shipped'=>1,'ReadytodeliverItem.shipped_date'=>"'.$cd_date.'"),array('ReadytodeliverItem.id'=>$delivery_order_id));
+            }
+        }
          public function ready_to_deliver_tag($delivery_order_id=NULL,$assign_to=NULL,$cd_date=NULL,$assign_value=NULL)
         {
             $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));

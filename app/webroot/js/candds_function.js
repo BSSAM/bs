@@ -242,15 +242,15 @@ $(document).ready(function(){
     });
     /******************************Cd save script**************/
     $('.cd_save').click(function(){
-       $('#col_an_del_date').val($('.cd_date').val());
+       //$('#col_an_del_date').val($('.cd_date').val());
        var shipped_checked = [];
         
         $('.shipping_check:checked').each(function(i){
           shipped_checked[i] = $(this).val();
         });
-        
-        if(assign_value!=''){
-            var conformation  =   window.confirm('Confirm to mark shipped '+checked+' delivery order');  
+        var cd_date = $('.cd_date').val();
+        if(shipped_checked!=''){
+            var conformation  =   window.confirm('Confirm to mark shipped '+shipped_checked+' delivery order');  
             if(conformation==true){
                 $.ajax({
                     type: "POST",
@@ -259,13 +259,15 @@ $(document).ready(function(){
                     cache: false,
                     success: function(data)
                     {
-                        console.log(data); //return false;
-                        var checked_node =   $.parseJSON(data);
-                        $.each(checked_node,function(k,v){
-                            $('.move_'+v).fadeOut('slow',function(){
-                            $(this).remove();
-                            }); 
-                        });
+                        alert("Shipment(s) Marked Successful");
+                        window.location.reload();
+                        //console.log(data); //return false;
+//                        var checked_node =   $.parseJSON(data);
+//                        $.each(checked_node,function(k,v){
+//                            $('.move_'+v).fadeOut('slow',function(){
+//                            $(this).remove();
+//                            }); 
+//                        });
                     }
                 });
             }
@@ -290,6 +292,58 @@ $(document).ready(function(){
     
     $(document).on('click','.candd_delivery_add',function(){
         var cd_date =   $('.cd_date').val();
+        console.log(cd_date);
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        yyyy = yyyy.toString().substr(2,2);
+        if(dd<10) {
+            dd='0'+dd
+        } 
+        switch(mm)
+        {
+            case 1:
+            mm = 'January';
+            break;
+            case 2:
+            mm = 'February';
+            break;
+            case 3:
+            mm = 'March';
+            break;
+            case 4:
+            mm = 'April';
+            break;
+            case 5:
+            mm = 'May';
+            break;
+            case 6:
+            mm = 'June';
+            break;
+            case 7:
+            mm = 'July';
+            break;
+            case 8:
+            mm = 'August';
+            break;
+            case 9:
+            mm = 'September';
+            break;
+            case 10:
+            mm = 'October';
+            break;
+            case 11:
+            mm = 'November';
+            break;
+            case 12:
+            mm = 'December';
+            break;
+
+        }
+        today = dd+'-'+mm+'-'+yyyy;
+        console.log(today);
+        
         $.ajax({
             type: "POST",
             data:"cd_date="+cd_date,
@@ -321,13 +375,48 @@ $(document).ready(function(){
                     else{
                         var del_no = v.ReadytodeliverItem.deliveryorderno;
                     }
+                    if(today == cd_date)
+                    {
+                        var disabled_ship = ' disabled=disabled';
+                        
+                    }
+                    else
+                    {
+                        var disabled_ship = '';
+                        
+                    }
                     if(v.ReadytodeliverItem.is_shipped == 0)
                     {
                         var checked = '';
+                        var disabled_deliver = ' disabled=disabled';
+                        //var type_deliver = 'hidden';
                     }
                     if(v.ReadytodeliverItem.is_shipped == 1)
                     {
                         var checked = ' checked=checked';
+                        var disabled_deliver = '';
+                        if(today == cd_date)
+                        {
+                            
+                            var type_deliver = 'checkbox';
+                        }
+                        else
+                        {
+                            
+                            var type_deliver = 'hidden';
+                        }
+                    }
+                    
+                    if(v.ReadytodeliverItem.is_delivered == 0)
+                    {
+                        var checked_del = '';
+                    }
+                    if(v.ReadytodeliverItem.is_delivered == 1)
+                    {
+                        if(type_deliver != 'hidden')
+                        {
+                            var checked_del = ' checked=checked';
+                        }
                     }
                     //alert(v.ReadytodeliverItem.is_shipped);
                     
@@ -342,7 +431,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
                                     <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\\n\
-                                    <td class="text-center"> Shipped : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"'+checked+'/></td>\n\\n\
+                                    <td class="text-center"> Shipped : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"'+checked+''+disabled_ship+'/> Delivered : <input type="'+type_deliver+'" value="'+v.ReadytodeliverItem.id+'" class ="delivered_check" name="delivered"'+checked_del+''+disabled_deliver+'/></td>\n\\n\
                                     <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
             }}
