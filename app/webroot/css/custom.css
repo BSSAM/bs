@@ -16,13 +16,7 @@ and open the template in the editor.
 .instrument_id{border-bottom: 1px dotted #dbe1e8 !important;color: #000000;font-size: 11px !important;line-height: 12px !important;max-height: 37px; max-width: inherit !important; min-width: inherit !important; padding: 5px 0 5px 8px !important;width: 100%;}
 .instrument_id:hover{background:#6ad2eb;color:#FFF;cursor:pointer;}
 #search_instrument{width: 92%; position: absolute;z-index: 999;background-color: #ffffff;text-align: left; max-height: 150px;overflow-y: scroll;overflow-x: hidden; border: 1px #dbe1e8 solid !important;}
-#search_instrument{}
-//#search_instrument .customer_show{max-height: 100%;}
-//#search_instrument .no_result:hover{background:#6ad2eb;}
-/*     -webkit-appearance: button;
-       -moz-appearance: button;
-            appearance: button;*/
-//For Delivery order Search List 
+
 .delivery_show{padding: 13px 0px; max-width: 230px; min-width: 230px;padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px;font-size: 15px; max-height: 37px; float: top; background:#FFFF;  color:#000000;  line-height: 20px; border-bottom: 1px #dbe1e8 dotted !important;}
 .delivery_no_result{padding: 13px 0px; max-width: 230px; min-width: 230px; padding-left: 9px; padding-top: 9px; border-bottom: #000000 1px; font-size: 15px; max-height: 37px; float: top; background:#FFFF; color:#000000; line-height: 20px; border-bottom: 1px #dbe1e8 dotted !important;}
 .delivery_no_result:hover{background:#6ad2eb; color:#FFF;cursor:pointer;}
@@ -205,13 +199,13 @@ and open the template in the editor.
 .table-responsive-scroll table *{-webkit-box-sizing: content-box !important;
 -moz-box-sizing: content-box !important;
 box-sizing: content-box !important;}
-.dataTables_scrollHeadInner{width:100% !important;white-space: nowrap;}
+/*.dataTables_scrollHeadInner{width:100% !important;white-space: nowrap;}
 .datatable-scroll {
     overflow-x: auto;
     overflow-y: visible;
 }
-.table {width:100% !important;white-space: nowrap;}
-.dataTables_scroll * {box-sizing: initial !important;}
+.table {width:100% !important;white-space: nowrap;}*/
+/*.dataTables_scroll * {box-sizing: initial !important;}
 .table th,.table  td { white-space: nowrap; }
     div.dataTables_wrapper {
         width: 100%;
@@ -223,4 +217,4 @@ box-sizing: content-box !important;}
     min-width: 100px;
 }
 #qofull-datatable_wrapper .dataTables_scrollHead{ overflow: unset !important;}
-#engineer-datatable_wrapper .dataTables_scrollBody{ overflow: auto !important;}
+#engineer-datatable_wrapper .dataTables_scrollBody{ overflow: auto !important;}*/

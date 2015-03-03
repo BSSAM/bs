@@ -243,6 +243,37 @@ $(document).ready(function(){
     /******************************Cd save script**************/
     $('.cd_save').click(function(){
        $('#col_an_del_date').val($('.cd_date').val());
+       var shipped_checked = [];
+        
+        $('.shipping_check:checked').each(function(i){
+          shipped_checked[i] = $(this).val();
+        });
+        
+        if(assign_value!=''){
+            var conformation  =   window.confirm('Confirm to mark shipped '+checked+' delivery order');  
+            if(conformation==true){
+                $.ajax({
+                    type: "POST",
+                    url: path_url+"/Candds/shipped_check",
+                    data:'shipped_check='+shipped_checked+"&cd_date="+cd_date,
+                    cache: false,
+                    success: function(data)
+                    {
+                        console.log(data); //return false;
+                        var checked_node =   $.parseJSON(data);
+                        $.each(checked_node,function(k,v){
+                            $('.move_'+v).fadeOut('slow',function(){
+                            $(this).remove();
+                            }); 
+                        });
+                    }
+                });
+            }
+        }
+        else{
+            alert('Please Select Assign To Person');
+            return false;
+        }
     });
     /*****************************C and D collection record delete script**************/
     $(document).on('click','#candd_edit',function(){
@@ -290,6 +321,15 @@ $(document).ready(function(){
                     else{
                         var del_no = v.ReadytodeliverItem.deliveryorderno;
                     }
+                    if(v.ReadytodeliverItem.is_shipped == 0)
+                    {
+                        var checked = '';
+                    }
+                    if(v.ReadytodeliverItem.is_shipped == 1)
+                    {
+                        var checked = ' checked=checked';
+                    }
+                    //alert(v.ReadytodeliverItem.is_shipped);
                     
                     $('.deliveries_info').append('<tr class="colletion_'+v.Candd.id+'">\n\\n\
                                     <td class="text-center">'+v.Candd.id+'</td>\n\\n\
@@ -302,7 +342,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
                                     <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\\n\
-                                    <td class="text-center"><input type="checkbox" name="shipping"/></td>\n\\n\
+                                    <td class="text-center"> Shipped : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"'+checked+'/></td>\n\\n\
                                     <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
             }}

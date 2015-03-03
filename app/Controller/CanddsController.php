@@ -26,6 +26,7 @@ class CanddsController extends AppController
         //pr($collection_items);exit;
         $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
         $this->set(compact('assignto','ready_to_deliver_items','collection_items'));
+        pr($this->request->data);exit;
         if($this->request->is('post'))
         {
             //echo date('Y-m-d',$this->request->data['Candd']['col_an_del_date']);
@@ -207,17 +208,17 @@ class CanddsController extends AppController
             }     
             if($this->request->data['purpose'] == 'Delivery')
             {
-                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
-                    $this->request->data['Logactivity']['logid'] = $candd_last_id;
-                    $this->request->data['Logactivity']['loglink'] = $date_cd;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
-                /******************/
-                    
+//                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
+//                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
+//                    $this->request->data['Logactivity']['logid'] = $candd_last_id;
+//                    $this->request->data['Logactivity']['loglink'] = $date_cd;
+//                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                    $this->request->data['Logactivity']['logapprove'] = 1;
+//
+//                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+//                    
+//                /******************/
+//                    
                 /******************
                     * Data Log Activity
                     */
@@ -267,16 +268,16 @@ class CanddsController extends AppController
                 /******************
                     * Log Activity For Approval
                     */
-                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
-                    $this->request->data['Logactivity']['logid'] = $cand_id;
-                    $this->request->data['Logactivity']['logno'] = $val;
-                    $this->request->data['Logactivity']['loglink'] = $cd_date;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
-
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
+//                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
+//                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
+//                    $this->request->data['Logactivity']['logid'] = $cand_id;
+//                    $this->request->data['Logactivity']['logno'] = $val;
+//                    $this->request->data['Logactivity']['loglink'] = $cd_date;
+//                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+//                    $this->request->data['Logactivity']['logapprove'] = 1;
+//
+//                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+//                    
                 /******************/
                     
                 /******************

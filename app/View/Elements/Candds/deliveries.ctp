@@ -1,6 +1,6 @@
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-<table id="customer-contact-add" class="table table-vcenter table-condensed table-bordered">
+<table id="dofull-datatable" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -13,6 +13,7 @@
             <th class="text-center">Assign To</th>
             <th class="text-center">Branch</th>
             <th class="text-center">Remarks</th>
+            <th class="text-center">Shipped/Delivered</th>
              <th class="text-center">Action</th>
         </tr>
     </thead>
