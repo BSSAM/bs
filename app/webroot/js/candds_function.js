@@ -385,24 +385,25 @@ $(document).ready(function(){
                         var disabled_ship = '';
                         
                     }
+                    //var disabled_deliver = '';
                     if(v.ReadytodeliverItem.is_shipped == 0)
                     {
                         var checked = '';
-                        var disabled_deliver = ' disabled=disabled';
-                        //var type_deliver = 'hidden';
+                        //var disabled_deliver = ' disabled=disabled';
+                        var type_deliver = 'hidden';
                     }
                     if(v.ReadytodeliverItem.is_shipped == 1)
                     {
                         var checked = ' checked=checked';
-                        var disabled_deliver = '';
-                        if(today == cd_date)
+                        //var disabled_deliver = '';
+                        if(today == cd_date+1)
                         {
                             
                             var type_deliver = 'checkbox';
                         }
                         else
                         {
-                            
+                            console.log('not equal');
                             var type_deliver = 'hidden';
                         }
                     }
@@ -431,8 +432,8 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
                                     <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\\n\
-                                    <td class="text-center"> Shipped : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"'+checked+''+disabled_ship+'/> Delivered : <input type="'+type_deliver+'" value="'+v.ReadytodeliverItem.id+'" class ="delivered_check" name="delivered"'+checked_del+''+disabled_deliver+'/></td>\n\\n\
-                                    <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
+                                    <td class="text-center"> Shipped : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"'+checked+''+disabled_ship+'/> Delivered : <input type="'+type_deliver+'" value="'+v.ReadytodeliverItem.id+'" class ="delivered_check" name="delivered"'+checked_del+'/></td>\n\\n\
+                                    <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.ReadytodeliverItem.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete_del"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
             }}
             
@@ -528,6 +529,57 @@ $(document).ready(function(){
             }
          });
     });
+    
+    $(document).on('click','.ready_to_delete_del',function(){
+        var ready_to_edit = $(this).attr('id');
+       // alert(ready_to_edit);
+       var conformation  =   window.confirm('Confirm to delete '+ready_to_edit+' delivery order');  
+       if(conformation == true)
+           {
+               //alert('ds');
+         $.ajax({
+            type: "POST",
+            data:"ready_to_edit="+ready_to_edit,
+            url: path_url+"/Candds/ready_to_delete",
+            cache: false,
+            success: function(data)
+            {
+                if(data == 'success')
+                    {
+                        alert('Delivery info is Updated to Ready to Delivery');
+                        window.location.reload();
+                        
+                    }
+                if(data == 'failure')
+                    {
+                        alert('Delivery info Cant be deleted since it is already shipped');
+                        window.location.reload();
+                        
+                    }
+//                console.log(edit_data_node);
+//                $('.candds_add').text('<i class="fa fa-plus fa-fw"></i>add');
+////                $('#val_range').empty().append('<option value="">Select Range</option>');
+//                $.each(parsedata.Instrument.InstrumentBrand, function(k, v)
+//                {
+//                     $('#val_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
+//                });
+//                
+////                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
+////                {
+////                     $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+////                });
+//                    
+//                $('#val_department').val(dept.Department.departmentname);
+//                
+//                $('#val_department_id').val(dept.Department.id);
+//                //$('#val_model_no').val(parsedata.CustomerInstrument.model_no);
+//                $('#QuotationInstrumentId').val(instrument_id);
+            }
+         });
+           }
+    });
+    
+    
     
      /**************************** Candd Delivery Tab *********************************/
 //    $(document).on('click','.candd_delivery_add',function(){

@@ -69,6 +69,12 @@ App::uses('Controller', 'Controller');
              /*****************************************************************************************************/
              //$this->random();
              $this->default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
+             $date = date('d-F-y');
+             //echo $date; exit;
+             $prev_date = date('d-F-y', strtotime($date .' -1 day'));
+             
+             $this->loadModel('ReadytodeliverItem');
+             $this->ReadytodeliverItem->updateAll(array('ReadytodeliverItem.is_delivered'=>1),array('ReadytodeliverItem.is_shipped ='=>1,'ReadytodeliverItem.cd_date ='=>$prev_date));
             // $this->set('branch',$default_branch);
         }
 //        public function afterFilter() {

@@ -22,6 +22,7 @@ class CanddsController extends AppController
     {   
         $assignto =   $this->Assign->find('list',array('conditions'=>array('Assign.status'=>1),'fields'=>array('id','assignedto')));
         $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver !='=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
+        //pr($ready_to_deliver_items);exit;
         $collection_items   =   $this->Candd->find('all',array('conditions'=>array('Candd.is_deleted'=>0)));
         //pr($collection_items);exit;
         $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
@@ -324,6 +325,30 @@ class CanddsController extends AppController
         echo  json_encode($candd_edit);
         //pr($candd_edit);
     }
+    public function ready_to_delete()
+    {
+        $this->autoRender = false;
+        $ready_to_edit =$this->request->data['ready_to_edit'];
+        //$this->loadModel('Deliveryorder');
+        $ready_to_deliver_items =   $this->ReadytodeliverItem->find('first',array('conditions'=>array('ReadytodeliverItem.id'=>$ready_to_edit,'ReadytodeliverItem.is_shipped'=>0)));
+        if($ready_to_deliver_items)
+        {
+        $candd_edit =   $this->Deliveryorder->updateAll(array('Deliveryorder.move_to_deliver'=>0),array('Deliveryorder.id'=>$ready_to_deliver_items['ReadytodeliverItem']['deliveryorder_id']));
+        
+        $this->ReadytodeliverItem->deleteAll(array('ReadytodeliverItem.id'=>$ready_to_edit));
+        $this->Candd->deleteAll(array('Candd.readytodeliver_items_id'=>$ready_to_edit));
+        
+        //echo  json_encode($candd_edit);
+        //pr($candd_edit);
+        
+        return 'success';
+        
+        }
+        else
+        {
+            return 'failure'; 
+        }
+    }
     
      public function approve()
     {
@@ -363,7 +388,6 @@ class CanddsController extends AppController
            // $quotation_data = $this->Quotation->find('first', array('conditions' => array('Quotation.id' => $id),'recursive'=>2));
             //pr($quotation_data);exit;
             $file_type = 'pdf';
-            $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id),'recursive'=>2));
             
         //pr($cd_statistics);exit;
         //$this->set(compact('cd_statistics'));
@@ -387,18 +411,27 @@ margin: 180px 50px;
 #footer .page:after { content: counter(page); }
 </style>
 </head>
-<body style="font-family:Oswald, sans-serif;font-size:9px;padding:0;margin:0;font-weight: 300; color:#444;">
-<div id="header">
+<body style="font-family:Oswald, sans-serif;font-size:9px;padding:0;margin:0;font-weight: 300; color:#444;">';
+
+           $data = $this->Assign->find('all',array('conditions'=>array('Assign.is_deleted'=>0)),array('order' => array('Assign.id' => 'DESC')));
+            foreach($data as $data_assignto)
+            {
+                
+                $html .='<div id="header">
      <h3 style="text-align:center;margin:10px 0;color:#000;font-size:28px;">BS TECH PTE LTD</h3>
      <div style="font-size:10px;color:#666;margin-top:20px;">DATE :<span style="margin-left:10px;"> '.$id.'</span></div>
      <div style="font-size:11px;color:#333;margin-top:10px;">BS TECH PTE LTD</div>
+     <div style="font-size:11px;color:#333;margin-top:5px;">ASSIGNED TO : '.$data_assignto['Assign']['assignedto'].'</div>
 </div>
 <div id="footer">
      <div style="width:100%;" class="page">
           <div style="font-size:10px;color:#666;margin-top:20px;">'.date('Y-m-d H:i:s').'</div>
      </div>
 </div>';
-           foreach($cd_statistics as $k=>$cd):
+                
+                
+            $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id,'Candd.assign_id'=>$data_assignto['Assign']['id']),'recursive'=>2));
+            foreach($cd_statistics as $k=>$cd):
            
                $cd_contact_id = $cd['Candd']['Contactpersoninfo_id'];
                $data = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$cd_contact_id)));
@@ -420,7 +453,7 @@ margin: 180px 50px;
                     {  
            
 $html .= '<div id="content">';
- $html .='<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:-50px;text-align:center;border-left:1px solid #333;border-top:1px solid #333;">
+ $html .='<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:-40px;text-align:center;border-left:1px solid #333;border-top:1px solid #333;">
           <tr style="background:#333;">
                <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">S NO.</th>
                <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">PURPOSE TO</th>
@@ -468,9 +501,10 @@ $html .= '<div id="content">';
                 $html .='</table>';
                 }
                 endforeach;
-     $html .= '
-</div>
-</body>
+                $html .='</div>';
+            }
+           
+     $html .= '</body>
 </html>'; 
                 //pr($html);exit;
         $this->export_report_all_format($file_type, $filename, $html);
