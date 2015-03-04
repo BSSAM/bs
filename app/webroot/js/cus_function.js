@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-    
+    $('#customer_instrument').val(null);
+                $('#range_array').append('<option value="" selected="selected">Select Range</option>');
+                $('#model_no').val(null);
+                $('#unit_price').val(null);
+                $('#total_price').val(null);
+                $('#status').prop('checked',false);
+                $('#instrument_name_chosen span').text('Select Instrument Name');
+                $('#customer_instrument').prop('disabled',false);
     $("#instrument_result",window.parent.document).hide();
     $(document).on('click','.customer_instrument_show',function(){
         

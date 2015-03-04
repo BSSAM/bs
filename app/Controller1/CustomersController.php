@@ -572,7 +572,6 @@ class CustomersController extends AppController
     }
     public function instrument_map($id=NULL,$id1=NULL)
     {
-        $user_role = $this->userrole_permission();
         if($id!=NULL)
         {
             

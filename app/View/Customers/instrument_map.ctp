@@ -9,6 +9,26 @@
         $('#unit_price').val('');
         $('#total_price').val('');
         
+        
+        <?php if($id1){ ?>
+        
+            $(".cus_instrument_edit[data-edit='"+<?php echo $id1; ?>+"']").trigger("click");
+        
+        <?php }?>
+        $(document).on('click','.customerinstrument_approve',function(){
+        var result = confirm("Are your sure want to Approve?");
+        if (result==true) {
+        var device_id=$(this).attr('id');
+        $.ajax({
+            type: 'POST',
+            data:"device_id="+ device_id,
+            url: path_url+'/Customers/approve_ins_cus/',
+            success:function(data){
+                window.location.reload();
+            }
+            });
+        }
+        });
     });
 </script>
 <h1><i class="gi gi-user"></i>Instrument Pricing</h1>
@@ -76,7 +96,7 @@
                                     </div>
                                     <label class="col-md-1 control-label" for="contract_disc">Contract Disc</label>
                                     <div class="col-md-1">   
-                                        <?php echo $this->Form->input('contract_disc', array('id'=>'contract_disc','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter the Contract Discount','name'=>'contract_disc')); ?>
+                                        <?php echo $this->Form->input('contract_disc', array('id'=>'contract_disc','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter the Contract Discount','name'=>'contract_disc','value'=>0)); ?>
                                         
                                     </div>
                                     <label class="col-md-1 control-label" for="total_price">Price</label>
@@ -100,6 +120,9 @@
                 <div class="form-group form-actions">
                     <div class="col-md-9 col-md-offset-10 update_device">
                         <?php echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add', array('type' => 'button', 'class' => 'btn btn-sm btn-primary customerinstrument_add', 'escape' => false)); ?>
+                    </div>
+                    <div class="col-md-9 col-md-offset-10">
+                        <?php if($id1){ if($id1!=''){echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> Approve', array('type' => 'button','id'=>$id1, 'class' => 'btn btn-sm btn-warning customerinstrument_approve', 'escape' => false)); }} ?>
                     </div>
                 </div>
                 <div class="col-md-12">

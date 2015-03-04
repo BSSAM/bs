@@ -20,7 +20,7 @@ class InsPercentsController extends AppController
          *  Controller : InsPercent
          *  Permission : view 
         *******************************************************/
-        $user_role = $this->userrole_permission();
+//        $user_role = $this->userrole_permission();
 //        if($user_role['ins_brand']['view'] == 0){ 
 //            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
 //        }

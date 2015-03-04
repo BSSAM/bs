@@ -1315,8 +1315,8 @@ $(document).on('click','.approve_invoice',function(){
                                                 </td>
                                                 <td class="text-center ">
                                                     <?PHP if($logactivity_instrument_customer_list['Logactivity']['logname'] == 'Costing'){ ?>
-                                                    <?PHP echo $this->html->link('Edit',array('controller'=>'Customers','action'=>'instrument_map',$logactivity_instrument_customer_list['Logactivity']['logno']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
-                                                    <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_ins_cus','id'=>$logactivity_instrument_customer_list['Logactivity']['logid'])) ?>
+                                                    <?PHP echo $this->html->link('Approve',array('controller'=>'Customers','action'=>'instrument_map',$logactivity_instrument_customer_list['Logactivity']['logno'],$logactivity_instrument_customer_list['Logactivity']['logid']),array('class'=>'btn btn-alt btn-xs btn-primary')) ?>
+                                                    <?PHP //echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_ins_cus','id'=>$logactivity_instrument_customer_list['Logactivity']['logid'])) ?>
                                                     <?php }?>
                                                 </td>
                                                 <td class="">by <?PHP echo $logactivity_instrument_customer_list['User']['username'] ?><br><small><?PHP echo $logactivity_instrument_customer_list['Logactivity']['created'] ?></small></td>

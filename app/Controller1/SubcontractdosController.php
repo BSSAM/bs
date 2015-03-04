@@ -544,12 +544,10 @@ $html .= '</tr>';
                         endif;
                         endfor;
                         
-                   $html .='</tr>';
-                    
-                endforeach;
-                $html .='<tr><td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
+                    $html .='</tr><tr><td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
                <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td></tr></table>';
                 
+                endforeach;
 $html .= '</div>'; 
 
                 //pr($html);exit;

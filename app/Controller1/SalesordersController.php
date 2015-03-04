@@ -1340,7 +1340,7 @@ margin: 180px 50px;
             {
                 $titles[] = $title_name['Title']['title_name'];
             }
-           // pr($salesorder_data);exit;
+            //pr($salesorder_data);
             //foreach ($salesorder_data as $salesorder_data_list):
                 $customername = $salesorder_data['Customer']['customername'];
                 $billing_address = $salesorder_data['Salesorder']['address'];
@@ -1359,7 +1359,7 @@ margin: 180px 50px;
                     $device_name[] = $device;
                 endforeach;
                 $ins_type = $salesorder_data['Quotation']['InstrumentType']['salesorder'];
-               // pr($device_name);exit;
+                
 
   
 
@@ -1578,12 +1578,11 @@ $html .= '</tr>';
                         $html .='<td style="padding:3px 10px;">'.$device['title'.($i+1).'_val'].'</td>';
                         endif;
                         endfor;
-                        $html .='</tr>';
-                    
-                endforeach;
-                $html .='<tr><td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
+                        
+                    $html .='</tr><tr><td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
                <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td></tr></table>';
                 
+                endforeach;
 $html .= '</div>'; 
 
                 //pr($html);exit;
