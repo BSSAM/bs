@@ -141,4 +141,45 @@ class QuotationHelper extends AppHelper
         $data_quo = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$id1[0])));
         return $data_quo['Quotation']['phone'];
     }
+     public function getgst($id=NULL)
+    {
+        APP::import('Model','Customerspecialneed');
+        $this->Customerspecialneed   =   new Customerspecialneed();
+        $data_cus = $this->Customerspecialneed->find('first',array('conditions'=>array('Customerspecialneed.quotation_id'=>$id)));
+        return $data_cus['Customerspecialneed']['gst'];
+    }
+     public function getremark($id=NULL)
+    {
+        APP::import('Model','Customerspecialneed');
+        $this->Customerspecialneed   =   new Customerspecialneed();
+        $data_cus = $this->Customerspecialneed->find('first',array('conditions'=>array('Customerspecialneed.quotation_id'=>$id)));
+        return $data_cus['Customerspecialneed']['remarks'];
+    }
+    public function getgsttype($id=NULL)
+    {
+        APP::import('Model','Customerspecialneed');
+        $this->Customerspecialneed   =   new Customerspecialneed();
+        $data_cus = $this->Customerspecialneed->find('first',array('conditions'=>array('Customerspecialneed.quotation_id'=>$id)));
+        return $data_cus['Customerspecialneed']['gsttype'];
+    }
+    public function getservicetype($id=NULL)
+    {
+        APP::import('Model','Customerspecialneed');
+        APP::import('Model','Service');
+        $this->Customerspecialneed   =   new Customerspecialneed();
+        $this->Service   =   new Service();
+        $data_cus = $this->Customerspecialneed->find('first',array('conditions'=>array('Customerspecialneed.quotation_id'=>$id)));
+        $service=$this->Service->find('first',array('conditions'=>array('Service.id'=>$data_cus['Customerspecialneed']['service_id'])));
+        return $service['Service']['servicetype'];
+    }
+    public function getdepartmentname($id=NULL)
+    {
+        APP::import('Model','Device');
+        APP::import('Model','Department');
+        $this->Device   =   new Device();
+        $this->Department   =   new Department();
+        $data_dev = $this->Device->find('first',array('conditions'=>array('Device.quotation_id'=>$id)));
+        $depart=$this->Department->find('first',array('conditions'=>array('Department.id'=>$data_dev['Device']['department_id'])));
+        return $depart['Department']['departmentname'];
+    }
 }

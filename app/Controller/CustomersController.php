@@ -581,16 +581,20 @@ class CustomersController extends AppController
            $customer_instruments   =   $this->CustomerInstrument->find('all',array('conditions'=>array('CustomerInstrument.customer_id'=>$id),'order'=>'CustomerInstrument.id ASC'));
            $customer_instruments_map   =   $this->CustomerInstrument->find('first',array('conditions'=>array('CustomerInstrument.id'=>$id1),'order'=>'CustomerInstrument.id ASC'));
            //echo $customer_instruments_map['CustomerInstrument']['is_approved'];
-           if($customer_instruments_map['CustomerInstrument']['is_approved']==1)
-           {
-               //echo 'dfs2f';
-            $this->set('id1','');
-           }
-           else
-           {
-               //echo 'dfsf';
-            $this->set('id1',$id1);
-           }
+           $this->set('id1','');
+            if($customer_instruments_map)
+            {
+                if($customer_instruments_map['CustomerInstrument']['is_approved']==1)
+                {
+                    //echo 'dfs2f';
+                 $this->set('id1','');
+                }
+                else
+                {
+                    //echo 'dfsf';
+                 $this->set('id1',$id1);
+                }
+            }
            $this->set(compact('customer_entry','instruments','customer_instruments'));
         }
     }

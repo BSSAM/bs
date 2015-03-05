@@ -26,9 +26,20 @@ $(function() {
         //"bFilter" : false,
         "processing": true,
         "serverSide": true,
+        //"scrollX": 1200,
+        
+	//"sScrollX": "100%",
+        //"bScrollCollapse": true,
         "ajax": _ROOT+"datatable/instrument-table-1.php?edit=<? echo $userrole_cus['edit'];?>&delete=<? echo $userrole_cus['delete'];?>"
         });
-
+        
+        setTimeout(function(){
+            
+            $('.dataTable ').after("<div class='new_scroll'></div>");
+            $( '.dataTable' ).appendTo( ".new_scroll" );
+            
+        }, 1000);
+        
         $("#jump").on( 'keyup change', function () {
 
         var info = table.page.info();
@@ -105,7 +116,7 @@ $(function() {
                                 
                                 
                             </table>
-                            <input type="text" id="jump">
+                            <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
                         </div>
                     </div>
                            

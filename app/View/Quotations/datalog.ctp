@@ -143,7 +143,7 @@ endfor; ?>
                                     $excel[] = array();
                                     if($fulllist == 0)
                                     {
-                                    $excel[] = array('ID','QuotationNo','QuotationDate','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Discount','GST','Remarks','TotalPrice','GSTType','CustomerId','CustomerName','PaymentTermsId','ServiceTypeId','DepartmentName','IsApproved');   
+                                    $excel[] = array('ID','QuotationNo','QuotationDate','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Discount','GST','Remarks','TotalPrice','GSTType','CustomerId','CustomerName','PaymentTermsId','ServiceTypeId','IsApproved');   
                                     }
                                     else
                                     {
@@ -195,18 +195,20 @@ endfor;
                                     <?php 
                                     if($fulllist == 0)
                                     {
-                                        $excel[] = '';
-//                                    $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['reg_date'],,
-//                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
-//                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
-//                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);
+                                        //$excel[] = '';
+                                    $excel[] = array(($k+1),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['reg_date'],$quotation_list['Quotation']['address'],$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),
+                    $quotation_list['Quotation']['phone'],$quotation_list['Quotation']['fax'],$quotation_list['Quotation']['email'],$quotation_list['Quotation']['ref_no'],$quotation_list['Quotation']['discount'],$this->Quotation->getgst($quotation_list['Quotation']['id']),
+                    $this->Quotation->getremark($quotation_list['Quotation']['id']),$this->Quotation->quotationtotal_all($quotation_list['Quotation']['quotationno']),$this->Quotation->getgsttype($quotation_list['Quotation']['id']),$quotation_list['Quotation']['customer_id'],
+                    $quotation_list['Quotation']['customername'],$this->Quotation->paymentterm_quotation($quotation_list['Quotation']['quotationno']),$this->Quotation->getservicetype($quotation_list['Quotation']['id']),$quotation_list['Quotation']['is_approved']);
                                     }
                                     else
                                     {
-//                                     $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['reg_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
-//                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
-//                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
-//                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);   
+                                     $excel[] = array(($k+1),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['reg_date'],$quotation_list['Quotation']['address'],$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),
+                    $quotation_list['Quotation']['phone'],$quotation_list['Quotation']['fax'],$quotation_list['Quotation']['email'],$quotation_list['Quotation']['ref_no'],$quotation_list['Quotation']['discount'],$this->Quotation->getgst($quotation_list['Quotation']['id']),
+                    $this->Quotation->getremark($quotation_list['Quotation']['id']),$this->Quotation->quotationtotal_all($quotation_list['Quotation']['quotationno']),$this->Quotation->getgsttype($quotation_list['Quotation']['id']),$quotation_list['Quotation']['customer_id'],
+                    $quotation_list['Quotation']['customername'],$this->Quotation->paymentterm_quotation($quotation_list['Quotation']['quotationno']),$this->Quotation->getservicetype($quotation_list['Quotation']['id']),$this->Quotation->getdepartmentname($quotation_list['Quotation']['id']),$quotation_list['Quotation']['is_approved'],
+                    $quotation_list['Instrument']['name'],$quotation_list['Brand']['brandname'],$quotation_list['Device']['model_no'],$quotation_list['Range']['range_name'],$quotation_list['Device']['call_location'],$quotation_list['Device']['call_type'],
+                    $quotation_list['Device']['unit_price'],$quotation_list['Device']['title1_val'],$quotation_list['Device']['title2_val'],$quotation_list['Device']['title3_val'],$quotation_list['Device']['title4_val'],$quotation_list['Device']['title5_val']);
                                     }
                                     endforeach; ?>
                                     <?PHP endif; ?>
