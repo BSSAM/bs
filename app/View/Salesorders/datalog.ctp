@@ -152,17 +152,17 @@ endfor;
                                     <?php 
                                     if($fulllist == 0)
                                     {
-//                                    $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['due_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
-//                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
-//                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
-//                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);
+//                                    $excel[] = array(($k+1),$salesorder_list['Salesorder']['id'],$salesorder_list['Salesorder']['due_date'],$this->Salesorder->find_deliveryorder_nos($salesorder_list['Salesorder']['id']),
+//                    $this->Salesorder->find_deliveryorder_no($salesorder_list['Salesorder']['id']),$this->Salesorder->find_deliveryorder_date($salesorder_list['Salesorder']['id']),$this->Salesorder->find_invoice_no($salesorder_list['Salesorder']['id']),
+//                    $this->Salesorder->find_invoice_date($salesorder_list['Salesorder']['id']),$salesorder_list['Salesorder']['quotationno'],$salesorder_list['Salesorder']['ref_no'],$a,
+//                    $salesorder_list['Salesorder']['remarks'],'-',$this->Salesorder->find_sales_order_customer($salesorder_list['Salesorder']['id']),$this->Salesorder->salesperson($salesorder_list['Salesorder']['attn']),$quotation_list['branch']['branchname']);
                                     }
                                     else
                                     {
-//                                     $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['due_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
-//                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
-//                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
-//                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);   
+//                                     $excel[] = array(($k+1),$salesorder_list['Salesorder']['id'],$salesorder_list['Salesorder']['due_date'],$this->Salesorder->find_deliveryorder_nos($salesorder_list['Salesorder']['id']),
+//                    $this->Salesorder->find_deliveryorder_no($salesorder_list['Salesorder']['id']),$this->Salesorder->find_deliveryorder_date($salesorder_list['Salesorder']['id']),$this->Salesorder->find_invoice_no($salesorder_list['Salesorder']['id']),
+//                    $this->Salesorder->find_invoice_date($salesorder_list['Salesorder']['id']),$salesorder_list['Salesorder']['quotationno'],$salesorder_list['Salesorder']['ref_no'],$a,
+//                    $salesorder_list['Salesorder']['remarks'],'-',$this->Salesorder->find_sales_order_customer($salesorder_list['Salesorder']['id']),$this->Salesorder->salesperson($salesorder_list['Salesorder']['attn']),$quotation_list['branch']['branchname']);   
                                     }
                                     endforeach; ?>
                                     <?PHP endif; ?>

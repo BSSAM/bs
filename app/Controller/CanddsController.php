@@ -412,24 +412,21 @@ margin: 180px 50px;
 </style>
 </head>
 <body style="font-family:Oswald, sans-serif;font-size:9px;padding:0;margin:0;font-weight: 300; color:#444;">';
-
-           $data = $this->Assign->find('all',array('conditions'=>array('Assign.is_deleted'=>0)),array('order' => array('Assign.id' => 'DESC')));
-            foreach($data as $data_assignto)
-            {
-                
-                $html .='<div id="header">
+ $html .='<div id="header">
      <h3 style="text-align:center;margin:10px 0;color:#000;font-size:28px;">BS TECH PTE LTD</h3>
      <div style="font-size:10px;color:#666;margin-top:20px;">DATE :<span style="margin-left:10px;"> '.$id.'</span></div>
      <div style="font-size:11px;color:#333;margin-top:10px;">BS TECH PTE LTD</div>
-     <div style="font-size:11px;color:#333;margin-top:5px;">ASSIGNED TO : '.$data_assignto['Assign']['assignedto'].'</div>
+     
 </div>
 <div id="footer">
      <div style="width:100%;" class="page">
           <div style="font-size:10px;color:#666;margin-top:20px;">'.date('Y-m-d H:i:s').'</div>
      </div>
 </div>';
-                
-                
+           $data = $this->Assign->find('all',array('conditions'=>array('Assign.is_deleted'=>0)),array('order' => array('Assign.id' => 'DESC')));
+           $html .= '<div id="content">';
+            foreach($data as $data_assignto)
+            {
             $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id,'Candd.assign_id'=>$data_assignto['Assign']['id']),'recursive'=>2));
             foreach($cd_statistics as $k=>$cd):
            
@@ -452,8 +449,9 @@ margin: 180px 50px;
              if($k == 0)
                     {  
            
-$html .= '<div id="content">';
- $html .='<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:-40px;text-align:center;border-left:1px solid #333;border-top:1px solid #333;">
+
+ $html .='<div style="font-size:11px;color:#333;margin-top:5px;margin-top:-40px;">ASSIGNED TO : '.$data_assignto['Assign']['assignedto'].'</div>
+     <table cellpadding="0" cellspacing="0"  style="width:100%;text-align:center;border-left:1px solid #333;border-top:1px solid #333;">
           <tr style="background:#333;">
                <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">S NO.</th>
                <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">PURPOSE TO</th>
@@ -501,8 +499,9 @@ $html .= '<div id="content">';
                 $html .='</table>';
                 }
                 endforeach;
-                $html .='</div>';
+                
             }
+            $html .='</div>';
            
      $html .= '</body>
 </html>'; 
