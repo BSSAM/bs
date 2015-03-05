@@ -195,7 +195,7 @@ endfor;
                                     <?php 
                                     if($fulllist == 0)
                                     {
-                                        //$excel[] = '';
+                                        $excel[] = '';
 //                                    $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['reg_date'],,
 //                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
 //                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
