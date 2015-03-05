@@ -195,14 +195,15 @@ endfor;
                                     <?php 
                                     if($fulllist == 0)
                                     {
-//                                    $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['due_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
+                                        $excel[] = '';
+//                                    $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['reg_date'],,
 //                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
 //                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
 //                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);
                                     }
                                     else
                                     {
-//                                     $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['due_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
+//                                     $excel[] = array(($k+1),$quotation_list['Quotation']['id'],$quotation_list['Quotation']['reg_date'],$this->Salesorder->find_deliveryorder_nos($quotation_list['Quotation']['id']),
 //                    $this->Salesorder->find_deliveryorder_no($quotation_list['Quotation']['id']),$this->Salesorder->find_deliveryorder_date($quotation_list['Quotation']['id']),$this->Salesorder->find_invoice_no($quotation_list['Quotation']['id']),
 //                    $this->Salesorder->find_invoice_date($quotation_list['Quotation']['id']),$quotation_list['Quotation']['quotationno'],$quotation_list['Quotation']['ref_no'],$a,
 //                    $quotation_list['Quotation']['remarks'],'-',$this->Salesorder->find_sales_order_customer($quotation_list['Quotation']['id']),$this->Salesorder->salesperson($quotation_list['Quotation']['attn']),$quotation_list['branch']['branchname']);   
