@@ -344,11 +344,11 @@
                                             </li>
                                             <li>
                                                 <?php $a=($control == 'Deliveryorders' && $actions == 'datalog')?'active':''; ?>
-                                                <?php echo $this->Html->link('Deliveryorder Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                                <?php echo $this->Html->link('Deliveryorder Datalog',array('controller'=>'Deliveryorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
                                                 <?php $a=($control == 'Invoices' && $actions == 'datalog')?'active':''; ?>
-                                                <?php echo $this->Html->link('Invoice Datalog',array('controller'=>'Salesorders','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
+                                                <?php echo $this->Html->link('Invoice Datalog',array('controller'=>'Invoices','action'=>'datalog'),array('class'=>$a,'escape'=>false)); ?>
                                             </li>
                                             <li>
                                                 <?php $a=($control == 'Invoices' && $actions == 'datalog')?'active':''; ?>

@@ -59,8 +59,11 @@ $("#val_reg_date").datepicker("setDate", new Date());
                                                             <?php echo $this->Form->input('PurchaseRequisition.id', array('name'=>'pr_id','id'=>'pr_id','type'=>'hidden','value'=>$pr_dat['PurchaseRequisition']['id'])); ?>
                                                             <?php if($user_role['job_purchasereq']['edit'] == 1 && $pr_dat['PurchaseRequisition']['is_manager_approved']==0): ?>
                                                             <?php if($user_role['app_prmanager']['view'] == 1){ ?>
+                                                            <?php if($pr_dat['PurchaseRequisition']['is_manager_approved'] == 0 && $pr_dat['PurchaseRequisition']['is_superviser_approved']==1) {?>
                                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_pr','escape' => false)); ?>
-                                                            <?php } else {?>
+                                                            <?php }if($pr_dat['PurchaseRequisition']['is_manager_approved'] == 0 && $pr_dat['PurchaseRequisition']['is_superviser_approved']==0) {?>
+                                                            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_pr_sup','escape' => false)); ?>
+                                                            <?php }} else {?>
                                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                             <?php } ?>
 

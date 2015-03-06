@@ -252,4 +252,47 @@ class SalesorderHelper extends AppHelper
         $sales_person  =    $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$attn)));
         return $sales_person['Contactpersoninfo']['name'];
     }
+    public function getservicetype($id=NULL)
+    {
+        APP::import('Model','Service');
+        $this->Service   =   new Service();
+        $service=$this->Service->find('first',array('conditions'=>array('Service.id'=>$id)));
+        return $service['Service']['servicetype'];
+    }
+    public function getinvoiceno($id=NULL)
+    {
+        APP::import('Model','Invoice');
+        $this->Invoice   =   new Invoice();
+        $invoice=$this->Invoice->find('first',array('conditions'=>array('Invoice.salesorder_id'=>$id)));
+        return $invoice['Invoice']['invoiceno'];
+    }
+    public function getinvoicedate($id=NULL)
+    {
+        APP::import('Model','Invoice');
+        $this->Invoice   =   new Invoice();
+        $invoice=$this->Invoice->find('first',array('conditions'=>array('Invoice.salesorder_id'=>$id)));
+        return $invoice['Invoice']['invoice_date'];
+    }
+    public function getinvoicebranch($id=NULL)
+    {
+        APP::import('Model','Branch');
+        $this->Branch   =   new Branch();
+        $invoice=$this->Branch->find('first',array('conditions'=>array('Branch.id'=>$id)));
+        return $invoice['Branch']['branchname'];
+    }
+    public function getinvoicedelno($id=NULL)
+    {
+        APP::import('Model','Invoice');
+        $this->Invoice   =   new Invoice();
+        $invoice=$this->Invoice->find('first',array('conditions'=>array('Invoice.salesorder_id'=>$id)));
+        return $invoice['Invoice']['deliveryorder_id'];
+    }
+    public function getinvoicedelapprove($id=NULL)
+    {
+        APP::import('Model','Invoice');
+        $this->Invoice   =   new Invoice();
+        $invoice=$this->Invoice->find('first',array('conditions'=>array('Invoice.salesorder_id'=>$id)));
+        return $invoice['Invoice']['is_approved'];
+    }
+    
 }

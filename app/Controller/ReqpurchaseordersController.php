@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Contactpersoninfo','SalesDocument','PurchaseRequisition','ReqDevice',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Reqpurchaseorder','ReqCustomerSpecialNeed',
-                            'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog');
+                            'Instrument','Instrumentforgroup','Brand','Customer','Device','Salesorder','Description','Logactivity','branch','Datalog','Title');
         public function index()
         {
             /*******************************************************
@@ -365,14 +365,14 @@
             $this->autoRender = false;
             $reqpurchaseorder_details=$this->Reqpurchaseorder->find('first',array('conditions'=>array('Reqpurchaseorder.id'=>$id),'recursive'=>'2'));
             //pr($reqpurchaseorder_details);exit;
-            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$subcontractdo_details['Subcontractdo']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_sub_con_id'=>$id),'Instrument','Brand','Range','Department'),'Customer'=>array('Contactpersoninfo','Paymentterm'))));
+            //$salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$reqpurchaseorder_details['Reqpurchaseorder']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_sub_con_id'=>$id),'Instrument','Brand','Range','Department'),'Customer'=>array('Contactpersoninfo','Paymentterm'))));
 			//pr($salesorder_details);exit;
-            $quotation_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Salesorder']['quotationno'],'Quotation.status'=>1),'recursive'=>'3'));
+            //$quotation_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Salesorder']['quotationno'],'Quotation.status'=>1),'recursive'=>'3'));
 //            $salesorder_data = $this->Salesorder->find('first', array('conditions' => array('Salesorder.id' => $id),'recursive'=>3));
 //            $quotation_data = $this->Quotation->find('first', array('conditions' => array('Quotation.id' => $salesorder_data['Salesorder']['quotation_id']),'recursive'=>2));
             //pr($quotation_data);exit;
             $file_type = 'pdf';
-            $filename = $subcontractdo_details['Subcontractdo']['subcontract_dono'];
+            $filename = $reqpurchaseorder_details['Reqpurchaseorder']['reqpurchaseno'];
       
       
  $html = '<html>
@@ -401,23 +401,23 @@ margin: 180px 50px;
             }
             //pr($salesorder_data);
             //foreach ($salesorder_data as $salesorder_data_list):
-                $customername = $salesorder_details['Customer']['customername'];
-                $billing_address = $salesorder_details['Salesorder']['address'];
-                $postalcode = $salesorder_details['Customer']['postalcode'];
-                $contactperson = $quotation_data['Customer']['Contactpersoninfo'][0]['name'];
-                $phone = $salesorder_details['Salesorder']['phone'];
-                $fax = $salesorder_details['Salesorder']['fax'];
-                $email = $salesorder_details['Salesorder']['email'];
+                $customername = $reqpurchaseorder_details['Reqpurchaseorder']['customername'];
+                $billing_address = $reqpurchaseorder_details['Reqpurchaseorder']['address'];
+               // $postalcode = $salesorder_details['Customer']['postalcode'];
+                $contactperson = $reqpurchaseorder_details['Reqpurchaseorder']['attn'];
+                $phone = $reqpurchaseorder_details['Reqpurchaseorder']['phone'];
+                $fax = $reqpurchaseorder_details['Reqpurchaseorder']['fax'];
+                $email = $reqpurchaseorder_details['Reqpurchaseorder']['email'];
                 //$our_ref_no = $salesorder_data_list['Quotation']['ref_no'];
-                $ref_no = $salesorder_details['Salesorder']['ref_no'];
-                $reg_date = $salesorder_details['Salesorder']['reg_date'];
-                 $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
-                $salesorderno = $salesorder_details['Salesorder']['salesorderno'];
-                $quotationno = $salesorder_details['Salesorder']['quotationno'];
-                foreach($salesorder_details['Description'] as $device):
+                $ref_no = $reqpurchaseorder_details['Reqpurchaseorder']['ref_no'];
+                $reg_date = $reqpurchaseorder_details['Reqpurchaseorder']['reg_date'];
+                 $payment_term = $reqpurchaseorder_details['Reqpurchaseorder']['paymentterm_name'];
+                //$salesorderno = $salesorder_details['Salesorder']['salesorderno'];
+                //$quotationno = $salesorder_details['Salesorder']['quotationno'];
+                foreach($reqpurchaseorder_details['ReqDevice'] as $device):
                     $device_name[] = $device;
                 endforeach;
-                $ins_type = $quotation_data['InstrumentType']['salesorder'];
+                $ins_type = $reqpurchaseorder_details['Reqpurchaseorder']['instrument_type_name'];
                 
 
 $html .=
@@ -438,7 +438,7 @@ $html .=
      </table>
      <table width="623" height="56">
           <tr>
-               <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">SUBCONTRACT DO</div></td>
+               <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">PR Purchase Order</div></td>
                <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
           </tr>
      </table>
@@ -452,7 +452,7 @@ $html .=
                               <td colspan="3" height="10px" style="font-size:9px !important;">'.$billing_address.'</td>
                          </tr>
                          <tr>
-                              <td style="font-size:9px !important;">'.$postalcode.'</td>
+                              <td style="font-size:9px !important;"></td>
                          </tr>
 						 <tr>
 						 <td><br /></td>
@@ -488,13 +488,13 @@ $html .=
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-10px;">'.$subcontractdo_details['Subcontractdo']['subcontract_dono'].'</div></td>
+                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-10px;">'.$reqpurchaseorder_details['Reqpurchaseorder']['reqpurchaseno'].'</div></td>
                          </tr>
                          <tr>
 						     
                               <td style="padding-left:5px;width:50px;" width="50">OUR REF NO </td>
                               
-                              <td style="padding-right:10px;">: &nbsp;&nbsp;&nbsp;'.$salesorderno.'</td>
+                              <td style="padding-right:10px;">: &nbsp;&nbsp;&nbsp;'.$ref_no.'</td>
 							  <td></td>
 						
                          </tr>
@@ -615,12 +615,12 @@ $html .= '</tr>';
                     //foreach($device_name as $device):
                     $html .= '
                     <tr>
-                        <td style="padding:3px 10px;">'.$device['order_by'].'</td>
+                        <td style="padding:3px 10px;">'.$k.'</td>
                         <td style="padding:3px 10px;">1</td>
-                        <td style="padding:3px 10px;width:20%;">'.$device['Instrument']['name'].'</td>
-                        <td style="padding:3px 10px;">'.$device['Brand']['brandname'].'</td>
+                        <td style="padding:3px 10px;width:20%;">'.$device['instrument_name'].'</td>
+                        <td style="padding:3px 10px;">'.$device['brand_name'].'</td>
                         <td style="padding:3px 10px;">'.$device['model_no'].'</td>
-                        <td style="padding:3px 10px;">'.$device['Range']['range_name'].'</td>';
+                        <td style="padding:3px 10px;">'.$device['range'].'</td>';
                         for($i=0;$i<=4;$i++):
                         if(isset($titles[$i])):
                         $html .='<td style="padding:3px 10px;">'.$device['title'.($i+1).'_val'].'</td>';
@@ -652,7 +652,7 @@ $html .= '</div>';
             $this->dompdf->load_html($html);
             $this->dompdf->set_paper($papersize, $orientation);        
             $this->dompdf->render();
-            $this->dompdf->stream("Saleorder-".$filename.".pdf");
+            $this->dompdf->stream("PRPURCHASE-".$filename.".pdf");
             echo $this->dompdf->output();
            // $output = $this->dompdf->output();
             //file_put_contents($filename.'.pdf', $output);

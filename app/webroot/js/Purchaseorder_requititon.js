@@ -301,6 +301,28 @@ var document_data_node   =   $.parseJSON(data);
     }
        
    });
+   $(document).on('click','.approve_pr_sup',function(){
+       var val_pr_id=$('#pr_id').val();
+       //alert(val_quotationno);
+       
+       if(window.confirm("Are you sure?")){
+       $.ajax({
+            type: 'POST',
+            data:"id="+val_pr_id,
+            url: path+'PurchaseRequisitions/approve_superviser/',
+            success: function(data)
+            {
+                window.location.reload(); 
+            }
+            
+        });
+    }
+    else
+    {
+        return false;
+    }
+       
+   });
    
    $(document).on('click','.approve_prpur',function(){
        var val_prpur_id=$('#prpur_id').val();

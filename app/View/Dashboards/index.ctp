@@ -754,7 +754,7 @@ $(document).on('click','.approve_invoice',function(){
                                             <td class="text-center ">
                                            <?PHP if($log_activity_prsuper_list['Logactivity']['logactivity'] == 'Add Supervisor'){ ?>
                                             <?PHP // echo $this->html->link('Approve',array('controller'=>'PurchaseRequisitions','action'=>'edit',$log_activity_prsuper_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
-                                                <?PHP echo $this->form->button('Approve',array('class'=>'btn btn-xs btn-primary approve_prsuper','id'=>$log_activity_prsuper_list['Logactivity']['logid'])) ?>
+                                                <?PHP echo $this->html->link('Approve',array('controller'=>'PurchaseRequisitions','action'=>'edit',$log_activity_prman_list['Logactivity']['logid']),array('class'=>'btn btn-xs btn-primary')) ?>
                                            <?php }?>
                                            
                                             

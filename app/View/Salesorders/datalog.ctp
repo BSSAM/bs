@@ -35,7 +35,7 @@ $(document).ready(function() {
                         
                         <div class="col-md-12">
                             <h2 class="pull-left">List Of Sales Order </h2> 
-                            <div class="pull-right" style="margin-top: 30px;"><div class="pull-left" style="margin-right: 20px; line-height: 20px;"><?php echo $this->Form->input('Full List',array('type'=>'checkbox','id'=>'fulllist','name'=>'fulllist')) ?></div><?php echo $this->Html->link('Generate Report',array('controller' => 'Quotations','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></div>
+                            <div class="pull-right" style="margin-top: 30px;"><div class="pull-left" style="margin-right: 20px; line-height: 20px;"><?php echo $this->Form->input('Full List',array('type'=>'checkbox','id'=>'fulllist','name'=>'fulllist')) ?></div><?php echo $this->Html->link('Generate Report',array('controller' => 'Salesorders','action' => 'reportfinal','full_base' => true),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','title'=>'Generate Report')); ?></div>
                         </div>
                         <div class="datalog">
                         <div class="col-md-12 custom_calculate">
@@ -55,9 +55,9 @@ $(document).ready(function() {
                                 <?php echo $this->Form->input('Proceed', array('id'=>'submit','class'=>'btn btn-primary','label'=>false,'name'=>'submit','type'=>'submit')); ?>
                             </div>
                         </div>
-                        <?PHP $this->Form->end(); ?>
+                        
                         </div>
-                       
+                       <?PHP $this->Form->end(); ?>
                         <div class="table-responsive table-responsive-scroll">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
@@ -102,19 +102,19 @@ endfor; ?>
                                     $excel[] = array();
                                     if($fulllist == 0)
                                     {
-                                    $excel[] = array('ID','SalesorderNo','RegDate','Due Date','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Discount','GST','Remarks','GSTType','CustomerId','CustomerName','PaymentTermsId','ServiceTypeId','DepartmentName','IsApproved');   
+                                    $excel[] = array('ID','SalesorderNo','RegDate','Due Date','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Remarks','CustomerId','CustomerName','ServiceTypeId','IsApproved');   
                                     }
                                     else
                                     {
                                         //ID,CompanyId	CreatedDate	QuotationNo	QuotationDate	CustomerAddress	ContactPersonName	Phone	Fax	Email	YourRefNo	Discount	GST	Remarks	TotalPrice	GSTType	CurrencyConversionRate	SOItemsAppBy	GSTTypeId	CustomerId	CurrencyId	SalesPersonId	BranchId	InstrumentForId	PaymentTermsId	ServiceTypeId	ProjectName	TitleIdValue1	TitleIdValue2	TitleIdValue3	Title1	Title2	Title3	CompanyName	CustomerName	CurrencyCode	SalesPersonName	BranchName	InstrumentForName	PaymentTerms	ServiceTypeName	RangeName	InstrumentName	BrandName	SNo	Quantity	Validity	SerialNo	ModelNo	PartNo	UnitPrice	QD_Discount	QD_Remarks	QD_TotalPrice	QDSNO	TagNo	Location	ControlNo	TitleValue1	TitleValue2	TitleValue3	TitleValue4	TitleValue5	TitleValue6	TitleValue7	TitleValue8	TitleValue9	InstrumentId	LedgerAccountId	CalibrationLocationID	CalibrationTypeId	LedgerAccountName	DepartmentName	LocationName	QDTitle1	QDTitle2	QDTitle3	QDTitle4	QDTitle5	QDTitle6	QDTitle7	QDTitle8	QDTitle9	IsActive													
 
-                                     $excel[] = array('ID','SalesorderNo','RegDate','Due Date','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Discount','GST','Remarks','GSTType','CustomerId','CustomerName','PaymentTermsId','ServiceTypeId','DepartmentName','IsApproved','Instrumentname','Brand','Model No','Range','Call Location','Call Type','Title1','Title2','Title3','Title4','Title5');   
+                                     $excel[] = array('ID','SalesorderNo','RegDate','Due Date','CustomerAddress','ContactPersonName','Phone','Fax','Email','RefNo','Remarks','CustomerId','CustomerName','ServiceTypeId','IsApproved','Instrumentname','Brand','Model No','Range','Call Location','Call Type','Title1','Title2','Title3','Title4','Title5');   
                                     }
                                     
                                     
                                     
                                     if(!empty($salesorder )): ?>
-                                     <?php foreach($salesorder as $salesorder_list): ?>
+                                     <?php foreach($salesorder as $k=>$salesorder_list): ?>
                                     <tr <?php if($salesorder_list['Salesorder']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['reg_date'] ?></td>
@@ -152,17 +152,18 @@ endfor;
                                     <?php 
                                     if($fulllist == 0)
                                     {
-//                                    $excel[] = array(($k+1),$salesorder_list['Salesorder']['id'],$salesorder_list['Salesorder']['due_date'],$this->Salesorder->find_deliveryorder_nos($salesorder_list['Salesorder']['id']),
-//                    $this->Salesorder->find_deliveryorder_no($salesorder_list['Salesorder']['id']),$this->Salesorder->find_deliveryorder_date($salesorder_list['Salesorder']['id']),$this->Salesorder->find_invoice_no($salesorder_list['Salesorder']['id']),
-//                    $this->Salesorder->find_invoice_date($salesorder_list['Salesorder']['id']),$salesorder_list['Salesorder']['quotationno'],$salesorder_list['Salesorder']['ref_no'],$a,
-//                    $salesorder_list['Salesorder']['remarks'],'-',$this->Salesorder->find_sales_order_customer($salesorder_list['Salesorder']['id']),$this->Salesorder->salesperson($salesorder_list['Salesorder']['attn']),$quotation_list['branch']['branchname']);
+                                    $excel[] = array(($k+1),$salesorder_list['Salesorder']['salesorderno'],$salesorder_list['Salesorder']['reg_date'],$salesorder_list['Salesorder']['due_date'],$salesorder_list['Salesorder']['address'],
+                    $this->Salesorder->salesperson($salesorder_list['Salesorder']['attn']),$salesorder_list['Salesorder']['phone'],$salesorder_list['Salesorder']['fax'],$salesorder_list['Salesorder']['email'],
+                    $salesorder_list['Salesorder']['ref_no'],$salesorder_list['Salesorder']['remarks'],$salesorder_list['Salesorder']['customer_id'],$salesorder_list['Salesorder']['customername'],
+                    $this->Salesorder->getservicetype($salesorder_list['Salesorder']['service_id']),$salesorder_list['Salesorder']['is_approved']);
                                     }
                                     else
                                     {
-//                                     $excel[] = array(($k+1),$salesorder_list['Salesorder']['id'],$salesorder_list['Salesorder']['due_date'],$this->Salesorder->find_deliveryorder_nos($salesorder_list['Salesorder']['id']),
-//                    $this->Salesorder->find_deliveryorder_no($salesorder_list['Salesorder']['id']),$this->Salesorder->find_deliveryorder_date($salesorder_list['Salesorder']['id']),$this->Salesorder->find_invoice_no($salesorder_list['Salesorder']['id']),
-//                    $this->Salesorder->find_invoice_date($salesorder_list['Salesorder']['id']),$salesorder_list['Salesorder']['quotationno'],$salesorder_list['Salesorder']['ref_no'],$a,
-//                    $salesorder_list['Salesorder']['remarks'],'-',$this->Salesorder->find_sales_order_customer($salesorder_list['Salesorder']['id']),$this->Salesorder->salesperson($salesorder_list['Salesorder']['attn']),$quotation_list['branch']['branchname']);   
+                                     $excel[] = array(($k+1),$salesorder_list['Salesorder']['salesorderno'],$salesorder_list['Salesorder']['reg_date'],$salesorder_list['Salesorder']['due_date'],$salesorder_list['Salesorder']['address'],
+                    $this->Salesorder->salesperson($salesorder_list['Salesorder']['attn']),$salesorder_list['Salesorder']['phone'],$salesorder_list['Salesorder']['fax'],$salesorder_list['Salesorder']['email'],
+                    $salesorder_list['Salesorder']['ref_no'],$salesorder_list['Salesorder']['remarks'],$salesorder_list['Salesorder']['customer_id'],$salesorder_list['Salesorder']['customername'],
+                    $this->Salesorder->getservicetype($salesorder_list['Salesorder']['service_id']),$salesorder_list['Salesorder']['is_approved'],$salesorder_list['Instrument']['name'],$salesorder_list['Brand']['brandname'],$salesorder_list['Description']['model_no'],
+                    $salesorder_list['Range']['range_name'],$salesorder_list['Description']['sales_calllocation'],$salesorder_list['Description']['sales_calltype'],$salesorder_list['Description']['title1_val'],$salesorder_list['Description']['title2_val'],$salesorder_list['Description']['title3_val'],$salesorder_list['Description']['title4_val'],$salesorder_list['Description']['title5_val']);
                                     }
                                     endforeach; ?>
                                     <?PHP endif; ?>

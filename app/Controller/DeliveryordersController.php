@@ -1494,9 +1494,84 @@ $html .= '</div>';
     public function datalog($id=NULL)
     {
         
-            $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
+//            $delivery_data = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.id' => 'DESC')));
+//        
+//        $this->set('deliveryorders', $delivery_data);
+    $title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+        $this->set('titles', $titles);
+        if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) && isset($this->request->data['val']))
+        {
+            //pr($this->request->data['fulllist']);exit;
+        $andor = $this->request->data['gate'];
         
-        $this->set('deliveryorders', $delivery_data);
+        $condition = $this->request->data['query_input'];
+        $conditiontype = $this->request->data['equal_input'];
+        $value = $this->request->data['val'];
+        $conditions = $ccres = array();
+        
+//        $conditions['Quotation.is_deleted'] = 0;
+//        $conditions['Device.quotationno'] = 'BSQ-05-000002';
+        foreach($condition as $k => $con)
+        {
+            if($conditiontype[$k]!='LIKE')
+            $ccres[$con.' '.$conditiontype[$k]]  = $value[$k];       
+//            else    
+//            $ccres[$con.' LIKE "%'.$value[$k].'%"']  = ''; 
+        }
+        
+        $conditions[$andor] = $ccres;
+        
+        if($this->request->data['fulllist'] == 1)
+        {
+            
+            $quotation_lists = $this->DelDescription->find('all',array('conditions'=>$conditions));
+        }
+        else
+        {
+            $quotation_lists = $this->Deliveryorder->find('all',array('conditions'=>$conditions,'order'=> array('Deliveryorder.id' => 'ASC')));
+            //$quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));    
+        }
+        //$quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));
+        
+        //pr($quotation_dev_lists);exit;
+        //pr($quotation_lists);
+        $this->set('deliveryorders', $quotation_lists);
+        //$log = $this->Quotation->getDataSource()->getLog(false, false);
+        //debug($log);
+        //exit;
+        }
+        else
+        {
+            //pr($this->request->data['fulllist']);exit;
+        if(!isset($this->request->data['fulllist'])){
+         $quotation_lists = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0),'order' => array('Deliveryorder.created' => 'ASC')));
+         //$quotation_lists = $this->Quotation->find('all',array('conditions'=>array('Quotation.is_deleted'=>'0'),'order' => array('Quotation.created' => 'ASC')));    
+         $this->set('fulllist', 0);
+        }
+        else
+        {
+         $quotation_lists = $this->DelDescription->find('all',array('conditions'=>array('Deliveryorder.is_deleted'=>0)));
+        // $quotation_lists = $this->DelDescription->find('all',array('conditions'=>array('Quotation.is_deleted'=>0)));  
+         $this->set('fulllist', 1);
+        }
+        $this->set('deliveryorders', $quotation_lists);
+        }
     }
-       
+    
+    public function reportfinal() {
+            $this->viewClass = 'Media';
+            // Download app/webroot/files/example.csv
+            $params = array(
+               'id'        => 'deliveryorderdatas.csv',
+               'name'      => 'deliveryorderdatas',
+               'extension' => 'csv',
+               'download'  => true,
+               'path'      => APP . 'webroot' . DS. 'excel'. DS  // file path
+           );
+           $this->set($params);
+        }
 }
