@@ -176,7 +176,15 @@ class CanddsController extends AppController
         $this->request->data['Candd']['status']                     =   0;
         
         $date_cd = $this->request->data['cd_date'];
+        $candd_data =   $this->Candd->find('count',array('conditions'=>array('Candd.cd_date'=>$date_cd,'Candd.purpose'=>'Collection')));
+        $canddsetting =   $this->Canddsetting->find('first',array('conditions'=>array('Canddsetting.is_deleted'=>0,'Canddsetting.purpose'=>'C')));
         
+        if($candd_data>$canddsetting['Canddsetting']['maxtask'])
+        {
+            echo "maxtask";
+        }
+        else
+        {
         if($this->Candd->save($this->request->data))
         {
             $candd_last_id=$this->Candd->getLastInsertID();
@@ -235,7 +243,7 @@ class CanddsController extends AppController
             {
                 echo json_encode($candd_data);
             }
-           
+            }
         }
     }
     public function move_deliveryorder()
@@ -247,6 +255,15 @@ class CanddsController extends AppController
         $cd_date =$this->request->data['cd_date'];
         $assign_value =$this->request->data['assign_value'];
         $export = explode(',', $description_string);
+        $candd_data =   $this->Candd->find('count',array('conditions'=>array('Candd.cd_date'=>$cd_date,'Candd.purpose'=>'Delivery')));
+        $canddsetting =   $this->Canddsetting->find('first',array('conditions'=>array('Canddsetting.is_deleted'=>0,'Canddsetting.purpose'=>'D')));
+        
+        if($candd_data>$canddsetting['Canddsetting']['maxtask'])
+        {
+            echo "maxtask";
+        }
+        else
+        {
         foreach ($export as $ex=>$val)
         {
             $move_deliver_data  =   $this->ready_to_deliver($val,$assign_to,$cd_date,$assign_value);
@@ -295,6 +312,7 @@ class CanddsController extends AppController
             }
         }
        echo  json_encode($export);
+        }
     }
     
     public function shipped_check()

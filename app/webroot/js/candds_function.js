@@ -31,7 +31,11 @@ $(document).ready(function(){
                 url: path_url+'Candds/add_candds/',
                 success: function(data)
                 {
-                   
+                   if(data == 'maxtask')
+                       {
+                       alert('Max Collection for the day reached');
+                       }
+                       else{
                         var candd_data_node    =   $.parseJSON(data);
                    
 
@@ -66,6 +70,7 @@ $(document).ready(function(){
                                         <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
                                         <td class="text-center"><div class="btn-group"><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 }
+                       }
                 var customer_name = $("#val_customer_candd").val('');
                 var customer_id =$('#candd_customer_id').val('');
                 var customer_address   =   $('#val_address').val('');
@@ -83,7 +88,11 @@ $(document).ready(function(){
                 url: path_url+'Candds/add_candds/',
                 success: function(data)
                 {
-                   
+                   if(data == 'maxtask')
+                       {
+                       alert('Max Collection for the day reached');
+                       }
+                       else{
                         var candd_data_node    =   $.parseJSON(data);
                     
 
@@ -118,6 +127,7 @@ $(document).ready(function(){
                                         <td class="text-center">'+candd_data_node.Candd.remarks+'</td>\n\\n\
                                         <td class="text-center"><div class="btn-group"><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+candd_data_node.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
                 }
+                       }
                 var customer_name = $("#val_customer_candd").val('');
                 var customer_id =$('#candd_customer_id').val('');
                 var customer_address   =   $('#val_address').val('');
@@ -651,6 +661,11 @@ $(document).ready(function(){
                     cache: false,
                     success: function(data)
                     {
+                        if(data == 'maxtask')
+                       {
+                       alert('Max Collection for the day reached');
+                       }
+                       else{
                         console.log(data); //return false;
                         var checked_node =   $.parseJSON(data);
                         $.each(checked_node,function(k,v){
@@ -658,6 +673,7 @@ $(document).ready(function(){
                             $(this).remove();
                             }); 
                         });
+                       }
                     }
                 });
             }
