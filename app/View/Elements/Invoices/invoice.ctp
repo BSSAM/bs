@@ -1,6 +1,6 @@
 <div class="block full">
     <div class="table-responsive invoice_info">
-        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <table id="scroll1-datatable" class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">Invoice no</th>

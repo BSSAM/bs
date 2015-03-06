@@ -548,6 +548,12 @@ $("#search_cusinstrument").hide();
        
        $scope.delete_instrument = function(index)
        {
+           if($scope.instruments.length == 1)
+           {
+               alert('One Instrument should be there');
+               return false;
+           }
+          
            res = $scope.instruments[index];
         
             $http.get(path_url+'Quotations/delete_instrument/'+res.serial).success(function(data){

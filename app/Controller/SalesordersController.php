@@ -1520,7 +1520,7 @@ $html .= '<div id="content" style="">';
                 foreach($device_name as $k=>$device):
                     if($k == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:150px;">      <tr>
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:180px;">      <tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
@@ -1542,7 +1542,7 @@ $html .= '</tr>';
                     }
                     elseif($k%5 == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:230px;">      <tr>
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:180px;">      <tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
@@ -1567,7 +1567,7 @@ $html .= '</tr>';
                     //foreach($device_name as $device):
                     $html .= '
                     <tr>
-                        <td style="padding:3px 10px;">'.$device['order_by'].'</td>
+                        <td style="padding:3px 10px ;">'.$device['order_by'].'</td>
                         <td style="padding:3px 10px;">1</td>
                         <td style="padding:3px 10px;width:20%;">'.$device['Instrument']['name'].'</td>
                         <td style="padding:3px 10px;">'.$device['Brand']['brandname'].'</td>
@@ -1581,8 +1581,9 @@ $html .= '</tr>';
                         $html .='</tr>';
                     
                 endforeach;
-                $html .='<tr><td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td></tr></table>';
+                $html .='<tr><td colspan="4" style="padding:20px 0px;"><div style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</div></td>
+               <td  colspan="5"  style="padding:20px 0px;"><div style="border:1px dashed #666;border-left:none; text-align:left;padding: 10px;font-size:11px !important;">
+               Self Collect & Self Delivery Non-Singlas</div></td></tr></table>';
                 
 $html .= '</div>'; 
 

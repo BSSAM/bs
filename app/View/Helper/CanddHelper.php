@@ -98,7 +98,7 @@ class CanddHelper extends AppHelper
     {
         APP::import('Model','Candd');
         //$this->ReadytodeliverItem  =   new ReadytodeliverItem();
-        $delivercount_basedon_date    =    $this->Candd->find('count',array('conditions'=>array('Candd.cd_date'=>$cd_date,'Candd.purpose'=>'Delivery')));
+        $delivercount_basedon_date    =    $this->Candd->find('count',array('group' => array("Candd.customer_id")));
         if(!empty($delivercount_basedon_date))
         {
             return $delivercount_basedon_date;

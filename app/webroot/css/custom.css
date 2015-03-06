@@ -218,3 +218,4 @@ box-sizing: content-box !important;}
 }
 #qofull-datatable_wrapper .dataTables_scrollHead{ overflow: unset !important;}
 #engineer-datatable_wrapper .dataTables_scrollBody{ overflow: auto !important;}*/
+.new_scroll{width:100% !important; overflow: auto;}

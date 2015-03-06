@@ -49,7 +49,7 @@ $(document).on('click','.pofull-prepare',function(){
 
 <div class="table-responsive">
 
-                    <table id="engineer-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="one-datatable"  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">Customer ID</th>

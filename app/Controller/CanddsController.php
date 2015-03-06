@@ -442,9 +442,10 @@ margin: 180px 50px;
      </div>
 </div>';
            $data = $this->Assign->find('all',array('conditions'=>array('Assign.is_deleted'=>0)),array('order' => array('Assign.id' => 'DESC')));
-           $html .= '<div id="content">';
+           
             foreach($data as $data_assignto)
             {
+			$html .= '<div id="content" style="page-break-after: always;">';
             $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id,'Candd.assign_id'=>$data_assignto['Assign']['id']),'recursive'=>2));
             foreach($cd_statistics as $k=>$cd):
            
@@ -517,9 +518,9 @@ margin: 180px 50px;
                 $html .='</table>';
                 }
                 endforeach;
-                
+                $html .='</div>';
             }
-            $html .='</div>';
+            
            
      $html .= '</body>
 </html>'; 

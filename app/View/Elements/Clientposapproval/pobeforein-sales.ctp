@@ -5,10 +5,11 @@
                 "iDisplayLength": 5,
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
+           
 </script>
 
 <div class="table-responsive">
-    <table id="solistvariation-datatable" class="table table-vcenter table-condensed table-bordered">
+    <table id="one-datatable" class="table table-vcenter table-condensed table-bordered dataTable ">
         <thead>
             <tr>
                 <!--<th class="text-center"><i class="gi gi-user"></i></th>-->

@@ -8,7 +8,7 @@
 </script>
 
 <div class="table-responsive">
-    <table id="qofull-datatable" class="table table-vcenter table-condensed table-bordered">
+    <table id="second-datatable" class="table table-vcenter table-condensed table-bordered">
         <thead>
             <tr>
                 <!--<th class="text-center"><i class="gi gi-user"></i></th>-->

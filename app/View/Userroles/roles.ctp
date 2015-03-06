@@ -977,115 +977,67 @@
                                     <tbody>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Customer</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_customer.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_customer.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_customer.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_customer.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Quotation</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_quotation.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_quotation.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_quotation.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_quotation.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Sales Order</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_salesorder.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_salesorder.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_salesorder.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_salesorder.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Delivery Order</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_deliveryorder1.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_deliveryorder1.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_deliveryorder1.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_deliveryorder1.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Invoice</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_invoice.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_invoice.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_invoice.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_invoice.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Procedure No</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_procedureno.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_procedureno.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_procedureno.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_procedureno.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Brand</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_brand.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_brand.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_brand.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_brand.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Instrument</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrument.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrument.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrument.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrument.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Instrument for Group</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrumentgroup.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrumentgroup.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrumentgroup.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrumentgroup.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Range</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_range.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_range.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_range.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_range.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Unit</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_unit.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_unit.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_unit.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_unit.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Ready to Prepare Invoice</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_ready.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_ready.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_ready.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_ready.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">PR_Supervisor Dashboard</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prsupervisor.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prsupervisor.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prsupervisor.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prsupervisor.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">PR_Manager</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prmanager.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prmanager.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prmanager.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prmanager.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">In Shipping - C & D info</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_inship.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Client PO</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         
                                     </tbody>

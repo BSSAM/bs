@@ -786,21 +786,43 @@ $html .= '</div>';
         
         if($this->request->data['fulllist'] == 1)
         {
-            $salesorder_list = $this->Description->find('all',array('conditions'=>$conditions));
+            $purchase_order_data = $this->Purchaseorder->find('all',array('order' => array('Purchaseorder.id' => 'DESC')));
+            //$this->set('purchaseorders', $purchase_order_data);
+            $purchase_order_list = array();
+            foreach($purchase_order_data as $pur)
+            {
+                $var_1 = array('Salesorder.id'=>$pur['Purchaseorder']['salesorder_id']);
+                $conditions = array_merge($conditions, $var_1);
+                $salesorder_list = $this->Description->find('first',array('conditions'=>$conditions,'order' => array('Salesorder.id' => 'DESC')));
+                
+                $purchase_order_list[] = array_merge($pur, $salesorder_list);
+            }
+            //$salesorder_list = $this->Description->find('all',array('conditions'=>$conditions));
             //$quotation_lists = $this->Device->find('all',array('conditions'=>$conditions));
         }
         else
         {
             $purchase_order_data = $this->Purchaseorder->find('all',array('order' => array('Purchaseorder.id' => 'DESC')));
-            $this->set('purchaseorders', $purchase_order_data);
-            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>$conditions,'order' => array('Salesorder.id' => 'DESC')));
+            //$this->set('purchaseorders', $purchase_order_data);
+            $purchase_order_list = array();
+            foreach($purchase_order_data as $pur)
+            {
+                $var_1 = array('Salesorder.id'=>$pur['Purchaseorder']['salesorder_id']);
+                $conditions = array_merge($conditions, $var_1);
+                $salesorder_list = $this->Salesorder->find('first',array('conditions'=>$conditions,'order' => array('Salesorder.id' => 'DESC')));
+                
+                $purchase_order_list[] = array_merge($pur, $salesorder_list);
+            }
+//            $purchase_order_data = $this->Purchaseorder->find('all',array('order' => array('Purchaseorder.id' => 'DESC')));
+//            $this->set('purchaseorders', $purchase_order_data);
+//            $salesorder_list = $this->Salesorder->find('all',array('conditions'=>$conditions,'order' => array('Salesorder.id' => 'DESC')));
             //$quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));    
         }
         //$quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));
         
         //pr($quotation_dev_lists);exit;
         //pr($quotation_lists);
-        $this->set('salesorder', $salesorder_list);
+        $this->set('salesorder', $purchase_order_list);
         //$log = $this->Quotation->getDataSource()->getLog(false, false);
         //debug($log);
         //exit;
@@ -809,15 +831,34 @@ $html .= '</div>';
         {
             //pr($this->request->data['fulllist']);exit;
         if(!isset($this->request->data['fulllist'])){
-         $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+            $purchase_order_data = $this->Purchaseorder->find('all',array('order' => array('Purchaseorder.id' => 'DESC')));
+            //$this->set('purchaseorders', $purchase_order_data);
+            $purchase_order_list = array();
+            foreach($purchase_order_data as $pur)
+            {
+                $salesorder_list = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$pur['Purchaseorder']['salesorder_id']),'order' => array('Salesorder.id' => 'DESC')));
+                
+                $purchase_order_list[] = array_merge($pur, $salesorder_list);
+            }
+            //pr($purchase_order_list);exit;
+         //$salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
          $this->set('fulllist', 0);
         }
         else
         {
-         $salesorder_list = $this->Description->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0)));  
+            $purchase_order_data = $this->Purchaseorder->find('all',array('order' => array('Purchaseorder.id' => 'DESC')));
+            //$this->set('purchaseorders', $purchase_order_data);
+            $purchase_order_list = array();
+            foreach($purchase_order_data as $pur)
+            {
+                //$salesorder_list = $this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$pur['Purchaseorder']['salesorder_id']),'order' => array('Salesorder.id' => 'DESC')));
+                $salesorder_list = $this->Description->find('all',array('conditions'=>array('Salesorder.id'=>$pur['Purchaseorder']['salesorder_id'],'Salesorder.is_deleted'=>0)));
+                $purchase_order_list[] = array_merge($pur, $salesorder_list);
+            }
+           
          $this->set('fulllist', 1);
         }
-        $this->set('salesorder', $salesorder_list);
+        $this->set('salesorder', $purchase_order_list);
         }
         
         

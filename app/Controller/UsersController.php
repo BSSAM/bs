@@ -57,11 +57,11 @@ class UsersController extends AppController {
          * ---------------  Functionality of Users -----------------------------------
          */
         $this->loadModel('Userrole');
-        $data = $this->Userrole->find('list', array('fields' => 'user_role'));
+        $data = $this->Userrole->find('list', array('conditions'=>array('Userrole.is_deleted'=>0),'fields' => 'user_role'));
         $this->set('userrole', $data);
 
         $this->loadModel('Department');
-        $data = $this->Department->find('list', array('fields' => 'departmentname'));
+        $data = $this->Department->find('list', array('conditions'=>array('Department.is_deleted'=>0),'fields' => 'departmentname'));
         $this->set('department', $data);
 
 
@@ -110,11 +110,11 @@ class UsersController extends AppController {
          */
 
         $this->loadModel('Userrole');
-        $data = $this->Userrole->find('list', array('fields' => 'user_role'));
+        $data = $this->Userrole->find('list', array('conditions'=>array('Userrole.is_deleted'=>0),'fields' => 'user_role'));
         $this->set('userrole', $data);
 
         $this->loadModel('Department');
-        $data = $this->Department->find('list', array('fields' => 'departmentname'));
+        $data = $this->Department->find('list', array('conditions'=>array('Department.is_deleted'=>0),'fields' => 'departmentname'));
         $this->set('department', $data);
 
         if (empty($id)) {
