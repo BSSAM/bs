@@ -9,7 +9,7 @@ class CanddsController extends AppController
 {
     public $helpers =   array('Html','Form','Session');
     public $uses    =   array('Priority','Paymentterm','Quotation','Currency','Deliveryorder','ReadytodeliverItem','CollectionDelivery',
-                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Contactpersoninfo',
+                            'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed','Contactpersoninfo','Canddsetting',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','Branch','Logactivity','Datalog');
     public function index()
     {
