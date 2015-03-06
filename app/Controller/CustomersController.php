@@ -671,7 +671,7 @@ class CustomersController extends AppController
                         $this->request->data['Logactivity']['logname'] = 'Costing';
                         $this->request->data['Logactivity']['logactivity'] = 'Add Costing';
                         $this->request->data['Logactivity']['logid'] = $last_id;
-                        $this->request->data['Logactivity']['logno'] = $customer_id;
+                        $this->request->data['Logactivity']['logno'] = $this->request->data['customer_id'];
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
 
@@ -1009,7 +1009,7 @@ class CustomersController extends AppController
         $this->Customer->updateAll(array('Customer.is_approved'=>1,'Customer.is_approved_date'=>'"'.date('Y-m-d').'"','Customer.is_approved_by'=>$user_id),array('Customer.id'=>$id));
         $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logactivity'=>'Add Customer'));
         $details=$this->Customer->find('first',array('conditions'=>array('Customer.id'=>$id)));
-        $this->xml_tally($id);
+        //$this->xml_tally($id);
     }
     public function xml_tally($id = NULL)
     {

@@ -64,7 +64,7 @@ $('#beforedo-datatable').DataTable( {
     </div>
 </div>
     
-<table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
+<table id="invoice-datatable" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">Customer ID</th>
