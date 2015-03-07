@@ -327,10 +327,12 @@
                                         <?php  $a=($control == 'Onsites')?'active':''; ?>
                                         <?php echo $this->Html->link('OnSite Schedule',array('controller'=>'Onsites','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php } ?>
+                                    <?php if($user_role['job_onsite']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'Tracks' && $actions == 'tracklist')?'active':''; ?>
                                         <?php echo $this->Html->link('Tracking System',array('controller'=>'Tracks','action'=>'tracklist'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li>
+                                    </li><?php } ?>
+                                    <?php if($user_role['job_datalog']['view'] == 1){ ?>
                                     <li>
                                         <a href="" class="sidebar-nav-submenu <?php echo $a=($control == 'Datalog')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i>Datalog</a>
                                         <ul <?php echo $a=($control == 'Datalog')?'style=display:block':'';?>>
@@ -368,7 +370,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                            
+                                    <?php } ?>
                                     <?php //if($user_role['job_salesorder']['view'] == 1){ ?>
                                     <li>
                                         <?php  //$a=($control == 'Recallservices')?'active':''; ?>

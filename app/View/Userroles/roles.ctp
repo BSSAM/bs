@@ -806,12 +806,12 @@
                                     <table class="table">
                                         
                                     <tbody>
-                                         <tr>
+<!--                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Client PO List</h5></td>
                                             
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_clientpolist.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('job_clientpolist.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                             
-                                        </tr>
+                                        </tr>-->
                                         
                                          <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Client Approval Form</h5></td>
@@ -897,10 +897,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Tracking System</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_tracking.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_tracking.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_tracking.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_tracking.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Debt Chase</h5></td>
@@ -945,19 +942,16 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_prpurchaseorder.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" style="width: 150px;"><h5 class="">Resistance BS2041</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_resis.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_resis.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_resis.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_resis.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Datalog</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_datalog.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
-                                        <tr>
+<!--                                        <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Form Datas</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_formdatas.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_formdatas.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_formdatas.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('job_formdatas.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
-                                        </tr>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('job_formdatas.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('job_formdatas.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('job_formdatas.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('job_formdatas.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
+                                        </tr>-->
                                     </tbody>
                                 </table>
                             </div>
