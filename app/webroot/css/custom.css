@@ -199,23 +199,16 @@ and open the template in the editor.
 .table-responsive-scroll table *{-webkit-box-sizing: content-box !important;
 -moz-box-sizing: content-box !important;
 box-sizing: content-box !important;}
-/*.dataTables_scrollHeadInner{width:100% !important;white-space: nowrap;}
-.datatable-scroll {
-    overflow-x: auto;
-    overflow-y: visible;
-}
-.table {width:100% !important;white-space: nowrap;}*/
-/*.dataTables_scroll * {box-sizing: initial !important;}
-.table th,.table  td { white-space: nowrap; }
-    div.dataTables_wrapper {
-        width: 100%;
-        margin: 0 auto;
-    }
-    .dataTables_scroll{ overflow: auto;}
-    .dataTables_scrollBody{ overflow: hidden !important;}
-   .table table tbody td {
-    min-width: 100px;
-}
-#qofull-datatable_wrapper .dataTables_scrollHead{ overflow: unset !important;}
-#engineer-datatable_wrapper .dataTables_scrollBody{ overflow: auto !important;}*/
+.dataTable th input{color: #394263;font-size: 11px;margin: 1px 0; max-width: 100%;padding: 6px 8px;border-radius: 4px; border: 1px solid #ccc;background-color: #fff; width: 100%;}
+.dataTables_paginate{ background: none !important; border: medium none !important;}
+.dataTables_paginate .paginate_button {margin-left: 5px;margin-right: 5px; color: #1bbae1; border-radius: 25px !important;font-size: 12px;padding: 5px 10px; background-color: #fff; line-height: 1.42857;cursor:pointer;}
+.dataTables_paginate .paginate_button:hover{background-color: #1bbae1;color:#fff; text-decoration: none;}
+.dataTables_paginate .current{background-color: #1bbae1;color:#fff; text-decoration: none;}
+.dataTables_info{float:left;border:none !important;width: 47% !important;}
+.pagination_search_input{color: #394263;font-size: 11px;margin: 5px 0; max-width: 100%;width: 65px;padding:3px;border-radius: 4px; border: 1px solid #ccc;background-color: #fff; }
+.dataTables_length label{float: right;font-size: 9px !important;}
+.dataTables_length label select{font-size: 9px;height: auto; padding: 2px;}
+#instrument-table-1_filter {display: none;}
+#range-table-1_filter {display: none;}
+#brand-table-1_filter {display: none;}
 .new_scroll{width:100% !important; overflow: auto;}

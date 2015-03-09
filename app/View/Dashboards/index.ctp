@@ -300,13 +300,21 @@ $(document).on('click','.approve_invoice',function(){
                                     <?php if($user_role['app_prsupervisor']['view'] != 0){ ?>
                                     <li><a href="#prsuper">PR - Supervisor<span class="badge animation-floating"><?php echo $log_activity_prsuper_count; ?></span></a></li>
                                     <?php } ?>
-                                    <?php //if($user_role['app_prsupervisor']['view'] != 0){ ?>
+                                    <?php if($user_role['app_prpurchase']['view'] != 0){ ?>
                                     <li><a href="#prpur">PR Purchase<span class="badge animation-floating"><?php echo $log_activity_prpur_count; ?></span></a></li>
-                                    <?php //} ?>
+                                    <?php } ?>
+                                    <?php if($user_role['app_invoice']['view'] != 0){ ?>
                                     <li><a href="#invoice">Invoice <span class="badge animation-floating"><?php echo $log_activity_invoice_count; ?></span></a></li>
+                                    <?php } ?>
+                                    <?php if($user_role['app_subcon']['view'] != 0){ ?>
                                     <li><a href="#subcon">Sub-Contract DO <span class="badge animation-floating"><?php echo $log_activity_subcon_count; ?></span></a></li>
+                                     <?php } ?>
+                                    <?php if($user_role['app_onsite']['view'] != 0){ ?>
                                     <li><a href="#onsite">Onsite <span class="badge animation-floating"><?php echo $log_activity_onsite_count; ?></span></a></li>
+                                     <?php } ?>
+                                    <?php if($user_role['app_purchase']['view'] != 0){ ?>
                                     <li><a href="#purchaseorder">Purchaseorder <span class="badge animation-floating"><?php echo $log_activity_pur_count; ?></span></a></li>
+                                     <?php } ?>
                                 </ul>
                             <div class="tab-content">
                                 <p></p>
@@ -1001,9 +1009,9 @@ $(document).on('click','.approve_invoice',function(){
                                     <?php if($user_role['app_instrumentgroup']['view'] != 0){ ?>
                                     <li><a href="#group">Instruments for Group <span class="badge animation-floating"><?php echo $log_activity_group_count; ?></span></a></li>
                                     <?php } ?>
-                                    <?php //if($user_role['app_instrumentgroup']['view'] != 0){ ?>
+                                    <?php if($user_role['app_cusinstrument']['view'] != 0){ ?>
                                     <li><a href="#instrumentcustomer">Customer Instrument <span class="badge animation-floating"><?php echo $logactivity_instrument_customer_count; ?></span></a></li>
-                                    <?php //} ?>
+                                    <?php } ?>
                                     
                                 </ul>
                             <div class="tab-content">

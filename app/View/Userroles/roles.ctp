@@ -1002,6 +1002,10 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrument.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
                                         <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Customer - Instrument</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_cusinstrument.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                        </tr>
+                                        <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">Instrument for Group</h5></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrumentgroup.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
@@ -1018,12 +1022,16 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_ready.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" style="width: 150px;"><h5 class="">PR_Supervisor Dashboard</h5></td>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">PR_Supervisor</h5></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prsupervisor.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">PR_Manager</h5></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prmanager.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">PR_Purchase</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_prpurchase.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
                                         <tr>
                                             <td class="text-center" style="width: 150px;"><h5 class="">In Shipping - C & D info</h5></td>
@@ -1033,7 +1041,18 @@
                                             <td class="text-center" style="width: 150px;"><h5 class="">Client PO</h5></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_clientpo.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
-                                        
+                                        <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Sub Contract DO</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_subcon.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Onsite</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_onsite.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Purchaseorders</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_purchase.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                        </tr>
                                     </tbody>
                                 </table> </div>
                         </div></div>

@@ -548,6 +548,36 @@ class SSP {
 		
 		return $data;
 	}
+        static function get_range_details($id)
+	{
+		global $sql_details;
+		
+		$db = self::db( $sql_details );
+		
+		$bindings = array();
+		
+		$data = self::sql_exec( $db, $bindings,
+			"SELECT * FROM ranges where id = $id"
+		);
+		
+		
+		return $data;
+	}
+        static function get_brand_details($id)
+	{
+		global $sql_details;
+		
+		$db = self::db( $sql_details );
+		
+		$bindings = array();
+		
+		$data = self::sql_exec( $db, $bindings,
+			"SELECT * FROM brands where id = $id"
+		);
+		
+		
+		return $data;
+	}
 	
 	
 }
