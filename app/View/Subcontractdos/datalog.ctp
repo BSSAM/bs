@@ -1,4 +1,11 @@
-
+<script>
+    $(function(){
+            setTimeout(function(){
+                    $('.dataTable').after("<div class='new_scroll'></div>");
+                    $('.dataTable').appendTo(".new_scroll");
+                },1000);
+            });
+</script>
 <h1>
                                 <i class="gi gi-user"></i>Sub Contract Delivery Order Datalog
                             </h1>

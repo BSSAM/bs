@@ -89,6 +89,10 @@
             'label' => false, 'options' => $priority,'readonly'=>'readonly'));
         ?>
     </div>
+    <label class="col-md-2 control-label" for="our_ref_no">Our Ref No</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('Salesorder.quotationno', array('id'=>'our_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','readonly'=>'readonly')); ?>
+    </div>
         <?php echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,)); ?>
 </div>
 <div class="form-group">

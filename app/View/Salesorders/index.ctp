@@ -14,6 +14,12 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
        window.location = _ROOT + 'Salesorders/index/' + val;
     });    
 });
+$(function(){
+            setTimeout(function(){
+                    $('.dataTable').after("<div class='new_scroll'></div>");
+                    $('.dataTable').appendTo(".new_scroll");
+                },1000);
+            });
 </script>
 <script type="text/javascript">
     $(function(){

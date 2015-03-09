@@ -20,7 +20,7 @@ class ClientposapprovalController extends AppController {
         if($user_role['app_clientpo']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
-        $this->set('userrole_clientpo',$user_role['app_clientpo']);
+        $this->set('userrole_clientpo',$user_role['job_clientapproval']);
         
         $quotation_list_bybeforedo = $this->Quotation->find('all', array('conditions' => array('Quotation.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>2,'Quotation.is_approved' =>1,'Quotation.is_deliveryorder_created'=>1,'Quotation.is_poapproved' =>0), 'order' => array('Quotation.id' => 'DESC')));
         $salesorder_list_bybeforedo = $this->Salesorder->find('all', array('conditions' => array('Salesorder.is_deleted' =>0,'Customer.acknowledgement_type_id'=>1,'Customer.invoice_type_id'=>3,'Salesorder.is_approved' =>1,'Salesorder.is_deliveryorder_created'=>1,'Salesorder.is_poapproved' =>0), 'order' => array('Salesorder.id' => 'DESC')));

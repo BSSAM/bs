@@ -43,6 +43,12 @@ $(document).ready(function() {
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });
+$(function(){
+            setTimeout(function(){
+                    $('.dataTable').after("<div class='new_scroll'></div>");
+                    $('.dataTable').appendTo(".new_scroll");
+                },1000);
+            });
 </script>
 
 <h1>

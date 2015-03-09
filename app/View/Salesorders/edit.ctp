@@ -123,7 +123,7 @@ if(customer!='')
                                                     <?PHP echo $this->element('Salesorders/edit/description'); ?>
                                                     <div class="form-group form-actions">
                                                         <div class="col-md-9 col-md-offset-9">
-                                                            <?php if ($user_role['app_salesorder']['add'] == 1 && $salesorder['Salesorder']['is_approved'] == 0): ?>
+                                                            <?php if ($user_role['app_salesorder']['view'] == 1 && $salesorder['Salesorder']['is_approved'] == 0): ?>
                                                                 <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Approve', array('type' => 'button', 'class' => 'btn btn-sm btn-danger approve_salesorder', 'escape' => false)); ?>
                                                                 <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
                                                                 <?php echo $this->Html->link('<i class="fa fa-repeat"></i> Cancel', array('controller' => 'Salesorders', 'action' => 'index'), array('class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>

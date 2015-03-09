@@ -67,7 +67,7 @@ class ProceduresController extends AppController
         /*
          * *****************************************************
          */
-        $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
+       $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>1,'Department.is_deleted'=>0),'fields'=>array('id','departmentname')));
         $this->set('departments',$department_array);
         if($this->request->is('post'))
         {
@@ -122,7 +122,7 @@ class ProceduresController extends AppController
          */
         $procedure_dat = $this->Procedure->find('first',array('conditions'=>array('Procedure.id'=>$id),'recursive'=>'2'));
         $this->set('procedure_dat',$procedure_dat);
-        $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>'1'),'fields'=>array('id','departmentname')));
+        $department_array =   $this->Department->find('list',array('conditions'=>array('Department.status'=>1,'Department.is_deleted'=>0),'fields'=>array('id','departmentname')));
         $this->set('departments',$department_array);
         if(empty($id))
         {

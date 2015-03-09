@@ -9,7 +9,7 @@ $(document).ready(function(){
                 $('#model_no').val(null);
                 $('#unit_price').val(null);
                 $('#total_price').val(null);
-                $('#status').prop('checked',false);
+                //$('#status').prop('checked',false);
                 $('#instrument_name_chosen span').text('Select Instrument Name');
                 $('#customer_instrument').prop('disabled',false);
     $("#instrument_result",window.parent.document).hide();

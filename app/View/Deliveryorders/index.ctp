@@ -9,6 +9,12 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
        window.location = _ROOT + 'Deliveryorders/index/' + val;
     });    
 });
+$(function(){
+            setTimeout(function(){
+                    $('.dataTable').after("<div class='new_scroll'></div>");
+                    $('.dataTable').appendTo(".new_scroll");
+                },1000);
+            });
 </script>
 <h1>
                                 <i class="gi gi-user"></i>Delivery Order

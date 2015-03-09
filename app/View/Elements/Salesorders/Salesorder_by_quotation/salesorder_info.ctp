@@ -76,6 +76,14 @@
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
     </div>
 </div>
+
+<div class="form-group">
+    <label class="col-md-2 control-label" for="val_our_ref_no">Our Ref No</label>
+    <div class="col-md-4">
+        <?php echo $this->Form->input('Salesorder.quotationno', array('id'=>'val_our_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','readonly'=>'readonly')); ?>
+    </div>
+    
+</div>
 <!--<div class="form-group">
     
     <label class="col-md-2 control-label" for="val_priority">Priority</label>

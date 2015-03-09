@@ -1,5 +1,6 @@
 <script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
 <script>
+    $('#status').prop('checked',true);
     $(document).on('change','#department_id',function(){
       var depart =   $(this).val();
         $.ajax({
@@ -92,7 +93,7 @@
                                     
                                     <label class="col-md-2 control-label" for="status">Active</label>
                                     <div class="col-md-4 form-control-static">
-                                            <?php echo $this->Form->checkbox('Instrument.status', array('id'=>'status','class'=>'','label'=>false,'checked')); ?>
+                                            <?php echo $this->Form->checkbox('Instrument.status', array('id'=>'status','class'=>'','label'=>false,'checked'=>true)); ?>
                                     </div>
                                 </div>
                                      <div class="form-group form-actions">

@@ -10,7 +10,7 @@ var TablesDatatables = function() {
         init: function() {
             /* Initialize Bootstrap Datatables Integration */
             App.datatables();
-
+            
             /* Initialize Datatables */
             $('#example-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
@@ -112,6 +112,7 @@ var TablesDatatables = function() {
                     $('.dataTable').appendTo(".new_scroll");
                 },1000);
             });
+            
             
             // Other Tables
             

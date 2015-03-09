@@ -65,14 +65,14 @@
             $track_id=$this->random('track');
             $this->set('our_ref_no', $track_id);
             $this->set('salesorderno', $dmt);
-            $priority=$this->Priority->find('list',array('fields'=>array('id','priority')));
-            $payment=$this->Paymentterm->find('list',array('fields'=>array('id','pay')));
-            $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
+            $priority=$this->Priority->find('list',array('conditions'=>array('Priority.is_deleted'=>0,'Priority.status'=>1),'fields'=>array('id','priority')));
+            $payment=$this->Paymentterm->find('list',array('conditions'=>array('Paymentterm.is_deleted'=>0,'Paymentterm.status'=>1),'fields'=>array('id','pay')));
+            $service=$this->Service->find('list',array('conditions'=>array('Service.is_deleted'=>0,'Service.status'=>1),'fields'=>array('id','servicetype')));
             $instrument_types=$this->InstrumentType->find('list',array('conditions'=>array('InstrumentType.status'=>1,'is_deleted'=>0),'fields'=>array('id','salesorder')));
             
             $this->set(compact('service','payment','priority','instrument_types'));
             $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
-            $title =   $this->Title->find('all');
+           $title =   $this->Title->find('all',array('conditions'=>array('Title.is_deleted'=>0,'Title.status'=>1)));
             foreach($title as $title_name)
             {
                 $titles[] = $title_name['Title']['title_name'];
@@ -247,7 +247,7 @@
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
             $this->set(compact('service','payment','priority'));
             $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
-            $title =   $this->Title->find('all');
+            $title =   $this->Title->find('all',array('conditions'=>array('Title.is_deleted'=>0,'Title.status'=>1)));
             foreach($title as $title_name)
             {
                 $titles[] = $title_name['Title']['title_name'];
@@ -256,6 +256,7 @@
             if($this->request->is('post'))
             {
                 
+               // $this->request->data['Salesorder']['our_ref_no'] = $id;
                //pr($this->request->data);exit;
                 
             
