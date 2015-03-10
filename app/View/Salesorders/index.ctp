@@ -1,25 +1,90 @@
-<style>
-    #result{
-        margin-top: 35px;
-    }
-</style>
+<?php echo $this->Html->script(array('datatable/jquery-1.11.1.min','datatable/jquery.dataTables.min'));  ?>
 <script>
-    var path_url='<?PHP echo Router::url('/',true); ?>';
-</script>
-<script>
-var _ROOT ='<?PHP echo Router::url('/',true); ?>';
-$(function() {
-$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
-       var val = $(this).val();  // val is the id
-       window.location = _ROOT + 'Salesorders/index/' + val;
-    });    
+    
+        var _ROOT ='<?PHP echo Router::url('/',true); ?>';
+        $(function() {
+       
+        ///  Status  Cond
+        
+        <?PHP if(isset($_GET['val'])){ ?>
+        var valu  ='<?PHP echo $_GET['val']; ?>';
+        <?php } else { ?>
+        var valu ='<?php echo '1'; ?>';
+        <?php } ?>
+
+
+        $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
+        var val = $(this).val(); 
+        window.location = _ROOT + 'Salesorders/index/?val=' + val;
+
+        });
+        
+        //// Search Input Element Add
+    
+        html = '<tr>';
+        $('#salesorder-table-1 thead th').each(function(){
+        html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
+        });
+        html += '</tr>';
+
+        //console.log(html);
+
+        $('#salesorder-table-1 thead').prepend(html);
+
+        table = $('#salesorder-table-1').DataTable( {
+        //"bFilter" : false,
+        "processing": true,
+        "serverSide": true,
+        //"scrollX": 1200,
+        
+	//"sScrollX": "100%",
+        //"bScrollCollapse": true,
+        "ajax": _ROOT+"datatable/job/salesorder-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>&val="+valu
+        });
+        
+        
+        
+        setTimeout(function(){
+            
+            $('.dataTable ').after("<div class='new_scroll'></div>");
+            $( '.dataTable' ).appendTo( ".new_scroll" );
+            
+        }, 1000);
+        
+        
+        //// Search Pages
+        $("#jump").on( 'keyup change', function () {
+
+        var info = table.page.info();
+
+        page = (parseInt($(this).val()) - 1);
+
+        if($.isNumeric(page) && info.pages >= page)
+        table.page(page).draw( false );
+        else
+        table.page(0).draw( false );
+
+        });
+
+        //// Search Result
+
+        table.columns().eq( 0 ).each( function ( colIdx ) {
+           if(colIdx == 5)
+           {
+                $('#salesorder-table-1 thead tr:first select').on( 'change', function () {
+                    table.column( colIdx ).search( $(this).val() ).draw();
+                });    
+            
+            }
+            else
+            {
+                $('#salesorder-table-1 thead tr:first input:eq('+colIdx+')').on( 'keyup change', function () {
+                    table.column( colIdx ).search($(this).val()).draw();
+                });
+            }
+        });
+       
 });
-$(function(){
-            setTimeout(function(){
-                    $('.dataTable').after("<div class='new_scroll'></div>");
-                    $('.dataTable').appendTo(".new_scroll");
-                },1000);
-            });
 </script>
 <script type="text/javascript">
     $(function(){
@@ -45,30 +110,42 @@ $(function(){
                 });
             }return false;    
         });});
-</script>                
+</script>
+<?php if(isset($_GET['val'])) { 
+    if($_GET['val'] == 3) { ?>
+<style>
+    table.dataTable td{ color: red;  border:1px lightgrey;}
+</style>
+<?php } if($_GET['val'] == 2) { ?>
+<style>
+    table.dataTable td{ color: #860000;}
+</style>
+<?php }} ?>
+<style>
+    #result{
+        margin-top: 35px;
+    }
+</style>
 <h1>
-    <i class="gi gi-user"></i>Sales Order
-</h1>
-                    </div>
+                                <i class="fa fa-table"></i>Salesorder
+                            </h1>
+                        </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Salesorders',array('controller'=>'Salesorders','action'=>'index')); ?></li>
+                        <li><?php echo $this->Html->link('Salesorder',array('controller'=>'Salesorders','action'=>'index')); ?></li>
                     </ul>
                     <!-- END Datatables Header -->
-                    <?PHP echo $this->element('message'); ?>
+                    <?php echo $this->element('message');?>
                     <!-- Datatables Content -->
                     <div class="block full">
-                        
-                        
                         <div class="block-title">
-                            <h2>List Of Sales Order <?php if($deleted_val == '2'): echo "- Pending Approval"; elseif($deleted_val == '3'): echo "- InActive"; elseif($deleted_val == '1'): echo "- Active"; endif;?></h2> 
-                            <?php if($userrole_cus['add']==1){ ?>                            
-                            <div style="float:right;">
-                                <h2><?php echo $this->Html->link('Add Salesorders', array('controller' => 'Salesorders', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Sales Order')); ?></h2>
-                            </div>
+                            <h2>List Of Salesorders <?php if(isset($_GET['val'])) { if($_GET['val'] == 2) {  echo "- Pending Approval"; }if($_GET['val'] == 3) { echo "- InActive"; } }?></h2>
+                            <?php if($userrole_cus['add']==1){ ?>
+                            <h2 style="float:right;"><?php echo $this->Html->link('Add Salesorder',array('controller'=>'Salesorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Salesorder')); ?></h2>
                             <?php } ?>
                         </div>
+                    
                         <div class="block full row col-sm-12 padding_t_b10">
 <!--                             <label class="col-md-2 control-label">Existing Quotation</label>-->
                         <div class="form-actions  col-sm-7 pull-right">
@@ -107,8 +184,9 @@ $(function(){
                             
                         </div>
                         <div class="table-responsive">
-                            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                            <table id="salesorder-table-1" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
+
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">Sales Orders No</th>
@@ -122,51 +200,20 @@ $(function(){
                                         <th class="text-center">Our Ref No</th>
                                         <th class="text-center">Reference No</th>
                                         <th class="text-center">Salesperson</th>
-                                        <?php if($deleted_val != 3): ?><th class="text-center">Action</th><?php endif; ?>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?PHP if(!empty($salesorder )): ?>
-                                     <?php foreach($salesorder as $salesorder_list): ?>
-                                    <tr <?php if($salesorder_list['Salesorder']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['salesorderno'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['in_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['due_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $this->Quotation->branchname($salesorder_list['Salesorder']['branch_id']); ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Customer']['Customertagname'] ?></td>
-                                        <td class="text-center"><?PHP echo $this->Quotation->contactname($salesorder_list['Salesorder']['attn']); ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['phone'] ?></td>
-                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['email'] ?></td>
-                                         <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['quotationno'] ?></td>
-                                        <td class="text-center"><?PHP echo $salesorder_list['Salesorder']['ref_no'] ?></td>
-                                        <td class="text-center"><?PHP echo $this->Quotation->salespersonname($salesorder_list['Salesorder']['quotation_id']); ?></td>
-                                        <?php if($deleted_val != 3): ?>
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <?php if($userrole_cus['edit']==1){ ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php } ?>
-                                            </div>
-                                            <?php if($userrole_cus['delete']==1){ ?>
-                                            <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                            <?php } ?>
-                                            <?php if($userrole_cus['view']==1 && $salesorder_list['Salesorder']['is_approved'] == 1){ ?>
-                                            <?php echo $this->Html->link('<i class="gi gi-print"></i>',array('action'=>'pdf',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                            <?php } ?>
-                                            <?php if($userrole_cus['view']==1 && $salesorder_list['Salesorder']['is_approved'] == 1){ ?>
-                                            <?php echo $this->Html->link('<i class="fa fa-tags"></i>',array('action'=>'pdf_tag',$salesorder_list['Salesorder']['id']),array('data-toggle'=>'tooltip','title'=>'Tags','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                            <?php } ?>
-                                        </td>
-                                        <?php endif; ?>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                    <?PHP endif; ?>
-                                </tbody>
+                                
                                 
                             </table>
-                            <div class="btn-group btn-group-md">
-                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
-                                            </div>
+                            <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
+                        </div>
+                        <div class="btn-group btn-group-md">
+                            <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+                        </div>
+                    </div>
+                           
+                            
                             <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>
                             <?php if ($this->Session->flash() != '') { ?>
@@ -178,3 +225,4 @@ $(function(){
                                 }();
                                 </script> 
                             <?php } ?>
+

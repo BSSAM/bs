@@ -249,6 +249,11 @@ class SSP {
 			 $order
 			 $limit"
 		);
+//                echo "SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
+//			 FROM `$table`
+//			 $where
+//			 $order
+//			 $limit";
 
 		// Data set length after filtering
 		$resFilterLength = self::sql_exec( $db,
@@ -601,11 +606,23 @@ class SSP {
                     "SELECT * FROM quotations where id = $id"
             );
 
-
             return $data;
 	}
         
-        
+        static function get_sales_details($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM salesorders where id = '$id'"
+            );
+
+            return $data;
+	}
         
         
         
