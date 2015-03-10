@@ -31,6 +31,7 @@ class CustomertaglistsController extends AppController
         $this->set('customer_id',$id);
         $maintag_data = $this->Customer->find('first',array('conditions'=>array('Customer.status'=>1,'Customer.id'=>$id,'Customer.is_deleted'=>0),'fields'=>array('Customername','customergroup_id')));
         $this -> set('cust',$maintag_data['Customer']['Customername']);
+		$this->set('group_id',$maintag_data['Customer']['customergroup_id']);
         $this->Address->deleteAll(array('Address.status'=>0));
         if(!empty($maintag_data))
         {

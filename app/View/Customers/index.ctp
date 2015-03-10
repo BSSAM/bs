@@ -1,24 +1,99 @@
-<h1><i class="gi gi-user"></i>Customers</h1>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+                
+<script>
+    
+var _ROOT ='<?PHP echo Router::url('/',true); ?>';
+
+$(function() {
+//$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
+//       var val = $(this).val();  // val is the drug id
+//       window.location = _ROOT + 'Procedures/index/' + val;
+//    }); 
+   
+        html = '<tr>';
+        $('#customer-table-1 thead th').each(function(){
+        html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
+        });
+        html += '</tr>';
+
+        //console.log(html);
+
+        $('#customer-table-1 thead').prepend(html);
+
+        
+        table = $('#customer-table-1').DataTable( {
+        //"bFilter" : false,
+        "processing": true,
+        "serverSide": true,
+        //"scrollX": 1200,
+		//"sScrollX": "100%",
+        //"bScrollCollapse": true,
+        "ajax": _ROOT+"datatable/customer/customer-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>
+		&instrument=<?php echo $userrole_cus['instrument'];?>&tag=<?php echo $userrole_cus['tag'];?>"
+        });
+       
+        setTimeout(function(){
+            
+            $('.dataTable ').after("<div class='new_scroll'></div>");
+            $( '.dataTable' ).appendTo( ".new_scroll" );
+            
+        }, 1000);
+        
+        $("#jump").on( 'keyup change', function () {
+
+        var info = table.page.info();
+
+        page = (parseInt($(this).val()) - 1);
+
+        if($.isNumeric(page) && info.pages >= page)
+        table.page(page).draw( false );
+        else
+        table.page(0).draw( false );
+
+        });
+
+        table.columns().eq( 0 ).each( function ( colIdx ) {
+           if(colIdx == 7)
+           {
+                $('#customer-table-1 thead tr:first select').on( 'change', function () {
+                    table.column( colIdx ).search( $(this).val() ).draw();
+                });    
+            
+            }
+            else
+            {
+                $('#customer-table-1 thead tr:first input:eq('+colIdx+')').on( 'keyup change', function () {
+                    
+                    console.log($(this).val());
+                    table.column( colIdx ).search($(this).val()).draw();
+                });
+            }
+        });
+
+});
+</script>
+
+<h1> <i class="gi gi-user"></i> Customers </h1>
 </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
-    <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-    <li><?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?></li>
+    <li> <?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?> </li>
+    <li> <?php echo $this->Html->link('Customers',array('controller'=>'Customers','action'=>'index')); ?> </li>
 </ul>
 <!-- END Datatables Header -->
             <?PHP echo $this->element('message');?>            
 <!-- Datatables Content -->
 <div class="block full">
     <div class="block-title">
-        <h2>List Of Customers</h2>
+        <h2> List Of Customers </h2>
         <?php if($userrole_cus['add']==1){ ?>
         <h2 style="float:right;"><?php echo $this->Html->link('Add Customer',array('controller'=>'Customers','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Customer')); ?></h2>
         <?php } ?>
     </div>
                             
-                            
     <div class="table-responsive">
-        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <table id="customer-table-1" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center">ID</th>
@@ -30,69 +105,20 @@
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                
-                <?php foreach ($customer as $customer_list): ?>
-                    <tr <?php if($customer_list['Customer']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                        <td class="text-center"><?php echo $customer_list['Customer']['id']; ?></td>
-                        <td class="text-center"><a href="javascript:void(0)"><?php echo $customer_list['Customer']['Customertagname']; ?></a></td>
-                        <td class="text-center"><?php echo $customer_list['Customer']['phone']; ?></td>
-                        <td class="text-center"><?php echo $customer_list['Customer']['customertype']; ?></td>
-                        <td class="text-center"><?php echo $customer_list['Industry']['industryname']; ?></td>
-                        <td class="text-center"><?php echo $customer_list['Location']['locationname']; ?></td>
-                        <td class="text-center">
+          </table>
+         <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
+    </div>
+    
+</div>
                             
-                                <?PHP
-                                
-                                
-                                if($customer_list['Customer']['is_approved'] == 1):
-                                if($userrole_cus['instrument']==1){
-                                
-                                echo $this->html->link('Instrument', array('controller' => 'Customers',
-                                    'action' => 'instrument_map', $customer_list['Customer']['id']), array('title' => 'Map Instrument',
-                                    'class' => 'btn  btn-xs btn-primary', 'data-toggle' => 'tooltip', 'escape' => false));
-                                }
-                                ?>
-                                <?PHP $tag_count    = $this->Customer->checktag_list($customer_list['Customer']['customergroup_id']); ?>
-                                <?PHP if($tag_count==1):
-                                        $tag_name   = 'Add Tag';
-                                        $controller='Customertaglists';$action='add' ;
-                                        else:
-                                        $tag_name   = 'Tag list';$controller='Customertaglists';
-                                        $action='index';
-                                        endif;
-                                      
-                                ?>
-                                <?PHP
-                                if($userrole_cus['tag']==1){
-                                echo $this->html->link($tag_name, array('controller' => $controller,
-                                    'action' => $action, $customer_list['Customer']['id']), array('title' => 'Tags',
-                                    'class' => 'btn  btn-xs btn-warning', 'data-toggle' => 'tooltip', 'escape' => false));
-                                }
-                                endif; 
-                                ?>
-                            <div class="btn-group">
-                                <?php if($userrole_cus['edit']==1){ ?>
-                                <?PHP
-                                echo $this->html->link('<i class="fa fa-pencil"></i>', array('controller' => 'Customers',
-                                    'action' => 'edit', $customer_list['Customer']['id']), array('title' => 'Edit',
-                                    'class' => 'btn btn-xs btn-default', 'data-toggle' => 'tooltip', 'escape' => false));
-                                ?>
-                                <?php } ?>
-                                <?php if($userrole_cus['delete']==1){ ?>
-                                <?PHP
-                                echo $this->Form->postlink('<i class="fa fa-times"></i>', array('controller' => 'Customers',
-                                    'action' => 'delete', $customer_list['Customer']['id']), array('title' => 'Delete',
-                                    'class' => 'btn btn-xs btn-danger', 'data-toggle' => 'tooltip', 'escape' => false, 'confirm' => 'Are you sure want to delete?'));
-                                ?>
-                                <?php } ?>
-                             </div>
-                    </td>
-                </tr>
-                                    <?php endforeach; ?>
-                                        
-            </tbody>
-        </table>
-        
-        
-      
+                            <?php echo $this->Html->script('pages/uiProgress'); ?>
+                            <script>$(function(){ UiProgress.init(); });</script>
+                            <?php if ($this->Session->flash() != '') { ?>
+                                <script> var UiProgress = function() {
+                                    // Get random number function from a given range
+                                    var getRandomInt = function(min, max) {
+                                        return Math.floor(Math.random() * (max - min + 1)) + min;
+                                    };
+                                }();
+                                </script> 
+                            <?php } ?>

@@ -24,7 +24,7 @@ class ProceduresController extends AppController
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         
-        $this->set('userrole_cus',$user_role['ins_instrument']);
+        $this->set('userrole_cus',$user_role['ins_procedureno']);
         /*
          * *****************************************************
          */

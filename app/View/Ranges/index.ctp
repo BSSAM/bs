@@ -1,5 +1,5 @@
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-                <script type="text/javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
                 
 <script>
     
@@ -30,7 +30,7 @@ $(function() {
         
 	//"sScrollX": "100%",
         //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/range-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>"
+        "ajax": _ROOT+"datatable/instrument/range-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>"
         });
         
         setTimeout(function(){
@@ -73,7 +73,7 @@ $(function() {
 
 });
 </script>
-<h1>
+							<h1>
                                 <i class="fa fa-table"></i>Ranges
                             </h1>
                         </div>

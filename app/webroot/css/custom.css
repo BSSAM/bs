@@ -208,7 +208,9 @@ box-sizing: content-box !important;}
 .pagination_search_input{color: #394263;font-size: 11px;margin: 5px 0; max-width: 100%;width: 65px;padding:3px;border-radius: 4px; border: 1px solid #ccc;background-color: #fff; }
 .dataTables_length label{float: right;font-size: 9px !important;}
 .dataTables_length label select{font-size: 9px;height: auto; padding: 2px;}
-#instrument-table-1_filter {display: none;}
-#range-table-1_filter {display: none;}
-#brand-table-1_filter {display: none;}
+
+#range-table-1_filter ,#brand-table-1_filter ,#instrument-table-1_filter ,#procedures-table-1_filter ,#unit-table-1_filter {display: none;}
+
+
+
 .new_scroll{width:100% !important; overflow: auto;}

@@ -25,6 +25,7 @@ class CustomersController extends AppController
         if($user_role['cus_customer']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+		
         $this->set('userrole_cus',$user_role['cus_customer']);
         /*
          * ---------------  Functionality of Users -----------------------------------

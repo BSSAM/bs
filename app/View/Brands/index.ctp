@@ -30,7 +30,7 @@ $(function() {
         
 	//"sScrollX": "100%",
         //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/brand-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>"
+        "ajax": _ROOT+"datatable/instrument/brand-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>"
         });
         
         setTimeout(function(){

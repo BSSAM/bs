@@ -1,15 +1,79 @@
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+                
 <script>
+    
 var _ROOT ='<?PHP echo Router::url('/',true); ?>';
+
 $(function() {
-$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
-       var val = $(this).val();  // val is the drug id
-       window.location = _ROOT + 'Procedures/index/' + val;
-    });    
+//$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
+//       var val = $(this).val();  // val is the drug id
+//       window.location = _ROOT + 'Procedures/index/' + val;
+//    }); 
+   
+        html = '<tr>';
+        $('#procedures-table-1 thead th').each(function(){
+        html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
+        });
+        html += '</tr>';
+
+        //console.log(html);
+
+        $('#procedures-table-1 thead').prepend(html);
+
+        
+        table = $('#procedures-table-1').DataTable( {
+        //"bFilter" : false,
+        "processing": true,
+        "serverSide": true,
+        //"scrollX": 1200,
+      
+	//"sScrollX": "100%",
+        //"bScrollCollapse": true,
+        "ajax": _ROOT+"datatable/instrument/procedures-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>"
+        });
+        
+        setTimeout(function(){
+            
+            $('.dataTable ').after("<div class='new_scroll'></div>");
+            $( '.dataTable' ).appendTo( ".new_scroll" );
+            
+        }, 1000);
+        
+        $("#jump").on( 'keyup change', function () {
+
+        var info = table.page.info();
+
+        page = (parseInt($(this).val()) - 1);
+
+        if($.isNumeric(page) && info.pages >= page)
+        table.page(page).draw( false );
+        else
+        table.page(0).draw( false );
+
+        });
+
+        table.columns().eq( 0 ).each( function ( colIdx ) {
+           if(colIdx == 6)
+           {
+                $('#procedures-table-1 thead tr:first select').on( 'change', function () {
+                    table.column( colIdx ).search( $(this).val() ).draw();
+                });    
+            
+            }
+            else
+            {
+                $('#procedures-table-1 thead tr:first input:eq('+colIdx+')').on( 'keyup change', function () {
+                    
+                    console.log($(this).val());
+                    table.column( colIdx ).search($(this).val()).draw();
+                });
+            }
+        });
+
 });
 </script>
-<h1><script>
-    var path='<?PHP echo Router::url('/',true); ?>';
-</script>
+							<h1>
                                 <i class="fa fa-table"></i>Procedures
                             </h1>
                         </div>
@@ -29,11 +93,10 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                             <?php } ?>
                         </div>
                         <div class="table-responsive">
-                            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                            <table id="procedures-table-1" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
                                         <th class="text-center">ID</th>
-                                        <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
                                         <th class="text-center">Created On</th>
                                         <th class="text-center">Procedures No</th>
                                         <th class="text-center">Department</th>
@@ -42,54 +105,12 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php foreach($procedures as $procedure): ?>
-                                       
-                                    <tr <?php if($procedure['Procedure']['is_approved'] == 1):?> class="" <?php else:?> class="themed-color-fire" <?php endif; ?>>
-                                        <td class="text-center"><?php echo $procedure['Procedure']['id'];?></td>
-                                        
-                                        <td class="text-center"><?php echo $this->Time->format('F jS, Y h:i A',$procedure['Procedure']['created']);?></td>
-                                        <td class="text-center"><?php echo $procedure['Procedure']['procedure_no'];?></td>
-                                        <td class="text-center"><?php echo $procedure['Department']['departmentname'];?></td>
-                                        <td class="text-center"><?php echo $procedure['Procedure']['description'];?></td>
-                                        <?php $status   =   ($procedure['Procedure']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
-                                        <td class="text-center"><?PHP echo $status; ?></td>
-                                        <?php if($deleted_val != 3): ?>
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <?php if($userrole_cus['edit']==1){ ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$procedure['Procedure']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php } ?>
-                                                <?php if($userrole_cus['delete']==1){ ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$procedure['Procedure']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                                <?php } ?>
-                                            </div>
-                                        </td>
-                                        <?php endif; ?>
-                                        <?php if($deleted_val == 3): ?>
-                                             <td class="text-center">
-                                                <div class="btn-group ">
 
-                                                    <?PHP echo $this->Form->postlink('<i class="fa fa-undo"></i>',array('action'=>'retrieve',$procedure['Procedure']['id']),array('title'=>'Retrieve',
-                                                            'class'=>'btn btn-xs btn-warning','data-toggle'=>'tooltip','escape'=>false,'confirm'=>'Are you sure want to Retrieve?')); ?>
-                                                </div>
-                                            </td>
-                                        <?php endif; ?>
-                                    </tr>
-                                    
-                                    <?php endforeach; ?>
-                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="8">
-                                            <div class="btn-group btn-group-md pull-right">
-                                                <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
                             </table>
+                            <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
+                        </div>
+                    </div>
+                           
                             
                             <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>

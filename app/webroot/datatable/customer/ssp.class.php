@@ -228,7 +228,7 @@ class SSP {
 	 *  @param  array $columns Column information array
 	 *  @return array          Server-side processing response array
 	 */
-	static function simple ( $request, $conn, $table, $primaryKey, $columns )
+	static function simple ( $request, $conn, $table, $primaryKey, $columns , $where)
 	{
 		$bindings = array();
 		$db = self::db( $conn );
@@ -236,8 +236,11 @@ class SSP {
 		// Build the SQL query string from the request
 		$limit = self::limit( $request, $columns );
 		$order = self::order( $request, $columns );
-		$where = self::filter( $request, $columns, $bindings );
-
+		if(!$where)
+		{
+			$where = self::filter( $request, $columns, $bindings );
+		}
+		
 		// Main query to actually get the data
 		$data = self::sql_exec( $db, $bindings,
 			"SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
@@ -533,7 +536,8 @@ class SSP {
 		
 		return isset($data[0]['departmentname']) ? $data[0]['departmentname'] : '';
 	}
-        static function get_instrument_details($id)
+        
+	static function get_customers_details($id)
 	{
 		global $sql_details;
 		
@@ -542,13 +546,14 @@ class SSP {
 		$bindings = array();
 		
 		$data = self::sql_exec( $db, $bindings,
-			"SELECT * FROM instruments where id = $id"
+			"SELECT * FROM customers WHERE id = '".$id."'"
 		);
 		
 		
 		return $data;
 	}
-        static function get_range_details($id)
+    
+	static function get_tag_count($id)
 	{
 		global $sql_details;
 		
@@ -557,28 +562,47 @@ class SSP {
 		$bindings = array();
 		
 		$data = self::sql_exec( $db, $bindings,
-			"SELECT * FROM ranges where id = $id"
+			"SELECT * FROM customers where customergroup_id = '".$id."' AND status = '1'"
 		);
 		
 		
-		return $data;
+		return count($data);
 	}
-        static function get_brand_details($id)
-	{
-		global $sql_details;
-		
-		$db = self::db( $sql_details );
-		
-		$bindings = array();
-		
-		$data = self::sql_exec( $db, $bindings,
-			"SELECT * FROM brands where id = $id"
-		);
-		
-		
-		return $data;
-	}
+   
 	
 	
-}
+	static function get_industryname($id)
+	{
+		global $sql_details;
+		
+		$db = self::db( $sql_details );
+		
+		$bindings = array();
+		
+		$data = self::sql_exec( $db, $bindings,
+			"SELECT * FROM industries where id = $id"
+		);
+		
+		return isset($data[0]['industryname']) ? $data[0]['industryname'] : '';
+	}
+        
+	static function get_locationname($id)
+	{
+		global $sql_details;
+		
+		$db = self::db( $sql_details );
+		
+		$bindings = array();
+		
+		$data = self::sql_exec( $db, $bindings,
+			"SELECT * FROM locations where id = $id"
+		);
+		
+		
+		return isset($data[0]['locationname']) ? $data[0]['locationname'] : '';
+	}
+        
+	
+	
+} ?>
 
