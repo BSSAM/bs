@@ -146,7 +146,9 @@
                             </table>
                             <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
                         </div>
-                        <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+                        <div class="btn-group btn-group-md">
+                            <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+                        </div>
                     </div>
                            
                             
