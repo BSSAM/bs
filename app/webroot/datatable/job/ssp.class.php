@@ -228,7 +228,7 @@ class SSP {
 	 *  @param  array $columns Column information array
 	 *  @return array          Server-side processing response array
 	 */
-	static function simple ( $request, $conn, $table, $primaryKey, $columns )
+	static function simple ( $request, $conn, $table, $primaryKey, $columns, $where )
 	{
 		$bindings = array();
 		$db = self::db( $conn );
@@ -236,8 +236,11 @@ class SSP {
 		// Build the SQL query string from the request
 		$limit = self::limit( $request, $columns );
 		$order = self::order( $request, $columns );
-		$where = self::filter( $request, $columns, $bindings );
-
+                if(!$where)
+                {    
+                    $where = self::filter( $request, $columns, $bindings );
+                }
+                
 		// Main query to actually get the data
 		$data = self::sql_exec( $db, $bindings,
 			"SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`

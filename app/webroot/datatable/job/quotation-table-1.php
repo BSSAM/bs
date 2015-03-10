@@ -6,7 +6,22 @@ $table = 'quotations';
 
 // Table's primary key
 $primaryKey = 'id';
- 
+$val = $_GET['val'];
+//'1'=>'Active','2'=>'Pending Approval','3'=>'InActive'
+
+if($val == 2)
+{
+    $where = 'where is_approved = 0 AND is_deleted = 0';
+}
+elseif($val == 3)
+{
+    $where = 'where is_deleted = 1';
+}
+else
+{
+    $where = 'where is_deleted = 0';
+}
+
 $columns = array(
     array( 'db' => 'quotationno', 'dt' => 0 ),
     array( 'db' => 'reg_date', 'dt' => 1 ),
@@ -20,20 +35,18 @@ $columns = array(
         }),
     array( 'db' => 'phone', 'dt' => 6 ),
     array( 'db' => 'email', 'dt' => 7 ),
-    array( 'db' => 'attn', 'dt' => 8, 'formatter' => function( $d, $row ) {
-            return SSP::get_attn_name($d);
-        }),
-    array( 'db' => 'id', 'dt' => 9, 'formatter' => function( $d, $row ) {
+    
+    array( 'db' => 'id', 'dt' => 8, 'formatter' => function( $d, $row ) {
             return SSP::get_salesperson_name($d);
         }),
-    array( 'db' => 'ref_no', 'dt' => 10 ),
-    array( 'db' => 'id', 'dt' => 11, 'formatter' => function( $d, $row ) {
+    array( 'db' => 'ref_no', 'dt' => 9 ),
+    array( 'db' => 'id', 'dt' => 10, 'formatter' => function( $d, $row ) {
             return SSP::get_quo_device_total($d);
         }),
 //    array( 'db' => 'status',     'dt' => 5, 'formatter' => function( $d, $row ) {
 //            return ($d == 1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';
 //        }),
-    array( 'db' => 'id', 'dt' => 12 ,'formatter' => function ( $d, $row) {
+    array( 'db' => 'id', 'dt' => 11 ,'formatter' => function ( $d, $row) {
             
             global $base_url;
             
@@ -63,5 +76,5 @@ $columns = array(
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $where )
 );
