@@ -6,11 +6,27 @@
 var _ROOT ='<?PHP echo Router::url('/',true); ?>';
 
 $(function() {
-//$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
-//       var val = $(this).val();  // val is the drug id
-//       window.location = _ROOT + 'Procedures/index/' + val;
-//    }); 
-   
+		
+		///  Status  Cond
+        
+       
+		var group_id ='<?php echo $group_id; ?>';
+		var customer_id ='<?php echo $customer_id; ?>';
+	    <?PHP 
+		if(isset($_GET['val'])){ ?>
+        var valu  ='<?PHP echo $_GET['val']; ?>';
+        <?php } else { ?>
+        var valu ='<?php echo '1'; ?>';
+        <?php } ?>
+
+
+        $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
+        var val = $(this).val(); 
+        window.location = _ROOT + 'Customertaglists/index/'+customer_id+'?val='+val+'&group_id='+group_id;
+
+        });
+   		
+		 //// Search Input Element Add   
         html = '<tr>';
         $('#CustomerTag-table-1 thead th').each(function(){
         html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
@@ -23,13 +39,14 @@ $(function() {
 
         
         table = $('#CustomerTag-table-1').DataTable( {
+			
         //"bFilter" : false,
         "processing": true,
         "serverSide": true,
         //"scrollX": 1200,
 		//"sScrollX": "100%",
         //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/customer/customertag-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>&group_id=<? echo $group_id; ?>"
+        "ajax": _ROOT+"datatable/customer/customertag-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>&group_id=<? echo $group_id; ?>&val="+valu
         });
        
         setTimeout(function(){
@@ -72,6 +89,16 @@ $(function() {
 
 });
 </script>
+<?php if(isset($_GET['val'])) { 
+    if($_GET['val'] == 3) { ?>
+<style>
+    table.dataTable td{ color: red;  border:1px lightgrey;}
+</style>
+<?php } if($_GET['val'] == 2) { ?>
+<style>
+    table.dataTable td{ color: #860000;}
+</style>
+<?php }} ?>
 <h1 class="text-center">
     <i class="gi gi-user"></i><div class="label label-six text-center" style="line-height: 61px;"><?php echo $cust; ?></div>
 </h1>
@@ -107,7 +134,9 @@ $(function() {
             </table>
          <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
     </div>
-    
+     <div class="btn-group btn-group-md">
+                            <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+      </div>
 </div>
                             
                             <?php echo $this->Html->script('pages/uiProgress'); ?>

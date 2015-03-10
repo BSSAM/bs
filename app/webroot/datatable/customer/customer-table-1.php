@@ -6,6 +6,23 @@ $table = 'customers';
 $where = ''; 
 // Table's primary key
 $primaryKey = 'id';
+
+$val = $_GET['val'];
+//'1'=>'Active','2'=>'Pending Approval','3'=>'InActive'
+
+if($val == 2)
+{
+    $where = 'where is_approved = 0 AND is_deleted = 0';
+}
+elseif($val == 3)
+{
+    $where = 'where is_deleted = 1';
+}
+else
+{
+    $where = 'where is_deleted = 0';
+}
+
  
 $columns = array(
     array( 'db' => 'id', 'dt' => 0 ),
@@ -37,7 +54,7 @@ $columns = array(
 					
                     $cn .= '<a class="btn  btn-xs btn-primary" data-toggle="tooltip" href="'.$base_url.'Customers/instrument_map/'.$d.'" title="Map Instrument">Instrument</a>';
 
-                }
+            }
                 if($_GET['tag']==1){
 					
 					 					$tag_count = SSP::get_tag_count($val[0]['customergroup_id']);

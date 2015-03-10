@@ -209,7 +209,7 @@ box-sizing: content-box !important;}
 .dataTables_length label{float: right;font-size: 9px !important;}
 .dataTables_length label select{font-size: 9px;height: auto; padding: 2px;}
 
-#range-table-1_filter ,#brand-table-1_filter ,#instrument-table-1_filter ,#procedures-table-1_filter ,#unit-table-1_filter, #quotation-table-1 {display: none;}
+#range-table-1_filter ,#brand-table-1_filter ,#instrument-table-1_filter ,#procedures-table-1_filter ,#unit-table-1_filter, #quotation-table-1_filter ,#CustomerTag-table-1_filter , #customer-table-1_filter{display: none;}
 
 
 

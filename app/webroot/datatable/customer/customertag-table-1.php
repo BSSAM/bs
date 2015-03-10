@@ -4,10 +4,27 @@ include 'config.php';
 // DB table to use
 $table = 'customers';
 $group_id = $_GET['group_id'];
-$where = "where customergroup_id = '".$group_id."'";
+//$where = "where customergroup_id = '".$group_id."'";
 
 // Table's primary key
 $primaryKey = 'id';
+
+$valus = $_GET['val'];
+//'1'=>'Active','2'=>'Pending Approval','3'=>'InActive'
+
+	if($valus == 2)
+	{
+		$where = "where is_approved = 0 AND is_deleted = 0  AND customergroup_id = '".$group_id."'";
+	}
+	elseif($valus == 3)
+	{
+		$where = "where is_deleted = 1 AND customergroup_id = '".$group_id."'";
+	}
+	else
+	{
+		$where = "where customergroup_id = '".$group_id."'";
+	}
+
  
 $columns = array(
     array( 'db' => 'id', 'dt' => 0 ),
@@ -33,11 +50,11 @@ $columns = array(
             if(!$val[0]['is_deleted'])
             {
                 if($_GET['edit']==1){
-                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customers/edit/'.$d.'" data-original-title="Edit">
+                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customertaglists/edit/'.$d.'" data-original-title="Edit">
 <i class="fa fa-pencil"></i></a>';
                 }
                 if($_GET['delete']==1){
-                    $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Customers/delete/'.$d.'" data-original-title="Delete">
+                    $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Customertaglists/delete/'.$d.'" data-original-title="Delete">
 <i class="fa fa-times"></i></a>';
                 }
             }
