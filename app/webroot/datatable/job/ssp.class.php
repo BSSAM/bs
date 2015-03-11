@@ -161,6 +161,7 @@ class SSP {
 	{
 		$globalSearch = array();
 		$columnSearch = array();
+                $otherSearch = array();
 		$dtColumns = self::pluck( $columns, 'dt' );
 
 		if ( isset($request['search']) && $request['search']['value'] != '' ) {
@@ -205,11 +206,15 @@ class SSP {
 				implode(' AND ', $columnSearch) :
 				$where .' AND '. implode(' AND ', $columnSearch);
 		}
+                if( count($otherSearch)) {
+                    
+                }
 
 		if ( $where !== '' ) {
 			$where = 'WHERE '.$where;
+                        //$where = 'AND '.$where;
 		}
-
+                //print_r($where);exit;
 		return $where;
 	}
 
@@ -228,7 +233,7 @@ class SSP {
 	 *  @param  array $columns Column information array
 	 *  @return array          Server-side processing response array
 	 */
-	static function simple ( $request, $conn, $table, $primaryKey, $columns, $where )
+	static function simple ( $request, $conn, $table, $primaryKey, $columns, $where1 ,$where2)
 	{
 		$bindings = array();
 		$db = self::db( $conn );
@@ -236,11 +241,20 @@ class SSP {
 		// Build the SQL query string from the request
 		$limit = self::limit( $request, $columns );
 		$order = self::order( $request, $columns );
-                if(!$where)
-                {    
-                    $where = self::filter( $request, $columns, $bindings );
+                //print_r($where);
+                //print_r($columns);exit;
+                    
+                $where = self::filter( $request, $columns, $bindings);
+               
+                if($where =='')
+                {
+                    $where = $where.$where2;
                 }
-                
+                else
+                {
+                    $where = $where.$where1;
+                    //print_r($where);exit;
+                }
 		// Main query to actually get the data
 		$data = self::sql_exec( $db, $bindings,
 			"SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
@@ -254,8 +268,7 @@ class SSP {
 //			 $where
 //			 $order
 //			 $limit";
-
-		// Data set length after filtering
+                // Data set length after filtering
 		$resFilterLength = self::sql_exec( $db,
 			"SELECT FOUND_ROWS()"
 		);
@@ -267,7 +280,7 @@ class SSP {
 			 FROM   `$table`"
 		);
 		$recordsTotal = $resTotalLength[0][0];
-
+                
 
 		/*
 		 * Output
