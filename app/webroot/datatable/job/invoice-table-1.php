@@ -2,63 +2,65 @@
 include 'config.php';
 
 // DB table to use
-$table = "deliveryorders as del";
-$join = " LEFT JOIN customers as cus ON (del.customer_id = cus.id)";
+$table = "invoices as inv";
+$join = " LEFT JOIN salesorders as sales ON (sales.id = inv.salesorder_id) ";
 // Table's primary key
 $primaryKey = 'id';
-$val = $_GET['val'];
+//$val = $_GET['val'];
 //'1'=>'Active','2'=>'Pending Approval','3'=>'InActive'
 
-if($val == 2)
-{
-    $where1 = ' AND del.is_approved = 0 AND del.is_deleted = 0';
-    $where2 = ' where del.is_approved = 0 AND del.is_deleted = 0';
-}
-elseif($val == 3)
-{
-    $where1 = ' AND del.is_deleted = 1';
-    $where2 = ' where del.is_deleted = 1';
-}
-else
-{
-    $where1 = ' AND del.is_deleted = 0';
-    $where2 = ' where del.is_deleted = 0';
-}
+//if($val == 2)
+//{
+//    $where1 = ' AND del.is_approved = 0 AND del.is_deleted = 0';
+//    $where2 = ' where del.is_approved = 0 AND del.is_deleted = 0';
+//}
+//elseif($val == 3)
+//{
+//    $where1 = ' AND del.is_deleted = 1';
+//    $where2 = ' where del.is_deleted = 1';
+//}
+//else
+//{
+//    $where1 = ' AND del.is_deleted = 0';
+//    $where2 = ' where del.is_deleted = 0';
+//}
 
 $columns = array(
-    array( 'db' => 'del.delivery_order_no', 'dt' => 0 , 'field' => 'delivery_order_no'),
-    array( 'db' => 'del.delivery_order_date', 'dt' => 1 , 'field' => 'delivery_order_date'),
-    array( 'db' => 'del.branch_id',  'dt' => 2, 'formatter' => function( $d, $row ) {
+    array( 'db' => 'inv.invoiceno', 'dt' => 0 , 'field' => 'invoiceno'),
+    array( 'db' => 'inv.invoice_date', 'dt' => 1 , 'field' => 'invoice_date'),
+    array( 'db' => 'sales.branch_id',  'dt' => 2, 'formatter' => function( $d, $row ) {
             return SSP::get_branch_name($d);
         } , 'field' => 'branch_id'),
-    array( 'db' => 'cus.customername', 'dt' => 3  , 'field' => 'customername'),
-    array( 'db' => 'del.delivery_address',   'dt' => 4  , 'field' => 'delivery_address'),
-    array( 'db' => 'del.customer_address',   'dt' => 5  , 'field' => 'customer_address'),
-    array( 'db' => 'del.attn', 'dt' => 6, 'formatter' => function( $d, $row ) {
-            return SSP::get_attn_name($d);
-        } , 'field' => 'attn'),
-    array( 'db' => 'del.phone', 'dt' => 7  , 'field' => 'phone'),
-    array( 'db' => 'del.email', 'dt' => 8 , 'field' => 'email' ),
-    array( 'db' => 'del.salesorder_id',   'dt' => 9 , 'field' => 'salesorder_id' ),
-    array( 'db' => 'del.quotationno',   'dt' => 10 , 'field' => 'quotationno' ),
+    array( 'db' => 'inv.customername', 'dt' => 3  , 'field' => 'customername'),
+    array( 'db' => 'inv.regaddress',   'dt' => 4  , 'field' => 'regaddress'),
+    array( 'db' => 'inv.regaddress',   'dt' => 5  , 'field' => 'regaddress'),
+    array( 'db' => 'inv.contactpersonname', 'dt' => 6 , 'field' => 'contactpersonname'),
+    array( 'db' => 'inv.phone', 'dt' => 7  , 'field' => 'phone'),
+    array( 'db' => 'inv.email', 'dt' => 8 , 'field' => 'email' ),
+    array( 'db' => '',   'dt' => 9 , 'field' => '' ),
+    array( 'db' => 'inv.salesorder_id',   'dt' => 10 , 'field' => 'salesorder_id' ),
     
-    array( 'db' => 'del.ref_no', 'dt' => 11  , 'field' => 'ref_no'),
-    array( 'db' => 'del.id', 'dt' => 12 ,'formatter' => function ( $d, $row) {
+    array( 'db' => 'inv.deliveryorder_id', 'dt' => 11  , 'field' => 'deliveryorder_id'),
+    array( 'db' => 'inv.quotation_id', 'dt' => 12  , 'field' => 'quotation_id'),
+    array( 'db' => 'inv.ref_no', 'dt' => 13  , 'field' => 'ref_no'),
+    array( 'db' => 'inv.quotation_id',  'dt' => 14, 'formatter' => function( $d, $row ) {
+            return SSP::get_quo_inv_device_total($d);
+        } , 'field' => 'quotation_id'),
+    array( 'db' => 'inv.invoiceno', 'dt' => 12 ,'formatter' => function ( $d, $row) {
             
             global $base_url;
             
             $cn = '<div class="btn-group">';
-            $val = SSP::get_delivery_details($d);
-            if(!$val[0]['is_deleted'])
+            $val = SSP::get_invoice_details($d);
+            if(!$val[0]['is_approved'])
             {
-                if($_GET['edit']==1){
-                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Deliveryorders/edit/'.$d.'" data-original-title="Edit">
-<i class="fa fa-pencil"></i></a>';
-                }
-                if($_GET['delete']==1){
-                    $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Deliveryorders/delete/'.$d.'" data-original-title="Delete">
-<i class="fa fa-times"></i></a>';
-                }
+                
+                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Invoices/view/'.$d.'" data-original-title="View">
+<i class="fa fa-file-text"></i></a>';
+                
+                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Invoices/pdf/'.$d.'" data-original-title="Report">
+<i class="gi gi-print"></i></a>';
+                
             }
             else
             {
@@ -69,10 +71,8 @@ $columns = array(
             $cn .= '</div>';
                           
             return $cn;
-    } , 'field' => 'id'),
-    array( 'db' => 'del.id', 'dt' => 13 ,'formatter' => function ( $d, $row) {
-         return SSP::get_poapproved_status($d);
-    } , 'field' => 'id')
+    } , 'field' => 'invoiceno')
+    
 );
    // print_r($columns);
 //print_r($_GET);exit;
