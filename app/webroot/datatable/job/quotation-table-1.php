@@ -11,15 +11,18 @@ $val = $_GET['val'];
 
 if($val == 2)
 {
-    $where = 'where is_approved = 0 AND is_deleted = 0';
+    $where1 = ' AND is_approved = 0 AND is_deleted = 0';
+    $where2 = ' where is_approved = 0 AND is_deleted = 0';
 }
 elseif($val == 3)
 {
-    $where = 'where is_deleted = 1';
+    $where1 = ' AND is_deleted = 1';
+    $where2 = ' where is_deleted = 1';
 }
 else
 {
-    $where = 'where is_deleted = 0';
+    $where1 = ' AND is_deleted = 0';
+    $where2 = ' where is_deleted = 0';
 }
 
 $columns = array(
@@ -77,5 +80,5 @@ $columns = array(
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $where )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $where1, $where2 )
 );

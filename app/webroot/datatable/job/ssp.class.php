@@ -43,10 +43,10 @@ class SSP {
 
 				// Is there a formatter?
 				if ( isset( $column['formatter'] ) ) {
-					$row[ $column['dt'] ] = $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
+					$row[ $column['dt'] ] = $column['formatter']( $data[$i][ $column['field'] ], $data[$i] );
 				}
 				else {
-					$row[ $column['dt'] ] = $data[$i][ $columns[$j]['db'] ];
+					$row[ $column['dt'] ] = $data[$i][ $columns[$j]['field'] ];
 				}
 			}
 
@@ -233,19 +233,24 @@ class SSP {
 	 *  @param  array $columns Column information array
 	 *  @return array          Server-side processing response array
 	 */
-	static function simple ( $request, $conn, $table, $primaryKey, $columns, $where1 ,$where2)
+	static function simple ( $request, $conn, $table, $primaryKey, $columns, $where1 ,$where2,$join)
 	{
 		$bindings = array();
 		$db = self::db( $conn );
 
 		// Build the SQL query string from the request
 		$limit = self::limit( $request, $columns );
-		$order = self::order( $request, $columns );
+		//$order = self::order( $request, $columns );
                 //print_r($where);
                 //print_r($columns);exit;
-                    
+                   // print_r($request);
+               
+                //echo $join;
+                
                 $where = self::filter( $request, $columns, $bindings);
                
+                $where = str_replace('`','',$where);
+                
                 if($where =='')
                 {
                     $where = $where.$where2;
@@ -256,18 +261,22 @@ class SSP {
                     //print_r($where);exit;
                 }
 		// Main query to actually get the data
-		$data = self::sql_exec( $db, $bindings,
-			"SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
-			 FROM `$table`
+//		echo "SELECT SQL_CALC_FOUND_ROWS ".implode(", ", self::pluck($columns, 'db'))."
+//			 FROM $table
+//			$join 
+//                        $where
+//			 
+//			 $limit";
+                
+                $data = self::sql_exec( $db, $bindings,
+			"SELECT SQL_CALC_FOUND_ROWS ".implode(", ", self::pluck($columns, 'db'))."
+			 FROM $table
+                         $join
 			 $where
-			 $order
+			 
 			 $limit"
 		);
-//                echo "SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
-//			 FROM `$table`
-//			 $where
-//			 $order
-//			 $limit";
+                
                 // Data set length after filtering
 		$resFilterLength = self::sql_exec( $db,
 			"SELECT FOUND_ROWS()"
@@ -276,8 +285,8 @@ class SSP {
 
 		// Total data set length
 		$resTotalLength = self::sql_exec( $db,
-			"SELECT COUNT(`{$primaryKey}`)
-			 FROM   `$table`"
+			"SELECT COUNT(id)
+			 FROM   $table"
 		);
 		$recordsTotal = $resTotalLength[0][0];
                 
@@ -637,9 +646,58 @@ class SSP {
             return $data;
 	}
         
+        static function get_customer_name($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM customers where id = '$id'"
+            );
+
+
+            return isset($data[0]['customername']) ? $data[0]['customername'] : '';
+	}
         
+        static function get_delivery_details($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM deliveryorders where id = '$id'"
+            );
+
+            return $data;
+	}
         
-        
+        static function get_poapproved_status($id)
+        {
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM deliveryorders where id = '$id'"
+            );
+            if($data[0]['is_poapproved']==1)
+            {
+                return '<span class="label label-five">PO#App</span>';
+            }
+            else
+            {
+                return '<span class="label label-six">PO#Not</span>';
+            }
+            
+        }
 	
 	
 }
