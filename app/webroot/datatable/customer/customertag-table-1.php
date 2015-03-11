@@ -53,7 +53,7 @@ $columns = array(
                     $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customertaglists/edit/'.$d.'" data-original-title="Edit">
 <i class="fa fa-pencil"></i></a>';
                 }
-                if($_GET['delete']==1){
+                if($_GET['delete']==1 && $_GET['customer_id'] != $val[0]['id']){
                     $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Customertaglists/delete/'.$d.'" data-original-title="Delete">
 <i class="fa fa-times"></i></a>';
                 }

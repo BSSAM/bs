@@ -16,6 +16,12 @@ class PurchaseordersController extends AppController
             //$this->Quotation->recursive = 1; 
             $purchase_order_data = $this->Purchaseorder->find('all',array('order' => array('Purchaseorder.id' => 'DESC')));
             $this->set('purchaseorders', $purchase_order_data);
+			
+			$user_role = $this->userrole_permission();
+            
+            $this->set('userrole_cus',$user_role['job_purchaseorder']);
+			
+			
         }
         public function add()
         {

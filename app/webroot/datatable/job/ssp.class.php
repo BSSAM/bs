@@ -564,7 +564,7 @@ class SSP {
             return isset($data[0]['branchname']) ? $data[0]['branchname'] : '';
 	}
         
-        static function get_attn_name($id)
+    static function get_attn_name($id)
 	{
             global $sql_details;
 
@@ -575,7 +575,6 @@ class SSP {
             $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM cus_contactpersoninfos where id = $id"
             );
-
 
             return isset($data[0]['name']) ? $data[0]['name'] : '';
 	}
@@ -699,6 +698,34 @@ class SSP {
             
         }
 	
-	
+	static function get_purchaseorders_details($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM purchaseorders where id = '$id'"
+            );
+
+            return $data;
+	}
+        
+	static function get_subcontractdos_details($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM subcontractdos where id = '$id'"
+            );
+
+            return $data;
+	}
 }
 

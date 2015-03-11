@@ -16,6 +16,9 @@ class SubcontractdosController extends AppController
     {
         $subcontract_list   =   $this->Subcontractdo->find('all',array('recursive'=>2));
         $this->set(compact('subcontract_list'));
+		
+		 $user_role = $this->userrole_permission();
+         $this->set('userrole_cus',$user_role['job_subcontract']);
     }
     public function add()
     {
