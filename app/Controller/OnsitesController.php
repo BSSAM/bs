@@ -15,11 +15,11 @@
          *  Permission : view 
         *******************************************************/
         $user_role = $this->userrole_permission();
-        if($user_role['job_quotation']['view'] == 0){ 
+        if($user_role['job_onsite']['view'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         
-        $this->set('userrole_cus',$user_role['job_quotation']);
+        $this->set('userrole_cus',$user_role['job_onsite']);
         /*
          * *****************************************************
          */
@@ -596,7 +596,9 @@
         {
             $this->autoRender = false;
             $cal = $this->Onsite->find('all', array( 'group' => 'schedule_date', 'fields' => array('Onsite.onsiteschedule_no as title', 'schedule_date as start','id as url'), 'recursive' => '-1'));
-
+			
+			$user_role = $this->userrole_permission();
+        
             $event_array = array();
             foreach ($cal as $cal_list => $v) {
                 //echo date('yyyy-mm-dd',$v['Onsite']['start']);
@@ -604,7 +606,10 @@
                 //exit;
                 $event_array[$cal_list]['title'] = $v['Onsite']['title'];
                 $event_array[$cal_list]['start'] = $v['Onsite']['start'];
+				if($user_role['job_onsite']['edit'] == 1 ) {
                 $event_array[$cal_list]['url'] = Router::url('/Onsites/edit/'.$v['Onsite']['url'],true);
+				}
+				
             }
             //2015-02-09
             header('Content-Type: application/json');

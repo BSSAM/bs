@@ -158,10 +158,12 @@ class BrandsController extends AppController
         /*
          * *****************************************************
          */
-        if($this->request->is('get'))
+		 
+        /*if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
-        }
+        }*/
+		
         if($this->Brand->updateAll(array('Brand.is_deleted'=>1,'Brand.status'=>0),array('Brand.id'=>$id)))
         {
              /******************

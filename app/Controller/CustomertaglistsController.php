@@ -30,9 +30,11 @@ class CustomertaglistsController extends AppController
          */
         $this->set('customer_id',$id);
         $maintag_data = $this->Customer->find('first',array('conditions'=>array('Customer.status'=>1,'Customer.id'=>$id,'Customer.is_deleted'=>0),'fields'=>array('Customername','customergroup_id')));
-        $this -> set('cust',$maintag_data['Customer']['Customername']);
+        if(!empty($maintag_data['Customer'])){ 
+		$this -> set('cust',$maintag_data['Customer']['Customername']); 
+		$this -> set('group_id',$maintag_data['Customer']['customergroup_id']); } else { $this -> set('cust',''); $this -> set('group_id',''); }
 		
-		$this->set('group_id',$maintag_data['Customer']['customergroup_id']);
+		
         $this->Address->deleteAll(array('Address.status'=>0));
         if(!empty($maintag_data))
         {
@@ -334,9 +336,9 @@ class CustomertaglistsController extends AppController
                     $a = $this->Datalog->save($this->request->data['Datalog']);
                     
             /******************/   
-            
+            $res = $this->Customer->findById($id);
             $this->Session->setFlash(__('Customer has been deleted'));
-            return $this->redirect(array('action'=>'index',$id));
+            return $this->redirect(array('action'=>'index',$res['Customer']['customergroup_id']));
         }
     }
    

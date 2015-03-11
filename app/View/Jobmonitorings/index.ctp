@@ -87,7 +87,7 @@
                     <td class="text-center"><?PHP $count_r = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['shipping'] == '1'): $count_r++; endif; endforeach; if($count_r == ''): echo '0'; else: echo $count_r; endif;?></td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit',$salesorder['Salesorder']['id']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
+                            <?php if($user_role['job_jobmonitor']['edit'] == 1){  echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'edit',$salesorder['Salesorder']['id']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); } ?>
                         </div>
                     </td>
                 </tr>

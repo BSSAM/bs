@@ -14,11 +14,11 @@
                         <div class="block-title">
                             <h2>List Of Purchase Requistions</h2>
                             <?php if($userrole_cus['add']==1){ ?>
-                            <h2 style="float:right;"><?php echo $this->Html->link('Add Purchase Requisition',array('controller'=>'PurchaseRequisitions','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Purchase Requisition')); ?></h2>
+                            <h2 style="float:right;">
+							<?php echo $this->Html->link('Add Purchase Requisition',array('controller'=>'PurchaseRequisitions','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Purchase Requisition')); ?></h2>
                             <?php } ?>
                         </div>
                         
-
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>

@@ -17,7 +17,8 @@
                         <div class="block-title">
                             <h2>List Of Purchase Orders </h2>
                             <h2>
-                                <?php echo $this->Html->link('Add Purchase Order',array('controller'=>'Purchaseorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Purchase Order')); ?>
+                                 <?php if($user_role['job_purchaseorder']['add'] == 1){ 
+								  echo $this->Html->link('Add Purchase Order',array('controller'=>'Purchaseorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Purchase Order')); } ?>
                             </h2>
                         </div>
                         <div class="table-responsive">
@@ -48,8 +49,10 @@
                                         <td class="text-center"><?PHP echo $purchaseorder['Purchaseorder']['due_amount'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$purchaseorder['Purchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$purchaseorder['Purchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure want to delete order  '.$purchaseorder['Purchaseorder']['purchaseorder_no'].'?')); ?>
+                                                <?php if($user_role['job_purchaseorder']['edit'] == 1){  
+												echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$purchaseorder['Purchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false));}  ?>
+                                                <?php if($user_role['job_purchaseorder']['delete'] == 1){ 
+												echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$purchaseorder['Purchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure want to delete order  '.$purchaseorder['Purchaseorder']['purchaseorder_no'].'?')); } ?>
                                                 <?php 
                                                 if($purchaseorder['Purchaseorder']['is_approved'] == 1){
                                                 echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$purchaseorder['Purchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

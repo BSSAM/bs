@@ -17,7 +17,7 @@
                     <div class="block block-alt-noborder full">
                         <div class="block-title">
                             <h2 style="float:right;">
-                                <?php echo $this->Html->link('Add Onsite Schedule',array('controller'=>'Onsites','action'=>'add'),array('class'=>'btn btn-xs btn-success','data-toggle'=>'tooltip','tile'=>'Add Onsite Schedule')); ?>
+                                <?php if($user_role['job_onsite']['add'] == 1){  echo $this->Html->link('Add Onsite Schedule',array('controller'=>'Onsites','action'=>'add'),array('class'=>'btn btn-xs btn-success','data-toggle'=>'tooltip','tile'=>'Add Onsite Schedule')); } ?>
                             </h2>
                         </div>
                         <div class="row">
@@ -145,7 +145,6 @@
                 },
                 events: path+'/calendar/'
 //                 [
-                   
 //                    {
 //                        title: 'Live Conference',
 //                        start: new Date(y, m, 3)

@@ -172,10 +172,7 @@ class ProceduresController extends AppController
         /*
          * *****************************************************
          */
-        if($this->request->is('get'))
-        {
-            throw new MethodNotAllowedException();
-        }
+       
         if($this->Procedure->updateAll(array('Procedure.is_deleted'=>1,'Procedure.status'=>0),array('Procedure.id'=>$id)))
         {
             /******************

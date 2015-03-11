@@ -62,7 +62,7 @@
                         <?PHP //}?>
                     </div>
                     <?PHP }?>
-                    <?php if($userrole_clientpo['approve']==1){ ?>
+                    <?php if($userrole_clientpo_app['view']==1){ ?>
                     <?PHP if(($do_list['Deliveryorder']['po_generate_type']=='Automatic'||$do_list['Deliveryorder']['po_generate_type']=='Manual')){?>
                     <div class="btn-group">
                        <?php //echo $do_list['Deliveryorder']['po_generate_type']; ?>

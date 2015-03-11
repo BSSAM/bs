@@ -3,26 +3,27 @@ include 'config.php';
 
 // DB table to use
 $table = 'customers';
-$where = ''; 
+
 // Table's primary key
 $primaryKey = 'id';
 
 $val = $_GET['val'];
-//'1'=>'Active','2'=>'Pending Approval','3'=>'InActive'
 
 if($val == 2)
 {
-    $where = 'where is_approved = 0 AND is_deleted = 0';
+    $where1 = ' AND is_approved = 0 AND is_deleted = 0';
+    $where2 = ' where is_approved = 0 AND is_deleted = 0';
 }
 elseif($val == 3)
 {
-    $where = 'where is_deleted = 1';
+    $where1 = ' AND is_deleted = 1';
+    $where2 = ' where is_deleted = 1';
 }
 else
 {
-    $where = 'where is_deleted = 0';
+    $where1 = ' AND is_deleted = 0';
+    $where2 = ' where is_deleted = 0';
 }
-
  
 $columns = array(
     array( 'db' => 'id', 'dt' => 0 ),
@@ -48,6 +49,10 @@ $columns = array(
 			/*if($val[0]['status']== 1){  
 			$cn .= '<span class="label label-success">Active</span>'; } else {  $cn .= '<span class="label label-danger">In Active</span>'; }
 			*/
+			
+			if(!$val[0]['is_deleted'])
+            {
+				
 			if($val[0]['is_approved'] == 1)
             {
                 if($_GET['instrument']==1){
@@ -71,9 +76,7 @@ $columns = array(
 
                 }
             }
-			
-            if(!$val[0]['is_deleted'])
-            {
+           
                 if($_GET['edit']==1){
                     $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customers/edit/'.$d.'" data-original-title="Edit">
 <i class="fa fa-pencil"></i></a>';
@@ -85,8 +88,9 @@ $columns = array(
             }
             else
             {
-                $cn .= '<a onclick="confirm(\'Are you sure want to Retrieve?\');" class="btn btn-xs btn-warning" title="" data-toggle="tooltip" href="'.$base_url.'Customers/delete/'.$d.'" data-original-title="Retrieve">
-<i class="fa fa-undo"></i></a>';
+               /* $cn .= '<a onclick="confirm(\'Are you sure want to Retrieve?\');" class="btn btn-xs btn-warning" title="" data-toggle="tooltip" href="'.$base_url.'Customers/delete/'.$d.'" data-original-title="Retrieve">
+<i class="fa fa-undo"></i></a>';*/
+				$cn .= '';
             }
             $cn .= '</div>';
                           
@@ -96,5 +100,5 @@ $columns = array(
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns ,$where)
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2 )
 );

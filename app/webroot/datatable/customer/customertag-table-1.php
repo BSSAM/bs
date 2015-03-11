@@ -4,28 +4,28 @@ include 'config.php';
 // DB table to use
 $table = 'customers';
 $group_id = $_GET['group_id'];
-//$where = "where customergroup_id = '".$group_id."'";
 
 // Table's primary key
 $primaryKey = 'id';
 
-$valus = $_GET['val'];
-//'1'=>'Active','2'=>'Pending Approval','3'=>'InActive'
+$val = $_GET['val'];
 
-	if($valus == 2)
-	{
-		$where = "where is_approved = 0 AND is_deleted = 0  AND customergroup_id = '".$group_id."'";
-	}
-	elseif($valus == 3)
-	{
-		$where = "where is_deleted = 1 AND customergroup_id = '".$group_id."'";
-	}
-	else
-	{
-		$where = "where customergroup_id = '".$group_id."'";
-	}
-
- 
+if($val == 2)
+{
+    $where1 = " AND is_approved = 0 AND is_deleted = 0 AND customergroup_id = '".$group_id."'";
+    $where2 = " where is_approved = 0 AND is_deleted = 0 AND customergroup_id = '".$group_id."'";
+}
+elseif($val == 3)
+{
+    $where1 = " AND is_deleted = 1 AND customergroup_id = '".$group_id."'";
+    $where2 = " where is_deleted = 1 AND customergroup_id = '".$group_id."'";
+}
+else
+{
+    $where1 = " AND is_deleted = 0 AND customergroup_id = '".$group_id."'";
+    $where2 = " where is_deleted = 0 AND customergroup_id = '".$group_id."'";
+}
+  
 $columns = array(
     array( 'db' => 'id', 'dt' => 0 ),
     array( 'db' => 'customername',  'dt' => 1 ),
@@ -60,8 +60,10 @@ $columns = array(
             }
             else
             {
-                $cn .= '<a onclick="confirm(\'Are you sure want to Retrieve?\');" class="btn btn-xs btn-warning" title="" data-toggle="tooltip" href="'.$base_url.'Customers/delete/'.$d.'" data-original-title="Retrieve">
-<i class="fa fa-undo"></i></a>';
+               /* $cn .= '<a onclick="confirm(\'Are you sure want to Retrieve?\');" class="btn btn-xs btn-warning" title="" data-toggle="tooltip" href="'.$base_url.'Customers/delete/'.$d.'" data-original-title="Retrieve">
+<i class="fa fa-undo"></i></a>';*/
+
+				$cn .= '';
             }
             $cn .= '</div>';
              
@@ -71,5 +73,5 @@ $columns = array(
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2 )
 );

@@ -15,11 +15,11 @@
              *  Permission : view 
             *******************************************************/
             $user_role = $this->userrole_permission();
-            if($user_role['job_quotation']['view'] == 0){ 
+            if($user_role['job_purchasereq']['view'] == 0){ 
                 return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
 
-            $this->set('userrole_cus',$user_role['job_quotation']);
+            $this->set('userrole_cus',$user_role['job_purchasereq']);
             /*
              * *****************************************************
              */
@@ -37,7 +37,7 @@
              *  Description   :   add Quotation Details page
              *******************************************************/
             $user_role = $this->userrole_permission();
-            if($user_role['job_quotation']['add'] == 0){ 
+            if($user_role['job_purchasereq']['add'] == 0){ 
                 return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
             /*
@@ -121,9 +121,10 @@
                 *  Description   :   Edit Quotation Details page
                 *******************************************************/
         $user_role = $this->userrole_permission();
-        if($user_role['job_quotation']['edit'] == 0){ 
+        if($user_role['job_purchasereq']['edit'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
+		 $this->set('userrole_cus',$user_role['job_purchasereq']);
         /*
          * *****************************************************
          */

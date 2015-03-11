@@ -1,16 +1,26 @@
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
-                
+<?php echo $this->Html->script(array('datatable/jquery-1.11.1.min','datatable/jquery.dataTables.min'));  ?>
 <script>
     
 var _ROOT ='<?PHP echo Router::url('/',true); ?>';
 
 $(function() {
-//$('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
-//       var val = $(this).val();  // val is the drug id
-//       window.location = _ROOT + 'Procedures/index/' + val;
-//    }); 
-   
+		
+		///  Status  Cond
+        
+        <?PHP if(isset($_GET['val'])){ ?>
+        var valu  ='<?PHP echo $_GET['val']; ?>';
+        <?php } else { ?>
+        var valu ='<?php echo '1'; ?>';
+        <?php } ?>
+
+
+        $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX with the id to your select box given by Cake
+        var val = $(this).val(); 
+        window.location = _ROOT + 'Units/index/?val=' + val;
+
+        });
+   		
+		 //// Search Input Element Add
         html = '<tr>';
         $('#unit-table-1 thead th').each(function(){
         html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
@@ -30,7 +40,7 @@ $(function() {
       
 	//"sScrollX": "100%",
         //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/instrument/unit-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>"
+        "ajax": _ROOT+"datatable/instrument/unit-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>&val="+valu
         });
         
         setTimeout(function(){
@@ -73,6 +83,16 @@ $(function() {
 
 });
 </script>
+							<?php if(isset($_GET['val'])) { 
+								if($_GET['val'] == 3) { ?>
+							<style>
+								table.dataTable td{ color: red;  border:1px lightgrey;}
+							</style>
+							<?php } if($_GET['val'] == 2) { ?>
+							<style>
+								table.dataTable td{ color: #860000;}
+							</style>
+							<?php }} ?>
 							<h1>
                                 <i class="fa fa-table"></i>Units
                             </h1>
@@ -87,7 +107,7 @@ $(function() {
                     <!-- Datatables Content -->
                     <div class="block full">
                         <div class="block-title">
-                            <h2>List Of Units</h2>
+                            <h2>List Of Units </h2>
                             <?php if($userrole_cus['add']==1){ ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Unit',array('controller'=>'Units','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Unit')); ?></h2>
                             <?php } ?>
@@ -108,6 +128,10 @@ $(function() {
                                 </table>
                             <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
                         </div>
+                        
+                          <div class="btn-group btn-group-md">
+                            <?php echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+     				     </div>
                     </div>
                            
                             

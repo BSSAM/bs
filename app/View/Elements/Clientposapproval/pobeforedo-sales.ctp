@@ -67,7 +67,7 @@
                         <?PHP //}?>
                     </div>
                      <?PHP }?>
-                    <?php if($userrole_clientpo['approve']==1){ ?>
+                    <?php if($userrole_clientpo_app['view']==1){ ?>
                     <?PHP if(($salesorder_list['Salesorder']['po_generate_type']=='Automatic'||$salesorder_list['Salesorder']['po_generate_type']=='Manual')){?>
                     <div class="btn-group">
                        <?php //echo $salesorder_list['Salesorder']['po_generate_type']; ?>

@@ -174,10 +174,12 @@ class UnitsController extends AppController
         if($user_role['ins_unit']['delete'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
-        if($this->request->is('get'))
+		
+      /*  if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
-        }
+        }*/
+		
         if($this->Unit->updateAll(array('Unit.is_deleted'=>1,'Unit.status'=>0),array('Unit.id'=>$id)))
         {
             /******************

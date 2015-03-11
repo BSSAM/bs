@@ -18,7 +18,8 @@
                         <div class="block-title">
                             <h2>List Of Proforma Invoice </h2> 
                             <h2 style="float:right;">
-                            <?php echo $this->Html->link('Add Proforma Invoice', array('controller' => 'Proformas', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Proforma Invoice')); ?></h2>
+                             <?php if($user_role['job_proforma']['add'] == 1){ 
+							  echo $this->Html->link('Add Proforma Invoice', array('controller' => 'Proformas', 'action' => 'add'), array('class' => 'btn btn-xs btn-primary', 'data-toggle' => 'tooltip', 'tile' => 'Add Proforma Invoice')); } ?></h2>
                         </div>
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -51,7 +52,8 @@
                                         <td class="text-center"><?PHP echo $salesorder_list['Proforma']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php if($user_role['job_proforma']['edit'] == 1){ 
+												echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$salesorder_list['Proforma']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); } ?>
                                                 
                                                 
                                             </div>

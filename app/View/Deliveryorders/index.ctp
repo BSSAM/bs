@@ -36,10 +36,10 @@
         "processing": true,
         "serverSide": true,
         //"scrollX": 1200,
-        
+      
 	//"sScrollX": "100%",
         //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/job/deliveryorder-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>&val="+valu
+        "ajax": _ROOT+"datatable/job/deliveryorder-table-1.php?edit=<?php echo $user_role['job_deliveryorder']['edit'];?>&delete=<?php echo $user_role['job_deliveryorder']['delete'];?>&val="+valu
         });
         
         
@@ -141,7 +141,7 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Deliveryorders <?php if(isset($_GET['val'])) { if($_GET['val'] == 2) {  echo "- Pending Approval"; }if($_GET['val'] == 3) { echo "- InActive"; } }?></h2>
-                            <?php if($userrole_cus['add']==1){ ?>
+                            <?php if($user_role['job_deliveryorder']['add'] == 1){  ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add Deliveryorder',array('controller'=>'Deliveryorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Salesorder')); ?></h2>
                             <?php } ?>
                         </div>

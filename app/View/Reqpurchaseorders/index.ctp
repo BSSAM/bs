@@ -42,6 +42,7 @@
                             <div class="col-md-4 pull-left">
                                 <?PHP echo $this->Form->create('Reqpurchaseorder', array('controller'=>'Reqpurchaseorders','action' => 'pr_purchaseorder', 'class' => 'form-horizontal form-bordered')); ?>
                             </div>
+                              <?php if($userrole_cus['add'] == 1) { ?>
                             <div class="input-group col-md-8 pull-right quot_display">
                                 <?PHP echo $this->Form->input('prequistion_id', array('placeholder' => 'Purchase Requistion No', 'class' => 'form-control',
                                     'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
@@ -51,7 +52,10 @@
                                 </span> 
                                 <div id="quoat_list" class="instrument_drop"> </div>
                             </div>
+                            <?php } ?>
+                            
                       </div>
+                      
                             
 		<?PHP $this->Form->end(); ?>
                             
@@ -84,8 +88,9 @@
                                         <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['ref_no'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php if($userrole_cus['edit'] == 1) { echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); }?>
+                                                
+                                                <?php  if($userrole_cus['edit'] == 1)  { echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); } ?>
                                                 <?php if($req_purchaseorder['Reqpurchaseorder']['is_approved'] == 1){ ?>
                                                 <?php echo $this->Html->link('<i class="gi gi-print"></i>',array('action'=>'pdf',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                                 <?php //echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

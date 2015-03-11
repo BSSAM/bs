@@ -195,10 +195,11 @@ class RangesController extends AppController
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         
-        if($this->request->is('get'))
+       /* if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
-        }
+        }*/
+		
         if($this->Range->updateAll(array('Range.is_deleted'=>1,'Range.status'=>0),array('Range.id'=>$id)))
         {
             /******************

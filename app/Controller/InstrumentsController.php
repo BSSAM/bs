@@ -264,10 +264,12 @@ class InstrumentsController extends AppController
         /*
          * *****************************************************
          */
-        if($this->request->is('get'))
+		// echo 'ff';exit;
+        /*if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();
-        }
+        }*/
+		
         //pr($id);exit;
         if($this->Instrument->updateAll(array('Instrument.is_deleted'=>1,'Instrument.status'=>0),array('Instrument.id'=>$id)))
         {

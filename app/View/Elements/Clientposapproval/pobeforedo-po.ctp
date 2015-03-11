@@ -64,7 +64,7 @@
                         <?PHP //}?>
                     </div>
                     <?PHP }?>
-                    <?php if($userrole_clientpo['approve']==1){ ?>
+                    <?php if($userrole_clientpo_app['view']==1){ ?>
                     <?PHP if(($quotation_list['Quotation']['po_generate_type']=='Automatic'||$quotation_list['Quotation']['po_generate_type']=='Manual')){?>
                     <div class="btn-group">
                        <?php //echo $quotation_list['Quotation']['po_generate_type']; ?>

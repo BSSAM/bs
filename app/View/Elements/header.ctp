@@ -230,13 +230,12 @@
                              <li>
                                 <a href="" class="sidebar-nav-menu <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval'||$control=='PurchaseRequisitions'||$control=='Reqpurchaseorders')?'open':''; ?>"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Jobs</a>
                                  <ul <?php echo $a=($control == 'Quotations'||$control == 'Salesorders'||$control == 'Deliveryorders'||$control =='Labprocesses'||$control =='Purchaseorders'||$control =='Onsites'||$control =='Debtchases'||$control =='Recallservices'||$control =='Subcontractdos'||$control =='Jobmonitorings'||$control == 'Clientpos'||$control == 'Fileuploads'||$control == 'Invoices'||$control == 'Proformas'||$control == 'Candds'||$control=='Clientposapproval'||$control=='PurchaseRequisitions'||$control=='Reqpurchaseorders')?'style=display:block':'';?>>
-                                    <?php //if($user_role['job_quotation']['view'] == 1){ ?>
-                                    <li>
-                                        <?php  if($user_role['app_clientpo']['view'] == 1) {?>
-                                         <?php  $a=($control == 'Clientpos')?'active':''; ?>
-                                         <?php echo $this->Html->link('Client Po List',array('controller'=>'Clientpos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li><?php } ?>
-                                     <?php if($user_role['app_clientpo']['view'] == 1){ ?>
+                                    <?php //if($user_role['job_quotation']['view'] == 1){ ?><?php // if($user_role['app_clientpo']['view'] == 1) {?>
+                                    <!-- <li>
+                                         <?php  //$a=($control == 'Clientpos')?'active':''; ?>
+                                         <?php //echo $this->Html->link('Client Po List',array('controller'=>'Clientpos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
+                                    </li><?php //} ?> -->
+                                     <?php if($user_role['job_clientapproval']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Clientposapproval')?'active':''; ?>
                                          <?php echo $this->Html->link('Client Po Approval',array('controller'=>'Clientposapproval','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
@@ -265,7 +264,7 @@
                                          <?php echo $this->Html->link('Lab Process',array('controller'=>'Labprocesses','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li> <?php } ?>
                                     
-                                     <?php if($user_role['job_salesorder']['view'] == 1){ ?>
+                                     <?php if($user_role['job_deliveryorder']['view'] == 1){ ?>
                                     <li>
                                         <?php  $a=($control == 'Deliveryorders')?'active':''; ?>
                                          <?php echo $this->Html->link('Delivery Order',array('controller'=>'Deliveryorders','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>

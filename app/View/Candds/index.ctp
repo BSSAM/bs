@@ -13,7 +13,7 @@
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Collection & Delivery Information</h2>
-                            <h2 style="float:right;"><?php echo $this->Html->link('Add C & D Info',array('controller'=>'Candds','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add C & D Info')); ?></h2>
+                            <h2 style="float:right;"> <?php if($user_role['job_candd']['add'] == 1){ echo $this->Html->link('Add C & D Info',array('controller'=>'Candds','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add C & D Info')); } ?></h2>
                         </div>
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -39,8 +39,9 @@
                                         <td class="text-center"><?php echo $this->Candd->get_delivery_count($candd_list['Candd']['cd_date']);?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$candd_list['Candd']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$candd_list['Candd']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                               <?php if($user_role['job_candd']['edit'] == 1){ echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$candd_list['Candd']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); } ?>
+                                               
+                                                <?php if($user_role['job_candd']['delete'] == 1){ echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$candd_list['Candd']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); } ?>
                                                 <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$candd_list['Candd']['cd_date']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
                                             </div>
                                         </td>

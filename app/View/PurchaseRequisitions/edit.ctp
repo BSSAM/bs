@@ -68,9 +68,15 @@ $("#val_reg_date").datepicker("setDate", new Date());
                                                             <?php } ?>
 
                                                             <?php else : ?>
+                                                            
+                                                            
                                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                             <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'PurchaseRequisitions','action'=>'index'), array('class'=>'btn btn-sm btn-warning','escape' => false)); ?>
                                                             <?php endif; ?>
+                                                            
+                                                            
+                                                            
+                                                            
                                                             <?php //echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
                                                             <?php //echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
                                                         </div>

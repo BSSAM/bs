@@ -477,7 +477,10 @@
                     <td class="text-center"><?PHP echo $this->Salesorder->query_checking($labprocess_list['Salesorder']['salesorderno']) ?></td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'labs','out','all', $labprocess_list['Salesorder']['salesorderno']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false)); ?>
+                         <?php if($user_role['job_labprocess']['edit'] == 1){ 
+						  echo $this->Html->link('<i class="fa fa-pencil"></i>', array('action' => 'labs','out','all', $labprocess_list['Salesorder']['salesorderno']), array('data-toggle' => 'tooltip', 'title' => 'Edit', 'class' => 'btn btn-xs btn-default', 'escape' => false));
+						 } ?>
+                            
                         </div>
                     </td>
                 </tr>
