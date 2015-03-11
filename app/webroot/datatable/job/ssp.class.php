@@ -727,5 +727,39 @@ class SSP {
 
             return $data;
 	}
+        
+        static function get_invoice_details($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM invoices where invoiceno = '$id'"
+            );
+
+            return $data;
+	}
+        
+        static function get_quo_inv_device_total($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM quo_devices where quotationno = $id"
+            );
+            $total = 0;
+            foreach($data as $data_every)
+            {
+                $total = $total + $data_every['total'];
+            }
+            return $total;
+	}
 }
 
