@@ -3,7 +3,7 @@ include 'config.php';
 
 // DB table to use
 $table = 'quotations';
-
+$join = '';
 // Table's primary key
 $primaryKey = 'id';
 $val = $_GET['val'];
@@ -26,26 +26,26 @@ else
 }
 
 $columns = array(
-    array( 'db' => 'quotationno', 'dt' => 0 ),
-    array( 'db' => 'reg_date', 'dt' => 1 ),
+    array( 'db' => 'quotationno', 'dt' => 0 ,'field' => 'quotationno'),
+    array( 'db' => 'reg_date', 'dt' => 1 ,'field' => 'reg_date'),
     array( 'db' => 'branch_id',  'dt' => 2, 'formatter' => function( $d, $row ) {
             return SSP::get_branch_name($d);
-        }),
-    array( 'db' => 'customername',   'dt' => 3 ),
-    array( 'db' => 'address', 'dt' => 4 ),
+        },'field' => 'branch_id'),
+    array( 'db' => 'customername',   'dt' => 3 ,'field' => 'customername'),
+    array( 'db' => 'address', 'dt' => 4 ,'field' => 'address'),
     array( 'db' => 'attn', 'dt' => 5, 'formatter' => function( $d, $row ) {
             return SSP::get_attn_name($d);
-        }),
-    array( 'db' => 'phone', 'dt' => 6 ),
-    array( 'db' => 'email', 'dt' => 7 ),
+        },'field' => 'attn'),
+    array( 'db' => 'phone', 'dt' => 6 ,'field' => 'phone'),
+    array( 'db' => 'email', 'dt' => 7 ,'field' => 'email'),
     
     array( 'db' => 'id', 'dt' => 8, 'formatter' => function( $d, $row ) {
             return SSP::get_salesperson_name($d);
-        }),
-    array( 'db' => 'ref_no', 'dt' => 9 ),
+        },'field' => 'id'),
+    array( 'db' => 'ref_no', 'dt' => 9 ,'field' => 'ref_no'),
     array( 'db' => 'id', 'dt' => 10, 'formatter' => function( $d, $row ) {
             return SSP::get_quo_device_total($d);
-        }),
+        },'field' => 'id'),
 //    array( 'db' => 'status',     'dt' => 5, 'formatter' => function( $d, $row ) {
 //            return ($d == 1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';
 //        }),
@@ -75,10 +75,10 @@ $columns = array(
             $cn .= '</div>';
                           
             return $cn;
-    })
+    },'field' => 'id')
     
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $where1, $where2 )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $where1, $where2, $join )
 );

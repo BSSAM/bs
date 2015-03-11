@@ -3,7 +3,7 @@ include 'config.php';
 
 // DB table to use
 $table = 'salesorders';
-
+$join = '';
 // Table's primary key
 $primaryKey = 'id';
 $val = $_GET['val'];
@@ -26,24 +26,24 @@ else
 }
 
 $columns = array(
-    array( 'db' => 'id', 'dt' => 0 ),
-    array( 'db' => 'reg_date', 'dt' => 1 ),
-    array( 'db' => 'due_date', 'dt' => 2 ),
+    array( 'db' => 'id', 'dt' => 0 ,'field' => 'id'),
+    array( 'db' => 'reg_date', 'dt' => 1 ,'field' => 'reg_date'),
+    array( 'db' => 'due_date', 'dt' => 2 ,'field' => 'due_date'),
     array( 'db' => 'branch_id',  'dt' => 3, 'formatter' => function( $d, $row ) {
             return SSP::get_branch_name($d);
-        }),
-    array( 'db' => 'customername',   'dt' => 4 ),
+        },'field' => 'branch_id'),
+    array( 'db' => 'customername',   'dt' => 4 ,'field' => 'customername'),
     array( 'db' => 'attn', 'dt' => 5, 'formatter' => function( $d, $row ) {
             return SSP::get_attn_name($d);
-        }),
-    array( 'db' => 'phone', 'dt' => 6 ),
-    array( 'db' => 'email', 'dt' => 7 ),
-    array( 'db' => 'quotationno',   'dt' => 8 ),
+        },'field' => 'attn'),
+    array( 'db' => 'phone', 'dt' => 6 ,'field' => 'phone'),
+    array( 'db' => 'email', 'dt' => 7 ,'field' => 'email'),
+    array( 'db' => 'quotationno',   'dt' => 8 ,'field' => 'quotationno'),
     
-    array( 'db' => 'ref_no', 'dt' => 9 ),
+    array( 'db' => 'ref_no', 'dt' => 9 ,'field' => 'ref_no'),
     array( 'db' => 'quotation_id', 'dt' => 10, 'formatter' => function( $d, $row ) {
             return SSP::get_salesperson_name($d);
-        }),
+        },'field' => 'quotation_id'),
     array( 'db' => 'id', 'dt' => 11 ,'formatter' => function ( $d, $row) {
             
             global $base_url;
@@ -70,11 +70,11 @@ $columns = array(
             $cn .= '</div>';
                           
             return $cn;
-    })
+    },'field' => 'id')
     
 );
    // print_r($columns);
 //print_r($_GET);exit;
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $where1, $where2 )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $where1, $where2, $join )
 );
