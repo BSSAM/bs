@@ -3,7 +3,7 @@ include 'config.php';
 
 // DB table to use
 $table = 'brands';
- 
+$join = ''; 
 // Table's primary key
 $primaryKey = 'id';
 
@@ -26,23 +26,24 @@ else
 }
  
 $columns = array(
-    array( 'db' => 'id', 'dt' => 0 ),
+    array( 'db' => 'id', 'dt' => 0 , 'field' => 'id' ),
     array(
         'db'        => 'created',
-        'dt'        => 1,
+        'dt'        => 1, 'field' => 'created',
+		
         'formatter' => function( $d, $row ) {
             return date( 'F jS, Y h:i A', strtotime($d));
         }),
-    array( 'db' => 'brandname',  'dt' => 2 ),
-    array( 'db' => 'branddescription',   'dt' => 3 ),
+    array( 'db' => 'brandname',  'dt' => 2, 'field' => 'brandname' ),
+    array( 'db' => 'branddescription',   'dt' => 3 , 'field' => 'branddescription' ),
 //    array( 'db' => 'department_id',     'dt' => 4,'formatter' => function( $d, $row ) {
 //            
 //			return SSP::get_department_name($d);
 //    } ),
-    array( 'db' => 'status',     'dt' => 4, 'formatter' => function( $d, $row ) {
+    array( 'db' => 'status',     'dt' => 4 , 'field' => 'status', 'formatter' => function( $d, $row ) {
             return ($d == 1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';
         }),
-    array( 'db' => 'id', 'dt' => 5 ,'formatter' => function ( $d, $row) {
+    array( 'db' => 'id', 'dt' => 5 , 'field' => 'id' ,'formatter' => function ( $d, $row) {
             
             global $base_url;
             
@@ -78,5 +79,5 @@ $columns = array(
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2 )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2 , $join )
 );

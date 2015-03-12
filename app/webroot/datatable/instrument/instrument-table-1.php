@@ -2,7 +2,8 @@
 include 'config.php';
 
 // DB table to use
-$table = 'instruments';
+$table = 'instruments as ins';
+$join = " LEFT JOIN  departments as dpt ON (ins.department_id = dpt.id)";
 
 // Table's primary key
 $primaryKey = 'id';
@@ -11,38 +12,36 @@ $val = $_GET['val'];
 
 if($val == 2)
 {
-    $where1 = ' AND is_approved = 0 AND is_deleted = 0';
-    $where2 = ' where is_approved = 0 AND is_deleted = 0';
+    $where1 = ' AND ins.is_approved = 0 AND ins.is_deleted = 0';
+    $where2 = ' where ins.is_approved = 0 AND ins.is_deleted = 0';
 }
 elseif($val == 3)
 {
-    $where1 = ' AND is_deleted = 1';
-    $where2 = ' where is_deleted = 1';
+    $where1 = ' AND ins.is_deleted = 1';
+    $where2 = ' where ins.is_deleted = 1';
 }
 else
 {
-    $where1 = ' AND is_deleted = 0';
-    $where2 = ' where is_deleted = 0';
+    $where1 = ' AND ins.is_deleted = 0';
+    $where2 = ' where ins.is_deleted = 0';
 }
   
 $columns = array(
-    array( 'db' => 'id', 'dt' => 0 ),
+    array( 'db' => 'ins.id', 'dt' => 0 , 'field' => 'id'),
     array(
-        'db'        => 'created',
+        'db'        => 'ins.created',
         'dt'        => 1,
+		'field' => 'created',
         'formatter' => function( $d, $row ) {
             return date( 'F jS, Y h:i A', strtotime($d));
         }),
-    array( 'db' => 'name',  'dt' => 2 ),
-    array( 'db' => 'description',   'dt' => 3 ),
-    array( 'db' => 'department_id',     'dt' => 4,'formatter' => function( $d, $row ) {
-            
-			return SSP::get_department_name($d);
-    } ),
-    array( 'db' => 'status',     'dt' => 5, 'formatter' => function( $d, $row ) {
+    array( 'db' => 'ins.name',  'dt' => 2 ,'field' => 'name'),
+    array( 'db' => 'ins.description',   'dt' => 3 ,'field' => 'description'),
+    array( 'db' => 'dpt.departmentname',     'dt' => 4 ,'field' => 'departmentname'),
+    array( 'db' => 'ins.status', 'dt' => 5 ,'field' => 'status', 'formatter' => function( $d, $row ) {
             return ($d == 1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';
         }),
-    array( 'db' => 'id', 'dt' => 6 ,'formatter' => function ( $d, $row) {
+    array( 'db' => 'ins.id', 'dt' => 6 ,'formatter' => function ( $d, $row) {
             
             global $base_url;
             
@@ -69,10 +68,10 @@ $columns = array(
             $cn .= '</div>';
                           
             return $cn;
-    })
+    },'field' => 'id')
     
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2 )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2, $join )
 );

@@ -1,72 +1,6 @@
-<?php echo $this->Html->script(array('datatable/jquery-1.11.1.min','datatable/jquery.dataTables.min'));  ?>
-<script>
- var _ROOT ='<?PHP echo Router::url('/',true); ?>';
-
-$(function() {
- 		
-		
-		 //// Search Input Element Add
-		 
-        html = '<tr>';
-        $('#Reqpurchaseorders-table-1 thead th').each(function(){
-        html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
-        });
-        html += '</tr>';
-
-        //console.log(html);
-
-        $('#Reqpurchaseorders-table-1 thead').prepend(html);
-
-        
-        table = $('#Reqpurchaseorders-table-1').DataTable( {
-        //"bFilter" : false,
-        "processing": true,
-        "serverSide": true,
-        //"scrollX": 1200,
-		//"sScrollX": "100%",
-        //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/job/Reqpurchaseorders-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>"
-        });
-       
-        setTimeout(function(){
-            
-            $('.dataTable ').after("<div class='new_scroll'></div>");
-            $( '.dataTable' ).appendTo( ".new_scroll" );
-            
-        }, 1000);
-        
-        $("#jump").on( 'keyup change', function () {
-
-        var info = table.page.info();
-
-        page = (parseInt($(this).val()) - 1);
-
-        if($.isNumeric(page) && info.pages >= page)
-        table.page(page).draw( false );
-        else
-        table.page(0).draw( false );
-
-        });
-
-        table.columns().eq( 0 ).each( function ( colIdx ) {
-           if(colIdx == 7)
-           {
-                $('#Reqpurchaseorders-table-1 thead tr:first select').on( 'change', function () {
-                    table.column( colIdx ).search( $(this).val() ).draw();
-                });    
-            
-            }
-            else
-            {
-                $('#Reqpurchaseorders-table-1 thead tr:first input:eq('+colIdx+')').on( 'keyup change', function () {
-                    
-                    console.log($(this).val());
-                    table.column( colIdx ).search($(this).val()).draw();
-                });
-            }
-        });
-		
-		
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
+<script type="text/javascript">
+    $(function(){
         $("#quoat_list").hide();
         $("#ReqpurchaseorderPrequistionId").keyup(function() 
         { 
@@ -121,12 +55,13 @@ $(function() {
                             <?php } ?>
                             
                       </div>
+                      
                             
 		<?PHP $this->Form->end(); ?>
                             
                        </div>
                         <div class="table-responsive">
-                            <table id="Reqpurchaseorders-table-1" class="table table-vcenter table-condensed table-bordered">
+                            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
@@ -140,22 +75,33 @@ $(function() {
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                 </table>
-         <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
-    </div>
-     <!-- <div class="btn-group btn-group-md">
-                            <?php //echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
-      </div>-->
-</div>
-                            
+                                <tbody>
+                                    <?PHP if(!empty($req_purchase)): ?>
+                                     <?php foreach($req_purchase as $req_purchaseorder): ?>
+                                    <tr <?php if($req_purchaseorder['Reqpurchaseorder']['is_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['reqpurchaseno'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['reg_date'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['branch']['branchname'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Customer']['Customertagname'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['phone'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['email'] ?></td>
+                                        <td class="text-center"><?PHP echo $req_purchaseorder['Reqpurchaseorder']['ref_no'] ?></td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <?php if($userrole_cus['edit'] == 1) { echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); }?>
+                                                
+                                                <?php  if($userrole_cus['edit'] == 1)  { echo $this->Html->link('<i class="fa fa-times"></i>',array('controller'=>'Salesorders','action'=>'delete',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); } ?>
+                                                <?php if($req_purchaseorder['Reqpurchaseorder']['is_approved'] == 1){ ?>
+                                                <?php echo $this->Html->link('<i class="gi gi-print"></i>',array('action'=>'pdf',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php //echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$req_purchaseorder['Reqpurchaseorder']['id']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                    <?PHP endif; ?>
+                                </tbody>
+                            </table>
                             <?php echo $this->Html->script('pages/uiProgress'); ?>
                             <script>$(function(){ UiProgress.init(); });</script>
-                            <?php if ($this->Session->flash() != '') { ?>
-                                <script> var UiProgress = function() {
-                                    // Get random number function from a given range
-                                    var getRandomInt = function(min, max) {
-                                        return Math.floor(Math.random() * (max - min + 1)) + min;
-                                    };
-                                }();
-                                </script> 
-                            <?php } ?>
+                            

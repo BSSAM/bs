@@ -82,16 +82,7 @@ $(function() {
 
 });
 </script>
-<?php if(isset($_GET['val'])) { 
-    if($_GET['val'] == 3) { ?>
-<style>
-    table.dataTable td{ color: red;  border:1px lightgrey;}
-</style>
-<?php } if($_GET['val'] == 2) { ?>
-<style>
-    table.dataTable td{ color: #860000;}
-</style>
-<?php }} ?>
+
 <h1>
                                 <i class="gi gi-user"></i>Purchase Order
                             </h1>

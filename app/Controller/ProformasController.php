@@ -16,6 +16,11 @@ class ProformasController extends AppController
     public function index() {
         $delivery_data = $this->Proforma->find('all', array('order' => array('Proforma.id' => 'DESC')));
         $this->set('proforma', $delivery_data);
+		
+		$user_role = $this->userrole_permission();
+            
+        $this->set('userrole_cus',$user_role['job_proforma']);
+			
     }
     public function export() {      
         $delivery_data = $this->Proforma->find('all', array('order' => array('Proforma.id' => 'DESC')));

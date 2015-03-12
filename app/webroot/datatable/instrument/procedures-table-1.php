@@ -3,7 +3,7 @@ include 'config.php';
 
 // DB table to use
 $table = 'procedures';
- 
+$join = '';  
 // Table's primary key
 $primaryKey = 'id';
 
@@ -26,23 +26,23 @@ else
 }
  
 $columns = array(
-    array( 'db' => 'id', 'dt' => 0 ),
+    array( 'db' => 'id', 'dt' => 0 , 'field' => 'id'),
     array(
-        'db'        => 'created',
+        'db'        => 'created' , 'field' => 'created',
         'dt'        => 1,
         'formatter' => function( $d, $row ) {
             return date( 'F jS, Y h:i A', strtotime($d));
         }),
-    array( 'db' => 'procedure_no',  'dt' => 2 ),
-    array( 'db' => 'department_id',     'dt' => 3,'formatter' => function( $d, $row ) {
+    array( 'db' => 'procedure_no',  'dt' => 2 , 'field' => 'procedure_no'),
+    array( 'db' => 'department_id' , 'field' => 'department_id' , 'dt' => 3,'formatter' => function( $d, $row ) {
             
 			return SSP::get_department_name($d);
     } ),
-	 array( 'db' => 'description',   'dt' => 4 ),
-    array( 'db' => 'status',     'dt' => 5, 'formatter' => function( $d, $row ) {
+	 array( 'db' => 'description',   'dt' => 4 , 'field' => 'description'),
+    array( 'db' => 'status',     'dt' => 5 , 'field' => 'status' , 'formatter' => function( $d, $row ) {
             return ($d == 1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';
         }),
-    array( 'db' => 'id', 'dt' => 6 ,'formatter' => function ( $d, $row) {
+    array( 'db' => 'id', 'dt' => 6 , 'field' => 'id','formatter' => function ( $d, $row) {
             
             global $base_url;
             
@@ -74,5 +74,5 @@ $columns = array(
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2 )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2 ,$join)
 );

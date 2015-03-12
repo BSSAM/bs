@@ -1,3 +1,73 @@
+<?php echo $this->Html->script(array('datatable/jquery-1.11.1.min','datatable/jquery.dataTables.min'));  ?>
+<script>
+ var _ROOT ='<?PHP echo Router::url('/',true); ?>';
+
+$(function() {
+ 		
+		
+		 //// Search Input Element Add
+		 
+        html = '<tr>';
+        $('#purchaserequisitions-table-1 thead th').each(function(){
+        html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
+        });
+        html += '</tr>';
+
+        //console.log(html);
+
+        $('#purchaserequisitions-table-1 thead').prepend(html);
+
+        
+        table = $('#purchaserequisitions-table-1').DataTable( {
+        //"bFilter" : false,
+        "processing": true,
+        "serverSide": true,
+        //"scrollX": 1200,
+		//"sScrollX": "100%",
+        //"bScrollCollapse": true,
+        "ajax": _ROOT+"datatable/job/purchaserequisitions-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>"
+        });
+       
+        setTimeout(function(){
+            
+            $('.dataTable ').after("<div class='new_scroll'></div>");
+            $( '.dataTable' ).appendTo( ".new_scroll" );
+            
+        }, 1000);
+        
+        $("#jump").on( 'keyup change', function () {
+
+        var info = table.page.info();
+
+        page = (parseInt($(this).val()) - 1);
+
+        if($.isNumeric(page) && info.pages >= page)
+        table.page(page).draw( false );
+        else
+        table.page(0).draw( false );
+
+        });
+
+        table.columns().eq( 0 ).each( function ( colIdx ) {
+           if(colIdx == 7)
+           {
+                $('#purchaserequisitions-table-1 thead tr:first select').on( 'change', function () {
+                    table.column( colIdx ).search( $(this).val() ).draw();
+                });    
+            
+            }
+            else
+            {
+                $('#purchaserequisitions-table-1 thead tr:first input:eq('+colIdx+')').on( 'keyup change', function () {
+                    
+                    console.log($(this).val());
+                    table.column( colIdx ).search($(this).val()).draw();
+                });
+            }
+        });
+
+});
+</script>
                             <h1>
                                 <i class="gi gi-user"></i>Purchase Requisition
                             </h1>
@@ -20,7 +90,7 @@
                         </div>
                         
                         <div class="table-responsive">
-                            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                            <table id="purchaserequisitions-table-1" class="table table-vcenter table-condensed table-bordered">
                                 <thead>
                                     <tr>
                                         <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
@@ -34,48 +104,22 @@
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?PHP if(!empty($prequistion)):  ?>
-                                     <?php foreach($prequistion as $preq): ?>
-                                    <tr <?php if($preq['PurchaseRequisition']['is_manager_approved'] == 1):?> class="success" <?php else:?> class="error" <?php endif; ?>>
-                                        <td class="text-center"><?PHP echo $preq['PurchaseRequisition']['prequistionno'] ?></td>
-                                        <td class="text-center"><?PHP echo $preq['PurchaseRequisition']['reg_date'] ?></td>
-                                        <td class="text-center"><?PHP echo $preq['branch']['branchname'] ?></td>
-                                        <td class="text-center"><?PHP echo $preq['PurchaseRequisition']['customername'] ?></td>
-                                        <td class="text-center"><?PHP echo $preq['PurchaseRequisition']['phone'] ?></td>
-                                        <td class="text-center"><?PHP echo $preq['PurchaseRequisition']['email'] ?></td>
-                                        <td class="text-center">
-                                            <?PHP if($preq['PurchaseRequisition']['po_generate_type']=='Auotmatic'){$class="danger";}elseif($preq['PurchaseRequisition']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
-                                            <span class="label label-<?PHP echo $class; ?>">
-                                                <?PHP echo $preq['PurchaseRequisition']['ref_no'] ?>
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <?php if($userrole_cus['edit']==1){ ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$preq['PurchaseRequisition']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php } ?>
-                                                <?php if($userrole_cus['delete']==1){ ?>
-                                                <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$preq['PurchaseRequisition']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
-                                                <?php } ?>
-                                                 
-                                            </div>
-                                                <?PHP //echo $this->html->link('View', array('url'=>'http://www.google.com'), array('title' => 'View','data-target'=>'#myModal','class' => 'btn btn-alt btn-xs btn-primary', 'data-toggle' => 'modal'));  ?>
-<!--                                            <a href="Customers" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">Launch First</a>-->
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                    <?PHP endif; ?>
-                                   
-                                </tbody>
-                            </table>
-<!--                            <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    </div>
-                                </div>
-                            </div>-->
-
-                    <?php echo $this->Html->script('pages/uiProgress'); ?>
-                    <script>$(function(){ UiProgress.init(); });</script>
-                    
+                               </table>
+         <input type="text" id="jump" class="pagination_search_input" placeholder="Page No">
+    </div>
+     <!-- <div class="btn-group btn-group-md">
+                            <?php //echo $this->Form->input('status', array('id'=>'status_call','class'=>'form-control','label'=>false,'name'=>'status_call','type'=>'select','options'=>array('1'=>'Active','2'=>'Pending Approval','3'=>'InActive'),'empty'=>'Select Status')); ?>
+      </div>-->
+</div>
+                            
+                            <?php echo $this->Html->script('pages/uiProgress'); ?>
+                            <script>$(function(){ UiProgress.init(); });</script>
+                            <?php if ($this->Session->flash() != '') { ?>
+                                <script> var UiProgress = function() {
+                                    // Get random number function from a given range
+                                    var getRandomInt = function(min, max) {
+                                        return Math.floor(Math.random() * (max - min + 1)) + min;
+                                    };
+                                }();
+                                </script> 
+                            <?php } ?>

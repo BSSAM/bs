@@ -761,5 +761,65 @@ class SSP {
             }
             return $total;
 	}
+	
+	static function get_proformas_details($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM proformas where id = '$id'"
+            );
+
+            return $data;
+	}
+	
+	 static function get_branchname($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM  branches where id = '$id'"
+            );
+
+
+            return isset($data[0]['branchname']) ? $data[0]['branchname'] : '';
+	}
+     static function get_prequistions_details($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM prequistions where id = '$id'"
+            );
+
+            return $data;
+	}   
+	
+	static function get_reqpurchaseorders_details($id)
+	{
+            global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM reqpurchaseorders where id = '$id'"
+            );
+
+            return $data;
+	}   
 }
 
