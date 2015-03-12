@@ -549,6 +549,7 @@ App::uses('Controller', 'Controller');
                 $this->request->data['DelDescription']['delivery_accountservice']   =   $devices['Description']['sales_accountservice'];
                 $this->request->data['DelDescription']['delivery_titles']           =   $devices['Description']['sales_titles'];
                 $this->request->data['DelDescription']['delivery_total']           =   $devices['Description']['sales_total'];
+                $this->Description->updateAll(array('Description.del_id'=>$del_id),array('Description.id'=>$devices['Description']['id']));
                 return $this->request->data;
             endif;
         }
@@ -578,6 +579,7 @@ App::uses('Controller', 'Controller');
                 $this->request->data['DelDescription']['delivery_accountservice']   =   $devices['Description']['sales_accountservice'];
                 $this->request->data['DelDescription']['delivery_titles']           =   $devices['Description']['sales_titles'];
                 $this->request->data['DelDescription']['delivery_total']           =   $devices['Description']['sales_total'];
+                $this->Description->updateAll(array('Description.del_id'=>$del_id),array('Description.id'=>$devices['Description']['id']));
                 return $this->request->data;
             endif;
         }

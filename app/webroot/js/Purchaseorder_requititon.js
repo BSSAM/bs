@@ -86,7 +86,8 @@ $(document).ready(function(){
                                     <td class="text-center">'+instrument_brand+'</td>\n\\n\
                                     <td class="text-center">'+instrument_range+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_account+'</td>\n\
+                                    <td class="text-center">'+instrument_account+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_total+'</td>\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+data+'"class="btn btn-xs btn-default pre_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+data+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger pre_instrument_delete">\n\

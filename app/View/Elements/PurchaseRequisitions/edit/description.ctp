@@ -109,6 +109,7 @@
             <th class="text-center">Range</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Account Service</th>
+            <th class="text-center">Total</th>
             <th class="text-center">Action</th>
         </tr>
     </thead>
@@ -125,6 +126,7 @@
                     <td class="text-center"><?PHP echo $device['range']; ?></td>
                     <td class="text-center"><?PHP echo $device['validity']; ?></td>
                     <td class="text-center"><?PHP echo $device['account_service']; ?></td>
+                    <td class="text-center"><?PHP echo $device['total']; ?></td>
                     <td class="text-center">
                         <div class="btn-group">
                             <a data-edit="<?PHP echo $device['id']; ?>" class="btn btn-xs btn-default pre_instrument_edit" data-toggle="tooltip" title="Edit">

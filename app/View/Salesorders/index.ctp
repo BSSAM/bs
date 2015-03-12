@@ -1,6 +1,6 @@
 <?php echo $this->Html->script(array('datatable/jquery-1.11.1.min','datatable/jquery.dataTables.min'));  ?>
 <script>
-    
+     var path_url = '<?PHP echo Router::url('/',true); ?>';
         var _ROOT ='<?PHP echo Router::url('/',true); ?>';
         $(function() {
        
@@ -109,8 +109,11 @@
                     }
                 });
             }return false;    
-        });});
+        });
+        
+        });
 </script>
+
 <?php if(isset($_GET['val'])) { 
     if($_GET['val'] == 3) { ?>
 <style>

@@ -59,6 +59,11 @@ $columns = array(
                     $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Deliveryorders/delete/'.$d.'" data-original-title="Delete">
 <i class="fa fa-times"></i></a>';
                 }
+                if($val[0]['is_approved']==1)
+                {
+                $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Deliveryorders/pdf/'.$d.'" data-original-title="Report">
+<i class="gi gi-print"></i></a>';
+                }
             }
             else
             {

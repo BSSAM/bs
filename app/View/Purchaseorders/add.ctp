@@ -67,6 +67,14 @@ function editab() {
             submit    : 'Save',
             tooltip   : 'Click to edit'
        });
+    $('.edit_unit').editable(path_url+'/Salesorders/edit_unit', {
+            id        : 'device_id',
+            name      : 'title8',
+            type      : 'text',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            tooltip   : 'Click to edit'
+       });
 }
 </script>
 
@@ -191,7 +199,7 @@ $(function(){
                                     <td class="text-center">'+value.Description.sales_calllocation+'</td>\n\\n\
                                     <td class="text-center">'+value.Description.sales_calltype+'</td>\n\
                                     <td class="text-center">'+value.Description.sales_validity+'</td>\n\\n\
-                                    <td class="text-center">'+value.Description.sales_unitprice+'</td>\n\
+                                    <td class="text-center edit_unit">'+value.Description.sales_unitprice+'</td>\n\
                                     <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\\n\\n\\n\\n\
                                     <td class="text-center">'+value.Description.sales_total+'</td>\n\
                                     <td class="text-center title_val title_val1 edit_title1" id = "'+value.Description.id+'">'+tt1+'</td>\n\\n\\n\\n\\n\
@@ -368,7 +376,7 @@ $(function(){
                 
             </div>-->
             <div class="form-group">
-                <label class="col-md-2 control-label" for="val_customername">Customer Name</label>
+                <label class="col-md-2 control-label" for="val_customername">Sub Contractor Name</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off')); ?>
                 <div id="subcontract_result">
