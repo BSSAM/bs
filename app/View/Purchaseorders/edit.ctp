@@ -67,7 +67,7 @@ $(function() {
        });
     $('.edit_unit').editable(path_url+'/Salesorders/edit_unit', {
          id        : 'device_id',
-         name      : 'title8',
+         name      : 'unit_price',
          type      : 'text',
          cancel    : 'Cancel',
          submit    : 'Save',
@@ -333,7 +333,7 @@ $(function() {
                     <td class="text-center"><?PHP echo $device['model_no']; ?></td>
                     <td class="text-center"><?PHP echo $device['sales_calllocation']; ?></td>
                     <td class="text-center"><?PHP echo $device['sales_validity']; ?></td>
-                    <td class="text-center edit_unit"><?PHP echo $device['sales_unitprice']; ?></td>
+                    <td class="text-center edit_unit" id="<?PHP echo $device['id']; ?>"><?PHP echo $device['sales_unitprice']; ?></td>
                     <td class="text-center"><?PHP echo $device['Department']['departmentname']; ?></td>
                     <td class="text-center"><?PHP echo $device['sales_total']; ?></td>
                     <?php if($device1 != 0): ?> 

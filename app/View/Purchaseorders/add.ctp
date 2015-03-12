@@ -199,7 +199,7 @@ $(function(){
                                     <td class="text-center">'+value.Description.sales_calllocation+'</td>\n\\n\
                                     <td class="text-center">'+value.Description.sales_calltype+'</td>\n\
                                     <td class="text-center">'+value.Description.sales_validity+'</td>\n\\n\
-                                    <td class="text-center edit_unit">'+value.Description.sales_unitprice+'</td>\n\
+                                    <td class="text-center edit_unit" id = "'+value.Description.id+'">'+value.Description.sales_unitprice+'</td>\n\
                                     <td class="text-center">'+value.Department.departmentname+'</td>\n\\n\\n\\n\\n\\n\
                                     <td class="text-center">'+value.Description.sales_total+'</td>\n\
                                     <td class="text-center title_val title_val1 edit_title1" id = "'+value.Description.id+'">'+tt1+'</td>\n\\n\\n\\n\\n\

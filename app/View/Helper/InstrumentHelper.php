@@ -34,11 +34,11 @@ class InstrumentHelper extends AppHelper
 
     public function checkbrand_value($ins_id=NULL,$brand_id=NULL)
     {
-        APP::import('Model','InstrumentBrand');
-        $this->InstrumentBrand  =   new InstrumentBrand();
-        $brand_date  =    $this->InstrumentBrand->find('all',array('conditions'=>array('InstrumentBrand.instrument_id'=>$ins_id,'InstrumentBrand.brand_id'=>$brand_id)));
-        if(count($brand_date)>0):
-            
+        App::uses('InstrumentBrand_copy', 'Model');
+       // APP::import('Model','InstrumentBrand_copy');
+        $this->InstrumentBrand_copy  =   new InstrumentBrand_copy();
+        $brand_date  =    $this->InstrumentBrand_copy->find('count',array('conditions'=>array('InstrumentBrand_copy.instrument_id'=>$ins_id,'InstrumentBrand_copy.brand_id'=>$brand_id)));
+        if($brand_date):
             return TRUE;
             else:
             return FALSE;
@@ -46,24 +46,57 @@ class InstrumentHelper extends AppHelper
     }
     public function checkrange_value($ins_id=NULL,$range_id=NULL)
     {
-        APP::import('Model','InstrumentRange');
-        $this->InstrumentRange  =   new InstrumentRange();
-        $range_date  =    $this->InstrumentRange->find('all',array('conditions'=>array('InstrumentRange.instrument_id'=>$ins_id,'InstrumentRange.range_id'=>$range_id)));
-        if(count($range_date)>0):
+        App::uses('InstrumentRange_copy', 'Model');
+        //APP::import('Model','InstrumentRange_copy');
+        $this->InstrumentRange_copy  =   new InstrumentRange_copy();
+        $range_date  =    $this->InstrumentRange_copy->find('count',array('conditions'=>array('InstrumentRange_copy.instrument_id'=>$ins_id,'InstrumentRange_copy.range_id'=>$range_id)));
+        if($range_date):
             return TRUE;
             else:
             return FALSE;
         endif;
     }
+    
     public function checkprocedure_value($ins_id=NULL,$pro_id=NULL)
     {
-        APP::import('Model','InstrumentProcedure');
-        $this->InstrumentProcedure  =   new InstrumentProcedure();
-        $procedure_date  =    $this->InstrumentProcedure->find('all',array('conditions'=>array('InstrumentProcedure.instrument_id'=>$ins_id,'InstrumentProcedure.procedure_id'=>$pro_id)));
-        if(count($procedure_date)>0):
+        App::uses('InstrumentProcedure_copy', 'Model');
+        //APP::import('Model','InstrumentProcedure_copy');
+        $this->InstrumentProcedure_copy  =   new InstrumentProcedure_copy();
+        $procedure_date  =    $this->InstrumentProcedure_copy->find('count',array('conditions'=>array('InstrumentProcedure_copy.instrument_id'=>$ins_id,'InstrumentProcedure_copy.procedure_id'=>$pro_id)));
+        if($procedure_date):
             return TRUE;
             else:
             return FALSE;
         endif;
+    }
+    
+    public function getprocedure_value($ins_id=NULL)
+    {
+        App::uses('InstrumentProcedure_copy', 'Model');
+        //APP::import('Model','InstrumentProcedure_copy');
+        $this->InstrumentProcedure_copy  =   new InstrumentProcedure_copy();
+        $procedure_date  =    $this->InstrumentProcedure_copy->find('list',array('fields' => array("id", "procedure_id"), 'conditions'=>array('InstrumentProcedure_copy.instrument_id'=>$ins_id)));
+        
+        return array_values($procedure_date);
+    }
+    
+    
+     public function getbrand_value($ins_id=NULL)
+    {
+        App::uses('InstrumentBrand_copy', 'Model');
+       // APP::import('Model','InstrumentBrand_copy');
+        $this->InstrumentBrand_copy  =   new InstrumentBrand_copy();
+        $brand_date  =    $this->InstrumentBrand_copy->find('list',array('fields' => array("id", "brand_id"), 'conditions'=>array('InstrumentBrand_copy.instrument_id'=>$ins_id)));
+        
+        return array_values($brand_date);
+    }
+    public function getrange_value($ins_id=NULL)
+    {
+        App::uses('InstrumentRange_copy', 'Model');
+        //APP::import('Model','InstrumentRange_copy');
+        $this->InstrumentRange_copy  =   new InstrumentRange_copy();
+        $range_date  =    $this->InstrumentRange_copy->find('list',array('fields' => array("id", "range_id"), 'conditions'=>array('InstrumentRange_copy.instrument_id'=>$ins_id)));
+        
+        return array_values($range_date);
     }
 }

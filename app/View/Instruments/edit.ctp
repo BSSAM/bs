@@ -74,10 +74,14 @@
                                     <div class="col-md-4">
                                         <?php //echo $this->Form->input('InstrumentProcedure.procedure_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$procedure_array,'data-placeholder'=>'Select Procedure Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                          <select id="procedure" name="data[InstrumentProcedure][procedure_id][]" class="" data-placeholder="Choose a Procedure.." style="width: 250px;" multiple >
-                                                    <?PHP foreach ($procedure_array as $k => $v): ?>
+                                                    <?PHP 
+                                                    
+                                                    $get_procedure = $this->Instrument->getprocedure_value($instrum_id);
+                                                    
+                                                    foreach ($procedure_array as $k => $v): ?>
                                                     <?php 
-                                                         $get_procedure = $this->Instrument->checkprocedure_value($instrum_id, $k);
-                                                           $selected_procedure = ($get_procedure == 1) ? 'selected="selected"' : ''; ?>
+                                                         //$get_procedure = $this->Instrument->checkprocedure_value($instrum_id, $k);
+                                                           $selected_procedure = (in_array($k, $get_procedure)) ? 'selected="selected"' : ''; ?>
                                                         <option <?PHP echo $selected_procedure; ?> value=<?PHP echo $k ?>><?PHP echo $v; ?></option>
                                                     <?PHP endforeach; ?>
                                         </select>
@@ -91,10 +95,14 @@
                                     <div class="col-md-4">
                                         <?php //echo $this->Form->input('InstrumentBrand.brand_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$brand_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         <select id="example-chosen-multiple" name="data[InstrumentBrand][brand_id][]" class="select-chosen" data-placeholder="Choose a Brand.." style="width: 250px;" multiple >
-                                                    <?PHP foreach ($brand_array as $k => $v): ?>
+                                                    <?PHP 
+                                                    
+                                                    $get_brand = $this->Instrument->getbrand_value($instrum_id);
+                                                    
+                                                    foreach ($brand_array as $k => $v): ?>
                                                     <?PHP  
-                                                        $get_brand = $this->Instrument->checkbrand_value($instrum_id, $k);
-                                                        $selected = ($get_brand == 1) ? 'selected="selected"' : ''; ?>
+                                                        
+                                                        $selected = (in_array($k, $get_brand)) ? 'selected="selected"' : ''; ?>
                                                         <option <?PHP echo $selected; ?> value=<?PHP echo $k ?>><?PHP echo $v; ?></option>
                                                     <?PHP endforeach; ?>
                                         </select>
@@ -106,10 +114,14 @@
                                     <div class="col-md-4">
                                         <?php //echo $this->Form->input('InstrumentRange.range_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         <select id="example-chosen-multiple" name="data[InstrumentRange][range_id][]" class="select-chosen" data-placeholder="Choose a Range.." style="width: 250px;" multiple >
-                                                    <?PHP foreach ($range_array as $k => $v): ?>
+                                                    <?PHP 
+                                                    
+                                                    $get_range = $this->Instrument->getrange_value($instrum_id);
+                                                    
+                                                    foreach ($range_array as $k => $v): ?>
                                                         <?PHP 
-                                                            $get_range = $this->Instrument->checkrange_value($instrum_id, $k);
-                                                            $selected_range = ($get_range == 1) ? 'selected="selected"' : '';
+                                                            
+                                                            $selected_range = (in_array($k, $get_range)) ? 'selected="selected"' : '';
                                                         ?>
                                                         <option <?PHP echo $selected_range; ?> value=<?PHP echo $k ?>><?PHP echo $v; ?></option>
                                                     <?PHP endforeach; ?>

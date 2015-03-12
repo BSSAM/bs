@@ -1991,6 +1991,25 @@ table td { font-size:13px; line-height:18px; }
             echo $title;
         }
     } 
+    public function edit_unit()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $unit_price = Sanitize::clean($this->request->data['unit_price']);
+            $this->Description->id = $this->request->data['device_id'];
+            $dev = $this->Description->find('first',array('conditions'=>array('Description.id'=>$this->request->data['device_id'])));
+            $this->Device->updateAll(array('Device.unit_price'=>$unit_price,'Device.total'=>$unit_price),array('Device.id'=>$dev['Description']['device_id']));
+            $this->Description->saveField('sales_unitprice', $unit_price);
+            $this->Description->saveField('sales_total', $unit_price);
+            
+            
+//            $this->Description->id = $this->request->data['device_id'];
+//            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+//            $this->Description->saveField('title8_val', $title);
+            echo $unit_price;
+        }
+    }
     public function price_change()
     {
         $this->autoRender   =   false;
