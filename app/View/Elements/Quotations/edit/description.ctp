@@ -1005,8 +1005,8 @@ $("#search_cusinstrument").hide();
             <th class="text-center">Brand</th>
             <th class="text-center">Model No</th>
             <th class="text-center">Range</th>
-            <th class="text-center">Call Location</th>
-            <th class="text-center">Call Type</th>
+            <th class="text-center">Cal Location</th>
+            <th class="text-center">Cal Type</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
             <th class="text-center">Account Service</th>

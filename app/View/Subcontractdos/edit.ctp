@@ -115,13 +115,13 @@ $(function() {
                 
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label" for="val_customername">Sub Contract Name</label>
+                <label class="col-md-2 control-label" for="val_customername">Subcontractor</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off','value'=>$subcondo['Subcontractdo']['subcontract_name'], 'readonly' => true)); ?>
 <!--                <div id="subcontract_result">
                 </div>-->
                 </div>
-                <label class="col-md-2 control-label" for="val_regaddress">Sub Contract Address</label>
+                <label class="col-md-2 control-label" for="val_regaddress">Address</label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_address', array('id' => 'val_regaddress', 'class' => 'form-control', 'placeholder' => 'Enter Sub Contract Address', 'label' => false,'readonly' => true,'value'=>$subcondo['Subcontractdo']['subcontract_address'])); ?>
                 </div>
