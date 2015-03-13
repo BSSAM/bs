@@ -211,6 +211,4 @@ box-sizing: content-box !important;}
 
 #range-table-1_filter ,#brand-table-1_filter ,#instrument-table-1_filter ,#procedures-table-1_filter ,#unit-table-1_filter, #quotation-table-1_filter ,#CustomerTag-table-1_filter , #customer-table-1_filter, #salesorder-table-1_filter ,#deliveryorder-table-1_filter , #purchaseorders-table-1_filter , #subcontractdos-table-1_filter , #proformas-table-1_filter , #purchaserequisitions-table-1_filter , #Reqpurchaseorders-table-1_filter{display: none;}
 
-
-
 .new_scroll{width:100% !important; overflow: auto;}

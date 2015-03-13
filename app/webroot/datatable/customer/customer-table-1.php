@@ -11,18 +11,18 @@ $val = $_GET['val'];
 
 if($val == 2)
 {
-    $where1 = ' AND is_approved = 0 AND is_deleted = 0';
-    $where2 = ' where is_approved = 0 AND is_deleted = 0';
+    $where1 = ' AND is_approved = 0 AND is_deleted = 0 AND is_default = 1';
+    $where2 = ' where is_approved = 0 AND is_deleted = 0 AND is_default = 1';
 }
 elseif($val == 3)
 {
-    $where1 = ' AND is_deleted = 1';
-    $where2 = ' where is_deleted = 1';
+    $where1 = ' AND is_deleted = 1 AND is_default = 1';
+    $where2 = ' where is_deleted = 1 AND is_default = 1';
 }
 else
 {
-    $where1 = ' AND is_deleted = 0';
-    $where2 = ' where is_deleted = 0';
+    $where1 = ' AND is_deleted = 0 AND is_default = 1';
+    $where2 = ' where is_deleted = 0 AND is_default = 1';
 }
  
 $columns = array(
@@ -44,7 +44,8 @@ $columns = array(
 			
             $val = SSP::get_customers_details($d);
 			
-            $cn = '<div class="btn-group">'; 
+            //$cn = '<div class="btn-group">'; 
+			$cn = ' '; 
             
 			/*if($val[0]['status']== 1){  
 			$cn .= '<span class="label label-success">Active</span>'; } else {  $cn .= '<span class="label label-danger">In Active</span>'; }
@@ -57,7 +58,7 @@ $columns = array(
             {
                 if($_GET['instrument']==1){
 					
-                    $cn .= '<a class="btn  btn-xs btn-primary" data-toggle="tooltip" href="'.$base_url.'Customers/instrument_map/'.$d.'" title="Map Instrument">Instrument</a>';
+                    $cn .= '<div class="btn-group"><a class="btn  btn-xs btn-primary" data-toggle="tooltip" href="'.$base_url.'Customers/instrument_map/'.$d.'" title="Map Instrument">Instrument</a></div>  ';
 
             }
                 if($_GET['tag']==1){
@@ -72,18 +73,16 @@ $columns = array(
                                         endif;
 					 
 					 
-                    $cn .= '<a class="btn  btn-xs btn-warning" data-toggle="tooltip" href="'.$base_url.$controller.'/'.$action.'/'.$d.'" title="Tags">'.$tag_name.'</a>';
+                    $cn .= '<div class="btn-group"><a class="btn  btn-xs btn-warning" data-toggle="tooltip" href="'.$base_url.$controller.'/'.$action.'/'.$d.'" title="Tags">'.$tag_name.'</a></div>  <br>';
 
                 }
             }
            
                 if($_GET['edit']==1){
-                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customers/edit/'.$d.'" data-original-title="Edit">
-<i class="fa fa-pencil"></i></a>';
+                    $cn .= '<div class="btn-group"><a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customers/edit/'.$d.'" data-original-title="Edit"><i class="fa fa-pencil"></i></a></div>  ';
                 }
                 if($_GET['delete']==1){
-                    $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Customers/delete/'.$d.'" data-original-title="Delete">
-<i class="fa fa-times"></i></a>';
+                    $cn .= '<div class="btn-group"><a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Customers/delete/'.$d.'" data-original-title="Delete"><i class="fa fa-times"></i></a></div>  ';
                 }
             }
             else
@@ -92,7 +91,7 @@ $columns = array(
 <i class="fa fa-undo"></i></a>';*/
 				$cn .= '';
             }
-            $cn .= '</div>';
+           // $cn .= '</div>';
                           
             return $cn;
     })

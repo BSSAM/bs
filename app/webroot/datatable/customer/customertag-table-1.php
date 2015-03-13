@@ -41,7 +41,8 @@ $columns = array(
 			
            $val = SSP::get_customers_details($d);
 			
-            $cn = '<div class="btn-group">'; 
+            //$cn = '<div class="btn-group">'; 
+			$cn = ''; 
             
 			/*if($val[0]['status']== 1){  
 			$cn .= '<span class="label label-success">Active</span>'; } else {  $cn .= '<span class="label label-danger">In Active</span>'; }
@@ -49,14 +50,30 @@ $columns = array(
 			
             if(!$val[0]['is_deleted'])
             {
+				
+				if($val[0]['is_default'] != 1) {
+					
+					if($val[0]['is_approved'] == 1){
+                		if($_GET['instrument']==1){
+					
+                    		$cn .= '<div class="btn-group"><a class="btn  btn-xs btn-primary" data-toggle="tooltip" href="'.$base_url.'Customers/instrument_map/'.$d.'" title="Map Instrument">Instrument</a></div>  ';
+						}
+					}
+				}
+				
                 if($_GET['edit']==1){
-                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customertaglists/edit/'.$d.'" data-original-title="Edit">
-<i class="fa fa-pencil"></i></a>';
+                    $cn .= '<div class="btn-group"><a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customertaglists/edit/'.$d.'" data-original-title="Edit"><i class="fa fa-pencil"></i></a></div>  ';
                 }
-                if($_GET['delete']==1 && $_GET['customer_id'] != $val[0]['id']){
-                    $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Customertaglists/delete/'.$d.'" data-original-title="Delete">
-<i class="fa fa-times"></i></a>';
+                if($_GET['delete']== 1 && $val[0]['is_default'] != 1){
+					
+                    $cn .= '<div class="btn-group"><a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Customertaglists/delete/'.$d.'" data-original-title="Delete"><i class="fa fa-times"></i></a></div>  ';
                 }
+				
+				if($val[0]['is_default'] == 1) {
+					
+					 $cn .= '<span class="label label-success">Default</span>'; 
+				}
+				
             }
             else
             {
@@ -65,7 +82,7 @@ $columns = array(
 
 				$cn .= '';
             }
-            $cn .= '</div>';
+            //$cn .= '</div>';
              
             return $cn;
     })

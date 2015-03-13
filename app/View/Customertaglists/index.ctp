@@ -42,7 +42,7 @@ $(function() {
         //"scrollX": 1200,
 		//"sScrollX": "100%",
         //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/customer/customertag-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>&group_id=<? echo $group_id; ?>&customer_id=<?php echo $customer_id['delete'];?>&val="+valu
+        "ajax": _ROOT+"datatable/customer/customertag-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete']; ?>&group_id=<?php echo $group_id; ?>&instrument=<?php echo $userrole_cus['instrument'];?>&customer_id=<?php echo $customer_id['delete'];?>&val="+valu
         });
        
         setTimeout(function(){

@@ -30,7 +30,8 @@ class CustomersController extends AppController
         /*
          * ---------------  Functionality of Users -----------------------------------
          */
-        $Customer_lists = $this->Customer->find('all',array('conditions'=>array('Customer.is_default'=>1,'Customer.is_deleted'=>0),'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
+        $Customer_lists = $this->Customer->find('all',array('conditions'=>array('Customer.is_default'=>1,'Customer.is_deleted'=>0),
+		'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
         $this->set('customer', $Customer_lists);
         $this->Address->deleteAll(array('Address.status'=>0));
         $this->Projectinfo->deleteAll(array('Projectinfo.project_status'=>0));
