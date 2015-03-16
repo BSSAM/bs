@@ -142,7 +142,7 @@
         </table> 
     </div>
     <div class="form-group form-actions">
-        <div class="pull-left"><code>Note:</code> P - Processing , C - Checking ,Doc - Delivery Approved ,R - Ready to Deliver ,S - In Shipping , D - Delivered </div>
+        <div class="pull-left"><code>Note:</code> P - Processing , C - Checking ,Doc - Delivery Approved ,R - Ready to Deliver ,S - In Transit , D - Job Done </div>
         <div class="col-md-9 col-md-offset-10">
             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary sales_submit', 'escape' => false)); ?>
         </div>

@@ -30,6 +30,7 @@
                     <th class="text-center">P</th>
                     <th class="text-center">C</th>
                     <th class="text-center">R</th>
+                    <th class="text-center">S</th>
                     <th class="text-center">D</th>
                     <th class="text-center">Action</th>
                 </tr>
@@ -66,6 +67,12 @@
                         endif; 
                     endforeach;
                     $status = "";
+                    if($count_p != $count_desc):
+                        $status = "Waiting - For All Jobs Processing";
+                    endif;
+                    if($count_p ==  0):
+                        $status = "Not Yet Processed";
+                    endif;
                     if($count_p ==  $count_desc):
                         $status = " Processing ";
                     endif;
@@ -84,6 +91,7 @@
                     <td class="text-center"><?PHP $count_p = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['processing'] == '1'): $count_p++; endif; endforeach; if($count_p == ''): echo '0'; else: echo $count_p; endif;?></td>
                     <td class="text-center"><?PHP $count_c = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['checking'] == '1'): $count_c++; endif; endforeach; if($count_c == ''): echo '0'; else: echo $count_c; endif;?></td>
                     <td class="text-center"><?PHP $count_r = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['ready_deliver'] == '1'): $count_r++; endif; endforeach; if($count_r == ''): echo '0'; else: echo $count_r; endif;?></td>
+                    <td class="text-center"><?PHP $count_r = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['shipping'] == '1'): $count_r++; endif; endforeach; if($count_r == ''): echo '0'; else: echo $count_r; endif;?></td>
                     <td class="text-center"><?PHP $count_r = '' ; foreach ($salesorder['Description'] as $desc):  if($desc['shipping'] == '1'): $count_r++; endif; endforeach; if($count_r == ''): echo '0'; else: echo $count_r; endif;?></td>
                     <td class="text-center">
                         <div class="btn-group">

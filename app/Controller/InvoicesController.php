@@ -1030,7 +1030,7 @@ margin: 180px 50px;
      </table>
 <table width="623" height="56">
      <tr>
-          <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:16px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
+          <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
           <td width="389" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
      </tr>
 </table>
@@ -1145,11 +1145,11 @@ margin: 180px 50px;
                     <td style="width:80%;padding-right:10px;"><div style="line-height:7px !important;font-size:8px !important; ">1) Payment must be made either by Crossed Cheque to the Order of BS TECH PTE LTD or by electronic transfer to OCBC Bank (Bank Code: 7339 /Branch Code: 581/Account No: 814589001/SWIFT: OCBCSGSG). Any discrepancy noted herein must be brought to the notice of the company within 7 days in writing from the date of this statement. Otherwise all charges will be deemed to be correct.</div>
                     <div style="line-height:7px !important;font-size:8px !important;">2) Prompt payment settlement would be appreciated. Otherwise, interest charge of 2% per month or part thereof will be levied on any amount outstanding.</div>
                     <div style="line-height:7px !important;font-size:8px !important; ">3) All business is transacted in strict compliance of the Standard Terms & Conditions of BS Tech Pte Ltd; a copy of which can be made available on request.</div></td>
-                    <td style="width:20%; text-align:right;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
+                    <!--<td style="width:20%; text-align:right;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>-->
                </tr>
           </table>
 
-<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:5px;font-size:12px;margin-top:20px;text-align:center;">E. & O . E</div>
+<div style="background:#00005b;line-height:7px !important;width:100%;color:#fff !important;font-size:12px;margin-top:20px;text-align:center;">E. & O . E</div>
 </div>
 </div>
 <table width="100%">
@@ -1514,7 +1514,7 @@ $html .=
 <div id="header">
 <table width="700px">
      <tr>
-          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logoBs.png" width="400;" height="auto" alt="" /></div></td>
+          <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logo.jpg" width="400;" height="auto" alt="" /></div></td>
           <td style="padding:0 10px;"><div style="float:left;text-align:right;">
                     <p>41 Senoko Drive</p>
                     <p>Singapore 758249</p>
@@ -1526,7 +1526,7 @@ $html .=
 </table>
 <table width="623" height="56">
      <tr>
-          <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:16px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
+          <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
           <td width="389" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
      </tr>
 </table>
@@ -1636,7 +1636,7 @@ $html .='<div id="footer">
                     <td style="width:80%;padding-right:10px;"><div style="font-size:9px !important;">1) Payment must be made either by Crossed Cheque to the Order of BS TECH PTE LTD or by electronic transfer to OCBC Bank (Bank Code: 7339 /Branch Code: 581/Account No: 814589001/SWIFT: OCBCSGSG). Any discrepancy noted herein must be brought to the notice of the company within 7 days in writing from the date of this statement. Otherwise all charges will be deemed to be correct.</div>
                     <div style="font-size:9px !important;">2) Prompt payment settlement would be appreciated. Otherwise, interest charge of 2% per month or part thereof will be levied on any amount outstanding.</div>
                     <div style="font-size:9px !important;">3) All business is transacted in strict compliance of the Standard Terms & Conditions of BS Tech Pte Ltd; a copy of which can be made available on request.</div></td>
-                    <td style="width:20%; text-align:right;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>
+                    <!--<td style="width:20%; text-align:right;"><img src="img/signature.jpg"  width="120px" height="auto" alt="" /></td>-->
                </tr>
           </table>
 
