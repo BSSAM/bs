@@ -24,14 +24,14 @@
 
 $(document).ready(function(){
     $(".controller").each(function(){
-        vino = ($(this).is(":checked")) ? false : true;
-        $(this).parents("tr").find(".controlled").prop("disabled", vino);
-
-    })
+        //alert('a');
+        a = ($(this).is(":checked")) ? false : true;
+        //$(this).parents("tr").find(".controlled").prop("disabled", a);
+    });
 
     $(".controller").click(function(){
-        vino = ($(this).is(":checked")) ? false : true;
-        $(this).parents("tr").find(".controlled").prop("disabled", vino);
+        a = ($(this).is(":checked")) ? false : true;
+        $(this).parents("tr").find(".controlled").prop("disabled", a);
     });
 });
 
@@ -72,8 +72,8 @@ $(document).ready(function(){
                 <?php foreach ($labs as $labs_list): ?> 
                 <?php $count = $count +1;?>
                 <?PHP $description_id   =   $labs_list['Description']['id']; 
-                       $processing=   'data[Description][processing]['.$description_id.']';
-                       $checking=   'data[Description][checking]['.$description_id.']';
+                      $processing=   'data[Description][processing]['.$description_id.']';
+                      $checking=   'data[Description][checking]['.$description_id.']';
                       $checked  =   $this->Labprocess->labprocess_checking($labs_list['Description']['id']);
                       $processed =   $this->Labprocess->labprocess_processing($labs_list['Description']['id']);
 //                      echo $processed;
