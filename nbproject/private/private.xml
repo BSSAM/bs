@@ -3,25 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/bs/app/Model/Onsite.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/createschedule.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/OnsitesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Quotations/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/edit/createschedule.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Onsites/edit.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/instrument.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/AppController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/edit/instrument.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Onsites/engineer.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Dashboards/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/DashboardsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Onsites/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/onsite_schedule.js</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/QuotationsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/quotation_info.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/edit/description.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/js/quo_function_js.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customertaglists/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instruments/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/PurchaseRequisitions/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Subcontractdos/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Deliveryorders/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Reqpurchaseorders/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/customer/customer-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Brands/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/customer/customertag-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Procedures/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customers/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Ranges/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Units/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/pages/tablesDatatables.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Purchaseorders/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Quotations/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Jobmonitorings/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/css/custom.css</file>
+            <file>file:/D:/wamp/www/bs/app/View/Salesorders/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Proformas/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/View/Layouts/default.ctp</file>
         </group>
     </open-files>
