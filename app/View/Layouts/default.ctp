@@ -49,6 +49,7 @@
                         var h = document.lastChild
                         return c ? h.className = c : h.className
                     }))
+                    
                 </script>
                 <?php
 		echo $this->Html->css('themes');
@@ -56,6 +57,7 @@
                 echo $this->Html->css('file_upload_css/jquery.fileupload');
 		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
 		echo $this->Html->script('pages/uiProgress');
+                //echo $this->Html->script('pages/colResizable-1.5.min');
                 echo $this->Html->script(array('jquery.min'));
                 echo $this->Html->script('jedit/jquery.jeditable');
                 echo $this->Html->script(array('sal_desc_func','functions','labprocess_js','onsite_schedule',

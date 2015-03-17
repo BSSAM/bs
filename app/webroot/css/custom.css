@@ -213,4 +213,10 @@ box-sizing: content-box !important;}
 
 .new_scroll{width:100% !important; overflow: auto;}
 table { white-space: nowrap; }
-.table thead > tr > th{ background:#394263;color:#fff;}
+.table thead > tr > th{ background:#646464;color:#fff;}
+
+.color-change { background: none !important;}
+
+table th.resizing {
+    cursor: col-resize !important; z-index: 1000;position: relative;
+}

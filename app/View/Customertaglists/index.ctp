@@ -25,7 +25,7 @@ $(function() {
 		 //// Search Input Element Add   
         html = '<tr>';
         $('#CustomerTag-table-1 thead th').each(function(){
-        html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
+        html += '<th class ="color-change"><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
         });
         html += '</tr>';
 
@@ -42,7 +42,7 @@ $(function() {
         //"scrollX": 1200,
 		//"sScrollX": "100%",
         //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/customer/customertag-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete']; ?>&group_id=<?php echo $group_id; ?>&instrument=<?php echo $userrole_cus['instrument'];?>&customer_id=<?php echo $customer_id['delete'];?>&val="+valu
+        "ajax": _ROOT+"datatable/customer/customertag-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete']; ?>&group_id=<?php echo $group_id; ?>&instrument=<?php echo $userrole_cus['instrument'];?>&customer_id=<?php echo $customer_id;?>&val="+valu
         });
        
         setTimeout(function(){

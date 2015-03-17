@@ -27,7 +27,7 @@ $(function() {
     
         html = '<tr>';
         $('#brand-table-1 thead th').each(function(){
-        html += '<th><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
+        html += '<th class ="color-change"><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
         });
         html += '</tr>';
 
@@ -45,6 +45,31 @@ $(function() {
 		//"sScrollX": "100%",
         //"bScrollCollapse": true,
         "ajax": _ROOT+"datatable/instrument/brand-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>&val="+valu
+        });
+        
+        var pressed = false;
+        var start = undefined;
+        var startX, startWidth;
+
+        $("table th").mousedown(function(e) {
+            start = $(this);
+            pressed = true;
+            startX = e.pageX;
+            startWidth = $(this).width();
+            $(start).addClass("resizing");
+        });
+
+        $(document).mousemove(function(e) {
+            if(pressed) {
+                $(start).width(startWidth+(e.pageX-startX));
+            }
+        });
+
+        $(document).mouseup(function() {
+            if(pressed) {
+                $(start).removeClass("resizing");
+                pressed = false;
+            }
         });
         
         setTimeout(function(){
