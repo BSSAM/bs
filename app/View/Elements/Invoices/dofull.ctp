@@ -46,7 +46,7 @@ $(document).on('click','.dofull-prepare',function(){
 </script>     
 <div class="table-responsive">
 <div class="col-sm-3 col-lg-12">
-                    <table id="fourth-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="scroll4-datatable"  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                              <th class="text-center">Customer ID</th>

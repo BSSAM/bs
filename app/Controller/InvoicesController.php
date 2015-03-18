@@ -1149,9 +1149,9 @@ margin: 180px 50px;
                </tr>
           </table>
 
-<div style="background:#00005b;line-height:7px !important;width:100%;color:#fff !important;font-size:12px;margin-top:20px;text-align:center;">E. & O . E</div>
+<div style="background:#00005b;line-height:7px !important;width:100%;color:#fff !important;font-size:8px;margin-top:20px;text-align:center;">E. & O . E</div>
 </div>
-</div>
+
 <table width="100%">
                <tr>
                     <td  style="width:80%;">'.date('Y-m-d H:i:s').'</td><td  style="width:7%;">Page: <span class="page"></span></td>
