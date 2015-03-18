@@ -46,10 +46,10 @@ $(document).on('click','.pofull-prepare',function(){
    });
 
 </script>     
-
+<div class="block full">
 <div class="table-responsive">
 
-                    <table id="one-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="engineer-datatable"  class="table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">Customer ID</th>
@@ -90,4 +90,4 @@ $(document).on('click','.pofull-prepare',function(){
                     </tbody>
                 </table>
            
-</div>
+</div></div>

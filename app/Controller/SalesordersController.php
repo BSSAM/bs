@@ -1508,7 +1508,7 @@ $html .='<div id="footer">
 <div style="font-size:9px !important;width:100%;margin-top:10px;">1) THE LABORATORY SHALL RECOMMEND THE CALIBRATION DUE DATE AS PER THE CLIENTS REQUIREMENT OF 1 YEAR, UNLESS OTHERWISE AGREED ON THE TIME FRAME.</div>
 <div style="font-size:9px !important;width:100%;">2) ANY DISCREPANCY NOTED HEREIN MUST BE BROUGHT TO THE NOTICE OF THE COMPANY WITHIN 24 HOURS; OTHERWISE ALL DOCUMENTATIONS WILL BE DEEMED TO BE CORRECT.</div>
 <div style="font-size:9px !important;width:100%;">3) PLEASE RETURN FAX OR RAISE YOUR PURCHASE ORDER UPON CONFIRMATION. YOU MAY CONTACT SALES PERSONNEL IF THERE ARE ANY QUERIES AT 6458 4411.</div>
-<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:10px;font-size:12px;margin-top:10px;text-align:center;">E. & O . E</div>
+<div style="background:#00005b;line-height:7px !important;width:100%;color:#fff !important;font-size:8px;margin-top:20px;text-align:center;">E. & O . E</div>
 
        </div> 
        <table width="100%">
