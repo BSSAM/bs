@@ -181,16 +181,16 @@ and open the template in the editor.
 .c_top_search label{float: left;margin-right: 10px;margin-top: 5px;}
 .c_top_search select{ float: left;height: 25px;padding: 2px;width: 81%;}
 .list_quotation{ margin-top: 10px;}
-.list_quotation select{float: left; margin-right: 15px; width: 31%;}
+.list_quotation select{float: left; margin-right: 15px; width: 30%;}
 .list_quotation input{  float: left; margin-right: 25px; width: 30%;}
 .list_quotation .remove_field{}
 .custom_calculate .input{width:31%;float:left;}
-.custom_calculate .add_field_button{margin-right: 10px;}
+.custom_calculate .add_field_button{margin-right: 17px;}
 .title_val{ display:none;}
 /*.auto_overflow{overflow:auto;width:100%;}*/
 .auto_overflow table{white-space: nowrap;}
 .table-responsive-scroll table{white-space: nowrap;}
-.datalog{background:#ddd; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc; float: left; margin: 10px 0; padding: 10px 0; width: 100%;}
+.datalog{background:#ddd; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc; float: left; margin: 0 0 15px; padding: 30px !important; width: 100%;}
 .datalog .submit{margin-top: 3px;}
 #subcontract_result{ width:91%;}
 #subcontract_result .po_customer_show{padding:10px;}
@@ -209,7 +209,7 @@ box-sizing: content-box !important;}
 .dataTables_length label{float: right;font-size: 9px !important;}
 .dataTables_length label select{font-size: 9px;height: auto; padding: 2px;}
 
-#range-table-1_filter ,#brand-table-1_filter ,#instrument-table-1_filter ,#procedures-table-1_filter ,#unit-table-1_filter, #quotation-table-1_filter ,#CustomerTag-table-1_filter , #customer-table-1_filter, #salesorder-table-1_filter ,#deliveryorder-table-1_filter , #purchaseorders-table-1_filter , #subcontractdos-table-1_filter , #proformas-table-1_filter , #purchaserequisitions-table-1_filter , #Reqpurchaseorders-table-1_filter{display: none;}
+#range-table-1_filter ,#brand-table-1_filter ,#instrument-table-1_filter ,#procedures-table-1_filter ,#unit-table-1_filter, #quotation-table-1_filter ,#CustomerTag-table-1_filter , #customer-table-1_filter, #salesorder-table-1_filter ,#deliveryorder-table-1_filter , #purchaseorders-table-1_filter , #subcontractdos-table-1_filter , #proformas-table-1_filter , #purchaserequisitions-table-1_filter , #Reqpurchaseorders-table-1_filter ,#TrackInComplete-table_filter{display: none;}
 
 .new_scroll{width:100% !important; overflow: auto;}
 table { white-space: nowrap; }

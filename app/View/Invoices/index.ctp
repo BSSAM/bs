@@ -27,17 +27,21 @@
                                     <div class="panel-body panel-body-nopadding">
                                         <!-- BASIC WIZARD -->
                                         <div id="basicWizard" class="basic-wizard">
+                                        
                                             <ul class="nav nav-pills nav-justified " data-toggle="tabs" id="tabs">
                                                 <li class="active invoice_active"><a href="#tab1" data-toggle="tab">Invoice</a></li>
-                                                 <?php if($user_role['app_invoice']['view'] == 1){ ?>
+                                                <?php if($user_role['app_invoice']['view'] == 1){ ?>
                                                 <li class=""><a href="#tab2" data-toggle="tab"> Prepare SO Full Invoice</a></li>
                                                 <li class=""><a href="#tab3" data-toggle="tab"> Prepare PO Full Invoice</a></li>
                                                 <li class=""><a href="#tab4" data-toggle="tab"> Prepare QO Full Invoice</a></li>                                                <li class=""><a href="#tab5" data-toggle="tab"> Prepare DO Full Invoice</a></li>
                                                 <?php } ?>
                                             </ul>
+                                            
                                             <div class="nav-pills-border-color"></div>
                                             <br><br>
+                                            
                                             <div class="tab-content">
+                                            
                                                 <div class="tab-pane active" id="tab1">
                                                     <?PHP echo $this->element('Invoices/invoice'); ?>
                                                 </div>

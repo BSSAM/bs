@@ -11,7 +11,9 @@
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','Deliveryorder');
-        public function index()
+       
+	   
+	    public function index()
         {
             $track_id = $this->request->query['track_id'];
             
@@ -42,9 +44,32 @@
             }
 //           
         }
+		
+		
         public function tracklist()
         {
-            if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) && isset($this->request->data['val']))
+			
+			if($this->request->is('post'))
+        	{
+				//pr($this->request->data);exit;
+				
+				if(isset($this->request->data['salestrack']) && !empty($this->request->data['TrackComplete']))
+				{
+					
+					foreach($this->request->data['TrackComplete'] as $salesid)
+					{
+						 $this->Salesorder->id = $salesid;
+    					 $this->Salesorder->saveField("is_trackcompleted","1");
+					}
+					$this->Session->setFlash(__('Tracking Status Changed Successfully'));
+					$salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_trackcompleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+                	$this->set('track_list',$salesorder_list);
+				}
+				
+				
+				
+            if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) &&
+			 isset($this->request->data['val']))
             {
                 $andor = $this->request->data['gate'];
 
@@ -73,14 +98,23 @@
                 //debug($log);
                 //exit;
             }
+			}
             else
             {
-                $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
+                $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_trackcompleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
                 //pr($salesorder_list);exit;
                 $this->set('track_list',$salesorder_list);
     //           
             }
+			
+			$salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'order' => array('Salesorder.id' =>'DESC')));
+            $this->set('track_list',$salesorder_list);
+			
+			$completed_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_trackcompleted'=>1),'order' => array('Salesorder.id' =>'DESC')));
+            $this->set('completed_list',$completed_list);
         }
+		
+		
         public function reportfinal() {
             $this->viewClass = 'Media';
             // Download app/webroot/files/example.csv
@@ -93,6 +127,8 @@
            );
            $this->set($params);
         }
+		
+		
         
     }     
     

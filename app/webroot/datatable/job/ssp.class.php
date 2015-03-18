@@ -821,5 +821,125 @@ class SSP {
 
             return $data;
 	}   
+	
+	
+	static function salesperson($attn=NULL)
+    {
+       		global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM cus_contactpersoninfos where id = '$attn'"
+            );
+
+             return isset($data[0]['name']) ? $data[0]['name'] : '';
+    }
+	
+	
+	
+	static function find_deliveryorder_nos($sales_id=NULL)
+    {
+       global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM deliveryorders where salesorder_id = '$sales_id'"
+            );
+            return count($data);
+    }
+    
+    static function find_deliveryorder_no($sales_id = null)
+    {
+		
+		 global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM deliveryorders where salesorder_id = '$sales_id'"
+            );
+			
+		$sa = array();
+        foreach($data as $k => $sales1):
+            $sa[] = $sales1['delivery_order_no'];
+        endforeach;
+        $id1 = implode(',',$sa);
+        return $id1;
+      
+    }
+	
+    static function find_deliveryorder_date($sales_id = null)
+    {
+		 global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM deliveryorders where salesorder_id = '$sales_id'"
+            );
+			
+		$sa = array();
+        foreach($data as $k => $sales1):
+            $sa[] = $sales1['delivery_order_date'];
+        endforeach;
+        $id1 = implode(',',$sa);
+        return $id1;
+      
+    }
+	
+    static function find_invoice_no($sales_id = null)
+    {
+		 global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM  invoices where salesorder_id = '$sales_id'"
+            );
+			
+		$sa = array();
+        foreach($data as $k => $sales1):
+            $sa[] = $sales1['invoiceno'];
+        endforeach;
+        $id1 = implode(',',$sa);
+        return $id1;
+		
+    }
+	
+    static function find_invoice_date($sales_id = null)
+    {
+		 global $sql_details;
+
+            $db = self::db( $sql_details );
+
+            $bindings = array();
+
+            $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM  invoices where salesorder_id = '$sales_id'"
+            );
+			
+		$sa = array();
+        foreach($data as $k => $sales1):
+            $sa[] = $sales1['invoice_date'];
+        endforeach;
+        $id1 = implode(',',$sa);
+        return $id1;
+		
+    }
+    
+	
+	
 }
 
