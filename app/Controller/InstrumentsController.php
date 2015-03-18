@@ -81,8 +81,8 @@ class InstrumentsController extends AppController
             $instrumentbra_array = $this->request->data['InstrumentBrand']['brand_id'];
             $instrumentran_array = $this->request->data['InstrumentRange']['range_id'];
             $this->request->data['Instrument']['ins_date'] = date('Y-m-d');
-            $instrument_data = $this->Instrument->find('first',array('conditions'=>array('Instrument.name'=>$this->request->data['Instrument']),'recursive'=>'2'));
-            if(!$instrument_data){
+           $instrument_data = $this->Instrument->find('first',array('conditions'=>array('Instrument.name'=>$this->request->data['Instrument']['name'])));
+            if(empty($instrument_data)){
             if($this->Instrument->save($this->request->data['Instrument']))
             {
                 $last_insert_id =   $this->Instrument->getLastInsertID();
