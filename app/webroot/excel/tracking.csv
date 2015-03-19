@@ -1,9 +1,4 @@
 
 ID,"Salesorder No","Due Date","No of Delivery orders","Deliveryorder No","Deliveryorder Date","Invoice No","Invoice Date","Quotation No","Ref No","Job Status",Remarks,"Responsible Person","Customer Name","Salesperson Name","Branch Name"
-1,BSO-05-000008,28-February-15,1,BDO-05-000006,24-February-15,,,BSQ-05-000008,PO12345,Incomplete,---,-,"BS OFFSHORE PTE LTD",Rajesh,Singapore
-2,BSO-05-000007,28-February-15,2,"BDO-05-000004,BDO-05-000005","24-February-15,24-February-15",BIN-05-000003,24-February-15,BSQ-05-000007,PO-05-000012,Incomplete,-,-,"ALLIANCE AIRSUPPORT PTE LTD","MS SARA",Singapore
-3,BSO-05-000006,17-February-15,0,,,,,BSQ-05-000006,CPO-05-000009,Incomplete,-,-,"BS AQUATIERRA PTE LTD",Mohanam,Singapore
-4,BSO-05-000005,14-February-15,1,BDO-05-000003,13-February-15,,,BSQ-05-000005,PO#4321,Incomplete,-,-,"BS AQUATIERRA PTE LTD",Mohanam,Singapore
-5,BSO-05-000004,17-February-15,1,BDO-05-000002,13-February-15,BIN-05-000002,13-February-15,BQS-05-000003,PO#124rasdsd,Incomplete,-,-,"BS AQUATIERRA PTE LTD",Mohan,Singapore
-6,BSO-05-000003,13-February-15,0,,,,,BSQ-05-000003,CPO-05-000003,Incomplete,-,-,"ALLIANCE AIRSUPPORT PTE LTD","MS SARA",Singapore
-7,BSO-05-000002,2015-12-11,0,,,,,BSQ-05-000002,PO#AAS/WO/0015/15,Incomplete,-,-,"ALLIANCE AIRSUPPORT PTE LTD","MS SARA",Singapore
+1,BSO-05-000004,17-February-15,1,BDO-05-000002,13-February-15,BIN-05-000002,13-February-15,BQS-05-000003,PO#124rasdsd,Incomplete,-,-,"BS AQUATIERRA PTE LTD",Mohan,Singapore
+2,BSO-05-000006,17-February-15,0,,,,,BSQ-05-000006,CPO-05-000009,Incomplete,-,-,"BS AQUATIERRA PTE LTD",Mohanam,Singapore
