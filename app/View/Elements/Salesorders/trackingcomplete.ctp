@@ -1,16 +1,23 @@
 <script>
 
-$(function(){
+/*$(function(){
     setTimeout(function(){
         $('.newscrol').after("<div class='new_scroll1'></div>");
         $('.newscrol').appendTo(".new_scroll1");
     },1000);
-});
+});*/
+
+     $(function(){
+           setTimeout(function(){
+                   $('.dataTable2').after("<div class='new_scroll2'></div>");
+                   $('.dataTable2').appendTo(".new_scroll2");
+               },1000);
+           });
 </script>
 <div class="block full">
 <div class="table-responsive">
 
-        <table id="example-datatable" class="table table-vcenter newscrol table-condensed table-bordered">
+        <table id="scroll2-datatable" class="table table-vcenter newscrol dataTable2 table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center">ID</th>

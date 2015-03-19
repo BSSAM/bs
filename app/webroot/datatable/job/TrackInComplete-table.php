@@ -1,17 +1,28 @@
 <?php
 include 'config.php';
 
-// DB table to use
-$table = 'salesorders as sals';
-$join = " LEFT JOIN customers as cus ON (sals.customer_id = cus.id)"; 
-// Table's primary key
-$primaryKey = 'id';
- 
-
-    $where1 = ' AND sals.is_deleted = 0 AND sals.is_trackcompleted = 0';
-    $where2 = ' where sals.is_deleted = 0 AND sals.is_trackcompleted = 0';
-
- 
+	// DB table to use
+	$table = 'salesorders as sals';
+	$join = " LEFT JOIN customers as cus ON (sals.customer_id = cus.id)"; 
+	// Table's primary key
+	$primaryKey = 'id';
+	$res = $_GET['slsid'];
+	if(!empty($res) && $res != 1 )
+	{
+		$sss = implode('","',explode(',',$res));
+		$where1 = ' AND sals.is_deleted = 0 AND sals.is_trackcompleted = 0 AND sals.id IN("'.$sss.'")';
+		$where2 = ' where sals.is_deleted = 0 AND sals.is_trackcompleted = 0 AND sals.id IN("'.$sss.'")';
+		
+	}
+	else
+	{
+		$where1 = ' AND sals.is_deleted = 0 AND sals.is_trackcompleted = 0 ';
+	
+		$where2 = ' where sals.is_deleted = 0 AND sals.is_trackcompleted = 0';
+	}
+	
+ 	
+		
 $columns = array(
     array( 'db' => 'sals.id', 'dt' => 0 , 'field' => 'id'),
     array(

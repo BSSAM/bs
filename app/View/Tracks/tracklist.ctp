@@ -12,7 +12,7 @@
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="col-md-12 list_quotation"><select name="query_input[]" class="form-control"><option value="Salesorder.id">Salesorder No</option><option value="Salesorder.due_date">Due Date</option><option value="Customer.customername">Customer Name</option><option value="Device.model_no">Model No</option><option value="Device.quantity">Quantity</option></select><select name="equal_input[]" class="form-control"><option value="=">Equal</option><option value="!=">Not Equal</option><option value="<=">Start With</option><option value=">=">End With</option><option value="LIKE">Contains</option></select><input type="text" name="val[]" class="form-control"/><button class="remove_field">-</button></div>'); 
+            $(wrapper).append('<div class="col-md-12 list_quotation"><select name="query_input[]" class="form-control"><option value="Salesorder.id">Salesorder No</option><option value="Salesorder.due_date">Due Date</option><option value="Salesorder.customername">Customer Name</option><option value="Device.model_no">Model No</option><option value="Device.quantity">Quantity</option></select><select name="equal_input[]" class="form-control"><option value="=">Equal</option><option value="!=">Not Equal</option><option value="<=">Start With</option><option value=">=">End With</option><option value="LIKE">Contains</option></select><input type="text" name="val[]" class="form-control"/><button class="remove_field">-</button></div>'); 
         }
     });
     
@@ -25,6 +25,7 @@
 
 </script>
 <style>
+.new_scroll2{width:100% !important; overflow: auto;}
 #example-datatable_wrapper .col-xs-5{ width:30% !important;}
 .submit2 { margin-right:10px;}
 </style>
@@ -67,16 +68,19 @@
                    <br><br>
                    
                                             
-                  <div class="tab-content">
+    <div class="tab-content">
                                             
-      				<div class="tab-pane active" id="tab1">
-                       <?php echo $this->Html->script(array('datatable/jquery-1.11.1.min','datatable/jquery.dataTables.min'));  ?> 
-                  		<script>
-						$(function() {
+      <div class="tab-pane active" id="tab1">
+       <?php echo $this->Html->script(array('datatable/jquery-1.11.1.min','datatable/jquery.dataTables.min')); 
+	   
+	   if($request_search != 1)  $res = implode(',',$request_search); else $res = 1; ?> 
+       
+       <script>
+	  
+	   $(function() {
  		
-		
 		 //// Search Input Element Add
-		 
+		
         html = '<tr>';
         $('#TrackInComplete-table thead th').each(function(){
         html += '<th class ="color-change"><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
@@ -84,10 +88,9 @@
         html += '</tr>';
 
         //console.log(html);
-
+		
         $('#TrackInComplete-table thead').prepend(html);
 
-        
         table = $('#TrackInComplete-table').DataTable( {
         //"bFilter" : false,
         "processing": true,
@@ -95,9 +98,9 @@
         //"scrollX": 1200,
 		//"sScrollX": "100%",
         //"bScrollCollapse": true,
-        "ajax": _ROOT+"datatable/job/TrackInComplete-table.php"
+		
+		"ajax": _ROOT+"datatable/job/TrackInComplete-table.php?slsid=<?php echo $res; ?>"
         });
-        
       /*  var pressed = false;
         var start = undefined;
         var startX, startWidth;
@@ -168,8 +171,9 @@
 
 });
 </script>
-                	    <div class="datalog" > <form method="post">
-                 <?PHP //echo $this->Form->create('Tracks', array('action' => 'tracklist', 'class' => 'form-horizontal form-bordered')); ?>
+                	    <div class="datalog" > <?php //pr($request_search); ?>
+                         <form method="post">
+                 <?PHP  //echo $this->Form->create('Tracks', array('action' => 'tracklist', 'class' => 'form-horizontal form-bordered')); ?>
                     <div class="col-md-12 custom_calculate">
                     <?php echo $this->Form->input('gate', array('id'=>'gate','class'=>'form-control','label'=>false,'name'=>'gate','type'=>'select','options'=>array('AND'=>'AND','OR'=>'OR'))); ?>
                    <button class="add_field_button pull-right">+</button></div>
@@ -185,9 +189,9 @@
                     </div></form>
                      <?PHP //$this->Form->end(); ?>
                 </div>
-                
+               
                        <form method="post">
-                        <?PHP //echo $this->Form->create('Tracks1', array('action' => 'tracklist')); ?>             
+                        <?PHP   //echo $this->Form->create('Tracks1', array('action' => 'tracklist')); ?>             
                         <div class="table-responsive">
                     	  
                              <div style=" margin-left: 50px;margin-right: 1px;" class="submit2 pull-right">

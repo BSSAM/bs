@@ -49,68 +49,81 @@
         public function tracklist()
         {
 			
-			if($this->request->is('post'))
-        	{
-				//pr($this->request->data);exit;
-				
-				if(isset($this->request->data['salestrack']) && !empty($this->request->data['TrackComplete']))
-				{
-					
+			
+			$request_search =  1;
+			
+			if(isset($this->request->data['salestrack']) && !empty($this->request->data['TrackComplete']))
+			{
 					foreach($this->request->data['TrackComplete'] as $salesid)
 					{
 						 $this->Salesorder->id = $salesid;
     					 $this->Salesorder->saveField("is_trackcompleted","1");
 					}
 					$this->Session->setFlash(__('Tracking Status Changed Successfully'));
-					$salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_trackcompleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
-                	$this->set('track_list',$salesorder_list);
-				}
+			}
 				
 				
 				
             if(isset($this->request->data['gate']) && isset($this->request->data['query_input']) && isset($this->request->data['equal_input']) &&
 			 isset($this->request->data['val']))
             {
-                $andor = $this->request->data['gate'];
-
+			    $andor = $this->request->data['gate'];
                 $condition = $this->request->data['query_input'];
                 $conditiontype = $this->request->data['equal_input'];
                 $value = $this->request->data['val'];
                 $conditions = $ccres = array();
 
                 $conditions['Salesorder.is_deleted'] = 0;
-                $conditions['branch.branchname'] = 'Singapore';
-                ///$conditions1['Device.quotationno'] = 'BSQ-05-000002';
+                $device = array();
                 foreach($condition as $k => $con)
                 {
                     if($conditiontype[$k]!='LIKE')
-                    $ccres[$con.' '.$conditiontype[$k]]  = $value[$k];       
-                //  else    
-                //  $ccres[$con.' LIKE "%'.$value[$k].'%"']  = ''; 
+					{
+						if($con == 'Device.model_no')   $device[$con.' '.$conditiontype[$k]] =  $value[$k];
+						
+						else if($con == 'Device.quantity')   $device[$con.' '.$conditiontype[$k]] =  $value[$k];
+						
+						else  $ccres[$con.' '.$conditiontype[$k]] =  $value[$k];
+						
+					}
+                	else    
+                	$ccres[$con.' LIKE "%'.$value[$k].'%"']  = ''; 
                 }
-
-                $conditions[$andor] = $ccres;
-                $salesorder_list = $this->Salesorder->find('all',array('conditions'=>$conditions,'order' => array('Salesorder.id' => 'DESC')));
-                //$quotation_lists = $this->Quotation->find('all',array('conditions'=>$conditions,'order' => array('Quotation.created' => 'ASC')));    
-                //pr($salesorder_list);
-                $this->set('track_list', $salesorder_list);
-                //$log = $this->Salesorder->getDataSource()->getLog(false, false);
-                //debug($log);
-                //exit;
-            }
+				
+				
+				
+				$Deviceid = $this->Device->find('list',array('fields'=>array('id'),'conditions'=>$device)); // pr($Deviceid);exit;
+				if(!empty($Deviceid))
+				{
+					$Description = $this->Description->find('list',array('fields'=>array('salesorder_id'),'conditions'=>array('Description.device_id'=>$Deviceid)));
+					$ccres['Salesorder.id'] =  $Description;
+				}
+               
+			    $conditions[$andor] = $ccres;
+				
+				$salesgetid = array();
+                $sales_all = $this->Salesorder->find('all',array('conditions'=>$conditions));  
+				foreach($sales_all as $k => $vv)
+				{
+					$salesgetid[$k] = $vv['Salesorder']['id'];
+				}
+				
+				$request_search = $salesgetid;
+				
+				$salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.id'=>$salesgetid,'Salesorder.is_approved'=>1)));
+                //pr($request_search);exit;
 			}
             else
             {
-                $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_trackcompleted'=>0),'order' => array('Salesorder.id' => 'DESC')));
-                //pr($salesorder_list);exit;
-                $this->set('track_list',$salesorder_list);
-    //           
+                $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
+              
             }
 			
-			$salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1),'order' => array('Salesorder.id' =>'DESC')));
-            $this->set('track_list',$salesorder_list);
+			$this->set('track_list',$salesorder_list);
+			$this->set('request_search', $request_search);
 			
-			$completed_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,'Salesorder.is_trackcompleted'=>1),'order' => array('Salesorder.id' =>'DESC')));
+			$completed_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,
+			'Salesorder.is_trackcompleted'=>1),'order' => array('Salesorder.id' =>'DESC')));
             $this->set('completed_list',$completed_list);
         }
 		
