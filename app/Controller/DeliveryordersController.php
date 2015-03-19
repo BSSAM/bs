@@ -1168,7 +1168,7 @@ table td { font-size:9px; line-height:11px; }
 margin: 180px 50px;
 }
 #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 350px; }
-#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 330px; }
+#footer { position: fixed; left: 0px; bottom: -280px; right: 0px; height: 330px; }
 #footer .page:after { content: counter(page); }
 </style>
 </head>'; 
@@ -1188,10 +1188,10 @@ $html .=
 					</td>
           <tr>
      </table>
-     <table width="623" height="56">
+     <table width="98%" height="56">
           <tr>
                <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">DELIVERY ORDER</div></td>
-               <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+               <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">COMPANY REG NO. 200510697M</div></td>
           </tr>
      </table>
      <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
@@ -1240,7 +1240,7 @@ $html .=
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-10px;">'.$deliveryorder_data['Deliveryorder']['delivery_order_no'].'</div></td>
+                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-10px;font-weight:bolder;">'.$deliveryorder_data['Deliveryorder']['delivery_order_no'].'</div></td>
                          </tr>
                          <tr>
 						     
@@ -1282,25 +1282,25 @@ $html .='<div id="footer">
      <div style="width:100%;">
           <table cellpadding="1" cellspacing="1"  style="width:100%;">
           <tr>
-               <td style="padding:5px;width:50%;border:1px solid #000;"><table cellpadding="0" cellspacing="0">
+               <td style="padding:5px;width:50%;border:1px solid #000;"><table cellpadding="0" cellspacing="0" width="245" >
                          <tr>
                               <td style="text-align:center;padding-bottom:50px;">ITEMS RECEIVED IN GOOD ORDER AND CONDITION</td>
                          </tr>
 						 <tr>
-                              <td style="font-size:9px !important;color:#777 !important;text-align:center;">COMPANYS STAMP, SIGNATURE AND DATE</td>
+                              <td style="font-size:9px !important;color:#777 !important;text-align:center;border-top:1px solid #000;">COMPANYS STAMP, SIGNATURE AND DATE</td>
                          </tr>
-                        
-                    </table></td>
+                        </table>
+                    </td>
                <td></td>
                <td></td>
                <td></td>
                <td></td>
-               <td style="border:1px dashed #000;padding:5px;width:50%;"><table width="270" cellpadding="0" cellspacing="0">
+               <td style="border:1px dashed #000;padding:5px;width:50%;"><table width="245" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td width="214" style="text-align:center;padding-bottom:30px;">FOR BS TECH PTE LTD</td>
+                              <td width="214" style="text-align:center;padding-bottom:50px;">FOR BS TECH PTE LTD</td>
                          </tr>
 						 <tr>
-                              <td style="font-size:9px !important;color:#777 !important; text-align:center;padding-top:10px;"><div style="border-top:1px solid #000;"> Authorized Signature</div></td>
+                              <td style="font-size:9px !important;color:#777 !important; text-align:center;padding-top:5px;border-top:1px solid #000;">Authorized Signature</td>
                          </tr>
                         
                </table></td>
@@ -1308,7 +1308,7 @@ $html .='<div id="footer">
      </table>
      
 
-<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:10px;font-size:12px;margin-top:30px;text-align:center;">E. & O . E</div>
+<div style="background:#00005b;line-height:7px !important;width:100%;color:#fff !important;font-size:8px;margin-top:20px;text-align:center;">E. & O . E</div>
        </div>  
        <table width="100%">
                <tr>

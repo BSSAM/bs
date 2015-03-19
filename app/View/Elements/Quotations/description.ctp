@@ -17,6 +17,7 @@
                 element.setAttribute("itemsSelected",itemsSelected.toString());	
         }
     }
+      
 </script>
 <script type="text/javascript">
     $(function(){
@@ -769,6 +770,7 @@ $("#search_cusinstrument").hide();
            $scope.end = ($scope.current_page * $scope.perpage) - 1;
        }
     }
+   
 </script>
 <style>
     .quotation_add .help-block_login{
@@ -926,9 +928,17 @@ $("#search_cusinstrument").hide();
 </div>
 </label>
 </div>
+    <script>
+     $(function(){
+            setTimeout(function(){
+                    $('.dataTable6').after("<div class='new_scroll6'></div>");
+                    $('.dataTable6').appendTo(".new_scroll6");
+                },1000);
+            });
+    </script>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-<table class="table table-vcenter table-condensed table-bordered" id="Quo-ins">
+<table class="table table-vcenter table-condensed table-bordered dataTable6" id="example-datatable">
     <thead>
         <tr>
             <th class="text-center">S.No</th>

@@ -44,12 +44,17 @@ $(document).on('click','.pofull-prepare',function(){
 //    }
        
    });
-
+  $(function(){
+            setTimeout(function(){
+                    $('.dataTable1').after("<div class='new_scroll'></div>");
+                    $('.dataTable1').appendTo(".new_scroll");
+                },1000);
+            });
 </script>     
 <div class="block full">
-<div class="table-responsive">
+<div class="table-responsive invoice_tab">
 
-                    <table id="engineer-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="scroll3-datatable"  class="table table-vcenter table-condensed table-bordered dataTable1">
                     <thead>
                         <tr>
                             <th class="text-center">Customer ID</th>

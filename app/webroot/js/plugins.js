@@ -2659,7 +2659,7 @@
                 a = null === a ? "DataTables warning: " + c : "DataTables warning (table id = '" +
                     a.sTableId + "'): " + c;
                 if (0 === b)
-                    if ("alert" == j.ext.sErrMode) alert(a);
+                    if ("alert" == j.ext.sErrMode) //alert(a);
                     else throw Error(a);
                     else X.console && console.log && console.log(a)
             }

@@ -220,3 +220,6 @@ table { white-space: nowrap; }
 table th.resizing {
     cursor: col-resize !important; z-index: 1000;position: relative;
 }
+.new_scroll2{width:100% !important; overflow: auto;}
+.new_scroll3{width:100% !important; overflow: auto;}
+.new_scroll4{width:100% !important; overflow: auto;}

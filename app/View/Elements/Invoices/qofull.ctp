@@ -44,11 +44,16 @@ $(document).on('click','.qofull-prepare',function(){
 //    }
        
    });
-
+ $(function(){
+            setTimeout(function(){
+                    $('.dataTable4').after("<div class='new_scroll4'></div>");
+                    $('.dataTable4').appendTo(".new_scroll4");
+                },1000);
+            });
 </script>      
-<div class="table-responsive">
+<div class="table-responsive invoice_tab">
 <div class="col-sm-3 col-lg-12">
-                    <table id="scroll5-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="second-datatable"  class="table table-vcenter table-condensed table-bordered dataTable4">
                     <thead>
                         <tr>
                             <th class="text-center">Customer ID</th>

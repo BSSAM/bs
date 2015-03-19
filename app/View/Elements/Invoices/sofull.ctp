@@ -45,11 +45,18 @@ $(document).on('click','.sofull-prepare',function(){
        
    });
 
+              $(function(){
+            setTimeout(function(){
+                    $('.dataTable2').after("<div class='new_scroll2'></div>");
+                    $('.dataTable2').appendTo(".new_scroll2");
+                },1000);
+            });
+           
 </script>  
 
-<div class="table-responsive">
+<div class="table-responsive invoice_tab">
 <div class="col-sm-3 col-lg-12">
-                    <table id="scroll2-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="scroll2-datatable"  class="table table-vcenter table-condensed table-bordered dataTable2">
                     <thead>
                         <tr>
                             <th class="text-center">Salesorder No</th>

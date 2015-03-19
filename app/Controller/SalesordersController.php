@@ -1380,10 +1380,10 @@ $html .=
 					</td>
           <tr>
      </table>
-     <table width="623" height="56">
+     <table width="98%" height="56">
           <tr>
                <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">SALESORDER</div></td>
-               <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+               <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;"">COMPANY REG NO. 200510697M</div></td>
           </tr>
      </table>
      <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
@@ -1432,7 +1432,7 @@ $html .=
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-10px;">'.$salesorderno.'</div></td>
+                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0;font-weight:bolder; position:relative;top:-10px;">'.$salesorderno.'</div></td>
                          </tr>
                          <tr>
 						     
@@ -1467,7 +1467,7 @@ $html .=
                
           </tr>
      </table>
-<div style="padding-top:10px;">'.$ins_type.' :</div>
+<div style="padding-top:5px;">'.$ins_type.' :</div>
 
 </div></div>';
 $html .='<div id="footer">
@@ -1524,9 +1524,9 @@ $html .= '<div id="content" style="">';
                         $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:180px;">      <tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Description</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:10%;">Model No</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
@@ -1546,9 +1546,9 @@ $html .= '</tr>';
                         $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:180px;">      <tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Description</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:10%;">Model No</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
@@ -1572,7 +1572,7 @@ $html .= '</tr>';
                         <td style="padding:3px 10px;">1</td>
                         <td style="padding:3px 10px;width:20%;">'.$device['Instrument']['name'].'</td>
                         <td style="padding:3px 10px;">'.$device['Brand']['brandname'].'</td>
-                        <td style="padding:3px 10px;">'.$device['model_no'].'</td>
+                        <td style="padding:3px 10px;width:10%;">'.$device['model_no'].'</td>
                         <td style="padding:3px 10px;">'.$device['Range']['range_name'].'</td>';
                         for($i=0;$i<=4;$i++):
                         if(isset($titles[$i])):

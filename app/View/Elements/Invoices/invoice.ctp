@@ -1,6 +1,17 @@
+<!--<script>
+    $.noConflict();
+jQuery( document ).ready(function() {
+         setTimeout(function(){
+                    jQuery('.dataTable').after("<div class='new_scroll'></div>");
+                    jQuery('.dataTable').appendTo(".new_scroll");
+                },1000);
+            });
+
+</script>-->
+
 <div class="block full">
-    <div class="table-responsive invoice_info">
-        <table id="scroll1-datatable" class="table table-vcenter table-condensed table-bordered">
+    <div class="table-responsive invoice_info invoice_tab">
+        <table id="scroll1-datatable" class="dataTable table table-vcenter table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">Invoice no</th>

@@ -48,23 +48,23 @@ $columns = array(
             
             global $base_url;
             
-            $cn = '<div class="btn-group">';
+            $cn = '<div class="btn-group"  style="white-space: nowrap; width: 100px;">';
             $val = SSP::get_sales_details($d);
             if(!$val[0]['is_deleted'])
             {
                 if($_GET['edit']==1){
-                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Salesorders/edit/'.$d.'" data-original-title="Edit">
+                    $cn .= '<a class="btn btn-xs btn-default" title="Edit" data-toggle="tooltip" href="'.$base_url.'Salesorders/edit/'.$d.'" data-original-title="Edit">
 <i class="fa fa-pencil"></i></a>';
                 }
                 if($_GET['delete']==1){
-                    $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Salesorders/delete/'.$d.'" data-original-title="Delete">
+                    $cn .= '<a class="btn btn-xs btn-danger" title="Delete" data-toggle="tooltip" href="'.$base_url.'Salesorders/delete/'.$d.'" data-original-title="Delete">
 <i class="fa fa-times"></i></a>';
                 }
                 if($val[0]['is_approved']==1)
                 {
-                $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Salesorders/pdf/'.$d.'" data-original-title="Report">
+                $cn .= '<a class="btn btn-xs btn-default" title="Report" data-toggle="tooltip" href="'.$base_url.'Salesorders/pdf/'.$d.'" data-original-title="Report">
 <i class="gi gi-print"></i></a>';
-                $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Salesorders/pdf_tag/'.$d.'" data-original-title="Tags">
+                $cn .= '<a class="btn btn-xs btn-default" title="Tags" data-toggle="tooltip" href="'.$base_url.'Salesorders/pdf_tag/'.$d.'" data-original-title="Tags">
 <i class="fa fa-tags"></i></a>';
                 }
             }

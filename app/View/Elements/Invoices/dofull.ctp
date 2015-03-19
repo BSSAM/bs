@@ -42,11 +42,16 @@ $(document).on('click','.dofull-prepare',function(){
     }
        
    });
-
+     $(function(){
+            setTimeout(function(){
+                    $('.dataTable3').after("<div class='new_scroll3'></div>");
+                    $('.dataTable3').appendTo(".new_scroll3");
+                },1000);
+            });
 </script>     
-<div class="table-responsive">
+<div class="table-responsive invoice_tab">
 <div class="col-sm-3 col-lg-12">
-                    <table id="scroll4-datatable"  class="table table-vcenter table-condensed table-bordered">
+                    <table id="one-datatable"  class="table table-vcenter table-condensed table-bordered dataTable3">
                     <thead>
                         <tr>
                              <th class="text-center">Customer ID</th>

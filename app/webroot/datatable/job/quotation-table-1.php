@@ -53,7 +53,7 @@ $columns = array(
             
             global $base_url;
             
-            $cn = '<div class="btn-group">';
+            $cn = '<div class="btn-group" style="white-space: nowrap; width: 100px;">';
             $val = SSP::get_quo_details($d);
             if(!$val[0]['is_deleted'])
             {

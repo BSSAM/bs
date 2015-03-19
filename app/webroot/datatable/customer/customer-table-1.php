@@ -73,13 +73,13 @@ $columns = array(
                                         endif;
 					 
 					 
-                    $cn .= '<div class="btn-group"><a class="btn  btn-xs btn-warning" data-toggle="tooltip" href="'.$base_url.$controller.'/'.$action.'/'.$d.'" title="Tags">'.$tag_name.'</a></div>  <br>';
+                    $cn .= '<div class="btn-group"><a class="btn  btn-xs btn-warning" data-toggle="tooltip" href="'.$base_url.$controller.'/'.$action.'/'.$d.'" title="Tags">'.$tag_name.'</a></div>';
 
                 }
             }
            
                 if($_GET['edit']==1){
-                    $cn .= '<div class="btn-group"><a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customers/edit/'.$d.'" data-original-title="Edit"><i class="fa fa-pencil"></i></a></div>  ';
+                    $cn .= '&nbsp;<div class="btn-group"><a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Customers/edit/'.$d.'" data-original-title="Edit"><i class="fa fa-pencil"></i></a></div>  ';
                 }
                 if($_GET['delete']==1){
                     $cn .= '<div class="btn-group"><a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Customers/delete/'.$d.'" data-original-title="Delete"><i class="fa fa-times"></i></a></div>  ';

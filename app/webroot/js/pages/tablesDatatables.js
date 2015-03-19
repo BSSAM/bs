@@ -198,16 +198,19 @@ var TablesDatatables = function() {
                 "sScrollX": "100%",
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
+  
             $('#scroll2-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
-                "scrollCollapse": true,
+               
+               
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
             $('#scroll3-datatable').dataTable({
 //                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1, 5 ] } ],
                 "iDisplayLength": 5,
-                "scrollCollapse": true,
+               
+                
                 "aLengthMenu": [[5,10, 20, 30, -1], [5,10, 20, 30, "All"]]
             });
 /***********************************************************************************************************/
