@@ -57,7 +57,7 @@
                 echo $this->Html->css('file_upload_css/jquery.fileupload');
 		echo $this->Html->css('file_upload_css/jquery.fileupload-ui');
 		echo $this->Html->script('pages/uiProgress');
-                echo $this->Html->script('pages/ColReorderWithResize');
+                //echo $this->Html->script('pages/ColReorderWithResize');
                 echo $this->Html->script(array('jquery.min'));
                 echo $this->Html->script('jedit/jquery.jeditable');
                 echo $this->Html->script(array('sal_desc_func','functions','labprocess_js','onsite_schedule',
@@ -65,7 +65,11 @@
                     'invoice_function_js','subcontract_function_js','cus_tag_function_js','clientpos_function_js','customer_contactperson_js','Purchaseorder_requititon'));
                 echo $this->Html->script('angular/angular.min');
                 ?>
-                <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
+                <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));
+                $(function(c){
+                    $(".select-chosen").chosen({ search_contains: true });
+                });
+                </script>
                 <?php 
                 echo $this->Html->script(array('vendor/modernizr-2.7.1-respond-1.4.2.min','vendor/ajaxform'));
                 echo $this->fetch('meta');
