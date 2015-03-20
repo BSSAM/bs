@@ -179,6 +179,10 @@ $(document).ready(function(){
     $(document).on('click','.cus_instrument_edit',function(){
        // alert($('#status').val());
       var edit_device_id=$(this).attr('data-edit');
+      var customer_id =   $('#CustomerInstrumentCustomerId').val();
+      $(this).attr('href', function() {
+        return path_url+ 'Customers/instrument_map/'+customer_id+'/'+edit_device_id;
+    });
       $('#device_id').val(edit_device_id);
       $('.update_device').html('<button class="btn btn-sm btn-primary cus_ins_update" type="button"><i class="fa fa-plus fa-fw"></i> Update</button>');
        $.ajax({
