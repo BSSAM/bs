@@ -1,18 +1,27 @@
+<script> var path_url='<?PHP echo Router::url('/',true); ?>';</script>
+<?php echo $this->Html->script('jedit/jquery.jeditable'); ?>
 <script>
 
-/*$(function(){
-    setTimeout(function(){
-        $('.newscrol').after("<div class='new_scroll1'></div>");
-        $('.newscrol').appendTo(".new_scroll1");
-    },1000);
-});*/
 
      $(function(){
            setTimeout(function(){
                    $('.dataTable2').after("<div class='new_scroll2'></div>");
                    $('.dataTable2').appendTo(".new_scroll2");
                },1000);
-           });
+			   
+       
+		   
+	$('.update_remark_track').editable(path_url+'/Salesorders/update_remark_track', {
+         id        : 'id',
+         name      : 'remarks',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Click to edit'
+    }); 
+	
+	
+	    });
 </script>
 <div class="block full">
 <div class="table-responsive">
@@ -55,11 +64,11 @@
                     <td class="text-center"><?PHP echo $track['Salesorder']['quotationno']; ?></td>
                     <td class="text-center"><?PHP echo $track['Salesorder']['ref_no']; ?></td>
                     <td class="text-center"><?PHP if($track['Salesorder']['is_jobcompleted']==1){ echo "Complete"; }else{ echo "Incomplete"; }; ?></td>
-                    <td class="text-center"><?PHP echo $track['Salesorder']['remarks']; ?></td>
+                    <td class="text-center update_remark_track" id="<?PHP echo $k+1; ?>"><?PHP echo $track['Salesorder']['remarks']; ?></td>
                     <td class="text-center">-</td>
                     <td class="text-center"><?PHP echo $this->Salesorder->find_sales_order_customer($track['Salesorder']['id']); ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->salesperson($track['Salesorder']['attn']); ?></td>
-                    <td class="text-center"><?PHP echo $track['branch']['branchname']; ?></td>
+                    <td class="text-center" ><?PHP echo $track['branch']['branchname']; ?></td>
                 </tr>
                 <?PHP 
                 endforeach; ?>
