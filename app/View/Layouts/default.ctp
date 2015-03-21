@@ -64,12 +64,18 @@
                     'delivery_order','pur_function_js','quo_function_js','cus_function','candds_function',
                     'invoice_function_js','subcontract_function_js','cus_tag_function_js','clientpos_function_js','customer_contactperson_js','Purchaseorder_requititon'));
                 echo $this->Html->script('angular/angular.min');
+				
                 ?>
+                
+                
                 <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));
                 $(function(c){
-                    $(".select-chosen").chosen({ search_contains: true });
+                    
+					if($(".select-chosen").length)
+					$(".select-chosen").chosen({ search_contains: true });
                 });
                 </script>
+                
                 <?php 
                 echo $this->Html->script(array('vendor/modernizr-2.7.1-respond-1.4.2.min','vendor/ajaxform'));
                 echo $this->fetch('meta');
@@ -108,6 +114,18 @@
    function ni_end(){
        NProgress.done(); 
    }
+   
+   function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 45 && charCode > 31 
+          && (charCode < 48 || charCode > 57))
+           return false;
+
+        return true;
+    }    
+   
+   
     </script>
 </body>
 </html>

@@ -4,7 +4,12 @@ include 'config.php';
 	// DB table to use
 	$table = 'salesorders as sals';
 	$join = " LEFT JOIN customers as cus ON (sals.customer_id = cus.id)"; 
-	// Table's primary key
+	$join .= " LEFT JOIN deliveryorders as delv ON (sals.id = delv.salesorder_id)"; 
+	$join .= " LEFT JOIN invoices as ins ON (sals.id = ins.salesorder_id)"; 
+	$join .= " LEFT JOIN cus_contactpersoninfos as ccpi ON (sals.attn = ccpi.id)"; 
+	$join .= " LEFT JOIN branches as brnch ON (sals.branch_id = brnch.id)"; 
+	
+	// Table's primary key  
 	$primaryKey = 'id';
 	$res = $_GET['slsid'];
 	if(!empty($res) && $res != 1 )
@@ -12,7 +17,6 @@ include 'config.php';
 		$sss = implode('","',explode(',',$res));
 		$where1 = ' AND sals.is_deleted = 0 AND sals.is_trackcompleted = 0 AND sals.id IN("'.$sss.'")';
 		$where2 = ' where sals.is_deleted = 0 AND sals.is_trackcompleted = 0 AND sals.id IN("'.$sss.'")';
-		
 	}
 	else
 	{
@@ -21,9 +25,7 @@ include 'config.php';
 		$where2 = ' where sals.is_deleted = 0 AND sals.is_trackcompleted = 0';
 	}
 	
- 	
-		
-$columns = array(
+   $columns = array(
     array( 'db' => 'sals.id', 'dt' => 0 , 'field' => 'id'),
     array(
         'db'        => 'sals.due_date',
@@ -42,20 +44,11 @@ $columns = array(
 			return SSP::find_deliveryorder_no($d);
     } ),			
 		
-	array( 'db' => 'sals.id' , 'field' => 'id' , 'dt' => 4,'formatter' => function( $d, $row ) {
-            
-			return SSP::find_deliveryorder_date($d);
-    } ),			
+	array( 'db' => 'delv.delivery_order_date' , 'field' => 'delivery_order_date' , 'dt' => 4),			
 		
-	array( 'db' => 'sals.id' , 'field' => 'id' , 'dt' => 5,'formatter' => function( $d, $row ) {
-            
-			return SSP::find_invoice_no($d);
-    } ),			
+	array( 'db' => 'ins.invoiceno' , 'field' => 'invoiceno' , 'dt' => 5 ),			
 	
-	array( 'db' => 'sals.id' , 'field' => 'id' , 'dt' => 6,'formatter' => function( $d, $row ) {
-            
-			return SSP::find_invoice_date($d);
-    } ),			
+	array( 'db' => 'ins.invoice_date' , 'field' => 'invoice_date' , 'dt' => 6),			
 			
 		
     array( 'db' => 'sals.quotationno',  'dt' =>7, 'field' => 'quotationno' ),
@@ -68,22 +61,18 @@ $columns = array(
             return '<input type="checkbox" name="data[TrackComplete]['.$d.']" value="'.$d.'" >';
         }),	
 		
-	array( 'db' => 'sals.remarks',  'dt' => 11, 'field' => 'remarks' ),	
+	array( 'db' => 'sals.remarks',  'dt' => 11, 'field' => 'remarks', 'formatter' => function( $d, $row ) {
+            return '-';
+        }),	
 	array( 'db' => 'sals.id',     'dt' => 12 , 'field' => 'id' , 'formatter' => function( $d, $row ) {
             return '-';
         }),	
 		
  	array( 'db' => 'cus.customername',  'dt' => 13, 'field' => 'customername' ),		
 	
-	array( 'db' => 'sals.attn' , 'field' => 'attn' , 'dt' => 14,'formatter' => function( $d, $row ) {
-            
-			return SSP::salesperson($d);
-    } ),		
+	array( 'db' => 'ccpi.name' , 'field' => 'name' , 'dt' => 14 ),		
 		
-	array( 'db' => 'sals.branch_id' , 'field' => 'branch_id' , 'dt' => 15,'formatter' => function( $d, $row ) {
-            
-			return SSP::get_branch_name($d);
-    } ),			
+	array( 'db' => 'brnch.branchname' , 'field' => 'branchname' , 'dt' => 15),			
 		
 );
 

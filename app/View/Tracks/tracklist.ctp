@@ -22,6 +22,15 @@
 });
 
 
+/*$('.update_remark_track').editable(path_url+'/Salesorders/update_remark_track', {
+         id        : 'id',
+         name      : 'remarks',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Click to edit'
+    }); 
+  */
 
 </script>
 <style>

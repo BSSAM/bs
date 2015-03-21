@@ -2141,6 +2141,20 @@ table td { font-size:13px; line-height:18px; }
            );
            $this->set($params);
         }
+		
+	public function update_remark_track()
+    {
+        $this->autoRender   =   false;
+         if ($this->request->data) {
+            App::uses('Sanitize', 'Utility');
+            $title = Sanitize::clean($this->request->data['remarks']);
+
+            $this->Salesorder->id = $this->request->data['id'];
+            //$this->Device->updateAll(array('Device.title1_val'=>$title),array('Device.id'=>$this->request->data['device_id']));
+            $this->Salesorder->saveField('remark_track', $title);
+            echo $title;
+        }
+    } 
 }
 
 ?>
