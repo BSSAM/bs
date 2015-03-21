@@ -851,9 +851,17 @@ $("#search_cusinstrument").hide();
 </div>
 </label>
 </div>
+<script>
+$(function(){
+       setTimeout(function(){
+               $('.dataTable6').after("<div class='new_scroll6'></div>");
+               $('.dataTable6').appendTo(".new_scroll6");
+           },1000);
+       });
+</script>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-    <table id="Sales-ins" class="table table-vcenter table-condensed table-bordered">
+    <table id="Sales-ins" class="table table-vcenter table-condensed table-bordered dataTable6" id="one-datatable">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -861,8 +869,8 @@ $("#search_cusinstrument").hide();
             <th class="text-center">Model No</th>
             <th class="text-center">Brand Name</th>
             <th class="text-center">Range</th>
-            <th class="text-center">Call Location</th>
-            <th class="text-center">Call Type</th>
+            <th class="text-center">Cal Location</th>
+            <th class="text-center">Cal Type</th>
             <th class="text-center">Validity</th>
 <!--            <th class="text-center">Unit Price</th>-->
             <th class="text-center">Account Service</th>

@@ -45,11 +45,11 @@
     <label class="col-md-2 control-label" for="val_phone">Phone</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control',
-                                                'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off')); ?>
+                                                'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off', 'onkeypress'=>'return isNumberKey(event)')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_fax">Fax</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('fax', array('id'=>'val_fax','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Fax Number')); ?>
+        <?php echo $this->Form->input('fax', array('id'=>'val_fax','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Fax Number', 'onkeypress'=>'return isNumberKey(event)')); ?>
     </div>
 </div>
 <div class="form-group">
@@ -80,7 +80,7 @@
     <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
-                                                'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text')); ?>
+                                                'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text', 'onkeypress'=>'return isNumberKey(event)')); ?>
     </div>
 </div>
 <div class="form-group">
@@ -94,7 +94,7 @@
  <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For</label>
  <div class="instrument_details">
     <div class="col-md-12">
-        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_instrument_type_id','class'=>'form-control select-chosen','type'=>'select',
+        <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_instrument_type_id','class'=>'form-control select-chosen instrument-type','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>$instrument_types)); ?>
     </div>
  </div>

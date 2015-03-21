@@ -45,12 +45,12 @@
     <label class="col-md-2 control-label" for="val_phone">Phone</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control',
-                                                'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off','readonly'=>'readonly')); ?>
+                                                'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off','readonly'=>'readonly', 'onkeypress'=>'return isNumberKey(event)')); ?>
        
     </div>
     <label class="col-md-2 control-label" for="val_fax">Fax</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('fax', array('id'=>'val_fax','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Fax Number','readonly'=>'readonly')); ?>
+        <?php echo $this->Form->input('fax', array('id'=>'val_fax','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Fax Number','readonly'=>'readonly', 'onkeypress'=>'return isNumberKey(event)')); ?>
     </div>
 </div>
 
@@ -76,7 +76,7 @@
      <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
-                                                'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text')); ?>
+                                                'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text', 'onkeypress'=>'return isNumberKey(event)')); ?>
     </div>
 </div>
 <div class="form-group">

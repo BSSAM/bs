@@ -845,17 +845,17 @@ $("#search_cusinstrument").hide();
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_call_location">Call Location</label>
+    <label class="col-md-2 control-label" for="val_call_location">Cal Location</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control error-custom','ng-model' => 'loca_quo_model',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
-                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Call Location')); ?>
-        <span class="help-block_login inscal_error">Enter the Call Location</span>
+                                                    'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Cal Location')); ?>
+        <span class="help-block_login inscal_error">Enter the Cal Location</span>
     </div>
-    <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
+    <label class="col-md-2 control-label" for="val_call_type">Cal Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model',
-                                      'type'=>'select','ng-init'=>'type_quo_model="Singlas"','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas'))); ?>
+                                      'type'=>'select','ng-init'=>'type_quo_model="Singlas"','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas','empty'=>'Select Cal Type'))); ?>
         
     </div>
 </div>
@@ -865,12 +865,12 @@ $("#search_cusinstrument").hide();
     <label class="col-md-2 control-label" for="val_discount1">Discount </label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control','ng-model' => 'type_quo_discount',
-                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text','max'=>$ins_cost_user)); ?>
+                                                'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text','max'=>$ins_cost_user, 'onkeypress'=>'return isNumberKey(event)')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('unit_price', array('id'=>'val_unit_price','class'=>'form-control','label'=>false,
-            'name'=>'unit_price','placeholder'=>'Enter the Unit Price','disabled'=>'disabled')); ?>
+            'name'=>'unit_price','placeholder'=>'Enter the Unit Price','disabled'=>'disabled', 'onkeypress'=>'return isNumberKey(event)')); ?>
     </div>
 </div>
 
@@ -938,7 +938,7 @@ $("#search_cusinstrument").hide();
     </script>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-<table class="table table-vcenter table-condensed table-bordered dataTable6" id="example-datatable">
+<table class="table table-vcenter table-condensed table-bordered dataTable6" id="one-datatable">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -950,6 +950,7 @@ $("#search_cusinstrument").hide();
             <th class="text-center">Cal Type</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
+            <th class="text-center">Discount</th>
             <th class="text-center">Account Service</th>
             <th class="text-center">Total</th>
             <th class="text-center edit_title1" ng-show="show_title1"><?php echo $titles[0]; ?></th>

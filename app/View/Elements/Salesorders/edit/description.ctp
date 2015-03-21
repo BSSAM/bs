@@ -344,16 +344,16 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="sales_calllocation">Call Location</label>
+    <label class="col-md-2 control-label" for="sales_calllocation">Cal Location</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_location', array('id'=>'sales_calllocation','class'=>'form-control','empty'=>'Please select Call Location',
+        <?php echo $this->Form->input('call_location', array('id'=>'sales_calllocation','class'=>'form-control','empty'=>'Please select Cal Location',
                                                 'label'=>false,'name'=>'sales_calllocation','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="sales_calltype">Call Type</label>
+    <label class="col-md-2 control-label" for="sales_calltype">Cal Type</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'sales_calltype','class'=>'form-control','label'=>false,'name'=>'sales_calltype',
-                                      'placeholder'=>'Enter the Fax Number','type'=>'select','options'=>array('singlas'=>'Singlas',
+                                      'placeholder'=>'Enter the Cal Type','type'=>'select','options'=>array('singlas'=>'Singlas',
                                           'no-singlas'=>'Non-Singlas'),'readonly'=>'readonly')); ?>
     </div>
 </div>
@@ -416,9 +416,17 @@
 </label>
 </div>
 </div>
+<script>
+$(function(){
+       setTimeout(function(){
+               $('.dataTable6').after("<div class='new_scroll6'></div>");
+               $('.dataTable6').appendTo(".new_scroll6");
+           },1000);
+       });
+</script>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-<table class="table table-vcenter table-condensed table-bordered">
+<table class="table table-vcenter table-condensed table-bordered dataTable6" id="one-datatable">
     <thead>
         <tr>
             <th class="text-center">S.No</th>
@@ -426,8 +434,8 @@
             <th class="text-center">Model No</th>
             <th class="text-center">Brand Name</th>
             <th class="text-center">Range</th>
-            <th class="text-center">Call Location</th>
-            <th class="text-center">Call Type</th>
+            <th class="text-center">Cal Location</th>
+            <th class="text-center">Cal Type</th>
             <th class="text-center">Validity</th>
 <!--            <th class="text-center">Unit Price</th>-->
             <th class="text-center">Account Service</th>

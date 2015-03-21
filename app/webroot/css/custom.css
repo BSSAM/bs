@@ -213,7 +213,7 @@ box-sizing: content-box !important;}
 
 .new_scroll{width:100% !important; overflow: auto;}
 table { white-space: nowrap; }
-.table thead > tr > th{ background:#646464;color:#fff;}
+.table thead > tr > th{ background:#646464;color:#fff; padding-top: 5px; padding-bottom: 5px;font-size:11px; text-transform: uppercase;}
 
 .color-change { background: none !important;}
 
@@ -223,3 +223,9 @@ table th.resizing {
 .new_scroll2{width:100% !important; overflow: auto;}
 .new_scroll3{width:100% !important; overflow: auto;}
 .new_scroll4{width:100% !important; overflow: auto;}
+.chosen-container { width:325px !important;}
+.new_scroll6{width:94% !important; overflow: auto; margin: 0 auto 20px;}
+#val_instrument_type_id_chosen{width:100% !important;}
+.edit_gst_percent{margin-right: 10px;float:left;}
+.edit_gst_div{display: inline-block;}
+.edit_gst_percent input{float: left;font-size: 10px;height: auto !important;margin: 0 23px;padding: 3px; width: auto !important;}

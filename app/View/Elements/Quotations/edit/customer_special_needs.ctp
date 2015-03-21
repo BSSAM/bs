@@ -67,7 +67,7 @@ echo $this->Form->input('Customerspecialneed.additionalcharge_id', array('id' =>
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.additional_service_value', array('id' => 'val_service_charge', 'class' => 'form-control',
-    'placeholder' => 'Enter Additional Service Charge Values', 'label' => false));
+    'placeholder' => 'Enter Additional Service Charge Values', 'label' => false, 'onkeypress'=>'return isNumberKey(event)'));
 ?>    
     </div>
 </div>

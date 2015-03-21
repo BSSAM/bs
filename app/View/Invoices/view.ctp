@@ -604,7 +604,7 @@ $(function() {
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="total_device_dyn"><?php echo number_format($total_device,2); ?></td>
           </tr>
          <tr>
-             <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <span class="edit_gst_percent" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%  )</td>
+             <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important; position:relative;line-height: 23px;">GST ( <span class="edit_gst_div"><span class="edit_gst_percent" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%</span>  )</td>
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="gst_total_dyn"><?php echo number_format($gst_total,2); ?></td>
           </tr>
           <?php if($additional_charge!=''){ ?>
