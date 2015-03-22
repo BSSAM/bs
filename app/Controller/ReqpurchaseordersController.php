@@ -112,7 +112,7 @@
             
             if($this->request->is('post'))
             {
-                //pr($this->request->data);exit;
+                pr($this->request->data);exit;
                 //pr($this->ReqDevice->find('all'));
                 $req_purchaseorderid  =   $this->Reqpurchaseorder->getLastInsertID();       
                 $this->ReqDevice->deleteAll(array('ReqDevice.status'=>0));
@@ -151,21 +151,24 @@
                  /******************
                      * Data Log
                     */ 
-                if($this->request->data)
-                {
+//                if($this->request->data)
+//                {
                     $reqpurchaseorder_id   =   $this->Reqpurchaseorder->getLastInsertID();
+                   if($reqpurchaseorder_id)
+                   {
                     $this->Logactivity->create();
                     $this->request->data['Logactivity']['logname']   =   'Reqpurchaseorder';
                     $this->request->data['Logactivity']['logactivity']   =   'Add Reqpurchaseorder';
                     $this->request->data['Logactivity']['logid']   =   $reqpurchaseorder_id;
-                    $this->request->data['Logactivity']['logno']   =   $dmt;
+                    $this->request->data['Logactivity']['logno']   =   $this->random('pr_purchaseorder');
                     $this->request->data['Logactivity']['loguser'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
                    
                     $a = $this->Logactivity->save($this->request->data['Logactivity']);
+                   }
                     //pr($a);exit;
                     /******************/
-                }
+                //}
             }
             else
             {
@@ -679,6 +682,22 @@ $html .= '</div>';
         }
 
         
+    }
+    public function check_pr_count()
+    {
+        $this->autoRender = false;
+        $this->loadModel('PurchaseRequisition');
+        $name =  $this->request->data['single_quote_id'];
+        $data = $this->PurchaseRequisition->find('all',array('conditions'=>array('PurchaseRequisition.prequistionno'=>$name,'PurchaseRequisition.is_manager_approved'=>1)));
+        $c = count($data);
+        if($c!=0)
+        {
+            echo "success";
+        }
+        else 
+        {
+            echo "failure";
+        }
     }
 }
 

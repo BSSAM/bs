@@ -80,7 +80,7 @@ $(document).ready(function(){
             {
                 $('.odd').empty();
                $('.Instrument_info').append('<tr class="pre_instrument_remove_'+data+'">\n\\n\
-                                    <td class="text-center">'+data+'</td>\n\
+                                    <td class="text-center">'+i+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
                                     <td class="text-center">'+instrument_modelno+'</td>\n\\n\
                                     <td class="text-center">'+instrument_brand+'</td>\n\\n\
@@ -164,7 +164,8 @@ $(document).ready(function(){
                                     <td class="text-center">'+instrument_brand+'</td>\n\\n\
                                     <td class="text-center">'+instrument_range+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_account+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_account+'</td>\n\\n\\n\
+                                    <td class="text-center">'+instrument_total+'</td>\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+device_id+'"class="btn btn-xs btn-default pre_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
                                     <a data-delete="'+device_id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger pre_instrument_delete">\n\
@@ -176,7 +177,7 @@ $(document).ready(function(){
                 $('#val_brand').val(null);
                 $('#val_range').val(null);
                 $('#val_unit_price').val(null);
-                $('#val_discount').val('');
+                $('#val_discount1').val(null);
                 $('#val_description').val(null);
                 }
         });

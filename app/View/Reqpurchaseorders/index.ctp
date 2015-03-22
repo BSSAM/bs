@@ -110,7 +110,35 @@ $(function() {
                     }
                 });
             }return false;    
-        });});
+        });
+          });
+        $(document).ready(function(){
+        $('.pr_search').click(function(){
+       
+        var quotation_single_id =   $('#ReqpurchaseorderPrequistionId').val();
+         alert(quotation_single_id);
+            $.ajax({
+               type:'POST',
+               url:"<?PHP echo Router::url('/',true); ?>/Reqpurchaseorders/check_pr_count",
+               data:'single_quote_id='+quotation_single_id,
+               success:function(data){
+           alert('sdf');
+                   if(data=='success')
+                   {
+                       //alert('sdfsdf');
+                     $('#ReqpurchaseorderPrPurchaseorderForm').submit();
+                   }
+                   if(data=='failure')
+                   {
+                        $('#ReqpurchaseorderPrequistionId').css('border','1px solid red');
+                        return false;
+                   }
+               }
+            });
+
+         });
+          });
+      
 </script>                
 <h1>
     <i class="gi gi-user"></i>PR_Purchase order
@@ -139,7 +167,7 @@ $(function() {
                                     'div' => false, 'label' => false, 'type' => 'text', 'autoComplete' => 'off'))
                                 ?>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary quotation_search" type="submit">Proceed</button>
+                                    <button class="btn btn-primary pr_search" type="submit">Proceed</button>
                                 </span> 
                                 <div id="quoat_list" class="instrument_drop"> </div>
                             </div>
