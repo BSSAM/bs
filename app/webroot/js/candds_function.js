@@ -254,10 +254,15 @@ $(document).ready(function(){
     $('.cd_save').click(function(){
        //$('#col_an_del_date').val($('.cd_date').val());
        var shipped_checked = [];
+       var delivered_check = [];
         
         $('.shipping_check:checked').each(function(i){
           shipped_checked[i] = $(this).val();
         });
+        $('.delivered_check:checked').each(function(i){
+          delivered_check[i] = $(this).val();
+        });
+        alert(shipped_checked);
         var cd_date = $('.cd_date').val();
         if(shipped_checked!=''){
             var conformation  =   window.confirm('Confirm to mark shipped '+shipped_checked+' delivery order');  
@@ -265,11 +270,11 @@ $(document).ready(function(){
                 $.ajax({
                     type: "POST",
                     url: path_url+"/Candds/shipped_check",
-                    data:'shipped_check='+shipped_checked+"&cd_date="+cd_date,
+                    data:'shipped_check='+shipped_checked+"&cd_date="+cd_date+"&delivered_check="+delivered_check,
                     cache: false,
                     success: function(data)
                     {
-                        alert("Shipment(s) Marked Successful");
+                        alert("Shipped & Delivered Successful");
                         window.location.reload();
                         //console.log(data); //return false;
 //                        var checked_node =   $.parseJSON(data);
@@ -402,33 +407,29 @@ $(document).ready(function(){
 //                        //var disabled_deliver = ' disabled=disabled';
 //                        var type_deliver = 'hidden';
 //                    }
-//                    if(v.ReadytodeliverItem.is_shipped == 1)
-//                    {
-//                        var checked = ' checked=checked';
-//                        //var disabled_deliver = '';
-//                        if(today == cd_date+1)
-//                        {
-//                            
-//                            var type_deliver = 'checkbox';
-//                        }
-//                        else
-//                        {
-//                            console.log('not equal');
-//                            var type_deliver = 'hidden';
-//                        }
-//                    }
+                    if(v.ReadytodeliverItem.is_shipped == 1)
+                    {
+                        var checked = ' checked=checked disabled';
+                        //var disabled_deliver = '';
+                        
+                    }
+                    else
+                        {
+                            var checked = '';
+                        }
                     
 //                    if(v.ReadytodeliverItem.is_delivered == 0)
 //                    {
 //                        var checked_del = '';
 //                    }
-//                    if(v.ReadytodeliverItem.is_delivered == 1)
-//                    {
-//                        if(type_deliver != 'hidden')
-//                        {
-//                            var checked_del = ' checked=checked';
-//                        }
-//                    }
+                    if(v.ReadytodeliverItem.is_delivered == 1)
+                    {
+                        var checked1 = ' checked=checked disabled';
+                    }
+                    else
+                        {
+                            var checked1 = '';
+                        }
                     //alert(v.ReadytodeliverItem.is_shipped);
                     
                     $('.deliveries_info').append('<tr class="colletion_'+v.Candd.id+'">\n\\n\
@@ -442,7 +443,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
                                     <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\\n\
-                                    <td class="text-center"> Shipped : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"/> Delivered : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="delivered_check" name="delivered"/></td>\n\\n\
+                                    <td class="text-center"> Shipped : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"'+checked+' /> Delivered : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="delivered_check" name="delivered"'+checked1+'/></td>\n\\n\
                                     <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.ReadytodeliverItem.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete_del"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
             }}
@@ -480,8 +481,9 @@ $(document).ready(function(){
                 $('.collections_info').empty();
                 $.each(deliver_data_node,function(k,v){
                     //alert(v);
-                    
-                    $('.collections_info').append('<tr class="colletion_'+v.Candd.id+'">\n\\n\
+                    if(v.Candd.is_approved == 1)
+                    {
+                        $('.collections_info').append('<tr class="colletion_'+v.Candd.id+'">\n\\n\
                                     <td class="text-center">'+v.Candd.id+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.customername+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.customer_address+'</td>\n\\n\
@@ -490,9 +492,25 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
                                     <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
-                                    <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div></td></tr>');
+                                    <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div>&nbsp;<span class="label label-five">Approved</span></td></tr>');
+                    }
+                    else
+                    {
+                        $('.collections_info').append('<tr class="colletion_'+v.Candd.id+'">\n\\n\
+                                    <td class="text-center">'+v.Candd.id+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.customername+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.customer_address+'</td>\n\\n\
+                                    <td class="text-center">'+v.Contactpersoninfo.name+'</td>\n\\n\
+                                    <td class="text-center">'+v.Contactpersoninfo.phone+'</td>\n\\n\\n\
+                                    <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
+                                    <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
+                                    <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\
+                                    <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete"><i class="fa fa-times"></i></a></div>&nbsp;<span class="label label-four">Not Approved</span></td></tr>');
+                    }
+                    
                 });
             }
+            //$('#myTable').dataTable();
             }
 	});}else
     {

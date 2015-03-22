@@ -34,9 +34,17 @@
 </table>
 </div>
 </div>-->
+<script>
+     $(function(){
+            setTimeout(function(){
+                    $('.dataTable2').after("<div class='new_scroll2'></div>");
+                    $('.dataTable2').appendTo(".new_scroll2");
+                },1000);
+            });
+    </script>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-    <table id="sofull-datatable" class="table table-vcenter table-condensed table-bordered" >
+    <table id="one-datatable" class="table table-vcenter table-condensed table-bordered dataTable2" >
     <thead>
         <tr>
             <th class="text-center">S.No</th>

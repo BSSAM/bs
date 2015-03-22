@@ -9,7 +9,7 @@
 </div>
 <div class="col-sm-3 col-lg-12">
 <div class="table-responsive">
-    <table  class="table table-vcenter table-condensed table-bordered" id="ready_add_candd">
+    <table  class="table table-vcenter table-condensed table-bordered" id="scroll1-datatable">
     <thead>
         <tr>
             <th class="text-center">Customer Name</th>

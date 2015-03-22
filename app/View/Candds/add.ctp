@@ -116,8 +116,21 @@
                                        
                                     </div>
                                     <!-- panel -->
-                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'button','class'=>'btn btn-sm btn-primary pull-right cd_save','escape' => false)); ?>
-                                
+                                <div class="form-group form-actions">
+                                        
+                                        <?php  echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Candds','action'=>'index'),array('class'=>'btn btn-sm btn-warning pull-right','escape' => false)); ?>
+                                        
+                                        
+                                        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'button','class'=>'btn btn-sm btn-primary pull-right cd_save','escape' => false)); ?>
+                                        
+                                    </div>
+                                    <div class="form-group form-actions">
+                                        <label class="col-md-1 control-label">Collection : </label>
+                                        <label class="col-md-2 control-label"><span class="label label-second">Max Task</span> - <?php echo $canddsetting_col['Canddsetting']['maxtask']; ?>   <span class="label label-four">Time</span> - <?php echo $canddsetting_col['Canddsetting']['maxtime']; ?></label>
+                                        <div class="col-md-1"></div>
+                                        <label class="col-md-1 control-label">Delivery : </label>
+                                        <label class="col-md-2 control-label"><span class="label label-second">Max Task</span> - <?php echo $canddsetting_del['Canddsetting']['maxtask']; ?>   <span class="label label-four">Time</span> - <?php echo $canddsetting_del['Canddsetting']['maxtime']; ?></label>
+                                    </div>
                                 </div>  
                                 <?php echo $this->Form->end(); ?>
                                 <script>

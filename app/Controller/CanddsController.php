@@ -26,7 +26,11 @@ class CanddsController extends AppController
         $collection_items   =   $this->Candd->find('all',array('conditions'=>array('Candd.is_deleted'=>0)));
         //pr($collection_items);exit;
         $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
-        $this->set(compact('assignto','ready_to_deliver_items','collection_items'));
+        
+        $canddsetting_col =    $this->Canddsetting->find('first',array('conditions'=>array('Canddsetting.status'=>1,'Canddsetting.purpose'=>'C')));
+        $canddsetting_del =    $this->Canddsetting->find('first',array('conditions'=>array('Canddsetting.status'=>1,'Canddsetting.purpose'=>'D')));
+        
+        $this->set(compact('assignto','ready_to_deliver_items','collection_items','canddsetting_col','canddsetting_del'));
         //pr($this->request->data);exit;
         if($this->request->is('post'))
         {
@@ -68,7 +72,9 @@ class CanddsController extends AppController
         $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver !='=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
         //pr($ready_to_deliver_items);exit;
         $collection_delivery_data   =   $this->Candd->find('first',array('conditions'=>array('Candd.is_deleted'=>0,'Candd.id'=>$id),'recursive'=>2));
-        $this->set(compact('assignto','collection_delivery_data','ready_to_deliver_items'));
+        $canddsetting_col =    $this->Canddsetting->find('first',array('conditions'=>array('Canddsetting.status'=>1,'Canddsetting.purpose'=>'C')));
+        $canddsetting_del =    $this->Canddsetting->find('first',array('conditions'=>array('Canddsetting.status'=>1,'Canddsetting.purpose'=>'D')));
+        $this->set(compact('assignto','collection_delivery_data','ready_to_deliver_items','canddsetting_col','canddsetting_del'));
     }
     public function search() 
     {
@@ -322,14 +328,21 @@ class CanddsController extends AppController
         $this->autoRender = false;
         //pr($this->request->data);exit;
         $shipped_check =$this->request->data['shipped_check'];
+        $delivered_check =$this->request->data['delivered_check'];
         //$assign_to =$this->request->data['assign_to'];
         $cd_date =$this->request->data['cd_date'];
         //pr($this->request->data);exit;
         //$assign_value =$this->request->data['assign_value'];
         $export = explode(',', $shipped_check);
+        $export1 = explode(',', $delivered_check);
         foreach ($export as $ex=>$val)
         {
             $shipped_data  =   $this->is_shipped($val,$cd_date);
+            
+        }
+        foreach ($export1 as $ex=>$val)
+        {
+            $deli_data  =   $this->is_delivered($val,$cd_date);
             
         }
     }
@@ -449,8 +462,10 @@ margin: 180px 50px;
             {
 			$html .= '<div id="content" style="page-break-after: always;">';
             $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id,'Candd.assign_id'=>$data_assignto['Assign']['id']),'recursive'=>2));
+            
             foreach($cd_statistics as $k=>$cd):
-           
+               if($cd['Candd']['purpose']=='Collection' && $cd['Candd']['is_approved']!=1)
+               {
                $cd_contact_id = $cd['Candd']['Contactpersoninfo_id'];
                $data = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$cd_contact_id)));
                $cd_contact_name ='';
@@ -519,8 +534,11 @@ margin: 180px 50px;
           if($k%5 == 4 || $k+1 == count($cd_statistics)){
                 $html .='</table>';
                 }
+               }
                 endforeach;
+                
                 $html .='</div>';
+                //pr($cd_statistics);
             }
             
            
