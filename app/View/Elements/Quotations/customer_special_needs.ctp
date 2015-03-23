@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_gsttype">GST type</label>
+    <label class="col-md-2 control-label" for="val_gsttype">GST type<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php
         echo $this->Form->input('Customerspecialneed.gsttype', array('id' => 'val_gsttype', 'class' => 'form-control gsttype select-chosen', 'type' => 'select',
@@ -35,7 +35,7 @@ echo $this->Form->input('Customerspecialneed.gst', array('id' => 'val_gst', 'cla
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_currency">Currency</label>
+    <label class="col-md-2 control-label" for="val_currency">Currency<span class="text-danger">*</span></label>
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.currency_id', array('id' => 'val_currency', 'class' => 'form-control country_value select-chosen', 'type' => 'select',

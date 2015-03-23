@@ -266,6 +266,13 @@ $(function(){
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea'));
             ?>    
             </div>
+            <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For</label>
+            <div class="col-md-4">
+            <?php
+                echo $this->Form->input('instrument_type_id', array('id' => 'val_instrument_type_id','class'=>'form-control','type'=>'select',
+                                                'label'=>false,'empty'=>'-- Select instrument For --','readonly'=>'readonly'));
+            ?>    
+            </div>
             </div>
            
             <div class="col-lg-12">

@@ -612,7 +612,7 @@ $(function() {
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="total_device_dyn"><?php echo number_format($total_device,2); ?></td>
           </tr>
          <tr>
-             <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <span class="edit_gst_percent" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%  )</td>
+             <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important; position:relative;line-height: 23px;">GST ( <span class="edit_gst_div"><span class="edit_gst_percent" id="<?PHP echo $salesorder_list['Salesorder']['id'] ?>"><?php echo $gst; ?></span>%</span>  )</td>
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="gst_total_dyn"><?php echo number_format($gst_total,2); ?></td>
           </tr>
           <?php if($additional_charge!=''){ ?>
@@ -642,7 +642,7 @@ $(function() {
 
 <!-- panel -->
                     
-                </div>
+                </div><div class="pull-left"><code>Note:</code> For Editing Certain Fields, Please Click on it to Edit. </div>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
@@ -1019,7 +1019,7 @@ $(function() {
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="total_device_dyn"><?php echo $total_device; ?></td>
           </tr>
           <tr>
-               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;">GST ( <span class="edit_gst_percent_po" id="<?PHP echo $po_list_first['Quotation']['ref_no']; ?>"><?php echo $gst; ?></span>%  )</td>
+               <td colspan="10" style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important; position:relative;line-height: 23px;">GST ( <span class="edit_gst_div"><span class="edit_gst_percent_po" id="<?PHP echo $po_list_first['Quotation']['ref_no']; ?>"><?php echo $gst; ?></span>%</span>  )</td>
                <td style="border-top:1px solid #000;padding:3px 10px;font-size:11px !important;" class="gst_total_dyn"><?php echo $gst_total; ?></td>
           </tr>
           <tr>
@@ -1047,7 +1047,7 @@ $(function() {
 
 <!-- panel -->
                     
-                </div>
+                </div><div class="pull-left"><code>Note:</code> For Editing Certain Fields, Please Click on it to Edit. </div>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
@@ -1445,7 +1445,7 @@ $(function() {
 
 <!-- panel -->
                     
-                </div>
+                </div><div class="pull-left"><code>Note:</code> For Editing Certain Fields, Please Click on it to Edit. </div>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
@@ -1453,6 +1453,7 @@ $(function() {
     </div>
                     <!-- END Basic Form Elements Block -->
 </div>
+
     <?php echo $this->Html->script('pages/formsValidation'); ?>
     <script>$(function(){ FormsValidation.init(); });</script>
     <?php echo $this->Html->script('pages/uiProgress'); ?>

@@ -12,7 +12,7 @@
 
 <div class="form-group">
     <div class="form-group_val">
-    <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
+    <label class="col-md-2 control-label" for="val_customer">Customer Name<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', 
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
@@ -31,7 +31,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+    <label class="col-md-2 control-label" for="val_attn">ATTN<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name')); ?>
     </div>
@@ -66,7 +66,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <div class="row col-md-9">
             <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','placeholder'=>'Enter the Purchase Order Number','class'=>'form-control','label'=>false)); ?>
@@ -91,7 +91,7 @@
     </div>
 </div>
 <div class="form-group">
- <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For</label>
+ <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For<span class="text-danger">*</span></label>
  <div class="instrument_details">
     <div class="col-md-12">
         <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_instrument_type_id','class'=>'form-control select-chosen instrument-type','type'=>'select',

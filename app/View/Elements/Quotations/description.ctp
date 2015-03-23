@@ -114,6 +114,18 @@ $("#search_cusinstrument").hide();
         $scope.end = 0;
         $scope.edit_index = '';
         $scope.titles = '';
+        
+        $scope.tttotal = 0;
+        
+        $scope.addtotal = function(ind, id){
+            
+            if(ind == 0)
+            $scope.tttotal = 0;
+        
+            $scope.tttotal += parseFloat(id);
+            //console.log(id);
+        };
+        
 //        $('#val_description').prop('required', true);
 //        $('#val_quantity').prop('required', true);
 //        $('#val_model_no').prop('required', true);
@@ -792,7 +804,7 @@ $("#search_cusinstrument").hide();
 </style>
 <div class="quotation_add" >
 <div class="form-group" >
-     <label class="col-md-2 control-label" for="val_description">Instrument</label>
+     <label class="col-md-2 control-label" for="val_description">Instrument<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
                 array('id'=>'val_description','class'=>'form-control error-custom','ng-model' => 'desc_quo_model','placeholder'=>'Enter the Description','label'=>false,
@@ -804,7 +816,7 @@ $("#search_cusinstrument").hide();
         <span class="help-block_login_cus inscus_error">Instrument Needs Customer Details</span>
         <div id="search_instrument" class="instrument_drop">  </div>
     </div>
-    <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
+    <label class="col-md-2 control-label" for="val_quantity">Quantity<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control error-custom','label'=>false,'name'=>'quantity')); ?>
         <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
@@ -813,7 +825,7 @@ $("#search_cusinstrument").hide();
 </div>
     
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_model_no">Model No</label>
+    <label class="col-md-2 control-label" for="val_model_no">Model No<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control error-custom',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','autoComplete'=>'off')); ?>
@@ -830,13 +842,13 @@ $("#search_cusinstrument").hide();
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_brand">Brand</label>
+    <label class="col-md-2 control-label" for="val_brand">Brand<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control error-custom','ng-model' => 'brand_quo_model',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
         <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
     </div>
-    <label class="col-md-2 control-label" for="val_range">Range</label>
+    <label class="col-md-2 control-label" for="val_range">Range<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control error-custom','ng-model' => 'range_quo_model',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
@@ -845,14 +857,14 @@ $("#search_cusinstrument").hide();
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_call_location">Cal Location</label>
+    <label class="col-md-2 control-label" for="val_call_location">Cal Location<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control error-custom','ng-model' => 'loca_quo_model',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Cal Location')); ?>
         <span class="help-block_login inscal_error">Enter the Cal Location</span>
     </div>
-    <label class="col-md-2 control-label" for="val_call_type">Cal Type</label>
+    <label class="col-md-2 control-label" for="val_call_type">Cal Type<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model',
                                       'type'=>'select','ng-init'=>'type_quo_model="Singlas"','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas','empty'=>'Select Cal Type'))); ?>
@@ -883,7 +895,7 @@ $("#search_cusinstrument").hide();
                                       'name'=>'department','placeholder'=>'Enter the Departmnent Name','readonly')); ?>
         <?PHP echo $this->Form->input('dept_id',array('id'=>'val_department_id','type'=>'hidden')) ?>
     </div>
-     <label class="col-md-2 control-label" for="val_account_service">Account Service</label>
+     <label class="col-md-2 control-label" for="val_account_service">Account Service<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control error-custom','ng-model' => 'service_quo_model',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
@@ -934,6 +946,8 @@ $("#search_cusinstrument").hide();
                     $('.dataTable6').after("<div class='new_scroll6'></div>");
                     $('.dataTable6').appendTo(".new_scroll6");
                 },1000);
+                
+                var sum_total_ins = '';
             });
     </script>
 <div class="col-sm-3 col-lg-12">
@@ -966,7 +980,7 @@ $("#search_cusinstrument").hide();
         </tr>
     </thead>
     <tbody class="Instrument_info"> 
-        <tr ng-repeat="res in instruments | filter:sss" ng-show="start<=$index && $index <= end">
+        <tr ng-repeat="res in instruments | filter:sss" ng-show="start<=$index && $index <= end" data-inc="{{addtotal($index, res.total)}}">
             
             <td>{{$index + 1}}</td>
             <td>{{res.name}}</td>
@@ -1002,7 +1016,8 @@ $("#search_cusinstrument").hide();
         </tr>
         <tr ng-hide="instruments.length"><td colspan="12">No Instruments found</td></tr>
     </tbody>
-</table>
+</table><div class="col-md-6 col-md-offset-6"><div class="pull-right"><span class="h3"><strong>TOTAL : ${{tttotal}}</strong></span></div></div>
 </div>
+    <br><br>
 </div>
 </div>

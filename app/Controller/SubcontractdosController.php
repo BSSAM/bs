@@ -225,9 +225,11 @@ class SubcontractdosController extends AppController
         $sales_data = $this->Description->find('all', array('conditions' => array('Description.salesorder_id' => $sales_id,'Description.sales_calllocation'=>'subcontract','Description.sales_sub_con_id'=>''),'order'=>'order_by ASC'));
         $this->Salesorder->recursive = 3;
         $sales_data1 = $this->Salesorder->find('first', array('conditions' => array('Salesorder.salesorderno' => $sales_id, 'Salesorder.is_approved' => 1),'contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract')))));
+        if($sales_data1){
         $quo_data = $this->Quotation->find('first', array('conditions' => array('Quotation.quotationno' => $sales_data1['Salesorder']['quotationno'], 'Quotation.is_approved' => 1), 'recursive' => '3'));
         $sale = array_merge($sales_data,$sales_data1);
         $sale = array_merge($sale,$quo_data);
+        }
         if (!empty($sales_data)) {
             echo json_encode($sale);
             //echo json_encode($sales_data1);

@@ -36,7 +36,8 @@ $(document).ready(function(){
                 {
                     
                     sales_node = $.parseJSON(data);
-                    console.log(sales_node);
+                    //console.log(sales_node);
+                    //console.log(sales_node.InstrumentType.subcontract_deliveryorder);
                     $('#SubcontractdoSalesorderId').val(sales_node.Salesorder.id);
                     $('#val_date').val(sales_node.Salesorder.in_date);
                     $('#val_duedate').val(sales_node.Salesorder.due_date);
@@ -44,6 +45,8 @@ $(document).ready(function(){
                     $('#val_ref_no').val(sales_node.Salesorder.quotationno);
                     $('#val_trackid').val(sales_node.Salesorder.track_id);
                     $('#val_salesperson').val(sales_node.Customerspecialneed.salesperson_name);
+                    $('#val_instrument_type_id').empty().append('<option value="'+sales_node.InstrumentType.id+'">'+sales_node.InstrumentType.subcontract_deliveryorder+'</option>');
+                    
                     var html = '';
                     var arr = [];
                     arr[1] = arr[2] = arr[3] = arr[4] = arr[5] = arr[6] = arr[7] = arr[8] = 0;
@@ -53,7 +56,7 @@ $(document).ready(function(){
                         if(key==0){
                             $('.subcontract_instrument_info').empty();
                         }
-                        console.log(value);
+                        //console.log(value);
                         if(sales_node.length===0)
                         {
                             $('.subcontract_instrument_info').html(' <tr class="text-center">No Records Found</tr>');
@@ -197,6 +200,7 @@ $(document).ready(function(){
                 $('#SalesorderCustomerId').val(data1.Customer.id);
                 $('#val_payment_term').val(data1.Paymentterm.paymentterm+' '+ data1.Paymentterm.paymenttype);
                 $('#pay_id').val(data1.Paymentterm.id);
+                $('#val_instrument_type_id').val(data1.Paymentterm.id);
             }
 	});
     });
