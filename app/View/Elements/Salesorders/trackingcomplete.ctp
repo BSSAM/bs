@@ -64,7 +64,7 @@
                     <td class="text-center"><?PHP echo $track['Salesorder']['quotationno']; ?></td>
                     <td class="text-center"><?PHP echo $track['Salesorder']['ref_no']; ?></td>
                     <td class="text-center"><?PHP if($track['Salesorder']['is_jobcompleted']==1){ echo "Complete"; }else{ echo "Incomplete"; }; ?></td>
-                    <td class="text-center update_remark_track" id="<?PHP echo $k+1; ?>"><?PHP echo $track['Salesorder']['remarks']; ?></td>
+                    <td class="text-center update_remark_track" id="<?PHP echo $track['Salesorder']['id']; ?>"><?PHP echo $track['Salesorder']['remarks']; ?></td>
                     <td class="text-center">-</td>
                     <td class="text-center"><?PHP echo $this->Salesorder->find_sales_order_customer($track['Salesorder']['id']); ?></td>
                     <td class="text-center"><?PHP echo $this->Salesorder->salesperson($track['Salesorder']['attn']); ?></td>
