@@ -1524,10 +1524,10 @@ $html .=
                </div></td>
      <tr>
 </table>
-<table width="623" height="56">
+<table width="98%" height="56">
      <tr>
           <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
-          <td width="389" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+          <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
      </tr>
 </table>
 <div style="width:100%;margin-top:10px;float:left;">
@@ -1566,7 +1566,7 @@ $html .=
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="280" height="161" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:98%;padding:10px 0;">'.$inv['Invoice']['invoiceno'].'</div></td>
+                              <td height=""  colspan="3" style="padding:10px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:98%;padding:10px 0;font-weight:bolder; ">'.$inv['Invoice']['invoiceno'].'</div></td>
 						
                          </tr>
                          <tr>
@@ -1640,7 +1640,7 @@ $html .='<div id="footer">
                </tr>
           </table>
 
-<div style="background:#313854;float:left;width:100%;color:#fff !important;padding:5px;font-size:12px;margin-top:20px;text-align:center;">E. & O . E</div>
+<div style="background:#00005b;line-height:7px !important;width:100%;color:#fff !important;font-size:8px;margin-top:20px;text-align:center;">E. & O . E</div>
 </div>
 </div>
 </div>';
