@@ -112,7 +112,7 @@
             
             if($this->request->is('post'))
             {
-                pr($this->request->data);exit;
+                //pr($this->request->data);exit;
                 //pr($this->ReqDevice->find('all'));
                 $req_purchaseorderid  =   $this->Reqpurchaseorder->getLastInsertID();       
                 $this->ReqDevice->deleteAll(array('ReqDevice.status'=>0));

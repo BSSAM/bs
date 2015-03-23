@@ -6,9 +6,12 @@
             <th class="text-center">S.No</th>
             <th class="text-center">Instrument</th>
             <th class="text-center">Model No</th>
+            <th class="text-center">Brand</th>
+            <th class="text-center">Range</th>
             <th class="text-center">Validity</th>
             <th class="text-center">Unit Price</th>
             <th class="text-center">Account Service</th>
+            <th class="text-center">Discount</th>
             <th class="text-center">Total</th>
             <th class="text-center">Action</th>
         </tr>
@@ -16,14 +19,17 @@
     <tbody class="Instrument_info"> 
         <?PHP 
             if(!empty($this->request->data['ReqDevice'])):
-                foreach($this->request->data['ReqDevice'] as $device):?>
+                foreach($this->request->data['ReqDevice'] as $k=>$device):?>
                 <tr class="prpur_instrument_remove_<?PHP echo $device['id']; ?>">
-                    <td class="text-center"><?PHP echo $device['id']; ?></td>
+                    <td class="text-center"><?PHP echo $k+1; ?></td>
                     <td class="text-center"><?PHP echo $device['instrument_name']; ?></td>
                     <td class="text-center"><?PHP echo $device['model_no']; ?></td>
+                    <td class="text-center"><?PHP echo $device['brand_name']; ?></td>
+                    <td class="text-center"><?PHP echo $device['range']; ?></td>
                     <td class="text-center"><?PHP echo $device['validity']; ?></td>
                     <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
                     <td class="text-center"><?PHP echo $device['account_service']; ?></td>
+                    <td class="text-center"><?PHP echo $device['discount']; ?></td>
                     <td class="text-center"><?PHP echo $device['total']; ?></td>
                    <td class="text-center">
                         <div class="btn-group">

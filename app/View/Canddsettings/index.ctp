@@ -22,7 +22,9 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Collection & Delivery Settings</h2>
+                             <?php if($userrole_cus['add'] == 1) { ?>
                             <h2 style="float:right;"><?php echo $this->Html->link('Add C & D Settings',array('controller'=>'Canddsettings','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add C & D Settings')); ?></h2>
+                            <?php } ?>
                         </div>
                         <div class="table-responsive">
                             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -46,8 +48,12 @@ $('#status_call').change(function() {   // replace the ID_OF_YOUR_SELECT_BOX wit
                                         <?php if($deleted_val != 1): ?>
                                         <td class="text-center">
                                             <div class="btn-group">
+                                                <?php if($userrole_cus['edit'] == 1) { ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$candd_list['Canddsetting']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
+                                                <?php } ?>
+                                                <?php if($userrole_cus['delete'] == 1) { ?>
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$candd_list['Canddsetting']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
+                                                <?php } ?>
                                             </div>
                                         </td>
                                         <?php endif; ?>

@@ -977,6 +977,7 @@ $("#search_cusinstrument").hide();
             <td>{{res.type}}</td>
             <td>{{res.validity}}</td>
             <td>{{res.price}}</td>
+            <td>{{res.instrument_discount}}</td>
             <td>{{res.service}}</td>
             <td>{{res.total}}</td>
             <td ng-show="show_title1" class="text-center edit_title1" id="{{res.id}}">{{res.title1_val}}</td>

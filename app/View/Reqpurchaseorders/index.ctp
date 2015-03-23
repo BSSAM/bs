@@ -116,13 +116,13 @@ $(function() {
         $('.pr_search').click(function(){
        
         var quotation_single_id =   $('#ReqpurchaseorderPrequistionId').val();
-         alert(quotation_single_id);
+        // alert(quotation_single_id);
             $.ajax({
                type:'POST',
                url:"<?PHP echo Router::url('/',true); ?>/Reqpurchaseorders/check_pr_count",
                data:'single_quote_id='+quotation_single_id,
                success:function(data){
-           alert('sdf');
+           //alert('sdf');
                    if(data=='success')
                    {
                        //alert('sdfsdf');

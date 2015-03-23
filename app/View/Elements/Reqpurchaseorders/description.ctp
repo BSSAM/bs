@@ -9,7 +9,10 @@
             <th class="text-center">Brand</th>
             <th class="text-center">Range</th>
             <th class="text-center">Validity</th>
+            <th class="text-center">Unit Price</th>
             <th class="text-center">Account Service</th>
+            <th class="text-center">Discount</th>
+            <th class="text-center">Total</th>
             <th class="text-center">Action</th>
         </tr>
     </thead>
@@ -28,7 +31,10 @@
                     <td class="text-center"><?PHP echo $device['brand_name']; ?></td>
                     <td class="text-center"><?PHP echo $device['range']; ?></td>
                     <td class="text-center"><?PHP echo $device['validity']; ?></td>
+                    <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
                     <td class="text-center"><?PHP echo $device['account_service']; ?></td>
+                    <td class="text-center"><?PHP echo $device['discount']; ?></td>
+                    <td class="text-center"><?PHP echo $device['total']; ?></td>
                     <td class="text-center">
                         <div class="btn-group">
                             <a data-delete="<?PHP echo $device['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger prpur_instrument_delete">

@@ -3,7 +3,7 @@
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * and open the template in the editor.other_canddsetting
  */
 class CanddsettingsController extends AppController
 {
@@ -13,6 +13,21 @@ class CanddsettingsController extends AppController
                             'Instrument','Brand','Customer','Device','Salesorder','Description','Candd','Assign','branch','Logactivity','Datalog');
     public function index($id = NULL)
     {
+            /*******************************************************
+             *  BS V1.0
+             *  User Role Permission
+             *  Controller : other_canddsetting
+             *  Permission : view 
+            *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['other_canddsetting']['view'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+
+            $this->set('userrole_cus',$user_role['other_canddsetting']);
+            /*
+             * *****************************************************
+             */
         $canddsetting =    $this->Canddsetting->find('all',array('conditions'=>array('Canddsetting.is_deleted'=>0)));
         //pr($cd_statistics);exit;
         
@@ -36,7 +51,21 @@ class CanddsettingsController extends AppController
     
     public function add()
     {
-       
+       /*******************************************************
+             *  BS V1.0
+             *  User Role Permission
+             *  Controller : other_canddsetting
+             *  Permission : view 
+            *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['other_canddsetting']['add'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+
+            $this->set('userrole_cus',$user_role['other_canddsetting']);
+            /*
+             * *****************************************************
+             */
         $this->loadModel('branch');
          $data = $this->branch->find('list', array('fields'=>array('id','branchname')));
         // pr($data);exit;
@@ -74,7 +103,21 @@ class CanddsettingsController extends AppController
     }
     public function edit($id = null)
     {
-        
+        /*******************************************************
+             *  BS V1.0
+             *  User Role Permission
+             *  Controller : other_canddsetting
+             *  Permission : view 
+            *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['other_canddsetting']['edit'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+
+            $this->set('userrole_cus',$user_role['other_canddsetting']);
+            /*
+             * *****************************************************
+             */
        $this->loadModel('Branch');
          $data = $this->Branch->find('list', array('fields'=>array('id','branchname')));
         // pr($data);exit;
@@ -121,7 +164,21 @@ class CanddsettingsController extends AppController
     }
     public function delete($id)
     {
-        
+        /*******************************************************
+             *  BS V1.0
+             *  User Role Permission
+             *  Controller : other_canddsetting
+             *  Permission : view 
+            *******************************************************/
+            $user_role = $this->userrole_permission();
+            if($user_role['other_canddsetting']['delete'] == 0){ 
+                return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+            }
+
+            $this->set('userrole_cus',$user_role['other_canddsetting']);
+            /*
+             * *****************************************************
+             */
         if($this->request->is('get'))
         {
             throw new MethodNotAllowedException();

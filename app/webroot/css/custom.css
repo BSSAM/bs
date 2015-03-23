@@ -224,7 +224,7 @@ table th.resizing {
 .new_scroll3{width:100% !important; overflow: auto;}
 .new_scroll4{width:100% !important; overflow: auto;}
 .chosen-container { width:325px !important;}
-.new_scroll6{width:94% !important; overflow: auto; margin: 0 auto 20px;}
+.new_scroll6{width:100% !important; overflow: auto; margin: 0 auto 20px;}
 #val_instrument_type_id_chosen{width:100% !important;}
 .edit_gst_percent{margin-right: 10px;float:left;}
 .edit_gst_div{display: inline-block;}

@@ -443,7 +443,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+v.assign.assignedto+'</td>\n\\n\
                                     <td class="text-center">'+v.branch.branchname+'</td>\n\\n\
                                     <td class="text-center">'+v.Candd.remarks+'</td>\n\\n\\n\
-                                    <td class="text-center"> Shipped : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"'+checked+' /> Delivered : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="delivered_check" name="delivered"'+checked1+'/></td>\n\\n\
+                                    <td class="text-center"> In transit : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="shipping_check" name="shipping"'+checked+' /> Job Done : <input type="checkbox" value="'+v.ReadytodeliverItem.id+'" class ="delivered_check" name="delivered"'+checked1+'/></td>\n\\n\
                                     <td class="text-center"><div class="btn-group"><a id="'+v.Candd.id+'" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default ready_to_edit"><i class="fa fa-pencil"></i></a><a id="'+v.ReadytodeliverItem.id+'" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger ready_to_delete_del"><i class="fa fa-times"></i></a></div></td></tr>');
                 });
             }}

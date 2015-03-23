@@ -129,6 +129,13 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.supervisor',array('id'=>'view')); ?><label for="remember">Supervisor</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.manager',array('id'=>'delete')); ?><label for="remember">Manager</label> </div></td>
                                         </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 150px;"><h5>C&D Settings</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_canddsetting.add',array('id'=>'add')); ?><label for="remember">Add</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_canddsetting.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_canddsetting.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_canddsetting.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

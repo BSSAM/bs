@@ -1,8 +1,15 @@
 <script>
     var path_url='<?PHP echo Router::url('/',true); ?>';
 </script>
-<script type="text/javascript">
-</script>                
+<script>
+     $(function(){
+            setTimeout(function(){
+                    $('.dataTable6').after("<div class='new_scroll6'></div>");
+                    $('.dataTable6').appendTo(".new_scroll6");
+                },1000);
+            });
+    </script>
+                
 <h1><i class="gi gi-user"></i>Job Monitoring</h1>
 </div>
 </div>
@@ -16,7 +23,7 @@
 <div class="block full">
     <div class="table-responsive">
         <div class="so_paste">
-        <table id="scroll1-datatable" class="table table-vcenter table-condensed table-bordered">
+        <table id="one-datatable" class="table table-vcenter table-condensed table-bordered dataTable6">
             <thead>
                 <tr>
                     <!--<th class="text-center"><i class="gi gi-user"></i></th>-->
@@ -106,6 +113,7 @@
         </div>
     </div>
 </div>
+<div class="pull-left"><code>Note:</code> P - Processing , C - Checking ,R - Ready to Deliver ,S - In Transit , D - Job Done </div>
         <?php echo $this->Html->script('pages/uiProgress'); ?>
         <script>$(function(){ UiProgress.init(); });</script>
         <?php if ($this->Session->flash() != '') { ?>
