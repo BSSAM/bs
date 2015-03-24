@@ -151,7 +151,7 @@ $(function(){
                 {
                     
                     sales_node = $.parseJSON(data);
-                    console.log(sales_node);
+                    //console.log(sales_node);
                     $('#salesorder_id').val(sales_node.Salesorder.id);
                     $('#val_date').val(sales_node.Salesorder.in_date);
                     $('#val_duedate').val(sales_node.Salesorder.due_date);
@@ -159,6 +159,7 @@ $(function(){
                     $('#val_ref_no').val(sales_node.Salesorder.ref_no);
                     $('#val_trackid').val(sales_node.Salesorder.track_id);
                     $('#val_salesperson').val(sales_node.Customerspecialneed.salesperson_name);
+                    $('#val_instrument_type_id').empty().append('<option value="'+sales_node.InstrumentType.purchaseorder+'">'+sales_node.InstrumentType.purchaseorder+'</option>');
                     //if(value.Description.title1_val)
                     var html = '';
                     var arr = [];

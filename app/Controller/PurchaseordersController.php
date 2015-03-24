@@ -51,6 +51,7 @@ class PurchaseordersController extends AppController
                 $this->request->data['Purchaseorder']['service_id'] = $this->request->data['Purchaseorder']['service_id'];
                 $this->request->data['Purchaseorder']['remarks'] = $this->request->data['Purchaseorder']['remarks'];
                 $this->request->data['Purchaseorder']['track_id'] = $this->request->data['Purchaseorder']['track_id'];
+                $this->request->data['Purchaseorder']['instrument_type_id'] = $this->request->data['Purchaseorder']['instrument_type_id'];
                 
                 if(!empty($this->request->data['Purchaseorder']))
                 {

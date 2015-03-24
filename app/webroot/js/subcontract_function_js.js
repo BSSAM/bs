@@ -45,7 +45,7 @@ $(document).ready(function(){
                     $('#val_ref_no').val(sales_node.Salesorder.quotationno);
                     $('#val_trackid').val(sales_node.Salesorder.track_id);
                     $('#val_salesperson').val(sales_node.Customerspecialneed.salesperson_name);
-                    $('#val_instrument_type_id').empty().append('<option value="'+sales_node.InstrumentType.id+'">'+sales_node.InstrumentType.subcontract_deliveryorder+'</option>');
+                    $('#val_instrument_type_id').empty().append('<option value="'+sales_node.InstrumentType.subcontract_deliveryorder+'">'+sales_node.InstrumentType.subcontract_deliveryorder+'</option>');
                     
                     var html = '';
                     var arr = [];
