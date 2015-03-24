@@ -11,7 +11,7 @@
 </div>
 <div class="form-group">
     <div class="form-group_val">
-    <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
+    <label class="col-md-2 control-label" for="val_customer">Customer Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Reqpurchaseorder.customername', 
                 array('id'=>'preq_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
@@ -27,7 +27,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+    <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Reqpurchaseorder.attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name')); ?>
     </div>
@@ -38,7 +38,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_phone">Phone</label>
+    <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Reqpurchaseorder.phone', array('id'=>'val_phone','class'=>'form-control',
                                                 'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off')); ?>
@@ -62,7 +62,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No <span class="text-danger">*</span></label>
     <div class="col-md-4">
             <?php echo $this->Form->input('Reqpurchaseorder.ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number',)); ?>
     </div>
@@ -73,7 +73,7 @@
     </div>
 </div>
 <div class="form-group">
- <label class="col-md-2 control-label" for="val_customer">Select Instrument For</label>
+ <label class="col-md-2 control-label" for="val_customer">Select Instrument For <span class="text-danger">*</span></label>
     <div class="col-md-12">
         <?php echo $this->Form->input('Reqpurchaseorder.instrument_type_name', array('class'=>'form-control', 'label'=>false,'value'=>$this->request->data['InstrumentType']['purchase_requisition'],'readonly'=>'readonly')); ?>
     </div>

@@ -26,12 +26,12 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_symbol">Currency Symbol</label>
+                                        <label class="col-md-2 control-label" for="val_symbol">Currency Symbol <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('symbol', array('id'=>'val_symbol','class'=>'form-control','placeholder'=>'Enter the Currency Symbol','label'=>false,'name'=>'symbol')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_country">Country</label>
+                                        <label class="col-md-2 control-label" for="val_country">Country <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('country_id', array('id'=>'val_country','options' => $country,'class'=>'form-control','empty'=>'Enter the Country','label'=>false,'name'=>'country_id')); ?>
                                         </div>
@@ -44,7 +44,7 @@
                                             <?php echo $this->Form->input('currencycode', array('id'=>'val_currencycode','class'=>'form-control','placeholder'=>'Enter the Currency Code','label'=>false,'name'=>'currencycode')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_exchangerate">Exchange Rate</label>
+                                        <label class="col-md-2 control-label" for="val_exchangerate">Exchange Rate <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('exchangerate', array('id'=>'val_exchangerate','class'=>'form-control','placeholder'=>'Enter the Exchange Rate','label'=>false,'name'=>'exchangerate')); ?>
                                         </div>

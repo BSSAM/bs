@@ -25,7 +25,7 @@
             <!-- Basic Form Elements Content -->
             <?php echo $this->Form->create('InsPercent',array('class'=>'form-horizontal form-bordered','id'=>'form-percent-add')); ?>
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="percent">Mark Up</label>
+                    <label class="col-md-2 control-label" for="percent">Mark Up <span class="text-danger">*</span></label>
                     <div class="col-md-4">
                         <?php echo $this->Form->input('percent', array('id'=>'percent','class'=>'form-control','placeholder'=>'Enter the Mark Up','label'=>false,'name'=>'percent')); ?>
                     </div>

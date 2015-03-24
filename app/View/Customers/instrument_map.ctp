@@ -63,7 +63,7 @@
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('Customer.customername', array('id' => 'customer_name', 'class' => 'form-control', 'placeholder' => 'Customer Name', 'label' => false, 'disabled' => 'disabled', 'value' => $customer_entry['Customer']['Customertagname'])); ?>
                                     </div>
-                                    <label class="col-md-2 control-label" for="customer_instrument">Instrument Name</label>
+                                    <label class="col-md-2 control-label" for="customer_instrument">Instrument Name <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name','placeholder'=>'Select Instrument Name')); ?>
                                         <?PHP echo $this->Form->input('in_id', array('type' => 'hidden', 'id' => 'in_id')); ?>
@@ -71,12 +71,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="model_no">Model No</label>
+                                    <label class="col-md-2 control-label" for="model_no">Model No <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('model_no', array('id' => 'model_no', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter Model No', 'name' => 'model_no')); ?>
                                             
                                     </div>
-                                    <label class="col-md-2 control-label" for="range">Range</label>
+                                    <label class="col-md-2 control-label" for="range">Range <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <select id="range_array" name="range" class="form-control" data-placeholder="Select Range" style="width: 250px;">
                                             <option value="">Select Range</option>

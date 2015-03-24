@@ -4,7 +4,7 @@
         <?php echo $this->Form->textarea('Proforma.remarks', array('id'=>'val_remarks','class'=>'form-control',
                                                'label'=>false,'rows'=>6,'cols'=>30,'readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="val_service_type">Service Type</label>
+    <label class="col-md-2 control-label" for="val_service_type">Service Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Proforma.service_id', array('id'=>'val_service_type','class'=>'form-control','type'=>'select','label'=>false,'readonly'=>'readonly','options'=>$service)); ?>
        

@@ -53,7 +53,7 @@
                                 <?php echo $this->Form->create('Instrument',array('class'=>'form-horizontal form-bordered','id'=>'form-machine-add')); ?>
                                 
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" for="machine_name">Name</label>
+                                        <label class="col-md-2 control-label" for="machine_name">Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('Instrument.name', array('id'=>'machine_name','class'=>'form-control','placeholder'=>'Enter the Instrument Name','label'=>false,'maxlength'=>false)); ?>
                                         </div>
@@ -63,12 +63,12 @@
                                         </div>
                                     </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Department</label>
+                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Department <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('Instrument.department_id', array('class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','id'=>'department_id','empty'=>'Select Department')); ?>
                                         
                                     </div>
-                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Procedure</label>
+                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Procedure <span class="text-danger">*</span></label>
                                     <div class="col-md-4"><?php //'options'=>$procedure_array,?>
                                         <?php echo $this->Form->input('InstrumentProcedure.procedure_id', array('id'=>'procedure','class'=>'form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select Procedure Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         
@@ -78,12 +78,12 @@
                                    
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="brand_id">Brand</label>
+                                    <label class="col-md-2 control-label" for="brand_id">Brand <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('InstrumentBrand.brand_id', array('id'=>'brand_id','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$brand_array,'data-placeholder'=>'Select Brand','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         
                                     </div>
-                                    <label class="col-md-2 control-label" for="range_id">Range</label>
+                                    <label class="col-md-2 control-label" for="range_id">Range <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('InstrumentRange.range_id', array('id'=>'range_id','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         

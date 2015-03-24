@@ -26,7 +26,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_industryname">Industry Name</label>
+                                        <label class="col-md-2 control-label" for="val_industryname">Industry Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('industryname', array('id'=>'val_industryname','class'=>'form-control','placeholder'=>'Enter the Industry Name','label'=>false,'name'=>'industryname')); ?>
                                         </div>

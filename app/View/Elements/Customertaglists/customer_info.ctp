@@ -1,9 +1,9 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_customername">Customer Name</label>
+    <label class="col-md-2 control-label" for="val_customername">Customer Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Customer Name', 'label' => false, 'name' => 'customername','readonly'=>'readonly','value'=>$tag_customer_details['Customer']['customername'])); ?>
     </div>
-     <label class="col-md-2 control-label" for="val_tag">Tag</label>
+     <label class="col-md-2 control-label" for="val_tag">Tag <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('tag_name', array('id' => 'val_tag', 'class' => 'form-control', 'placeholder' => 'Enter the Tag', 'label' => false, 'name' => 'tag_name')); ?>
     </div>
@@ -11,7 +11,7 @@
     
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_salespeoples">Sales Persons</label>
+    <label class="col-md-2 control-label" for="val_salespeoples">Sales Persons <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('salesperson_id', array('id' => 'val_salespeoples', 'class' => 'select-chosen required', 'options' => $salesperson, 'data-placeholder' => 'Enter the Sales Persons', 'label' => false, 'name' => 'salesperson_id', 'multiple' => true, 'style' => 'width: 250px; display: none;')); ?>
     </div>
@@ -23,7 +23,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_regaddress">Registered Address</label>
+    <label class="col-md-2 control-label" for="val_regaddress">Registered Address <span class="text-danger">*</span></label>
     <div class="col-md-10">
         <!-- Block Tabs -->
         <div class="block full">
@@ -130,7 +130,7 @@
 
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="var_phone">Phone</label>
+    <label class="col-md-2 control-label" for="var_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('phone', array('id' => 'var_phone', 'class' => 'form-control', 'placeholder' => 'Enter the Phone No', 'label' => false, 'name' => 'phone')); ?>
     </div>
@@ -147,7 +147,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('postalcode', array('id' => 'val_postalcode', 'class' => 'form-control', 'placeholder' => 'Enter the Postal Code', 'label' => false, 'name' => 'postalcode')); ?>
     </div>
-    <label class="col-md-2 control-label" for="val_industry">Customer Industry</label>
+    <label class="col-md-2 control-label" for="val_industry">Customer Industry <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('industry_id', array('id' => 'val_industry', 'class' => 'form-control select-chosen', 'empty' => 'Enter the Industry', 'options' => $industry, 'label' => false, 'name' => 'industry_id')); ?>
     </div>
@@ -157,7 +157,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="var_type">Customer Type</label>
+    <label class="col-md-2 control-label" for="var_type">Customer Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customertype', array('id' => 'var_type', 'class' => 'form-control select-chosen', 'empty' => 'Enter the Customer Type', 'options' => array('Customer' => 'Customer', 'Sub-Contractor' => 'Sub-Contractor', 'Supplier' => 'Supplier', 'Customer/Sub-Contractor' => 'Customer/Sub-Contractor'), 'label' => false, 'name' => 'customertype')); ?>
     </div>
@@ -171,34 +171,34 @@
 
 <div class="form-group">
   
-    <label class="col-md-2 control-label" for="var_priorities">Priority</label>
+    <label class="col-md-2 control-label" for="var_priorities">Priority <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('priority_id', array('id' => 'var_priorities', 'class' => 'form-control select-chosen', 'options' => $priority, 'empty' => 'Enter the Priorities', 'label' => false, 'name' => 'priority_id')); ?>
     </div>
 
-    <label class="col-md-2 control-label" for="val_paymentterms">Payment Terms</label>
+    <label class="col-md-2 control-label" for="val_paymentterms">Payment Terms <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('paymentterm_id', array('id' => 'val_paymentterms', 'class' => 'form-control select-chosen', 'options' => $paymentterm, 'empty' => 'Enter the Payment Terms', 'label' => false, 'name' => 'paymentterm_id')); ?>
     </div>
 
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_calibrationtype">Calibration Type</label>
+    <label class="col-md-2 control-label" for="val_calibrationtype">Calibration Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('calibrationtype', array('id' => 'val_calibrationtype', 'class' => 'form-control select-chosen', 'options' => array('Singlas' => 'Singlas', 'Non-Singlas' => 'Non-Singlas'), 'empty' => 'Enter the Calibration Type', 'label' => false, 'name' => 'calibrationtype')); ?>
     </div>
-   <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type</label>
+   <label class="col-md-2 control-label" for="val_invoicetype">Invoice Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('invoice_type_id', array('id' => 'val_invoicetype', 'class' => 'form-control select-chosen', 'options' =>$invoice_types, 'empty' => 'Enter the Invoice Type', 'label' => false, 'name' => 'invoice_type_id')); ?>
     </div>
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type</label>
+    <label class="col-md-2 control-label" for="val_deliveryordertype">Delivery Order Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('deliveryordertype', array('id' => 'val_deliveryordertype', 'class' => 'form-control select-chosen', 'options' => $deliverorder_type, 'empty' => 'Enter the Delivery Order Type', 'label' => false, 'name' => 'deliveryordertype')); ?>
     </div>
-     <label class="col-md-2 control-label" for="val_poack">Acknowledgement Type</label>
+     <label class="col-md-2 control-label" for="val_poack">Acknowledgement Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('acknowledgement_type_id', array('id' => 'val_poack', 'class' => 'form-control select-chosen checkbox', 'label' => false, 'name' => 'acknowledgement_type_id','type'=>'select','options'=>$acknowledgement_type,'empty'=>'Select the Acknowledgement Type')); ?>
     </div>

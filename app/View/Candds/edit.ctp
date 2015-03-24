@@ -99,14 +99,14 @@
                                     <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','id'=>'candd_customer_id')) ?> 
                                     <?PHP echo $this->Form->input('col_an_del_date',array('type'=>'hidden','id'=>'col_an_del_date')) ?> 
                                 <div class="form-group">
-                                        <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
+                                        <label class="col-md-2 control-label" for="val_customer">Customer Name <span class="text-danger">*</span></label>
                                          <div class="col-md-4">
                                             <?php echo $this->Form->input('customername', 
                                                   array('id'=>'val_customer_candd','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
                                                   'autoComplete'=>'off','type'=>'text','name'=>'customername')); ?>
                                          <div id="candd_result"></div>
                                         </div>
-                                        <label class="col-md-2 control-label" for="val_purpose">Purpose To</label>
+                                        <label class="col-md-2 control-label" for="val_purpose">Purpose To <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('purpose', array('id'=>'val_purpose','class'=>'form-control select-chosen','label'=>false,'name'=>'purpose','type'=>'select','empty'=>'Select of purpose','options'=>array('Collection'=>'Collection','Delivery'=>'Delivery'))); ?>
                                         </div>
@@ -123,18 +123,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+                                    <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('attn', array('id'=>'val_attn_candd','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name')); ?>
                                     </div>
-                                    <label class="col-md-2 control-label" for="val_phone">Phone</label>
+                                    <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control',
                                                 'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off')); ?>
                                     </div>
                                 </div>
                                  <div class="form-group">
-                                    <label class="col-md-2 control-label" for="val_assigned">Assigned To</label>
+                                    <label class="col-md-2 control-label" for="val_assigned">Assigned To <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('assigned', array('id'=>'val_assigned','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$assignto,'empty'=>'Select Assigned To')); ?>
                                     </div>

@@ -376,7 +376,7 @@ $(function(){
                 
             </div>-->
             <div class="form-group">
-                <label class="col-md-2 control-label" for="val_customername">Sub Contractor Name</label>
+                <label class="col-md-2 control-label" for="val_customername">Sub Contractor Name <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off')); ?>
                 <div id="subcontract_result">
@@ -389,11 +389,11 @@ $(function(){
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+                <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => 'Select Contact person Name')); ?>
                 </div>
-                <label class="col-md-2 control-label" for="val_phone">Phone</label>
+                <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('phone', array('id' => 'val_phone', 'class' => 'form-control',
                         'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true));
@@ -448,7 +448,7 @@ $(function(){
                 ?>
                 </div>  
                 
-                <label class="col-md-2 control-label" for="val_service_id">Service Type</label>
+                <label class="col-md-2 control-label" for="val_service_id">Service Type <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',
@@ -462,6 +462,13 @@ $(function(){
             <?php
                 echo $this->Form->input('remarks', array('id' => 'val_remarks', 'class' => 'form-control',
             'placeholder' => 'Enter Remarks', 'label' => false,'type'=>'textarea'));
+            ?>    
+            </div>
+            <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For <span class="text-danger">*</span></label>
+            <div class="col-md-4">
+            <?php
+                echo $this->Form->input('instrument_type_id', array('id' => 'val_instrument_type_id','class'=>'form-control','type'=>'select',
+                                                'label'=>false,'empty'=>'-- Select instrument For --','readonly'=>'readonly'));
             ?>    
             </div>
             </div>

@@ -897,7 +897,7 @@ $("#search_cusinstrument").hide();
     }
 </script>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_description">Instrument</label>
+    <label class="col-md-2 control-label" for="val_description">Instrument <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
                 array('id'=>'val_instrument','class'=>'form-control','ng-model' => 'ins_sales_model','placeholder'=>'Enter the Description','label'=>false,
@@ -908,14 +908,14 @@ $("#search_cusinstrument").hide();
          <span class="help-block_login ins_error">Enter the Instrument Name</span>
         <div id="search_instrument"></div>
     </div>
-    <label class="col-md-2 control-label" for="sales_quantity">Quantity</label>
+    <label class="col-md-2 control-label" for="sales_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','ng-model' => 'quan_sales_model','class'=>'form-control','label'=>false,'name'=>'sales_quantity','onkeypress'=>'return isNumberKey(event)','placeholder'=>'Enter the Quantity ( only Numbers )')); ?>
     </div>
         
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_model_no">Model No</label>
+    <label class="col-md-2 control-label" for="val_model_no">Model No <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_sales_model','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','autoComplete'=>'off')); ?>
@@ -926,7 +926,7 @@ $("#search_cusinstrument").hide();
     </div>
     
     
-    <label class="col-md-2 control-label" for="val_brand">Brand</label>
+    <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control','ng-model' => 'brand_sales_model',
                                                 'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand')); ?>
@@ -937,7 +937,7 @@ $("#search_cusinstrument").hide();
 <div class="form-group">
     
     
-    <label class="col-md-2 control-label" for="sales_range">Range</label>
+    <label class="col-md-2 control-label" for="sales_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
          <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control','ng-model' => 'range_sales_model',
                                                 'label'=>false,'name'=>'range_id','type'=>'select','empty'=>'Select Range')); ?>
@@ -951,14 +951,14 @@ $("#search_cusinstrument").hide();
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="sales_calllocation">Cal Location</label>
+    <label class="col-md-2 control-label" for="sales_calllocation">Cal Location <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_location', array('id'=>'sales_calllocation','class'=>'form-control','ng-model' => 'loca_sales_model',
                                                 'label'=>false,'name'=>'sales_calllocation','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Cal Location')); ?>
      
     </div>
-    <label class="col-md-2 control-label" for="sales_calltype">Cal Type</label>
+    <label class="col-md-2 control-label" for="sales_calltype">Cal Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'sales_calltype','class'=>'form-control','label'=>false,'name'=>'sales_calltype','ng-model' => 'type_sales_model',
                                       'type'=>'select','options'=>array('Singlas'=>'Singlas',
@@ -983,7 +983,7 @@ $("#search_cusinstrument").hide();
                                       'name'=>'department','placeholder'=>'Enter the Departmnent Name','readonly','ng-model' => 'department')); ?>
         <?PHP echo $this->Form->input('department_id',array('type'=>'hidden','id'=>'sales_department_id','ng-model' => 'department_id')); ?>
     </div>
-     <label class="col-md-2 control-label" for="sales_accountservice">Account Service</label>
+     <label class="col-md-2 control-label" for="sales_accountservice">Account Service <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('account_service', array('id'=>'sales_accountservice','class'=>'form-control','ng-model' => 'service_sales_model',
                                       'label'=>false,'name'=>'sales_accountservice','options'=>array('calibration service'=>'Calibration Service'),

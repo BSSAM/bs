@@ -24,7 +24,7 @@
                                 <?php echo $this->Form->create('Title',array('class'=>'form-horizontal form-bordered','id'=>'form-title-add')); ?>
                                 
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" for="title_name">Title Name</label>
+                                        <label class="col-md-2 control-label" for="title_name">Title Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('title_name', array('id'=>'title_name','class'=>'form-control','placeholder'=>'Enter the Instrument Name','label'=>false,'name'=>'title_name')); ?>
                                         </div>

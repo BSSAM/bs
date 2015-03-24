@@ -26,7 +26,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_priority">Priority</label>
+                                        <label class="col-md-2 control-label" for="val_priority">Priority <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('priority', array('id'=>'val_priority','class'=>'form-control','placeholder'=>'Enter the Priority','label'=>false,'name'=>'priority')); ?>
                                         </div>
@@ -40,12 +40,12 @@
                                     </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="val_noofdays">No of Days</label>
+                                    <label class="col-md-2 control-label" for="val_noofdays">No of Days <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('noofdays', array('id'=>'val_noofdays','class'=>'form-control','empty'=>'Enter the Days','label'=>false,'name'=>'noofdays')); ?>
                                         </div>
                                     
-                                    <label class="col-md-2 control-label" for="val_multipleof">Multiples Of</label>
+                                    <label class="col-md-2 control-label" for="val_multipleof">Multiples Of <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('multipleof', array('id'=>'val_multipleof','class'=>'form-control','empty'=>'Enter the Multiples','label'=>false,'name'=>'multipleof','type'=>'text')); ?>
                                         </div>

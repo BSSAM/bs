@@ -28,7 +28,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="from_range">From Range Name</label>
+                                        <label class="col-md-2 control-label" for="from_range">From Range <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('from_range', array('id'=>'from_range','class'=>'form-control','placeholder'=>'Enter the Starting Range','label'=>false,'name'=>'from_range')); ?>
                                         </div>
@@ -41,7 +41,7 @@
                                     </div>
                                 <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="unit_id">Unit</label>
+                                        <label class="col-md-2 control-label" for="unit_id">Unit <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('unit_id', array('id'=>'unit_id','class'=>'form-control','label'=>false,
                                                 'name'=>'unit_id','type'=>'select','options'=>$units,'empty'=>'Select the Unit')); ?>

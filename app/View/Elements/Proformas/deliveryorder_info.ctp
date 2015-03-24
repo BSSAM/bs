@@ -18,7 +18,7 @@
 </div>
     
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
+    <label class="col-md-2 control-label" for="val_customer">Customer Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Proforma.customername', 
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
@@ -43,14 +43,14 @@
                                                 'placeholder'=>'Enter the Due Amount','label'=>false,'readonly'=>'readonly')); ?>
        
     </div>
-    <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+    <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Proforma.attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','readonly'=>'readonly')); ?>
     </div>
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_phone">Phone</label>
+    <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Proforma.phone', array('id'=>'val_phone','class'=>'form-control',
                                                 'placeholder'=>'Enter the Phone Number','label'=>false,'readonly'=>'readonly')); ?>
@@ -80,7 +80,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">Reference No <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Proforma.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','readonly'=>'readonly')); ?>
     </div>
@@ -107,7 +107,7 @@
     
 </div>-->
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
+    <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Proforma.instrument_type', array('id'=>'val_instrument_type','class'=>'form-control','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','readonly'=>'readonly')); ?>

@@ -115,7 +115,7 @@ $(function() {
                 
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label" for="val_customername">Subcontractor</label>
+                <label class="col-md-2 control-label" for="val_customername">Subcontractor <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off','value'=>$subcondo['Subcontractdo']['subcontract_name'], 'readonly' => true)); ?>
 <!--                <div id="subcontract_result">
@@ -128,11 +128,11 @@ $(function() {
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+                <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'text', 'empty' => 'Select Contact person Name','value'=>$contact_list['Contactpersoninfo']['name'], 'readonly' => true)); ?>
                 </div>
-                <label class="col-md-2 control-label" for="val_phone">Phone</label>
+                <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('subcontract_phone', array('id' => 'val_phone', 'class' => 'form-control',
                         'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true,'value'=>$contact_list['Contactpersoninfo']['phone']));
@@ -196,7 +196,7 @@ $(function() {
                 ?>
                 </div>  
                 
-                <label class="col-md-2 control-label" for="val_service_id">Service Type</label>
+                <label class="col-md-2 control-label" for="val_service_id">Service Type <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('service_id', array('id' => 'val_service_id', 'class' => 'form-control', 'type' => 'text',

@@ -26,7 +26,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_salesperson">Sales Person</label>
+                                        <label class="col-md-2 control-label" for="val_salesperson">Sales Person <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('salesperson', array('id'=>'val_salesperson','class'=>'form-control','placeholder'=>'Enter the Sales Person','label'=>false,'name'=>'salesperson')); ?>
                                         </div>

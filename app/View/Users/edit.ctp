@@ -26,12 +26,12 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_username">UserName</label>
+                                        <label class="col-md-2 control-label" for="val_username">UserName <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('username', array('id'=>'val_username','class'=>'form-control','placeholder'=>'Enter the User Name','label'=>false,'name'=>'username')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_password">Password</label>
+                                        <label class="col-md-2 control-label" for="val_password">Password <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->password('password', array('id'=>'val_password','class'=>'form-control','placeholder'=>'Enter the Password','label'=>false,'name'=>'password')); ?>
                                         </div>
@@ -40,7 +40,7 @@
                                 
                                 <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_firstname">First Name</label>
+                                        <label class="col-md-2 control-label" for="val_firstname">First Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('firstname', array('id'=>'val_firstname','class'=>'form-control','placeholder'=>'Enter the First Name','label'=>false,'name'=>'firstname')); ?>
                                         </div>
@@ -54,12 +54,12 @@
                                 
                                 <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_emailid">Email Id</label>
+                                        <label class="col-md-2 control-label" for="val_emailid">Email Id <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('emailid', array('id'=>'val_emailid','class'=>'form-control','placeholder'=>'Enter the E-Mail Id','label'=>false,'name'=>'emailid')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_userrole">User Role</label>
+                                        <label class="col-md-2 control-label" for="val_userrole">User Role <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('userrole_id', array('id'=>'val_userrole','class'=>'select-chosen form-control','options' => $userrole,'empty'=>'Enter the User Role','label'=>false,'name'=>'userrole_id')); ?>
                                         </div>
@@ -69,7 +69,7 @@
                                 
                                 <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_department">Department</label>
+                                        <label class="col-md-2 control-label" for="val_department">Department <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                          <select  name="data[department_id][]" class="select-chosen required" data-placeholder="Select the Department name" style="width: 250px;" multiple >
                                                     <?PHP foreach ($department as $k => $v): ?>

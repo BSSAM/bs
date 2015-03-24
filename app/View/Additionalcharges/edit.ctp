@@ -26,7 +26,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_additionalcharge">Additional Charges</label>
+                                        <label class="col-md-2 control-label" for="val_additionalcharge">Additional Charges <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('additionalcharge', array('id'=>'val_additionalcharge','class'=>'form-control','placeholder'=>'Enter the Additional Charges','label'=>false,'name'=>'additionalcharge')); ?>
                                         </div>

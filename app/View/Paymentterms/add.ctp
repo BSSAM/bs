@@ -26,12 +26,12 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_paymentterm">Payment Term</label>
+                                        <label class="col-md-2 control-label" for="val_paymentterm">Payment Term <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('paymentterm', array('id'=>'val_paymentterm','class'=>'form-control','placeholder'=>'Enter the Payment Term','label'=>false,'name'=>'paymentterm')); ?>
                                         </div>
                                         
-                                        <label class="col-md-2 control-label" for="val_paymenttype">Payment Type</label>
+                                        <label class="col-md-2 control-label" for="val_paymenttype">Payment Type <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('paymenttype', array('id'=>'val_paymenttype','class'=>'form-control','empty'=>'Enter the Payment Type','options'=>array('days'=>'days', 'week'=>'week', 'month'=>'month','year'=> 'year','COD'=> 'COD'),'label'=>false,'name'=>'paymenttype')); ?>
                                         </div>

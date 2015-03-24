@@ -25,7 +25,7 @@
                                 <!-- Basic Form Elements Content -->
                                 <?php echo $this->Form->create('Brand',array('class'=>'form-horizontal form-bordered','id'=>'form-brand-add')); ?>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" for="brandname">Brand Name</label>
+                                        <label class="col-md-2 control-label" for="brandname">Brand Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('brandname', array('id'=>'brandname','class'=>'form-control','placeholder'=>'Enter the Brand Name','label'=>false,'name'=>'brandname')); ?>
                                         </div>

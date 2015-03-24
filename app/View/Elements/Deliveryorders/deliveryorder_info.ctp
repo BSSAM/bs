@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="deli_customer">Customer Name</label>
+    <label class="col-md-2 control-label" for="deli_customer">Customer Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customer_name', array('id'=>'deli_customer','class'=>'form-control','readonly'=>'readonly','label'=>false,'name'=>'deli_customer_name')); ?>
     </div>
@@ -22,7 +22,7 @@
    
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="del_attn">ATTN</label>
+    <label class="col-md-2 control-label" for="del_attn">ATTN <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.attn', array('id'=>'del_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select the Contact person name')); ?>
     </div>
@@ -35,7 +35,7 @@
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="del_phone">Phone</label>
+    <label class="col-md-2 control-label" for="del_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.phone', array('id'=>'del_phone','class'=>'form-control',
                                                 'label'=>false,'readonly'=>'readonly')); ?>
@@ -57,7 +57,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">Po Reference No <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.po_reference_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
     </div>
@@ -67,7 +67,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
+    <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For <span class="text-danger">*</span></label>
     <div class="col-md-12">
         <?php echo $this->Form->input('Deliveryorder.instrument_type_id', array('id'=>'instrument_type_id','class'=>'form-control','type'=>'text',
                                                 'label'=>false,'readonly'=>'readonly','type'=>'select','empty'=>'Select the Instrument Type')); ?>

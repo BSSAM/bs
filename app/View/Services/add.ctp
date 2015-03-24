@@ -26,7 +26,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_service">Services Type</label>
+                                        <label class="col-md-2 control-label" for="val_service">Services Type <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('servicetype', array('id'=>'val_service','class'=>'form-control','placeholder'=>'Enter the Service Type','label'=>false,'name'=>'servicetype')); ?>
                                         </div>

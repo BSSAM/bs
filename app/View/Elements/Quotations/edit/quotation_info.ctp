@@ -13,7 +13,7 @@
 </div>
     
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_customer">Customer Name<span class="text-danger">*</span></label>
+    <label class="col-md-2 control-label" for="val_customer">Customer Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customername', 
                 array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
@@ -30,7 +30,7 @@
         
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_attn">ATTN<span class="text-danger">*</span></label>
+    <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('attn', array('id'=>'val_attn','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name','options'=>$person_list,'readonly'=>'readonly')); ?>
     </div>
@@ -42,7 +42,7 @@
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_phone">Phone</label>
+    <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control',
                                                 'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off','readonly'=>'readonly', 'onkeypress'=>'return isNumberKey(event)')); ?>
@@ -68,7 +68,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No<span class="text-danger">*</span></label> 
+    <label class="col-md-2 control-label" for="val_ref_no">PO Reference No <span class="text-danger">*</span></label> 
      <div class="col-md-4">
             <?PHP //if(!empty($this->request->data['Clientpo'])){$pos =$po_list ;$readonly    ="readonly";}else{$pos =$this->request->data['Quotation']['ref_no'];$readonly    ="";}?>
             <?php echo $this->Form->input('ref_no', array('type'=>'text','id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','readonly'=>'readonly')); ?>
@@ -88,7 +88,7 @@
 </div>
 <div class="form-group">
     
- <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For<span class="text-danger">*</span></label>
+ <label class="col-md-2 control-label" for="val_instrument_type_id">Select Instrument For <span class="text-danger">*</span></label>
     <div class="col-md-12">
         <?php echo $this->Form->input('instrument_type_id', array('id'=>'val_instrument_type_id','class'=>'form-control select-chosen instrument-type','type'=>'select',
                                                 'label'=>false,'empty'=>'-- Select instrument For --','options'=>$instrument_types)); ?>

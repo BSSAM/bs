@@ -1,11 +1,11 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_salespeoples">Name</label>
+    <label class="col-md-2 control-label" for="val_salespeoples">Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('name', array('id'=>'contact_name','class'=>'form-control','placeholder'=>'Enter the contact Person name','label'=>false)); ?>
         <span class="help-block_login name_error">Enter the Contact Person name</span>
 
     </div>
-    <label class="col-md-2 control-label" for="val_postalcode">Email</label>
+    <label class="col-md-2 control-label" for="val_postalcode">Email <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('email', array('id'=>'contact_email','class'=>'form-control','placeholder'=>'Enter the Email Id','label'=>false)); ?>
         <span class="help-block_login email_error">Enter the Mail id</span>
@@ -23,7 +23,7 @@
     
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="contact_phone">Phone</label>
+    <label class="col-md-2 control-label" for="contact_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('phoneno', array('id'=>'contact_phone','class'=>'form-control','placeholder'=>'Enter the Phone Number','label'=>false)); ?>
     </div>

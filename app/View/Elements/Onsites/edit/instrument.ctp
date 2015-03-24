@@ -30,7 +30,7 @@
 
 </script>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_description">Instrument</label>
+    <label class="col-md-2 control-label" for="val_description">Instrument <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php
         echo $this->Form->input('description', array('id' => 'onsite_description', 'class' => 'form-control', 'placeholder' => 'Enter the Description', 'label' => false,
@@ -41,7 +41,7 @@
         <span class="help-block_login inscus_error">Instrument Needs Customer Details</span>
         <div id="search_instrument"></div>
     </div>
-    <label class="col-md-2 control-label" for="onsite_quantity">Quantity</label>
+    <label class="col-md-2 control-label" for="onsite_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('onsite_quantity', array('id' => 'onsite_quantity', 'class' => 'form-control', 'label' => false, 'name' => 'onsite_quantity')); ?>
      <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
@@ -52,7 +52,7 @@
 
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_address">Model No</label>
+    <label class="col-md-2 control-label" for="val_address">Model No <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id' => 'onsite_model_no', 'class' => 'form-control',
             'placeholder' => 'Enter the Model Number', 'label' => false, 'name' => 'model_no'));
@@ -68,13 +68,13 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_brand">Brand</label>
+    <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id' => 'onsite_brand', 'class' => 'form-control','label' => false, 'name' => 'brand', 'type' => 'select', 'empty' => 'Select Brand'));?>
      <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
     </div>
    
-    <label class="col-md-2 control-label" for="val_range">Range</label>
+    <label class="col-md-2 control-label" for="val_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('range', array('id' => 'onsite_range', 'class' => 'form-control',
             'label' => false, 'name' => 'range', 'type' => 'select', 'empty' => 'Select Range'));
@@ -83,7 +83,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_call_location">Call Location</label>
+    <label class="col-md-2 control-label" for="val_call_location">Call Location <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php
         echo $this->Form->input('call_location', array('id' => 'onsite_call_location', 'class' => 'form-control',
@@ -91,7 +91,7 @@
         ?>
          <span class="help-block_login inscal_error">Enter the Call Location</span>
     </div>
-    <label class="col-md-2 control-label" for="val_call_type">Call Type</label>
+    <label class="col-md-2 control-label" for="val_call_type">Call Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php
         echo $this->Form->input('call_type', array('id' => 'onsite_call_type', 'class' => 'form-control', 'label' => false, 'name' => 'call_type',
@@ -127,7 +127,7 @@
         ?>
 <?PHP echo $this->Form->input('dept_id', array('id' => 'val_department_id', 'type' => 'hidden')) ?>
     </div>
-     <label class="col-md-2 control-label" for="val_account_service">Account Service</label>
+     <label class="col-md-2 control-label" for="val_account_service">Account Service <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php
         echo $this->Form->input('account_service', array('id' => 'onsite_account_service', 'class' => 'form-control',

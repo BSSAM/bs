@@ -26,12 +26,12 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_country">Country Name</label>
+                                        <label class="col-md-2 control-label" for="val_country">Country Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('country', array('id'=>'val_country','class'=>'form-control','placeholder'=>'Enter Country Name','label'=>false,'name'=>'country')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_countrycode">Country Code</label>
+                                        <label class="col-md-2 control-label" for="val_countrycode">Country Code <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('countrycode', array('id'=>'val_countrycode','class'=>'form-control','placeholder'=>'Enter Country Code','label'=>false,'name'=>'countrycode')); ?>
                                         </div>

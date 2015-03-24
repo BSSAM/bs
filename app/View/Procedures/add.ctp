@@ -26,11 +26,11 @@
                                 <?php echo $this->Form->create('Procedure',array('class'=>'form-horizontal form-bordered','id'=>'form-procedure-add')); ?>
                                 
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" for="val_procedure">Procedure No</label>
+                                        <label class="col-md-2 control-label" for="val_procedure">Procedure No <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('procedure_no', array('id'=>'procedure_no','class'=>'form-control','placeholder'=>'Enter the Procedure No','label'=>false,'name'=>'procedure_no')); ?>
                                         </div>
-                                        <label class="col-md-2 control-label" for="to_range">Department</label>
+                                        <label class="col-md-2 control-label" for="to_range">Department <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('department_id', array('id'=>'department_id','class'=>'form-control','label'=>false,'name'=>'department_id','type'=>'select','options'=>$departments,'empty'=>'Select Department Name')); ?>
                                         </div>

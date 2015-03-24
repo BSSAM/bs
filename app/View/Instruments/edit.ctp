@@ -52,7 +52,7 @@
                                 <?php echo $this->Form->create('Instrument',array('class'=>'form-horizontal form-bordered','id'=>'form-machine-add')); ?>
                                 
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" for="machine_name">Name</label>
+                                        <label class="col-md-2 control-label" for="machine_name">Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('name', array('id'=>'machine_name','class'=>'form-control','placeholder'=>'Enter the Instrument Name','label'=>false,'name'=>'name')); ?>
                                         </div>
@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Department</label>
+                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Department <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php echo $this->Form->input('department_id', array('id'=>'department_id','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$department_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','name'=>'department_id')); ?>
                                         
@@ -70,7 +70,7 @@
                                     <?PHP
                                         $instrum_id = $this->request->data['Instrument']['id'];
                                     ?>
-                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Procedure</label>
+                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Procedure <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php //echo $this->Form->input('InstrumentProcedure.procedure_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$procedure_array,'data-placeholder'=>'Select Procedure Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                          <select id="procedure" name="data[InstrumentProcedure][procedure_id][]" class="" data-placeholder="Choose a Procedure.." style="width: 250px;" multiple >
@@ -91,7 +91,7 @@
                                 $instrum_id = $this->request->data['Instrument']['id'];
                                 ?>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Brand</label>
+                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Brand <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php //echo $this->Form->input('InstrumentBrand.brand_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$brand_array,'data-placeholder'=>'Select Department Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         <select id="example-chosen-multiple" name="data[InstrumentBrand][brand_id][]" class="select-chosen" data-placeholder="Choose a Brand.." style="width: 250px;" multiple >
@@ -110,7 +110,7 @@
                                     <?PHP
                                     $instrum_id = $this->request->data['Instrument']['id'];
                                     ?>
-                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Range</label>
+                                    <label class="col-md-2 control-label" for="example-chosen-multiple">Range <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
                                         <?php //echo $this->Form->input('InstrumentRange.range_id', array('id'=>'example-chosen-multiple','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                         <select id="example-chosen-multiple" name="data[InstrumentRange][range_id][]" class="select-chosen" data-placeholder="Choose a Range.." style="width: 250px;" multiple >

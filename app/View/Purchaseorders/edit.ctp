@@ -150,7 +150,7 @@ $(function() {
             <?PHP //echo $this->Form->input('customer_id',array('type'=>'hidden')); ?>
             <?PHP //echo $this->Form->input('salesorder_id',array('type'=>'hidden')); ?>
             <div class="form-group">
-                <label class="col-md-2 control-label" for="val_customername">Customer Name</label>
+                <label class="col-md-2 control-label" for="val_customername">Customer Name <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('purchase_name', array('id' => 'val_customername', 'class' => 'form-control', 'placeholder' => 'Enter the Sub Contract Name', 'label' => false,'autoComplete'=>'off','value'=>$purchase['Purchaseorder']['purchase_name'],'readonly' => true)); ?>
 <!--                <div id="subcontract_result">
@@ -163,12 +163,12 @@ $(function() {
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+                <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php if($contact_list==''){ $answer = $contact_list['Contactpersoninfo']['name'];} else{$answer = '';} ?>
                     <?php echo $this->Form->input('attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'type' => 'select', 'empty' => 'Select Contact person Name','value'=>$answer, 'readonly' => true)); ?>
                 </div>
-                <label class="col-md-2 control-label" for="val_phone">Phone</label>
+                <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                     <?php echo $this->Form->input('phone', array('id' => 'val_phone', 'class' => 'form-control',
                         'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => true,'value'=>$purchase['Purchaseorder']['phone']));
@@ -223,7 +223,7 @@ $(function() {
                 ?>
                 </div>  
                 
-                <label class="col-md-2 control-label" for="val_service_id">Service Type</label>
+                <label class="col-md-2 control-label" for="val_service_id">Service Type <span class="text-danger">*</span></label>
                 <div class="col-md-4">
                 <?php
                     echo $this->Form->input('service_id', array('id' => 'val_service_id', 'class' => 'form-control select-chosen', 'type' => 'select',

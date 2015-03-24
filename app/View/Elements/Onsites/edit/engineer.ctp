@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_engineer">Engineer</label>
+    <label class="col-md-2 control-label" for="val_engineer">Engineer <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('engineer', array('id'=>'val_engineer','class'=>'form-control select-chosen','label'=>false,'name'=>'engineer','empty'=>'Select Engineers','options'=>$user_list)); ?>
     </div>

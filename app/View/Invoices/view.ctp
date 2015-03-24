@@ -371,7 +371,7 @@ $(function() {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_customer">Customer Name</label>
+                        <label class="col-md-2 control-label" for="inv_customer">Customer Name <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('customer_name', array('id'=>'inv_customer','class'=>'form-control','readonly'=>'readonly','label'=>false,'name'=>'inv_customer_name','value'=>$salesorder_list['Customer']['customername'])); ?>
                         </div>
@@ -404,7 +404,7 @@ $(function() {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_contactpersonname">ATTN</label>
+                        <label class="col-md-2 control-label" for="inv_contactpersonname">ATTN <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('contactpersonname', array('id'=>'inv_contactpersonname',
                                 'class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$contactperson['name'])); ?>
@@ -418,7 +418,7 @@ $(function() {
                     </div>
                     <div class="form-group">
 
-                        <label class="col-md-2 control-label" for="inv_phone">Phone</label>
+                        <label class="col-md-2 control-label" for="inv_phone">Phone <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('phone', array('id'=>'inv_phone','class'=>'form-control',
                                                                     'label'=>false,'readonly'=>'readonly','value'=>$contactperson['phone'])); ?>
@@ -434,13 +434,13 @@ $(function() {
                         <div class="col-md-4">
                             <?php echo $this->Form->input('delivery_order_no', array('id'=>'inv_del_order_no','class'=>'form-control','label'=>false,'value'=>$deliveryorderno,'readonly'=>'readonly')); ?>
                         </div>
-                        <label class="col-md-2 control-label" for="inv_date">Invoice Date</label>
+                        <label class="col-md-2 control-label" for="inv_date">Invoice Date <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No</label>
+                        <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$salesorder_list['Salesorder']['ref_no'])); ?>
                         </div>
@@ -456,7 +456,7 @@ $(function() {
                             <?php echo $this->Form->textarea('remarks', array('id'=>'inv_remarks','class'=>'form-control',
                                                                    'label'=>false,'rows'=>6,'cols'=>30,'value'=>$salesorder_list['Salesorder']['remarks'],'readonly'=>'readonly')); ?>
                         </div>
-                        <label class="col-md-2 control-label" for="inv_service_type">Service Type</label>
+                        <label class="col-md-2 control-label" for="inv_service_type">Service Type <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('service_type', array('id'=>'inv_service_type','class'=>'form-control','value'=>$servicetype,'label'=>false,'readonly'=>'readonly')); ?>
                             <div id="result">
@@ -464,7 +464,7 @@ $(function() {
                         </div>
                     </div>  
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
+                        <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For <span class="text-danger">*</span></label>
                         <div class="col-md-12">
                             <?php echo $this->Form->input('val_instrument_type', array('class'=>'form-control','type'=>'text',
                                                                     'label'=>false,'value'=>$salesorder_list['Quotation']['InstrumentType']['invoice'],'readonly'=>'readonly')); ?>
@@ -773,7 +773,7 @@ $(function() {
                 
                 <div class="panel-body panel-body-nopadding">
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_customer">Customer Name</label>
+                        <label class="col-md-2 control-label" for="inv_customer">Customer Name <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('customer_name', array('id'=>'inv_customer','class'=>'form-control','readonly'=>'readonly','label'=>false,'name'=>'inv_customer_name','value'=>$po_list_first['Customer']['customername'])); ?>
                         </div>
@@ -806,7 +806,7 @@ $(function() {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_contactpersonname">ATTN</label>
+                        <label class="col-md-2 control-label" for="inv_contactpersonname">ATTN <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('contactpersonname', array('id'=>'inv_contactpersonname',
                                 'class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$contactperson['name'])); ?>
@@ -820,7 +820,7 @@ $(function() {
                     </div>
                     <div class="form-group">
 
-                        <label class="col-md-2 control-label" for="inv_phone">Phone</label>
+                        <label class="col-md-2 control-label" for="inv_phone">Phone <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('phone', array('id'=>'inv_phone','class'=>'form-control',
                                                                     'label'=>false,'readonly'=>'readonly','value'=>$po_list_first['Quotation']['phone'])); ?>
@@ -836,13 +836,13 @@ $(function() {
                         <div class="col-md-4">
                             <?php echo $this->Form->input('delivery_order_no', array('id'=>'inv_del_order_no','class'=>'form-control','label'=>false,'value'=>$deliveryorderno,'readonly'=>'readonly')); ?>
                         </div>
-                        <label class="col-md-2 control-label" for="inv_date">Invoice Date</label>
+                        <label class="col-md-2 control-label" for="inv_date">Invoice Date <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No</label>
+                        <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$po_list_first['Quotation']['ref_no'])); ?>
                         </div>
@@ -858,7 +858,7 @@ $(function() {
                             <?php echo $this->Form->textarea('remarks', array('id'=>'inv_remarks','class'=>'form-control',
                                                                    'label'=>false,'rows'=>6,'cols'=>30,'value'=>$po_list_first['Customerspecialneed']['remarks'],'readonly'=>'readonly')); ?>
                         </div>
-                        <label class="col-md-2 control-label" for="inv_service_type">Service Type</label>
+                        <label class="col-md-2 control-label" for="inv_service_type">Service Type <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('service_type', array('id'=>'inv_service_type','class'=>'form-control','value'=>$servicetype,'label'=>false,'readonly'=>'readonly')); ?>
                             <div id="result">
@@ -866,7 +866,7 @@ $(function() {
                         </div>
                     </div>  
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
+                        <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For <span class="text-danger">*</span></label>
                         <div class="col-md-12">
                             <?php echo $this->Form->input('val_instrument_type', array('class'=>'form-control','type'=>'text',
                                                                     'label'=>false,'value'=>$po_list_first['InstrumentType']['invoice'],'readonly'=>'readonly')); ?>
@@ -1178,7 +1178,7 @@ $(function() {
                 
                 <div class="panel-body panel-body-nopadding">
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_customer">Customer Name</label>
+                        <label class="col-md-2 control-label" for="inv_customer">Customer Name <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('customer_name', array('id'=>'inv_customer','class'=>'form-control','readonly'=>'readonly','label'=>false,'name'=>'inv_customer_name','value'=>$quotation_lists['Customer']['customername'])); ?>
                         </div>
@@ -1211,7 +1211,7 @@ $(function() {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_contactpersonname">ATTN</label>
+                        <label class="col-md-2 control-label" for="inv_contactpersonname">ATTN <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('contactpersonname', array('id'=>'inv_contactpersonname',
                                 'class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$contactperson['name'])); ?>
@@ -1225,7 +1225,7 @@ $(function() {
                     </div>
                     <div class="form-group">
 
-                        <label class="col-md-2 control-label" for="inv_phone">Phone</label>
+                        <label class="col-md-2 control-label" for="inv_phone">Phone <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('phone', array('id'=>'inv_phone','class'=>'form-control',
                                                                     'label'=>false,'readonly'=>'readonly','value'=>$quotation_lists['Quotation']['phone'])); ?>
@@ -1241,13 +1241,13 @@ $(function() {
                         <div class="col-md-4">
                             <?php echo $this->Form->input('delivery_order_no', array('id'=>'inv_del_order_no','class'=>'form-control','label'=>false,'value'=>$deliveryorderno,'readonly'=>'readonly')); ?>
                         </div>
-                        <label class="col-md-2 control-label" for="inv_date">Invoice Date</label>
+                        <label class="col-md-2 control-label" for="inv_date">Invoice Date <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No</label>
+                        <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$quotation_lists['Quotation']['ref_no'])); ?>
                         </div>
@@ -1263,7 +1263,7 @@ $(function() {
                             <?php echo $this->Form->textarea('remarks', array('id'=>'inv_remarks','class'=>'form-control',
                                                                    'label'=>false,'rows'=>6,'cols'=>30,'value'=>$quotation_lists['Customerspecialneed']['remarks'],'readonly'=>'readonly')); ?>
                         </div>
-                        <label class="col-md-2 control-label" for="inv_service_type">Service Type</label>
+                        <label class="col-md-2 control-label" for="inv_service_type">Service Type <span class="text-danger">*</span></label>
                         <div class="col-md-4">
                             <?php echo $this->Form->input('service_type', array('id'=>'inv_service_type','class'=>'form-control','value'=>$servicetype,'label'=>false,'readonly'=>'readonly')); ?>
                             <div id="result">
@@ -1271,7 +1271,7 @@ $(function() {
                         </div>
                     </div>  
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
+                        <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For <span class="text-danger">*</span></label>
                         <div class="col-md-12">
                             <?php echo $this->Form->input('val_instrument_type', array('class'=>'form-control','type'=>'text',
                                                                     'label'=>false,'value'=>$quotation_lists['InstrumentType']['invoice'],'readonly'=>'readonly')); ?>

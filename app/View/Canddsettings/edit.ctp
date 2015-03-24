@@ -26,12 +26,12 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_branch_id">Branch Name</label>
+                                        <label class="col-md-2 control-label" for="val_branch_id">Branch Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('branch_id', array('id'=>'val_branch_id','options' => $branch,'class'=>'select-chosen form-control','empty'=>'Enter the branch','label'=>false,'name'=>'branch_id')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_maxtask">Max Task</label>
+                                        <label class="col-md-2 control-label" for="val_maxtask">Max Task <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('maxtask', array('id'=>'val_maxtask','class'=>'form-control','placeholder'=>'Enter the Max Task','label'=>false,'name'=>'maxtask')); ?>
                                         </div>
@@ -39,12 +39,12 @@
                                     </div>
                                      <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_maxtime">Max Time</label>
+                                        <label class="col-md-2 control-label" for="val_maxtime">Max Time <span class="text-danger">*</span> </label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('maxtime', array('id'=>'val_maxtime','class'=>'form-control','placeholder'=>'Enter the Max Time','label'=>false,'name'=>'maxtime')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_purpose">Purpose</label>
+                                        <label class="col-md-2 control-label" for="val_purpose">Purpose <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('purpose', array('id'=>'val_purpose','options' => array('C'=>'Collection','D'=>'Delivery'),'class'=>'select-chosen form-control','empty'=>'Enter the Purpose','label'=>false,'name'=>'purpose')); ?>
                                         </div>

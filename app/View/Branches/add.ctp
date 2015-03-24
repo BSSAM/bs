@@ -26,12 +26,12 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_branchname">Branch Name</label>
+                                        <label class="col-md-2 control-label" for="val_branchname">Branch Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('branchname', array('id'=>'val_branchname','class'=>'form-control','placeholder'=>'Enter the Branch Name','label'=>false,'name'=>'branchname')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_address">Address</label>
+                                        <label class="col-md-2 control-label" for="val_address">Address <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('address', array('id'=>'val_address','class'=>'form-control','placeholder'=>'Enter the Address','label'=>false,'name'=>'address')); ?>
                                         </div>
@@ -39,7 +39,7 @@
                                     </div>
                                      <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_phone">Phone No</label>
+                                        <label class="col-md-2 control-label" for="val_phone">Phone No <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control','placeholder'=>'Enter the Phone No','label'=>false,'name'=>'phone')); ?>
                                         </div>
@@ -57,7 +57,7 @@
                                             <?php echo $this->Form->input('website', array('id'=>'val_website','class'=>'form-control','placeholder'=>'Enter the Web Site','label'=>false,'name'=>'website')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_companyregno">Company Reg No</label>
+                                        <label class="col-md-2 control-label" for="val_companyregno">Company Reg No <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('companyregno', array('id'=>'val_companyregno','class'=>'form-control','placeholder'=>'Enter the Company Reg No','label'=>false,'name'=>'companyregno')); ?>
                                         </div>
@@ -65,12 +65,12 @@
                                     </div>
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_gstregno">GST Reg No</label>
+                                        <label class="col-md-2 control-label" for="val_gstregno">GST Reg No <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('gstregno', array('id'=>'val_gstregno','class'=>'form-control','placeholder'=>'Enter the GST Reg No','label'=>false,'name'=>'gstregno')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_defaultbranch">Default Branch</label>
+                                        <label class="col-md-2 control-label" for="val_defaultbranch">Default Branch <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->checkbox('defaultbranch', array('id'=>'val_defaultbranch','class'=>'checkbox','label'=>false,'name'=>'defaultbranch')); ?>
                                         </div>
@@ -78,12 +78,12 @@
                                     </div>
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_currency_id">Currency</label>
+                                        <label class="col-md-2 control-label" for="val_currency_id">Currency <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('currency_id', array('id'=>'val_currency_id','options' => $currency,'class'=>'select-chosen form-control','empty'=>'Enter the Currency','label'=>false,'name'=>'currency_id')); ?>
                                         </div>
                                    
-                                        <label class="col-md-2 control-label" for="val_gst">GST</label>
+                                        <label class="col-md-2 control-label" for="val_gst">GST <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('gst', array('id'=>'val_gst','class'=>'form-control','placeholder'=>'Enter the GST','label'=>false,'name'=>'gst')); ?>
                                         </div>

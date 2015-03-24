@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="deli_customer">Customer Name</label>
+    <label class="col-md-2 control-label" for="deli_customer">Customer Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('customer_name', array('id'=>'deli_customer','class'=>'form-control','readonly'=>'readonly','label'=>false,'name'=>'deli_customer_name','value'=>$deliveryorder['Customer']['customername'])); ?>
     </div>
@@ -27,7 +27,7 @@
         <?php echo $this->Form->input('Deliveryorder.email', array('id'=>'del_email','class'=>'form-control',
                                                 'label'=>false,'readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="del_attn">ATTN</label>
+    <label class="col-md-2 control-label" for="del_attn">ATTN <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.attn', array('id'=>'del_attn',
             'class'=>'form-control','label'=>false,'type'=>'select','options'=>array($deliveryorder['Deliveryorder']['attn']=>$deliveryorder['Deliveryorder']['attn']),'selected'=>'selected')); ?>
@@ -35,7 +35,7 @@
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="del_phone">Phone</label>
+    <label class="col-md-2 control-label" for="del_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.phone', array('id'=>'del_phone','class'=>'form-control',
                                                 'label'=>false,'readonly'=>'readonly')); ?>
@@ -57,7 +57,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_ref_no">Your Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">Your Reference No <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Deliveryorder.your_reference_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly')); ?>
     </div>

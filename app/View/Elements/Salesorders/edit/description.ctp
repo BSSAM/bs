@@ -296,7 +296,7 @@
     });
 </script>-->
 <div class="form-group">
-   <label class="col-md-2 control-label" for="val_description">Instrument</label>
+   <label class="col-md-2 control-label" for="val_description">Instrument <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
                 array('id'=>'val_instrument','class'=>'form-control','placeholder'=>'Enter the Instrument','label'=>false,
@@ -307,7 +307,7 @@
         <div id="search_instrument">
         </div>
     </div>
-    <label class="col-md-2 control-label" for="sales_quantity">Quantity</label>
+    <label class="col-md-2 control-label" for="sales_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','class'=>'form-control','label'=>false,'name'=>'sales_quantity','readonly'=>'readonly')); ?>
     </div>
@@ -316,12 +316,12 @@
 <div class="form-group">
     
    
-    <label class="col-md-2 control-label" for="val_model_no">Model No</label>
+    <label class="col-md-2 control-label" for="val_model_no">Model No <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','readonly'=>'readonly')); ?>
     </div>
-     <label class="col-md-2 control-label" for="val_brand">Brand</label>
+     <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
                                                 'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand','readonly'=>'readonly')); ?>
@@ -332,7 +332,7 @@
 <div class="form-group">
     
    
-    <label class="col-md-2 control-label" for="sales_range">Range</label>
+    <label class="col-md-2 control-label" for="sales_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control','label'=>false,'name'=>'sales_range','readonly'=>'readonly')); ?>
     </div>
@@ -344,13 +344,13 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="sales_calllocation">Cal Location</label>
+    <label class="col-md-2 control-label" for="sales_calllocation">Cal Location <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_location', array('id'=>'sales_calllocation','class'=>'form-control','empty'=>'Please select Cal Location',
                                                 'label'=>false,'name'=>'sales_calllocation','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="sales_calltype">Cal Type</label>
+    <label class="col-md-2 control-label" for="sales_calltype">Cal Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'sales_calltype','class'=>'form-control','label'=>false,'name'=>'sales_calltype',
                                       'placeholder'=>'Enter the Cal Type','type'=>'select','options'=>array('singlas'=>'Singlas',
@@ -378,7 +378,7 @@
                                       'name'=>'department','placeholder'=>'Enter the Departmnent Name','readonly'=>'readonly')); ?>
         <?PHP echo $this->Form->input('department_id',array('type'=>'hidden','id'=>'sales_department_id')); ?>
     </div>
-    <label class="col-md-2 control-label" for="sales_accountservice">Account Service</label>
+    <label class="col-md-2 control-label" for="sales_accountservice">Account Service <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('sales_accountservice', array('id'=>'sales_accountservice','class'=>'form-control',
                                       'label'=>false,'name'=>'sales_accountservice','options'=>array('calibration service'=>'Calibration Service'),

@@ -26,7 +26,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_userrole">User Role</label>
+                                        <label class="col-md-2 control-label" for="val_userrole">User Role <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('user_role', array('id'=>'val_userrole','class'=>'form-control','placeholder'=>'Enter the User Role','label'=>false,'name'=>'user_role')); ?>
                                         </div>

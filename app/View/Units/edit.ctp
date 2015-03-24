@@ -27,7 +27,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="unit_name">Unit Name</label>
+                                        <label class="col-md-2 control-label" for="unit_name">Unit Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('unit_name', array('id'=>'unit_name','class'=>'form-control','placeholder'=>'Enter the Unit Name','label'=>false,'name'=>'unit_name')); ?>
                                         </div>

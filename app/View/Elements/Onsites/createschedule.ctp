@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="onsite_customer">Customer Name</label>
+    <label class="col-md-2 control-label" for="onsite_customer">Customer Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php
         echo $this->Form->input('Onsite.customer_name', array('id' => 'onsite_customer', 'class' => 'form-control', 'placeholder' => 'Enter the Customer Name', 'label' => false,
@@ -19,7 +19,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('fax', array('id'=>'val_fax','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Fax Number','readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="val_schedule_status">Onsite Schedule Status</label>
+    <label class="col-md-2 control-label" for="val_schedule_status">Onsite Schedule Status <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('schedule_status', array('id'=>'val_schedule_status','class'=>'form-control select-chosen','type'=>'select','value'=>'Pending','readonly'=>'readonly',
                                                 'label'=>false,'empty'=>'-- Select Onsite Schedule Status --','options'=>array('Pending'=>'Pending','Processing'=>'Processing','Confirm'=>'Confirm','Completed'=>'Completed'))); ?>
@@ -28,11 +28,11 @@
 
  
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+    <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('attn', array('id' => 'val_attn', 'class' => 'form-control', 'label' => false, 'readonly' => 'readonly', 'placeholder' => 'Enter Contact Person Name')); ?>
     </div>
-    <label class="col-md-2 control-label" for="val_phone">Phone</label>
+    <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('phone', array('id' => 'val_phone', 'class' => 'form-control',
             'placeholder' => 'Enter the Phone Number', 'label' => false, 'autoComplete' => 'off', 'readonly' => 'readonly'));
@@ -70,7 +70,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_time">Onsite Schedule Time</label>
+    <label class="col-md-2 control-label" for="val_time">Onsite Schedule Time <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <div class="input-group bootstrap-timepicker">
             <?php echo $this->Form->input('schedule_time', array('id'=>'example-timepicker24','class'=>'form-control input-timepicker24',
@@ -81,7 +81,7 @@
             </span>
         </div>
     </div>
-    <label class="col-md-2 control-label" for="val_duration">Duration</label>
+    <label class="col-md-2 control-label" for="val_duration">Duration <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <div class="row col-md-4">
             <?php echo $this->Form->input('duration1', array('id' => 'val_duration', 'class' => 'form-control', 'label' => false)); ?>

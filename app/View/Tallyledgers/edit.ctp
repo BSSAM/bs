@@ -26,7 +26,7 @@
                                 
                                     <div class="form-group">
                                        
-                                        <label class="col-md-2 control-label" for="val_tallyledger">Tally Ledger A/C Name</label>
+                                        <label class="col-md-2 control-label" for="val_tallyledger">Tally Ledger A/C Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('tallyledgeraccount', array('id'=>'val_tallyledger','class'=>'form-control','placeholder'=>'Enter the Tally Ledger A/C Name','label'=>false,'name'=>'tallyledgeraccount')); ?>
                                         </div>

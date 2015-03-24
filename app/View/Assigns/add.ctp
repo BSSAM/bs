@@ -26,7 +26,7 @@
 
                                     <div class="form-group">
 
-                                        <label class="col-md-2 control-label" for="val_assigned">Assigned To</label>
+                                        <label class="col-md-2 control-label" for="val_assigned">Assigned To <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('assignedto', array('id'=>'val_assigned','class'=>'form-control','placeholder'=>'Who is Assigned To','label'=>false,'name'=>'assignedto')); ?>
                                         </div>

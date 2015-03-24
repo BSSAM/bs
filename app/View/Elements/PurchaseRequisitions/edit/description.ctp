@@ -18,21 +18,21 @@
     }
 </script>
 <div class="form-group">
-     <label class="col-md-2 control-label" for="val_description">Instrument</label>
+     <label class="col-md-2 control-label" for="val_description">Instrument <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
                 array('id'=>'val_description','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,
                     'name'=>'description','autoComplete'=>'off')); ?>
          <span class="help-block_login ins_error">Enter the Instrument Name</span>
     </div>
-    <label class="col-md-2 control-label" for="val_quantity">Quantity</label>
+    <label class="col-md-2 control-label" for="val_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
     </div>
 </div>
     
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_address">Model No</label>
+    <label class="col-md-2 control-label" for="val_address">Model No <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
@@ -45,13 +45,13 @@
 </div>
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_brand">Brand</label>
+    <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
                                                 'label'=>false,'name'=>'brand','type'=>'text','placeholder'=>'Enter the Brand Name')); ?>
         
     </div>
-    <label class="col-md-2 control-label" for="val_range">Range</label>
+    <label class="col-md-2 control-label" for="val_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control',
                                                 'label'=>false,'name'=>'range','type'=>'text')); ?>
@@ -64,7 +64,7 @@
         <?php echo $this->Form->input('device_discount', array('id'=>'val_discount1','class'=>'form-control',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'device_discount','type'=>'text')); ?>
     </div>
-    <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
+    <label class="col-md-2 control-label" for="val_unit_price">Unit Price <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('unit_price', array('id'=>'val_unit_price','class'=>'form-control','label'=>false,
             'name'=>'unit_price','placeholder'=>'Enter the Unit Price')); ?>
@@ -72,13 +72,13 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_department">Department</label>
+    <label class="col-md-2 control-label" for="val_department">Department <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('department', array('id'=>'val_department','class'=>'form-control','label'=>false,
                                       'name'=>'department','placeholder'=>'Enter the Departmnent Name')); ?>
         <?PHP echo $this->Form->input('dept_id',array('id'=>'val_department_id','type'=>'hidden')) ?>
     </div>
-     <label class="col-md-2 control-label" for="val_account_service">Account Service</label>
+     <label class="col-md-2 control-label" for="val_account_service">Account Service <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control',
                                       'label'=>false,'name'=>'account_service','value'=>'Calibration Service','readonly')); ?>

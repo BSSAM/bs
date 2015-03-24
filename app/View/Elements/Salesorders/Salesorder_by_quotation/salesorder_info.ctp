@@ -13,7 +13,7 @@
     
 <div class="form-group">
     
-    <label class="col-md-2 control-label" for="val_customer">Customer Name</label>
+    <label class="col-md-2 control-label" for="val_customer">Customer Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?PHP $customer_name    =   (!empty($sale['Customer']['Customertagname'])?$sale['Customer']['Customertagname']:$sale['Salesorder']['customername']); ?>
         <?php echo $this->Form->input('Salesorder.customername', array('id'=>'val_customer','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
@@ -28,11 +28,11 @@
         
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_attn">ATTN</label>
+    <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.attn', array('id'=>'val_attn','class'=>'select-chosen form-control','label'=>false,'type'=>'select','data-placeholder'=>'Select the Contact person name','options'=>$contact_list,'readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="val_phone">Phone</label>
+    <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.phone', array('id'=>'val_phone','class'=>'form-control',
                                                 'placeholder'=>'Enter the Phone Number','label'=>false)); ?>
@@ -58,7 +58,7 @@
         <?php echo $this->Form->input('Salesorder.reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false,'readonly'=>'readonly')); ?>
     </div>
-    <label class="col-md-2 control-label" for="val_ref_no">Po Reference No</label>
+    <label class="col-md-2 control-label" for="val_ref_no">Po Reference No <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('Salesorder.ref_no', array('id'=>'val_ref_no','class'=>'form-control','label'=>false,'placeholder'=>'Enter the Reference Number','readonly'=>'readonly')); ?>
     </div>
@@ -93,7 +93,7 @@
     <?php //echo $this->Form->input('Salesorder.track_id', array('type'=>'hidden','id'=>'val_our_ref_no','class'=>'form-control','label'=>false,)); ?>
 </div>-->
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For</label>
+    <label class="col-md-2 control-label" for="val_instrument_type">Select Instrument For <span class="text-danger">*</span></label>
     <div class="col-md-12">
         <?php echo $this->Form->input('Salesorder.instrument_type_id', array('class'=>'form-control','type'=>'text',
                                                 'label'=>false,'value'=>$instrument_type,'readonly'=>'readonly')); ?>
