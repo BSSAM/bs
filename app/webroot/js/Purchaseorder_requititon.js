@@ -80,7 +80,7 @@ $(document).ready(function(){
             {
                 $('.odd').empty();
                $('.Instrument_info').append('<tr class="pre_instrument_remove_'+data+'">\n\\n\
-                                    <td class="text-center">'+i+'</td>\n\
+                                    <td class="text-center">'+data+'</td>\n\
                                     <td class="text-center">'+instrument_name+'</td>\n\\n\
                                     <td class="text-center">'+instrument_modelno+'</td>\n\\n\
                                     <td class="text-center">'+instrument_brand+'</td>\n\\n\

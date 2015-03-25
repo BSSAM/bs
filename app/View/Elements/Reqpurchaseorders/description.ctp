@@ -33,7 +33,7 @@
                     <td class="text-center"><?PHP echo $device['validity']; ?></td>
                     <td class="text-center"><?PHP echo $device['unit_price']; ?></td>
                     <td class="text-center"><?PHP echo $device['account_service']; ?></td>
-                    <td class="text-center"><?PHP echo $device['discount']; ?></td>
+                    <td class="text-center"><?PHP if($device['discount']){ echo $device['discount']; } ?></td>
                     <td class="text-center"><?PHP echo $device['total']; ?></td>
                     <td class="text-center">
                         <div class="btn-group">

@@ -180,9 +180,33 @@ $(document).ready(function(){
        // alert($('#status').val());
       var edit_device_id=$(this).attr('data-edit');
       var customer_id =   $('#CustomerInstrumentCustomerId').val();
-      $(this).attr('href', function() {
-        return path_url+ 'Customers/instrument_map/'+customer_id+'/'+edit_device_id;
-    });
+      var edit_app = '';
+      $.ajax({
+		type: 'POST',
+                data:"instrument_id="+edit_device_id,
+		url: path_url+'/customers/find_approved_or_not/',
+                beforeSend: ni_start(),  
+                success:function(data){
+                    
+                if(data=='0')
+                {
+                    //alert(data);
+                    $('.cus_instrument_edit').attr('href', function() {
+                    return path_url+ 'Customers/instrument_map/'+customer_id+'/'+edit_device_id;
+                    });
+                }
+                else
+                {
+                    //alert(data);
+                    $('.cus_instrument_edit').attr('href', function() {
+                    return path_url+ 'Customers/instrument_map/'+customer_id;
+                    });
+                }
+                }
+                });
+                
+            
+      
       $('#device_id').val(edit_device_id);
       $('.update_device').html('<button class="btn btn-sm btn-primary cus_ins_update" type="button"><i class="fa fa-plus fa-fw"></i> Update</button>');
        $.ajax({

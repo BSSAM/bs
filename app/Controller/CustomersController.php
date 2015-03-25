@@ -610,6 +610,13 @@ class CustomersController extends AppController
                 echo json_encode($edit_device_details);
         }
     }
+    public function find_approved_or_not()
+    {
+        $this->autoRender=false;
+        $device_id= $this->request->data['instrument_id'];
+        $edit_device_details    =   $this->CustomerInstrument->find('count',array('conditions'=>array('CustomerInstrument.id'=>$device_id,'CustomerInstrument.is_approved'=>1)));
+        return $edit_device_details;
+    }
     public function get_range()
     {
         $this->layout   =   'ajax';
@@ -657,6 +664,7 @@ class CustomersController extends AppController
         
             if(count($customer_instruments)==0){
             // Order By    
+            $customer_id = $customer_instruments_max['CustomerInstrument']['customer_id'];
             $this->request->data['order_by'] = $order_by+1;
             //$this->request->data['CustomerInstrument']['cost'] = $this->request->data['cost'];
             $this->request->data['unit_price'] = $total_price;
@@ -673,7 +681,7 @@ class CustomersController extends AppController
                         $this->request->data['Logactivity']['logname'] = 'Costing';
                         $this->request->data['Logactivity']['logactivity'] = 'Add Costing';
                         $this->request->data['Logactivity']['logid'] = $last_id;
-                        $this->request->data['Logactivity']['logno'] = $this->request->data['customer_id'];
+                        $this->request->data['Logactivity']['logno'] = $customer_id;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
 
@@ -715,6 +723,7 @@ class CustomersController extends AppController
             if(count($customer_instruments)==0)
             {
             // Order By    
+            $customer_id = $customer_instruments_max['CustomerInstrument']['customer_id'];
             $this->request->data['order_by'] = 1;
             $this->request->data['contract_disc'] = $disc;
             $this->request->data['unit_price'] = $total_price;
@@ -730,6 +739,7 @@ class CustomersController extends AppController
                         $this->request->data['Logactivity']['logname'] = 'Costing';
                         $this->request->data['Logactivity']['logactivity'] = 'Add Costing';
                         $this->request->data['Logactivity']['logid'] = $last_id;
+                        $this->request->data['Logactivity']['logno'] = $customer_id;
                         $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                         $this->request->data['Logactivity']['logapprove'] = 1;
 
