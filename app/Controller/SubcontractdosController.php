@@ -311,7 +311,7 @@ table td { font-size:9px; line-height:11px; }
 margin: 180px 50px;
 }
 #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 350px; }
-#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 330px; }
+#footer { position: fixed; left: 0px; bottom: -300px; right: 0px; height: 330px; }
 #footer .page:after { content: counter(page); }
 </style>
 </head>';

@@ -448,11 +448,13 @@ class PurchaseordersController extends AppController
         
             $this->autoRender = false;
             $purchase_edit_data = $this->Purchaseorder->find('first',array('conditions'=>array('Purchaseorder.id'=>$id),'recursive'=>3));
+			
             $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$purchase_edit_data['Purchaseorder']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_po_id'=>$id),'Instrument','Brand','Range','Department'))));
-            $quotation_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Salesorder']['quotationno'],'Quotation.status'=>1)));
+			//pr($salesorder_details);exit;
+            $quotation_data = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$salesorder_details['Salesorder']['quotationno'],'Quotation.status'=>1),'recursive'=>2));
 //            $salesorder_data = $this->Salesorder->find('first', array('conditions' => array('Salesorder.id' => $id),'recursive'=>3));
 //            $quotation_data = $this->Quotation->find('first', array('conditions' => array('Quotation.id' => $salesorder_data['Salesorder']['quotation_id']),'recursive'=>2));
-//            //pr($salesorder_data);exit;
+           // pr($quotation_data);exit;
             $file_type = 'pdf';
             $filename = $purchase_edit_data['Purchaseorder']['purchaseorder_no'];
       
@@ -470,7 +472,7 @@ table td { font-size:9px; line-height:11px; }
 margin: 180px 50px;
 }
 #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 350px; }
-#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 330px; }
+#footer { position: fixed; left: 0px; bottom: -300px; right: 0px; height: 330px; }
 #footer .page:after { content: counter(page); }
 </style>
 </head>';
@@ -482,9 +484,9 @@ margin: 180px 50px;
             }
             //pr($salesorder_data);
             //foreach ($salesorder_data as $salesorder_data_list):
-                $customername = $salesorder_details['Customer']['customername'];
+                $customername = $quotation_data['Customer']['customername'];
                 $billing_address = $salesorder_details['Salesorder']['address'];
-                $postalcode = $salesorder_details['Customer']['postalcode'];
+                $postalcode = $quotation_data['Customer']['postalcode'];
                 $contactperson = $quotation_data['Customer']['Contactpersoninfo'][0]['name'];
                 $phone = $salesorder_details['Salesorder']['phone'];
                 $fax = $salesorder_details['Salesorder']['fax'];
@@ -498,7 +500,7 @@ margin: 180px 50px;
                 foreach($salesorder_details['Description'] as $device):
                     $device_name[] = $device;
                 endforeach;
-                $ins_type = $salesorder_details['Quotation']['InstrumentType']['salesorder'];
+                $ins_type = $quotation_data['InstrumentType']['salesorder'];
    
                 
 $html .=
