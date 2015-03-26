@@ -802,6 +802,25 @@
                     //pr($salesorder_instrument_count);
                     //pr($deliveryorder_instrument_count);
                     //exit;
+                    $logactivity_client = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logname'=>"ClientPO",'Logactivity.logactivity'=>"Add",'Logactivity.logid'=>$deliver_salesorder,'Logactivity.logno'=>$deliver_salesorder)));
+                    if(!$logactivity_client)
+                    {
+                                    $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                                    $this->request->data['Logactivity']['logactivity'] = 'Add';
+                                    $this->request->data['Logactivity']['logid'] = $deliver_salesorder;
+                                    $this->request->data['Logactivity']['logno'] = $deliver_salesorder;
+                                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                                    $this->request->data['Logactivity']['logapprove'] = 1;
+                                    $this->Logactivity->create();
+                                    $this->Logactivity->save($this->request->data['Logactivity']);
+
+                                    $this->request->data['Datalog']['logname'] = 'ClientPO';
+                                    $this->request->data['Datalog']['logactivity'] = 'Add';
+                                    $this->request->data['Datalog']['logid'] = $deliver_salesorder;
+                                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+                                    $this->Datalog->create();
+                                    $this->Datalog->save($this->request->data['Datalog']);
+                    }
                     if($salesorder_instrument_count == $deliveryorder_instrument_count)
                     {
                         $data_sales_del_app = $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.salesorder_id'=>$deliver_salesorder,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_approved'=>1),'recursive'=>3));
@@ -839,25 +858,7 @@
                         * Data Log - Client PO
                         */
                             
-        $logactivity_client = $this->Logactivity->find('count',array('conditions'=>array('Logactivity.logname'=>"ClientPO",'Logactivity.logactivity'=>"Add",'Logactivity.logid'=>$deliver_salesorder,'Logactivity.logno'=>$deliver_salesorder)));
-            if(!$logactivity_client)
-            {
-                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                            $this->request->data['Logactivity']['logactivity'] = 'Add';
-                            $this->request->data['Logactivity']['logid'] = $deliver_salesorder;
-                            $this->request->data['Logactivity']['logno'] = $deliver_salesorder;
-                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                            $this->request->data['Logactivity']['logapprove'] = 1;
-                            $this->Logactivity->create();
-                            $this->Logactivity->save($this->request->data['Logactivity']);
-
-                            $this->request->data['Datalog']['logname'] = 'ClientPO';
-                            $this->request->data['Datalog']['logactivity'] = 'Add';
-                            $this->request->data['Datalog']['logid'] = $deliver_salesorder;
-                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                            $this->Datalog->create();
-                            $this->Datalog->save($this->request->data['Datalog']);
-            }
+        
                         }
                         }
                 }

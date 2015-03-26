@@ -19,12 +19,14 @@
         var result = confirm("Are your sure want to Approve?");
         if (result==true) {
         var device_id=$(this).attr('id');
+        var customer_id =   $('#CustomerInstrumentCustomerId').val();
         $.ajax({
             type: 'POST',
             data:"device_id="+ device_id,
             url: path_url+'/Customers/approve_ins_cus/',
             success:function(data){
-                window.location.reload();
+                window.location= path_url+ 'Customers/instrument_map/'+customer_id;
+                
             }
             });
         }

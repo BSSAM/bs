@@ -106,13 +106,17 @@ $('#beforedo-datatable').DataTable( {
        <?PHP endif; ?>
     </tbody>
 </table>
-<div class="form-group form-actions">
-                                            <div class="col-md-9 col-md-offset-10">
-                                                <?php if($user_role['cus_customer']['add'] == 1 && $customer_dat['Customer']['is_approved']==0): ?>
-                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_customer','escape' => false)); ?>
-                                                <?php else : ?>
-                                                <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
-                                                <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Customers','action'=>'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
+    <div class="form-group form-actions">
+        
+            <?php if($user_role['cus_customer']['add'] == 1 && $customer_dat['Customer']['is_approved']==0): ?>
+            <div class="col-md-9 col-md-offset-9">
+            <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_customer','escape' => false)); ?>
+            <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Customers','action'=>'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+            <?php else : ?>
+            <div class="col-md-9 col-md-offset-10">
+            <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Update', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
+            <?php echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Customers','action'=>'index'), array('type' => 'reset', 'class' => 'btn btn-sm btn-warning', 'escape' => false)); ?>
+            <?php endif; ?>
+        </div>
+    </div>

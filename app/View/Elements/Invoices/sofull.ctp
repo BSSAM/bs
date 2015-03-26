@@ -79,7 +79,7 @@ $(document).on('click','.sofull-prepare',function(){
                             <td class="text-center"><?PHP echo $list['Salesorder']['id']; ?></td>
                             <td class="text-center"><?PHP echo $list['Salesorder']['in_date']; ?></td>
                             <td class="text-center"><?PHP echo $list['Salesorder']['due_date']; ?></td>
-                            <td class="text-center"><?PHP echo $list['Customer']['quotationno']; ?></td>
+                            <td class="text-center"><?PHP echo $list['Salesorder']['quotationno']; ?></td>
                             <td class="text-center"><?PHP echo $list['Salesorder']['ref_no']; ?></td>
                             <td class="text-center"><?PHP echo $this->Delivery->find_customer($list['Customer']['id']); ?></td>
                             <td class="text-center"><?PHP echo $list['Salesorder']['address']; ?></td>

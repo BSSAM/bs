@@ -574,6 +574,7 @@ class CustomersController extends AppController
     }
     public function instrument_map($id=NULL,$id1=NULL)
     {
+        $this->set('approve',1);
         $user_role = $this->userrole_permission();
         if($id!=NULL)
         {
@@ -729,7 +730,7 @@ class CustomersController extends AppController
             if(count($customer_instruments)==0)
             {
             // Order By    
-            $customer_id = $customer_instruments_max['CustomerInstrument']['customer_id'];
+            $customer_id = $customer_id;
             $this->request->data['order_by'] = 1;
             $this->request->data['contract_disc'] = $disc;
             $this->request->data['unit_price'] = $total_price;
