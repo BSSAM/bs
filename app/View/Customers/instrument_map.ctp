@@ -9,9 +9,9 @@
         $('#unit_price').val('');
         $('#total_price').val('');
         
-        
+        var edit_device_id=$(this).attr('data-edit');
         <?php if($id1){ ?>
-        
+                
             $(".cus_instrument_edit[data-edit='"+<?php echo $id1; ?>+"']").trigger("click");
         
         <?php }?>
@@ -122,7 +122,7 @@
                         <?php echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add', array('type' => 'button', 'class' => 'btn btn-sm btn-primary customerinstrument_add', 'escape' => false)); ?>
                     </div>
                     <div class="col-md-9 col-md-offset-10">
-                        <?php if($id1){ if($id1!=''){echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> Approve', array('type' => 'button','id'=>$id1, 'class' => 'btn btn-sm btn-warning customerinstrument_approve', 'escape' => false)); }} ?>
+                        <?php if($approve!=1){echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> Approve', array('type' => 'button','id'=>$id1, 'class' => 'btn btn-sm btn-warning customerinstrument_approve', 'escape' => false)); } ?>
                     </div>
                 </div>
                 <div class="col-md-12">

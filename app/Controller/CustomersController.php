@@ -588,14 +588,20 @@ class CustomersController extends AppController
             {
                 if($customer_instruments_map['CustomerInstrument']['is_approved']==1)
                 {
-                    //echo 'dfs2f';
-                 $this->set('id1','');
+                    $this->set('approve',1);
                 }
                 else
                 {
+                    $this->set('approve',0);
+                }
+//                    //echo 'dfs2f';
+//                 $this->set('id1','');
+//                }
+//                else
+//                {
                     //echo 'dfsf';
                  $this->set('id1',$id1);
-                }
+               // }
             }
            $this->set(compact('customer_entry','instruments','customer_instruments'));
         }

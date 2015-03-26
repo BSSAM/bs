@@ -180,30 +180,31 @@ $(document).ready(function(){
        // alert($('#status').val());
       var edit_device_id=$(this).attr('data-edit');
       var customer_id =   $('#CustomerInstrumentCustomerId').val();
-      var edit_app = '';
-      $.ajax({
-		type: 'POST',
-                data:"instrument_id="+edit_device_id,
-		url: path_url+'/customers/find_approved_or_not/',
-                beforeSend: ni_start(),  
-                success:function(data){
-                    
-                if(data=='0')
-                {
+      //alert(edit_device_id);
+//      var edit_app = '';
+//      $.ajax({
+//		type: 'POST',
+//                data:"instrument_id="+edit_device_id,
+//		url: path_url+'/customers/find_approved_or_not/',
+//                beforeSend: ni_start(),  
+//                success:function(data){
+//                    
+//                if(data=='0')
+//                {
                     //alert(data);
                     $('.cus_instrument_edit').attr('href', function() {
                     return path_url+ 'Customers/instrument_map/'+customer_id+'/'+edit_device_id;
                     });
-                }
-                else
-                {
-                    //alert(data);
-                    $('.cus_instrument_edit').attr('href', function() {
-                    return path_url+ 'Customers/instrument_map/'+customer_id;
-                    });
-                }
-                }
-                });
+//                }
+//                else
+//                {
+//                    //alert(data);
+//                    $('.cus_instrument_edit').attr('href', function() {
+//                    return path_url+ 'Customers/instrument_map/'+customer_id;
+//                    });
+//                }
+//                }
+//                });
                 
             
       

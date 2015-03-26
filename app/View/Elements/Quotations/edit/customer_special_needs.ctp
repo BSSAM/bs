@@ -24,7 +24,7 @@
     <div class="col-md-4">
         <?php
         echo $this->Form->input('Customerspecialneed.gsttype', array('id' => 'val_gsttype', 'class' => 'form-control gsttype', 'type' => 'select',
-            'label' => false, 'options' => array('Standard' => 'Standard Rated', 'Zero' => 'Zero Rated')));
+            'label' => false, 'options' => array('Standard' => 'Standard Rated', 'Zero' => 'Zero Rated','empty'=>'Select GST Type')));
         ?>
        
     </div>
@@ -32,7 +32,7 @@
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.gst', array('id' => 'val_gst', 'class' => 'form-control',
-    'placeholder' => 'GST Values', 'label' => false,'type'=>'text'));
+    'placeholder' => 'GST Values', 'label' => false,'type'=>'text','readonly'));
 ?>    
     </div>
 </div>
@@ -41,7 +41,7 @@ echo $this->Form->input('Customerspecialneed.gst', array('id' => 'val_gst', 'cla
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.currency_id', array('id' => 'val_currency', 'class' => 'form-control country_value', 'type' => 'select',
-    'label' => false ,'options' => $country));
+    'label' => false ,'options' => $country,'empty'=>'Select Currency Type'));
 ?>
         
     </div>
@@ -49,7 +49,7 @@ echo $this->Form->input('Customerspecialneed.currency_id', array('id' => 'val_cu
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.currency_value', array('id' => 'val_currency_value', 'class' => 'form-control',
-    'placeholder' => 'Currency Values', 'label' => false,'type'=>'text'));
+    'placeholder' => 'Currency Values', 'label' => false,'type'=>'text','readonly'));
 ?>    
     </div>
 </div>
@@ -58,8 +58,8 @@ echo $this->Form->input('Customerspecialneed.currency_value', array('id' => 'val
     <label class="col-md-2 control-label" for="val_additional_service_charge">Additional Service Charge</label>
     <div class="col-md-4">
 <?php
-echo $this->Form->input('Customerspecialneed.additionalcharge_id', array('id' => 'val_additional_service_charge', 'class' => 'form-control', 'type' => 'select',
-    'label' => false, 'options' => $additional));
+echo $this->Form->input('Customerspecialneed.additionalcharge_id', array('id' => 'val_additional_service_charge', 'class' => 'form-control','placeholder' => 'Enter Additional Service Charge Values', 'type' => 'select',
+    'label' => false, 'options' => $additional, 'onkeypress'=>'return isNumberKey(event)'));
 ?>
         
     </div>
@@ -84,7 +84,7 @@ echo $this->Form->input('Customerspecialneed.additional_service_value', array('i
     <div class="col-md-4">
 <?php
 echo $this->Form->input('Customerspecialneed.service_id', array('id' => 'val_service_id', 'class' => 'form-control', 'type' => 'select',
-    'label' => false, 'options' =>$service));
+    'label' => false, 'options' =>$service,'empty'=>'Select Service Type'));
 ?>
         
     </div>  
