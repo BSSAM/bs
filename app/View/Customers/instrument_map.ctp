@@ -16,20 +16,20 @@
         
         <?php }?>
         $(document).on('click','.customerinstrument_approve',function(){
-        var result = confirm("Are your sure want to Approve?");
-        if (result==true) {
-        var device_id=$(this).attr('id');
-        var customer_id =   $('#CustomerInstrumentCustomerId').val();
-        $.ajax({
-            type: 'POST',
-            data:"device_id="+ device_id,
-            url: path_url+'/Customers/approve_ins_cus/',
-            success:function(data){
-                window.location= path_url+ 'Customers/instrument_map/'+customer_id;
-                
+            if(window.confirm("Are you sure you want to Approve?"))
+            {
+                var device_id=$(this).attr('id');
+                var customer_id =   $('#CustomerInstrumentCustomerId').val();
+                $.ajax({
+                    type: 'POST',
+                    data:"device_id="+ device_id,
+                    url: path_url+'/Customers/approve_ins_cus/',
+                    success:function(data){
+                        alert("Customer Instrument Approval Successful");
+                        window.location= path_url+ 'Customers/instrument_map/'+customer_id;
+                    }
+                });
             }
-            });
-        }
         });
     });
 </script>
@@ -94,11 +94,11 @@
                                         <?php //$disable_unit = "disabled = 'disabled'";
                                         $disable_unit = "";
                                         ?>
-                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter Cost of the Instrument','name'=>'unit_price','value'=>'0',$disable_unit)); ?>
+                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter Cost of the Instrument','name'=>'unit_price','value'=>'0',$disable_unit, 'onkeypress'=>'return isNumberKey(event)')); ?>
                                     </div>
                                     <label class="col-md-1 control-label" for="contract_disc">Contract Disc</label>
                                     <div class="col-md-1">   
-                                        <?php echo $this->Form->input('contract_disc', array('id'=>'contract_disc','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter the Contract Discount','name'=>'contract_disc','value'=>0)); ?>
+                                        <?php echo $this->Form->input('contract_disc', array('id'=>'contract_disc','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter the Contract Discount','name'=>'contract_disc','value'=>0, 'onkeypress'=>'return isNumberKey(event)')); ?>
                                         
                                     </div>
                                     <label class="col-md-1 control-label" for="total_price">Price</label>
