@@ -42,7 +42,7 @@ class LabprocessHelper extends AppHelper
         $check_count    =   count($check_value);
         if($check_count==1)
         {
-            $data   =   'checked="checked" disabled';
+            $data   =   'checked="checked"';
         }
         else
         {
@@ -59,7 +59,7 @@ class LabprocessHelper extends AppHelper
         $check_count    =   count($check_value);
         if($check_count==1)
         {
-            $data   =   'checked="checked" disabled';
+            $data   =   'checked="checked"';
         }
         else
         {
