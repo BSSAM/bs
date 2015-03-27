@@ -276,7 +276,7 @@ class SSP {
 			 
 			 $limit"
 		);
-                
+                //print_r($data);
                 // Data set length after filtering
 		$resFilterLength = self::sql_exec( $db,
 			"SELECT FOUND_ROWS()"
@@ -550,6 +550,7 @@ class SSP {
 	
 	static function get_department_name($id)
 	{
+            if($id){
 		global $sql_details;
 		
 		$db = self::db( $sql_details );
@@ -562,6 +563,11 @@ class SSP {
 		
 		
 		return isset($data[0]['departmentname']) ? $data[0]['departmentname'] : '';
+            }
+            else
+            {
+                return '';
+            }
 	}
         static function get_instrument_details($id)
 	{

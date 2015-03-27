@@ -11,18 +11,18 @@ $val = $_GET['val'];
 
 if($val == 2)
 {
-    $where1 = ' AND is_approved = 0 AND is_deleted = 0';
-    $where2 = ' where is_approved = 0 AND is_deleted = 0';
+    $where1 = 'AND is_approved = 0 AND is_deleted = 0';
+    $where2 = 'where is_approved = 0 AND is_deleted = 0';
 }
 elseif($val == 3)
 {
-    $where1 = ' AND is_deleted = 1';
-    $where2 = ' where is_deleted = 1';
+    $where1 = 'AND is_deleted = 1';
+    $where2 = 'where is_deleted = 1';
 }
 else
 {
-    $where1 = ' AND is_deleted = 0';
-    $where2 = ' where is_deleted = 0';
+    $where1 = 'AND is_deleted = 0';
+    $where2 = 'where is_deleted = 0';
 }
  
 $columns = array(
@@ -38,7 +38,7 @@ $columns = array(
             
 			return SSP::get_department_name($d);
     } ),
-	 array( 'db' => 'description',   'dt' => 4 , 'field' => 'description'),
+    array( 'db' => 'description',   'dt' => 4 , 'field' => 'description'),
     array( 'db' => 'status',     'dt' => 5 , 'field' => 'status' , 'formatter' => function( $d, $row ) {
             return ($d == 1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';
         }),

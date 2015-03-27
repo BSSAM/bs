@@ -337,7 +337,7 @@
             $id =  $this->request->data['id'];
             $this->Reqpurchaseorder->updateAll(array('Reqpurchaseorder.is_approved'=>1),array('Reqpurchaseorder.id'=>$id));
             $user_id = $this->Session->read('sess_userid');
-            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logname'=>'PRPurchase'));
+            $this->Logactivity->updateAll(array('Logactivity.logapprove'=>2,'Logactivity.approved_by'=>$user_id),array('Logactivity.logid'=>$id,'Logactivity.logname'=>'Reqpurchaseorder','Logactivity.logactivity'=>'Add Reqpurchaseorder'));
         }
         public function calendar()
         {

@@ -97,11 +97,24 @@ $(document).ready(function(){
         </table> 
     </div>
     <div class="form-group form-actions">
-         <div class="pull-left"><code>Note:</code> P - Processing , C - Checking </div>
+        <div class="form-group">
+            <table class="table table-borderless ">
+                <thead>
+                    <tr>
+                        <td colspan="2" style="font-size: 12"><span class="label label-six">Note:</span> <code>P - Processing , C - Checking </code></td>
+                        <td colspan="2" style="font-size: 12"><span class="label label-six">To Fix Exact Remarks Like :</span> <code>FAULTY, NO CAPABILITY, RETURN WITHOUT CAL, OUT OF TOLERANCE,  AND JOB CANCELLED.</code></td>
+                    </tr>
+<!--                    <tr>
+                        
+                    </tr>-->
+                </thead>
+            </table>
+        </div>
         <div class="col-md-9 col-md-offset-10">
             <?php echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit', array('type' => 'submit', 'class' => 'btn btn-sm btn-primary sales_submit', 'escape' => false)); ?>
         </div>
     </div>
+    
     <?php echo $this->Form->end(); ?>
 </div>
 <!-- panel -->

@@ -11,8 +11,14 @@ $(document).ready(function(){
     $(document).on('click','.contactperson_submit',function()
     {
         
-        if($('#contact_name').val()=='' && $('#contact_email').val()=='')
+        
+
+        //alert('sdfsf');
+        alert($('#contact_name').val());
+        alert($('#contact_email').val());
+        if($.trim($('#contact_name').val())=='' || $.trim($('#contact_email').val())=='')
         {
+            //alert('asd');
             if($('#contact_name').val()=='')
             {
                 $('.name_error').addClass('animation-slideDown');
@@ -27,6 +33,7 @@ $(document).ready(function(){
                 $('.email_error').show();
                 
             }
+
             return false;
         }
         
@@ -47,7 +54,7 @@ $(document).ready(function(){
         $.ajax({
             type: 'POST',
             data:"contact_name="+ contact_name+"&contact_email="+contact_email+"&contact_department="+contact_department+"&contact_phone="+contact_phone+"&contact_position="+contact_position+"&contact_remark="+contact_remark+"&contact_purpose="+contact_purpose+"&contact_mobile="+contact_mobile+"&customer_id="+customer_id+"&tag_id="+tag_id+"&serial_id="+serial+"&group_id="+group_id,
-            url: path_url+'/customers/contact_person_add/',
+            url: path_url+'customers/contact_person_add/',
             success:function(data){
                 var table_name = $("#customer-contact-add").dataTable();
                  $('.contact_info_row').append('<tr class="contact_remove_'+data+'">\n\\n\
@@ -134,7 +141,7 @@ $(document).ready(function(){
         var customer_id =$('#customer_id').val();
         //alert(customer_id);return false;
         var id= $(this).attr('id');
-        if($('#contact_name').val()=='' && $('#contact_email').val()=='')
+        if($.trim($('#contact_name').val())=='' || $.trim($('#contact_email').val())=='')
         {
             if($('#contact_name').val()=='')
             {

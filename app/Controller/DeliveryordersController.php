@@ -96,6 +96,7 @@
                 $new_array['ref_count'] = $delivery_before_quo['Quotation']['ref_count'];
                 $new_array['remarks'] = $this->request->data['Deliveryorder']['remarks'];
                 $new_array['service_id'] = $this->request->data['Deliveryorder']['service_id'];
+                //$new_array['ready_deliver'] = $this->request->data['Deliveryorder']['service_id'];
                 $new_array['is_approved'] = 0;
                 $new_array['instrument_type_id'] = $delivery_before_quo['Quotation']['instrument_type_id'];
                 $new_array['status'] = 1;
