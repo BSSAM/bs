@@ -9,7 +9,7 @@ class JobmonitoringsController extends AppController
 {
     public $helpers = array('Html','Form','Session');
     public $components = array('RequestHandler');
-    public $uses    =   array('Deliveryorder','Invoice','Salesorder','Description','Customer');
+    public $uses    =   array('Deliveryorder','Invoice','Salesorder','Description','Customer','DelDescription');
     public function index()
     {
         $salesorder_approved_list    =   $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_approved'=>1),'recursive'=>2));
@@ -45,10 +45,14 @@ class JobmonitoringsController extends AppController
                    
                             $this->Description->id = $value;
                             $this->Description->saveField('ready_deliver', 1);
+                            $this->DelDescription->description_id = $value;
+                            $this->DelDescription->saveField('ready_deliver', 1);
                         }
                     }
                     
                 }
+                
+                $total_count    =   $this->DelDescription->find('count',array('conditions'=>array('DelDescription.deliveryorder_id'=>$id)));
                 $total_count    =   $this->Description->find('count',array('conditions'=>array('Description.salesorder_id'=>$id)));
                 $deliver_count      =   $this->Description->find('count',array('conditions'=>array('Description.salesorder_id'=>$id,'Description.ready_deliver'=>1)));
                 if($total_count==$deliver_count)
