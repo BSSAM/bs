@@ -52,38 +52,47 @@ class BrandsController extends AppController
          */
         if($this->request->is('post'))
         {
+            //pr($this->request->data);exit;
             $this->request->data['status']=1;
-            if($this->Brand->save($this->request->data))
+            $brand_data = $this->Brand->find('first',array('conditions'=>array('Brand.brandname'=>$this->request->data['brandname'])));
+            if(empty($brand_data))
             {
-                $last_insert_id =   $this->Brand->getLastInsertID();
-                 /******************
-                    * Log Activity For Approval
-                    */
-                    $this->request->data['Logactivity']['logname'] = 'Brand';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Brand';
-                    $this->request->data['Logactivity']['logid'] = $last_insert_id;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
+                if($this->Brand->save($this->request->data))
+                {
+                    $last_insert_id =   $this->Brand->getLastInsertID();
+                     /******************
+                        * Log Activity For Approval
+                        */
+                        $this->request->data['Logactivity']['logname'] = 'Brand';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Brand';
+                        $this->request->data['Logactivity']['logid'] = $last_insert_id;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
 
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
-                /******************/
-                    
-                /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Brand';
-                    $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $last_insert_id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                /******************/
-                $this->Session->setFlash(__('Brand is Added'));
-                $this->redirect(array('controller'=>'Brands','action'=>'index'));
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+
+                    /******************/
+
+                    /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Brand';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $last_insert_id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/
+                    $this->Session->setFlash(__('Brand is Added'));
+                    $this->redirect(array('controller'=>'Brands','action'=>'index'));
+                }
             }
-            $this->Session->setFlash(__('Brand Could Not be Added'));
+            else
+            {
+                $this->Session->setFlash(__('Brand Already Exists!'));
+            }
+            //$this->Session->setFlash(__('Brand Could Not be Added'));
         }
     }
     public function edit($id = null)
@@ -117,24 +126,32 @@ class BrandsController extends AppController
         }
         if($this->request->is(array('post','put')))
         {
-            $this->Brand->id = $id;
-            if($this->Brand->save($this->request->data))
+            $brand_data = $this->Brand->find('first',array('conditions'=>array('Brand.brandname'=>$this->request->data['brandname'])));
+            if(empty($brand_data))
             {
-                 /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Brand';
-                    $this->request->data['Datalog']['logactivity'] = 'Edit';
-                    $this->request->data['Datalog']['logid'] = $id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                /******************/
-               $this->Session->setFlash(__('Brand is Updated'));
-               return $this->redirect(array('controller'=>'Brands','action'=>'index'));
+                $this->Brand->id = $id;
+                if($this->Brand->save($this->request->data))
+                {
+                     /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Brand';
+                        $this->request->data['Datalog']['logactivity'] = 'Edit';
+                        $this->request->data['Datalog']['logid'] = $id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/
+                   $this->Session->setFlash(__('Brand is Updated'));
+                   return $this->redirect(array('controller'=>'Brands','action'=>'index'));
+                }
+                //$this->Session->setFlash(__('Brand Cant be Updated'));
             }
-            $this->Session->setFlash(__('Brand Cant be Updated'));
+            else
+            {
+                $this->Session->setFlash(__('Brand Already Exists!'));
+            }
         }
         else
         {

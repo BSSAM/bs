@@ -11,7 +11,7 @@
                         <li>Add Units</li>
                     </ul>
                     <!-- END Forms General Header -->
-
+<?php echo $this->element('message');?>
 <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->

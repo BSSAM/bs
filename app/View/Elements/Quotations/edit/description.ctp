@@ -468,6 +468,8 @@ $("#search_cusinstrument").hide();
                     $('#val_range').val(null);
                     $('#val_unit_price').val(null);
                     $('#val_discount1').val(null);
+                    $('#val_range').trigger('chosen:updated');
+                    $('#val_brand').trigger('chosen:updated');
 //                    $('#val_description').val(null);
 //                    $('#val_description').removeAttr("required");
 //                    $('#val_quantity').removeAttr("required");
@@ -659,6 +661,8 @@ $("#search_cusinstrument").hide();
                 $('#val_call_location').val(null);
                 $('#val_brand').empty().append('<option value="">Select Brand</option>');
                 $('#val_range').val(null);
+                $('#val_range').trigger('chosen:updated');
+                $('#val_brand').trigger('chosen:updated');
                 $('#val_unit_price').val(null);
                 $('#val_discount1').val(null);
                 $('#val_description').val(null);
@@ -717,12 +721,16 @@ $("#search_cusinstrument").hide();
                         //$scope.brand_quo_model = res.instrument_brand;
                         $('#val_brand').val(res.brand_id);
                         $('#val_brand option[value="'+res.brand_id+'"]').prop('selected', true);
+                        
                      }
+                     
                 });
+                $('#val_brand').trigger('chosen:updated');
                 //console.log(res.range_id);
                 //console.log(res.instrument_range);
                 $('#val_range').append('<option value='+res.range_id+' selected>'+data.Range.range_name+'</option>');
                 $('#val_range option[value="'+res.range_id+'"]').prop('selected', true);
+                $('#val_range').trigger('chosen:updated');
 //                        $scope.range_quo_model = res.instrument_range;
 //                        //$('#val_range').val(res.instrument_range);
 //                        $('#val_range option[value="'+res.instrument_range+'"]').prop('selected', true);
@@ -910,13 +918,13 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control','ng-model' => 'brand_quo_model',
+        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control select-chosen','ng-model' => 'brand_quo_model',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
         <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
     </div>
     <label class="col-md-2 control-label" for="val_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','ng-model' => 'range_quo_model',
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control select-chosen','ng-model' => 'range_quo_model',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
        <span class="help-block_login insra_error">Enter the Instrument Range</span>
     </div>

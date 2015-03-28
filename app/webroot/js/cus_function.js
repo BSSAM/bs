@@ -29,8 +29,10 @@ $(document).ready(function(){
 		url: path_url+'/customers/get_range/',
                 beforeSend: ni_start(),  
                 success:function(data){
+                    
                     $('#range_array').empty().append('<option value="">Select Range</option>');
                     $('#range_array').append(data);
+                    $('#range_array').trigger('chosen:updated');
                 },
                 complete: ni_end(),
             });
@@ -237,6 +239,7 @@ $(document).ready(function(){
                     $('#range_array').empty().append('<option value="">Select Range</option>');
                     $('#range_array').append(data);
                     $('#range_array option[value="'+edit_node.Range.id+'"]').prop('selected', true);
+                    $('#range_array').trigger('chosen:updated');
                 },
                 complete: ni_end(),
                 });

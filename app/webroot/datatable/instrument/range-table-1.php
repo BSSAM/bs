@@ -51,11 +51,11 @@ $columns = array(
             if(!$val[0]['is_deleted'])
             {
                 if($_GET['edit']==1){
-                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'ranges/edit/'.$d.'" data-original-title="Edit">
+                    $cn .= '<a class="btn btn-xs btn-default" title="" data-toggle="tooltip" href="'.$base_url.'Ranges/edit/'.$d.'" data-original-title="Edit">
 <i class="fa fa-pencil"></i></a>';
                 }
                 if($_GET['delete']==1){
-                    $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'ranges/delete/'.$d.'" data-original-title="Delete">
+                    $cn .= '<a class="btn btn-xs btn-danger" title="" data-toggle="tooltip" href="'.$base_url.'Ranges/delete/'.$d.'" data-original-title="Delete">
 <i class="fa fa-times"></i></a>';
                 }
             }

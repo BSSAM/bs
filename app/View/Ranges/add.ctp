@@ -1,5 +1,6 @@
  <h1><script>
     var path='<?PHP echo Router::url('/',true); ?>';
+    $('#unit_id').trigger('chosen:updated');
 </script>
                                 <i class="gi gi-user"></i>Add Range
                             </h1>
@@ -11,7 +12,7 @@
                         <li>Add Range</li>
                     </ul>
                     <!-- END Forms General Header -->
-
+<?php echo $this->element('message');?>
             <div class="row">
                         <div class="col-md-12">
                             <!-- Basic Form Elements Block -->
@@ -43,7 +44,7 @@
                                        
                                         <label class="col-md-2 control-label" for="unit_id">Unit <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('unit_id', array('id'=>'unit_id','class'=>'form-control','label'=>false,
+                                            <?php echo $this->Form->input('unit_id', array('id'=>'unit_id','class'=>'form-control select-chosen','label'=>false,
                                                 'name'=>'unit_id','type'=>'select','options'=>$units,'empty'=>'Select the Unit')); ?>
                                         </div>
                                    

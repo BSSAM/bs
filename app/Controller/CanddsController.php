@@ -147,8 +147,20 @@ class CanddsController extends AppController
         $customer_id = $this->request->data['cust_id'];
         $contact_person = $this->request->data['contact_person_value'];
         $contact_person_data = $this->Contactpersoninfo->find('first', array('conditions' => array('Contactpersoninfo.id' => $contact_person,'Contactpersoninfo.customer_id' => $customer_id,'Contactpersoninfo.status'=>1),'fields'=>array('phone')));
+        $customer_data = $this->Customer->find('first', array('conditions' => array('Customer.id' => $customer_id,'Customer.is_deleted'=>0), 'recursive' => '2'));
         if (!empty($contact_person_data)) {
-            echo $contact_person_data['Contactpersoninfo']['phone'];
+            if(!empty($contact_person_data['Contactpersoninfo']['phone']))
+            {
+                echo $contact_person_data['Contactpersoninfo']['phone'];
+            }
+            else
+            {
+                echo $customer_data['Customer']['phone'];
+            }
+        }
+        else
+        {
+            echo $customer_data['Customer']['phone'];
         }
     }
     public function get_candd_customer_address() 

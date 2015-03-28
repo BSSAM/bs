@@ -56,39 +56,49 @@ class UnitsController extends AppController
         
         if($this->request->is('post'))
         {
-            if($this->Unit->save($this->request->data))
+            //pr($this->request->data);exit;
+            $unit_data = $this->Unit->find('first',array('conditions'=>array('Unit.unit_name'=>$this->request->data['unit_name'])));
+            if(empty($unit_data))
             {
-                $last_insert_id =   $this->Unit->getLastInsertID();
-                /******************
-                    * Log Activity For Approval
-                    */
-                    $this->request->data['Logactivity']['logname'] = 'Unit';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Unit';
-                    $this->request->data['Logactivity']['logid'] = $last_insert_id;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
+            
+                if($this->Unit->save($this->request->data))
+                {
+                    $last_insert_id =   $this->Unit->getLastInsertID();
+                    /******************
+                        * Log Activity For Approval
+                        */
+                        $this->request->data['Logactivity']['logname'] = 'Unit';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Unit';
+                        $this->request->data['Logactivity']['logid'] = $last_insert_id;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
 
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
-                /******************/
-                    
-                /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Unit';
-                    $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $last_insert_id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                /******************/ 
-                
-                    
-                $this->Session->setFlash(__('Unit is Added'));
-                $this->redirect(array('controller'=>'Units','action'=>'index'));
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+
+                    /******************/
+
+                    /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Unit';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $last_insert_id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/ 
+
+
+                    $this->Session->setFlash(__('Unit is Added'));
+                    $this->redirect(array('controller'=>'Units','action'=>'index'));
+                }
             }
-            $this->Session->setFlash(__('Unit Could Not be Added'));
+            else
+            {
+                $this->Session->setFlash(__('Unit Already Exists!'));
+            }
+            //$this->Session->setFlash(__('Unit Could Not be Added'));
         }
     }
     public function edit($id = null)
@@ -128,24 +138,33 @@ class UnitsController extends AppController
         }
         if($this->request->is(array('post','put')))
         {
-            $this->Unit->id = $id;
-            if($this->Unit->save($this->request->data))
+            //pr($this->request->data);exit;
+            $unit_data = $this->Unit->find('first',array('conditions'=>array('Unit.unit_name'=>$this->request->data['unit_name'])));
+            if(empty($unit_data))
             {
-                /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Unit';
-                    $this->request->data['Datalog']['logactivity'] = 'Edit';
-                    $this->request->data['Datalog']['logid'] = $id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                /******************/
-               $this->Session->setFlash(__('Unit is Updated'));
-               return $this->redirect(array('controller'=>'Units','action'=>'index'));
+                $this->Unit->id = $id;
+                if($this->Unit->save($this->request->data))
+                {
+                    /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Unit';
+                        $this->request->data['Datalog']['logactivity'] = 'Edit';
+                        $this->request->data['Datalog']['logid'] = $id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/
+                   $this->Session->setFlash(__('Unit is Updated'));
+                   return $this->redirect(array('controller'=>'Units','action'=>'index'));
+                }
+                //$this->Session->setFlash(__('Unit Cant be Updated'));
             }
-            $this->Session->setFlash(__('Unit Cant be Updated'));
+            else
+            {
+                $this->Session->setFlash(__('Unit Already Exists!'));
+            }
         }
         else
         {

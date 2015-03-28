@@ -200,8 +200,10 @@ $(document).ready(function(){
                 $('#candd_customer_id').val(data1.Customer.id);
                 
                 $.each(contact_person_info,function(k,v){
+                    $('#val_attn_candd').empty().append('<option value="">Select Contact Person</option>');
                     $('#val_attn_candd').append('<option value="'+v.id+'">'+v.name+'</option>');
                 });
+                $('#val_phone').val('');
             }
 	});
     });

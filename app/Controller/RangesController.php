@@ -70,37 +70,45 @@ class RangesController extends AppController
             
             $this->request->data['range_name']=$range_name;
             
-            if($this->Range->save($this->request->data))
+            $range_data = $this->Range->find('first',array('conditions'=>array('Range.range_name'=>$this->request->data['range_name'])));
+            if(empty($range_data))
             {
-                $last_insert_id =   $this->Range->getLastInsertID();
-                /******************
-                    * Log Activity For Approval
-                    */
-                    $this->request->data['Logactivity']['logname'] = 'Range';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Range';
-                    $this->request->data['Logactivity']['logid'] = $last_insert_id;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
+                if($this->Range->save($this->request->data))
+                {
+                    $last_insert_id =   $this->Range->getLastInsertID();
+                    /******************
+                        * Log Activity For Approval
+                        */
+                        $this->request->data['Logactivity']['logname'] = 'Range';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Range';
+                        $this->request->data['Logactivity']['logid'] = $last_insert_id;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
 
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
-                /******************/
-                    
-                /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Range';
-                    $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $last_insert_id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                /******************/ 
-                $this->Session->setFlash(__('Range is Added'));
-                $this->redirect(array('controller'=>'Ranges','action'=>'index'));
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+
+                    /******************/
+
+                    /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Range';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $last_insert_id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/ 
+                    $this->Session->setFlash(__('Range is Added'));
+                    $this->redirect(array('controller'=>'Ranges','action'=>'index'));
+                }
+                //$this->Session->setFlash(__('Range Could Not be Added'));
             }
-            $this->Session->setFlash(__('Range Could Not be Added'));
+            else
+            {
+                $this->Session->setFlash(__('Range Already Exists!'));
+            }
         }
     }
     public function edit($id = null)
@@ -149,23 +157,31 @@ class RangesController extends AppController
             $unit_array =   $this->Unit->find('first',array('conditions'=>array('Unit.id'=>$unit_id,'Unit.status'=>'1','Unit.is_approved'=>'1'),'fields'=>array('id','unit_name')));
             $range_name =   "(".$this->request->data['from_range']."~".$this->request->data['to_range'].")/".$unit_array['Unit']['unit_name'];
             $this->request->data['range_name']=$range_name;
-            if($this->Range->save($this->request->data))
+            $range_data = $this->Range->find('first',array('conditions'=>array('Range.range_name'=>$this->request->data['range_name'])));
+            if(empty($range_data))
             {
-                /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Range';
-                    $this->request->data['Datalog']['logactivity'] = 'Edit';
-                    $this->request->data['Datalog']['logid'] = $id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                /******************/
-               $this->Session->setFlash(__('Range is Updated'));
-               return $this->redirect(array('controller'=>'Ranges','action'=>'index'));
+                if($this->Range->save($this->request->data))
+                {
+                    /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Range';
+                        $this->request->data['Datalog']['logactivity'] = 'Edit';
+                        $this->request->data['Datalog']['logid'] = $id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/
+                   $this->Session->setFlash(__('Range is Updated'));
+                   return $this->redirect(array('controller'=>'Ranges','action'=>'index'));
+                }
+                //$this->Session->setFlash(__('Range Cant be Updated'));
             }
-            $this->Session->setFlash(__('Range Cant be Updated'));
+            else
+            {
+                $this->Session->setFlash(__('Range Already Exists!'));
+            }
         }
         else
         {

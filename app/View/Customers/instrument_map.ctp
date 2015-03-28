@@ -80,8 +80,8 @@
                                     </div>
                                     <label class="col-md-2 control-label" for="range">Range <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <select id="range_array" name="range" class="form-control" data-placeholder="Select Range" style="width: 250px;">
-                                            <option value="">Select Range</option>
+                                        <select id="range_array" name="range" class="form-control select-chosen" data-placeholder="Select Range" style="width: 250px;">
+<!--                                            <option value="">Select Range</option>-->
                                         </select>
                                         <?php //echo $this->Form->input('range', array('id'=>'range','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                             

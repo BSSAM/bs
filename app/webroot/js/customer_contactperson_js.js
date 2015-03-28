@@ -14,8 +14,8 @@ $(document).ready(function(){
         
 
         //alert('sdfsf');
-        alert($('#contact_name').val());
-        alert($('#contact_email').val());
+        //alert($('#contact_name').val());
+        //alert($('#contact_email').val());
         if($.trim($('#contact_name').val())=='' || $.trim($('#contact_email').val())=='')
         {
             //alert('asd');

@@ -209,7 +209,7 @@ parsedata = $.parseJSON(data);
                 {
                      $('#val_brand').append('<option value='+v.Brand.id+'>'+v.Brand.brandname+'</option>');
                 });
-                
+                $('#val_brand').trigger('chosen:updated');
 //                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
 //                {
 //                     $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
@@ -258,6 +258,7 @@ parsedata = $.parseJSON(data);
                 $.each(parsedata, function(k, v)
                 {
                      $('#val_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
+                     $('#val_range').trigger('chosen:updated');
                      $('#val_unit_price').val(v.CustomerInstrument.unit_price);
                 });
                  

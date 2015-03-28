@@ -123,9 +123,10 @@ $(function() {
                     <div class="block full">
                         <div class="block-title">
                             <h2>List Of Purchase Orders </h2>
-                            <h2>
-                                 <?php if($user_role['job_purchaseorder']['add'] == 1){ 
-								  echo $this->Html->link('Add Purchase Order',array('controller'=>'Purchaseorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Purchase Order')); } ?>
+                            <h2 style="float:right;">
+                                <?php if($user_role['job_purchaseorder']['add'] == 1){ 
+                                    echo $this->Html->link('Add Purchase Order',array('controller'=>'Purchaseorders','action'=>'add'),array('class'=>'btn btn-xs btn-primary','data-toggle'=>'tooltip','tile'=>'Add Purchase Order')); 
+                                } ?>
                             </h2>
                         </div>
                         <div class="table-responsive">

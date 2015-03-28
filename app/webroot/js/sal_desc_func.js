@@ -46,6 +46,7 @@ $(document).ready(function(){
     //                $('#val_model_no').val(parsedata.CustomerInstrument.model_no);
                 $('#SalesorderInstrumentId').val(instrument_id);
                 $('#sales_unitprice').val(parsedata.CustomerInstrument.unit_price);
+                $('#val_brand').trigger('chosen:updated');
             }
         });
     });
@@ -83,6 +84,7 @@ parsedata = $.parseJSON(data);
                      $('#sales_range').append('<option value='+v.Range.id+'>'+v.Range.range_name+'</option>');
                      $('#sales_unitprice').val(v.CustomerInstrument.unit_price);
                 });
+                $('#sales_range').trigger('chosen:updated');
                  
             }
     });
@@ -238,6 +240,8 @@ parsedata = $.parseJSON(data);
                  
                 $('#sales_accountservice').val(edit_node.Description.sales_accountservice);
                 $('#sales_titles').val(edit_node.Description.sales_titles);
+                $('#sales_range').trigger('chosen:updated');
+                $('#val_brand').trigger('chosen:updated');
               
             }
         });
@@ -431,7 +435,8 @@ if(pending == 1)
                 $('#val_brand').empty().append('<option value="">Select Brand</option><option selected="selected" value="'+edit_node.Brand.id+'">'+edit_node.Brand.brandname+'</option>');
                 $('#sales_range').empty().append('<option value="">Select Range</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
                 //$('#sales_range').val(edit_node.Description.sales_range);
-                
+                $('#sales_range').trigger('chosen:updated');
+                        $('#val_brand').trigger('chosen:updated');
                 $('#sales_calllocation').val(edit_node.Description.sales_calllocation);
                 $('#sales_calltype').empty().append('<option value="">Select Call Type</option><option selected="selected" value="'+edit_node.Description.sales_calltype+'">'+edit_node.Description.sales_calltype+'</option>');
                 //$('#sales_calltype').val(edit_node.Description.sales_calltype);
@@ -472,7 +477,8 @@ if(pending == 1)
                 $('#val_brand').empty().append('<option value="">Select Brand</option><option selected="selected" value="'+edit_node.Brand.id+'">'+edit_node.Brand.brandname+'</option>');
                 $('#sales_range').empty().append('<option value="">Select Range</option><option selected="selected" value="'+edit_node.Range.id+'">'+edit_node.Range.range_name+'</option>');
                 //$('#sales_range').val(edit_node.Device.range);
-                
+                $('#sales_range').trigger('chosen:updated');
+                        $('#val_brand').trigger('chosen:updated');
                 $('#sales_calllocation').val(edit_node.Device.call_location);
                 $('#sales_calltype').empty().append('<option value="">Select Call Type</option><option selected="selected" value="'+edit_node.Device.call_type+'">'+edit_node.Device.call_type+'</option>');
                 $('#sales_validity').val(edit_node.Device.validity);
@@ -624,6 +630,8 @@ if(pending == 1)
                 $('#val_model_no').val(null);
                 $('#val_brand').empty().append('<option value="">Select Brand</option>');
                 $('#sales_range').val(null);
+                $('#sales_range').trigger('chosen:updated');
+                $('#val_brand').trigger('chosen:updated');
                 $('#sales_unitprice').val(null);
                 $('#sales_discount').val(null);
                 $('#val_description').val(null);

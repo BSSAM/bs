@@ -1,5 +1,6 @@
  <h1><script>
     var path='<?PHP echo Router::url('/',true); ?>';
+    $('#department_id').trigger('chosen:updated');
 </script>
                                 <i class="gi gi-user"></i>Add Procedures
                             </h1>
@@ -32,7 +33,7 @@
                                         </div>
                                         <label class="col-md-2 control-label" for="to_range">Department <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
-                                           <?php echo $this->Form->input('department_id', array('id'=>'department_id','class'=>'form-control','label'=>false,'name'=>'department_id','type'=>'select','options'=>$departments,'empty'=>'Select Department Name')); ?>
+                                           <?php echo $this->Form->input('department_id', array('id'=>'department_id','class'=>'form-control select-chosen','label'=>false,'name'=>'department_id','type'=>'select','options'=>$departments,'empty'=>'Select Department Name')); ?>
                                         </div>
                                     </div>
                                 <div class="form-group">

@@ -130,10 +130,11 @@
                                         <?php $a=($control == 'InsPercents')?'active':''; ?>
                                         <?php echo $this->Html->link('Instrument Costing',array('controller'=>'InsPercents','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php }} ?>
+                                     <?php if(isset($user_role['other_canddsetting']['view'])){if($user_role['other_canddsetting']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'Canddsettings')?'active':''; ?>
                                         <?php echo $this->Html->link('Candd Settings',array('controller'=>'Canddsettings','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
-                                    </li>
+                                    </li><?php }} ?>
                                 </ul>
                             </li>
                             <li>

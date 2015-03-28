@@ -273,6 +273,8 @@ $("#search_cusinstrument").hide();
                         $('#val_model_no').val(null);
                         $('#val_brand').empty().append('<option value="">Select Brand</option>');
                         $('#sales_range').empty().append('<option value="">Select Range</option>');
+                        $('#sales_range').trigger('chosen:updated');
+                        $('#val_brand').trigger('chosen:updated');
                     });
 
                 if($scope.titles.indexOf("0") != "-1")
@@ -396,7 +398,8 @@ $("#search_cusinstrument").hide();
                     $('#sales_calllocation').val(null);
                     $('#val_brand').empty().append('<option value="">Select Brand</option>');
                     $('#sales_range').empty().append('<option value="">Select Range</option>');
-                    
+                    $('#sales_range').trigger('chosen:updated');
+                    $('#val_brand').trigger('chosen:updated');
                     $scope.pagination();
                     setTimeout(
                         function(){
@@ -555,6 +558,8 @@ $("#search_cusinstrument").hide();
                         $('#sales_range option[value="'+res.instrument_range+'"]').prop('selected', true);
                      }
                 });
+                $('#sales_range').trigger('chosen:updated');
+                $('#val_brand').trigger('chosen:updated');
                 //$('#val_brand').find('<option value="'+res.instrument_brand+'></option>');
                // alert(res.instrument_brand);
 //                $.each(parsedata.Instrument.InstrumentRange, function(k, v)
@@ -741,7 +746,7 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control','ng-model' => 'brand_sales_model',
+        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control select-chosen','ng-model' => 'brand_sales_model',
                                                 'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand')); ?>
         <span class="help-block_login brand_error">Select the Brand Name</span>
     </div>
@@ -752,7 +757,7 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="sales_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
-         <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control','ng-model' => 'range_sales_model',
+         <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control select-chosen','ng-model' => 'range_sales_model',
                                                 'label'=>false,'name'=>'range_id','type'=>'select','empty'=>'Select Range')); ?>
         
     </div>
