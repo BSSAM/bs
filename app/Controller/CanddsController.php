@@ -217,6 +217,7 @@ class CanddsController extends AppController
                     $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
                     $this->request->data['Logactivity']['logactivity'] = 'Add Collection';
                     $this->request->data['Logactivity']['logid'] = $candd_last_id;
+                    $this->request->data['Logactivity']['logno'] = $this->request->data['customer_name'];
                     $this->request->data['Logactivity']['loglink'] = $date_cd;
                     $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
                     $this->request->data['Logactivity']['logapprove'] = 1;
