@@ -208,7 +208,24 @@ $("#search_cusinstrument").hide();
                 var instrument_department=$('#val_department_id').val();
                 var instrument_account=$('#val_account_service').val();
                 var instrument_title=$('#val_title').val();
-
+                
+                if($.trim(instrument_name)=='' || $.trim(instrument_quantity)=='')
+                {
+                    if(instrument_name)
+                    {
+                        $('.name_error').addClass('animation-slideDown');
+                        $('.name_error').css('color','red');
+                        $('.name_error').show();
+                        return false;
+                    }
+                    if(instrument_quantity)
+                    {
+                        $('.email_error').addClass('animation-slideDown');
+                        $('.email_error').css('color','red');
+                        $('.email_error').show();
+                        return false;
+                    }
+                }
                 
                     $http.post(path_url+'Quotations/add_instrument/',{
                         instrument_quantity:instrument_quantity,
@@ -258,6 +275,9 @@ $("#search_cusinstrument").hide();
                                 "instrument_department":instrument_department
                             };
                             $scope.instruments.push($new_data);
+                            $('.name_error').removeClass('animation-slideDown');
+                            $('.name_error').css('color','white');
+                            $('.name_error').hide();
                             setTimeout(
                                     function(){
                             $('.edit_title1').editable(path_url+'/Quotations/update_title1', {
@@ -820,12 +840,14 @@ $("#search_cusinstrument").hide();
         <!-- ng-if="quotation_add.desc_quo_model.$viewValue.length>0" -->
         <span class="help-block_login ins_error">Enter the Instrument Name</span>
         <span class="help-block_login_cus inscus_error">Instrument Needs Customer Details</span>
+        <span class="name_error">Instrument Name is Required</span>
         <div id="search_instrument" class="instrument_drop">  </div>
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control error-custom','label'=>false,'name'=>'quantity')); ?>
         <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
+        <span class="name_error">Instrument Quantity is Required</span>
     </div>
         
 </div>

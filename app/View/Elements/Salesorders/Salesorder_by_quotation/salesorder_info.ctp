@@ -55,7 +55,7 @@
    
     <label class="col-md-2 control-label" for="val_reg_date">Reg Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
+        <?php echo $this->Form->input('Salesorder.reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-M-yyyy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false,'readonly'=>'readonly')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_ref_no">Po Reference No <span class="text-danger">*</span></label>
@@ -67,12 +67,12 @@
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_in_date">In Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.in_date', array('id'=>'val_in_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
+        <?php echo $this->Form->input('Salesorder.in_date', array('id'=>'val_in_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-M-yyyy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false,'readonly'=>'readonly')); ?>
     </div>
     <label class="col-md-2 control-label" for="val_out_date">Out Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Salesorder.due_date', array('id'=>'val_out_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-MM-yy',
+        <?php echo $this->Form->input('Salesorder.due_date', array('id'=>'val_out_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-M-yyyy',
                                                 'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
     </div>
 </div>

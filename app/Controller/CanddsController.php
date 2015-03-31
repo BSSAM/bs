@@ -21,8 +21,41 @@ class CanddsController extends AppController
     public function add()
     {   
         $assignto =   $this->Assign->find('list',array('conditions'=>array('Assign.status'=>1),'fields'=>array('id','assignedto')));
-        $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver !='=>1,'Deliveryorder.ready_to_deliver'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
-        //pr($ready_to_deliver_items);exit;
+        $ready_to_deliver_item =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver !='=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
+        $dummy = array();
+        foreach($ready_to_deliver_item as $abc)
+        {
+            $c = count($abc['DelDescription']);
+            $count_1 = '';
+            foreach($abc['DelDescription'] as $a)
+            {
+                if($a['sales_desc_id'])
+                {
+                $device_no = $this->Description->find('first',array('conditions'=>array('Description.id'=>$a['sales_desc_id'],'Description.ready_deliver'=>1))); 
+                }
+                else
+                {
+                    $device_no ='';
+                }
+                if($device_no)
+                {
+                    $count_1 = $count_1 + 1;
+                }
+            }
+            if($c == $count_1)
+            {
+                $dummy[] = $abc['Deliveryorder']['id'];
+            }
+        }
+        $ready_del = array();
+        foreach($dummy as $lastone)
+        {
+            $ready_del[] =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$lastone,'Deliveryorder.move_to_deliver !='=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
+        }
+        $ready_to_deliver_items =  $ready_del;
+        
+        //pr($ready_to_deliver_items);
+        //exit;
         $collection_items   =   $this->Candd->find('all',array('conditions'=>array('Candd.is_deleted'=>0)));
         //pr($collection_items);exit;
         $default_branch    =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
