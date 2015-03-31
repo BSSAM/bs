@@ -12,7 +12,7 @@ $("#val_reg_date").datepicker("setDate", new Date());
                    
                     <ul class="breadcrumb breadcrumb-top">
                           <li><?php echo $this->Html->link('Home',array('controller'=>'Dashboards','action'=>'index')); ?></li>
-                        <li><?php echo $this->Html->link('Purchase Requistion',array('controller'=>'PurchaseRequisitions','action'=>'index','id'=>'form-puchasereq-add')); ?></li>
+                        <li><?php echo $this->Html->link('Purchase Requistion',array('controller'=>'PurchaseRequisitions','action'=>'index')); ?></li>
                         <li>Add Purchase Requistion</li>
                     </ul>
                     <!-- END Forms General Header -->

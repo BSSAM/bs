@@ -33,7 +33,7 @@ $('#beforedo-datatable').DataTable( {
     
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="contact_phone">Phone</label>
+    <label class="col-md-2 control-label" for="contact_phone">Phone <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('phoneno', array('id'=>'contact_phone','class'=>'form-control','placeholder'=>'Enter the Phone Number','label'=>false)); ?>
     </div>

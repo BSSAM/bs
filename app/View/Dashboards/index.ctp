@@ -611,7 +611,7 @@ $(document).on('click','.approve_invoice',function(){
                                         <tr>
                                             <td class="text-center" style="width: 80px;"><?php echo $this->Html->image('letters/letters-c&d.jpg', array('alt' => 'C & D Info','class'=>'')); ?></td>
                                             <td>
-                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_cdinfo_list['Logactivity']['logname'] ?></strong></a> <br><small><em><?PHP echo $log_activity_cdinfo_list['Logactivity']['logno'] ?></em> - <?PHP echo $log_activity_cdinfo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['logid'] ?></em> | <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['loglink'] ?></em></small></h4>
+                                                <h4><a href="javascript:void(0)"><strong><?PHP echo $log_activity_cdinfo_list['Logactivity']['logname'] ?></strong></a> <br><small><?PHP echo $log_activity_cdinfo_list['Logactivity']['logactivity'] ?>   -  <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['logid'] ?></em> | <em><?PHP echo $log_activity_cdinfo_list['Logactivity']['loglink'] ?></em></small></h4>
                                             </td>
                                             <td class="text-center ">
                                             <?PHP if($log_activity_cdinfo_list['Logactivity']['logname'] == 'C&Dinfo'){ ?>

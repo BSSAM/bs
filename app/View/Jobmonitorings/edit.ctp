@@ -70,7 +70,6 @@
                         $check_ready    =   'disabled="disabled"';
                         $dis_ready='disabled="disabled"';
                     endif;
-                    
                ?>
                 <tr>
                     <td class="text-center"><?PHP echo $description['Description']['id']; ?></td>
@@ -98,13 +97,6 @@
                                 $delivery_delivery = false;
                                 $dis = 'readonly';
                             endif;
-                    if(($description['Description']['processing']!=1)&&($description['Description']['checking']!=1))
-                    {
-                        $check_ready = '';
-                        $delivery_delivery='';
-                        $shipping ='';
-                    }
-                            
                             ?>
                             <?PHP echo $this->Form->input('document', array('name'=>'document','label' => false, 'id' => 'document', 'type' => 'checkbox', 'class' => $description['Description']['salesorder_id'],'disabled'=>'disabled', 'checked'=> $delivery_delivery)); ?></td>
                        
@@ -128,7 +120,7 @@
 //                                $job_finished = false;
 //                            endif;
                          //$description['Description']['shipping']
-                                  if ($description['Description']['is_delivered'] == 1):
+                                  if ($description['Description']['shipping'] == 1):
 //                                foreach ($deliver_order as $deliver_list):
 //                                    if ($deliver_list['Deliveryorder']['job_finished'] == 1):
                                         $job_finished = true;
