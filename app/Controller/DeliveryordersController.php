@@ -123,8 +123,9 @@
                     foreach($delivery_before['Description'] as $desc):
                         if($desc['checking'] == 1):
                             $this->request->data['DelDescription']['deliveryorder_id']          =   $del_last_id;
-                            $this->request->data['DelDescription']['salesorder_id']             =   $desc['id'];
+                            $this->request->data['DelDescription']['salesorder_id']             =   $desc['salesorder_id'];
                             $this->request->data['DelDescription']['order_by']                  =   $desc['order_by'];
+                            $this->request->data['DelDescription']['sales_desc_id']             =   $desc['id'];
                             $this->request->data['DelDescription']['quotation_id']              =   $desc['quotation_id'];
                             $this->request->data['DelDescription']['quotationno']               =   $desc['quotationno'];
                             $this->request->data['DelDescription']['customer_id']               =   $desc['customer_id'];

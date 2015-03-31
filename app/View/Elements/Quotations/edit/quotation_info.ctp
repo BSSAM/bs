@@ -62,8 +62,8 @@
     </div>
      <label class="col-md-2 control-label" for="val_reg_date">Reg Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd',
-                                                'placeholder'=>'Enter the Registration date Name','label'=>false)); ?>
+        <?php echo $this->Form->input('reg_date', array('id'=>'val_reg_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-M-yyyy',
+                                                'placeholder'=>'Enter the Registration date Name','label'=>false,'readonly'=>'readonly')); ?>
     </div>
 </div>
 
