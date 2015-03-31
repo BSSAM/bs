@@ -81,7 +81,7 @@
      <label class="col-md-2 control-label" for="val_account_service">Account Service <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control',
-                                      'label'=>false,'name'=>'account_service','value'=>'Calibration Service','readonly')); ?>
+                                      'label'=>false,'name'=>'account_service','type'=>'select','options'=>$service)); ?>
     </div>
     
 </div>
