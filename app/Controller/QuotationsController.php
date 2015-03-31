@@ -890,7 +890,8 @@ margin: 180px 50px;
                     $d[] = $device['title4_val'];
                     $e[] = $device['title5_val'];
                 endforeach;
-                //pr($a);pr($b);pr($c);pr($d);pr($e);exit;
+                //sales_desc_id
+                ///pr($a);pr($b);pr($c);pr($d);pr($e);exit;
                
 $html .=
 '<body style="font-family:Oswald, sans-serif;font-size:9px;padding:0;margin:0;font-weight: 300; color:#444 !important;">
