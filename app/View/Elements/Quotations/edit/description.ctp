@@ -124,6 +124,48 @@ $("#search_cusinstrument").hide();
             $scope.tttotal += parseFloat(id);
             //console.log(id);
         };
+        $scope.get_discount = function(ind){
+            var overall_discount=$('#val_discount').val();
+            var gst=$('#val_gst').val();
+            var sc=$('#val_service_charge').val();
+            
+            discount_after =  ind - (ind*overall_discount/100);
+            gst_after =  ind*gst/100;
+            
+            return parseFloat(discount_after - gst_after - sc).toFixed(2);
+        }
+        
+        $scope.get_gst = function(ind){
+            var gst=$('#val_gst').val();
+            var sc=$('#val_service_charge').val();
+            gst_after =  ind*gst/100;
+            
+            return parseFloat(gst_after + sc).toFixed(2);
+        }
+        
+        $scope.discount_red = function(ind){
+            var overall_discount=$('#val_discount').val();
+            
+            return parseFloat(ind*overall_discount/100).toFixed(2);
+        }
+        
+        $(".error-custom").change(function(){
+            $(".error-custom").each(function(){
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                    }
+            });
+        });
+         
         //$scope.brand_id = '';
 //        $('#val_description').prop('required', true);
 //        $('#val_quantity').prop('required', true);
@@ -332,20 +374,41 @@ $("#search_cusinstrument").hide();
                 var instrument_unitprice=$('#val_unit_price').val();
                 var instrument_unitprice=$('#val_unit_price').val();
                 var instrument_discount=$('#val_discount1').val();
-                var overall_discount=$('#val_discount').val();
-                if(overall_discount!==''){
-                    instrument_unitprice1 = instrument_unitprice*overall_discount/100;
-                    instrument_unitprice = instrument_unitprice-instrument_unitprice1;
-                }
+//                var overall_discount=$('#val_discount').val();
+//                if(overall_discount!==''){
+//                    instrument_unitprice1 = instrument_unitprice*overall_discount/100;
+//                    instrument_unitprice = instrument_unitprice-instrument_unitprice1;
+//                }
                 
                 //alert(instrument_discount);
                 var instrument_cal=instrument_unitprice*instrument_discount/100;
                 var instrument_total= instrument_unitprice - instrument_cal;
-
+                var instrument_total = parseFloat(instrument_total).toFixed(2);
                 var instrument_department=$('#val_department_id').val();
                 var instrument_account=$('#val_account_service').val();
                 var instrument_title=$('#val_title').val();
-
+                
+                
+                errr = 0;
+                
+                $(".error-custom").each(function(){
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                        errr++;
+                    }
+                });
+                
+                if(errr)
+                    return false;
 
                     $http.post(path_url+'Quotations/add_instrument/',{
                         instrument_quantity:instrument_quantity,
@@ -371,7 +434,7 @@ $("#search_cusinstrument").hide();
                             //console.log(k);
                             //console.log(v);
                             //,"id":k
-                            $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:instrument_total,"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
+                            $new_data = {serial:v,customer_id:customer_id,quotation_id:quotation_id,"id":v,"instrument_id":instrument_id,name:instrument_name,model:instrument_modelno,location:instrument_calllocation,type:instrument_calltype,"instrument_brand":instrument_brand,validity:instrument_validity,"instrument_range":instrument_range,price:instrument_unitprice,service:instrument_account,total:parseFloat(instrument_total).toFixed(2),"instrument_discount":instrument_discount,"instrument_title":instrument_title,"instrument_department":instrument_department};
                             $scope.instruments.push($new_data);
                             setTimeout(
                                     function(){
@@ -506,17 +569,41 @@ $("#search_cusinstrument").hide();
             var instrument_validity=$('#val_validity').val();
             var instrument_unitprice=$('#val_unit_price').val();
             var instrument_discount=$('#val_discount1').val();
-            //var overall_discount=$('#val_discount').val();
+//            var overall_discount=$('#val_discount').val();
 //            if(overall_discount!==''){
 //                instrument_unitprice1 = instrument_unitprice*overall_discount/100;
 //                instrument_unitprice = instrument_unitprice-instrument_unitprice1;
 //            }
             var instrument_cal=instrument_unitprice*instrument_discount/100;
             var instrument_total= instrument_unitprice - instrument_cal;
-
+            var instrument_total=   parseFloat(instrument_total).toFixed(2);
             var instrument_department=$('#val_department_id').val();
             var instrument_account=$('#val_account_service').val();
             var instrument_title=$('#val_title').val();
+            
+            
+            errr = 0;
+                
+            $(".error-custom").each(function(){
+                if(($(this).val()).trim())
+                {
+                    $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                    $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                    $(this).parents(".col-md-4").find('.name_error').hide();
+                }
+                else
+                {
+                    $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                    $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                    $(this).parents(".col-md-4").find('.name_error').show();
+                    errr++;
+                }
+            });
+            
+            if(errr)
+                return false;
+                
+            $scope.mode = 'add';
             //console.log(val_brand);
             //console.log(val_range);
                 $http.post(path_url+'Quotations/update_instrument/', {
@@ -555,7 +642,7 @@ $("#search_cusinstrument").hide();
                         $scope.instruments[$scope.edit_index]['instrument_range']=instrument_ra_disp;
                         $scope.instruments[$scope.edit_index]['price']=instrument_unitprice;
                         $scope.instruments[$scope.edit_index]['service']=instrument_account;
-                        $scope.instruments[$scope.edit_index]['total']=instrument_total;
+                        $scope.instruments[$scope.edit_index]['total']=parseFloat(instrument_total).toFixed(2);
                         $scope.instruments[$scope.edit_index]['instrument_discount']=instrument_discount;
                         $scope.instruments[$scope.edit_index]['instrument_title']=instrument_title;
                         $scope.instruments[$scope.edit_index]['instrument_department']=instrument_department;
@@ -886,14 +973,14 @@ $("#search_cusinstrument").hide();
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
         <!-- ng-if="quotation_add.desc_quo_model.$viewValue.length>0" -->
-        <span class="help-block_login ins_error">Enter the Instrument Name</span>
+        <span class="name_error">Enter the Instrument Name</span>
          <span class="help-block_login inscus_error">Instrument Needs Customer Details</span>
         <div id="search_instrument" class="instrument_drop">  </div>
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
-        <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
+        <span class="name_error">Enter the Instrument Quantity</span>
     </div>
         
 </div>
@@ -906,7 +993,7 @@ $("#search_cusinstrument").hide();
         <div id="search_cusinstrument" class="instrument_drop">  </div>
          <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                 //'label'=>false,'name'=>'model_no','type'=>'select','empty'=>'Enter the Model Number')); ?>
-        <span class="help-block_login insmo_error">Enter the Instrument Model No</span>
+        <span class="name_error">Enter the Instrument Model No</span>
     </div>
     <label class="col-md-2 control-label" for="val_validity">Validity (in months) </label>
     <div class="col-md-4">
@@ -920,13 +1007,13 @@ $("#search_cusinstrument").hide();
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control select-chosen','ng-model' => 'brand_quo_model',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
-        <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
+        <span class="name_error">Enter the Instrument Brand</span>
     </div>
     <label class="col-md-2 control-label" for="val_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control select-chosen','ng-model' => 'range_quo_model',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
-       <span class="help-block_login insra_error">Enter the Instrument Range</span>
+       <span class="name_error">Enter the Instrument Range</span>
     </div>
 </div>
 <div class="form-group">
@@ -936,12 +1023,13 @@ $("#search_cusinstrument").hide();
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control','ng-model' => 'loca_quo_model',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Cal Location')); ?>
-        <span class="help-block_login inscal_error">Enter the Calibration Location</span>
+        <span class="name_error">Enter the Calibration Location</span>
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Cal Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model',
                                       'type'=>'select','ng-init'=>'type_quo_model="Singlas"','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas','empty'=>'Select Cal Type'))); ?>
+        <span class="name_error">Enter the Cal Type</span>
     </div>
 </div>
 
@@ -973,7 +1061,7 @@ $("#search_cusinstrument").hide();
         <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control','ng-model' => 'service_quo_model',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
-        <span class="help-block_login insser_error">Enter the Account Service</span>
+        <span class="name_error">Enter the Account Service</span>
     </div>
     
 </div>
@@ -984,12 +1072,14 @@ $("#search_cusinstrument").hide();
             'options'=>$titles,'placeholder'=>'Enter the Title','multiple','onclick'=>'setMaximumSelected(5,this)')); ?>
     </div>
 </div>
-<!--<div class="form-group form-actions" ng-show="mode=='add'">
+    <?php if($quotations_list['Quotation']['is_approved'] != 1){ ?>
+<div class="form-group form-actions" ng-show="mode=='add'">
     <div class="col-md-9 col-md-offset-10 update_device">
-        <?php  //echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-disabled' => 'quotation_add.$invalid', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
+        <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-disabled' => 'quotation_add.$invalid', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
         
     </div>
-</div>-->
+</div>
+    <?php } ?>
 
 <div class="form-group form-actions" ng-show="mode=='edit'">
     <div class="col-md-9 col-md-offset-10 update_device">
@@ -1086,7 +1176,16 @@ $(function(){
         </tr>
         <tr ng-hide="instruments.length"><td colspan="10">No Instruments found</td></tr>
     </tbody>
-</table><div class="col-md-6 col-md-offset-6"><div class="pull-right"><span class="h3"><strong>TOTAL : ${{tttotal}}</strong></span></div></div>
+</table>
+    <div class="form-group">
+    <div class="col-md-6 col-md-offset-6"><div class="pull-right"><span class="h4">DISCOUNT : ${{discount_red(tttotal)}}</span></div></div>
+    </div>
+    <div class="form-group">
+    <div class="col-md-6 col-md-offset-6"><div class="pull-right"><span class="h4">GST & OTHERS : ${{get_gst(tttotal)}}</span></div></div>
+    </div>
+    <div class="form-group">
+    <div class="col-md-6 col-md-offset-6"><div class="pull-right"><span class="h3"><strong>TOTAL : ${{get_discount(tttotal)}}</strong></span></div></div>
+    </div>
 </ng-form><br><br>
 </div>
 </div>

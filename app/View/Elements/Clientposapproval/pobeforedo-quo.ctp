@@ -30,7 +30,7 @@
             <?PHP if($quotation_list['Quotation']['po_generate_type']=='Automatic'){$class="error";}elseif($quotation_list['Quotation']['po_generate_type']=='Manual'){$class="success";}else{ $class="warning";} ?>
             <tr class=<?PHP echo $class; ?>>
                 <td class="text-center"><?PHP echo $quotation_list['Quotation']['quotationno'] ?></td>
-                <td class="text-center"><?PHP echo $this->find_sales_order($quotation_list['Quotation']['quotationno']); ?></td>
+                <td class="text-center"><?PHP // echo $this->find_sales_order($quotation_list['Quotation']['quotationno']); ?></td>
                 <td class="text-center"><?PHP echo $quotation_list['Quotation']['reg_date'] ?></td>
                 <td class="text-center"><?PHP echo $quotation_list['branch']['branchname'] ?></td>
                 <td class="text-center"><?PHP echo $quotation_list['Quotation']['customername'] ?></td>
