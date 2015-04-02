@@ -21,21 +21,24 @@
      <label class="col-md-2 control-label" for="val_description">Instrument <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
-                array('id'=>'val_description','class'=>'form-control','placeholder'=>'Enter the Description','label'=>false,
+                array('id'=>'val_description','class'=>'form-control error-custom','placeholder'=>'Enter the Description','label'=>false,
                     'name'=>'description','autoComplete'=>'off')); ?>
-         <span class="help-block_login ins_error">Enter the Instrument Name</span>
+<!--         <span class="help-block_login ins_error">Enter the Instrument Name</span>-->
+         <span class="name_error">Instrument Name is Required</span>
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','class'=>'form-control error-custom','label'=>false,'name'=>'quantity')); ?>
+        <span class="name_error">Instrument Quantity is Required</span>
     </div>
 </div>
     
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_address">Model No <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
+        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control error-custom',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no')); ?>
+        <span class="name_error">Instrument Model No is Required</span>
     </div>
     <label class="col-md-2 control-label" for="val_validity">Validity (in months) </label>
     <div class="col-md-4">
@@ -47,14 +50,16 @@
     
     <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control',
+        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control error-custom',
                                                 'label'=>false,'name'=>'brand','type'=>'text','placeholder'=>'Enter the Brand Name')); ?>
+        <span class="name_error">Instrument Brand is Required</span>
         
     </div>
     <label class="col-md-2 control-label" for="val_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control','placeholder'=>'Enter the Instrument Range',
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control error-custom','placeholder'=>'Enter the Instrument Range',
                                                 'label'=>false,'name'=>'range','type'=>'text')); ?>
+        <span class="name_error">Instrument Range is Required</span>
        
     </div>
 </div>
@@ -69,22 +74,25 @@
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('unit_price', array('id'=>'val_unit_price','class'=>'form-control','label'=>false,
+        <?php echo $this->Form->input('unit_price', array('id'=>'val_unit_price','class'=>'form-control error-custom','label'=>false,
             'name'=>'unit_price','placeholder'=>'Enter the Unit Price')); ?>
+        <span class="name_error">Instrument Unit Price is Required</span>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_department">Department <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('department', array('id'=>'val_department','class'=>'form-control','label'=>false,
+        <?php echo $this->Form->input('department', array('id'=>'val_department','class'=>'form-control error-custom','label'=>false,
                                       'name'=>'department','placeholder'=>'Enter the Departmnent Name')); ?>
         <?PHP echo $this->Form->input('dept_id',array('id'=>'val_department_id','type'=>'hidden')) ?>
+         <span class="name_error">Instrument Department is Required</span>
     </div>
      <label class="col-md-2 control-label" for="val_account_service">Account Service <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control',
+        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control error-custom',
                                       'label'=>false,'name'=>'account_service','value'=>'Calibration Service','type'=>'select','options'=>$service)); ?>
+        <span class="name_error">Instrument Account Service is Required</span>
     </div>
     
 </div>

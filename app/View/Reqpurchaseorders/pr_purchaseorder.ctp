@@ -34,7 +34,7 @@ $(function(){
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Reqpurchaseorder',array('class'=>'form-horizontal form-bordered','id'=>'form-salesorder-add','controller'=>'Reqpurchaseorders','action'=>'add')); ?>
+                                    <?php echo $this->Form->create('Reqpurchaseorder',array('class'=>'form-horizontal form-bordered','id'=>'form-prpo-add','controller'=>'Reqpurchaseorders','action'=>'add')); ?>
                                     <?php echo $this->Form->input('Reqpurchaseorder.customer_id', array('type'=>'hidden')); ?>
                                     <?php echo $this->Form->input('Reqpurchaseorder.prequisitionno', array('type'=>'hidden','value'=>$this->request->data['Reqpurchaseorder']['prequistionno'])); ?>
                                     <?php echo $this->Form->input('Reqpurchaseorder.track_id', array('type'=>'hidden','value'=>$this->request->data['Reqpurchaseorder']['track_id'])); ?>

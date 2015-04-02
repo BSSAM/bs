@@ -22,7 +22,7 @@ $(function() {
 		   //for grand total update
 		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
 		  $(".grand_total_dyn").text(parseFloat(grand_total));
-		  //console.log(device_total);
+		  console.log(grand_total);
 		  //return false;
    });
    $(".edit_additional_service").on('click', "button[type='submit']", function() {
@@ -34,6 +34,7 @@ $(function() {
 		   //for grand total update
 		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
 		  $(".grand_total_dyn").text(parseFloat(grand_total));
+                  console.log(grand_total);
 		  //return false;
    });
  $(".edit_sales_unit").on('click', "button[type='submit']", function() {
@@ -58,9 +59,11 @@ $(function() {
 		  //for gst total update
 		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
 		  additional_charge = parseFloat($(".edit_additional_service").text()).toFixed(2);
+                  additional_charge = parseInt(additional_charge) || 0;
 		   //for grand total update
 		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
 		  $(".grand_total_dyn").text(parseFloat(grand_total));
+                  console.log(grand_total);
 		  //return false;
    });
  $(".edit_sales_unit_dis").on('click', "button[type='submit']", function() {
@@ -82,12 +85,17 @@ $(function() {
 			$(".total_device_dyn").text(parseFloat(total_unit_price).toFixed(2) );
 		 
 		  device_total = parseFloat($(".total_device_dyn").text()).toFixed(2);
+                  //console.log(device_total);
 		  //for gst total update
 		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
+                  //console.log(gst_total);
 		  additional_charge = parseFloat($(".edit_additional_service").text()).toFixed(2);
+                  additional_charge = parseInt(additional_charge) || 0;
+                   //console.log(additional_charge);
 		   //for grand total update
 		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
 		  $(".grand_total_dyn").text(parseFloat(grand_total));
+                  //console.log(grand_total);
 		  //return false;
    });
    
@@ -137,6 +145,7 @@ $(function() {
 		  //for gst total update
 		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
 		  additional_charge = parseFloat($(".edit_additional_service_po").text()).toFixed(2);
+                  additional_charge = parseInt(additional_charge) || 0;
 		   //for grand total update
 		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
 		  $(".grand_total_dyn").text(parseFloat(grand_total));
@@ -164,6 +173,7 @@ $(function() {
 		  //for gst total update
 		  gst_total = parseFloat($(".gst_total_dyn").text()).toFixed(2);
 		  additional_charge = parseFloat($(".edit_additional_service_po").text()).toFixed(2);
+                  additional_charge = parseInt(additional_charge) || 0;
 		   //for grand total update
 		  grand_total = (parseFloat(device_total) + parseFloat(gst_total) + parseFloat(additional_charge)).toFixed(2);
 		  $(".grand_total_dyn").text(parseFloat(grand_total));
@@ -436,7 +446,7 @@ $(function() {
                         </div>
                         <label class="col-md-2 control-label" for="inv_date">Invoice Date <span class="text-danger">*</span></label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
+                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-M-yyyy','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -838,7 +848,7 @@ $(function() {
                         </div>
                         <label class="col-md-2 control-label" for="inv_date">Invoice Date <span class="text-danger">*</span></label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
+                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-M-yyyy','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -1243,7 +1253,7 @@ $(function() {
                         </div>
                         <label class="col-md-2 control-label" for="inv_date">Invoice Date <span class="text-danger">*</span></label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false)); ?>
+                            <?php echo $this->Form->input('invoice_date', array('id'=>'inv_date','Type'=>'text','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-M-yyyy','label'=>false)); ?>
                         </div>
                     </div>
                     <div class="form-group">

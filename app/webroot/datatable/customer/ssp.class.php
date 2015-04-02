@@ -128,14 +128,14 @@ class SSP {
 
 				if ( $requestColumn['orderable'] == 'true' ) {
 					$dir = $request['order'][$i]['dir'] === 'asc' ?
-						'ASC' :
+						'DESC' :
 						'DESC';
 
 					$orderBy[] = '`'.$column['db'].'` '.$dir;
 				}
 			}
 
-			$order = 'ORDER BY '.implode(', ', $orderBy);
+			$order = 'ORDER BY'.implode(', ', $orderBy);
 		}
 
 		return $order;
@@ -236,7 +236,7 @@ class SSP {
 		// Build the SQL query string from the request
 		$limit = self::limit( $request, $columns );
 		$order = self::order( $request, $columns );
-		
+		//pr($order);exit;
 		$where = self::filter( $request, $columns, $bindings);
                
                 if($where =='')
@@ -256,7 +256,7 @@ class SSP {
 			 $order
 			 $limit"
 		);
-
+                
 		// Data set length after filtering
 		$resFilterLength = self::sql_exec( $db,
 			"SELECT FOUND_ROWS()"

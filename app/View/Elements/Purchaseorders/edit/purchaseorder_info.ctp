@@ -122,7 +122,7 @@ $("#val_reg_date").datepicker("setDate", new Date());
     </div>
     <label class="col-md-2 control-label" for="pur_order_date">Purchase Order Date</label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('Purchaseorder.purchase_order_date', array('id'=>'pur_order_date','class'=>'form-control input-datepicker-close','data-date-format'=>'yyyy-mm-dd','label'=>false,'value'=>date('d-M-y'))); ?>
+        <?php echo $this->Form->input('Purchaseorder.purchase_order_date', array('id'=>'pur_order_date','class'=>'form-control input-datepicker-close','data-date-format'=>'dd-M-yyyy','label'=>false,'value'=>date('d-M-y'))); ?>
     </div>
 </div>
 <div class="form-group">

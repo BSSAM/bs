@@ -33,7 +33,7 @@ $columns = array(
         'dt'        => 1,
 		'field' => 'created',
         'formatter' => function( $d, $row ) {
-            return date( 'F jS, Y h:i A', strtotime($d));
+            return date( 'j-M-Y ', strtotime($d));
         }),
     array( 'db' => 'ins.name',  'dt' => 2 ,'field' => 'name'),
     array( 'db' => 'ins.description',   'dt' => 3 ,'field' => 'description'),

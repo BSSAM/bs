@@ -45,13 +45,13 @@ $(document).ready(function(){
     
     $(document).on('click','.preqdescription_add',function(){
       
-        if($('#val_description').val()=='')
-        {
-            $('.ins_error').addClass('animation-slideDown');
-            $('.ins_error').css('color','red');
-            $('.ins_error').show();
-            return false;
-        }
+//        if($('#val_description').val()=='')
+//        {
+//            $('.ins_error').addClass('animation-slideDown');
+//            $('.ins_error').css('color','red');
+//            $('.ins_error').show();
+//            return false;
+//        }
         var prequistion_id =   $('#PurchaseRequisitionPrequistionnoId').val();
    
         var instrument_name=$('#val_description').val();
@@ -69,8 +69,28 @@ $(document).ready(function(){
         
         var instrument_department=$('#val_department').val();
         var instrument_account=$('#val_account_service').val();
+        var instrument_account1=$('#val_account_service').text();
         var instrument_title=$('#val_title').val();
-        
+        errr = 0;
+                
+                $(".error-custom").each(function(){
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                        errr++;
+                    }
+                });
+                
+                if(errr)
+                    return false;
         for ( var i = 1; i <= instrument_quantity; i++ ){
         $.ajax({
             type: 'POST',
@@ -86,7 +106,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+instrument_brand+'</td>\n\\n\
                                     <td class="text-center">'+instrument_range+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_account+'</td>\n\\n\
+                                    <td class="text-center">'+instrument_account1+'</td>\n\\n\
                                     <td class="text-center">'+instrument_total+'</td>\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+data+'"class="btn btn-xs btn-default pre_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\
@@ -149,6 +169,7 @@ $(document).ready(function(){
         
         var instrument_department=$('#val_department').val();
         var instrument_account=$('#val_account_service').val();
+        var instrument_account1=$('#val_account_service').text();
         var instrument_title=$('#val_title').val();
         $.ajax({
             type: 'POST',
@@ -164,7 +185,7 @@ $(document).ready(function(){
                                     <td class="text-center">'+instrument_brand+'</td>\n\\n\
                                     <td class="text-center">'+instrument_range+'</td>\n\
                                     <td class="text-center">'+instrument_validity+'</td>\n\
-                                    <td class="text-center">'+instrument_account+'</td>\n\\n\\n\
+                                    <td class="text-center">'+instrument_account1+'</td>\n\\n\\n\
                                     <td class="text-center">'+instrument_total+'</td>\n\
                                     <td class="text-center"><div class="btn-group">\n\
                                     <a data-edit="'+device_id+'"class="btn btn-xs btn-default pre_instrument_edit" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>\n\

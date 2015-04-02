@@ -988,7 +988,8 @@ class InvoicesController extends AppController
                 $ref_no = $quotation_data['Quotation']['ref_no'];
                 $reg_date = $quotation_data['Quotation']['reg_date'];
                 $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
-                $quotationno = $quotation_data['Quotation']['quotationno'];                
+                $quotationno = $quotation_data['Quotation']['quotationno'];  
+                $discount = $quotation_data['Quotation']['discount'];
                 foreach($quotation_data['Device'] as $device):
                     $device_name[] = $device;
                 endforeach;
@@ -1228,23 +1229,31 @@ $html .= '</tr>';
                         
                     $html .='<td style="padding:3px;">'.number_format($device['unit_price'], 2, '.', '').'</td></tr>';
                 $subtotal = $subtotal + $device['unit_price']; 
-                
+                $distotal = $distotal + ($device['unit_price'] - $device['total']);
                 
          if($k+1 == count($device_name)){       
          $gst = $subtotal * 0.07;
                 $total_due = $gst + $subtotal;
                
                 $html .= '<tr>
-                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">SUBTOTAL $(SGD)</td>
-                         <td style="padding:3px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($subtotal, 2, '.', '').'</td>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-top:1px  dashed #666;border-left:1px  dashed #666;">SUBTOTAL $(SGD)</td>
+                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($subtotal, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">GST ( 7.00% )</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($gst, 2, '.', '').'</td>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">GST ( 7.00% )</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($gst, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">TOTAL DUE $(SGD)</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($total_due, 2, '.', '').'</td>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">DISCOUNT ('.$discount.' %)</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($distotal).'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE $(SGD)</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($total_due, 2, '.', '').'</td>
+                    </tr>
+                    <tr>
+                    <td colspan="4" style="padding:10px;"></td>
+                    <td colspan="8" style="padding:10px;"></td>
                     </tr>
                      <tr>
                <td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
@@ -1470,7 +1479,8 @@ else:
                 $ref_no = $po_list_first['Quotation']['ref_no'];
                 $reg_date = $po_list_first['Quotation']['reg_date'];
                 $payment_term = $po_list_first['Customer']['Paymentterm']['paymentterm'] . ' ' . $po_list_first['Customer']['Paymentterm']['paymenttype'];
-                $quotationno = $po_list_first['Quotation']['quotationno'];      
+                $quotationno = $po_list_first['Quotation']['quotationno']; 
+                $discount = $po_list_first['Quotation']['discount'];
                 $this->set('titles',$titles);
                 $this->set('total',$total);
                 $this->set('desc',$quono);
@@ -1653,46 +1663,46 @@ $html .= '<div id="content">';
                     {
 					$html .='<div style="color:#000 !important;line-height:12px;font-size:11px;display:block;margin-top:260px;"> SALES ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['salesorder_id'].'</span></div>
 <div style="color:#000 !important;line-height:12px;font-size:11px;"> DELIVERY ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['deliveryorder_id'].'</span></div>';
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;">      <tr>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;white-space: nowrap;">      <tr>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Range</td>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
+        $html .='<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">';
         $html .= $titles[$i];
         $html .='</td>';
     endif;
     $count1 = $count1+1;
 endfor;
-$html .= '<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
+$html .= '<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
 
 $html .= '</tr>';
                     }
                     elseif($k%5 == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:230px;">      <tr>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:230px;white-space: nowrap;">      <tr>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Range</td>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        $html .='<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
+        $html .='<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">';
         $html .= $titles[$i];
         $html .='</td>';
     endif;
     $count1 = $count1+1;
 endfor;
 $count1 = $count1+1;
-$html .= '<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
+$html .= '<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
 
 $html .= '</tr>';
                     }
@@ -1701,41 +1711,49 @@ $html .= '</tr>';
                     //foreach($device_name as $device):
                     $html .= '
                     <tr>
-                        <td style="padding:3px 10px;">'.$device['order_by'].'</td>
-                        <td style="padding:3px 10px;">1</td>
-                        <td style="padding:3px 10px;width:20%;">'.$device['Instrument']['name'].'</td>
-                        <td style="padding:3px 10px;">'.$device['Brand']['brandname'].'</td>
-                        <td style="padding:3px 10px;">'.$device['model_no'].'</td>
-                        <td style="padding:3px 10px;">'.$device['Range']['range_name'].'</td>';
+                        <td style="padding:3px">'.$device['order_by'].'</td>
+                        <td style="padding:3px;">1</td>
+                        <td style="padding:3px;width:20%;">'.$device['Instrument']['name'].'</td>
+                        <td style="padding:3px;">'.$device['Brand']['brandname'].'</td>
+                        <td style="padding:3px;">'.$device['model_no'].'</td>
+                        <td style="padding:3px;">'.$device['Range']['range_name'].'</td>';
                         for($i=0;$i<=4;$i++):
                         if(isset($titles[$i])):
-                        $html .='<td style="padding:3px 10px;">'.$device['title'.($i+1).'_val'].'</td>';
+                        $html .='<td style="padding:3px;">'.$device['title'.($i+1).'_val'].'</td>';
                         endif;
                         endfor;
                         
-                    $html .='<td style="padding:3px 10px;">'.number_format($device['unit_price'], 2, '.', '').'</td></tr>';
+                    $html .='<td style="padding:3px;">'.number_format($device['unit_price'], 2, '.', '').'</td></tr>';
                 $subtotal = $subtotal + $device['unit_price']; 
-                
+                $distotal = $distotal + ($device['unit_price'] - $device['total']);
                 
          if($k+1 == count($device_name)){       
          $gst = $subtotal * 0.07;
                 $total_due = $gst + $subtotal;
                
-                $html .= '<tr>
-                         <td colspan="'.($count1+5).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">SUBTOTAL $(SGD)</td>
-                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($subtotal, 2, '.', '').'</td>
+               $html .= '<tr>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-top:1px  dashed #666;border-left:1px  dashed #666;">SUBTOTAL $(SGD)</td>
+                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($subtotal, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="'.($count1+5).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">GST ( 7.00% )</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($gst, 2, '.', '').'</td>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">GST ( 7.00% )</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($gst, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="'.($count1+5).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">TOTAL DUE $(SGD)</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-top:1px solid #333;">'.number_format($total_due, 2, '.', '').'</td>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">DISCOUNT ('.$discount.' %)</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($distotal).'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE $(SGD)</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($total_due, 2, '.', '').'</td>
+                    </tr>
+                    <tr>
+                    <td colspan="4" style="padding:10px;"></td>
+                    <td colspan="8" style="padding:10px;"></td>
                     </tr>
                      <tr>
-               <td colspan="3" style="border:1px  dashed #000;text-align:right;padding:3px 10px;color: #000 !important;font-size:15px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #000; text-align:left;padding:3px 10px;font-size:15px !important;">Self Collect & Self Delivery Non-Singlas</td>
+               <td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
+               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td>
           </tr>';
          }
                 if($k%5 == 4 || $k+1 == count($device_name)){

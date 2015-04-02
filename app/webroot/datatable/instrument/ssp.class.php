@@ -128,7 +128,7 @@ class SSP {
 
 				if ( $requestColumn['orderable'] == 'true' ) {
 					$dir = $request['order'][$i]['dir'] === 'asc' ?
-						'ASC' :
+						'DESC' :
 						'DESC';
 
 					$orderBy[] = '`'.$column['db'].'` '.$dir;
@@ -273,7 +273,7 @@ class SSP {
 			 FROM $table
                          $join
 			 $where
-			 
+			 ORDER BY id DESC
 			 $limit"
 		);
                 //print_r($data);

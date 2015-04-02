@@ -968,7 +968,7 @@ $("#search_cusinstrument").hide();
      <label class="col-md-2 control-label" for="val_description">Instrument <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
-                array('id'=>'val_description','class'=>'form-control','ng-model' => 'desc_quo_model','placeholder'=>'Enter the Description','label'=>false,
+                array('id'=>'val_description','class'=>'form-control error-custom','ng-model' => 'desc_quo_model','placeholder'=>'Enter the Description','label'=>false,
                     'name'=>'description','autoComplete'=>'off')); ?>
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
@@ -979,7 +979,7 @@ $("#search_cusinstrument").hide();
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control','label'=>false,'name'=>'quantity')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control error-custom','label'=>false,'name'=>'quantity')); ?>
         <span class="name_error">Enter the Instrument Quantity</span>
     </div>
         
@@ -988,7 +988,7 @@ $("#search_cusinstrument").hide();
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_address">Model No <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control',
+        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_quo_model','class'=>'form-control error-custom',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','autoComplete'=>'off')); ?>
         <div id="search_cusinstrument" class="instrument_drop">  </div>
          <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
@@ -1005,13 +1005,13 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control select-chosen','ng-model' => 'brand_quo_model',
+        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control select-chosen error-custom','ng-model' => 'brand_quo_model',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
         <span class="name_error">Enter the Instrument Brand</span>
     </div>
     <label class="col-md-2 control-label" for="val_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control select-chosen','ng-model' => 'range_quo_model',
+        <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control select-chosen error-custom','ng-model' => 'range_quo_model',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
        <span class="name_error">Enter the Instrument Range</span>
     </div>
@@ -1020,14 +1020,14 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="val_call_location">Cal Location <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control','ng-model' => 'loca_quo_model',
+        <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control error-custom','ng-model' => 'loca_quo_model',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Cal Location')); ?>
         <span class="name_error">Enter the Calibration Location</span>
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Cal Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model',
+        <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control error-custom','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model',
                                       'type'=>'select','ng-init'=>'type_quo_model="Singlas"','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas','empty'=>'Select Cal Type'))); ?>
         <span class="name_error">Enter the Cal Type</span>
     </div>
@@ -1058,7 +1058,7 @@ $("#search_cusinstrument").hide();
     </div>
      <label class="col-md-2 control-label" for="val_account_service">Account Service <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control','ng-model' => 'service_quo_model',
+        <?php echo $this->Form->input('account_service', array('id'=>'val_account_service','class'=>'form-control error-custom','ng-model' => 'service_quo_model',
                                       'label'=>false,'name'=>'account_service','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
         <span class="name_error">Enter the Account Service</span>

@@ -1058,7 +1058,7 @@ $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
         //if($titles[$i] == 2 && $b)
-        if(($i!=2 && !empty($c))||($i!=3 && !empty($d))||($i!=4 && !empty($e)))
+        if(($i==2 && !empty($c))||($i==3 && !empty($d))||($i==4 && !empty($e)||($i==0)||($i==1)))
         {
             $html .='<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">';
             $html .= $titles[$i];
@@ -1083,7 +1083,7 @@ $html .= '</tr>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        if(($i!=2 && !empty($c))||($i!=3 && !empty($d))||($i!=4 && !empty($e)))
+        if(($i==2 && !empty($c))||($i==3 && !empty($d))||($i==4 && !empty($e)||($i==0)||($i==1)))
         {
             $html .='<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">';
             $html .= $titles[$i];
@@ -1110,7 +1110,7 @@ $html .= '</tr>';
                         <td style="padding:3px;">'.$device['Range']['range_name'].'</td>';
                         for($i=0;$i<=4;$i++):
                         if(isset($titles[$i])):
-                            if(($i!=2 && !empty($c))||($i!=3 && !empty($d))||($i!=4 && !empty($e)))
+                            if(($i==2 && !empty($c))||($i==3 && !empty($d))||($i==4 && !empty($e)||($i==0)||($i==1)))
                             {
                                 $html .='<td style="padding:3px;">'.$device['title'.($i+1).'_val'].'</td>';
                             }
