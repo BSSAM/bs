@@ -570,9 +570,10 @@
             $quantity = $this->request->data->instrument_quantity;
             //pr($quantity);exit;
             $instrument_ids = array();
-            
+            //pr($this->request->data);exit;
             for($i=0;$i<$quantity;$i++)
             {
+                
                 $order_by = $this->device_id_session($this->request->data->quotationno);
                 $data['quotationno']   =   $this->request->data->quotationno;
                 $data['customer_id']   =   $this->request->data->customer_id;
@@ -591,7 +592,7 @@
                 $data['total']         =   $this->request->data->instrument_total;
                 $data['title']         =   $this->request->data->instrument_title;
                 $data['order_by']      =   $order_by;
-                $data['status']        =   0;
+                $data['status']        =   $this->request->data->status;
                 //pr($data);//exit;
                 $this->Device->create();
                 if($this->Device->save($data))

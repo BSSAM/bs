@@ -274,7 +274,8 @@ $("#search_cusinstrument").hide();
                         "instrument_account":instrument_account,
                         "instrument_title":instrument_title,
                         "instrument_total":instrument_total,
-                        "quotationno":quotation_id
+                        "quotationno":quotation_id,
+                        "status":0
                     }).success(function(data){
                          $.each(data,function(k,v){
                             //console.log(k);

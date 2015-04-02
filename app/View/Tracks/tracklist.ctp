@@ -1,4 +1,5 @@
- <?php echo $this->Html->script(array('plugins'));  ?>
+
+<?php echo $this->Html->script(array('plugins'));  ?>
 
  <script>
     var _ROOT ='<?PHP echo Router::url('/',true); ?>';
@@ -111,6 +112,7 @@
 		
 		"ajax": _ROOT+"datatable/job/TrackInComplete-table.php?slsid=<?php echo $res; ?>"
         });
+        
       /*  var pressed = false;
         var start = undefined;
         var startX, startWidth;
@@ -140,7 +142,12 @@
             
             $('.dataTable ').after("<div class='new_scroll'></div>");
             $( '.dataTable' ).appendTo( ".new_scroll" );
-            
+            $('.remarks_check').editable(path_url+'/Tracks/remarks', {
+                id        : 'id',
+                name      : 'track_remark',
+                type      : 'text',
+                tooltip   : 'Click to edit'
+               });
         }, 1000);
         
         $("#jump").on( 'keyup change', function () {
@@ -181,18 +188,7 @@
 
 });
 </script>
-<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
-<script type="text/javascript">
-    $(function() {
-    $('.remarks_check').editable(path_url+'/Tracks/remarks', {
-         id        : 'id',
-         name      : 'remark',
-         type      : 'text',
-         cancel    : 'Cancel',
-         submit    : 'Save',
-         tooltip   : 'Click to edit the Remarks'
-    });
-     </script>
+
                 	    <div class="datalog" > <?php //pr($request_search); ?>
                          <form method="post">
                  <?PHP  //echo $this->Form->create('Tracks', array('action' => 'tracklist', 'class' => 'form-horizontal form-bordered')); ?>

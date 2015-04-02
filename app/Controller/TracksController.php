@@ -151,7 +151,7 @@
             $this->autoRender   =   false;
              if ($this->data) {
                 App::uses('Sanitize', 'Utility');
-                $title = Sanitize::clean($this->request->data['remark']);
+                $title = Sanitize::clean($this->request->data['track_remark']);
 
                 $this->Salesorder->id = $this->request->data['id'];
                 $this->Salesorder->saveField('track_remark', $title);

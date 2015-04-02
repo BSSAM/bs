@@ -66,8 +66,8 @@ include 'config.php';
             return '<input type="checkbox" name="data[TrackComplete]['.$d.']" value="'.$d.'" >';
         }),	
 		
-	array( 'db' => 'sals.remarks',  'dt' => 11, 'field' => 'id', 'formatter' => function( $d, $row ) {
-            return '<span class="remarks_check" id='.$d.'></span>';
+	array( 'db' => 'sals.track_remark',  'dt' => 11, 'field' => 'id', 'formatter' => function( $d, $row ) {
+            return '<span class="remarks_check" id='.$d.'>sals.track_remark</span>';
         }),	
 	array( 'db' => 'sals.id',     'dt' => 12 , 'field' => 'id' , 'formatter' => function( $d, $row ) {
             return '-';
