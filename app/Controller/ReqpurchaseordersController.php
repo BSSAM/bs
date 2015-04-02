@@ -417,6 +417,7 @@ margin: 180px 50px;
                  $payment_term = $reqpurchaseorder_details['Reqpurchaseorder']['paymentterm_name'];
                 //$salesorderno = $salesorder_details['Salesorder']['salesorderno'];
                 //$quotationno = $salesorder_details['Salesorder']['quotationno'];
+                
                 foreach($reqpurchaseorder_details['ReqDevice'] as $device):
                     $device_name[] = $device;
                 endforeach;

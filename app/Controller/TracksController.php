@@ -10,7 +10,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','Deliveryorder');
+                            'Instrument','Brand','Customer','Device','Salesorder','Description','Logactivity','Deliveryorder','Title');
        
 	   
 	    public function index()
@@ -48,8 +48,16 @@
 		
         public function tracklist()
         {
-			
-			
+			$completed_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,
+			'Salesorder.is_trackcompleted'=>1),'order' => array('Salesorder.id' =>'DESC')));
+                       // pr($completed_list);
+            $this->set('completed_list',$completed_list);
+			$title =   $this->Title->find('all');
+            foreach($title as $title_name)
+            {
+                $titles[] = $title_name['Title']['title_name'];
+            }
+        $this->set('titles', $titles);
 			$request_search =  1;
 			
 			if(isset($this->request->data['salestrack']) && !empty($this->request->data['TrackComplete']))
@@ -115,16 +123,14 @@
 			}
             else
             {
-                $salesorder_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1)));
+                $salesorder_list = $this->Description->find('all',array('conditions'=>array('Description.is_deleted'=>0)));
               
             }
 			
 			$this->set('track_list',$salesorder_list);
 			$this->set('request_search', $request_search);
 			
-			$completed_list = $this->Salesorder->find('all',array('conditions'=>array('Salesorder.is_deleted'=>0,'Salesorder.is_approved'=>1,
-			'Salesorder.is_trackcompleted'=>1),'order' => array('Salesorder.id' =>'DESC')));
-            $this->set('completed_list',$completed_list);
+			
         }
 		
 		
@@ -140,7 +146,18 @@
            );
            $this->set($params);
         }
-		
+	public function remarks()
+        {
+            $this->autoRender   =   false;
+             if ($this->data) {
+                App::uses('Sanitize', 'Utility');
+                $title = Sanitize::clean($this->request->data['remark']);
+
+                $this->Salesorder->id = $this->request->data['id'];
+                $this->Salesorder->saveField('track_remark', $title);
+                echo $title;
+            }
+        }	
 		
         
     }     

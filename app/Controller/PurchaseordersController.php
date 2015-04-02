@@ -497,9 +497,24 @@ margin: 180px 50px;
                  $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
                 $salesorderno = $salesorder_details['Salesorder']['salesorderno'];
                 $quotationno = $salesorder_details['Salesorder']['quotationno'];
-                foreach($salesorder_details['Description'] as $device):
+                $a = array();
+                $b = array();
+                $c = array();
+                $d = array();
+                $e = array();
+                foreach($salesorder_data['Description'] as $device):
                     $device_name[] = $device;
+                    $a[] = $device['title1_val'];
+                    $b[] = $device['title2_val'];
+                    $c[] = $device['title3_val'];
+                    $d[] = $device['title4_val'];
+                    $e[] = $device['title5_val'];
                 endforeach;
+                $a = array_filter($a);
+                $b = array_filter($b);
+                $c = array_filter($c);
+                $d = array_filter($d);
+                $e = array_filter($e);
                 $ins_type = $quotation_data['InstrumentType']['salesorder'];
    
                 
@@ -661,9 +676,12 @@ $html .= '<div id="content" style="">';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
-        $html .= $titles[$i];
-        $html .='</td>';
+        if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
+        {
+            $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
+            $html .= $titles[$i];
+            $html .='</td>';
+        }
     endif;
     $count1 = $count1+1;
 endfor;
@@ -683,9 +701,12 @@ $html .= '</tr>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        $html .='<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
-        $html .= $titles[$i];
-        $html .='</td>';
+        if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
+        {
+            $html .='<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
+            $html .= $titles[$i];
+            $html .='</td>';
+        }
     endif;
     $count1 = $count1+1;
 endfor;
@@ -706,7 +727,10 @@ $html .= '</tr>';
                         <td style="padding:3px;">'.$device['Range']['range_name'].'</td>';
                         for($i=0;$i<=4;$i++):
                         if(isset($titles[$i])):
-                        $html .='<td style="padding:3px;">'.$device['title'.($i+1).'_val'].'</td>';
+                            if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
+                            {
+                                $html .='<td style="padding:3px;">'.$device['title'.($i+1).'_val'].'</td>';
+                            }
                         endif;
                         endfor;
                        $html .='</tr>';

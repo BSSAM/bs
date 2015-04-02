@@ -891,6 +891,12 @@ margin: 180px 50px;
                     $d[] = $device['title4_val'];
                     $e[] = $device['title5_val'];
                 endforeach;
+                $a = array_filter($a);
+                $b = array_filter($b);
+                $c = array_filter($c);
+                $d = array_filter($d);
+                $e = array_filter($e);
+                
                 //pr($a);pr($b);pr($c);pr($d);pr($e);exit;
                
 $html .=
@@ -1060,7 +1066,7 @@ $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
         //if($titles[$i] == 2 && $b)
-        if(($i==2 && !empty($c))||($i==3 && !empty($d))||($i==4 && !empty($e)||($i==0)||($i==1)))
+        if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
         {
             $html .='<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">';
             $html .= $titles[$i];
@@ -1085,7 +1091,7 @@ $html .= '</tr>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        if(($i==2 && !empty($c))||($i==3 && !empty($d))||($i==4 && !empty($e)||($i==0)||($i==1)))
+         if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
         {
             $html .='<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">';
             $html .= $titles[$i];
@@ -1099,7 +1105,7 @@ $html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;paddi
 
 $html .= '</tr>';
                     }
-                      
+                     
                       
                     //foreach($device_name as $device):
                     $html .= '
@@ -1112,7 +1118,7 @@ $html .= '</tr>';
                         <td style="padding:3px;">'.$device['Range']['range_name'].'</td>';
                         for($i=0;$i<=4;$i++):
                         if(isset($titles[$i])):
-                            if(($i==2 && !empty($c))||($i==3 && !empty($d))||($i==4 && !empty($e)||($i==0)||($i==1)))
+                            if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
                             {
                                 $html .='<td style="padding:3px;">'.$device['title'.($i+1).'_val'].'</td>';
                             }
@@ -1125,7 +1131,19 @@ $html .= '</tr>';
                 $subtotal1 = $subtotal1 + $device['unit_price']; 
                 //$distotal = ($subtotal1 - $sub);
                 
-         if($k+1 == count($device_name)){       
+         if($k+1 == count($device_name)){  
+                        if(!count($c))
+                        {
+                            $count1 = $count1 - 1;
+                        }
+                        if(!count($d))
+                        {
+                            $count1 = $count1 - 1;
+                        }
+                        if(!count($e))
+                        {
+                            $count1 = $count1 - 1;
+                        }
          $gst = $subtotal1 * 0.07;
                 $total_due = ($gst + $subtotal) - $sub;
                

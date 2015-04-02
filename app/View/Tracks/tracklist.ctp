@@ -1,4 +1,5 @@
  <?php echo $this->Html->script(array('plugins'));  ?>
+
  <script>
     var _ROOT ='<?PHP echo Router::url('/',true); ?>';
 	 var path_url='<?PHP echo Router::url('/',true); ?>';
@@ -180,6 +181,18 @@
 
 });
 </script>
+<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
+<script type="text/javascript">
+    $(function() {
+    $('.remarks_check').editable(path_url+'/Tracks/remarks', {
+         id        : 'id',
+         name      : 'remark',
+         type      : 'text',
+         cancel    : 'Cancel',
+         submit    : 'Save',
+         tooltip   : 'Click to edit the Remarks'
+    });
+     </script>
                 	    <div class="datalog" > <?php //pr($request_search); ?>
                          <form method="post">
                  <?PHP  //echo $this->Form->create('Tracks', array('action' => 'tracklist', 'class' => 'form-horizontal form-bordered')); ?>
@@ -226,6 +239,25 @@
                                         <th class="text-center">Customer Name</th>
                                         <th class="text-center">Salesperson Name</th>
                                         <th class="text-center">Branch Name</th>
+                                        <th class="text-center">Device Name</th>
+                                        <th class="text-center">Brand Name</th>
+                                        <th class="text-center">Model No</th>
+                                        <th class="text-center">Range Name</th>
+                                        <th class="text-center">Cal Location</th>
+                                        <th class="text-center">Cal Type</th>
+                                        <th class="text-center">Department Name</th>
+                                        <th class="text-center">Unit Price</th>
+                                        <?php $count1 = 0; for($i=0;$i<=4;$i++):
+    if(isset($titles[$i])):
+        ?>
+        <th class="text-center"><?php 
+        
+        echo $titles[$i]; ?></th>
+        <?php
+    endif;
+    $count1 = $count1+1;
+endfor; ?>
+                                       
                                     </tr>
                                 </thead>
                                </table>
@@ -246,7 +278,7 @@
                                     <?PHP 
                                     $excel = array();
                                     $excel[] = array();
-                                    $excel[] = array('ID','Salesorder No','Due Date','No of Delivery orders','Deliveryorder No','Deliveryorder Date','Invoice No','Invoice Date','Quotation No','Ref No','Job Status','Remarks','Responsible Person','Customer Name','Salesperson Name','Branch Name');
+                                    $excel[] = array('ID','Salesorder No','Due Date','No of Delivery orders','Deliveryorder No','Deliveryorder Date','Invoice No','Invoice Date','Quotation No','Ref No','Job Status','Remarks','Responsible Person','Customer Name','Salesperson Name','Branch Name','Instrument Name','Brand Name','Model No','Range','Cal Location','Cal Type','Unit Price','Account Service','Title1','Title2','Title3','Title4','Title5');
                                     
                                     
                                     if(!empty($track_list)): ?>
@@ -257,7 +289,7 @@
                                     $excel[] = array(($k+1),$track['Salesorder']['id'],$track['Salesorder']['due_date'],$this->Salesorder->find_deliveryorder_nos($track['Salesorder']['id']),
                                         $this->Salesorder->find_deliveryorder_no($track['Salesorder']['id']),$this->Salesorder->find_deliveryorder_date($track['Salesorder']['id']),$this->Salesorder->find_invoice_no($track['Salesorder']['id']),
                                         $this->Salesorder->find_invoice_date($track['Salesorder']['id']),$track['Salesorder']['quotationno'],$track['Salesorder']['ref_no'],$a,
-                                        $track['Salesorder']['remarks'],'-',$this->Salesorder->find_sales_order_customer($track['Salesorder']['id']),$this->Salesorder->salesperson($track['Salesorder']['attn']),$track['branch']['branchname']);
+                                        $track['Salesorder']['remarks'],'-',$this->Salesorder->find_sales_order_customer($track['Salesorder']['id']),$this->Salesorder->salesperson($track['Salesorder']['attn']),'',$track['Instrument']['name'],$track['Brand']['brandname'],$track['Description']['model_no'],$track['Range']['range_name'],$track['Description']['sales_calllocation'],$track['Description']['sales_calltype'],$track['Description']['sales_unitprice'],$track['Description']['sales_accountservice'],$track['Description']['title1_val'],$track['Description']['title2_val'],$track['Description']['title3_val'],$track['Description']['title4_val'],$track['Description']['title5_val']);
                                     
                                     endforeach; ?>
                                     <?PHP endif; ?>

@@ -2,15 +2,20 @@
 include 'config.php';
 
 	// DB table to use
-	$table = 'salesorders as sals';
-	$join = " LEFT JOIN customers as cus ON (sals.customer_id = cus.id)"; 
-	$join .= " LEFT JOIN deliveryorders as delv ON (sals.id = delv.salesorder_id)"; 
-	$join .= " LEFT JOIN invoices as ins ON (sals.id = ins.salesorder_id)"; 
+	$table = 'sal_description as des';
+	$join = " LEFT JOIN customers as cus ON (des.customer_id = cus.id)"; 
+        $join .= " LEFT JOIN salesorders as sals ON (des.salesorder_id = sals.id)";
+	$join .= " LEFT JOIN deliveryorders as delv ON (des.salesorder_id = delv.salesorder_id)"; 
+	$join .= " LEFT JOIN invoices as ins ON (des.salesorder_id = ins.salesorder_id)"; 
 	$join .= " LEFT JOIN cus_contactpersoninfos as ccpi ON (sals.attn = ccpi.id)"; 
-	$join .= " LEFT JOIN branches as brnch ON (sals.branch_id = brnch.id)"; 
+	$join .= " LEFT JOIN branches as brnch ON (sals.branch_id = brnch.id)";
+        $join .= " LEFT JOIN instruments as inst ON (des.instrument_id = inst.id)";
+        $join .= " LEFT JOIN brands as bra ON (des.brand_id = bra.id)";
+        $join .= " LEFT JOIN ranges as ran ON (des.sales_range = ran.id)";
+        $join .= " LEFT JOIN departments as dept ON (des.department_id = dept.id)"; 
 	
 	// Table's primary key  
-	$primaryKey = 'id';
+	$primaryKey = 'sals.id';
 	$res = $_GET['slsid'];
 	if(!empty($res) && $res != 1 )
 	{
@@ -31,7 +36,7 @@ include 'config.php';
         'db'        => 'sals.due_date',
         'dt'        => 1 , 'field' => 'due_date',
         'formatter' => function( $d, $row ) {
-            return date( 'F jS, Y h:i A', strtotime($d));
+            return date( 'j-M-Y', strtotime($d));
         }),
 		
 	array( 'db' => 'sals.id' , 'field' => 'id' , 'dt' => 2,'formatter' => function( $d, $row ) {
@@ -61,8 +66,8 @@ include 'config.php';
             return '<input type="checkbox" name="data[TrackComplete]['.$d.']" value="'.$d.'" >';
         }),	
 		
-	array( 'db' => 'sals.remarks',  'dt' => 11, 'field' => 'remarks', 'formatter' => function( $d, $row ) {
-            return '-';
+	array( 'db' => 'sals.remarks',  'dt' => 11, 'field' => 'id', 'formatter' => function( $d, $row ) {
+            return '<span class="remarks_check" id='.$d.'></span>';
         }),	
 	array( 'db' => 'sals.id',     'dt' => 12 , 'field' => 'id' , 'formatter' => function( $d, $row ) {
             return '-';
@@ -72,7 +77,20 @@ include 'config.php';
 	
 	array( 'db' => 'ccpi.name' , 'field' => 'name' , 'dt' => 14 ),		
 		
-	array( 'db' => 'brnch.branchname' , 'field' => 'branchname' , 'dt' => 15),			
+	array( 'db' => 'brnch.branchname' , 'field' => 'branchname' , 'dt' => 15),
+        array( 'db' => 'inst.name',  'dt' => 16, 'field' => 'name' ),	
+        array( 'db' => 'bra.brandname',  'dt' => 17, 'field' => 'brandname' ),	
+        array( 'db' => 'des.model_no',  'dt' => 18, 'field' => 'model_no' ),
+        array( 'db' => 'ran.range_name',  'dt' => 19, 'field' => 'range_name' ),	
+        array( 'db' => 'des.sales_calllocation',  'dt' => 20, 'field' => 'sales_calllocation' ),
+        array( 'db' => 'des.sales_calltype',  'dt' => 21, 'field' => 'sales_calltype' ),
+        array( 'db' => 'dept.departmentname',  'dt' => 22, 'field' => 'departmentname' ),
+        array( 'db' => 'des.sales_unitprice',  'dt' => 23, 'field' => 'sales_unitprice' ),
+        array( 'db' => 'des.title1_val',  'dt' => 24, 'field' => 'title1_val' ),
+        array( 'db' => 'des.title2_val',  'dt' => 25, 'field' => 'title2_val' ),
+        array( 'db' => 'des.title3_val',  'dt' => 26, 'field' => 'title3_val' ),
+        array( 'db' => 'des.title4_val',  'dt' => 27, 'field' => 'title4_val' ),
+        array( 'db' => 'des.title5_val',  'dt' => 28, 'field' => 'title5_val' ),
 		
 );
 
