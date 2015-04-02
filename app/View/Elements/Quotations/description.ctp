@@ -136,7 +136,7 @@ $("#search_cusinstrument").hide();
             discount_after =  ind - (ind*overall_discount/100);
             gst_after =  ind*gst/100;
             
-            return parseFloat(discount_after - gst_after - sc).toFixed(2);
+            return parseFloat(discount_after + gst_after + sc).toFixed(2);
         }
         
         $scope.get_gst = function(ind){

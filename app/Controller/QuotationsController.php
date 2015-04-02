@@ -1042,6 +1042,8 @@ $html .='<div id="footer">
                         </tr></table>
 </div>';
 $subtotal = 0;
+$subtotal1 = 0;
+$sub = 0;
 $distotal = 0;
 $html .= '<div id="content" style="">'; 
                 foreach($device_name as $k=>$device):
@@ -1117,13 +1119,15 @@ $html .= '</tr>';
                         endif;
                         endfor;
                         
-                    $html .='<td style="padding:3px;">'.number_format($device['unit_price'], 2, '.', '').'</td></tr>';
-                $subtotal = $subtotal + $device['unit_price']; 
-                $distotal = $distotal + ($device['unit_price'] - $device['total']);
+                    $html .='<td style="padding:3px;">'.number_format($device['total'], 2, '.', '').'</td></tr>';
+                $subtotal = $subtotal + $device['total']; 
+                $sub = $sub + (($device['total']*$discount)/100);
+                $subtotal1 = $subtotal1 + $device['unit_price']; 
+                //$distotal = ($subtotal1 - $sub);
                 
          if($k+1 == count($device_name)){       
-         $gst = $subtotal * 0.07;
-                $total_due = $gst + $subtotal;
+         $gst = $subtotal1 * 0.07;
+                $total_due = ($gst + $subtotal) - $sub;
                
                 $html .= '<tr>
                          <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-top:1px  dashed #666;border-left:1px  dashed #666;">SUBTOTAL $(SGD)</td>
@@ -1135,7 +1139,7 @@ $html .= '</tr>';
                     </tr>
                     <tr>
                          <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">DISCOUNT ('.$discount.' %)</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($distotal).'</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($sub).'</td>
                     </tr>
                     <tr>
                          <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE $(SGD)</td>
