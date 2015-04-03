@@ -1,22 +1,21 @@
 
 ID,QuotationNo,QuotationDate,CustomerAddress,ContactPersonName,Phone,Fax,Email,RefNo,Discount,GST,Remarks,TotalPrice,GSTType,CustomerId,CustomerName,PaymentTermsId,ServiceTypeId,IsApproved
-1,BQS-15-000002,2015-03-26,"108 Woodlands Industrial 
+1,BQS-15-000002,31-Mar-2015,"108 Woodlands Industrial 
 Park E3 
 Singapore 757841","MR KEN","6368 0931 / 6368 1355","6265 8418",ken@ableresources.com.sg,"PO#,PO#BQS-15-00002,PO#BQS-15-00002",0,7,,$239.4,Standard,CUS-15-000002,"ABLE RESOURCES ENGINEERING PTE LTD ( MAIN ) ","0 COD",Calibration,1
 2,BQS-15-000003,2015-03-26,"108 Woodlands Industrial 
 Park E3 
 Singapore 757841","MR ANG","6368 0931 / 6368 1355","6265 8418",acy@ableresources.com.sg,PO#,0,7,"REQUIRE PO BEFORE DELIVERY",$336,Standard,CUS-15-000002,"ABLE RESOURCES ENGINEERING PTE LTD ( MAIN ) ","0 COD",Calibration,1
-3,BQS-15-000004,2015-03-27,"41 SENOKO DRIVE
-SINGAPORE 758249",RAJESH,64584411,64584400,rajesh@bsoffshore.com,CPO-15-000002,,7,-,$580,Standard,CUS-15-000004,"BS OFFSHORE PTE LTD ( MAIN ) ","0 COD",Calibration,1
-4,BQS-15-000005,2015-03-27,"11 Senoko Avenue
-Singapore 758301","Mr Thai",65497854,63210259,tianloy@teesin.com.sg,"CPO-15-000004,PO-15-000004",20,7,-,$195,Standard,CUS-15-000003,"TEESIN MACHINERY PTE LTD ( MAIN ) ","14 days",Calibration,1
-5,BQS-15-000006,2015-03-27,"41 SENOKO DRIVE
-SINGAPORE 758249",RAJESH,64584411,64584400,rajesh@bsoffshore.com,"CPO-15-000005,po test 2",,7,-,$920,Standard,CUS-15-000004,"BS OFFSHORE PTE LTD ( MAIN ) ","0 COD",Calibration,1
-6,BQS-15-000007,30-March-15,"45 EUNOS LINK
-SINGAPORE 543234","MS SU",65463434,65353434,su@ge.sg,"CPO-15-000006,PO#000006",,7,-,$1300,Standard,CUS-15-000011,"GE AVIATION LIMITED ( MAIN ) ","30 days",Calibration,1
-7,BQS-15-000008,31-March-15,"45 EUNOS LINK
-SINGAPORE 543234","MS SU",65463434,65353434,su@ge.sg,CPO-15-000007,,7,,$1940,Standard,CUS-15-000011,"GE AVIATION LIMITED ( MAIN ) ","30 days",Calibration,1
-8,BQS-15-000009,31-March-15,"45 EUNOS LINK
-SINGAPORE 543234","MS SU",65463434,65353434,su@ge.sg,"CPO-15-000008,PO-15-#d5343",10,7,,$1440,Standard,CUS-15-000011,"GE AVIATION LIMITED ( MAIN ) ","30 days",Calibration,1
-9,BSQ-15-000011,31-March-15,"11 Senoko Avenue
-Singapore 758301","Mr Thai",65497854,63210259,tianloy@teesin.com.sg,"CPO-15-000010,PO#-15-000010",,,-,$190,,CUS-15-000003,"TEESIN MACHINERY PTE LTD ( MAIN ) ",,Calibration,1
+3,BQS-15-000004,2015-03-26,"108 Woodlands Industrial 
+Park E3 
+Singapore 757841","MR KEN","6368 0931 / 6368 1355","6265 8418",ken@ableresources.com.sg,"CPO-15-000002,#PO-15-000002",,7,--,$105,Standard,CUS-15-000002,"ABLE RESOURCES ENGINEERING PTE LTD ( MAIN ) ","0 COD",Calibration,1
+4,BQS-15-000005,2015-03-26,"108 Woodlands Industrial 
+Park E3 
+Singapore 757841","MR ANG","6368 0931 / 6368 1355","6265 8418",acy@ableresources.com.sg,PO#,,7,--,$175,Standard,CUS-15-000002,"ABLE RESOURCES ENGINEERING PTE LTD ( MAIN ) ","0 COD",Calibration,1
+5,BQS-15-000006,2015-03-26,"108 Woodlands Industrial 
+Park E3 
+Singapore 757841","MR KEN","6368 0931 / 6368 1355","6265 8418",ken@ableresources.com.sg,CPO-15-000003,,7,--,$105,Standard,CUS-15-000002,"ABLE RESOURCES ENGINEERING PTE LTD ( MAIN ) ","0 COD",Calibration,1
+6,BQS-15-000007,2015-03-26,ANSS,aaa,8987987789789,87978979789789,aa1@gmail.com,"PO#,PO#",,7,asd,$64.4,Standard,CUS-15-000004,"New Pvt Ltd ( Main ) ","0 COD",Calibration,1
+7,BQS-15-000008,31-Mar-2015,"108 Woodlands Industrial 
+Park E3 
+Singapore 757841","MR KEN","6368 0931 / 6368 1355","6265 8418",ken@ableresources.com.sg,CPO-15-000004,10,7,,$183.7837925,Standard,CUS-15-000002,"ABLE RESOURCES ENGINEERING PTE LTD ( MAIN ) ","0 COD",Calibration,1

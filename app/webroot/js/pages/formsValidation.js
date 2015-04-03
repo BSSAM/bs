@@ -1792,9 +1792,7 @@ var FormsValidation = function() {
                         required: true,
                         minlength: 1
                     },
-                   "data[PurchaseRequisition][attn]": {
-                        required: true
-                    },
+                   
                     "data[PurchaseRequisition][ref_no]": {
                         required: true
                     },
@@ -1808,9 +1806,7 @@ var FormsValidation = function() {
                         required: 'Customer Name is Required',
                         minlength: 'Customer Name Should Aleast be 1 Characters'
                     }, 
-                    "data[PurchaseRequisition][attn]": {
-                        required: 'Select Contact person'
-                       },
+                    
                     "data[PurchaseRequisition][ref_no]": {
                         required: 'Reference No is Required'
                     },
@@ -1852,9 +1848,7 @@ var FormsValidation = function() {
                         required: true,
                         minlength: 1
                     },
-                   "data[Reqpurchaseorder][attn]": {
-                        required: true
-                    },
+                    
                     "data[Reqpurchaseorder][ref_no]": {
                         required: true
                     },
@@ -1871,9 +1865,7 @@ var FormsValidation = function() {
                         required: 'Customer Name is Required',
                         minlength: 'Customer Name Should Aleast be 1 Characters'
                     }, 
-                    "data[Reqpurchaseorder][attn]": {
-                        required: 'Select Contact person'
-                       },
+                    
                     "data[Reqpurchaseorder][ref_no]": {
                         required: 'Reference No is Required'
                     },

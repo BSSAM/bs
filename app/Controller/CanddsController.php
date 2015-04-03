@@ -510,7 +510,7 @@ margin: 180px 50px;
             $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id,'Candd.assign_id'=>$data_assignto['Assign']['id']),'recursive'=>2));
             
             foreach($cd_statistics as $k=>$cd):
-               if($cd['Candd']['purpose']=='Collection' && $cd['Candd']['is_approved']!=1)
+               if(($cd['Candd']['purpose']=='Collection' && $cd['Candd']['is_approved']==1) || $cd['Candd']['purpose']=='Delivery')
                {
                $cd_contact_id = $cd['Candd']['Contactpersoninfo_id'];
                $data = $this->Contactpersoninfo->find('first',array('conditions'=>array('Contactpersoninfo.id'=>$cd_contact_id)));

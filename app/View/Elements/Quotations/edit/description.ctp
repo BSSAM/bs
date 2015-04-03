@@ -262,7 +262,7 @@ $("#search_cusinstrument").hide();
                             }
                             
                             
-                            //console.log($new_data);
+                            console.log($new_data);
                             $scope.instruments.push($new_data);
                             setTimeout(
                                     function(){
