@@ -47,7 +47,7 @@ if(customer!='')
                                 <!-- END Form Elements Title -->
                                 <!-- Basic Form Elements Content -->
                                 <div class="panel panel-default">
-                                    <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'fileupload','enctype'=>'multipart/form-data')); ?>
+                                    <?php echo $this->Form->create('Quotation',array('class'=>'form-horizontal form-bordered','id'=>'form-quotation-edit','enctype'=>'multipart/form-data')); ?>
                                     <?php echo $this->Form->input('Quotation.customer_id', array('type'=>'hidden','value'=>$quotations_list['Quotation']['customer_id'])); ?>
                                     <div class="panel-body panel-body-nopadding">
                                         

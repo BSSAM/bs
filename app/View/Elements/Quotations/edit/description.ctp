@@ -216,10 +216,10 @@ $("#search_cusinstrument").hide();
                                 model:v.Device.model_no,
                                 location:v.Device.call_location,
                                 type:v.Device.call_type,
-                                "instrument_brand":v.Brand.brandname,
+                                "instrument_brand_text":v.Brand.brandname,
                                 brand_id:v.Brand.id,
                                 validity:v.Device.validity,
-                                "instrument_range":v.Range.range_name,
+                                "instrument_range_text":v.Range.range_name,
                                 range_id:v.Range.id,
                                 price:v.Device.unit_price,
                                 service:v.Device.account_service,
@@ -361,7 +361,7 @@ $("#search_cusinstrument").hide();
                  
                 
                 var customer_id =   $('#QuotationCustomerId').val();
-                var quotation_id =   $('#val_quotationno').val();
+                var quotationno =   $('#val_quotationno').val();
                 var instrument_id   =   $('#QuotationInstrumentId').val();
                 var instrument_quantity =   $('#val_quantity').val();
                 var instrument_name=$('#val_description').val();
@@ -375,6 +375,7 @@ $("#search_cusinstrument").hide();
                 var instrument_validity=$('#val_validity').val();
                 var instrument_unitprice=$('#val_unit_price').val();
                 var instrument_discount=$('#val_discount1').val();
+                var quotation_id = $('#val_quotationid').val();
 //                var overall_discount=$('#val_discount').val();
 //                if(overall_discount!==''){
 //                    instrument_unitprice1 = instrument_unitprice*overall_discount/100;
@@ -430,7 +431,8 @@ $("#search_cusinstrument").hide();
                         "instrument_account":instrument_account,
                         "instrument_title":instrument_title,
                         "instrument_total":instrument_total,
-                        "quotationno":quotation_id,
+                        "quotationno":quotationno,
+                        "quotation_id":quotation_id,
                         "status":1
                     }).success(function(data){
                         //console.log(data); return false;
@@ -442,6 +444,7 @@ $("#search_cusinstrument").hide();
                             $new_data = {
                                 serial:v,
                                 customer_id:customer_id,
+                                quotationno:quotationno,
                                 quotation_id:quotation_id,
                                 "id":v,
                                 "instrument_id":instrument_id,
@@ -580,8 +583,8 @@ $("#search_cusinstrument").hide();
            //console.log(res);
             //$scope.mode = 'add';
             $scope.mode = false;
-            var customer_id =   $('#QuotationCustomerId').val();
-                var quotation_id =   $('#val_quotationno').val();
+                var customer_id =   $('#QuotationCustomerId').val();
+                var quotationno =   $('#val_quotationno').val();
                 var instrument_id   =   $('#QuotationInstrumentId').val();
                 var instrument_quantity =   $('#val_quantity').val();
                 var instrument_name=$('#val_description').val();
@@ -653,7 +656,7 @@ $("#search_cusinstrument").hide();
                     "instrument_account":instrument_account,
                     "instrument_title":instrument_title,
                     "instrument_total":instrument_total,
-                    "quotationno":quotation_id
+                    "quotationno":quotationno
                 }).success(function(data){
                     //console.log(data);
                     //return false;
@@ -1206,7 +1209,7 @@ $(function(){
                 
             </td>
         </tr>
-        <tr ng-hide="instruments.length"><td colspan="10">No Instruments found</td></tr>
+        <tr ng-hide="instruments.length" ><td colspan="13" class="no_instrument{{instruments.length}}">No Instruments found</td></tr>
     </tbody>
 </table>
     <div class="form-group">

@@ -593,7 +593,12 @@
                 $data['title']         =   $this->request->data->instrument_title;
                 $data['order_by']      =   $order_by;
                 $data['status']        =   $this->request->data->status;
-                //pr($data);//exit;
+                if(isset($this->request->data->quotation_id))
+                {
+                    $data['quotation_id']  = $this->request->data->quotation_id;
+                }
+                  
+               // pr($data);exit;
                 $this->Device->create();
                 if($this->Device->save($data))
                 {

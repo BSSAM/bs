@@ -1166,7 +1166,10 @@ var FormsValidation = function() {
                     },
                     "data[Customerspecialneed][currency_id]":{
                         required: true
-                    } 
+                    },
+                    "data[Customerspecialneed][service_id]":{
+                         required: true
+                    }
                    
                 },
                 messages: {
@@ -1188,9 +1191,110 @@ var FormsValidation = function() {
                     },
                     "data[Customerspecialneed][currency_id]":{
                         required: 'Currency is Required'
+                    },
+                    "data[Customerspecialneed][service_id]":{
+                         required: 'Service Type is Required'
+                    }
+                    
+                    
+                },
+                submitHandler: function(e,validator) { 
+                    var submit_string = $('.no_instrument0').html();
+                    if(submit_string == 'No Instruments found')
+                    {
+                        $('#val_description').focus();
+                        alert('Atleast One Instrument is needed');
+                        return false;
                     } 
+                }
+                
+                
+            });
+            
+            $('#form-quotation-edit').validate({
+               ignore: ".ignore",
+                invalidHandler: function(e, validator){
+                    if(validator.errorList.length)
+                    $('#tabs a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+                },
+               
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.col-md-4 > div').append(error);
+                     e.parents('.instrument_details > div').append(error);
+                   // e.parents('.basic-wizard > tab').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.instrument_details').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.col-md-4').removeClass('has-success has-error');
+                    e.closest('.instrument_details').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    customername: {
+                        required: true,
+                        minlength: 1
+                    },
+                    "data[Quotation][ref_no]": {
+                        required: true
+                    },
+                    "data[Quotation][attn]": {
+                        required: true
+                    },
+                    "data[Quotation][instrument_type_id]": {
+                        required: true    
+                    },
+                    "data[Customerspecialneed][gsttype]":{
+                        required: true
+                    },
+                    "data[Customerspecialneed][currency_id]":{
+                        required: true
+                    },
+                    "data[Customerspecialneed][service_id]":{
+                         required: true
+                    }
+                   
+                },
+                messages: {
+                    customername: {
+                        required: 'Customer Name is Required',
+                        minlength: 'Customer Name Should Aleast be 1 Characters'
+                    }, 
+                    "data[Quotation][ref_no]": {
+                        required: 'Ref No is Required'
+                       },
+                    "data[Quotation][attn]": {
+                        required: 'Contact Person is Required'
+                    },
+                    "data[Quotation][instrument_type_id]":{
+                        required: 'Instrument Details is Required'
+                    },
+                    "data[Customerspecialneed][gsttype]":{
+                        required: 'GST Type is Required'
+                    },
+                    "data[Customerspecialneed][currency_id]":{
+                        required: 'Currency is Required'
+                    },
+                    "data[Customerspecialneed][service_id]":{
+                         required: 'Service Type is Required'
+                    }
                     
                     
+                },
+                submitHandler: function(e,validator) { 
+                    var submit_string = $('.no_instrument0').html();
+                    if(submit_string == 'No Instruments found')
+                    {
+                        $('#val_description').focus();
+                        alert('Atleast One Instrument is needed');
+                        return false;
+                    } 
                 }
                 
                 
