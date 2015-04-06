@@ -36,7 +36,13 @@ class SubcontractdosController extends AppController
             $this->set('titles',$titles);
         if($this->request->is('post'))
         {
-            //pr($this->request->data);exit;
+            //pr($this->request->data);
+            $salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$this->request->data['Subcontractdo']['salesorder_id']),'recursive'=>'2','contain'=>array('Description')));
+            $customer_details =  $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$salesorder_details['Salesorder']['customer_id'],'Customer.status'=>1,'Customer.is_deleted'=>0))); 
+            //pr($salesorder_details);exit;
+            $this->request->data['Subcontractdo']['subcontract_cus_id'] = $salesorder_details['Salesorder']['customer_id'];
+            $this->request->data['Subcontractdo']['subcontract_cus_name'] = $customer_details['Customer']['customername'];
+            $this->request->data['Subcontractdo']['branch_id'] = $salesorder_details['Salesorder']['branch_id'];
             $description_list   =  $this->request->data['description_list'];
             $salesorder_id = $this->request->data['Subcontractdo']['salesorder_id'];
             if(!empty($this->request->data['Subcontractdo']))
@@ -323,8 +329,8 @@ margin: 180px 50px;
             }
             //pr($salesorder_data);
             //foreach ($salesorder_data as $salesorder_data_list):
-                $customername = $salesorder_details['Customer']['customername'];
-                $billing_address = $salesorder_details['Salesorder']['address'];
+                $customername = $subcontractdo_details['Subcontractdo']['subcontract_name'];
+                $billing_address = $subcontractdo_details['Subcontractdo']['subcontract_address'];
                 $postalcode = $salesorder_details['Customer']['postalcode'];
                 $contactperson = $quotation_data['Customer']['Contactpersoninfo'][0]['name'];
                 $phone = $salesorder_details['Salesorder']['phone'];

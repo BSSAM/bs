@@ -376,6 +376,7 @@ $("#search_cusinstrument").hide();
                 var instrument_unitprice=$('#val_unit_price').val();
                 var instrument_discount=$('#val_discount1').val();
                 var quotation_id = $('#val_quotationid').val();
+                
 //                var overall_discount=$('#val_discount').val();
 //                if(overall_discount!==''){
 //                    instrument_unitprice1 = instrument_unitprice*overall_discount/100;
@@ -611,7 +612,7 @@ $("#search_cusinstrument").hide();
                 var instrument_department=$('#val_department_id').val();
                 var instrument_account=$('#val_account_service').val();
                 var instrument_title=$('#val_title').val();
-            
+                var quotation_id = $('#val_quotationid').val();
             
             errr = 0;
                 
@@ -656,7 +657,8 @@ $("#search_cusinstrument").hide();
                     "instrument_account":instrument_account,
                     "instrument_title":instrument_title,
                     "instrument_total":instrument_total,
-                    "quotationno":quotationno
+                    "quotationno":quotationno,
+                    "quotation_id":quotation_id
                 }).success(function(data){
                     //console.log(data);
                     //return false;
@@ -1107,14 +1109,14 @@ $("#search_cusinstrument").hide();
             'options'=>$titles,'placeholder'=>'Enter the Title','multiple','onclick'=>'setMaximumSelected(5,this)')); ?>
     </div>
 </div>
-    <?php //if($quotations_list['Quotation']['is_approved'] != 1){ ?>
+    <?php if($quotations_list['Quotation']['is_approved'] != 1){ ?>
 <div class="form-group form-actions" ng-show="mode=='add'">
     <div class="col-md-9 col-md-offset-10 update_device">
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-disabled' => 'quotation_add.$invalid', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
         
     </div>
 </div>
-    <?php //} ?>
+    <?php } ?>
 
 <div class="form-group form-actions" ng-show="mode=='edit'">
     <div class="col-md-9 col-md-offset-10 update_device">

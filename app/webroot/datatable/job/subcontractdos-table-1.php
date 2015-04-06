@@ -29,7 +29,7 @@ $columns = array(
     array( 'db' => 'del.subcontract_dono', 'dt' => 0 , 'field' => 'subcontract_dono'),
     array( 'db' => 'del.subcontract_date', 'dt' => 1 , 'field' => 'subcontract_date'),
 	array( 'db' => 'del.subcontract_duedate', 'dt' => 2 , 'field' => 'subcontract_duedate'),
-    array( 'db' => 'cus.customername', 'dt' => 3  , 'field' => 'customername'),
+    array( 'db' => 'del.subcontract_cus_name', 'dt' => 3  , 'field' => 'subcontract_cus_name'),
     array( 'db' => 'del.subcontract_name', 'dt' =>4  , 'field' => 'subcontract_name'),
 	array( 'db' => 'del.subcontract_phone', 'dt' =>5  , 'field' => 'subcontract_phone'),
     array( 'db' => 'del.subcontract_email', 'dt' => 6 , 'field' => 'subcontract_email' ),

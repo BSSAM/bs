@@ -1014,7 +1014,7 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_instrument.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" style="width: 150px;"><h5 class="">Customer - Instrument</h5></td>
+                                            <td class="text-center" style="width: 150px;"><h5 class="">Instrument Costing</h5></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('app_cusinstrument.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
                                         <tr>

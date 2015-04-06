@@ -94,7 +94,7 @@
                                         <?php //$disable_unit = "disabled = 'disabled'";
                                         $disable_unit = "";
                                         ?>
-                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter Cost of the Instrument','name'=>'unit_price','value'=>'0',$disable_unit, 'onkeypress'=>'return isNumberKey(event)')); ?>
+                                        <?php echo $this->Form->input('unit_price', array('id'=>'unit_price','class'=>'form-control','label'=>false,'type'=>'text','placeholder'=>'Enter Cost of the Instrument','name'=>'unit_price','value'=>0,$disable_unit, 'onkeypress'=>'return isNumberKey(event)')); ?>
                                     </div>
                                     <label class="col-md-1 control-label" for="contract_disc">Contract Disc</label>
                                     <div class="col-md-1">   
@@ -123,9 +123,11 @@
                     <div class="col-md-9 col-md-offset-10 update_device">
                         <?php echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add', array('type' => 'button', 'class' => 'btn btn-sm btn-primary customerinstrument_add', 'escape' => false)); ?>
                     </div>
+                    <?php if($userrole_cus['view']==1){ ?>
                     <div class="col-md-9 col-md-offset-10">
                         <?php if($approve!=1){echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> Approve', array('type' => 'button','id'=>$id1, 'class' => 'btn btn-sm btn-warning customerinstrument_approve', 'escape' => false)); } ?>
                     </div>
+                    <?php } ?>
                 </div>
                 <div class="col-md-12">
                 <div class="table-responsive">

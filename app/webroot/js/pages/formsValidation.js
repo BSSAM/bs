@@ -1355,6 +1355,14 @@ var FormsValidation = function() {
                     }
                     
                 },
+                submitHandler: function(e,validator) {
+                    if(isset($('.no_instrument0').html()))
+                    {
+                        $('#val_instrument').focus();
+                        alert('Atleast One Instrument is needed');
+                        return false;
+                    } 
+                }
                 
             });
            // $('#form-machine-add').
@@ -1417,6 +1425,40 @@ var FormsValidation = function() {
                 
             });
             $('#form-procedure-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    procedure_no: {
+                        required: true
+                    },
+                    department_id: {
+                        required: true,
+                    },
+                    
+                },
+                messages: {
+                    procedure_no: {
+                        required: 'Enter Procedure No',
+                    },
+                    department_id: {
+                        required: 'Select Department Name',
+                    },
+                    
+                }
+            });
+			$('#form-procedure-edit').validate({
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {

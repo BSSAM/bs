@@ -24,14 +24,14 @@
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                <?php echo $this->Form->create('Procedure',array('class'=>'form-horizontal form-bordered','id'=>'form-procedure-add')); ?>
+                                <?php echo $this->Form->create('Procedure',array('class'=>'form-horizontal form-bordered','id'=>'form-procedure-edit')); ?>
                                 
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" for="val_procedure">Procedure No <span class="text-danger">*</span></label>
+                                        <label class="col-md-2 control-label" for="procedure_no">Procedure No <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('procedure_no', array('id'=>'procedure_no','class'=>'form-control','placeholder'=>'Enter the Procedure No','label'=>false,'name'=>'procedure_no')); ?>
                                         </div>
-                                        <label class="col-md-2 control-label" for="to_range">Department <span class="text-danger">*</span></label>
+                                        <label class="col-md-2 control-label" for="department_id">Department <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                            <?php echo $this->Form->input('department_id', array('id'=>'department_id','class'=>'form-control select-chosen','label'=>false,'name'=>'department_id','type'=>'select','options'=>$departments,'empty'=>'Select Department Name')); ?>
                                         </div>
@@ -56,6 +56,7 @@
                                                  <?php if($user_role['ins_procedureno']['edit'] == 1 && $procedure_dat['Procedure']['is_approved']==0): ?>
                                                 <?php if($user_role['app_procedureno']['view'] == 1){ ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_procedure','escape' => false)); ?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php } else {?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php } ?>

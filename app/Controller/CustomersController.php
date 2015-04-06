@@ -574,8 +574,10 @@ class CustomersController extends AppController
     }
     public function instrument_map($id=NULL,$id1=NULL)
     {
+        
         $this->set('approve',1);
         $user_role = $this->userrole_permission();
+        $this->set('userrole_cus',$user_role['app_cusinstrument']);
         if($id!=NULL)
         {
             

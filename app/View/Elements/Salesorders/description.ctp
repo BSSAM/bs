@@ -139,7 +139,22 @@ $("#search_cusinstrument").hide();
         $('#sales_quantity').prop("disabled", false);
         $('#val_instrument').prop("disabled", false);
        
-            
+        $(".error-custom").change(function(){
+            $(".error-custom").each(function(){
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                    }
+            });
+        });    
             
         $scope.title_change = function()
         {
@@ -169,7 +184,28 @@ $("#search_cusinstrument").hide();
                 var instrument_account=$('#sales_accountservice').val();
                 var instrument_title=$('#val_title').val();
 
-
+                errr = 0;
+                
+                $(".error-custom").each(function(){
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                        errr++;
+                    }
+                });
+                
+                if(errr)
+                    return false;
+                
+                
                     $http.post(path_url+'Salesorders/sales_add_instrument_2/',{
                         instrument_quantity:instrument_quantity,
                         "instrument_validity":instrument_validity,
@@ -362,7 +398,28 @@ $("#search_cusinstrument").hide();
                 var instrument_account=$('#sales_accountservice').val();
                 var instrument_title=$('#val_title').val();
              
-            
+                errr = 0;
+                
+                $(".error-custom").each(function(){
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                        errr++;
+                    }
+                });
+
+                if(errr)
+                    return false;
+                
+                
                 $http.post(path_url+'Salesorders/update_instrument/', {
                     device_id:$scope.edit_id,
                     instrument_quantity:instrument_quantity,
@@ -719,36 +776,41 @@ $("#search_cusinstrument").hide();
     <label class="col-md-2 control-label" for="val_description">Instrument <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('description', 
-                array('id'=>'val_instrument','class'=>'form-control','ng-model' => 'ins_sales_model','placeholder'=>'Enter the Description','label'=>false,
+                array('id'=>'val_instrument','class'=>'form-control error-custom','ng-model' => 'ins_sales_model','placeholder'=>'Enter the Description','label'=>false,
                     'name'=>'instrument','autoComplete'=>'off')); ?>
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
-         <span class="help-block_login ins_error">Enter the Instrument Name</span>
+         
         <div id="search_instrument"></div>
+        <span class="help-block_login ins_error">Enter the Instrument Name</span>
+         <span class="name_error">Instrument Name is Required</span>
     </div>
     <label class="col-md-2 control-label" for="sales_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','ng-model' => 'quan_sales_model','class'=>'form-control','label'=>false,'name'=>'sales_quantity','onkeypress'=>'return isNumberKey(event)','placeholder'=>'Enter the Quantity ( only Numbers )')); ?>
+        <?php echo $this->Form->input('quantity', array('id'=>'sales_quantity','ng-model' => 'quan_sales_model','class'=>'form-control error-custom','label'=>false,'name'=>'sales_quantity','onkeypress'=>'return isNumberKey(event)','placeholder'=>'Enter the Quantity ( only Numbers )')); ?>
+        <span class="name_error">Instrument Quantity is Required</span>
     </div>
         
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="val_model_no">Model No <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_sales_model','class'=>'form-control',
+        <?php echo $this->Form->input('model_no', array('id'=>'val_model_no','ng-model' => 'model_sales_model','class'=>'form-control error-custom',
                                                'placeholder'=>'Enter the Model Number','label'=>false,'name'=>'model_no','autoComplete'=>'off')); ?>
         <div id="search_cusinstrument">  </div>
          <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                 //'label'=>false,'name'=>'model_no','type'=>'select','empty'=>'Enter the Model Number')); ?>
         <span class="help-block_login insmo_error">Enter the Instrument Model No</span>
+        <span class="name_error">Instrument Model No is Required</span>
     </div>
     
     
     <label class="col-md-2 control-label" for="val_brand">Brand <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control select-chosen','ng-model' => 'brand_sales_model',
+        <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control select-chosen error-custom','ng-model' => 'brand_sales_model',
                                                 'label'=>false,'name'=>'brand_id','type'=>'select','empty'=>'Select Brand')); ?>
         <span class="help-block_login brand_error">Select the Brand Name</span>
+        <span class="name_error">Instrument Brand is Required</span>
     </div>
         
 </div>
@@ -757,8 +819,9 @@ $("#search_cusinstrument").hide();
     
     <label class="col-md-2 control-label" for="sales_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
-         <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control select-chosen','ng-model' => 'range_sales_model',
+         <?php echo $this->Form->input('range', array('id'=>'sales_range','class'=>'form-control select-chosen error-custom','ng-model' => 'range_sales_model',
                                                 'label'=>false,'name'=>'range_id','type'=>'select','empty'=>'Select Range')); ?>
+        <span class="name_error">Instrument Range is Required</span>
         
     </div>
     <label class="col-md-2 control-label" for="sales_validity">Validity (in months) </label>
@@ -771,16 +834,17 @@ $("#search_cusinstrument").hide();
 <div class="form-group">
     <label class="col-md-2 control-label" for="sales_calllocation">Call Location <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_location', array('id'=>'sales_calllocation','class'=>'form-control','ng-model' => 'loca_sales_model',
+        <?php echo $this->Form->input('call_location', array('id'=>'sales_calllocation','class'=>'form-control error-custom','ng-model' => 'loca_sales_model',
                                                 'label'=>false,'name'=>'sales_calllocation','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Call Location')); ?>
-     
+     <span class="name_error">Instrument Cal Location is Required</span>
     </div>
     <label class="col-md-2 control-label" for="sales_calltype">Call Type <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('call_type', array('id'=>'sales_calltype','class'=>'form-control','label'=>false,'name'=>'sales_calltype','ng-model' => 'type_sales_model',
+        <?php echo $this->Form->input('call_type', array('id'=>'sales_calltype','class'=>'form-control error-custom','label'=>false,'name'=>'sales_calltype','ng-model' => 'type_sales_model',
                                       'type'=>'select','options'=>array('Singlas'=>'Singlas',
                                           'Non-Singlas'=>'Non-Singlas'),'empty'=>'Select Call Type')); ?>
+        <span class="name_error">Instrument Cal Type is Required</span>
     </div>
 </div>
 
@@ -803,9 +867,10 @@ $("#search_cusinstrument").hide();
     </div>
      <label class="col-md-2 control-label" for="sales_accountservice">Account Service <span class="text-danger">*</span></label>
     <div class="col-md-4">
-        <?php echo $this->Form->input('account_service', array('id'=>'sales_accountservice','class'=>'form-control','ng-model' => 'service_sales_model',
+        <?php echo $this->Form->input('account_service', array('id'=>'sales_accountservice','class'=>'form-control error-custom','ng-model' => 'service_sales_model',
                                       'label'=>false,'name'=>'sales_accountservice','options'=>array('calibration service'=>'Calibration Service'),
                                       'empty'=>'Select Account Service')); ?>
+        <span class="name_error">Account Service is Required</span>
         <?php //echo $this->Form->input('sales_accountservice', array('id'=>'sales_accountservice','class'=>'form-control','ng-model' => 'service_sales_model',
                                       //'label'=>false,'name'=>'sales_accountservice','value'=>'Calibration Service')); ?>
      
@@ -926,7 +991,7 @@ $(function(){
                 
             </td>
         </tr>
-        <tr ng-hide="instruments.length"><td colspan="12">No Instruments found</td></tr>
+        <tr ng-hide="instruments.length"><td colspan="12" class="no_instrument{{instruments.length}}">No Instruments found</td></tr>
     </tbody>
 </table>
 </ng-form>

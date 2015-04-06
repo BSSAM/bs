@@ -1398,7 +1398,7 @@ $html .=
      <table width="98%" height="56">
           <tr>
                <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">SALESORDER</div></td>
-               <td width="391" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;"">COMPANY REG NO. 200510697M</div></td>
+               <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;"">COMPANY REG NO. 200510697M</div></td>
           </tr>
      </table>
      <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">

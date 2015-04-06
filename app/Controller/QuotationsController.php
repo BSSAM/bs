@@ -673,6 +673,10 @@
             $data['unit_price']    =   $this->request->data->instrument_unitprice;
             $data['account_service']=  $this->request->data->instrument_account;
             $data['total']          =  $this->request->data->instrument_total;
+            if(isset($this->request->data->quotation_id))
+            {
+                $data['quotation_id']  = $this->request->data->quotation_id;
+            }
             if($this->Device->save($data))
             {
                $this->Session->setFlash(__('Instrument has been Updated Successfully'));
