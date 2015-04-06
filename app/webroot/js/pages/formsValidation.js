@@ -1198,14 +1198,13 @@ var FormsValidation = function() {
                     
                     
                 },
-                submitHandler: function(e,validator) { 
-                    var submit_string = $('.no_instrument0').html();
-                    if(submit_string == 'No Instruments found')
+                submitHandler: function() {
+                    if(isset($('.no_instrument0').html()))
                     {
                         $('#val_description').focus();
                         alert('Atleast One Instrument is needed');
                         return false;
-                    } 
+                    }
                 }
                 
                 
@@ -1287,9 +1286,8 @@ var FormsValidation = function() {
                     
                     
                 },
-                submitHandler: function(e,validator) { 
-                    var submit_string = $('.no_instrument0').html();
-                    if(submit_string == 'No Instruments found')
+                submitHandler: function(e,validator) {
+                    if(isset($('.no_instrument0').html()))
                     {
                         $('#val_description').focus();
                         alert('Atleast One Instrument is needed');

@@ -264,7 +264,7 @@ $(document).ready(function(){
         $('.delivered_check:checked').each(function(i){
           delivered_check[i] = $(this).val();
         });
-        alert(shipped_checked);
+        //alert(shipped_checked);
         var cd_date = $('.cd_date').val();
         if(shipped_checked!=''){
             var conformation  =   window.confirm('Confirm to mark shipped '+shipped_checked+' delivery order');  
