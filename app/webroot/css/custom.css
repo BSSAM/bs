@@ -228,4 +228,4 @@ table th.resizing {
 #val_instrument_type_id_chosen{width:100% !important;}
 .edit_gst_percent{margin-right: 10px;float:left;}
 .edit_gst_div{display: inline-block;}
-.edit_gst_percent input{float: left;font-size: 10px;height: auto !important;margin: 0 23px;padding: 3px; width: auto !important;}
+.name_error_dis{display:none;}

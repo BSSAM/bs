@@ -61,7 +61,7 @@
         $user_role = $this->userrole_permission();
         
         
-        $this->set(compact('ins_cost_user','ins_cost_super','ins_cost_man'));
+        
         $percents =  $this->InsPercent->findById(1);
         
         if($user_role['instr_costing']['edit'] == 1)
@@ -80,7 +80,7 @@
         {
             $this->set('ins_cost_user',0);
         }
-        
+        $this->set(compact('ins_cost_user','ins_cost_super','ins_cost_man'));
         if($user_role['job_quotation']['add'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
@@ -218,6 +218,25 @@
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
         
+        $percents =  $this->InsPercent->findById(1);
+        
+        if($user_role['instr_costing']['edit'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['user']);
+        }
+        elseif($user_role['instr_costing']['view'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['supervisor']);
+        }
+        elseif($user_role['instr_costing']['delete'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['manager']);
+        }
+        else 
+        {
+            $this->set('ins_cost_user',0);
+        }
+        $this->set(compact('ins_cost_user','ins_cost_super','ins_cost_man'));
         /*
          * *****************************************************
          */
@@ -1085,6 +1104,7 @@ for($i=0;$i<=4;$i++):
     endif;
     $count1 = $count1+1;
 endfor;
+$html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';
 $html .= '<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
 
 $html .= '</tr>';
@@ -1111,7 +1131,9 @@ for($i=0;$i<=4;$i++):
     $count1 = $count1+1;
 endfor;
 $count1 = $count1+1;
+$html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';
 $html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
+
 
 $html .= '</tr>';
                     }
@@ -1135,6 +1157,7 @@ $html .= '</tr>';
                         endif;
                         endfor;
                         
+                    $html .='<td style="padding:3px;">'.$device['discount'].'</td>';
                     $html .='<td style="padding:3px;">'.number_format($device['total'], 2, '.', '').'</td></tr>';
                 $subtotal = $subtotal + $device['total']; 
                 $sub = $sub + (($device['total']*$discount)/100);

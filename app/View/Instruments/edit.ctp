@@ -49,7 +49,7 @@
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                <?php echo $this->Form->create('Instrument',array('class'=>'form-horizontal form-bordered','id'=>'form-machine-add')); ?>
+                                <?php echo $this->Form->create('Instrument',array('class'=>'form-horizontal form-bordered','id'=>'form-machine-edit')); ?>
                                 
                                     <div class="form-group">
                                         <label class="col-md-2 control-label" for="machine_name">Name <span class="text-danger">*</span></label>

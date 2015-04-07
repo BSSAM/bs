@@ -408,6 +408,17 @@ $("#search_cusinstrument").hide();
                         $(this).parents(".col-md-4").find('.name_error').show();
                         errr++;
                     }
+                    
+                    if($('#val_discount1').val() >= <?php echo $ins_cost_user ?>)
+                    {
+                        $(this).parents(".col-md-4").find('.name_error_dis').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error_dis').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error_dis').show();
+                        if($('#val_discount1').val()!='')
+                        {
+                            errr++;
+                        }
+                    }
                 });
                 
                 if(errr)
@@ -617,20 +628,31 @@ $("#search_cusinstrument").hide();
             errr = 0;
                 
             $(".error-custom").each(function(){
-                if(($(this).val()).trim())
-                {
-                    $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
-                    $(this).parents(".col-md-4").find('.name_error').css('color','red');
-                    $(this).parents(".col-md-4").find('.name_error').hide();
-                }
-                else
-                {
-                    $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
-                    $(this).parents(".col-md-4").find('.name_error').css('color','red');
-                    $(this).parents(".col-md-4").find('.name_error').show();
-                    errr++;
-                }
-            });
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                        errr++;
+                    }
+                    
+                    if($('#val_discount1').val() >= <?php echo $ins_cost_user ?>)
+                    {
+                        $(this).parents(".col-md-4").find('.name_error_dis').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error_dis').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error_dis').show();
+                        if($('#val_discount1').val()!='')
+                        {
+                            errr++;
+                        }
+                    }
+                });
             
             if(errr)
                 return false;
@@ -1009,10 +1031,11 @@ $("#search_cusinstrument").hide();
                     'name'=>'description','autoComplete'=>'off')); ?>
         <?PHP echo $this->Form->input('instrument_id',array('type'=>'hidden')); ?>
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
+        <div id="search_instrument" class="instrument_drop">  </div>
         <!-- ng-if="quotation_add.desc_quo_model.$viewValue.length>0" -->
         <span class="name_error">Enter the Instrument Name</span>
          <span class="help-block_login inscus_error">Instrument Needs Customer Details</span>
-        <div id="search_instrument" class="instrument_drop">  </div>
+        
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
@@ -1073,9 +1096,11 @@ $("#search_cusinstrument").hide();
 <div class="form-group">
     
     <label class="col-md-2 control-label" for="val_discount1">Discount </label>
-    <div class="col-md-4">
-        <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control',
+     <div class="col-md-4">
+         <!-- ,'max'=>$ins_cost_user -->
+        <?php echo $this->Form->input('discount', array('id'=>'val_discount1','class'=>'form-control error-custom','ng-model' => 'type_quo_discount',
                                                 'placeholder'=>'Enter the discount','label'=>false,'name'=>'discount','type'=>'text', 'onkeypress'=>'return isNumberKey(event)')); ?>
+        <span class="name_error_dis">Please enter a value less than or equal to <?php echo $ins_cost_user; ?>.</span>
     </div>
     <label class="col-md-2 control-label" for="val_unit_price">Unit Price</label>
     <div class="col-md-4">

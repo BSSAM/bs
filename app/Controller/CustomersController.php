@@ -578,6 +578,7 @@ class CustomersController extends AppController
         $this->set('approve',1);
         $user_role = $this->userrole_permission();
         $this->set('userrole_cus',$user_role['app_cusinstrument']);
+        $this->set('userrole_edit',$user_role['instr_costing']);
         if($id!=NULL)
         {
             

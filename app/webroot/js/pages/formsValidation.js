@@ -8,6 +8,7 @@ var FormsValidation = function() {
 
     return {
         init: function() {
+            $.validator.setDefaults({ ignore: ":hidden:not(select)" });
             /*
              *  Jquery Validation, Check out more examples and documentation at https://github.com/jzaefferer/jquery-validation
              */
@@ -1385,10 +1386,10 @@ var FormsValidation = function() {
                     e.closest('.help-block_login').remove();
                 },
                 rules: {
-                    name: {
+                    "data[Instrument][name]": {
                         required: true,
                     },
-                    department_id: {
+                    "data[Instrument][department_id]": {
                         required: true
                     },
                     "data[InstrumentProcedure][procedure_id][]": {
@@ -1403,10 +1404,68 @@ var FormsValidation = function() {
                    
                 },
                 messages: {
-                    name: {
+                    "data[Instrument][name]": {
                         required: 'Instrument Name is Required',
                     }, 
-                    department_id: {
+                    "data[Instrument][department_id]": {
+                        required: 'Department is Required'
+                       },
+                    "data[InstrumentProcedure][procedure_id][]": {
+                        required: 'Instrument Procedure No Required'
+                    },
+                    "data[InstrumentBrand][brand_id][]":{
+                        required: 'Brand Name is Required'
+                    },
+                    "data[InstrumentRange][range_id][]":{
+                        required: 'Range is Required'
+                    } 
+                    
+                    
+                }
+                
+                
+            });
+            $('#form-machine-edit').validate({
+               errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.col-md-4 > div').append(error);
+                     
+                   // e.parents('.basic-wizard > tab').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.col-md-4').removeClass('has-success has-error');
+                    // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    "data[Instrument][name]": {
+                        required: true,
+                    },
+                    "data[Instrument][department_id]": {
+                        required: true
+                    },
+                    "data[InstrumentProcedure][procedure_id][]": {
+                        required: true
+                    },
+                    "data[InstrumentBrand][brand_id][]": {
+                        required: true    
+                    },
+                    "data[InstrumentRange][range_id][]":{
+                        required: true
+                    } 
+                   
+                },
+                messages: {
+                    "data[Instrument][name]": {
+                        required: 'Instrument Name is Required',
+                    }, 
+                    "data[Instrument][department_id]": {
                         required: 'Department is Required'
                        },
                     "data[InstrumentProcedure][procedure_id][]": {
@@ -1443,7 +1502,7 @@ var FormsValidation = function() {
                     procedure_no: {
                         required: true
                     },
-                    department_id: {
+                    "department_id": {
                         required: true,
                     },
                     
@@ -1452,7 +1511,7 @@ var FormsValidation = function() {
                     procedure_no: {
                         required: 'Enter Procedure No',
                     },
-                    department_id: {
+                    "department_id": {
                         required: 'Select Department Name',
                     },
                     
@@ -1937,10 +1996,19 @@ var FormsValidation = function() {
                         minlength: 1
                     },
                    
+                   "data[PurchaseRequisition][attn]": {
+                        required: true
+                    },
                     "data[PurchaseRequisition][ref_no]": {
                         required: true
                     },
                     "data[PurchaseRequisition][instrument_type_id]":{
+                        required: true    
+                    },
+                    "data[PreqCustomerSpecialNeed][gsttype]":{
+                        required: true    
+                    },
+                    "data[PreqCustomerSpecialNeed][currency_id]":{
                         required: true    
                     },
                     
@@ -1950,12 +2018,20 @@ var FormsValidation = function() {
                         required: 'Customer Name is Required',
                         minlength: 'Customer Name Should Aleast be 1 Characters'
                     }, 
-                    
+                    "data[PurchaseRequisition][attn]": {
+                        required: 'Contact Person is Required'
+                    },
                     "data[PurchaseRequisition][ref_no]": {
                         required: 'Reference No is Required'
                     },
                     "data[PurchaseRequisition][instrument_type_id]":{
                         required: 'Instrument Type is Required'
+                    },
+                    "data[PreqCustomerSpecialNeed][gsttype]":{
+                        required: 'Gst Type is Required'    
+                    },
+                    "data[PreqCustomerSpecialNeed][currency_id]":{
+                        required: 'Currency is Required'        
                     },
                     
                 }

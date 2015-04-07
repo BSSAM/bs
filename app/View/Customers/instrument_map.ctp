@@ -120,15 +120,18 @@
                                     </div>
                                 </div>
                 <div class="form-group form-actions">
+                    <?php if($userrole_edit['view']==1){ ?>
                     <div class="col-md-9 col-md-offset-10 update_device">
                         <?php echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add', array('type' => 'button', 'class' => 'btn btn-sm btn-primary customerinstrument_add', 'escape' => false)); ?>
                     </div>
+                    <?php } ?>
                     <?php if($userrole_cus['view']==1){ ?>
                     <div class="col-md-9 col-md-offset-10">
                         <?php if($approve!=1){echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> Approve', array('type' => 'button','id'=>$id1, 'class' => 'btn btn-sm btn-warning customerinstrument_approve', 'escape' => false)); } ?>
                     </div>
                     <?php } ?>
                 </div>
+                    <?php if($userrole_edit['view']==1){ ?>            
                 <div class="col-md-12">
                 <div class="table-responsive">
                 <table id="qofull-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -156,9 +159,11 @@
                             <td class="text-center">
                                 
                                 <div class="btn-group">
+                                    <?php if($userrole_edit['edit']==1){ ?>
                                     <a data-edit="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" class="btn btn-xs btn-default cus_instrument_edit" data-toggle="tooltip" title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
+                                    <?php } ?>
                                     <?PHP if($cusins['CustomerInstrument']['is_approved'] == 1): ?>
                                     <a data-delete="<?PHP echo $cusins['CustomerInstrument']['id']; ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger cus_instrument_delete">
                                         <i class="fa fa-times"></i>
@@ -179,6 +184,7 @@
                 </table>
                 </div>
                 </div>
+                                <?php } ?>
                                 <div class="form-group form-actions">
                                     <div class="col-md-9 col-md-offset-10">
                                         <?php echo $this->Html->link('Submit', array('controller' => 'Customers', 'action' => 'index'), array('class' => 'btn btn-sm btn-primary', 'escape' => false)); ?>
