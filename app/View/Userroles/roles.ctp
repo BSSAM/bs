@@ -174,7 +174,7 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('cus_customer.edit',array('id'=>'edit')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('cus_customer.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('cus_customer.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('cus_customer.instrument',array('id'=>'instrument')); ?><label for="remember">Instrument</label> </div></td>
+<!--                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('cus_customer.instrument',array('id'=>'instrument')); ?><label for="remember">Instrument</label> </div></td>-->
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('cus_customer.tag',array('id'=>'tag')); ?><label for="remember">Tag</label> </div></td>
                                             
                                         </tr>

@@ -181,16 +181,36 @@ $(document).on('click','.approve_invoice',function(){
                                 }
                                 else
                                 {
+                                    if($user_role['app_customer']['view'] == 1){$a = $log_activity_customer_count;$b = $log_activity_customertag_count;}else{$a =0;$b=0; }
+                                    if($user_role['app_quotation']['view'] == 1){$c = $log_activity_quotation_count;}else{$c =0; }
+                                    if($user_role['app_salesorder']['view'] == 1){$d = $log_activity_salesorder_count;}else{$d =0; }
+                                    if($user_role['app_deliveryorder1']['view'] == 1){$e = $log_activity_deliveryorder_count;}else{$e =0; }
+                                    if($user_role['app_invoice']['view'] == 1){$f = $log_activity_invoice_count;}else{$f =0; }
+                                    if($user_role['app_prsupervisor']['view'] == 1){$g = $log_activity_prsuper_count;}else{$g =0; }
+                                    if($user_role['app_prmanager']['view'] == 1){$h = $log_activity_prman_count;}else{$h =0; }
+                                    if($user_role['app_prpurchase']['view'] == 1){$i = $log_activity_prpur_count;}else{$i =0; }
+                                    if($user_role['app_inship']['view'] == 1){$j = $log_activity_cdinfo_count;}else{$j =0; }
+                                    if($user_role['app_clientpo']['view'] == 1){$k = $log_activity_client_count;}else{$k =0; }
+                                    if($user_role['app_subcon']['view'] == 1){$l = $log_activity_subcon_count;}else{$l =0; }
+                                    if($user_role['app_onsite']['view'] == 1){$m = $log_activity_onsite_count;}else{$m =0; }
+                                    if($user_role['app_purchase']['view'] == 1){$n = $log_activity_pur_count;}else{$n =0; }
                                 ?>
-                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($log_activity_customer_count)+($log_activity_customertag_count)+($log_activity_salesorder_count)+($log_activity_cdinfo_count)+($log_activity_deliveryorder_count)+($log_activity_quotation_count)+($log_activity_client_count)+($log_activity_prpur_count)+($log_activity_prman_count)+($log_activity_prsuper_count)+($log_activity_invoice_count)+($log_activity_subcon_count)+($log_activity_onsite_count)+($log_activity_pur_count); ?></span></a></li>
+                                <li><a href="#job_approval">Job Approval <span class="badge animation-floating"><?php echo ($a)+($b)+($c)+($d)+($e)+($f)+($g)+($h)+($i)+($j)+($k)+($l)+($m)+($n); ?></span></a></li>
                                 <?php } 
                                 if($user_role['app_procedureno']['view'] == 0 && $user_role['app_brand']['view'] == 0 && $user_role['app_instrument']['view'] == 0 && $user_role['app_range']['view'] == 0 && $user_role['app_unit']['view'] == 0 ){ 
                                     //return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
                                 }
                                 else
                                 {
+                                    if($user_role['app_procedureno']['view'] == 1){$o = $log_activity_procedure_count;}else{$o =0; }
+                                    if($user_role['app_brand']['view'] == 1){$p = $log_activity_brand_count;}else{$p =0; }
+                                    if($user_role['app_instrument']['view'] == 1){$q = $log_activity_instrument_count;}else{$q =0; }
+                                    if($user_role['app_range']['view'] == 1){$r = $log_activity_range_count;}else{$r =0; }
+                                    if($user_role['app_unit']['view'] == 1){$s = $log_activity_unit_count;}else{$s =0; }
+                                    if($user_role['app_instrumentgroup']['view'] == 1){$t = $log_activity_group_count;}else{$t =0; }
+                                    if($user_role['app_cusinstrument']['view'] == 1){$u = $logactivity_instrument_customer_count;}else{$u =0; }
                                 ?>
-                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($log_activity_instrument_count)+($log_activity_procedure_count)+($log_activity_unit_count)+($log_activity_range_count)+($log_activity_brand_count)+($log_activity_group_count)+($logactivity_instrument_customer_count); ?></span></a></li>
+                                <li><a href="#ins_approval">Instrument Approval <span class="badge animation-floating"><?php echo ($o)+($p)+($q)+($r)+($s)+($t)+($u); ?></span></a></li>
                                 <?php 
                                 }
                                 ?>

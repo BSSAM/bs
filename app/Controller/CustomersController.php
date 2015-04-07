@@ -27,6 +27,7 @@ class CustomersController extends AppController
         }
 		
         $this->set('userrole_cus',$user_role['cus_customer']);
+        $this->set('userrole_ins',$user_role['instr_costing']);
         /*
          * ---------------  Functionality of Users -----------------------------------
          */

@@ -40,7 +40,7 @@ $(function() {
 		//"sScrollX": "100%",
         //"bScrollCollapse": true,
         "ajax": _ROOT+"datatable/customer/customer-table-1.php?edit=<?php echo $userrole_cus['edit'];?>&delete=<?php echo $userrole_cus['delete'];?>
-		&instrument=<?php echo $userrole_cus['instrument'];?>&tag=<?php echo $userrole_cus['tag'];?>&val="+valu
+		&instrument=<?php echo $userrole_ins['view'];?>&tag=<?php echo $userrole_cus['tag'];?>&val="+valu
         });
         
         var pressed = false;
