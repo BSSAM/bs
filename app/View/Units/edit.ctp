@@ -52,6 +52,7 @@
                                                 <?php if($user_role['ins_unit']['edit'] == 1 && $unit_dat['Unit']['is_approved']==0): ?>
                                                 <?php if($user_role['app_unit']['view'] == 1){ ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_unit','escape' => false)); ?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php } else {?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php } ?>
