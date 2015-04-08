@@ -42,6 +42,7 @@
                                         <label class="col-md-2 control-label" for="val_maxtime">Max Time <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('maxtime', array('id'=>'val_maxtime','class'=>'form-control','placeholder'=>'Enter the Max Time','label'=>false,'name'=>'maxtime')); ?>
+                                            <span class="text-danger"> Please Enter Time in HH:MM Format Only</span>
                                         </div>
                                    
                                         <label class="col-md-2 control-label" for="val_purpose">Purpose <span class="text-danger">*</span></label>

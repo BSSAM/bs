@@ -232,71 +232,80 @@ class CanddsController extends AppController
         $candd_data =   $this->Candd->find('count',array('conditions'=>array('Candd.cd_date'=>$date_cd,'Candd.purpose'=>'Collection')));
         $canddsetting =   $this->Canddsetting->find('first',array('conditions'=>array('Canddsetting.is_deleted'=>0,'Canddsetting.purpose'=>'C')));
         
-        if($candd_data>$canddsetting['Canddsetting']['maxtask'])
+        $f = date("H:i");
+        
+        if($canddsetting['Canddsetting']['maxtime'] <= $f)
         {
-            echo "maxtask";
+            echo "maxtime";
         }
         else
         {
-        if($this->Candd->save($this->request->data))
-        {
-            $candd_last_id=$this->Candd->getLastInsertID();
-            $candd_data =   $this->Candd->find('first',array('conditions'=>array('Candd.id'=>$candd_last_id)));
-            /******************
-                    * Log Activity For Approval
-                    */
-            if($this->request->data['purpose'] == 'Collection')
+            if($candd_data>$canddsetting['Canddsetting']['maxtask'])
             {
-                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Collection';
-                    $this->request->data['Logactivity']['logid'] = $candd_last_id;
-                    $this->request->data['Logactivity']['logno'] = $this->request->data['customer_name'];
-                    $this->request->data['Logactivity']['loglink'] = $date_cd;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
+                echo "maxtask";
+            }
+            else
+            {
+                if($this->Candd->save($this->request->data))
+                {
+                    $candd_last_id=$this->Candd->getLastInsertID();
+                    $candd_data =   $this->Candd->find('first',array('conditions'=>array('Candd.id'=>$candd_last_id)));
+                    /******************
+                            * Log Activity For Approval
+                            */
+                    if($this->request->data['purpose'] == 'Collection')
+                    {
+                            $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
+                            $this->request->data['Logactivity']['logactivity'] = 'Add Collection';
+                            $this->request->data['Logactivity']['logid'] = $candd_last_id;
+                            $this->request->data['Logactivity']['logno'] = $this->request->data['customer_name'];
+                            $this->request->data['Logactivity']['loglink'] = $date_cd;
+                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                            $this->request->data['Logactivity']['logapprove'] = 1;
 
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
-                /******************/
-                    
-                /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'C&Dinfo';
-                    $this->request->data['Datalog']['logactivity'] = 'Add Collection';
-                    $this->request->data['Datalog']['logid'] = $candd_last_id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-            }     
-            if($this->request->data['purpose'] == 'Delivery')
-            {
-//                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
-//                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
-//                    $this->request->data['Logactivity']['logid'] = $candd_last_id;
-//                    $this->request->data['Logactivity']['loglink'] = $date_cd;
-//                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-//                    $this->request->data['Logactivity']['logapprove'] = 1;
-//
-//                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-//                    
-//                /******************/
-//                    
-                /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'C&Dinfo';
-                    $this->request->data['Datalog']['logactivity'] = 'Add Delivery';
-                    $this->request->data['Datalog']['logid'] = $candd_last_id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-            }
-                /******************/ 
-            if(!empty($candd_data))
-            {
-                echo json_encode($candd_data);
-            }
+                            $a = $this->Logactivity->save($this->request->data['Logactivity']);
+
+                        /******************/
+
+                        /******************
+                            * Data Log Activity
+                            */
+                            $this->request->data['Datalog']['logname'] = 'C&Dinfo';
+                            $this->request->data['Datalog']['logactivity'] = 'Add Collection';
+                            $this->request->data['Datalog']['logid'] = $candd_last_id;
+                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                            $a = $this->Datalog->save($this->request->data['Datalog']);
+                    }     
+                    if($this->request->data['purpose'] == 'Delivery')
+                    {
+        //                    $this->request->data['Logactivity']['logname'] = 'C&Dinfo';
+        //                    $this->request->data['Logactivity']['logactivity'] = 'Add Delivery';
+        //                    $this->request->data['Logactivity']['logid'] = $candd_last_id;
+        //                    $this->request->data['Logactivity']['loglink'] = $date_cd;
+        //                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+        //                    $this->request->data['Logactivity']['logapprove'] = 1;
+        //
+        //                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
+        //                    
+        //                /******************/
+        //                    
+                        /******************
+                            * Data Log Activity
+                            */
+                            $this->request->data['Datalog']['logname'] = 'C&Dinfo';
+                            $this->request->data['Datalog']['logactivity'] = 'Add Delivery';
+                            $this->request->data['Datalog']['logid'] = $candd_last_id;
+                            $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                            $a = $this->Datalog->save($this->request->data['Datalog']);
+                    }
+                        /******************/ 
+                    if(!empty($candd_data))
+                    {
+                        echo json_encode($candd_data);
+                    }
+                }
             }
         }
     }

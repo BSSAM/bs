@@ -67,6 +67,7 @@
                                                 <?php if($user_role['ins_range']['edit'] == 1 && $range_dat['Range']['is_approved']==0): ?>
                                                 <?php if($user_role['app_range']['view'] == 1){ ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_range','escape' => false)); ?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php } else {?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php } ?>

@@ -40,9 +40,9 @@
                                     </div>
                                 </div>
                                      <div class="form-group form-actions">
-                                        <div class="col-md-9 col-md-offset-3">
+                                        <div class="col-md-9 col-md-offset-11">
                                             <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
-                                            <?php echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
+                                            <?php //echo $this->Form->button('<i class="fa fa-repeat"></i> Reset', array('type'=>'reset','class'=>'btn btn-sm btn-warning','escape' => false)); ?>
 <!--                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>-->
                                         </div>
@@ -52,6 +52,6 @@
                             </div>
                             <!-- END Basic Form Elements Block -->
                         </div>
-    <?php echo $this->Html->script('pages/instrumentsvalidation'); ?>
-        <script>$(function(){ FormsValidation.init(); });</script>
+<!--    <?php //echo $this->Html->script('pages/formsvalidation'); ?>
+        <script>$(function(){ FormsValidation.init(); });</script>-->
                         

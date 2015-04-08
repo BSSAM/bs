@@ -22,7 +22,7 @@
                                 <!-- END Form Elements Title -->
 
                                 <!-- Basic Form Elements Content -->
-                                 <?php echo $this->Form->create('Canddsetting',array('class'=>'form-horizontal form-bordered','id'=>'form-canddsetting-add')); ?>
+                                 <?php echo $this->Form->create('Canddsetting',array('class'=>'form-horizontal form-bordered','id'=>'form-canddsetting-edit')); ?>
                                 
                                     <div class="form-group">
                                        
@@ -42,6 +42,7 @@
                                         <label class="col-md-2 control-label" for="val_maxtime">Max Time <span class="text-danger">*</span> </label>
                                         <div class="col-md-4">
                                             <?php echo $this->Form->input('maxtime', array('id'=>'val_maxtime','class'=>'form-control','placeholder'=>'Enter the Max Time','label'=>false,'name'=>'maxtime')); ?>
+                                            <span class="text-danger"> Please Enter Time in HH:MM Format Only</span>
                                         </div>
                                    
                                         <label class="col-md-2 control-label" for="val_purpose">Purpose <span class="text-danger">*</span></label>

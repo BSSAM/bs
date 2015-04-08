@@ -420,7 +420,18 @@ var FormsValidation = function() {
                         required: true,
                         maxlength: 100
                     },
-                    
+                    companyregno: {
+                        required: true,
+                    },
+                    gstregno: {
+                        required: true,
+                    },
+                    currency_id: {
+                        required: true,
+                    },
+                    gst: {
+                        required: true, 
+                    }
                     
                    
                    
@@ -435,10 +446,65 @@ var FormsValidation = function() {
                         required: 'Address is Required',
                         maxlength: 'The Address should have only 100 characters'
                     },
-                    
-                    
+                    companyregno: {
+                        required: 'Company Reg No is Required',
+                    },
+                    gstregno: {
+                        required: 'GST Reg No is Required',
+                    },
+                    currency_id: {
+                        required: 'Currency is Required',
+                    },
+                    gst: {
+                        required: 'GST is Required',
+                    }
                     
                   
+                }
+            });
+            
+            $('#form-canddsetting-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.col-md-4 > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    branch_id: {
+                        required: true,
+                    },
+                    maxtask: {
+                        required: true,
+                    },
+                    maxtime: {
+                        required: true,
+                    },
+                    purpose: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    branch_id: {
+                        required: 'Branch Name is Required',
+                    },
+                    maxtask: {
+                        required: 'Max Task is Required',
+                    },
+                    maxtime: {
+                        required: 'Max Time is Required',
+                    },
+                    purpose: {
+                        required: 'Purpose is Required',
+                    }
                 }
             });
             
@@ -1200,7 +1266,7 @@ var FormsValidation = function() {
                     
                 },
                 submitHandler: function() {
-                    if(isset($('.no_instrument0').html()))
+                    if($.trim($('.no_instrument0').html()))
                     {
                         $('#val_description').focus();
                         alert('Atleast One Instrument is needed');
@@ -1287,8 +1353,8 @@ var FormsValidation = function() {
                     
                     
                 },
-                submitHandler: function(e,validator) {
-                    if(isset($('.no_instrument0').html()))
+                submitHandler: function() {
+                    if($.trim($('.no_instrument0').html()))
                     {
                         $('#val_description').focus();
                         alert('Atleast One Instrument is needed');
@@ -1356,8 +1422,8 @@ var FormsValidation = function() {
                     }
                     
                 },
-                submitHandler: function(e,validator) {
-                    if(isset($('.no_instrument0').html()))
+                submitHandler: function() {
+                    if($.trim($('.no_instrument0').html()))
                     {
                         $('#val_instrument').focus();
                         alert('Atleast One Instrument is needed');
@@ -1517,7 +1583,7 @@ var FormsValidation = function() {
                     
                 }
             });
-			$('#form-procedure-edit').validate({
+	    $('#form-procedure-edit').validate({
                 errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'div',
                 errorPlacement: function(error, e) {
@@ -1883,6 +1949,33 @@ var FormsValidation = function() {
 //                    
 //                }
 //            });
+            $('#form-title-add').validate({
+                errorClass: 'help-block_login animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.col-md-4 > div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.col-md-4').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block_login').remove();
+                },
+                success: function(e) {
+                    // You can use the following if you would like to highlight with green color the input after successful validation!
+                    e.closest('.col-md-4').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                    e.closest('.help-block_login').remove();
+                },
+                rules: {
+                    title_name: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    title_name: {
+                        required: 'Title Name is Required',
+                    }
+                }
+            });
+            
             $('#form-deliveryorder-add').validate({
                ignore: ".ignore",
                 invalidHandler: function(e, validator){
@@ -1957,9 +2050,6 @@ var FormsValidation = function() {
                     "data[Deliveryorder][customer_address]": {
                         required: 'Delivery Address is Required',
                     }, 
-                    
-                    
-                    
                 }
                 
                 
@@ -2010,7 +2100,7 @@ var FormsValidation = function() {
                     },
                     "data[PreqCustomerSpecialNeed][currency_id]":{
                         required: true    
-                    },
+                    }
                     
                 },
                 messages: {
@@ -2032,12 +2122,13 @@ var FormsValidation = function() {
                     },
                     "data[PreqCustomerSpecialNeed][currency_id]":{
                         required: 'Currency is Required'        
-                    },
+                    }
                     
                 }
                 
                 
             });
+            
             $('#form-prpo-add').validate({
                ignore: ".ignore",
                 invalidHandler: function(e, validator){
@@ -2099,6 +2190,7 @@ var FormsValidation = function() {
                 
                 
             });
+             
             
             // Initialize Masked Inputs
             // a - Represents an alpha character (A-Z,a-z)

@@ -1134,14 +1134,14 @@ $("#search_cusinstrument").hide();
             'options'=>$titles,'placeholder'=>'Enter the Title','multiple','onclick'=>'setMaximumSelected(5,this)')); ?>
     </div>
 </div>
-    <?php if($quotations_list['Quotation']['is_approved'] != 1){ ?>
+    
 <div class="form-group form-actions" ng-show="mode=='add'">
     <div class="col-md-9 col-md-offset-10 update_device">
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button', 'ng-disabled' => 'quotation_add.$invalid', 'ng-click' => 'title_change()', 'class'=>'btn btn-sm btn-primary description_add','escape' => false)); ?>
         
     </div>
 </div>
-    <?php } ?>
+   
 
 <div class="form-group form-actions" ng-show="mode=='edit'">
     <div class="col-md-9 col-md-offset-10 update_device">
@@ -1190,14 +1190,14 @@ $(function(){
             <th class="text-center">Discount</th>
             <th class="text-center">Account Service</th>
             <th class="text-center">Total</th>
-            <th class="text-center edit_title1" ng-show="show_title1"><?php echo $titles[0]; ?></th>
-            <th class="text-center edit_title2" ng-show="show_title2"><?php echo $titles[1]; ?></th>
-            <th class="text-center edit_title3" ng-show="show_title3"><?php echo $titles[2]; ?></th>
-            <th class="text-center edit_title4" ng-show="show_title4"><?php echo $titles[3]; ?></th>
-            <th class="text-center edit_title5" ng-show="show_title5"><?php echo $titles[4]; ?></th>
-            <th class="text-center edit_title6" ng-show="show_title6"><?php echo $titles[5]; ?></th>
-            <th class="text-center edit_title7" ng-show="show_title7"><?php echo $titles[6]; ?></th>
-            <th class="text-center edit_title8" ng-show="show_title8"><?php echo $titles[7]; ?></th>
+            <th class="text-center edit_title1" ng-show="show_title1"><?php if(isset($titles[0])){ echo $titles[0]; } ?></th>
+            <th class="text-center edit_title2" ng-show="show_title2"><?php if(isset($titles[1])){ echo $titles[1]; }  ?></th>
+            <th class="text-center edit_title3" ng-show="show_title3"><?php if(isset($titles[2])){ echo $titles[2]; }  ?></th>
+            <th class="text-center edit_title4" ng-show="show_title4"><?php if(isset($titles[3])){ echo $titles[3]; }  ?></th>
+            <th class="text-center edit_title5" ng-show="show_title5"><?php if(isset($titles[4])){ echo $titles[4]; }  ?></th>
+            <th class="text-center edit_title6" ng-show="show_title6"><?php if(isset($titles[5])){ echo $titles[5]; }  ?></th>
+            <th class="text-center edit_title7" ng-show="show_title7"><?php if(isset($titles[6])){ echo $titles[6]; }  ?></th>
+            <th class="text-center edit_title8" ng-show="show_title8"><?php if(isset($titles[7])){ echo $titles[7]; }  ?></th>
             
             <th class="text-center">Action</th>
         </tr>

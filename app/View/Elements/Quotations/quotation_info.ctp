@@ -80,7 +80,7 @@
     <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
-                                                'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text', 'onkeypress'=>'return isNumberKey(event)')); ?>
+                                                'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text', 'onkeypress'=>'return isNumberKey(event)','onkeyup'=>'sync();')); ?>
     </div>
 </div>
 <div class="form-group">

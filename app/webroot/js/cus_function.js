@@ -85,13 +85,13 @@ $(document).ready(function(){
 //    });
     $(document).on('click','.customerinstrument_add',function(){
        
-        if($('#customer_instrument').val()=='')
-        {
-            $('.customer_instrument').addClass('animation-slideDown');
-            $('.customer_instrument').css('color','red');
-            $('.customer_instrument').show();
-            return false;
-        }
+//        if($('#customer_instrument').val()=='')
+//        {
+//            $('.customer_instrument').addClass('animation-slideDown');
+//            $('.customer_instrument').css('color','red');
+//            $('.customer_instrument').show();
+//            return false;
+//        }
         var range   =   $('#range_array').val();
         var customer_id =   $('#CustomerInstrumentCustomerId').val();
         var instrument_id   =   $('#in_id').val();
@@ -104,7 +104,35 @@ $(document).ready(function(){
         //var status  =   $('#status').val();
         if ($('#status').is(":checked")){ var status = 1;} else { var status = 0; }
       // return false;
-        
+        errr = 0;
+                
+        $(".error-custom").each(function(){
+            if(($(this).val()).trim())
+            {
+                $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                $(this).parents(".col-md-4").find('.name_error').hide();
+            }
+            else
+            {
+                $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                $(this).parents(".col-md-4").find('.name_error').show();
+                errr++;
+            }
+        });
+
+        if(errr)
+            return false;
+                
+        if(cost=='')
+        {
+            cost = '0';
+        }
+        if(total_price=='')
+        {
+            total_price = '0';
+        }
         $.ajax({
             type: 'POST',
             data:"customer_id="+customer_id+"&instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&cost="+cost+"&disc="+disc+"&total_price="+total_price+"&status="+status+"&range_id="+range,
@@ -291,6 +319,28 @@ $(document).ready(function(){
             var status = 0;
         }
         var check=(status==1)?'Active':'In Active';
+        
+        errr = 0;
+                
+        $(".error-custom").each(function(){
+            if(($(this).val()).trim())
+            {
+                $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                $(this).parents(".col-md-4").find('.name_error').hide();
+            }
+            else
+            {
+                $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                $(this).parents(".col-md-4").find('.name_error').show();
+                errr++;
+            }
+        });
+
+        if(errr)
+            return false;
+                
         $.ajax({
             type: 'POST',
             data:"instrument_id="+instrument_id+"&instrument_name="+instrument_name+"&model_no="+model_no+"&cost="+cost+"&disc="+disc+"&total_price="+total_price+"&status="+status+"&range_id="+range+"&device_id="+device_id,

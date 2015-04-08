@@ -75,6 +75,7 @@ class CanddsettingsController extends AppController
         //$this->set('country',$data);
         if($this->request->is('post'))
         {
+            pr($this->request->data);exit;
              $this->request->data['status']=1;
             //pr($dat);exit;
              //$dat = $this->request->params[''];
@@ -82,7 +83,9 @@ class CanddsettingsController extends AppController
              $data1 = $this->branch->findById($match1);
              $match2 = $this->request->data['purpose'];
              $data2 = $this->Canddsetting->findByPurpose($match2);
-             
+        
+        if(empty($match1) && empty($match2))
+        {
             if(!empty($data1) && !empty($data2))
             {
                 $this->Session->setFlash(__('Candd Setting Entered is Already Exist'));
@@ -97,6 +100,11 @@ class CanddsettingsController extends AppController
                 return $this->redirect(array('action'=>'index'));
             }
             $this->Session->setFlash(__('Canddsetting Could Not be Added'));
+        }
+        else
+        {
+            $this->Session->setFlash(__('Canddsetting Values are Empty'));
+        }
            
         }
        

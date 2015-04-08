@@ -1,4 +1,24 @@
-<script>var path_url='<?PHP echo Router::url('/',true); ?>';</script>
+<script>
+    var path_url='<?PHP echo Router::url('/',true); ?>';
+    $(function(){
+        $(".error-custom").change(function(){
+            $(".error-custom").each(function(){
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                    }
+            });
+        });
+    });
+</script>
 
 <h1><i class="gi gi-user"></i>Add Collection & Delivery Info</h1></div></div>
                     <ul class="breadcrumb breadcrumb-top">
@@ -36,19 +56,22 @@
                                         <label class="col-md-2 control-label" for="val_customer">Customer Name <span class="text-danger">*</span></label>
                                          <div class="col-md-4">
                                             <?php echo $this->Form->input('customername', 
-                                                  array('id'=>'val_customer_candd','class'=>'form-control','placeholder'=>'Enter the Customer Name','label'=>false,
+                                                  array('id'=>'val_customer_candd','class'=>'form-control error-custom','placeholder'=>'Enter the Customer Name','label'=>false,
                                                   'autoComplete'=>'off','type'=>'text','name'=>'customername')); ?>
                                          <div id="candd_result"></div>
+                                         <span class="name_error">Customer Name is Required</span>
                                         </div>
                                         <label class="col-md-2 control-label" for="val_purpose">Purpose To <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('purpose', array('id'=>'val_purpose','class'=>'form-control select-chosen','label'=>false,'name'=>'purpose','type'=>'select','empty'=>'Select of purpose','options'=>array('Collection'=>'Collection','Delivery'=>'Delivery'))); ?>
+                                            <?php echo $this->Form->input('purpose', array('id'=>'val_purpose','class'=>'form-control select-chosen error-custom','label'=>false,'name'=>'purpose','type'=>'select','empty'=>'Select of purpose','options'=>array('Collection'=>'Collection','Delivery'=>'Delivery'))); ?>
+                                            <span class="name_error">Purpose is Required</span>
                                         </div>
                                     </div>
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="val_address">Select Address</label>
                                     <div class="col-md-4">
-                                    <?php echo $this->Form->input('addr', array('id'=>'val_addr','class'=>'form-control select-chosen','label'=>false,'name'=>'addr','type'=>'select','empty'=>'Select Customer Address','options'=>array('registered'=>'Registered','billing'=>'Billing','delivery'=>'Delivery'))); ?>
+                                    <?php echo $this->Form->input('addr', array('id'=>'val_addr','class'=>'form-control select-chosen error-custom','label'=>false,'name'=>'addr','type'=>'select','empty'=>'Select Customer Address','options'=>array('registered'=>'Registered','billing'=>'Billing','delivery'=>'Delivery'))); ?>
+                                        <span class="name_error">Address is Required</span>
                                     </div>
                                     <label class="col-md-2 control-label" for="val_assigned">Customer Address</label>
                                     <div class="col-md-4">
@@ -59,18 +82,21 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="val_attn">ATTN <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('attn', array('id'=>'val_attn_candd','class'=>'form-control','label'=>false,'type'=>'select','empty'=>'Select Contact person Name')); ?>
+                                        <?php echo $this->Form->input('attn', array('id'=>'val_attn_candd','class'=>'form-control error-custom','label'=>false,'type'=>'select','empty'=>'Select Contact person Name')); ?>
+                                        <span class="name_error">Contact Person is Required</span>
                                     </div>
                                     <label class="col-md-2 control-label" for="val_phone">Phone <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control',
+                                        <?php echo $this->Form->input('phone', array('id'=>'val_phone','class'=>'form-control error-custom',
                                                 'placeholder'=>'Enter the Phone Number','label'=>false,'autoComplete'=>'off')); ?>
+                                        <span class="name_error">Phone No is Required</span>
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     <label class="col-md-2 control-label" for="val_assigned">Assigned To <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('assigned', array('id'=>'val_assigned','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$assignto,'empty'=>'Select Assigned To')); ?>
+                                        <?php echo $this->Form->input('assigned', array('id'=>'val_assigned','class'=>'form-control select-chosen error-custom','label'=>false,'type'=>'select','options'=>$assignto,'empty'=>'Select Assigned To')); ?>
+                                        <span class="name_error">Assigner To is Required</span>
                                     </div>
                                    <label class="col-md-2 control-label" for="val_remarks">Remarks</label>
                                    <div class="col-md-4">

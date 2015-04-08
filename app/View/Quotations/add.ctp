@@ -14,7 +14,14 @@
     
  $(function(){
     $("#val_reg_date").datepicker("setDate", new Date());
+    
     });
+    function sync()
+    {
+      var n1 = document.getElementById('val_discount');
+      var n2 = document.getElementById('val_discount1');
+      n2.value = n1.value;
+    }
 </script>
 <h1>
                                 <i class="gi gi-user"></i>Add Quotation

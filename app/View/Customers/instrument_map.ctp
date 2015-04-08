@@ -6,8 +6,8 @@
         $('#in_id').val('');
         $('#customer_instrument').val('');
         $('#model_no').val('');
-        $('#unit_price').val('');
-        $('#total_price').val('');
+        $('#unit_price').val('0');
+        $('#total_price').val('0');
         
         var edit_device_id=$(this).attr('data-edit');
         <?php if($id1){ ?>
@@ -16,22 +16,52 @@
         
         <?php }?>
         $(document).on('click','.customerinstrument_approve',function(){
-            if(window.confirm("Are you sure you want to Approve?"))
+            var cost=$('#unit_price').val();
+            var device_id=$(this).attr('id');
+            var customer_id =   $('#CustomerInstrumentCustomerId').val();
+            if(($('#unit_price').val()=='')||($('#unit_price').val()=='0'))
             {
-                var device_id=$(this).attr('id');
-                var customer_id =   $('#CustomerInstrumentCustomerId').val();
-                $.ajax({
-                    type: 'POST',
-                    data:"device_id="+ device_id,
-                    url: path_url+'/Customers/approve_ins_cus/',
-                    success:function(data){
-                        alert("Customer Instrument Approval Successful");
-                        window.location= path_url+ 'Customers/instrument_map/'+customer_id;
-                    }
-                });
+                alert("Cost Should not be Null While Approve");
+                return false;
+            }
+            else
+            {
+                if(window.confirm("Are you sure you want to Approve?"))
+                {
+                    
+                    
+                    $.ajax({
+                        type: 'POST',
+                        data:"device_id="+ device_id,
+                        url: path_url+'/Customers/approve_ins_cus/',
+                        success:function(data){
+                            alert("Customer Instrument Approval Successful");
+                            window.location= path_url+ 'Customers/instrument_map/'+customer_id;
+                        }
+                    });
+                }
             }
         });
+        $(".error-custom").change(function(){
+            $(".error-custom").each(function(){
+                    if(($(this).val()).trim())
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').hide();
+                    }
+                    else
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                    }
+            });
+        });
     });
+    
+        
+    
 </script>
 <h1><i class="gi gi-user"></i>Instrument Pricing</h1>
 </div>
@@ -67,22 +97,24 @@
                                     </div>
                                     <label class="col-md-2 control-label" for="customer_instrument">Instrument Name <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control', 'label' => false, 'name' => 'instrument_name','placeholder'=>'Select Instrument Name')); ?>
+                                        <?php echo $this->Form->input('instrument_name', array('id' => 'customer_instrument', 'class' => 'form-control error-custom', 'label' => false, 'name' => 'instrument_name','placeholder'=>'Select Instrument Name')); ?>
                                         <?PHP echo $this->Form->input('in_id', array('type' => 'hidden', 'id' => 'in_id')); ?>
                                         <div class="instrument_result" style="display:none;"></div>
+                                        <span class="name_error">Instrument is Required</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="model_no">Model No <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <?php echo $this->Form->input('model_no', array('id' => 'model_no', 'class' => 'form-control', 'label' => false, 'placeholder' => 'Enter Model No', 'name' => 'model_no')); ?>
-                                            
+                                        <?php echo $this->Form->input('model_no', array('id' => 'model_no', 'class' => 'form-control error-custom', 'label' => false, 'placeholder' => 'Enter Model No', 'name' => 'model_no')); ?>
+                                        <span class="name_error">Model No is Required</span>    
                                     </div>
                                     <label class="col-md-2 control-label" for="range">Range <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <select id="range_array" name="range" class="form-control select-chosen" data-placeholder="Select Range" style="width: 250px;">
+                                        <select id="range_array" name="range" class="form-control select-chosen error-custom" data-placeholder="Select Range" style="width: 250px;">
 <!--                                            <option value="">Select Range</option>-->
                                         </select>
+                                        <span class="name_error">Range is Required</span>
                                         <?php //echo $this->Form->input('range', array('id'=>'range','class'=>'form-control select-chosen','label'=>false,'type'=>'select','options'=>$range_array,'data-placeholder'=>'Select Range Name','style'=>'width: 250px;','multiple'=>'multiple')); ?>
                                             
                                     </div>

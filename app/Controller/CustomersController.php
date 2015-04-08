@@ -663,6 +663,18 @@ class CustomersController extends AppController
         $cost       =   $this->request->data['cost'];
         $disc       =   $this->request->data['disc'];
         $total_price       =   $this->request->data['total_price'];
+        if($cost=='')
+        {
+            $cost = 0;
+        }
+        if($disc=='')
+        {
+            $disc = 0;
+        }
+        if($total_price=='')
+        {
+            $total_price = 0;
+        }
         
         $customer_instruments_count  = $this->CustomerInstrument->find('count',  array('conditions'=>array('CustomerInstrument.is_deleted'=>0,'CustomerInstrument.customer_id'=>$customer_id),'order'=>'CustomerInstrument.order_by DESC'));
         //pr($customer_instruments_count);exit;

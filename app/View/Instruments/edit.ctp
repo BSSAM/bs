@@ -145,6 +145,7 @@
                                                  <?php if($user_role['ins_instrument']['edit'] == 1 && $instrument_dat['Instrument']['is_approved']==0): ?>
                                                 <?php if($user_role['app_instrument']['view'] == 1){ ?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> <b>Approve</b>',array('type'=>'button','class'=>'btn btn-sm btn-danger approve_instrument','escape' => false)); ?>
+                                                <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php } else {?>
                                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Update',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>
                                                 <?php } ?>
