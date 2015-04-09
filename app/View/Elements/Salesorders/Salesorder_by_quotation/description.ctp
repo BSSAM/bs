@@ -526,7 +526,7 @@ $("#search_cusinstrument").hide();
 //            var instrument_account=$('#val_account_service').val();
 //            var instrument_title=$('#val_title').val();
                 var customer_id =   $('#SalesorderCustomerId').val();
-                var salesorder_id =   $('#SalesorderSalesorderId').val();
+                var salesorder_id =   $('#val_salesorderno').val();
                 var instrument_id   =   $('#SalesorderInstrumentId').val();
                 var instrument_quantity =   $('#sales_quantity').val();
                 var instrument_name=$('#val_instrument').val();
