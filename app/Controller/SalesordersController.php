@@ -318,7 +318,7 @@
                          //pr($this->request->data['Salesorder']['quotationno']);
                          //pr($this->request->data['Salesorder']['salesorderno']);
                          $edit_device_details_check    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>1)));
-                         $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$dmt.'"'),array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>1));
+                         $this->Description->updateAll(array('Description.salesorder_id'=>'"'.$dmt.'"','Description.pending'=>0),array('Description.quotationno'=>$this->request->data['Salesorder']['quotationno'],'Description.pending'=>1));
                         // pr($edit_device_details_check);exit;
                          //pr($sales['Description']);exit;
 //                         foreach($sales['Description'] as $sale):
@@ -977,7 +977,7 @@
             $sales_id= $this->request->data->sales_id;
             $quo_id = $this->request->data->quo_id;
             $this->loadModel('Description');
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.quotationno'=>$quo_id,),'order'=>'Description.order_by asc'));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.quotationno'=>$quo_id),'order'=>'Description.order_by asc'));
             //pr($edit_device_details);
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
