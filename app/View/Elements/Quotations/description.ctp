@@ -493,7 +493,7 @@ $("#search_cusinstrument").hide();
                         errr++;
                     }
                 }
-                if($('#val_discount1').val() <= <?php echo $ins_cost_user ?>)
+                if($('#val_discount1').val() >= <?php echo $ins_cost_user ?>)
                 {
                     $(this).parents(".col-md-4").find('.name_error_dis').addClass('animation-slideDown');
                     $(this).parents(".col-md-4").find('.name_error_dis').css('color','red');
