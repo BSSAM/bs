@@ -973,6 +973,7 @@
             // = json_decode(file_get_contents("php://input"));
             //pr($this->params['requested']);exit;
             $this->request->data = json_decode(file_get_contents("php://input"));
+            pr($this->request->data);
             $sales_id= $this->request->data->sales_id;
             $quo_id = $this->request->data->quo_id;
             $this->loadModel('Description');
@@ -982,6 +983,7 @@
                 $edit_device_val[]=$edit_device;
             endforeach;
             //pr($edit_device_val);exit;
+            pr($quo_id);
             if(empty($edit_device_details)):
             $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.quotationno'=>$quo_id,'Description.pending'=>1),'order'=>'Description.order_by asc'));
             foreach($edit_device_details as $edit_device):
@@ -991,7 +993,7 @@
            //pr($edit_device_val);exit;
             if(!empty($edit_device_val ))
             {
-                echo json_encode($edit_device_val);
+                //echo json_encode($edit_device_val);
             }
             
         }

@@ -617,7 +617,7 @@
                     $data['quotation_id']  = $this->request->data->quotation_id;
                 }
                   
-               // pr($data);exit;
+                //pr($data);exit;
                 $this->Device->create();
                 if($this->Device->save($data))
                 {

@@ -1266,12 +1266,15 @@ var FormsValidation = function() {
                     
                 },
                 submitHandler: function() {
-                    if($.trim($('.no_instrument0').html()))
+                    if($('.no_instrument0').length)
                     {
+                        //alert();
                         $('#val_description').focus();
                         alert('Atleast One Instrument is needed');
                         return false;
                     }
+                    else
+                        form.submit();
                 }
                 
                 
@@ -1353,13 +1356,19 @@ var FormsValidation = function() {
                     
                     
                 },
-                submitHandler: function() {
-                    if($.trim($('.no_instrument0').html()))
+                submitHandler: function(form) {
+                    
+                    //console.log($('.no_instrument0').length);
+                    if($('.no_instrument0').length)
                     {
+                        //alert();
                         $('#val_description').focus();
                         alert('Atleast One Instrument is needed');
                         return false;
-                    } 
+                    }
+                    else
+                        form.submit();
+                    
                 }
                 
                 
@@ -1423,12 +1432,16 @@ var FormsValidation = function() {
                     
                 },
                 submitHandler: function() {
-                    if($.trim($('.no_instrument0').html()))
+                    if($('.no_instrument0').length)
                     {
+                        //alert();
                         $('#val_instrument').focus();
                         alert('Atleast One Instrument is needed');
                         return false;
-                    } 
+                    }
+                    else
+                        form.submit();
+                    
                 }
                 
             });

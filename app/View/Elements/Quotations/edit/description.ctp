@@ -403,10 +403,13 @@ $("#search_cusinstrument").hide();
                     }
                     else
                     {
-                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
-                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
-                        $(this).parents(".col-md-4").find('.name_error').show();
-                        errr++;
+                        if($(this).parents(".col-md-4").find("input").attr("name")!= 'discount')
+                        {
+                            $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                            $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                            $(this).parents(".col-md-4").find('.name_error').show();
+                            errr++;
+                        }
                     }
                     
                     if($('#val_discount1').val() >= <?php echo $ins_cost_user ?>)
@@ -594,7 +597,7 @@ $("#search_cusinstrument").hide();
            //res = $scope.instruments[index];
            //console.log(res);
             //$scope.mode = 'add';
-            $scope.mode = false;
+            //$scope.mode = false;
                 var customer_id =   $('#QuotationCustomerId').val();
                 var quotationno =   $('#val_quotationno').val();
                 var instrument_id   =   $('#QuotationInstrumentId').val();
@@ -636,10 +639,13 @@ $("#search_cusinstrument").hide();
                     }
                     else
                     {
-                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
-                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
-                        $(this).parents(".col-md-4").find('.name_error').show();
-                        errr++;
+                        if($(this).parents(".col-md-4").find("input").attr("name")!= 'discount')
+                        {
+                            $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                            $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                            $(this).parents(".col-md-4").find('.name_error').show();
+                            errr++;
+                        }
                     }
                     
                     if($('#val_discount1').val() >= <?php echo $ins_cost_user ?>)

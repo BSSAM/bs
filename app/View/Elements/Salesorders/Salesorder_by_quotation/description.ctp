@@ -159,7 +159,7 @@ $("#search_cusinstrument").hide();
             $http.post(path_url+'Salesorders/instrument/',{
                         sales_id:sales_id,quo_id:quo_id,
                     }).success(function(data){
-                       // console.log(data);
+                        console.log(data);return false;
                         $.each(data,function(k,v){
                             //console.log(k);
                             //console.log(v);

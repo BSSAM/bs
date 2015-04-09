@@ -3,24 +3,25 @@
 </script>
 <script type="text/javascript">
 $(function(){
-$("#val_customer").keyup(function() 
-{ 
-var customer = $(this).val();
-var dataString = 'name='+ customer;
-if(customer!='')
-{
-	$.ajax({
-	type: "POST",
-	url: "<?PHP echo Router::url('/',true); ?>/Quotations/search",
-	data: dataString,
-	cache: false,
-	success: function(html)
-	{
-            $("#result").html(html).show();
-	}
-	});
-}return false;    
-});
+    $("#val_customer").keyup(function() 
+    { 
+        var customer = $(this).val();
+        var dataString = 'name='+ customer;
+        if(customer!='')
+        {
+            $.ajax({
+            type: "POST",
+            url: "<?PHP echo Router::url('/',true); ?>/Quotations/search",
+            data: dataString,
+            cache: false,
+            success: function(html)
+            {
+                $("#result").html(html).show();
+            }
+            });
+        }
+        //return false;    
+    });
 });
 </script>
 <h1>

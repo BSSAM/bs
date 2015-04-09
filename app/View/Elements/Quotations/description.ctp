@@ -233,10 +233,11 @@ $("#search_cusinstrument").hide();
                 var instrument_account=$('#val_account_service').val();
                 var instrument_title=$('#val_title').val();
                 
-                
+                //alert('1');
                 errr = 0;
                 
                 $(".error-custom").each(function(){
+                    
                     if(($(this).val()).trim())
                     {
                         $(this).parents(".col-md-4").find('.name_error').removeClass('animation-slideDown');
@@ -245,19 +246,25 @@ $("#search_cusinstrument").hide();
                     }
                     else
                     {
-                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
-                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
-                        $(this).parents(".col-md-4").find('.name_error').show();
-                        errr++;
+                        if($(this).parents(".col-md-4").find("input").attr("name")!= 'discount')
+                        {
+                            $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                            //alert($(this).parents(".col-md-4").find("input").attr("name"));
+                            $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                            $(this).parents(".col-md-4").find('.name_error').show();
+                            errr++;
+                        }
+                        //alert(errr);
                     }
                     
                     if($('#val_discount1').val() >= <?php echo $ins_cost_user ?>)
                     {
-                        $(this).parents(".col-md-4").find('.name_error_dis').addClass('animation-slideDown');
-                        $(this).parents(".col-md-4").find('.name_error_dis').css('color','red');
-                        $(this).parents(".col-md-4").find('.name_error_dis').show();
+                        //alert('into');
                         if($('#val_discount1').val()!='')
                         {
+                            $(this).parents(".col-md-4").find('.name_error_dis').addClass('animation-slideDown');
+                            $(this).parents(".col-md-4").find('.name_error_dis').css('color','red');
+                            $(this).parents(".col-md-4").find('.name_error_dis').show();
                             errr++;
                         }
                     }
@@ -265,7 +272,7 @@ $("#search_cusinstrument").hide();
                 
                 if(errr)
                     return false;
-                
+                //alert();
                     $http.post(path_url+'Quotations/add_instrument/',{
                         instrument_quantity:instrument_quantity,
                         "instrument_validity":instrument_validity,
@@ -289,8 +296,8 @@ $("#search_cusinstrument").hide();
                         "status":0
                     }).success(function(data){
                          $.each(data,function(k,v){
-                            //console.log(k);
-                            //console.log(v);
+                            console.log(k);
+                            console.log(v);
                             //return false;
                             $new_data = {
                                 serial:v,
@@ -478,10 +485,13 @@ $("#search_cusinstrument").hide();
                 }
                 else
                 {
-                    $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
-                    $(this).parents(".col-md-4").find('.name_error').css('color','red');
-                    $(this).parents(".col-md-4").find('.name_error').show();
-                    errr++;
+                    if($(this).parents(".col-md-4").find("input").attr("name")!= 'discount')
+                    {
+                        $(this).parents(".col-md-4").find('.name_error').addClass('animation-slideDown');
+                        $(this).parents(".col-md-4").find('.name_error').css('color','red');
+                        $(this).parents(".col-md-4").find('.name_error').show();
+                        errr++;
+                    }
                 }
                 if($('#val_discount1').val() <= <?php echo $ins_cost_user ?>)
                 {
@@ -909,15 +919,15 @@ $("#search_cusinstrument").hide();
         <?PHP echo $this->Form->input('device_id',array('type'=>'hidden','id'=>'device_id')); ?>
         <div id="search_instrument" class="instrument_drop">  </div>
         <!-- ng-if="quotation_add.desc_quo_model.$viewValue.length>0" -->
-        <span class="help-block_login ins_error">Enter the Instrument Name</span>
-        <span class="help-block_login_cus inscus_error">Instrument Needs Customer Details</span>
+<!--        <span class="help-block_login ins_error">Enter the Instrument Name</span>
+        <span class="help-block_login_cus inscus_error">Instrument Needs Customer Details</span>-->
         <span class="name_error">Instrument Name is Required</span>
         
     </div>
     <label class="col-md-2 control-label" for="val_quantity">Quantity <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('quantity', array('id'=>'val_quantity','ng-model' => 'quan_quo_model','class'=>'form-control error-custom','label'=>false,'name'=>'quantity' , 'onkeypress'=>'return isNumberKey(event)')); ?>
-        <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>
+<!--        <span class="help-block_login insqn_error">Enter the Instrument Quantity</span>-->
         <span class="name_error">Instrument Quantity is Required</span>
     </div>
         
@@ -931,7 +941,7 @@ $("#search_cusinstrument").hide();
         <div id="search_cusinstrument"  class="instrument_drop" style="display:none;">  </div>
          <?php //echo $this->Form->input('model_no', array('id'=>'val_model_no','class'=>'form-control',
                                                 //'label'=>false,'name'=>'model_no','type'=>'select','empty'=>'Enter the Model Number')); ?>
-        <span class="help-block_login insmo_error">Enter the Instrument Model No</span>
+<!--        <span class="help-block_login insmo_error">Enter the Instrument Model No</span>-->
         <span class="name_error">Instrument Model No is Required</span>
     </div>
     <label class="col-md-2 control-label" for="val_validity">Validity (in months) </label>
@@ -946,14 +956,14 @@ $("#search_cusinstrument").hide();
     <div class="col-md-4">
         <?php echo $this->Form->input('brand', array('id'=>'val_brand','class'=>'form-control error-custom select-chosen','ng-model' => 'brand_quo_model',
                                                 'label'=>false,'name'=>'brand','type'=>'select','empty'=>'Select Brand')); ?>
-        <span class="help-block_login insbr_error">Enter the Instrument Brand</span>
+<!--        <span class="help-block_login insbr_error">Enter the Instrument Brand</span>-->
         <span class="name_error">Instrument Brand is Required</span>
     </div>
     <label class="col-md-2 control-label" for="val_range">Range <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('range', array('id'=>'val_range','class'=>'form-control error-custom select-chosen','ng-model' => 'range_quo_model',
                                                 'label'=>false,'name'=>'range','type'=>'select','empty'=>'Select Range')); ?>
-       <span class="help-block_login insra_error">Enter the Instrument Range</span>
+<!--       <span class="help-block_login insra_error">Enter the Instrument Range</span>-->
        <span class="name_error">Instrument Range is Required</span>
     </div>
 </div>
@@ -964,7 +974,7 @@ $("#search_cusinstrument").hide();
         <?php echo $this->Form->input('call_location', array('id'=>'val_call_location','class'=>'form-control error-custom','ng-model' => 'loca_quo_model',
                                                 'label'=>false,'name'=>'call_location','type'=>'select','options'=>array('Inlab'=>'In-Lab',
                                                     'subcontract'=>'Sub-Contract','onsite'=>'On Site'),'empty'=>'Select Cal Location')); ?>
-        <span class="help-block_login inscal_error">Enter the Cal Location <span class="text-danger">*</span></span>
+<!--        <span class="help-block_login inscal_error">Enter the Cal Location <span class="text-danger">*</span></span>-->
         <span class="name_error">Instrument Cal Location is Required</span>
     </div>
     <label class="col-md-2 control-label" for="val_call_type">Cal Type<span class="text-danger">*</span></label>
