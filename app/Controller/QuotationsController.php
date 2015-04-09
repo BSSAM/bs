@@ -901,12 +901,14 @@ margin: 180px 50px;
                 $fax = $quotation_data['Customer']['fax'];
                 $email = $quotation_data['Quotation']['email'];
                 $InstrumentType = $quotation_data['InstrumentType']['quotation'];
-                //$our_ref_no = $quotation_data_list['Quotation']['ref_no'];
+                //pr($quotation_data);exit;
                 $ref_no = $quotation_data['Quotation']['ref_no'];
                 $reg_date = $quotation_data['Quotation']['reg_date'];
                 $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
                 $quotationno = $quotation_data['Quotation']['quotationno'];
                 $discount = $quotation_data['Quotation']['discount'];
+                $currency_symbol = $quotation_data['branch']['Currency']['symbol'];
+                $currency_code = $quotation_data['branch']['Currency']['currencycode'];
                 $a = array();
                 $b = array();
                 $c = array();
@@ -1102,10 +1104,11 @@ for($i=0;$i<=4;$i++):
             $html .='</td>';
         }
     endif;
-    $count1 = $count1+1;
+    $count1 = $count1+1; $currency_symbol = $quotation_data['branch']['Currency']['symbol'];
+                $currency_code = $quotation_data['branch']['Currency']['currencycode'];
 endfor;
 $html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';
-$html .= '<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
+$html .= '<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">Total Price '.$currency_symbol.'('.$currency_code.')</td>';
 
 $html .= '</tr>';
                     }
@@ -1132,7 +1135,7 @@ for($i=0;$i<=4;$i++):
 endfor;
 $count1 = $count1+1;
 $html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';
-$html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
+$html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Total Price '.$currency_symbol.'('.$currency_code.')</td>';
 
 
 $html .= '</tr>';
@@ -1181,7 +1184,7 @@ $html .= '</tr>';
                 $total_due = ($gst + $subtotal) - $sub;
                
                 $html .= '<tr>
-                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-top:1px  dashed #666;border-left:1px  dashed #666;">SUBTOTAL $(SGD)</td>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-top:1px  dashed #666;border-left:1px  dashed #666;">SUBTOTAL '.$currency_symbol.'('.$currency_code.')</td>
                          <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($subtotal, 2, '.', '').'</td>
                     </tr>
                     <tr>
@@ -1193,7 +1196,7 @@ $html .= '</tr>';
                          <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($sub).'</td>
                     </tr>
                     <tr>
-                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE $(SGD)</td>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE '.$currency_symbol.'('.$currency_code.')</td>
                          <td style="padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($total_due, 2, '.', '').'</td>
                     </tr>
                     <tr>
