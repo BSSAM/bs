@@ -1020,7 +1020,7 @@
             }
             else
             {
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>1,'Description.is_deleted'=>0),'order'=>'Description.order_by asc'));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.pending'=>0,'Description.is_deleted'=>0),'order'=>'Description.order_by asc'));
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
             endforeach; 
