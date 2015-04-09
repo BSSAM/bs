@@ -977,7 +977,7 @@
             $sales_id= $this->request->data->sales_id;
             $quo_id = $this->request->data->quo_id;
             $this->loadModel('Description');
-            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id),'order'=>'Description.order_by asc'));
+            $edit_device_details    =   $this->Description->find('all',array('conditions'=>array('Description.salesorder_id'=>$sales_id,'Description.quotationno'=>$quo_id,),'order'=>'Description.order_by asc'));
             //pr($edit_device_details);
             foreach($edit_device_details as $edit_device):
                 $edit_device_val[]=$edit_device;
