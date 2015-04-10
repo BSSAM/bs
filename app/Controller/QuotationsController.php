@@ -1162,8 +1162,9 @@ $html .= '</tr>';
                         
                     $html .='<td style="padding:3px;">'.$device['discount'].'</td>';
                     $html .='<td style="padding:3px;">'.number_format($device['total'], 2, '.', '').'</td></tr>';
-                $subtotal = $subtotal + $device['total']; 
-                $sub = $sub + (($device['total']*$discount)/100);
+                    $sub = $sub + ($device['unit_price'] - $device['total']);
+                    $subtotal = $subtotal + $device['total']; 
+                
                 $subtotal1 = $subtotal1 + $device['unit_price']; 
                 //$distotal = ($subtotal1 - $sub);
                 
@@ -1180,8 +1181,15 @@ $html .= '</tr>';
                         {
                             $count1 = $count1 - 1;
                         }
-         $gst = $subtotal1 * 0.07;
-                $total_due = ($gst + $subtotal) - $sub;
+                if($quotation_data['Customerspecialneed']['gst'] == 7)
+                {
+                $gst = $subtotal * 0.07;
+                }
+                else {
+                    $gst = 0.00;
+                }
+                
+                $total_due = ($gst + $subtotal + $quotation_data['Customerspecialneed']['additional_service_value']);
                
                 $html .= '<tr>
                          <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-top:1px  dashed #666;border-left:1px  dashed #666;">SUBTOTAL '.$currency_symbol.'('.$currency_code.')</td>
@@ -1193,7 +1201,11 @@ $html .= '</tr>';
                     </tr>
                     <tr>
                          <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">DISCOUNT ('.$discount.' %)</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($sub).'</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($sub, 2, '.', '').'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">OTHER CHARGES '.$currency_symbol.'('.$currency_code.')</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($quotation_data['Customerspecialneed']['additional_service_value'], 2, '.', '').'</td>
                     </tr>
                     <tr>
                          <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE '.$currency_symbol.'('.$currency_code.')</td>
