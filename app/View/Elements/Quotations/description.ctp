@@ -128,30 +128,51 @@ $("#search_cusinstrument").hide();
             
             //console.log(id);
         };
+        $scope.addtotal_dis = function(ind, id){
+            
+            if(ind == 0)
+            $scope.tttotal1 = 0;
+        
+            $scope.tttotal1 += parseFloat(id);
+            //console.log($scope.tttotal1);
+        };
+        
         $scope.get_discount = function(ind){
-            var overall_discount=$('#val_discount').val();
             var gst=$('#val_gst').val();
             var sc=$('#val_service_charge').val();
-            
-            discount_after =  ind - (ind*overall_discount/100);
             gst_after =  ind*gst/100;
-            
-            return parseFloat(discount_after + gst_after + sc).toFixed(2);
+            return parseFloat(ind + gst_after + sc).toFixed(2);
         }
+//            var overall_discount=$('#val_discount').val();
+//            var gst=$('#val_gst').val();
+//            var sc=$('#val_service_charge').val();
+//            
+//            discount_after =  ind - (ind*overall_discount/100);
+//            gst_after =  ind*gst/100;
+//            
+//            return parseFloat(discount_after + gst_after + sc).toFixed(2);
+        //}
         
         $scope.get_gst = function(ind){
             var gst=$('#val_gst').val();
             var sc=$('#val_service_charge').val();
             gst_after =  ind*gst/100;
-            
             return parseFloat(gst_after + sc).toFixed(2);
         }
+//            var gst=$('#val_gst').val();
+//            var sc=$('#val_service_charge').val();
+//            gst_after =  ind*gst/100;
+//            
+//            return parseFloat(gst_after + sc).toFixed(2);
+        //}
         
-        $scope.discount_red = function(ind){
-            var overall_discount=$('#val_discount').val();
-            
-            return parseFloat(ind*overall_discount/100).toFixed(2);
+        $scope.discount_red = function(ind,ind1){
+            return parseFloat(ind1-ind).toFixed(2);
         }
+//            var overall_discount=$('#val_discount').val();
+//            
+//            return parseFloat(ind*overall_discount/100).toFixed(2);
+        //}
         
         
         
@@ -1096,7 +1117,7 @@ $("#search_cusinstrument").hide();
         </tr>
     </thead>
     <tbody class="Instrument_info"> 
-        <tr ng-repeat="res in instruments | filter:sss" ng-show="start<=$index && $index <= end" data-inc="{{addtotal($index, res.total)}}">
+        <tr ng-repeat="res in instruments | filter:sss" ng-show="start<=$index && $index <= end" data-inc="{{addtotal($index, res.total)}}" data-dec="{{addtotal_dis($index, res.price)}}">
             
             <td>{{$index + 1}}</td>
             <td>{{res.name}}</td>
@@ -1134,7 +1155,7 @@ $("#search_cusinstrument").hide();
     </tbody>
 </table>
     <div class="form-group">
-    <div class="col-md-6 col-md-offset-6"><div class="pull-right"><span class="h4">DISCOUNT : ${{discount_red(tttotal)}}</span></div></div>
+    <div class="col-md-6 col-md-offset-6"><div class="pull-right"><span class="h4">DISCOUNT : ${{discount_red(tttotal,tttotal1)}}</span></div></div>
     </div>
     <div class="form-group">
     <div class="col-md-6 col-md-offset-6"><div class="pull-right"><span class="h4">GST & OTHERS : ${{get_gst(tttotal)}}</span></div></div>
