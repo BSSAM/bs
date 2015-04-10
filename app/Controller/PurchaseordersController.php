@@ -497,12 +497,13 @@ margin: 180px 50px;
                  $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
                 $salesorderno = $salesorder_details['Salesorder']['salesorderno'];
                 $quotationno = $salesorder_details['Salesorder']['quotationno'];
+                //pr($salesorder_data);exit;
                 $a = array();
                 $b = array();
                 $c = array();
                 $d = array();
                 $e = array();
-                foreach($salesorder_data['Description'] as $device):
+                foreach($salesorder_details['Description'] as $device):
                     $device_name[] = $device;
                     $a[] = $device['title1_val'];
                     $b[] = $device['title2_val'];
