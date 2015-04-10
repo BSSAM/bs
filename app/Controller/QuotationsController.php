@@ -1196,7 +1196,7 @@ $html .= '</tr>';
                          <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($subtotal, 2, '.', '').'</td>
                     </tr>
                     <tr>
-                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">GST ( 7.00% )</td>
+                         <td colspan="'.($count1+6).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">GST ( '.$quotation_data['Customerspecialneed']['gst'].'% )</td>
                          <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($gst, 2, '.', '').'</td>
                     </tr>
                     <tr>
