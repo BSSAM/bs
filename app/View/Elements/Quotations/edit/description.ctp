@@ -435,7 +435,7 @@ $("#search_cusinstrument").hide();
                         }
                     }
                     
-                    if($('#val_discount1').val() >= <?php echo $ins_cost_user ?>)
+                    if($('#val_discount1').val() > <?php echo $ins_cost_user ?>)
                     {
                         $(this).parents(".col-md-4").find('.name_error_dis').addClass('animation-slideDown');
                         $(this).parents(".col-md-4").find('.name_error_dis').css('color','red');
@@ -600,6 +600,8 @@ $("#search_cusinstrument").hide();
                     $('#val_discount1').val(null);
                     $('#val_range').trigger('chosen:updated');
                     $('#val_brand').trigger('chosen:updated');
+                    var sd = $('#val_discount').val();
+                    $('#val_discount1').val(sd);
 //                    $('#val_description').val(null);
 //                    $('#val_description').removeAttr("required");
 //                    $('#val_quantity').removeAttr("required");
@@ -841,6 +843,8 @@ $("#search_cusinstrument").hide();
                 $('#val_unit_price').val(null);
                 $('#val_discount1').val(null);
                 $('#val_description').val(null);
+                var sd = $('#val_discount').val();
+                $('#val_discount1').val(sd);
        }
        
        $scope.delete_instrument = function(index)

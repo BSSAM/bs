@@ -123,7 +123,8 @@
                     foreach($delivery_before['Description'] as $desc):
                         if($desc['checking'] == 1):
                             $this->request->data['DelDescription']['deliveryorder_id']          =   $del_last_id;
-                            $this->request->data['DelDescription']['salesorder_id']             =   $desc['id'];
+                            $this->request->data['DelDescription']['sales_desc_id']             =   $desc['id'];
+                            $this->request->data['DelDescription']['salesorder_id']             =   $desc['salesorder_id'];
                             $this->request->data['DelDescription']['order_by']                  =   $desc['order_by'];
                             $this->request->data['DelDescription']['quotation_id']              =   $desc['quotation_id'];
                             $this->request->data['DelDescription']['quotationno']               =   $desc['quotationno'];
@@ -1140,13 +1141,29 @@
                 $email = $deliveryorder_data['Deliveryorder']['email'];
                 //$our_ref_no = $salesorder_data_list['Quotation']['ref_no'];
                 $ref_no = $deliveryorder_data['Deliveryorder']['ref_no'];
+                $po_array = explode(',',$ref_no);
+                for($i=0;$i<count($po_array);$i++):
+                //$po_array[$i];
+                $check_string[] = strchr($po_array[$i], 'CPO');
+                endfor;
+                if(array_filter($check_string)):
+                    $ponumber_check = 0;  // Automatic
+                else:
+                    $ponumber_check = 1;  // Manual
+                endif;
+                if($ponumber_check==0){
+                    $ref_no = '-';
+                }
+                else
+                {
+                    $ref_no = $deliveryorder_data['Deliveryorder']['ref_no'];
+                }
                 $reg_date = $deliveryorder_data['Deliveryorder']['delivery_order_date'];
                 $payment_term = $deliveryorder_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $deliveryorder_data['Customer']['Paymentterm']['paymenttype'];
                 $deliveryorderno = $deliveryorder_data['Deliveryorder']['delivery_order_no'];
                 $quo_no = $deliveryorder_data['Deliveryorder']['quotationno'];
                 $sal_no = $deliveryorder_data['Deliveryorder']['salesorder_id'];
                 $instrument_type = $deliveryorder_data['Salesorder']['Quotation']['InstrumentType']['deliveryorder'];
-                //pr($deliveryorder_data);exit;
                 $a = array();
                 $b = array();
                 $c = array();
@@ -1194,11 +1211,10 @@ $html .=
           <tr>
                <td width="335" ><div style="float:left; "><img src="img/logo.jpg" width="450" height="80" alt="" /></div></td>
                <td><div style="float:left;text-align:right;float:right;line-height:7px !important;font-size:8px !important;">
-                     41 Senoko Drive<br />
-                      Singapore 758249<br />
-                        Tel.+65 6458 4411<br />
-                         Fax.+65 64584400<br />
-                         www.bestandards.com
+                     '.$deliveryorder_data['branch']['address'].'<br/>
+                     Tel - '.$deliveryorder_data['branch']['phone'].'<br/>
+                     Fax - '.$deliveryorder_data['branch']['fax'].'<br/>
+                     '.$deliveryorder_data['branch']['website'].'
                     </div>
 					</td>
           <tr>
@@ -1206,7 +1222,7 @@ $html .=
      <table width="98%" height="56">
           <tr>
                <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">DELIVERY ORDER</div></td>
-               <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">COMPANY REG NO. 200510697M</div></td>
+               <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">COMPANY REG NO. '.$deliveryorder_data['branch']['companyregno'].'</div></td>
           </tr>
      </table>
      <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
@@ -1255,7 +1271,7 @@ $html .=
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-10px;font-weight:bolder;">'.$deliveryorder_data['Deliveryorder']['delivery_order_no'].'</div></td>
+                              <td  width="260" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-10px;font-weight:bolder;">'.$deliveryorder_data['Deliveryorder']['delivery_order_no'].'</div></td>
                          </tr>
                          <tr>
 						     
@@ -1356,7 +1372,7 @@ for($i=0;$i<=4;$i++):
 endfor;
 
 
-$html .= '</tr>';
+
                     }
                     elseif($k%5 == 0)
                     {
@@ -1381,10 +1397,10 @@ for($i=0;$i<=4;$i++):
 endfor;
 $count1 = $count1+1;
 
-$html .= '</tr>';
+
                     }
                       
-                      
+            $html .= '</tr>';          
                     //foreach($device_name as $device):
                     $html .= '
                     <tr>
@@ -1406,7 +1422,7 @@ $html .= '</tr>';
                     
                 endforeach;
                 $html .='<tr><td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td></tr></table>';
+               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">'.$deliveryorder_data['Deliveryorder']['remarks'].'</td></tr></table>';
                 
                 
 $html .= '</div>'; 

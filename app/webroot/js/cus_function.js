@@ -56,7 +56,12 @@ $(document).ready(function(){
     $('#contract_disc').change(function() {
         //alert('contract_disc');
         var disc   =   $(this).val();
-        var total   =   $('#total_price').val();
+        var total   =   $('#unit_price').val();
+        if(disc >= total)
+        {
+            alert('Discount Should not exceed Unit Price');
+            return false;
+        }
         $.ajax({
              type: 'POST',
              data:"disc="+disc+"&total="+total,
@@ -168,8 +173,10 @@ $(document).ready(function(){
                     $('ul.chosen-results li:first-child').addClass('result-selected');
                     $('#customer_instrument').val(null);
                     $('#model_no').val(null);
-                    $('#unit_price').val(null);
                     $('#total_price').val(null);
+                    $('#unit_price').val('0');
+                    $('#total_price').val('0');
+                    $('#contract_disc').val('0');
                     $('#range_array').empty().append('<option value="">Select Range</option>');
                     $('#status').val(null);
                     }

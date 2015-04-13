@@ -52,7 +52,7 @@ class SalesorderHelper extends AppHelper
     {
         APP::import('Model','Salesorder');
         $this->Salesorder   =   new Salesorder();
-        $data_count = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.processing" => 1,'Description.is_deleted'=>0))) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
+        $data_count = $this->Salesorder->find('all',array('contain'=>array("Description" => array("conditions" => array("Description.processing" => 1,"Description.checking !=" => 1,'Description.is_deleted'=>0))) ,'conditions'=>array('Salesorder.is_approved'=>1,'Salesorder.id'=>$id),'group' => array('Salesorder.salesorderno')));
        // pr(count($data_count[0]['Description']));exit;
         return count($data_count[0]['Description']);
     }

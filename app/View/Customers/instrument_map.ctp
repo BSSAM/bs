@@ -8,6 +8,7 @@
         $('#model_no').val('');
         $('#unit_price').val('0');
         $('#total_price').val('0');
+        $('#contract_disc').val('0');
         
         var edit_device_id=$(this).attr('data-edit');
         <?php if($id1){ ?>

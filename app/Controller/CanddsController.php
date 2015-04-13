@@ -102,7 +102,38 @@ class CanddsController extends AppController
     {
         $assignto =   $this->Assign->find('list',array('conditions'=>array('Assign.status'=>1),'fields'=>array('id','assignedto')));
         //$ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver'=>0,'Deliveryorder.ready_to_deliver'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
-        $ready_to_deliver_items =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver !='=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
+        $ready_to_deliver_item =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.move_to_deliver !='=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
+        $dummy = array();
+        foreach($ready_to_deliver_item as $abc)
+        {
+            $c = count($abc['DelDescription']);
+            $count_1 = '';
+            foreach($abc['DelDescription'] as $a)
+            {
+                if($a['sales_desc_id'])
+                {
+                $device_no = $this->Description->find('first',array('conditions'=>array('Description.id'=>$a['sales_desc_id'],'Description.ready_deliver'=>1))); 
+                }
+                else
+                {
+                    $device_no ='';
+                }
+                if($device_no)
+                {
+                    $count_1 = $count_1 + 1;
+                }
+            }
+            if($c == $count_1)
+            {
+                $dummy[] = $abc['Deliveryorder']['id'];
+            }
+        }
+        $ready_del = array();
+        foreach($dummy as $lastone)
+        {
+            $ready_del[] =   $this->Deliveryorder->find('first',array('conditions'=>array('Deliveryorder.id'=>$lastone,'Deliveryorder.move_to_deliver !='=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.status'=>1,'Deliveryorder.is_approved'=>1)));
+        }
+        $ready_to_deliver_items =  $ready_del;
         //pr($ready_to_deliver_items);exit;
         $collection_delivery_data   =   $this->Candd->find('first',array('conditions'=>array('Candd.is_deleted'=>0,'Candd.id'=>$id),'recursive'=>2));
         $canddsetting_col =    $this->Canddsetting->find('first',array('conditions'=>array('Canddsetting.status'=>1,'Canddsetting.purpose'=>'C')));

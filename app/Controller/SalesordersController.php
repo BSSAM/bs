@@ -279,6 +279,7 @@
                         
                         $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                         //pr($quotation_details);exit;
+                        $this->request->data['Salesorder']['remarks'] = $quotation_details['Customerspecialneed']['remarks'];
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
                         //pr($contact_list);exit;
                         $this->set(compact('contact_list'));
@@ -343,7 +344,7 @@
                         {
                             $this->Description->deleteAll(array('Description.status'=>0));
                         }
-                                               
+                        $this->request->data['Salesorder']['remarks'] = $quotation_details['Customerspecialneed']['remarks'];                       
                         $con = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>1,'Quotation.status'=>1)));
                         //pr($con);
                         $con_inv_type = $con['Customer']['invoice_type_id']; 
@@ -401,7 +402,7 @@
                     $instrument_type = $con['InstrumentType']['salesorder'];
                     $this->set('instrument_type',$instrument_type);
                     $this->set('pendin',0);
-                    
+                    $this->request->data['Salesorder']['remarks'] = $con['Customerspecialneed']['remarks'];
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
@@ -1343,7 +1344,7 @@ margin: 180px 50px;
             {
                 $titles[] = $title_name['Title']['title_name'];
             }
-           // pr($salesorder_data);exit;
+            //pr($quotation_data);exit;
             //foreach ($salesorder_data as $salesorder_data_list):
                 $customername = $salesorder_data['Customer']['customername'];
                 $billing_address = $salesorder_data['Salesorder']['address'];
@@ -1354,6 +1355,23 @@ margin: 180px 50px;
                 $email = $salesorder_data['Salesorder']['email'];
                 //$our_ref_no = $salesorder_data_list['Quotation']['ref_no'];
                 $ref_no = $salesorder_data['Salesorder']['ref_no'];
+                $po_array = explode(',',$ref_no);
+                for($i=0;$i<count($po_array);$i++):
+                //$po_array[$i];
+                $check_string[] = strchr($po_array[$i], 'CPO');
+                endfor;
+                if(array_filter($check_string)):
+                    $ponumber_check = 0;  // Automatic
+                else:
+                    $ponumber_check = 1;  // Manual
+                endif;
+                if($ponumber_check==0){
+                    $ref_no = '-';
+                }
+                else
+                {
+                    $ref_no = $salesorder_data['Salesorder']['ref_no'];
+                }
                 $reg_date = $salesorder_data['Salesorder']['reg_date'];
                  $payment_term = $quotation_data['Customer']['Paymentterm']['paymentterm'] . ' ' . $quotation_data['Customer']['Paymentterm']['paymenttype'];
                 $salesorderno = $salesorder_data['Salesorder']['salesorderno'];
@@ -1388,11 +1406,10 @@ $html .=
           <tr>
                <td width="335" ><div style="float:left; "><img src="img/logo.jpg" width="450" height="80" alt="" /></div></td>
                <td><div style="float:left;text-align:right;float:right;line-height:7px !important;font-size:8px !important;">
-                     41 Senoko Drive<br />
-                      Singapore 758249<br />
-                        Tel.+65 6458 4411<br />
-                         Fax.+65 64584400<br />
-                         www.bestandards.com
+                     '.$quotation_data['branch']['address'].'<br/>
+                     Tel - '.$quotation_data['branch']['phone'].'<br/>
+                     Fax - '.$quotation_data['branch']['fax'].'<br/>
+                     '.$quotation_data['branch']['website'].'
                     </div>
 					</td>
           <tr>
@@ -1400,7 +1417,7 @@ $html .=
      <table width="98%" height="56">
           <tr>
                <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">SALESORDER</div></td>
-               <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;"">COMPANY REG NO. 200510697M</div></td>
+               <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;"">COMPANY REG NO. '.$quotation_data['branch']['companyregno'].'</div></td>
           </tr>
      </table>
      <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
@@ -1449,7 +1466,7 @@ $html .=
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0;font-weight:bolder; position:relative;top:-10px;">'.$salesorderno.'</div></td>
+                              <td  width="260" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0;font-weight:bolder; position:relative;top:-10px;">'.$salesorderno.'</div></td>
                          </tr>
                          <tr>
 						     
@@ -1608,9 +1625,9 @@ $html .= '</tr>';
                         $html .='</tr>';
                     
                 endforeach;
-                $html .='<tr><td colspan="4" style="padding:20px 0px;"><div style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</div></td>
-               <td  colspan="5"  style="padding:20px 0px;"><div style="border:1px dashed #666;border-left:none; text-align:left;padding: 10px;font-size:11px !important;">
-               Self Collect & Self Delivery Non-Singlas</div></td></tr></table>';
+                $html .='<tr><td colspan="4" height="30" style="padding:20px 0px;"><div style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</div></td>
+               <td  colspan="5" height="30"  style="padding:20px 0px;"><div style="border:1px dashed #666;border-left:none;height:18px; text-align:left;padding: 10px;font-size:11px !important;">
+               '.$salesorder_data['Salesorder']['remarks'].'</div></td></tr></table>';
                 
 $html .= '</div>'; 
 

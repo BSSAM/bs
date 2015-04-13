@@ -81,6 +81,7 @@
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
                                                 'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text', 'onkeypress'=>'return isNumberKey(event)','onkeyup'=>'sync();')); ?>
+        <span class="name_error_dis1">Please enter a value less than or equal to <?php echo $ins_cost_user; ?>.</span>
     </div>
 </div>
 <div class="form-group">

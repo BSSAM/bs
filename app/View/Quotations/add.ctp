@@ -22,6 +22,25 @@
       var n2 = document.getElementById('val_discount1');
       n2.value = n1.value;
     }
+    $(function(){
+    $('#val_discount').change(function() {
+        //alert('contract_disc');
+        var disc   =   $(this).val();
+        //var total   =   $('#unit_price').val();
+        if(disc > <?php echo $ins_cost_user ?>)
+        {
+            $(this).parents(".col-md-4").find('.name_error_dis1').addClass('animation-slideDown');
+            $(this).parents(".col-md-4").find('.name_error_dis1').css('color','red');
+            $(this).parents(".col-md-4").find('.name_error_dis1').show();
+            $(this).val('');
+            return false;
+        }
+        else
+        {
+            $(this).parents(".col-md-4").find('.name_error_dis1').hide();
+        }
+    });
+    });
 </script>
 <h1>
                                 <i class="gi gi-user"></i>Add Quotation

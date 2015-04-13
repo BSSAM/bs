@@ -278,7 +278,7 @@ $("#search_cusinstrument").hide();
                         //alert(errr);
                     }
                     
-                    if($('#val_discount1').val() >= <?php echo $ins_cost_user ?>)
+                    if($('#val_discount1').val() > <?php echo $ins_cost_user ?>)
                     {
                         //alert('into');
                         if($('#val_discount1').val()!='')
@@ -426,6 +426,8 @@ $("#search_cusinstrument").hide();
                 $('#val_unit_price').val(null);
                 $('#val_discount1').val(null);
                 $('#val_description').val(null);
+                var sd = $('#val_discount').val();
+                $('#val_discount1').val(sd);
                     });
                 
                 if($scope.titles.indexOf("0") != "-1")
@@ -658,7 +660,8 @@ $("#search_cusinstrument").hide();
                 $('#val_range').trigger('chosen:updated');
                 $('#val_brand').trigger('chosen:updated');
                 $('#val_unit_price').val(null);
-                $('#val_discount1').val(null);
+                var sd = $('#val_discount').val();
+                $('#val_discount1').val(sd);
                 $('#val_description').val(null);
                 });
                 

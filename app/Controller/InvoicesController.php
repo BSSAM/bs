@@ -42,7 +42,7 @@ class InvoicesController extends AppController
         //******************* Deliveryorder Full Invoice *******************//
         $prepareinvoice_approved_list    =   $this->Deliveryorder->find('all',array('conditions'=>array('Deliveryorder.is_approved'=>1,'Deliveryorder.is_poapproved'=>1,'Deliveryorder.status'=>1,'Deliveryorder.is_deleted'=>0,'Deliveryorder.is_invoice_created'=>1,'Customer.invoice_type_id'=>4,'Deliveryorder.is_invoice_approved'=>0)));
         
-        $invoice_list =$this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>'1'),'recursive'=>3));
+        $invoice_list =$this->Invoice->find('all',array('conditions'=>array('Invoice.is_approved'=>1),'recursive'=>3));
         
         $this->set(compact('prepareinvoice_approved_list','salesorder_list','quotation_lists','po_lists','invoice_list'));
     }
@@ -1037,19 +1037,18 @@ margin: 180px 50px;
           <tr>
                <td width="335" ><div style="float:left; "><img src="img/logo.jpg" width="450" height="80" alt="" /></div></td>
                <td><div style="float:left;text-align:right;float:right;line-height:7px !important;font-size:8px !important;">
-                     41 Senoko Drive<br />
-                      Singapore 758249<br />
-                        Tel.+65 6458 4411<br />
-                         Fax.+65 64584400<br />
-                         www.bestandards.com
+                    '.$quotation_data['branch']['address'].'<br/>
+                     Tel - '.$quotation_data['branch']['phone'].'<br/>
+                     Fax - '.$quotation_data['branch']['fax'].'<br/>
+                     '.$quotation_data['branch']['website'].'
                     </div>
 					</td>
           <tr>
      </table>
-<table width="623" height="56">
+<table width="98%" height="56">
      <tr>
-          <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
-          <td width="389" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+          <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
+          <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">GST REG NO. '.$quotation_data['branch']['gstregno'].' / COMPANY REG NO. '.$quotation_data['branch']['companyregno'].'</div></td>
      </tr>
 </table>
 <div style="width:100%;margin-top:10px;float:left;">
@@ -1095,7 +1094,7 @@ margin: 180px 50px;
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-5px;">'.$inv['Invoice']['invoiceno'].'</div></td>
+                              <td  width="260" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:24px;border-bottom:1px solid #000;width:100%;padding:5px 0; position:relative;top:-5px;">'.$inv['Invoice']['invoiceno'].'</div></td>
 						
                          </tr>
                          <tr>
@@ -1121,7 +1120,10 @@ margin: 180px 50px;
           </tr>
      </table>
 </div>
+<div style="color:#000 !important;line-height:12px;font-size:11px;display:block;margin-top:10px;"> SALES ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['salesorder_id'].'</span></div>
+<div style="color:#000 !important;line-height:12px;font-size:11px;"> DELIVERY ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['deliveryorder_id'].'</span></div>
 <div style="padding-top:10px;">'.$InstrumentType.'</div>
+
 </div></div>';
               $html .='<div id="footer">
      <div style="width:100%;">
@@ -1185,9 +1187,8 @@ $html .= '<div id="content">';
                 foreach($device_name as $k=>$device):
                     if($k == 0)
                     {
-					$html .='<div style="color:#000 !important;line-height:12px;font-size:11px;display:block;margin-top:150px;"> SALES ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['salesorder_id'].'</span></div>
-<div style="color:#000 !important;line-height:12px;font-size:11px;"> DELIVERY ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['deliveryorder_id'].'</span></div>';
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;white-space: nowrap;">      <tr>
+					
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;white-space: nowrap;margin-top:200px;">      <tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
@@ -1206,8 +1207,8 @@ for($i=0;$i<=4;$i++):
     endif;
     $count1 = $count1+1;
 endfor;
-$html .= '<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';
-$html .= '<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
+$html .= '<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';
+$html .= '<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">Total Price $(SGD)</td>';
 
 $html .= '</tr>';
                     }
@@ -1259,7 +1260,7 @@ $html .= '</tr>';
                         endfor;
                       
                     $html .='<td style="padding:3px;">'.$device['discount'].'</td>';
-                    $html .='<td style="padding:3px;">'.number_format($device['total'], 2, '.', '').'</td></tr>';
+                    $html .='<td style="padding:4px;">'.number_format($device['total'], 2, '.', '').'</td></tr>';
                     $sub = $sub + ($device['unit_price'] - $device['total']);
                     $subtotal = $subtotal + $device['total']; 
                 
@@ -1286,7 +1287,14 @@ $html .= '</tr>';
                 else {
                     $gst = 0.00;
                 }
-                
+                if($quotation_data['Customerspecialneed']['additional_service_value'] == '')
+                {
+                    $service_charge = 0;
+                }
+                else
+                {
+                    $service_charge = $quotation_data['Customerspecialneed']['additional_service_value'];
+                }
                 $total_due = ($gst + $subtotal + $quotation_data['Customerspecialneed']['additional_service_value']);
                
                 $html .= '<tr>
@@ -1303,7 +1311,7 @@ $html .= '</tr>';
                     </tr>
                     <tr>
                          <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">OTHER CHARGES '.$currency_symbol.'('.$currency_code.')</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($quotation_data['Customerspecialneed']['additional_service_value'], 2, '.', '').'</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($service_charge, 2, '.', '').'</td>
                     </tr>
                     <tr>
                          <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE '.$currency_symbol.'('.$currency_code.')</td>
@@ -1315,7 +1323,7 @@ $html .= '</tr>';
                     </tr>
                      <tr>
                <td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td>
+               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">'.$salesorder_list[0]['Deliveryorder']['remarks'].'</td>
           </tr>';
          }
                 if($k%5 == 4 || $k+1 == count($device_name)){
@@ -1584,18 +1592,17 @@ $html .=
      <tr>
           <td width="435" style="padding:0 10px; border-right:2px solid #F60;"><div style="float:left; "><img src="img/logo.jpg" width="400;" height="auto" alt="" /></div></td>
           <td style="padding:0 10px;"><div style="float:left;text-align:right;">
-                    <p>41 Senoko Drive</p>
-                    <p>Singapore 758249</p>
-                    <p>Tel.+65 6458 4411</p>
-                    <p>Fax.+65 64584400</p>
-                    <p>www.bestandards.com</p>
+                    '.$po_list_first['branch']['address'].'<br/>
+                     Tel - '.$po_list_first['branch']['phone'].'<br/>
+                     Fax - '.$po_list_first['branch']['fax'].'<br/>
+                     '.$po_list_first['branch']['website'].'
                </div></td>
      <tr>
 </table>
 <table width="98%" height="56">
      <tr>
-          <td width="222" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
-          <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+          <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">TAX INVOICE</div></td>
+          <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">GST REG NO. '.$po_list_first['branch']['gstregno'].' / COMPANY REG NO. '.$po_list_first['branch']['companyregno'].'</div></td>
      </tr>
 </table>
 <div style="width:100%;margin-top:10px;float:left;">
@@ -1662,6 +1669,8 @@ $html .=
           </tr>
      </table>
 </div>
+<div style="color:#000 !important;line-height:12px;font-size:11px;display:block;margin-top:10px;"> SALES ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['salesorder_id'].'</span></div>
+<div style="color:#000 !important;line-height:12px;font-size:11px;"> DELIVERY ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['deliveryorder_id'].'</span></div>
 <div style="padding-top:10px;">'.$InstrumentType.'</div>
 </div></div>';
 $html .='<div id="footer">
@@ -1722,9 +1731,8 @@ $html .= '<div id="content">';
                 foreach($device_name as $k=>$device):
                     if($k == 0)
                     {
-					$html .='<div style="color:#000 !important;line-height:12px;font-size:11px;display:block;margin-top:260px;"> SALES ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['salesorder_id'].'</span></div>
-<div style="color:#000 !important;line-height:12px;font-size:11px;"> DELIVERY ORDER NO : <span style="font-size:14px !important;">'.$inv['Invoice']['deliveryorder_id'].'</span></div>';
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:160px;white-space: nowrap; ">      <tr>
+					
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:200px;;white-space: nowrap; ">      <tr>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Instrument</td>
@@ -1752,7 +1760,7 @@ $html .= '</tr>';
                     }
                     elseif($k%5 == 0)
                     {
-                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:150px;white-space: nowrap;">      <tr>
+                        $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:200px;white-space: nowrap;">      <tr>
                <td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Item</td>
                <td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Qty</td>
                <td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
@@ -1799,7 +1807,7 @@ $html .= '</tr>';
                         endfor;
                         
                     $html .='<td style="padding:3px;">'.$device['discount'].'</td>';
-                    $html .='<td style="padding:3px;">'.number_format($device['total'], 2, '.', '').'</td></tr>';
+                    $html .='<td style="padding:4px;">'.number_format($device['total'], 2, '.', '').'</td></tr>';
                     $sub = $sub + ($device['unit_price'] - $device['total']);
                     $subtotal = $subtotal + $device['total']; 
                 
@@ -1826,7 +1834,14 @@ $html .= '</tr>';
                 else {
                     $gst = 0.00;
                 }
-                
+                if($quotation_data['Customerspecialneed']['additional_service_value'] == '')
+                {
+                    $service_charge = 0;
+                }
+                else
+                {
+                    $service_charge = $quotation_data['Customerspecialneed']['additional_service_value'];
+                }
                 $total_due = ($gst + $subtotal + $quotation_data['Customerspecialneed']['additional_service_value']);
                
                 $html .= '<tr>
@@ -1843,7 +1858,7 @@ $html .= '</tr>';
                     </tr>
                     <tr>
                          <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">OTHER CHARGES '.$currency_symbol.'('.$currency_code.')</td>
-                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($quotation_data['Customerspecialneed']['additional_service_value'], 2, '.', '').'</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($service_charge, 2, '.', '').'</td>
                     </tr>
                     <tr>
                          <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE '.$currency_symbol.'('.$currency_code.')</td>
@@ -1855,7 +1870,7 @@ $html .= '</tr>';
                     </tr>
                      <tr>
                <td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td>
+               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">'.$delivery_lists[0]['Deliveryorder']['remarks'].'</td>
           </tr>';
          }
                 if($k%5 == 4 || $k+1 == count($device_name)){

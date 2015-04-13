@@ -71,37 +71,46 @@ class ProceduresController extends AppController
         $this->set('departments',$department_array);
         if($this->request->is('post'))
         {
-            if($this->Procedure->save($this->request->data))
+            $pro_data = $this->Procedure->find('first',array('conditions'=>array('Procedure.procedure_no'=>$this->request->data['procedure_no'])));
+            if(empty($pro_data))
             {
-                $last_insert_id =   $this->Procedure->getLastInsertID();
-                /******************
-                    * Log Activity For Approval
-                    */
-                    $this->request->data['Logactivity']['logname'] = 'Procedure No';
-                    $this->request->data['Logactivity']['logactivity'] = 'Add Procedure No';
-                    $this->request->data['Logactivity']['logid'] = $last_insert_id;
-                    $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                    $this->request->data['Logactivity']['logapprove'] = 1;
+                if($this->Procedure->save($this->request->data))
+                {
+                    $last_insert_id =   $this->Procedure->getLastInsertID();
+                    /******************
+                        * Log Activity For Approval
+                        */
+                        $this->request->data['Logactivity']['logname'] = 'Procedure No';
+                        $this->request->data['Logactivity']['logactivity'] = 'Add Procedure No';
+                        $this->request->data['Logactivity']['logid'] = $last_insert_id;
+                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                        $this->request->data['Logactivity']['logapprove'] = 1;
 
-                    $a = $this->Logactivity->save($this->request->data['Logactivity']);
-                    
-                /******************/
-                    
-                /******************
-                    * Data Log Activity
-                    */
-                    $this->request->data['Datalog']['logname'] = 'Procedure No';
-                    $this->request->data['Datalog']['logactivity'] = 'Add';
-                    $this->request->data['Datalog']['logid'] = $last_insert_id;
-                    $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
-                    
-                    $a = $this->Datalog->save($this->request->data['Datalog']);
-                    
-                /******************/ 
-                $this->Session->setFlash(__('Procedure is Added Successfully'));
+                        $a = $this->Logactivity->save($this->request->data['Logactivity']);
+
+                    /******************/
+
+                    /******************
+                        * Data Log Activity
+                        */
+                        $this->request->data['Datalog']['logname'] = 'Procedure No';
+                        $this->request->data['Datalog']['logactivity'] = 'Add';
+                        $this->request->data['Datalog']['logid'] = $last_insert_id;
+                        $this->request->data['Datalog']['user_id'] = $this->Session->read('sess_userid');
+
+                        $a = $this->Datalog->save($this->request->data['Datalog']);
+
+                    /******************/ 
+                    $this->Session->setFlash(__('Procedure is Added Successfully'));
+                    $this->redirect(array('controller'=>'Procedures','action'=>'index'));
+                }
+                $this->Session->setFlash(__('Procedure Could Not be Added'));
+            }
+            else
+            {
+                $this->Session->setFlash(__('Procedure No Already Exists!'));
                 $this->redirect(array('controller'=>'Procedures','action'=>'index'));
             }
-            $this->Session->setFlash(__('Procedure Could Not be Added'));
         }
     }
     public function edit($id = NULL)

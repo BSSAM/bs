@@ -33,7 +33,7 @@
                                    
                                         <label class="col-md-2 control-label" for="val_address">Address <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
-                                           <?php echo $this->Form->input('address', array('id'=>'val_address','class'=>'form-control','placeholder'=>'Enter the Address','label'=>false,'name'=>'address')); ?>
+                                           <?php echo $this->Form->input('address', array('id'=>'val_address','class'=>'form-control ckeditor','placeholder'=>'Enter the Address','label'=>false,'name'=>'address')); ?>
                                         </div>
                                    
                                     </div>
