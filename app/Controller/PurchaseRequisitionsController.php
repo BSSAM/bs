@@ -2,7 +2,7 @@
     class PurchaseRequisitionsController extends AppController
     {
         public $helpers = array('Html','Form','Session');
-        public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
+        public $uses =array('Priority','Paymentterm','Quotation','Currency','Document','branch',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
                             'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Title',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','PurchaseRequisition','PreqDevice','PreqCustomerSpecialNeed');
@@ -526,6 +526,10 @@
         
             $this->autoRender = false;
             $purchase_requistion_list=$this->PurchaseRequisition->find('first',array('conditions'=>array('PurchaseRequisition.id'=>$id,'PurchaseRequisition.is_deleted'=>'0'),'recursive'=>2));
+            $data = $this->branch->find('first',array('conditions'=>array('branch.id'=>$purchase_requistion_list['PurchaseRequisition']['branch_id'])));
+            //$data_cu = currency_id
+              $data1 = $this->Currency->findByCountryId($data['branch']['currency_id']);
+                    ////return $data['Branch']['branchname'];
             //$reqpurchaseorder_details=$this->Reqpurchaseorder->find('first',array('conditions'=>array('Reqpurchaseorder.id'=>$id),'recursive'=>'2'));
             //pr($reqpurchaseorder_details);exit;
             //$salesorder_details=$this->Salesorder->find('first',array('conditions'=>array('Salesorder.id'=>$reqpurchaseorder_details['Reqpurchaseorder']['salesorder_id']),'recursive'=>'2','contain'=>array('Description'=>array('conditions'=>array('Description.sales_calllocation'=>'subcontract','Description.sales_sub_con_id'=>$id),'Instrument','Brand','Range','Department'),'Customer'=>array('Contactpersoninfo','Paymentterm'))));
@@ -552,7 +556,7 @@ table td { font-size:9px; line-height:11px; }
 margin: 180px 50px;
 }
 #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 350px; }
-#footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 330px; }
+#footer { position: fixed; left: 0px; bottom: -300px; right: 0px; height: 330px; }
 #footer .page:after { content: counter(page); }
 </style>
 </head>';
@@ -578,9 +582,26 @@ margin: 180px 50px;
                 //$salesorderno = $salesorder_details['Salesorder']['salesorderno'];
                 //$quotationno = $salesorder_details['Salesorder']['quotationno'];
                 //pr($purchase_requistion_list);exit;
+                 $a = array();
+                $b = array();
+                $c = array();
+                $d = array();
+                $e = array();
                 foreach($purchase_requistion_list['PreqDevice'] as $device):
                     $device_name[] = $device;
+                    $a[] = $device['title1_val'];
+                    $b[] = $device['title2_val'];
+                    $c[] = $device['title3_val'];
+                    $d[] = $device['title4_val'];
+                    $e[] = $device['title5_val'];
                 endforeach;
+                $a = array_filter($a);
+                $b = array_filter($b);
+                $c = array_filter($c);
+                $d = array_filter($d);
+                $e = array_filter($e);
+                
+                
                 //$ins_type = $purchase_requistion_list['PurchaseRequisition']['instrument_type_id'];
                 $ins_type = $purchase_requistion_list['InstrumentType']['purchase_requisition'];
                 
@@ -592,11 +613,10 @@ $html .=
           <tr>
                <td width="335" ><div style="float:left; "><img src="img/logo.jpg" width="450" height="80" alt="" /></div></td>
                <td><div style="float:left;text-align:right;float:right;line-height:7px !important;font-size:8px !important;">
-                     41 Senoko Drive<br />
-                      Singapore 758249<br />
-                        Tel.+65 6458 4411<br />
-                         Fax.+65 64584400<br />
-                         www.bestandards.com
+                     '.$data['branch']['address'].'<br/>
+                     Tel - '.$data['branch']['phone'].'<br/>
+                     Fax - '.$data['branch']['fax'].'<br/>
+                     '.$data['branch']['website'].'
                     </div>
 					</td>
           <tr>
@@ -604,7 +624,7 @@ $html .=
      <table width="98%" height="56">
           <tr>
                <td width="198" style="padding:0 10px;"><div style="display:inline-block;font-size:18px;font-weight:bold; font-style:italic;color:#00005b !important">PR Purchase Order</div></td>
-               <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">GST REG NO. M200510697 / COMPANY REG NO. 200510697M</div></td>
+               <td width="300" style="padding:0 10px;"><div style="display:inline-block;background:#00005b;color:#fff !important;padding:5px;font-size:13px;text-align:right;">GST REG NO. '.$data['branch']['gstregno'].' / COMPANY REG NO. '.$data['branch']['companyregno'].'</div></td>
           </tr>
      </table>
      <table width="98%" cellpadding="1" cellspacing="1"  style="width:100%;margin-top:20px;">
@@ -653,7 +673,7 @@ $html .=
                <td width="3%"></td>
                <td width="45%" style="border:1px solid #000;width:50%;padding:0"><table width="230" cellpadding="0" cellspacing="0">
                          <tr>
-                              <td  width="270" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0;font-weight:bolder;  position:relative;top:-10px;">'.$reqpurchaseorder_details['Reqpurchaseorder']['reqpurchaseno'].'</div></td>
+                              <td  width="260" colspan="3" style="padding:5px 0;"><div align="center" style="font-size:28px;border-bottom:1px solid #000;width:100%;padding:5px 0;font-weight:bolder;  position:relative;top:-8px;">'.$purchase_requistion_list['PurchaseRequisition']['prequistionno'].'</div></td>
                          </tr>
                          <tr>
 						     
@@ -709,7 +729,7 @@ $html .='<div id="footer">
                <td></td>
                <td></td>
                <td></td>
-               <td style="border:1px dashed #000;padding:5px;width:50%;"><table width="270" cellpadding="0" cellspacing="0">
+               <td style="border:1px dashed #000;padding:5px;width:60%;"><table width="270" cellpadding="0" cellspacing="0">
                          <tr>
                               <td width="214" style="text-align:center;padding-bottom:50px;">FOR BS TECH PTE LTD</td>
                          </tr>
@@ -729,49 +749,67 @@ $html .='<div id="footer">
                     <td  style="width:80%;">'.date('Y-m-d H:i:s').'</td><td  style="width:20%;">Page: <span class="page"></span></td>
                         </tr></table>
 </div>';
+$subtotal = 0;
+$subtotal1 = 0;
+$sub = 0;
+$distotal = 0;
 $html .= '<div id="content" style="">'; 
                 foreach($device_name as $k=>$device):
                     if($k == 0)
                     {
                         $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;margin-top:150px;"><tr>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Range</td>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        $html .='<td style="border-bottom:1px solid #000;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
-        $html .= $titles[$i];
-        $html .='</td>';
+        if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
+        {
+            $html .='<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">';
+            $html .= $titles[$i];
+            $html .='</td>';
+        }
     endif;
     $count1 = $count1+1;
+    $currency_symbol = $data1['Currency']['symbol'];
+    $currency_code = $data1['Currency']['currencycode'];
 endfor;
 
+$html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';
+$html .= '<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">Total Price '.$currency_symbol.'('.$currency_code.')</td>';
 
 $html .= '</tr>';
                     }
                     elseif($k%5 == 0)
                     {
                         $html .= '<table cellpadding="0" cellspacing="0"  style="width:100%;page-break-before: always;margin-top:230px;"><tr>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Item</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Qty</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Brand</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Model</td>
-               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">Range</td>';
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Item</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Qty</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;width:20%;">Instrument</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Brand</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Model</td>
+               <td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Range</td>';
 $count1 = 0;
 for($i=0;$i<=4;$i++):
     if(isset($titles[$i])):
-        $html .='<td style="border-bottom:1px solid #000;text-transform:uppercase;padding:3px 10px;font-size:11px !important;color: #000 !important;">';
-        $html .= $titles[$i];
-        $html .='</td>';
+         if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
+        {
+            $html .='<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">';
+            $html .= $titles[$i];
+            $html .='</td>';
+        }
     endif;
     $count1 = $count1+1;
+    $currency_symbol = $data1['Currency']['symbol'];
+    $currency_code = $data1['Currency']['currencycode'];
 endfor;
-$count1 = $count1+1;
+
+$html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';
+$html .= '<td style="border-bottom:1px solid #000;padding:3px;font-size:11px !important;color: #000 !important;">Total Price '.$currency_symbol.'('.$currency_code.')</td>';
 
 $html .= '</tr>';
                     }
@@ -780,25 +818,86 @@ $html .= '</tr>';
                     //foreach($device_name as $device):
                     $html .= '
                     <tr>
-                        <td style="padding:3px 10px;">'.$k.'</td>
-                        <td style="padding:3px 10px;">1</td>
-                        <td style="padding:3px 10px;width:20%;">'.$device['instrument_name'].'</td>
-                        <td style="padding:3px 10px;">'.$device['brand_name'].'</td>
-                        <td style="padding:3px 10px;">'.$device['model_no'].'</td>
-                        <td style="padding:3px 10px;">'.$device['range'].'</td>';
+                        <td style="padding:3px;">'.($k+1).'</td>
+                        <td style="padding:3px;">1</td>
+                        <td style="padding:3px;width:20%;">'.$device['instrument_name'].'</td>
+                        <td style="padding:3px;">'.$device['brand_name'].'</td>
+                        <td style="padding:3px;">'.$device['model_no'].'</td>
+                        <td style="padding:3px;">'.$device['range'].'</td>';
                         for($i=0;$i<=4;$i++):
                         if(isset($titles[$i])):
-                        $html .='<td style="padding:3px 10px;">'.$device['title'.($i+1).'_val'].'</td>';
+                            if(($i==2 && count($c))||($i==3 && count($d))||($i==4 && count($e)||($i==0)||($i==1)))
+                            {
+                                $html .='<td style="padding:3px;">'.$device['title'.($i+1).'_val'].'</td>';
+                            }
                         endif;
                         endfor;
                         
-                   $html .='</tr>';
-                    
-                endforeach;
-                $html .='<tr><td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
-               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">Self Collect & Self Delivery Non-Singlas</td></tr></table>';
+                    $html .='<td style="padding:3px;">'.$device['device_discount'].'</td>';
+                    $html .='<td style="padding:3px;">'.number_format($device['total'], 2, '.', '').'</td></tr>';
+                    $sub = $sub + ($device['unit_price'] - $device['total']);
+                    $subtotal = $subtotal + $device['total']; 
                 
+                $subtotal1 = $subtotal1 + $device['unit_price']; 
+                    
+                 if($k+1 == count($device_name)){  
+                        if(!count($c))
+                        {
+                            $count1 = $count1 - 1;
+                        }
+                        if(!count($d))
+                        {
+                            $count1 = $count1 - 1;
+                        }
+                        if(!count($e))
+                        {
+                            $count1 = $count1 - 1;
+                        }
+                if($purchase_requistion_list['PreqCustomerSpecialNeed']['gst'] == 7)
+                {
+                $gst = $subtotal * 0.07;
+                }
+                else {
+                    $gst = 0.00;
+                }
+                
+                $total_due = ($gst + $subtotal + $purchase_requistion_list['PreqCustomerSpecialNeed']['additional_service_value']);
+               
+                $html .= '<tr>
+                         <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;border-top:1px  dashed #666;border-left:1px  dashed #666;">SUBTOTAL '.$currency_symbol.'('.$currency_code.')</td>
+                         <td style="padding:3px 10px;font-size:11px !important;color: #000 !important;border-top:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($subtotal, 2, '.', '').'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">GST ( '.$purchase_requistion_list['PreqCustomerSpecialNeed']['gst'].'% )</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($gst, 2, '.', '').'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">DISCOUNT</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($sub, 2, '.', '').'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;border-left:1px  dashed #666;">OTHER CHARGES '.$currency_symbol.'('.$currency_code.')</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-right:1px  dashed #666;">'.number_format($purchase_requistion_list['PreqCustomerSpecialNeed']['additional_service_value'], 2, '.', '').'</td>
+                    </tr>
+                    <tr>
+                         <td colspan="'.($count1+7).'" style="text-align:right;padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-left:1px  dashed #666;">TOTAL DUE '.$currency_symbol.'('.$currency_code.')</td>
+                         <td style="padding:10px;font-size:11px !important;color: #000 !important;border-bottom:1px  dashed #666;border-right:1px  dashed #666;">'.number_format($total_due, 2, '.', '').'</td>
+                    </tr>
+                    <tr>
+                    <td colspan="4" style="padding:10px;"></td>
+                    <td colspan="8" style="padding:10px;"></td>
+                    </tr>
+                     <tr>
+               <td colspan="4" style="border:1px  dashed #666;text-align:right;padding:10px;color: #000 !important;font-size:11px !important;">SPECIAL REQUIREMENTS :</td>
+               <td  colspan="8" style="border:1px dashed #666; text-align:left;padding: 10px;font-size:11px !important;">'.$purchase_requistion_list['PreqCustomerSpecialNeed']['remarks'].'</td>
+          </tr>';
+         }
+                if($k%5 == 4 || $k+1 == count($device_name)){
+                $html .='</table>';
+                }
+                endforeach;
 $html .= '</div>'; 
+              
 
                 //pr($html);exit;
         $this->export_report_all_format($file_type, $filename, $html);

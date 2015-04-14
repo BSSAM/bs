@@ -546,7 +546,7 @@ margin: 180px 50px;
            
             foreach($data as $data_assignto)
             {
-			$html .= '<div id="content" style="page-break-after: always;">';
+			$html .= '<div id="content" style="page-break-after: always;"><div style="font-size:11px;color:#333;margin-top:5px;margin-top:-40px;">ASSIGNED TO : '.$data_assignto['Assign']['assignedto'].'</div>';
             $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id,'Candd.assign_id'=>$data_assignto['Assign']['id']),'recursive'=>2));
             
             foreach($cd_statistics as $k=>$cd):
@@ -572,7 +572,7 @@ margin: 180px 50px;
                     {  
            
 
- $html .='<div style="font-size:11px;color:#333;margin-top:5px;margin-top:-40px;">ASSIGNED TO : '.$data_assignto['Assign']['assignedto'].'</div>
+ $html .='
      <table cellpadding="0" cellspacing="0"  style="width:100%;text-align:center;border-left:1px solid #333;border-top:1px solid #333;">
           <tr style="background:#333;">
                <th style="font-size:11px;text-transform:uppercase;color:#fff;border-right:1px solid #333;border-bottom:1px solid #333;padding:5px;">S NO.</th>

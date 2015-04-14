@@ -1155,6 +1155,8 @@ for($i=0;$i<=4;$i++):
         }
     endif;
     $count1 = $count1+1;
+    $currency_symbol = $quotation_data['branch']['Currency']['symbol'];
+                $currency_code = $quotation_data['branch']['Currency']['currencycode'];
 endfor;
 $count1 = $count1+1;
 $html .= '<td style="border-bottom:1px solid #666;text-transform:uppercase;padding:3px;font-size:11px !important;color: #000 !important;">Discount(%)</td>';

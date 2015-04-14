@@ -1232,7 +1232,7 @@ class LabprocessesController extends AppController
             $this->Description->saveField('delay', $title);
             if($title == 'FAULTY' || $title == 'NO CAPABILITY' ||$title == 'RETURN WITHOUT CAL' ||$title == 'OUT OF TOLERANCE' ||$title == 'JOB CANCELLED')
             {
-                $this->Description->saveField('title2_val', $title);
+                $this->Description->saveField('title2_val', ".$title.");
                 $this->Description->saveField('sales_total', 0);
                 $this->Description->saveField('sales_unitprice', 0);
             }
@@ -1240,12 +1240,12 @@ class LabprocessesController extends AppController
             if($is_there_sal)
             {
                 $varia_quo_des_id = $is_there_sal['Description']['device_id'];
-                $this->Device->updateAll(array('Device.title2_val'=>$title,'Device.unit_price'=>0,'Device.total'=>0),array('Device.id'=>$varia_quo_des_id));
+                $this->Device->updateAll(array('Device.title2_val'=>".$title.",'Device.unit_price'=>0,'Device.total'=>0),array('Device.id'=>$varia_quo_des_id));
             }
             $is_there_del = $this->DelDescription->find('first',array('conditions'=>array('DelDescription.sales_desc_id'=>$this->data['Description']['id'])));
             if($is_there_del)
             {
-                $this->DelDescription->updateAll(array('DelDescription.title2_val'=>$title,'DelDescription.delivery_unitprice'=>0),array('DelDescription.sales_desc_id'=>$this->data['Description']['id']));
+                $this->DelDescription->updateAll(array('DelDescription.title2_val'=>".$title.",'DelDescription.delivery_unitprice'=>0),array('DelDescription.sales_desc_id'=>$this->data['Description']['id']));
             }
             echo $title;
         }
