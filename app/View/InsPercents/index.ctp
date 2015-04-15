@@ -43,9 +43,9 @@
                                         
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <?php //if($userrole_cus['edit']==1){ ?>
+                                                <?php if($userrole_cus['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$percents['InsPercent']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
-                                                <?php //} ?>
+                                                <?php } ?>
                                                 <?php //if($userrole_cus['delete']==1){ ?>
                                                 <?php //echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$percents['InsPercent']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 <?php //} ?>

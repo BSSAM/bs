@@ -122,9 +122,9 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('other_auto.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" style="width: 150px;"><h5>Instrument Costing</h5></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.view',array('id'=>'add')); ?><label for="remember">View Instrument Costing</label> </div></td>
-                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.edit',array('id'=>'add')); ?><label for="remember">Edit Instrument Costing</label> </div></td>
+                                            <td class="text-center" style="width: 150px;"><h5>Instrument Costing - Settings</h5></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing_settings.view',array('id'=>'view')); ?><label for="remember">View</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing_settings.edit',array('id'=>'view')); ?><label for="remember">Edit</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.user',array('id'=>'edit')); ?><label for="remember">User</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.supervisor',array('id'=>'view')); ?><label for="remember">Supervisor</label> </div></td>
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.manager',array('id'=>'delete')); ?><label for="remember">Manager</label> </div></td>
@@ -176,6 +176,8 @@
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('cus_customer.delete',array('id'=>'delete')); ?><label for="remember">Delete</label> </div></td>
 <!--                                            <td class="text-center"><div class="checkbox pull-right"> <?php //echo $this->Form->checkbox('cus_customer.instrument',array('id'=>'instrument')); ?><label for="remember">Instrument</label> </div></td>-->
                                             <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('cus_customer.tag',array('id'=>'tag')); ?><label for="remember">Tag</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.view',array('id'=>'add')); ?><label for="remember">View Instrument Costing</label> </div></td>
+                                            <td class="text-center"><div class="checkbox pull-right"> <?php echo $this->Form->checkbox('instr_costing.edit',array('id'=>'add')); ?><label for="remember">Edit Instrument Costing</label> </div></td>
                                             
                                         </tr>
                                         <tr>

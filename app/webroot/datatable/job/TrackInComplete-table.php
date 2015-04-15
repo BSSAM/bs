@@ -67,7 +67,7 @@ include 'config.php';
         }),	
 		
 	array( 'db' => 'sals.track_remark',  'dt' => 11, 'field' => 'id', 'formatter' => function( $d, $row ) {
-            return '<span class="remarks_check" id='.$d.'>sals.track_remark</span>';
+            return '<span class="remarks_check" id='.$d.'></span>';
         }),	
 	array( 'db' => 'sals.id',     'dt' => 12 , 'field' => 'id' , 'formatter' => function( $d, $row ) {
             return '-';

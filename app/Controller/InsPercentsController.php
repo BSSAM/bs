@@ -21,11 +21,11 @@ class InsPercentsController extends AppController
          *  Permission : view 
         *******************************************************/
         $user_role = $this->userrole_permission();
-//        if($user_role['ins_brand']['view'] == 0){ 
-//            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
-//        }
+        if($user_role['instr_costing_settings']['view'] == 0){ 
+            return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
+        }
         
-        //$this->set('userrole_cus',$user_role['ins_brand']);
+        $this->set('userrole_cus',$user_role['instr_costing_settings']);
         /*
          * *****************************************************
          */
@@ -87,7 +87,7 @@ class InsPercentsController extends AppController
          * ---------------  User Permission Condition  -------------------------------------
          */
         $user_role = $this->userrole_permission();
-        if($user_role['instr_costing']['edit'] == 0){ 
+        if($user_role['instr_costing_settings']['edit'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
 		$this->set('user_role',$user_role);

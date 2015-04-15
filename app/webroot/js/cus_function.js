@@ -57,11 +57,11 @@ $(document).ready(function(){
         //alert('contract_disc');
         var disc   =   $(this).val();
         var total   =   $('#unit_price').val();
-        if(disc >= total)
-        {
-            alert('Discount Should not exceed Unit Price');
-            return false;
-        }
+        //if(disc >= total)
+        //{
+        //    alert('Discount Should not exceed Unit Price');
+        //    return false;
+        //}
         $.ajax({
              type: 'POST',
              data:"disc="+disc+"&total="+total,

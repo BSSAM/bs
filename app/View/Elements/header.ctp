@@ -125,7 +125,7 @@
                                         <?php $a=($control == 'Autos')?'active':''; ?>
                                         <?php echo $this->Html->link('Random No',array('controller'=>'Autos','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>
                                     </li><?php }} ?>
-                                    <?php if(isset($user_role['instr_costing']['view'])){if($user_role['instr_costing']['view'] == 1){ ?>
+                                    <?php if(isset($user_role['instr_costing_settings']['view'])){if($user_role['instr_costing_settings']['view'] == 1){ ?>
                                     <li>
                                         <?php $a=($control == 'InsPercents')?'active':''; ?>
                                         <?php echo $this->Html->link('Instrument Costing',array('controller'=>'InsPercents','action'=>'index'),array('class'=>$a,'escape'=>false)); ?>

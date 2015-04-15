@@ -81,17 +81,16 @@ class CustomertaglistsController extends AppController
         $data12 = $this->Address->find('all',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'delivery')));
         $data12_count = $this->Address->find('count',array('conditions'=>array('customer_id'=>$this->Session->read('customer_id'),'status'=>0,'type'=>'delivery')));
        
-        $industry = $this->Industry->find('list', array('fields' => 'industryname'));
+        
+        $industry = $this->Industry->find('list', array('conditions'=>array('Industry.is_deleted'=>0),'fields' => 'industryname'));
         $deliverorder_type = $this->Deliveryordertype->find('list', array('fields' => array('id','delivery_order_type')));
-        
         $invoice_types = $this->InvoiceType->find('list', array('fields' => array('id','type_invoice')));
-        $location = $this->Location->find('list', array('fields' => 'locationname'));
+        $location = $this->Location->find('list', array('conditions'=>array('Location.is_deleted'=>0),'fields' => 'locationname'));
         
-        $paymentterm = $this->Paymentterm->find('list', array('fields' => array('id','pay')));
-        $priority = $this->Priority->find('list', array('fields' => 'priority'));
-        $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
-       
+        $paymentterm = $this->Paymentterm->find('list', array('conditions'=>array('Paymentterm.is_deleted'=>0),'fields' => array('id','pay')));
+        $priority= $this->Priority->find('list', array('conditions'=>array('Priority.is_deleted'=>0),'fields' => 'priority'));
         $userrole = $this->Userrole->find('list', array('fields' => 'user_role'));
+        $acknowledgement_type = $this->AcknowledgementType->find('list', array('fields' => array('id','acknowledgement_type')));
         $this->set(compact('salesperson','referedby','data10','data10_count','data11',
                             'data11_count','data12','data12_count','data13','data13_count',
                             'industry','deliverorder_type','invoice_types','location',

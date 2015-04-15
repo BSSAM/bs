@@ -1383,7 +1383,7 @@ $(document).on('click','.approve_invoice',function(){
                     <!-- END Mini Top Stats Row -->
 
                     <!-- Widgets Row -->
-                    <?php if($user_me == 1 || $user_me ==2){ ?>
+                    <?php //if($user_me == 1 || $user_me ==2){ ?>
                     <?php if($user_role['dash_number']['view'] != 0){ ?>
                     <div class="row">
                         <div class="col-sm-2 col-lg-2">
@@ -1451,8 +1451,8 @@ $(document).on('click','.approve_invoice',function(){
                         </div>
                     </div>
                                 <?php } ?>
-                    <?php } ?>
-                    <?php if($user_me == 1 || $user_me ==2){ ?>
+                    <?php //} ?>
+                    <?php //if($user_me == 1 || $user_me ==2){ ?>
                     <?php if($user_role['dash_graph']['view'] != 0){ ?>
                     <div class="row">
                         
@@ -1514,7 +1514,7 @@ $(document).on('click','.approve_invoice',function(){
                        
                     </div>
                     <?php } ?>
-                    <?php } ?>
+                    <?php //} ?>
                      <?php if($user_role['dash_calendar']['view'] != 0){ ?>
                     <div class="block block-alt-noborder full">
                         <div class="block-title">

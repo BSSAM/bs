@@ -648,9 +648,13 @@ class CustomersController extends AppController
     public function get_disc()
     {
         $this->autoRender=false;
-        $disc  =   $this->request->data['disc'];
         $total  =   $this->request->data['total'];
-        return $total-$disc;
+        $instrument_range    =    $this->InsPercent->find('first');
+        $percent = $instrument_range['InsPercent']['percent'];
+        $di = $total+($total*$percent/100);
+        $disc  =   $this->request->data['disc'];
+        
+        return $di-$disc;
     }
     public function add_customer_instrument()
     {

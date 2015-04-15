@@ -1059,7 +1059,7 @@ margin: 180px 50px;
                              <td width="128" colspan="3" height="10px" style="font-size:9px !important;">'.$salesorder_list['Customer']['customername'].'</td>
                          </tr>
                          <tr>
-                               <td colspan="3" height="10px" style="font-size:9px !important;">'.$salesorder_list['Salesorder']['address'].'</td>
+                               <td colspan="3" height="10px" style="font-size:9px !important;">'.$billing_address.'</td>
 							  
                          </tr>
                         <tr>
