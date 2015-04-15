@@ -80,7 +80,7 @@
 <!-- END Forms General Header -->
                         
 <div class="row">
-    <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customer-add')); ?>
+    <?php echo $this->Form->create('Customer',array('class'=>'form-horizontal form-bordered','id'=>'form-customertag-add')); ?>
     <?PHP echo $this->Form->input('customer_id',array('type'=>'hidden','value'=>$customer_id,'name'=>'data[id]','id'=>'customer_id')); ?>
     <?PHP echo $this->Form->input('tag_id',array('type'=>'hidden','value'=>$tag_id,'name'=>'data[tag_id]')); ?>
     <?PHP echo $this->Form->input('group_id',array('type'=>'hidden','value'=>$group_id,'name'=>'data[customergroup_id]')); ?>
@@ -217,5 +217,30 @@
     </div>
   <?php echo $this->Form->end(); ?>
 
+<?php echo $this->Html->script('pages/formsValidation'); ?>
+    <script>
+        $(function(){ FormsValidation.init(); });
+        $( "#form-customertag-add" ).submit(function() {
+            if ($("#customer-contact-add").dataTable().fnSettings().aoData.length == 0)
+            {
+                alert("Atleast One Contact Person is needed");
+                $('#contact_name').focus();
 
+                $('.name_error').addClass('animation-slideDown');
+                $('.name_error').css('color','red');
+                $('.name_error').show();
+                
+//                $('.email_error').addClass('animation-slideDown');
+//                $('.email_error').css('color','red');
+//                $('.email_error').show();
+                
+                return false;
+            }
+            else
+            {
+                 return true;
+            }
+
+        });        
+   </script>
    

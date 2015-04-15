@@ -1,11 +1,11 @@
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_salespeoples">Name <span class="text-danger">*</span></label>
+    <label class="col-md-2 control-label" for="contact_name">Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('name', array('id'=>'contact_name','class'=>'form-control','placeholder'=>'Enter the contact Person name','label'=>false)); ?>
         <span class="help-block_login name_error">Enter the Contact Person name</span>
     </div>
     
-    <label class="col-md-2 control-label" for="val_postalcode">Email <span class="text-danger">*</span></label>
+    <label class="col-md-2 control-label" for="contact_email">Email <span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('email', array('id'=>'contact_email','class'=>'form-control','placeholder'=>'Enter the Email Id','label'=>false)); ?>
         <span class="help-block_login email_error">Enter the Mail id</span>
@@ -13,12 +13,12 @@
     
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="val_referredbies">Department</label>
+    <label class="col-md-2 control-label" for="contact_department">Department</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('department', array('id'=>'contact_department','class'=>'form-control','placeholder'=>'Enter the Department name','label'=>false)); ?>
     </div>
     
-    <label class="col-md-2 control-label" for="val_billaddress">Position</label>
+    <label class="col-md-2 control-label" for="contact_position">Position</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('position', array('id'=>'contact_position','class'=>'form-control','placeholder'=>'Enter the Position','label'=>false)); ?>
     </div>
@@ -53,7 +53,7 @@
     </div>
 </div>
     
-<table id="beforedo-datatable" class="table table-vcenter table-condensed table-bordered">
+<table id="customer-contact-add" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
             <th class="text-center">Customer Id</th>

@@ -7,11 +7,24 @@ $(document).ready(function(){
     /******************************Customertag Contact person add*************************************/ 
     $('.tag_contactperson_submit').click(function()
     {
-        if($('#contact_name').val()=='')
+        if($.trim($('#contact_name').val())=='' || $.trim($('#contact_email').val())=='')
         {
-            $('.name_error').addClass('animation-slideDown');
-            $('.name_error').css('color','red');
-            $('.name_error').show();
+            //alert('asd');
+            if($('#contact_name').val()=='')
+            {
+                $('.name_error').addClass('animation-slideDown');
+                $('.name_error').css('color','red');
+                $('.name_error').show();
+                
+            }
+            if($('#contact_email').val()=='')
+            {
+                $('.email_error').addClass('animation-slideDown');
+                $('.email_error').css('color','red');
+                $('.email_error').show();
+                
+            }
+
             return false;
         }
         var serial=(Math.random()+' ').substring(2,6)+(Math.random()+' ').substring(2,6);
@@ -98,11 +111,24 @@ $(document).ready(function(){
     {
         var customer_id =$('#customer_id').val();
         var id= $(this).attr('id');
-        if($('#contact_name').val()=='')
+        if($.trim($('#contact_name').val())=='' || $.trim($('#contact_email').val())=='')
         {
-            $('.name_error').addClass('animation-slideDown');
-            $('.name_error').css('color','red');
-            $('.name_error').show();
+            //alert('asd');
+            if($('#contact_name').val()=='')
+            {
+                $('.name_error').addClass('animation-slideDown');
+                $('.name_error').css('color','red');
+                $('.name_error').show();
+                
+            }
+            if($('#contact_email').val()=='')
+            {
+                $('.email_error').addClass('animation-slideDown');
+                $('.email_error').css('color','red');
+                $('.email_error').show();
+                
+            }
+
             return false;
         }
        $('.update_button_for_contactperson').html('<button class="btn btn-sm btn-primary tag_contactperson_editsubmit" type="button"><i class="fa fa-plus fa-fw"></i> add</button>');
