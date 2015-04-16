@@ -108,7 +108,7 @@
             
             $additional=$this->Additionalcharge->find('list',array('fields'=>array('id','additionalcharge')));
             $service=$this->Service->find('list',array('fields'=>array('id','servicetype')));
-            $tally=$this->Tallyledger->find('list',array('fields'=>array('id','servicetype')));
+            //$tally=$this->Tallyledger->find('list',array('fields'=>array('id','servicetype')));
             
             $branch =   $this->branch->find('first',array('conditions'=>array('branch.defaultbranch'=>1,'branch.status'=>1)));
             $this->set(compact('service','additional','instrument_types','country','priority','payment'));
