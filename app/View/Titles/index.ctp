@@ -39,7 +39,9 @@
                                         <td class="text-center"><?php echo $title['Title']['title_description'];?></td>
                                         <?php $status   =   ($title['Title']['status']==1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';?>
                                         <td class="text-center"><?PHP echo $status; ?></td>
+                                        
                                         <td class="text-center">
+                                            <?php if(($title['Title']['title_name'] != 'SERIAL NO')&& ($title['Title']['title_name'] != 'REMARKS')) { ?>
                                             <div class="btn-group">
                                                 <?php if($userrole_cus['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$title['Title']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
@@ -48,7 +50,9 @@
                                                 <?php echo $this->Form->postLink('<i class="fa fa-times"></i>',array('action'=>'delete',$title['Title']['id']),array('data-toggle'=>'tooltip','title'=>'Delete','class'=>'btn btn-xs btn-danger','escape'=>false,'confirm'=>'Are you Sure?')); ?>
                                                 <?php } ?>
                                             </div>
+                                            <?php } ?>
                                         </td>
+                                        
                                     </tr>
                                     
                                     <?php endforeach; ?>

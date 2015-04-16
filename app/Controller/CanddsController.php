@@ -546,7 +546,11 @@ margin: 180px 50px;
            
             foreach($data as $data_assignto)
             {
-			$html .= '<div id="content" style="page-break-after: always;"><div style="font-size:11px;color:#333;margin-top:5px;margin-top:-40px;">ASSIGNED TO : '.$data_assignto['Assign']['assignedto'].'</div>';
+		$cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id,'Candd.assign_id'=>$data_assignto['Assign']['id']),'recursive'=>2));
+               if($cd_statistics)
+               {
+                $html .= '<div id="content" style="page-break-after: always;"><div style="font-size:11px;color:#333;margin-top:5px;margin-top:-40px;">ASSIGNED TO : '.$data_assignto['Assign']['assignedto'].'</div>';
+                        
             $cd_statistics =    $this->Candd->find('all',array('conditions'=>array('Candd.cd_date'=>$id,'Candd.assign_id'=>$data_assignto['Assign']['id']),'recursive'=>2));
             
             foreach($cd_statistics as $k=>$cd):
@@ -632,6 +636,7 @@ margin: 180px 50px;
 </html>'; 
                 //pr($html);exit;
         $this->export_report_all_format($file_type, $filename, $html);
+        }
     }
     function export_report_all_format($file_type, $filename, $html)
     {    
