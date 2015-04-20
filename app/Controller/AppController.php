@@ -185,7 +185,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 //Customer Tag Id
                 case 'tag':
@@ -205,7 +205,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.tag'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.tag'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 //Customer Group Id
                 case 'group':
@@ -225,7 +225,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.group'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.group'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 // Instrument Random ID
                 case 'instrument':
@@ -266,7 +266,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.quotation'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.quotation'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 
                 // SalesOrder Random ID
@@ -287,7 +287,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.salesorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.salesorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 
                 // DeliveryOrder Random ID
@@ -308,7 +308,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.deliveryorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.deliveryorder'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                  // Invoice Random ID
                 case 'invoice':
@@ -328,7 +328,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.customer'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.invoice'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 case 'clientpo':
                   $random = $this->Random->find('first');
@@ -442,7 +442,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 case 'subcon':
                   $random = $this->Random->find('first');
@@ -461,7 +461,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.subcon'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 case 'uncertain':
                   $random = $this->Random->find('first');
@@ -480,7 +480,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.uncertain'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 case 'purchaseorders':
                   $random = $this->Random->find('first');
@@ -499,7 +499,7 @@ App::uses('Controller', 'Controller');
                         $parts[2] = sprintf("%06d", $parts[2]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.purchaseorders'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
                 case 'certificateno':
                     $random = $this->Random->find('first');
@@ -519,7 +519,7 @@ App::uses('Controller', 'Controller');
                         $parts[1] = sprintf("%04d", $parts[1]);
                     }
                     $str1 = implode('-', $parts);
-                    //$this->Random->updateAll(array('Random.onsites'=>'"'.$str1.'"'),array('Random.id'=>1));  
+                    $this->Random->updateAll(array('Random.certificateno'=>'"'.$str1.'"'),array('Random.id'=>1));  
                 break;
             }
             return $str1;

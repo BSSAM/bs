@@ -557,12 +557,17 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM branches where id = $id"
-            );
-
-
-            return isset($data[0]['branchname']) ? $data[0]['branchname'] : '';
+                );
+                return isset($data[0]['branchname']) ? $data[0]['branchname'] : '';
+            }
+            else
+            {
+                return '-';
+            }
 	}
         
     static function get_attn_name($id)
@@ -572,12 +577,17 @@ class SSP {
             $db = self::db( $sql_details );
 
             $bindings = array();
-
-            $data = self::sql_exec( $db, $bindings,
-                    "SELECT * FROM cus_contactpersoninfos where id = $id"
-            );
-
-            return isset($data[0]['name']) ? $data[0]['name'] : '';
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
+                        "SELECT * FROM cus_contactpersoninfos where id = $id"
+                );
+                return isset($data[0]['name']) ? $data[0]['name'] : '';
+            }
+            else
+            {
+                return '-';
+            }
 	}
         
         static function get_salesperson_name($id)
@@ -587,13 +597,17 @@ class SSP {
             $db = self::db( $sql_details );
 
             $bindings = array();
-
-            $data = self::sql_exec( $db, $bindings,
-                    "SELECT * FROM quo_customerspecialneeds where quotation_id = $id"
-            );
-
-
-            return isset($data[0]['salesperson_name']) ? $data[0]['salesperson_name'] : '';
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
+                        "SELECT * FROM quo_customerspecialneeds where quotation_id = $id"
+                );
+                return isset($data[0]['salesperson_name']) ? $data[0]['salesperson_name'] : '';
+            }
+            else
+            {
+                return '-';
+            }
 	}
         
         
@@ -605,15 +619,22 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
-                    "SELECT * FROM quo_devices where quotation_id = $id"
-            );
-            $total = 0;
-            foreach($data as $data_every)
+            if($id)
             {
-                $total = $total + $data_every['total'];
+                $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM quo_devices where quotation_id = $id"
+                );
+                $total = 0;
+                foreach($data as $data_every)
+                {
+                    $total = $total + $data_every['total'];
+                }
+                return $total;
             }
-            return $total;
+            else
+            {
+                return '-';
+            }
 	}
         
         static function get_quo_details($id)
@@ -624,11 +645,18 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM quotations where id = $id"
-            );
+                );
 
-            return $data;
+                return $data;
+            }
+            else
+            {
+                return '-';
+            }
 	}
         
         static function get_sales_details($id)
@@ -639,11 +667,18 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM salesorders where id = '$id'"
-            );
+                );
 
-            return $data;
+                return $data;
+            }
+            else
+            {
+                return '-';
+            }
 	}
         
         static function get_customer_name($id)
@@ -654,12 +689,17 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM customers where id = '$id'"
-            );
-
-
-            return isset($data[0]['customername']) ? $data[0]['customername'] : '';
+                );
+                return isset($data[0]['customername']) ? $data[0]['customername'] : '';
+            }
+            else
+            {
+                return '-';
+            }
 	}
         
         static function get_delivery_details($id)
@@ -670,11 +710,18 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM deliveryorders where id = '$id'"
-            );
+                );
 
-            return $data;
+                return $data;
+            }
+            else
+            {
+                return '-';
+            }
 	}
         
         static function get_poapproved_status($id)
@@ -685,16 +732,23 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
-                    "SELECT * FROM deliveryorders where id = '$id'"
-            );
-            if($data[0]['is_poapproved']==1)
+            if($id)
             {
-                return '<span class="label label-five">PO#App</span>';
+                $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM deliveryorders where id = '$id'"
+                );
+                if($data[0]['is_poapproved']==1)
+                {
+                    return '<span class="label label-five">PO#App</span>';
+                }
+                else
+                {
+                    return '<span class="label label-six">PO#Not</span>';
+                }
             }
             else
             {
-                return '<span class="label label-six">PO#Not</span>';
+                return '-';
             }
             
         }
@@ -707,11 +761,18 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM purchaseorders where id = '$id'"
-            );
+                );
 
-            return $data;
+                return $data;
+            }
+            else
+            {
+                return '-'; 
+            }
 	}
         
 	static function get_subcontractdos_details($id)
@@ -722,11 +783,18 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM subcontractdos where id = '$id'"
-            );
-
-            return $data;
+                );
+                
+                return $data;
+            }
+            else
+            {
+                return '-'; 
+            }
 	}
         
         static function get_invoice_details($id)
@@ -737,11 +805,18 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM invoices where invoiceno = '$id'"
-            );
+                );
 
-            return $data;
+                return $data;
+            }
+            else 
+            {
+                return '-'; 
+            }
 	}
         
         static function get_quo_inv_device_total($id)
@@ -752,15 +827,22 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
-                    "SELECT * FROM quo_devices where quotationno = $id"
-            );
-            $total = 0;
-            foreach($data as $data_every)
+            if($id)
             {
-                $total = $total + $data_every['total'];
+                $data = self::sql_exec( $db, $bindings,
+                    "SELECT * FROM quo_devices where quotationno = $id"
+                );
+                $total = 0;
+                foreach($data as $data_every)
+                {
+                    $total = $total + $data_every['total'];
+                }
+                return $total;
             }
-            return $total;
+            else 
+            {
+                return '-'; 
+            }
 	}
 	
 	static function get_proformas_details($id)
@@ -771,11 +853,18 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM proformas where id = '$id'"
-            );
+                );
 
-            return $data;
+                return $data;
+            }
+            else 
+            {
+                return '-'; 
+            }
 	}
 	
 	 static function get_branchname($id)
@@ -786,12 +875,17 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM  branches where id = '$id'"
-            );
-
-
-            return isset($data[0]['branchname']) ? $data[0]['branchname'] : '';
+                );
+                return isset($data[0]['branchname']) ? $data[0]['branchname'] : '';
+            }
+            else 
+            {
+                return '-'; 
+            }
 	}
      static function get_prequistions_details($id)
 	{
@@ -801,11 +895,18 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM prequistions where id = '$id'"
-            );
+                );
 
-            return $data;
+                return $data;
+            }
+            else 
+            {
+                return '-'; 
+            }
 	}   
 	
 	static function get_reqpurchaseorders_details($id)
@@ -816,15 +917,22 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM reqpurchaseorders where id = '$id'"
-            );
+                );
 
-            return $data;
+                return $data;
+            }
+            else 
+            {
+                return '-'; 
+            }
 	}   
 	
 	
-	static function salesperson($attn=NULL)
+    static function salesperson($attn=NULL)
     {
        		global $sql_details;
 
@@ -832,16 +940,23 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($attn)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM cus_contactpersoninfos where id = '$attn'"
-            );
+                );
 
-             return isset($data[0]['name']) ? $data[0]['name'] : '';
+                return isset($data[0]['name']) ? $data[0]['name'] : '';
+            }
+            else 
+            {
+                return '-'; 
+            }
     }
 	
 	
 	
-	static function find_deliveryorder_nos($sales_id=NULL)
+    static function find_deliveryorder_nos($sales_id=NULL)
     {
        global $sql_details;
 
@@ -849,10 +964,17 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($sales_id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM deliveryorders where salesorder_id = '$sales_id'"
-            );
-            return count($data);
+                );
+                return count($data);
+            }
+            else 
+            {
+                return '-'; 
+            }
     }
     
     static function find_deliveryorder_no($sales_id = null)
@@ -864,17 +986,23 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($sales_id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM deliveryorders where salesorder_id = '$sales_id'"
-            );
+                );
 			
 		$sa = array();
-        foreach($data as $k => $sales1):
-            $sa[] = $sales1['delivery_order_no'];
-        endforeach;
-        $id1 = implode(',',$sa);
-        return $id1;
-      
+                foreach($data as $k => $sales1):
+                    $sa[] = $sales1['delivery_order_no'];
+                endforeach;
+                $id1 = implode(',',$sa);
+                return $id1;
+            }
+            else 
+            {
+                return '-'; 
+            }
     }
 	
     static function find_deliveryorder_date($sales_id = null)
@@ -885,17 +1013,23 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($sales_id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM deliveryorders where salesorder_id = '$sales_id'"
-            );
-			
-		$sa = array();
-        foreach($data as $k => $sales1):
-            $sa[] = $sales1['delivery_order_date'];
-        endforeach;
-        $id1 = implode(',',$sa);
-        return $id1;
-      
+                    );
+
+                        $sa = array();
+                foreach($data as $k => $sales1):
+                    $sa[] = $sales1['delivery_order_date'];
+                endforeach;
+                $id1 = implode(',',$sa);
+                return $id1;
+            }
+            else 
+            {
+                return '-'; 
+            }
     }
 	
     static function find_invoice_no($sales_id = null)
@@ -906,17 +1040,23 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($sales_id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM  invoices where salesorder_id = '$sales_id'"
-            );
-			
-		$sa = array();
-        foreach($data as $k => $sales1):
-            $sa[] = $sales1['invoiceno'];
-        endforeach;
-        $id1 = implode(',',$sa);
-        return $id1;
-		
+                    );
+
+                        $sa = array();
+                foreach($data as $k => $sales1):
+                    $sa[] = $sales1['invoiceno'];
+                endforeach;
+                $id1 = implode(',',$sa);
+                return $id1;
+	    }
+            else 
+            {
+                return '-'; 
+            }
     }
 	
     static function find_invoice_date($sales_id = null)
@@ -927,17 +1067,23 @@ class SSP {
 
             $bindings = array();
 
-            $data = self::sql_exec( $db, $bindings,
+            if($sales_id)
+            {
+                $data = self::sql_exec( $db, $bindings,
                     "SELECT * FROM  invoices where salesorder_id = '$sales_id'"
-            );
-			
-		$sa = array();
-        foreach($data as $k => $sales1):
-            $sa[] = $sales1['invoice_date'];
-        endforeach;
-        $id1 = implode(',',$sa);
-        return $id1;
-		
+                    );
+
+                        $sa = array();
+                foreach($data as $k => $sales1):
+                    $sa[] = $sales1['invoice_date'];
+                endforeach;
+                $id1 = implode(',',$sa);
+                return $id1;
+	    }
+            else 
+            {
+                return '-'; 
+            }
     }
     
 	

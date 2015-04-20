@@ -93,6 +93,15 @@
          * *****************************************************
          */
             $dmt=$this->random('quotation');
+            if($dmt)
+            {
+                $random = $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$dmt)));
+                if($random)
+                {
+                    $this->Session->setFlash(__('Quotation No Already Exists & U need to update Random No'));
+                    $this->redirect(array('action'=>'index'));
+                }
+            }
             $track_id=$this->random('track');
             $this->set('quotationno', $dmt);
             $this->set('our_ref_no', $track_id);
@@ -161,7 +170,7 @@
                     $this->device_id_session_logout($quotationno);
                     
                     
-                    $this->Random->updateAll(array('Random.quotation'=>'"'.$quotationno.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.quotation'=>'"'.$quotationno.'"'),array('Random.id'=>1));  
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
                     
                     $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
