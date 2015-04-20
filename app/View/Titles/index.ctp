@@ -41,7 +41,7 @@
                                         <td class="text-center"><?PHP echo $status; ?></td>
                                         
                                         <td class="text-center">
-                                            <?php if(($title['Title']['title_name'] != 'SERIAL NO')&& ($title['Title']['title_name'] != 'REMARKS')) { ?>
+                                            <?php if(($title['Title']['title_name'] != 'SERIAL NO.')&&($title['Title']['title_name'] != 'SERIAL NO')&& ($title['Title']['title_name'] != 'REMARKS')) { ?>
                                             <div class="btn-group">
                                                 <?php if($userrole_cus['edit']==1){ ?>
                                                 <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action'=>'edit',$title['Title']['id']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-xs btn-default','escape'=>false)); ?>
