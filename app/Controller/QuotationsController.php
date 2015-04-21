@@ -26,7 +26,7 @@
         
         // Delete Device when Status '0'
         
-        $this->Device->deleteAll(array('Device.status'=>0));
+        //$this->Device->deleteAll(array('Device.status'=>0));
         
         //
         /*
@@ -88,7 +88,7 @@
         if($user_role['job_quotation']['add'] == 0){ 
             return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
         }
-        $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
+        //$this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
         /*
          * *****************************************************
          */
@@ -173,7 +173,7 @@
                     //$this->Random->updateAll(array('Random.quotation'=>'"'.$quotationno.'"'),array('Random.id'=>1));  
                     $device_node    =   $this->Device->find('all',array('conditions'=>array('Device.customer_id'=>$customer_id)));
                     
-                    $this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
+                    //$this->Device->deleteAll(array('Device.quotation_id'=>'','Device.status'=>0));
                     if(!empty($device_node))
                     {  
                         $this->Device->updateAll(array('Device.quotation_id'=>$quotation_id,'Device.status'=>1,'Device.quotationno'=>'"'.$this->request->data['Quotation']['quotationno'].'"'),array('Device.customer_id'=>$customer_id,'Device.quotationno'=>$this->request->data['Quotation']['quotationno'],'Device.status'=>0));

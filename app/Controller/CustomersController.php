@@ -34,9 +34,9 @@ class CustomersController extends AppController
         $Customer_lists = $this->Customer->find('all',array('conditions'=>array('Customer.is_default'=>1,'Customer.is_deleted'=>0),
 		'order' => array('Customer.id' => 'DESC'),'recursive'=>'2'));
         $this->set('customer', $Customer_lists);
-        $this->Address->deleteAll(array('Address.status'=>0));
-        $this->Projectinfo->deleteAll(array('Projectinfo.project_status'=>0));
-        $this->Contactpersoninfo->deleteAll(array('Contactpersoninfo.status'=>0));
+//        $this->Address->deleteAll(array('Address.status'=>0));
+//        $this->Projectinfo->deleteAll(array('Projectinfo.project_status'=>0));
+//        $this->Contactpersoninfo->deleteAll(array('Contactpersoninfo.status'=>0));
         
     }
     public function add()
@@ -88,6 +88,7 @@ class CustomersController extends AppController
             $refer_array = $this->request->data['referedbies_id'];
             $sales_array = $this->request->data['salesperson_id'];
             $cust_id  =   $this->request->data['id'];
+            //pr($cust_id);exit;
             $group_id  =   $this->request->data['customergroup_id'];
             $tag_id  =   $this->request->data['tag_id'];
             $this->request->data['is_default']  =   1;
@@ -120,6 +121,11 @@ class CustomersController extends AppController
 //                $this->Random->updateAll(array('Random.group'=>'"'.$group_id.'"'),array('Random.id'=>1));  
                 $contactperson = $this->Contactpersoninfo->find('count', array('conditions' => array('Contactpersoninfo.customer_id' => $cust_id)));
                 $address = $this->Address->find('count', array('conditions' => array('Address.customer_id' =>$cust_id)));
+                $contactperson1 = $this->Contactpersoninfo->find('all', array('conditions' => array('Contactpersoninfo.customer_id' => $cust_id)));
+                $address1 = $this->Address->find('all', array('conditions' => array('Address.customer_id' =>$cust_id)));
+                //pr($contactperson1);
+                //pr($address1); 
+                //exit;
                 if ($contactperson > 0) {
                     $this->Contactpersoninfo->updateAll(array('Contactpersoninfo.status' => 1), array('Contactpersoninfo.customer_id' => $cust_id));
                 }

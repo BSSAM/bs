@@ -25,7 +25,7 @@
          * *****************************************************
          */
         
-        $this->Description->deleteAll(array('Description.status'=>0));
+        //$this->Description->deleteAll(array('Description.status'=>0));
         
         
             //$this->Quotation->recursive = 1;
@@ -124,7 +124,7 @@
                 if($this->Salesorder->save($this->request->data['Salesorder']))
                 {
                     $sales_orderid  =   $this->Salesorder->getLastInsertID();
-                    $this->Random->updateAll(array('Random.salesorder'=>'"'.$sales_orderid.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.salesorder'=>'"'.$sales_orderid.'"'),array('Random.id'=>1));  
                     $this->device_id_session_logout($sales_orderid);
 //                    echo "SalesLast - ".$sales_orderid;
 //                    echo "<br>";
@@ -336,7 +336,7 @@
                    }
                    else
                    {
-                       
+                       $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                         // Status '0' will be deleted
                         $device_node_nonstatus    =   $this->Description->find('all',array('conditions'=>array('Description.status'=>0)));
                         
@@ -355,7 +355,7 @@
                         $this->set('pendin',0);
                         //pr($instrument_type); exit;
                          $this->set('instrument_type',$instrument_type);
-                        $quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
+                        //$quotation_details    =   $this->Quotation->find('first',array('conditions'=>array('Quotation.quotationno'=>$this->request->data['Salesorder']['quotation_id'],'Quotation.is_approved'=>'1'),'recursive'=>'2'));
                         $contact_list   =   $this->Contactpersoninfo->find('list',array('conditions'=>array('Contactpersoninfo.customer_id'=>$quotation_details['Quotation']['customer_id'],'Contactpersoninfo.status'=>1),'fields'=>array('id','name')));
                         //pr($contact_list);exit;
                         $this->set(compact('contact_list'));
@@ -406,7 +406,7 @@
                     if($this->Salesorder->save($this->request->data['Salesorder']))
                     {
                         $sales_orderid  =   $this->Salesorder->getLastInsertID();
-                        $this->Random->updateAll(array('Random.salesorder'=>'"'.$sales_orderid.'"'),array('Random.id'=>1));  
+                        //$this->Random->updateAll(array('Random.salesorder'=>'"'.$sales_orderid.'"'),array('Random.id'=>1));  
                         if(!empty($this->request->data['Salesorder']['device_status']))
                         {
                             $device_node_pending    =   $this->Description->find('all',array('conditions'=>array('Description.customer_id'=>$customer_id,'Description.pending'=>1)));

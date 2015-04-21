@@ -61,7 +61,7 @@ class PurchaseordersController extends AppController
                         $purchase_id   =   $this->Purchaseorder->getLastInsertID();
                        $this->Description->updateAll(array('Description.sales_po_id'=>$purchase_id),array('Description.salesorder_id'=>$salesorder_id,'Description.sales_po_del'=>0,'Description.sales_po_id'=>''));
                        $this->Description->updateAll(array('Description.sales_po_del'=>0),array('Description.salesorder_id'=>$salesorder_id,'Description.sales_po_del'=>1));
-                       $this->Random->updateAll(array('Random.purchaseorders'=>'"'.$dmt.'"'),array('Random.id'=>1));  
+                       //$this->Random->updateAll(array('Random.purchaseorders'=>'"'.$dmt.'"'),array('Random.id'=>1));  
                         
                        /******************
                         * Data Log

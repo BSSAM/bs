@@ -133,9 +133,9 @@ class CustomertaglistsController extends AppController
             
             if($this->Customer->save($this->request->data))
             {
-                $this->Random->updateAll(array('Random.customer'=>'"'.$cust_id.'"'),array('Random.id'=>1));  
-                $this->Random->updateAll(array('Random.tag'=>'"'.$tag_id.'"'),array('Random.id'=>1));  
-                $this->Random->updateAll(array('Random.group'=>'"'.$group_id.'"'),array('Random.id'=>1));
+//                $this->Random->updateAll(array('Random.customer'=>'"'.$cust_id.'"'),array('Random.id'=>1));  
+//                $this->Random->updateAll(array('Random.tag'=>'"'.$tag_id.'"'),array('Random.id'=>1));  
+//                $this->Random->updateAll(array('Random.group'=>'"'.$group_id.'"'),array('Random.id'=>1));
                 $contactperson = $this->Contactpersoninfo->find('count', array('conditions' => array('Contactpersoninfo.customer_id' =>$cust_id )));
                 $address = $this->Address->find('count', array('conditions' => array('Address.customer_id' => $cust_id)));
                 if ($contactperson > 0) 

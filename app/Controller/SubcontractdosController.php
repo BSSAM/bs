@@ -54,7 +54,7 @@ class SubcontractdosController extends AppController
                        $last_id_subcontract    =   $this->Subcontractdo->getLastInsertId();
                        $this->Description->updateAll(array('Description.sales_sub_con_id'=>$last_id_subcontract),array('Description.salesorder_id'=>$salesorder_id,'Description.sales_sub_con_del'=>0,'Description.sales_sub_con_id'=>''));
                        $this->Description->updateAll(array('Description.sales_sub_con_del'=>0),array('Description.salesorder_id'=>$salesorder_id,'Description.sales_sub_con_del'=>1));
-                       $this->Random->updateAll(array('Random.subcon'=>'"'.$dmt.'"'),array('Random.id'=>1));  
+                       //$this->Random->updateAll(array('Random.subcon'=>'"'.$dmt.'"'),array('Random.id'=>1));  
                        /******************
                         * Data Log
                         */

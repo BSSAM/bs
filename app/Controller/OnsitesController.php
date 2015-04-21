@@ -78,7 +78,7 @@
                 if($this->Onsite->save($this->request->data['Onsite']))
                 {
                     $onsite_id   =   $this->Onsite->getLastInsertID();
-                    $this->Random->updateAll(array('Random.onsites'=>'"'.$onsite_no.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.onsites'=>'"'.$onsite_no.'"'),array('Random.id'=>1));  
                     // Quo Device Update
                     $this->Device->updateAll(array('Device.onsite'=>1,'Device.onsite_id'=>$onsite_id),array('Device.quotationno'=>$quotationno));  
                     

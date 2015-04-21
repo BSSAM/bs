@@ -80,7 +80,7 @@ class InstrumentsController extends AppController
             $instrumentpro_array = $this->request->data['InstrumentProcedure']['procedure_id'];
             $instrumentbra_array = $this->request->data['InstrumentBrand']['brand_id'];
             $instrumentran_array = $this->request->data['InstrumentRange']['range_id'];
-            $this->request->data['Instrument']['ins_date'] = date('Y-m-d');
+            $this->request->data['Instrument']['created'] = date('d-M-Y');
            $instrument_data = $this->Instrument->find('first',array('conditions'=>array('Instrument.name'=>$this->request->data['Instrument']['name'])));
             if(empty($instrument_data)){
             if($this->Instrument->save($this->request->data['Instrument']))

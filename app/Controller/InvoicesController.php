@@ -323,7 +323,7 @@ class InvoicesController extends AppController
                    // pr($this->request->data['Invoice']);exit;
                     //invoiceno
                     $invoice_id  =   $this->Invoice->getLastInsertID();
-                    $this->Random->updateAll(array('Random.invoice'=>'"'.$dmt.'"'),array('Random.id'=>1));  
+                    //$this->Random->updateAll(array('Random.invoice'=>'"'.$dmt.'"'),array('Random.id'=>1));  
 
                     if($this->request->data['Invoice']['full_type'] == 1):
 

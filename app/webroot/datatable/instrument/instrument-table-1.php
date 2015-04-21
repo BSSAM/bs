@@ -28,13 +28,7 @@ else
   
 $columns = array(
     array( 'db' => 'ins.id', 'dt' => 0 , 'field' => 'id'),
-    array(
-        'db'        => 'ins.created',
-        'dt'        => 1,
-		'field' => 'created',
-        'formatter' => function( $d, $row ) {
-            return date( 'j-M-Y ', strtotime($d));
-        }),
+    array( 'db' => 'ins.created', 'dt' => 1, 'field' => 'created'),
     array( 'db' => 'ins.name',  'dt' => 2 ,'field' => 'name'),
     array( 'db' => 'ins.description',   'dt' => 3 ,'field' => 'description'),
     array( 'db' => 'dpt.departmentname',     'dt' => 4 ,'field' => 'departmentname'),
