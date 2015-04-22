@@ -72,6 +72,7 @@ class ProceduresController extends AppController
         if($this->request->is('post'))
         {
             $pro_data = $this->Procedure->find('first',array('conditions'=>array('Procedure.procedure_no'=>$this->request->data['procedure_no'])));
+            $this->request->data['created'] = date('d-M-Y');
             if(empty($pro_data))
             {
                 if($this->Procedure->save($this->request->data))

@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session','xls','Number');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Document',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType',
+                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Salesperson',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','Datalog','Title','Random','InsPercent');
         public function index($id=NULL)
         {
@@ -160,6 +160,7 @@
                 $this->request->data['Quotation']['po_generate_type']=$po_type;
                 $this->request->data['Quotation']['ref_count']=$p_count_string;
                 //pr($this->request->data['Quotation']);exit;
+                //pr($this->request->data['Customerspecialneed']);exit;
                 if($this->Quotation->save($this->request->data['Quotation']))
                 {
                     $quotation_id   =   $this->Quotation->getLastInsertID();
@@ -183,7 +184,9 @@
                     {  
                         $this->Document->updateAll(array('Document.quotation_id'=>$quotation_id,'Document.customer_id'=>'"'.$customer_id.'"'),array('Document.quotationno'=>$this->request->data['Quotation']['quotationno'],'Document.status'=>1));
                     }
-                    $this->request->data['Customerspecialneed']['quotation_id']=$quotation_id;
+                    //pr($this->request->data['Customerspecialneed']);exit;
+                    $this->request->data['Customerspecialneed']['quotation_id']=$this->request->data['Quotation']['id'];
+                    $this->request->data['Customerspecialneed']['salesperson_name'] = $this->request->data['Customerspecialneed']['salesperson'];
                     $this->Customerspecialneed->save($this->request->data['Customerspecialneed']); 
                     /******************
                     * Data Log
@@ -908,7 +911,17 @@ margin: 180px 50px;
             {
                 $titles[] = $title_name['Title']['title_name'];
             }
-            //$this->set('titles',$titles);
+            //$this->set('titles',$titles);salespeople_id
+            
+            foreach($quotation_data['Customer']['CusSalesperson'] as $quo_salesper):
+                $saleper[] = $quo_salesper['salespeople_id'];
+            endforeach;
+            foreach($saleper as $sa):
+                $saleperson = $this->Salesperson->find('first', array('conditions' => array('Salesperson.id' => $sa)));
+                $saleperson_arr[] = $saleperson['Salesperson']['salesperson'];
+            endforeach;
+            $salesperson_name = implode(',',$saleperson_arr);
+            //pr($salesperson_name);exit;
             
                 $customername = $quotation_data['Customer']['customername'];
                 $billing_address = $quotation_data['Customer']['Address'][0]['address'];
@@ -1037,7 +1050,7 @@ $html .=
 						     
                               <td style="padding-left:5px;width:50px;" width="50">SALES PERSON </td>
                               
-                              <td style="padding-right:10px;">: &nbsp;&nbsp;&nbsp;Mr.Padma</td>
+                              <td style="padding-right:10px;">: &nbsp;&nbsp;&nbsp;'.$salesperson_name.'</td>
 							  <td></td>
 						
                          </tr>

@@ -22,8 +22,15 @@ $(function() {
    		
 		 //// Search Input Element Add
         html = '<tr>';
-        $('#range-table-1 thead th').each(function(){
-        html += '<th class ="color-change"><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
+        $('#range-table-1 thead th').each(function(k,v){
+            if(k==4)
+            {
+                html += '<th class ="color-change"><div class="col-md-12"><select class="form-control"><option value="">Select status</option><option value="1">Active</option><option value="0">Inactive</option></select></div></th>';
+            }
+            else
+            {
+                html += '<th class ="color-change"><input type="text" placeholder="Search '+$(this).text()+'" /></th>';
+            }
         });
         html += '</tr>';
 
@@ -90,7 +97,7 @@ $(function() {
         });
 
         table.columns().eq( 0 ).each( function ( colIdx ) {
-           if(colIdx == 5)
+           if(colIdx == 4)
            {
                 $('#range-table-1 thead tr:first select').on( 'change', function () {
                     table.column( colIdx ).search( $(this).val() ).draw();

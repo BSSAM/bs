@@ -204,6 +204,7 @@
     <script>
         $(function(){ FormsValidation.init(); });
         $( "#form-customer-add" ).submit(function() {
+            //alert($("#customer-contact-add").dataTable().fnSettings().aoData.length);
             if ($("#customer-contact-add").dataTable().fnSettings().aoData.length == 0)
             {
                 alert("Atleast One Contact Person is needed");

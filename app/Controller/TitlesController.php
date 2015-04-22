@@ -51,6 +51,7 @@ class TitlesController extends AppController
          */
         if($this->request->is('post'))
         {
+            $this->request->data['created'] = date('d-M-Y');
             if($this->Title->save($this->request->data))
             {
                 $this->Session->setFlash(__('Title has been  Added Successfully'));

@@ -2,47 +2,39 @@
 include 'config.php';
 
 // DB table to use
-$table = 'procedures';
-$join = '';  
+$table = 'procedures as pro';
+$join = " LEFT JOIN  departments as dpt ON (pro.department_id = dpt.id)";
 // Table's primary key
-$primaryKey = 'id';
+$primaryKey = 'pro.id';
 
 $val = $_GET['val'];
 
 if($val == 2)
 {
-    $where1 = 'AND is_approved = 0 AND is_deleted = 0';
-    $where2 = 'where is_approved = 0 AND is_deleted = 0';
+    $where1 = ' AND pro.is_approved = 0 AND pro.is_deleted = 0';
+    $where2 = ' where pro.is_approved = 0 AND pro.is_deleted = 0';
 }
 elseif($val == 3)
 {
-    $where1 = 'AND is_deleted = 1';
-    $where2 = 'where is_deleted = 1';
+    $where1 = ' AND pro.is_deleted = 1';
+    $where2 = ' where pro.is_deleted = 1';
 }
 else
 {
-    $where1 = 'AND is_deleted = 0';
-    $where2 = 'where is_deleted = 0';
+    $where1 = ' AND pro.is_deleted = 0';
+    $where2 = ' where pro.is_deleted = 0';
 }
  
 $columns = array(
-    array( 'db' => 'id', 'dt' => 0 , 'field' => 'id'),
-    array(
-        'db'        => 'created' , 'field' => 'created',
-        'dt'        => 1,
-        'formatter' => function( $d, $row ) {
-            return date( 'j-M-Y', strtotime($d));
-        }),
-    array( 'db' => 'procedure_no',  'dt' => 2 , 'field' => 'procedure_no'),
-    array( 'db' => 'department_id' , 'field' => 'department_id' , 'dt' => 3,'formatter' => function( $d, $row ) {
-            
-			return SSP::get_department_name($d);
-    } ),
-    array( 'db' => 'description',   'dt' => 4 , 'field' => 'description'),
-    array( 'db' => 'status',     'dt' => 5 , 'field' => 'status' , 'formatter' => function( $d, $row ) {
+    array( 'db' => 'pro.id', 'dt' => 0 , 'field' => 'id'),
+    array( 'db' => 'pro.created', 'dt' => 1, 'field' => 'created'),
+    array( 'db' => 'pro.procedure_no',  'dt' => 2 , 'field' => 'procedure_no'),
+    array( 'db' => 'dpt.departmentname' , 'field' => 'departmentname' , 'dt' => 3),
+    array( 'db' => 'pro.description',   'dt' => 4 , 'field' => 'description'),
+    array( 'db' => 'pro.status',     'dt' => 5 , 'field' => 'status' , 'formatter' => function( $d, $row ) {
             return ($d == 1)?'<span class="label label-success">Active</span>':'<span class="label label-danger">In Active</span>';
         }),
-    array( 'db' => 'id', 'dt' => 6 , 'field' => 'id','formatter' => function ( $d, $row) {
+    array( 'db' => 'pro.id', 'dt' => 6 , 'field' => 'id','formatter' => function ( $d, $row) {
             
             global $base_url;
             

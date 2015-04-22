@@ -121,10 +121,12 @@ $(function() {
         <table id="CustomerTag-table-1" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
-                    <th class="text-center">Customer ID</th>
+                    <th class="text-center">ID</th>
                     <th class="text-center">Customer Name</th>
+                    <th class="text-center">Phone</th>
                     <th class="text-center">Customer Type</th>
                     <th class="text-center">Industry</th>
+                    <th class="text-center">Location</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>

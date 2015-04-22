@@ -2,43 +2,37 @@
 include 'config.php';
 
 // DB table to use
-$table = 'customers';
-
+$table = 'customers as cus';
+$join = " LEFT JOIN  industries as ins ON (cus.industry_id = ins.id) LEFT JOIN  locations as loc ON (cus.location_id = loc.id)";
 // Table's primary key
-$primaryKey = 'id';
+$primaryKey = 'cus.id';
 
 $val = $_GET['val'];
 
 if($val == 2)
 {
-    $where1 = ' AND is_approved = 0 AND is_deleted = 0 AND is_default = 1';
-    $where2 = ' where is_approved = 0 AND is_deleted = 0 AND is_default = 1';
+    $where1 = ' AND cus.is_approved = 0 AND cus.is_deleted = 0 AND cus.is_default = 1';
+    $where2 = ' where cus.is_approved = 0 AND cus.is_deleted = 0 AND cus.is_default = 1';
 }
 elseif($val == 3)
 {
-    $where1 = ' AND is_deleted = 1 AND is_default = 1';
-    $where2 = ' where is_deleted = 1 AND is_default = 1';
+    $where1 = ' AND cus.is_deleted = 1 AND cus.is_default = 1';
+    $where2 = ' where cus.is_deleted = 1 AND cus.is_default = 1';
 }
 else
 {
-    $where1 = ' AND is_deleted = 0 AND is_default = 1';
-    $where2 = ' where is_deleted = 0 AND is_default = 1';
+    $where1 = ' AND cus.is_deleted = 0 AND cus.is_default = 1';
+    $where2 = ' where cus.is_deleted = 0 AND cus.is_default = 1';
 }
  
 $columns = array(
-    array( 'db' => 'id', 'dt' => 0 ),
-    array( 'db' => 'customername',  'dt' => 1 ),
-	array( 'db' => 'phone',   'dt' => 2 ),
-    array( 'db' => 'customertype',  'dt' => 3 ),
-	array( 'db' => 'industry_id',     'dt' => 4,'formatter' => function( $d, $row ) {
-            
-			return SSP::get_industryname($d);
-    } ),
-	array( 'db' => 'location_id',     'dt' => 5,'formatter' => function( $d, $row ) {
-            
-			return SSP::get_locationname($d);
-    } ),
-    array( 'db' => 'id', 'dt' => 6 ,'formatter' => function ( $d, $row) {
+    array( 'db' => 'cus.id', 'dt' => 0 , 'field' => 'id'),
+    array( 'db' => 'cus.customername',  'dt' => 1 , 'field' => 'customername'),
+	array( 'db' => 'cus.phone',   'dt' => 2 , 'field' => 'phone'),
+    array( 'db' => 'cus.customertype',  'dt' => 3 , 'field' => 'customertype'),
+	array( 'db' => 'ins.industryname',     'dt' => 4, 'field' => 'industryname' ),
+	array( 'db' => 'loc.locationname',     'dt' => 5, 'field' => 'locationname'),
+    array( 'db' => 'cus.id', 'dt' => 6 , 'field' => 'id','formatter' => function ( $d, $row) {
             
             global $base_url;
 			
@@ -99,5 +93,5 @@ $columns = array(
 );
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2 )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where1, $where2,$join )
 );

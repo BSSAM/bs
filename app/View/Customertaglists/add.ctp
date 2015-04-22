@@ -219,9 +219,12 @@
 
 <?php echo $this->Html->script('pages/formsValidation'); ?>
     <script>
+        
         $(function(){ FormsValidation.init(); });
         $( "#form-customertag-add" ).submit(function() {
-            if ($("#customer-contact-add").dataTable().fnSettings().aoData.length == 0)
+                    //alert($("#customer-contact-add").dataTable().fnSettings().aoData.length);
+                    
+            if ($("#customer-contact-add tbody tr td").hasClass("dataTables_empty"))
             {
                 alert("Atleast One Contact Person is needed");
                 $('#contact_name').focus();

@@ -81,8 +81,8 @@ class InstrumentsController extends AppController
             $instrumentbra_array = $this->request->data['InstrumentBrand']['brand_id'];
             $instrumentran_array = $this->request->data['InstrumentRange']['range_id'];
             $this->request->data['Instrument']['created'] = date('d-M-Y');
-           $instrument_data = $this->Instrument->find('first',array('conditions'=>array('Instrument.name'=>$this->request->data['Instrument']['name'])));
-            if(empty($instrument_data)){
+//           $instrument_data = $this->Instrument->find('first',array('conditions'=>array('Instrument.name'=>$this->request->data['Instrument']['name'])));
+//            if(empty($instrument_data)){
             if($this->Instrument->save($this->request->data['Instrument']))
             {
                 $last_insert_id =   $this->Instrument->getLastInsertID();
@@ -143,11 +143,11 @@ class InstrumentsController extends AppController
                 $this->Session->setFlash(__('Instrument is Added Successfully'));
                 $this->redirect(array('controller'=>'Instruments','action'=>'index'));
             }
-            }
- else {
-     $this->Session->setFlash(__('Instrument Name Already Exists!'));
-     //$this->redirect(array('controller'=>'Instruments','action'=>'index'));
- }
+//            }
+// else {
+//     $this->Session->setFlash(__('Instrument Name Already Exists!'));
+//     //$this->redirect(array('controller'=>'Instruments','action'=>'index'));
+// }
            // $this->Session->setFlash(__('Instrument Could Not be Added'));
         }
     }

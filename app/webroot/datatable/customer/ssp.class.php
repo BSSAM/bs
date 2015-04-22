@@ -43,10 +43,10 @@ class SSP {
 
 				// Is there a formatter?
 				if ( isset( $column['formatter'] ) ) {
-					$row[ $column['dt'] ] = $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
+					$row[ $column['dt'] ] = $column['formatter']( $data[$i][ $column['field'] ], $data[$i] );
 				}
 				else {
-					$row[ $column['dt'] ] = $data[$i][ $columns[$j]['db'] ];
+					$row[ $column['dt'] ] = $data[$i][ $columns[$j]['field'] ];
 				}
 			}
 
@@ -135,7 +135,7 @@ class SSP {
 				}
 			}
 
-			$order = 'ORDER BY'.implode(', ', $orderBy);
+			$order = 'ORDER BY '.implode(', ', $orderBy);
 		}
 
 		return $order;
@@ -161,6 +161,7 @@ class SSP {
 	{
 		$globalSearch = array();
 		$columnSearch = array();
+                $otherSearch = array();
 		$dtColumns = self::pluck( $columns, 'dt' );
 
 		if ( isset($request['search']) && $request['search']['value'] != '' ) {
@@ -205,11 +206,15 @@ class SSP {
 				implode(' AND ', $columnSearch) :
 				$where .' AND '. implode(' AND ', $columnSearch);
 		}
+                if( count($otherSearch)) {
+                    
+                }
 
 		if ( $where !== '' ) {
 			$where = 'WHERE '.$where;
+                        //$where = 'AND '.$where;
 		}
-
+                //print_r($where);exit;
 		return $where;
 	}
 
@@ -228,17 +233,24 @@ class SSP {
 	 *  @param  array $columns Column information array
 	 *  @return array          Server-side processing response array
 	 */
-	static function simple ( $request, $conn, $table, $primaryKey, $columns , $where1 ,$where2)
+	static function simple ( $request, $conn, $table, $primaryKey, $columns, $where1 ,$where2,$join)
 	{
 		$bindings = array();
 		$db = self::db( $conn );
 
 		// Build the SQL query string from the request
 		$limit = self::limit( $request, $columns );
-		$order = self::order( $request, $columns );
-		//pr($order);exit;
-		$where = self::filter( $request, $columns, $bindings);
+		//$order = self::order( $request, $columns );
+                //print_r($where);
+                //print_r($columns);exit;
+                   // print_r($request);
                
+                //echo $join;
+                
+                $where = self::filter( $request, $columns, $bindings);
+               
+                $where = str_replace('`','',$where);
+                
                 if($where =='')
                 {
                     $where = $where.$where2;
@@ -246,18 +258,26 @@ class SSP {
                 else
                 {
                     $where = $where.$where1;
+                    //print_r($where);exit;
                 }
-				
 		// Main query to actually get the data
-		$data = self::sql_exec( $db, $bindings,
-			"SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", self::pluck($columns, 'db'))."`
-			 FROM `$table`
+//		echo "SELECT SQL_CALC_FOUND_ROWS ".implode(", ", self::pluck($columns, 'db'))."
+//			 FROM $table
+//			$join 
+//                        $where
+//			 
+//			 $limit";
+                
+                $data = self::sql_exec( $db, $bindings,
+			"SELECT SQL_CALC_FOUND_ROWS ".implode(", ", self::pluck($columns, 'db'))."
+			 FROM $table
+                         $join
 			 $where
-			 $order
+			 ORDER BY id DESC
 			 $limit"
 		);
-                
-		// Data set length after filtering
+                //print_r($data);
+                // Data set length after filtering
 		$resFilterLength = self::sql_exec( $db,
 			"SELECT FOUND_ROWS()"
 		);
@@ -265,11 +285,11 @@ class SSP {
 
 		// Total data set length
 		$resTotalLength = self::sql_exec( $db,
-			"SELECT COUNT(`{$primaryKey}`)
-			 FROM   `$table`"
+			"SELECT COUNT(id)
+			 FROM   $table"
 		);
 		$recordsTotal = $resTotalLength[0][0];
-
+                
 
 		/*
 		 * Output

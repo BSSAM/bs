@@ -92,19 +92,19 @@
         //// Search Result
 
         table.columns().eq( 0 ).each( function ( colIdx ) {
-           if(colIdx == 5)
-           {
-                $('#quotation-table-1 thead tr:first select').on( 'change', function () {
-                    table.column( colIdx ).search( $(this).val() ).draw();
-                });    
-            
-            }
-            else
-            {
+//           if(colIdx == 5)
+//           {
+//                $('#quotation-table-1 thead tr:first select').on( 'change', function () {
+//                    table.column( colIdx ).search( $(this).val() ).draw();
+//                });    
+//            
+//            }
+//            else
+//            {
                 $('#quotation-table-1 thead tr:first input:eq('+colIdx+')').on( 'keyup change', function () {
                     table.column( colIdx ).search($(this).val()).draw();
                 });
-            }
+            //}
         });
        
 });

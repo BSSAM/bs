@@ -1,3 +1,10 @@
+<script>
+if(table.fnSettings().aoData.length===0) {
+    alert('no data');
+} else {
+    alert('data exists!');
+}
+</script>
 <div class="form-group">
     <label class="col-md-2 control-label" for="contact_name">Name <span class="text-danger">*</span></label>
     <div class="col-md-4">
@@ -52,7 +59,7 @@
         <?php  echo $this->Form->button('<i class="fa fa-plus fa-fw"></i> add',array('type'=>'button','class'=>'btn btn-sm btn-primary tag_contactperson_submit','escape' => false)); ?>
     </div>
 </div>
-    
+<!--    <div class="table-responsive">-->
 <table id="customer-contact-add" class="table table-vcenter table-condensed table-bordered">
     <thead>
         <tr>
@@ -95,6 +102,7 @@
        <?PHP endif; ?>
     </tbody>
 </table>
+<!--    </div>-->
 <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-10">
                                 <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Submit',array('type'=>'submit','class'=>'btn btn-sm btn-primary','escape' => false)); ?>

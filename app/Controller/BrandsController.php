@@ -57,6 +57,7 @@ class BrandsController extends AppController
             $brand_data = $this->Brand->find('first',array('conditions'=>array('Brand.brandname'=>$this->request->data['brandname'])));
             if(empty($brand_data))
             {
+                $this->request->data['created'] = date('d-M-Y');
                 if($this->Brand->save($this->request->data))
                 {
                     $last_insert_id =   $this->Brand->getLastInsertID();
@@ -126,9 +127,9 @@ class BrandsController extends AppController
         }
         if($this->request->is(array('post','put')))
         {
-            $brand_data = $this->Brand->find('first',array('conditions'=>array('Brand.brandname'=>$this->request->data['brandname'])));
-            if(empty($brand_data))
-            {
+//            $brand_data = $this->Brand->find('first',array('conditions'=>array('Brand.brandname'=>$this->request->data['brandname'])));
+//            if(empty($brand_data))
+//            {
                 $this->Brand->id = $id;
                 if($this->Brand->save($this->request->data))
                 {
@@ -147,11 +148,11 @@ class BrandsController extends AppController
                    return $this->redirect(array('controller'=>'Brands','action'=>'index'));
                 }
                 //$this->Session->setFlash(__('Brand Cant be Updated'));
-            }
-            else
-            {
-                $this->Session->setFlash(__('Brand Already Exists!'));
-            }
+//            }
+//            else
+//            {
+//                $this->Session->setFlash(__('Brand Already Exists!'));
+//            }
         }
         else
         {

@@ -69,7 +69,7 @@ class RangesController extends AppController
             endif;
             
             $this->request->data['range_name']=$range_name;
-            
+            $this->request->data['created'] = date('d-M-Y');
             $range_data = $this->Range->find('first',array('conditions'=>array('Range.range_name'=>$this->request->data['range_name'])));
             if(empty($range_data))
             {
@@ -157,9 +157,9 @@ class RangesController extends AppController
             $unit_array =   $this->Unit->find('first',array('conditions'=>array('Unit.id'=>$unit_id,'Unit.status'=>'1','Unit.is_approved'=>'1'),'fields'=>array('id','unit_name')));
             $range_name =   "(".$this->request->data['from_range']."~".$this->request->data['to_range'].")/".$unit_array['Unit']['unit_name'];
             $this->request->data['range_name']=$range_name;
-            $range_data = $this->Range->find('first',array('conditions'=>array('Range.range_name'=>$this->request->data['range_name'])));
-            if(empty($range_data))
-            {
+//            $range_data = $this->Range->find('first',array('conditions'=>array('Range.range_name'=>$this->request->data['range_name'])));
+//            if(empty($range_data))
+//            {
                 if($this->Range->save($this->request->data))
                 {
                     /******************
@@ -177,11 +177,11 @@ class RangesController extends AppController
                    return $this->redirect(array('controller'=>'Ranges','action'=>'index'));
                 }
                 //$this->Session->setFlash(__('Range Cant be Updated'));
-            }
-            else
-            {
-                $this->Session->setFlash(__('Range Already Exists!'));
-            }
+//            }
+//            else
+//            {
+//                $this->Session->setFlash(__('Range Already Exists!'));
+//            }
         }
         else
         {

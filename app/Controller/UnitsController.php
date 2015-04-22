@@ -58,6 +58,7 @@ class UnitsController extends AppController
         {
             //pr($this->request->data);exit;
             $unit_data = $this->Unit->find('first',array('conditions'=>array('Unit.unit_name'=>$this->request->data['unit_name'])));
+            $this->request->data['created'] = date('d-M-Y');
             if(empty($unit_data))
             {
             
@@ -139,9 +140,9 @@ class UnitsController extends AppController
         if($this->request->is(array('post','put')))
         {
             //pr($this->request->data);exit;
-            $unit_data = $this->Unit->find('first',array('conditions'=>array('Unit.unit_name'=>$this->request->data['unit_name'])));
-            if(empty($unit_data))
-            {
+//            $unit_data = $this->Unit->find('first',array('conditions'=>array('Unit.unit_name'=>$this->request->data['unit_name'])));
+//            if(empty($unit_data))
+//            {
                 $this->Unit->id = $id;
                 if($this->Unit->save($this->request->data))
                 {
@@ -160,11 +161,11 @@ class UnitsController extends AppController
                    return $this->redirect(array('controller'=>'Units','action'=>'index'));
                 }
                 //$this->Session->setFlash(__('Unit Cant be Updated'));
-            }
-            else
-            {
-                $this->Session->setFlash(__('Unit Already Exists!'));
-            }
+//            }
+//            else
+//            {
+//                $this->Session->setFlash(__('Unit Already Exists!'));
+//            }
         }
         else
         {

@@ -27,12 +27,7 @@ else
  
 $columns = array(
     array( 'db' => 'id', 'dt' => 0 , 'field' => 'id'),
-    array(
-        'db'        => 'created',
-        'dt'        => 1 , 'field' => 'created',
-        'formatter' => function( $d, $row ) {
-            return date( 'j-M-Y', strtotime($d));
-        }),
+    array( 'db' => 'created', 'dt' => 1, 'field' => 'created'),
     array( 'db' => 'unit_name',  'dt' => 2, 'field' => 'unit_name' ),
 	 array( 'db' => 'unit_description',   'dt' => 3, 'field' => 'unit_description' ),
     array( 'db' => 'status',     'dt' => 4 , 'field' => 'status' , 'formatter' => function( $d, $row ) {
