@@ -3,16 +3,44 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/bs/app/webroot/datatable/job/purchaserequisitions-table-1.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/PurchaseRequisitions/index.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/webroot/datatable/job/reqpurchaseorders-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/instrument/brand-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Brands/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/customer/customer-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customers/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/RangesController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Procedures/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/instrument/ssp.class.php</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/instrument/instrument-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/instrument/range-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Ranges/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customers/index.ctp</file>
             <file>file:/D:/wamp/www/bs/app/Controller/QuotationsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/InvoicesController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/PurchaseordersController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/PurchaseRequisitionsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/description.ctp</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/CanddsController.php</file>
-            <file>file:/D:/wamp/www/bs/app/Controller/ReqpurchaseordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/customer/ssp.class.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Quotations/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/customer_contactperson_js.js</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/instrument/unit-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/Model/Salesperson.php</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/cus_function.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Instruments/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customertaglists/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/job/quotation-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/instrument/procedures-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/SalesordersController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Customertaglists/add.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/job/ssp.class.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/AppController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/UnitsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Quotations/customer_special_needs.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/datatable/customer/customertag-table-1.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/InstrumentsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/BrandsController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Units/index.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customers/contact_person_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/ProceduresController.php</file>
+            <file>file:/D:/wamp/www/bs/app/Controller/TitlesController.php</file>
+            <file>file:/D:/wamp/www/bs/app/View/Elements/Customertaglists/contact_person_info.ctp</file>
+            <file>file:/D:/wamp/www/bs/app/webroot/js/cus_tag_function_js.js</file>
+            <file>file:/D:/wamp/www/bs/app/View/Layouts/default.ctp</file>
         </group>
     </open-files>
 </project-private>
