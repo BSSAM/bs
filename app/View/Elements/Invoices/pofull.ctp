@@ -12,7 +12,8 @@
 });
 
 $(document).on('click','.pofull-prepare',function(){
-       var val_quotationid = $(this).attr('id');
+    //alert('');
+       var val_quotationid = encodeURIComponent($(this).attr('id'));
        window.location.href = path_url+'Invoices/approve/'+val_quotationid;
 //       if(window.confirm("Are you sure?")){
 //           

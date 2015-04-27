@@ -395,7 +395,7 @@ $(function() {
                         <label class="col-md-2 control-label" for="val_address">Billing Address</label>
                         <div class="col-md-4">
                             <?php echo $this->Form->textarea('regaddress', array('class'=>'form-control',
-                                                                   'placeholder'=>'Enter the Delivery Address','label'=>false,'rows'=>4,'cols'=>30,'readonly'=>'readonly','value'=>$salesorder_list['Salesorder']['address'])); ?>
+                                                                   'placeholder'=>'Enter the Delivery Address','label'=>false,'rows'=>4,'cols'=>30,'readonly'=>'readonly','value'=>$salesorder_list['Quotation']['address'])); ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -437,7 +437,7 @@ $(function() {
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No <span class="text-danger">*</span></label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$salesorder_list['Salesorder']['ref_no'])); ?>
+                            <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'value'=>$salesorder_list['Salesorder']['ref_no'])); ?>
                         </div>
                         <label class="col-md-2 control-label" for="total">Total</label>
                         <div class="col-md-4">
@@ -449,7 +449,7 @@ $(function() {
                         <label class="col-md-2 control-label" for="inv_remarks">Remarks</label>
                         <div class="col-md-4">
                             <?php echo $this->Form->textarea('remarks', array('id'=>'inv_remarks','class'=>'form-control',
-                                                                   'label'=>false,'rows'=>6,'cols'=>30,'value'=>$salesorder_list['Salesorder']['remarks'],'readonly'=>'readonly')); ?>
+                                                                   'label'=>false,'rows'=>6,'cols'=>30,'value'=>$salesorder_list['Salesorder']['remarks'])); ?>
                         </div>
                         <label class="col-md-2 control-label" for="inv_service_type">Service Type <span class="text-danger">*</span></label>
                         <div class="col-md-4">
@@ -856,7 +856,7 @@ $(function() {
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No <span class="text-danger">*</span></label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$po_list_first['Quotation']['ref_no'])); ?>
+                            <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'value'=>$po_list_first['Quotation']['ref_no'])); ?>
                         </div>
                         <label class="col-md-2 control-label" for="total">Total</label>
                         <div class="col-md-4">
@@ -868,7 +868,7 @@ $(function() {
                         <label class="col-md-2 control-label" for="inv_remarks">Remarks</label>
                         <div class="col-md-4">
                             <?php echo $this->Form->textarea('remarks', array('id'=>'inv_remarks','class'=>'form-control',
-                                                                   'label'=>false,'rows'=>6,'cols'=>30,'value'=>$po_list_first['Customerspecialneed']['remarks'],'readonly'=>'readonly')); ?>
+                                                                   'label'=>false,'rows'=>6,'cols'=>30,'value'=>$po_list_first['Customerspecialneed']['remarks'])); ?>
                         </div>
                         <label class="col-md-2 control-label" for="inv_service_type">Service Type <span class="text-danger">*</span></label>
                         <div class="col-md-4">
@@ -1261,7 +1261,7 @@ $(function() {
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="inv_ref_no">PO Reference No <span class="text-danger">*</span></label>
                         <div class="col-md-4">
-                            <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'readonly'=>'readonly','value'=>$quotation_lists['Quotation']['ref_no'])); ?>
+                            <?php echo $this->Form->input('po_reference_no', array('id'=>'inv_ref_no','class'=>'form-control','label'=>false,'value'=>$quotation_lists['Quotation']['ref_no'])); ?>
                         </div>
                         <label class="col-md-2 control-label" for="total">Total</label>
                         <div class="col-md-4">

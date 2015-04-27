@@ -8,7 +8,41 @@ jQuery( document ).ready(function() {
             });
 
 </script>-->
-
+<script>
+$(document).on('click','.invoice_fin',function(){
+       var val_quotationid = encodeURIComponent($(this).attr('id'));
+       window.location.href = path_url+'Invoices/view/'+val_quotationid;
+//       if(window.confirm("Are you sure?")){
+//           
+//       $.ajax({
+//            type: 'POST',
+//            data:"id="+val_quotationid,
+//            url: path_url+'Invoices/approve/',
+////            success: function(data)
+////            {
+////                 window.location.reload();
+//////                if(data=='success')
+//////                    {
+//////                        alert('Client PO is Approved');
+//////                        window.location.reload();
+//////                    }
+//////                    else
+//////                        {
+//////                             alert('Client PO is Approval Failed due to unknown Cause');
+//////                             window.location.reload();
+//////                        }
+////                
+////            }
+////            
+//        });
+//    }
+//    else
+//    {
+//        return false;
+//    }
+       
+   });
+   </script>
 <div class="block full">
     <div class="table-responsive invoice_info invoice_tab">
         <table id="scroll1-datatable" class="dataTable table table-vcenter table-condensed table-bordered">
@@ -53,7 +87,8 @@ jQuery( document ).ready(function() {
                             <td class="text-center"><?PHP echo $this->Quotation->quotationtotal_all($invoice['Invoice']['quotation_id']); ?></td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <?php echo $this->Html->link('Edit',array('action'=>'view',$invoice['Invoice']['invoiceno']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-alt btn-xs btn-default','escape'=>false)); ?>
+                                    <?php //echo $this->Html->link('Edit',array('action'=>'view',$invoice['Invoice']['invoiceno']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-alt btn-xs btn-default','escape'=>false)); ?>
+                                    <td class="text-center"><a href="javascript:void(0);" class="invoice_fin btn btn-alt btn-xs btn-success" id="<?PHP echo $invoice['Invoice']['invoiceno']; ?>"><?PHP echo  'Edit'; ?></a></td>
                                 </div>
                                 <div class="btn-group">
                                     <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$invoice['Invoice']['invoiceno']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

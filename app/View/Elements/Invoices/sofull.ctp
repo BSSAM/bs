@@ -12,7 +12,7 @@
 });
 
 $(document).on('click','.sofull-prepare',function(){
-       var val_quotationid = $(this).attr('id');
+       var val_quotationid = encodeURIComponent($(this).attr('id'));
        window.location.href = path_url+'Invoices/approve/'+val_quotationid;
 //       if(window.confirm("Are you sure?")){
 //           
