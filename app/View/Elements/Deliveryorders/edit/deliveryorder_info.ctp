@@ -27,8 +27,8 @@
     </div>
     <label class="col-md-2 control-label" for="val_address">Delivery Address</label>
     <div class="col-md-4">
-        <?php echo $this->Form->textarea('Deliveryorder.customer_address', array('class'=>'form-control',
-                                               'placeholder'=>'Enter the Delivery Address','label'=>false,'rows'=>4,'cols'=>30,'value'=>$address_register)); ?>
+        <?php echo $this->Form->textarea('Deliveryorder.delivery_address', array('class'=>'form-control',
+                                               'placeholder'=>'Enter the Delivery Address','label'=>false,'rows'=>4,'cols'=>30,'value'=>$deliveryorder['Deliveryorder']['delivery_address'])); ?>
     </div>
 </div>
 <div class="form-group">

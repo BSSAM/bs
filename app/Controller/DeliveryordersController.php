@@ -188,25 +188,33 @@
                     {
                     if($inv_type == 3)
                     {
-                        $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                        $this->request->data['Logactivity']['logactivity'] = 'Add';
-                        $this->request->data['Logactivity']['logid'] = $this->request->data['Deliveryorder']['salesorder_id'];
-                        $this->request->data['Logactivity']['logno'] = $this->request->data['Deliveryorder']['salesorder_id'];
-                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                        $this->request->data['Logactivity']['logapprove'] = 1;
-                        $this->Logactivity->create();
-                        $this->Logactivity->save($this->request->data['Logactivity']);
+                        $lo_ac_list =  $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>'"'.$this->request->data['Deliveryorder']['salesorder_id'].'"','Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add')));
+                        if(!$lo_ac_list)
+                        {
+                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+                            $this->request->data['Logactivity']['logid'] = $this->request->data['Deliveryorder']['salesorder_id'];
+                            $this->request->data['Logactivity']['logno'] = $this->request->data['Deliveryorder']['salesorder_id'];
+                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                            $this->request->data['Logactivity']['logapprove'] = 1;
+                            $this->Logactivity->create();
+                            $this->Logactivity->save($this->request->data['Logactivity']);
+                        }
                     }
                     if($inv_type == 1)
                     {
-                        $this->request->data['Logactivity']['logname'] = 'ClientPO';
-                        $this->request->data['Logactivity']['logactivity'] = 'Add';
-                        $this->request->data['Logactivity']['logid'] = $delivery_before_quo['Quotation']['ref_no'];
-                        $this->request->data['Logactivity']['logno'] = $delivery_before_quo['Quotation']['ref_no'];
-                        $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
-                        $this->request->data['Logactivity']['logapprove'] = 1;
-                        $this->Logactivity->create();
-                        $this->Logactivity->save($this->request->data['Logactivity']);
+                        $lo_ac_list =  $this->Logactivity->find('first',array('conditions'=>array('Logactivity.logid'=>'"'.$delivery_before_quo['Quotation']['ref_no'].'"','Logactivity.logname'=>'ClientPO','Logactivity.logactivity'=>'Add')));
+                        if(!$lo_ac_list)
+                        {
+                            $this->request->data['Logactivity']['logname'] = 'ClientPO';
+                            $this->request->data['Logactivity']['logactivity'] = 'Add';
+                            $this->request->data['Logactivity']['logid'] = $delivery_before_quo['Quotation']['ref_no'];
+                            $this->request->data['Logactivity']['logno'] = $delivery_before_quo['Quotation']['ref_no'];
+                            $this->request->data['Logactivity']['user_id'] = $this->Session->read('sess_userid');
+                            $this->request->data['Logactivity']['logapprove'] = 1;
+                            $this->Logactivity->create();
+                            $this->Logactivity->save($this->request->data['Logactivity']);
+                        }
                     }
                     }
                 /******************/ 

@@ -327,7 +327,7 @@ $(document).ready(function(){
             }
         }
         else{
-            alert('Please Select Assign To Person');
+            alert('Please Select Shipped or Delivered');
             return false;
         }
     });

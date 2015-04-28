@@ -71,3 +71,7 @@
 </table>
 </div>
 </div>
+    <div class="form-group form-actions">
+        <?php  echo $this->Html->link('<i class="fa fa-angle-left"></i> Cancel',array('controller'=>'Candds','action'=>'index'),array('class'=>'btn btn-sm btn-warning pull-right','escape' => false)); ?>
+        <?php  echo $this->Form->button('<i class="fa fa-angle-right"></i> Save',array('type'=>'button','class'=>'btn btn-sm btn-primary pull-right cd_save','escape' => false)); ?>
+    </div>
