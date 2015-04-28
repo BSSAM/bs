@@ -88,7 +88,7 @@ $(document).on('click','.invoice_fin',function(){
                             <td class="text-center">
                                 <div class="btn-group">
                                     <?php //echo $this->Html->link('Edit',array('action'=>'view',$invoice['Invoice']['invoiceno']),array('data-toggle'=>'tooltip','title'=>'Edit','class'=>'btn btn-alt btn-xs btn-default','escape'=>false)); ?>
-                                    <td class="text-center"><a href="javascript:void(0);" class="invoice_fin btn btn-alt btn-xs btn-success" id="<?PHP echo $invoice['Invoice']['invoiceno']; ?>"><?PHP echo  'Edit'; ?></a></td>
+                                    <a href="javascript:void(0);" class="invoice_fin btn btn-alt btn-xs btn-success" id="<?PHP echo $invoice['Invoice']['invoiceno']; ?>"><?PHP echo  'Edit'; ?></a>
                                 </div>
                                 <div class="btn-group">
                                     <?php echo $this->Form->postLink('<i class="gi gi-print"></i>',array('action'=>'pdf',$invoice['Invoice']['invoiceno']),array('data-toggle'=>'tooltip','title'=>'Report','class'=>'btn btn-xs btn-default','escape'=>false)); ?>

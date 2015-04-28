@@ -75,7 +75,13 @@ function editab() {
             submit    : 'Save',
             tooltip   : 'Click to edit'
        });
+      
 }
+   
+ $(function(){
+    $("#pur_order_date").datepicker("setDate", new Date());
+    
+    });
 </script>
 
 <script type="text/javascript">

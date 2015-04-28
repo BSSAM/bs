@@ -93,7 +93,7 @@ $(document).on('click','.preno_result',function(e){
     <label class="col-md-2 control-label" for="val_discount">Discount</label>
     <div class="col-md-4">
         <?php echo $this->Form->input('discount', array('id'=>'val_discount','class'=>'form-control',
-                                                'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text')); ?>
+                                                'placeholder'=>'Enter the Discount value','label'=>false,'type'=>'text','onkeyup'=>'sync();')); ?>
     </div>
 </div>
 

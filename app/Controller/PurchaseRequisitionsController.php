@@ -4,7 +4,7 @@
         public $helpers = array('Html','Form','Session');
         public $uses =array('Priority','Paymentterm','Quotation','Currency','Document','branch',
                             'Country','Additionalcharge','Service','CustomerInstrument','Customerspecialneed',
-                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Title',
+                            'Instrument','Brand','Customer','Device','Unit','Logactivity','InstrumentType','Title','InsPercent',
                             'Contactpersoninfo','CusSalesperson','Clientpo','branch','PurchaseRequisition','PreqDevice','PreqCustomerSpecialNeed');
         public function index()
         {
@@ -37,6 +37,32 @@
              *  Description   :   add Quotation Details page
              *******************************************************/
             $user_role = $this->userrole_permission();
+           
+        
+        $percents =  $this->InsPercent->findById(1);
+        //pr($percents);
+        //pr($user_role['instr_costing']);
+        if($user_role['instr_costing']['user'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['user']);
+            //pr($percents['InsPercent']['user']);
+        }
+        elseif($user_role['instr_costing']['supervisor'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['supervisor']);
+            //pr($percents['InsPercent']['supervisor']);
+        }
+        elseif($user_role['instr_costing']['manager'] == 1)
+        {
+            $this->set('ins_cost_user',$percents['InsPercent']['manager']);
+            //pr($percents['InsPercent']['manager']);
+        }
+        else 
+        {
+            $this->set('ins_cost_user',0);
+        }
+        $this->set(compact('ins_cost_user','ins_cost_super','ins_cost_man'));
+            
             if($user_role['job_purchasereq']['add'] == 0){ 
                 return $this->redirect(array('controller'=>'Dashboards','action'=>'index'));
             }
