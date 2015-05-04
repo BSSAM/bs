@@ -415,6 +415,7 @@ $(document).ready(function(){
             cache: false,
             success: function(data)
             {
+                //console.log(data); return false;
 				try {
  data1 = $.parseJSON(data);
   } catch (e) {
@@ -430,7 +431,9 @@ $(document).ready(function(){
                 $('#val_call_type').find("option").filter(function(){
       return ( ($(this).val() == calibrationtype) || ($(this).text() == calibrationtype) )
     }).prop('selected', true);
-               
+               $('#sales_calltype').find("option").filter(function(){
+      return ( ($(this).val() == calibrationtype) || ($(this).text() == calibrationtype) )
+    }).prop('selected', true);
                 $.each(address_node,function(k,v){
                     if(v.type=='registered'){
                     $('#val_address').val(v.address);}

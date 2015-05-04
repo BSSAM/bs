@@ -1004,7 +1004,7 @@ $("#search_cusinstrument").hide();
     <label class="col-md-2 control-label" for="val_call_type">Cal Type<span class="text-danger">*</span></label>
     <div class="col-md-4">
         <?php echo $this->Form->input('call_type', array('id'=>'val_call_type','class'=>'form-control error-custom','label'=>false,'name'=>'call_type','ng-model' => 'type_quo_model',
-                                      'type'=>'select','ng-init'=>'type_quo_model="Singlas"','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas','empty'=>'Select Cal Type'))); ?>
+                                      'type'=>'select','options'=>array('Non-Singlas'=>'Non-Singlas','Singlas'=>'Singlas','empty'=>'Select Cal Type'))); ?>
         <span class="name_error">Instrument Cal Type is Required</span>
     </div>
 </div>

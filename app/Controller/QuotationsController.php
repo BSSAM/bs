@@ -427,7 +427,7 @@
             $this->loadModel('Customer');
             $customer_id =  $this->request->data['cust_id'];
             $customer_data = $this->Customer->find('first',array('conditions'=>array('Customer.id'=>$customer_id,'Customer.is_deleted'=>0,'Customer.is_approved'=>1),'recursive'=>'2'));
-           
+            //pr($customer_data);exit;
             if(!empty($customer_data))
             {
                 echo json_encode($customer_data) ;
