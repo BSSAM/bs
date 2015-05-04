@@ -76,7 +76,7 @@
         
         $scope.pagination = function(){
            $scope.total = $scope.instruments.length;
-           $scope.perpage = 5;
+           $scope.perpage = 15;
 
            $scope.length1 = Math.ceil($scope.total/$scope.perpage);
 

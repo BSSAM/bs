@@ -55,7 +55,7 @@
                                     <div class="form-group">
                                         <label class="col-md-2 control-label" for="machine_name">Name <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
-                                            <?php echo $this->Form->input('Instrument.name', array('id'=>'machine_name','class'=>'form-control','placeholder'=>'Enter the Instrument Name','label'=>false,'maxlength'=>false)); ?>
+                                            <?php echo $this->Form->input('Instrument.name', array('id'=>'machine_name','class'=>'form-control','placeholder'=>'Enter the Instrument Name','label'=>false)); ?>
                                         </div>
                                         <label class="col-md-2 control-label" for="machine_description">Description</label>
                                         <div class="col-md-4">
